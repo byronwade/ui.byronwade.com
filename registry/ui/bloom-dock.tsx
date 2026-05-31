@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronsLeftRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -70,13 +69,18 @@ const PILL =
 const PILL_IDLE = "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground";
 const PILL_ACTIVE = "bg-dock-active text-dock-active-foreground";
 
-/** One nav item — `<a>` when `href`, else a `<button>`. */
+/**
+ * One nav item — `<a>` when `href`, else a `<button>`. Collapsed (compact-
+ * hidden) items morph to zero width via CSS — `w-0 scale-50 opacity-0` with a
+ * 300ms `cubic-bezier(.22,1,.36,1)` transition on width/opacity/transform —
+ * ported from NavDock's item morph (no Motion `layout`/`AnimatePresence`).
+ */
 function DockItem({
   item,
-  reduce,
+  collapsed,
 }: {
   item: BloomDockItem;
-  reduce: boolean;
+  collapsed: boolean;
 }) {
   const Icon = item.icon;
   const hasBadge = typeof item.badge === "number" && item.badge > 0;
@@ -126,29 +130,29 @@ function DockItem({
       </button>
     );
 
-  // `layout` reflows the row width smoothly as items enter/exit (compact ↔ full).
   return (
-    <motion.div
-      layout={!reduce}
-      initial={reduce ? false : { width: 0, opacity: 0 }}
-      animate={{ width: "auto", opacity: 1 }}
-      exit={reduce ? undefined : { width: 0, opacity: 0 }}
-      transition={reduce ? { duration: 0 } : { duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
-      className="flex shrink-0 items-center overflow-hidden"
+    <div
+      className={cn(
+        "flex shrink-0 items-center overflow-hidden",
+        "transition-[width,opacity,transform] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
+        collapsed ? "w-0 scale-50 opacity-0" : "w-8 scale-100 opacity-100",
+      )}
+      aria-hidden={collapsed}
     >
       {content}
-    </motion.div>
+    </div>
   );
 }
 
 /**
- * Config-driven morphing navigation dock.
+ * Config-driven morphing navigation dock — a generalized port of NavDock.
  *
- * - Compact ↔ full: an `expanded` toggle reveals non-core/non-pinned items; the
- *   pill width reflows via Motion `layout` + `AnimatePresence`.
- * - A contextual `action` either blooms the whole dock into a `BloomFlow`
- *   (the item row cross-fades + collapses to make room for the flow's own
- *   footer) or runs a plain handler.
+ * - Compact ↔ full: an `expanded` toggle reveals non-core/non-pinned items; each
+ *   item morphs its own width/opacity/transform via CSS (no library layout).
+ * - A contextual `action` either blooms the whole dock into a `BloomFlow` (via
+ *   the `Bloom` primitive — the item row collapses to make room for the flow's
+ *   own footer, then settles back in with `animate-in fade-in` on close) or runs
+ *   a plain handler.
  * - Stays visually dark in both themes via the `--dock-*` tokens (tone="dock").
  */
 export function BloomDock({
@@ -161,7 +165,6 @@ export function BloomDock({
   navLabel = "Primary",
   className,
 }: BloomDockProps) {
-  const reduce = useReducedMotion() ?? false;
   const [expanded, setExpanded] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -181,25 +184,22 @@ export function BloomDock({
         "flex items-center gap-1",
         // Collapse the row (height + opacity) while the flow is bloomed so the
         // docked bar doesn't leave a ghost footer beneath BloomFlow's footer.
-        open && "pointer-events-none h-0 overflow-hidden opacity-0",
+        open
+          ? "pointer-events-none h-0 overflow-hidden opacity-0"
+          : "animate-in fade-in duration-300 motion-reduce:animate-none",
       )}
     >
-      <motion.nav
-        aria-label={navLabel}
-        layout={!reduce}
-        className="flex items-center gap-1"
-      >
-        <AnimatePresence initial={false}>
-          {mainItems
-            .filter((item) => isVisible(item, expanded))
-            .map((item) => (
-              <DockItem key={item.id} item={item} reduce={reduce} />
-            ))}
-        </AnimatePresence>
+      <nav aria-label={navLabel} className="flex items-center gap-1">
+        {mainItems.map((item) => (
+          <DockItem
+            key={item.id}
+            item={item}
+            collapsed={!isVisible(item, expanded)}
+          />
+        ))}
 
         {showToggle ? (
-          <motion.button
-            layout={!reduce}
+          <button
             type="button"
             aria-expanded={expanded}
             aria-label={expanded ? "Show fewer" : "Show all"}
@@ -212,17 +212,17 @@ export function BloomDock({
           >
             <ChevronsLeftRight className="size-4 shrink-0" />
             <span className="sr-only">{expanded ? "Show fewer" : "Show all"}</span>
-          </motion.button>
+          </button>
         ) : null}
 
-        <AnimatePresence initial={false}>
-          {pinnedItems
-            .filter((item) => isVisible(item, expanded))
-            .map((item) => (
-              <DockItem key={item.id} item={item} reduce={reduce} />
-            ))}
-        </AnimatePresence>
-      </motion.nav>
+        {pinnedItems.map((item) => (
+          <DockItem
+            key={item.id}
+            item={item}
+            collapsed={!isVisible(item, expanded)}
+          />
+        ))}
+      </nav>
 
       {cluster ? (
         <div className="flex shrink-0 items-center">{cluster}</div>

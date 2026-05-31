@@ -1080,8 +1080,8 @@
       "name": "bloom",
       "type": "registry:ui",
       "title": "Bloom",
-      "description": "Morphing surface that blooms from a bar into a panel — placement-adaptive, mobile bottom-sheet, Motion-powered.",
-      "dependencies": ["motion", "lucide-react"],
+      "description": "Morphing surface that blooms from a bar into a panel — placement-adaptive, mobile bottom-sheet, pure-CSS animated.",
+      "dependencies": ["lucide-react"],
       "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
       "files": [
         { "path": "registry/ui/bloom.tsx", "type": "registry:ui", "target": "components/ui/bloom.tsx" },
@@ -1093,7 +1093,7 @@
       "type": "registry:ui",
       "title": "Bloom flow",
       "description": "Declarative form/wizard runner rendered inside a Bloom (persistent footer, steps, success ring).",
-      "dependencies": ["motion", "lucide-react"],
+      "dependencies": ["lucide-react"],
       "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/bloom"],
       "files": [
         { "path": "registry/ui/bloom-flow.tsx", "type": "registry:ui", "target": "components/ui/bloom-flow.tsx" }
@@ -1104,7 +1104,7 @@
       "type": "registry:ui",
       "title": "Bloom dock",
       "description": "Config-driven morphing navigation dock built on Bloom + Bloom flow.",
-      "dependencies": ["motion", "lucide-react"],
+      "dependencies": ["lucide-react"],
       "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/bloom", "@byronwade/bloom-flow"],
       "files": [
         { "path": "registry/ui/bloom-dock.tsx", "type": "registry:ui", "target": "components/ui/bloom-dock.tsx" }

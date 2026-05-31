@@ -1,8 +1,10 @@
 /**
  * Exhaustive tests for BloomDock (components/ui/bloom-dock.tsx).
  *
- * Motion is mocked per-file. BloomDock composes Bloom + BloomFlow for its
- * flow action, so the mock also covers those nested components.
+ * BloomDock composes the pure-CSS Bloom + BloomFlow for its flow action; no
+ * Motion is involved. jsdom doesn't run CSS transitions, so compact/expand,
+ * item morph, and the bloomed flow are observable immediately after each state
+ * change.
  */
 
 import { render, screen, waitFor } from "@testing-library/react";
@@ -11,40 +13,20 @@ import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { axe } from "vitest-axe";
 import { Home, MessageSquare, Phone, Settings, Plus, Sparkles } from "lucide-react";
 
-// Mutable reduced-motion flag (see bloom.test.tsx for rationale).
-const motionState = vi.hoisted(() => ({ reduce: true }));
-
-vi.mock("motion/react", async () => {
-  const React = await import("react");
-  const cache: Record<string, unknown> = {};
-  const passthrough = (tag: string) =>
-    React.forwardRef((props: Record<string, unknown>, ref: unknown) => {
-      const {
-        initial, animate, exit, transition, layout, layoutId,
-        drag, dragConstraints, dragElastic, onDragEnd, variants,
-        whileTap, whileHover, whileDrag, whileFocus, whileInView,
-        pathLength, ...rest
-      } = props;
-      return React.createElement(tag, { ref, ...rest });
-    });
-  const motion = new Proxy(
-    {},
-    { get: (_t, tag: string) => (cache[tag] ??= passthrough(tag)) },
-  );
-  return {
-    motion,
-    AnimatePresence: ({ children }: { children: React.ReactNode }) =>
-      React.createElement(React.Fragment, null, children),
-    useReducedMotion: () => motionState.reduce,
-  };
-});
-
 import { BloomDock, type BloomDockItem, type BloomDockAction } from "@/components/ui/bloom-dock";
 import type { BloomFlowDef } from "@/components/ui/bloom-flow";
 
-// jsdom lacks matchMedia (needed by the nested Bloom for the flow action).
+// jsdom lacks matchMedia (the nested Bloom reads it for the mobile + reduced-
+// motion queries) and ResizeObserver (the Bloom body-size measurement). Default:
+// desktop, motion enabled (matches=false for all). The ResizeObserver no-op is
+// scoped here (not global setup) because recharts' tests behave differently with
+// one present.
 beforeEach(() => {
-  motionState.reduce = true;
+  globalThis.ResizeObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  } as unknown as typeof ResizeObserver;
   window.matchMedia = vi.fn().mockImplementation((query: string) => ({
     matches: false,
     media: query,
@@ -58,7 +40,6 @@ beforeEach(() => {
 });
 afterEach(() => {
   vi.restoreAllMocks();
-  motionState.reduce = true;
 });
 
 const items: BloomDockItem[] = [
@@ -236,6 +217,18 @@ describe("BloomDock — flow action", () => {
     await user.click(pill);
     await waitFor(() => expect(pill).toHaveAttribute("aria-expanded", "true"));
   });
+
+  it("closing the flow (step-0 Close) collapses the bloom back to the pill", async () => {
+    const user = userEvent.setup();
+    const action: BloomDockAction = { label: "Buy number", icon: Sparkles, flow: buyFlow };
+    render(<BloomDock items={items} action={action} />);
+    const pill = screen.getByRole("button", { name: "Buy number" });
+    await user.click(pill);
+    await screen.findByText("Choose an area code");
+    // BloomFlow's first-step "Close" calls onClose → the dock's setOpen(false).
+    await user.click(screen.getByRole("button", { name: /close/i }));
+    await waitFor(() => expect(pill).toHaveAttribute("aria-expanded", "false"));
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -254,15 +247,10 @@ describe("BloomDock — tone", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Non-reduced motion — exercises the animated arm of each ternary across the
-// dock + nested Bloom/BloomFlow (DOM identical under the mock).
+// End-to-end: expand the dock, then bloom a flow from the action pill.
 // ---------------------------------------------------------------------------
-describe("BloomDock — non-reduced motion branches", () => {
-  beforeEach(() => {
-    motionState.reduce = false;
-  });
-
-  it("expands and opens a flow with motion enabled", async () => {
+describe("BloomDock — expand then bloom a flow", () => {
+  it("expands to reveal collapsible items, then opens the flow", async () => {
     const user = userEvent.setup();
     const action: BloomDockAction = { label: "Buy number", icon: Sparkles, flow: buyFlow };
     render(<BloomDock items={items} action={action} />);

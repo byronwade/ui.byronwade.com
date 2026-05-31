@@ -13,31 +13,32 @@ export default defineConfig({
       include: ["components/**"],
       reporter: ["text", "json-summary"],
       thresholds: {
-        // Bloom animation-branch allowance (sanctioned per AGENTS.md). The bloom /
-        // bloom-flow / bloom-dock components contain a few branches that are
-        // genuinely unreachable in jsdom: the drag-dismiss `onDragEnd` (Motion's
-        // `drag` is no-op'd by the per-test `motion/react` mock) and the
-        // focus-trap Tab-wrap (gated on `el.offsetParent`, which jsdom always
-        // reports as null). Every other branch — incl. both arms of the
-        // reduced-motion ternaries — is covered.
+        // Bloom animation-branch allowance (sanctioned per AGENTS.md). The bloom
+        // components are now pure CSS (Motion removed). The few branches still
+        // unreachable in jsdom are timing/measurement-only: the cross-axis
+        // close `transitionend` handler (no real CSS transition fires in jsdom)
+        // and the focus-trap Tab-wrap arms (gated on `el.offsetParent`, which
+        // jsdom always reports as null). Every other branch — incl. both arms of
+        // the reduced-motion ternaries, the inline/element-anchor mode, and the
+        // mobile bottom-sheet — is covered.
         //
         // NOTE on scoping: in Vitest 4 a per-glob threshold is an ADDITIONAL
         // per-file gate; glob-matched files are STILL aggregated into the global
         // numbers (documented divergence from Jest). So the per-glob block below
-        // only pins the bloom files to their own (high) measured floor — it does
-        // NOT remove them from the global average. Because of that aggregation,
-        // the four global metrics are also lowered to the measured repo-wide
-        // floor (rounded down) — this is a repo-wide relaxation, not bloom-only.
-        // Lowered ONLY to the measured floor; do not lower further, never disable.
+        // pins the bloom files to their own measured floor without removing them
+        // from the global average.
+        //
+        // Thresholds sit at the measured floor (rounded down). Ratcheted UP after
+        // the CSS rewrite restored coverage; do not lower, never disable.
         statements: 96,
-        branches: 92,
-        functions: 98,
+        branches: 93,
+        functions: 99,
         lines: 97,
         "**/components/ui/bloom*.tsx": {
-          statements: 88,
+          statements: 92,
           branches: 86,
-          functions: 93,
-          lines: 92,
+          functions: 97,
+          lines: 95,
         },
       },
     },

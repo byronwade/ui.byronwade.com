@@ -1,45 +1,22 @@
 /**
  * Exhaustive tests for BloomFlow (components/ui/bloom-flow.tsx).
  *
- * Motion is mocked per-file (motion.<tag> → <tag>, AnimatePresence → children,
- * useReducedMotion → true) so step transitions are deterministic.
+ * BloomFlow is pure CSS (Motion removed): step bodies fade/slide in via
+ * `animate-in`, the step-dots widen via a CSS `transition-all`, and the success
+ * check is a static `--brand` ring. jsdom does not run CSS transitions, so step
+ * advance/back/success are observable immediately after the state change.
  */
 
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
+import { vi, describe, it, expect } from "vitest";
 import { axe } from "vitest-axe";
 
-// Mutable reduced-motion flag (see bloom.test.tsx for the rationale): the mock
-// strips all animation props, so flipping this only selects the ternary arm.
-const motionState = vi.hoisted(() => ({ reduce: true }));
-
-vi.mock("motion/react", async () => {
-  const React = await import("react");
-  const cache: Record<string, unknown> = {};
-  const passthrough = (tag: string) =>
-    React.forwardRef((props: Record<string, unknown>, ref: unknown) => {
-      const {
-        initial, animate, exit, transition, layout, layoutId,
-        drag, dragConstraints, dragElastic, onDragEnd, variants,
-        whileTap, whileHover, whileDrag, whileFocus, whileInView,
-        pathLength, ...rest
-      } = props;
-      return React.createElement(tag, { ref, ...rest });
-    });
-  const motion = new Proxy(
-    {},
-    { get: (_t, tag: string) => (cache[tag] ??= passthrough(tag)) },
-  );
-  return {
-    motion,
-    AnimatePresence: ({ children }: { children: React.ReactNode }) =>
-      React.createElement(React.Fragment, null, children),
-    useReducedMotion: () => motionState.reduce,
-  };
-});
-
 import { BloomFlow, type BloomFlowDef } from "@/components/ui/bloom-flow";
+
+// The step-dots are `<span class="h-1.5 rounded-full …">` (active widens to w-4,
+// others stay w-1.5) — one per step. This selector counts them.
+const DOT_SELECTOR = ".h-1\\.5.rounded-full";
 
 // ---------------------------------------------------------------------------
 // Flow definitions
@@ -144,7 +121,7 @@ describe("BloomFlow — first step", () => {
     const { container } = render(
       <BloomFlow flow={makeTwoStepFlow(async () => ({ number: "x" }))} onClose={vi.fn()} />,
     );
-    const dots = container.querySelectorAll(".size-1\\.5.rounded-full");
+    const dots = container.querySelectorAll(DOT_SELECTOR);
     expect(dots.length).toBe(2);
   });
 });
@@ -163,7 +140,7 @@ describe("BloomFlow — navigation", () => {
 
     expect(await screen.findByText("Confirm purchase")).toBeInTheDocument();
     // Active dot (index 1) is the brand-filled one.
-    const dots = container.querySelectorAll(".size-1\\.5.rounded-full");
+    const dots = container.querySelectorAll(DOT_SELECTOR);
     expect(dots[1].className).toContain("bg-brand");
     expect(dots[0].className).not.toContain("bg-brand ");
   });
@@ -258,7 +235,7 @@ describe("BloomFlow — single step", () => {
     const { container } = render(<BloomFlow flow={oneStepFlow} onClose={onClose} />);
 
     expect(screen.getByRole("button", { name: /close/i })).toBeInTheDocument();
-    expect(container.querySelectorAll(".size-1\\.5.rounded-full").length).toBe(1);
+    expect(container.querySelectorAll(DOT_SELECTOR).length).toBe(1);
 
     await user.type(screen.getByLabelText("Name"), "Main line");
     await user.click(screen.getByRole("button", { name: "Save" }));
@@ -269,20 +246,12 @@ describe("BloomFlow — single step", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Non-reduced motion — exercises the animated arm of each ternary, incl. the
-// SuccessRing draw transitions (DOM identical under the mock).
+// Success ring — the static `--brand` check that replaced the Motion path-draw.
 // ---------------------------------------------------------------------------
-describe("BloomFlow — non-reduced motion branches", () => {
-  beforeEach(() => {
-    motionState.reduce = false;
-  });
-  afterEach(() => {
-    motionState.reduce = true;
-  });
-
-  it("runs a full step → success cycle with motion enabled (covers SuccessRing draw)", async () => {
+describe("BloomFlow — success ring", () => {
+  it("renders the brand success ring on the success view", async () => {
     const user = userEvent.setup();
-    render(
+    const { container } = render(
       <BloomFlow flow={makeTwoStepFlow(async () => ({ number: "x" }))} onClose={vi.fn()} />,
     );
     await user.type(screen.getByLabelText("Area code"), "415");
@@ -290,6 +259,8 @@ describe("BloomFlow — non-reduced motion branches", () => {
     await user.click(await screen.findByLabelText(/i agree/i));
     await user.click(screen.getByRole("button", { name: "Buy number" }));
     expect(await screen.findByText("Purchased x")).toBeInTheDocument();
+    // The SuccessRing is a `bg-brand/15` chip wrapping a brand Check glyph.
+    expect(container.querySelector(".bg-brand\\/15")).toBeTruthy();
   });
 });
 

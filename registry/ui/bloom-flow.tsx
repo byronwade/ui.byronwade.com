@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, X } from "lucide-react";
+import { ArrowLeft, Check, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -37,13 +36,19 @@ export interface BloomFlowProps<S, R> {
   className?: string;
 }
 
+/**
+ * The stepped flow body rendered INSIDE a `Bloom`. It owns the steps, the
+ * persistent footer (Back/Close · step-dots · Primary), and the success view —
+ * but NOT the outer height bloom: Bloom's body-height ResizeObserver picks up
+ * this content's size changes, so BloomFlow must not wrap itself in a competing
+ * height transition. Step bodies fade/slide in via CSS (`animate-in`); the
+ * step-dots and the success check are pure CSS, ported from DockSheet. No Motion.
+ */
 export function BloomFlow<S, R>({
   flow,
   onClose,
   className,
 }: BloomFlowProps<S, R>) {
-  const reduce = useReducedMotion() ?? false;
-
   const [state, setState] = React.useState<S>(flow.initial);
   const [stepIndex, setStepIndex] = React.useState(0);
   const [phase, setPhase] = React.useState<Phase>("steps");
@@ -90,73 +95,51 @@ export function BloomFlow<S, R>({
     }
   }, [submitting, step, state, isLast, flow]);
 
-  // Motion presets, mirroring the Bloom primitive's feel.
-  const stepTransition = reduce ? { duration: 0 } : { duration: 0.2 };
-  const layoutTransition = reduce
-    ? { duration: 0 }
-    : { type: "spring" as const, stiffness: 420, damping: 36, mass: 0.9 };
-
   const successView =
     phase === "success" && result ? flow.success(result.value) : null;
 
   return (
-    <motion.div
-      layout={!reduce}
-      transition={layoutTransition}
-      className={cn("flex w-full flex-col", className)}
-    >
-      {/* ── Body region (scrollable) ── */}
-      <div className="min-h-0 flex-1 overflow-auto px-5 py-4">
-        <AnimatePresence mode="wait" initial={false}>
-          {phase === "success" && successView ? (
-            <motion.div
-              key="__success"
-              initial={reduce ? false : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? undefined : { opacity: 0, y: -10 }}
-              transition={stepTransition}
-              className="flex flex-col items-center gap-4 py-6 text-center"
-            >
-              <SuccessRing reduce={reduce} />
-              <h3 className="text-base font-semibold text-foreground">
-                {successView.title}
-              </h3>
-              {successView.actions ? (
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  {successView.actions}
-                </div>
-              ) : null}
-            </motion.div>
-          ) : step ? (
-            <motion.div
-              key={stepIndex}
-              initial={reduce ? false : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? undefined : { opacity: 0, y: -10 }}
-              transition={stepTransition}
-            >
-              <div className="mb-3">
-                <h3 className="text-base font-semibold text-foreground">
-                  {step.title}
-                </h3>
-                {step.caption ? (
-                  <p className="mt-0.5 text-sm text-muted-foreground">
-                    {step.caption}
-                  </p>
-                ) : null}
+    <div className={cn("flex w-full flex-col", className)}>
+      {/* ── Body region ── (height owned by the parent Bloom) */}
+      <div className="min-w-0 px-5 py-4">
+        {phase === "success" && successView ? (
+          <div
+            key="__success"
+            className="animate-in fade-in slide-in-from-bottom-2 flex flex-col items-center gap-4 py-6 text-center duration-300 motion-reduce:animate-none"
+          >
+            <SuccessRing />
+            <h3 className="text-base font-semibold text-foreground">
+              {successView.title}
+            </h3>
+            {successView.actions ? (
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {successView.actions}
               </div>
-              <div>{step.body(state, set)}</div>
-              {error ? (
-                <p
-                  role="alert"
-                  className="mt-3 text-sm text-destructive"
-                >
-                  {error}
+            ) : null}
+          </div>
+        ) : step ? (
+          <div
+            key={stepIndex}
+            className="animate-in fade-in slide-in-from-bottom-2 duration-300 motion-reduce:animate-none"
+          >
+            <div className="mb-3">
+              <h3 className="text-base font-semibold text-foreground">
+                {step.title}
+              </h3>
+              {step.caption ? (
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  {step.caption}
                 </p>
               ) : null}
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+            </div>
+            <div>{step.body(state, set)}</div>
+            {error ? (
+              <p role="alert" className="mt-3 text-sm text-destructive">
+                {error}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
       </div>
 
       {/* ── Persistent footer (built once) ── */}
@@ -192,7 +175,7 @@ export function BloomFlow<S, R>({
               )}
             </button>
 
-            {/* Centered step-dots — one per step, position fixed. */}
+            {/* Centered step-dots — one per step; the active dot widens (w-1.5→w-4). */}
             <div
               className="mx-auto flex items-center gap-1.5"
               role="presentation"
@@ -202,12 +185,12 @@ export function BloomFlow<S, R>({
                 <span
                   key={i}
                   className={cn(
-                    "size-1.5 rounded-full transition-colors",
+                    "h-1.5 rounded-full transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
                     i === stepIndex
-                      ? "bg-brand"
+                      ? "w-4 bg-brand"
                       : i < stepIndex
-                        ? "bg-brand/40"
-                        : "bg-border",
+                        ? "w-1.5 bg-brand/40"
+                        : "w-1.5 bg-border",
                   )}
                 />
               ))}
@@ -232,46 +215,16 @@ export function BloomFlow<S, R>({
           </>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-/** Animated `--brand` check-ring shown on the success phase. */
-function SuccessRing({ reduce }: { reduce: boolean }) {
-  const draw = reduce
-    ? { duration: 0 }
-    : { duration: 0.5, ease: "easeInOut" as const };
+/** Static `--brand` success check, ported from DockSheet's SuccessView (no path-draw). */
+function SuccessRing() {
   return (
-    <motion.svg
-      width="56"
-      height="56"
-      viewBox="0 0 56 56"
-      fill="none"
-      aria-hidden
-    >
-      <motion.circle
-        cx="28"
-        cy="28"
-        r="25"
-        stroke="var(--brand)"
-        strokeWidth="3"
-        initial={reduce ? false : { pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={draw}
-      />
-      <motion.path
-        d="M18 28.5L25 35.5L39 21"
-        stroke="var(--brand)"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        initial={reduce ? false : { pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={
-          reduce ? draw : { ...draw, delay: 0.35 }
-        }
-      />
-    </motion.svg>
+    <div className="flex size-14 items-center justify-center rounded-full bg-brand/15">
+      <Check className="size-7 text-brand" strokeWidth={2.5} aria-hidden />
+    </div>
   );
 }
 

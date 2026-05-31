@@ -1,13 +1,6 @@
 "use client";
 
 import * as React from "react";
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-  type PanInfo,
-  type Transition,
-} from "motion/react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -63,6 +56,10 @@ export interface BloomProps {
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
+/** The shared morph easing + duration, ported verbatim from NavDock/DockSheet. */
+const EASE = "cubic-bezier(.22,1,.36,1)";
+const MORPH_MS = 400;
+
 /** Deterministic-on-server media query hook. Initial state is always `false`
  * (desktop) so SSR and the first client render agree; flips inside an effect. */
 function useMediaQuery(query: string): boolean {
@@ -78,6 +75,19 @@ function useMediaQuery(query: string): boolean {
   return matches;
 }
 
+function usePrefersReducedMotion(): boolean {
+  const [reduce, setReduce] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReduce(mql.matches);
+    onChange();
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+  return reduce;
+}
+
 const FOCUSABLE =
   'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
@@ -90,13 +100,36 @@ function getFocusable(root: HTMLElement | null): HTMLElement[] {
 
 function toneClasses(tone: "dock" | "surface"): string {
   return tone === "dock"
-    ? "bg-dock text-dock-foreground shadow-float"
+    ? "bg-dock text-dock-foreground shadow-float border border-white/5"
     : "bg-card text-foreground border border-border shadow-card";
 }
 
-const SHEET_CLOSE_OFFSET = 120;
-const SHEET_CLOSE_VELOCITY = 500;
-
+/**
+ * The morphing edge-anchored bloom primitive — a generalized port of NavDock's
+ * proven CSS technique (NOT a library-animated popover).
+ *
+ * Two orthogonal morphs, exactly as the reference splits them:
+ *  - The **outer morph container** animates inline `width` (measured collapsed
+ *    bar width → `size`) + `border-radius` (`rounded-3xl` → `rounded-2xl`) with a
+ *    400ms `cubic-bezier(.22,1,.36,1)` transition; reversed on close via
+ *    `transitionend`.
+ *  - An **inner body div** wrapping `children` animates `height` (0 →
+ *    `scrollHeight`, measured by a ResizeObserver) over the same curve.
+ *
+ * The bar is ALWAYS mounted inside the container and pinned to the placement
+ * edge (footer for bottom/right, header for top/left), so opening never reflows
+ * page content — the body simply grows away from the anchored edge.
+ *
+ * Positioning modes:
+ *  - `anchor="viewport"` (default): an outer `fixed z-50 pointer-events-none`
+ *    container positioned by the resolved placement edge. Dock-style.
+ *  - element/inline anchor: a `relative inline-flex` wrapper reserves the bar's
+ *    space; the morph container is `absolute`, pinned to the bar's placement edge
+ *    and grows away from it, so the bar never moves.
+ *
+ * `children` unmount when closed; the close animation keeps them mounted for the
+ * 400ms collapse, then unmounts (the `mounted` flag, distinct from `open`).
+ */
 export function Bloom({
   bar,
   children,
@@ -114,7 +147,7 @@ export function Bloom({
   className,
   "aria-label": ariaLabel,
 }: BloomProps) {
-  const reduce = useReducedMotion() ?? false;
+  const reduce = usePrefersReducedMotion();
   const isMobile = useMediaQuery(`(max-width:${mobileBreakpoint - 1}px)`);
 
   const isControlled = controlledOpen !== undefined;
@@ -129,8 +162,24 @@ export function Bloom({
     [isControlled, onOpenChange],
   );
 
-  const triggerRef = React.useRef<HTMLButtonElement>(null);
-  const panelRef = React.useRef<HTMLDivElement>(null);
+  // `mounted` keeps the body in the tree through the close animation; it lags
+  // `open` by the morph duration on close (mirrors DockSheet's requestClose).
+  const [mounted, setMounted] = React.useState(open);
+  React.useEffect(() => {
+    if (open) {
+      setMounted(true);
+      return;
+    }
+    if (!mounted) return;
+    // Closing: keep mounted for the collapse, then unmount.
+    const t = window.setTimeout(() => setMounted(false), reduce ? 0 : MORPH_MS);
+    return () => window.clearTimeout(t);
+  }, [open, mounted, reduce]);
+
+  const morphRef = React.useRef<HTMLDivElement>(null);
+  const barRef = React.useRef<HTMLDivElement>(null);
+  const bodyRef = React.useRef<HTMLDivElement>(null);
+  const collapsedSizeRef = React.useRef<number | null>(null);
 
   // Resolve effective placement (with auto-flip) when open on desktop.
   const [resolved, setResolved] = React.useState<ResolvedPlacement>(() =>
@@ -151,8 +200,8 @@ export function Bloom({
     let rect: DOMRect | null = null;
     if (anchor !== "viewport" && anchor.current) {
       rect = anchor.current.getBoundingClientRect();
-    } else if (triggerRef.current) {
-      rect = triggerRef.current.getBoundingClientRect();
+    } else if (barRef.current) {
+      rect = barRef.current.getBoundingClientRect();
     }
 
     const space = rect
@@ -168,29 +217,114 @@ export function Bloom({
     setResolved(resolvePlacement(flipped));
   }, [open, isMobile, placement, anchor, size, collisionPadding]);
 
-  // Dialog: focus management + scroll lock.
+  const axis = resolved.axis; // "y" → grow via height; "x" → grow via width.
+  const barAsHeader =
+    barPosition === "leading" ? true : resolved.barOrder === "before";
+
+  // ─── Cross-axis (width for y-axis, height for x-axis) morph on the container ───
+  // Mirrors NavDock: measure the collapsed bar's cross-size, then transition to
+  // `size` on open and back on close (reversed via transitionend).
+  useIsoLayoutEffect(() => {
+    const el = morphRef.current;
+    if (!el || isMobile) return;
+    const prop = axis === "y" ? "width" : "height";
+    const T = `${prop} ${MORPH_MS}ms ${EASE}, border-radius ${MORPH_MS}ms ${EASE}`;
+    const read = () => (axis === "y" ? el.offsetWidth : el.offsetHeight);
+    const setSize = (v: string) => {
+      if (axis === "y") el.style.width = v;
+      else el.style.height = v;
+    };
+    const styleVal = () => (axis === "y" ? el.style.width : el.style.height);
+
+    if (open) {
+      const collapsed = collapsedSizeRef.current ?? read();
+      if (reduce) {
+        el.style.transition = "none";
+        setSize(`${size}px`);
+        return;
+      }
+      el.style.transition = "none";
+      setSize(`${collapsed}px`);
+      void el.offsetWidth; // reflow
+      el.style.transition = T;
+      setSize(`${size}px`);
+    } else if (styleVal()) {
+      const collapsed = collapsedSizeRef.current;
+      const restore = () => {
+        el.style.transition = "none";
+        setSize("");
+        void el.offsetWidth;
+        el.style.transition = "";
+      };
+      if (reduce || collapsed == null) {
+        restore();
+        return;
+      }
+      el.style.transition = T;
+      setSize(`${collapsed}px`);
+      const onEnd = (e: TransitionEvent) => {
+        if (e.propertyName !== prop) return;
+        restore();
+        el.removeEventListener("transitionend", onEnd);
+      };
+      el.addEventListener("transitionend", onEnd);
+      return () => el.removeEventListener("transitionend", onEnd);
+    }
+  }, [open, axis, size, reduce, isMobile]);
+
+  // Remember the collapsed cross-size while closed so the morph can start from it.
+  useIsoLayoutEffect(() => {
+    const el = morphRef.current;
+    if (el && !open && !el.style.width && !el.style.height) {
+      collapsedSizeRef.current = axis === "y" ? el.offsetWidth : el.offsetHeight;
+    }
+  });
+
+  // ─── Growth-axis (height for y-axis, width for x-axis) bloom on the body ───
+  // The body starts at 0; a ResizeObserver measures its natural scroll size and
+  // we transition the wrapper to it. On close we drive it back to 0.
+  const [bodySize, setBodySize] = React.useState(0);
+
+  useIsoLayoutEffect(() => {
+    if (!open || !mounted) return;
+    const el = bodyRef.current;
+    if (!el) return;
+    const measure = () =>
+      setBodySize(axis === "y" ? el.scrollHeight : el.scrollWidth);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [open, mounted, axis]);
+
+  // Collapse the body when closing.
+  React.useEffect(() => {
+    if (!open) setBodySize(0);
+  }, [open]);
+
+  // ─── Dialog: focus management ───
   const prevFocusRef = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
-    if (!open || !modal || isMobile === undefined) return;
+    if (!open) return;
     if (typeof document === "undefined") return;
 
     prevFocusRef.current = document.activeElement as HTMLElement | null;
 
-    // Focus first focusable in the panel on open.
+    // Focus first focusable in the body on open.
     const focusFirst = () => {
-      const focusables = getFocusable(panelRef.current);
-      (focusables[0] ?? panelRef.current)?.focus();
+      const focusables = getFocusable(bodyRef.current);
+      focusables[0]?.focus();
     };
     const raf = requestAnimationFrame(focusFirst);
 
     return () => {
       cancelAnimationFrame(raf);
-      // Restore focus to the trigger on close.
-      const target = triggerRef.current ?? prevFocusRef.current;
-      target?.focus?.();
+      // Restore focus to the bar trigger on close.
+      const focusables = getFocusable(barRef.current);
+      (focusables[0] ?? prevFocusRef.current)?.focus?.();
     };
-  }, [open, modal, isMobile]);
+  }, [open]);
 
   // Esc to close + Tab trap (modal only).
   const onPanelKeyDown = React.useCallback(
@@ -201,7 +335,7 @@ export function Bloom({
         return;
       }
       if (!modal || e.key !== "Tab") return;
-      const focusables = getFocusable(panelRef.current);
+      const focusables = getFocusable(morphRef.current);
       if (focusables.length === 0) {
         e.preventDefault();
         return;
@@ -220,165 +354,182 @@ export function Bloom({
     [modal, setOpen],
   );
 
-  const instant: Transition = { duration: 0 };
-  const ease: Transition = reduce
-    ? instant
-    : { type: "spring", stiffness: 420, damping: 36, mass: 0.9 };
-  const fade: Transition = reduce ? instant : { duration: 0.18 };
-
-  // ─── Collapsed: render only the bar as a pill trigger ───
-  const collapsedTrigger = (
-    <motion.button
-      ref={triggerRef}
-      type="button"
-      layout={!reduce}
-      onClick={() => setOpen(true)}
-      aria-expanded={open}
-      aria-haspopup={modal ? "dialog" : undefined}
+  // The bar, always mounted. When closed it's a clickable trigger; when open it
+  // docks as a header/footer at the placement edge.
+  const barNode = (
+    <div
+      ref={barRef}
       className={cn(
-        "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-        toneClasses(tone),
-        className,
+        "flex shrink-0 items-center",
+        open
+          ? cn(
+              "gap-2 px-4 py-3",
+              barAsHeader
+                ? tone === "dock"
+                  ? "border-b border-white/10"
+                  : "border-b border-border/60"
+                : tone === "dock"
+                  ? "border-t border-white/10"
+                  : "border-t border-border/60",
+            )
+          : "gap-2",
       )}
     >
-      {bar}
-    </motion.button>
-  );
-
-  // The bar as it appears docked inside the open panel (footer/header).
-  const dockedBar = (
-    <motion.div
-      layout={!reduce}
-      className={cn(
-        "flex shrink-0 items-center gap-2 px-4 py-3",
-        resolved.barOrder === "after" ? "border-t border-border/60" : "border-b border-border/60",
+      {!open ? (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-expanded={open}
+          aria-haspopup={modal ? "dialog" : undefined}
+          className="flex w-full items-center gap-2 rounded-full px-4 py-2 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          {bar}
+        </button>
+      ) : (
+        bar
       )}
-    >
-      {bar}
-    </motion.div>
+    </div>
   );
 
-  // Whether the bar docks as header or footer.
-  // barPosition "leading" forces header; "edge" follows placement (barOrder).
-  const barAsHeader =
-    barPosition === "leading" ? true : resolved.barOrder === "before";
-
-  const bodyContent = (
-    <motion.div
-      className="min-h-0 overflow-auto px-4 py-3"
-      initial={reduce ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={reduce ? undefined : { opacity: 0 }}
-      transition={fade}
+  const bodyWrap = mounted ? (
+    <div
+      className={cn(
+        "overflow-hidden motion-reduce:transition-none",
+        // Literal classes (Tailwind JIT can't see interpolated strings); these
+        // mirror DockSheet's body transition exactly.
+        axis === "y"
+          ? "transition-[height] duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)]"
+          : "transition-[width] duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)]",
+      )}
+      style={axis === "y" ? { height: bodySize } : { width: bodySize }}
     >
-      {children}
-    </motion.div>
-  );
+      <div
+        ref={bodyRef}
+        className="animate-in fade-in slide-in-from-bottom-2 duration-300 motion-reduce:animate-none"
+      >
+        {/* Keep children mounted through the collapse (gated on `mounted`, not
+            `open`) so the body clips away under overflow-hidden instead of
+            snapping to empty — matches DockSheet's requestClose feel. */}
+        {children}
+      </div>
+    </div>
+  ) : null;
 
   // ─── Mobile bottom sheet ───
-  const onSheetDragEnd = (_e: unknown, info: PanInfo) => {
-    if (info.offset.y > SHEET_CLOSE_OFFSET || info.velocity.y > SHEET_CLOSE_VELOCITY) {
-      setOpen(false);
-    }
-  };
-
   const mobileSheet =
-    isMobile && open ? (
-      <motion.div
-        ref={panelRef}
+    isMobile && mounted ? (
+      <div
         role={modal ? "dialog" : undefined}
         aria-modal={modal ? true : undefined}
         aria-label={ariaLabel}
         onKeyDown={onPanelKeyDown}
         className={cn(
-          "fixed inset-x-0 bottom-0 z-50 flex max-h-[85vh] flex-col rounded-t-2xl",
+          "pointer-events-auto fixed inset-x-0 bottom-0 z-50 flex max-h-[85vh] flex-col rounded-t-2xl",
+          open
+            ? "animate-in slide-in-from-bottom duration-300 motion-reduce:animate-none"
+            : "animate-out slide-out-to-bottom duration-300 motion-reduce:animate-none",
           toneClasses(tone),
         )}
-        initial={reduce ? false : { y: "100%" }}
-        animate={{ y: 0 }}
-        exit={reduce ? { opacity: 0 } : { y: "100%" }}
-        transition={reduce ? instant : { type: "spring", stiffness: 320, damping: 34 }}
-        drag={reduce ? false : "y"}
-        dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={{ top: 0, bottom: 0.6 }}
-        onDragEnd={reduce ? undefined : onSheetDragEnd}
       >
         <div className="flex justify-center pt-2">
           <div className="h-1.5 w-10 rounded-full bg-border" aria-hidden />
         </div>
-        {barAsHeader ? dockedBar : null}
+        {barAsHeader ? barNode : null}
         <div className="min-h-0 flex-1 overflow-auto">{children}</div>
-        {barAsHeader ? null : dockedBar}
-      </motion.div>
+        {barAsHeader ? null : barNode}
+      </div>
     ) : null;
 
-  // ─── Desktop panel ───
-  // Cross-axis is fixed to `size`; growth axis animates 0 → auto.
-  const growStyle: React.CSSProperties =
-    resolved.axis === "y" ? { width: size } : { height: size };
-
-  const desktopPanel =
-    !isMobile && open ? (
-      <motion.div
-        ref={panelRef}
-        role={modal ? "dialog" : undefined}
-        aria-modal={modal ? true : undefined}
-        aria-label={ariaLabel}
-        onKeyDown={onPanelKeyDown}
-        layout={!reduce}
-        className={cn(
-          "z-50 flex flex-col overflow-hidden",
-          resolved.axis === "x" ? "flex-row" : "flex-col",
-          toneClasses(tone),
-        )}
-        style={{ ...growStyle, transformOrigin: resolved.transformOrigin }}
-        initial={reduce ? false : { borderRadius: 9999, opacity: 0 }}
-        animate={{ borderRadius: "var(--radius-2xl)", opacity: 1 }}
-        exit={reduce ? { opacity: 0 } : { borderRadius: 9999, opacity: 0 }}
-        transition={ease}
-      >
-        {resolved.barOrder === "before" ? dockedBar : null}
-        <motion.div
-          className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden"
-          initial={reduce ? false : resolved.axis === "y" ? { height: 0 } : { width: 0 }}
-          animate={resolved.axis === "y" ? { height: "auto" } : { width: "auto" }}
-          exit={reduce ? undefined : resolved.axis === "y" ? { height: 0 } : { width: 0 }}
-          transition={ease}
-        >
-          {bodyContent}
-        </motion.div>
-        {resolved.barOrder === "after" ? dockedBar : null}
-      </motion.div>
-    ) : null;
-
-  return (
+  // ─── Desktop morph container ───
+  const desktopContainer = !isMobile ? (
     <div
+      ref={morphRef}
+      role={open ? (modal ? "dialog" : undefined) : undefined}
+      aria-modal={open && modal ? true : undefined}
+      aria-label={ariaLabel}
+      onKeyDown={onPanelKeyDown}
       className={cn(
-        "relative inline-flex",
-        // Anchor the absolute panel relative to the bar for viewport/element flows.
-        resolved.axis === "y" ? "flex-col" : "flex-row",
+        "pointer-events-auto transform-gpu overflow-hidden motion-reduce:transition-none",
+        toneClasses(tone),
+        open ? "rounded-2xl" : "rounded-3xl",
+        // Compose body above/below the bar along the growth axis.
+        axis === "x" ? "flex flex-row" : "flex flex-col",
+        className,
       )}
     >
-      {/* Collapsed trigger stays mounted (and visually present) when closed. */}
-      {!open ? collapsedTrigger : <span aria-hidden className="opacity-0">{collapsedTrigger}</span>}
+      {barAsHeader ? (
+        <>
+          {barNode}
+          {bodyWrap}
+        </>
+      ) : (
+        <>
+          {bodyWrap}
+          {barNode}
+        </>
+      )}
+    </div>
+  ) : null;
 
-      <AnimatePresence>
-        {open && modal ? (
-          <motion.div
-            key="bloom-scrim"
-            className="fixed inset-0 z-40 bg-foreground/20"
-            initial={reduce ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={fade}
+  // ─── Outer positioning ───
+  // Viewport mode: a fixed, edge-anchored, pointer-events-none container.
+  if (anchor === "viewport") {
+    const outer = VIEWPORT_OUTER[resolved.side];
+    return (
+      <>
+        {modal && open ? (
+          <div
+            className="animate-in fade-in fixed inset-0 z-40 bg-foreground/20 duration-200 motion-reduce:animate-none"
             onClick={() => setOpen(false)}
+            aria-hidden
           />
         ) : null}
-      </AnimatePresence>
+        <div className={cn("pointer-events-none fixed z-50 flex print:hidden", outer)}>
+          {desktopContainer}
+        </div>
+        {mobileSheet}
+      </>
+    );
+  }
 
-      <AnimatePresence>{isMobile ? mobileSheet : desktopPanel}</AnimatePresence>
-    </div>
+  // Element/inline anchor: a relative wrapper reserves the bar's footprint; the
+  // morph container is absolutely pinned to the placement edge and grows away, so
+  // the bar never shifts.
+  const inlineAbs = INLINE_ABS[resolved.side];
+  return (
+    <span className="relative inline-flex">
+      {/* Invisible spacer reserving the collapsed bar's space (keeps layout put). */}
+      <span aria-hidden className="pointer-events-none invisible">
+        {bar}
+      </span>
+      {modal && open ? (
+        <div
+          className="animate-in fade-in fixed inset-0 z-40 bg-foreground/20 duration-200 motion-reduce:animate-none"
+          onClick={() => setOpen(false)}
+          aria-hidden
+        />
+      ) : null}
+      <div className={cn("absolute z-50", inlineAbs)}>{desktopContainer}</div>
+      {mobileSheet}
+    </span>
   );
 }
+
+/** Outer fixed-container placement classes per resolved side (viewport mode). */
+const VIEWPORT_OUTER: Record<BloomSide, string> = {
+  bottom: "inset-x-0 bottom-4 justify-center px-4 sm:bottom-6",
+  top: "inset-x-0 top-3 justify-center px-4",
+  left: "inset-y-0 left-3 items-center",
+  right: "inset-y-0 right-3 items-center justify-end",
+};
+
+/** Absolute morph-container anchoring per resolved side (inline/element mode).
+ * Pins the container to the bar's placement edge so it grows away from the bar. */
+const INLINE_ABS: Record<BloomSide, string> = {
+  bottom: "bottom-0 left-1/2 -translate-x-1/2",
+  top: "top-0 left-1/2 -translate-x-1/2",
+  left: "left-0 top-1/2 -translate-y-1/2",
+  right: "right-0 top-1/2 -translate-y-1/2",
+};
 
 export default Bloom;

@@ -1,74 +1,72 @@
 /**
  * Exhaustive tests for the Bloom primitive (components/ui/bloom.tsx).
  *
- * Motion is mocked per-file so behaviour is deterministic in jsdom:
- *   motion.<tag>  → plain <tag> with motion-only props stripped
- *   AnimatePresence → renders children
- *   useReducedMotion → true
+ * Bloom is now pure CSS (Motion removed). jsdom does not run CSS transitions,
+ * so the morph is effectively instant: opening mounts the body + dialog
+ * immediately, and the close keeps the body mounted for MORPH_MS (~400ms) via a
+ * setTimeout before unmounting — `waitFor` covers that window.
+ *
+ * Reduced-motion is read from `window.matchMedia("(prefers-reduced-motion:
+ * reduce)")`, and the mobile vs desktop split from
+ * `matchMedia("(max-width:…)")`. The stub below is query-aware so the two can be
+ * controlled independently (e.g. desktop + reduced-motion, which exercises the
+ * `if (reduce)` arms of the cross-axis morph effect).
  *
  * We assert behaviour / markup / state / a11y — never animation visuals.
  */
 
+import { useRef } from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { axe } from "vitest-axe";
 
-// Mutable reduced-motion flag. Because the mock strips ALL animation props, the
-// rendered DOM is identical regardless of this value — it only selects which arm
-// of each `reduce ? A : B` ternary executes. Flipping it (see "non-reduced
-// motion" block) deterministically covers the animated arms.
-const motionState = vi.hoisted(() => ({ reduce: true }));
-
-vi.mock("motion/react", async () => {
-  const React = await import("react");
-  const cache: Record<string, unknown> = {};
-  const passthrough = (tag: string) =>
-    React.forwardRef((props: Record<string, unknown>, ref: unknown) => {
-      const {
-        initial, animate, exit, transition, layout, layoutId,
-        drag, dragConstraints, dragElastic, onDragEnd, variants,
-        whileTap, whileHover, whileDrag, whileFocus, whileInView,
-        ...rest
-      } = props;
-      return React.createElement(tag, { ref, ...rest });
-    });
-  const motion = new Proxy(
-    {},
-    { get: (_t, tag: string) => (cache[tag] ??= passthrough(tag)) },
-  );
-  return {
-    motion,
-    AnimatePresence: ({ children }: { children: React.ReactNode }) =>
-      React.createElement(React.Fragment, null, children),
-    useReducedMotion: () => motionState.reduce,
-  };
-});
-
 import { Bloom } from "@/components/ui/bloom";
 
-// Stub window.matchMedia (jsdom lacks it). Default: desktop (matches=false).
-function stubMatchMedia(matches: boolean) {
-  window.matchMedia = vi.fn().mockImplementation((query: string) => ({
-    matches,
-    media: query,
-    onchange: null,
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    addListener: vi.fn(),
-    removeListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  }));
+// Stub window.matchMedia (jsdom lacks it). Query-aware: `mobile` drives the
+// max-width query, `reduce` drives the prefers-reduced-motion query.
+function stubMatchMedia({
+  mobile = false,
+  reduce = false,
+}: { mobile?: boolean; reduce?: boolean } = {}) {
+  window.matchMedia = vi.fn().mockImplementation((query: string) => {
+    const matches = query.includes("prefers-reduced-motion")
+      ? reduce
+      : query.includes("max-width")
+        ? mobile
+        : false;
+    return {
+      matches,
+      media: query,
+      onchange: null,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    };
+  });
+}
+
+// jsdom has no ResizeObserver; the CSS Bloom uses one to measure its body's
+// natural size for the height bloom. A no-op lets it mount (measurements are 0
+// in jsdom anyway). Scoped to this file — NOT global setup — because recharts'
+// tests behave differently when a ResizeObserver is present.
+function stubResizeObserver() {
+  globalThis.ResizeObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  } as unknown as typeof ResizeObserver;
 }
 
 beforeEach(() => {
-  stubMatchMedia(false);
-  motionState.reduce = true;
+  stubResizeObserver();
+  stubMatchMedia();
 });
 
 afterEach(() => {
   vi.restoreAllMocks();
-  motionState.reduce = true;
 });
 
 function renderBloom(props: Partial<React.ComponentProps<typeof Bloom>> = {}) {
@@ -160,17 +158,24 @@ describe("Bloom — open / close", () => {
     );
   });
 
-  it("returns focus to the bar trigger after closing", async () => {
+  it("runs focus-restore cleanup on close and restores the collapsed trigger", async () => {
+    // NOTE: the actual `.focus()` target is filtered out by `getFocusable`'s
+    // `offsetParent` check (always null in jsdom — the same sanctioned limit as
+    // the Tab-wrap), so we don't assert `toHaveFocus`. We still drive the full
+    // open→Esc→close path so the close cleanup (getFocusable + focus()) runs,
+    // and assert the dialog is gone and the collapsed trigger is back.
     const user = userEvent.setup();
     renderBloom();
     await user.click(screen.getByRole("button", { name: "Open menu" }));
     await screen.findByRole("dialog");
     await user.click(screen.getByRole("button", { name: "Body action" }));
     await user.keyboard("{Escape}");
-    await waitFor(() => {
-      const trigger = screen.getByRole("button", { name: "Open menu" });
-      expect(trigger).toHaveFocus();
-    });
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+    expect(
+      screen.getByRole("button", { name: "Open menu" }),
+    ).toBeInTheDocument();
   });
 });
 
@@ -178,18 +183,25 @@ describe("Bloom — open / close", () => {
 // Tone tokens
 // ---------------------------------------------------------------------------
 describe("Bloom — tone", () => {
-  it("tone='surface' (default) applies card/border classes to the trigger", () => {
+  it("tone='surface' (default) applies card/border classes to the morph container", () => {
     renderBloom({ tone: "surface" });
-    const trigger = screen.getByRole("button", { name: "Open menu" });
-    expect(trigger.className).toContain("bg-card");
-    expect(trigger.className).toContain("border-border");
+    // Tone lives on the morph container (the trigger's nearest `.transform-gpu`).
+    const container = screen
+      .getByRole("button", { name: "Open menu" })
+      .closest(".transform-gpu");
+    expect(container).toBeTruthy();
+    expect(container!.className).toContain("bg-card");
+    expect(container!.className).toContain("border-border");
   });
 
-  it("tone='dock' applies dock token classes to the trigger", () => {
+  it("tone='dock' applies dock token classes to the morph container", () => {
     renderBloom({ tone: "dock" });
-    const trigger = screen.getByRole("button", { name: "Open menu" });
-    expect(trigger.className).toContain("bg-dock");
-    expect(trigger.className).toContain("shadow-float");
+    const container = screen
+      .getByRole("button", { name: "Open menu" })
+      .closest(".transform-gpu");
+    expect(container).toBeTruthy();
+    expect(container!.className).toContain("bg-dock");
+    expect(container!.className).toContain("shadow-float");
   });
 
   it("tone='dock' applies dock classes to the open panel", async () => {
@@ -238,13 +250,63 @@ describe("Bloom — placement & barPosition", () => {
     expect(dialog.className).toContain("flex-row");
   });
 
-  it("barPosition='leading' forces the bar to dock as header", async () => {
+  it("barPosition='leading' docks the bar as a header (border-b)", async () => {
     const user = userEvent.setup();
     renderBloom({ placement: "bottom", barPosition: "leading" });
     await user.click(screen.getByRole("button", { name: "Open menu" }));
     expect(await screen.findByRole("dialog")).toBeInTheDocument();
-    // Two "Open menu" labels: the (hidden) trigger + the docked bar.
-    expect(screen.getAllByText("Open menu").length).toBeGreaterThanOrEqual(2);
+    // Leading → the docked bar wrapper gets a bottom border (header), not top.
+    const barWrap = screen.getByText("Open menu").closest("div");
+    expect(barWrap?.className).toContain("border-b");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Element/inline anchor mode (anchor = a ref, not "viewport")
+// ---------------------------------------------------------------------------
+describe("Bloom — element/inline anchor", () => {
+  function InlineAnchorHarness() {
+    const ref = useRef<HTMLDivElement>(null);
+    return (
+      <div ref={ref}>
+        <Bloom
+          bar={<span>Open menu</span>}
+          aria-label="Inline bloom"
+          anchor={ref}
+          modal
+        >
+          <div>
+            <p>Bloomed body content</p>
+            <button type="button">Body action</button>
+          </div>
+        </Bloom>
+      </div>
+    );
+  }
+
+  it("opens an absolutely-anchored panel that grows from the bar (inline mode)", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<InlineAnchorHarness />);
+    // The single accessible trigger (the aria-hidden spacer copy is excluded).
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+    expect(await screen.findByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByText("Bloomed body content")).toBeInTheDocument();
+    // Inline mode wraps in `span.relative.inline-flex` with an `.absolute` panel.
+    expect(container.querySelector("span.relative.inline-flex")).toBeTruthy();
+    expect(container.querySelector(".absolute.z-50")).toBeTruthy();
+  });
+
+  it("the inline-mode scrim closes the panel", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<InlineAnchorHarness />);
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+    await screen.findByRole("dialog");
+    const scrim = container.querySelector(".fixed.inset-0") as HTMLElement;
+    expect(scrim).toBeTruthy();
+    await user.click(scrim);
+    await waitFor(() =>
+      expect(screen.queryByText("Bloomed body content")).not.toBeInTheDocument(),
+    );
   });
 });
 
@@ -253,10 +315,10 @@ describe("Bloom — placement & barPosition", () => {
 // ---------------------------------------------------------------------------
 describe("Bloom — mobile sheet", () => {
   it("renders the bottom-sheet dialog when the mobile media query matches", async () => {
-    stubMatchMedia(true);
-    const user = userEvent.setup();
-    renderBloom({ modal: true });
-    await user.click(screen.getByRole("button", { name: "Open menu" }));
+    stubMatchMedia({ mobile: true });
+    // On mobile + closed there is no collapsed trigger (the parent owns `open`
+    // and renders its own pill, as BloomDock does), so drive `open` directly.
+    renderBloom({ open: true, modal: true });
     const dialog = await screen.findByRole("dialog");
     expect(dialog.className).toContain("rounded-t-2xl");
     expect(screen.getByText("Bloomed body content")).toBeInTheDocument();
@@ -320,15 +382,17 @@ describe("Bloom — uncontrolled defaultOpen", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Non-reduced motion — exercises the animated arm of each `reduce ? … : …`
-// ternary (DOM is identical under the mock; only branch selection differs).
+// Reduced motion — the default (above) runs with reduce=false (the animated
+// arm of every `reduce ? … : …`); these turn reduced-motion ON to cover the
+// `if (reduce)` arms of the cross-axis morph effect on DESKTOP (the mobile
+// branch early-returns before those arms, so the stub must keep mobile=false).
 // ---------------------------------------------------------------------------
-describe("Bloom — non-reduced motion branches", () => {
+describe("Bloom — reduced motion (desktop)", () => {
   beforeEach(() => {
-    motionState.reduce = false;
+    stubMatchMedia({ mobile: false, reduce: true });
   });
 
-  it("opens, renders the body, and closes with full motion enabled (desktop)", async () => {
+  it("opens + closes on the y-axis with reduced motion (covers the reduce arms)", async () => {
     const user = userEvent.setup();
     renderBloom({ modal: true, placement: "bottom" });
     await user.click(screen.getByRole("button", { name: "Open menu" }));
@@ -340,19 +404,23 @@ describe("Bloom — non-reduced motion branches", () => {
     );
   });
 
-  it("renders the x-axis panel with motion enabled", async () => {
+  it("opens + closes on the x-axis with reduced motion", async () => {
     const user = userEvent.setup();
-    renderBloom({ placement: "left" });
+    renderBloom({ placement: "left", modal: true });
     await user.click(screen.getByRole("button", { name: "Open menu" }));
     const dialog = await screen.findByRole("dialog");
     expect(dialog.className).toContain("flex-row");
+    await user.click(screen.getByRole("button", { name: "Body action" }));
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByText("Bloomed body content")).not.toBeInTheDocument(),
+    );
   });
 
-  it("renders the mobile sheet with motion enabled", async () => {
-    stubMatchMedia(true);
-    const user = userEvent.setup();
-    renderBloom({ modal: true, barPosition: "leading" });
-    await user.click(screen.getByRole("button", { name: "Open menu" }));
+  it("renders the mobile sheet with reduced motion", async () => {
+    stubMatchMedia({ mobile: true, reduce: true });
+    // Drive `open` (no collapsed trigger on mobile — see the mobile-sheet block).
+    renderBloom({ open: true, modal: true, barPosition: "leading" });
     const dialog = await screen.findByRole("dialog");
     expect(dialog.className).toContain("rounded-t-2xl");
   });
