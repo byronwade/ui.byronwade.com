@@ -91,26 +91,17 @@ export const SECTIONS = [
 export const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
-/** Full table-of-contents model: each section with its specimens. */
+/** Curated table-of-contents model: one entry per component; prose sections are header-only. */
 export const NAV: { id: string; label: string; items: { id: string; label: string }[] }[] = [
   {
     id: "philosophy",
     label: "Philosophy",
-    items: [
-      { id: slugify("Calm over chrome"), label: "Calm over chrome" },
-      { id: slugify("No generic grids — one signature hero per page"), label: "No generic grids — one signature hero per page" },
-      { id: slugify("Constant chrome, bespoke body"), label: "Constant chrome, bespoke body" },
-    ],
+    items: [],
   },
   {
     id: "principles",
     label: "Principles",
-    items: [
-      { id: slugify("Single-accent rule"), label: "Single-accent rule" },
-      { id: slugify("Status convention"), label: "Status convention" },
-      { id: slugify("Do / Don't"), label: "Do / Don't" },
-      { id: slugify("Spacing & radius"), label: "Spacing & radius" },
-    ],
+    items: [],
   },
   {
     id: "foundations",
@@ -127,8 +118,7 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
     id: "primitives",
     label: "Primitives",
     items: [
-      { id: slugify("Button — variants"), label: "Button — variants" },
-      { id: slugify("Button — sizes"), label: "Button — sizes" },
+      { id: slugify("Button — variants"), label: "Button" },
       { id: slugify("Badge"), label: "Badge" },
       { id: slugify("FilterPill"), label: "FilterPill" },
       { id: slugify("SegmentedControl"), label: "SegmentedControl" },
@@ -192,7 +182,7 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
       { id: slugify("StatCard"), label: "StatCard" },
       { id: slugify("Gauge"), label: "Gauge" },
       { id: slugify("ActivityGrid"), label: "ActivityGrid" },
-      { id: slugify("GradientAvatar + animalName"), label: "GradientAvatar + animalName" },
+      { id: slugify("GradientAvatar + animalName"), label: "GradientAvatar" },
       { id: slugify("EmptyState"), label: "EmptyState" },
     ],
   },
@@ -209,7 +199,7 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
     label: "House components",
     items: [
       { id: slugify("DetailHeader"), label: "DetailHeader" },
-      { id: slugify("Section (settings panel)"), label: "Section (settings panel)" },
+      { id: slugify("Section (settings panel)"), label: "Section" },
       { id: slugify("EventTimeline"), label: "EventTimeline" },
     ],
   },
@@ -219,7 +209,7 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
     items: [
       { id: slugify("HeroSection"), label: "HeroSection" },
       { id: slugify("CenteredFocal"), label: "CenteredFocal" },
-      { id: slugify("SplitWithRail + TimelineRail"), label: "SplitWithRail + TimelineRail" },
+      { id: slugify("SplitWithRail + TimelineRail"), label: "Split + rail" },
     ],
   },
   {
@@ -229,7 +219,7 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
   },
 ];
 
-/** Sticky in-page nav — full TOC: each section with its specimens, component-level scroll-spy. */
+/** Sticky in-page nav — one entry per component, calm/airy Visitors style. */
 export function SideNav() {
   const [active, setActive] = React.useState<string>(SECTIONS[0].id);
   const navRef = React.useRef<HTMLElement>(null);
@@ -302,44 +292,47 @@ export function SideNav() {
   return (
     <nav
       ref={navRef}
-      className="sticky top-24 hidden max-h-[calc(100dvh-7rem)] self-start overflow-y-auto pr-2 scrollbar-thin lg:block"
+      className="sticky top-24 hidden max-h-[calc(100dvh-7rem)] self-start overflow-y-auto pr-3 scrollbar-thin lg:block"
     >
-      <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+      <p className="mb-4 text-xs font-medium uppercase tracking-wide text-muted-foreground">
         Contents
       </p>
-      <ul className="border-l border-border">
-        {NAV.map((section) => {
+      <ul className="space-y-0.5">
+        {NAV.map((section, i) => {
           const sectionIsActive = parentSection[active] === section.id;
+          const isHeaderOnly = section.items.length === 0;
           return (
-            <li key={section.id}>
-              {/* Section header */}
+            <li key={section.id} className={i === 0 ? "" : "mt-6"}>
+              {/* Section header — always a clickable link */}
               <a
                 href={`#${section.id}`}
                 data-nav-id={section.id}
                 className={cn(
-                  "-ml-px block border-l-2 px-3 py-1 text-xs font-medium uppercase tracking-wide transition-colors",
-                  active === section.id && section.items.length === 0
-                    ? "border-brand text-foreground"
+                  "mb-2 block rounded-md px-2 py-1.5 text-xs font-medium uppercase tracking-wide transition-colors",
+                  isHeaderOnly
+                    ? active === section.id
+                      ? "-ml-px border-l-2 border-brand pl-[calc(0.5rem-2px)] font-semibold text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                     : sectionIsActive
-                    ? "border-brand/40 text-foreground"
-                    : "border-transparent text-muted-foreground hover:text-foreground",
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {section.label}
               </a>
-              {/* Specimen items */}
+              {/* Component items — one per component, no truncation */}
               {section.items.length > 0 && (
-                <ul className="mb-1">
+                <ul className="space-y-0.5">
                   {section.items.map((item) => (
                     <li key={item.id}>
                       <a
                         href={`#${item.id}`}
                         data-nav-id={item.id}
                         className={cn(
-                          "-ml-px block truncate border-l-2 py-0.5 pl-6 pr-2 text-sm transition-colors",
+                          "block rounded-md px-2 py-1.5 pl-4 text-sm leading-relaxed transition-colors",
                           active === item.id
-                            ? "border-brand font-medium text-foreground"
-                            : "border-transparent text-muted-foreground hover:text-foreground",
+                            ? "-ml-px border-l-2 border-brand pl-[calc(1rem-2px)] font-medium text-foreground"
+                            : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
                         )}
                       >
                         {item.label}
