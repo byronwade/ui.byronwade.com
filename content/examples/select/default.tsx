@@ -13,7 +13,7 @@ import {
 
 export default function Example() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-[200px]">
       <Select>
         <SelectTrigger>
           <SelectValue placeholder="Pick a fruit" />

@@ -11,18 +11,21 @@ import {
 
 export default function Example() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-[200px]">
       <Popover>
-        <PopoverTrigger className="px-4 py-2 rounded-md border text-sm font-medium">
+        <PopoverTrigger className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors">
           Open Popover
         </PopoverTrigger>
         <PopoverContent side="bottom" align="center">
           <PopoverHeader>
-            <PopoverTitle>Quick Info</PopoverTitle>
-            <PopoverDescription>Here are some helpful details about this item.</PopoverDescription>
+            <PopoverTitle>What is this?</PopoverTitle>
+            <PopoverDescription>
+              A popover floats above the page and anchors to its trigger.
+            </PopoverDescription>
           </PopoverHeader>
           <p className="text-sm text-muted-foreground">
-            You can place any content inside the popover body.
+            Use it to surface contextual info, quick settings, or supplementary
+            actions without navigating away.
           </p>
         </PopoverContent>
       </Popover>

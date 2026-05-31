@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "@/components/ui/alert"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 import { InfoIcon } from "lucide-react"
 
 export default function Example() {
@@ -6,20 +6,10 @@ export default function Example() {
     <div className="flex flex-col gap-4 p-6 max-w-lg">
       <Alert>
         <InfoIcon />
-        <AlertTitle>Heads up</AlertTitle>
+        <AlertTitle>New update available</AlertTitle>
         <AlertDescription>
-          Your free trial ends in 3 days. Upgrade to keep access to all features.
+          Version 2.4.0 is ready to install. Restart the application to apply changes.
         </AlertDescription>
-      </Alert>
-
-      <Alert variant="destructive">
-        <AlertTitle>Payment failed</AlertTitle>
-        <AlertDescription>
-          We could not process your card. Please update your billing details.
-        </AlertDescription>
-        <AlertAction>
-          <button className="text-xs underline">Update</button>
-        </AlertAction>
       </Alert>
     </div>
   )

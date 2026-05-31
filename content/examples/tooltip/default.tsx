@@ -6,13 +6,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
     <TooltipProvider>
       <div className="flex items-center justify-center p-16">
         <Tooltip>
-          <TooltipTrigger className="rounded-md border px-4 py-2 text-sm">
+          <TooltipTrigger render={<Button variant="outline" />}>
             Hover me
           </TooltipTrigger>
           <TooltipContent>

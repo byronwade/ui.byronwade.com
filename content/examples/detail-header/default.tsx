@@ -7,7 +7,7 @@ export default function Example() {
     <div className="max-w-4xl p-8">
       <DetailHeader
         title="my-project.acme.com"
-        badge={<Badge variant="secondary">Active</Badge>}
+        badge={<Badge variant="success">Active</Badge>}
         actions={
           <>
             <Button variant="outline" size="sm">Edit</Button>

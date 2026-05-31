@@ -11,48 +11,53 @@ import {
 
 export default function Example() {
   return (
-    <div className="flex flex-col gap-6 p-8">
-      {/* Single avatar with image and fallback */}
-      <div className="flex items-center gap-4">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/40?u=alice" alt="Alice" />
-          <AvatarFallback>AL</AvatarFallback>
-        </Avatar>
-
+    <div className="flex flex-col gap-8 p-8">
+      {/* Basic avatar with image */}
+      <div className="flex flex-col gap-2">
+        <span className="text-xs text-muted-foreground">With image</span>
         <Avatar>
-          <AvatarImage src="https://i.pravatar.cc/40?u=bob" alt="Bob" />
-          <AvatarFallback>BO</AvatarFallback>
-        </Avatar>
-
-        <Avatar size="lg">
-          <AvatarImage src="/broken.jpg" alt="Carol" />
-          <AvatarFallback>CA</AvatarFallback>
+          <AvatarImage src="https://i.pravatar.cc/40?u=default1" alt="Sam Rivera" />
+          <AvatarFallback>SR</AvatarFallback>
         </Avatar>
       </div>
 
-      {/* Avatar with a badge */}
-      <Avatar>
-        <AvatarImage src="https://i.pravatar.cc/40?u=dave" alt="Dave" />
-        <AvatarFallback>DA</AvatarFallback>
-        <AvatarBadge />
-      </Avatar>
+      {/* Fallback when no image */}
+      <div className="flex flex-col gap-2">
+        <span className="text-xs text-muted-foreground">Fallback initials</span>
+        <Avatar>
+          <AvatarFallback>JD</AvatarFallback>
+        </Avatar>
+      </div>
 
-      {/* Grouped avatars */}
-      <AvatarGroup>
+      {/* Avatar with status badge */}
+      <div className="flex flex-col gap-2">
+        <span className="text-xs text-muted-foreground">With badge</span>
         <Avatar>
-          <AvatarImage src="https://i.pravatar.cc/40?u=eve" alt="Eve" />
-          <AvatarFallback>EV</AvatarFallback>
+          <AvatarImage src="https://i.pravatar.cc/40?u=default2" alt="Pat Chen" />
+          <AvatarFallback>PC</AvatarFallback>
+          <AvatarBadge className="bg-green-500" />
         </Avatar>
-        <Avatar>
-          <AvatarImage src="https://i.pravatar.cc/40?u=frank" alt="Frank" />
-          <AvatarFallback>FR</AvatarFallback>
-        </Avatar>
-        <Avatar>
-          <AvatarImage src="https://i.pravatar.cc/40?u=grace" alt="Grace" />
-          <AvatarFallback>GR</AvatarFallback>
-        </Avatar>
-        <AvatarGroupCount>+4</AvatarGroupCount>
-      </AvatarGroup>
+      </div>
+
+      {/* Group of avatars */}
+      <div className="flex flex-col gap-2">
+        <span className="text-xs text-muted-foreground">Group</span>
+        <AvatarGroup>
+          <Avatar>
+            <AvatarImage src="https://i.pravatar.cc/40?u=default3" alt="User A" />
+            <AvatarFallback>UA</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://i.pravatar.cc/40?u=default4" alt="User B" />
+            <AvatarFallback>UB</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://i.pravatar.cc/40?u=default5" alt="User C" />
+            <AvatarFallback>UC</AvatarFallback>
+          </Avatar>
+          <AvatarGroupCount>+5</AvatarGroupCount>
+        </AvatarGroup>
+      </div>
     </div>
   );
 }

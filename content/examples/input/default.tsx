@@ -7,16 +7,16 @@ export default function Example() {
   const [value, setValue] = React.useState("");
 
   return (
-    <div className="flex flex-col gap-4 p-6 max-w-sm">
+    <div className="flex flex-col gap-4 p-6 max-w-sm w-full">
       <Input
         type="text"
-        placeholder="Enter your name"
+        placeholder="Full name"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
       <Input type="email" placeholder="Email address" />
       <Input type="password" placeholder="Password" />
-      <Input type="text" placeholder="Disabled input" disabled />
+      <Input type="search" placeholder="Search…" />
     </div>
   );
 }

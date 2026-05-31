@@ -1,111 +1,683 @@
 import type { ComponentType } from "react";
 
+import AccordionDefault from "./accordion/default";
+import AccordionControlled from "./accordion/controlled";
+import AccordionDisabled from "./accordion/disabled";
+import AccordionKeepMounted from "./accordion/keep-mounted";
+import AccordionMultiple from "./accordion/multiple";
+import AccordionNestedContent from "./accordion/nested-content";
+import AccordionWithIcon from "./accordion/with-icon";
+import ActivityGridDefault from "./activity-grid/default";
+import ActivityGridColumns from "./activity-grid/columns";
+import ActivityGridEmpty from "./activity-grid/empty";
+import ActivityGridInCard from "./activity-grid/in-card";
+import ActivityGridIntensityLevels from "./activity-grid/intensity-levels";
+import ActivityGridInteractive from "./activity-grid/interactive";
+import AlertDefault from "./alert/default";
+import AlertNoIcon from "./alert/no-icon";
+import AlertVariants from "./alert/variants";
+import AlertWithAction from "./alert/with-action";
+import AlertWithIcon from "./alert/with-icon";
+import AlertWithLink from "./alert/with-link";
+import AvatarDefault from "./avatar/default";
+import AvatarFallback from "./avatar/fallback";
+import AvatarGroup from "./avatar/group";
+import AvatarSizes from "./avatar/sizes";
+import AvatarUserList from "./avatar/user-list";
+import AvatarWithBadge from "./avatar/with-badge";
+import BadgeDefault from "./badge/default";
+import BadgeAsLink from "./badge/as-link";
+import BadgeInlineContent from "./badge/inline-content";
+import BadgeInvalid from "./badge/invalid";
+import BadgeStatus from "./badge/status";
+import BadgeWithIcon from "./badge/with-icon";
+import BreadcrumbDefault from "./breadcrumb/default";
+import BreadcrumbCustomSeparator from "./breadcrumb/custom-separator";
+import BreadcrumbLongPath from "./breadcrumb/long-path";
+import BreadcrumbResponsive from "./breadcrumb/responsive";
+import BreadcrumbWithEllipsis from "./breadcrumb/with-ellipsis";
+import BreadcrumbWithIcons from "./breadcrumb/with-icons";
+import BreadcrumbWithRenderProp from "./breadcrumb/with-render-prop";
+import ButtonDefault from "./button/default";
+import ButtonDisabled from "./button/disabled";
+import ButtonError from "./button/error";
+import ButtonLoading from "./button/loading";
+import ButtonSizes from "./button/sizes";
+import ButtonVariants from "./button/variants";
+import ButtonWithIcon from "./button/with-icon";
+import CardDefault from "./card/default";
+import CardContentOnly from "./card/content-only";
+import CardGridLayout from "./card/grid-layout";
+import CardSizes from "./card/sizes";
+import CardWithAction from "./card/with-action";
+import CardWithImage from "./card/with-image";
+import CenteredFocalDefault from "./centered-focal/default";
+import CenteredFocalCustomClassname from "./centered-focal/custom-classname";
+import CenteredFocalLoadingState from "./centered-focal/loading-state";
+import CenteredFocalNoBackdrop from "./centered-focal/no-backdrop";
+import CenteredFocalWithForm from "./centered-focal/with-form";
+import CenteredFocalWithIllustrationBackdrop from "./centered-focal/with-illustration-backdrop";
+import ChartDefault from "./chart/default";
+import ChartBarChart from "./chart/bar-chart";
+import ChartCustomTooltip from "./chart/custom-tooltip";
+import ChartDonutChart from "./chart/donut-chart";
+import ChartLegendVariants from "./chart/legend-variants";
+import ChartLineChart from "./chart/line-chart";
+import ChartPieChart from "./chart/pie-chart";
+import ChartRadialBar from "./chart/radial-bar";
+import ChartStackedBar from "./chart/stacked-bar";
+import ChartThemeColors from "./chart/theme-colors";
+import ChartTooltipVariants from "./chart/tooltip-variants";
+import CheckboxDefault from "./checkbox/default";
+import CheckboxCheckboxGroup from "./checkbox/checkbox-group";
+import CheckboxDisabled from "./checkbox/disabled";
+import CheckboxIndeterminate from "./checkbox/indeterminate";
+import CheckboxReadonly from "./checkbox/readonly";
+import CheckboxWithLabel from "./checkbox/with-label";
+import DetailHeaderDefault from "./detail-header/default";
+import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
+import DetailHeaderManyActions from "./detail-header/many-actions";
+import DetailHeaderMetaGridStandalone from "./detail-header/meta-grid-standalone";
+import DetailHeaderNoMeta from "./detail-header/no-meta";
+import DetailHeaderRichMetaValues from "./detail-header/rich-meta-values";
+import DetailHeaderWithStatusBadges from "./detail-header/with-status-badges";
+import DialogDefault from "./dialog/default";
+import DialogDestructive from "./dialog/destructive";
+import DialogLoading from "./dialog/loading";
+import DialogNoCloseButton from "./dialog/no-close-button";
+import DialogScrollable from "./dialog/scrollable";
+import DialogWithForm from "./dialog/with-form";
+import DialogWithIcon from "./dialog/with-icon";
+import DropdownMenuDefault from "./dropdown-menu/default";
+import DropdownMenuDisabled from "./dropdown-menu/disabled";
+import DropdownMenuWithCheckboxes from "./dropdown-menu/with-checkboxes";
+import DropdownMenuWithIcons from "./dropdown-menu/with-icons";
+import DropdownMenuWithRadio from "./dropdown-menu/with-radio";
+import DropdownMenuWithShortcuts from "./dropdown-menu/with-shortcuts";
+import DropdownMenuWithSubmenu from "./dropdown-menu/with-submenu";
+import EmptyStateDefault from "./empty-state/default";
+import EmptyStateCompact from "./empty-state/compact";
+import EmptyStateErrorState from "./empty-state/error-state";
+import EmptyStateMinimal from "./empty-state/minimal";
+import EmptyStateNoIcon from "./empty-state/no-icon";
+import EmptyStateSearchNoResults from "./empty-state/search-no-results";
+import EmptyStateWithMultipleActions from "./empty-state/with-multiple-actions";
+import EventTimelineDefault from "./event-timeline/default";
+import EventTimelineLiveFeed from "./event-timeline/live-feed";
+import EventTimelineRichContent from "./event-timeline/rich-content";
+import EventTimelineSingleEvent from "./event-timeline/single-event";
+import EventTimelineTimestamps from "./event-timeline/timestamps";
+import EventTimelineTitleOnly from "./event-timeline/title-only";
+import EventTimelineTones from "./event-timeline/tones";
+import FilterPillDefault from "./filter-pill/default";
+import FilterPillActiveState from "./filter-pill/active-state";
+import FilterPillAsSelectTrigger from "./filter-pill/as-select-trigger";
+import FilterPillDisabled from "./filter-pill/disabled";
+import FilterPillFilterBar from "./filter-pill/filter-bar";
+import FilterPillWithIcon from "./filter-pill/with-icon";
+import FoundationTokens from "./foundation/tokens";
 import GaugeDefault from "./gauge/default";
+import GaugeAnimated from "./gauge/animated";
+import GaugeDashboardGrid from "./gauge/dashboard-grid";
+import GaugeScoreTone from "./gauge/score-tone";
+import GaugeSizes from "./gauge/sizes";
+import GaugeThickness from "./gauge/thickness";
 import GaugeTones from "./gauge/tones";
-import StatusDotTones from "./status-dot/tones";
-import StatusDotPulse from "./status-dot/pulse";
+import GradientAvatarDefault from "./gradient-avatar/default";
+import GradientAvatarGroupedStack from "./gradient-avatar/grouped-stack";
+import GradientAvatarListRows from "./gradient-avatar/list-rows";
 import GradientAvatarSeeds from "./gradient-avatar/seeds";
 import GradientAvatarSizes from "./gradient-avatar/sizes";
-import ActivityGridDefault from "./activity-grid/default";
-import FilterPillDefault from "./filter-pill/default";
-import SegmentedControlDefault from "./segmented-control/default";
-import TimelineRailDefault from "./timeline-rail/default";
-import SplitWithRailDefault from "./split-with-rail/default";
+import GradientAvatarWithNameBadge from "./gradient-avatar/with-name-badge";
 import HeroSectionDefault from "./hero-section/default";
-import MetricStatDefault from "./metric-stat/default";
-import CenteredFocalDefault from "./centered-focal/default";
-import IdentityNames from "./identity/names";
-import FoundationTokens from "./foundation/tokens";
-import ButtonDefault from "./button/default";
-import BadgeDefault from "./badge/default";
-import CardDefault from "./card/default";
-import StatusPillDefault from "./status-pill/default";
-import InputDefault from "./input/default";
-import TextareaDefault from "./textarea/default";
-import LabelDefault from "./label/default";
-import SelectDefault from "./select/default";
-import CheckboxDefault from "./checkbox/default";
-import SwitchDefault from "./switch/default";
-import RadioGroupDefault from "./radio-group/default";
-import TooltipDefault from "./tooltip/default";
-import PopoverDefault from "./popover/default";
-import DropdownMenuDefault from "./dropdown-menu/default";
-import DialogDefault from "./dialog/default";
+import HeroSectionNoHeader from "./hero-section/no-header";
+import HeroSectionWithActionHeader from "./hero-section/with-action-header";
+import HeroSectionWithChart from "./hero-section/with-chart";
+import HeroSectionWithCustomClassname from "./hero-section/with-custom-classname";
+import HeroSectionWithMetricsHeader from "./hero-section/with-metrics-header";
 import HoverCardDefault from "./hover-card/default";
-import AlertDefault from "./alert/default";
-import ProgressDefault from "./progress/default";
-import SkeletonDefault from "./skeleton/default";
-import SonnerDefault from "./sonner/default";
-import TabsDefault from "./tabs/default";
-import AccordionDefault from "./accordion/default";
-import AvatarDefault from "./avatar/default";
-import SeparatorDefault from "./separator/default";
-import BreadcrumbDefault from "./breadcrumb/default";
-import TableDefault from "./table/default";
+import HoverCardAlignment from "./hover-card/alignment";
+import HoverCardControlled from "./hover-card/controlled";
+import HoverCardPlacement from "./hover-card/placement";
+import HoverCardRichContent from "./hover-card/rich-content";
+import HoverCardWithDelay from "./hover-card/with-delay";
+import IdentityNames from "./identity/names";
+import InputDefault from "./input/default";
+import InputDisabled from "./input/disabled";
+import InputError from "./input/error";
+import InputFileUpload from "./input/file-upload";
+import InputInputTypes from "./input/input-types";
+import InputWithAdornment from "./input/with-adornment";
+import InputWithButton from "./input/with-button";
+import InputWithIcon from "./input/with-icon";
+import InputWithLabel from "./input/with-label";
+import LabelDefault from "./label/default";
+import LabelDisabled from "./label/disabled";
+import LabelErrorState from "./label/error-state";
+import LabelFormLayout from "./label/form-layout";
+import LabelRequired from "./label/required";
+import LabelWithCheckbox from "./label/with-checkbox";
+import LabelWithIcon from "./label/with-icon";
+import MetricStatDefault from "./metric-stat/default";
+import MetricStatCustomValue from "./metric-stat/custom-value";
+import MetricStatDeltaDirections from "./metric-stat/delta-directions";
+import MetricStatGridLayout from "./metric-stat/grid-layout";
+import MetricStatLoading from "./metric-stat/loading";
+import MetricStatNoDelta from "./metric-stat/no-delta";
+import MetricStatWithIcon from "./metric-stat/with-icon";
 import PageHeaderDefault from "./page-header/default";
-import StatCardDefault from "./stat-card/default";
-import EmptyStateDefault from "./empty-state/default";
-import ChartDefault from "./chart/default";
-import DetailHeaderDefault from "./detail-header/default";
+import PageHeaderAlign from "./page-header/align";
+import PageHeaderBreadcrumbContext from "./page-header/breadcrumb-context";
+import PageHeaderDescriptionOnly from "./page-header/description-only";
+import PageHeaderWithActions from "./page-header/with-actions";
+import PageHeaderWithBadge from "./page-header/with-badge";
+import PopoverDefault from "./popover/default";
+import PopoverControlled from "./popover/controlled";
+import PopoverMenuLike from "./popover/menu-like";
+import PopoverPlacement from "./popover/placement";
+import PopoverRichContent from "./popover/rich-content";
+import PopoverWithForm from "./popover/with-form";
+import ProgressDefault from "./progress/default";
+import ProgressColors from "./progress/colors";
+import ProgressControlled from "./progress/controlled";
+import ProgressIndeterminate from "./progress/indeterminate";
+import ProgressSizes from "./progress/sizes";
+import ProgressWithFormat from "./progress/with-format";
+import RadioGroupDefault from "./radio-group/default";
+import RadioGroupDisabled from "./radio-group/disabled";
+import RadioGroupFormValidation from "./radio-group/form-validation";
+import RadioGroupHorizontal from "./radio-group/horizontal";
+import RadioGroupWithDescription from "./radio-group/with-description";
+import RadioGroupWithIcon from "./radio-group/with-icon";
 import SectionDefault from "./section/default";
-import EventTimelineDefault from "./event-timeline/default";
+import SectionInlineChildren from "./section/inline-children";
+import SectionNoHeader from "./section/no-header";
+import SectionSettingRowControls from "./section/setting-row-controls";
+import SectionStackedSections from "./section/stacked-sections";
+import SectionWithAction from "./section/with-action";
+import SegmentedControlDefault from "./segmented-control/default";
+import SegmentedControlControlledDisplay from "./segmented-control/controlled-display";
+import SegmentedControlDisabled from "./segmented-control/disabled";
+import SegmentedControlManyOptions from "./segmented-control/many-options";
+import SegmentedControlSizes from "./segmented-control/sizes";
+import SegmentedControlTwoOptions from "./segmented-control/two-options";
+import SelectDefault from "./select/default";
+import SelectControlled from "./select/controlled";
+import SelectDisabled from "./select/disabled";
+import SelectGrouped from "./select/grouped";
+import SelectSizes from "./select/sizes";
+import SelectWithError from "./select/with-error";
+import SelectWithIcon from "./select/with-icon";
+import SeparatorDefault from "./separator/default";
+import SeparatorCustomStyling from "./separator/custom-styling";
+import SeparatorInCard from "./separator/in-card";
+import SeparatorInNav from "./separator/in-nav";
+import SeparatorVertical from "./separator/vertical";
+import SeparatorWithLabel from "./separator/with-label";
+import SkeletonDefault from "./skeleton/default";
+import SkeletonCard from "./skeleton/card";
+import SkeletonList from "./skeleton/list";
+import SkeletonMediaGrid from "./skeleton/media-grid";
+import SkeletonProfile from "./skeleton/profile";
+import SkeletonTable from "./skeleton/table";
+import SkeletonWithLoadedState from "./skeleton/with-loaded-state";
+import SonnerDefault from "./sonner/default";
+import SonnerCustom from "./sonner/custom";
+import SonnerDismissible from "./sonner/dismissible";
+import SonnerPositions from "./sonner/positions";
+import SonnerPromise from "./sonner/promise";
+import SonnerRichColors from "./sonner/rich-colors";
+import SonnerVariants from "./sonner/variants";
+import SonnerWithAction from "./sonner/with-action";
+import SonnerWithDescription from "./sonner/with-description";
+import SplitWithRailDefault from "./split-with-rail/default";
+import SplitWithRailCustomLayout from "./split-with-rail/custom-layout";
+import SplitWithRailMetricsSummary from "./split-with-rail/metrics-summary";
+import SplitWithRailWithEventTimeline from "./split-with-rail/with-event-timeline";
+import SplitWithRailWithTimelineRail from "./split-with-rail/with-timeline-rail";
+import StatCardDefault from "./stat-card/default";
+import StatCardDeltaDirections from "./stat-card/delta-directions";
+import StatCardGridDashboard from "./stat-card/grid-dashboard";
+import StatCardNoDelta from "./stat-card/no-delta";
+import StatCardRichValue from "./stat-card/rich-value";
+import StatCardWithIcons from "./stat-card/with-icons";
+import StatusDotDefault from "./status-dot/default";
+import StatusDotInlineText from "./status-dot/inline-text";
+import StatusDotPulse from "./status-dot/pulse";
+import StatusDotSizes from "./status-dot/sizes";
+import StatusDotTableRows from "./status-dot/table-rows";
+import StatusDotTones from "./status-dot/tones";
+import StatusPillDefault from "./status-pill/default";
+import StatusPillCustomClass from "./status-pill/custom-class";
+import StatusPillInlineText from "./status-pill/inline-text";
+import StatusPillPulse from "./status-pill/pulse";
+import StatusPillTableRows from "./status-pill/table-rows";
+import StatusPillTones from "./status-pill/tones";
+import SwitchDefault from "./switch/default";
+import SwitchControlled from "./switch/controlled";
+import SwitchDisabled from "./switch/disabled";
+import SwitchInvalid from "./switch/invalid";
+import SwitchSizes from "./switch/sizes";
+import SwitchWithLabel from "./switch/with-label";
+import TableDefault from "./table/default";
+import TableEmptyState from "./table/empty-state";
+import TableLoadingSkeleton from "./table/loading-skeleton";
+import TableSelectableRows from "./table/selectable-rows";
+import TableSortableColumns from "./table/sortable-columns";
+import TableWithActions from "./table/with-actions";
+import TableWithStatusBadges from "./table/with-status-badges";
+import TabsDefault from "./tabs/default";
+import TabsControlled from "./tabs/controlled";
+import TabsDisabled from "./tabs/disabled";
+import TabsKeepMounted from "./tabs/keep-mounted";
+import TabsVertical from "./tabs/vertical";
+import TabsVerticalWithIcons from "./tabs/vertical-with-icons";
+import TabsWithIcons from "./tabs/with-icons";
+import TextareaDefault from "./textarea/default";
+import TextareaAutoResize from "./textarea/auto-resize";
+import TextareaCharacterCount from "./textarea/character-count";
+import TextareaDisabled from "./textarea/disabled";
+import TextareaErrorState from "./textarea/error-state";
+import TextareaReadonly from "./textarea/readonly";
+import TextareaWithLabelAndHint from "./textarea/with-label-and-hint";
+import TimelineRailDefault from "./timeline-rail/default";
+import TimelineRailCustomTerminal from "./timeline-rail/custom-terminal";
+import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
+import TimelineRailMultiGroup from "./timeline-rail/multi-group";
+import TimelineRailWithIcons from "./timeline-rail/with-icons";
+import TimelineRailWithTones from "./timeline-rail/with-tones";
+import TooltipDefault from "./tooltip/default";
+import TooltipAlignment from "./tooltip/alignment";
+import TooltipRichContent from "./tooltip/rich-content";
+import TooltipSides from "./tooltip/sides";
+import TooltipWithDelay from "./tooltip/with-delay";
+import TooltipWithIcon from "./tooltip/with-icon";
 
 export type Example = { name: string; file: string; Component: ComponentType };
 
 export const examples: Record<string, Example[]> = {
-  gauge: [
+  "accordion": [
+    { name: "Default", file: "accordion/default.tsx", Component: AccordionDefault },
+    { name: "Controlled", file: "accordion/controlled.tsx", Component: AccordionControlled },
+    { name: "Disabled", file: "accordion/disabled.tsx", Component: AccordionDisabled },
+    { name: "Keep Mounted", file: "accordion/keep-mounted.tsx", Component: AccordionKeepMounted },
+    { name: "Multiple", file: "accordion/multiple.tsx", Component: AccordionMultiple },
+    { name: "Nested Content", file: "accordion/nested-content.tsx", Component: AccordionNestedContent },
+    { name: "With Icon", file: "accordion/with-icon.tsx", Component: AccordionWithIcon },
+  ],
+  "activity-grid": [
+    { name: "Default", file: "activity-grid/default.tsx", Component: ActivityGridDefault },
+    { name: "Columns", file: "activity-grid/columns.tsx", Component: ActivityGridColumns },
+    { name: "Empty", file: "activity-grid/empty.tsx", Component: ActivityGridEmpty },
+    { name: "In Card", file: "activity-grid/in-card.tsx", Component: ActivityGridInCard },
+    { name: "Intensity Levels", file: "activity-grid/intensity-levels.tsx", Component: ActivityGridIntensityLevels },
+    { name: "Interactive", file: "activity-grid/interactive.tsx", Component: ActivityGridInteractive },
+  ],
+  "alert": [
+    { name: "Default", file: "alert/default.tsx", Component: AlertDefault },
+    { name: "No Icon", file: "alert/no-icon.tsx", Component: AlertNoIcon },
+    { name: "Variants", file: "alert/variants.tsx", Component: AlertVariants },
+    { name: "With Action", file: "alert/with-action.tsx", Component: AlertWithAction },
+    { name: "With Icon", file: "alert/with-icon.tsx", Component: AlertWithIcon },
+    { name: "With Link", file: "alert/with-link.tsx", Component: AlertWithLink },
+  ],
+  "avatar": [
+    { name: "Default", file: "avatar/default.tsx", Component: AvatarDefault },
+    { name: "Fallback", file: "avatar/fallback.tsx", Component: AvatarFallback },
+    { name: "Group", file: "avatar/group.tsx", Component: AvatarGroup },
+    { name: "Sizes", file: "avatar/sizes.tsx", Component: AvatarSizes },
+    { name: "User List", file: "avatar/user-list.tsx", Component: AvatarUserList },
+    { name: "With Badge", file: "avatar/with-badge.tsx", Component: AvatarWithBadge },
+  ],
+  "badge": [
+    { name: "Default", file: "badge/default.tsx", Component: BadgeDefault },
+    { name: "As Link", file: "badge/as-link.tsx", Component: BadgeAsLink },
+    { name: "Inline Content", file: "badge/inline-content.tsx", Component: BadgeInlineContent },
+    { name: "Invalid", file: "badge/invalid.tsx", Component: BadgeInvalid },
+    { name: "Status", file: "badge/status.tsx", Component: BadgeStatus },
+    { name: "With Icon", file: "badge/with-icon.tsx", Component: BadgeWithIcon },
+  ],
+  "breadcrumb": [
+    { name: "Default", file: "breadcrumb/default.tsx", Component: BreadcrumbDefault },
+    { name: "Custom Separator", file: "breadcrumb/custom-separator.tsx", Component: BreadcrumbCustomSeparator },
+    { name: "Long Path", file: "breadcrumb/long-path.tsx", Component: BreadcrumbLongPath },
+    { name: "Responsive", file: "breadcrumb/responsive.tsx", Component: BreadcrumbResponsive },
+    { name: "With Ellipsis", file: "breadcrumb/with-ellipsis.tsx", Component: BreadcrumbWithEllipsis },
+    { name: "With Icons", file: "breadcrumb/with-icons.tsx", Component: BreadcrumbWithIcons },
+    { name: "With Render Prop", file: "breadcrumb/with-render-prop.tsx", Component: BreadcrumbWithRenderProp },
+  ],
+  "button": [
+    { name: "Default", file: "button/default.tsx", Component: ButtonDefault },
+    { name: "Disabled", file: "button/disabled.tsx", Component: ButtonDisabled },
+    { name: "Error", file: "button/error.tsx", Component: ButtonError },
+    { name: "Loading", file: "button/loading.tsx", Component: ButtonLoading },
+    { name: "Sizes", file: "button/sizes.tsx", Component: ButtonSizes },
+    { name: "Variants", file: "button/variants.tsx", Component: ButtonVariants },
+    { name: "With Icon", file: "button/with-icon.tsx", Component: ButtonWithIcon },
+  ],
+  "card": [
+    { name: "Default", file: "card/default.tsx", Component: CardDefault },
+    { name: "Content Only", file: "card/content-only.tsx", Component: CardContentOnly },
+    { name: "Grid Layout", file: "card/grid-layout.tsx", Component: CardGridLayout },
+    { name: "Sizes", file: "card/sizes.tsx", Component: CardSizes },
+    { name: "With Action", file: "card/with-action.tsx", Component: CardWithAction },
+    { name: "With Image", file: "card/with-image.tsx", Component: CardWithImage },
+  ],
+  "centered-focal": [
+    { name: "Default", file: "centered-focal/default.tsx", Component: CenteredFocalDefault },
+    { name: "Custom Classname", file: "centered-focal/custom-classname.tsx", Component: CenteredFocalCustomClassname },
+    { name: "Loading State", file: "centered-focal/loading-state.tsx", Component: CenteredFocalLoadingState },
+    { name: "No Backdrop", file: "centered-focal/no-backdrop.tsx", Component: CenteredFocalNoBackdrop },
+    { name: "With Form", file: "centered-focal/with-form.tsx", Component: CenteredFocalWithForm },
+    { name: "With Illustration Backdrop", file: "centered-focal/with-illustration-backdrop.tsx", Component: CenteredFocalWithIllustrationBackdrop },
+  ],
+  "chart": [
+    { name: "Default", file: "chart/default.tsx", Component: ChartDefault },
+    { name: "Bar Chart", file: "chart/bar-chart.tsx", Component: ChartBarChart },
+    { name: "Custom Tooltip", file: "chart/custom-tooltip.tsx", Component: ChartCustomTooltip },
+    { name: "Donut Chart", file: "chart/donut-chart.tsx", Component: ChartDonutChart },
+    { name: "Legend Variants", file: "chart/legend-variants.tsx", Component: ChartLegendVariants },
+    { name: "Line Chart", file: "chart/line-chart.tsx", Component: ChartLineChart },
+    { name: "Pie Chart", file: "chart/pie-chart.tsx", Component: ChartPieChart },
+    { name: "Radial Bar", file: "chart/radial-bar.tsx", Component: ChartRadialBar },
+    { name: "Stacked Bar", file: "chart/stacked-bar.tsx", Component: ChartStackedBar },
+    { name: "Theme Colors", file: "chart/theme-colors.tsx", Component: ChartThemeColors },
+    { name: "Tooltip Variants", file: "chart/tooltip-variants.tsx", Component: ChartTooltipVariants },
+  ],
+  "checkbox": [
+    { name: "Default", file: "checkbox/default.tsx", Component: CheckboxDefault },
+    { name: "Checkbox Group", file: "checkbox/checkbox-group.tsx", Component: CheckboxCheckboxGroup },
+    { name: "Disabled", file: "checkbox/disabled.tsx", Component: CheckboxDisabled },
+    { name: "Indeterminate", file: "checkbox/indeterminate.tsx", Component: CheckboxIndeterminate },
+    { name: "Readonly", file: "checkbox/readonly.tsx", Component: CheckboxReadonly },
+    { name: "With Label", file: "checkbox/with-label.tsx", Component: CheckboxWithLabel },
+  ],
+  "detail-header": [
+    { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },
+    { name: "Custom Title Node", file: "detail-header/custom-title-node.tsx", Component: DetailHeaderCustomTitleNode },
+    { name: "Many Actions", file: "detail-header/many-actions.tsx", Component: DetailHeaderManyActions },
+    { name: "Meta Grid Standalone", file: "detail-header/meta-grid-standalone.tsx", Component: DetailHeaderMetaGridStandalone },
+    { name: "No Meta", file: "detail-header/no-meta.tsx", Component: DetailHeaderNoMeta },
+    { name: "Rich Meta Values", file: "detail-header/rich-meta-values.tsx", Component: DetailHeaderRichMetaValues },
+    { name: "With Status Badges", file: "detail-header/with-status-badges.tsx", Component: DetailHeaderWithStatusBadges },
+  ],
+  "dialog": [
+    { name: "Default", file: "dialog/default.tsx", Component: DialogDefault },
+    { name: "Destructive", file: "dialog/destructive.tsx", Component: DialogDestructive },
+    { name: "Loading", file: "dialog/loading.tsx", Component: DialogLoading },
+    { name: "No Close Button", file: "dialog/no-close-button.tsx", Component: DialogNoCloseButton },
+    { name: "Scrollable", file: "dialog/scrollable.tsx", Component: DialogScrollable },
+    { name: "With Form", file: "dialog/with-form.tsx", Component: DialogWithForm },
+    { name: "With Icon", file: "dialog/with-icon.tsx", Component: DialogWithIcon },
+  ],
+  "dropdown-menu": [
+    { name: "Default", file: "dropdown-menu/default.tsx", Component: DropdownMenuDefault },
+    { name: "Disabled", file: "dropdown-menu/disabled.tsx", Component: DropdownMenuDisabled },
+    { name: "With Checkboxes", file: "dropdown-menu/with-checkboxes.tsx", Component: DropdownMenuWithCheckboxes },
+    { name: "With Icons", file: "dropdown-menu/with-icons.tsx", Component: DropdownMenuWithIcons },
+    { name: "With Radio", file: "dropdown-menu/with-radio.tsx", Component: DropdownMenuWithRadio },
+    { name: "With Shortcuts", file: "dropdown-menu/with-shortcuts.tsx", Component: DropdownMenuWithShortcuts },
+    { name: "With Submenu", file: "dropdown-menu/with-submenu.tsx", Component: DropdownMenuWithSubmenu },
+  ],
+  "empty-state": [
+    { name: "Default", file: "empty-state/default.tsx", Component: EmptyStateDefault },
+    { name: "Compact", file: "empty-state/compact.tsx", Component: EmptyStateCompact },
+    { name: "Error State", file: "empty-state/error-state.tsx", Component: EmptyStateErrorState },
+    { name: "Minimal", file: "empty-state/minimal.tsx", Component: EmptyStateMinimal },
+    { name: "No Icon", file: "empty-state/no-icon.tsx", Component: EmptyStateNoIcon },
+    { name: "Search No Results", file: "empty-state/search-no-results.tsx", Component: EmptyStateSearchNoResults },
+    { name: "With Multiple Actions", file: "empty-state/with-multiple-actions.tsx", Component: EmptyStateWithMultipleActions },
+  ],
+  "event-timeline": [
+    { name: "Default", file: "event-timeline/default.tsx", Component: EventTimelineDefault },
+    { name: "Live Feed", file: "event-timeline/live-feed.tsx", Component: EventTimelineLiveFeed },
+    { name: "Rich Content", file: "event-timeline/rich-content.tsx", Component: EventTimelineRichContent },
+    { name: "Single Event", file: "event-timeline/single-event.tsx", Component: EventTimelineSingleEvent },
+    { name: "Timestamps", file: "event-timeline/timestamps.tsx", Component: EventTimelineTimestamps },
+    { name: "Title Only", file: "event-timeline/title-only.tsx", Component: EventTimelineTitleOnly },
+    { name: "Tones", file: "event-timeline/tones.tsx", Component: EventTimelineTones },
+  ],
+  "filter-pill": [
+    { name: "Default", file: "filter-pill/default.tsx", Component: FilterPillDefault },
+    { name: "Active State", file: "filter-pill/active-state.tsx", Component: FilterPillActiveState },
+    { name: "As Select Trigger", file: "filter-pill/as-select-trigger.tsx", Component: FilterPillAsSelectTrigger },
+    { name: "Disabled", file: "filter-pill/disabled.tsx", Component: FilterPillDisabled },
+    { name: "Filter Bar", file: "filter-pill/filter-bar.tsx", Component: FilterPillFilterBar },
+    { name: "With Icon", file: "filter-pill/with-icon.tsx", Component: FilterPillWithIcon },
+  ],
+  "foundation": [
+    { name: "Tokens", file: "foundation/tokens.tsx", Component: FoundationTokens },
+  ],
+  "gauge": [
     { name: "Default", file: "gauge/default.tsx", Component: GaugeDefault },
+    { name: "Animated", file: "gauge/animated.tsx", Component: GaugeAnimated },
+    { name: "Dashboard Grid", file: "gauge/dashboard-grid.tsx", Component: GaugeDashboardGrid },
+    { name: "Score Tone", file: "gauge/score-tone.tsx", Component: GaugeScoreTone },
+    { name: "Sizes", file: "gauge/sizes.tsx", Component: GaugeSizes },
+    { name: "Thickness", file: "gauge/thickness.tsx", Component: GaugeThickness },
     { name: "Tones", file: "gauge/tones.tsx", Component: GaugeTones },
   ],
-  "status-dot": [
-    { name: "Tones", file: "status-dot/tones.tsx", Component: StatusDotTones },
-    { name: "Pulse", file: "status-dot/pulse.tsx", Component: StatusDotPulse },
-  ],
   "gradient-avatar": [
+    { name: "Default", file: "gradient-avatar/default.tsx", Component: GradientAvatarDefault },
+    { name: "Grouped Stack", file: "gradient-avatar/grouped-stack.tsx", Component: GradientAvatarGroupedStack },
+    { name: "List Rows", file: "gradient-avatar/list-rows.tsx", Component: GradientAvatarListRows },
     { name: "Seeds", file: "gradient-avatar/seeds.tsx", Component: GradientAvatarSeeds },
     { name: "Sizes", file: "gradient-avatar/sizes.tsx", Component: GradientAvatarSizes },
+    { name: "With Name Badge", file: "gradient-avatar/with-name-badge.tsx", Component: GradientAvatarWithNameBadge },
   ],
-  "activity-grid": [{ name: "Default", file: "activity-grid/default.tsx", Component: ActivityGridDefault }],
-  "filter-pill": [{ name: "Default", file: "filter-pill/default.tsx", Component: FilterPillDefault }],
-  "segmented-control": [{ name: "Default", file: "segmented-control/default.tsx", Component: SegmentedControlDefault }],
-  "timeline-rail": [{ name: "Default", file: "timeline-rail/default.tsx", Component: TimelineRailDefault }],
-  "split-with-rail": [{ name: "Default", file: "split-with-rail/default.tsx", Component: SplitWithRailDefault }],
-  "hero-section": [{ name: "Default", file: "hero-section/default.tsx", Component: HeroSectionDefault }],
-  "metric-stat": [{ name: "Default", file: "metric-stat/default.tsx", Component: MetricStatDefault }],
-  "centered-focal": [{ name: "Default", file: "centered-focal/default.tsx", Component: CenteredFocalDefault }],
-  identity: [{ name: "Names", file: "identity/names.tsx", Component: IdentityNames }],
-  foundation: [{ name: "Tokens", file: "foundation/tokens.tsx", Component: FoundationTokens }],
-  button: [{ name: "Default", file: "button/default.tsx", Component: ButtonDefault }],
-  badge: [{ name: "Default", file: "badge/default.tsx", Component: BadgeDefault }],
-  card: [{ name: "Default", file: "card/default.tsx", Component: CardDefault }],
-  "status-pill": [{ name: "Default", file: "status-pill/default.tsx", Component: StatusPillDefault }],
-  input: [{ name: "Default", file: "input/default.tsx", Component: InputDefault }],
-  textarea: [{ name: "Default", file: "textarea/default.tsx", Component: TextareaDefault }],
-  label: [{ name: "Default", file: "label/default.tsx", Component: LabelDefault }],
-  select: [{ name: "Default", file: "select/default.tsx", Component: SelectDefault }],
-  checkbox: [{ name: "Default", file: "checkbox/default.tsx", Component: CheckboxDefault }],
-  switch: [{ name: "Default", file: "switch/default.tsx", Component: SwitchDefault }],
-  "radio-group": [{ name: "Default", file: "radio-group/default.tsx", Component: RadioGroupDefault }],
-  tooltip: [{ name: "Default", file: "tooltip/default.tsx", Component: TooltipDefault }],
-  popover: [{ name: "Default", file: "popover/default.tsx", Component: PopoverDefault }],
-  "dropdown-menu": [{ name: "Default", file: "dropdown-menu/default.tsx", Component: DropdownMenuDefault }],
-  dialog: [{ name: "Default", file: "dialog/default.tsx", Component: DialogDefault }],
-  "hover-card": [{ name: "Default", file: "hover-card/default.tsx", Component: HoverCardDefault }],
-  alert: [{ name: "Default", file: "alert/default.tsx", Component: AlertDefault }],
-  progress: [{ name: "Default", file: "progress/default.tsx", Component: ProgressDefault }],
-  skeleton: [{ name: "Default", file: "skeleton/default.tsx", Component: SkeletonDefault }],
-  sonner: [{ name: "Default", file: "sonner/default.tsx", Component: SonnerDefault }],
-  tabs: [{ name: "Default", file: "tabs/default.tsx", Component: TabsDefault }],
-  accordion: [{ name: "Default", file: "accordion/default.tsx", Component: AccordionDefault }],
-  avatar: [{ name: "Default", file: "avatar/default.tsx", Component: AvatarDefault }],
-  separator: [{ name: "Default", file: "separator/default.tsx", Component: SeparatorDefault }],
-  breadcrumb: [{ name: "Default", file: "breadcrumb/default.tsx", Component: BreadcrumbDefault }],
-  table: [{ name: "Default", file: "table/default.tsx", Component: TableDefault }],
-  "page-header": [{ name: "Default", file: "page-header/default.tsx", Component: PageHeaderDefault }],
-  "stat-card": [{ name: "Default", file: "stat-card/default.tsx", Component: StatCardDefault }],
-  "empty-state": [{ name: "Default", file: "empty-state/default.tsx", Component: EmptyStateDefault }],
-  chart: [{ name: "Default", file: "chart/default.tsx", Component: ChartDefault }],
-  "detail-header": [{ name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault }],
-  section: [{ name: "Default", file: "section/default.tsx", Component: SectionDefault }],
-  "event-timeline": [{ name: "Default", file: "event-timeline/default.tsx", Component: EventTimelineDefault }],
+  "hero-section": [
+    { name: "Default", file: "hero-section/default.tsx", Component: HeroSectionDefault },
+    { name: "No Header", file: "hero-section/no-header.tsx", Component: HeroSectionNoHeader },
+    { name: "With Action Header", file: "hero-section/with-action-header.tsx", Component: HeroSectionWithActionHeader },
+    { name: "With Chart", file: "hero-section/with-chart.tsx", Component: HeroSectionWithChart },
+    { name: "With Custom Classname", file: "hero-section/with-custom-classname.tsx", Component: HeroSectionWithCustomClassname },
+    { name: "With Metrics Header", file: "hero-section/with-metrics-header.tsx", Component: HeroSectionWithMetricsHeader },
+  ],
+  "hover-card": [
+    { name: "Default", file: "hover-card/default.tsx", Component: HoverCardDefault },
+    { name: "Alignment", file: "hover-card/alignment.tsx", Component: HoverCardAlignment },
+    { name: "Controlled", file: "hover-card/controlled.tsx", Component: HoverCardControlled },
+    { name: "Placement", file: "hover-card/placement.tsx", Component: HoverCardPlacement },
+    { name: "Rich Content", file: "hover-card/rich-content.tsx", Component: HoverCardRichContent },
+    { name: "With Delay", file: "hover-card/with-delay.tsx", Component: HoverCardWithDelay },
+  ],
+  "identity": [
+    { name: "Names", file: "identity/names.tsx", Component: IdentityNames },
+  ],
+  "input": [
+    { name: "Default", file: "input/default.tsx", Component: InputDefault },
+    { name: "Disabled", file: "input/disabled.tsx", Component: InputDisabled },
+    { name: "Error", file: "input/error.tsx", Component: InputError },
+    { name: "File Upload", file: "input/file-upload.tsx", Component: InputFileUpload },
+    { name: "Input Types", file: "input/input-types.tsx", Component: InputInputTypes },
+    { name: "With Adornment", file: "input/with-adornment.tsx", Component: InputWithAdornment },
+    { name: "With Button", file: "input/with-button.tsx", Component: InputWithButton },
+    { name: "With Icon", file: "input/with-icon.tsx", Component: InputWithIcon },
+    { name: "With Label", file: "input/with-label.tsx", Component: InputWithLabel },
+  ],
+  "label": [
+    { name: "Default", file: "label/default.tsx", Component: LabelDefault },
+    { name: "Disabled", file: "label/disabled.tsx", Component: LabelDisabled },
+    { name: "Error State", file: "label/error-state.tsx", Component: LabelErrorState },
+    { name: "Form Layout", file: "label/form-layout.tsx", Component: LabelFormLayout },
+    { name: "Required", file: "label/required.tsx", Component: LabelRequired },
+    { name: "With Checkbox", file: "label/with-checkbox.tsx", Component: LabelWithCheckbox },
+    { name: "With Icon", file: "label/with-icon.tsx", Component: LabelWithIcon },
+  ],
+  "metric-stat": [
+    { name: "Default", file: "metric-stat/default.tsx", Component: MetricStatDefault },
+    { name: "Custom Value", file: "metric-stat/custom-value.tsx", Component: MetricStatCustomValue },
+    { name: "Delta Directions", file: "metric-stat/delta-directions.tsx", Component: MetricStatDeltaDirections },
+    { name: "Grid Layout", file: "metric-stat/grid-layout.tsx", Component: MetricStatGridLayout },
+    { name: "Loading", file: "metric-stat/loading.tsx", Component: MetricStatLoading },
+    { name: "No Delta", file: "metric-stat/no-delta.tsx", Component: MetricStatNoDelta },
+    { name: "With Icon", file: "metric-stat/with-icon.tsx", Component: MetricStatWithIcon },
+  ],
+  "page-header": [
+    { name: "Default", file: "page-header/default.tsx", Component: PageHeaderDefault },
+    { name: "Align", file: "page-header/align.tsx", Component: PageHeaderAlign },
+    { name: "Breadcrumb Context", file: "page-header/breadcrumb-context.tsx", Component: PageHeaderBreadcrumbContext },
+    { name: "Description Only", file: "page-header/description-only.tsx", Component: PageHeaderDescriptionOnly },
+    { name: "With Actions", file: "page-header/with-actions.tsx", Component: PageHeaderWithActions },
+    { name: "With Badge", file: "page-header/with-badge.tsx", Component: PageHeaderWithBadge },
+  ],
+  "popover": [
+    { name: "Default", file: "popover/default.tsx", Component: PopoverDefault },
+    { name: "Controlled", file: "popover/controlled.tsx", Component: PopoverControlled },
+    { name: "Menu Like", file: "popover/menu-like.tsx", Component: PopoverMenuLike },
+    { name: "Placement", file: "popover/placement.tsx", Component: PopoverPlacement },
+    { name: "Rich Content", file: "popover/rich-content.tsx", Component: PopoverRichContent },
+    { name: "With Form", file: "popover/with-form.tsx", Component: PopoverWithForm },
+  ],
+  "progress": [
+    { name: "Default", file: "progress/default.tsx", Component: ProgressDefault },
+    { name: "Colors", file: "progress/colors.tsx", Component: ProgressColors },
+    { name: "Controlled", file: "progress/controlled.tsx", Component: ProgressControlled },
+    { name: "Indeterminate", file: "progress/indeterminate.tsx", Component: ProgressIndeterminate },
+    { name: "Sizes", file: "progress/sizes.tsx", Component: ProgressSizes },
+    { name: "With Format", file: "progress/with-format.tsx", Component: ProgressWithFormat },
+  ],
+  "radio-group": [
+    { name: "Default", file: "radio-group/default.tsx", Component: RadioGroupDefault },
+    { name: "Disabled", file: "radio-group/disabled.tsx", Component: RadioGroupDisabled },
+    { name: "Form Validation", file: "radio-group/form-validation.tsx", Component: RadioGroupFormValidation },
+    { name: "Horizontal", file: "radio-group/horizontal.tsx", Component: RadioGroupHorizontal },
+    { name: "With Description", file: "radio-group/with-description.tsx", Component: RadioGroupWithDescription },
+    { name: "With Icon", file: "radio-group/with-icon.tsx", Component: RadioGroupWithIcon },
+  ],
+  "section": [
+    { name: "Default", file: "section/default.tsx", Component: SectionDefault },
+    { name: "Inline Children", file: "section/inline-children.tsx", Component: SectionInlineChildren },
+    { name: "No Header", file: "section/no-header.tsx", Component: SectionNoHeader },
+    { name: "Setting Row Controls", file: "section/setting-row-controls.tsx", Component: SectionSettingRowControls },
+    { name: "Stacked Sections", file: "section/stacked-sections.tsx", Component: SectionStackedSections },
+    { name: "With Action", file: "section/with-action.tsx", Component: SectionWithAction },
+  ],
+  "segmented-control": [
+    { name: "Default", file: "segmented-control/default.tsx", Component: SegmentedControlDefault },
+    { name: "Controlled Display", file: "segmented-control/controlled-display.tsx", Component: SegmentedControlControlledDisplay },
+    { name: "Disabled", file: "segmented-control/disabled.tsx", Component: SegmentedControlDisabled },
+    { name: "Many Options", file: "segmented-control/many-options.tsx", Component: SegmentedControlManyOptions },
+    { name: "Sizes", file: "segmented-control/sizes.tsx", Component: SegmentedControlSizes },
+    { name: "Two Options", file: "segmented-control/two-options.tsx", Component: SegmentedControlTwoOptions },
+  ],
+  "select": [
+    { name: "Default", file: "select/default.tsx", Component: SelectDefault },
+    { name: "Controlled", file: "select/controlled.tsx", Component: SelectControlled },
+    { name: "Disabled", file: "select/disabled.tsx", Component: SelectDisabled },
+    { name: "Grouped", file: "select/grouped.tsx", Component: SelectGrouped },
+    { name: "Sizes", file: "select/sizes.tsx", Component: SelectSizes },
+    { name: "With Error", file: "select/with-error.tsx", Component: SelectWithError },
+    { name: "With Icon", file: "select/with-icon.tsx", Component: SelectWithIcon },
+  ],
+  "separator": [
+    { name: "Default", file: "separator/default.tsx", Component: SeparatorDefault },
+    { name: "Custom Styling", file: "separator/custom-styling.tsx", Component: SeparatorCustomStyling },
+    { name: "In Card", file: "separator/in-card.tsx", Component: SeparatorInCard },
+    { name: "In Nav", file: "separator/in-nav.tsx", Component: SeparatorInNav },
+    { name: "Vertical", file: "separator/vertical.tsx", Component: SeparatorVertical },
+    { name: "With Label", file: "separator/with-label.tsx", Component: SeparatorWithLabel },
+  ],
+  "skeleton": [
+    { name: "Default", file: "skeleton/default.tsx", Component: SkeletonDefault },
+    { name: "Card", file: "skeleton/card.tsx", Component: SkeletonCard },
+    { name: "List", file: "skeleton/list.tsx", Component: SkeletonList },
+    { name: "Media Grid", file: "skeleton/media-grid.tsx", Component: SkeletonMediaGrid },
+    { name: "Profile", file: "skeleton/profile.tsx", Component: SkeletonProfile },
+    { name: "Table", file: "skeleton/table.tsx", Component: SkeletonTable },
+    { name: "With Loaded State", file: "skeleton/with-loaded-state.tsx", Component: SkeletonWithLoadedState },
+  ],
+  "sonner": [
+    { name: "Default", file: "sonner/default.tsx", Component: SonnerDefault },
+    { name: "Custom", file: "sonner/custom.tsx", Component: SonnerCustom },
+    { name: "Dismissible", file: "sonner/dismissible.tsx", Component: SonnerDismissible },
+    { name: "Positions", file: "sonner/positions.tsx", Component: SonnerPositions },
+    { name: "Promise", file: "sonner/promise.tsx", Component: SonnerPromise },
+    { name: "Rich Colors", file: "sonner/rich-colors.tsx", Component: SonnerRichColors },
+    { name: "Variants", file: "sonner/variants.tsx", Component: SonnerVariants },
+    { name: "With Action", file: "sonner/with-action.tsx", Component: SonnerWithAction },
+    { name: "With Description", file: "sonner/with-description.tsx", Component: SonnerWithDescription },
+  ],
+  "split-with-rail": [
+    { name: "Default", file: "split-with-rail/default.tsx", Component: SplitWithRailDefault },
+    { name: "Custom Layout", file: "split-with-rail/custom-layout.tsx", Component: SplitWithRailCustomLayout },
+    { name: "Metrics Summary", file: "split-with-rail/metrics-summary.tsx", Component: SplitWithRailMetricsSummary },
+    { name: "With Event Timeline", file: "split-with-rail/with-event-timeline.tsx", Component: SplitWithRailWithEventTimeline },
+    { name: "With Timeline Rail", file: "split-with-rail/with-timeline-rail.tsx", Component: SplitWithRailWithTimelineRail },
+  ],
+  "stat-card": [
+    { name: "Default", file: "stat-card/default.tsx", Component: StatCardDefault },
+    { name: "Delta Directions", file: "stat-card/delta-directions.tsx", Component: StatCardDeltaDirections },
+    { name: "Grid Dashboard", file: "stat-card/grid-dashboard.tsx", Component: StatCardGridDashboard },
+    { name: "No Delta", file: "stat-card/no-delta.tsx", Component: StatCardNoDelta },
+    { name: "Rich Value", file: "stat-card/rich-value.tsx", Component: StatCardRichValue },
+    { name: "With Icons", file: "stat-card/with-icons.tsx", Component: StatCardWithIcons },
+  ],
+  "status-dot": [
+    { name: "Default", file: "status-dot/default.tsx", Component: StatusDotDefault },
+    { name: "Inline Text", file: "status-dot/inline-text.tsx", Component: StatusDotInlineText },
+    { name: "Pulse", file: "status-dot/pulse.tsx", Component: StatusDotPulse },
+    { name: "Sizes", file: "status-dot/sizes.tsx", Component: StatusDotSizes },
+    { name: "Table Rows", file: "status-dot/table-rows.tsx", Component: StatusDotTableRows },
+    { name: "Tones", file: "status-dot/tones.tsx", Component: StatusDotTones },
+  ],
+  "status-pill": [
+    { name: "Default", file: "status-pill/default.tsx", Component: StatusPillDefault },
+    { name: "Custom Class", file: "status-pill/custom-class.tsx", Component: StatusPillCustomClass },
+    { name: "Inline Text", file: "status-pill/inline-text.tsx", Component: StatusPillInlineText },
+    { name: "Pulse", file: "status-pill/pulse.tsx", Component: StatusPillPulse },
+    { name: "Table Rows", file: "status-pill/table-rows.tsx", Component: StatusPillTableRows },
+    { name: "Tones", file: "status-pill/tones.tsx", Component: StatusPillTones },
+  ],
+  "switch": [
+    { name: "Default", file: "switch/default.tsx", Component: SwitchDefault },
+    { name: "Controlled", file: "switch/controlled.tsx", Component: SwitchControlled },
+    { name: "Disabled", file: "switch/disabled.tsx", Component: SwitchDisabled },
+    { name: "Invalid", file: "switch/invalid.tsx", Component: SwitchInvalid },
+    { name: "Sizes", file: "switch/sizes.tsx", Component: SwitchSizes },
+    { name: "With Label", file: "switch/with-label.tsx", Component: SwitchWithLabel },
+  ],
+  "table": [
+    { name: "Default", file: "table/default.tsx", Component: TableDefault },
+    { name: "Empty State", file: "table/empty-state.tsx", Component: TableEmptyState },
+    { name: "Loading Skeleton", file: "table/loading-skeleton.tsx", Component: TableLoadingSkeleton },
+    { name: "Selectable Rows", file: "table/selectable-rows.tsx", Component: TableSelectableRows },
+    { name: "Sortable Columns", file: "table/sortable-columns.tsx", Component: TableSortableColumns },
+    { name: "With Actions", file: "table/with-actions.tsx", Component: TableWithActions },
+    { name: "With Status Badges", file: "table/with-status-badges.tsx", Component: TableWithStatusBadges },
+  ],
+  "tabs": [
+    { name: "Default", file: "tabs/default.tsx", Component: TabsDefault },
+    { name: "Controlled", file: "tabs/controlled.tsx", Component: TabsControlled },
+    { name: "Disabled", file: "tabs/disabled.tsx", Component: TabsDisabled },
+    { name: "Keep Mounted", file: "tabs/keep-mounted.tsx", Component: TabsKeepMounted },
+    { name: "Vertical", file: "tabs/vertical.tsx", Component: TabsVertical },
+    { name: "Vertical With Icons", file: "tabs/vertical-with-icons.tsx", Component: TabsVerticalWithIcons },
+    { name: "With Icons", file: "tabs/with-icons.tsx", Component: TabsWithIcons },
+  ],
+  "textarea": [
+    { name: "Default", file: "textarea/default.tsx", Component: TextareaDefault },
+    { name: "Auto Resize", file: "textarea/auto-resize.tsx", Component: TextareaAutoResize },
+    { name: "Character Count", file: "textarea/character-count.tsx", Component: TextareaCharacterCount },
+    { name: "Disabled", file: "textarea/disabled.tsx", Component: TextareaDisabled },
+    { name: "Error State", file: "textarea/error-state.tsx", Component: TextareaErrorState },
+    { name: "Readonly", file: "textarea/readonly.tsx", Component: TextareaReadonly },
+    { name: "With Label And Hint", file: "textarea/with-label-and-hint.tsx", Component: TextareaWithLabelAndHint },
+  ],
+  "timeline-rail": [
+    { name: "Default", file: "timeline-rail/default.tsx", Component: TimelineRailDefault },
+    { name: "Custom Terminal", file: "timeline-rail/custom-terminal.tsx", Component: TimelineRailCustomTerminal },
+    { name: "Mixed Glyphs", file: "timeline-rail/mixed-glyphs.tsx", Component: TimelineRailMixedGlyphs },
+    { name: "Multi Group", file: "timeline-rail/multi-group.tsx", Component: TimelineRailMultiGroup },
+    { name: "With Icons", file: "timeline-rail/with-icons.tsx", Component: TimelineRailWithIcons },
+    { name: "With Tones", file: "timeline-rail/with-tones.tsx", Component: TimelineRailWithTones },
+  ],
+  "tooltip": [
+    { name: "Default", file: "tooltip/default.tsx", Component: TooltipDefault },
+    { name: "Alignment", file: "tooltip/alignment.tsx", Component: TooltipAlignment },
+    { name: "Rich Content", file: "tooltip/rich-content.tsx", Component: TooltipRichContent },
+    { name: "Sides", file: "tooltip/sides.tsx", Component: TooltipSides },
+    { name: "With Delay", file: "tooltip/with-delay.tsx", Component: TooltipWithDelay },
+    { name: "With Icon", file: "tooltip/with-icon.tsx", Component: TooltipWithIcon },
+  ],
 };

@@ -7,19 +7,19 @@ export default function Example() {
   const [enabled, setEnabled] = useState(false);
 
   return (
-    <div className="flex flex-col gap-4 p-6">
-      <div className="flex items-center gap-3">
+    <div className="flex flex-col gap-6 p-6">
+      <div className="flex items-center justify-between rounded-lg border p-4">
+        <div className="space-y-0.5">
+          <p className="text-sm font-medium">Notifications</p>
+          <p className="text-xs text-muted-foreground">
+            Receive alerts about account activity
+          </p>
+        </div>
         <Switch checked={enabled} onCheckedChange={setEnabled} />
-        <span className="text-sm">{enabled ? "Enabled" : "Disabled"}</span>
       </div>
-      <div className="flex items-center gap-3">
-        <Switch size="sm" defaultChecked />
-        <span className="text-sm">Small (default on)</span>
-      </div>
-      <div className="flex items-center gap-3">
-        <Switch disabled />
-        <span className="text-sm text-muted-foreground">Disabled</span>
-      </div>
+      <p className="text-sm text-muted-foreground text-center">
+        Notifications are <strong>{enabled ? "on" : "off"}</strong>
+      </p>
     </div>
   );
 }

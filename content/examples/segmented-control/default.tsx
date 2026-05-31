@@ -4,16 +4,16 @@ import { useState } from "react";
 import { SegmentedControl } from "@/components/ui/segmented-control";
 
 export default function Example() {
-  const [v, setV] = useState("ref");
+  const [view, setView] = useState("week");
   return (
     <SegmentedControl
       options={[
-        { label: "Referrer", value: "ref" },
-        { label: "Links", value: "links" },
-        { label: "Campaign", value: "camp" },
+        { label: "Day", value: "day" },
+        { label: "Week", value: "week" },
+        { label: "Month", value: "month" },
       ]}
-      value={v}
-      onValueChange={setV}
+      value={view}
+      onValueChange={setView}
     />
   );
 }
