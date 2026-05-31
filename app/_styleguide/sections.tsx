@@ -1,8 +1,10 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { toast } from "sonner";
 import { Bell, Settings, Trash2 } from "lucide-react";
+import { bySlug } from "@/content/components";
 import {
   Area,
   AreaChart,
@@ -408,15 +410,34 @@ export function Specimen({
   plain?: boolean;
   children: React.ReactNode;
 }) {
+  // Derive a detail-page link when `from` maps to a known component slug.
+  let detailHref: string | null = null;
+  if (from?.startsWith("@/components/")) {
+    const slug = from.split("/").pop() ?? "";
+    if (slug && bySlug(slug)) {
+      detailHref = `/components/${slug}`;
+    }
+  }
+
   return (
     <div id={slugify(name)} className="scroll-mt-24 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="text-sm font-medium">{name}</span>
-        {from && (
-          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
-            {from}
-          </code>
-        )}
+        <div className="flex items-center gap-2">
+          {from && (
+            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+              {from}
+            </code>
+          )}
+          {detailHref && (
+            <Link
+              href={detailHref}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Details →
+            </Link>
+          )}
+        </div>
       </div>
       <div className={cn(!plain && "rounded-xl border border-border bg-background p-5")}>
         {children}

@@ -13,20 +13,64 @@ export type SearchEntry = {
 
 /** Slugs that have their own /components/[slug] detail page (from content/components.ts). */
 const COMPONENT_SLUGS = new Set([
+  // Foundation / Libraries
   "foundation",
   "utils",
   "identity",
+  // UI
   "status-dot",
   "gauge",
   "gradient-avatar",
   "activity-grid",
   "filter-pill",
   "segmented-control",
+  // Composites
   "timeline-rail",
   "split-with-rail",
   "hero-section",
   "metric-stat",
   "centered-focal",
+  // Primitives
+  "button",
+  "badge",
+  "card",
+  "status-pill",
+  // Forms
+  "input",
+  "textarea",
+  "label",
+  "select",
+  "checkbox",
+  "switch",
+  "radio-group",
+  // Overlays
+  "tooltip",
+  "popover",
+  "dropdown-menu",
+  "dialog",
+  "hover-card",
+  // Feedback
+  "alert",
+  "progress",
+  "skeleton",
+  "sonner",
+  // Data display
+  "tabs",
+  "accordion",
+  "avatar",
+  "separator",
+  "breadcrumb",
+  "table",
+  // Patterns
+  "page-header",
+  "stat-card",
+  "empty-state",
+  // Charts
+  "chart",
+  // House components
+  "detail-header",
+  "section",
+  "event-timeline",
 ]);
 
 function componentHref(slug: string, fallbackSection: string): string {
@@ -80,7 +124,7 @@ export const searchIndex: SearchEntry[] = [
   { kind: "Component", label: "Alert",            href: componentHref("alert", "feedback"),             keywords: "notification error warning destructive" },
   { kind: "Component", label: "Progress",         href: componentHref("progress", "feedback"),          keywords: "progress bar loading value" },
   { kind: "Component", label: "Skeleton",         href: componentHref("skeleton", "feedback"),          keywords: "loading placeholder skeleton" },
-  { kind: "Component", label: "Toast",            href: componentHref("toast", "feedback"),             keywords: "sonner toast notification success error" },
+  { kind: "Component", label: "Toast",            href: componentHref("sonner", "feedback"),            keywords: "sonner toast notification success error" },
 
   /* ── Components: Data display ────────────────────────────────────── */
   { kind: "Component", label: "Tabs",             href: componentHref("tabs", "data"),                  keywords: "tabs tablist trigger content" },
