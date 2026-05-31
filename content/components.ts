@@ -2,7 +2,7 @@ export type PropRow = { name: string; type: string; default?: string; descriptio
 export type ComponentDoc = {
   slug: string;
   name: string;
-  category: "Foundation" | "Libraries" | "UI" | "Composites";
+  category: "Foundation" | "Libraries" | "UI" | "Composites" | "Primitives" | "Forms" | "Overlays" | "Feedback" | "Data display" | "Patterns" | "Charts" | "House components";
   description: string;
   npmDeps?: string[];
   registryDeps?: string[];
@@ -112,8 +112,382 @@ export const components: ComponentDoc[] = [
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
+  {
+    slug: "button", name: "Button", category: "Primitives",
+    description: "A polymorphic button component built on Base UI with CVA-powered variant and size styles, supporting icon-only sizes and custom render targets.",
+    props: [
+      { name: "variant", type: '"default" | "outline" | "secondary" | "ghost" | "destructive" | "link"', default: '"default"', description: "Visual style of the button." },
+      { name: "size", type: '"default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"', default: '"default"', description: "Controls height, padding, and icon sizing." },
+      { name: "render", type: "React.ReactElement | ((props: object) => React.ReactElement)", description: "Swap the underlying element (e.g. a Next.js Link); nativeButton is inferred automatically." },
+      { name: "nativeButton", type: "boolean", description: "Override Base UI's native-button semantics inference when using a custom render target." },
+      { name: "className", type: "string", description: "Additional Tailwind classes merged onto the variant styles." },
+      { name: "disabled", type: "boolean", description: "Disables pointer events and reduces opacity via the disabled: utilities." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "badge", name: "Badge", category: "Primitives",
+    description: "A small inline label component with multiple semantic variants (default, secondary, destructive, success, warning, outline, ghost, link) built on Base UI's useRender for polymorphic rendering.",
+    props: [
+      { name: "variant", type: '"default" | "secondary" | "destructive" | "success" | "warning" | "outline" | "ghost" | "link"', default: '"default"', description: "Visual style variant controlling color and appearance of the badge." },
+      { name: "render", type: 'useRender.RenderProp<"span">', description: "Base UI render prop for polymorphic rendering — override the default span element." },
+      { name: "className", type: "string", description: "Additional CSS class names merged with the variant styles." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "card", name: "Card", category: "Primitives",
+    description: "A composable card container with header, title, description, action, content, and footer sub-components, supporting a compact \"sm\" size variant.",
+    props: [
+      { name: "size", type: '"default" | "sm"', default: '"default"', description: 'Controls padding and text size across all child slots; "sm" produces a more compact layout.' },
+      { name: "className", type: "string", description: "Additional CSS classes merged onto the root div." },
+      { name: "children", type: "React.ReactNode", description: "Slot content — typically CardHeader, CardContent, CardFooter, and related sub-components." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "status-pill", name: "Status Pill", category: "Primitives",
+    description: "A colored-dot-plus-label chip that communicates status at a glance using a soft tinted background and a matching StatusDot.",
+    props: [
+      { name: "tone", type: '"success" | "warning" | "danger" | "info" | "neutral"', default: '"neutral"', description: "Color tone that controls the dot color, text color, and background tint." },
+      { name: "children", type: "React.ReactNode", description: "Label text or content rendered inside the pill." },
+      { name: "pulse", type: "boolean", default: "false", description: "When true, the status dot animates with a ping effect to indicate live activity." },
+      { name: "className", type: "string", description: "Additional CSS classes to merge onto the pill element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "input", name: "Input", category: "Forms",
+    description: "A styled text input field that wraps Base UI's Input primitive, supporting all native HTML input attributes with consistent focus, disabled, and validation states.",
+    props: [
+      { name: "type", type: "React.HTMLInputTypeAttribute", default: '"text"', description: 'The type of the input element (e.g. "text", "email", "password").' },
+      { name: "className", type: "string", description: "Additional CSS classes merged onto the input element." },
+      { name: "placeholder", type: "string", description: "Placeholder text shown when the input is empty." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables the input, preventing interaction and applying reduced-opacity styling." },
+      { name: "aria-invalid", type: 'boolean | "true" | "false"', description: "Marks the input as invalid, applying destructive border and ring styles." },
+      { name: "value", type: "string | number | readonly string[]", description: "Controlled value of the input." },
+      { name: "onChange", type: "React.ChangeEventHandler<HTMLInputElement>", description: "Change event handler called when the input value changes." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "textarea", name: "Textarea", category: "Forms",
+    description: "A styled textarea element that auto-sizes to its content and supports focus, disabled, and invalid states via standard HTML textarea props.",
+    props: [
+      { name: "className", type: "string", description: "Additional CSS classes to merge with the default textarea styles." },
+      { name: "...props", type: 'React.ComponentProps<"textarea">', description: "All standard HTML textarea attributes (value, placeholder, onChange, rows, disabled, aria-invalid, etc.)." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "label", name: "Label", category: "Forms",
+    description: "A styled wrapper around the native HTML label element with consistent typography and disabled-state handling.",
+    props: [
+      { name: "className", type: "string", description: "Additional CSS classes to merge with the default label styles." },
+      { name: "htmlFor", type: "string", description: "Associates the label with a form control by its id." },
+      { name: "children", type: "React.ReactNode", description: "The label text or content." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "select", name: "Select", category: "Forms",
+    description: "An accessible dropdown select built on Base UI's Select primitive, composed of compound parts (trigger, content, items, groups, labels, separators) with animated popover positioning and keyboard navigation.",
+    props: [
+      { name: "size", type: '"sm" | "default"', default: '"default"', description: "Controls the height of the trigger button (h-7 for sm, h-8 for default)." },
+      { name: "side", type: '"top" | "bottom" | "left" | "right" | "inline-start" | "inline-end"', default: '"bottom"', description: "Which side of the trigger the dropdown content opens on (passed to SelectContent)." },
+      { name: "sideOffset", type: "number", default: "4", description: "Gap in pixels between the trigger and the dropdown content (passed to SelectContent)." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment of the dropdown content relative to the trigger (passed to SelectContent)." },
+      { name: "alignOffset", type: "number", default: "0", description: "Pixel offset applied along the alignment axis (passed to SelectContent)." },
+      { name: "alignItemWithTrigger", type: "boolean", default: "true", description: "When true, the selected item inside the popup aligns with the trigger position (passed to SelectContent)." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "checkbox", name: "Checkbox", category: "Forms",
+    description: "A styled checkbox input built on Base UI's headless Checkbox primitive, rendering a checkmark indicator with focus, disabled, and validation states.",
+    props: [
+      { name: "checked", type: "boolean", description: "Controlled checked state of the checkbox." },
+      { name: "defaultChecked", type: "boolean", default: "false", description: "Initial checked state for uncontrolled usage." },
+      { name: "onCheckedChange", type: "(checked: boolean, eventDetails: CheckboxRootChangeEventDetails) => void", description: "Callback fired when the checkbox is ticked or unticked." },
+      { name: "disabled", type: "boolean", default: "false", description: "Prevents user interaction and applies disabled styling." },
+      { name: "readOnly", type: "boolean", default: "false", description: "Prevents the user from ticking or unticking the checkbox." },
+      { name: "required", type: "boolean", default: "false", description: "Marks the checkbox as required for form submission." },
+      { name: "indeterminate", type: "boolean", default: "false", description: "Puts the checkbox in a mixed state, neither checked nor unchecked." },
+      { name: "name", type: "string", description: "Field name submitted with the form." },
+      { name: "value", type: "string", description: "Value submitted with the form when the checkbox is checked." },
+      { name: "className", type: "string", description: "Additional CSS classes merged onto the root element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "switch", name: "Switch", category: "Forms",
+    description: "A toggle switch component built on Base UI's Switch primitive that supports two sizes and accessible checked/disabled states.",
+    props: [
+      { name: "size", type: '"sm" | "default"', default: '"default"', description: "Controls the dimensions of the switch track and thumb." },
+      { name: "className", type: "string", description: "Additional CSS classes merged onto the root element." },
+      { name: "defaultChecked", type: "boolean", description: "Uncontrolled initial checked state (from Base UI Root props)." },
+      { name: "checked", type: "boolean", description: "Controlled checked state (from Base UI Root props)." },
+      { name: "onCheckedChange", type: "(checked: boolean) => void", description: "Callback fired when the checked state changes (from Base UI Root props)." },
+      { name: "disabled", type: "boolean", description: "Disables the switch and applies reduced-opacity styling (from Base UI Root props)." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "radio-group", name: "Radio Group", category: "Forms",
+    description: "A radio group component built on Base UI primitives that renders a group of mutually exclusive radio buttons in a vertical grid layout.",
+    props: [
+      { name: "value", type: "Value", description: "The controlled value of the currently selected radio item." },
+      { name: "defaultValue", type: "Value", description: "The uncontrolled default selected value on initial render." },
+      { name: "onValueChange", type: "(value: Value, eventDetails: RadioGroup.ChangeEventDetails) => void", description: "Callback fired when the selected value changes." },
+      { name: "disabled", type: "boolean", default: "false", description: "Whether the component should ignore user interaction." },
+      { name: "readOnly", type: "boolean", default: "false", description: "Whether the user should be unable to select a different radio button in the group." },
+      { name: "required", type: "boolean", default: "false", description: "Whether the user must choose a value before submitting a form." },
+      { name: "name", type: "string", description: "Identifies the field when a form is submitted." },
+      { name: "className", type: "string", description: "Additional CSS class names to apply to the group container." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "tooltip", name: "Tooltip", category: "Overlays",
+    description: "A compound tooltip component built on Base UI that shows a floating label near a trigger element with animated entry/exit transitions.",
+    props: [
+      { name: "side", type: '"top" | "bottom" | "left" | "right" | "inline-start" | "inline-end"', default: '"top"', description: "Which side of the trigger the tooltip popup appears on." },
+      { name: "sideOffset", type: "number", default: "4", description: "Distance in pixels between the trigger and the tooltip popup." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment of the tooltip relative to the trigger along the cross axis." },
+      { name: "alignOffset", type: "number", default: "0", description: "Offset in pixels along the alignment axis." },
+      { name: "className", type: "string", description: "Additional CSS class names applied to the tooltip popup element." },
+      { name: "children", type: "React.ReactNode", description: "Content rendered inside the tooltip popup." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "popover", name: "Popover", category: "Overlays",
+    description: "A floating popover panel built on Base UI that renders anchored content next to a trigger element with configurable side and alignment positioning.",
+    props: [
+      { name: "open", type: "boolean", description: "Controlled open state of the popover." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback fired when the open state changes." },
+      { name: "defaultOpen", type: "boolean", description: "Initial open state for uncontrolled usage." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "dropdown-menu", name: "Dropdown Menu", category: "Overlays",
+    description: "A composable dropdown menu built on Base UI's Menu primitive, providing a trigger-controlled popup with support for items, checkboxes, radio groups, submenus, separators, and keyboard shortcuts.",
+    props: [
+      { name: "open", type: "boolean", description: "Controls the open state of the menu (controlled mode)." },
+      { name: "defaultOpen", type: "boolean", description: "The initial open state when uncontrolled." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback fired when the open state changes." },
+      { name: "modal", type: "boolean", default: "true", description: "Whether the menu should behave as a modal (trap focus)." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "dialog", name: "Dialog", category: "Overlays",
+    description: "A modal dialog compound component built on Base UI's Dialog primitive, with overlay, content popup, header, footer, title, description, and close button sub-components.",
+    props: [
+      { name: "open", type: "boolean", description: "Controlled open state of the dialog." },
+      { name: "defaultOpen", type: "boolean", description: "Uncontrolled initial open state." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback fired when the open state changes." },
+      { name: "modal", type: "boolean", default: "true", description: "Whether the dialog blocks interaction with the rest of the page." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "hover-card", name: "Hover Card", category: "Overlays",
+    description: "A compound component that displays a floating preview card when hovering over a trigger element, built on Base UI's PreviewCard primitive.",
+    props: [
+      { name: "side", type: '"top" | "bottom" | "left" | "right" | "inline-start" | "inline-end"', default: '"bottom"', description: "Which side of the trigger the card appears on (HoverCardContent only)." },
+      { name: "sideOffset", type: "number", default: "4", description: "Distance in pixels between the trigger and the card (HoverCardContent only)." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment of the card relative to the trigger (HoverCardContent only)." },
+      { name: "alignOffset", type: "number", default: "4", description: "Offset in pixels along the alignment axis (HoverCardContent only)." },
+      { name: "className", type: "string", description: "Additional CSS class names to apply to the popup element (HoverCardContent only)." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "alert", name: "Alert", category: "Feedback",
+    description: "A compound alert component for surfacing inline feedback messages with an optional title, description, icon slot, and action button.",
+    props: [
+      { name: "variant", type: '"default" | "destructive"', default: '"default"', description: 'Controls the color style of the alert; use "destructive" for error or warning states.' },
+      { name: "className", type: "string", description: "Additional CSS class names merged onto the root element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "progress", name: "Progress", category: "Feedback",
+    description: "A linear progress bar built on Base UI that displays a labeled, accessible indicator of completion with optional label and numeric value display.",
+    props: [
+      { name: "value", type: "number | null", description: "The current progress value (typically 0–100). Pass null for indeterminate state." },
+      { name: "className", type: "string", description: "Additional CSS class names applied to the root wrapper element." },
+      { name: "children", type: "React.ReactNode", description: "Optional children rendered inside the root before the built-in track (e.g. ProgressLabel, ProgressValue)." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "skeleton", name: "Skeleton", category: "Feedback",
+    description: "A pulsing placeholder div used to indicate loading state before content is available.",
+    props: [
+      { name: "className", type: "string", description: "Additional CSS classes to merge onto the skeleton div." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "sonner", name: "Sonner", category: "Feedback",
+    description: "A themed toast notification provider that wraps the Sonner Toaster with next-themes integration and custom Lucide icons for success, info, warning, error, and loading states.",
+    props: [
+      { name: "...props", type: "ToasterProps", description: "All props from Sonner's ToasterProps are forwarded directly to the underlying Toaster (e.g. position, richColors, expand, duration, closeButton, offset)." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "tabs", name: "Tabs", category: "Data display",
+    description: "A compound tabs component built on Base UI that renders a tabbed interface with optional horizontal or vertical orientation and two list variants (default pill or underline line).",
+    props: [
+      { name: "value", type: "TabsTab.Value | undefined", description: "Controlled active tab value." },
+      { name: "defaultValue", type: "TabsTab.Value | undefined", default: "0", description: "Default active tab value for uncontrolled usage." },
+      { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Layout flow direction; vertical stacks the tab list and panels side by side." },
+      { name: "onValueChange", type: "(value: TabsTab.Value, eventDetails: TabsRoot.ChangeEventDetails) => void", description: "Callback fired when the active tab changes." },
+      { name: "className", type: "string", description: "Additional CSS class names applied to the root element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "accordion", name: "Accordion", category: "Data display",
+    description: "A vertically stacked set of collapsible sections, each with a trigger header that toggles its content panel open or closed.",
+    props: [
+      { name: "value", type: "any[]", description: "Controlled array of expanded item values." },
+      { name: "defaultValue", type: "any[]", description: "Uncontrolled initial array of expanded item values." },
+      { name: "multiple", type: "boolean", default: "false", description: "Whether multiple items can be open at the same time." },
+      { name: "disabled", type: "boolean", default: "false", description: "Whether the accordion ignores user interaction." },
+      { name: "onValueChange", type: "(value: any[], eventDetails: AccordionRootChangeEventDetails) => void", description: "Called when an item is expanded or collapsed." },
+      { name: "loopFocus", type: "boolean", default: "true", description: "Whether keyboard focus loops back to the first item when the end is reached." },
+      { name: "keepMounted", type: "boolean", default: "false", description: "Whether to keep panel content in the DOM while closed." },
+      { name: "hiddenUntilFound", type: "boolean", default: "false", description: 'Uses hidden="until-found" so browser page search can find and expand panels.' },
+      { name: "orientation", type: "'horizontal' | 'vertical'", default: "'vertical'", description: "Visual orientation that controls which arrow keys move focus." },
+      { name: "className", type: "string", description: "Additional CSS class names applied to the root element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "avatar", name: "Avatar", category: "Data display",
+    description: "A compound avatar component built on Base UI primitives, supporting image display with fallback text, an optional badge indicator, and grouped avatar stacks.",
+    props: [
+      { name: "size", type: '"default" | "sm" | "lg"', default: '"default"', description: "Controls the overall size of the avatar (sm=24px, default=32px, lg=40px)." },
+      { name: "className", type: "string", description: "Additional CSS classes merged onto the root element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "separator", name: "Separator", category: "Data display",
+    description: "A thin horizontal or vertical dividing line built on Base UI's Separator primitive for visually separating content sections.",
+    props: [
+      { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Controls whether the separator renders as a horizontal line or a vertical rule." },
+      { name: "className", type: "string", description: "Additional CSS class names to apply to the separator element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "breadcrumb", name: "Breadcrumb", category: "Data display",
+    description: "A compound navigation component that renders an accessible breadcrumb trail with support for links, the current page, separators, and an ellipsis for collapsed items.",
+    props: [
+      { name: "className", type: "string", description: "Additional CSS classes applied to the root <nav> element." },
+      { name: "...props", type: 'React.ComponentProps<"nav">', description: "All standard HTML nav attributes are forwarded to the root element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "table", name: "Table", category: "Data display",
+    description: "A styled, accessible HTML table compound component with scrollable container, header, body, footer, rows, cells, and caption parts.",
+    props: [
+      { name: "className", type: "string", description: "Additional CSS classes merged onto the root table element." },
+      { name: "children", type: "React.ReactNode", description: "Table content — typically TableHeader, TableBody, and TableFooter compound parts." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "page-header", name: "Page Header", category: "Patterns",
+    description: "A dashboard page heading that renders a title, optional subtitle, and optional action slot in either a left-aligned (start) or centered layout.",
+    props: [
+      { name: "title", type: "string", description: "The main heading text rendered as an h1." },
+      { name: "description", type: "string", description: "Optional muted subtitle rendered below the title." },
+      { name: "children", type: "React.ReactNode", description: "Optional action elements (e.g. buttons) placed to the right of the heading (start) or below it (center)." },
+      { name: "align", type: '"start" | "center"', default: '"start"', description: "Controls layout alignment: start puts actions on the right; center stacks everything and centers it." },
+      { name: "className", type: "string", description: "Additional Tailwind classes merged onto the root wrapper element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "stat-card", name: "Stat Card", category: "Patterns",
+    description: "A compact metric tile displaying a labeled value with an optional icon, delta trend pill, and muted hint line.",
+    props: [
+      { name: "label", type: "string", description: "Short text label shown above the value." },
+      { name: "value", type: "React.ReactNode", description: "The primary metric value displayed prominently." },
+      { name: "hint", type: "React.ReactNode", default: "undefined", description: "Optional muted helper text shown below the value." },
+      { name: "delta", type: "{ value: string; direction: 'up' | 'down' | 'flat' }", default: "undefined", description: "Optional trend pill showing directional change alongside the value." },
+      { name: "icon", type: "LucideIcon", default: "undefined", description: "Optional Lucide icon rendered in the top-right corner of the card." },
+      { name: "className", type: "string", default: "undefined", description: "Additional CSS classes merged onto the card root element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "empty-state", name: "Empty State", category: "Patterns",
+    description: "A centered empty-state panel with a dashed border, optional icon chip, title, description, and an optional action slot.",
+    props: [
+      { name: "title", type: "string", description: "Primary heading text displayed in the empty state." },
+      { name: "icon", type: "LucideIcon", default: "undefined", description: "Optional Lucide icon component rendered in a small rounded chip above the title." },
+      { name: "description", type: "string", default: "undefined", description: "Optional muted helper text rendered below the title." },
+      { name: "action", type: "React.ReactNode", default: "undefined", description: "Optional action element (e.g. a button) rendered below the description." },
+      { name: "className", type: "string", default: "undefined", description: "Additional class names merged onto the root container." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "chart", name: "Chart", category: "Charts",
+    description: "A Recharts wrapper that injects CSS color variables from a config map and provides tooltip and legend sub-components styled to match the design system.",
+    props: [
+      { name: "config", type: "ChartConfig", description: "Map of data-key names to label, icon, and color/theme values; drives CSS variable injection for all chart series." },
+      { name: "children", type: "React.ComponentProps<typeof ResponsiveContainer>['children']", description: "A Recharts chart element (e.g. AreaChart, BarChart) rendered inside a ResponsiveContainer." },
+      { name: "id", type: "string", description: "Optional stable ID used to scope the injected CSS variables; auto-generated when omitted." },
+      { name: "initialDimension", type: "{ width: number; height: number }", default: "{ width: 320, height: 200 }", description: "Fallback dimensions passed to ResponsiveContainer before the first layout measurement." },
+      { name: "className", type: "string", description: "Additional Tailwind / CSS classes merged onto the outer div." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "detail-header", name: "Detail Header", category: "House components",
+    description: "A resource detail page header that renders a title row with an optional badge and action buttons, followed by a responsive grid of label-over-value metadata columns.",
+    props: [
+      { name: "title", type: "React.ReactNode", description: "The primary heading displayed in monospace font at the top of the header." },
+      { name: "badge", type: "React.ReactNode", default: "undefined", description: "Optional badge element rendered inline next to the title." },
+      { name: "actions", type: "React.ReactNode", default: "undefined", description: "Optional action buttons or controls rendered on the right side of the title row." },
+      { name: "meta", type: "{ label: string; value: React.ReactNode }[]", default: "undefined", description: "Array of label/value pairs rendered as a responsive metadata grid below the title." },
+      { name: "className", type: "string", default: "undefined", description: "Additional CSS classes applied to the root wrapper element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "section", name: "Section", category: "House components",
+    description: "A titled settings-style content block with an optional header action, rendering a labelled section heading above a bordered card body; ships with companion SettingsList and SettingRow compound components for building explain-everything config panels.",
+    props: [
+      { name: "title", type: "string", description: "Section heading rendered as a small semibold label above the card." },
+      { name: "description", type: "string", description: "Muted helper text displayed beneath the title." },
+      { name: "action", type: "React.ReactNode", description: "Optional element (e.g. a button) right-aligned beside the title row." },
+      { name: "children", type: "React.ReactNode", description: "Content rendered inside the bordered card body." },
+      { name: "className", type: "string", description: "Extra Tailwind classes merged onto the outer <section> element." },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "event-timeline", name: "Event Timeline", category: "House components",
+    description: "A vertical \"domain events\" style timeline that renders a list of labeled events with toned status dots, optional descriptions, and monospaced timestamps connected by a vertical rule.",
+    props: [
+      { name: "events", type: "TimelineEvent[]", description: "Array of timeline event objects to render, each with a title, optional description, optional timestamp, and optional tone." },
+      { name: "className", type: "string", description: "Additional CSS classes applied to the root <ol> element." },
+    ],
+    examples: ["default"],
+  },
 ];
 
-export const categories = ["Foundation", "Libraries", "UI", "Composites"] as const;
+export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components"] as const;
 export const byCategory = (cat: string) => components.filter((c) => c.category === cat);
 export const bySlug = (slug: string) => components.find((c) => c.slug === slug);
