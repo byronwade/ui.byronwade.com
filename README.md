@@ -101,6 +101,45 @@ This repo is a normal Next.js app. Connect it to Vercel (or `vercel --prod`). Th
 `shadcn build` before `next build`, so `public/r/*.json` is freshly generated on every deploy. Once live,
 note the deployment URL and use it as `<REGISTRY_URL>` above.
 
+## Testing
+
+### Stack
+
+- **Vitest** + **Testing Library** + **jsdom** — unit/component tests
+- **vitest-axe** — accessibility assertions (wraps axe-core)
+- **@vitest/coverage-v8** — V8 coverage instrumentation
+
+### Commands
+
+| Command | Purpose |
+|---------|---------|
+| `npm test` | Watch mode (re-runs on file changes) |
+| `npm run test:run` | One-shot run, no coverage |
+| `npm run test:coverage` | One-shot run with coverage report |
+| `npm run check:tests` | Gate: verify every `registry:ui`/`registry:component` has a test file |
+| `npm run test:ci` | Full CI gate: `check:tests` + suite + coverage thresholds |
+
+### Coverage gate (ratcheted thresholds)
+
+Coverage is measured over `components/**` (all generated component files). Thresholds are configured in `vitest.config.ts` and enforced on every run:
+
+| Metric | Threshold |
+|--------|-----------|
+| Statements | ≥ 99% |
+| Branches | ≥ 96% |
+| Functions | ≥ 100% |
+| Lines | ≥ 99% |
+
+Thresholds are ratcheted — they can only increase over time. A new component or variant that adds untested branches will trip the threshold and fail CI.
+
+### CI
+
+The `.github/workflows/test.yml` workflow runs `npm run check:tests` followed by `npm run test:ci` on every `push` and `pull_request`. Merges are blocked until both gates pass.
+
+### Known limitations
+
+**jsdom** does not implement `HTMLCanvasElement.getContext()`, so `chart.tsx` (Recharts) and `activity-grid.tsx` canvas internals are not deeply exercised. `sonner` toast interaction coverage is thinner due to portal/timer constraints in jsdom. These components' render and variant tests still pass; only deep canvas/animation branches are uncovered.
+
 ## Canonical source
 
 **SignalRoute (`byronwade/signalroute`) is the source of truth for all component code.** The files in
