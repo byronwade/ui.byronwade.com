@@ -4,7 +4,19 @@ A personal master design system, published as a **namespaced [shadcn](https://ui
 Token-driven components with a single warm-green brand accent that you re-skin from one CSS variable.
 Install components into any Next.js + Tailwind v4 project with the shadcn CLI — you own the copied code.
 
-> **Registry URL:** `https://byronwade-ui.vercel.app` *(replace with your actual Vercel deployment URL — shown after you deploy this repo to Vercel).* Throughout this README, substitute your real URL wherever you see `<REGISTRY_URL>`.
+> **`<REGISTRY_URL>`** — wherever this README says `<REGISTRY_URL>`, substitute the registry's deployed
+> base URL. After you deploy this repo to Vercel that's the assigned deployment URL (e.g.
+> `https://byronwade-ui.vercel.app`, or whatever Vercel gives you / your custom domain). It is **not**
+> baked into the published components — it lives only in each consuming project's `components.json`.
+
+> **Scope: greenfield projects.** The install flow below assumes a **new** project, because the foundation
+> base is installed via `shadcn init` so it owns `:root`. Dropping the system into an **existing** project
+> that already has its own theme is *not* a clean `init`/`add`: `init` against foundation would overwrite
+> that project's `globals.css`, and merely `add`-ing components onto a different base leaves `--ring` /
+> `--chart-1` pinned to that base's values (shadcn keeps an existing base's standard tokens), so the
+> brand-follows-`--brand` behavior won't hold. For an existing project, **manually merge** the token blocks
+> from `registry.json`'s `foundation` item (the `cssVars` light/dark/theme values) into that project's
+> `globals.css`, then `add` components. Verified flows in this repo cover the greenfield path only.
 
 ## What's in it
 
