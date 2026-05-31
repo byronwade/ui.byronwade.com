@@ -93,6 +93,26 @@
       "css": {
         "@custom-variant dark": "(&:is(.dark *))"
       }
+    },
+    {
+      "name": "status-dot",
+      "type": "registry:ui",
+      "title": "Status dot",
+      "description": "Atomic status indicator dot with tone + optional pulse.",
+      "registryDependencies": ["foundation"],
+      "files": [
+        { "path": "registry/ui/status-dot.tsx", "type": "registry:ui", "target": "components/ui/status-dot.tsx" }
+      ]
+    },
+    {
+      "name": "gauge",
+      "type": "registry:ui",
+      "title": "Ring gauge",
+      "description": "Circular score ring with status tone, big centered number.",
+      "registryDependencies": ["status-dot"],
+      "files": [
+        { "path": "registry/ui/gauge.tsx", "type": "registry:ui", "target": "components/ui/gauge.tsx" }
+      ]
     }
   ]
 }

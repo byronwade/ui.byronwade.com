@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-dot",
+  "title": "Status dot",
+  "description": "Atomic status indicator dot with tone + optional pulse.",
+  "registryDependencies": [
+    "foundation"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/status-dot.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\nexport type StatusTone = \"success\" | \"warning\" | \"danger\" | \"info\" | \"neutral\";\n\nconst dot: Record<StatusTone, string> = {\n  success: \"bg-success\",\n  warning: \"bg-warning\",\n  danger: \"bg-destructive\",\n  info: \"bg-brand\",\n  neutral: \"bg-muted-foreground\",\n};\n\nconst sizes = { sm: \"size-1.5\", md: \"size-2\", lg: \"size-2.5\" } as const;\n\n/** Atomic status indicator dot. Reused by StatusPill, tables, metric rows, timelines. */\nexport function StatusDot({\n  tone = \"neutral\",\n  size = \"sm\",\n  pulse = false,\n  className,\n}: {\n  tone?: StatusTone;\n  size?: keyof typeof sizes;\n  pulse?: boolean;\n  className?: string;\n}) {\n  return (\n    <span className={cn(\"relative inline-flex\", sizes[size], className)}>\n      {pulse && (\n        <span className={cn(\"absolute inline-flex size-full animate-ping rounded-full opacity-75\", dot[tone])} />\n      )}\n      <span className={cn(\"relative inline-flex size-full rounded-full\", dot[tone])} />\n    </span>\n  );\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/status-dot.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
