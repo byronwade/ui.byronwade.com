@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "sync": "node scripts/sync-registry.mjs",
+    "predev": "node scripts/sync-registry.mjs",
     "dev": "next dev",
     "registry:build": "shadcn build",
-    "prebuild": "shadcn build",
+    "prebuild": "shadcn build && node scripts/sync-registry.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
