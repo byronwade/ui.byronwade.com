@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DeltaPill, type Delta } from "@/components/dashboard/metric-stat";
+import { DeltaPill, type Delta } from "@/components/metric-stat";
 
 /** Compact metric tile used across Overview and Billing. */
 export function StatCard({
