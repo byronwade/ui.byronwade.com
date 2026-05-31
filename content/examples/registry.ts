@@ -31,6 +31,12 @@ import BadgeInlineContent from "./badge/inline-content";
 import BadgeInvalid from "./badge/invalid";
 import BadgeStatus from "./badge/status";
 import BadgeWithIcon from "./badge/with-icon";
+import BloomDefault from "./bloom/default";
+import BloomPlacements from "./bloom/placements";
+import BloomDockDefault from "./bloom-dock/default";
+import BloomDockExpand from "./bloom-dock/expand";
+import BloomFlowForm from "./bloom-flow/form";
+import BloomFlowWizard from "./bloom-flow/wizard";
 import BreadcrumbDefault from "./breadcrumb/default";
 import BreadcrumbCustomSeparator from "./breadcrumb/custom-separator";
 import BreadcrumbLongPath from "./breadcrumb/long-path";
@@ -336,6 +342,18 @@ export const examples: Record<string, Example[]> = {
     { name: "Invalid", file: "badge/invalid.tsx", Component: BadgeInvalid },
     { name: "Status", file: "badge/status.tsx", Component: BadgeStatus },
     { name: "With Icon", file: "badge/with-icon.tsx", Component: BadgeWithIcon },
+  ],
+  "bloom": [
+    { name: "Default", file: "bloom/default.tsx", Component: BloomDefault },
+    { name: "Placements", file: "bloom/placements.tsx", Component: BloomPlacements },
+  ],
+  "bloom-dock": [
+    { name: "Default", file: "bloom-dock/default.tsx", Component: BloomDockDefault },
+    { name: "Expand", file: "bloom-dock/expand.tsx", Component: BloomDockExpand },
+  ],
+  "bloom-flow": [
+    { name: "Form", file: "bloom-flow/form.tsx", Component: BloomFlowForm },
+    { name: "Wizard", file: "bloom-flow/wizard.tsx", Component: BloomFlowWizard },
   ],
   "breadcrumb": [
     { name: "Default", file: "breadcrumb/default.tsx", Component: BreadcrumbDefault },

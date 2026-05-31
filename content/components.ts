@@ -2,7 +2,7 @@ export type PropRow = { name: string; type: string; default?: string; descriptio
 export type ComponentDoc = {
   slug: string;
   name: string;
-  category: "Foundation" | "Libraries" | "UI" | "Composites" | "Primitives" | "Forms" | "Overlays" | "Feedback" | "Data display" | "Patterns" | "Charts" | "House components";
+  category: "Foundation" | "Libraries" | "UI" | "Composites" | "Primitives" | "Forms" | "Overlays" | "Feedback" | "Data display" | "Patterns" | "Charts" | "House components" | "Bloom";
   description: string;
   npmDeps?: string[];
   registryDeps?: string[];
@@ -486,8 +486,67 @@ export const components: ComponentDoc[] = [
     ],
     examples: ["default"],
   },
+  {
+    slug: "bloom",
+    name: "Bloom",
+    category: "Bloom",
+    description: "A spring-animated popover panel that blooms from a pill bar trigger. Supports all 12 placement values with auto-flip collision detection, mobile bottom-sheet fallback, and modal focus-trap.",
+    npmDeps: ["motion"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    props: [
+      { name: "bar", type: "React.ReactNode", description: "Collapsed pill content; persists as footer/header when open." },
+      { name: "children", type: "React.ReactNode", description: "The bloomed body content." },
+      { name: "open", type: "boolean", description: "Controlled open state." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "Uncontrolled initial open state." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback fired when the open state changes." },
+      { name: "placement", type: "BloomPlacement", default: '"bottom"', description: 'Where the panel blooms (e.g. "top", "bottom-end", "right").' },
+      { name: "size", type: "number", default: "430", description: "Panel cross-size in px." },
+      { name: "tone", type: '"dock" | "surface"', default: '"surface"', description: "Visual tone: dark dock or light card surface." },
+      { name: "barPosition", type: '"edge" | "leading"', default: '"edge"', description: 'Bar becomes footer (edge) or header (leading) when open.' },
+      { name: "modal", type: "boolean", default: "true", description: "Dialog semantics — overlay + focus trap." },
+      { name: "collisionPadding", type: "number", default: "12", description: "px from viewport edge that triggers auto-flip." },
+      { name: "mobileBreakpoint", type: "number", default: "640", description: "px below which a full-width bottom sheet is shown." },
+    ],
+    examples: ["default", "placements"],
+  },
+  {
+    slug: "bloom-flow",
+    name: "BloomFlow",
+    category: "Bloom",
+    description: "A declarative multi-step form/wizard renderer designed to live inside a Bloom panel. Handles state, step navigation, submission, and an animated success view.",
+    npmDeps: ["motion", "lucide-react"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/bloom"],
+    props: [
+      { name: "flow", type: "BloomFlowDef<S, R>", description: "Declarative flow definition: id, initial state, steps array, onComplete handler, and success renderer." },
+      { name: "onClose", type: "() => void", description: "Called when the user clicks Close or Done." },
+      { name: "flow.id", type: "string", description: "Stable identifier for the flow." },
+      { name: "flow.initial", type: "S", description: "Initial state object shallow-merged by set()." },
+      { name: "flow.steps", type: "BloomStep<S>[]", description: "Array of steps; each has title, optional caption, body renderer, primaryLabel, and canAdvance gate." },
+      { name: "flow.onComplete", type: "(state: S) => Promise<R>", description: "Async handler called when the last step's primary button is pressed." },
+      { name: "flow.success", type: "(result: R) => { title: string; actions?: React.ReactNode }", description: "Renders the success view from the completion result." },
+    ],
+    examples: ["form", "wizard"],
+  },
+  {
+    slug: "bloom-dock",
+    name: "BloomDock",
+    category: "Bloom",
+    description: "A config-driven morphing navigation dock rendered as a floating dark pill. Supports compact/expand toggle, pinned items, badge counts, a trailing cluster slot, and a contextual action that can bloom a BloomFlow.",
+    npmDeps: ["motion", "lucide-react"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/bloom", "@byronwade/bloom-flow"],
+    props: [
+      { name: "items", type: "BloomDockItem[]", description: "Array of nav items. Each item: id, label, icon, optional onSelect/href, active, core, pinned, badge." },
+      { name: "placement", type: "BloomPlacement", default: '"bottom"', description: "Where the dock sits and which way it blooms." },
+      { name: "expandable", type: "boolean", default: "true", description: "Allow compact ↔ full toggling via a chevron button." },
+      { name: "cluster", type: "React.ReactNode", description: "Custom trailing slot (count + badge, env tag, etc.)." },
+      { name: "action", type: "BloomDockAction", description: "Contextual action: blooms a BloomFlow (flow) or runs a plain handler (onSelect)." },
+      { name: "tone", type: '"dock" | "surface"', default: '"dock"', description: "Dark dock pill (default) or light surface." },
+      { name: "navLabel", type: "string", default: '"Primary"', description: "Accessible name for the nav landmark." },
+    ],
+    examples: ["default", "expand"],
+  },
 ];
 
-export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components"] as const;
+export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Bloom"] as const;
 export const byCategory = (cat: string) => components.filter((c) => c.category === cat);
 export const bySlug = (slug: string) => components.find((c) => c.slug === slug);
