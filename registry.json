@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "byronwade-ui",
+  "homepage": "https://ui.byronwade.com",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "cn() utility",
+      "description": "clsx + tailwind-merge class combiner.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/lib/utils.ts", "type": "registry:lib", "target": "lib/utils.ts" }
+      ]
+    }
+  ]
+}
