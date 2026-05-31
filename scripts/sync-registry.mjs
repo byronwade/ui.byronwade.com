@@ -23,11 +23,26 @@ const lines = (obj) =>
   Object.entries(obj)
     .map(([k, val]) => `  --${k}: ${val};`)
     .join("\n");
-const css =
+
+function emitCss(obj, indent = "") {
+  let out = "";
+  for (const [k, val] of Object.entries(obj)) {
+    if (val && typeof val === "object") out += `${indent}${k} {\n${emitCss(val, indent + "  ")}${indent}}\n`;
+    else out += `${indent}${k}: ${val};\n`;
+  }
+  return out;
+}
+
+let css =
   `/* GENERATED from registry.json (foundation) — do not edit. Run \`npm run sync\`. */\n` +
   `@theme inline {\n${lines(v.theme)}\n}\n\n` +
   `:root {\n${lines(v.light)}\n}\n\n` +
   `.dark {\n${lines(v.dark)}\n}\n`;
+
+if (foundation.css) {
+  css += "\n" + emitCss(foundation.css);
+}
+
 writeFileSync(join(root, "app/foundation.generated.css"), css);
 
 console.log(`sync-registry: copied ${copied} files + app/foundation.generated.css`);
