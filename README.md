@@ -100,3 +100,31 @@ namespace at `http://localhost:4000/r/{name}.json` and `init`/`add` against it.
 This repo is a normal Next.js app. Connect it to Vercel (or `vercel --prod`). The `prebuild` script runs
 `shadcn build` before `next build`, so `public/r/*.json` is freshly generated on every deploy. Once live,
 note the deployment URL and use it as `<REGISTRY_URL>` above.
+
+## Canonical source
+
+**SignalRoute (`byronwade/signalroute`) is the source of truth for all component code.** The files in
+`registry/ui/`, `registry/components/`, and `registry/lib/` are mirrors of the components that live and
+evolve in SignalRoute — they must never be hand-edited here.
+
+To sync them, run:
+```bash
+npm run mirror
+```
+This reads `registry.json`, locates each file's origin in SignalRoute (using `SIGNALROUTE_DIR`, defaulting
+to `/Users/byronwade/signalroute`), and copies the source with one rewrite:
+`@/components/dashboard/` → `@/components/` (so cross-component imports resolve in the consumer project).
+
+After mirroring, rebuild the published registry:
+```bash
+npm run registry:build
+```
+
+**What is NOT touched by the mirror script** — these are hand-maintained in this repo:
+- `registry.json` — npm dependencies, `registryDependencies`, `cssVars`, metadata, and all item structure
+- The `foundation` token layer (lives entirely inside `registry.json`'s `cssVars` block; has no source file)
+
+**Workflow for changing a component:**
+1. Edit the component in SignalRoute (`components/ui/`, `components/dashboard/`, or `lib/`).
+2. In this repo: `npm run mirror` then `npm run registry:build`.
+3. Commit both repos.

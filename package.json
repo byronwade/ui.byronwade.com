@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "sync": "node scripts/sync-registry.mjs",
+    "mirror": "node scripts/mirror-from-signalroute.mjs",
     "predev": "node scripts/sync-registry.mjs",
     "dev": "next dev",
     "registry:build": "shadcn build",
