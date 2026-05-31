@@ -12,6 +12,87 @@
       "files": [
         { "path": "registry/lib/utils.ts", "type": "registry:lib", "target": "lib/utils.ts" }
       ]
+    },
+    {
+      "name": "foundation",
+      "type": "registry:base",
+      "extends": "none",
+      "title": "Design system foundation",
+      "description": "Token layer: brand-derived green accent, status/warning/dock/chart tokens, radius scale, dark variant. Override --brand to re-skin.",
+      "dependencies": ["tw-animate-css"],
+      "registryDependencies": ["utils"],
+      "cssVars": {
+        "theme": {
+          "color-brand": "var(--brand)",
+          "color-brand-foreground": "var(--brand-foreground)",
+          "color-brand-muted": "var(--brand-muted)",
+          "color-success": "var(--success)",
+          "color-success-foreground": "var(--success-foreground)",
+          "color-warning": "var(--warning)",
+          "color-warning-foreground": "var(--warning-foreground)",
+          "color-dock": "var(--dock)",
+          "color-dock-foreground": "var(--dock-foreground)",
+          "color-dock-muted": "var(--dock-muted)",
+          "color-dock-active": "var(--dock-active)",
+          "color-dock-active-foreground": "var(--dock-active-foreground)",
+          "color-chart-1": "var(--chart-1)",
+          "color-chart-2": "var(--chart-2)",
+          "color-chart-3": "var(--chart-3)",
+          "color-chart-4": "var(--chart-4)",
+          "color-chart-5": "var(--chart-5)",
+          "radius-sm": "calc(var(--radius) * 0.6)",
+          "radius-md": "calc(var(--radius) * 0.8)",
+          "radius-lg": "var(--radius)",
+          "radius-xl": "calc(var(--radius) * 1.4)",
+          "radius-2xl": "calc(var(--radius) * 1.8)",
+          "radius-3xl": "calc(var(--radius) * 2.2)",
+          "radius-4xl": "calc(var(--radius) * 2.6)"
+        },
+        "light": {
+          "brand": "oklch(0.6 0.17 148)",
+          "brand-foreground": "oklch(0.985 0 0)",
+          "brand-muted": "oklch(0.96 0.03 148)",
+          "success": "var(--brand)",
+          "success-foreground": "oklch(0.985 0 0)",
+          "warning": "oklch(0.78 0.16 75)",
+          "warning-foreground": "oklch(0.26 0.05 70)",
+          "ring": "var(--brand)",
+          "chart-1": "var(--brand)",
+          "chart-2": "oklch(0.556 0 0)",
+          "chart-3": "oklch(0.439 0 0)",
+          "chart-4": "oklch(0.371 0 0)",
+          "chart-5": "oklch(0.269 0 0)",
+          "radius": "0.75rem",
+          "dock": "oklch(0.205 0 0)",
+          "dock-foreground": "oklch(0.72 0 0)",
+          "dock-muted": "oklch(1 0 0 / 10%)",
+          "dock-active": "oklch(1 0 0 / 14%)",
+          "dock-active-foreground": "oklch(0.99 0 0)"
+        },
+        "dark": {
+          "brand": "oklch(0.7 0.17 148)",
+          "brand-foreground": "oklch(0.985 0 0)",
+          "brand-muted": "oklch(0.3 0.06 148)",
+          "success": "var(--brand)",
+          "success-foreground": "oklch(0.985 0 0)",
+          "warning": "oklch(0.82 0.15 78)",
+          "warning-foreground": "oklch(0.26 0.05 70)",
+          "ring": "var(--brand)",
+          "chart-1": "var(--brand)",
+          "chart-2": "oklch(0.556 0 0)",
+          "chart-3": "oklch(0.439 0 0)",
+          "chart-4": "oklch(0.371 0 0)",
+          "chart-5": "oklch(0.269 0 0)",
+          "dock": "oklch(0.255 0 0)",
+          "dock-foreground": "oklch(0.72 0 0)",
+          "dock-muted": "oklch(1 0 0 / 8%)",
+          "dock-active": "oklch(1 0 0 / 14%)",
+          "dock-active-foreground": "oklch(0.99 0 0)"
+        }
+      },
+      "css": {
+        "@custom-variant dark": "(&:is(.dark *))"
+      }
     }
   ]
 }
