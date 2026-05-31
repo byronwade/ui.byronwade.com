@@ -8,9 +8,16 @@
       "type": "registry:lib",
       "title": "cn() utility",
       "description": "clsx + tailwind-merge class combiner.",
-      "dependencies": ["clsx", "tailwind-merge"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/lib/utils.ts", "type": "registry:lib", "target": "lib/utils.ts" }
+        {
+          "path": "registry/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        }
       ]
     },
     {
@@ -19,7 +26,9 @@
       "extends": "none",
       "title": "Design system foundation",
       "description": "Complete self-contained base: neutrals + brand-derived green accent (override --brand to re-skin), status/warning/dock/chart/sidebar tokens, radius scale. Install via `shadcn init` so it owns :root.",
-      "dependencies": ["tw-animate-css"],
+      "dependencies": [
+        "tw-animate-css"
+      ],
       "cssVars": {
         "theme": {
           "color-background": "var(--background)",
@@ -219,9 +228,16 @@
       "type": "registry:ui",
       "title": "Status dot",
       "description": "Atomic status indicator dot with tone + optional pulse.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/ui/status-dot.tsx", "type": "registry:ui", "target": "components/ui/status-dot.tsx" }
+        {
+          "path": "registry/ui/status-dot.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/status-dot.tsx"
+        }
       ]
     },
     {
@@ -229,9 +245,15 @@
       "type": "registry:ui",
       "title": "Ring gauge",
       "description": "Circular score ring with status tone, big centered number.",
-      "registryDependencies": ["@byronwade/status-dot"],
+      "registryDependencies": [
+        "@byronwade/status-dot"
+      ],
       "files": [
-        { "path": "registry/ui/gauge.tsx", "type": "registry:ui", "target": "components/ui/gauge.tsx" }
+        {
+          "path": "registry/ui/gauge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gauge.tsx"
+        }
       ]
     },
     {
@@ -240,7 +262,11 @@
       "title": "Anonymous identity",
       "description": "Deterministic animal-name + OKLCH gradient from a seed string.",
       "files": [
-        { "path": "registry/lib/identity.ts", "type": "registry:lib", "target": "lib/identity.ts" }
+        {
+          "path": "registry/lib/identity.ts",
+          "type": "registry:lib",
+          "target": "lib/identity.ts"
+        }
       ]
     },
     {
@@ -248,9 +274,17 @@
       "type": "registry:ui",
       "title": "Gradient avatar",
       "description": "Radial-gradient avatar disc derived deterministically from a seed.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/identity"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/identity"
+      ],
       "files": [
-        { "path": "registry/ui/gradient-avatar.tsx", "type": "registry:ui", "target": "components/ui/gradient-avatar.tsx" }
+        {
+          "path": "registry/ui/gradient-avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gradient-avatar.tsx"
+        }
       ]
     },
     {
@@ -258,9 +292,16 @@
       "type": "registry:ui",
       "title": "Activity grid",
       "description": "GitHub-style grid of small circles, filled in brand where active.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/ui/activity-grid.tsx", "type": "registry:ui", "target": "components/ui/activity-grid.tsx" }
+        {
+          "path": "registry/ui/activity-grid.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/activity-grid.tsx"
+        }
       ]
     },
     {
@@ -268,10 +309,19 @@
       "type": "registry:ui",
       "title": "Filter pill",
       "description": "Pill-with-chevron filter/range selector control.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/ui/filter-pill.tsx", "type": "registry:ui", "target": "components/ui/filter-pill.tsx" }
+        {
+          "path": "registry/ui/filter-pill.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/filter-pill.tsx"
+        }
       ]
     },
     {
@@ -279,9 +329,16 @@
       "type": "registry:ui",
       "title": "Segmented control",
       "description": "Inline segmented toggle (Referrer · Links · Campaign style).",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/ui/segmented-control.tsx", "type": "registry:ui", "target": "components/ui/segmented-control.tsx" }
+        {
+          "path": "registry/ui/segmented-control.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/segmented-control.tsx"
+        }
       ]
     },
     {
@@ -289,10 +346,20 @@
       "type": "registry:component",
       "title": "Timeline rail",
       "description": "Vertical event/timeline rail with connectors and terminal marker.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/status-dot"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/status-dot"
+      ],
       "files": [
-        { "path": "registry/components/timeline-rail.tsx", "type": "registry:component", "target": "components/timeline-rail.tsx" }
+        {
+          "path": "registry/components/timeline-rail.tsx",
+          "type": "registry:component",
+          "target": "components/timeline-rail.tsx"
+        }
       ]
     },
     {
@@ -300,9 +367,16 @@
       "type": "registry:component",
       "title": "Split with rail",
       "description": "Summary column + vertical event/timeline rail archetype shell.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/components/split-with-rail.tsx", "type": "registry:component", "target": "components/split-with-rail.tsx" }
+        {
+          "path": "registry/components/split-with-rail.tsx",
+          "type": "registry:component",
+          "target": "components/split-with-rail.tsx"
+        }
       ]
     },
     {
@@ -310,9 +384,16 @@
       "type": "registry:component",
       "title": "Hero section",
       "description": "Full-bleed hero composition shell.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/components/hero-section.tsx", "type": "registry:component", "target": "components/hero-section.tsx" }
+        {
+          "path": "registry/components/hero-section.tsx",
+          "type": "registry:component",
+          "target": "components/hero-section.tsx"
+        }
       ]
     },
     {
@@ -320,10 +401,19 @@
       "type": "registry:component",
       "title": "Metric stat",
       "description": "Label + large value + delta badge metric row.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/components/metric-stat.tsx", "type": "registry:component", "target": "components/metric-stat.tsx" }
+        {
+          "path": "registry/components/metric-stat.tsx",
+          "type": "registry:component",
+          "target": "components/metric-stat.tsx"
+        }
       ]
     },
     {
@@ -331,9 +421,659 @@
       "type": "registry:component",
       "title": "Centered focal",
       "description": "One centerpiece + floating card; first-run & single-action tools.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/components/centered-focal.tsx", "type": "registry:component", "target": "components/centered-focal.tsx" }
+        {
+          "path": "registry/components/centered-focal.tsx",
+          "type": "registry:component",
+          "target": "components/centered-focal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Badge — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Card — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Input — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Textarea — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Label — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Select — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Checkbox — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Switch — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Radio Group — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Tooltip — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Popover — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Dropdown Menu — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Dialog — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/button",
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Hover Card — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hover-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Alert — design-system component.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/alert.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Progress — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/progress.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/progress.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Skeleton — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Sonner — design-system component.",
+      "dependencies": [
+        "lucide-react",
+        "next-themes",
+        "sonner"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/sonner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sonner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Tabs — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Accordion — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/accordion.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/accordion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Avatar — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Separator — design-system component.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Breadcrumb — design-system component.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/breadcrumb.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Table — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Chart — design-system component.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/chart.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "status-pill",
+      "type": "registry:component",
+      "title": "Status Pill",
+      "description": "Status Pill — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/status-dot",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/status-pill.tsx",
+          "type": "registry:component",
+          "target": "components/status-pill.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-header",
+      "type": "registry:component",
+      "title": "Page Header",
+      "description": "Page Header — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/page-header.tsx",
+          "type": "registry:component",
+          "target": "components/page-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:component",
+      "title": "Stat Card",
+      "description": "Stat Card — design-system component.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/metric-stat",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/stat-card.tsx",
+          "type": "registry:component",
+          "target": "components/stat-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:component",
+      "title": "Empty State",
+      "description": "Empty State — design-system component.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/empty-state.tsx",
+          "type": "registry:component",
+          "target": "components/empty-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "detail-header",
+      "type": "registry:component",
+      "title": "Detail Header",
+      "description": "Detail Header — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/detail-header.tsx",
+          "type": "registry:component",
+          "target": "components/detail-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "section",
+      "type": "registry:component",
+      "title": "Section",
+      "description": "Section — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/section.tsx",
+          "type": "registry:component",
+          "target": "components/section.tsx"
+        }
+      ]
+    },
+    {
+      "name": "event-timeline",
+      "type": "registry:component",
+      "title": "Event Timeline",
+      "description": "Event Timeline — design-system component.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/event-timeline.tsx",
+          "type": "registry:component",
+          "target": "components/event-timeline.tsx"
+        }
       ]
     }
   ]
