@@ -87,45 +87,270 @@ export const SECTIONS = [
   { id: "comparison", label: "Side by side" },
 ] as const;
 
-/** Sticky in-page nav — the Settings "hub + vertical sub-nav" archetype, with scroll-spy. */
+/** Derive a URL-safe anchor id from an arbitrary string. */
+export const slugify = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
+/** Full table-of-contents model: each section with its specimens. */
+export const NAV: { id: string; label: string; items: { id: string; label: string }[] }[] = [
+  {
+    id: "philosophy",
+    label: "Philosophy",
+    items: [
+      { id: slugify("Calm over chrome"), label: "Calm over chrome" },
+      { id: slugify("No generic grids — one signature hero per page"), label: "No generic grids — one signature hero per page" },
+      { id: slugify("Constant chrome, bespoke body"), label: "Constant chrome, bespoke body" },
+    ],
+  },
+  {
+    id: "principles",
+    label: "Principles",
+    items: [
+      { id: slugify("Single-accent rule"), label: "Single-accent rule" },
+      { id: slugify("Status convention"), label: "Status convention" },
+      { id: slugify("Do / Don't"), label: "Do / Don't" },
+      { id: slugify("Spacing & radius"), label: "Spacing & radius" },
+    ],
+  },
+  {
+    id: "foundations",
+    label: "Foundations",
+    items: [
+      { id: slugify("Color"), label: "Color" },
+      { id: slugify("Radius"), label: "Radius" },
+      { id: slugify("Elevation"), label: "Elevation" },
+      { id: slugify("Typography"), label: "Typography" },
+      { id: slugify("Utilities"), label: "Utilities" },
+    ],
+  },
+  {
+    id: "primitives",
+    label: "Primitives",
+    items: [
+      { id: slugify("Button — variants"), label: "Button — variants" },
+      { id: slugify("Button — sizes"), label: "Button — sizes" },
+      { id: slugify("Badge"), label: "Badge" },
+      { id: slugify("FilterPill"), label: "FilterPill" },
+      { id: slugify("SegmentedControl"), label: "SegmentedControl" },
+      { id: slugify("StatusDot"), label: "StatusDot" },
+      { id: slugify("StatusPill"), label: "StatusPill" },
+      { id: slugify("Card"), label: "Card" },
+    ],
+  },
+  {
+    id: "forms",
+    label: "Forms",
+    items: [
+      { id: slugify("Input"), label: "Input" },
+      { id: slugify("Textarea"), label: "Textarea" },
+      { id: slugify("Select"), label: "Select" },
+      { id: slugify("Checkbox"), label: "Checkbox" },
+      { id: slugify("Switch"), label: "Switch" },
+      { id: slugify("RadioGroup"), label: "RadioGroup" },
+      { id: slugify("Label"), label: "Label" },
+    ],
+  },
+  {
+    id: "overlays",
+    label: "Overlays",
+    items: [
+      { id: slugify("Tooltip"), label: "Tooltip" },
+      { id: slugify("Popover"), label: "Popover" },
+      { id: slugify("DropdownMenu"), label: "DropdownMenu" },
+      { id: slugify("Dialog"), label: "Dialog" },
+      { id: slugify("HoverCard"), label: "HoverCard" },
+    ],
+  },
+  {
+    id: "feedback",
+    label: "Feedback",
+    items: [
+      { id: slugify("Alert"), label: "Alert" },
+      { id: slugify("Progress"), label: "Progress" },
+      { id: slugify("Skeleton"), label: "Skeleton" },
+      { id: slugify("Toast"), label: "Toast" },
+    ],
+  },
+  {
+    id: "data",
+    label: "Data display",
+    items: [
+      { id: slugify("Tabs"), label: "Tabs" },
+      { id: slugify("Accordion"), label: "Accordion" },
+      { id: slugify("Avatar"), label: "Avatar" },
+      { id: slugify("Separator"), label: "Separator" },
+      { id: slugify("Breadcrumb"), label: "Breadcrumb" },
+      { id: slugify("Table"), label: "Table" },
+    ],
+  },
+  {
+    id: "patterns",
+    label: "Patterns",
+    items: [
+      { id: slugify("PageHeader"), label: "PageHeader" },
+      { id: slugify("MetricStat"), label: "MetricStat" },
+      { id: slugify("StatCard"), label: "StatCard" },
+      { id: slugify("Gauge"), label: "Gauge" },
+      { id: slugify("ActivityGrid"), label: "ActivityGrid" },
+      { id: slugify("GradientAvatar + animalName"), label: "GradientAvatar + animalName" },
+      { id: slugify("EmptyState"), label: "EmptyState" },
+    ],
+  },
+  {
+    id: "charts",
+    label: "Charts",
+    items: [
+      { id: slugify("Area chart"), label: "Area chart" },
+      { id: slugify("Bar chart"), label: "Bar chart" },
+    ],
+  },
+  {
+    id: "house",
+    label: "House components",
+    items: [
+      { id: slugify("DetailHeader"), label: "DetailHeader" },
+      { id: slugify("Section (settings panel)"), label: "Section (settings panel)" },
+      { id: slugify("EventTimeline"), label: "EventTimeline" },
+    ],
+  },
+  {
+    id: "layouts",
+    label: "Layouts",
+    items: [
+      { id: slugify("HeroSection"), label: "HeroSection" },
+      { id: slugify("CenteredFocal"), label: "CenteredFocal" },
+      { id: slugify("SplitWithRail + TimelineRail"), label: "SplitWithRail + TimelineRail" },
+    ],
+  },
+  {
+    id: "comparison",
+    label: "Side by side",
+    items: [],
+  },
+];
+
+/** Sticky in-page nav — full TOC: each section with its specimens, component-level scroll-spy. */
 export function SideNav() {
   const [active, setActive] = React.useState<string>(SECTIONS[0].id);
+  const navRef = React.useRef<HTMLElement>(null);
+  const prevActiveRef = React.useRef<string>(SECTIONS[0].id);
 
-  React.useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
-      },
-      { rootMargin: "-25% 0px -65% 0px" },
-    );
-    for (const s of SECTIONS) {
-      const el = document.getElementById(s.id);
-      if (el) obs.observe(el);
+  // Build a flat ordered list of all anchor ids (section then specimens, in DOM order)
+  const allIds = React.useMemo(() => {
+    const ids: string[] = [];
+    for (const section of NAV) {
+      ids.push(section.id);
+      for (const item of section.items) {
+        ids.push(item.id);
+      }
     }
-    return () => obs.disconnect();
+    return ids;
   }, []);
 
+  // Build a lookup: itemId -> parent sectionId
+  const parentSection = React.useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const section of NAV) {
+      for (const item of section.items) {
+        map[item.id] = section.id;
+      }
+      map[section.id] = section.id;
+    }
+    return map;
+  }, []);
+
+  React.useEffect(() => {
+    const visibleIds = new Set<string>();
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            visibleIds.add(e.target.id);
+          } else {
+            visibleIds.delete(e.target.id);
+          }
+        }
+        // Pick the last id in DOM order that is currently visible
+        let nextActive = active;
+        for (const id of allIds) {
+          if (visibleIds.has(id)) nextActive = id;
+        }
+        if (nextActive !== prevActiveRef.current) {
+          prevActiveRef.current = nextActive;
+          setActive(nextActive);
+        }
+      },
+      { rootMargin: "-15% 0px -60% 0px" },
+    );
+
+    for (const id of allIds) {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    }
+
+    return () => obs.disconnect();
+  }, [allIds]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Auto-scroll the active nav link into view when active changes
+  React.useEffect(() => {
+    if (!navRef.current) return;
+    const el = navRef.current.querySelector(`[data-nav-id="${active}"]`);
+    if (el) (el as HTMLElement).scrollIntoView({ block: "nearest" });
+  }, [active]);
+
   return (
-    <nav className="sticky top-24 hidden self-start lg:block">
+    <nav
+      ref={navRef}
+      className="sticky top-24 hidden max-h-[calc(100dvh-7rem)] self-start overflow-y-auto pr-2 scrollbar-thin lg:block"
+    >
       <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
         Contents
       </p>
-      <ul className="space-y-0.5 border-l border-border">
-        {SECTIONS.map((s) => (
-          <li key={s.id}>
-            <a
-              href={`#${s.id}`}
-              className={cn(
-                "-ml-px block border-l-2 px-3 py-1 text-sm transition-colors",
-                active === s.id
-                  ? "border-brand font-medium text-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground",
+      <ul className="border-l border-border">
+        {NAV.map((section) => {
+          const sectionIsActive = parentSection[active] === section.id;
+          return (
+            <li key={section.id}>
+              {/* Section header */}
+              <a
+                href={`#${section.id}`}
+                data-nav-id={section.id}
+                className={cn(
+                  "-ml-px block border-l-2 px-3 py-1 text-xs font-medium uppercase tracking-wide transition-colors",
+                  active === section.id && section.items.length === 0
+                    ? "border-brand text-foreground"
+                    : sectionIsActive
+                    ? "border-brand/40 text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {section.label}
+              </a>
+              {/* Specimen items */}
+              {section.items.length > 0 && (
+                <ul className="mb-1">
+                  {section.items.map((item) => (
+                    <li key={item.id}>
+                      <a
+                        href={`#${item.id}`}
+                        data-nav-id={item.id}
+                        className={cn(
+                          "-ml-px block truncate border-l-2 py-0.5 pl-6 pr-2 text-sm transition-colors",
+                          active === item.id
+                            ? "border-brand font-medium text-foreground"
+                            : "border-transparent text-muted-foreground hover:text-foreground",
+                        )}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               )}
-            >
-              {s.label}
-            </a>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
@@ -181,7 +406,7 @@ export function Specimen({
   children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-3">
+    <div id={slugify(name)} className="scroll-mt-24 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="text-sm font-medium">{name}</span>
         {from && (

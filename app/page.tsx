@@ -145,7 +145,7 @@ export default function StyleguidePage() {
         </Reveal>
 
         {/* Body: hub + vertical sub-nav archetype */}
-        <div className="grid gap-12 pb-28 lg:grid-cols-[176px_minmax(0,1fr)]">
+        <div className="grid gap-12 pb-28 lg:grid-cols-[220px_minmax(0,1fr)]">
           <SideNav />
 
           <main className="min-w-0 space-y-20">
