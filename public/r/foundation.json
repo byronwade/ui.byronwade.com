@@ -8,7 +8,7 @@
     "tw-animate-css"
   ],
   "registryDependencies": [
-    "utils"
+    "@byronwade/utils"
   ],
   "cssVars": {
     "theme": {
@@ -78,9 +78,6 @@
       "dock-active": "oklch(1 0 0 / 14%)",
       "dock-active-foreground": "oklch(0.99 0 0)"
     }
-  },
-  "css": {
-    "@custom-variant dark": "(&:is(.dark *))"
   },
   "type": "registry:base"
 }

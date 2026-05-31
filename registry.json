@@ -20,7 +20,7 @@
       "title": "Design system foundation",
       "description": "Token layer: brand-derived green accent, status/warning/dock/chart tokens, radius scale, dark variant. Override --brand to re-skin.",
       "dependencies": ["tw-animate-css"],
-      "registryDependencies": ["utils"],
+      "registryDependencies": ["@byronwade/utils"],
       "cssVars": {
         "theme": {
           "color-brand": "var(--brand)",
@@ -89,9 +89,6 @@
           "dock-active": "oklch(1 0 0 / 14%)",
           "dock-active-foreground": "oklch(0.99 0 0)"
         }
-      },
-      "css": {
-        "@custom-variant dark": "(&:is(.dark *))"
       }
     },
     {
@@ -99,7 +96,7 @@
       "type": "registry:ui",
       "title": "Status dot",
       "description": "Atomic status indicator dot with tone + optional pulse.",
-      "registryDependencies": ["foundation"],
+      "registryDependencies": ["@byronwade/foundation"],
       "files": [
         { "path": "registry/ui/status-dot.tsx", "type": "registry:ui", "target": "components/ui/status-dot.tsx" }
       ]
@@ -109,7 +106,7 @@
       "type": "registry:ui",
       "title": "Ring gauge",
       "description": "Circular score ring with status tone, big centered number.",
-      "registryDependencies": ["status-dot"],
+      "registryDependencies": ["@byronwade/status-dot"],
       "files": [
         { "path": "registry/ui/gauge.tsx", "type": "registry:ui", "target": "components/ui/gauge.tsx" }
       ]

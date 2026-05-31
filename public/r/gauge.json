@@ -4,7 +4,7 @@
   "title": "Ring gauge",
   "description": "Circular score ring with status tone, big centered number.",
   "registryDependencies": [
-    "status-dot"
+    "@byronwade/status-dot"
   ],
   "files": [
     {

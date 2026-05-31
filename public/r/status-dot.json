@@ -4,7 +4,7 @@
   "title": "Status dot",
   "description": "Atomic status indicator dot with tone + optional pulse.",
   "registryDependencies": [
-    "foundation"
+    "@byronwade/foundation"
   ],
   "files": [
     {
