@@ -185,6 +185,108 @@
       "files": [
         { "path": "registry/ui/gauge.tsx", "type": "registry:ui", "target": "components/ui/gauge.tsx" }
       ]
+    },
+    {
+      "name": "identity",
+      "type": "registry:lib",
+      "title": "Anonymous identity",
+      "description": "Deterministic animal-name + OKLCH gradient from a seed string.",
+      "files": [
+        { "path": "registry/lib/identity.ts", "type": "registry:lib", "target": "lib/identity.ts" }
+      ]
+    },
+    {
+      "name": "gradient-avatar",
+      "type": "registry:ui",
+      "title": "Gradient avatar",
+      "description": "Radial-gradient avatar disc derived deterministically from a seed.",
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/identity"],
+      "files": [
+        { "path": "registry/ui/gradient-avatar.tsx", "type": "registry:ui", "target": "components/ui/gradient-avatar.tsx" }
+      ]
+    },
+    {
+      "name": "activity-grid",
+      "type": "registry:ui",
+      "title": "Activity grid",
+      "description": "GitHub-style grid of small circles, filled in brand where active.",
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "files": [
+        { "path": "registry/ui/activity-grid.tsx", "type": "registry:ui", "target": "components/ui/activity-grid.tsx" }
+      ]
+    },
+    {
+      "name": "filter-pill",
+      "type": "registry:ui",
+      "title": "Filter pill",
+      "description": "Pill-with-chevron filter/range selector control.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "files": [
+        { "path": "registry/ui/filter-pill.tsx", "type": "registry:ui", "target": "components/ui/filter-pill.tsx" }
+      ]
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented control",
+      "description": "Inline segmented toggle (Referrer · Links · Campaign style).",
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "files": [
+        { "path": "registry/ui/segmented-control.tsx", "type": "registry:ui", "target": "components/ui/segmented-control.tsx" }
+      ]
+    },
+    {
+      "name": "timeline-rail",
+      "type": "registry:component",
+      "title": "Timeline rail",
+      "description": "Vertical event/timeline rail with connectors and terminal marker.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/status-dot"],
+      "files": [
+        { "path": "registry/components/timeline-rail.tsx", "type": "registry:component", "target": "components/timeline-rail.tsx" }
+      ]
+    },
+    {
+      "name": "split-with-rail",
+      "type": "registry:component",
+      "title": "Split with rail",
+      "description": "Summary column + vertical event/timeline rail archetype shell.",
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "files": [
+        { "path": "registry/components/split-with-rail.tsx", "type": "registry:component", "target": "components/split-with-rail.tsx" }
+      ]
+    },
+    {
+      "name": "hero-section",
+      "type": "registry:component",
+      "title": "Hero section",
+      "description": "Full-bleed hero composition shell.",
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "files": [
+        { "path": "registry/components/hero-section.tsx", "type": "registry:component", "target": "components/hero-section.tsx" }
+      ]
+    },
+    {
+      "name": "metric-stat",
+      "type": "registry:component",
+      "title": "Metric stat",
+      "description": "Label + large value + delta badge metric row.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "files": [
+        { "path": "registry/components/metric-stat.tsx", "type": "registry:component", "target": "components/metric-stat.tsx" }
+      ]
+    },
+    {
+      "name": "centered-focal",
+      "type": "registry:component",
+      "title": "Centered focal",
+      "description": "One centerpiece + floating card; first-run & single-action tools.",
+      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "files": [
+        { "path": "registry/components/centered-focal.tsx", "type": "registry:component", "target": "components/centered-focal.tsx" }
+      ]
     }
   ]
 }

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "filter-pill",
+  "title": "Filter pill",
+  "description": "Pill-with-chevron filter/range selector control.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/filter-pill.tsx",
+      "content": "import * as React from \"react\";\nimport { ChevronsUpDown } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\n/** Pill+chevron filter/range trigger (AGENTS.md Controls). Pass as `render` to a Select/Menu trigger,\n *  or use standalone with onClick. */\nexport const FilterPill = React.forwardRef<\n  HTMLButtonElement,\n  React.ComponentProps<\"button\"> & { icon?: React.ReactNode }\n>(function FilterPill({ className, children, icon, ...props }, ref) {\n  return (\n    <button\n      ref={ref}\n      type=\"button\"\n      data-slot=\"filter-pill\"\n      className={cn(\n        \"inline-flex h-8 items-center gap-1.5 rounded-full border border-border bg-background px-3 text-sm font-medium shadow-card transition-colors hover:bg-muted aria-expanded:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 outline-none\",\n        className,\n      )}\n      {...props}\n    >\n      {icon}\n      {children}\n      <ChevronsUpDown className=\"size-3.5 text-muted-foreground\" />\n    </button>\n  );\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/filter-pill.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

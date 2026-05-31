@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "centered-focal",
+  "title": "Centered focal",
+  "description": "One centerpiece + floating card; first-run & single-action tools.",
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/components/centered-focal.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/** Centered-focal / tool archetype: a large centerpiece with one floating card. */\nexport function CenteredFocal({\n  backdrop,\n  children,\n  className,\n}: {\n  backdrop?: React.ReactNode;\n  children: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <div className={cn(\"relative grid min-h-[60vh] place-items-center\", className)}>\n      {backdrop && (\n        <div className=\"pointer-events-none absolute inset-0 grid place-items-center opacity-60\">{backdrop}</div>\n      )}\n      <div className=\"relative z-10 w-full max-w-sm rounded-2xl border border-border bg-card p-6 text-center shadow-card\">\n        {children}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/centered-focal.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

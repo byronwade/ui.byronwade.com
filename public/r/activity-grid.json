@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "activity-grid",
+  "title": "Activity grid",
+  "description": "GitHub-style grid of small circles, filled in brand where active.",
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/activity-grid.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/** GitHub-style activity grid. `data` = per-cell counts; intensity buckets fill --brand. */\nexport function ActivityGrid({\n  data,\n  columns = 26,\n  className,\n}: {\n  data: number[];\n  columns?: number;\n  className?: string;\n}) {\n  const max = Math.max(1, ...data);\n  const level = (n: number) => (n <= 0 ? 0 : Math.min(4, Math.ceil((n / max) * 4)));\n  const fill = [\"bg-muted\", \"bg-brand/30\", \"bg-brand/50\", \"bg-brand/75\", \"bg-brand\"];\n  return (\n    <div\n      className={cn(\"grid w-fit gap-1\", className)}\n      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}\n    >\n      {data.map((n, i) => (\n        <span key={i} className={cn(\"size-2.5 rounded-full\", fill[level(n)])} />\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/activity-grid.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

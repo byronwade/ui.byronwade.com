@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "identity",
+  "title": "Anonymous identity",
+  "description": "Deterministic animal-name + OKLCH gradient from a seed string.",
+  "files": [
+    {
+      "path": "registry/lib/identity.ts",
+      "content": "// Deterministic anonymous identity: stable name + gradient from any seed string.\nconst ADJECTIVES = [\n  \"Spectacular\", \"Injured\", \"Current\", \"Verbal\", \"Theoretical\", \"Natural\",\n  \"Expensive\", \"Significant\", \"Quiet\", \"Brave\", \"Sleepy\", \"Curious\",\n  \"Polished\", \"Distant\", \"Gentle\", \"Rapid\",\n];\nconst ANIMALS = [\n  \"Bonobo\", \"Narwhal\", \"Pheasant\", \"Bobcat\", \"Iguana\", \"Wasp\",\n  \"Ant\", \"Slug\", \"Otter\", \"Falcon\", \"Lynx\", \"Heron\",\n  \"Marten\", \"Gecko\", \"Tapir\", \"Crane\",\n];\n\n/** FNV-1a 32-bit hash → stable non-negative int. */\nfunction hash(seed: string): number {\n  let h = 0x811c9dc5;\n  for (let i = 0; i < seed.length; i++) {\n    h ^= seed.charCodeAt(i);\n    h = Math.imul(h, 0x01000193);\n  }\n  return h >>> 0;\n}\n\nexport function animalName(seed: string): string {\n  const h = hash(seed);\n  return `${ADJECTIVES[h % ADJECTIVES.length]} ${ANIMALS[(h >>> 8) % ANIMALS.length]}`;\n}\n\n/** Two-stop gradient stops (CSS color strings) derived from the seed. */\nexport function gradientFor(seed: string): { from: string; to: string; angle: number } {\n  const h = hash(seed);\n  const hue = h % 360;\n  return {\n    from: `oklch(0.72 0.18 ${hue})`,\n    to: `oklch(0.62 0.2 ${(hue + 40) % 360})`,\n    angle: h % 360,\n  };\n}\n",
+      "type": "registry:lib",
+      "target": "lib/identity.ts"
+    }
+  ],
+  "type": "registry:lib"
+}

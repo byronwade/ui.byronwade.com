@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "segmented-control",
+  "title": "Segmented control",
+  "description": "Inline segmented toggle (Referrer · Links · Campaign style).",
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/segmented-control.tsx",
+      "content": "\"use client\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport function SegmentedControl<T extends string>({\n  options,\n  value,\n  onValueChange,\n  className,\n}: {\n  options: { label: string; value: T }[];\n  value: T;\n  onValueChange: (v: T) => void;\n  className?: string;\n}) {\n  return (\n    <div role=\"group\" className={cn(\"inline-flex items-center gap-0.5 rounded-full border border-border bg-muted/60 p-0.5\", className)}>\n      {options.map((o) => (\n        <button\n          key={o.value}\n          type=\"button\"\n          aria-pressed={o.value === value}\n          data-active={o.value === value}\n          onClick={() => onValueChange(o.value)}\n          className={cn(\n            \"rounded-full px-3 py-1 text-sm font-medium text-muted-foreground transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50\",\n            \"data-[active=true]:bg-card data-[active=true]:text-foreground data-[active=true]:shadow-card\",\n          )}\n        >\n          {o.label}\n        </button>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/segmented-control.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "split-with-rail",
+  "title": "Split with rail",
+  "description": "Summary column + vertical event/timeline rail archetype shell.",
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/components/split-with-rail.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/** Split+rail archetype shell: summary column (left) + rail column (right). */\nexport function SplitWithRail({\n  summary,\n  rail,\n  className,\n}: {\n  summary: React.ReactNode;\n  rail: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <div className={cn(\"grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]\", className)}>\n      <div>{summary}</div>\n      <div>{rail}</div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/split-with-rail.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

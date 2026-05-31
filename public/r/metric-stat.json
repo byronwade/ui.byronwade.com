@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "metric-stat",
+  "title": "Metric stat",
+  "description": "Label + large value + delta badge metric row.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/components/metric-stat.tsx",
+      "content": "import { ArrowDown, ArrowUp, type LucideIcon } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type Delta = { value: string; direction: \"up\" | \"down\" | \"flat\" };\n\n/** Delta pill: green for up, red for down, neutral for flat. */\nexport function DeltaPill({ delta, className }: { delta: Delta; className?: string }) {\n  const tone =\n    delta.direction === \"up\"\n      ? \"bg-success/10 text-success\"\n      : delta.direction === \"down\"\n        ? \"bg-destructive/10 text-destructive\"\n        : \"bg-muted text-muted-foreground\";\n  const Icon = delta.direction === \"up\" ? ArrowUp : delta.direction === \"down\" ? ArrowDown : null;\n  return (\n    <span className={cn(\"inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-xs font-medium tabular-nums\", tone, className)}>\n      {Icon && <Icon className=\"size-3\" />}\n      {delta.value}\n    </span>\n  );\n}\n\n/** Inline metric: small label, large value, optional delta pill. AGENTS.md \"Metric rows\". */\nexport function MetricStat({\n  label,\n  value,\n  delta,\n  icon: Icon,\n  className,\n}: {\n  label: string;\n  value: React.ReactNode;\n  delta?: Delta;\n  icon?: LucideIcon;\n  className?: string;\n}) {\n  return (\n    <div className={cn(\"flex flex-col gap-1\", className)}>\n      <span className=\"flex items-center gap-1.5 text-sm text-muted-foreground\">\n        {Icon && <Icon className=\"size-3.5\" />}\n        {label}\n      </span>\n      <div className=\"flex items-center gap-2\">\n        <span className=\"text-2xl font-semibold tracking-tight tabular-nums\">{value}</span>\n        {delta && <DeltaPill delta={delta} />}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/metric-stat.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

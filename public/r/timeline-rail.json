@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "timeline-rail",
+  "title": "Timeline rail",
+  "description": "Vertical event/timeline rail with connectors and terminal marker.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils",
+    "@byronwade/status-dot"
+  ],
+  "files": [
+    {
+      "path": "registry/components/timeline-rail.tsx",
+      "content": "import { Flame } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\nimport { StatusDot, type StatusTone } from \"@/components/ui/status-dot\";\n\nexport interface RailItem {\n  glyph?: React.ReactNode;        // leading icon; falls back to a StatusDot\n  tone?: StatusTone;\n  title: React.ReactNode;\n  meta?: React.ReactNode;         // trailing (right-aligned) duration/time\n}\n\n/** Split+rail archetype's right column: grouped vertical timeline with a terminal marker. */\nexport function TimelineRail({\n  groups,\n  terminalLabel = \"This is where it begins\",\n  className,\n}: {\n  groups: { label: string; items: RailItem[] }[];\n  terminalLabel?: string;\n  className?: string;\n}) {\n  return (\n    <div className={cn(\"space-y-4\", className)}>\n      {groups.map((g, gi) => (\n        <div key={gi} className=\"space-y-2\">\n          <div className=\"flex justify-center\">\n            <span className=\"rounded-full bg-muted px-2.5 py-0.5 text-xs text-muted-foreground\">{g.label}</span>\n          </div>\n          <ol className=\"overflow-hidden rounded-2xl border border-border bg-card\">\n            {g.items.map((it, i) => (\n              <li key={i} className={cn(\"flex items-center gap-3 px-4 py-2.5 text-sm\", i > 0 && \"border-t border-border\")}>\n                <span className=\"grid size-5 shrink-0 place-items-center text-muted-foreground\">\n                  {it.glyph ?? <StatusDot tone={it.tone ?? \"neutral\"} />}\n                </span>\n                <span className=\"min-w-0 flex-1 truncate\">{it.title}</span>\n                {it.meta && <span className=\"shrink-0 font-mono text-xs text-muted-foreground\">{it.meta}</span>}\n              </li>\n            ))}\n          </ol>\n        </div>\n      ))}\n      <div className=\"flex flex-col items-center gap-1 pt-2 text-center text-muted-foreground\">\n        <Flame className=\"size-4\" />\n        <span className=\"text-xs\">{terminalLabel}</span>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/timeline-rail.tsx"
+    }
+  ],
+  "type": "registry:component"
+}
