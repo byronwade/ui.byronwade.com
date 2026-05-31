@@ -49,7 +49,7 @@ import { StatusPill } from "@/components/status-pill";
  * variables; each system sets those variables (plus a few tone rules) on its
  * own theme class (`.vercel-scope`, `.linear-scope`, `.zero-scope`,
  * `.shopify-scope`, `.stripe-scope`, `.github-scope`). No `:root` writes, no
- * Tailwind-layer edits — nothing leaks into our global Visitors theme. The
+ * Tailwind-layer edits — nothing leaks into our global theme. The
  * right column wears exactly one theme; the left column is always our real
  * components, unchanged.
  * ─────────────────────────────────────────────────────────────────────────── */
@@ -527,7 +527,7 @@ const BADGES: [string, string][] = [
   ["success", "Active"],
   ["warning", "Pending"],
   ["critical", "Failed"],
-  ["info", "Provisioning"],
+  ["info", "In review"],
 ];
 
 function RBadges() {
@@ -555,7 +555,7 @@ const RIGHT: Record<string, React.ReactNode> = {
   Card: (
     <div className="c-card mx-auto" style={{ maxWidth: "20rem" }}>
       <div className="c-card__title">Usage this month</div>
-      <div className="c-card__sub">Calls and texts across all numbers.</div>
+      <div className="c-card__sub">Events across all projects.</div>
       <div className="c-card__value">12,480</div>
       <button className="c-btn c-btn--secondary">View details</button>
     </div>
@@ -566,14 +566,14 @@ const RIGHT: Record<string, React.ReactNode> = {
         Display name
       </label>
       <input id="cmp-field" className="c-input" placeholder="Acme Support" />
-      <p className="c-help">Shown to people you call.</p>
+      <p className="c-help">Shown to teammates across your workspace.</p>
     </div>
   ),
   Select: (
     <div className="mx-auto" style={{ maxWidth: "20rem" }}>
-      <label className="c-label">Capability</label>
+      <label className="c-label">Role</label>
       <div className="c-select">
-        <span>Voice &amp; SMS</span>
+        <span>Editor</span>
         <ChevronDown className="c-select__chev" size={16} />
       </div>
     </div>
@@ -584,11 +584,11 @@ const RIGHT: Record<string, React.ReactNode> = {
         <span className="c-check c-check--on">
           <Check size={11} />
         </span>
-        Forward missed calls to voicemail
+        Email me a weekly summary
       </span>
       <span className="c-check-row">
         <span className="c-check" />
-        Send a weekly summary
+        Notify me of mentions
       </span>
     </div>
   ),
@@ -598,13 +598,13 @@ const RIGHT: Record<string, React.ReactNode> = {
         <span className="c-switch c-switch--on">
           <span className="c-switch__thumb" />
         </span>
-        AI answers after 4 rings
+        Enable two-factor authentication
       </span>
       <span className="c-switch-row">
         <span className="c-switch">
           <span className="c-switch__thumb" />
         </span>
-        Record calls
+        Make project public
       </span>
     </div>
   ),
@@ -633,18 +633,18 @@ const RIGHT: Record<string, React.ReactNode> = {
       <div className="c-banner c-banner--info">
         <Info className="c-banner__icon" size={18} />
         <div>
-          <div className="c-banner__title">Number verified</div>
+          <div className="c-banner__title">Changes saved</div>
           <div className="c-banner__body">
-            Outbound calls now show your business caller ID.
+            Your workspace settings have been updated.
           </div>
         </div>
       </div>
       <div className="c-banner c-banner--critical">
         <TriangleAlert className="c-banner__icon" size={18} />
         <div>
-          <div className="c-banner__title">Registration required</div>
+          <div className="c-banner__title">Action required</div>
           <div className="c-banner__body">
-            Texting is paused until your brand is approved.
+            Confirm your billing details to keep your plan active.
           </div>
         </div>
       </div>
@@ -654,24 +654,24 @@ const RIGHT: Record<string, React.ReactNode> = {
     <table className="c-table">
       <thead>
         <tr>
-          <th>Number</th>
+          <th>Name</th>
           <th>Status</th>
-          <th className="c-num">Calls</th>
+          <th className="c-num">Usage</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td className="c-mono">+1 (555) 010-2048</td>
+          <td>Acme Inc.</td>
           <td>
             <span className="c-badge c-badge--success">
               <span className="c-badge__dot" />
               Active
             </span>
           </td>
-          <td className="c-num">42</td>
+          <td className="c-num">1,284</td>
         </tr>
         <tr>
-          <td className="c-mono">+1 (555) 010-7720</td>
+          <td>Globex</td>
           <td>
             <span className="c-badge c-badge--warning">
               <span className="c-badge__dot" />
@@ -686,11 +686,11 @@ const RIGHT: Record<string, React.ReactNode> = {
   Tabs: (
     <div className="mx-auto" style={{ maxWidth: "24rem" }}>
       <div className="c-tabs">
-        <span className="c-tab c-tab--active">Calls</span>
-        <span className="c-tab">Texts</span>
-        <span className="c-tab">Voicemail</span>
+        <span className="c-tab c-tab--active">Overview</span>
+        <span className="c-tab">Activity</span>
+        <span className="c-tab">Settings</span>
       </div>
-      <div className="c-tabs__panel">42 calls this week.</div>
+      <div className="c-tabs__panel">1,284 events this week.</div>
     </div>
   ),
 };
@@ -698,16 +698,16 @@ const RIGHT: Record<string, React.ReactNode> = {
 /* ── Left-column markup (always our real components) ────────────────────── */
 
 function OursSelect() {
-  const [value, setValue] = React.useState("both");
+  const [value, setValue] = React.useState("editor");
   return (
     <Select value={value} onValueChange={(v) => setValue(v as string)}>
       <SelectTrigger className="w-full">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="voice">Voice — calls only</SelectItem>
-        <SelectItem value="sms">SMS — texts only</SelectItem>
-        <SelectItem value="both">Voice &amp; SMS</SelectItem>
+        <SelectItem value="viewer">Read only</SelectItem>
+        <SelectItem value="editor">Editor</SelectItem>
+        <SelectItem value="admin">Admin</SelectItem>
       </SelectContent>
     </Select>
   );
@@ -726,7 +726,7 @@ const OURS: Record<string, React.ReactNode> = {
       <StatusPill tone="success">Active</StatusPill>
       <StatusPill tone="warning">Pending</StatusPill>
       <StatusPill tone="danger">Failed</StatusPill>
-      <StatusPill tone="info">Provisioning</StatusPill>
+      <StatusPill tone="info">In review</StatusPill>
     </div>
   ),
   Card: (
@@ -749,7 +749,7 @@ const OURS: Record<string, React.ReactNode> = {
     <div className="mx-auto max-w-xs space-y-1.5">
       <Label htmlFor="cmp-ours-field">Display name</Label>
       <Input id="cmp-ours-field" placeholder="Acme Support" />
-      <p className="text-xs text-muted-foreground">Shown to people you call.</p>
+      <p className="text-xs text-muted-foreground">Shown to teammates across your workspace.</p>
     </div>
   ),
   Select: (
@@ -762,11 +762,11 @@ const OURS: Record<string, React.ReactNode> = {
     <div className="flex flex-col gap-3">
       <Label className="gap-2">
         <Checkbox defaultChecked />
-        Forward missed calls to voicemail
+        Email me a weekly summary
       </Label>
       <Label className="gap-2">
         <Checkbox />
-        Send a weekly summary
+        Notify me of mentions
       </Label>
     </div>
   ),
@@ -774,11 +774,11 @@ const OURS: Record<string, React.ReactNode> = {
     <div className="flex flex-col gap-3">
       <Label className="gap-2">
         <Switch defaultChecked />
-        AI answers after 4 rings
+        Enable two-factor authentication
       </Label>
       <Label className="gap-2">
         <Switch />
-        Record calls
+        Make project public
       </Label>
     </div>
   ),
@@ -803,9 +803,9 @@ const OURS: Record<string, React.ReactNode> = {
     <div className="mx-auto max-w-sm space-y-3">
       <Alert>
         <CheckCircle2 />
-        <AlertTitle>Number verified</AlertTitle>
+        <AlertTitle>Changes saved</AlertTitle>
         <AlertDescription>
-          Outbound calls now show your business caller ID.
+          Your workspace settings have been updated.
         </AlertDescription>
       </Alert>
     </div>
@@ -814,21 +814,21 @@ const OURS: Record<string, React.ReactNode> = {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Number</TableHead>
+          <TableHead>Name</TableHead>
           <TableHead>Status</TableHead>
-          <TableHead className="text-right tabular-nums">Calls</TableHead>
+          <TableHead className="text-right tabular-nums">Usage</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell className="font-mono">+1 (555) 010-2048</TableCell>
+          <TableCell>Acme Inc.</TableCell>
           <TableCell>
             <Badge variant="success">Active</Badge>
           </TableCell>
-          <TableCell className="text-right tabular-nums">42</TableCell>
+          <TableCell className="text-right tabular-nums">1,284</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell className="font-mono">+1 (555) 010-7720</TableCell>
+          <TableCell>Globex</TableCell>
           <TableCell>
             <Badge variant="warning">Pending</Badge>
           </TableCell>
@@ -838,20 +838,20 @@ const OURS: Record<string, React.ReactNode> = {
     </Table>
   ),
   Tabs: (
-    <Tabs defaultValue="calls" className="mx-auto max-w-sm">
+    <Tabs defaultValue="overview" className="mx-auto max-w-sm">
       <TabsList>
-        <TabsTrigger value="calls">Calls</TabsTrigger>
-        <TabsTrigger value="texts">Texts</TabsTrigger>
-        <TabsTrigger value="voicemail">Voicemail</TabsTrigger>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="activity">Activity</TabsTrigger>
+        <TabsTrigger value="settings">Settings</TabsTrigger>
       </TabsList>
-      <TabsContent value="calls" className="pt-3 text-sm text-muted-foreground">
-        42 calls this week.
+      <TabsContent value="overview" className="pt-3 text-sm text-muted-foreground">
+        1,284 events this week.
       </TabsContent>
-      <TabsContent value="texts" className="pt-3 text-sm text-muted-foreground">
-        118 texts delivered.
+      <TabsContent value="activity" className="pt-3 text-sm text-muted-foreground">
+        42 active users today.
       </TabsContent>
-      <TabsContent value="voicemail" className="pt-3 text-sm text-muted-foreground">
-        3 new voicemails.
+      <TabsContent value="settings" className="pt-3 text-sm text-muted-foreground">
+        3 members can edit.
       </TabsContent>
     </Tabs>
   ),
@@ -1125,7 +1125,7 @@ export function VsComparison() {
           <div key={name} className="space-y-3">
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="space-y-2">
-                <ColHead label="SignalRoute" />
+                <ColHead label="byronwade/ui" />
                 <div className="flex min-h-[148px] items-center justify-center rounded-xl border border-border bg-background p-6 transition-colors">
                   <div className="w-full">{OURS[name]}</div>
                 </div>

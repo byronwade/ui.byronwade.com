@@ -219,7 +219,7 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
   },
 ];
 
-/** Sticky in-page nav — one entry per component, calm/airy Visitors style. */
+/** Sticky in-page nav — one entry per component, calm/airy style. */
 export function SideNav() {
   const [active, setActive] = React.useState<string>(SECTIONS[0].id);
   const navRef = React.useRef<HTMLElement>(null);
@@ -261,10 +261,14 @@ export function SideNav() {
             visibleIds.delete(e.target.id);
           }
         }
-        // Pick the last id in DOM order that is currently visible
-        let nextActive = active;
+        // Pick the FIRST id in DOM order that is currently visible
+        // (topmost-in-view), falling back to the previously-active id.
+        let nextActive = prevActiveRef.current;
         for (const id of allIds) {
-          if (visibleIds.has(id)) nextActive = id;
+          if (visibleIds.has(id)) {
+            nextActive = id;
+            break;
+          }
         }
         if (nextActive !== prevActiveRef.current) {
           prevActiveRef.current = nextActive;
@@ -282,9 +286,15 @@ export function SideNav() {
     return () => obs.disconnect();
   }, [allIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Auto-scroll the active nav link into view when active changes
+  // Auto-scroll the active nav link into view when active changes.
+  // When we're back at the very first section, reset the nav to the top so
+  // the contents list shows its header again.
   React.useEffect(() => {
     if (!navRef.current) return;
+    if (active === SECTIONS[0].id) {
+      navRef.current.scrollTop = 0;
+      return;
+    }
     const el = navRef.current.querySelector(`[data-nav-id="${active}"]`);
     if (el) (el as HTMLElement).scrollIntoView({ block: "nearest" });
   }, [active]);
@@ -378,7 +388,7 @@ export function Section({
           </span>
         )}
       </div>
-      <div className="divide-y divide-border [&>*]:py-8 [&>*:first-child]:pt-6 [&>*:last-child]:pb-0">
+      <div className="divide-y divide-border [&>*]:py-7 [&>*:first-child]:pt-6 [&>*:last-child]:pb-0">
         {children}
       </div>
     </section>
@@ -408,7 +418,7 @@ export function Specimen({
           </code>
         )}
       </div>
-      <div className={cn(!plain && "rounded-xl border border-border bg-background p-6")}>
+      <div className={cn(!plain && "rounded-xl border border-border bg-background p-5")}>
         {children}
       </div>
     </div>
@@ -452,16 +462,16 @@ export function SegmentedDemo() {
 /* ── Forms ───────────────────────────────────────────────────────────── */
 
 export function SelectDemo() {
-  const [value, setValue] = React.useState("voice");
+  const [value, setValue] = React.useState("editor");
   return (
     <Select value={value} onValueChange={(v) => setValue(v as string)}>
       <SelectTrigger id="capability" className="w-full">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="voice">Voice — calls only</SelectItem>
-        <SelectItem value="sms">SMS — texts only</SelectItem>
-        <SelectItem value="both">Voice & SMS</SelectItem>
+        <SelectItem value="viewer">Read only</SelectItem>
+        <SelectItem value="editor">Editor</SelectItem>
+        <SelectItem value="admin">Admin</SelectItem>
       </SelectContent>
     </Select>
   );
@@ -476,7 +486,7 @@ export function CheckboxDemo() {
         checked={checked}
         onCheckedChange={(v) => setChecked(v === true)}
       />
-      <Label htmlFor="forward">Forward missed calls to voicemail</Label>
+      <Label htmlFor="forward">Email me a weekly summary</Label>
     </div>
   );
 }
@@ -486,26 +496,26 @@ export function SwitchDemo() {
   return (
     <div className="flex items-center gap-2">
       <Switch id="ai-answer" checked={on} onCheckedChange={setOn} />
-      <Label htmlFor="ai-answer">AI answers after 4 rings</Label>
+      <Label htmlFor="ai-answer">Enable two-factor authentication</Label>
     </div>
   );
 }
 
 export function RadioGroupDemo() {
-  const [value, setValue] = React.useState("local");
+  const [value, setValue] = React.useState("monthly");
   return (
     <RadioGroup value={value} onValueChange={(v) => setValue(v as string)}>
       <Label className="gap-2">
-        <RadioGroupItem value="local" />
-        Local number
+        <RadioGroupItem value="monthly" />
+        Monthly billing
       </Label>
       <Label className="gap-2">
-        <RadioGroupItem value="tollfree" />
-        Toll-free number
+        <RadioGroupItem value="yearly" />
+        Yearly billing
       </Label>
       <Label className="gap-2">
-        <RadioGroupItem value="port" />
-        Port an existing number
+        <RadioGroupItem value="invoice" />
+        Pay by invoice
       </Label>
     </RadioGroup>
   );
@@ -517,7 +527,7 @@ export function TooltipDemo() {
   return (
     <Tooltip>
       <TooltipTrigger render={<Button variant="outline">Hover me</Button>} />
-      <TooltipContent>Routes inbound calls to this number</TooltipContent>
+      <TooltipContent>Copy the project ID to your clipboard</TooltipContent>
     </Tooltip>
   );
 }
@@ -528,9 +538,9 @@ export function PopoverDemo() {
       <PopoverTrigger render={<Button variant="outline">Open popover</Button>} />
       <PopoverContent>
         <PopoverHeader>
-          <PopoverTitle>Caller ID</PopoverTitle>
+          <PopoverTitle>Display name</PopoverTitle>
           <PopoverDescription>
-            The name shown to people you call from this number.
+            The name shown to teammates across your workspace.
           </PopoverDescription>
         </PopoverHeader>
       </PopoverContent>
@@ -545,7 +555,7 @@ export function DropdownMenuDemo() {
         render={<Button variant="outline">Actions</Button>}
       />
       <DropdownMenuContent>
-        <DropdownMenuLabel>This number</DropdownMenuLabel>
+        <DropdownMenuLabel>This project</DropdownMenuLabel>
         <DropdownMenuItem>
           <Settings />
           Settings
@@ -557,7 +567,7 @@ export function DropdownMenuDemo() {
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
           <Trash2 />
-          Release number
+          Delete project
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -570,9 +580,9 @@ export function DialogDemo() {
       <DialogTrigger render={<Button variant="outline">Open dialog</Button>} />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Release this number?</DialogTitle>
+          <DialogTitle>Delete this project?</DialogTitle>
           <DialogDescription>
-            This permanently releases the number and stops all routing. This
+            This permanently deletes the project and all of its data. This
             can&apos;t be undone.
           </DialogDescription>
         </DialogHeader>
@@ -581,7 +591,7 @@ export function DialogDemo() {
             render={<Button variant="outline">Cancel</Button>}
           />
           <DialogClose
-            render={<Button variant="destructive">Release</Button>}
+            render={<Button variant="destructive">Delete</Button>}
           />
         </DialogFooter>
       </DialogContent>
@@ -603,7 +613,7 @@ export function HoverCardDemo() {
           <div>
             <p className="font-medium">Penguin</p>
             <p className="font-mono text-xs text-muted-foreground">
-              +1 (555) 010-2048
+              @penguin
             </p>
           </div>
         </div>
@@ -621,8 +631,8 @@ export function ToastDemo() {
         variant="outline"
         size="sm"
         onClick={() =>
-          toast.success("Number provisioned", {
-            description: "+1 (555) 010-2048 is ready to use.",
+          toast.success("Saved", {
+            description: "Your changes have been saved.",
           })
         }
       >
@@ -631,7 +641,7 @@ export function ToastDemo() {
       <Button
         variant="outline"
         size="sm"
-        onClick={() => toast.error("Verification failed. Try again.")}
+        onClick={() => toast.error("Couldn't save. Try again.")}
       >
         Error
       </Button>
@@ -639,7 +649,7 @@ export function ToastDemo() {
         variant="outline"
         size="sm"
         onClick={() =>
-          toast("Heads up", { description: "Carrier registration is pending." })
+          toast("Heads up", { description: "You're nearing your plan limit." })
         }
       >
         Default
@@ -651,7 +661,7 @@ export function ToastDemo() {
 /* ── Charts ──────────────────────────────────────────────────────────── */
 
 const areaConfig = {
-  value: { label: "Calls", color: "var(--chart-1)" },
+  value: { label: "Sessions", color: "var(--chart-1)" },
 } satisfies ChartConfig;
 
 // 24 hourly points — a calm, single-series curve.
@@ -710,7 +720,7 @@ export function AreaChartDemo() {
 }
 
 const barConfig = {
-  value: { label: "Texts", color: "var(--chart-1)" },
+  value: { label: "Signups", color: "var(--chart-1)" },
 } satisfies ChartConfig;
 
 const barData = [

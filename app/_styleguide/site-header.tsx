@@ -1,7 +1,7 @@
 import { ThemeToggle } from "@/app/_components/theme-toggle";
 import { SearchButton } from "@/app/_components/search-button";
 
-/** Sticky top bar lifted from SignalRoute's styleguide layout, re-skinned for the showcase. */
+/** Sticky top bar — the constant chrome for the showcase. */
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/70 backdrop-blur-md">

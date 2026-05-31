@@ -130,11 +130,11 @@ export default function StyleguidePage() {
               Design system
             </h1>
             <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
-              The tokens, primitives, and layout archetypes that compose every surface — the
-              Visitors aesthetic, built around one warm-green accent.
+              The tokens, primitives, and layout archetypes that compose every surface — a
+              calm, content-first aesthetic built around one warm-green accent.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-              <HeroPill>Visitors aesthetic</HeroPill>
+              <HeroPill>Calm &amp; content-first</HeroPill>
               <HeroPill>Geist</HeroPill>
               <HeroPill>
                 <span className="size-1.5 rounded-full bg-brand" />
@@ -224,9 +224,9 @@ export default function StyleguidePage() {
                     avatar) and a dark floating dock — the primary nav — are identical on every
                     surface; only the body changes. That fixed frame is what lets each page be a
                     bespoke composition without the product feeling disjointed. There is exactly
-                    one deliberate exception to the calm-and-light rules: the{" "}
-                    <span className="text-foreground">Messages cockpit</span>, a dark, dense,
-                    two-pane surface that trades the airy spacing for an inbox built for speed —
+                    one deliberate exception to the calm-and-light rules: a{" "}
+                    <span className="text-foreground">dark, dense surface</span> (e.g. an
+                    inbox/cockpit), a two-pane layout that trades the airy spacing for speed —
                     still on our single green accent.
                   </p>
                 </Specimen>
@@ -448,7 +448,7 @@ export default function StyleguidePage() {
                       Muted · sm — captions, hints, and secondary metadata.
                     </p>
                     <p className="font-mono text-xs text-muted-foreground">
-                      Mono · 12px — values, IDs, and code (e.g. +1 555 010 2048).
+                      Mono · 12px — values, IDs, and code (e.g. usr_8f2a91c4).
                     </p>
                   </div>
                 </Specimen>
@@ -480,7 +480,7 @@ export default function StyleguidePage() {
                               key={i}
                               className="inline-flex shrink-0 items-center rounded-full border border-border px-2.5 py-0.5 text-xs text-muted-foreground"
                             >
-                              +1 (555) 010-{2040 + i}
+                              usr_{(2040 + i).toString(16)}
                             </span>
                           ))}
                         </div>
@@ -541,7 +541,7 @@ export default function StyleguidePage() {
                   <div className="flex flex-wrap items-center gap-2">
                     <FilterPill>Today</FilterPill>
                     <FilterPill>7 days</FilterPill>
-                    <FilterPill>All numbers</FilterPill>
+                    <FilterPill>All projects</FilterPill>
                   </div>
                 </Specimen>
 
@@ -565,7 +565,7 @@ export default function StyleguidePage() {
                     <StatusPill tone="success">Active</StatusPill>
                     <StatusPill tone="warning">Pending</StatusPill>
                     <StatusPill tone="danger">Failed</StatusPill>
-                    <StatusPill tone="info">Provisioning</StatusPill>
+                    <StatusPill tone="info">In review</StatusPill>
                     <StatusPill tone="neutral">Draft</StatusPill>
                   </div>
                 </Specimen>
@@ -574,7 +574,7 @@ export default function StyleguidePage() {
                   <Card className="max-w-sm">
                     <CardHeader>
                       <CardTitle>Usage this month</CardTitle>
-                      <CardDescription>Calls and texts across all numbers.</CardDescription>
+                      <CardDescription>Events across all projects.</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <p className="text-2xl font-semibold tracking-tight tabular-nums">12,480</p>
@@ -606,17 +606,17 @@ export default function StyleguidePage() {
 
                 <Specimen name="Textarea" from="@/components/ui/textarea">
                   <div className="max-w-sm space-y-1.5">
-                    <Label htmlFor="sg-greeting">Voicemail greeting</Label>
+                    <Label htmlFor="sg-greeting">Welcome message</Label>
                     <Textarea
                       id="sg-greeting"
-                      placeholder="You've reached Acme. Leave a message…"
+                      placeholder="Welcome to Acme. How can we help?"
                     />
                   </div>
                 </Specimen>
 
                 <Specimen name="Select" from="@/components/ui/select">
                   <div className="max-w-sm space-y-1.5">
-                    <Label htmlFor="capability">Capability</Label>
+                    <Label htmlFor="capability">Role</Label>
                     <SelectDemo />
                   </div>
                 </Specimen>
@@ -634,7 +634,7 @@ export default function StyleguidePage() {
                 </Specimen>
 
                 <Specimen name="Label" from="@/components/ui/label">
-                  <Label htmlFor="sg-label-only">Number label</Label>
+                  <Label htmlFor="sg-label-only">Project name</Label>
                 </Specimen>
               </Section>
             </Reveal>
@@ -681,15 +681,15 @@ export default function StyleguidePage() {
                   <div className="space-y-3">
                     <Alert>
                       <CheckCircle2 />
-                      <AlertTitle>Number verified</AlertTitle>
+                      <AlertTitle>Changes saved</AlertTitle>
                       <AlertDescription>
-                        Outbound calls now show your business caller ID.
+                        Your workspace settings have been updated.
                       </AlertDescription>
                     </Alert>
                     <Alert variant="destructive">
-                      <AlertTitle>Carrier registration required</AlertTitle>
+                      <AlertTitle>Action required</AlertTitle>
                       <AlertDescription>
-                        Texting is paused until your brand is approved.
+                        Confirm your billing details to keep your plan active.
                       </AlertDescription>
                     </Alert>
                   </div>
@@ -727,41 +727,41 @@ export default function StyleguidePage() {
                 count={6}
               >
                 <Specimen name="Tabs" from="@/components/ui/tabs">
-                  <Tabs defaultValue="calls">
+                  <Tabs defaultValue="overview">
                     <TabsList>
-                      <TabsTrigger value="calls">Calls</TabsTrigger>
-                      <TabsTrigger value="texts">Texts</TabsTrigger>
-                      <TabsTrigger value="voicemail">Voicemail</TabsTrigger>
+                      <TabsTrigger value="overview">Overview</TabsTrigger>
+                      <TabsTrigger value="activity">Activity</TabsTrigger>
+                      <TabsTrigger value="settings">Settings</TabsTrigger>
                     </TabsList>
-                    <TabsContent value="calls" className="pt-3 text-muted-foreground">
-                      42 calls this week, averaging 2m 41s.
+                    <TabsContent value="overview" className="pt-3 text-muted-foreground">
+                      1,284 events this week, up 14%.
                     </TabsContent>
-                    <TabsContent value="texts" className="pt-3 text-muted-foreground">
-                      118 texts delivered, 2 pending.
+                    <TabsContent value="activity" className="pt-3 text-muted-foreground">
+                      42 active users in the last 24 hours.
                     </TabsContent>
                     <TabsContent
-                      value="voicemail"
+                      value="settings"
                       className="pt-3 text-muted-foreground"
                     >
-                      3 new voicemails to review.
+                      3 members can edit this project.
                     </TabsContent>
                   </Tabs>
                 </Specimen>
 
                 <Specimen name="Accordion" from="@/components/ui/accordion">
                   <Accordion className="max-w-md">
-                    <AccordionItem value="route">
-                      <AccordionTrigger>How are calls routed?</AccordionTrigger>
+                    <AccordionItem value="invite">
+                      <AccordionTrigger>How do I invite a teammate?</AccordionTrigger>
                       <AccordionContent>
-                        Inbound calls ring your number, then fall back to the AI
-                        agent or voicemail based on your rules.
+                        Open your workspace settings, choose Members, and send an
+                        invite by email with a role of Editor or Admin.
                       </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="verify">
-                      <AccordionTrigger>What is verification?</AccordionTrigger>
+                    <AccordionItem value="billing">
+                      <AccordionTrigger>How does billing work?</AccordionTrigger>
                       <AccordionContent>
-                        Carrier verification confirms your business so calls show a
-                        trusted caller ID instead of &ldquo;Spam Likely&rdquo;.
+                        You&apos;re billed monthly based on usage. Upgrade or
+                        downgrade anytime; changes prorate to the current cycle.
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
@@ -783,11 +783,11 @@ export default function StyleguidePage() {
 
                 <Specimen name="Separator" from="@/components/ui/separator">
                   <div className="flex h-5 items-center gap-3 text-sm text-muted-foreground">
-                    <span>Calls</span>
+                    <span>Overview</span>
                     <Separator orientation="vertical" />
-                    <span>Texts</span>
+                    <span>Activity</span>
                     <Separator orientation="vertical" />
-                    <span>Voicemail</span>
+                    <span>Settings</span>
                   </div>
                 </Specimen>
 
@@ -795,11 +795,11 @@ export default function StyleguidePage() {
                   <Breadcrumb>
                     <BreadcrumbList>
                       <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Numbers</BreadcrumbLink>
+                        <BreadcrumbLink href="#">Projects</BreadcrumbLink>
                       </BreadcrumbItem>
                       <BreadcrumbSeparator />
                       <BreadcrumbItem>
-                        <BreadcrumbLink href="#">+1 (555) 010-2048</BreadcrumbLink>
+                        <BreadcrumbLink href="#">Acme</BreadcrumbLink>
                       </BreadcrumbItem>
                       <BreadcrumbSeparator />
                       <BreadcrumbItem>
@@ -813,23 +813,23 @@ export default function StyleguidePage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Number</TableHead>
+                        <TableHead>Name</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead className="text-right tabular-nums">
-                          Calls
+                          Usage
                         </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       <TableRow>
-                        <TableCell className="font-mono">+1 (555) 010-2048</TableCell>
+                        <TableCell>Acme Inc.</TableCell>
                         <TableCell>
                           <Badge variant="success">Active</Badge>
                         </TableCell>
-                        <TableCell className="text-right tabular-nums">42</TableCell>
+                        <TableCell className="text-right tabular-nums">1,284</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-mono">+1 (555) 010-7720</TableCell>
+                        <TableCell>Globex</TableCell>
                         <TableCell>
                           <Badge variant="warning">Pending</Badge>
                         </TableCell>
@@ -853,10 +853,10 @@ export default function StyleguidePage() {
                   <div className="space-y-8">
                     <PageHeader title="People" description="8 people this week" align="center" />
                     <div className="border-t border-border pt-8">
-                      <PageHeader title="Numbers" description="3 active numbers" align="start">
+                      <PageHeader title="Projects" description="3 active projects" align="start">
                         <Button size="sm">
                           <Plus />
-                          Add number
+                          New project
                         </Button>
                       </PageHeader>
                     </div>
@@ -865,9 +865,9 @@ export default function StyleguidePage() {
 
                 <Specimen name="MetricStat" from="@/components/metric-stat">
                   <div className="flex flex-wrap gap-12">
-                    <MetricStat label="Delivered" value="1,204" delta={{ value: "+100%", direction: "up" }} />
-                    <MetricStat label="Bounced" value="48" delta={{ value: "-12%", direction: "down" }} />
-                    <MetricStat label="Queued" value="320" delta={{ value: "0%", direction: "flat" }} />
+                    <MetricStat label="Revenue" value="$48.2k" delta={{ value: "+100%", direction: "up" }} />
+                    <MetricStat label="Active users" value="1,204" delta={{ value: "-12%", direction: "down" }} />
+                    <MetricStat label="Churn" value="2.4%" delta={{ value: "0%", direction: "flat" }} />
                   </div>
                 </Specimen>
 
@@ -875,7 +875,7 @@ export default function StyleguidePage() {
                   <StatCard
                     label="Total spend"
                     value="$842.10"
-                    hint="Across 3 numbers"
+                    hint="Across 3 projects"
                     delta={{ value: "+8%", direction: "up" }}
                     className="max-w-xs"
                   />
@@ -907,12 +907,12 @@ export default function StyleguidePage() {
                 <Specimen name="EmptyState" from="@/components/empty-state" plain>
                   <EmptyState
                     icon={Inbox}
-                    title="No messages yet"
-                    description="Texts and calls to this number will show up here."
+                    title="No activity yet"
+                    description="Events for this project will show up here."
                     action={
                       <Button size="sm">
                         <Plus />
-                        New message
+                        New event
                       </Button>
                     }
                   />
@@ -953,7 +953,7 @@ export default function StyleguidePage() {
                 <Specimen name="DetailHeader" from="@/components/detail-header" plain>
                   <div className="rounded-xl border border-border bg-background p-6">
                     <DetailHeader
-                      title="+1 (555) 010-2048"
+                      title="Acme Inc."
                       badge={<StatusPill tone="success">Active</StatusPill>}
                       actions={
                         <Button variant="outline" size="sm">
@@ -962,10 +962,10 @@ export default function StyleguidePage() {
                         </Button>
                       }
                       meta={[
-                        { label: "Capability", value: "Voice & SMS" },
+                        { label: "Plan", value: "Pro" },
                         { label: "Region", value: "US · California" },
-                        { label: "Provisioned", value: "Mar 14, 2026" },
-                        { label: "Monthly", value: "$1.15" },
+                        { label: "Created", value: "Mar 14, 2026" },
+                        { label: "Monthly", value: "$49.00" },
                       ]}
                     />
                   </div>
@@ -973,8 +973,8 @@ export default function StyleguidePage() {
 
                 <Specimen name="Section (settings panel)" from="@/components/section" plain>
                   <PanelSection
-                    title="Caller ID"
-                    description="The name shown to people you call from this number."
+                    title="Display name"
+                    description="The name shown across your workspace."
                     action={
                       <Button variant="outline" size="sm">
                         Edit
@@ -982,9 +982,9 @@ export default function StyleguidePage() {
                     }
                   >
                     <div className="px-5 py-5">
-                      <p className="text-sm">Acme Support</p>
+                      <p className="text-sm">Acme Inc.</p>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        Verified caller ID, shown on outbound calls.
+                        Visible to teammates and on shared links.
                       </p>
                     </div>
                   </PanelSection>
@@ -996,25 +996,25 @@ export default function StyleguidePage() {
                       events={[
                         {
                           tone: "success",
-                          title: "Number verified",
-                          description: "Carrier registration approved.",
+                          title: "Deployment live",
+                          description: "Production build published.",
                           timestamp: "Today · 9:42 AM",
                         },
                         {
                           tone: "info",
-                          title: "Brand submitted",
-                          description: "Awaiting carrier review.",
+                          title: "Changes pushed",
+                          description: "Awaiting review.",
                           timestamp: "Mar 14 · 4:18 PM",
                         },
                         {
                           tone: "warning",
                           title: "Action needed",
-                          description: "Business address could not be matched.",
+                          description: "Billing details could not be verified.",
                           timestamp: "Mar 12 · 11:02 AM",
                         },
                         {
                           tone: "neutral",
-                          title: "Number provisioned",
+                          title: "Project created",
                           timestamp: "Mar 11 · 8:30 AM",
                         },
                       ]}
@@ -1038,8 +1038,8 @@ export default function StyleguidePage() {
                       <HeroSection
                         header={
                           <>
-                            <MetricStat label="Calls" value="3,201" delta={{ value: "+14%", direction: "up" }} />
-                            <MetricStat label="Avg duration" value="2m 41s" />
+                            <MetricStat label="Sessions" value="3,201" delta={{ value: "+14%", direction: "up" }} />
+                            <MetricStat label="Avg session" value="2m 41s" />
                           </>
                         }
                       >
@@ -1071,12 +1071,12 @@ export default function StyleguidePage() {
                           <GradientAvatar seed="abc" size="xl" />
                           <div>
                             <p className="font-semibold">{animalName("abc")}</p>
-                            <p className="font-mono text-sm text-muted-foreground">+1 (555) 010-2048</p>
+                            <p className="font-mono text-sm text-muted-foreground">usr_8f2a91c4</p>
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
-                          <MetricStat label="Calls" value="42" />
-                          <MetricStat label="Texts" value="118" />
+                          <MetricStat label="Sessions" value="42" />
+                          <MetricStat label="Events" value="118" />
                         </div>
                       </div>
                     }
@@ -1086,15 +1086,15 @@ export default function StyleguidePage() {
                           {
                             label: "Today",
                             items: [
-                              { tone: "success", title: "Inbound call answered", meta: "1m 8s" },
-                              { tone: "info", title: "Text received", meta: "12s" },
+                              { tone: "success", title: "Signed in", meta: "1m 8s" },
+                              { tone: "info", title: "Viewed dashboard", meta: "12s" },
                             ],
                           },
                           {
                             label: "Yesterday",
                             items: [
-                              { tone: "warning", title: "Missed call", meta: "0s" },
-                              { tone: "neutral", title: "Voicemail left", meta: "44s" },
+                              { tone: "warning", title: "Failed login", meta: "0s" },
+                              { tone: "neutral", title: "Updated profile", meta: "44s" },
                             ],
                           },
                         ]}
