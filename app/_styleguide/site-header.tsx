@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/app/_components/theme-toggle";
+import { SearchButton } from "@/app/_components/search-button";
 
 /** Sticky top bar lifted from SignalRoute's styleguide layout, re-skinned for the showcase. */
 export function SiteHeader() {
@@ -14,7 +15,10 @@ export function SiteHeader() {
             · byronwade/ui
           </span>
         </div>
-        <ThemeToggle />
+        <div className="flex items-center gap-3">
+          <SearchButton />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
