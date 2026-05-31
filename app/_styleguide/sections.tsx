@@ -311,8 +311,8 @@ export function SideNav() {
                   "mb-2 block rounded-md px-2 py-1.5 text-xs font-medium uppercase tracking-wide transition-colors",
                   isHeaderOnly
                     ? active === section.id
-                      ? "-ml-px border-l-2 border-brand pl-[calc(0.5rem-2px)] font-semibold text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-accent font-semibold text-foreground"
+                      : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
                     : sectionIsActive
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground",
@@ -331,7 +331,7 @@ export function SideNav() {
                         className={cn(
                           "block rounded-md px-2 py-1.5 pl-4 text-sm leading-relaxed transition-colors",
                           active === item.id
-                            ? "-ml-px border-l-2 border-brand pl-[calc(1rem-2px)] font-medium text-foreground"
+                            ? "bg-accent font-medium text-foreground"
                             : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
                         )}
                       >
