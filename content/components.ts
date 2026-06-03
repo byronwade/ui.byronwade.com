@@ -650,6 +650,6 @@ export const components: ComponentDoc[] = [
   },
 ];
 
-export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Bloom"] as const;
+export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph"] as const;
 export const byCategory = (cat: string) => components.filter((c) => c.category === cat);
 export const bySlug = (slug: string) => components.find((c) => c.slug === slug);
