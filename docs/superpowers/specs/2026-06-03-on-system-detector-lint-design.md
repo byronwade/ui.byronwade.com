@@ -83,6 +83,12 @@ export const MANIFEST = {
 - The `nativeToComponent` map is the one hand-curated piece (which native element maps
   to which primitive). It lives in `scripts/gen-lint-manifest.mjs` as an explicit table
   and is validated against real registry component names by `check:manifest`.
+- **Semantic palettes are valid but never autofix targets.** Per the Design DNA, the
+  agent-activity pastels (`activity-thinking/search/read/edit`) and the `chart-1…5` ramp
+  carry meaning. They are kept in the validity set (so `bg-activity-search` / `bg-chart-2`
+  are never flagged) but **excluded from the nearest-token candidate set**, so an
+  arbitrary raw color is never snapped onto a meaning-bearing token (e.g. a green hex
+  must map to `brand`, not the brand-adjacent `activity-search`).
 
 ## The four detectors
 
@@ -185,6 +191,10 @@ OKLCH ΔE** and applies it under `--fix`.
 - No config presets beyond `recommended`.
 - No nearest-token mapping for non-color arbitrary values (spacing/radius use exact /
   scale matching, not "nearest"); only color uses ΔE.
+- **No editorial-typography detector** (the Design DNA's "no `font-bold` on headings,
+  `font-mono` for data, `font-serif` for prose" rule). It's heuristic — it requires
+  inferring which element is a heading — and is a strong candidate for a 5th detector in
+  a later pass, but is explicitly out of v1.
 
 ## Risks & mitigations
 
