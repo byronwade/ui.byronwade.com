@@ -13,6 +13,7 @@ export default function Example() {
       <MorphDock
         open={open}
         onOpenChange={setOpen}
+        origin="center"
         action={{ label: "Search", icon: Search }}
         panelWidth={320}
         items={[

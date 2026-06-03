@@ -187,6 +187,22 @@ import MetricStatLoading from "./metric-stat/loading";
 import MetricStatNoDelta from "./metric-stat/no-delta";
 import MetricStatWithIcon from "./metric-stat/with-icon";
 import MorphDockDefault from "./morph-dock/default";
+import MorphDockBreadcrumb from "./morph-dock/breadcrumb";
+import MorphDockCommand from "./morph-dock/command";
+import MorphDockDialer from "./morph-dock/dialer";
+import MorphDockDraggable from "./morph-dock/draggable";
+import MorphDockExpand from "./morph-dock/expand";
+import MorphDockHelp from "./morph-dock/help";
+import MorphDockLauncher from "./morph-dock/launcher";
+import MorphDockNotifications from "./morph-dock/notifications";
+import MorphDockOrientations from "./morph-dock/orientations";
+import MorphDockOrigins from "./morph-dock/origins";
+import MorphDockResizable from "./morph-dock/resizable";
+import MorphDockSaveStatus from "./morph-dock/save-status";
+import MorphDockSeparators from "./morph-dock/separators";
+import MorphDockSplitToolbar from "./morph-dock/split-toolbar";
+import MorphDockTones from "./morph-dock/tones";
+import MorphDockToolsPrimary from "./morph-dock/tools-primary";
 import NavigationMenuDefault from "./navigation-menu/default";
 import NavigationMenuSimpleLinks from "./navigation-menu/simple-links";
 import NavigationMenuWithDescriptions from "./navigation-menu/with-descriptions";
@@ -598,6 +614,22 @@ export const examples: Record<string, Example[]> = {
   ],
   "morph-dock": [
     { name: "Default", file: "morph-dock/default.tsx", Component: MorphDockDefault },
+    { name: "Breadcrumb", file: "morph-dock/breadcrumb.tsx", Component: MorphDockBreadcrumb },
+    { name: "Command", file: "morph-dock/command.tsx", Component: MorphDockCommand },
+    { name: "Dialer", file: "morph-dock/dialer.tsx", Component: MorphDockDialer },
+    { name: "Draggable", file: "morph-dock/draggable.tsx", Component: MorphDockDraggable },
+    { name: "Expand", file: "morph-dock/expand.tsx", Component: MorphDockExpand },
+    { name: "Help", file: "morph-dock/help.tsx", Component: MorphDockHelp },
+    { name: "Launcher", file: "morph-dock/launcher.tsx", Component: MorphDockLauncher },
+    { name: "Notifications", file: "morph-dock/notifications.tsx", Component: MorphDockNotifications },
+    { name: "Orientations", file: "morph-dock/orientations.tsx", Component: MorphDockOrientations },
+    { name: "Origins", file: "morph-dock/origins.tsx", Component: MorphDockOrigins },
+    { name: "Resizable", file: "morph-dock/resizable.tsx", Component: MorphDockResizable },
+    { name: "Save Status", file: "morph-dock/save-status.tsx", Component: MorphDockSaveStatus },
+    { name: "Separators", file: "morph-dock/separators.tsx", Component: MorphDockSeparators },
+    { name: "Split Toolbar", file: "morph-dock/split-toolbar.tsx", Component: MorphDockSplitToolbar },
+    { name: "Tones", file: "morph-dock/tones.tsx", Component: MorphDockTones },
+    { name: "Tools Primary", file: "morph-dock/tools-primary.tsx", Component: MorphDockToolsPrimary },
   ],
   "navigation-menu": [
     { name: "Default", file: "navigation-menu/default.tsx", Component: NavigationMenuDefault },
