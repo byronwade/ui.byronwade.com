@@ -150,7 +150,7 @@ const TONES: Record<
     close: "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground",
     badgeRing: "ring-dock",
     pill: "bg-dock-muted group-hover:bg-dock-active",
-    stroke: "stroke-dock-muted group-hover/grip:stroke-dock-foreground",
+    stroke: "stroke-dock-foreground/55 group-hover/grip:stroke-dock-foreground",
     seam: "bg-dock-muted",
     tool: "bg-dock-tool",
     toolPrimary: "bg-brand text-brand-foreground",
@@ -169,7 +169,7 @@ const TONES: Record<
     close: "text-muted-foreground hover:bg-accent hover:text-foreground",
     badgeRing: "ring-card",
     pill: "bg-muted group-hover:bg-accent",
-    stroke: "stroke-muted-foreground/60 group-hover/grip:stroke-foreground",
+    stroke: "stroke-muted-foreground/80 group-hover/grip:stroke-foreground",
     seam: "bg-border",
     tool: "bg-muted/60",
     toolPrimary: "bg-brand text-brand-foreground",
@@ -190,28 +190,28 @@ const GRIP: Record<
   { pos: string; rotate: string; cursor: string; sx: number; sy: number }
 > = {
   bottom: {
-    pos: "bottom-0 right-0 translate-x-[calc(50%+7px)] translate-y-[calc(50%+7px)]",
+    pos: "bottom-0 right-0 translate-x-[calc(50%+3px)] translate-y-[calc(50%+3px)]",
     rotate: "rotate-90",
     cursor: "cursor-nwse-resize",
     sx: 1,
     sy: 1,
   },
   top: {
-    pos: "top-0 right-0 translate-x-[calc(50%+7px)] -translate-y-[calc(50%+7px)]",
+    pos: "top-0 right-0 translate-x-[calc(50%+3px)] -translate-y-[calc(50%+3px)]",
     rotate: "",
     cursor: "cursor-nesw-resize",
     sx: 1,
     sy: -1,
   },
   right: {
-    pos: "bottom-0 right-0 translate-x-[calc(50%+7px)] translate-y-[calc(50%+7px)]",
+    pos: "bottom-0 right-0 translate-x-[calc(50%+3px)] translate-y-[calc(50%+3px)]",
     rotate: "rotate-90",
     cursor: "cursor-nwse-resize",
     sx: 1,
     sy: 1,
   },
   left: {
-    pos: "bottom-0 left-0 -translate-x-[calc(50%+7px)] translate-y-[calc(50%+7px)]",
+    pos: "bottom-0 left-0 -translate-x-[calc(50%+3px)] translate-y-[calc(50%+3px)]",
     rotate: "rotate-180",
     cursor: "cursor-nesw-resize",
     sx: -1,
@@ -643,7 +643,7 @@ export function MorphDock({
       <div
         ref={barRef}
         className={cn(
-          "flex items-center gap-1 rounded-3xl p-[3px] transition-opacity duration-150",
+          "flex items-center gap-1 rounded-full p-[3px] transition-opacity duration-150",
           t.shell,
           inPlace && "pointer-events-none opacity-0",
         )}
@@ -707,7 +707,7 @@ export function MorphDock({
             className={cn(
               "-my-[3px] flex shrink-0 items-center gap-1 self-stretch px-1.5",
               t.tool,
-              !cluster && !action ? "-mr-[3px] rounded-r-3xl pr-[7px]" : "rounded-xl",
+              !cluster && !action ? "-mr-[3px] rounded-r-full pr-[7px]" : "rounded-xl",
             )}
           >
             {tools.map((a, i) => {
@@ -764,7 +764,7 @@ export function MorphDock({
               ref={morphRef}
               className={cn(
                 "overflow-hidden transition-[border-radius] duration-200",
-                morphOpen ? "rounded-2xl" : "rounded-3xl",
+                morphOpen ? "rounded-4xl" : "rounded-full",
                 surfaceOn && t.panel,
               )}
             >
@@ -775,7 +775,7 @@ export function MorphDock({
                 aria-hidden={!open && !hasStatus}
                 style={{ width: panelW, height: panelH }}
                 className={cn(
-                  "group flex flex-col rounded-2xl opacity-0 transition-opacity duration-150 outline-none",
+                  "group flex flex-col rounded-4xl opacity-0 transition-opacity duration-150 outline-none",
                   panelH != null && "overflow-hidden",
                   open || hasStatus ? "pointer-events-auto" : "pointer-events-none",
                 )}
@@ -849,10 +849,10 @@ export function MorphDock({
                 title="Drag to resize"
                 onPointerDown={onResizeStart}
                 className={cn(
-                  "group/grip absolute z-30 touch-none transition-opacity duration-200 focus-visible:outline-none",
+                  "group/grip absolute z-30 touch-none transition-opacity duration-150 focus-visible:outline-none",
                   GRIP[placement].pos,
                   GRIP[placement].cursor,
-                  open ? "opacity-100 delay-200" : "pointer-events-none opacity-0",
+                  open ? "opacity-100" : "pointer-events-none opacity-0",
                 )}
               >
                 <svg
