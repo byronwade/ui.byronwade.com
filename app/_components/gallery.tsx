@@ -45,7 +45,7 @@ function uniqueSorted(values: string[]) {
 /** A removable active-filter chip (Mobbin's "Hero ✕"). */
 function ActivePill({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (
-    <span className="inline-flex h-8 items-center gap-1 rounded-full border border-border bg-muted pl-3 pr-1.5 text-sm font-medium">
+    <span className="inline-flex h-8 items-center gap-1 rounded-full edge bg-muted pl-3 pr-1.5 text-sm font-medium">
       {label}
       <button
         type="button"
@@ -179,7 +179,7 @@ export function Gallery({ items, noun }: { items: GalleryItem[]; noun: string })
               href={item.href}
               className="group flex flex-col gap-3 rounded-2xl outline-none"
             >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border bg-background shadow-card transition-all group-hover:-translate-y-0.5 group-hover:shadow-lg group-focus-visible:ring-3 group-focus-visible:ring-ring/50">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border bg-background transition-all group-hover:-translate-y-0.5 group-hover:shadow-card group-focus-visible:ring-3 group-focus-visible:ring-ring/50">
                 <iframe
                   src={item.previewSrc}
                   title={`${item.name} preview`}
@@ -189,12 +189,12 @@ export function Gallery({ items, noun }: { items: GalleryItem[]; noun: string })
                   className="pointer-events-none absolute left-0 top-0 h-[320%] w-[320%] origin-top-left scale-[0.3125] border-0"
                 />
                 {item.price && (
-                  <span className="absolute right-2.5 top-2.5 rounded-full border border-border bg-background/90 px-2 py-0.5 text-[11px] font-medium text-foreground shadow-card backdrop-blur">
+                  <span className="absolute right-2.5 top-2.5 rounded-full bg-background/90 px-2 py-0.5 text-[11px] font-medium text-foreground shadow-card backdrop-blur">
                     {item.price}
                   </span>
                 )}
                 {/* Reveal-on-hover affordance — ours, not Mobbin's static thumbnail. */}
-                <span className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex translate-y-1 items-center gap-1 rounded-full border border-border bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground opacity-0 shadow-card backdrop-blur transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex translate-y-1 items-center gap-1 rounded-full bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground opacity-0 shadow-card backdrop-blur transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                   Inspect
                   <ArrowRight className="size-3" />
                 </span>
@@ -206,7 +206,7 @@ export function Gallery({ items, noun }: { items: GalleryItem[]; noun: string })
                     {item.name}
                   </span>
                 </div>
-                <span className="shrink-0 rounded-full border border-border px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+                <span className="shrink-0 rounded-full edge px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
                   {item.category}
                 </span>
               </div>
