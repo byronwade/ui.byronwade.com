@@ -90,7 +90,7 @@ export const MANIFEST = {
   arbitrary raw color is never snapped onto a meaning-bearing token (e.g. a green hex
   must map to `brand`, not the brand-adjacent `activity-search`).
 
-## The four detectors
+## The five detectors
 
 All run inside `detect()`. Source is parsed once with a TS+JSX-capable parser
 (`@typescript-eslint/parser` via its `parseForESLint`, so offsets line up with what the
@@ -102,6 +102,7 @@ ESLint plugin would produce). Each detector walks the AST / scans the relevant n
 | 2 | **Arbitrary values** | Tailwind arbitrary values off the token/radius scale: `bg-[…]`, `text-[…]`, `p-[13px]`, `m-[…]`, `rounded-[10px]`, `gap-[…]` | error |
 | 3 | **Hand-rolled gradient/grid/glow** | `bg-gradient-*` / inline `linear-gradient`/`radial-gradient` / repeating grid backgrounds, when a house utility (`glow-brand`, `text-gradient-brand`, `bg-grid`) covers it | error |
 | 4 | **Off-system components** | JSX raw `<button>`/`<input>`/`<select>`/`<textarea>`/… present in `nativeToComponent` | warn (configurable) |
+| 5 | **Typography (weight-hierarchy)** | a bold-family weight (`font-semibold`/`bold`/`extrabold`/`black`, or arbitrary `font-[≥600]`) on a native `<h1>`–`<h6>`; autofix → `font-medium` | error |
 
 Scoping notes:
 - Detector 1 must NOT flag arbitrary values that reference tokens (`bg-[var(--brand)]`)
@@ -191,10 +192,11 @@ OKLCH ΔE** and applies it under `--fix`.
 - No config presets beyond `recommended`.
 - No nearest-token mapping for non-color arbitrary values (spacing/radius use exact /
   scale matching, not "nearest"); only color uses ΔE.
-- **No editorial-typography detector** (the Design DNA's "no `font-bold` on headings,
-  `font-mono` for data, `font-serif` for prose" rule). It's heuristic — it requires
-  inferring which element is a heading — and is a strong candidate for a 5th detector in
-  a later pass, but is explicitly out of v1.
+- **Typography detector (5) enforces only the negative rule** — a bold-family weight on a
+  native `<h1>`–`<h6>`. The positive guidance (`font-mono` for data, `font-serif` for
+  prose) needs semantic intent and is not lintable; **heading components** (e.g. a
+  `<PageHeader>`/`<Heading>` wrapper) are also out of v1 — only native heading elements
+  are checked. Both are future work.
 
 ## Risks & mitigations
 
@@ -210,7 +212,7 @@ OKLCH ΔE** and applies it under `--fix`.
 
 1. Workspaces scaffold (`packages/*`, root `workspaces`, verify app build unaffected).
 2. Manifest generator + `check:manifest` gate.
-3. `on-system-core`: parser + the four detectors + violation shape (TDD against fixtures).
+3. `on-system-core`: parser + the five detectors + violation shape (TDD against fixtures).
 4. Autofix (mechanical + OKLCH nearest-token + threshold) (TDD round-trip).
 5. `eslint-plugin-ui` adapter + `recommended` preset + tests.
 6. `lint-cli` + tests.

@@ -4,7 +4,7 @@
 
 **Goal:** Ship a framework-agnostic `detect()` that flags off-system UI code, exposed as an ESLint plugin and a `byronwade-lint` CLI, with knowledge sourced from `registry.json`.
 
-**Architecture:** npm workspaces. A pure `@byronwade/on-system-core` package owns all detection (four detectors + OKLCH nearest-token autofix) driven by a manifest generated from `registry.json`. `@byronwade/eslint-plugin-ui` and `@byronwade/lint` are thin adapters over `detect()`. The Next app stays at the repo root and dogfoods the lint.
+**Architecture:** npm workspaces. A pure `@byronwade/on-system-core` package owns all detection (five detectors + OKLCH nearest-token autofix) driven by a manifest generated from `registry.json`. `@byronwade/eslint-plugin-ui` and `@byronwade/lint` are thin adapters over `detect()`. The Next app stays at the repo root and dogfoods the lint.
 
 **Tech Stack:** TypeScript (ESM), `@typescript-eslint/parser` (ESTree AST), `culori` (OKLCH color math), `fast-glob` + `picocolors` (CLI), `vitest` (tests), ESLint 9 flat config.
 
@@ -33,12 +33,13 @@ packages/
         arbitrary-value.ts
         hand-rolled.ts
         off-system-component.ts
+        typography.ts
       detect.ts                               ← orchestrator: parse → run detectors → sort
       apply-fixes.ts                          ← applyFixes(code, violations)
       index.ts                                ← public exports
     tests/
       color.test.ts  raw-color.test.ts  arbitrary-value.test.ts
-      hand-rolled.test.ts  off-system-component.test.ts  roundtrip.test.ts
+      hand-rolled.test.ts  off-system-component.test.ts  typography.test.ts  roundtrip.test.ts
       fixtures/on-system/*.tsx  fixtures/off-system/*.tsx
   eslint-plugin-ui/
     package.json  tsconfig.json  vitest.config.ts
@@ -181,7 +182,7 @@ The manifest is the single source of truth derived from `registry.json`. `cssVar
 
 ```ts
 export type DetectorId =
-  | "raw-color" | "arbitrary-value" | "hand-rolled" | "off-system-component";
+  | "raw-color" | "arbitrary-value" | "hand-rolled" | "off-system-component" | "typography";
 export type Severity = "error" | "warn";
 
 export interface Fix { range: [number, number]; text: string; }
@@ -426,16 +427,43 @@ function stringParts(node: Node): { text: string; base: number }[] {
   return [];
 }
 
+/** Static class tokens of a single className/class JSXAttribute. */
+function attrClassTokens(attr: Node): ClassToken[] {
+  const value = attr.value as Node | null;
+  if (!value) return [];
+  const expr = value.type === "JSXExpressionContainer" ? (value.expression as Node) : value;
+  const out: ClassToken[] = [];
+  for (const { text, base } of stringParts(expr)) out.push(...splitClasses(text, base));
+  return out;
+}
+
+const isClassAttr = (n: Node) => {
+  const name = (n.name as { name?: string } | undefined)?.name;
+  return name === "className" || name === "class";
+};
+
 export function extractClassTokens(ast: Node): ClassToken[] {
   const out: ClassToken[] = [];
   walk(ast, (n) => {
-    if (n.type !== "JSXAttribute") return;
-    const name = (n.name as { name?: string } | undefined)?.name;
-    if (name !== "className" && name !== "class") return;
-    const value = n.value as Node | null;
-    if (!value) return;
-    const expr = value.type === "JSXExpressionContainer" ? (value.expression as Node) : value;
-    for (const { text, base } of stringParts(expr)) out.push(...splitClasses(text, base));
+    if (n.type === "JSXAttribute" && isClassAttr(n)) out.push(...attrClassTokens(n));
+  });
+  return out;
+}
+
+export interface ElementClasses { name: string; classes: ClassToken[]; }
+
+/** Each JSX opening element paired with its own className tokens (for element-scoped rules). */
+export function extractElementClasses(ast: Node): ElementClasses[] {
+  const out: ElementClasses[] = [];
+  walk(ast, (n) => {
+    if (n.type !== "JSXOpeningElement") return;
+    const nm = n.name as { type: string; name?: string };
+    if (nm.type !== "JSXIdentifier" || !nm.name) return;
+    const classes: ClassToken[] = [];
+    for (const attr of (n.attributes as Node[])) {
+      if (attr.type === "JSXAttribute" && isClassAttr(attr)) classes.push(...attrClassTokens(attr));
+    }
+    out.push({ name: nm.name, classes });
   });
   return out;
 }
@@ -477,7 +505,7 @@ export function extractJsxElements(ast: Node): JsxElement[] {
 ```ts
 import { describe, it, expect } from "vitest";
 import { parse } from "../src/parse.js";
-import { extractClassTokens, extractStyleStrings, extractJsxElements } from "../src/extract.js";
+import { extractClassTokens, extractStyleStrings, extractJsxElements, extractElementClasses } from "../src/extract.js";
 
 describe("extractClassTokens", () => {
   it("reads string literal classNames with correct offsets", () => {
@@ -511,6 +539,17 @@ describe("extractJsxElements", () => {
   it("reads element names", () => {
     const code = `const x = <button><Input /></button>;`;
     expect(extractJsxElements(parse(code)).map((e) => e.name)).toEqual(["button", "Input"]);
+  });
+});
+
+describe("extractElementClasses", () => {
+  it("pairs each element with its own class tokens", () => {
+    const code = `const x = <h1 className="text-4xl font-bold"><span className="bg-brand" /></h1>;`;
+    const els = extractElementClasses(parse(code));
+    const h1 = els.find((e) => e.name === "h1")!;
+    expect(h1.classes.map((c) => c.value)).toEqual(["text-4xl", "font-bold"]);
+    const span = els.find((e) => e.name === "span")!;
+    expect(span.classes.map((c) => c.value)).toEqual(["bg-brand"]);
   });
 });
 ```
@@ -736,7 +775,7 @@ export { manifest } from "./manifest.js";
 export type { Violation, DetectOptions, DetectorId, Severity, Fix, Manifest } from "./types.js";
 ```
 
-Note: `apply-fixes.js` is created in Task 9; until then, comment that export out or create the file early. (Task 9 Step 1 creates it.)
+Note: `apply-fixes.js` is created in Task 10; until then, comment that export out or create the file early. (Task 10 Step 1 creates it.)
 
 - [ ] **Step 4: Write `packages/on-system-core/tests/raw-color.test.ts`**
 
@@ -1049,7 +1088,107 @@ git commit -m "feat(lint): off-system-component detector (warn)"
 
 ---
 
-## Task 9: Apply-fixes + round-trip fixtures
+## Task 9: Typography (weight-hierarchy) detector
+
+Enforces the Design DNA's editorial-typography rule: headings carry hierarchy through size + tracking, never weight. Flags a bold-family weight on an `<h1>`–`<h6>` and autofixes to `font-medium`. (The positive guidance — `font-mono` for data, `font-serif` for prose — is not lintable without semantic intent and stays out of scope.)
+
+**Files:**
+- Create: `packages/on-system-core/src/detectors/typography.ts`
+- Modify: `packages/on-system-core/src/detect.ts`
+- Test: `packages/on-system-core/tests/typography.test.ts`
+
+- [ ] **Step 1: Write `packages/on-system-core/src/detectors/typography.ts`**
+
+```ts
+import type { Violation } from "../types.js";
+import type { ElementClasses } from "../extract.js";
+
+const HEADINGS = new Set(["h1", "h2", "h3", "h4", "h5", "h6"]);
+const BOLD = new Set(["font-semibold", "font-bold", "font-extrabold", "font-black"]);
+const ARB_WEIGHT = /^font-\[(\d{3})\]$/;
+
+/** Headings carry hierarchy through size + tracking, never weight (Design DNA). */
+export function detectTypography(elements: ElementClasses[]): Violation[] {
+  const out: Violation[] = [];
+  for (const el of elements) {
+    if (!HEADINGS.has(el.name)) continue;
+    for (const tok of el.classes) {
+      const arb = tok.value.match(ARB_WEIGHT);
+      const isBold = BOLD.has(tok.value) || (arb !== null && Number(arb[1]) >= 600);
+      if (!isBold) continue;
+      out.push({
+        detector: "typography", range: tok.range, severity: "error",
+        message: `Headings carry hierarchy through size + tracking, not weight. Use \`font-medium\`, not \`${tok.value}\`.`,
+        fix: { range: tok.range, text: "font-medium" },
+      });
+    }
+  }
+  return out;
+}
+```
+
+- [ ] **Step 2: Wire into `detect.ts`**
+
+In `packages/on-system-core/src/detect.ts`:
+1. Add `extractElementClasses` to the extract import:
+```ts
+import { extractClassTokens, extractStyleStrings, extractJsxElements, extractElementClasses } from "./extract.js";
+```
+2. Add the detector import:
+```ts
+import { detectTypography } from "./detectors/typography.js";
+```
+3. After the existing `const elements = extractJsxElements(ast);`, add:
+```ts
+  const elementClasses = extractElementClasses(ast);
+```
+4. Add to the `violations` array:
+```ts
+    ...detectTypography(elementClasses),
+```
+
+- [ ] **Step 3: Write `packages/on-system-core/tests/typography.test.ts`**
+
+```ts
+import { describe, it, expect } from "vitest";
+import { detect } from "../src/detect.js";
+
+describe("typography detector", () => {
+  it("flags font-bold on a heading and autofixes to font-medium", () => {
+    const v = detect(`const x = <h1 className="text-4xl font-bold">Hi</h1>;`);
+    const t = v.filter((x) => x.detector === "typography");
+    expect(t).toHaveLength(1);
+    expect(t[0].fix?.text).toBe("font-medium");
+  });
+  it("flags font-semibold and arbitrary heavy weights on headings", () => {
+    expect(detect(`const x = <h2 className="font-semibold" />;`).some((x) => x.detector === "typography")).toBe(true);
+    expect(detect(`const x = <h3 className="font-[700]" />;`).some((x) => x.detector === "typography")).toBe(true);
+  });
+  it("allows font-medium / font-normal on headings", () => {
+    expect(detect(`const x = <h1 className="text-4xl font-medium" />;`).filter((x) => x.detector === "typography")).toEqual([]);
+  });
+  it("does not flag bold weight on non-heading elements", () => {
+    expect(detect(`const x = <span className="font-bold" />;`).filter((x) => x.detector === "typography")).toEqual([]);
+  });
+});
+```
+
+- [ ] **Step 4: Run tests**
+
+Run: `npm run test --workspace @byronwade/on-system-core`
+Expected: PASS.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add packages/on-system-core/src/detectors/typography.ts packages/on-system-core/src/detect.ts \
+  packages/on-system-core/tests/typography.test.ts
+git commit -m "feat(lint): typography detector — headings never carry weight"
+```
+
+---
+
+## Task 10: Apply-fixes + round-trip fixtures
 
 **Files:**
 - Create: `packages/on-system-core/src/apply-fixes.ts`
@@ -1096,6 +1235,7 @@ export function Clean() {
 export function Dirty() {
   return (
     <div className="text-[#16a34a] p-[13px] bg-gradient-to-b" style={{ color: "#dc2626" }}>
+      <h2 className="text-2xl font-bold">Heading</h2>
       <button>raw</button>
     </div>
   );
@@ -1124,6 +1264,7 @@ describe("fixtures", () => {
     expect(kinds).toContain("arbitrary-value");
     expect(kinds).toContain("hand-rolled");
     expect(kinds).toContain("off-system-component");
+    expect(kinds).toContain("typography");
   });
   it("autofix output has no error-severity color/arbitrary violations left", () => {
     const code = read("fixtures/off-system/colors.tsx");
@@ -1152,7 +1293,7 @@ git commit -m "feat(lint): applyFixes + on/off-system round-trip fixtures"
 
 ---
 
-## Task 10: ESLint plugin adapter
+## Task 11: ESLint plugin adapter
 
 **Files:**
 - Create: `packages/eslint-plugin-ui/package.json`
@@ -1293,7 +1434,7 @@ git commit -m "feat(lint): eslint-plugin-ui adapter + recommended config"
 
 ---
 
-## Task 11: CLI adapter
+## Task 12: CLI adapter
 
 **Files:**
 - Create: `packages/lint-cli/package.json`
@@ -1436,7 +1577,7 @@ git commit -m "feat(lint): byronwade-lint CLI (run + --fix)"
 
 ---
 
-## Task 12: Dogfood gate + wire all gates into validate/CI
+## Task 13: Dogfood gate + wire all gates into validate/CI
 
 **Files:**
 - Modify: `package.json` (scripts)
@@ -1453,7 +1594,7 @@ git commit -m "feat(lint): byronwade-lint CLI (run + --fix)"
 - [ ] **Step 2: Run the dogfood lint over our own code**
 
 Run: `npm run gen:lint-manifest && npm run lint:on-system`
-Expected: `0 error(s)`. If errors surface, they are real DNA drift in `registry/`/`app/` — fix each (replace the raw color/arbitrary value/gradient with the token/utility), re-run until `0 error(s)`. Commit those fixes separately with message `fix(registry): resolve on-system lint violations`.
+Expected: `0 error(s)`. If errors surface, they are real DNA drift in `registry/`/`app/` — fix each (raw color/arbitrary value → token/utility; hand-rolled gradient → house utility; `font-bold` on a heading → `font-medium`), re-run until `0 error(s)`. Note: the editorial-typography rule was added to the DNA recently, so existing headings may carry a bold weight that now flags — those are legitimate fixes. Commit separately with message `fix(registry): resolve on-system lint violations`.
 
 - [ ] **Step 3: Add the packages test + dogfood to CI**
 
@@ -1484,7 +1625,7 @@ git commit -m "ci(lint): dogfood on-system lint + run lint packages in CI"
 
 ---
 
-## Task 13: Consumer docs
+## Task 14: Consumer docs
 
 **Files:**
 - Create: `app/(docs)/docs/lint/page.tsx`
@@ -1508,7 +1649,7 @@ Model it on the existing `app/(docs)/docs/installation/page.tsx` structure (same
 // 2. CLI:
 //    npx byronwade-lint "src/**/*.{ts,tsx}"
 //    npx byronwade-lint "src/**/*.{ts,tsx}" --fix
-// 3. What it catches (the four detectors) + the maxColorDistance/offSystemComponents options.
+// 3. What it catches (the five detectors) + the maxColorDistance/offSystemComponents options.
 ```
 
 Write the actual page using the real components from `installation/page.tsx` (do not invent a new shell). Keep all copy on-system (it will be linted by the dogfood gate).
@@ -1529,10 +1670,10 @@ git commit -m "docs(lint): consumer usage page for the ESLint plugin + CLI"
 
 ## Self-review notes (for the executor)
 
-- **Build order matters for imports:** the ESLint plugin and CLI import the **built** `dist` of `@byronwade/on-system-core`. After any change to core, run `npm run build --workspace @byronwade/on-system-core` before testing the adapters (Tasks 10–12 steps already do this).
-- **Regenerate the manifest** (`npm run gen:lint-manifest`) before any test that relies on real token suggestions (Tasks 5, 9, 12). The manifest is git-ignored.
+- **Build order matters for imports:** the ESLint plugin and CLI import the **built** `dist` of `@byronwade/on-system-core`. After any change to core, run `npm run build --workspace @byronwade/on-system-core` before testing the adapters (Tasks 11–13 steps already do this).
+- **Regenerate the manifest** (`npm run gen:lint-manifest`) before any test that relies on real token suggestions (Tasks 5, 10, 13). The manifest is git-ignored.
 - **Coverage:** the on-system-core vitest config collects coverage; if the repo's package coverage ratchet is enforced for these packages, extend the fixture corpus (more on/off-system samples) until thresholds are met. The round-trip test is the cheapest way to raise coverage broadly.
-- **`apply-fixes.js` export:** Task 5 Step 3 exports `applyFixes` from `index.ts`, but the file is created in Task 9. If executing strictly in order, create an empty `apply-fixes.ts` stub (`export function applyFixes(c: string){ return c; }`) in Task 5 and replace it in Task 9, or comment the export until Task 9. Prefer creating the real file early.
+- **`apply-fixes.js` export:** Task 5 Step 3 exports `applyFixes` from `index.ts`, but the file is created in Task 10. If executing strictly in order, create an empty `apply-fixes.ts` stub (`export function applyFixes(c: string){ return c; }`) in Task 5 and replace it in Task 10, or comment the export until Task 10. Prefer creating the real file early.
 - **Semantic-palette exclusion (verify in Task 5):** add an assertion that a brand-adjacent raw green does NOT autofix to a semantic token. With the real manifest, `detect(\`<div className="text-[#10b981]" />\`)[0].fix?.text` must be `text-brand` (or another general accent), never `text-activity-search` / `text-chart-*`. The exclusion lives in the manifest generator (Task 2); this test guards it from regressing.
-- **Editorial typography is OUT OF SCOPE for v1** (newly added to the AGENTS.md Design DNA: no `font-bold` on headings, `font-mono` for data, `font-serif` for prose). It's a strong candidate for a 5th detector later, but it's heuristic (requires deciding "is this a heading?") and was not in the approved spec. Do NOT add it in this plan; note it as future work. The four detectors here do not cover it.
+- **Typography detector (Task 9) covers only the negative rule** — a bold-family weight on a native `<h1>`–`<h6>`. It does NOT enforce the positive guidance (`font-mono` for data, `font-serif` for prose), which needs semantic intent and is genuinely not lintable. Heading *components* (e.g. a `<PageHeader>` or `<Heading>`) are also not covered in v1 — only native heading elements. Note both as future work.
 ```
