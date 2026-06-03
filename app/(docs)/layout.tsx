@@ -1,4 +1,5 @@
 import { SiteNav } from "@/app/(docs)/_components/site-nav";
+import { DocsNavDock } from "@/app/(docs)/_components/docs-nav-dock";
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -18,6 +19,9 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           </div>
         </main>
       </div>
+
+      {/* Mobile/tablet docs nav — hamburger bottom-left blooming SiteNav (lg:hidden). */}
+      <DocsNavDock />
     </div>
   );
 }
