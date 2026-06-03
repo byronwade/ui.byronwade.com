@@ -138,16 +138,17 @@ export function ActivityRing({
       strokeWidth: isActive ? thickness + 3 : thickness,
       opacity: dim ? 0.4 : 1,
       // Draw-in (dasharray) is slow; hover feedback (width/opacity) is snappy —
-      // separate properties so the two animations never fight.
+      // separate properties so the two animations never fight. Segments only
+      // render when total > 0, so no guard is needed in the handlers.
       style: {
         transition: reduced
           ? undefined
           : "stroke-dasharray 700ms ease-out, stroke-width 200ms ease, opacity 200ms ease",
-        cursor: total > 0 ? "pointer" : "default",
+        cursor: "pointer",
       } as React.CSSProperties,
-      onMouseEnter: () => total > 0 && setHovered(i),
+      onMouseEnter: () => setHovered(i),
       onMouseLeave: () => setHovered(null),
-      onClick: () => total > 0 && onSegment(i),
+      onClick: () => onSegment(i),
     };
   };
 
