@@ -764,3 +764,41 @@ describe("scoreTone + Gauge integration", () => {
     });
   });
 });
+
+// ---------------------------------------------------------------------------
+// Accessible label + reduced motion (added with activity-ring work)
+// ---------------------------------------------------------------------------
+
+describe("Gauge component – accessible label + reduced motion", () => {
+  it("wrapper has role='img'", () => {
+    const { container } = render(<Gauge value={78} />);
+    expect(container.firstChild).toHaveAttribute("role", "img");
+  });
+
+  it("default aria-label is the rounded value + label", () => {
+    const { container } = render(<Gauge value={78.6} label="Performance" />);
+    expect(container.firstChild).toHaveAttribute("aria-label", "79 Performance");
+  });
+
+  it("default aria-label omits label segment when label absent", () => {
+    const { container } = render(<Gauge value={42} />);
+    expect(container.firstChild).toHaveAttribute("aria-label", "42");
+  });
+
+  it("explicit aria-label overrides the default", () => {
+    const { container } = render(<Gauge value={78} label="Performance" aria-label="Overall health 78 of 100" />);
+    expect(container.firstChild).toHaveAttribute("aria-label", "Overall health 78 of 100");
+  });
+
+  it("progress arc carries motion-reduce:transition-none", () => {
+    const { container } = render(<Gauge value={78} />);
+    const progressCircle = getProgressCircle(container);
+    expect(cls(progressCircle)).toContain("motion-reduce:transition-none");
+  });
+
+  it("has no axe violations with default aria-label (no wrapping region needed)", async () => {
+    const { container } = render(<Gauge value={78} label="Performance" />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+});
