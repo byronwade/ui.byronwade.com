@@ -101,7 +101,7 @@ export function HeroChartArchetype() {
         </header>
 
         {/* ── Hero chart ───────────────────────────────────────────── */}
-        <section className="relative mt-6 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-card">
+        <section className="relative mt-6 overflow-hidden rounded-2xl bg-card p-6 shadow-card">
           <div aria-hidden className="glow-brand pointer-events-none absolute inset-x-0 -top-10 h-48 opacity-70" />
           <div className="relative flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -146,7 +146,7 @@ export function HeroChartArchetype() {
         </section>
 
         {/* ── KPI strip ────────────────────────────────────────────── */}
-        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-card sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl bg-border shadow-card sm:grid-cols-2 lg:grid-cols-4">
           {kpis.map((k) => (
             <div key={k.label} className="flex flex-col gap-3 bg-card p-5">
               <MetricStat label={k.label} value={k.value} icon={k.icon} delta={{ value: k.delta, direction: k.dir }} />
@@ -157,7 +157,7 @@ export function HeroChartArchetype() {
 
         {/* ── Breakdown + products bento ───────────────────────────── */}
         <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.4fr]">
-          <section className="rounded-2xl border border-border bg-card p-5 shadow-card">
+          <section className="rounded-2xl bg-card p-5 shadow-card">
             <h2 className="text-sm font-semibold tracking-tight">Revenue by source</h2>
             <div className="mt-5 space-y-4">
               {sources.map((s) => (
@@ -174,7 +174,7 @@ export function HeroChartArchetype() {
             </div>
           </section>
 
-          <section className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+          <section className="overflow-hidden rounded-2xl bg-card shadow-card">
             <div className="border-b border-border px-5 py-3 text-sm font-semibold tracking-tight">Top products</div>
             <Table>
               <TableHeader>

@@ -226,7 +226,7 @@ export function CockpitArchetype() {
                   <p className="text-sm leading-relaxed text-muted-foreground">{active.detail}</p>
                   <div>
                     <h2 className="mb-2 text-xs font-medium text-muted-foreground">Error rate · last 30 min</h2>
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="rounded-xl edge bg-card p-4">
                       <Sparkline data={active.errors} fill className="h-12 text-destructive" />
                     </div>
                   </div>

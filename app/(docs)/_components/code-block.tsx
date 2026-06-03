@@ -20,7 +20,7 @@ export function CodeBlock({ code, lang = "tsx" }: { code: string; lang?: string 
       >
         {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
       </button>
-      <pre className="overflow-x-auto rounded-xl border border-border bg-muted/40 p-4 text-sm leading-relaxed">
+      <pre className="overflow-x-auto rounded-xl edge bg-muted/40 p-4 text-sm leading-relaxed">
         <code data-lang={lang}>{code}</code>
       </pre>
     </div>

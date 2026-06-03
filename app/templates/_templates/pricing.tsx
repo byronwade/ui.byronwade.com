@@ -203,7 +203,7 @@ export function PricingTemplate() {
           <h2 className="text-center font-heading text-xl font-semibold tracking-tight">
             Compare every plan
           </h2>
-          <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+          <div className="mt-6 overflow-hidden rounded-2xl bg-card shadow-card">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -244,7 +244,7 @@ export function PricingTemplate() {
           <h2 className="text-center font-heading text-xl font-semibold tracking-tight">
             Frequently asked
           </h2>
-          <dl className="mt-6 divide-y divide-border rounded-2xl border border-border bg-card px-5 shadow-card">
+          <dl className="mt-6 divide-y divide-border rounded-2xl bg-card px-5 shadow-card">
             {faqs.map((f) => (
               <div key={f.q} className="py-5">
                 <dt className="text-sm font-medium">{f.q}</dt>

@@ -102,7 +102,7 @@ describe("Alert — base CSS classes", () => {
     "grid",
     "w-full",
     "rounded-lg",
-    "border",
+    "edge",
     "px-2.5",
     "py-2",
     "text-left",

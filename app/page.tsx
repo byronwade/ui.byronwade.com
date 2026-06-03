@@ -89,7 +89,7 @@ export default function HomePage() {
           className="animate-in fade-in slide-in-from-bottom-3 mt-8 w-full max-w-md duration-700"
           style={{ animationDelay: "240ms", animationFillMode: "both" }}
         >
-          <div className="flex items-center gap-3 rounded-xl border border-border bg-card/70 px-4 py-2.5 text-left font-mono text-[13px] shadow-card backdrop-blur">
+          <div className="flex items-center gap-3 rounded-xl bg-card/70 px-4 py-2.5 text-left font-mono text-[13px] shadow-card backdrop-blur">
             <span className="select-none text-brand">$</span>
             <code className="truncate text-foreground">npx shadcn@latest add @byronwade/all</code>
           </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
             key={p.title}
             className="rounded-2xl border border-border bg-card/60 p-5 text-left backdrop-blur transition-colors hover:border-brand/30"
           >
-            <span className="flex size-9 items-center justify-center rounded-xl border border-border bg-background text-brand">
+            <span className="edge flex size-9 items-center justify-center rounded-xl bg-background text-brand">
               <p.icon className="size-4.5" strokeWidth={2} />
             </span>
             <h2 className="mt-4 text-sm font-semibold tracking-tight">{p.title}</h2>
@@ -142,7 +142,7 @@ export default function HomePage() {
       >
         <div className="rounded-2xl border border-brand/30 bg-card/60 p-6 text-left backdrop-blur sm:p-8">
           <div className="flex flex-wrap items-start gap-4">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background text-brand">
+            <span className="edge flex size-10 shrink-0 items-center justify-center rounded-xl bg-background text-brand">
               <Bot className="size-5" strokeWidth={2} />
             </span>
             <div className="min-w-0 flex-1">
@@ -176,7 +176,7 @@ export default function HomePage() {
           </ul>
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="min-w-0 flex-1 rounded-xl border border-border bg-background/70 px-4 py-3 font-mono text-[13px] shadow-card">
+            <div className="min-w-0 flex-1 rounded-xl bg-background/70 px-4 py-3 font-mono text-[13px] shadow-card">
               <span className="select-none text-brand">$ </span>
               <code className="text-foreground">npx shadcn@latest add @byronwade/design-rules</code>
             </div>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function AiPage() {
   return (
-    <article className="max-w-2xl space-y-12">
+    <article className="mx-auto max-w-4xl space-y-12">
       <header>
         <p className="text-sm font-medium text-brand">Get Started</p>
         <h1 className="mt-2 font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">

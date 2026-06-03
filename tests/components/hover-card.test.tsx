@@ -308,11 +308,11 @@ describe("HoverCardContent — classes and default props", () => {
     expect(popup.className).toContain("text-popover-foreground");
   });
 
-  it("has class 'shadow-md' when open", async () => {
+  it("has class 'shadow-float' when open", async () => {
     render(<BasicHoverCard defaultOpen contentText="shadow test" />);
     const content = await screen.findByText("shadow test");
     const popup = content.closest("[data-slot='hover-card-content']") as HTMLElement;
-    expect(popup.className).toContain("shadow-md");
+    expect(popup.className).toContain("shadow-float");
   });
 
   it("has class 'p-2.5' when open", async () => {

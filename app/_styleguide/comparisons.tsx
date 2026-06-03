@@ -1126,7 +1126,7 @@ export function VsComparison() {
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="space-y-2">
                 <ColHead label="byronwade/ui" />
-                <div className="flex min-h-[148px] items-center justify-center rounded-xl border border-border bg-background p-6 transition-colors">
+                <div className="edge flex min-h-[148px] items-center justify-center rounded-xl bg-background p-6 transition-colors">
                   <div className="w-full">{OURS[name]}</div>
                 </div>
               </div>

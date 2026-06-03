@@ -167,7 +167,7 @@ export function AppLauncher() {
       <div
         ref={morphRef}
         className={cn(
-          "pointer-events-auto absolute top-0 left-0 inline-flex transform-gpu overflow-hidden border border-white/5 bg-dock text-dock-foreground shadow-float [will-change:width,height]",
+          "pointer-events-auto absolute top-0 left-0 inline-flex transform-gpu overflow-hidden bg-dock text-dock-foreground shadow-float [will-change:width,height]",
           open ? "rounded-2xl" : "rounded-3xl",
         )}
       >

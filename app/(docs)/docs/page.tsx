@@ -22,14 +22,14 @@ export const metadata: Metadata = {
 
 const principles = [
   "One warm-green accent carries every bit of emphasis — the rest is calm ink and gray.",
-  "Hairline borders before shadows; whitespace is a material, not an afterthought.",
+  "Depth from soft shadows and a hairline inset edge — not hard borders. Whitespace is a material.",
   "Each page earns one signature hero — never a generic, repeated card grid.",
   "Pure tokens. Override one variable and the whole system re-skins, light and dark.",
 ];
 
 export default function ComponentsIndexPage() {
   return (
-    <div className="space-y-12">
+    <div className="mx-auto max-w-6xl space-y-12">
       <header className="max-w-2xl">
         <p className="text-sm font-medium text-brand">Get Started</p>
         <h1 className="mt-2 font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
@@ -146,7 +146,7 @@ export default function ComponentsIndexPage() {
                 <Link
                   key={c.slug}
                   href={`/docs/${c.slug}`}
-                  className="group flex flex-col gap-1.5 rounded-xl border border-border bg-card p-4 shadow-card outline-none transition-all hover:-translate-y-0.5 hover:border-brand/40 focus-visible:ring-3 focus-visible:ring-ring/50"
+                  className="group flex flex-col gap-1.5 rounded-xl border border-transparent bg-card p-4 shadow-card outline-none transition-all hover:-translate-y-0.5 hover:border-brand/40 focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
                   <span className="text-sm font-semibold tracking-tight group-hover:text-foreground">
                     {c.name}

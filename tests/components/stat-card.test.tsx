@@ -41,10 +41,10 @@ describe("StatCard", () => {
       expect(container.firstChild).toHaveClass("rounded-2xl");
     });
 
-    it("root div has border border-border class", () => {
+    it("root div elevates with shadow-card (immersive edge, no hard border)", () => {
       const { container } = render(<StatCard label="Label" value="Value" />);
-      expect(container.firstChild).toHaveClass("border");
-      expect(container.firstChild).toHaveClass("border-border");
+      expect(container.firstChild).toHaveClass("shadow-card");
+      expect(container.firstChild).not.toHaveClass("border-border");
     });
 
     it("root div has bg-card class", () => {
@@ -613,7 +613,7 @@ describe("StatCard", () => {
       );
       const root = container.firstChild as HTMLElement;
       expect(root).toHaveClass("rounded-2xl");
-      expect(root).toHaveClass("border");
+      expect(root).toHaveClass("shadow-card");
       expect(root).toHaveClass("bg-card");
       expect(root).toHaveClass("p-5");
       expect(root).toHaveClass("col-span-2");

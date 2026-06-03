@@ -309,7 +309,7 @@ export default function StyleguidePage() {
 
                 <Specimen name="Do / Don't" plain>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="space-y-3 rounded-xl border border-border bg-background p-5">
+                    <div className="edge space-y-3 rounded-xl bg-background p-5">
                       {[
                         "Generic uniform card grid",
                         "Hardcoded hex / oklch values",
@@ -322,7 +322,7 @@ export default function StyleguidePage() {
                         </div>
                       ))}
                     </div>
-                    <div className="space-y-3 rounded-xl border border-border bg-background p-5">
+                    <div className="edge space-y-3 rounded-xl bg-background p-5">
                       {[
                         "One signature hero per page",
                         "CSS tokens only",
@@ -430,7 +430,7 @@ export default function StyleguidePage() {
                       ["shadow-float", "dock · popovers"],
                     ].map(([s, role]) => (
                       <div key={s} className="flex flex-col items-center gap-2">
-                        <div className={`size-16 rounded-2xl border border-border bg-card ${s}`} />
+                        <div className={`size-16 rounded-2xl bg-card ${s}`} />
                         <div className="text-center">
                           <p className="font-mono text-[11px] text-foreground">{s}</p>
                           <p className="text-[11px] text-muted-foreground">{role}</p>
@@ -468,7 +468,7 @@ export default function StyleguidePage() {
                     </h3>
                     <div className="grid gap-4 sm:grid-cols-3">
                       <div className="space-y-1.5">
-                        <div className="relative h-24 overflow-hidden rounded-xl border border-border bg-card">
+                        <div className="edge relative h-24 overflow-hidden rounded-xl bg-card">
                           <div className="glow-brand absolute inset-0" />
                         </div>
                         <p className="font-mono text-[11px] text-muted-foreground">
@@ -476,13 +476,13 @@ export default function StyleguidePage() {
                         </p>
                       </div>
                       <div className="space-y-1.5">
-                        <div className="bg-grid h-24 rounded-xl border border-border bg-card" />
+                        <div className="bg-grid edge h-24 rounded-xl bg-card" />
                         <p className="font-mono text-[11px] text-muted-foreground">
                           .bg-grid
                         </p>
                       </div>
                       <div className="space-y-1.5">
-                        <div className="mask-fade-x flex h-24 items-center gap-2 overflow-hidden rounded-xl border border-border bg-card px-3">
+                        <div className="mask-fade-x edge flex h-24 items-center gap-2 overflow-hidden rounded-xl bg-card px-3">
                           {Array.from({ length: 8 }, (_, i) => (
                             <span
                               key={i}
@@ -894,7 +894,7 @@ export default function StyleguidePage() {
                 </Specimen>
 
                 <Specimen name="AspectRatio" from="@/components/ui/aspect-ratio">
-                  <AspectRatio ratio={16 / 9} className="max-w-xs overflow-hidden rounded-xl border border-border bg-muted">
+                  <AspectRatio ratio={16 / 9} className="edge max-w-xs overflow-hidden rounded-xl bg-muted">
                     <div className="flex size-full items-center justify-center text-xs text-muted-foreground">
                       16 / 9
                     </div>
@@ -902,7 +902,7 @@ export default function StyleguidePage() {
                 </Specimen>
 
                 <Specimen name="ScrollArea" from="@/components/ui/scroll-area">
-                  <ScrollArea className="h-36 max-w-xs rounded-xl border border-border">
+                  <ScrollArea className="edge h-36 max-w-xs rounded-xl">
                     <div className="p-4 space-y-2">
                       {Array.from({ length: 12 }, (_, i) => (
                         <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -1016,13 +1016,13 @@ export default function StyleguidePage() {
                 description="One green series, soft gradient fade, faint gridlines, endpoint labels only — never a rainbow."
               >
                 <Specimen name="Area chart" from="@/components/ui/chart" plain>
-                  <div className="rounded-xl border border-border bg-background p-6">
+                  <div className="edge rounded-xl bg-background p-6">
                     <AreaChartDemo />
                   </div>
                 </Specimen>
 
                 <Specimen name="Bar chart" from="@/components/ui/chart" plain>
-                  <div className="rounded-xl border border-border bg-background p-6">
+                  <div className="edge rounded-xl bg-background p-6">
                     <BarChartDemo />
                   </div>
                 </Specimen>
@@ -1037,7 +1037,7 @@ export default function StyleguidePage() {
                 description="Composed dashboard pieces — detail headers, settings panels, and event timelines."
               >
                 <Specimen name="DetailHeader" from="@/components/detail-header" plain>
-                  <div className="rounded-xl border border-border bg-background p-6">
+                  <div className="edge rounded-xl bg-background p-6">
                     <DetailHeader
                       title="Acme Inc."
                       badge={<StatusPill tone="success">Active</StatusPill>}
@@ -1077,7 +1077,7 @@ export default function StyleguidePage() {
                 </Specimen>
 
                 <Specimen name="EventTimeline" from="@/components/event-timeline" plain>
-                  <div className="rounded-xl border border-border bg-background p-6">
+                  <div className="edge rounded-xl bg-background p-6">
                     <EventTimeline
                       events={[
                         {
@@ -1109,7 +1109,7 @@ export default function StyleguidePage() {
                 </Specimen>
 
                 <Specimen name="VerificationProgress" from="@/components/verification-progress" plain>
-                  <div className="space-y-6 rounded-xl border border-border bg-background p-6">
+                  <div className="edge space-y-6 rounded-xl bg-background p-6">
                     <VerificationProgress
                       steps={[
                         { tone: "success", label: "Verified", count: 55 },
@@ -1156,7 +1156,7 @@ export default function StyleguidePage() {
                 </Link>
 
                 <Specimen name="HeroSection" from="@/components/hero-section" plain>
-                  <div className="relative overflow-hidden rounded-xl border border-border bg-background pt-6">
+                  <div className="edge relative overflow-hidden rounded-xl bg-background pt-6">
                     <div className="px-6">
                       <HeroSection
                         header={
@@ -1173,7 +1173,7 @@ export default function StyleguidePage() {
                 </Specimen>
 
                 <Specimen name="CenteredFocal" from="@/components/centered-focal" plain>
-                  <div className="overflow-hidden rounded-xl border border-border bg-background">
+                  <div className="edge overflow-hidden rounded-xl bg-background">
                     <CenteredFocal className="min-h-[20rem]">
                       <h3 className="text-base font-semibold">Waiting for events</h3>
                       <p className="mt-1 text-sm text-muted-foreground">

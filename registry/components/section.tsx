@@ -32,7 +32,7 @@ export function Section({
           {action && <div className="shrink-0">{action}</div>}
         </div>
       )}
-      <div className="rounded-2xl border border-border bg-card shadow-card">{children}</div>
+      <div className="rounded-2xl bg-card shadow-card">{children}</div>
     </section>
   );
 }

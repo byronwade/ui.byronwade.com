@@ -262,9 +262,11 @@ describe("Card — base classes", () => {
     expect((container.firstChild as HTMLElement).className).toContain("overflow-hidden");
   });
 
-  it("has border class", () => {
+  it("elevates with shadow-card (immersive edge, no hard border)", () => {
     const { container } = render(<Card />);
-    expect((container.firstChild as HTMLElement).className).toContain("border");
+    const cls = (container.firstChild as HTMLElement).className;
+    expect(cls).toContain("shadow-card");
+    expect(cls).not.toContain("border-border");
   });
 
   it("has bg-card class", () => {

@@ -267,11 +267,11 @@ describe("Section – card body wrapper", () => {
     expect(cardWrapper.className).toContain("rounded-2xl");
   });
 
-  it("card wrapper has border border-border class", () => {
+  it("card wrapper elevates with shadow-card (immersive edge, no hard border)", () => {
     render(<Section><div data-testid="inner">content</div></Section>);
     const cardWrapper = screen.getByTestId("inner").parentElement!;
-    expect(cardWrapper.className).toContain("border");
-    expect(cardWrapper.className).toContain("border-border");
+    expect(cardWrapper.className).toContain("shadow-card");
+    expect(cardWrapper.className).not.toContain("border-border");
   });
 
   it("card wrapper has bg-card class", () => {

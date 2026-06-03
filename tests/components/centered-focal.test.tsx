@@ -183,12 +183,13 @@ describe("CenteredFocal — inner content card", () => {
     expect(innerCard).toHaveClass("rounded-2xl");
   });
 
-  it("inner card has 'border' class", () => {
+  it("inner card elevates with shadow-card (immersive edge, no hard border)", () => {
     const { container } = render(
       <CenteredFocal><p>Content</p></CenteredFocal>
     );
     const innerCard = container.querySelector(".z-10") as HTMLElement;
-    expect(innerCard).toHaveClass("border");
+    expect(innerCard).toHaveClass("shadow-card");
+    expect(innerCard).not.toHaveClass("border-border");
   });
 
   it("inner card has 'p-6' class (padding)", () => {

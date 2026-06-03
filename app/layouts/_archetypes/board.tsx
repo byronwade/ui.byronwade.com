@@ -170,7 +170,7 @@ export function BoardArchetype() {
                 {col.cards.map((card) => (
                   <article
                     key={card.id}
-                    className="group cursor-grab space-y-2.5 rounded-xl border border-border bg-card p-3 shadow-card transition-shadow hover:shadow-md active:cursor-grabbing"
+                    className="group cursor-grab space-y-2.5 rounded-xl bg-card p-3 shadow-card transition-shadow hover:shadow-md active:cursor-grabbing"
                   >
                     <div className="flex flex-wrap items-center gap-1.5">
                       {card.labels.map((l) => (

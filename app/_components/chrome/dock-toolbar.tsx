@@ -47,7 +47,7 @@ export function DockToolbar() {
 
   return (
     <div className="pointer-events-none fixed top-3 right-3 z-50 print:hidden">
-      <div className="pointer-events-auto inline-flex transform-gpu items-center rounded-3xl border border-white/5 bg-dock p-[3px] text-dock-foreground shadow-float">
+      <div className="pointer-events-auto inline-flex transform-gpu items-center rounded-3xl bg-dock p-[3px] text-dock-foreground shadow-float">
         <button
           type="button"
           onClick={copy}

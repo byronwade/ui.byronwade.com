@@ -175,7 +175,7 @@ export function SettingsTemplate() {
                     </div>
                     <Button variant="outline" size="sm">Update</Button>
                   </div>
-                  <div className="divide-y divide-border rounded-xl border border-border">
+                  <div className="edge divide-y divide-border rounded-xl">
                     {invoices.map((inv) => (
                       <div key={inv.id} className="flex items-center justify-between px-4 py-2.5 text-sm">
                         <span className="font-mono text-muted-foreground">{inv.id}</span>

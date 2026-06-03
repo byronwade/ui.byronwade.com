@@ -91,7 +91,7 @@ export default function TemplateFramePage({
 
       <div className="min-h-0 flex-1 overflow-auto bg-muted/30 p-4 sm:p-6">
         <div
-          className="mx-auto h-full overflow-hidden rounded-xl border border-border bg-background shadow-card transition-[max-width] duration-300"
+          className="mx-auto h-full overflow-hidden rounded-xl bg-background shadow-card transition-[max-width] duration-300"
           style={{ maxWidth: width ? `${width}px` : "100%" }}
         >
           <iframe

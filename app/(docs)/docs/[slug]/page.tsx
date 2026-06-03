@@ -31,7 +31,7 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
   }));
 
   return (
-    <article className="max-w-2xl space-y-10">
+    <article className="mx-auto max-w-4xl space-y-10">
       <header>
         <h1 className="text-3xl font-semibold tracking-tight">{doc.name}</h1>
         <p className="mt-2 text-muted-foreground">{doc.description}</p>
@@ -55,7 +55,7 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
       {doc.props && doc.props.length > 0 && (
         <section className="space-y-3">
           <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">Props</h2>
-          <div className="overflow-hidden rounded-xl border border-border">
+          <div className="overflow-hidden rounded-xl edge">
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/40 hover:bg-muted/40">

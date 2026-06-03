@@ -70,7 +70,7 @@ export function AppBreadcrumb() {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="pointer-events-auto relative z-0 flex h-[40px] items-center overflow-hidden rounded-3xl border border-white/5 bg-dock px-4 text-[13px] shadow-float"
+      className="pointer-events-auto relative z-0 flex h-[40px] items-center overflow-hidden rounded-3xl bg-dock px-4 text-[13px] shadow-float"
     >
       {/* DESKTOP — full trail, collapsing to root / … / current. */}
       <ol
@@ -98,7 +98,7 @@ export function AppBreadcrumb() {
                 <PopoverContent
                   align="start"
                   sideOffset={8}
-                  className="flex w-auto min-w-44 flex-col gap-0.5 rounded-xl border border-white/5 bg-dock p-1.5 text-dock-foreground ring-0"
+                  className="flex w-auto min-w-44 flex-col gap-0.5 rounded-xl bg-dock p-1.5 text-dock-foreground shadow-float ring-0"
                 >
                   {middle.map((c) => (
                     <Link

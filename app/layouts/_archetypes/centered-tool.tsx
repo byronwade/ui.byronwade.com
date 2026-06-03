@@ -42,7 +42,7 @@ export function CenteredToolArchetype() {
             team, from first alert to all-clear.
           </p>
 
-          <figure className="mt-10 rounded-2xl border border-border bg-card/70 p-5 shadow-float backdrop-blur">
+          <figure className="mt-10 rounded-2xl bg-card/70 p-5 shadow-float backdrop-blur">
             <blockquote className="text-sm leading-relaxed">
               “We replaced three dashboards with Console. On-call finally feels
               calm — everything we need is one glance away.”

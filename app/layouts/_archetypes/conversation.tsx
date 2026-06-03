@@ -151,13 +151,13 @@ export function ConversationArchetype() {
                 <button
                   key={s}
                   type="button"
-                  className="inline-flex h-7 items-center rounded-full border border-border bg-background px-3 text-xs font-medium shadow-card transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                  className="inline-flex h-7 items-center rounded-full bg-background px-3 text-xs font-medium shadow-card transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                 >
                   {s}
                 </button>
               ))}
             </div>
-            <div className="flex items-end gap-2 rounded-2xl border border-border bg-card p-2 shadow-card focus-within:ring-3 focus-within:ring-ring/40">
+            <div className="flex items-end gap-2 rounded-2xl bg-card p-2 shadow-card focus-within:ring-3 focus-within:ring-ring/40">
               <Button variant="ghost" size="icon-sm" aria-label="Attach">
                 <Paperclip />
               </Button>

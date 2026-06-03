@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function InstallationPage() {
   return (
-    <article className="max-w-2xl space-y-12">
+    <article className="mx-auto max-w-4xl space-y-12">
       <header className="space-y-3">
         <p className="text-sm font-medium text-brand">Get Started</p>
         <div className="flex flex-wrap items-center gap-3">

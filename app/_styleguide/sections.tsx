@@ -475,7 +475,7 @@ export function Specimen({
           )}
         </div>
       </div>
-      <div className={cn(!plain && "rounded-xl border border-border bg-background p-5")}>
+      <div className={cn(!plain && "edge rounded-xl bg-background p-5")}>
         {children}
       </div>
     </div>
@@ -844,7 +844,7 @@ export function SheetDemo() {
 
 export function CommandDemo() {
   return (
-    <div className="overflow-hidden rounded-xl border border-border shadow-float" style={{ maxWidth: "22rem" }}>
+    <div className="overflow-hidden rounded-xl shadow-float" style={{ maxWidth: "22rem" }}>
       <Command>
         <CommandInput placeholder="Search commands…" />
         <CommandList>

@@ -145,7 +145,7 @@ export function DashboardTemplate() {
             </Badge>
           </div>
           <div className="flex items-center gap-2">
-            <div className="hidden items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-sm text-muted-foreground sm:flex">
+            <div className="edge hidden items-center gap-2 rounded-lg bg-card px-3 py-1.5 text-sm text-muted-foreground sm:flex">
               <Search className="size-4" />
               <span>Search…</span>
             </div>
@@ -162,7 +162,7 @@ export function DashboardTemplate() {
         {/* Scrolling content */}
         <div className="min-h-0 flex-1 overflow-y-auto p-4 sm:p-6">
           {/* KPI strip */}
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-card sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px overflow-hidden rounded-2xl bg-border shadow-card sm:grid-cols-2 lg:grid-cols-4">
             {kpis.map((k) => (
               <div key={k.label} className="bg-card p-5">
                 <MetricStat label={k.label} value={k.value} icon={k.icon} delta={k.delta} />
@@ -171,7 +171,7 @@ export function DashboardTemplate() {
           </div>
 
           {/* Hero chart */}
-          <section className="relative mt-6 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-card">
+          <section className="relative mt-6 overflow-hidden rounded-2xl bg-card p-6 shadow-card">
             <div aria-hidden className="glow-brand pointer-events-none absolute inset-x-0 -top-10 h-40 opacity-60" />
             <div className="relative flex flex-wrap items-end justify-between gap-4">
               <div>
@@ -212,7 +212,7 @@ export function DashboardTemplate() {
 
           {/* Orders + activity */}
           <div className="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-            <section className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+            <section className="overflow-hidden rounded-2xl bg-card shadow-card">
               <div className="flex items-center justify-between border-b border-border px-5 py-3">
                 <h2 className="text-sm font-semibold tracking-tight">Recent orders</h2>
                 <Button variant="ghost" size="sm">View all</Button>
@@ -244,7 +244,7 @@ export function DashboardTemplate() {
               </Table>
             </section>
 
-            <section className="rounded-2xl border border-border bg-card p-5 shadow-card">
+            <section className="rounded-2xl bg-card p-5 shadow-card">
               <h2 className="text-sm font-semibold tracking-tight">Activity</h2>
               <ol className="mt-4 space-y-4">
                 {activity.map((a, i) => (

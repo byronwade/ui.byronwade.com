@@ -403,7 +403,7 @@ export function NavDock() {
           <div
             ref={morphRef}
             className={cn(
-              "pointer-events-auto absolute bottom-0 left-1/2 -translate-x-1/2 transform-gpu overflow-hidden border border-white/5 bg-dock text-dock-foreground shadow-float [will-change:width,height] sm:top-0 sm:bottom-auto",
+              "pointer-events-auto absolute bottom-0 left-1/2 -translate-x-1/2 transform-gpu overflow-hidden bg-dock text-dock-foreground shadow-float [will-change:width,height] sm:top-0 sm:bottom-auto",
               open ? "rounded-2xl" : "rounded-3xl",
             )}
           >
