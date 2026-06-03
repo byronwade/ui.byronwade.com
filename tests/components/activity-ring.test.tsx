@@ -430,3 +430,96 @@ describe("ActivityRing – accessibility", () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Verdict + caption + active-index guard
+// ---------------------------------------------------------------------------
+
+describe("ActivityRing – verdict + caption", () => {
+  it("does not render the summary block by default", () => {
+    const { container } = render(<ActivityRing segments={SEGMENTS} />);
+    expect(container.querySelector('[data-slot="activity-ring-summary"]')).not.toBeInTheDocument();
+  });
+
+  it("renders 'Mostly {label}' when one segment dominates (≥60%)", () => {
+    // 120/200 = 60% → Mostly Inbound
+    render(<ActivityRing segments={SEGMENTS} verdict />);
+    expect(screen.getByText("Mostly Inbound")).toBeInTheDocument();
+  });
+
+  it("derives the dominant label even when it is not the first segment", () => {
+    const segs: RingSegment[] = [
+      { value: 80, label: "A" },
+      { value: 120, label: "B" },
+    ];
+    render(<ActivityRing segments={segs} verdict />);
+    expect(screen.getByText("Mostly B")).toBeInTheDocument();
+  });
+
+  it("renders 'Balanced' when no segment reaches 60%", () => {
+    const segs: RingSegment[] = [
+      { value: 100, label: "A" },
+      { value: 100, label: "B" },
+    ];
+    render(<ActivityRing segments={segs} verdict />);
+    expect(screen.getByText("Balanced")).toBeInTheDocument();
+  });
+
+  it("renders 'Quiet' when total is 0", () => {
+    const segs: RingSegment[] = [
+      { value: 0, label: "A" },
+      { value: 0, label: "B" },
+    ];
+    render(<ActivityRing segments={segs} verdict />);
+    expect(screen.getByText("Quiet")).toBeInTheDocument();
+  });
+
+  it("renders a caption when provided", () => {
+    render(<ActivityRing segments={SEGMENTS} caption="1.2k in · 740 out this week" />);
+    expect(screen.getByText("1.2k in · 740 out this week")).toBeInTheDocument();
+  });
+
+  it("renders both verdict and caption together", () => {
+    const { container } = render(
+      <ActivityRing segments={SEGMENTS} verdict caption="this week" />
+    );
+    expect(container.querySelector('[data-slot="activity-ring-verdict"]')).toBeInTheDocument();
+    expect(screen.getByText("this week")).toBeInTheDocument();
+  });
+
+  it("verdict is a paragraph, not a heading (avoids heading-order issues)", () => {
+    render(<ActivityRing segments={SEGMENTS} verdict />);
+    expect(screen.queryByRole("heading")).not.toBeInTheDocument();
+  });
+
+  it("has no axe violations with verdict + caption", async () => {
+    const { container } = render(
+      <div role="region" aria-label="Activity">
+        <ActivityRing segments={SEGMENTS} verdict caption="this week" />
+      </div>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+});
+
+describe("ActivityRing – active-index guard", () => {
+  it("does not crash when segments shrink while a chip is pinned", () => {
+    const three: RingSegment[] = [
+      { value: 10, label: "A" },
+      { value: 20, label: "B" },
+      { value: 35, label: "C" },
+    ];
+    const { rerender } = render(<ActivityRing segments={three} centerLabel="total" />);
+    // Pin the third chip (index 2) → centre follows C (35).
+    fireEvent.click(screen.getByRole("button", { name: /C/ }));
+    expect(screen.getByText("35")).toBeInTheDocument();
+    // Shrink to 2 segments — index 2 is now out of range.
+    const two: RingSegment[] = [
+      { value: 10, label: "A" },
+      { value: 20, label: "B" },
+    ];
+    expect(() => rerender(<ActivityRing segments={two} centerLabel="total" />)).not.toThrow();
+    // Centre falls back to the new total (30), not the stale C value.
+    expect(screen.getByText("30")).toBeInTheDocument();
+  });
+});
