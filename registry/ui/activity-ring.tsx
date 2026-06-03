@@ -63,6 +63,8 @@ export function ActivityRing({
   centerLabel = "total",
   formatValue = (n) => n.toLocaleString(),
   onSegmentClick,
+  verdict = false,
+  caption,
   className,
 }: {
   segments: RingSegment[];
@@ -72,13 +74,20 @@ export function ActivityRing({
   centerLabel?: string;
   formatValue?: (n: number) => string;
   onSegmentClick?: (segment: RingSegment, index: number) => void;
+  /** Show a derived headline below the ring (dominant≥60% → "Mostly {label}", else "Balanced"; 0 → "Quiet"). */
+  verdict?: boolean;
+  /** Optional description line shown below the ring. */
+  caption?: string;
   className?: string;
 }) {
   const reduced = usePrefersReducedMotion();
 
   const [hovered, setHovered] = React.useState<number | null>(null);
   const [pinned, setPinned] = React.useState<number | null>(null);
-  const active = hovered ?? pinned;
+  const rawActive = hovered ?? pinned;
+  // Guard against a parent shrinking `segments` while a chip is pinned —
+  // a stale index must not blow up `segments[active]`.
+  const active = rawActive !== null && rawActive < segments.length ? rawActive : null;
 
   // Draw-in: segments start collapsed, then expand to their share on mount.
   const [drawn, setDrawn] = React.useState(false);
@@ -152,6 +161,12 @@ export function ActivityRing({
     };
   };
 
+  let verdictText = "Quiet";
+  if (total > 0) {
+    const dominant = resolved.reduce((best, r) => (r.share > best.share ? r : best));
+    verdictText = dominant.share >= 0.6 ? `Mostly ${dominant.seg.label}` : "Balanced";
+  }
+
   return (
     <div
       data-slot="activity-ring"
@@ -211,6 +226,17 @@ export function ActivityRing({
           <span className="text-xs text-muted-foreground">{centre.label}</span>
         </div>
       </div>
+
+      {(verdict || caption) && (
+        <div data-slot="activity-ring-summary" className="space-y-1">
+          {verdict && (
+            <p data-slot="activity-ring-verdict" className="text-lg font-semibold tracking-tight">
+              {verdictText}
+            </p>
+          )}
+          {caption && <p className="max-w-[16rem] text-sm text-muted-foreground">{caption}</p>}
+        </div>
+      )}
 
       <div
         data-slot="activity-ring-legend"
