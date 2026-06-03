@@ -146,15 +146,29 @@ export function useChromeMorph({
       const cw = from?.w ?? collapsedW.current;
       const ch = from?.h ?? collapsedH.current;
       const hadHeight = el.style.height !== "";
-      const restore = () => {
+      // No collapsed box to shrink into → clear inline sizing (legacy fallback).
+      if (cw == null) {
         el.style.transition = "none";
         el.style.width = "";
         el.style.height = "";
         void el.offsetWidth;
         el.style.transition = "";
+        return;
+      }
+      // Settle AT the collapsed box rather than clearing the inline width. The
+      // panel inside is a fixed `panelW`, so clearing the width would let the box
+      // reflow (shrink-wrap) back to full panel width for a frame the instant the
+      // close transition ends — a one-frame "snap" flash. Coming to rest exactly
+      // over the pill leaves nothing to snap to, and reopen grows from this box.
+      const settle = () => {
+        el.style.transition = "";
       };
-      if (reduce || cw == null) {
-        restore();
+      if (reduce) {
+        el.style.transition = "none";
+        el.style.width = `${cw}px`;
+        if (hadHeight) el.style.height = `${ch ?? el.offsetHeight}px`;
+        void el.offsetWidth;
+        settle();
         return;
       }
       el.style.transition = hadHeight
@@ -164,7 +178,7 @@ export function useChromeMorph({
       if (hadHeight) el.style.height = `${ch ?? el.offsetHeight}px`;
       const onEnd = (e: TransitionEvent) => {
         if (e.propertyName !== "width") return;
-        restore();
+        settle();
         el.removeEventListener("transitionend", onEnd);
       };
       el.addEventListener("transitionend", onEnd);

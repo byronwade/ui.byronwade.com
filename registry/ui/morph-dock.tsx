@@ -114,6 +114,11 @@ export interface MorphDockProps {
   draggable?: boolean;
   /** Show a corner grip to resize the open panel. */
   resizable?: boolean;
+  /**
+   * Drop the resting pill background/shadow — the items float bare until a panel
+   * blooms (the bloomed panel keeps its surface). A "ghost" / no-pill dock.
+   */
+  bare?: boolean;
 }
 
 /** Every surface token is keyed by tone, so a light `surface` reads correctly. */
@@ -449,6 +454,7 @@ export function MorphDock({
   origin = "start",
   draggable = false,
   resizable = false,
+  bare = false,
 }: MorphDockProps) {
   const t = TONES[tone];
   const [expanded, setExpanded] = React.useState(false);
@@ -481,10 +487,18 @@ export function MorphDock({
   // The overlay exists for consumer children OR a status bloom.
   const hasPanel = children != null || hasStatus;
   const morphOpen = (open && children != null) || hasStatus;
+  // A status has no persistent `children` to keep the overlay mounted, so on
+  // dismiss it would vanish instantly. Retain the last status and render it
+  // while the close shrink plays (tracked by `surfaceOn`), so it animates home.
+  const lastStatusRef = React.useRef(status);
+  if (status != null) lastStatusRef.current = status;
+  const overlayStatus = status ?? (surfaceOn ? lastStatusRef.current : null);
+  // Keep the overlay (and morph element) mounted through the close shrink.
+  const showOverlay = children != null || morphOpen || surfaceOn;
   // The panel sits over the pill (pill faded) only when open AND not torn off.
   const inPlace = morphOpen && !detached;
   // The status body carries its own dismiss, so it never renders the drag/save header.
-  const hasHeader = !hasStatus && (draggable || panelTitle != null || onSave != null);
+  const hasHeader = overlayStatus == null && (draggable || panelTitle != null || onSave != null);
 
   const panelW = size?.w ?? panelWidth;
   const panelH = size?.h ?? panelHeight;
@@ -506,11 +520,15 @@ export function MorphDock({
     deps: [open, hasPanel, panelW, panelH],
   });
 
-  // The hook fades the panel IN on open; clear that inline opacity on close so it
-  // hides again, and (if it was dragged) fly the panel home + drop the detach.
+  // The hook fades the panel IN on open; on close fade it OUT fast (faster than
+  // the box shrink) so the content never reads as text/colour clipping inward —
+  // the box then collapses as a clean surface. Also fly a dragged panel home.
   useIsoLayoutEffect(() => {
     if (morphOpen) return;
-    if (panelRef.current) panelRef.current.style.opacity = "";
+    if (panelRef.current) {
+      panelRef.current.style.transitionDelay = "0ms";
+      panelRef.current.style.opacity = "0";
+    }
     const wrap = dragWrapRef.current;
     if (wrap && (dragRef.current.x !== 0 || dragRef.current.y !== 0)) {
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -644,12 +662,12 @@ export function MorphDock({
         ref={barRef}
         className={cn(
           "flex items-center gap-1 rounded-full p-[3px] transition-opacity duration-150",
-          t.shell,
+          bare ? "shadow-none" : t.shell,
           inPlace && "pointer-events-none opacity-0",
         )}
       >
         {breadcrumb && breadcrumb.length > 0 ? (
-          <div data-slot="morph-dock-breadcrumb" className="flex min-w-0 items-center gap-1 px-2">
+          <div data-slot="morph-dock-breadcrumb" className="flex h-8 min-w-0 items-center gap-1 px-2.5">
             {breadcrumb.map((c, i) => {
               const last = i === breadcrumb.length - 1;
               return (
@@ -750,7 +768,7 @@ export function MorphDock({
       </div>
 
       {/* PANEL — an overlay that blooms out of the pill and can be dragged free. */}
-      {hasPanel ? (
+      {showOverlay ? (
         <div
           className={cn(
             "absolute z-10",
@@ -775,7 +793,7 @@ export function MorphDock({
                 aria-hidden={!open && !hasStatus}
                 style={{ width: panelW, height: panelH }}
                 className={cn(
-                  "group flex flex-col rounded-4xl opacity-0 transition-opacity duration-150 outline-none",
+                  "group flex flex-col rounded-4xl opacity-0 transition-opacity duration-100 outline-none",
                   panelH != null && "overflow-hidden",
                   open || hasStatus ? "pointer-events-auto" : "pointer-events-none",
                 )}
@@ -831,8 +849,8 @@ export function MorphDock({
                 ) : null}
 
                 <div className={cn(panelH != null && "min-h-0 flex-1 overflow-auto")}>
-                  {hasStatus ? (
-                    <StatusBody status={status!} t={t} onClose={() => onStatusDismiss?.()} />
+                  {overlayStatus != null ? (
+                    <StatusBody status={overlayStatus} t={t} onClose={() => onStatusDismiss?.()} />
                   ) : (
                     children
                   )}

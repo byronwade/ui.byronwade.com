@@ -523,6 +523,16 @@ describe("MorphDock", () => {
     expect(screen.getByRole("button", { name: "Resize" })).toHaveClass("opacity-0");
   });
 
+  it("drops the pill background when bare", () => {
+    const { rerender } = renderDock();
+    const bar = screen.getByRole("navigation").parentElement as HTMLElement;
+    expect(bar).toHaveClass("bg-dock");
+    rerender(<MorphDock items={baseItems} bare />);
+    const bareBar = screen.getByRole("navigation").parentElement as HTMLElement;
+    expect(bareBar).not.toHaveClass("bg-dock");
+    expect(bareBar).toHaveClass("shadow-none");
+  });
+
   it("has no axe violations (closed and open)", async () => {
     const { container, rerender } = render(
       <MorphDock items={baseItems} action={{ label: "Search", icon: Search }}>

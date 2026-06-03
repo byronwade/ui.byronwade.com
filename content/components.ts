@@ -532,8 +532,9 @@ export const components: ComponentDoc[] = [
       { name: "origin", type: '"start" | "center" | "end"', default: '"start"', description: "Where along the dock the panel grows from — a centered dock blooms symmetrically with \"center\"." },
       { name: "draggable", type: "boolean", default: "false", description: "Detach the open panel and drag it free by its handle (flies home on close)." },
       { name: "resizable", type: "boolean", default: "false", description: "Show a corner grip to resize the open panel; the morph box follows live." },
+      { name: "bare", type: "boolean", default: "false", description: "Drop the resting pill background/shadow — items float free until a panel blooms (the panel keeps its surface)." },
     ],
-    examples: ["default", "split-toolbar", "tools-primary", "breadcrumb", "separators", "save-status", "expand", "tones", "origins", "orientations", "command", "help", "launcher", "notifications", "dialer", "draggable", "resizable"],
+    examples: ["default", "app-bar", "app-bar-panels", "ghost", "split-toolbar", "tools-primary", "breadcrumb", "separators", "save-status", "expand", "tones", "origins", "orientations", "command", "help", "launcher", "notifications", "dialer", "draggable", "resizable"],
   },
   {
     slug: "aspect-ratio", name: "Aspect Ratio", category: "Data display",
