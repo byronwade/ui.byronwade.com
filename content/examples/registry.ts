@@ -94,6 +94,7 @@ import CommandEmptyState from "./command/empty-state";
 import CommandGrouped from "./command/grouped";
 import CommandInline from "./command/inline";
 import CommandWithIcons from "./command/with-icons";
+import ConversationListDefault from "./conversation-list/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
 import DetailHeaderManyActions from "./detail-header/many-actions";
@@ -490,6 +491,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Grouped", file: "command/grouped.tsx", Component: CommandGrouped },
     { name: "Inline", file: "command/inline.tsx", Component: CommandInline },
     { name: "With Icons", file: "command/with-icons.tsx", Component: CommandWithIcons },
+  ],
+  "conversation-list": [
+    { name: "Default", file: "conversation-list/default.tsx", Component: ConversationListDefault },
   ],
   "detail-header": [
     { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },

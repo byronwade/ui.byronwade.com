@@ -64,7 +64,7 @@ function seedSource(): CommsSource {
     { id: "v1", contact: SEED_CONTACTS[0], number: "Main line", lastMessage: "Sounds good — talk then.", unread: 2, flags: ["pinned"], updatedAt: BASE - min(2) },
     { id: "v2", contact: SEED_CONTACTS[1], number: "Main line", lastMessage: "Invoice is attached.", unread: 0, flags: [], updatedAt: BASE - min(40) },
     { id: "v3", contact: SEED_CONTACTS[2], number: "Support", lastMessage: "Can you resend the link?", unread: 1, flags: ["unread"], updatedAt: BASE - min(120) },
-    { id: "v4", contact: SEED_CONTACTS[3], number: "Support", lastMessage: "Thanks for the quick reply!", unread: 0, flags: [], updatedAt: BASE - min(300) },
+    { id: "v4", contact: SEED_CONTACTS[3], number: "Support", lastMessage: "Thanks for the quick reply!", unread: 0, flags: [], updatedAt: BASE - min(1500) },
     { id: "v5", contact: SEED_CONTACTS[4], number: "Sales", lastMessage: "Let's schedule a demo.", unread: 0, flags: ["archived"], updatedAt: BASE - min(1440) },
   ];
   const mk = (cid: string, i: number, dir: "in" | "out", body: string): Message => ({
