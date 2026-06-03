@@ -17,7 +17,7 @@ export function GradientAvatar({
   return (
     <span
       aria-hidden
-      className={cn("edge inline-block shrink-0 rounded-full", sizes[size], className)}
+      className={cn("inline-block shrink-0 rounded-full", sizes[size], className)}
       style={{ backgroundImage: `radial-gradient(circle at 30% 30%, ${g.from}, ${g.to})` }}
     />
   );
