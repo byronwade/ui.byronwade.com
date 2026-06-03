@@ -23,12 +23,13 @@ const APPS = [
   ["Layouts", "Page archetypes"],
   ["Templates", "Starter kits"],
 ];
-const NOTES = [
+type Icon = React.ComponentType<{ className?: string }>;
+const NOTES: [string, string, Icon][] = [
   ["New release", "v2.4 shipped to production", Check],
   ["Mention", "@you in “Morph dock” review", Bell],
   ["Build passed", "CI green on main", Check],
 ];
-const ACCOUNT = [
+const ACCOUNT: [string, Icon][] = [
   ["Profile", User],
   ["Settings", Settings],
   ["Sign out", LogOut],
