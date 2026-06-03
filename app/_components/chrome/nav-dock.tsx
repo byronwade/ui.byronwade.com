@@ -19,6 +19,13 @@ import { isActive, navItems, type DocsNavItem } from "./nav-config";
 
 const GITHUB_URL = "https://github.com/byronwade/ui";
 
+// Minimal shape of the object returned by document.startViewTransition().
+type ViewTransitionLike = {
+  ready: Promise<void>;
+  finished?: Promise<void>;
+  skipTransition?: () => void;
+};
+
 const ITEM =
   "relative flex size-8 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white/30";
 const ITEM_IDLE =
@@ -146,24 +153,31 @@ export function NavDock() {
   // Theme swap as a morph: the incoming theme blooms via an expanding clip-path
   // circle anchored on the toggle button (View Transitions API + globals.css),
   // so the change radiates from the trigger like the dock/launcher morphs.
+  const vtRef = React.useRef<ViewTransitionLike | null>(null);
   const toggleTheme = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       const next = resolvedTheme === "dark" ? "light" : "dark";
       const doc = document as Document & {
-        startViewTransition?: (cb: () => void) => { ready: Promise<void> };
+        startViewTransition?: (cb: () => void) => ViewTransitionLike;
       };
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (!doc.startViewTransition || reduce) {
         setTheme(next);
         return;
       }
+      // A rapid second click would start a new transition while the previous one
+      // is still capturing/animating, which aborts the old one and rejects its
+      // `ready` promise with InvalidStateError. Skip the in-flight transition
+      // first, then ignore the resulting (expected) rejection below.
+      vtRef.current?.skipTransition?.();
       const rect = e.currentTarget.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
       const y = rect.top + rect.height / 2;
       const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-      doc
-        .startViewTransition(() => flushSync(() => setTheme(next)))
-        .ready.then(() => {
+      const transition = doc.startViewTransition(() => flushSync(() => setTheme(next)));
+      vtRef.current = transition;
+      transition.ready
+        .then(() => {
           document.documentElement.animate(
             {
               clipPath: [
@@ -173,6 +187,13 @@ export function NavDock() {
             },
             { duration: 480, easing: EASE, pseudoElement: "::view-transition-new(root)" },
           );
+        })
+        // The transition was interrupted by a newer toggle — expected, not an error.
+        .catch(() => {});
+      Promise.resolve(transition.finished)
+        .catch(() => {})
+        .finally(() => {
+          if (vtRef.current === transition) vtRef.current = null;
         });
     },
     [resolvedTheme, setTheme],
