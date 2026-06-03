@@ -16,7 +16,7 @@
  *         {backdrop}
  *       </div>
  *     )}
- *     <div class="relative z-10 w-full max-w-sm rounded-2xl border border-border bg-card p-6 text-center shadow-card">
+ *     <div class="relative z-10 w-full max-w-sm rounded-2xl border border-border bg-card p-6 text-center edge">
  *       {children}
  *     </div>
  *   </div>
@@ -183,12 +183,12 @@ describe("CenteredFocal — inner content card", () => {
     expect(innerCard).toHaveClass("rounded-2xl");
   });
 
-  it("inner card elevates with shadow-card (immersive edge, no hard border)", () => {
+  it("inner card elevates with edge (immersive edge, no hard border)", () => {
     const { container } = render(
       <CenteredFocal><p>Content</p></CenteredFocal>
     );
     const innerCard = container.querySelector(".z-10") as HTMLElement;
-    expect(innerCard).toHaveClass("shadow-card");
+    expect(innerCard).toHaveClass("edge");
     expect(innerCard).not.toHaveClass("border-border");
   });
 

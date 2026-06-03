@@ -36,7 +36,7 @@ agent following that rule would produce identical-looking code.** That means:
   `focus-visible:ring-ring`. Dark mode must come for free from tokens — never branch on a hardcoded
   color.
 - **House utilities** (`bg-grid`, `glow-brand`, `text-gradient(-brand)`, `mask-fade-x`, `full-bleed`,
-  `shadow-float`, `shadow-card`, `scrollbar-thin`) live in `foundation`; reuse them instead of
+  `edge`, `scrollbar-thin`) live in `foundation`; reuse them instead of
   re-implementing gradients/grids/shadows.
 
 > If you add a new token, utility, or convention that consumers should follow, update

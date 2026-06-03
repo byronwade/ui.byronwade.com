@@ -92,10 +92,10 @@ describe("FilterPill — pill shape and base classes", () => {
     expect(screen.getByRole("button")).toHaveClass("items-center");
   });
 
-  it("elevates with shadow-card (immersive edge, no hard border)", () => {
+  it("elevates with edge (immersive edge, no hard border)", () => {
     render(<FilterPill>Test</FilterPill>);
     const btn = screen.getByRole("button");
-    expect(btn).toHaveClass("shadow-card");
+    expect(btn).toHaveClass("edge");
     expect(btn).not.toHaveClass("border-border");
   });
 

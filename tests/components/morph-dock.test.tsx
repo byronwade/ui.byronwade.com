@@ -530,7 +530,7 @@ describe("MorphDock", () => {
     rerender(<MorphDock items={baseItems} bare />);
     const bareBar = screen.getByRole("navigation").parentElement as HTMLElement;
     expect(bareBar).not.toHaveClass("bg-dock");
-    expect(bareBar).toHaveClass("shadow-none");
+    expect(bareBar).not.toHaveClass("edge");
   });
 
   it("has no axe violations (closed and open)", async () => {

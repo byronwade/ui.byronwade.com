@@ -371,9 +371,9 @@ describe("PopoverContent — classes (open state)", () => {
     expect(content).toHaveClass("bg-popover");
   });
 
-  it("has shadow-float class", async () => {
+  it("has edge class", async () => {
     const content = await openAndGetContent();
-    expect(content).toHaveClass("shadow-float");
+    expect(content).toHaveClass("edge");
   });
 
   it("has text-sm class", async () => {

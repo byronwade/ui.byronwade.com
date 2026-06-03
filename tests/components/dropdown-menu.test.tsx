@@ -852,13 +852,13 @@ describe("DropdownMenuContent — classes", () => {
     });
   });
 
-  it("has shadow-float class", async () => {
+  it("has edge class", async () => {
     const user = userEvent.setup();
     render(<BasicMenu />);
     await user.click(screen.getByRole("button", { name: "Options" }));
     await waitFor(() => {
       const popup = document.querySelector("[data-slot='dropdown-menu-content']");
-      expect(popup).toHaveClass("shadow-float");
+      expect(popup).toHaveClass("edge");
     });
   });
 

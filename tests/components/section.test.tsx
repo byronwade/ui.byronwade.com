@@ -267,10 +267,10 @@ describe("Section – card body wrapper", () => {
     expect(cardWrapper.className).toContain("rounded-2xl");
   });
 
-  it("card wrapper elevates with shadow-card (immersive edge, no hard border)", () => {
+  it("card wrapper elevates with edge (immersive edge, no hard border)", () => {
     render(<Section><div data-testid="inner">content</div></Section>);
     const cardWrapper = screen.getByTestId("inner").parentElement!;
-    expect(cardWrapper.className).toContain("shadow-card");
+    expect(cardWrapper.className).toContain("edge");
     expect(cardWrapper.className).not.toContain("border-border");
   });
 
@@ -280,10 +280,10 @@ describe("Section – card body wrapper", () => {
     expect(cardWrapper.className).toContain("bg-card");
   });
 
-  it("card wrapper has shadow-card class", () => {
+  it("card wrapper has edge class", () => {
     render(<Section><div data-testid="inner">content</div></Section>);
     const cardWrapper = screen.getByTestId("inner").parentElement!;
-    expect(cardWrapper.className).toContain("shadow-card");
+    expect(cardWrapper.className).toContain("edge");
   });
 
   it("renders multiple children inside the card wrapper", () => {

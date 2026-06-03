@@ -14,7 +14,7 @@ export const FilterPill = React.forwardRef<
       type="button"
       data-slot="filter-pill"
       className={cn(
-        "inline-flex h-8 items-center gap-1.5 rounded-full bg-background px-3 text-sm font-medium shadow-card transition-colors hover:bg-muted aria-expanded:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 outline-none",
+        "inline-flex h-8 items-center gap-1.5 rounded-full bg-background px-3 text-sm font-medium edge transition-colors hover:bg-muted aria-expanded:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 outline-none",
         className,
       )}
       {...props}

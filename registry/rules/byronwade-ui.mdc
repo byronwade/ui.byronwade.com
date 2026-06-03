@@ -86,27 +86,28 @@ Use the radius scale, never raw pixels: `rounded-sm`, `rounded-md`, `rounded-lg`
 ### House utilities (already defined by `foundation`)
 
 `bg-grid`, `bg-grid-lines`, `glow-brand`, `text-gradient`, `text-gradient-brand`, `mask-fade-x`,
-`full-bleed`, `shadow-float`, `shadow-card`, `edge`, `scrollbar-thin`. Prefer these over
+`full-bleed`, `edge`, `scrollbar-thin`. Prefer these over
 re-implementing gradients, grids, or shadows by hand.
 
-### Depth via shadow + an inset hairline — not hard borders
+### Depth via the inset `edge` hairline — not shadows or hard borders
 
-Surfaces read as **layered depth**, not outlined boxes. The trick (think of an immersive video
-frame): rounded corners + `overflow-hidden` so content clips to the radius, an outer elevation
-shadow, and a **subtle inset hairline** drawn _inside_ the edge that catches a little light so a
+Surfaces read as **crisp, flat planes**, not outlined boxes and not drop-shadowed cards. The trick
+(think of an immersive video frame): rounded corners + `overflow-hidden` so content clips to the
+radius, and a **subtle inset hairline** drawn _inside_ the edge that catches a little light so a
 surface reads as "set into" its background. That hairline is the `--edge` token — faint dark in
-light mode, faint light in dark mode — and it is already baked into `shadow-float` and `shadow-card`.
+light mode, faint light in dark mode — exposed as the **`edge`** utility (`box-shadow: inset 0 0 0
+1px var(--edge)`). **No drop shadows** anywhere; depth is the hairline alone.
 
-- **Floating overlays** (dialog, popover, dropdown-menu, hover-card, command, select, sheet,
-  navigation-menu, morph-dock panels) use `shadow-float` and carry **no** `border`.
-- **Resting surfaces** (card, stat-card, section) use `shadow-card` and carry **no** `border`.
-- **Flat surfaces that shouldn't float** (an inline alert, a list container, a gradient avatar)
-  use the standalone **`edge`** utility (inset hairline only, no drop shadow) instead of a border.
+- **Every surface** — floating overlays (dialog, popover, dropdown-menu, hover-card, command,
+  select, sheet, navigation-menu, morph-dock panels) AND resting surfaces (card, stat-card, section)
+  AND flat containers (inline alert, list container) — uses the **`edge`** utility and carries
+  **no** `border`. Overlays are crisp and flat; the hairline separates them. (Filled decorative
+  shapes like `gradient-avatar` are the exception — no hairline; for stacks use `ring-background`.)
 - **Borders are for separators only** — a divider between regions (`border-t`, `border-b`,
   table-row dividers), an input/affordance edge (`border-input`), or a genuinely subtle line that
-  breaks an element from a same-colored background. Never reach for a `border` to outline an
-  elevated surface; let the shadow + `--edge` hairline do it. No raw colors here either — the
-  hairline is token-driven, so a consumer overriding nothing still gets correct light/dark depth.
+  breaks an element from a same-colored background. Never reach for a `border` to outline a surface;
+  let the `--edge` hairline do it. No raw colors here either — the hairline is token-driven, so a
+  consumer overriding nothing still gets correct light/dark depth.
 
 ## 3. Re-skinning is one variable — leave the rest alone
 

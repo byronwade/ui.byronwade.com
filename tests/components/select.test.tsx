@@ -499,13 +499,13 @@ describe("Select — opening the popup", () => {
     expect(content).toHaveClass("bg-popover");
   });
 
-  it("popup has shadow-float class", async () => {
+  it("popup has edge class", async () => {
     const user = userEvent.setup();
     render(<BasicSelect />);
     await user.click(screen.getByRole("combobox"));
     await screen.findByRole("listbox");
     const content = document.querySelector("[data-slot='select-content']");
-    expect(content).toHaveClass("shadow-float");
+    expect(content).toHaveClass("edge");
   });
 });
 

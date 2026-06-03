@@ -145,8 +145,8 @@ const TONES: Record<
   }
 > = {
   dock: {
-    shell: "bg-dock text-dock-foreground shadow-float",
-    panel: "bg-dock text-dock-foreground shadow-float",
+    shell: "bg-dock text-dock-foreground edge",
+    panel: "bg-dock text-dock-foreground edge",
     idle: "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground",
     active: "bg-dock-active text-dock-active-foreground",
     ring: "focus-visible:ring-white/30",
@@ -164,8 +164,8 @@ const TONES: Record<
     statusInfo: "bg-dock-active text-dock-active-foreground",
   },
   surface: {
-    shell: "bg-card text-foreground shadow-card",
-    panel: "bg-card text-foreground shadow-card",
+    shell: "bg-card text-foreground edge",
+    panel: "bg-card text-foreground edge",
     idle: "text-muted-foreground hover:bg-accent hover:text-foreground",
     active: "bg-accent text-foreground",
     ring: "focus-visible:ring-ring",
@@ -662,7 +662,7 @@ export function MorphDock({
         ref={barRef}
         className={cn(
           "flex items-center gap-1 rounded-full p-[3px] transition-opacity duration-150",
-          bare ? "shadow-none" : t.shell,
+          bare ? "" : t.shell,
           inPlace && "pointer-events-none opacity-0",
         )}
       >
