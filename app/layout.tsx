@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/app/_components/theme-provider";
-import { CommandPalette } from "@/app/_components/command-palette";
+import { AppChrome } from "@/app/_components/chrome/app-chrome";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
@@ -34,8 +34,8 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
+          <AppChrome />
           {children}
-          <CommandPalette />
           <Toaster />
         </ThemeProvider>
       </body>

@@ -86,98 +86,112 @@
           "font-heading": "var(--font-sans)"
         },
         "light": {
-          "background": "oklch(1 0 0)",
-          "foreground": "oklch(0.16 0 0)",
-          "card": "oklch(1 0 0)",
-          "card-foreground": "oklch(0.16 0 0)",
-          "popover": "oklch(1 0 0)",
-          "popover-foreground": "oklch(0.16 0 0)",
-          "primary": "oklch(0.205 0 0)",
-          "primary-foreground": "oklch(0.985 0 0)",
-          "secondary": "oklch(0.97 0 0)",
-          "secondary-foreground": "oklch(0.205 0 0)",
-          "muted": "oklch(0.968 0 0)",
-          "muted-foreground": "oklch(0.556 0 0)",
-          "accent": "oklch(0.968 0 0)",
-          "accent-foreground": "oklch(0.205 0 0)",
+          "background": "oklch(0.994 0.002 95)",
+          "foreground": "oklch(0.205 0.006 72)",
+          "card": "oklch(0.997 0.002 95)",
+          "card-foreground": "oklch(0.205 0.006 72)",
+          "popover": "oklch(0.998 0.002 95)",
+          "popover-foreground": "oklch(0.205 0.006 72)",
+          "primary": "oklch(0.235 0.006 72)",
+          "primary-foreground": "oklch(0.99 0.002 95)",
+          "secondary": "oklch(0.967 0.004 90)",
+          "secondary-foreground": "oklch(0.235 0.006 72)",
+          "muted": "oklch(0.963 0.004 90)",
+          "muted-foreground": "oklch(0.553 0.01 75)",
+          "accent": "oklch(0.963 0.004 90)",
+          "accent-foreground": "oklch(0.235 0.006 72)",
           "destructive": "oklch(0.577 0.245 27.325)",
-          "border": "oklch(0.93 0 0)",
-          "input": "oklch(0.93 0 0)",
+          "border": "oklch(0.92 0.004 85)",
+          "input": "oklch(0.92 0.004 85)",
           "brand": "oklch(0.6 0.17 148)",
-          "brand-foreground": "oklch(0.985 0 0)",
+          "brand-foreground": "oklch(0.99 0.002 95)",
           "brand-muted": "oklch(0.96 0.03 148)",
           "success": "var(--brand)",
-          "success-foreground": "oklch(0.985 0 0)",
+          "success-foreground": "oklch(0.99 0.002 95)",
           "warning": "oklch(0.78 0.16 75)",
           "warning-foreground": "oklch(0.26 0.05 70)",
           "ring": "var(--brand)",
           "chart-1": "var(--brand)",
-          "chart-2": "oklch(0.556 0 0)",
-          "chart-3": "oklch(0.439 0 0)",
-          "chart-4": "oklch(0.371 0 0)",
-          "chart-5": "oklch(0.269 0 0)",
+          "chart-2": "oklch(0.556 0.01 75)",
+          "chart-3": "oklch(0.439 0.01 75)",
+          "chart-4": "oklch(0.371 0.01 75)",
+          "chart-5": "oklch(0.269 0.01 75)",
           "radius": "0.75rem",
-          "dock": "oklch(0.205 0 0)",
-          "dock-foreground": "oklch(0.72 0 0)",
+          "dock": "oklch(0.235 0.006 72)",
+          "dock-foreground": "oklch(0.72 0.006 75)",
           "dock-muted": "oklch(1 0 0 / 10%)",
           "dock-active": "oklch(1 0 0 / 14%)",
           "dock-active-foreground": "oklch(0.99 0 0)",
-          "sidebar": "oklch(0.985 0 0)",
-          "sidebar-foreground": "oklch(0.145 0 0)",
-          "sidebar-primary": "oklch(0.205 0 0)",
-          "sidebar-primary-foreground": "oklch(0.985 0 0)",
-          "sidebar-accent": "oklch(0.97 0 0)",
-          "sidebar-accent-foreground": "oklch(0.205 0 0)",
-          "sidebar-border": "oklch(0.922 0 0)",
-          "sidebar-ring": "oklch(0.708 0 0)"
+          "sidebar": "oklch(0.974 0.005 88)",
+          "sidebar-foreground": "oklch(0.205 0.006 72)",
+          "sidebar-primary": "oklch(0.235 0.006 72)",
+          "sidebar-primary-foreground": "oklch(0.99 0.002 95)",
+          "sidebar-accent": "oklch(0.955 0.0045 88)",
+          "sidebar-accent-foreground": "oklch(0.235 0.006 72)",
+          "sidebar-border": "oklch(0.91 0.004 85)",
+          "sidebar-ring": "oklch(0.708 0.008 75)"
         },
         "dark": {
-          "background": "oklch(0.13 0 0)",
-          "foreground": "oklch(0.985 0 0)",
-          "card": "oklch(0.185 0 0)",
-          "card-foreground": "oklch(0.985 0 0)",
-          "popover": "oklch(0.185 0 0)",
-          "popover-foreground": "oklch(0.985 0 0)",
-          "primary": "oklch(0.922 0 0)",
-          "primary-foreground": "oklch(0.205 0 0)",
-          "secondary": "oklch(0.255 0 0)",
-          "secondary-foreground": "oklch(0.985 0 0)",
-          "muted": "oklch(0.255 0 0)",
-          "muted-foreground": "oklch(0.708 0 0)",
-          "accent": "oklch(0.255 0 0)",
-          "accent-foreground": "oklch(0.985 0 0)",
+          "background": "oklch(0.16 0.006 70)",
+          "foreground": "oklch(0.928 0.004 83)",
+          "card": "oklch(0.205 0.007 70)",
+          "card-foreground": "oklch(0.928 0.004 83)",
+          "popover": "oklch(0.215 0.007 70)",
+          "popover-foreground": "oklch(0.928 0.004 83)",
+          "primary": "oklch(0.922 0.004 83)",
+          "primary-foreground": "oklch(0.2 0.006 70)",
+          "secondary": "oklch(0.268 0.007 70)",
+          "secondary-foreground": "oklch(0.928 0.004 83)",
+          "muted": "oklch(0.255 0.007 70)",
+          "muted-foreground": "oklch(0.715 0.009 75)",
+          "accent": "oklch(0.285 0.008 70)",
+          "accent-foreground": "oklch(0.95 0.004 83)",
           "destructive": "oklch(0.704 0.191 22.216)",
-          "border": "oklch(1 0 0 / 10%)",
-          "input": "oklch(1 0 0 / 15%)",
+          "border": "oklch(0.285 0.006 70)",
+          "input": "oklch(0.32 0.007 70)",
           "brand": "oklch(0.7 0.17 148)",
-          "brand-foreground": "oklch(0.985 0 0)",
-          "brand-muted": "oklch(0.3 0.06 148)",
+          "brand-foreground": "oklch(0.985 0.001 95)",
+          "brand-muted": "oklch(0.32 0.06 148)",
           "success": "var(--brand)",
-          "success-foreground": "oklch(0.985 0 0)",
+          "success-foreground": "oklch(0.985 0.001 95)",
           "warning": "oklch(0.82 0.15 78)",
           "warning-foreground": "oklch(0.26 0.05 70)",
           "ring": "var(--brand)",
           "chart-1": "var(--brand)",
-          "chart-2": "oklch(0.556 0 0)",
-          "chart-3": "oklch(0.439 0 0)",
-          "chart-4": "oklch(0.371 0 0)",
-          "chart-5": "oklch(0.269 0 0)",
-          "dock": "oklch(0.255 0 0)",
-          "dock-foreground": "oklch(0.72 0 0)",
+          "chart-2": "oklch(0.556 0.01 75)",
+          "chart-3": "oklch(0.439 0.01 75)",
+          "chart-4": "oklch(0.371 0.01 75)",
+          "chart-5": "oklch(0.269 0.01 75)",
+          "dock": "oklch(0.205 0.007 70)",
+          "dock-foreground": "oklch(0.72 0.008 75)",
           "dock-muted": "oklch(1 0 0 / 8%)",
           "dock-active": "oklch(1 0 0 / 14%)",
           "dock-active-foreground": "oklch(0.99 0 0)",
-          "sidebar": "oklch(0.145 0 0)",
-          "sidebar-foreground": "oklch(0.708 0 0)",
-          "sidebar-primary": "oklch(0.488 0.243 264.376)",
-          "sidebar-primary-foreground": "oklch(0.985 0 0)",
-          "sidebar-accent": "oklch(0.235 0 0)",
-          "sidebar-accent-foreground": "oklch(0.985 0 0)",
-          "sidebar-border": "oklch(1 0 0 / 7%)",
-          "sidebar-ring": "oklch(0.556 0 0)"
+          "sidebar": "oklch(0.15 0.006 70)",
+          "sidebar-foreground": "oklch(0.715 0.009 75)",
+          "sidebar-primary": "oklch(0.922 0.004 83)",
+          "sidebar-primary-foreground": "oklch(0.2 0.006 70)",
+          "sidebar-accent": "oklch(0.255 0.007 70)",
+          "sidebar-accent-foreground": "oklch(0.95 0.004 83)",
+          "sidebar-border": "oklch(0.275 0.006 70)",
+          "sidebar-ring": "oklch(0.556 0.006 75)"
         }
       },
       "css": {
+        "@layer base": {
+          "body": {
+            "font-feature-settings": "\"liga\" 1, \"calt\" 1",
+            "-webkit-font-smoothing": "antialiased",
+            "-moz-osx-font-smoothing": "grayscale",
+            "text-rendering": "optimizeLegibility",
+            "letter-spacing": "-0.006em",
+            "line-height": "1.6"
+          },
+          "h1, h2, h3, h4": {
+            "letter-spacing": "-0.02em",
+            "line-height": "1.15"
+          }
+        },
         "@layer utilities": {
           ".bg-grid": {
             "background-image": "radial-gradient(circle at 1px 1px, color-mix(in oklch, var(--foreground) 12%, transparent) 1px, transparent 0)",
@@ -1077,37 +1091,323 @@
       ]
     },
     {
-      "name": "bloom",
-      "type": "registry:ui",
-      "title": "Bloom",
-      "description": "Morphing surface that blooms from a bar into a panel — placement-adaptive, mobile bottom-sheet, pure-CSS animated.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "name": "use-chrome-morph",
+      "type": "registry:lib",
+      "title": "useChromeMorph",
+      "description": "Shared morph hook for floating chrome — sizes a container between its collapsed box and an open panel (width/height/border-radius), cross-fading rest and panel.",
       "files": [
-        { "path": "registry/ui/bloom.tsx", "type": "registry:ui", "target": "components/ui/bloom.tsx" },
-        { "path": "registry/lib/bloom/placement.ts", "type": "registry:lib", "target": "lib/bloom/placement.ts" }
+        {
+          "path": "registry/lib/use-chrome-morph.ts",
+          "type": "registry:lib",
+          "target": "lib/use-chrome-morph.ts"
+        }
       ]
     },
     {
-      "name": "bloom-flow",
+      "name": "morph-dock",
       "type": "registry:ui",
-      "title": "Bloom flow",
-      "description": "Declarative form/wizard runner rendered inside a Bloom (persistent footer, steps, success ring).",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/bloom"],
+      "title": "Morph dock",
+      "description": "Config-driven morphing navigation dock built on the useChromeMorph hook — compact/expand items that bloom in place into a consumer panel.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/use-chrome-morph"
+      ],
       "files": [
-        { "path": "registry/ui/bloom-flow.tsx", "type": "registry:ui", "target": "components/ui/bloom-flow.tsx" }
+        {
+          "path": "registry/ui/morph-dock.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-dock.tsx"
+        }
       ]
     },
     {
-      "name": "bloom-dock",
+      "name": "aspect-ratio",
       "type": "registry:ui",
-      "title": "Bloom dock",
-      "description": "Config-driven morphing navigation dock built on Bloom + Bloom flow.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/bloom", "@byronwade/bloom-flow"],
+      "title": "Aspect Ratio",
+      "description": "Container that locks child content to a fixed width-to-height ratio.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
-        { "path": "registry/ui/bloom-dock.tsx", "type": "registry:ui", "target": "components/ui/bloom-dock.tsx" }
+        {
+          "path": "registry/ui/aspect-ratio.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/aspect-ratio.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Custom-styled scrollable viewport with optional scrollbars.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/scroll-area.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Expand/collapse region with trigger and animated panel.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/collapsible.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Two-state pressable toggle button with variant and size styles.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Mutually exclusive or multi-select group of toggle buttons.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/toggle"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Grouped input shell with addons, buttons, and aligned controls.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/input",
+        "@byronwade/textarea"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Slide-over panel dialog anchored to any screen edge.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sheet.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Command palette built on cmdk with dialog and input-group integration.",
+      "dependencies": [
+        "cmdk",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/dialog",
+        "@byronwade/input-group"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/command.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/command.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Accessible site navigation with animated dropdown panels.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/navigation-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verification-progress",
+      "type": "registry:component",
+      "title": "Verification Progress",
+      "description": "Multi-step verification status tracker with tone-colored steps, optional counts, and connecting rails.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/verification-progress.tsx",
+          "type": "registry:component",
+          "target": "components/verification-progress.tsx"
+        }
+      ]
+    },
+    {
+      "name": "design-rules",
+      "type": "registry:file",
+      "title": "Design-system AI rules",
+      "description": "Drops a Cursor rule into the project so AI agents always build and edit UI with the @byronwade/ui design system (components + tokens, no hardcoded colors). Add it once with `npx shadcn add @byronwade/design-rules`.",
+      "files": [
+        {
+          "path": "registry/rules/byronwade-ui.mdc",
+          "type": "registry:file",
+          "target": ".cursor/rules/byronwade-ui.mdc"
+        }
+      ]
+    },
+    {
+      "name": "all",
+      "type": "registry:block",
+      "title": "All components",
+      "description": "The entire byronwade/ui catalog in one install. Run `init` against foundation first, then add this to pull every component (dependencies resolve automatically).",
+      "registryDependencies": [
+        "@byronwade/utils",
+        "@byronwade/status-dot",
+        "@byronwade/gauge",
+        "@byronwade/identity",
+        "@byronwade/gradient-avatar",
+        "@byronwade/activity-grid",
+        "@byronwade/filter-pill",
+        "@byronwade/segmented-control",
+        "@byronwade/timeline-rail",
+        "@byronwade/split-with-rail",
+        "@byronwade/hero-section",
+        "@byronwade/metric-stat",
+        "@byronwade/centered-focal",
+        "@byronwade/button",
+        "@byronwade/badge",
+        "@byronwade/card",
+        "@byronwade/input",
+        "@byronwade/textarea",
+        "@byronwade/label",
+        "@byronwade/select",
+        "@byronwade/checkbox",
+        "@byronwade/switch",
+        "@byronwade/radio-group",
+        "@byronwade/tooltip",
+        "@byronwade/popover",
+        "@byronwade/dropdown-menu",
+        "@byronwade/dialog",
+        "@byronwade/hover-card",
+        "@byronwade/alert",
+        "@byronwade/progress",
+        "@byronwade/skeleton",
+        "@byronwade/sonner",
+        "@byronwade/tabs",
+        "@byronwade/accordion",
+        "@byronwade/avatar",
+        "@byronwade/separator",
+        "@byronwade/breadcrumb",
+        "@byronwade/table",
+        "@byronwade/chart",
+        "@byronwade/status-pill",
+        "@byronwade/page-header",
+        "@byronwade/stat-card",
+        "@byronwade/empty-state",
+        "@byronwade/detail-header",
+        "@byronwade/section",
+        "@byronwade/event-timeline",
+        "@byronwade/use-chrome-morph",
+        "@byronwade/morph-dock",
+        "@byronwade/aspect-ratio",
+        "@byronwade/scroll-area",
+        "@byronwade/collapsible",
+        "@byronwade/toggle",
+        "@byronwade/toggle-group",
+        "@byronwade/input-group",
+        "@byronwade/sheet",
+        "@byronwade/command",
+        "@byronwade/navigation-menu",
+        "@byronwade/verification-progress"
       ]
     }
   ]

@@ -19,6 +19,11 @@ import AlertVariants from "./alert/variants";
 import AlertWithAction from "./alert/with-action";
 import AlertWithIcon from "./alert/with-icon";
 import AlertWithLink from "./alert/with-link";
+import AspectRatioDefault from "./aspect-ratio/default";
+import AspectRatioCinematic from "./aspect-ratio/cinematic";
+import AspectRatioPortrait from "./aspect-ratio/portrait";
+import AspectRatioSquare from "./aspect-ratio/square";
+import AspectRatioThumbnail from "./aspect-ratio/thumbnail";
 import AvatarDefault from "./avatar/default";
 import AvatarFallback from "./avatar/fallback";
 import AvatarGroup from "./avatar/group";
@@ -31,12 +36,6 @@ import BadgeInlineContent from "./badge/inline-content";
 import BadgeInvalid from "./badge/invalid";
 import BadgeStatus from "./badge/status";
 import BadgeWithIcon from "./badge/with-icon";
-import BloomDefault from "./bloom/default";
-import BloomPlacements from "./bloom/placements";
-import BloomDockDefault from "./bloom-dock/default";
-import BloomDockExpand from "./bloom-dock/expand";
-import BloomFlowForm from "./bloom-flow/form";
-import BloomFlowWizard from "./bloom-flow/wizard";
 import BreadcrumbDefault from "./breadcrumb/default";
 import BreadcrumbCustomSeparator from "./breadcrumb/custom-separator";
 import BreadcrumbLongPath from "./breadcrumb/long-path";
@@ -80,6 +79,16 @@ import CheckboxDisabled from "./checkbox/disabled";
 import CheckboxIndeterminate from "./checkbox/indeterminate";
 import CheckboxReadonly from "./checkbox/readonly";
 import CheckboxWithLabel from "./checkbox/with-label";
+import CollapsibleDefault from "./collapsible/default";
+import CollapsibleDisabled from "./collapsible/disabled";
+import CollapsibleFaq from "./collapsible/faq";
+import CollapsibleUncontrolled from "./collapsible/uncontrolled";
+import CollapsibleWithRichContent from "./collapsible/with-rich-content";
+import CommandDefault from "./command/default";
+import CommandEmptyState from "./command/empty-state";
+import CommandGrouped from "./command/grouped";
+import CommandInline from "./command/inline";
+import CommandWithIcons from "./command/with-icons";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
 import DetailHeaderManyActions from "./detail-header/many-actions";
@@ -157,6 +166,12 @@ import InputWithAdornment from "./input/with-adornment";
 import InputWithButton from "./input/with-button";
 import InputWithIcon from "./input/with-icon";
 import InputWithLabel from "./input/with-label";
+import InputGroupDefault from "./input-group/default";
+import InputGroupTextarea from "./input-group/textarea";
+import InputGroupValidation from "./input-group/validation";
+import InputGroupWithButton from "./input-group/with-button";
+import InputGroupWithKbd from "./input-group/with-kbd";
+import InputGroupWithText from "./input-group/with-text";
 import LabelDefault from "./label/default";
 import LabelDisabled from "./label/disabled";
 import LabelErrorState from "./label/error-state";
@@ -171,6 +186,11 @@ import MetricStatGridLayout from "./metric-stat/grid-layout";
 import MetricStatLoading from "./metric-stat/loading";
 import MetricStatNoDelta from "./metric-stat/no-delta";
 import MetricStatWithIcon from "./metric-stat/with-icon";
+import MorphDockDefault from "./morph-dock/default";
+import NavigationMenuDefault from "./navigation-menu/default";
+import NavigationMenuSimpleLinks from "./navigation-menu/simple-links";
+import NavigationMenuWithDescriptions from "./navigation-menu/with-descriptions";
+import NavigationMenuWithIcons from "./navigation-menu/with-icons";
 import PageHeaderDefault from "./page-header/default";
 import PageHeaderAlign from "./page-header/align";
 import PageHeaderBreadcrumbContext from "./page-header/breadcrumb-context";
@@ -195,6 +215,11 @@ import RadioGroupFormValidation from "./radio-group/form-validation";
 import RadioGroupHorizontal from "./radio-group/horizontal";
 import RadioGroupWithDescription from "./radio-group/with-description";
 import RadioGroupWithIcon from "./radio-group/with-icon";
+import ScrollAreaDefault from "./scroll-area/default";
+import ScrollAreaCardList from "./scroll-area/card-list";
+import ScrollAreaCompact from "./scroll-area/compact";
+import ScrollAreaProse from "./scroll-area/prose";
+import ScrollAreaWithHeader from "./scroll-area/with-header";
 import SectionDefault from "./section/default";
 import SectionInlineChildren from "./section/inline-children";
 import SectionNoHeader from "./section/no-header";
@@ -220,6 +245,11 @@ import SeparatorInCard from "./separator/in-card";
 import SeparatorInNav from "./separator/in-nav";
 import SeparatorVertical from "./separator/vertical";
 import SeparatorWithLabel from "./separator/with-label";
+import SheetDefault from "./sheet/default";
+import SheetNoCloseButton from "./sheet/no-close-button";
+import SheetScrollable from "./sheet/scrollable";
+import SheetSides from "./sheet/sides";
+import SheetWithForm from "./sheet/with-form";
 import SkeletonDefault from "./skeleton/default";
 import SkeletonCard from "./skeleton/card";
 import SkeletonList from "./skeleton/list";
@@ -292,12 +322,30 @@ import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
 import TimelineRailMultiGroup from "./timeline-rail/multi-group";
 import TimelineRailWithIcons from "./timeline-rail/with-icons";
 import TimelineRailWithTones from "./timeline-rail/with-tones";
+import ToggleDefault from "./toggle/default";
+import ToggleControlled from "./toggle/controlled";
+import ToggleDisabled from "./toggle/disabled";
+import ToggleSizes from "./toggle/sizes";
+import ToggleVariants from "./toggle/variants";
+import ToggleWithText from "./toggle/with-text";
+import ToggleGroupDefault from "./toggle-group/default";
+import ToggleGroupDisabled from "./toggle-group/disabled";
+import ToggleGroupMultiple from "./toggle-group/multiple";
+import ToggleGroupSizes from "./toggle-group/sizes";
+import ToggleGroupVariants from "./toggle-group/variants";
+import ToggleGroupVertical from "./toggle-group/vertical";
 import TooltipDefault from "./tooltip/default";
 import TooltipAlignment from "./tooltip/alignment";
 import TooltipRichContent from "./tooltip/rich-content";
 import TooltipSides from "./tooltip/sides";
 import TooltipWithDelay from "./tooltip/with-delay";
 import TooltipWithIcon from "./tooltip/with-icon";
+import VerificationProgressDefault from "./verification-progress/default";
+import VerificationProgressAllTones from "./verification-progress/all-tones";
+import VerificationProgressManySteps from "./verification-progress/many-steps";
+import VerificationProgressStatuses from "./verification-progress/statuses";
+import VerificationProgressTwoSteps from "./verification-progress/two-steps";
+import VerificationProgressWithCounts from "./verification-progress/with-counts";
 
 export type Example = { name: string; file: string; Component: ComponentType };
 
@@ -327,6 +375,13 @@ export const examples: Record<string, Example[]> = {
     { name: "With Icon", file: "alert/with-icon.tsx", Component: AlertWithIcon },
     { name: "With Link", file: "alert/with-link.tsx", Component: AlertWithLink },
   ],
+  "aspect-ratio": [
+    { name: "Default", file: "aspect-ratio/default.tsx", Component: AspectRatioDefault },
+    { name: "Cinematic", file: "aspect-ratio/cinematic.tsx", Component: AspectRatioCinematic },
+    { name: "Portrait", file: "aspect-ratio/portrait.tsx", Component: AspectRatioPortrait },
+    { name: "Square", file: "aspect-ratio/square.tsx", Component: AspectRatioSquare },
+    { name: "Thumbnail", file: "aspect-ratio/thumbnail.tsx", Component: AspectRatioThumbnail },
+  ],
   "avatar": [
     { name: "Default", file: "avatar/default.tsx", Component: AvatarDefault },
     { name: "Fallback", file: "avatar/fallback.tsx", Component: AvatarFallback },
@@ -342,18 +397,6 @@ export const examples: Record<string, Example[]> = {
     { name: "Invalid", file: "badge/invalid.tsx", Component: BadgeInvalid },
     { name: "Status", file: "badge/status.tsx", Component: BadgeStatus },
     { name: "With Icon", file: "badge/with-icon.tsx", Component: BadgeWithIcon },
-  ],
-  "bloom": [
-    { name: "Default", file: "bloom/default.tsx", Component: BloomDefault },
-    { name: "Placements", file: "bloom/placements.tsx", Component: BloomPlacements },
-  ],
-  "bloom-dock": [
-    { name: "Default", file: "bloom-dock/default.tsx", Component: BloomDockDefault },
-    { name: "Expand", file: "bloom-dock/expand.tsx", Component: BloomDockExpand },
-  ],
-  "bloom-flow": [
-    { name: "Form", file: "bloom-flow/form.tsx", Component: BloomFlowForm },
-    { name: "Wizard", file: "bloom-flow/wizard.tsx", Component: BloomFlowWizard },
   ],
   "breadcrumb": [
     { name: "Default", file: "breadcrumb/default.tsx", Component: BreadcrumbDefault },
@@ -409,6 +452,20 @@ export const examples: Record<string, Example[]> = {
     { name: "Indeterminate", file: "checkbox/indeterminate.tsx", Component: CheckboxIndeterminate },
     { name: "Readonly", file: "checkbox/readonly.tsx", Component: CheckboxReadonly },
     { name: "With Label", file: "checkbox/with-label.tsx", Component: CheckboxWithLabel },
+  ],
+  "collapsible": [
+    { name: "Default", file: "collapsible/default.tsx", Component: CollapsibleDefault },
+    { name: "Disabled", file: "collapsible/disabled.tsx", Component: CollapsibleDisabled },
+    { name: "Faq", file: "collapsible/faq.tsx", Component: CollapsibleFaq },
+    { name: "Uncontrolled", file: "collapsible/uncontrolled.tsx", Component: CollapsibleUncontrolled },
+    { name: "With Rich Content", file: "collapsible/with-rich-content.tsx", Component: CollapsibleWithRichContent },
+  ],
+  "command": [
+    { name: "Default", file: "command/default.tsx", Component: CommandDefault },
+    { name: "Empty State", file: "command/empty-state.tsx", Component: CommandEmptyState },
+    { name: "Grouped", file: "command/grouped.tsx", Component: CommandGrouped },
+    { name: "Inline", file: "command/inline.tsx", Component: CommandInline },
+    { name: "With Icons", file: "command/with-icons.tsx", Component: CommandWithIcons },
   ],
   "detail-header": [
     { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },
@@ -513,6 +570,14 @@ export const examples: Record<string, Example[]> = {
     { name: "With Icon", file: "input/with-icon.tsx", Component: InputWithIcon },
     { name: "With Label", file: "input/with-label.tsx", Component: InputWithLabel },
   ],
+  "input-group": [
+    { name: "Default", file: "input-group/default.tsx", Component: InputGroupDefault },
+    { name: "Textarea", file: "input-group/textarea.tsx", Component: InputGroupTextarea },
+    { name: "Validation", file: "input-group/validation.tsx", Component: InputGroupValidation },
+    { name: "With Button", file: "input-group/with-button.tsx", Component: InputGroupWithButton },
+    { name: "With Kbd", file: "input-group/with-kbd.tsx", Component: InputGroupWithKbd },
+    { name: "With Text", file: "input-group/with-text.tsx", Component: InputGroupWithText },
+  ],
   "label": [
     { name: "Default", file: "label/default.tsx", Component: LabelDefault },
     { name: "Disabled", file: "label/disabled.tsx", Component: LabelDisabled },
@@ -530,6 +595,15 @@ export const examples: Record<string, Example[]> = {
     { name: "Loading", file: "metric-stat/loading.tsx", Component: MetricStatLoading },
     { name: "No Delta", file: "metric-stat/no-delta.tsx", Component: MetricStatNoDelta },
     { name: "With Icon", file: "metric-stat/with-icon.tsx", Component: MetricStatWithIcon },
+  ],
+  "morph-dock": [
+    { name: "Default", file: "morph-dock/default.tsx", Component: MorphDockDefault },
+  ],
+  "navigation-menu": [
+    { name: "Default", file: "navigation-menu/default.tsx", Component: NavigationMenuDefault },
+    { name: "Simple Links", file: "navigation-menu/simple-links.tsx", Component: NavigationMenuSimpleLinks },
+    { name: "With Descriptions", file: "navigation-menu/with-descriptions.tsx", Component: NavigationMenuWithDescriptions },
+    { name: "With Icons", file: "navigation-menu/with-icons.tsx", Component: NavigationMenuWithIcons },
   ],
   "page-header": [
     { name: "Default", file: "page-header/default.tsx", Component: PageHeaderDefault },
@@ -563,6 +637,13 @@ export const examples: Record<string, Example[]> = {
     { name: "With Description", file: "radio-group/with-description.tsx", Component: RadioGroupWithDescription },
     { name: "With Icon", file: "radio-group/with-icon.tsx", Component: RadioGroupWithIcon },
   ],
+  "scroll-area": [
+    { name: "Default", file: "scroll-area/default.tsx", Component: ScrollAreaDefault },
+    { name: "Card List", file: "scroll-area/card-list.tsx", Component: ScrollAreaCardList },
+    { name: "Compact", file: "scroll-area/compact.tsx", Component: ScrollAreaCompact },
+    { name: "Prose", file: "scroll-area/prose.tsx", Component: ScrollAreaProse },
+    { name: "With Header", file: "scroll-area/with-header.tsx", Component: ScrollAreaWithHeader },
+  ],
   "section": [
     { name: "Default", file: "section/default.tsx", Component: SectionDefault },
     { name: "Inline Children", file: "section/inline-children.tsx", Component: SectionInlineChildren },
@@ -595,6 +676,13 @@ export const examples: Record<string, Example[]> = {
     { name: "In Nav", file: "separator/in-nav.tsx", Component: SeparatorInNav },
     { name: "Vertical", file: "separator/vertical.tsx", Component: SeparatorVertical },
     { name: "With Label", file: "separator/with-label.tsx", Component: SeparatorWithLabel },
+  ],
+  "sheet": [
+    { name: "Default", file: "sheet/default.tsx", Component: SheetDefault },
+    { name: "No Close Button", file: "sheet/no-close-button.tsx", Component: SheetNoCloseButton },
+    { name: "Scrollable", file: "sheet/scrollable.tsx", Component: SheetScrollable },
+    { name: "Sides", file: "sheet/sides.tsx", Component: SheetSides },
+    { name: "With Form", file: "sheet/with-form.tsx", Component: SheetWithForm },
   ],
   "skeleton": [
     { name: "Default", file: "skeleton/default.tsx", Component: SkeletonDefault },
@@ -690,6 +778,22 @@ export const examples: Record<string, Example[]> = {
     { name: "With Icons", file: "timeline-rail/with-icons.tsx", Component: TimelineRailWithIcons },
     { name: "With Tones", file: "timeline-rail/with-tones.tsx", Component: TimelineRailWithTones },
   ],
+  "toggle": [
+    { name: "Default", file: "toggle/default.tsx", Component: ToggleDefault },
+    { name: "Controlled", file: "toggle/controlled.tsx", Component: ToggleControlled },
+    { name: "Disabled", file: "toggle/disabled.tsx", Component: ToggleDisabled },
+    { name: "Sizes", file: "toggle/sizes.tsx", Component: ToggleSizes },
+    { name: "Variants", file: "toggle/variants.tsx", Component: ToggleVariants },
+    { name: "With Text", file: "toggle/with-text.tsx", Component: ToggleWithText },
+  ],
+  "toggle-group": [
+    { name: "Default", file: "toggle-group/default.tsx", Component: ToggleGroupDefault },
+    { name: "Disabled", file: "toggle-group/disabled.tsx", Component: ToggleGroupDisabled },
+    { name: "Multiple", file: "toggle-group/multiple.tsx", Component: ToggleGroupMultiple },
+    { name: "Sizes", file: "toggle-group/sizes.tsx", Component: ToggleGroupSizes },
+    { name: "Variants", file: "toggle-group/variants.tsx", Component: ToggleGroupVariants },
+    { name: "Vertical", file: "toggle-group/vertical.tsx", Component: ToggleGroupVertical },
+  ],
   "tooltip": [
     { name: "Default", file: "tooltip/default.tsx", Component: TooltipDefault },
     { name: "Alignment", file: "tooltip/alignment.tsx", Component: TooltipAlignment },
@@ -697,5 +801,13 @@ export const examples: Record<string, Example[]> = {
     { name: "Sides", file: "tooltip/sides.tsx", Component: TooltipSides },
     { name: "With Delay", file: "tooltip/with-delay.tsx", Component: TooltipWithDelay },
     { name: "With Icon", file: "tooltip/with-icon.tsx", Component: TooltipWithIcon },
+  ],
+  "verification-progress": [
+    { name: "Default", file: "verification-progress/default.tsx", Component: VerificationProgressDefault },
+    { name: "All Tones", file: "verification-progress/all-tones.tsx", Component: VerificationProgressAllTones },
+    { name: "Many Steps", file: "verification-progress/many-steps.tsx", Component: VerificationProgressManySteps },
+    { name: "Statuses", file: "verification-progress/statuses.tsx", Component: VerificationProgressStatuses },
+    { name: "Two Steps", file: "verification-progress/two-steps.tsx", Component: VerificationProgressTwoSteps },
+    { name: "With Counts", file: "verification-progress/with-counts.tsx", Component: VerificationProgressWithCounts },
   ],
 };

@@ -48,3 +48,7 @@ next-env.d.ts
 /lib/utils.ts
 /lib/identity.ts
 /app/foundation.generated.css
+
+# local artifacts
+/.screenshots
+/.tsc-nontest.txt

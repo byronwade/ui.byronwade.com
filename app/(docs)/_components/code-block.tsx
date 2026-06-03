@@ -11,7 +11,7 @@ export function CodeBlock({ code, lang = "tsx" }: { code: string; lang?: string 
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <div className="relative">
+    <div className="relative min-w-0">
       <button
         type="button"
         onClick={copy}

@@ -7,9 +7,16 @@ import { dirname, join } from "node:path";
 const root = process.cwd();
 const reg = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 
+// Only sync files that belong in the app tree (components/*, lib/*). Items like
+// `registry:file` (e.g. the design-rules Cursor rule) ship to a consumer project
+// path and must not be materialized into this repo.
+const isAppTarget = (target) =>
+  target.startsWith("components/") || target.startsWith("lib/");
+
 let copied = 0;
 for (const item of reg.items) {
   for (const f of item.files ?? []) {
+    if (!isAppTarget(f.target)) continue;
     const dest = join(root, f.target);
     mkdirSync(dirname(dest), { recursive: true });
     copyFileSync(join(root, f.path), dest);

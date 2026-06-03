@@ -106,19 +106,17 @@ describe("Tabs – orientation prop", () => {
     expect(root).toHaveAttribute("data-orientation", "vertical");
   });
 
-  it("horizontal tabs root has data-horizontal attribute", () => {
+  it("horizontal tabs root stacks list above content (flex-col)", () => {
     const { container } = render(<BasicTabs orientation="horizontal" />);
     const root = container.querySelector("[data-slot='tabs']");
-    // Base UI sets data-[orientation] as a data attribute on the root
-    expect(root).toHaveAttribute("data-orientation", "horizontal");
+    expect(root?.className).toContain("flex-col");
+    expect(root?.className).toContain("data-[orientation=vertical]:flex-row");
   });
 
-  it("vertical tabs root has flex-col layout class via data-horizontal:flex-col absent", () => {
-    // The root class includes 'data-horizontal:flex-col'; vertical tabs do NOT have data-horizontal
+  it("vertical tabs root lays out list beside content (flex-row)", () => {
     const { container } = render(<BasicTabs orientation="vertical" />);
     const root = container.querySelector("[data-slot='tabs']");
-    // The root always has the data-horizontal:flex-col class in the string; orientation is set by the data-attribute
-    expect(root?.className).toContain("data-horizontal:flex-col");
+    expect(root?.className).toContain("data-[orientation=vertical]:flex-row");
   });
 
   it("root always has 'flex' and 'gap-2' base classes", () => {

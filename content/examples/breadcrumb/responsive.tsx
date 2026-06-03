@@ -13,9 +13,9 @@ import {
 
 const crumbs = [
   { label: "Home", href: "/" },
-  { label: "Library", href: "/library" },
-  { label: "Collections", href: "/library/collections" },
-  { label: "Architecture", href: "/library/collections/architecture" },
+  { label: "Library", href: "#" },
+  { label: "Collections", href: "#" },
+  { label: "Architecture", href: "#" },
   { label: "Modern Structures", href: null }, // current page
 ];
 

@@ -17,9 +17,11 @@ export function Section({
   children: React.ReactNode;
   className?: string;
 }) {
+  const hasHeader = Boolean(title || description || action);
+
   return (
     <section className={cn("space-y-4", className)}>
-      {(title || action) && (
+      {hasHeader && (
         <div className="flex items-end justify-between gap-4">
           <div className="space-y-1">
             {title && <h2 className="text-sm font-semibold tracking-tight">{title}</h2>}

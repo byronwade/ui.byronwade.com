@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Bell, Settings, Trash2 } from "lucide-react";
+import { Bell, FileTextIcon, MenuIcon, Settings, Trash2, XIcon } from "lucide-react";
 import { bySlug } from "@/content/components";
 import {
   Area,
@@ -72,6 +72,30 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 export const SECTIONS = [
   { id: "philosophy", label: "Philosophy" },
@@ -140,6 +164,9 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
       { id: slugify("Switch"), label: "Switch" },
       { id: slugify("RadioGroup"), label: "RadioGroup" },
       { id: slugify("Label"), label: "Label" },
+      { id: slugify("Toggle"), label: "Toggle" },
+      { id: slugify("ToggleGroup"), label: "ToggleGroup" },
+      { id: slugify("InputGroup"), label: "InputGroup" },
     ],
   },
   {
@@ -150,6 +177,9 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
       { id: slugify("Popover"), label: "Popover" },
       { id: slugify("DropdownMenu"), label: "DropdownMenu" },
       { id: slugify("Dialog"), label: "Dialog" },
+      { id: slugify("Sheet"), label: "Sheet" },
+      { id: slugify("Command"), label: "Command" },
+      { id: slugify("NavigationMenu"), label: "NavigationMenu" },
       { id: slugify("HoverCard"), label: "HoverCard" },
     ],
   },
@@ -173,6 +203,9 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
       { id: slugify("Separator"), label: "Separator" },
       { id: slugify("Breadcrumb"), label: "Breadcrumb" },
       { id: slugify("Table"), label: "Table" },
+      { id: slugify("AspectRatio"), label: "AspectRatio" },
+      { id: slugify("ScrollArea"), label: "ScrollArea" },
+      { id: slugify("Collapsible"), label: "Collapsible" },
     ],
   },
   {
@@ -196,15 +229,16 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
       { id: slugify("Bar chart"), label: "Bar chart" },
     ],
   },
-  {
-    id: "house",
-    label: "House components",
-    items: [
-      { id: slugify("DetailHeader"), label: "DetailHeader" },
-      { id: slugify("Section (settings panel)"), label: "Section" },
-      { id: slugify("EventTimeline"), label: "EventTimeline" },
-    ],
-  },
+    {
+      id: "house",
+      label: "House components",
+      items: [
+        { id: slugify("DetailHeader"), label: "DetailHeader" },
+        { id: slugify("Section (settings panel)"), label: "Section" },
+        { id: slugify("EventTimeline"), label: "EventTimeline" },
+        { id: slugify("VerificationProgress"), label: "VerificationProgress" },
+      ],
+    },
   {
     id: "layouts",
     label: "Layouts",
@@ -375,6 +409,10 @@ export function Section({
   count?: number;
   children: React.ReactNode;
 }) {
+  // Auto-derive the badge from the rendered specimens so it can never drift
+  // from the actual content. Pass `count` to override (e.g. the comparison
+  // section renders one child that stands in for many items).
+  const resolvedCount = count ?? React.Children.count(children);
   return (
     <section id={id} className="scroll-mt-24">
       <div className="flex items-end justify-between gap-4 border-b border-border pb-4">
@@ -384,11 +422,9 @@ export function Section({
             <p className="mt-1 text-sm text-muted-foreground">{description}</p>
           )}
         </div>
-        {count != null && (
-          <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
-            {count} {count === 1 ? "item" : "items"}
-          </span>
-        )}
+        <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+          {resolvedCount} {resolvedCount === 1 ? "item" : "items"}
+        </span>
       </div>
       <div className="divide-y divide-border [&>*]:py-7 [&>*:first-child]:pt-6 [&>*:last-child]:pb-0">
         {children}
@@ -415,7 +451,7 @@ export function Specimen({
   if (from?.startsWith("@/components/")) {
     const slug = from.split("/").pop() ?? "";
     if (slug && bySlug(slug)) {
-      detailHref = `/components/${slug}`;
+      detailHref = `/docs/${slug}`;
     }
   }
 
@@ -782,5 +818,87 @@ export function BarChartDemo() {
         <Bar dataKey="value" fill="var(--color-value)" radius={[6, 6, 0, 0]} />
       </BarChart>
     </ChartContainer>
+  );
+}
+
+/* ── New overlay demos ───────────────────────────────────────────────── */
+
+export function SheetDemo() {
+  return (
+    <Sheet>
+      <SheetTrigger render={<Button variant="outline"><MenuIcon className="mr-2 size-4" />Open sheet</Button>} />
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Project settings</SheetTitle>
+          <SheetDescription>
+            Manage display name, access, and integrations for this project.
+          </SheetDescription>
+        </SheetHeader>
+        <div className="p-6 pt-0 space-y-4">
+          <p className="text-sm text-muted-foreground">Settings content goes here.</p>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
+export function CommandDemo() {
+  return (
+    <div className="overflow-hidden rounded-xl border border-border shadow-float" style={{ maxWidth: "22rem" }}>
+      <Command>
+        <CommandInput placeholder="Search commands…" />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Actions">
+            <CommandItem>
+              <Settings className="size-4" />
+              Project settings
+            </CommandItem>
+            <CommandItem>
+              <Bell className="size-4" />
+              Notifications
+            </CommandItem>
+            <CommandItem>
+              <FileTextIcon className="size-4" />
+              Documentation
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </Command>
+    </div>
+  );
+}
+
+export function NavigationMenuDemo() {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="#" className="px-3 py-1.5 text-sm">
+            Home
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="grid w-56 gap-1 p-2">
+              <NavigationMenuLink href="#" className="rounded-md">
+                <span className="font-medium text-sm">Analytics</span>
+                <p className="text-xs text-muted-foreground">Track usage and events.</p>
+              </NavigationMenuLink>
+              <NavigationMenuLink href="#" className="rounded-md">
+                <span className="font-medium text-sm">Messaging</span>
+                <p className="text-xs text-muted-foreground">Calls, SMS, and voicemail.</p>
+              </NavigationMenuLink>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="#" className="px-3 py-1.5 text-sm">
+            Docs
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 }

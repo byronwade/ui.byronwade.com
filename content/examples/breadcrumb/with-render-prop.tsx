@@ -31,7 +31,7 @@ export default function Example() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink
-              href="/store"
+              href="#"
               render={
                 <a className="font-medium underline underline-offset-4 hover:no-underline" />
               }

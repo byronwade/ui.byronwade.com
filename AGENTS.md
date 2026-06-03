@@ -6,11 +6,98 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # byronwade/ui design-system registry
 
-This repo is the **byronwade/ui design-system registry**. Component source is **mirrored from SignalRoute** (the canonical repo) via `npm run mirror` — never hand-edit `registry/*` files. Edit the component in SignalRoute, then mirror here.
+This repo is the **byronwade/ui design-system registry** — a standalone shadcn registry. All component source lives here in `registry/` and is edited directly in this repo.
 
-See `README.md` for the full workflow (mirror → registry:build → deploy).
+See `README.md` for the full workflow (sync → registry:build → deploy).
 
-For design-system conventions (tokens, layout archetypes, Visitors-style shell), see SignalRoute's `AGENTS.md`.
+## Design DNA — the law for authoring components
+
+This is the same standard we ship to consumers (see `registry/rules/byronwade-ui.mdc`, published as
+`@byronwade/design-rules`). **When you create or edit a component here, build it so a downstream AI
+agent following that rule would produce identical-looking code.** That means:
+
+- **Tokens only, never raw color.** No hex, `rgb()`, `hsl()`, named colors, or arbitrary values
+  (`text-[#333]`). Use semantic token utilities: `bg-background`/`text-foreground`,
+  `bg-primary`/`text-primary-foreground`, `bg-brand`/`bg-brand-muted`, `bg-success`, `bg-warning`,
+  `bg-destructive`/`text-destructive`, `border-border`, `bg-input`, `ring-ring`, `bg-muted`,
+  `bg-secondary`, `bg-accent`, `bg-card`, `bg-popover`, `--chart-1…5`, `bg-sidebar*`, `dock-*`.
+  Tone with opacity (`bg-brand/10`, `bg-success/10`) rather than introducing new colors.
+- **One accent variable.** The accent (rings, `--chart-1`, `--success`, active states) is derived
+  from `--brand`. Anything brand/accent/success-colored must resolve to `--brand`, so a consumer
+  overriding `--brand` re-skins the whole system. Never pin those to a literal green.
+- **Base UI + CVA + `data-slot`.** Primitives build on `@base-ui/react`. Variants/sizes live in a
+  `cva(...)` block (see `registry/ui/button.tsx`), each part carries a `data-slot` attribute, and the
+  radius scale (`rounded-sm`…`rounded-4xl`, all from `--radius`) is used instead of pixel radii.
+- **`cn()` + `className` passthrough.** Always merge with `cn()` from `@/lib/utils` and accept a
+  `className` prop so callers extend without clobbering base styles.
+- **Composites compose primitives.** Patterns in `registry/components/` are built from UI primitives
+  and tokens (e.g. `status-pill` = `status-dot` + token chip), never bespoke one-off elements.
+- **Accessibility & dark mode are non-optional.** Preserve labels, `aria-*`, keyboard behavior, and
+  `focus-visible:ring-ring`. Dark mode must come for free from tokens — never branch on a hardcoded
+  color.
+- **House utilities** (`bg-grid`, `glow-brand`, `text-gradient(-brand)`, `mask-fade-x`, `full-bleed`,
+  `shadow-float`, `shadow-card`, `scrollbar-thin`) live in `foundation`; reuse them instead of
+  re-implementing gradients/grids/shadows.
+
+> If you add a new token, utility, or convention that consumers should follow, update
+> `registry/rules/byronwade-ui.mdc` in the same change so the shipped AI rule stays in sync.
+
+## Design conventions
+
+- **Tokens** — The `foundation` item in `registry.json` owns all CSS variables. Brand accent follows `--brand`; override it in consuming projects to re-skin rings, charts, and success states.
+- **Imports** — Registry files use consumer paths: `@/components/ui/…`, `@/components/…` (composites), `@/lib/…`.
+- **Primitives** — UI components are built on `@base-ui/react` with CVA variants, `data-slot` attributes, and Tailwind v4 utilities from the foundation theme.
+- **Composites** — Layout and pattern components live in `registry/components/` and compose UI primitives.
+- **Shipped AI rule** — `registry/rules/byronwade-ui.mdc` is published as the `design-rules` item (`@byronwade/design-rules`). It is the consumer-facing version of the Design DNA above; keep the two aligned.
+
+## Registry automation
+
+This repo is organized for **automated shadcn registry publishing**. Source flows one direction:
+
+```
+registry/ + registry.json → sync → shadcn build → public/r/
+```
+
+### Maintenance commands
+
+| Command | Purpose |
+|---------|---------|
+| `npm run update:registry` | Full pipeline: gen `all` → sync → build → validate |
+| `npm run sync` | Copy `registry/` → app `components/` + foundation CSS |
+| `npm run registry:build` | Compile `registry.json` → `public/r/*.json` |
+| `npm run check:registry` | Validate manifest integrity (names, deps, files, orphans) |
+| `npm run check:registry:built` | Also verify `public/r/` matches manifest |
+| `npm run check:examples` | Every UI/composite has `content/examples/<slug>/default.tsx` |
+| `npm run validate` | All non-test gates (registry + examples + test file presence) |
+
+### What is hand-maintained vs generated
+
+| Path | Maintained by |
+|------|---------------|
+| `registry/ui/`, `registry/components/`, `registry/lib/` | **Hand-maintained** — edit component source here |
+| `registry/rules/byronwade-ui.mdc` | **Hand-maintained** — shipped AI rule (`@byronwade/design-rules`); keep aligned with the Design DNA |
+| `registry.json` | **Hand-maintained** — deps, metadata, foundation tokens, item structure. Exception: the `all` aggregator item is **auto-generated** by `scripts/gen-all-item.mjs` (runs in `prebuild`/`update:registry`) — never edit it by hand |
+| `public/r/` | **Generated** — `shadcn build`, git-ignored, rebuilt on every deploy |
+| `components/`, `lib/`, `app/foundation.generated.css` | **Generated** — `npm run sync`, git-ignored |
+| `content/examples/` | **Hand-maintained** — add `default.tsx` for every new component |
+| `tests/components/` | **Hand-maintained** — required for every `registry:ui`/`registry:component` |
+
+### CI gates
+
+| Workflow | Checks |
+|----------|--------|
+| `.github/workflows/registry.yml` | Manifest, examples, `shadcn build`, built output |
+| `.github/workflows/test.yml` | Test file presence, full suite, coverage thresholds |
+
+### Adding a new component (checklist)
+
+1. Add the component source under `registry/ui/`, `registry/components/`, or `registry/lib/`.
+2. Append item to `registry.json` (type, files, deps, registryDependencies).
+3. `npm run update:registry`.
+4. Add `content/examples/<slug>/default.tsx`, run `npm run gen:examples`.
+5. Add `tests/components/<slug>.test.tsx` covering all variants/states/interactions + axe.
+6. `npm run test:ci` — must be green before committing.
+7. Commit.
 
 ## Testing is mandatory and enforced
 
@@ -34,8 +121,8 @@ Both gates run automatically in CI on every push and pull request (`.github/work
 
 ### Workflow for new components
 
-1. Add/edit the component in SignalRoute.
-2. In this repo: `npm run mirror` then `npm run registry:build`.
+1. Add/edit the component in `registry/`.
+2. `npm run update:registry` (or `registry:build` if only rebuilding).
 3. Write `tests/components/<slug>.test.tsx` covering all variants and states.
 4. Run `npm run test:ci` — must be green before committing.
-5. Commit both repos.
+5. Commit.

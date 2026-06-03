@@ -26,7 +26,7 @@ export default function Example() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
+            <BreadcrumbLink href="#">Components</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>

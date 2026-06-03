@@ -1626,10 +1626,13 @@ describe("DropdownMenu — accessibility (axe)", () => {
     await user.click(screen.getByRole("button", { name: "Open options menu" }));
     await screen.findByRole("menu");
     const popup = document.querySelector("[data-slot='dropdown-menu-content']") as HTMLElement;
-    // Scan only the popup node; skip region/aria-command-name rules that are Base UI internals
-    const results = await axe(popup, {
-      rules: { region: { enabled: false }, "aria-command-name": { enabled: false } },
-    });
+    // Base UI injects visually-hidden focus-guard sentinels ([data-base-ui-focus-guard]) into the
+    // portaled popup; under jsdom (navigator.vendor = "Apple") they take role="button" with no
+    // accessible name. Strip those library internals so `aria-command-name` stays ENABLED and
+    // validates our real menu items. `region` is the only rule disabled — an isolated, portaled
+    // popup is intentionally not wrapped in a page landmark.
+    popup.querySelectorAll("[data-base-ui-focus-guard]").forEach((el) => el.remove());
+    const results = await axe(popup, { rules: { region: { enabled: false } } });
     expect(results).toHaveNoViolations();
   });
 
@@ -1639,9 +1642,10 @@ describe("DropdownMenu — accessibility (axe)", () => {
     await user.click(screen.getByRole("button", { name: "Columns" }));
     await screen.findByRole("menu");
     const popup = document.querySelector("[data-slot='dropdown-menu-content']") as HTMLElement;
-    const results = await axe(popup, {
-      rules: { region: { enabled: false }, "aria-command-name": { enabled: false } },
-    });
+    // Strip Base UI focus-guard sentinels (see note above) so aria-command-name validates our
+    // items; region stays disabled for the isolated, portaled popup.
+    popup.querySelectorAll("[data-base-ui-focus-guard]").forEach((el) => el.remove());
+    const results = await axe(popup, { rules: { region: { enabled: false } } });
     expect(results).toHaveNoViolations();
   });
 
@@ -1651,9 +1655,10 @@ describe("DropdownMenu — accessibility (axe)", () => {
     await user.click(screen.getByRole("button", { name: "View density" }));
     await screen.findByRole("menu");
     const popup = document.querySelector("[data-slot='dropdown-menu-content']") as HTMLElement;
-    const results = await axe(popup, {
-      rules: { region: { enabled: false }, "aria-command-name": { enabled: false } },
-    });
+    // Strip Base UI focus-guard sentinels (see note above) so aria-command-name validates our
+    // items; region stays disabled for the isolated, portaled popup.
+    popup.querySelectorAll("[data-base-ui-focus-guard]").forEach((el) => el.remove());
+    const results = await axe(popup, { rules: { region: { enabled: false } } });
     expect(results).toHaveNoViolations();
   });
 

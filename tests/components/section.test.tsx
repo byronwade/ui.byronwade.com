@@ -115,12 +115,9 @@ describe("Section – description prop", () => {
     expect(allPs.length).toBe(0);
   });
 
-  it("renders description without title (header wrapper still present)", () => {
-    // description alone, no title → header wrapper NOT rendered
-    // Per source: `{(title || action) && ...}` — description without title or action skips header
+  it("renders description without title when description alone is provided", () => {
     render(<Section description="Standalone desc"><div /></Section>);
-    // The description text should NOT be visible (header skipped because no title and no action)
-    expect(screen.queryByText("Standalone desc")).not.toBeInTheDocument();
+    expect(screen.getByText("Standalone desc")).toBeInTheDocument();
   });
 
   it("renders description when title is also present", () => {

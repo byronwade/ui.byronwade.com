@@ -21,7 +21,7 @@ export default function Example() {
             <SlashIcon />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+            <BreadcrumbLink href="#">Blog</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
             <SlashIcon />
@@ -42,7 +42,7 @@ export default function Example() {
             <span className="text-xs">•</span>
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/settings">Settings</BreadcrumbLink>
+            <BreadcrumbLink href="#">Settings</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
             <span className="text-xs">•</span>
@@ -63,7 +63,7 @@ export default function Example() {
             <span className="text-muted-foreground">→</span>
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/library">Library</BreadcrumbLink>
+            <BreadcrumbLink href="#">Library</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
             <span className="text-muted-foreground">→</span>

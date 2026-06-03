@@ -1,0 +1,34 @@
+name: Registry
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate registry manifest
+        run: node scripts/check-registry.mjs
+
+      - name: Validate styleguide examples
+        run: node scripts/check-examples.mjs
+
+      - name: Sync generated app files
+        run: node scripts/sync-registry.mjs
+
+      - name: Build shadcn registry
+        run: npm run registry:build
+
+      - name: Verify built registry output
+        run: node scripts/check-registry.mjs --built

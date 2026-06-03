@@ -18,3 +18,23 @@
     @apply font-sans;
   }
 }
+
+/*
+ * Theme-toggle morph. The nav dock drives the swap through the View Transitions
+ * API and animates `::view-transition-new(root)` with an expanding clip-path
+ * circle anchored at the toggle button — so the new theme blooms outward from the
+ * trigger, matching the dock/launcher morph language. We disable the default
+ * cross-fade and stack the incoming snapshot on top so the circle reveals it.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
