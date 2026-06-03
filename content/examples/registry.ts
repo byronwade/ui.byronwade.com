@@ -13,6 +13,7 @@ import ActivityGridEmpty from "./activity-grid/empty";
 import ActivityGridInCard from "./activity-grid/in-card";
 import ActivityGridIntensityLevels from "./activity-grid/intensity-levels";
 import ActivityGridInteractive from "./activity-grid/interactive";
+import ActivityRingDefault from "./activity-ring/default";
 import AlertDefault from "./alert/default";
 import AlertNoIcon from "./alert/no-icon";
 import AlertVariants from "./alert/variants";
@@ -187,11 +188,14 @@ import MetricStatLoading from "./metric-stat/loading";
 import MetricStatNoDelta from "./metric-stat/no-delta";
 import MetricStatWithIcon from "./metric-stat/with-icon";
 import MorphDockDefault from "./morph-dock/default";
+import MorphDockAppBar from "./morph-dock/app-bar";
+import MorphDockAppBarPanels from "./morph-dock/app-bar-panels";
 import MorphDockBreadcrumb from "./morph-dock/breadcrumb";
 import MorphDockCommand from "./morph-dock/command";
 import MorphDockDialer from "./morph-dock/dialer";
 import MorphDockDraggable from "./morph-dock/draggable";
 import MorphDockExpand from "./morph-dock/expand";
+import MorphDockGhost from "./morph-dock/ghost";
 import MorphDockHelp from "./morph-dock/help";
 import MorphDockLauncher from "./morph-dock/launcher";
 import MorphDockNotifications from "./morph-dock/notifications";
@@ -382,6 +386,9 @@ export const examples: Record<string, Example[]> = {
     { name: "In Card", file: "activity-grid/in-card.tsx", Component: ActivityGridInCard },
     { name: "Intensity Levels", file: "activity-grid/intensity-levels.tsx", Component: ActivityGridIntensityLevels },
     { name: "Interactive", file: "activity-grid/interactive.tsx", Component: ActivityGridInteractive },
+  ],
+  "activity-ring": [
+    { name: "Default", file: "activity-ring/default.tsx", Component: ActivityRingDefault },
   ],
   "alert": [
     { name: "Default", file: "alert/default.tsx", Component: AlertDefault },
@@ -614,11 +621,14 @@ export const examples: Record<string, Example[]> = {
   ],
   "morph-dock": [
     { name: "Default", file: "morph-dock/default.tsx", Component: MorphDockDefault },
+    { name: "App Bar", file: "morph-dock/app-bar.tsx", Component: MorphDockAppBar },
+    { name: "App Bar Panels", file: "morph-dock/app-bar-panels.tsx", Component: MorphDockAppBarPanels },
     { name: "Breadcrumb", file: "morph-dock/breadcrumb.tsx", Component: MorphDockBreadcrumb },
     { name: "Command", file: "morph-dock/command.tsx", Component: MorphDockCommand },
     { name: "Dialer", file: "morph-dock/dialer.tsx", Component: MorphDockDialer },
     { name: "Draggable", file: "morph-dock/draggable.tsx", Component: MorphDockDraggable },
     { name: "Expand", file: "morph-dock/expand.tsx", Component: MorphDockExpand },
+    { name: "Ghost", file: "morph-dock/ghost.tsx", Component: MorphDockGhost },
     { name: "Help", file: "morph-dock/help.tsx", Component: MorphDockHelp },
     { name: "Launcher", file: "morph-dock/launcher.tsx", Component: MorphDockLauncher },
     { name: "Notifications", file: "morph-dock/notifications.tsx", Component: MorphDockNotifications },
