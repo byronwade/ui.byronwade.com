@@ -297,16 +297,16 @@ export function NavDock() {
     return () => ro.disconnect();
   }, [open]);
 
-  /* — keep the active result clamped + scrolled into view — */
-  React.useEffect(() => {
-    if (active > flat.length - 1) setActive(flat.length ? flat.length - 1 : 0);
-  }, [flat.length, active]);
+  // Clamp the active index to the current results during render, so a shrinking
+  // result set never points past the end — no effect, no cascading setState.
+  const safeActive = Math.min(active, Math.max(0, flat.length - 1));
+  /* — keep the active result scrolled into view — */
   React.useEffect(() => {
     if (!open) return;
     listRef.current
-      ?.querySelector<HTMLElement>(`[data-idx="${active}"]`)
+      ?.querySelector<HTMLElement>(`[data-idx="${safeActive}"]`)
       ?.scrollIntoView({ block: "nearest" });
-  }, [active, open]);
+  }, [safeActive, open]);
 
   /* — global ⌘K toggle + legacy open event — */
   React.useEffect(() => {
@@ -350,13 +350,13 @@ export function NavDock() {
   const onInputKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActive((i) => Math.min(i + 1, flat.length - 1));
+      setActive(Math.min(safeActive + 1, flat.length - 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setActive((i) => Math.max(i - 1, 0));
+      setActive(Math.max(safeActive - 1, 0));
     } else if (e.key === "Enter") {
       e.preventDefault();
-      const hit = flat[active];
+      const hit = flat[safeActive];
       if (hit) run(hit.href);
     }
   };
@@ -371,7 +371,7 @@ export function NavDock() {
       onClick={() => run(entry.href)}
       className={cn(
         "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] outline-none transition-colors",
-        idx === active
+        idx === safeActive
           ? "bg-dock-active text-dock-active-foreground"
           : "text-dock-foreground",
       )}
