@@ -54,7 +54,7 @@ export function Gauge({
           strokeDasharray={c} strokeDashoffset={offset}
         />
       </svg>
-      <div className="absolute inset-0 grid place-items-center text-center">
+      <div aria-hidden className="absolute inset-0 grid place-items-center text-center">
         <div>
           <div className="text-3xl font-semibold tracking-tight tabular-nums">{Math.round(value)}</div>
           {label && <div className="text-xs text-muted-foreground">{label}</div>}
