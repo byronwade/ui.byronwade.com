@@ -1124,6 +1124,22 @@
       ]
     },
     {
+      "name": "comms-store",
+      "type": "registry:lib",
+      "title": "Comms store",
+      "description": "In-memory messaging backend for the Messages Cockpit layout — seeded mock data + reducer with simulated commit latency and an opt-in fake realtime feed. The swappable boundary for a real backend.",
+      "dependencies": [
+        "react"
+      ],
+      "files": [
+        {
+          "path": "registry/lib/comms-store.tsx",
+          "type": "registry:lib",
+          "target": "lib/comms-store.tsx"
+        }
+      ]
+    },
+    {
       "name": "morph-dock",
       "type": "registry:ui",
       "title": "Morph dock",
@@ -1418,6 +1434,7 @@
         "@byronwade/section",
         "@byronwade/event-timeline",
         "@byronwade/use-chrome-morph",
+        "@byronwade/comms-store",
         "@byronwade/morph-dock",
         "@byronwade/aspect-ratio",
         "@byronwade/scroll-area",
