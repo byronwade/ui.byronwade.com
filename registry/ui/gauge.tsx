@@ -24,6 +24,7 @@ export function Gauge({
   size = 160,
   thickness = 10,
   className,
+  "aria-label": ariaLabel,
 }: {
   value: number;
   label?: string;
@@ -31,6 +32,7 @@ export function Gauge({
   size?: number;
   thickness?: number;
   className?: string;
+  "aria-label"?: string;
 }) {
   const t = tone ?? scoreTone(value);
   const r = (size - thickness) / 2;
@@ -38,12 +40,17 @@ export function Gauge({
   const pct = Math.max(0, Math.min(100, value));
   const offset = c - (pct / 100) * c;
   return (
-    <div className={cn("relative inline-grid place-items-center", className)} style={{ width: size, height: size }}>
+    <div
+      role="img"
+      aria-label={ariaLabel ?? `${Math.round(value)}${label ? ` ${label}` : ""}`}
+      className={cn("relative inline-grid place-items-center", className)}
+      style={{ width: size, height: size }}
+    >
       <svg width={size} height={size} className="-rotate-90" aria-hidden>
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={thickness} className="stroke-muted" />
         <circle
           cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={thickness} strokeLinecap="round"
-          className={cn("transition-[stroke-dashoffset] duration-700", stroke[t])}
+          className={cn("transition-[stroke-dashoffset] duration-700 motion-reduce:transition-none", stroke[t])}
           strokeDasharray={c} strokeDashoffset={offset}
         />
       </svg>
