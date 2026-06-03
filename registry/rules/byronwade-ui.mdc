@@ -72,6 +72,7 @@ re-skinning automatically:
 | Focus ring | `ring-ring` (already on primitives) | custom outline |
 | Muted fill | `bg-muted`, `bg-secondary`, `bg-accent` | `bg-gray-100` |
 | Sidebar | `bg-sidebar`, `text-sidebar-foreground`, … | — |
+| Dock | `bg-dock`, `text-dock-foreground`, `bg-dock-muted`, `bg-dock-active`, `text-dock-active-foreground`, `bg-dock-tool` (lighter tool-zone shelf for two-tone combined nav+toolbar) | `bg-zinc-900` |
 | Charts | `--chart-1` … `--chart-5` (via `chart`) | fixed palettes |
 
 Tone the same token with opacity instead of new colors: `bg-brand/10`, `text-destructive`,
@@ -85,8 +86,27 @@ Use the radius scale, never raw pixels: `rounded-sm`, `rounded-md`, `rounded-lg`
 ### House utilities (already defined by `foundation`)
 
 `bg-grid`, `bg-grid-lines`, `glow-brand`, `text-gradient`, `text-gradient-brand`, `mask-fade-x`,
-`full-bleed`, `shadow-float`, `shadow-card`, `scrollbar-thin`. Prefer these over re-implementing
-gradients, grids, or shadows by hand.
+`full-bleed`, `shadow-float`, `shadow-card`, `edge`, `scrollbar-thin`. Prefer these over
+re-implementing gradients, grids, or shadows by hand.
+
+### Depth via shadow + an inset hairline — not hard borders
+
+Surfaces read as **layered depth**, not outlined boxes. The trick (think of an immersive video
+frame): rounded corners + `overflow-hidden` so content clips to the radius, an outer elevation
+shadow, and a **subtle inset hairline** drawn _inside_ the edge that catches a little light so a
+surface reads as "set into" its background. That hairline is the `--edge` token — faint dark in
+light mode, faint light in dark mode — and it is already baked into `shadow-float` and `shadow-card`.
+
+- **Floating overlays** (dialog, popover, dropdown-menu, hover-card, command, select, sheet,
+  navigation-menu, morph-dock panels) use `shadow-float` and carry **no** `border`.
+- **Resting surfaces** (card, stat-card, section) use `shadow-card` and carry **no** `border`.
+- **Flat surfaces that shouldn't float** (an inline alert, a list container, a gradient avatar)
+  use the standalone **`edge`** utility (inset hairline only, no drop shadow) instead of a border.
+- **Borders are for separators only** — a divider between regions (`border-t`, `border-b`,
+  table-row dividers), an input/affordance edge (`border-input`), or a genuinely subtle line that
+  breaks an element from a same-colored background. Never reach for a `border` to outline an
+  elevated surface; let the shadow + `--edge` hairline do it. No raw colors here either — the
+  hairline is token-driven, so a consumer overriding nothing still gets correct light/dark depth.
 
 ## 3. Re-skinning is one variable — leave the rest alone
 
