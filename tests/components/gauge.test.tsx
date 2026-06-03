@@ -801,4 +801,12 @@ describe("Gauge component – accessible label + reduced motion", () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
+
+  it("inner text overlay is aria-hidden so the value is not double-announced", () => {
+    render(<Gauge value={78} label="Performance" />);
+    const valueEl = screen.getByText("78");
+    // value div → inner container div → overlay div (the aria-hidden one)
+    const overlay = valueEl.parentElement?.parentElement;
+    expect(overlay).toHaveAttribute("aria-hidden");
+  });
 });
