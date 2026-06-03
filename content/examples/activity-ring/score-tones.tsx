@@ -1,3 +1,5 @@
+"use client";
+
 import { ActivityRing, scoreTone } from "@/components/ui/activity-ring";
 
 export default function Example() {
