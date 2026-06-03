@@ -55,7 +55,7 @@ import { InputGroup, InputGroupAddon } from "@/components/ui/input-group";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
-import { Gauge } from "@/components/ui/gauge";
+import { ActivityRing } from "@/components/ui/activity-ring";
 import { ActivityGrid } from "@/components/ui/activity-grid";
 import { GradientAvatar } from "@/components/ui/gradient-avatar";
 
@@ -969,11 +969,11 @@ export default function StyleguidePage() {
                   />
                 </Specimen>
 
-                <Specimen name="Gauge" from="@/components/ui/gauge">
+                <Specimen name="Ring gauge" from="@/components/ui/activity-ring">
                   <div className="flex flex-wrap items-center gap-8">
-                    <Gauge value={32} label="Poor" />
-                    <Gauge value={67} label="Needs work" />
-                    <Gauge value={94} label="Great" />
+                    <ActivityRing value={32} label="Poor" />
+                    <ActivityRing value={67} label="Needs work" />
+                    <ActivityRing value={94} label="Great" />
                   </div>
                 </Specimen>
 

@@ -1,6 +1,6 @@
 import { SplitWithRail } from "@/components/split-with-rail";
 import { MetricStat } from "@/components/metric-stat";
-import { Gauge } from "@/components/ui/gauge";
+import { ActivityRing } from "@/components/ui/activity-ring";
 import { TimelineRail } from "@/components/timeline-rail";
 import { StatusDot } from "@/components/ui/status-dot";
 import { Activity, Clock, Users, Zap } from "lucide-react";
@@ -17,7 +17,7 @@ export default function Example() {
             </div>
 
             <div className="flex justify-center py-2">
-              <Gauge value={94} label="Uptime" size={140} />
+              <ActivityRing value={94} label="Uptime" size={140} />
             </div>
 
             <div className="grid grid-cols-2 gap-4 pt-2">

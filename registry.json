@@ -257,26 +257,10 @@
       ]
     },
     {
-      "name": "gauge",
-      "type": "registry:ui",
-      "title": "Ring gauge",
-      "description": "Circular score ring with status tone, big centered number.",
-      "registryDependencies": [
-        "@byronwade/status-dot"
-      ],
-      "files": [
-        {
-          "path": "registry/ui/gauge.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/gauge.tsx"
-        }
-      ]
-    },
-    {
       "name": "activity-ring",
       "type": "registry:ui",
       "title": "Activity ring",
-      "description": "Interactive segmented donut: tonal segments, hover/pin emphasis, tooltip, legend, draw-in.",
+      "description": "Ring visualisation: a single-value score gauge (value) or an interactive segmented donut (segments) with hover/pin, tooltip, legend, and draw-in.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/status-dot",
@@ -1140,6 +1124,28 @@
       ]
     },
     {
+      "name": "conversation-list",
+      "type": "registry:component",
+      "title": "Conversation list",
+      "description": "Messaging conversation list — live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/comms-store",
+        "@byronwade/gradient-avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/components/conversation-list.tsx",
+          "type": "registry:component",
+          "target": "components/conversation-list.tsx"
+        }
+      ]
+    },
+    {
       "name": "morph-dock",
       "type": "registry:ui",
       "title": "Morph dock",
@@ -1355,6 +1361,9 @@
       "type": "registry:component",
       "title": "Verification Progress",
       "description": "Multi-step verification status tracker with tone-colored steps, optional counts, and connecting rails.",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1388,7 +1397,6 @@
       "registryDependencies": [
         "@byronwade/utils",
         "@byronwade/status-dot",
-        "@byronwade/gauge",
         "@byronwade/activity-ring",
         "@byronwade/identity",
         "@byronwade/gradient-avatar",
@@ -1435,6 +1443,7 @@
         "@byronwade/event-timeline",
         "@byronwade/use-chrome-morph",
         "@byronwade/comms-store",
+        "@byronwade/conversation-list",
         "@byronwade/morph-dock",
         "@byronwade/aspect-ratio",
         "@byronwade/scroll-area",

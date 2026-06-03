@@ -14,6 +14,10 @@ import ActivityGridInCard from "./activity-grid/in-card";
 import ActivityGridIntensityLevels from "./activity-grid/intensity-levels";
 import ActivityGridInteractive from "./activity-grid/interactive";
 import ActivityRingDefault from "./activity-ring/default";
+import ActivityRingScore from "./activity-ring/score";
+import ActivityRingScoreTones from "./activity-ring/score-tones";
+import ActivityRingTones from "./activity-ring/tones";
+import ActivityRingWithVerdict from "./activity-ring/with-verdict";
 import AlertDefault from "./alert/default";
 import AlertNoIcon from "./alert/no-icon";
 import AlertVariants from "./alert/variants";
@@ -132,13 +136,6 @@ import FilterPillDisabled from "./filter-pill/disabled";
 import FilterPillFilterBar from "./filter-pill/filter-bar";
 import FilterPillWithIcon from "./filter-pill/with-icon";
 import FoundationTokens from "./foundation/tokens";
-import GaugeDefault from "./gauge/default";
-import GaugeAnimated from "./gauge/animated";
-import GaugeDashboardGrid from "./gauge/dashboard-grid";
-import GaugeScoreTone from "./gauge/score-tone";
-import GaugeSizes from "./gauge/sizes";
-import GaugeThickness from "./gauge/thickness";
-import GaugeTones from "./gauge/tones";
 import GradientAvatarDefault from "./gradient-avatar/default";
 import GradientAvatarGroupedStack from "./gradient-avatar/grouped-stack";
 import GradientAvatarListRows from "./gradient-avatar/list-rows";
@@ -389,6 +386,10 @@ export const examples: Record<string, Example[]> = {
   ],
   "activity-ring": [
     { name: "Default", file: "activity-ring/default.tsx", Component: ActivityRingDefault },
+    { name: "Score", file: "activity-ring/score.tsx", Component: ActivityRingScore },
+    { name: "Score Tones", file: "activity-ring/score-tones.tsx", Component: ActivityRingScoreTones },
+    { name: "Tones", file: "activity-ring/tones.tsx", Component: ActivityRingTones },
+    { name: "With Verdict", file: "activity-ring/with-verdict.tsx", Component: ActivityRingWithVerdict },
   ],
   "alert": [
     { name: "Default", file: "alert/default.tsx", Component: AlertDefault },
@@ -545,15 +546,6 @@ export const examples: Record<string, Example[]> = {
   ],
   "foundation": [
     { name: "Tokens", file: "foundation/tokens.tsx", Component: FoundationTokens },
-  ],
-  "gauge": [
-    { name: "Default", file: "gauge/default.tsx", Component: GaugeDefault },
-    { name: "Animated", file: "gauge/animated.tsx", Component: GaugeAnimated },
-    { name: "Dashboard Grid", file: "gauge/dashboard-grid.tsx", Component: GaugeDashboardGrid },
-    { name: "Score Tone", file: "gauge/score-tone.tsx", Component: GaugeScoreTone },
-    { name: "Sizes", file: "gauge/sizes.tsx", Component: GaugeSizes },
-    { name: "Thickness", file: "gauge/thickness.tsx", Component: GaugeThickness },
-    { name: "Tones", file: "gauge/tones.tsx", Component: GaugeTones },
   ],
   "gradient-avatar": [
     { name: "Default", file: "gradient-avatar/default.tsx", Component: GradientAvatarDefault },

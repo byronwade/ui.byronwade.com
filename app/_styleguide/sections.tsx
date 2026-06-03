@@ -215,7 +215,7 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
       { id: slugify("PageHeader"), label: "PageHeader" },
       { id: slugify("MetricStat"), label: "MetricStat" },
       { id: slugify("StatCard"), label: "StatCard" },
-      { id: slugify("Gauge"), label: "Gauge" },
+      { id: slugify("Ring gauge"), label: "Ring gauge" },
       { id: slugify("ActivityGrid"), label: "ActivityGrid" },
       { id: slugify("GradientAvatar + animalName"), label: "GradientAvatar" },
       { id: slugify("EmptyState"), label: "EmptyState" },

@@ -72,7 +72,7 @@ export const archetypes: ArchetypeMeta[] = [
       "A health page built around one ring gauge, flanked by metrics, activity, and a timeline.",
     centerpiece: "The ring gauge",
     category: "Dashboard",
-    uses: ["Gauge", "StatCard", "ActivityGrid", "EventTimeline", "StatusPill", "PageHeader"],
+    uses: ["ActivityRing", "StatCard", "ActivityGrid", "EventTimeline", "StatusPill", "PageHeader"],
   },
   {
     slug: "hero-chart",

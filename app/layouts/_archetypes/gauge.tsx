@@ -7,7 +7,7 @@
 // surfaces are reserved for the floating hero card; data tiles sit on 1px seams.
 import { Activity, Cpu, Timer, Zap } from "lucide-react";
 
-import { Gauge } from "@/components/ui/gauge";
+import { ActivityRing } from "@/components/ui/activity-ring";
 import { ActivityGrid } from "@/components/ui/activity-grid";
 import { MetricStat } from "@/components/metric-stat";
 import { EventTimeline } from "@/components/event-timeline";
@@ -63,7 +63,7 @@ export function GaugeArchetype() {
 
           <div className="relative mt-8">
             <div aria-hidden className="glow-brand absolute -inset-12 -z-10 opacity-80" />
-            <Gauge value={98} label="health score" size={236} thickness={14} />
+            <ActivityRing value={98} label="health score" size={236} thickness={14} />
           </div>
 
           <h1 className="text-gradient mt-8 text-3xl font-semibold tracking-tight sm:text-4xl">

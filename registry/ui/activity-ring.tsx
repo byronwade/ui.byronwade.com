@@ -5,10 +5,26 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { StatusDot, type StatusTone } from "@/components/ui/status-dot";
 
+/** Map a 0–100 score to a tone via thresholds (default: <50 danger, <90 warning, else success). */
+export function scoreTone(value: number, t: [number, number] = [50, 90]): StatusTone {
+  if (value < t[0]) return "danger";
+  if (value < t[1]) return "warning";
+  return "success";
+}
+
+// Saturated arc stroke for the single-value score ring.
+const scoreStroke: Record<StatusTone, string> = {
+  success: "stroke-success",
+  warning: "stroke-warning",
+  danger: "stroke-destructive",
+  info: "stroke-brand",
+  neutral: "stroke-muted-foreground",
+};
+
 /**
- * Per-segment stroke utility — same token map as Gauge, with the neutral tone
- * softened (tone-with-opacity) so a brand segment stays the clear accent rather
- * than being swamped by a heavy mid-gray.
+ * Per-segment stroke utility — same token map, with the neutral tone softened
+ * (tone-with-opacity) so a brand segment stays the clear accent rather than
+ * being swamped by a heavy mid-gray.
  */
 const segmentStroke: Record<StatusTone, string> = {
   success: "stroke-success",
@@ -33,6 +49,102 @@ export type RingSegment = {
   href?: string;
 };
 
+type ScoreProps = {
+  /** Single value for the score ring (0–`max`). */
+  value: number;
+  segments?: never;
+  /** Denominator for `value` (default 100). */
+  max?: number;
+  /** Override the threshold-derived tone (see `scoreTone`). */
+  tone?: StatusTone;
+  label?: string;
+  size?: number;
+  thickness?: number;
+  className?: string;
+  "aria-label"?: string;
+};
+
+type SegmentsProps = {
+  /** Segments to plot as a donut. */
+  segments: RingSegment[];
+  value?: never;
+  size?: number;
+  thickness?: number;
+  gap?: number;
+  centerLabel?: string;
+  formatValue?: (n: number) => string;
+  onSegmentClick?: (segment: RingSegment, index: number) => void;
+  /** Show a derived headline below the ring ("Mostly {label}" / "Balanced" / "Quiet"). */
+  verdict?: boolean;
+  /** Optional description line shown below the ring. */
+  caption?: string;
+  className?: string;
+};
+
+export type ActivityRingProps = ScoreProps | SegmentsProps;
+
+/**
+ * Ring visualisation with two modes:
+ *
+ * - **Score** — pass `value` (0–`max`) for a single-arc gauge with a big centred
+ *   number and a threshold-derived `tone` (see `scoreTone`).
+ * - **Segmented** — pass `segments` for an interactive donut: tonal segments,
+ *   hover/pin emphasis, tooltip, legend, optional verdict/caption, and a draw-in
+ *   that respects `prefers-reduced-motion`.
+ */
+export function ActivityRing(props: ActivityRingProps) {
+  return props.segments
+    ? <SegmentedRing {...(props as SegmentsProps)} />
+    : <ScoreRing {...(props as ScoreProps)} />;
+}
+
+function ScoreRing({
+  value,
+  max = 100,
+  tone,
+  label,
+  size = 160,
+  thickness = 10,
+  className,
+  "aria-label": ariaLabel,
+}: ScoreProps) {
+  const pct = Math.max(0, Math.min(100, (value / max) * 100));
+  const t = tone ?? scoreTone(pct);
+  const r = (size - thickness) / 2;
+  const c = 2 * Math.PI * r;
+  const offset = c - (pct / 100) * c;
+  return (
+    <div
+      data-slot="activity-ring"
+      role="img"
+      aria-label={ariaLabel ?? `${Math.round(value)}${label ? ` ${label}` : ""}`}
+      className={cn("relative inline-grid place-items-center", className)}
+      style={{ width: size, height: size }}
+    >
+      <svg width={size} height={size} className="-rotate-90" aria-hidden>
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={thickness} className="stroke-muted" />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          strokeWidth={thickness}
+          strokeLinecap="round"
+          className={cn("transition-[stroke-dashoffset] duration-700 motion-reduce:transition-none", scoreStroke[t])}
+          strokeDasharray={c}
+          strokeDashoffset={offset}
+        />
+      </svg>
+      <div aria-hidden className="absolute inset-0 grid place-items-center text-center">
+        <div>
+          <div className="text-3xl font-semibold tracking-tight tabular-nums">{Math.round(value)}</div>
+          {label && <div className="text-xs text-muted-foreground">{label}</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /** Respect the OS "reduce motion" setting — skips the draw-in animation. */
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = React.useState(false);
@@ -46,16 +158,7 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-/**
- * Segmented activity ring: an interactive donut split into tonal segments.
- *
- * Hovering a segment (or its legend chip) lifts it and dims the others; the
- * centre figure follows the active segment and a dark tooltip shows its share.
- * Clicking a legend chip pins that emphasis. Supplying `onSegmentClick` makes
- * the segments actionable (e.g. drill-down) — framework-agnostic, no router.
- * The ring draws itself in on mount, respecting `prefers-reduced-motion`.
- */
-export function ActivityRing({
+function SegmentedRing({
   segments,
   size = 168,
   thickness = 12,
@@ -66,20 +169,7 @@ export function ActivityRing({
   verdict = false,
   caption,
   className,
-}: {
-  segments: RingSegment[];
-  size?: number;
-  thickness?: number;
-  gap?: number;
-  centerLabel?: string;
-  formatValue?: (n: number) => string;
-  onSegmentClick?: (segment: RingSegment, index: number) => void;
-  /** Show a derived headline below the ring (dominant≥60% → "Mostly {label}", else "Balanced"; 0 → "Quiet"). */
-  verdict?: boolean;
-  /** Optional description line shown below the ring. */
-  caption?: string;
-  className?: string;
-}) {
+}: SegmentsProps) {
   const reduced = usePrefersReducedMotion();
 
   const [hovered, setHovered] = React.useState<number | null>(null);

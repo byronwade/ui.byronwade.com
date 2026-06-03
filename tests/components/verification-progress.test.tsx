@@ -114,6 +114,14 @@ describe("VerificationProgress – structure", () => {
     }
   );
 
+  it("is responsive: stacks vertically by default and switches to a horizontal track at sm", () => {
+    const { container } = render(<VerificationProgress steps={sampleSteps} />);
+    const root = container.querySelector("[data-slot='verification-progress']");
+    // Vertical stack on small screens, horizontal track from `sm` up.
+    expect(root).toHaveClass("flex-col");
+    expect(root).toHaveClass("sm:flex-row");
+  });
+
   it("merges a custom className onto the root while keeping base classes", () => {
     const { container } = render(
       <VerificationProgress className="custom-class" steps={sampleSteps} />

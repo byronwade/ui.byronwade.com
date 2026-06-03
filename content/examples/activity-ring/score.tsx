@@ -1,9 +1,9 @@
-import { Gauge } from "@/components/ui/gauge";
+import { ActivityRing } from "@/components/ui/activity-ring";
 
 export default function Example() {
   return (
     <div className="flex items-center justify-center p-8">
-      <Gauge value={78} label="Performance" />
+      <ActivityRing value={78} label="Performance" />
     </div>
   );
 }

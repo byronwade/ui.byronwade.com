@@ -16,7 +16,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { expect, describe, it, vi, beforeEach } from "vitest";
 import { axe } from "vitest-axe";
-import { ActivityRing, type RingSegment } from "@/components/ui/activity-ring";
+import { ActivityRing, scoreTone, type RingSegment } from "@/components/ui/activity-ring";
 
 // ---------------------------------------------------------------------------
 // matchMedia stub (mirrors morph-dock.test.tsx)
@@ -521,5 +521,136 @@ describe("ActivityRing – active-index guard", () => {
     expect(() => rerender(<ActivityRing segments={two} centerLabel="total" />)).not.toThrow();
     // Centre falls back to the new total (30), not the stale C value.
     expect(screen.getByText("30")).toBeInTheDocument();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// scoreTone utility (score mode)
+// ---------------------------------------------------------------------------
+
+describe("scoreTone utility", () => {
+  it("default thresholds: <50 → danger", () => {
+    expect(scoreTone(0)).toBe("danger");
+    expect(scoreTone(49)).toBe("danger");
+  });
+  it("default thresholds: 50–89 → warning", () => {
+    expect(scoreTone(50)).toBe("warning");
+    expect(scoreTone(89)).toBe("warning");
+  });
+  it("default thresholds: ≥90 → success", () => {
+    expect(scoreTone(90)).toBe("success");
+    expect(scoreTone(100)).toBe("success");
+  });
+  it("custom thresholds [70, 95]", () => {
+    expect(scoreTone(61, [70, 95])).toBe("danger");
+    expect(scoreTone(85, [70, 95])).toBe("warning");
+    expect(scoreTone(95, [70, 95])).toBe("success");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Score mode (single-value gauge)
+// ---------------------------------------------------------------------------
+
+function scoreProgress(container: HTMLElement): Element {
+  const found = Array.from(container.querySelectorAll("circle")).find((el) =>
+    el.hasAttribute("stroke-dasharray"),
+  );
+  if (!found) throw new Error("progress circle not found");
+  return found;
+}
+
+describe("ActivityRing – score mode", () => {
+  it("renders the rounded value and label", () => {
+    render(<ActivityRing value={78.6} label="Performance" />);
+    expect(screen.getByText("79")).toBeInTheDocument();
+    expect(screen.getByText("Performance")).toBeInTheDocument();
+  });
+
+  it("wrapper is role=img with a default aria-label of value + label", () => {
+    const { container } = render(<ActivityRing value={78} label="Performance" />);
+    const root = container.querySelector('[data-slot="activity-ring"]');
+    expect(root).toHaveAttribute("role", "img");
+    expect(root).toHaveAttribute("aria-label", "78 Performance");
+  });
+
+  it("default aria-label omits the label segment when absent", () => {
+    const { container } = render(<ActivityRing value={42} />);
+    expect(container.querySelector('[data-slot="activity-ring"]')).toHaveAttribute("aria-label", "42");
+  });
+
+  it("explicit aria-label overrides the default", () => {
+    const { container } = render(<ActivityRing value={78} aria-label="Overall health" />);
+    expect(container.querySelector('[data-slot="activity-ring"]')).toHaveAttribute("aria-label", "Overall health");
+  });
+
+  it("auto-derives tone from value (30 → danger → stroke-destructive)", () => {
+    const { container } = render(<ActivityRing value={30} />);
+    expect(cls(scoreProgress(container))).toContain("stroke-destructive");
+  });
+
+  it("auto tone 70 → warning and 95 → success", () => {
+    const a = render(<ActivityRing value={70} />);
+    expect(cls(scoreProgress(a.container))).toContain("stroke-warning");
+    const b = render(<ActivityRing value={95} />);
+    expect(cls(scoreProgress(b.container))).toContain("stroke-success");
+  });
+
+  it("explicit tone overrides the auto tone", () => {
+    const { container } = render(<ActivityRing value={30} tone="success" />);
+    expect(cls(scoreProgress(container))).toContain("stroke-success");
+    expect(cls(scoreProgress(container))).not.toContain("stroke-destructive");
+  });
+
+  it("info tone maps to stroke-brand (never a literal blue)", () => {
+    const { container } = render(<ActivityRing value={55} tone="info" />);
+    expect(cls(scoreProgress(container))).toContain("stroke-brand");
+  });
+
+  it("progress arc carries motion-reduce:transition-none", () => {
+    const { container } = render(<ActivityRing value={78} />);
+    expect(cls(scoreProgress(container))).toContain("motion-reduce:transition-none");
+  });
+
+  it("geometry: value 0 → full offset, value 100 → 0 offset", () => {
+    const size = 160, thickness = 10, c = 2 * Math.PI * ((size - thickness) / 2);
+    const zero = render(<ActivityRing value={0} size={size} thickness={thickness} />);
+    expect(Number(scoreProgress(zero.container).getAttribute("stroke-dashoffset"))).toBeCloseTo(c, 2);
+    const full = render(<ActivityRing value={100} size={size} thickness={thickness} />);
+    expect(Number(scoreProgress(full.container).getAttribute("stroke-dashoffset"))).toBeCloseTo(0, 2);
+  });
+
+  it("geometry: value 50 → half offset", () => {
+    const size = 160, thickness = 10, c = 2 * Math.PI * ((size - thickness) / 2);
+    const { container } = render(<ActivityRing value={50} size={size} thickness={thickness} />);
+    expect(Number(scoreProgress(container).getAttribute("stroke-dashoffset"))).toBeCloseTo(c / 2, 2);
+  });
+
+  it("max scales the arc: value 50 / max 200 → 25% filled (0.75·c offset)", () => {
+    const size = 160, thickness = 10, c = 2 * Math.PI * ((size - thickness) / 2);
+    const { container } = render(<ActivityRing value={50} max={200} size={size} thickness={thickness} />);
+    expect(Number(scoreProgress(container).getAttribute("stroke-dashoffset"))).toBeCloseTo(c * 0.75, 2);
+  });
+
+  it("clamps geometry but not the displayed number (value 150 shows 150)", () => {
+    const { container } = render(<ActivityRing value={150} />);
+    expect(screen.getByText("150")).toBeInTheDocument();
+    expect(Number(scoreProgress(container).getAttribute("stroke-dashoffset"))).toBeCloseTo(0, 2);
+  });
+
+  it("applies size to the wrapper box", () => {
+    const { container } = render(<ActivityRing value={78} size={120} />);
+    const root = container.querySelector('[data-slot="activity-ring"]') as HTMLElement;
+    expect(root.style.width).toBe("120px");
+  });
+
+  it("merges className on the score wrapper", () => {
+    const { container } = render(<ActivityRing value={78} className="my-score" />);
+    expect(container.querySelector('[data-slot="activity-ring"]')).toHaveClass("my-score");
+  });
+
+  it("has no axe violations in score mode", async () => {
+    const { container } = render(<ActivityRing value={78} label="Performance" />);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });
