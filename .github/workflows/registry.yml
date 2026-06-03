@@ -24,6 +24,9 @@ jobs:
       - name: Validate styleguide examples
         run: node scripts/check-examples.mjs
 
+      - name: Validate shipped AI rule sync
+        run: node scripts/check-rule.mjs
+
       - name: Sync generated app files
         run: node scripts/sync-registry.mjs
 

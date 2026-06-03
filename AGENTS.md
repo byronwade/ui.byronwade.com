@@ -68,7 +68,8 @@ registry/ + registry.json → sync → shadcn build → public/r/
 | `npm run check:registry` | Validate manifest integrity (names, deps, files, orphans) |
 | `npm run check:registry:built` | Also verify `public/r/` matches manifest |
 | `npm run check:examples` | Every UI/composite has `content/examples/<slug>/default.tsx` |
-| `npm run validate` | All non-test gates (registry + examples + test file presence) |
+| `npm run check:rule` | Rule (`byronwade-ui.mdc`) names every component + house utility; no ghost `@byronwade/*` install refs across docs; accent-DNA tokens intact |
+| `npm run validate` | All non-test gates (registry + examples + rule sync + test file presence) |
 
 ### What is hand-maintained vs generated
 
@@ -86,18 +87,19 @@ registry/ + registry.json → sync → shadcn build → public/r/
 
 | Workflow | Checks |
 |----------|--------|
-| `.github/workflows/registry.yml` | Manifest, examples, `shadcn build`, built output |
+| `.github/workflows/registry.yml` | Manifest, examples, rule sync, `shadcn build`, built output |
 | `.github/workflows/test.yml` | Test file presence, full suite, coverage thresholds |
 
 ### Adding a new component (checklist)
 
 1. Add the component source under `registry/ui/`, `registry/components/`, or `registry/lib/`.
 2. Append item to `registry.json` (type, files, deps, registryDependencies).
-3. `npm run update:registry`.
-4. Add `content/examples/<slug>/default.tsx`, run `npm run gen:examples`.
-5. Add `tests/components/<slug>.test.tsx` covering all variants/states/interactions + axe.
-6. `npm run test:ci` — must be green before committing.
-7. Commit.
+3. Add the component name to the relevant list in `registry/rules/byronwade-ui.mdc` (enforced by `check:rule`).
+4. `npm run update:registry`.
+5. Add `content/examples/<slug>/default.tsx`, run `npm run gen:examples`.
+6. Add `tests/components/<slug>.test.tsx` covering all variants/states/interactions + axe.
+7. `npm run test:ci` — must be green before committing.
+8. Commit.
 
 ## Testing is mandatory and enforced
 
@@ -122,7 +124,8 @@ Both gates run automatically in CI on every push and pull request (`.github/work
 ### Workflow for new components
 
 1. Add/edit the component in `registry/`.
-2. `npm run update:registry` (or `registry:build` if only rebuilding).
-3. Write `tests/components/<slug>.test.tsx` covering all variants and states.
-4. Run `npm run test:ci` — must be green before committing.
-5. Commit.
+2. List the component name in `registry/rules/byronwade-ui.mdc` (enforced by `check:rule`).
+3. `npm run update:registry` (or `registry:build` if only rebuilding).
+4. Write `tests/components/<slug>.test.tsx` covering all variants and states.
+5. Run `npm run test:ci` — must be green before committing.
+6. Commit.

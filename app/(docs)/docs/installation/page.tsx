@@ -82,13 +82,13 @@ export default function InstallationPage() {
             </p>
             <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/all`} />
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Or add only the pieces you want — transitive dependencies still come along (adding a
-              gauge pulls in <code className="font-mono text-[13px]">status-dot</code> and{" "}
+              Or add only the pieces you want — transitive dependencies still come along (adding an
+              activity-ring pulls in <code className="font-mono text-[13px]">status-dot</code> and{" "}
               <code className="font-mono text-[13px]">utils</code> for you):
             </p>
             <CodeBlock
               lang="bash"
-              code={`npx shadcn@latest add @byronwade/gauge
+              code={`npx shadcn@latest add @byronwade/activity-ring
 npx shadcn@latest add @byronwade/timeline-rail @byronwade/metric-stat
 npx shadcn@latest add @byronwade/sheet @byronwade/command @byronwade/morph-dock`}
             />

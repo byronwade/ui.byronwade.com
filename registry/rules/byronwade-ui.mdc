@@ -26,13 +26,13 @@ Before writing any markup, check whether a component already exists. Reach for t
 - **Feedback** — `alert`, `progress`, `skeleton`, `sonner` (toasts)
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `separator`,
   `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`
-- **House UI** — `status-dot`, `gauge`, `gradient-avatar`, `activity-grid`, `filter-pill`,
+- **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
   `segmented-control`
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
   (config-driven nav dock that blooms into a panel via the hook)
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
-  `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`
+  `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`
 
 Import from the consumer paths (these are where shadcn installs them):
 
@@ -49,7 +49,7 @@ npx shadcn@latest add @byronwade/<name>
 # e.g. npx shadcn@latest add @byronwade/sheet @byronwade/command
 ```
 
-Transitive dependencies resolve automatically (`add @byronwade/gauge` pulls `status-dot` + `utils`).
+Transitive dependencies resolve automatically (`add @byronwade/activity-ring` pulls `status-dot` + `utils`).
 Only build a brand-new component when nothing in the list above fits — and when you do, follow
 sections 2–4 so it looks like it belongs.
 
