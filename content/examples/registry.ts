@@ -13,6 +13,7 @@ import ActivityGridEmpty from "./activity-grid/empty";
 import ActivityGridInCard from "./activity-grid/in-card";
 import ActivityGridIntensityLevels from "./activity-grid/intensity-levels";
 import ActivityGridInteractive from "./activity-grid/interactive";
+import ActivityRingDefault from "./activity-ring/default";
 import AlertDefault from "./alert/default";
 import AlertNoIcon from "./alert/no-icon";
 import AlertVariants from "./alert/variants";
@@ -366,6 +367,9 @@ export const examples: Record<string, Example[]> = {
     { name: "In Card", file: "activity-grid/in-card.tsx", Component: ActivityGridInCard },
     { name: "Intensity Levels", file: "activity-grid/intensity-levels.tsx", Component: ActivityGridIntensityLevels },
     { name: "Interactive", file: "activity-grid/interactive.tsx", Component: ActivityGridInteractive },
+  ],
+  "activity-ring": [
+    { name: "Default", file: "activity-ring/default.tsx", Component: ActivityRingDefault },
   ],
   "alert": [
     { name: "Default", file: "alert/default.tsx", Component: AlertDefault },

@@ -271,6 +271,24 @@
       ]
     },
     {
+      "name": "activity-ring",
+      "type": "registry:ui",
+      "title": "Activity ring",
+      "description": "Interactive segmented donut: tonal segments, hover/pin emphasis, tooltip, legend, draw-in.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/status-dot",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/activity-ring.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/activity-ring.tsx"
+        }
+      ]
+    },
+    {
       "name": "identity",
       "type": "registry:lib",
       "title": "Anonymous identity",
@@ -1353,6 +1371,7 @@
         "@byronwade/utils",
         "@byronwade/status-dot",
         "@byronwade/gauge",
+        "@byronwade/activity-ring",
         "@byronwade/identity",
         "@byronwade/gradient-avatar",
         "@byronwade/activity-grid",
