@@ -10,17 +10,22 @@ is inaccessible below `lg`. Mobile/tablet users can't navigate the docs.
 A `DocsNavDock` app component (docs chrome, not a registry item) rendered in the docs
 layout, `fixed bottom-4 left-4 z-50 lg:hidden`. It's a **MorphDock**:
 - A single hamburger item (icon-only, `expandable={false}`) toggles a controlled `open`.
-- Blooms **`SiteNav`** as the panel: `placement="top"`, `origin="start"`,
-  `tone="surface"` (so SiteNav's foreground/muted text reads on the light panel),
-  `panelTitle="Documentation"`, fixed `panelHeight` → the body scrolls (`overflow-auto`),
-  `panelWidth ≈ 264`.
+- Blooms the docs nav as the panel: `placement="top"`, `origin="start"`,
+  default **`tone="dock"`** (dark) so the pill + panel match the floating primary
+  `NavDock` chrome, `panelTitle="Documentation"`, fixed `panelHeight` → the body
+  scrolls (`overflow-auto`), `panelWidth ≈ 264`.
+- Instead of reusing the light-theme `SiteNav`, it renders the same data
+  (`guides` + `categories`/`byCategory`) with **dock tokens** — uppercase section
+  labels (`text-dock-foreground/50`) + `dock-active` rows — mirroring `NavDock`'s
+  search-panel styling, so the open panel reads as the same component.
 - Auto-closes on navigation (pathname change), Esc, and click-away (MorphDock built-ins).
-- Desktop `<aside>` unchanged.
+- Desktop `<aside>` (light `SiteNav`) unchanged.
 
 ## Decisions
 - Reuse MorphDock (dogfoods our morph component, matches floating-chrome aesthetic).
 - Show below `lg` (exactly when the aside hides).
-- `tone="surface"` for legibility of the ported light-theme `SiteNav`.
+- **`tone="dock"`** to match the primary `NavDock` (the light `surface` tone read as a
+  different, mismatched component); dock-styled links instead of the light `SiteNav`.
 
 ## Testing
 App-chrome component (not a registry item) → no per-component test mandate; verified
