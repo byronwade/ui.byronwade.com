@@ -69,7 +69,10 @@ export default function Example() {
                 <GlobeIcon className="size-4" />
                 <span>Search</span>
               </PromptInputButton>
-              <PromptInputSelect value={model} onValueChange={setModel}>
+              <PromptInputSelect
+                value={model}
+                onValueChange={(v) => setModel(v as string)}
+              >
                 <PromptInputSelectTrigger>
                   <PromptInputSelectValue />
                 </PromptInputSelectTrigger>

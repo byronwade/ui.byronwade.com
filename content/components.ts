@@ -2,7 +2,7 @@ export type PropRow = { name: string; type: string; default?: string; descriptio
 export type ComponentDoc = {
   slug: string;
   name: string;
-  category: "Foundation" | "Libraries" | "UI" | "Composites" | "Primitives" | "Forms" | "Overlays" | "Feedback" | "Data display" | "Patterns" | "Charts" | "House components" | "Morph";
+  category: "Foundation" | "Libraries" | "UI" | "Composites" | "Primitives" | "Forms" | "Overlays" | "Feedback" | "Data display" | "Patterns" | "Charts" | "House components" | "Morph" | "AI";
   description: string;
   npmDeps?: string[];
   registryDeps?: string[];
@@ -795,8 +795,222 @@ export const components: ComponentDoc[] = [
     registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/scroll-area", "@byronwade/collapsible"],
     examples: ["default"],
   },
+  {
+    slug: "ai-loader", name: "Loader", category: "AI",
+    description: "Spinning multi-opacity loader for AI/agent surfaces (adapted from AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-shimmer", name: "Shimmer", category: "AI",
+    description: "Animated text-shimmer that sweeps a token-driven light gradient across muted text for AI thinking/streaming states.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["motion"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-suggestion", name: "Suggestion", category: "AI",
+    description: "A horizontally-scrolling row of clickable prompt pills that surface suggested actions for an AI chat or agent surface.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/scroll-area"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-image", name: "Image", category: "AI",
+    description: "Renders an AI-generated image from the Experimental_GeneratedImage shape as an edge-framed, radius-clipped data URI (adapted from AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["ai"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-open-in-chat", name: "Open in Chat", category: "AI",
+    description: "A dropdown menu that opens the current prompt or query in external AI chat providers (ChatGPT, Claude, Cursor, Scira, T3, v0).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/dropdown-menu"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-inline-citation", name: "Inline Citation", category: "AI",
+    description: "Inline text citations that reveal a hover card carousel of grounded sources with titles, URLs, and quotes (adapted from Vercel AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/badge", "@byronwade/hover-card"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-context", name: "Context", category: "AI",
+    description: "Hover-card token/cost usage meter for AI model context windows (adapted from Vercel AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/hover-card", "@byronwade/progress"],
+    npmDeps: ["ai", "tokenlens"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-code-block", name: "Code Block", category: "AI",
+    description: "Syntax-highlighted code surface with light/dark Shiki rendering, optional line numbers, and a copy-to-clipboard button (adapted from Vercel AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button"],
+    npmDeps: ["shiki", "lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-task", name: "Task", category: "AI",
+    description: "A collapsible task log showing an AI agent's step-by-step actions with inline file chips, ported from Vercel AI Elements.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/collapsible"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-sources", name: "Sources", category: "AI",
+    description: "A collapsible citation list that reveals the sources an AI response was grounded in, built on the Base UI collapsible primitive.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/collapsible"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-model-selector", name: "Model Selector", category: "AI",
+    description: "A searchable command-palette dialog for choosing an AI model, with provider logos, grouped items, and keyboard shortcuts.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/command", "@byronwade/dialog"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-confirmation", name: "Confirmation", category: "AI",
+    description: "A tool-call approval prompt that requests, then reflects, an accepted or rejected agent action using AI SDK approval state.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/alert", "@byronwade/button"],
+    npmDeps: ["ai"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-checkpoint", name: "Checkpoint", category: "AI",
+    description: "A conversation checkpoint marker that pairs a bookmark icon with a tooltip-enabled restore trigger and a trailing separator.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/separator", "@byronwade/tooltip"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-plan", name: "Plan", category: "AI",
+    description: "Collapsible plan card for AI/agent surfaces with a streaming-aware title and description (adapted from AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/card", "@byronwade/collapsible", "@byronwade/ai-shimmer"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-queue", name: "Queue", category: "AI",
+    description: "A collapsible task-queue surface for AI agents, with pending/completed status indicators, descriptions, hover action buttons, and image/file attachments.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/collapsible", "@byronwade/scroll-area", "@byronwade/button"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-conversation", name: "Conversation", category: "AI",
+    description: "An auto-scrolling chat transcript that sticks to the bottom as messages stream, with content, empty-state, and scroll-to-bottom affordances.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button"],
+    npmDeps: ["lucide-react", "use-stick-to-bottom"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-reasoning", name: "Reasoning", category: "AI",
+    description: "A collapsible \"thinking\" trace for AI responses that auto-opens while streaming, records elapsed seconds, and renders its markdown reasoning through Streamdown.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/collapsible", "@byronwade/ai-shimmer"],
+    npmDeps: ["streamdown", "lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-tool", name: "Tool", category: "AI",
+    description: "Collapsible tool-call card that shows a tool's status, JSON parameters, and result or error output for agent chat UIs.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/badge", "@byronwade/collapsible", "@byronwade/ai-code-block"],
+    npmDeps: ["ai", "lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-message", name: "Message", category: "AI",
+    description: "Chat message primitives for AI conversations — bubbles, actions, branch navigation, attachments, and a streaming markdown response.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/button-group", "@byronwade/tooltip"],
+    npmDeps: ["ai", "streamdown", "lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-chain-of-thought", name: "Chain of Thought", category: "AI",
+    description: "A collapsible, step-by-step reasoning trace for AI responses with status-coded steps, search-result chips, and captioned image wells.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/badge", "@byronwade/collapsible"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-artifact", name: "Artifact", category: "AI",
+    description: "A framed surface for presenting generated artifacts (code, files, canvases) in a chat with a titled header, tooltip actions, a close button, and scrollable content.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/tooltip"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-node", name: "Node", category: "AI",
+    description: "A React Flow node rendered as a Card with editorial header/footer and token-styled source/target connection handles.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/card"],
+    npmDeps: ["@xyflow/react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-edge", name: "Edge", category: "AI",
+    description: "React Flow custom edges: a dashed temporary connector and an animated edge with a brand dot traveling along the path.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["@xyflow/react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-panel", name: "Panel", category: "AI",
+    description: "A React Flow overlay panel that floats over the flow canvas, pinned to a configurable corner.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["@xyflow/react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-canvas", name: "Canvas", category: "AI",
+    description: "A React Flow node-graph surface with opinionated interaction defaults and a token-driven, pattern-configurable background for agent/workflow UIs.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["@xyflow/react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-controls", name: "Controls", category: "AI",
+    description: "Token-styled React Flow zoom / fit-view / interactivity control panel for AI canvas surfaces (adapted from AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["@xyflow/react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-prompt-input", name: "Prompt Input", category: "AI",
+    description: "A composable AI chat prompt input with textarea, file attachments, action menu, model select, speech-to-text, and slash-command primitives built on byronwade/ui input-group, select, dropdown-menu, hover-card, and command.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/command", "@byronwade/dropdown-menu", "@byronwade/hover-card", "@byronwade/input-group", "@byronwade/select"],
+    npmDeps: ["ai", "lucide-react", "nanoid"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-toolbar", name: "Toolbar", category: "AI",
+    description: "A token-driven floating action toolbar that attaches to a React Flow custom node, with horizontal/vertical orientation variants.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["@xyflow/react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-attachments", name: "Attachments", category: "AI",
+    description: "A compound component for displaying file, media, and source-document attachments in grid, inline, or list layouts with previews, remove buttons, and hover-card details.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/hover-card"],
+    npmDeps: ["ai", "lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-connection", name: "Connection", category: "AI",
+    description: "Token-styled React Flow connection line for AI canvas/workflow surfaces (adapted from AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["@xyflow/react"],
+    examples: ["default"],
+  },
+  {
+    slug: "ai-web-preview", name: "Web Preview", category: "AI",
+    description: "An embedded browser-style web preview with URL bar, navigation, and a console log for AI-generated sites (adapted from AI Elements).",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/collapsible", "@byronwade/input", "@byronwade/tooltip"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
 ];
 
-export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph"] as const;
+export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;
 export const byCategory = (cat: string) => components.filter((c) => c.category === cat);
 export const bySlug = (slug: string) => components.find((c) => c.slug === slug);

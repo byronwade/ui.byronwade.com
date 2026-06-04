@@ -120,7 +120,9 @@ export function PriceRangeFilter({
           max={max}
           value={selected}
           onValueChange={(v) =>
-            setSelected(Array.isArray(v) ? ([v[0], v[1]] as Range) : [v, v])
+            setSelected(
+              (Array.isArray(v) ? [v[0], v[1]] : [v, v]) as unknown as Range
+            )
           }
         />
       </div>
