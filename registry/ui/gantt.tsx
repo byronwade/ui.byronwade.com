@@ -1287,13 +1287,53 @@ export const GanttProvider: FC<GanttProviderProps> = ({
     [zoom, columnWidth, sidebarWidth]
   );
 
+  // Center the viewport on "today" once the sidebar (and therefore the grid)
+  // has been measured — otherwise scrollWidth isn't final on mount and the
+  // timeline lands at its far-left edge (years away from the data). Re-centers
+  // when the range/zoom variant changes, but not on user scroll or the
+  // infinite-scroll timelineData growth (guarded by `centeredKey`).
+  const centeredKey = useRef<string | null>(null);
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollLeft =
-        scrollRef.current.scrollWidth / 2 - scrollRef.current.clientWidth / 2;
-      setScrollX(scrollRef.current.scrollLeft);
+    const el = scrollRef.current;
+    if (!el || sidebarWidth === 0) {
+      return;
     }
-  }, [setScrollX]);
+    const key = `${range}:${zoom}`;
+    if (centeredKey.current === key) {
+      return;
+    }
+    const id = requestAnimationFrame(() => {
+      // Nothing to center until the viewport has a measured width (e.g. jsdom).
+      if (el.clientWidth === 0) {
+        return;
+      }
+      const timelineStartDate = new Date(timelineData[0].year, 0, 1);
+      const todayOffset = getOffset(new Date(), timelineStartDate, {
+        zoom,
+        range,
+        columnWidth,
+        sidebarWidth,
+        headerHeight,
+        rowHeight,
+        onAddItem,
+        placeholderLength: 2,
+        timelineData,
+        ref: scrollRef,
+      });
+      el.scrollLeft = Math.max(0, todayOffset - (el.clientWidth - sidebarWidth) / 2);
+      setScrollX(el.scrollLeft);
+      centeredKey.current = key;
+    });
+    return () => cancelAnimationFrame(id);
+  }, [
+    sidebarWidth,
+    range,
+    zoom,
+    columnWidth,
+    timelineData,
+    onAddItem,
+    setScrollX,
+  ]);
 
   // Update sidebar width when DOM is ready
   useEffect(() => {

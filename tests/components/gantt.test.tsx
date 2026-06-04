@@ -13,6 +13,7 @@ import { render, screen, fireEvent, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
 import { addDays, startOfMonth, subDays } from "date-fns";
+import { Provider as JotaiProvider } from "jotai";
 
 import {
   GanttColumns,
@@ -541,7 +542,13 @@ describe("gantt — exported atoms", () => {
         </span>
       );
     }
-    render(<Probe />);
+    // Fresh jotai store so the global scrollX atom (written by Board renders in
+    // other tests) can't leak in — we're asserting the hooks' defaults.
+    render(
+      <JotaiProvider>
+        <Probe />
+      </JotaiProvider>,
+    );
     expect(screen.getByTestId("probe").textContent).toBe("false:0");
   });
 });
