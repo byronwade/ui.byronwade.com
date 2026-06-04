@@ -223,11 +223,16 @@ function asChildOrButton(
   props: ComponentProps<"button">,
 ) {
   if (asChild && isValidElement(children)) {
-    return cloneElement(children as ReactElement<ComponentProps<"button">>, {
-      onClick: handleClick,
-      "data-slot": slot,
-      ...props,
-    });
+    return cloneElement(
+      children as ReactElement<
+        ComponentProps<"button"> & Record<`data-${string}`, string>
+      >,
+      {
+        onClick: handleClick,
+        "data-slot": slot,
+        ...props,
+      },
+    );
   }
   return (
     <Button data-slot={slot} aria-label={label} onClick={handleClick} size="icon" variant="ghost" {...props}>
