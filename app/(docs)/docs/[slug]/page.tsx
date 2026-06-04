@@ -78,6 +78,21 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
             ))}
           </div>
         ) : null}
+        {doc.category === "AI" && (
+          <p className="mt-6 max-w-2xl rounded-lg edge bg-muted/40 px-3.5 py-2.5 text-[13px] leading-relaxed text-muted-foreground">
+            Adapted from{" "}
+            <a
+              href="https://ai-sdk.dev/elements"
+              target="_blank"
+              rel="noreferrer"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              Vercel AI Elements
+            </a>{" "}
+            — the original components, repurposed onto the byronwade/ui design
+            system (semantic tokens, dark mode, small subtle refinements). © Vercel.
+          </p>
+        )}
       </header>
 
       {rendered.length > 0 && (
