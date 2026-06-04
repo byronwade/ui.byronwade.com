@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { categories, byCategory, components } from "@/content/components";
+import { components } from "@/content/components";
+import { catalogItems } from "@/content/catalog";
+import { ComponentGallery } from "@/app/(docs)/_components/component-gallery";
 import { archetypes } from "@/app/layouts/_archetypes";
 import { Button } from "@/components/ui/button";
 import { CodeBlock } from "@/app/(docs)/_components/code-block";
@@ -114,38 +116,8 @@ export default function ComponentsIndexPage() {
           </span>
         </div>
 
-        <div>
-          {categories.map((cat) => {
-            const items = byCategory(cat);
-            if (items.length === 0) return null;
-            return (
-              <div
-                key={cat}
-                className="grid gap-x-8 gap-y-3 border-b border-border py-6 sm:grid-cols-[10rem_1fr]"
-              >
-                <div className="flex items-baseline gap-2">
-                  <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    {cat}
-                  </h3>
-                  <span className="font-mono text-[11px] tabular-nums text-muted-foreground/60">
-                    {items.length}
-                  </span>
-                </div>
-                <ul className="flex flex-wrap gap-x-5 gap-y-2.5">
-                  {items.map((c) => (
-                    <li key={c.slug}>
-                      <Link
-                        href={`/docs/${c.slug}`}
-                        className="text-[15px] text-foreground underline-offset-4 transition-colors hover:text-brand hover:underline"
-                      >
-                        {c.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
+        <div className="mt-8">
+          <ComponentGallery items={catalogItems()} />
         </div>
       </section>
 
