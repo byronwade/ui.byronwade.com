@@ -143,6 +143,7 @@ import CommandGrouped from "./command/grouped";
 import CommandInline from "./command/inline";
 import CommandWithIcons from "./command/with-icons";
 import ConversationListDefault from "./conversation-list/default";
+import CursorDefault from "./cursor/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
 import DetailHeaderManyActions from "./detail-header/many-actions";
@@ -270,6 +271,7 @@ import PageHeaderBreadcrumbContext from "./page-header/breadcrumb-context";
 import PageHeaderDescriptionOnly from "./page-header/description-only";
 import PageHeaderWithActions from "./page-header/with-actions";
 import PageHeaderWithBadge from "./page-header/with-badge";
+import PillDefault from "./pill/default";
 import PixelatedCanvasDefault from "./pixelated-canvas/default";
 import PopoverDefault from "./popover/default";
 import PopoverControlled from "./popover/controlled";
@@ -680,6 +682,9 @@ export const examples: Record<string, Example[]> = {
   "conversation-list": [
     { name: "Default", file: "conversation-list/default.tsx", Component: ConversationListDefault },
   ],
+  "cursor": [
+    { name: "Default", file: "cursor/default.tsx", Component: CursorDefault },
+  ],
   "detail-header": [
     { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },
     { name: "Custom Title Node", file: "detail-header/custom-title-node.tsx", Component: DetailHeaderCustomTitleNode },
@@ -856,6 +861,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Description Only", file: "page-header/description-only.tsx", Component: PageHeaderDescriptionOnly },
     { name: "With Actions", file: "page-header/with-actions.tsx", Component: PageHeaderWithActions },
     { name: "With Badge", file: "page-header/with-badge.tsx", Component: PageHeaderWithBadge },
+  ],
+  "pill": [
+    { name: "Default", file: "pill/default.tsx", Component: PillDefault },
   ],
   "pixelated-canvas": [
     { name: "Default", file: "pixelated-canvas/default.tsx", Component: PixelatedCanvasDefault },

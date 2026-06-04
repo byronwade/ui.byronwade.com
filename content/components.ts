@@ -1009,6 +1009,18 @@ export const components: ComponentDoc[] = [
     npmDeps: ["lucide-react"],
     examples: ["default"],
   },
+  {
+    slug: "cursor", name: "Cursor", category: "UI",
+    description: "Live collaboration cursor — pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "pill", name: "Pill", category: "UI",
+    description: "Rounded pill with avatar/status/indicator/delta parts; tones map to semantic tokens. Adapted from kibo-ui.",
+    npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/avatar", "@byronwade/badge", "@byronwade/button"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;

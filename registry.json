@@ -1774,6 +1774,46 @@
       ]
     },
     {
+      "name": "cursor",
+      "type": "registry:ui",
+      "title": "Cursor",
+      "description": "Live collaboration cursor — pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/cursor.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/cursor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pill",
+      "type": "registry:ui",
+      "title": "Pill",
+      "description": "Rounded pill with avatar/status/indicator/delta parts; tones map to success/destructive/warning/brand tokens. Adapted from kibo-ui.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/avatar",
+        "@byronwade/badge",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/pill.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pill.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",
