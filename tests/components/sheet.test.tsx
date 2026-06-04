@@ -11,6 +11,7 @@ import {
   SheetDescription,
   SheetFooter,
   SheetHeader,
+  SheetPanel,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
@@ -204,6 +205,182 @@ describe("Sheet – accessibility", () => {
     const user = userEvent.setup();
     const { container } = render(<SimpleSheet />);
     await user.click(screen.getByRole("button", { name: "Open sheet" }));
+    await screen.findByRole("dialog");
+    expect(await axe(container)).toHaveNoViolations();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Drawer variants — showBar, inset variant, SheetPanel, bare footer, nesting
+// ---------------------------------------------------------------------------
+
+describe("Sheet – drawer variants", () => {
+  it("defaults to variant='default' on the content", async () => {
+    const user = userEvent.setup();
+    render(<SimpleSheet />);
+    await user.click(screen.getByRole("button", { name: "Open sheet" }));
+    await screen.findByRole("dialog");
+    expect(
+      document.querySelector("[data-slot='sheet-content']")
+    ).toHaveAttribute("data-variant", "default");
+  });
+
+  it("variant='inset' sets data-variant='inset'", async () => {
+    const user = userEvent.setup();
+    render(
+      <Sheet>
+        <SheetTrigger render={<Button variant="outline" />}>Open</SheetTrigger>
+        <SheetContent side="right" variant="inset">
+          <SheetHeader>
+            <SheetTitle>Inset</SheetTitle>
+            <SheetDescription>Floating drawer</SheetDescription>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
+    );
+    await user.click(screen.getByRole("button", { name: "Open" }));
+    await screen.findByRole("dialog");
+    const content = document.querySelector("[data-slot='sheet-content']");
+    expect(content).toHaveAttribute("data-variant", "inset");
+    expect((content as HTMLElement).className).toContain("rounded-2xl");
+  });
+
+  it("showBar renders a grab bar; omitting it does not", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(
+      <Sheet defaultOpen>
+        <SheetContent side="bottom" showBar showCloseButton={false}>
+          <SheetHeader>
+            <SheetTitle>Bar</SheetTitle>
+            <SheetDescription>Has a grab bar</SheetDescription>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
+    );
+    await screen.findByRole("dialog");
+    expect(
+      document.querySelector("[data-slot='sheet-bar']")
+    ).toBeInTheDocument();
+
+    rerender(
+      <Sheet defaultOpen>
+        <SheetContent side="bottom" showCloseButton={false}>
+          <SheetHeader>
+            <SheetTitle>No bar</SheetTitle>
+            <SheetDescription>No grab bar</SheetDescription>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
+    );
+    expect(document.querySelector("[data-slot='sheet-bar']")).toBeNull();
+    void user;
+  });
+
+  it("SheetPanel renders a body region and forwards className", async () => {
+    render(
+      <Sheet defaultOpen>
+        <SheetContent side="right" showCloseButton={false}>
+          <SheetHeader>
+            <SheetTitle>Record</SheetTitle>
+            <SheetDescription>Details</SheetDescription>
+          </SheetHeader>
+          <SheetPanel className="grid gap-4">
+            <p>Body content</p>
+          </SheetPanel>
+        </SheetContent>
+      </Sheet>
+    );
+    await screen.findByRole("dialog");
+    const panel = document.querySelector("[data-slot='sheet-panel']");
+    expect(panel).toBeInTheDocument();
+    expect(screen.getByText("Body content")).toBeInTheDocument();
+    expect((panel as HTMLElement).className).toContain("grid");
+    expect((panel as HTMLElement).className).toContain("flex-1");
+  });
+
+  it("SheetFooter variant='bare' lays out as a row", async () => {
+    render(
+      <Sheet defaultOpen>
+        <SheetContent side="bottom" showBar showCloseButton={false}>
+          <SheetHeader>
+            <SheetTitle>Step</SheetTitle>
+            <SheetDescription>Footer is bare</SheetDescription>
+          </SheetHeader>
+          <SheetFooter variant="bare" className="justify-center">
+            <SheetClose render={<Button variant="ghost" />}>Cancel</SheetClose>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
+    );
+    await screen.findByRole("dialog");
+    const footer = document.querySelector("[data-slot='sheet-footer']");
+    expect(footer).toHaveAttribute("data-variant", "bare");
+    expect((footer as HTMLElement).className).toContain("flex-row");
+  });
+
+  it("default footer stays a column", async () => {
+    render(
+      <Sheet defaultOpen>
+        <SheetContent side="right" showCloseButton={false}>
+          <SheetHeader>
+            <SheetTitle>T</SheetTitle>
+            <SheetDescription>D</SheetDescription>
+          </SheetHeader>
+          <SheetFooter>
+            <Button>Save</Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
+    );
+    await screen.findByRole("dialog");
+    const footer = document.querySelector("[data-slot='sheet-footer']");
+    expect(footer).toHaveAttribute("data-variant", "default");
+    expect((footer as HTMLElement).className).toContain("flex-col");
+  });
+
+  it("opens a nested drawer from within a footer", async () => {
+    const user = userEvent.setup();
+    render(
+      <Sheet defaultOpen>
+        <SheetContent side="right" variant="inset" showCloseButton={false}>
+          <SheetHeader>
+            <SheetTitle>First</SheetTitle>
+            <SheetDescription>Outer drawer</SheetDescription>
+          </SheetHeader>
+          <SheetFooter>
+            <Sheet>
+              <SheetTrigger render={<Button variant="outline" />}>
+                Edit details
+              </SheetTrigger>
+              <SheetContent side="right" variant="inset" showCloseButton={false}>
+                <SheetHeader>
+                  <SheetTitle>Edit details</SheetTitle>
+                  <SheetDescription>Inner drawer</SheetDescription>
+                </SheetHeader>
+              </SheetContent>
+            </Sheet>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
+    );
+    await user.click(screen.getByRole("button", { name: "Edit details" }));
+    expect(await screen.findByText("Inner drawer")).toBeInTheDocument();
+  });
+
+  it("an inset drawer with a grab bar has no axe violations", async () => {
+    const { container } = render(
+      <Sheet defaultOpen>
+        <SheetContent side="bottom" showBar showCloseButton={false}>
+          <SheetHeader>
+            <SheetTitle>Accessible drawer</SheetTitle>
+            <SheetDescription>With a grab bar.</SheetDescription>
+          </SheetHeader>
+          <SheetPanel>
+            <p>Body</p>
+          </SheetPanel>
+        </SheetContent>
+      </Sheet>
+    );
     await screen.findByRole("dialog");
     expect(await axe(container)).toHaveNoViolations();
   });

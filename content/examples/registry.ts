@@ -19,6 +19,7 @@ import ActivityRingScoreTones from "./activity-ring/score-tones";
 import ActivityRingTones from "./activity-ring/tones";
 import ActivityRingWithVerdict from "./activity-ring/with-verdict";
 import AiArtifactDefault from "./ai-artifact/default";
+import AiAttachmentsDefault from "./ai-attachments/default";
 import AiCanvasDefault from "./ai-canvas/default";
 import AiChainOfThoughtDefault from "./ai-chain-of-thought/default";
 import AiCheckpointDefault from "./ai-checkpoint/default";
@@ -46,6 +47,7 @@ import AiSourcesDefault from "./ai-sources/default";
 import AiSuggestionDefault from "./ai-suggestion/default";
 import AiTaskDefault from "./ai-task/default";
 import AiToolDefault from "./ai-tool/default";
+import AiToolbarDefault from "./ai-toolbar/default";
 import AiWebPreviewDefault from "./ai-web-preview/default";
 import AlertDefault from "./alert/default";
 import AlertNoIcon from "./alert/no-icon";
@@ -456,6 +458,9 @@ export const examples: Record<string, Example[]> = {
   "ai-artifact": [
     { name: "Default", file: "ai-artifact/default.tsx", Component: AiArtifactDefault },
   ],
+  "ai-attachments": [
+    { name: "Default", file: "ai-attachments/default.tsx", Component: AiAttachmentsDefault },
+  ],
   "ai-canvas": [
     { name: "Default", file: "ai-canvas/default.tsx", Component: AiCanvasDefault },
   ],
@@ -536,6 +541,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "ai-tool": [
     { name: "Default", file: "ai-tool/default.tsx", Component: AiToolDefault },
+  ],
+  "ai-toolbar": [
+    { name: "Default", file: "ai-toolbar/default.tsx", Component: AiToolbarDefault },
   ],
   "ai-web-preview": [
     { name: "Default", file: "ai-web-preview/default.tsx", Component: AiWebPreviewDefault },

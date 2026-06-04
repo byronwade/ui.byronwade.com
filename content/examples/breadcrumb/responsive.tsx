@@ -37,7 +37,7 @@ export default function Example() {
         <Breadcrumb>
           <BreadcrumbList>
             {crumbs.map((crumb, index) => (
-              <React.Fragment key={crumb.href ?? crumb.label}>
+              <React.Fragment key={crumb.label}>
                 {index > 0 && <BreadcrumbSeparator />}
                 <BreadcrumbItem>
                   {crumb.href ? (
@@ -66,7 +66,7 @@ export default function Example() {
             {expanded ? (
               <>
                 {middle.map((crumb) => (
-                  <React.Fragment key={crumb.href}>
+                  <React.Fragment key={crumb.label}>
                     <BreadcrumbItem>
                       <BreadcrumbLink href={crumb.href!}>
                         {crumb.label}

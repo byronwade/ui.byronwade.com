@@ -1799,6 +1799,664 @@
       ]
     },
     {
+      "name": "ai-shimmer",
+      "type": "registry:component",
+      "title": "AI Shimmer",
+      "description": "Animated text-shimmer that sweeps a token-driven light gradient across muted text for AI thinking/streaming states.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/shimmer.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/shimmer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-suggestion",
+      "type": "registry:component",
+      "title": "AI Suggestion",
+      "description": "A horizontally-scrolling row of clickable prompt pills that surface suggested actions for an AI chat or agent surface.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/scroll-area"
+      ],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/suggestion.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/suggestion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-image",
+      "type": "registry:component",
+      "title": "AI Image",
+      "description": "Renders an AI-generated image from the Experimental_GeneratedImage shape as an edge-framed, radius-clipped data URI (adapted from AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "ai"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/image.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/image.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-open-in-chat",
+      "type": "registry:component",
+      "title": "Open in Chat",
+      "description": "A dropdown menu that opens the current prompt or query in external AI chat providers (ChatGPT, Claude, Cursor, Scira, T3, v0).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/dropdown-menu"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/open-in-chat.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/open-in-chat.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-inline-citation",
+      "type": "registry:component",
+      "title": "AI Inline Citation",
+      "description": "Inline text citations that reveal a hover card carousel of grounded sources with titles, URLs, and quotes (adapted from Vercel AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/badge",
+        "@byronwade/hover-card"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/inline-citation.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/inline-citation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-context",
+      "type": "registry:component",
+      "title": "AI Context",
+      "description": "Hover-card token/cost usage meter for AI model context windows (adapted from Vercel AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/hover-card",
+        "@byronwade/progress"
+      ],
+      "dependencies": [
+        "ai",
+        "tokenlens"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/context.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/context.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-code-block",
+      "type": "registry:component",
+      "title": "AI Code Block",
+      "description": "Syntax-highlighted code surface with light/dark Shiki rendering, optional line numbers, and a copy-to-clipboard button (adapted from Vercel AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
+      "dependencies": [
+        "shiki",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/code-block.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/code-block.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-task",
+      "type": "registry:component",
+      "title": "AI Task",
+      "description": "A collapsible task log showing an AI agent's step-by-step actions with inline file chips, ported from Vercel AI Elements.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/collapsible"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/task.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/task.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-sources",
+      "type": "registry:component",
+      "title": "AI Sources",
+      "description": "A collapsible citation list that reveals the sources an AI response was grounded in, built on the Base UI collapsible primitive.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/collapsible"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/sources.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/sources.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-model-selector",
+      "type": "registry:component",
+      "title": "AI Model Selector",
+      "description": "A searchable command-palette dialog for choosing an AI model, with provider logos, grouped items, and keyboard shortcuts.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/command",
+        "@byronwade/dialog"
+      ],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/model-selector.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/model-selector.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-confirmation",
+      "type": "registry:component",
+      "title": "AI Confirmation",
+      "description": "A tool-call approval prompt that requests, then reflects, an accepted or rejected agent action using AI SDK approval state.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/alert",
+        "@byronwade/button"
+      ],
+      "dependencies": [
+        "ai"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/confirmation.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/confirmation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-checkpoint",
+      "type": "registry:component",
+      "title": "AI Checkpoint",
+      "description": "A conversation checkpoint marker that pairs a bookmark icon with a tooltip-enabled restore trigger and a trailing separator.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/separator",
+        "@byronwade/tooltip"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/checkpoint.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/checkpoint.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-plan",
+      "type": "registry:component",
+      "title": "AI Plan",
+      "description": "Collapsible plan card for AI/agent surfaces with a streaming-aware title and description (adapted from AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/card",
+        "@byronwade/collapsible",
+        "@byronwade/ai-shimmer"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/plan.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/plan.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-queue",
+      "type": "registry:component",
+      "title": "AI Queue",
+      "description": "A collapsible task-queue surface for AI agents, with pending/completed status indicators, descriptions, hover action buttons, and image/file attachments.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/collapsible",
+        "@byronwade/scroll-area",
+        "@byronwade/button"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/queue.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/queue.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-conversation",
+      "type": "registry:component",
+      "title": "AI Conversation",
+      "description": "An auto-scrolling chat transcript that sticks to the bottom as messages stream, with content, empty-state, and scroll-to-bottom affordances.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "use-stick-to-bottom"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/conversation.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/conversation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-reasoning",
+      "type": "registry:component",
+      "title": "AI Reasoning",
+      "description": "A collapsible \"thinking\" trace for AI responses that auto-opens while streaming, records elapsed seconds, and renders its markdown reasoning through Streamdown.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/collapsible",
+        "@byronwade/ai-shimmer"
+      ],
+      "dependencies": [
+        "streamdown",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/reasoning.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/reasoning.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-tool",
+      "type": "registry:component",
+      "title": "AI Tool",
+      "description": "Collapsible tool-call card that shows a tool's status, JSON parameters, and result or error output for agent chat UIs.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/badge",
+        "@byronwade/collapsible",
+        "@byronwade/ai-code-block"
+      ],
+      "dependencies": [
+        "ai",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/tool.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/tool.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-message",
+      "type": "registry:component",
+      "title": "AI Message",
+      "description": "Chat message primitives for AI conversations — bubbles, actions, branch navigation, attachments, and a streaming markdown response.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/button-group",
+        "@byronwade/tooltip"
+      ],
+      "dependencies": [
+        "ai",
+        "streamdown",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/message.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/message.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-chain-of-thought",
+      "type": "registry:component",
+      "title": "AI Chain of Thought",
+      "description": "A collapsible, step-by-step reasoning trace for AI responses with status-coded steps, search-result chips, and captioned image wells.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/badge",
+        "@byronwade/collapsible"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/chain-of-thought.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/chain-of-thought.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-artifact",
+      "type": "registry:component",
+      "title": "AI Artifact",
+      "description": "A framed surface for presenting generated artifacts (code, files, canvases) in a chat with a titled header, tooltip actions, a close button, and scrollable content.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/tooltip"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/artifact.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/artifact.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-node",
+      "type": "registry:component",
+      "title": "AI Node",
+      "description": "A React Flow node rendered as a Card with editorial header/footer and token-styled source/target connection handles.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/card"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/node.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/node.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-edge",
+      "type": "registry:component",
+      "title": "AI Edge",
+      "description": "React Flow custom edges: a dashed temporary connector and an animated edge with a brand dot traveling along the path.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/edge.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/edge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-panel",
+      "type": "registry:component",
+      "title": "AI Panel",
+      "description": "A React Flow overlay panel that floats over the flow canvas, pinned to a configurable corner.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/panel.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-canvas",
+      "type": "registry:component",
+      "title": "AI Canvas",
+      "description": "A React Flow node-graph surface with opinionated interaction defaults and a token-driven, pattern-configurable background for agent/workflow UIs.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/canvas.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/canvas.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-controls",
+      "type": "registry:component",
+      "title": "AI Controls",
+      "description": "Token-styled React Flow zoom / fit-view / interactivity control panel for AI canvas surfaces (adapted from AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/controls.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/controls.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-prompt-input",
+      "type": "registry:component",
+      "title": "AI Prompt Input",
+      "description": "A composable AI chat prompt input with textarea, file attachments, action menu, model select, speech-to-text, and slash-command primitives built on byronwade/ui input-group, select, dropdown-menu, hover-card, and command.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/command",
+        "@byronwade/dropdown-menu",
+        "@byronwade/hover-card",
+        "@byronwade/input-group",
+        "@byronwade/select"
+      ],
+      "dependencies": [
+        "ai",
+        "lucide-react",
+        "nanoid"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/prompt-input.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/prompt-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-toolbar",
+      "type": "registry:component",
+      "title": "AI Toolbar",
+      "description": "A token-driven floating action toolbar that attaches to a React Flow custom node, with horizontal/vertical orientation variants.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/toolbar.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/toolbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-attachments",
+      "type": "registry:component",
+      "title": "Attachments",
+      "description": "A compound component for displaying file, media, and source-document attachments in grid, inline, or list layouts with previews, remove buttons, and hover-card details.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/hover-card"
+      ],
+      "dependencies": [
+        "ai",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/attachments.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/attachments.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-connection",
+      "type": "registry:component",
+      "title": "AI Connection",
+      "description": "Token-styled React Flow connection line for AI canvas/workflow surfaces (adapted from AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/connection.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/connection.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-web-preview",
+      "type": "registry:component",
+      "title": "AI Web Preview",
+      "description": "An embedded browser-style web preview with URL bar, navigation, and a console log for AI-generated sites (adapted from AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/collapsible",
+        "@byronwade/input",
+        "@byronwade/tooltip"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/web-preview.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/web-preview.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -1818,6 +2476,11 @@
         "@byronwade/metric-stat",
         "@byronwade/centered-focal",
         "@byronwade/button",
+        "@byronwade/calendar",
+        "@byronwade/kbd",
+        "@byronwade/spinner",
+        "@byronwade/button-group",
+        "@byronwade/native-select",
         "@byronwade/badge",
         "@byronwade/card",
         "@byronwade/input",
@@ -1870,7 +2533,46 @@
         "@byronwade/kinetic-text",
         "@byronwade/backlight",
         "@byronwade/world-map",
-        "@byronwade/floating-dock"
+        "@byronwade/floating-dock",
+        "@byronwade/use-outside-click",
+        "@byronwade/apple-cards-carousel",
+        "@byronwade/canvas-text",
+        "@byronwade/pixelated-canvas",
+        "@byronwade/slider",
+        "@byronwade/number-field",
+        "@byronwade/price-range-filter",
+        "@byronwade/file-tree",
+        "@byronwade/ai-loader",
+        "@byronwade/ai-shimmer",
+        "@byronwade/ai-suggestion",
+        "@byronwade/ai-image",
+        "@byronwade/ai-open-in-chat",
+        "@byronwade/ai-inline-citation",
+        "@byronwade/ai-context",
+        "@byronwade/ai-code-block",
+        "@byronwade/ai-task",
+        "@byronwade/ai-sources",
+        "@byronwade/ai-model-selector",
+        "@byronwade/ai-confirmation",
+        "@byronwade/ai-checkpoint",
+        "@byronwade/ai-plan",
+        "@byronwade/ai-queue",
+        "@byronwade/ai-conversation",
+        "@byronwade/ai-reasoning",
+        "@byronwade/ai-tool",
+        "@byronwade/ai-message",
+        "@byronwade/ai-chain-of-thought",
+        "@byronwade/ai-artifact",
+        "@byronwade/ai-node",
+        "@byronwade/ai-edge",
+        "@byronwade/ai-panel",
+        "@byronwade/ai-canvas",
+        "@byronwade/ai-controls",
+        "@byronwade/ai-prompt-input",
+        "@byronwade/ai-toolbar",
+        "@byronwade/ai-attachments",
+        "@byronwade/ai-connection",
+        "@byronwade/ai-web-preview"
       ]
     }
   ]

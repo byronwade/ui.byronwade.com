@@ -40,7 +40,7 @@ If a port needs a primitive we lack, build it as a proper `registry:ui` item fir
 Legend: **L**=source lines, **ext**=external npm deps, **ui**=our primitives it composes.
 
 ### Tier 0 — trivial, no deps
-- [ ] `loader` — 96L — ext: — — ui: — (pure SVG spinner + cn)
+- [x] `loader` — 96L — ext: — — ui: — (pure SVG spinner + cn) ✅ committed f561222 (10 tests, axe)
 - [ ] `shimmer` — 64L — ext: — — ui: — (animated text shimmer)
 
 ### Tier 1 — composes our primitives / single functional dep

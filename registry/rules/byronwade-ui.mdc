@@ -43,7 +43,37 @@ Before writing any markup, check whether a component already exists. Reach for t
   expand into a modal), `canvas-text` (animated lines clipped to text),
   `pixelated-canvas` (image as an interactive dot grid)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
-  `ai-loader` (spinning multi-opacity loader)
+  `ai-loader` (spinning multi-opacity loader),
+  `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),
+  `ai-suggestion` (horizontal scroll row of clickable prompt-pill buttons for AI chat suggestions),
+  `ai-image` (renders an AI-generated image from base64 + mediaType as an `edge`-framed, radius-clipped data URI),
+  `ai-open-in-chat` (dropdown that opens the current prompt/query in ChatGPT, Claude, Cursor, Scira, T3, or v0),
+  `ai-inline-citation` (inline source citations: a hover-card badge revealing a navigable carousel of sources with titles, URLs, and quotes),
+  `ai-context` (hover-card token/cost usage meter for AI model context windows, built on hover-card + progress + button),
+  `ai-code-block` (syntax-highlighted code surface with light/dark Shiki rendering, line numbers, and a copy button),
+  `ai-task` (collapsible AI agent task log: trigger + reasoning items with inline file chips),
+  `ai-sources` (collapsible citation list revealing the sources behind an AI response),
+  `ai-model-selector` (command-palette dialog for picking an AI model, with provider logos, search, grouped items, and shortcuts),
+  `ai-confirmation` (tool-call approval prompt: requests a decision, then shows the accepted/rejected outcome from AI SDK approval state),
+  `ai-checkpoint` (conversation checkpoint marker with icon + tooltip restore trigger and a trailing separator),
+  `ai-plan` (collapsible plan card — streaming-aware title/description with a ghost toggle, header/action/content/footer parts),
+  `ai-queue` (collapsible task-queue list with status indicators, descriptions, action buttons, and image/file attachments),
+  `ai-conversation` (auto-stick-to-bottom chat transcript log with content, empty-state, and scroll-to-bottom button),
+  `ai-reasoning` (collapsible streaming "reasoning"/thinking trace — brain trigger with elapsed-seconds count, Streamdown markdown body),
+  `ai-tool` (collapsible tool-call card showing a status badge, JSON parameters, and result/error output),
+  `ai-message` (chat message bubbles with actions, branch navigation, attachments, and a streaming markdown response),
+  `ai-chain-of-thought` (collapsible, step-by-step AI reasoning trace with status-coded steps, search-result chips, and image wells),
+  `ai-artifact` (framed artifact surface — header with title/description, tooltip actions, close button, scrollable content),
+  `ai-node` (React Flow node card with token-styled source/target handles, composed from Card primitives),
+  `ai-edge` (React Flow edges — dashed temporary connector + animated brand-dot edge),
+  `ai-panel` (React Flow overlay panel pinned to a canvas corner),
+  `ai-canvas` (React Flow node-graph surface with a token-driven, pattern-configurable background),
+  `ai-controls` (React Flow zoom / fit-view / interactivity control panel, token-styled),
+  `ai-prompt-input` (composable AI chat prompt input: textarea, attachments, action menu, model select, speech, and slash-command parts),
+  `ai-toolbar` (floating React Flow node action toolbar; horizontal/vertical orientation),
+  `ai-attachments` (file/media/source attachment chips with grid, inline, and list variants, previews, remove buttons, and hover-card details),
+  `ai-connection` (React Flow connection line, token-styled),
+  `ai-web-preview` (embedded browser-style preview with URL bar + console)
 
 Import from the consumer paths (these are where shadcn installs them):
 

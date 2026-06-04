@@ -28,6 +28,13 @@ import {
   CardAction,
   CardDescription,
   CardContent,
+  CardPanel,
+  CardFrame,
+  CardFrameHeader,
+  CardFrameTitle,
+  CardFrameDescription,
+  CardFrameAction,
+  CardFrameFooter,
 } from "@/components/ui/card";
 
 // ---------------------------------------------------------------------------
@@ -1431,5 +1438,361 @@ describe("Card — DOM structure", () => {
   it("Card renders a single root div (no extra wrapper)", () => {
     const { container } = render(<Card />);
     expect(container.children).toHaveLength(1);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 19. CardPanel — form/content body inside a Card
+// ---------------------------------------------------------------------------
+
+describe("CardPanel — classes and content", () => {
+  it("has data-slot='card-panel'", () => {
+    const { container } = render(
+      <Card>
+        <CardPanel>body</CardPanel>
+      </Card>
+    );
+    expect(
+      container.querySelector("[data-slot='card-panel']")
+    ).toBeInTheDocument();
+  });
+
+  it("has flex-1 class (fills remaining height)", () => {
+    const { container } = render(
+      <Card>
+        <CardPanel />
+      </Card>
+    );
+    const panel = container.querySelector(
+      "[data-slot='card-panel']"
+    ) as HTMLElement;
+    expect(panel.className).toContain("flex-1");
+  });
+
+  it("has px-5 class (default padding)", () => {
+    const { container } = render(
+      <Card>
+        <CardPanel />
+      </Card>
+    );
+    const panel = container.querySelector(
+      "[data-slot='card-panel']"
+    ) as HTMLElement;
+    expect(panel.className).toContain("px-5");
+  });
+
+  it("has group-data-[size=sm]/card:px-3 class", () => {
+    const { container } = render(
+      <Card>
+        <CardPanel />
+      </Card>
+    );
+    const panel = container.querySelector(
+      "[data-slot='card-panel']"
+    ) as HTMLElement;
+    expect(panel.className).toContain("group-data-[size=sm]/card:px-3");
+  });
+
+  it("renders children", () => {
+    render(
+      <Card>
+        <CardPanel>
+          <p>Deploy form</p>
+        </CardPanel>
+      </Card>
+    );
+    expect(screen.getByText("Deploy form")).toBeInTheDocument();
+  });
+
+  it("forwards custom className", () => {
+    const { container } = render(
+      <Card>
+        <CardPanel className="custom-panel" />
+      </Card>
+    );
+    const panel = container.querySelector(
+      "[data-slot='card-panel']"
+    ) as HTMLElement;
+    expect(panel.className).toContain("custom-panel");
+  });
+
+  it("forwards HTML attributes", () => {
+    const { container } = render(
+      <Card>
+        <CardPanel id="panel-1" data-testid="panel" />
+      </Card>
+    );
+    const panel = container.querySelector("[data-slot='card-panel']");
+    expect(panel).toHaveAttribute("id", "panel-1");
+    expect(panel).toHaveAttribute("data-testid", "panel");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 20. CardFrame family — framed (inset panel) variant
+// ---------------------------------------------------------------------------
+
+describe("CardFrame — outer frame wrapper", () => {
+  it("has data-slot='card-frame'", () => {
+    const { container } = render(<CardFrame />);
+    expect(container.firstChild).toHaveAttribute("data-slot", "card-frame");
+  });
+
+  it("is a <div> element", () => {
+    const { container } = render(<CardFrame />);
+    expect(container.firstChild?.nodeName).toBe("DIV");
+  });
+
+  it("has muted frame surface (bg-muted/40)", () => {
+    const { container } = render(<CardFrame />);
+    expect((container.firstChild as HTMLElement).className).toContain(
+      "bg-muted/40"
+    );
+  });
+
+  it("has rounded-2xl class", () => {
+    const { container } = render(<CardFrame />);
+    expect((container.firstChild as HTMLElement).className).toContain(
+      "rounded-2xl"
+    );
+  });
+
+  it("elevates with edge (no hard border)", () => {
+    const { container } = render(<CardFrame />);
+    const cls = (container.firstChild as HTMLElement).className;
+    expect(cls).toContain("edge");
+    expect(cls).not.toContain("border-border");
+  });
+
+  it("has group/card-frame class", () => {
+    const { container } = render(<CardFrame />);
+    expect((container.firstChild as HTMLElement).className).toContain(
+      "group/card-frame"
+    );
+  });
+
+  it("squares the inset card to rounded-xl via child selector", () => {
+    const { container } = render(<CardFrame />);
+    expect((container.firstChild as HTMLElement).className).toContain(
+      "*:data-[slot=card]:rounded-xl"
+    );
+  });
+
+  it("renders an inset Card child", () => {
+    const { container } = render(
+      <CardFrame>
+        <Card>
+          <CardPanel>inside</CardPanel>
+        </Card>
+      </CardFrame>
+    );
+    const frame = container.querySelector("[data-slot='card-frame']");
+    expect(frame?.querySelector("[data-slot='card']")).toBeInTheDocument();
+    expect(screen.getByText("inside")).toBeInTheDocument();
+  });
+
+  it("forwards custom className and HTML attributes", () => {
+    const { container } = render(
+      <CardFrame className="custom-frame" id="frame-1" />
+    );
+    const frame = container.firstChild as HTMLElement;
+    expect(frame.className).toContain("custom-frame");
+    expect(frame).toHaveAttribute("id", "frame-1");
+  });
+});
+
+describe("CardFrameHeader / Title / Description / Action / Footer", () => {
+  it("CardFrameHeader has data-slot and action-aware grid class", () => {
+    const { container } = render(<CardFrameHeader />);
+    const el = container.querySelector("[data-slot='card-frame-header']") as
+      | HTMLElement
+      | null;
+    expect(el).toBeInTheDocument();
+    expect(el?.className).toContain(
+      "has-data-[slot=card-frame-action]:grid-cols-[1fr_auto]"
+    );
+  });
+
+  it("CardFrameTitle has data-slot, is font-medium (never bold), renders text", () => {
+    render(<CardFrameTitle>Create project</CardFrameTitle>);
+    const title = screen.getByText("Create project");
+    expect(title).toHaveAttribute("data-slot", "card-frame-title");
+    expect(title.className).toContain("font-medium");
+    expect(title.className).not.toContain("font-bold");
+    expect(title.className).not.toContain("font-semibold");
+  });
+
+  it("CardFrameDescription has data-slot, muted text, renders text", () => {
+    render(<CardFrameDescription>Manage your projects</CardFrameDescription>);
+    const desc = screen.getByText("Manage your projects");
+    expect(desc).toHaveAttribute("data-slot", "card-frame-description");
+    expect(desc.className).toContain("text-muted-foreground");
+  });
+
+  it("CardFrameAction has data-slot and pins to the second column", () => {
+    const { container } = render(
+      <CardFrameAction>
+        <button>Add</button>
+      </CardFrameAction>
+    );
+    const action = container.querySelector(
+      "[data-slot='card-frame-action']"
+    ) as HTMLElement;
+    expect(action).toBeInTheDocument();
+    expect(action.className).toContain("col-start-2");
+    expect(action.className).toContain("justify-self-end");
+    expect(screen.getByRole("button", { name: "Add" })).toBeInTheDocument();
+  });
+
+  it("CardFrameFooter has data-slot and renders children", () => {
+    render(
+      <CardFrameFooter>
+        <span>This will take a few seconds.</span>
+      </CardFrameFooter>
+    );
+    const footer = screen.getByText("This will take a few seconds.");
+    expect(footer.parentElement).toHaveAttribute(
+      "data-slot",
+      "card-frame-footer"
+    );
+  });
+
+  it("all frame parts forward custom className", () => {
+    const { container } = render(
+      <CardFrame className="f">
+        <CardFrameHeader className="h">
+          <CardFrameTitle className="t">T</CardFrameTitle>
+          <CardFrameDescription className="d">D</CardFrameDescription>
+          <CardFrameAction className="a">
+            <button>A</button>
+          </CardFrameAction>
+        </CardFrameHeader>
+        <CardFrameFooter className="ft">F</CardFrameFooter>
+      </CardFrame>
+    );
+    expect(
+      (container.querySelector("[data-slot='card-frame']") as HTMLElement)
+        .className
+    ).toContain("f");
+    expect(
+      (
+        container.querySelector(
+          "[data-slot='card-frame-header']"
+        ) as HTMLElement
+      ).className
+    ).toContain("h");
+    expect(
+      (container.querySelector("[data-slot='card-frame-title']") as HTMLElement)
+        .className
+    ).toContain("t");
+    expect(
+      (
+        container.querySelector(
+          "[data-slot='card-frame-description']"
+        ) as HTMLElement
+      ).className
+    ).toContain("d");
+    expect(
+      (
+        container.querySelector(
+          "[data-slot='card-frame-action']"
+        ) as HTMLElement
+      ).className
+    ).toContain("a");
+    expect(
+      (
+        container.querySelector(
+          "[data-slot='card-frame-footer']"
+        ) as HTMLElement
+      ).className
+    ).toContain("ft");
+  });
+});
+
+describe("CardFrame — composition & accessibility (axe)", () => {
+  it("renders a frame with header + inset card panel (header-above pattern)", () => {
+    const { container } = render(
+      <CardFrame>
+        <CardFrameHeader>
+          <CardFrameTitle>Create project</CardFrameTitle>
+          <CardFrameDescription>Deploy in one click.</CardFrameDescription>
+        </CardFrameHeader>
+        <Card>
+          <CardPanel>
+            <p>form</p>
+          </CardPanel>
+        </Card>
+      </CardFrame>
+    );
+    expect(
+      container.querySelector("[data-slot='card-frame-header']")
+    ).toBeInTheDocument();
+    expect(container.querySelector("[data-slot='card-panel']")).toBeInTheDocument();
+    expect(screen.getByText("Create project")).toBeInTheDocument();
+  });
+
+  it("renders a frame with footnote below the panel (footer pattern)", () => {
+    render(
+      <CardFrame>
+        <Card>
+          <CardHeader>
+            <CardTitle>Create project</CardTitle>
+          </CardHeader>
+          <CardPanel>
+            <p>form</p>
+          </CardPanel>
+        </Card>
+        <CardFrameFooter>
+          <span>This will take a few seconds.</span>
+        </CardFrameFooter>
+      </CardFrame>
+    );
+    expect(screen.getByText("This will take a few seconds.")).toBeInTheDocument();
+  });
+
+  it("framed form has no axe violations", async () => {
+    const { container } = render(
+      <main>
+        <CardFrame>
+          <CardFrameHeader>
+            <CardFrameTitle>Create project</CardFrameTitle>
+            <CardFrameDescription>Deploy in one click.</CardFrameDescription>
+          </CardFrameHeader>
+          <Card>
+            <CardPanel>
+              <form className="flex flex-col gap-2">
+                <label htmlFor="project-name">Name</label>
+                <input id="project-name" type="text" placeholder="Project" />
+              </form>
+            </CardPanel>
+          </Card>
+        </CardFrame>
+      </main>
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  it("framed empty-state with header action has no axe violations", async () => {
+    const { container } = render(
+      <main>
+        <CardFrame>
+          <CardFrameHeader>
+            <CardFrameTitle>Project</CardFrameTitle>
+            <CardFrameDescription>Manage your projects</CardFrameDescription>
+            <CardFrameAction>
+              <button>Add</button>
+            </CardFrameAction>
+          </CardFrameHeader>
+          <Card>
+            <CardPanel>
+              <p>No projects yet</p>
+            </CardPanel>
+          </Card>
+        </CardFrame>
+      </main>
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });
