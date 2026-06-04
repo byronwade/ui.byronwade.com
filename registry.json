@@ -1782,6 +1782,23 @@
       ]
     },
     {
+      "name": "ai-loader",
+      "type": "registry:component",
+      "title": "AI Loader",
+      "description": "Spinning multi-opacity loader for AI/agent surfaces (adapted from AI Elements).",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/ai-elements/loader.tsx",
+          "type": "registry:component",
+          "target": "components/ai-elements/loader.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
