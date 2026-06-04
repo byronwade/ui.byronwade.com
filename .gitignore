@@ -52,3 +52,6 @@ next-env.d.ts
 # local artifacts
 /.screenshots
 /.tsc-nontest.txt
+
+# generated lint manifest
+packages/on-system-core/src/manifest.generated.ts

@@ -2,6 +2,7 @@
   "name": "byronwade-ui",
   "version": "0.1.0",
   "private": true,
+  "workspaces": ["packages/*"],
   "scripts": {
     "sync": "node scripts/sync-registry.mjs",
     "update:registry": "node scripts/update-registry.mjs",
@@ -25,7 +26,10 @@
     "test:coverage": "vitest run --coverage",
     "check:tests": "node scripts/check-test-coverage.mjs",
     "pretest:ci": "node scripts/sync-registry.mjs",
-    "test:ci": "npm run check:tests && vitest run --coverage"
+    "test:ci": "npm run check:tests && vitest run --coverage",
+    "gen:lint-manifest": "node scripts/gen-lint-manifest.mjs",
+    "check:lint-manifest": "node scripts/check-lint-manifest.mjs",
+    "test:packages": "npm run test --workspaces --if-present"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -45,6 +49,10 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@typescript-eslint/parser": "^8.20.0",
+    "culori": "^4.0.1",
+    "fast-glob": "^3.3.2",
+    "picocolors": "^1.1.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
