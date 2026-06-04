@@ -60,10 +60,12 @@ import ButtonSizes from "./button/sizes";
 import ButtonStateful from "./button/stateful";
 import ButtonVariants from "./button/variants";
 import ButtonWithIcon from "./button/with-icon";
+import ButtonGroupDefault from "./button-group/default";
 import CalendarDefault from "./calendar/default";
 import CalendarAppointment from "./calendar/appointment";
 import CalendarPricing from "./calendar/pricing";
 import CalendarRangePresets from "./calendar/range-presets";
+import CanvasTextDefault from "./canvas-text/default";
 import CardDefault from "./card/default";
 import CardContentOnly from "./card/content-only";
 import CardFrameEmpty from "./card/frame-empty";
@@ -187,6 +189,7 @@ import InputGroupWithButton from "./input-group/with-button";
 import InputGroupWithKbd from "./input-group/with-kbd";
 import InputGroupWithText from "./input-group/with-text";
 import IphoneDefault from "./iphone/default";
+import KbdDefault from "./kbd/default";
 import KineticTextDefault from "./kinetic-text/default";
 import LabelDefault from "./label/default";
 import LabelDisabled from "./label/disabled";
@@ -222,6 +225,7 @@ import MorphDockSeparators from "./morph-dock/separators";
 import MorphDockSplitToolbar from "./morph-dock/split-toolbar";
 import MorphDockTones from "./morph-dock/tones";
 import MorphDockToolsPrimary from "./morph-dock/tools-primary";
+import NativeSelectDefault from "./native-select/default";
 import NavigationMenuDefault from "./navigation-menu/default";
 import NavigationMenuSimpleLinks from "./navigation-menu/simple-links";
 import NavigationMenuWithDescriptions from "./navigation-menu/with-descriptions";
@@ -232,6 +236,7 @@ import PageHeaderBreadcrumbContext from "./page-header/breadcrumb-context";
 import PageHeaderDescriptionOnly from "./page-header/description-only";
 import PageHeaderWithActions from "./page-header/with-actions";
 import PageHeaderWithBadge from "./page-header/with-badge";
+import PixelatedCanvasDefault from "./pixelated-canvas/default";
 import PopoverDefault from "./popover/default";
 import PopoverControlled from "./popover/controlled";
 import PopoverMenuLike from "./popover/menu-like";
@@ -304,6 +309,7 @@ import SonnerRichColors from "./sonner/rich-colors";
 import SonnerVariants from "./sonner/variants";
 import SonnerWithAction from "./sonner/with-action";
 import SonnerWithDescription from "./sonner/with-description";
+import SpinnerDefault from "./spinner/default";
 import SplitWithRailDefault from "./split-with-rail/default";
 import SplitWithRailCustomLayout from "./split-with-rail/custom-layout";
 import SplitWithRailMetricsSummary from "./split-with-rail/metrics-summary";
@@ -473,11 +479,17 @@ export const examples: Record<string, Example[]> = {
     { name: "Variants", file: "button/variants.tsx", Component: ButtonVariants },
     { name: "With Icon", file: "button/with-icon.tsx", Component: ButtonWithIcon },
   ],
+  "button-group": [
+    { name: "Default", file: "button-group/default.tsx", Component: ButtonGroupDefault },
+  ],
   "calendar": [
     { name: "Default", file: "calendar/default.tsx", Component: CalendarDefault },
     { name: "Appointment", file: "calendar/appointment.tsx", Component: CalendarAppointment },
     { name: "Pricing", file: "calendar/pricing.tsx", Component: CalendarPricing },
     { name: "Range Presets", file: "calendar/range-presets.tsx", Component: CalendarRangePresets },
+  ],
+  "canvas-text": [
+    { name: "Default", file: "canvas-text/default.tsx", Component: CanvasTextDefault },
   ],
   "card": [
     { name: "Default", file: "card/default.tsx", Component: CardDefault },
@@ -646,6 +658,9 @@ export const examples: Record<string, Example[]> = {
   "iphone": [
     { name: "Default", file: "iphone/default.tsx", Component: IphoneDefault },
   ],
+  "kbd": [
+    { name: "Default", file: "kbd/default.tsx", Component: KbdDefault },
+  ],
   "kinetic-text": [
     { name: "Default", file: "kinetic-text/default.tsx", Component: KineticTextDefault },
   ],
@@ -689,6 +704,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Tones", file: "morph-dock/tones.tsx", Component: MorphDockTones },
     { name: "Tools Primary", file: "morph-dock/tools-primary.tsx", Component: MorphDockToolsPrimary },
   ],
+  "native-select": [
+    { name: "Default", file: "native-select/default.tsx", Component: NativeSelectDefault },
+  ],
   "navigation-menu": [
     { name: "Default", file: "navigation-menu/default.tsx", Component: NavigationMenuDefault },
     { name: "Simple Links", file: "navigation-menu/simple-links.tsx", Component: NavigationMenuSimpleLinks },
@@ -702,6 +720,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Description Only", file: "page-header/description-only.tsx", Component: PageHeaderDescriptionOnly },
     { name: "With Actions", file: "page-header/with-actions.tsx", Component: PageHeaderWithActions },
     { name: "With Badge", file: "page-header/with-badge.tsx", Component: PageHeaderWithBadge },
+  ],
+  "pixelated-canvas": [
+    { name: "Default", file: "pixelated-canvas/default.tsx", Component: PixelatedCanvasDefault },
   ],
   "popover": [
     { name: "Default", file: "popover/default.tsx", Component: PopoverDefault },
@@ -798,6 +819,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Variants", file: "sonner/variants.tsx", Component: SonnerVariants },
     { name: "With Action", file: "sonner/with-action.tsx", Component: SonnerWithAction },
     { name: "With Description", file: "sonner/with-description.tsx", Component: SonnerWithDescription },
+  ],
+  "spinner": [
+    { name: "Default", file: "spinner/default.tsx", Component: SpinnerDefault },
   ],
   "split-with-rail": [
     { name: "Default", file: "split-with-rail/default.tsx", Component: SplitWithRailDefault },

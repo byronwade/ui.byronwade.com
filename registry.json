@@ -509,6 +509,83 @@
       ]
     },
     {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keyboard-key indicator (and KbdGroup for shortcut sequences) — mono, token-driven.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/kbd.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kbd.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Pure-CSS loading spinner in currentColor with sm/default/lg sizes; role=status + aria-label.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/spinner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button group",
+      "description": "Joins related buttons into one segmented control with shared, overlapped edges; horizontal or vertical.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native select",
+      "description": "A styled native <select> with an inline chevron and the standard input affordance edge + focus ring — token-driven, no icon dependency.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/native-select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/native-select.tsx"
+        }
+      ]
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
@@ -1569,6 +1646,41 @@
           "path": "registry/ui/apple-cards-carousel.tsx",
           "type": "registry:ui",
           "target": "components/ui/apple-cards-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "canvas-text",
+      "type": "registry:ui",
+      "title": "Canvas text",
+      "description": "Animated bezier lines clipped to text via canvas compositing; palette defaults to the --chart-1…5 ramp. Adapted from Aceternity UI.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/canvas-text.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/canvas-text.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pixelated-canvas",
+      "type": "registry:ui",
+      "title": "Pixelated canvas",
+      "description": "Renders an image as an interactive grid of dots that distort around the pointer. Token-friendly defaults. Adapted from Aceternity UI.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/pixelated-canvas.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pixelated-canvas.tsx"
         }
       ]
     },
