@@ -1,11 +1,11 @@
 import { components } from "@/content/components";
 import { examples } from "@/content/examples/registry";
+import { PreviewFit } from "@/app/preview/components/[slug]/preview-fit";
 
 // Component previews for the catalog gallery cards (scaled inside a lazy iframe).
 // Mirrors app/preview/[slug] (archetypes/templates) but renders a component's
-// DEFAULT example. Only known component slugs are valid. The example is centered
-// in a full-width canvas so full-bleed components lay out correctly; the card
-// scales this canvas down to fit.
+// DEFAULT example at the iframe's fixed canvas width; PreviewFit reports the
+// content height so the card can scale tall components down to fit.
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -23,12 +23,12 @@ export default async function ComponentPreview({
   const Component = demo?.Component;
 
   return (
-    <div className="grid min-h-dvh place-items-center bg-background p-6">
+    <PreviewFit>
       {Component ? (
         <Component />
       ) : (
         <span className="font-mono text-sm text-muted-foreground">{slug}</span>
       )}
-    </div>
+    </PreviewFit>
   );
 }
