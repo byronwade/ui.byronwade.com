@@ -24,6 +24,7 @@ import AlertVariants from "./alert/variants";
 import AlertWithAction from "./alert/with-action";
 import AlertWithIcon from "./alert/with-icon";
 import AlertWithLink from "./alert/with-link";
+import AndroidDefault from "./android/default";
 import AspectRatioDefault from "./aspect-ratio/default";
 import AspectRatioCinematic from "./aspect-ratio/cinematic";
 import AspectRatioPortrait from "./aspect-ratio/portrait";
@@ -171,6 +172,7 @@ import InputGroupValidation from "./input-group/validation";
 import InputGroupWithButton from "./input-group/with-button";
 import InputGroupWithKbd from "./input-group/with-kbd";
 import InputGroupWithText from "./input-group/with-text";
+import IphoneDefault from "./iphone/default";
 import LabelDefault from "./label/default";
 import LabelDisabled from "./label/disabled";
 import LabelErrorState from "./label/error-state";
@@ -233,6 +235,7 @@ import RadioGroupFormValidation from "./radio-group/form-validation";
 import RadioGroupHorizontal from "./radio-group/horizontal";
 import RadioGroupWithDescription from "./radio-group/with-description";
 import RadioGroupWithIcon from "./radio-group/with-icon";
+import SafariDefault from "./safari/default";
 import ScrollAreaDefault from "./scroll-area/default";
 import ScrollAreaCardList from "./scroll-area/card-list";
 import ScrollAreaCompact from "./scroll-area/compact";
@@ -399,6 +402,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Action", file: "alert/with-action.tsx", Component: AlertWithAction },
     { name: "With Icon", file: "alert/with-icon.tsx", Component: AlertWithIcon },
     { name: "With Link", file: "alert/with-link.tsx", Component: AlertWithLink },
+  ],
+  "android": [
+    { name: "Default", file: "android/default.tsx", Component: AndroidDefault },
   ],
   "aspect-ratio": [
     { name: "Default", file: "aspect-ratio/default.tsx", Component: AspectRatioDefault },
@@ -597,6 +603,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Kbd", file: "input-group/with-kbd.tsx", Component: InputGroupWithKbd },
     { name: "With Text", file: "input-group/with-text.tsx", Component: InputGroupWithText },
   ],
+  "iphone": [
+    { name: "Default", file: "iphone/default.tsx", Component: IphoneDefault },
+  ],
   "label": [
     { name: "Default", file: "label/default.tsx", Component: LabelDefault },
     { name: "Disabled", file: "label/disabled.tsx", Component: LabelDisabled },
@@ -674,6 +683,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Horizontal", file: "radio-group/horizontal.tsx", Component: RadioGroupHorizontal },
     { name: "With Description", file: "radio-group/with-description.tsx", Component: RadioGroupWithDescription },
     { name: "With Icon", file: "radio-group/with-icon.tsx", Component: RadioGroupWithIcon },
+  ],
+  "safari": [
+    { name: "Default", file: "safari/default.tsx", Component: SafariDefault },
   ],
   "scroll-area": [
     { name: "Default", file: "scroll-area/default.tsx", Component: ScrollAreaDefault },

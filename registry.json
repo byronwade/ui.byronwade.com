@@ -25,7 +25,7 @@
       "type": "registry:base",
       "extends": "none",
       "title": "Design system foundation",
-      "description": "Complete self-contained base: neutrals + brand-derived green accent (override --brand to re-skin), status/warning/dock/chart/sidebar tokens, radius scale. Install via `shadcn init` so it owns :root.",
+      "description": "Complete self-contained base: warm paper neutrals + brand-derived green accent (override --brand to re-skin), status/warning/dock/chart/sidebar tokens, fixed agent-activity pastels, radius scale, and sans/mono/serif font tokens. Install via `shadcn init` so it owns :root.",
       "dependencies": [
         "tw-animate-css"
       ],
@@ -67,6 +67,10 @@
           "color-chart-3": "var(--chart-3)",
           "color-chart-4": "var(--chart-4)",
           "color-chart-5": "var(--chart-5)",
+          "color-activity-thinking": "var(--activity-thinking)",
+          "color-activity-search": "var(--activity-search)",
+          "color-activity-read": "var(--activity-read)",
+          "color-activity-edit": "var(--activity-edit)",
           "color-sidebar": "var(--sidebar)",
           "color-sidebar-foreground": "var(--sidebar-foreground)",
           "color-sidebar-primary": "var(--sidebar-primary)",
@@ -84,26 +88,27 @@
           "radius-4xl": "calc(var(--radius) * 2.6)",
           "font-sans": "var(--font-sans)",
           "font-mono": "var(--font-geist-mono)",
-          "font-heading": "var(--font-sans)"
+          "font-heading": "var(--font-sans)",
+          "font-serif": "var(--font-serif, ui-serif, \"Iowan Old Style\", \"Palatino Linotype\", Georgia, Cambria, \"Times New Roman\", Times, serif)"
         },
         "light": {
-          "background": "oklch(0.994 0.002 95)",
-          "foreground": "oklch(0.205 0.006 72)",
-          "card": "oklch(0.997 0.002 95)",
-          "card-foreground": "oklch(0.205 0.006 72)",
-          "popover": "oklch(0.998 0.002 95)",
-          "popover-foreground": "oklch(0.205 0.006 72)",
-          "primary": "oklch(0.235 0.006 72)",
+          "background": "oklch(0.974 0.004 95)",
+          "foreground": "oklch(0.205 0.008 72)",
+          "card": "oklch(0.988 0.003 95)",
+          "card-foreground": "oklch(0.205 0.008 72)",
+          "popover": "oklch(0.99 0.003 95)",
+          "popover-foreground": "oklch(0.205 0.008 72)",
+          "primary": "oklch(0.235 0.008 72)",
           "primary-foreground": "oklch(0.99 0.002 95)",
-          "secondary": "oklch(0.967 0.004 90)",
-          "secondary-foreground": "oklch(0.235 0.006 72)",
-          "muted": "oklch(0.963 0.004 90)",
-          "muted-foreground": "oklch(0.553 0.01 75)",
-          "accent": "oklch(0.963 0.004 90)",
-          "accent-foreground": "oklch(0.235 0.006 72)",
+          "secondary": "oklch(0.95 0.005 90)",
+          "secondary-foreground": "oklch(0.235 0.008 72)",
+          "muted": "oklch(0.948 0.005 90)",
+          "muted-foreground": "oklch(0.52 0.012 75)",
+          "accent": "oklch(0.948 0.005 90)",
+          "accent-foreground": "oklch(0.235 0.008 72)",
           "destructive": "oklch(0.577 0.245 27.325)",
-          "border": "oklch(0.92 0.004 85)",
-          "input": "oklch(0.92 0.004 85)",
+          "border": "oklch(0.908 0.005 85)",
+          "input": "oklch(0.908 0.005 85)",
           "edge": "oklch(0 0 0 / 11%)",
           "brand": "oklch(0.6 0.17 148)",
           "brand-foreground": "oklch(0.99 0.002 95)",
@@ -125,14 +130,18 @@
           "dock-active": "oklch(1 0 0 / 14%)",
           "dock-active-foreground": "oklch(0.99 0 0)",
           "dock-tool": "oklch(0.305 0.006 72)",
-          "sidebar": "oklch(0.974 0.005 88)",
-          "sidebar-foreground": "oklch(0.205 0.006 72)",
-          "sidebar-primary": "oklch(0.235 0.006 72)",
+          "sidebar": "oklch(0.958 0.006 88)",
+          "sidebar-foreground": "oklch(0.205 0.008 72)",
+          "sidebar-primary": "oklch(0.235 0.008 72)",
           "sidebar-primary-foreground": "oklch(0.99 0.002 95)",
-          "sidebar-accent": "oklch(0.955 0.0045 88)",
-          "sidebar-accent-foreground": "oklch(0.235 0.006 72)",
-          "sidebar-border": "oklch(0.91 0.004 85)",
-          "sidebar-ring": "oklch(0.708 0.008 75)"
+          "sidebar-accent": "oklch(0.94 0.006 88)",
+          "sidebar-accent-foreground": "oklch(0.235 0.008 72)",
+          "sidebar-border": "oklch(0.9 0.005 85)",
+          "sidebar-ring": "oklch(0.708 0.008 75)",
+          "activity-thinking": "oklch(0.8 0.075 55)",
+          "activity-search": "oklch(0.82 0.06 152)",
+          "activity-read": "oklch(0.8 0.07 245)",
+          "activity-edit": "oklch(0.78 0.08 300)"
         },
         "dark": {
           "background": "oklch(0.16 0.006 70)",
@@ -179,7 +188,11 @@
           "sidebar-accent": "oklch(0.255 0.007 70)",
           "sidebar-accent-foreground": "oklch(0.95 0.004 83)",
           "sidebar-border": "oklch(0.275 0.006 70)",
-          "sidebar-ring": "oklch(0.556 0.006 75)"
+          "sidebar-ring": "oklch(0.556 0.006 75)",
+          "activity-thinking": "oklch(0.8 0.09 55)",
+          "activity-search": "oklch(0.82 0.08 152)",
+          "activity-read": "oklch(0.8 0.09 245)",
+          "activity-edit": "oklch(0.8 0.1 300)"
         }
       },
       "css": {
@@ -1373,6 +1386,56 @@
           "path": "registry/components/verification-progress.tsx",
           "type": "registry:component",
           "target": "components/verification-progress.tsx"
+        }
+      ]
+    },
+    {
+      "name": "safari",
+      "type": "registry:ui",
+      "title": "Safari",
+      "description": "Safari browser device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/safari.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/safari.tsx"
+        }
+      ]
+    },
+    {
+      "name": "iphone",
+      "type": "registry:ui",
+      "title": "iPhone",
+      "description": "iPhone device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/iphone.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/iphone.tsx"
+        }
+      ]
+    },
+    {
+      "name": "android",
+      "type": "registry:ui",
+      "title": "Android",
+      "description": "Android phone device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "registryDependencies": [
+        "@byronwade/foundation"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/android.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/android.tsx"
         }
       ]
     },

@@ -33,6 +33,8 @@ Before writing any markup, check whether a component already exists. Reach for t
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
   `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`
+- **Design mocks** — device + browser frames for screenshots/video: `safari`, `iphone`,
+  `android` (drop a screenshot or `videoSrc` in to show a product in context)
 
 Import from the consumer paths (these are where shadcn installs them):
 
@@ -74,6 +76,7 @@ re-skinning automatically:
 | Sidebar | `bg-sidebar`, `text-sidebar-foreground`, … | — |
 | Dock | `bg-dock`, `text-dock-foreground`, `bg-dock-muted`, `bg-dock-active`, `text-dock-active-foreground`, `bg-dock-tool` (lighter tool-zone shelf for two-tone combined nav+toolbar) | `bg-zinc-900` |
 | Charts | `--chart-1` … `--chart-5` (via `chart`) | fixed palettes |
+| Agent activity | `bg-activity-thinking`, `bg-activity-search`, `bg-activity-read`, `bg-activity-edit` (+ `text-activity-*`) | bespoke pastels |
 
 Tone the same token with opacity instead of new colors: `bg-brand/10`, `text-destructive`,
 `bg-success/10`. This is the house pattern for soft chips and rings (see `status-pill`).
@@ -82,6 +85,22 @@ Tone the same token with opacity instead of new colors: `bg-brand/10`, `text-des
 
 Use the radius scale, never raw pixels: `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`,
 `rounded-2xl` … `rounded-4xl` (all derived from `--radius`). Pills use `rounded-full`.
+
+### Typography — editorial restraint
+
+The system reads as a calm, warm, editorial canvas. Express hierarchy through **size + tight
+tracking + the typeface**, not through heavy weight or color. Base styles already apply the tracking
+(`h1–h4` carry `-0.02em`); your job is to not fight them.
+
+- **Display / page headings stay light.** Set large headings at `font-normal` (or at most
+  `font-medium`) — **never `font-bold`** for hero/section titles. Bold is reserved for genuinely
+  emphatic inline runs, not headlines. A regular-weight headline with tight tracking is the house look.
+- **Mono for metadata.** Use `font-mono` for the things that are *data*: numeric stats and metrics,
+  timestamps, durations, counts, IDs, keyboard hints (`kbd`), and small technical labels. This is
+  what gives the UI its crisp, "engineered" texture. Body copy and headings stay `font-sans`.
+- **Serif for editorial moments only.** `font-serif` (backed by the `--font-serif` token) is for
+  long-form prose, pull quotes, and blockquotes — not UI chrome. Reach for it sparingly to add warmth
+  to reading surfaces.
 
 ### House utilities (already defined by `foundation`)
 
@@ -121,6 +140,14 @@ To re-theme, override **only** `--brand` in your `globals.css`:
 
 Do **not** edit other foundation tokens, hardcode the green, or fork `globals.css` token values
 to achieve a color. If the design needs a different accent, change `--brand`.
+
+**Two deliberate exceptions** do **not** follow `--brand` — they are fixed, semantic palettes:
+the **chart** ramp (`--chart-2…5`) and the **agent-activity** pastels (`--activity-thinking`,
+`--activity-search`, `--activity-read`, `--activity-edit`). The activity set encodes what an AI agent
+is *doing* (thinking / searching / reading / editing) for agent composites like `event-timeline`,
+`verification-progress`, `activity-ring`, and `conversation-list`. Use them via `bg-activity-*` /
+`text-activity-*`; tone with opacity for soft chips (`bg-activity-read/15`). Don't repurpose them as
+a general accent — they carry meaning.
 
 ## 4. Component conventions (match these when extending or composing)
 
