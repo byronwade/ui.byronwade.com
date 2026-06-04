@@ -1,0 +1,1 @@
+Build a data table of users (avatar, name, email, role, status badge) with a header row and row hover. Return one self-contained React .tsx component.

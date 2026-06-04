@@ -1,0 +1,1 @@
+Build a notifications list panel with grouped items (avatar, message, timestamp) and a "Mark all read" action. Return one self-contained React .tsx component.

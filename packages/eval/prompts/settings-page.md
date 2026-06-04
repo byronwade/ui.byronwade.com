@@ -1,0 +1,1 @@
+Build an account settings page with sections for profile, notifications (toggles), and danger zone (delete account). Return one self-contained React .tsx component.

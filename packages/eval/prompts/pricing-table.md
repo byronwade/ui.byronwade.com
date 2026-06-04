@@ -1,0 +1,1 @@
+Build a three-tier pricing table (Starter, Pro, Enterprise) with per-tier price, a feature list, and a call-to-action button on each. Return one self-contained React .tsx component.

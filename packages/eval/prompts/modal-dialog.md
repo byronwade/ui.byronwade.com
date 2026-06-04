@@ -1,0 +1,1 @@
+Build a confirmation modal dialog with a title, body text, and Cancel / Confirm buttons. Return one self-contained React .tsx component.
