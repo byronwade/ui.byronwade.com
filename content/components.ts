@@ -1057,6 +1057,12 @@ export const components: ComponentDoc[] = [
     npmDeps: ["react-svg-credit-card-payment-icons"], registryDeps: ["@byronwade/utils"],
     examples: ["default"],
   },
+  {
+    slug: "image-crop", name: "Image crop", category: "UI",
+    description: "Crop a File to a PNG (react-image-crop + canvas); apply/reset controls. Adapted from kibo-ui.",
+    npmDeps: ["lucide-react", "react-image-crop"], registryDeps: ["@byronwade/utils", "@byronwade/button"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;

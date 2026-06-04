@@ -1453,6 +1453,24 @@
       ]
     },
     {
+      "name": "command-result",
+      "type": "registry:component",
+      "title": "Command Result",
+      "description": "Compact rich result row for a command palette: media, title, description, meta, and an action slot.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/command"
+      ],
+      "files": [
+        {
+          "path": "registry/components/command-result.tsx",
+          "type": "registry:component",
+          "target": "components/command-result.tsx"
+        }
+      ]
+    },
+    {
       "name": "navigation-menu",
       "type": "registry:ui",
       "title": "Navigation Menu",
@@ -1922,6 +1940,27 @@
           "path": "registry/ui/credit-card.tsx",
           "type": "registry:ui",
           "target": "components/ui/credit-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-crop",
+      "type": "registry:ui",
+      "title": "Image crop",
+      "description": "Crop a File to a PNG (react-image-crop + canvas); apply/reset controls, token crop chrome. Adapted from kibo-ui.",
+      "dependencies": [
+        "lucide-react",
+        "react-image-crop"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/image-crop.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/image-crop.tsx"
         }
       ]
     },
@@ -2682,6 +2721,7 @@
         "@byronwade/input-group",
         "@byronwade/sheet",
         "@byronwade/command",
+        "@byronwade/command-result",
         "@byronwade/navigation-menu",
         "@byronwade/verification-progress",
         "@byronwade/safari",
@@ -2699,6 +2739,15 @@
         "@byronwade/number-field",
         "@byronwade/price-range-filter",
         "@byronwade/file-tree",
+        "@byronwade/cursor",
+        "@byronwade/pill",
+        "@byronwade/glimpse",
+        "@byronwade/ticker",
+        "@byronwade/relative-time",
+        "@byronwade/qr-code",
+        "@byronwade/rating",
+        "@byronwade/credit-card",
+        "@byronwade/image-crop",
         "@byronwade/ai-loader",
         "@byronwade/ai-shimmer",
         "@byronwade/ai-suggestion",
