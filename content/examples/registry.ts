@@ -85,11 +85,24 @@ import BreadcrumbWithIcons from "./breadcrumb/with-icons";
 import BreadcrumbWithRenderProp from "./breadcrumb/with-render-prop";
 import ButtonDefault from "./button/default";
 import ButtonCount from "./button/count";
+import ButtonDestructive from "./button/destructive";
 import ButtonDisabled from "./button/disabled";
 import ButtonError from "./button/error";
+import ButtonGhost from "./button/ghost";
+import ButtonIcon from "./button/icon";
+import ButtonIconSm from "./button/icon-sm";
+import ButtonLeadingIcon from "./button/leading-icon";
+import ButtonLink from "./button/link";
 import ButtonLoading from "./button/loading";
+import ButtonOutline from "./button/outline";
+import ButtonSecondary from "./button/secondary";
+import ButtonSizeLg from "./button/size-lg";
+import ButtonSizeSm from "./button/size-sm";
+import ButtonSizeXs from "./button/size-xs";
 import ButtonSizes from "./button/sizes";
+import ButtonSolid from "./button/solid";
 import ButtonStateful from "./button/stateful";
+import ButtonTrailingIcon from "./button/trailing-icon";
 import ButtonVariants from "./button/variants";
 import ButtonWithIcon from "./button/with-icon";
 import ButtonGroupDefault from "./button-group/default";
@@ -615,11 +628,24 @@ export const examples: Record<string, Example[]> = {
   "button": [
     { name: "Default", file: "button/default.tsx", Component: ButtonDefault },
     { name: "Count", file: "button/count.tsx", Component: ButtonCount },
+    { name: "Destructive", file: "button/destructive.tsx", Component: ButtonDestructive },
     { name: "Disabled", file: "button/disabled.tsx", Component: ButtonDisabled },
     { name: "Error", file: "button/error.tsx", Component: ButtonError },
+    { name: "Ghost", file: "button/ghost.tsx", Component: ButtonGhost },
+    { name: "Icon", file: "button/icon.tsx", Component: ButtonIcon },
+    { name: "Icon Sm", file: "button/icon-sm.tsx", Component: ButtonIconSm },
+    { name: "Leading Icon", file: "button/leading-icon.tsx", Component: ButtonLeadingIcon },
+    { name: "Link", file: "button/link.tsx", Component: ButtonLink },
     { name: "Loading", file: "button/loading.tsx", Component: ButtonLoading },
+    { name: "Outline", file: "button/outline.tsx", Component: ButtonOutline },
+    { name: "Secondary", file: "button/secondary.tsx", Component: ButtonSecondary },
+    { name: "Size Lg", file: "button/size-lg.tsx", Component: ButtonSizeLg },
+    { name: "Size Sm", file: "button/size-sm.tsx", Component: ButtonSizeSm },
+    { name: "Size Xs", file: "button/size-xs.tsx", Component: ButtonSizeXs },
     { name: "Sizes", file: "button/sizes.tsx", Component: ButtonSizes },
+    { name: "Solid", file: "button/solid.tsx", Component: ButtonSolid },
     { name: "Stateful", file: "button/stateful.tsx", Component: ButtonStateful },
+    { name: "Trailing Icon", file: "button/trailing-icon.tsx", Component: ButtonTrailingIcon },
     { name: "Variants", file: "button/variants.tsx", Component: ButtonVariants },
     { name: "With Icon", file: "button/with-icon.tsx", Component: ButtonWithIcon },
   ],
