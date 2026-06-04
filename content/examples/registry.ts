@@ -287,6 +287,7 @@ import ProgressControlled from "./progress/controlled";
 import ProgressIndeterminate from "./progress/indeterminate";
 import ProgressSizes from "./progress/sizes";
 import ProgressWithFormat from "./progress/with-format";
+import QrCodeDefault from "./qr-code/default";
 import RadioGroupDefault from "./radio-group/default";
 import RadioGroupDisabled from "./radio-group/disabled";
 import RadioGroupFormValidation from "./radio-group/form-validation";
@@ -892,6 +893,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Indeterminate", file: "progress/indeterminate.tsx", Component: ProgressIndeterminate },
     { name: "Sizes", file: "progress/sizes.tsx", Component: ProgressSizes },
     { name: "With Format", file: "progress/with-format.tsx", Component: ProgressWithFormat },
+  ],
+  "qr-code": [
+    { name: "Default", file: "qr-code/default.tsx", Component: QrCodeDefault },
   ],
   "radio-group": [
     { name: "Default", file: "radio-group/default.tsx", Component: RadioGroupDefault },

@@ -1867,6 +1867,26 @@
       ]
     },
     {
+      "name": "qr-code",
+      "type": "registry:ui",
+      "title": "QR code",
+      "description": "Token-colored QR code (modules use --foreground/--background, so it re-skins). Adapted from kibo-ui.",
+      "dependencies": [
+        "qrcode",
+        "culori"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/qr-code.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/qr-code.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",

@@ -1039,6 +1039,12 @@ export const components: ComponentDoc[] = [
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
+  {
+    slug: "qr-code", name: "QR code", category: "UI",
+    description: "Token-colored QR code (modules use --foreground/--background, re-skins with the theme). Adapted from kibo-ui.",
+    npmDeps: ["qrcode", "culori"], registryDeps: ["@byronwade/utils"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;
