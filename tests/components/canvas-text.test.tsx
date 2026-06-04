@@ -31,7 +31,8 @@ function makeCtx() {
     fillRect: vi.fn(),
     beginPath: vi.fn(),
     moveTo: vi.fn(),
-    bezierCurveTo: vi.fn(),
+    lineTo: vi.fn(),
+    quadraticCurveTo: vi.fn(),
     stroke: vi.fn(),
     measureText: vi.fn(() => ({
       actualBoundingBoxAscent: 12,
@@ -135,7 +136,8 @@ describe("CanvasText — draw pipeline", () => {
     });
     expect(ctx.fillText).toHaveBeenCalledWith("Draw", 0, expect.any(Number));
     expect(ctx.stroke).toHaveBeenCalled();
-    expect(ctx.bezierCurveTo).toHaveBeenCalled();
+    // The flowing-fabric lines are sampled as smooth polylines.
+    expect(ctx.quadraticCurveTo).toHaveBeenCalled();
   });
 
   it("does not draw when the 2D context is unavailable", () => {
