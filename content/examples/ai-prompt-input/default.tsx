@@ -45,7 +45,7 @@ export default function Example() {
   };
 
   return (
-    <div className="flex min-h-screen items-end justify-center bg-background p-8">
+    <div className="flex min-h-0 items-end justify-center bg-background p-8">
       <div className="w-full max-w-xl">
         <PromptInput accept="image/*" multiple onSubmit={handleSubmit}>
           <PromptInputBody>

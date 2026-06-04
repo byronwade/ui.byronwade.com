@@ -6,7 +6,7 @@ import "@xyflow/react/dist/style.css";
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <div className="h-96 w-full max-w-2xl overflow-hidden rounded-lg">
         <ReactFlowProvider>
           <ReactFlow nodes={[]} edges={[]} fitView>

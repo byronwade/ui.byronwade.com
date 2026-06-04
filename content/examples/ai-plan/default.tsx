@@ -21,7 +21,7 @@ const steps = [
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <Plan className="w-96" defaultOpen>
         <PlanHeader>
           <div className="grid gap-1">

@@ -30,7 +30,7 @@ const edges = [
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <div className="h-[420px] w-full max-w-3xl overflow-hidden rounded-2xl edge">
         <ReactFlowProvider>
           <Canvas

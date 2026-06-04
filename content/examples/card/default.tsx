@@ -10,7 +10,7 @@ import {
 
 export default function Example() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background p-8">
+    <div className="flex items-center justify-center min-h-0 bg-background p-8">
       <Card className="w-80">
         <CardHeader>
           <CardTitle>Monthly Summary</CardTitle>

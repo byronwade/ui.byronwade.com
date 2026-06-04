@@ -13,7 +13,7 @@ export default function Example() {
   const [restoredAt, setRestoredAt] = useState<string | null>(null);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background p-8">
+    <div className="flex min-h-0 flex-col items-center justify-center gap-6 bg-background p-8">
       <div className="flex w-full max-w-md flex-col gap-3">
         <p className="text-sm text-muted-foreground">
           Agent saved a checkpoint before editing 4 files.

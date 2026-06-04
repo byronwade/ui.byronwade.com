@@ -20,7 +20,7 @@ export function ExampleTabs({ title, preview, code }: { title: string; preview: 
         />
       </div>
       {view === "preview" ? (
-        <div className="grid min-h-56 max-h-[36rem] place-items-center overflow-auto rounded-xl edge p-8">
+        <div className="grid min-h-56 items-center rounded-xl edge p-8">
           {preview}
         </div>
       ) : (

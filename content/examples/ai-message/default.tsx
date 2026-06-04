@@ -13,7 +13,7 @@ import {
 
 export default function Example() {
   return (
-    <div className="mx-auto flex min-h-screen max-w-2xl flex-col gap-6 bg-background p-8">
+    <div className="mx-auto flex min-h-0 max-w-2xl flex-col gap-6 bg-background p-8">
       <Message from="user">
         <MessageContent>
           How do I re-skin the byronwade/ui accent color?

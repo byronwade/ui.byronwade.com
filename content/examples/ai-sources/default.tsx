@@ -15,7 +15,7 @@ const CITATIONS = [
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <div className="w-full max-w-md rounded-2xl bg-card p-5 text-card-foreground edge">
         <p className="mb-3 text-sm text-muted-foreground">
           Based on your docs, edge functions stream tokens as they are

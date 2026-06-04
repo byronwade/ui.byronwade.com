@@ -20,7 +20,7 @@ export default function Example() {
   const approval = { id: "deploy-1", approved };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <div className="w-full max-w-md">
         <Confirmation
           approval={approval}

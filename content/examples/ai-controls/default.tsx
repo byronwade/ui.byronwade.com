@@ -28,7 +28,7 @@ const edges: Edge[] = [
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <div className="h-80 w-full max-w-2xl overflow-hidden rounded-md border border-border bg-card">
         <ReactFlow defaultEdges={edges} defaultNodes={nodes} fitView>
           <Background />

@@ -35,7 +35,7 @@ export default function Example() {
   ];
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <WebPreview defaultUrl="https://byronwade.ui" className="h-[480px] max-w-2xl">
         <WebPreviewNavigation>
           <WebPreviewNavigationButton tooltip="Back" disabled>

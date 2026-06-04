@@ -15,7 +15,7 @@ import {
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <Context
         maxTokens={1_000_000}
         modelId="anthropic:claude-sonnet-4"

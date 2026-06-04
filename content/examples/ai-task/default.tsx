@@ -10,7 +10,7 @@ import {
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <Task className="w-96" defaultOpen>
         <TaskTrigger title="Searching the codebase" />
         <TaskContent>

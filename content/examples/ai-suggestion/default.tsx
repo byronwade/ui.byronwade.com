@@ -17,7 +17,7 @@ export default function Example() {
   const [picked, setPicked] = useState<string | null>(null);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background p-8">
+    <div className="flex min-h-0 flex-col items-center justify-center gap-4 bg-background p-8">
       <div className="w-full max-w-xl">
         <p className="mb-3 text-sm text-muted-foreground">
           Try one of these suggestions

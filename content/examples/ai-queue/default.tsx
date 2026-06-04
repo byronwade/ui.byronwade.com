@@ -40,7 +40,7 @@ const todos = [
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <Queue className="w-96">
         <QueueSection defaultOpen>
           <QueueSectionTrigger>

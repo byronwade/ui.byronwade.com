@@ -59,7 +59,7 @@ export default function Example() {
   const [selected, setSelected] = useState<Model>(frontier[0]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <ModelSelector>
         <ModelSelectorTrigger
           render={

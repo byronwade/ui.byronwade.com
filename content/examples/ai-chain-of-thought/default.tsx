@@ -13,7 +13,7 @@ import { FileSearchIcon, GlobeIcon, ListChecksIcon } from "lucide-react";
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-start justify-center bg-background p-8">
+    <div className="flex min-h-0 items-start justify-center bg-background p-8">
       <ChainOfThought className="w-full max-w-md" defaultOpen>
         <ChainOfThoughtHeader>Reasoning</ChainOfThoughtHeader>
         <ChainOfThoughtContent>

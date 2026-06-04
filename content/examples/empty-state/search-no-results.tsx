@@ -16,7 +16,7 @@ export default function Example() {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-8 gap-4">
+    <div className="flex flex-col items-center justify-center min-h-0 bg-background p-8 gap-4">
       <div className="w-full max-w-md">
         <Input
           placeholder="Search..."
