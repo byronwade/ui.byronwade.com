@@ -1685,6 +1685,67 @@
       ]
     },
     {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Single or range slider built on Base UI — one thumb per value, token track/indicator, keyboard + a11y.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "number-field",
+      "type": "registry:ui",
+      "title": "Number field",
+      "description": "Numeric input with increment/decrement, clamping, scrub, and formatting — built on Base UI. Token surfaces, lucide steppers.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/number-field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/number-field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "price-range-filter",
+      "type": "registry:component",
+      "title": "Price range filter",
+      "description": "Histogram + range slider + min/max number inputs + apply button. Composes slider, number-field, button. Adapted from a coss.com UI block.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/slider",
+        "@byronwade/number-field",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/components/price-range-filter.tsx",
+          "type": "registry:component",
+          "target": "components/price-range-filter.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",

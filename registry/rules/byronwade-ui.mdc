@@ -20,7 +20,8 @@ system component exists, you are doing it wrong.
 Before writing any markup, check whether a component already exists. Reach for these first:
 
 - **Forms** — `button`, `button-group`, `input`, `textarea`, `label`, `select`, `native-select`,
-  `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, `calendar`
+  `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, `calendar`,
+  `slider`, `number-field`
 - **Overlays** — `dialog`, `sheet`, `popover`, `tooltip`, `hover-card`, `dropdown-menu`,
   `command`, `navigation-menu`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)
@@ -32,7 +33,8 @@ Before writing any markup, check whether a component already exists. Reach for t
   (config-driven nav dock that blooms into a panel via the hook)
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
-  `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`
+  `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`,
+  `price-range-filter` (histogram + range slider + number inputs)
 - **Design mocks** — device + browser frames for screenshots/video: `safari`, `iphone`,
   `android` (drop a screenshot or `videoSrc` in to show a product in context)
 - **Marketing / motion** — `world-map` (dotted map with animated connection arcs),

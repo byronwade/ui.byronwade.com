@@ -230,6 +230,7 @@ import NavigationMenuDefault from "./navigation-menu/default";
 import NavigationMenuSimpleLinks from "./navigation-menu/simple-links";
 import NavigationMenuWithDescriptions from "./navigation-menu/with-descriptions";
 import NavigationMenuWithIcons from "./navigation-menu/with-icons";
+import NumberFieldDefault from "./number-field/default";
 import PageHeaderDefault from "./page-header/default";
 import PageHeaderAlign from "./page-header/align";
 import PageHeaderBreadcrumbContext from "./page-header/breadcrumb-context";
@@ -243,6 +244,7 @@ import PopoverMenuLike from "./popover/menu-like";
 import PopoverPlacement from "./popover/placement";
 import PopoverRichContent from "./popover/rich-content";
 import PopoverWithForm from "./popover/with-form";
+import PriceRangeFilterDefault from "./price-range-filter/default";
 import ProgressDefault from "./progress/default";
 import ProgressColors from "./progress/colors";
 import ProgressControlled from "./progress/controlled";
@@ -300,6 +302,7 @@ import SkeletonMediaGrid from "./skeleton/media-grid";
 import SkeletonProfile from "./skeleton/profile";
 import SkeletonTable from "./skeleton/table";
 import SkeletonWithLoadedState from "./skeleton/with-loaded-state";
+import SliderDefault from "./slider/default";
 import SonnerDefault from "./sonner/default";
 import SonnerCustom from "./sonner/custom";
 import SonnerDismissible from "./sonner/dismissible";
@@ -713,6 +716,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Descriptions", file: "navigation-menu/with-descriptions.tsx", Component: NavigationMenuWithDescriptions },
     { name: "With Icons", file: "navigation-menu/with-icons.tsx", Component: NavigationMenuWithIcons },
   ],
+  "number-field": [
+    { name: "Default", file: "number-field/default.tsx", Component: NumberFieldDefault },
+  ],
   "page-header": [
     { name: "Default", file: "page-header/default.tsx", Component: PageHeaderDefault },
     { name: "Align", file: "page-header/align.tsx", Component: PageHeaderAlign },
@@ -731,6 +737,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Placement", file: "popover/placement.tsx", Component: PopoverPlacement },
     { name: "Rich Content", file: "popover/rich-content.tsx", Component: PopoverRichContent },
     { name: "With Form", file: "popover/with-form.tsx", Component: PopoverWithForm },
+  ],
+  "price-range-filter": [
+    { name: "Default", file: "price-range-filter/default.tsx", Component: PriceRangeFilterDefault },
   ],
   "progress": [
     { name: "Default", file: "progress/default.tsx", Component: ProgressDefault },
@@ -808,6 +817,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Profile", file: "skeleton/profile.tsx", Component: SkeletonProfile },
     { name: "Table", file: "skeleton/table.tsx", Component: SkeletonTable },
     { name: "With Loaded State", file: "skeleton/with-loaded-state.tsx", Component: SkeletonWithLoadedState },
+  ],
+  "slider": [
+    { name: "Default", file: "slider/default.tsx", Component: SliderDefault },
   ],
   "sonner": [
     { name: "Default", file: "sonner/default.tsx", Component: SonnerDefault },
