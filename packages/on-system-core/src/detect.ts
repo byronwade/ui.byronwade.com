@@ -3,6 +3,7 @@ import { manifest } from "./manifest.js";
 import { parse } from "./parse.js";
 import { extractClassTokens, extractStyleStrings, extractJsxElements } from "./extract.js";
 import { detectRawColor } from "./detectors/raw-color.js";
+import { detectArbitraryValue } from "./detectors/arbitrary-value.js";
 
 export function detect(code: string, options: DetectOptions = {}): Violation[] {
   const opts = {
@@ -18,6 +19,7 @@ export function detect(code: string, options: DetectOptions = {}): Violation[] {
 
   const violations: Violation[] = [
     ...detectRawColor(classes, styles, manifest, opts),
+    ...detectArbitraryValue(classes, manifest),
   ];
 
   return violations.sort((a, b) => a.range[0] - b.range[0]);
