@@ -21,12 +21,12 @@ Before writing any markup, check whether a component already exists. Reach for t
 
 - **Forms** — `button`, `button-group`, `input`, `textarea`, `label`, `select`, `native-select`,
   `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, `calendar`,
-  `slider`, `number-field`, `rating`
+  `slider`, `number-field`, `rating`, `color-picker`, `editor`
 - **Overlays** — `dialog`, `sheet`, `popover`, `tooltip`, `hover-card`, `dropdown-menu`,
   `command`, `navigation-menu`, `glimpse`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `kbd`, `separator`,
-  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `file-tree`
+  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `file-tree`, `kanban` (drag-drop board), `gantt` (timeline chart)
 - **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
   `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR), `credit-card` (flippable card), `image-crop` (crop a file to PNG)
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
@@ -43,7 +43,8 @@ Before writing any markup, check whether a component already exists. Reach for t
   `floating-dock` (magnify-on-hover dock), `kinetic-text` (per-letter hover typography),
   `backlight` (saturated RGB glow behind a child), `apple-cards-carousel` (cards that
   expand into a modal), `canvas-text` (animated lines clipped to text),
-  `pixelated-canvas` (image as an interactive dot grid)
+  `pixelated-canvas` (image as an interactive dot grid),
+  `video-player` (media-chrome player with variants)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),

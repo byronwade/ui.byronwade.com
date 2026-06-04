@@ -150,6 +150,7 @@ import CollapsibleDisabled from "./collapsible/disabled";
 import CollapsibleFaq from "./collapsible/faq";
 import CollapsibleUncontrolled from "./collapsible/uncontrolled";
 import CollapsibleWithRichContent from "./collapsible/with-rich-content";
+import ColorPickerDefault from "./color-picker/default";
 import CommandDefault from "./command/default";
 import CommandActions from "./command/actions";
 import CommandCards from "./command/cards";
@@ -184,6 +185,7 @@ import DropdownMenuWithIcons from "./dropdown-menu/with-icons";
 import DropdownMenuWithRadio from "./dropdown-menu/with-radio";
 import DropdownMenuWithShortcuts from "./dropdown-menu/with-shortcuts";
 import DropdownMenuWithSubmenu from "./dropdown-menu/with-submenu";
+import EditorDefault from "./editor/default";
 import EmptyStateDefault from "./empty-state/default";
 import EmptyStateCompact from "./empty-state/compact";
 import EmptyStateErrorState from "./empty-state/error-state";
@@ -207,6 +209,7 @@ import FilterPillFilterBar from "./filter-pill/filter-bar";
 import FilterPillWithIcon from "./filter-pill/with-icon";
 import FloatingDockDefault from "./floating-dock/default";
 import FoundationTokens from "./foundation/tokens";
+import GanttDefault from "./gantt/default";
 import GlimpseDefault from "./glimpse/default";
 import GradientAvatarDefault from "./gradient-avatar/default";
 import GradientAvatarGroupedStack from "./gradient-avatar/grouped-stack";
@@ -244,6 +247,7 @@ import InputGroupWithButton from "./input-group/with-button";
 import InputGroupWithKbd from "./input-group/with-kbd";
 import InputGroupWithText from "./input-group/with-text";
 import IphoneDefault from "./iphone/default";
+import KanbanDefault from "./kanban/default";
 import KbdDefault from "./kbd/default";
 import KineticTextDefault from "./kinetic-text/default";
 import LabelDefault from "./label/default";
@@ -453,6 +457,7 @@ import VerificationProgressManySteps from "./verification-progress/many-steps";
 import VerificationProgressStatuses from "./verification-progress/statuses";
 import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
+import VideoPlayerDefault from "./video-player/default";
 import WorldMapDefault from "./world-map/default";
 
 export type Example = { name: string; file: string; Component: ComponentType };
@@ -710,6 +715,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Uncontrolled", file: "collapsible/uncontrolled.tsx", Component: CollapsibleUncontrolled },
     { name: "With Rich Content", file: "collapsible/with-rich-content.tsx", Component: CollapsibleWithRichContent },
   ],
+  "color-picker": [
+    { name: "Default", file: "color-picker/default.tsx", Component: ColorPickerDefault },
+  ],
   "command": [
     { name: "Default", file: "command/default.tsx", Component: CommandDefault },
     { name: "Actions", file: "command/actions.tsx", Component: CommandActions },
@@ -760,6 +768,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Shortcuts", file: "dropdown-menu/with-shortcuts.tsx", Component: DropdownMenuWithShortcuts },
     { name: "With Submenu", file: "dropdown-menu/with-submenu.tsx", Component: DropdownMenuWithSubmenu },
   ],
+  "editor": [
+    { name: "Default", file: "editor/default.tsx", Component: EditorDefault },
+  ],
   "empty-state": [
     { name: "Default", file: "empty-state/default.tsx", Component: EmptyStateDefault },
     { name: "Compact", file: "empty-state/compact.tsx", Component: EmptyStateCompact },
@@ -794,6 +805,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "foundation": [
     { name: "Tokens", file: "foundation/tokens.tsx", Component: FoundationTokens },
+  ],
+  "gantt": [
+    { name: "Default", file: "gantt/default.tsx", Component: GanttDefault },
   ],
   "glimpse": [
     { name: "Default", file: "glimpse/default.tsx", Component: GlimpseDefault },
@@ -849,6 +863,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "iphone": [
     { name: "Default", file: "iphone/default.tsx", Component: IphoneDefault },
+  ],
+  "kanban": [
+    { name: "Default", file: "kanban/default.tsx", Component: KanbanDefault },
   ],
   "kbd": [
     { name: "Default", file: "kbd/default.tsx", Component: KbdDefault },
@@ -1144,6 +1161,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Statuses", file: "verification-progress/statuses.tsx", Component: VerificationProgressStatuses },
     { name: "Two Steps", file: "verification-progress/two-steps.tsx", Component: VerificationProgressTwoSteps },
     { name: "With Counts", file: "verification-progress/with-counts.tsx", Component: VerificationProgressWithCounts },
+  ],
+  "video-player": [
+    { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },
   ],
   "world-map": [
     { name: "Default", file: "world-map/default.tsx", Component: WorldMapDefault },

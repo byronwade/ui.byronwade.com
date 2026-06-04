@@ -1965,6 +1965,145 @@
       ]
     },
     {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color picker",
+      "description": "HSL color picker with a 2D saturation/lightness field, hue and alpha sliders, an eyedropper, and hex/rgb/css/hsl format output. Adapted from kibo-ui.",
+      "dependencies": [
+        "color",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/input",
+        "@byronwade/select"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/color-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/color-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "video-player",
+      "type": "registry:ui",
+      "title": "Video player",
+      "description": "Token-mapped media-chrome video player with a composable control bar and default/minimal/theater/poster variants. Adapted from kibo-ui.",
+      "dependencies": [
+        "media-chrome"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/video-player.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/video-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kanban",
+      "type": "registry:ui",
+      "title": "Kanban",
+      "description": "Drag-and-drop kanban board with columns, sortable cards, and accessible drag announcements. Adapted from kibo-ui.",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities",
+        "tunnel-rat"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/card",
+        "@byronwade/scroll-area"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/kanban.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kanban.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gantt",
+      "type": "registry:ui",
+      "title": "Gantt",
+      "description": "Draggable timeline / roadmap chart with a sidebar, multi-range header, feature bars, markers, and a today line. Adapted from kibo-ui.",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/modifiers",
+        "@uidotdev/usehooks",
+        "date-fns",
+        "jotai",
+        "lodash.throttle",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/card"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/gantt.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gantt.tsx"
+        }
+      ]
+    },
+    {
+      "name": "editor",
+      "type": "registry:ui",
+      "title": "Editor",
+      "description": "A Tiptap rich-text editor with a bubble toolbar, slash command menu, tables, task lists, and syntax-highlighted code blocks. Adapted from kibo-ui.",
+      "dependencies": [
+        "@floating-ui/dom",
+        "@tiptap/core",
+        "@tiptap/react",
+        "@tiptap/pm",
+        "@tiptap/starter-kit",
+        "@tiptap/suggestion",
+        "@tiptap/extensions",
+        "@tiptap/extension-code-block-lowlight",
+        "@tiptap/extension-list",
+        "@tiptap/extension-subscript",
+        "@tiptap/extension-superscript",
+        "@tiptap/extension-table",
+        "@tiptap/extension-text-style",
+        "@tiptap/extension-typography",
+        "fuse.js",
+        "lowlight",
+        "tippy.js",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/command",
+        "@byronwade/dropdown-menu",
+        "@byronwade/popover",
+        "@byronwade/separator",
+        "@byronwade/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/editor.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/editor.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",

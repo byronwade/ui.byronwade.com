@@ -1100,6 +1100,36 @@ export const components: ComponentDoc[] = [
     npmDeps: ["lucide-react", "react-image-crop"], registryDeps: ["@byronwade/utils", "@byronwade/button"],
     examples: ["default"],
   },
+  {
+    slug: "color-picker", name: "Color picker", category: "Forms",
+    description: "HSL color picker — 2D field + hue/alpha sliders, eyedropper, hex/rgb/css/hsl output. Adapted from kibo-ui.",
+    npmDeps: ["color", "@base-ui/react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/input", "@byronwade/select"],
+    examples: ["default"],
+  },
+  {
+    slug: "video-player", name: "Video player", category: "UI",
+    description: "media-chrome player with default/minimal/theater/poster variants. Adapted from kibo-ui.",
+    npmDeps: ["media-chrome"], registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "kanban", name: "Kanban", category: "Data display",
+    description: "Drag-and-drop kanban board with columns + sortable cards. Adapted from kibo-ui.",
+    npmDeps: ["@dnd-kit/core", "@dnd-kit/sortable", "@dnd-kit/utilities", "tunnel-rat"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/card", "@byronwade/scroll-area"],
+    examples: ["default"],
+  },
+  {
+    slug: "gantt", name: "Gantt", category: "Data display",
+    description: "Draggable timeline / roadmap chart — sidebar, multi-range header, feature bars, markers, today line. Adapted from kibo-ui.",
+    npmDeps: ["@dnd-kit/core", "@dnd-kit/modifiers", "@uidotdev/usehooks", "date-fns", "jotai", "lodash.throttle", "lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/card"],
+    examples: ["default"],
+  },
+  {
+    slug: "editor", name: "Editor", category: "Forms",
+    description: "Tiptap rich-text editor — bubble toolbar, slash menu, tables, task lists, code blocks. Adapted from kibo-ui.",
+    npmDeps: ["@tiptap/react", "@tiptap/starter-kit", "lowlight", "tippy.js"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/command", "@byronwade/dropdown-menu", "@byronwade/popover", "@byronwade/separator", "@byronwade/tooltip"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;
