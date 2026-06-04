@@ -29,7 +29,9 @@
     "test:ci": "npm run check:tests && vitest run --coverage",
     "gen:lint-manifest": "node scripts/gen-lint-manifest.mjs",
     "check:lint-manifest": "node scripts/check-lint-manifest.mjs",
-    "test:packages": "npm run test --workspaces --if-present"
+    "test:packages": "npm run test --workspaces --if-present",
+    "build:lint": "npm run build --workspace @byronwade/on-system-core && npm run build --workspace @byronwade/lint",
+    "lint:on-system": "npm run build:lint && node packages/lint-cli/dist/cli.js \"registry/**/*.{ts,tsx}\" --off-system-components off --error-detectors raw-color,hand-rolled,typography"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

@@ -27,6 +27,15 @@ jobs:
       - name: Validate shipped AI rule sync
         run: node scripts/check-rule.mjs
 
+      - name: On-system lint manifest sync
+        run: node scripts/check-lint-manifest.mjs
+
+      - name: Test lint packages
+        run: npm run test:packages
+
+      - name: Dogfood on-system lint
+        run: npm run lint:on-system
+
       - name: Sync generated app files
         run: node scripts/sync-registry.mjs
 

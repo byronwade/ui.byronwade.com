@@ -31,4 +31,14 @@ describe("run", () => {
     expect(componentViolations).toHaveLength(0);
     expect(rawColorViolations.length).toBeGreaterThan(0);
   });
+  it("errorDetectors demotes non-listed error violations to warnCount", async () => {
+    // rounded-[2px] → arbitrary-value (error severity); text-[#16a34a] → raw-color (error severity)
+    // with errorDetectors: ["raw-color"], only raw-color is blocking
+    const file = tmp(`const x = <div className="rounded-[2px] text-[#16a34a]" />;`);
+    const res = await run([file], { errorDetectors: ["raw-color"] });
+    // raw-color violation counts as error (blocking)
+    expect(res.errorCount).toBe(1);
+    // arbitrary-value violation is demoted to warn
+    expect(res.warnCount).toBeGreaterThanOrEqual(1);
+  });
 });
