@@ -62,6 +62,19 @@ const componentEntries: SearchEntry[] = components.map((c) => ({
   keywords: `${c.slug.replace(/-/g, " ")} ${c.category} ${c.description}`.toLowerCase(),
 }));
 
+/* ── Variants (authored only — derived from the canonical manifest) ─── */
+
+const variantEntries: SearchEntry[] = components.flatMap((c) =>
+  (c.variants ?? []).map((v) => ({
+    kind: "Component" as const,
+    label: `${c.name} — ${v.name}`,
+    href: `/docs/${c.slug}#${v.id}`,
+    meta: "Variant",
+    keywords:
+      `${c.slug.replace(/-/g, " ")} ${v.name} ${v.tags.join(" ")} ${c.category}`.toLowerCase(),
+  })),
+);
+
 /* ── Layout archetypes (derived from the gallery metadata) ────────── */
 
 const layoutEntries: SearchEntry[] = [
@@ -106,4 +119,5 @@ export const searchIndex: SearchEntry[] = [
   ...layoutEntries,
   ...templateEntries,
   ...componentEntries,
+  ...variantEntries,
 ];
