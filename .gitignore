@@ -59,3 +59,6 @@ packages/on-system-core/src/manifest.generated.ts
 
 # workspace package build output
 packages/*/dist
+
+# generated mcp data bundle
+packages/mcp/src/data.generated.json
