@@ -7,8 +7,8 @@ import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { MorphDock } from "@/components/ui/morph-dock";
-import { categories, byCategory } from "@/content/components";
 import { guides } from "@/content/guides";
+import { variantJumps } from "@/app/(docs)/_components/docs-nav-data";
 
 /**
  * Mobile docs navigation — a hamburger pill pinned bottom-left (below `lg`, where
@@ -21,6 +21,7 @@ import { guides } from "@/content/guides";
 export function DocsNavDock() {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
+  const onPage = variantJumps(pathname);
 
   // Close the panel whenever the route changes (a nav link was tapped).
   React.useEffect(() => {
@@ -79,9 +80,12 @@ export function DocsNavDock() {
       >
         <div className="p-1.5">
           {section("Get Started", guides.map((g) => row(g.href, g.label)))}
-          {categories.map((cat) =>
-            section(cat, byCategory(cat).map((c) => row(`/docs/${c.slug}`, c.name))),
-          )}
+          {section("Components", row("/docs#catalog", "Browse all components"))}
+          {onPage &&
+            section(
+              "On this page",
+              onPage.jumps.map((j) => row(`/docs/${onPage.slug}#${j.id}`, j.name)),
+            )}
         </div>
       </MorphDock>
     </div>
