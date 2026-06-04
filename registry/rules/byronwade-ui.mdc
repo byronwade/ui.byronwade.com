@@ -20,7 +20,7 @@ system component exists, you are doing it wrong.
 Before writing any markup, check whether a component already exists. Reach for these first:
 
 - **Forms** — `button`, `input`, `textarea`, `label`, `select`, `checkbox`, `switch`,
-  `radio-group`, `toggle`, `toggle-group`, `input-group`
+  `radio-group`, `toggle`, `toggle-group`, `input-group`, `calendar`
 - **Overlays** — `dialog`, `sheet`, `popover`, `tooltip`, `hover-card`, `dropdown-menu`,
   `command`, `navigation-menu`
 - **Feedback** — `alert`, `progress`, `skeleton`, `sonner` (toasts)
@@ -37,7 +37,8 @@ Before writing any markup, check whether a component already exists. Reach for t
   `android` (drop a screenshot or `videoSrc` in to show a product in context)
 - **Marketing / motion** — `world-map` (dotted map with animated connection arcs),
   `floating-dock` (magnify-on-hover dock), `kinetic-text` (per-letter hover typography),
-  `backlight` (saturated RGB glow behind a child)
+  `backlight` (saturated RGB glow behind a child), `apple-cards-carousel` (cards that
+  expand into a modal)
 
 Import from the consumer paths (these are where shadcn installs them):
 

@@ -486,6 +486,29 @@
       ]
     },
     {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Date picker built on react-day-picker, dressed in byronwade/ui tokens — selection follows --brand, the range bar uses bg-accent, and nav + day cells reuse buttonVariants.",
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/calendar.tsx"
+        }
+      ]
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
@@ -1511,6 +1534,41 @@
           "path": "registry/ui/floating-dock.tsx",
           "type": "registry:ui",
           "target": "components/ui/floating-dock.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-outside-click",
+      "type": "registry:lib",
+      "title": "useOutsideClick",
+      "description": "Hook that fires a callback on pointer/touch interactions outside a ref. Adapted from Aceternity UI.",
+      "files": [
+        {
+          "path": "registry/lib/use-outside-click.ts",
+          "type": "registry:lib",
+          "target": "lib/use-outside-click.ts"
+        }
+      ]
+    },
+    {
+      "name": "apple-cards-carousel",
+      "type": "registry:ui",
+      "title": "Apple cards carousel",
+      "description": "Horizontal card carousel where cards expand into a full modal. Token surfaces, lucide controls, no next/image. Adapted from Aceternity UI.",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/use-outside-click"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/apple-cards-carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/apple-cards-carousel.tsx"
         }
       ]
     },

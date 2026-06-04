@@ -25,6 +25,7 @@ import AlertWithAction from "./alert/with-action";
 import AlertWithIcon from "./alert/with-icon";
 import AlertWithLink from "./alert/with-link";
 import AndroidDefault from "./android/default";
+import AppleCardsCarouselDefault from "./apple-cards-carousel/default";
 import AspectRatioDefault from "./aspect-ratio/default";
 import AspectRatioCinematic from "./aspect-ratio/cinematic";
 import AspectRatioPortrait from "./aspect-ratio/portrait";
@@ -59,6 +60,10 @@ import ButtonSizes from "./button/sizes";
 import ButtonStateful from "./button/stateful";
 import ButtonVariants from "./button/variants";
 import ButtonWithIcon from "./button/with-icon";
+import CalendarDefault from "./calendar/default";
+import CalendarAppointment from "./calendar/appointment";
+import CalendarPricing from "./calendar/pricing";
+import CalendarRangePresets from "./calendar/range-presets";
 import CardDefault from "./card/default";
 import CardContentOnly from "./card/content-only";
 import CardFrameEmpty from "./card/frame-empty";
@@ -277,6 +282,8 @@ import SeparatorInNav from "./separator/in-nav";
 import SeparatorVertical from "./separator/vertical";
 import SeparatorWithLabel from "./separator/with-label";
 import SheetDefault from "./sheet/default";
+import SheetInsetNested from "./sheet/inset-nested";
+import SheetNestedSteps from "./sheet/nested-steps";
 import SheetNoCloseButton from "./sheet/no-close-button";
 import SheetScrollable from "./sheet/scrollable";
 import SheetSides from "./sheet/sides";
@@ -417,6 +424,9 @@ export const examples: Record<string, Example[]> = {
   "android": [
     { name: "Default", file: "android/default.tsx", Component: AndroidDefault },
   ],
+  "apple-cards-carousel": [
+    { name: "Default", file: "apple-cards-carousel/default.tsx", Component: AppleCardsCarouselDefault },
+  ],
   "aspect-ratio": [
     { name: "Default", file: "aspect-ratio/default.tsx", Component: AspectRatioDefault },
     { name: "Cinematic", file: "aspect-ratio/cinematic.tsx", Component: AspectRatioCinematic },
@@ -462,6 +472,12 @@ export const examples: Record<string, Example[]> = {
     { name: "Stateful", file: "button/stateful.tsx", Component: ButtonStateful },
     { name: "Variants", file: "button/variants.tsx", Component: ButtonVariants },
     { name: "With Icon", file: "button/with-icon.tsx", Component: ButtonWithIcon },
+  ],
+  "calendar": [
+    { name: "Default", file: "calendar/default.tsx", Component: CalendarDefault },
+    { name: "Appointment", file: "calendar/appointment.tsx", Component: CalendarAppointment },
+    { name: "Pricing", file: "calendar/pricing.tsx", Component: CalendarPricing },
+    { name: "Range Presets", file: "calendar/range-presets.tsx", Component: CalendarRangePresets },
   ],
   "card": [
     { name: "Default", file: "card/default.tsx", Component: CardDefault },
@@ -756,6 +772,8 @@ export const examples: Record<string, Example[]> = {
   ],
   "sheet": [
     { name: "Default", file: "sheet/default.tsx", Component: SheetDefault },
+    { name: "Inset Nested", file: "sheet/inset-nested.tsx", Component: SheetInsetNested },
+    { name: "Nested Steps", file: "sheet/nested-steps.tsx", Component: SheetNestedSteps },
     { name: "No Close Button", file: "sheet/no-close-button.tsx", Component: SheetNoCloseButton },
     { name: "Scrollable", file: "sheet/scrollable.tsx", Component: SheetScrollable },
     { name: "Sides", file: "sheet/sides.tsx", Component: SheetSides },
