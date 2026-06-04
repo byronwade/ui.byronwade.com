@@ -13,8 +13,8 @@
  *   - Base classes always present:
  *       shrink-0  bg-border
  *   - Orientation-gated classes (applied via data-* selectors):
- *       data-horizontal:h-px  data-horizontal:w-full
- *       data-vertical:w-px    data-vertical:self-stretch
+ *       data-[orientation=horizontal]:h-px  data-[orientation=horizontal]:w-full
+ *       data-[orientation=vertical]:w-px    data-[orientation=vertical]:self-stretch
  *   - data-slot="separator" attribute always set
  *   - aria-orientation reflects the orientation value
  *   - data-orientation reflects the orientation value
@@ -131,13 +131,13 @@ describe("Separator — orientation='horizontal'", () => {
   it("className includes horizontal-width class fragment", () => {
     const { container } = render(<Separator orientation="horizontal" />);
     const cls = (container.firstElementChild as HTMLElement).className;
-    expect(cls).toContain("data-horizontal:w-full");
+    expect(cls).toContain("data-[orientation=horizontal]:w-full");
   });
 
   it("className includes horizontal-height class fragment", () => {
     const { container } = render(<Separator orientation="horizontal" />);
     const cls = (container.firstElementChild as HTMLElement).className;
-    expect(cls).toContain("data-horizontal:h-px");
+    expect(cls).toContain("data-[orientation=horizontal]:h-px");
   });
 
   it("omitting orientation prop gives same aria-orientation as explicit 'horizontal'", () => {
@@ -193,13 +193,13 @@ describe("Separator — orientation='vertical'", () => {
   it("className includes vertical-width class fragment", () => {
     const { container } = render(<Separator orientation="vertical" />);
     const cls = (container.firstElementChild as HTMLElement).className;
-    expect(cls).toContain("data-vertical:w-px");
+    expect(cls).toContain("data-[orientation=vertical]:w-px");
   });
 
   it("className includes vertical self-stretch class fragment", () => {
     const { container } = render(<Separator orientation="vertical" />);
     const cls = (container.firstElementChild as HTMLElement).className;
-    expect(cls).toContain("data-vertical:self-stretch");
+    expect(cls).toContain("data-[orientation=vertical]:self-stretch");
   });
 
   it("does NOT have data-orientation='horizontal' when orientation='vertical'", () => {
@@ -328,7 +328,7 @@ describe("Separator — render prop (polymorphic)", () => {
   it("rendered <hr> carries orientation classes", () => {
     const { container } = render(<Separator render={<hr />} orientation="horizontal" />);
     const el = container.querySelector("hr") as HTMLElement;
-    expect(el.className).toContain("data-horizontal:h-px");
+    expect(el.className).toContain("data-[orientation=horizontal]:h-px");
   });
 
   it("renders as <span> when render={<span />}", () => {
@@ -843,14 +843,14 @@ describe("Separator — DOM structure", () => {
   it("className contains both orientation-gated fragments for horizontal", () => {
     const { container } = render(<Separator />);
     const cls = (container.firstElementChild as HTMLElement).className;
-    expect(cls).toContain("data-horizontal:h-px");
-    expect(cls).toContain("data-horizontal:w-full");
+    expect(cls).toContain("data-[orientation=horizontal]:h-px");
+    expect(cls).toContain("data-[orientation=horizontal]:w-full");
   });
 
   it("className contains both orientation-gated fragments for vertical", () => {
     const { container } = render(<Separator orientation="vertical" />);
     const cls = (container.firstElementChild as HTMLElement).className;
-    expect(cls).toContain("data-vertical:w-px");
-    expect(cls).toContain("data-vertical:self-stretch");
+    expect(cls).toContain("data-[orientation=vertical]:w-px");
+    expect(cls).toContain("data-[orientation=vertical]:self-stretch");
   });
 });
