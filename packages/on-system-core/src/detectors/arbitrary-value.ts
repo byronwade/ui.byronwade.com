@@ -5,6 +5,11 @@ import { ARBITRARY } from "../patterns.js";
 
 const VAR_TOKEN = /^var\(--([a-z0-9-]+)\)$/;
 
+// spacing/radius prefixes that have a token scale (negative spacing allowed)
+const SCALE_PREFIX = /^-?(p[xytrbl]?|m[xytrbl]?|gap(-[xy])?|space-[xy]|rounded(-(t|b|l|r|tl|tr|bl|br|s|e|ss|se|ee|es))?)$/;
+// a bare length the spacing/radius scale could express
+const BARE_LENGTH = /^-?\d*\.?\d+(px|rem|em)$/;
+
 export function detectArbitraryValue(classes: ClassToken[], manifest: Manifest): Violation[] {
   const out: Violation[] = [];
   for (const tok of classes) {
@@ -22,10 +27,13 @@ export function detectArbitraryValue(classes: ClassToken[], manifest: Manifest):
       });
       continue;
     }
-    out.push({
-      detector: "arbitrary-value", range: tok.range, severity: "error",
-      message: `Arbitrary value \`${tok.value}\` is off-system. Use a token/scale utility (spacing, radius from --radius, or a color token).`,
-    });
+    if (SCALE_PREFIX.test(prefix) && BARE_LENGTH.test(inner)) {
+      out.push({
+        detector: "arbitrary-value", range: tok.range, severity: "error",
+        message: `Arbitrary value \`${tok.value}\` is off-system. Use the spacing/radius scale (from --radius), not a pixel value.`,
+      });
+    }
+    // all other arbitrary values (durations, easings, calc(), %, keywords, etc.) are allowed
   }
   return out;
 }

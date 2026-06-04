@@ -7,11 +7,13 @@ async function main() {
   const fix = argv.includes("--fix");
   const distIdx = argv.indexOf("--max-color-distance");
   const maxColorDistance = distIdx >= 0 ? Number(argv[distIdx + 1]) : undefined;
+  const oscIdx = argv.indexOf("--off-system-components");
+  const offSystemComponents = oscIdx >= 0 ? argv[oscIdx + 1] as "warn" | "error" | "off" : undefined;
   const patterns = argv.filter((a, i) =>
-    !a.startsWith("--") && !(distIdx >= 0 && i === distIdx + 1));
+    !a.startsWith("--") && !(distIdx >= 0 && i === distIdx + 1) && !(oscIdx >= 0 && i === oscIdx + 1));
   if (patterns.length === 0) patterns.push("**/*.{ts,tsx}");
 
-  const res = await run(patterns, { fix, maxColorDistance });
+  const res = await run(patterns, { fix, maxColorDistance, offSystemComponents });
   for (const { file, violations } of res.files) {
     console.log(pc.underline(file));
     for (const v of violations) {
