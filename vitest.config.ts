@@ -1,4 +1,4 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig, coverageConfigDefaults } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
@@ -10,7 +10,13 @@ export default defineConfig({
     setupFiles: ["./tests/setup.ts"],
     coverage: {
       provider: "v8",
+      // The gate covers design-system component source only. `include` is matched
+      // loosely (any path containing "components"), so anchor it away from app
+      // routes like `app/(docs)/_components/*` and `app/preview/components/*`,
+      // which are docs/catalog UI — not registry components — and carry a
+      // different testing bar.
       include: ["components/**"],
+      exclude: [...coverageConfigDefaults.exclude, "app/**"],
       reporter: ["text", "json-summary"],
       thresholds: {
         // Global coverage floor — ratcheted up only. (A per-glob threshold is an
