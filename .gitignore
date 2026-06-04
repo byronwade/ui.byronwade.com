@@ -55,3 +55,6 @@ next-env.d.ts
 
 # generated lint manifest
 packages/on-system-core/src/manifest.generated.ts
+
+# workspace package build output
+packages/*/dist

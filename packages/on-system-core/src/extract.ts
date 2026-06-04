@@ -15,12 +15,12 @@ function splitClasses(text: string, base: number): ClassToken[] {
 
 /** Static string parts of a className value, with absolute offsets (literal start + 1 for the quote). */
 function stringParts(node: Node): { text: string; base: number }[] {
-  if (node.type === "Literal" && typeof (node as { value?: unknown }).value === "string") {
-    return [{ text: (node as { value: string }).value, base: node.range[0] + 1 }];
+  if (node.type === "Literal" && typeof node.value === "string") {
+    return [{ text: node.value as string, base: node.range[0] + 1 }];
   }
   if (node.type === "TemplateLiteral") {
     return (node.quasis as Node[]).map((q) => ({
-      text: ((q as { value: { cooked: string } }).value.cooked) ?? "",
+      text: ((q.value as { cooked?: string } | undefined)?.cooked) ?? "",
       base: q.range[0] + 1,
     }));
   }
@@ -85,8 +85,8 @@ export function extractStyleStrings(ast: Node): StyleString[] {
       const key = (p.key as { name?: string; value?: string } | undefined);
       const prop = key?.name ?? key?.value ?? "";
       const v = p.value as Node | undefined;
-      if (v && v.type === "Literal" && typeof (v as { value?: unknown }).value === "string") {
-        out.push({ value: (v as { value: string }).value, prop: String(prop), range: [v.range[0] + 1, v.range[1] - 1] });
+      if (v && v.type === "Literal" && typeof v.value === "string") {
+        out.push({ value: v.value as string, prop: String(prop), range: [v.range[0] + 1, v.range[1] - 1] });
       }
     }
   });

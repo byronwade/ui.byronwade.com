@@ -100,7 +100,8 @@ In root `package.json`, add a top-level `"workspaces"` key and the new dependenc
   "files": ["dist"],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "tsc --noEmit -p tsconfig.json && vitest run",
     "test:watch": "vitest"
   },
   "dependencies": { "@typescript-eslint/parser": "^8.20.0", "culori": "^4.0.1" },
@@ -411,12 +412,12 @@ function splitClasses(text: string, base: number): ClassToken[] {
 
 /** Static string parts of a className value, with absolute offsets (literal start + 1 for the quote). */
 function stringParts(node: Node): { text: string; base: number }[] {
-  if (node.type === "Literal" && typeof (node as { value?: unknown }).value === "string") {
-    return [{ text: (node as { value: string }).value, base: node.range[0] + 1 }];
+  if (node.type === "Literal" && typeof node.value === "string") {
+    return [{ text: node.value as string, base: node.range[0] + 1 }];
   }
   if (node.type === "TemplateLiteral") {
     return (node.quasis as Node[]).map((q) => ({
-      text: ((q as { value: { cooked: string } }).value.cooked) ?? "",
+      text: ((q.value as { cooked?: string } | undefined)?.cooked) ?? "",
       base: q.range[0] + 1,
     }));
   }
@@ -496,7 +497,9 @@ export function extractJsxElements(ast: Node): JsxElement[] {
     const nm = n.name as { type: string; name?: string };
     if (nm.type === "JSXIdentifier" && nm.name) out.push({ name: nm.name, range: (n.name as Node).range });
   });
-  return out;
+  // walk() visits in Object.keys order; for JSXElement `children` precede `openingElement`,
+  // so sort by source position to keep nested-after-parent ordering the tests assert.
+  return out.sort((a, b) => a.range[0] - b.range[0]);
 }
 ```
 
