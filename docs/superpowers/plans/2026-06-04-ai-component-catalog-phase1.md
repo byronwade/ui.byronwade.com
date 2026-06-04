@@ -14,11 +14,11 @@
 
 ## Pre-flight facts (verified, do not re-investigate)
 
-- `content/components.ts` is **pure data** — no `import` statements; exports `components`, `categories`, `byCategory`, `bySlug`. Node v22.20 can import it via `node --experimental-strip-types`.
+- `content/components.ts` is **pure data** — no `import` statements; exports `components`, `categories`, `byCategory`, `bySlug`. Build scripts import it via **`node --import tsx`** (tsx is a build-time devDep, Node 18+). ⚠️ Do NOT use `--experimental-strip-types`: CI runs Node 20, which predates that flag and would crash. `tsx` works on Node 18/20/22.
 - `doc.examples` (the `examples: string[]` field) is **read nowhere** outside `content/examples/` — the `/docs/[slug]` page renders the generated `content/examples/registry.ts` map keyed by slug. So adding `variants` does not collide with anything.
 - `content/examples/button/` already has: `count, default, disabled, error, loading, sizes, stateful, variants, with-icon`.
 - The ⌘K palette (`app/_components/chrome/nav-dock.tsx`) groups entries by `kind` (`"Section"` | `"Component"`) and renders every non-Section entry identically (label + meta + Box icon). **Reusing `kind: "Component"` for variants needs zero palette changes.**
-- `scripts/gen-mcp-data.mjs` sources components from `registry.json` and writes `packages/mcp/src/data.generated.json` (committed, gated by `scripts/check-mcp-data.mjs` which re-gens and diffs).
+- `scripts/gen-mcp-data.mjs` sources components from `registry.json` and writes `packages/mcp/src/data.generated.json`. ⚠️ This file is **git-ignored** (like its siblings `manifest.generated.ts`, `foundation.generated.css`) — a generated artifact, NOT committed. The gate `scripts/check-mcp-data.mjs` must **generate-if-missing** then assert content (a fresh CI checkout has no file). CI on `main` is currently red and the committed lockfile was drifted; do not assume parity with main.
 - Coverage (`vitest.config.ts`) only includes `components/**`; new tests under `tests/content/` run but do not affect coverage thresholds.
 
 ---
@@ -36,11 +36,12 @@
 | `tests/content/search-index.test.ts` | Assert button variants are indexed | 3 |
 | `scripts/gen-mcp-data.mjs` | Attach `group`, `tags`, per-variant records to mcp data | 4 |
 | `scripts/check-mcp-data.mjs` | Also assert button exposes ≥18 variants | 4 |
-| `packages/mcp/src/data.generated.json` | Regenerated committed artifact | 4 |
+| `packages/mcp/src/data.generated.json` | Regenerated **git-ignored** artifact (not committed) | 4 |
 | `scripts/gen-llms-txt.mjs` (new) | Emit `public/llms.txt` AI entry point | 5 |
-| `scripts/check-llms-txt.mjs` (new) | Gate `llms.txt` freshness | 5 |
-| `public/llms.txt` (new, committed) | Generated AI entry point | 5 |
-| `package.json` | Flag generators with strip-types; add `gen:llms`/`check:llms`; wire into `prebuild`/`validate` | 4, 5, 6 |
+| `scripts/check-llms-txt.mjs` (new) | Gate `llms.txt` freshness (gen-if-missing) | 5 |
+| `public/llms.txt` (new, **git-ignored**) | Generated AI entry point (served via prebuild, not committed) | 5 |
+| `.gitignore` | Add `public/llms.txt` | 5 |
+| `package.json` | Run generators via `node --import tsx`; add `tsx` devDep + `gen:llms`/`check:llms`; wire into `prebuild`/`validate` | 4, 5, 6 |
 
 ---
 
@@ -385,11 +386,13 @@ git commit -m "feat(catalog): index authored variants in the command palette"
 
 ## Task 4: Per-variant + tags in the machine index (mcp-data)
 
+⚠️ Implemented with a corrected approach (Steps 2/4 below show the original strip-types plan, but it was built with **`node --import tsx`** instead — CI's Node 20 lacks `--experimental-strip-types`). `data.generated.json` stays **git-ignored** (not committed); `check:mcp-data` **generates-if-missing**. `tsx` was added as a build-time devDep.
+
 **Files:**
-- Modify: `scripts/gen-mcp-data.mjs`
-- Modify: `scripts/check-mcp-data.mjs`
-- Modify: `package.json` (`gen:mcp-data` + `prebuild` invocations get the strip-types flags)
-- Regenerated: `packages/mcp/src/data.generated.json`
+- Modify: `scripts/gen-mcp-data.mjs` (top-level `await import("../content/components.ts")`)
+- Modify: `scripts/check-mcp-data.mjs` (gen-if-missing + `node --import tsx`; assert button ≥18 variants)
+- Modify: `package.json` (`gen:mcp-data` + `prebuild` → `node --import tsx …`; add `tsx` devDep)
+- Regenerated (git-ignored, NOT committed): `packages/mcp/src/data.generated.json`
 
 - [ ] **Step 1: Teach the generator to read `components.ts` and attach variants**
 
@@ -485,20 +488,27 @@ git commit -m "feat(catalog): emit per-variant + tags in the mcp machine index"
 
 ## Task 5: `llms.txt` AI entry point + gate
 
+⚠️ Approach corrected during execution: generators run via **`node --import tsx`** (NOT `--experimental-strip-types`, which crashes CI's Node 20). `public/llms.txt` is a **git-ignored generated artifact** (served via `prebuild`, not committed), and its checker **generates-if-missing** — mirroring how Task 4 was implemented for `data.generated.json`.
+
 **Files:**
 - Create: `scripts/gen-llms-txt.mjs`
 - Create: `scripts/check-llms-txt.mjs`
-- Create (generated, committed): `public/llms.txt`
+- Create (generated, **git-ignored**): `public/llms.txt`
+- Modify: `.gitignore` (add `public/llms.txt`)
 - Modify: `package.json` (`gen:llms`, `check:llms`, wire into `prebuild` + `validate`)
 
-- [ ] **Step 1: Confirm `public/llms.txt` is not git-ignored**
+- [ ] **Step 1: Git-ignore the generated artifact**
 
-Run: `git check-ignore public/llms.txt; echo "exit=$?"`
-Expected: `exit=1` (not ignored). If it prints the path with `exit=0`, add `!public/llms.txt` to `.gitignore` before continuing.
+Add `public/llms.txt` to `.gitignore` (near the other generated outputs), so the file is never committed:
+
+```
+# generated AI entry point (regenerated by prebuild / gen:llms)
+public/llms.txt
+```
 
 - [ ] **Step 2: Write the generator**
 
-Create `scripts/gen-llms-txt.mjs`:
+Create `scripts/gen-llms-txt.mjs` (runs under `node --import tsx`, so the `await import` of the TS catalog works on Node 18+):
 
 ```js
 #!/usr/bin/env node
@@ -539,13 +549,16 @@ writeFileSync(join(root, "public/llms.txt"), lines.join("\n") + "\n");
 console.log(`✓ llms.txt: ${components.length} components`);
 ```
 
-- [ ] **Step 3: Write the checker (mirrors check-mcp-data)**
+- [ ] **Step 3: Write the checker (gen-if-missing, mirrors check-mcp-data)**
 
 Create `scripts/check-llms-txt.mjs`:
 
 ```js
 #!/usr/bin/env node
-// Fails if public/llms.txt is missing or stale vs content/components.ts.
+// Validates public/llms.txt against content/components.ts. The file is a
+// gitignored generated artifact, so on a fresh checkout it won't exist — we
+// generate it, then assert content. The generator imports the TS catalog, so
+// it runs under tsx (Node 18+ compatible).
 import { readFileSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
@@ -555,19 +568,15 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const out = join(root, "public/llms.txt");
 const errors = [];
 
-if (!existsSync(out)) {
-  errors.push("public/llms.txt missing — run `npm run gen:llms`.");
-} else {
-  const before = readFileSync(out, "utf8");
-  execFileSync(
-    "node",
-    ["--experimental-strip-types", "--disable-warning=MODULE_TYPELESS_PACKAGE_JSON", "scripts/gen-llms-txt.mjs"],
-    { cwd: root, stdio: "ignore" },
-  );
-  const after = readFileSync(out, "utf8");
-  if (before !== after) errors.push("public/llms.txt is stale — run `npm run gen:llms`.");
-  if (!after.includes("/docs/button#solid")) errors.push("llms.txt missing button variants");
-}
+const regen = () =>
+  execFileSync("node", ["--import", "tsx", "scripts/gen-llms-txt.mjs"], { cwd: root, stdio: "ignore" });
+
+const existed = existsSync(out);
+const before = existed ? readFileSync(out, "utf8") : null;
+regen();
+const after = readFileSync(out, "utf8");
+if (existed && before !== after) errors.push("public/llms.txt is stale — run `npm run gen:llms`.");
+if (!after.includes("/docs/button#solid")) errors.push("llms.txt missing button variants");
 
 if (errors.length) { for (const e of errors) console.error("  - " + e); process.exit(1); }
 console.log("✓ llms.txt in sync with content/components.ts");
@@ -575,19 +584,17 @@ console.log("✓ llms.txt in sync with content/components.ts");
 
 - [ ] **Step 4: Add the npm scripts and wire them in**
 
-In `package.json`:
-
-Add two scripts:
+In `package.json`, add two scripts:
 
 ```json
-"gen:llms": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/gen-llms-txt.mjs",
+"gen:llms": "node --import tsx scripts/gen-llms-txt.mjs",
 "check:llms": "node scripts/check-llms-txt.mjs",
 ```
 
 Append `gen:llms` to `prebuild` (after the mcp-data step, before `gen-all-item`):
 
 ```json
-"prebuild": "node scripts/gen-lint-manifest.mjs && node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/gen-mcp-data.mjs && node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/gen-llms-txt.mjs && node scripts/gen-all-item.mjs && shadcn build && node scripts/sync-registry.mjs",
+"prebuild": "node scripts/gen-lint-manifest.mjs && node --import tsx scripts/gen-mcp-data.mjs && node --import tsx scripts/gen-llms-txt.mjs && node scripts/gen-all-item.mjs && shadcn build && node scripts/sync-registry.mjs",
 ```
 
 Append `check:llms` to `validate` (end of the chain):
@@ -601,10 +608,10 @@ Append `check:llms` to `validate` (end of the chain):
 Run: `npm run gen:llms && npm run check:llms`
 Expected: `✓ llms.txt: <N> components` then `✓ llms.txt in sync with content/components.ts`.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 6: Commit (do NOT commit the gitignored `public/llms.txt`)**
 
 ```bash
-git add scripts/gen-llms-txt.mjs scripts/check-llms-txt.mjs public/llms.txt package.json .gitignore
+git add scripts/gen-llms-txt.mjs scripts/check-llms-txt.mjs package.json .gitignore
 git commit -m "feat(catalog): generate llms.txt AI entry point + freshness gate"
 ```
 
