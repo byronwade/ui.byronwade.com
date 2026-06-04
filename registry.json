@@ -1907,6 +1907,25 @@
       ]
     },
     {
+      "name": "credit-card",
+      "type": "registry:ui",
+      "title": "Credit card",
+      "description": "Flippable credit-card display (chip, number, expiry, CVV, mag stripe, payment icon). Token body that re-skins; legible in both themes. Adapted from kibo-ui.",
+      "dependencies": [
+        "react-svg-credit-card-payment-icons"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/credit-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/credit-card.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",

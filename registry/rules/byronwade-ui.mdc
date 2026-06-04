@@ -28,7 +28,7 @@ Before writing any markup, check whether a component already exists. Reach for t
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `kbd`, `separator`,
   `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `file-tree`
 - **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
-  `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR)
+  `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR), `credit-card` (flippable card)
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
   (config-driven nav dock that blooms into a panel via the hook)
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,

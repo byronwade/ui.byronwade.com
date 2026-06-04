@@ -1051,6 +1051,12 @@ export const components: ComponentDoc[] = [
     npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
+  {
+    slug: "credit-card", name: "Credit card", category: "UI",
+    description: "Flippable credit-card display (chip, number, expiry, CVV, mag stripe, payment icon). Adapted from kibo-ui.",
+    npmDeps: ["react-svg-credit-card-payment-icons"], registryDeps: ["@byronwade/utils"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;

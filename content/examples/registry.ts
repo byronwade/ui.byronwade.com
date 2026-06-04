@@ -143,6 +143,7 @@ import CommandGrouped from "./command/grouped";
 import CommandInline from "./command/inline";
 import CommandWithIcons from "./command/with-icons";
 import ConversationListDefault from "./conversation-list/default";
+import CreditCardDefault from "./credit-card/default";
 import CursorDefault from "./cursor/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
@@ -686,6 +687,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "conversation-list": [
     { name: "Default", file: "conversation-list/default.tsx", Component: ConversationListDefault },
+  ],
+  "credit-card": [
+    { name: "Default", file: "credit-card/default.tsx", Component: CreditCardDefault },
   ],
   "cursor": [
     { name: "Default", file: "cursor/default.tsx", Component: CursorDefault },
