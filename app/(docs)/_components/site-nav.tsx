@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { categories, byCategory } from "@/content/components";
 import { guides } from "@/content/guides";
-import { variantJumps } from "@/app/(docs)/_components/docs-nav-data";
 
 /** A section header + its items, grouped under a vertical rail. */
 function Group({ label, children }: { label: string; children: ReactNode }) {
@@ -30,11 +30,12 @@ export function SiteNav() {
         href={href}
         aria-current={active ? "page" : undefined}
         className={cn(
+          // sit the 2px state border on top of the group's 1px rail
           "-ml-px border-l-2 py-1.5 pl-3 pr-2 text-sm transition-colors",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
           active
             ? "border-brand text-foreground"
-            : "border-transparent text-muted-foreground hover:border-border hover:text-foreground",
+            : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
         )}
       >
         {label}
@@ -42,19 +43,19 @@ export function SiteNav() {
     );
   };
 
-  const onPage = variantJumps(pathname);
-
   return (
     <nav className="flex flex-col gap-7">
       <Group label="Get Started">{guides.map((g) => item(g.href, g.label))}</Group>
 
-      <Group label="Components">{item("/docs#catalog", "Browse all components")}</Group>
-
-      {onPage && (
-        <Group label="On this page">
-          {onPage.jumps.map((j) => item(`/docs/${onPage.slug}#${j.id}`, j.name))}
-        </Group>
-      )}
+      {/* "Foundation" lives in Get Started (it's a base, not a browseable
+          component), so skip its lone catalog category here. */}
+      {categories
+        .filter((cat) => cat !== "Foundation")
+        .map((cat) => (
+          <Group key={cat} label={cat}>
+            {byCategory(cat).map((c) => item(`/docs/${c.slug}`, c.name))}
+          </Group>
+        ))}
     </nav>
   );
 }

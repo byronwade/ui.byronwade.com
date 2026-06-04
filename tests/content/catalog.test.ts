@@ -20,13 +20,23 @@ describe("catalogItems", () => {
     expect(button.search).toContain("ghost"); // sourced from variant tags
     expect(button.search).toBe(button.search.toLowerCase());
   });
+
+  it("uses the example count for components without authored variants", () => {
+    // accordion has no authored `variants`; with a counts map it reports the real count.
+    const withCounts = catalogItems({ accordion: 7 });
+    const accordion = withCounts.find((i) => i.slug === "accordion")!;
+    expect(accordion.variantCount).toBe(7);
+    // button keeps its authored count regardless of the example count passed in.
+    const button = withCounts.find((i) => i.slug === "button")!;
+    expect(button.variantCount).toBeGreaterThanOrEqual(18);
+  });
 });
 
 describe("filterCatalog", () => {
   const items: CatalogItem[] = [
-    { slug: "button", name: "Button", group: "Primitives", description: "A button.", tags: ["interactive", "action"], variantCount: 18, href: "/docs/button", search: "button primitives a button interactive action ghost solid" },
-    { slug: "card", name: "Card", group: "Primitives", description: "A card.", tags: ["layout"], variantCount: 1, href: "/docs/card", search: "card primitives a card layout" },
-    { slug: "alert", name: "Alert", group: "Feedback", description: "An alert.", tags: ["status"], variantCount: 1, href: "/docs/alert", search: "alert feedback an alert status" },
+    { slug: "button", name: "Button", group: "Primitives", description: "A button.", tags: ["interactive", "action"], variantCount: 18, depCount: 2, href: "/docs/button", search: "button primitives a button interactive action ghost solid" },
+    { slug: "card", name: "Card", group: "Primitives", description: "A card.", tags: ["layout"], variantCount: 1, depCount: 2, href: "/docs/card", search: "card primitives a card layout" },
+    { slug: "alert", name: "Alert", group: "Feedback", description: "An alert.", tags: ["status"], variantCount: 1, depCount: 2, href: "/docs/alert", search: "alert feedback an alert status" },
   ];
   const base = { query: "", groups: [], tags: [], sort: "featured" as const };
 

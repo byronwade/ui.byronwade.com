@@ -29,7 +29,7 @@ const pageEntries: SearchEntry[] = [
   { kind: "Section", label: "Installation", href: "/docs/installation",   meta: "Guide", keywords: "install installation setup quick start shadcn registry cli init add namespace" },
   { kind: "Section", label: "Theming",      href: "/docs/theming",        meta: "Guide", keywords: "theming theme re-skin reskin brand color tokens css variable dark mode" },
   { kind: "Section", label: "AI rules",     href: "/docs/ai",             meta: "Guide", keywords: "ai rules cursor claude copilot windsurf codex agent on-system design rules" },
-  { kind: "Section", label: "Components",   href: "/docs#catalog",        meta: "Page", keywords: "all components index catalog list" },
+  { kind: "Section", label: "Catalog",      href: "/catalog",             meta: "Page", keywords: "catalog all components index list grid browse gallery search filter" },
   { kind: "Section", label: "Styleguide",   href: "/styleguide",                meta: "Page", keywords: "styleguide design philosophy tokens showcase" },
 ];
 

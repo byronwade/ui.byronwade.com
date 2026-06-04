@@ -7,16 +7,16 @@ import { ComponentGallery } from "@/app/(docs)/_components/component-gallery";
 import type { CatalogItem } from "@/content/catalog";
 
 const items: CatalogItem[] = [
-  { slug: "button", name: "Button", group: "Primitives", description: "A button.", tags: ["interactive", "action"], variantCount: 18, href: "/docs/button", search: "button primitives a button interactive action ghost solid" },
-  { slug: "card", name: "Card", group: "Primitives", description: "A card.", tags: ["layout"], variantCount: 1, href: "/docs/card", search: "card primitives a card layout" },
-  { slug: "alert", name: "Alert", group: "Feedback", description: "An alert.", tags: ["status"], variantCount: 1, href: "/docs/alert", search: "alert feedback an alert status" },
+  { slug: "button", name: "Button", group: "Primitives", description: "A button.", tags: ["interactive", "action"], variantCount: 18, depCount: 2, href: "/docs/button", search: "button primitives a button interactive action ghost solid" },
+  { slug: "card", name: "Card", group: "Primitives", description: "A card.", tags: ["layout"], variantCount: 1, depCount: 0, href: "/docs/card", search: "card primitives a card layout" },
+  { slug: "alert", name: "Alert", group: "Feedback", description: "An alert.", tags: ["status"], variantCount: 1, depCount: 0, href: "/docs/alert", search: "alert feedback an alert status" },
 ];
 
 describe("ComponentGallery", () => {
-  it("renders a linked card per item with group + variant count", () => {
+  it("renders a linked card per item with group + variant/dep count", () => {
     render(<ComponentGallery items={items} />);
     expect(screen.getByRole("link", { name: /Button/ })).toHaveAttribute("href", "/docs/button");
-    expect(screen.getByText("18 variants")).toBeInTheDocument();
+    expect(screen.getByText(/18 variants · 2 deps/)).toBeInTheDocument();
     expect(screen.getAllByText("1 variant")).toHaveLength(2);
   });
 

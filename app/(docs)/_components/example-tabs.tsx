@@ -20,7 +20,9 @@ export function ExampleTabs({ title, preview, code }: { title?: string; preview:
         />
       </div>
       {view === "preview" ? (
-        <div className="grid min-h-56 items-center rounded-xl edge p-8">
+        // flex + justify-center centers fixed-size demos (single button, etc.)
+        // while full-width demos (w-full / full-bleed) still fill — no collapse.
+        <div className="flex min-h-56 items-center justify-center rounded-xl edge p-8">
           {preview}
         </div>
       ) : (
