@@ -13,11 +13,12 @@ const items: CatalogItem[] = [
 ];
 
 describe("ComponentGallery", () => {
-  it("renders a linked card per item with group + variant/dep count", () => {
+  it("renders a linked card per item with name, description, and variant count", () => {
     render(<ComponentGallery items={items} />);
     expect(screen.getByRole("link", { name: /Button/ })).toHaveAttribute("href", "/docs/button");
-    expect(screen.getByText(/18 variants · 2 deps/)).toBeInTheDocument();
+    expect(screen.getByText("18 variants")).toBeInTheDocument();
     expect(screen.getAllByText("1 variant")).toHaveLength(2);
+    expect(screen.getByText("A button.")).toBeInTheDocument();
   });
 
   it("free-text search filters the grid (matches variant tokens in the haystack)", async () => {

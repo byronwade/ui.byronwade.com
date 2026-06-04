@@ -30,7 +30,7 @@ function exampleCounts(): Record<string, number> {
 export default function CatalogPage() {
   const items = catalogItems(exampleCounts());
   return (
-    <div className="mx-auto max-w-6xl px-6 pb-24 pt-24 sm:px-8 sm:pt-28 lg:px-10">
+    <div className="mx-auto w-full max-w-[110rem] px-6 pb-24 pt-24 sm:px-8 sm:pt-28 lg:px-12">
       <header className="max-w-2xl">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Catalog</p>
         <h1 className="mt-3 text-[clamp(2rem,5vw,3.25rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">

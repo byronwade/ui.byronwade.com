@@ -3,10 +3,11 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-/** Fixed logical canvas width the preview iframe renders at (full-bleed fills it). */
-const CANVAS_W = 860;
+/** Fixed logical canvas width the preview iframe renders at (full-bleed fills it).
+ *  Kept near a typical component width so most components fill the card. */
+const CANVAS_W = 540;
 /** Height used before the iframe reports its real content height. */
-const FALLBACK_H = 900;
+const FALLBACK_H = 600;
 
 /**
  * A viewport-lazy preview: renders `placeholder` immediately and mounts an
