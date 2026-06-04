@@ -91,14 +91,16 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     <CarouselContext.Provider
       value={{ onCardClose: handleCardClose, currentIndex }}
     >
-      <div data-slot="carousel" className="relative w-full">
+      <div data-slot="carousel" className="relative w-full min-w-0 max-w-full">
         <div
-          className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] md:py-20"
+          className="flex w-full min-w-0 overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] md:py-20"
           ref={carouselRef}
           onScroll={checkScrollability}
         >
-          <div className="absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l" />
-          <div className={cn("flex flex-row justify-start gap-4 pl-4", "mx-auto max-w-7xl")}>
+          {/* Items start flush-left so the carousel scrolls from the start and
+              never blows out its container (no mx-auto/max-w-7xl — that centring
+              is for a full-bleed page, and broke bounded layouts). */}
+          <div className="flex flex-row justify-start gap-4 pl-4">
             {items.map((item, index) => (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
