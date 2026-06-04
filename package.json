@@ -12,12 +12,12 @@
     "check:registry:built": "node scripts/check-registry.mjs --built",
     "check:examples": "node scripts/check-examples.mjs",
     "check:rule": "node scripts/check-rule.mjs",
-    "validate": "node scripts/check-registry.mjs && node scripts/check-examples.mjs && node scripts/check-rule.mjs && npm run check:tests && node scripts/check-lint-manifest.mjs && node scripts/check-mcp-data.mjs",
+    "validate": "node scripts/check-registry.mjs && node scripts/check-examples.mjs && node scripts/check-rule.mjs && npm run check:tests && node scripts/check-lint-manifest.mjs && node scripts/check-mcp-data.mjs && node scripts/check-llms-txt.mjs",
     "predev": "node scripts/sync-registry.mjs",
     "dev": "next dev",
     "registry:build": "shadcn build",
     "gen:examples": "node scripts/gen-examples-registry.mjs",
-    "prebuild": "node scripts/gen-lint-manifest.mjs && node --import tsx scripts/gen-mcp-data.mjs && node scripts/gen-all-item.mjs && shadcn build && node scripts/sync-registry.mjs",
+    "prebuild": "node scripts/gen-lint-manifest.mjs && node --import tsx scripts/gen-mcp-data.mjs && node --import tsx scripts/gen-llms-txt.mjs && node scripts/gen-all-item.mjs && shadcn build && node scripts/sync-registry.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -36,7 +36,9 @@
     "lint:on-system": "npm run build:lint && node packages/lint-cli/dist/cli.js \"registry/**/*.{ts,tsx}\" --off-system-components off --error-detectors raw-color,hand-rolled,typography",
     "eval": "npm run build --workspace @byronwade/eval && node packages/eval/dist/cli.js",
     "gen:mcp-data": "node --import tsx scripts/gen-mcp-data.mjs",
-    "check:mcp-data": "node scripts/check-mcp-data.mjs"
+    "check:mcp-data": "node scripts/check-mcp-data.mjs",
+    "gen:llms": "node --import tsx scripts/gen-llms-txt.mjs",
+    "check:llms": "node scripts/check-llms-txt.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
