@@ -40,9 +40,16 @@ const componentNames = registry.items
   .filter((item) => componentTypes.has(item.type))
   .map((item) => item.name);
 
-// `@byronwade/ui` is the design-system namespace itself (used in prose), not an
-// installable registry item — never treat it as a ghost.
-const NAMESPACE_ALLOW = new Set(["ui"]);
+// `@byronwade/ui` is the design-system namespace itself (used in prose), and the
+// entries below are published npm workspace packages (under packages/*), not
+// shadcn registry items — consumers install them with npm, so they're legitimate
+// `@byronwade/*` references in docs, never ghosts.
+const NAMESPACE_ALLOW = new Set([
+  "ui",
+  "eslint-plugin-ui",
+  "on-system-core",
+  "lint",
+]);
 
 const errors = [];
 
