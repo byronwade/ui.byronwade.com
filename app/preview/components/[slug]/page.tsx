@@ -1,5 +1,6 @@
 import { components } from "@/content/components";
 import { examples } from "@/content/examples/registry";
+import { PreviewFit } from "@/app/preview/components/[slug]/preview-fit";
 
 // Component previews for the catalog gallery cards (scaled inside a lazy iframe).
 // Mirrors app/preview/[slug] (archetypes/templates) but renders a component's
@@ -21,12 +22,12 @@ export default async function ComponentPreview({
   const Component = demo?.Component;
 
   return (
-    <div className="grid min-h-dvh place-items-center bg-background p-8">
+    <PreviewFit>
       {Component ? (
         <Component />
       ) : (
         <span className="font-mono text-sm text-muted-foreground">{slug}</span>
       )}
-    </div>
+    </PreviewFit>
   );
 }
