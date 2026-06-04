@@ -1,0 +1,246 @@
+{
+  "date": "2026-06-03",
+  "model": "claude-sonnet-4-6",
+  "promptSetHash": "5920ab715a76",
+  "conditions": {
+    "with-rule": {
+      "condition": "with-rule",
+      "total": 12,
+      "passes": 12,
+      "passRate": 1,
+      "meanViolations": 0,
+      "byDetector": {}
+    },
+    "baseline": {
+      "condition": "baseline",
+      "total": 12,
+      "passes": 0,
+      "passRate": 0,
+      "meanViolations": 3,
+      "byDetector": {
+        "raw-color": 12,
+        "arbitrary-value": 12,
+        "off-system-component": 12
+      }
+    }
+  },
+  "lift": 1,
+  "perPrompt": [
+    {
+      "prompt": "card-grid",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "card-grid",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "dashboard-stats",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "dashboard-stats",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "data-table",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "data-table",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "empty-state",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "empty-state",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "filter-bar",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "filter-bar",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "modal-dialog",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "modal-dialog",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "notifications",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "notifications",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "pricing-table",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "pricing-table",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "profile-header",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "profile-header",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "settings-page",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "settings-page",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "sign-in-form",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "sign-in-form",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    },
+    {
+      "prompt": "top-nav",
+      "condition": "with-rule",
+      "pass": true,
+      "violations": 0,
+      "byDetector": {}
+    },
+    {
+      "prompt": "top-nav",
+      "condition": "baseline",
+      "pass": false,
+      "violations": 3,
+      "byDetector": {
+        "raw-color": 1,
+        "arbitrary-value": 1,
+        "off-system-component": 1
+      }
+    }
+  ]
+}
