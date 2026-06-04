@@ -1440,6 +1440,81 @@
       ]
     },
     {
+      "name": "kinetic-text",
+      "type": "registry:ui",
+      "title": "Kinetic text",
+      "description": "Per-letter kinetic typography: letters thicken (weight + text-stroke) and breathe on hover, with neighbours easing in sympathy. currentColor only, dark-mode safe. Adapted from MagicUI.",
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/kinetic-text.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kinetic-text.tsx"
+        }
+      ]
+    },
+    {
+      "name": "backlight",
+      "type": "registry:ui",
+      "title": "Backlight",
+      "description": "Wraps a child in a saturated, blurred glow of its own pixels via an SVG filter — an RGB backlight that inherits the child’s token colors. Adapted from MagicUI.",
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/backlight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/backlight.tsx"
+        }
+      ]
+    },
+    {
+      "name": "world-map",
+      "type": "registry:ui",
+      "title": "World map",
+      "description": "Dotted SVG world map with animated great-circle connection arcs. Arcs + points derive from --brand; dotted base resolves from --muted-foreground. Adapted from Aceternity UI.",
+      "dependencies": [
+        "motion",
+        "dotted-map",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/world-map.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/world-map.tsx"
+        }
+      ]
+    },
+    {
+      "name": "floating-dock",
+      "type": "registry:ui",
+      "title": "Floating dock",
+      "description": "macOS-style magnify-on-hover dock (desktop) + collapsible mobile dock, token surfaces and lucide icons. Adapted from Aceternity UI.",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/floating-dock.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/floating-dock.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",
@@ -1517,7 +1592,14 @@
         "@byronwade/sheet",
         "@byronwade/command",
         "@byronwade/navigation-menu",
-        "@byronwade/verification-progress"
+        "@byronwade/verification-progress",
+        "@byronwade/safari",
+        "@byronwade/iphone",
+        "@byronwade/android",
+        "@byronwade/kinetic-text",
+        "@byronwade/backlight",
+        "@byronwade/world-map",
+        "@byronwade/floating-dock"
       ]
     }
   ]

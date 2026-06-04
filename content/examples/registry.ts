@@ -36,6 +36,7 @@ import AvatarGroup from "./avatar/group";
 import AvatarSizes from "./avatar/sizes";
 import AvatarUserList from "./avatar/user-list";
 import AvatarWithBadge from "./avatar/with-badge";
+import BacklightDefault from "./backlight/default";
 import BadgeDefault from "./badge/default";
 import BadgeAsLink from "./badge/as-link";
 import BadgeInlineContent from "./badge/inline-content";
@@ -50,15 +51,22 @@ import BreadcrumbWithEllipsis from "./breadcrumb/with-ellipsis";
 import BreadcrumbWithIcons from "./breadcrumb/with-icons";
 import BreadcrumbWithRenderProp from "./breadcrumb/with-render-prop";
 import ButtonDefault from "./button/default";
+import ButtonCount from "./button/count";
 import ButtonDisabled from "./button/disabled";
 import ButtonError from "./button/error";
 import ButtonLoading from "./button/loading";
 import ButtonSizes from "./button/sizes";
+import ButtonStateful from "./button/stateful";
 import ButtonVariants from "./button/variants";
 import ButtonWithIcon from "./button/with-icon";
 import CardDefault from "./card/default";
 import CardContentOnly from "./card/content-only";
+import CardFrameEmpty from "./card/frame-empty";
+import CardFrameFooter from "./card/frame-footer";
+import CardFrameHeader from "./card/frame-header";
+import CardFrameHeaderFooter from "./card/frame-header-footer";
 import CardGridLayout from "./card/grid-layout";
+import CardLoginForm from "./card/login-form";
 import CardSizes from "./card/sizes";
 import CardWithAction from "./card/with-action";
 import CardWithImage from "./card/with-image";
@@ -137,6 +145,7 @@ import FilterPillAsSelectTrigger from "./filter-pill/as-select-trigger";
 import FilterPillDisabled from "./filter-pill/disabled";
 import FilterPillFilterBar from "./filter-pill/filter-bar";
 import FilterPillWithIcon from "./filter-pill/with-icon";
+import FloatingDockDefault from "./floating-dock/default";
 import FoundationTokens from "./foundation/tokens";
 import GradientAvatarDefault from "./gradient-avatar/default";
 import GradientAvatarGroupedStack from "./gradient-avatar/grouped-stack";
@@ -173,6 +182,7 @@ import InputGroupWithButton from "./input-group/with-button";
 import InputGroupWithKbd from "./input-group/with-kbd";
 import InputGroupWithText from "./input-group/with-text";
 import IphoneDefault from "./iphone/default";
+import KineticTextDefault from "./kinetic-text/default";
 import LabelDefault from "./label/default";
 import LabelDisabled from "./label/disabled";
 import LabelErrorState from "./label/error-state";
@@ -367,6 +377,7 @@ import VerificationProgressManySteps from "./verification-progress/many-steps";
 import VerificationProgressStatuses from "./verification-progress/statuses";
 import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
+import WorldMapDefault from "./world-map/default";
 
 export type Example = { name: string; file: string; Component: ComponentType };
 
@@ -421,6 +432,9 @@ export const examples: Record<string, Example[]> = {
     { name: "User List", file: "avatar/user-list.tsx", Component: AvatarUserList },
     { name: "With Badge", file: "avatar/with-badge.tsx", Component: AvatarWithBadge },
   ],
+  "backlight": [
+    { name: "Default", file: "backlight/default.tsx", Component: BacklightDefault },
+  ],
   "badge": [
     { name: "Default", file: "badge/default.tsx", Component: BadgeDefault },
     { name: "As Link", file: "badge/as-link.tsx", Component: BadgeAsLink },
@@ -440,17 +454,24 @@ export const examples: Record<string, Example[]> = {
   ],
   "button": [
     { name: "Default", file: "button/default.tsx", Component: ButtonDefault },
+    { name: "Count", file: "button/count.tsx", Component: ButtonCount },
     { name: "Disabled", file: "button/disabled.tsx", Component: ButtonDisabled },
     { name: "Error", file: "button/error.tsx", Component: ButtonError },
     { name: "Loading", file: "button/loading.tsx", Component: ButtonLoading },
     { name: "Sizes", file: "button/sizes.tsx", Component: ButtonSizes },
+    { name: "Stateful", file: "button/stateful.tsx", Component: ButtonStateful },
     { name: "Variants", file: "button/variants.tsx", Component: ButtonVariants },
     { name: "With Icon", file: "button/with-icon.tsx", Component: ButtonWithIcon },
   ],
   "card": [
     { name: "Default", file: "card/default.tsx", Component: CardDefault },
     { name: "Content Only", file: "card/content-only.tsx", Component: CardContentOnly },
+    { name: "Frame Empty", file: "card/frame-empty.tsx", Component: CardFrameEmpty },
+    { name: "Frame Footer", file: "card/frame-footer.tsx", Component: CardFrameFooter },
+    { name: "Frame Header", file: "card/frame-header.tsx", Component: CardFrameHeader },
+    { name: "Frame Header Footer", file: "card/frame-header-footer.tsx", Component: CardFrameHeaderFooter },
     { name: "Grid Layout", file: "card/grid-layout.tsx", Component: CardGridLayout },
+    { name: "Login Form", file: "card/login-form.tsx", Component: CardLoginForm },
     { name: "Sizes", file: "card/sizes.tsx", Component: CardSizes },
     { name: "With Action", file: "card/with-action.tsx", Component: CardWithAction },
     { name: "With Image", file: "card/with-image.tsx", Component: CardWithImage },
@@ -554,6 +575,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Filter Bar", file: "filter-pill/filter-bar.tsx", Component: FilterPillFilterBar },
     { name: "With Icon", file: "filter-pill/with-icon.tsx", Component: FilterPillWithIcon },
   ],
+  "floating-dock": [
+    { name: "Default", file: "floating-dock/default.tsx", Component: FloatingDockDefault },
+  ],
   "foundation": [
     { name: "Tokens", file: "foundation/tokens.tsx", Component: FoundationTokens },
   ],
@@ -605,6 +629,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "iphone": [
     { name: "Default", file: "iphone/default.tsx", Component: IphoneDefault },
+  ],
+  "kinetic-text": [
+    { name: "Default", file: "kinetic-text/default.tsx", Component: KineticTextDefault },
   ],
   "label": [
     { name: "Default", file: "label/default.tsx", Component: LabelDefault },
@@ -859,5 +886,8 @@ export const examples: Record<string, Example[]> = {
     { name: "Statuses", file: "verification-progress/statuses.tsx", Component: VerificationProgressStatuses },
     { name: "Two Steps", file: "verification-progress/two-steps.tsx", Component: VerificationProgressTwoSteps },
     { name: "With Counts", file: "verification-progress/with-counts.tsx", Component: VerificationProgressWithCounts },
+  ],
+  "world-map": [
+    { name: "Default", file: "world-map/default.tsx", Component: WorldMapDefault },
   ],
 };

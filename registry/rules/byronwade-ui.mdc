@@ -35,6 +35,9 @@ Before writing any markup, check whether a component already exists. Reach for t
   `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`
 - **Design mocks** — device + browser frames for screenshots/video: `safari`, `iphone`,
   `android` (drop a screenshot or `videoSrc` in to show a product in context)
+- **Marketing / motion** — `world-map` (dotted map with animated connection arcs),
+  `floating-dock` (magnify-on-hover dock), `kinetic-text` (per-letter hover typography),
+  `backlight` (saturated RGB glow behind a child)
 
 Import from the consumer paths (these are where shadcn installs them):
 
