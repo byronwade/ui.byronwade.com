@@ -13,11 +13,14 @@ export function LazyPreview({
   title,
   placeholder,
   className,
+  zoom = 0.5,
 }: {
   src: string;
   title: string;
   placeholder?: React.ReactNode;
   className?: string;
+  /** Scale the iframed page so its content fills the frame (smaller = more zoomed-out). */
+  zoom?: number;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [show, setShow] = React.useState(false);
@@ -49,7 +52,8 @@ export function LazyPreview({
           aria-hidden
           tabIndex={-1}
           loading="lazy"
-          className="pointer-events-none absolute left-0 top-0 h-[320%] w-[320%] origin-top-left scale-[0.3125] border-0 bg-background"
+          style={{ width: `${100 / zoom}%`, height: `${100 / zoom}%`, transform: `scale(${zoom})` }}
+          className="pointer-events-none absolute left-0 top-0 origin-top-left border-0 bg-background"
         />
       )}
     </div>
