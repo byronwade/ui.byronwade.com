@@ -34,7 +34,7 @@ import {
 } from "date-fns";
 import { atom, useAtom } from "jotai";
 import throttle from "lodash.throttle";
-import { PlusIcon, TrashIcon } from "lucide-react";
+import { MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import type {
   CSSProperties,
   FC,
@@ -55,6 +55,7 @@ import {
   useState,
 } from "react";
 
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -144,6 +145,8 @@ export type GanttMarkerProps = {
 
 export type Range = "daily" | "monthly" | "quarterly";
 
+export type GanttDensity = "comfortable" | "compact";
+
 export type TimelineData = {
   year: number;
   quarters: {
@@ -165,6 +168,14 @@ export type GanttContextProps = {
   timelineData: TimelineData;
   ref: RefObject<HTMLDivElement | null> | null;
   scrollToFeature?: (feature: GanttFeature) => void;
+  /** "compact" tightens row height for dense roadmaps. */
+  density: GanttDensity;
+  /** Presentation mode — disables dragging/markers for dashboards & screenshots. */
+  readOnly: boolean;
+  /** Switch the timescale (wired to <GanttControls />). */
+  setRange?: (range: Range) => void;
+  /** Set the zoom percentage 50–200 (wired to <GanttControls />). */
+  setZoom?: (zoom: number) => void;
 };
 
 const getsDaysIn = (range: Range) => {
@@ -361,6 +372,10 @@ const GanttContext = createContext<GanttContextProps>({
   timelineData: [],
   ref: null,
   scrollToFeature: undefined,
+  density: "comfortable",
+  readOnly: false,
+  setRange: undefined,
+  setZoom: undefined,
 });
 
 export type GanttContentHeaderProps = {
@@ -872,13 +887,17 @@ export const GanttFeatureDragHelper: FC<GanttFeatureDragHelperProps> = ({
 
 export type GanttFeatureItemCardProps = Pick<GanttFeature, "id"> & {
   children?: ReactNode;
+  /** Token bg-* class (e.g. from `status.color`) shown as a left accent + tint. */
+  statusColor?: string;
 };
 
 export const GanttFeatureItemCard: FC<GanttFeatureItemCardProps> = ({
   id,
   children,
+  statusColor,
 }) => {
   const [, setDragging] = useGanttDragging();
+  const { readOnly } = useContext(GanttContext);
   const { attributes, listeners, setNodeRef } = useDraggable({ id });
   const isPressed = Boolean(attributes["aria-pressed"]);
 
@@ -887,16 +906,27 @@ export const GanttFeatureItemCard: FC<GanttFeatureItemCardProps> = ({
   return (
     <Card
       data-slot="gantt-feature-item-card"
-      className="h-full w-full gap-0 rounded-md bg-background p-2 py-0 text-xs"
+      data-status-color={statusColor || undefined}
+      className={cn(
+        "relative h-full w-full gap-0 overflow-hidden rounded-md bg-background p-2 py-0 text-xs",
+        statusColor && "pl-2.5"
+      )}
     >
+      {statusColor && (
+        <span
+          aria-hidden="true"
+          className={cn("absolute inset-y-0 left-0 w-1.5", statusColor)}
+        />
+      )}
       <div
         className={cn(
           "flex h-full w-full items-center justify-between gap-2 text-left",
+          !readOnly && "cursor-grab",
           isPressed && "cursor-grabbing"
         )}
-        {...attributes}
-        {...listeners}
-        ref={setNodeRef}
+        {...(readOnly ? {} : attributes)}
+        {...(readOnly ? {} : listeners)}
+        ref={readOnly ? undefined : setNodeRef}
       >
         {children}
       </div>
@@ -1005,7 +1035,7 @@ export const GanttFeatureItem: FC<GanttFeatureItemProps> = ({
           left: Math.round(offset),
         }}
       >
-        {onMove && (
+        {onMove && !gantt.readOnly && (
           <DndContext
             modifiers={[restrictToHorizontalAxis]}
             onDragEnd={onDragEnd}
@@ -1019,20 +1049,34 @@ export const GanttFeatureItem: FC<GanttFeatureItemProps> = ({
             />
           </DndContext>
         )}
-        <DndContext
-          modifiers={[restrictToHorizontalAxis]}
-          onDragEnd={onDragEnd}
-          onDragMove={handleItemDragMove}
-          onDragStart={handleItemDragStart}
-          sensors={[mouseSensor]}
-        >
-          <GanttFeatureItemCard id={feature.id}>
+        {gantt.readOnly ? (
+          <GanttFeatureItemCard
+            id={feature.id}
+            statusColor={feature.status?.color}
+          >
             {children ?? (
               <p className="flex-1 truncate text-xs">{feature.name}</p>
             )}
           </GanttFeatureItemCard>
-        </DndContext>
-        {onMove && (
+        ) : (
+          <DndContext
+            modifiers={[restrictToHorizontalAxis]}
+            onDragEnd={onDragEnd}
+            onDragMove={handleItemDragMove}
+            onDragStart={handleItemDragStart}
+            sensors={[mouseSensor]}
+          >
+            <GanttFeatureItemCard
+              id={feature.id}
+              statusColor={feature.status?.color}
+            >
+              {children ?? (
+                <p className="flex-1 truncate text-xs">{feature.name}</p>
+              )}
+            </GanttFeatureItemCard>
+          </DndContext>
+        )}
+        {onMove && !gantt.readOnly && (
           <DndContext
             modifiers={[restrictToHorizontalAxis]}
             onDragEnd={onDragEnd}
@@ -1243,20 +1287,30 @@ export const GanttMarker: FC<
 GanttMarker.displayName = "GanttMarker";
 
 export type GanttProviderProps = {
+  /** Initial timescale; also controllable live via <GanttControls />. */
   range?: Range;
+  /** Initial zoom percentage (50–200); also controllable via <GanttControls />. */
   zoom?: number;
+  /** "compact" tightens rows for dense roadmaps. */
+  density?: GanttDensity;
+  /** Presentation mode — disables drag/markers for dashboards & screenshots. */
+  readOnly?: boolean;
   onAddItem?: (date: Date) => void;
   children: ReactNode;
   className?: string;
 };
 
 export const GanttProvider: FC<GanttProviderProps> = ({
-  zoom = 100,
-  range = "monthly",
+  zoom: zoomProp = 100,
+  range: rangeProp = "monthly",
+  density = "comfortable",
+  readOnly = false,
   onAddItem,
   children,
   className,
 }) => {
+  const [range, setRange] = useState<Range>(rangeProp);
+  const [zoom, setZoom] = useState<number>(zoomProp);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [timelineData, setTimelineData] = useState<TimelineData>(
     createInitialTimelineData(new Date())
@@ -1265,7 +1319,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
   const [sidebarWidth, setSidebarWidth] = useState(0);
 
   const headerHeight = 60;
-  const rowHeight = 36;
+  const rowHeight = density === "compact" ? 26 : 40;
   let columnWidth = 50;
 
   if (range === "monthly") {
@@ -1284,7 +1338,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         "--gantt-row-height": `${rowHeight}px`,
         "--gantt-sidebar-width": `${sidebarWidth}px`,
       }) as CSSProperties,
-    [zoom, columnWidth, sidebarWidth]
+    [zoom, columnWidth, sidebarWidth, rowHeight]
   );
 
   // Center the viewport on "today" once the sidebar (and therefore the grid)
@@ -1302,9 +1356,16 @@ export const GanttProvider: FC<GanttProviderProps> = ({
     if (centeredKey.current === key) {
       return;
     }
-    const id = requestAnimationFrame(() => {
-      // Nothing to center until the viewport has a measured width (e.g. jsdom).
+    let id = 0;
+    let attempts = 0;
+    const center = () => {
+      // Retry across frames until the viewport has a measured width — on a busy
+      // page (or below the fold) clientWidth can still be 0 on the first frame.
+      // Always 0 in jsdom, so this simply no-ops there after a few frames.
       if (el.clientWidth === 0) {
+        if (attempts++ < 30) {
+          id = requestAnimationFrame(center);
+        }
         return;
       }
       const timelineStartDate = new Date(timelineData[0].year, 0, 1);
@@ -1319,11 +1380,14 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         placeholderLength: 2,
         timelineData,
         ref: scrollRef,
+        density,
+        readOnly,
       });
       el.scrollLeft = Math.max(0, todayOffset - (el.clientWidth - sidebarWidth) / 2);
       setScrollX(el.scrollLeft);
       centeredKey.current = key;
-    });
+    };
+    id = requestAnimationFrame(center);
     return () => cancelAnimationFrame(id);
   }, [
     sidebarWidth,
@@ -1333,6 +1397,8 @@ export const GanttProvider: FC<GanttProviderProps> = ({
     timelineData,
     onAddItem,
     setScrollX,
+    density,
+    readOnly,
   ]);
 
   // Update sidebar width when DOM is ready
@@ -1467,6 +1533,8 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         placeholderLength: 2,
         timelineData,
         ref: scrollRef,
+        density,
+        readOnly,
       });
 
       // Scroll to align the feature's start with the right side of the sidebar
@@ -1477,7 +1545,16 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         behavior: "smooth",
       });
     },
-    [timelineData, zoom, range, columnWidth, sidebarWidth, onAddItem]
+    [
+      timelineData,
+      zoom,
+      range,
+      columnWidth,
+      sidebarWidth,
+      onAddItem,
+      density,
+      readOnly,
+    ]
   );
 
   return (
@@ -1494,6 +1571,10 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         placeholderLength: 2,
         ref: scrollRef,
         scrollToFeature,
+        density,
+        readOnly,
+        setRange,
+        setZoom,
       }}
     >
       <div
@@ -1588,6 +1669,124 @@ export const GanttToday: FC<GanttTodayProps> = ({ className }) => {
         </span>
       </div>
       <div className={cn("h-full w-px bg-brand", className)} />
+    </div>
+  );
+};
+
+const GANTT_RANGE_LABELS: Record<Range, string> = {
+  daily: "Day",
+  monthly: "Month",
+  quarterly: "Quarter",
+};
+
+export type GanttControlsProps = {
+  /** Which timescale presets to expose. */
+  ranges?: Range[];
+  /** Zoom step per click, clamped to 50–200. */
+  zoomStep?: number;
+  className?: string;
+};
+
+/**
+ * Toolbar that drives the timescale + zoom of its <GanttProvider>. Drop it above
+ * (or beside) the gantt; it reads/writes range + zoom through context.
+ */
+export const GanttControls: FC<GanttControlsProps> = ({
+  ranges = ["daily", "monthly", "quarterly"],
+  zoomStep = 25,
+  className,
+}) => {
+  const { range, zoom, setRange, setZoom } = useContext(GanttContext);
+
+  return (
+    <div
+      data-slot="gantt-controls"
+      className={cn("flex items-center gap-2", className)}
+    >
+      <div className="flex items-center gap-0.5 rounded-md bg-muted p-0.5">
+        {ranges.map((value) => (
+          <button
+            key={value}
+            type="button"
+            data-active={range === value}
+            onClick={() => setRange?.(value)}
+            className="rounded-sm px-2 py-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground data-[active=true]:bg-background data-[active=true]:text-foreground data-[active=true]:shadow-sm"
+          >
+            {GANTT_RANGE_LABELS[value]}
+          </button>
+        ))}
+      </div>
+      <div className="flex items-center gap-0.5">
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          className="size-7"
+          aria-label="Zoom out"
+          disabled={zoom <= 50}
+          onClick={() => setZoom?.(Math.max(50, zoom - zoomStep))}
+        >
+          <MinusIcon className="size-3.5" />
+        </Button>
+        <span className="w-11 text-center font-mono text-xs text-muted-foreground tabular-nums">
+          {zoom}%
+        </span>
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          className="size-7"
+          aria-label="Zoom in"
+          disabled={zoom >= 200}
+          onClick={() => setZoom?.(Math.min(200, zoom + zoomStep))}
+        >
+          <PlusIcon className="size-3.5" />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export type GanttMilestoneProps = {
+  date: Date;
+  label: string;
+  className?: string;
+};
+
+/**
+ * A diamond milestone marker pinned to a date on the timeline (reveals its label
+ * on hover). Render inside <GanttFeatureList> alongside features/markers.
+ */
+export const GanttMilestone: FC<GanttMilestoneProps> = ({
+  date,
+  label,
+  className,
+}) => {
+  const gantt = useContext(GanttContext);
+  const timelineStartDate = useMemo(
+    () => new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1),
+    [gantt.timelineData]
+  );
+  const offset = useMemo(
+    () => getOffset(date, timelineStartDate, gantt),
+    [date, timelineStartDate, gantt]
+  );
+
+  return (
+    <div
+      data-slot="gantt-milestone"
+      className={cn("pointer-events-none absolute top-0 z-20 h-full", className)}
+      style={{ left: Math.round(offset) }}
+    >
+      <div className="group pointer-events-auto sticky top-0 flex -translate-x-1/2 flex-col items-center gap-1 pt-1">
+        <span
+          aria-hidden="true"
+          className="size-2.5 rotate-45 rounded-[2px] bg-brand ring-2 ring-background"
+        />
+        <span className="max-h-0 overflow-hidden whitespace-nowrap rounded-md bg-brand-muted px-1.5 py-0.5 font-mono text-[10px] text-foreground opacity-0 transition-all group-hover:max-h-8 group-hover:opacity-100">
+          {label}
+        </span>
+      </div>
     </div>
   );
 };

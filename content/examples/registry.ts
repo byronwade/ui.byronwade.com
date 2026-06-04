@@ -212,6 +212,9 @@ import FilterPillWithIcon from "./filter-pill/with-icon";
 import FloatingDockDefault from "./floating-dock/default";
 import FoundationTokens from "./foundation/tokens";
 import GanttDefault from "./gantt/default";
+import GanttCompact from "./gantt/compact";
+import GanttControls from "./gantt/controls";
+import GanttReadOnly from "./gantt/read-only";
 import GlimpseDefault from "./glimpse/default";
 import GradientAvatarDefault from "./gradient-avatar/default";
 import GradientAvatarGroupedStack from "./gradient-avatar/grouped-stack";
@@ -812,6 +815,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "gantt": [
     { name: "Default", file: "gantt/default.tsx", Component: GanttDefault },
+    { name: "Compact", file: "gantt/compact.tsx", Component: GanttCompact },
+    { name: "Controls", file: "gantt/controls.tsx", Component: GanttControls },
+    { name: "Read Only", file: "gantt/read-only.tsx", Component: GanttReadOnly },
   ],
   "glimpse": [
     { name: "Default", file: "glimpse/default.tsx", Component: GlimpseDefault },

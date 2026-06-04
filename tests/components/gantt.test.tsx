@@ -17,6 +17,7 @@ import { Provider as JotaiProvider } from "jotai";
 
 import {
   GanttColumns,
+  GanttControls,
   GanttCreateMarkerTrigger,
   GanttFeatureItem,
   GanttFeatureList,
@@ -24,6 +25,7 @@ import {
   GanttFeatureRow,
   GanttHeader,
   GanttMarker,
+  GanttMilestone,
   GanttProvider,
   GanttSidebar,
   GanttSidebarGroup,
@@ -553,9 +555,151 @@ describe("gantt — exported atoms", () => {
   });
 });
 
+describe("gantt — variants", () => {
+  it("density='compact' tightens the row-height CSS var; comfortable is the default", () => {
+    const { container, rerender } = render(<Board />);
+    const root = () =>
+      container.querySelector('[data-slot="gantt"]') as HTMLElement;
+    expect(root().style.getPropertyValue("--gantt-row-height")).toBe("40px");
+
+    rerender(
+      <GanttProvider range="monthly" density="compact">
+        <GanttSidebar>
+          <GanttSidebarGroup name="Roadmap">
+            {FEATURES.map((f) => (
+              <GanttSidebarItem feature={f} key={f.id} />
+            ))}
+          </GanttSidebarGroup>
+        </GanttSidebar>
+        <GanttTimeline>
+          <GanttHeader />
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    expect(root().style.getPropertyValue("--gantt-row-height")).toBe("26px");
+  });
+
+  it("read-only feature bars carry no drag affordance", () => {
+    const { container } = render(
+      <GanttProvider range="monthly" readOnly>
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttFeatureListGroup>
+              {FEATURES.map((f) => (
+                <GanttFeatureItem {...f} key={f.id} />
+              ))}
+            </GanttFeatureListGroup>
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    expect(
+      container.querySelector('[aria-roledescription="draggable"]')
+    ).toBeNull();
+    expect(
+      container.querySelector('[data-slot="gantt-feature-item-card"]')
+    ).not.toBeNull();
+  });
+
+  it("tints the bar with a status-colored accent strip", () => {
+    const { container } = render(
+      <GanttProvider range="monthly" readOnly>
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttFeatureListGroup>
+              <GanttFeatureItem {...FEATURES[0]} />
+            </GanttFeatureListGroup>
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    const card = container.querySelector(
+      '[data-slot="gantt-feature-item-card"]'
+    ) as HTMLElement;
+    expect(card.getAttribute("data-status-color")).toBe("bg-brand");
+    expect(card.querySelector(".bg-brand")).not.toBeNull();
+  });
+
+  it("GanttMilestone renders a labelled diamond on the timeline", () => {
+    render(
+      <GanttProvider range="monthly">
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttMilestone date={addDays(monthStart, 10)} label="Launch" />
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    expect(
+      document.querySelector('[data-slot="gantt-milestone"]')
+    ).not.toBeNull();
+    expect(screen.getByText("Launch")).toBeInTheDocument();
+  });
+});
+
+describe("gantt — controls", () => {
+  function Controlled() {
+    return (
+      <GanttProvider range="monthly" zoom={100}>
+        <GanttControls />
+        <GanttTimeline>
+          <GanttHeader />
+        </GanttTimeline>
+      </GanttProvider>
+    );
+  }
+
+  it("marks the active range and switches timescale on click", async () => {
+    const user = userEvent.setup();
+    render(<Controlled />);
+    const month = screen.getByRole("button", { name: "Month" });
+    const day = screen.getByRole("button", { name: "Day" });
+    expect(month).toHaveAttribute("data-active", "true");
+    expect(day).toHaveAttribute("data-active", "false");
+    await user.click(day);
+    expect(day).toHaveAttribute("data-active", "true");
+    expect(month).toHaveAttribute("data-active", "false");
+  });
+
+  it("steps the zoom and clamps to 50–200%", async () => {
+    const user = userEvent.setup();
+    render(<Controlled />);
+    expect(screen.getByText("100%")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Zoom in" }));
+    expect(screen.getByText("125%")).toBeInTheDocument();
+    // Walk down to the floor and confirm the out button disables at 50%.
+    const out = screen.getByRole("button", { name: "Zoom out" });
+    for (let i = 0; i < 5; i++) {
+      await user.click(out);
+    }
+    expect(screen.getByText("50%")).toBeInTheDocument();
+    expect(out).toBeDisabled();
+  });
+});
+
 describe("gantt — accessibility", () => {
   it("has no axe violations", async () => {
     const { container } = render(<Board />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it("read-only + controls have no axe violations", async () => {
+    const { container } = render(
+      <GanttProvider range="monthly" readOnly>
+        <GanttControls />
+        <GanttTimeline>
+          <GanttHeader />
+          <GanttFeatureList>
+            <GanttFeatureListGroup>
+              {FEATURES.map((f) => (
+                <GanttFeatureItem {...f} key={f.id} />
+              ))}
+            </GanttFeatureListGroup>
+          </GanttFeatureList>
+          <GanttMilestone date={addDays(monthStart, 10)} label="Launch" />
+        </GanttTimeline>
+      </GanttProvider>
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 });

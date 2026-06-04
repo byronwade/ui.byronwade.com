@@ -1120,9 +1120,9 @@ export const components: ComponentDoc[] = [
   },
   {
     slug: "gantt", name: "Gantt", category: "Data display",
-    description: "Draggable timeline / roadmap chart — sidebar, multi-range header, feature bars, markers, today line. Adapted from kibo-ui.",
-    npmDeps: ["@dnd-kit/core", "@dnd-kit/modifiers", "@uidotdev/usehooks", "date-fns", "jotai", "lodash.throttle", "lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/card"],
-    examples: ["default"],
+    description: "Draggable timeline / roadmap chart — sidebar, multi-range header, status-tinted feature bars, milestone diamonds, today line. Auto-centers on today; a GanttControls toolbar drives timescale + zoom, with density and read-only presentation variants. Adapted from kibo-ui.",
+    npmDeps: ["@dnd-kit/core", "@dnd-kit/modifiers", "@uidotdev/usehooks", "date-fns", "jotai", "lodash.throttle", "lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/card"],
+    examples: ["default", "controls", "compact", "read-only"],
   },
   {
     slug: "editor", name: "Editor", category: "Forms",

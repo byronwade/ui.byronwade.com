@@ -2039,7 +2039,7 @@
       "name": "gantt",
       "type": "registry:ui",
       "title": "Gantt",
-      "description": "Draggable timeline / roadmap chart with a sidebar, multi-range header, feature bars, markers, and a today line. Adapted from kibo-ui.",
+      "description": "Draggable timeline / roadmap chart with a sidebar, multi-range header, status-tinted feature bars, milestone diamonds, and a today line. Auto-centers on today; a GanttControls toolbar drives timescale + zoom, with density and read-only presentation variants. Adapted from kibo-ui.",
       "dependencies": [
         "@dnd-kit/core",
         "@dnd-kit/modifiers",
@@ -2052,6 +2052,7 @@
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
+        "@byronwade/button",
         "@byronwade/card"
       ],
       "files": [
