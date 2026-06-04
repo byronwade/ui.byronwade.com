@@ -1887,6 +1887,26 @@
       ]
     },
     {
+      "name": "rating",
+      "type": "registry:ui",
+      "title": "Rating",
+      "description": "Interactive star rating (keyboard + hover) plus a read-only RatingBadge (score + star). Tone follows --brand. Adapted from kibo-ui (+ Untitled UI-style badge).",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",

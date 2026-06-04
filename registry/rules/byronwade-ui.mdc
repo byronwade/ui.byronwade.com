@@ -21,7 +21,7 @@ Before writing any markup, check whether a component already exists. Reach for t
 
 - **Forms** — `button`, `button-group`, `input`, `textarea`, `label`, `select`, `native-select`,
   `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, `calendar`,
-  `slider`, `number-field`
+  `slider`, `number-field`, `rating`
 - **Overlays** — `dialog`, `sheet`, `popover`, `tooltip`, `hover-card`, `dropdown-menu`,
   `command`, `navigation-menu`, `glimpse`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)

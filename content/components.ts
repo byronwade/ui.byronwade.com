@@ -1045,6 +1045,12 @@ export const components: ComponentDoc[] = [
     npmDeps: ["qrcode", "culori"], registryDeps: ["@byronwade/utils"],
     examples: ["default"],
   },
+  {
+    slug: "rating", name: "Rating", category: "Forms",
+    description: "Interactive star rating (keyboard + hover) + a read-only RatingBadge (score + star). Adapted from kibo-ui.",
+    npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;

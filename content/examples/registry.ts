@@ -294,6 +294,7 @@ import RadioGroupFormValidation from "./radio-group/form-validation";
 import RadioGroupHorizontal from "./radio-group/horizontal";
 import RadioGroupWithDescription from "./radio-group/with-description";
 import RadioGroupWithIcon from "./radio-group/with-icon";
+import RatingDefault from "./rating/default";
 import RelativeTimeDefault from "./relative-time/default";
 import SafariDefault from "./safari/default";
 import ScrollAreaDefault from "./scroll-area/default";
@@ -904,6 +905,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Horizontal", file: "radio-group/horizontal.tsx", Component: RadioGroupHorizontal },
     { name: "With Description", file: "radio-group/with-description.tsx", Component: RadioGroupWithDescription },
     { name: "With Icon", file: "radio-group/with-icon.tsx", Component: RadioGroupWithIcon },
+  ],
+  "rating": [
+    { name: "Default", file: "rating/default.tsx", Component: RatingDefault },
   ],
   "relative-time": [
     { name: "Default", file: "relative-time/default.tsx", Component: RelativeTimeDefault },
