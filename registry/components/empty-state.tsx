@@ -27,7 +27,7 @@ export function EmptyState({
           <Icon className="size-5 text-muted-foreground" />
         </div>
       )}
-      <h3 className="text-sm font-semibold">{title}</h3>
+      <h3 className="text-sm font-medium">{title}</h3>
       {description && (
         <p className="mt-1 max-w-sm text-sm text-muted-foreground">{description}</p>
       )}

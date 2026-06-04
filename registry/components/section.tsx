@@ -24,7 +24,7 @@ export function Section({
       {hasHeader && (
         <div className="flex items-end justify-between gap-4">
           <div className="space-y-1">
-            {title && <h2 className="text-sm font-semibold tracking-tight">{title}</h2>}
+            {title && <h2 className="text-sm font-medium tracking-tight">{title}</h2>}
             {description && (
               <p className="text-sm text-muted-foreground">{description}</p>
             )}
