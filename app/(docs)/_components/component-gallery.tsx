@@ -4,10 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { filterCatalog, type CatalogItem, type CatalogFilter } from "@/content/catalog";
 import { GradientAvatar } from "@/components/ui/gradient-avatar";
 import { FilterPill } from "@/components/ui/filter-pill";
+import { LazyPreview } from "@/app/(docs)/_components/lazy-preview";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -172,25 +172,31 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
               <Link
                 href={item.href}
                 aria-label={item.name}
-                className={cn(
-                  "group flex h-full flex-col gap-3 rounded-2xl edge bg-card p-4 outline-none transition-all",
-                  "hover:-translate-y-0.5 hover:shadow-card focus-visible:ring-3 focus-visible:ring-ring/50",
-                )}
+                className="group flex flex-col gap-3 rounded-2xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex min-w-0 items-center gap-2.5">
-                    <GradientAvatar seed={item.name} size="sm" className="rounded-md" />
+                <LazyPreview
+                  src={`/preview/components/${item.slug}`}
+                  title={`${item.name} preview`}
+                  placeholder={
+                    <div className="grid h-full place-items-center bg-card">
+                      <GradientAvatar seed={item.name} size="lg" className="rounded-lg" />
+                    </div>
+                  }
+                  className="aspect-[16/10] rounded-xl edge bg-background transition-all group-hover:-translate-y-0.5 group-hover:shadow-card"
+                />
+                <div className="flex items-center justify-between gap-3 px-0.5">
+                  <div className="flex min-w-0 items-center gap-2">
                     <span className="truncate text-sm font-medium tracking-tight">{item.name}</span>
+                    <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
+                      {item.variantCount} variant{item.variantCount === 1 ? "" : "s"}
+                    </span>
                   </div>
                   <span className="shrink-0 rounded-full edge px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
                     {item.group}
                   </span>
                 </div>
-                <p className="line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
-                  {item.description}
-                </p>
-                <div className="mt-auto flex items-center justify-between gap-2 pt-1">
-                  <div className="flex flex-wrap gap-1">
+                {item.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1 px-0.5">
                     {item.tags.slice(0, 3).map((t) => (
                       <span
                         key={t}
@@ -200,10 +206,7 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
                       </span>
                     ))}
                   </div>
-                  <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
-                    {item.variantCount} variant{item.variantCount === 1 ? "" : "s"}
-                  </span>
-                </div>
+                )}
               </Link>
             </li>
           ))}
