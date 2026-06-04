@@ -1,4 +1,5 @@
 import type { DetectorId } from "@byronwade/on-system-core";
+export type { DetectorId } from "@byronwade/on-system-core";
 
 export type Condition = "with-rule" | "baseline";
 
