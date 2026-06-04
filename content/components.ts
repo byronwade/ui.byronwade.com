@@ -1,4 +1,16 @@
 export type PropRow = { name: string; type: string; default?: string; description: string };
+export type Variant = {
+  /** Stable, unique within a type; kebab-case. Becomes the #anchor + search id. */
+  id: string;
+  /** Human label, e.g. "Ghost · small". */
+  name: string;
+  /** Facet tags: "variant:ghost", "size:sm", "content:icon-only", "state:loading", … */
+  tags: string[];
+  /** Example file base under content/examples/<slug>/ that renders this variant. */
+  example: string;
+  /** Optional per-variant install ref; falls back to the type install when absent. */
+  install?: string;
+};
 export type ComponentDoc = {
   slug: string;
   name: string;
@@ -8,6 +20,10 @@ export type ComponentDoc = {
   registryDeps?: string[];
   props?: PropRow[];
   examples: string[];
+  /** Type-level facet tags (drive catalog filters + AI match). */
+  tags?: string[];
+  /** Authored variants. Absent ⇒ getVariants() synthesizes a single default. */
+  variants?: Variant[];
 };
 
 export const components: ComponentDoc[] = [
@@ -1068,3 +1084,13 @@ export const components: ComponentDoc[] = [
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;
 export const byCategory = (cat: string) => components.filter((c) => c.category === cat);
 export const bySlug = (slug: string) => components.find((c) => c.slug === slug);
+
+/**
+ * Variants for a component. Authored `variants` win; otherwise synthesize one
+ * "default" variant from the type itself so every component exposes at least one
+ * addressable variant during the Phase 2 migration.
+ */
+export const getVariants = (doc: ComponentDoc): Variant[] =>
+  doc.variants && doc.variants.length > 0
+    ? doc.variants
+    : [{ id: "default", name: doc.name, tags: doc.tags ?? [], example: "default" }];
