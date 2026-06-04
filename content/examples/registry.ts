@@ -19,17 +19,25 @@ import ActivityRingScoreTones from "./activity-ring/score-tones";
 import ActivityRingTones from "./activity-ring/tones";
 import ActivityRingWithVerdict from "./activity-ring/with-verdict";
 import AiArtifactDefault from "./ai-artifact/default";
+import AiCanvasDefault from "./ai-canvas/default";
 import AiChainOfThoughtDefault from "./ai-chain-of-thought/default";
 import AiCheckpointDefault from "./ai-checkpoint/default";
 import AiCodeBlockDefault from "./ai-code-block/default";
 import AiConfirmationDefault from "./ai-confirmation/default";
+import AiConnectionDefault from "./ai-connection/default";
 import AiContextDefault from "./ai-context/default";
+import AiControlsDefault from "./ai-controls/default";
 import AiConversationDefault from "./ai-conversation/default";
+import AiEdgeDefault from "./ai-edge/default";
 import AiImageDefault from "./ai-image/default";
 import AiInlineCitationDefault from "./ai-inline-citation/default";
 import AiLoaderDefault from "./ai-loader/default";
+import AiMessageDefault from "./ai-message/default";
 import AiModelSelectorDefault from "./ai-model-selector/default";
+import AiNodeDefault from "./ai-node/default";
 import AiOpenInChatDefault from "./ai-open-in-chat/default";
+import AiPanelDefault from "./ai-panel/default";
+import AiPlanDefault from "./ai-plan/default";
 import AiPromptInputDefault from "./ai-prompt-input/default";
 import AiQueueDefault from "./ai-queue/default";
 import AiReasoningDefault from "./ai-reasoning/default";
@@ -59,6 +67,7 @@ import AvatarSizes from "./avatar/sizes";
 import AvatarUserList from "./avatar/user-list";
 import AvatarWithBadge from "./avatar/with-badge";
 import BacklightDefault from "./backlight/default";
+import BacklightWithVideo from "./backlight/with-video";
 import BadgeDefault from "./badge/default";
 import BadgeAsLink from "./badge/as-link";
 import BadgeInlineContent from "./badge/inline-content";
@@ -447,6 +456,9 @@ export const examples: Record<string, Example[]> = {
   "ai-artifact": [
     { name: "Default", file: "ai-artifact/default.tsx", Component: AiArtifactDefault },
   ],
+  "ai-canvas": [
+    { name: "Default", file: "ai-canvas/default.tsx", Component: AiCanvasDefault },
+  ],
   "ai-chain-of-thought": [
     { name: "Default", file: "ai-chain-of-thought/default.tsx", Component: AiChainOfThoughtDefault },
   ],
@@ -459,11 +471,20 @@ export const examples: Record<string, Example[]> = {
   "ai-confirmation": [
     { name: "Default", file: "ai-confirmation/default.tsx", Component: AiConfirmationDefault },
   ],
+  "ai-connection": [
+    { name: "Default", file: "ai-connection/default.tsx", Component: AiConnectionDefault },
+  ],
   "ai-context": [
     { name: "Default", file: "ai-context/default.tsx", Component: AiContextDefault },
   ],
+  "ai-controls": [
+    { name: "Default", file: "ai-controls/default.tsx", Component: AiControlsDefault },
+  ],
   "ai-conversation": [
     { name: "Default", file: "ai-conversation/default.tsx", Component: AiConversationDefault },
+  ],
+  "ai-edge": [
+    { name: "Default", file: "ai-edge/default.tsx", Component: AiEdgeDefault },
   ],
   "ai-image": [
     { name: "Default", file: "ai-image/default.tsx", Component: AiImageDefault },
@@ -474,11 +495,23 @@ export const examples: Record<string, Example[]> = {
   "ai-loader": [
     { name: "Default", file: "ai-loader/default.tsx", Component: AiLoaderDefault },
   ],
+  "ai-message": [
+    { name: "Default", file: "ai-message/default.tsx", Component: AiMessageDefault },
+  ],
   "ai-model-selector": [
     { name: "Default", file: "ai-model-selector/default.tsx", Component: AiModelSelectorDefault },
   ],
+  "ai-node": [
+    { name: "Default", file: "ai-node/default.tsx", Component: AiNodeDefault },
+  ],
   "ai-open-in-chat": [
     { name: "Default", file: "ai-open-in-chat/default.tsx", Component: AiOpenInChatDefault },
+  ],
+  "ai-panel": [
+    { name: "Default", file: "ai-panel/default.tsx", Component: AiPanelDefault },
+  ],
+  "ai-plan": [
+    { name: "Default", file: "ai-plan/default.tsx", Component: AiPlanDefault },
   ],
   "ai-prompt-input": [
     { name: "Default", file: "ai-prompt-input/default.tsx", Component: AiPromptInputDefault },
@@ -538,6 +571,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "backlight": [
     { name: "Default", file: "backlight/default.tsx", Component: BacklightDefault },
+    { name: "With Video", file: "backlight/with-video.tsx", Component: BacklightWithVideo },
   ],
   "badge": [
     { name: "Default", file: "badge/default.tsx", Component: BadgeDefault },

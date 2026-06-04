@@ -742,7 +742,7 @@ export const components: ComponentDoc[] = [
     slug: "backlight", name: "Backlight", category: "UI",
     description: "Wraps a child in a saturated, blurred glow of its own pixels via an SVG filter — an RGB backlight that inherits the child’s token colors. Adapted from MagicUI.",
     registryDeps: ["@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default", "with-video"],
   },
   {
     slug: "apple-cards-carousel", name: "Apple cards carousel", category: "UI",
