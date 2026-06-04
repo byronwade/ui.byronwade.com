@@ -1021,6 +1021,18 @@ export const components: ComponentDoc[] = [
     npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/avatar", "@byronwade/badge", "@byronwade/button"],
     examples: ["default"],
   },
+  {
+    slug: "glimpse", name: "Glimpse", category: "Overlays",
+    description: "Link/preview hover card (title, description, image) on the house hover-card. Adapted from kibo-ui.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/hover-card"],
+    examples: ["default"],
+  },
+  {
+    slug: "ticker", name: "Ticker", category: "UI",
+    description: "Stock/crypto ticker — icon, symbol, formatted price, up/down change. Adapted from kibo-ui.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/avatar"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;

@@ -1814,6 +1814,42 @@
       ]
     },
     {
+      "name": "glimpse",
+      "type": "registry:ui",
+      "title": "Glimpse",
+      "description": "Link/preview hover card (title, description, image) built on the house hover-card. Adapted from kibo-ui.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/hover-card"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/glimpse.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/glimpse.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ticker",
+      "type": "registry:ui",
+      "title": "Ticker",
+      "description": "Stock/crypto ticker — icon, symbol, formatted price, and up/down change (success/destructive tokens). Adapted from kibo-ui.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/ticker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ticker.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",

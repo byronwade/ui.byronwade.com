@@ -188,6 +188,7 @@ import FilterPillFilterBar from "./filter-pill/filter-bar";
 import FilterPillWithIcon from "./filter-pill/with-icon";
 import FloatingDockDefault from "./floating-dock/default";
 import FoundationTokens from "./foundation/tokens";
+import GlimpseDefault from "./glimpse/default";
 import GradientAvatarDefault from "./gradient-avatar/default";
 import GradientAvatarGroupedStack from "./gradient-avatar/grouped-stack";
 import GradientAvatarListRows from "./gradient-avatar/list-rows";
@@ -398,6 +399,7 @@ import TextareaDisabled from "./textarea/disabled";
 import TextareaErrorState from "./textarea/error-state";
 import TextareaReadonly from "./textarea/readonly";
 import TextareaWithLabelAndHint from "./textarea/with-label-and-hint";
+import TickerDefault from "./ticker/default";
 import TimelineRailDefault from "./timeline-rail/default";
 import TimelineRailCustomTerminal from "./timeline-rail/custom-terminal";
 import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
@@ -747,6 +749,9 @@ export const examples: Record<string, Example[]> = {
   "foundation": [
     { name: "Tokens", file: "foundation/tokens.tsx", Component: FoundationTokens },
   ],
+  "glimpse": [
+    { name: "Default", file: "glimpse/default.tsx", Component: GlimpseDefault },
+  ],
   "gradient-avatar": [
     { name: "Default", file: "gradient-avatar/default.tsx", Component: GradientAvatarDefault },
     { name: "Grouped Stack", file: "gradient-avatar/grouped-stack.tsx", Component: GradientAvatarGroupedStack },
@@ -1038,6 +1043,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Error State", file: "textarea/error-state.tsx", Component: TextareaErrorState },
     { name: "Readonly", file: "textarea/readonly.tsx", Component: TextareaReadonly },
     { name: "With Label And Hint", file: "textarea/with-label-and-hint.tsx", Component: TextareaWithLabelAndHint },
+  ],
+  "ticker": [
+    { name: "Default", file: "ticker/default.tsx", Component: TickerDefault },
   ],
   "timeline-rail": [
     { name: "Default", file: "timeline-rail/default.tsx", Component: TimelineRailDefault },

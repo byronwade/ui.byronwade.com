@@ -23,12 +23,12 @@ Before writing any markup, check whether a component already exists. Reach for t
   `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, `calendar`,
   `slider`, `number-field`
 - **Overlays** — `dialog`, `sheet`, `popover`, `tooltip`, `hover-card`, `dropdown-menu`,
-  `command`, `navigation-menu`
+  `command`, `navigation-menu`, `glimpse`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `kbd`, `separator`,
   `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `file-tree`
 - **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
-  `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor)
+  `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker)
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
   (config-driven nav dock that blooms into a panel via the hook)
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
