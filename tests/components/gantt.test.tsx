@@ -50,6 +50,12 @@ beforeAll(() => {
   }
 });
 
+// Don't leak the no-op ResizeObserver into sibling files in this worker — the
+// carousel + recharts behave differently when one is globally present.
+afterAll(() => {
+  Reflect.deleteProperty(globalThis, "ResizeObserver");
+});
+
 const monthStart = startOfMonth(new Date());
 
 const FEATURES: GanttFeature[] = [

@@ -827,10 +827,10 @@ export const components: ComponentDoc[] = [
   },
   {
     slug: "file-tree", name: "File tree", category: "Data display",
-    description: "Collapsible file/folder tree with selection, sorting, and expand-all — rebuilt on Base UI (collapsible). Adapted from MagicUI.",
+    description: "Collapsible file/folder tree with selection, sorting, and expand-all, plus a panel variant (chevron disclosure, guide lines, count badges) and multi-select with cascading checkboxes — rebuilt on Base UI. Base from MagicUI; panel/multi-select inspired by Untitled UI.",
     npmDeps: ["lucide-react"],
-    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/scroll-area", "@byronwade/collapsible"],
-    examples: ["default"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/badge", "@byronwade/checkbox", "@byronwade/scroll-area", "@byronwade/collapsible"],
+    examples: ["default", "panel", "multi-select"],
   },
   {
     slug: "ai-loader", name: "Loader", category: "AI",

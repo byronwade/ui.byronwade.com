@@ -1772,7 +1772,7 @@
       "name": "file-tree",
       "type": "registry:ui",
       "title": "File tree",
-      "description": "Collapsible file/folder tree with selection, sorting, and expand-all — rebuilt on Base UI (collapsible). Adapted from MagicUI.",
+      "description": "Collapsible file/folder tree with selection, sorting, and expand-all, plus a `panel` variant (chevron disclosure, guide lines, count badges) and `multi`-select with cascading checkboxes — rebuilt on Base UI (collapsible). Base adapted from MagicUI; panel/multi-select an original implementation inspired by Untitled UI.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1780,6 +1780,8 @@
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/button",
+        "@byronwade/badge",
+        "@byronwade/checkbox",
         "@byronwade/scroll-area",
         "@byronwade/collapsible"
       ],
