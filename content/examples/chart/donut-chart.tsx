@@ -18,15 +18,15 @@ const data = [
 const chartConfig: ChartConfig = {
   active: {
     label: "Active",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
   idle: {
     label: "Idle",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
   },
   offline: {
     label: "Offline",
-    color: "hsl(var(--chart-3))",
+    color: "var(--chart-3)",
   },
 }
 
@@ -35,7 +35,7 @@ export default function Example() {
 
   return (
     <div className="p-6 rounded-2xl border bg-card w-full max-w-sm">
-      <h2 className="text-sm font-semibold mb-1 text-foreground">Device Status</h2>
+      <h2 className="text-sm font-medium mb-1 text-foreground">Device Status</h2>
       <p className="text-xs text-muted-foreground mb-2">Current session overview</p>
       <ChartContainer config={chartConfig} className="h-56 w-full">
         <PieChart>

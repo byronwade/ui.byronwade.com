@@ -26,11 +26,11 @@ const data = [
 const chartConfig: ChartConfig = {
   visitors: {
     label: "Unique Visitors",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
   pageviews: {
     label: "Page Views",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
   },
 }
 
@@ -38,7 +38,7 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (!active || !payload?.length) return null
   return (
     <div className="rounded-xl border bg-background shadow-xl px-3 py-2 text-xs min-w-36">
-      <p className="font-semibold text-foreground mb-1.5">{label}</p>
+      <p className="font-medium text-foreground mb-1.5">{label}</p>
       {payload.map((item, i) => (
         <div key={i} className="flex items-center justify-between gap-4">
           <span className="flex items-center gap-1.5 text-muted-foreground">
@@ -60,7 +60,7 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 export default function Example() {
   return (
     <div className="p-6 rounded-2xl border bg-card w-full max-w-xl">
-      <h2 className="text-sm font-semibold mb-1 text-foreground">Site Analytics</h2>
+      <h2 className="text-sm font-medium mb-1 text-foreground">Site Analytics</h2>
       <p className="text-xs text-muted-foreground mb-4">Custom tooltip renderer</p>
       <ChartContainer config={chartConfig} className="h-56 w-full">
         <AreaChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
@@ -74,7 +74,7 @@ export default function Example() {
               <stop offset="95%" stopColor="var(--color-pageviews)" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
+          <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
           <XAxis dataKey="date" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
           <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}

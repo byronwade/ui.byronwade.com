@@ -17,22 +17,22 @@ const data = [
 const chartConfig: ChartConfig = {
   storage: {
     label: "Storage",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
   memory: {
     label: "Memory",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
   },
   cpu: {
     label: "CPU",
-    color: "hsl(var(--chart-3))",
+    color: "var(--chart-3)",
   },
 }
 
 export default function Example() {
   return (
     <div className="p-6 rounded-2xl border bg-card w-full max-w-sm">
-      <h2 className="text-sm font-semibold mb-1 text-foreground">Resource Utilization</h2>
+      <h2 className="text-sm font-medium mb-1 text-foreground">Resource Utilization</h2>
       <p className="text-xs text-muted-foreground mb-2">Current usage percentages</p>
       <ChartContainer config={chartConfig} className="h-56 w-full">
         <RadialBarChart

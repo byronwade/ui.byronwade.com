@@ -20,26 +20,26 @@ const data = [
 const chartConfig: ChartConfig = {
   organic: {
     label: "Organic",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
   referral: {
     label: "Referral",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
   },
   direct: {
     label: "Direct",
-    color: "hsl(var(--chart-3))",
+    color: "var(--chart-3)",
   },
   social: {
     label: "Social",
-    color: "hsl(var(--chart-4))",
+    color: "var(--chart-4)",
   },
 }
 
 export default function Example() {
   return (
     <div className="p-6 rounded-2xl border bg-card w-full max-w-sm">
-      <h2 className="text-sm font-semibold mb-1 text-foreground">Traffic Sources</h2>
+      <h2 className="text-sm font-medium mb-1 text-foreground">Traffic Sources</h2>
       <p className="text-xs text-muted-foreground mb-4">Breakdown by acquisition channel</p>
       <ChartContainer config={chartConfig} className="h-56 w-full">
         <PieChart>

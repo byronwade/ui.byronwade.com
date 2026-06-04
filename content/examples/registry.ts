@@ -18,6 +18,27 @@ import ActivityRingScore from "./activity-ring/score";
 import ActivityRingScoreTones from "./activity-ring/score-tones";
 import ActivityRingTones from "./activity-ring/tones";
 import ActivityRingWithVerdict from "./activity-ring/with-verdict";
+import AiArtifactDefault from "./ai-artifact/default";
+import AiChainOfThoughtDefault from "./ai-chain-of-thought/default";
+import AiCheckpointDefault from "./ai-checkpoint/default";
+import AiCodeBlockDefault from "./ai-code-block/default";
+import AiConfirmationDefault from "./ai-confirmation/default";
+import AiContextDefault from "./ai-context/default";
+import AiConversationDefault from "./ai-conversation/default";
+import AiImageDefault from "./ai-image/default";
+import AiInlineCitationDefault from "./ai-inline-citation/default";
+import AiLoaderDefault from "./ai-loader/default";
+import AiModelSelectorDefault from "./ai-model-selector/default";
+import AiOpenInChatDefault from "./ai-open-in-chat/default";
+import AiPromptInputDefault from "./ai-prompt-input/default";
+import AiQueueDefault from "./ai-queue/default";
+import AiReasoningDefault from "./ai-reasoning/default";
+import AiShimmerDefault from "./ai-shimmer/default";
+import AiSourcesDefault from "./ai-sources/default";
+import AiSuggestionDefault from "./ai-suggestion/default";
+import AiTaskDefault from "./ai-task/default";
+import AiToolDefault from "./ai-tool/default";
+import AiWebPreviewDefault from "./ai-web-preview/default";
 import AlertDefault from "./alert/default";
 import AlertNoIcon from "./alert/no-icon";
 import AlertVariants from "./alert/variants";
@@ -422,6 +443,69 @@ export const examples: Record<string, Example[]> = {
     { name: "Score Tones", file: "activity-ring/score-tones.tsx", Component: ActivityRingScoreTones },
     { name: "Tones", file: "activity-ring/tones.tsx", Component: ActivityRingTones },
     { name: "With Verdict", file: "activity-ring/with-verdict.tsx", Component: ActivityRingWithVerdict },
+  ],
+  "ai-artifact": [
+    { name: "Default", file: "ai-artifact/default.tsx", Component: AiArtifactDefault },
+  ],
+  "ai-chain-of-thought": [
+    { name: "Default", file: "ai-chain-of-thought/default.tsx", Component: AiChainOfThoughtDefault },
+  ],
+  "ai-checkpoint": [
+    { name: "Default", file: "ai-checkpoint/default.tsx", Component: AiCheckpointDefault },
+  ],
+  "ai-code-block": [
+    { name: "Default", file: "ai-code-block/default.tsx", Component: AiCodeBlockDefault },
+  ],
+  "ai-confirmation": [
+    { name: "Default", file: "ai-confirmation/default.tsx", Component: AiConfirmationDefault },
+  ],
+  "ai-context": [
+    { name: "Default", file: "ai-context/default.tsx", Component: AiContextDefault },
+  ],
+  "ai-conversation": [
+    { name: "Default", file: "ai-conversation/default.tsx", Component: AiConversationDefault },
+  ],
+  "ai-image": [
+    { name: "Default", file: "ai-image/default.tsx", Component: AiImageDefault },
+  ],
+  "ai-inline-citation": [
+    { name: "Default", file: "ai-inline-citation/default.tsx", Component: AiInlineCitationDefault },
+  ],
+  "ai-loader": [
+    { name: "Default", file: "ai-loader/default.tsx", Component: AiLoaderDefault },
+  ],
+  "ai-model-selector": [
+    { name: "Default", file: "ai-model-selector/default.tsx", Component: AiModelSelectorDefault },
+  ],
+  "ai-open-in-chat": [
+    { name: "Default", file: "ai-open-in-chat/default.tsx", Component: AiOpenInChatDefault },
+  ],
+  "ai-prompt-input": [
+    { name: "Default", file: "ai-prompt-input/default.tsx", Component: AiPromptInputDefault },
+  ],
+  "ai-queue": [
+    { name: "Default", file: "ai-queue/default.tsx", Component: AiQueueDefault },
+  ],
+  "ai-reasoning": [
+    { name: "Default", file: "ai-reasoning/default.tsx", Component: AiReasoningDefault },
+  ],
+  "ai-shimmer": [
+    { name: "Default", file: "ai-shimmer/default.tsx", Component: AiShimmerDefault },
+  ],
+  "ai-sources": [
+    { name: "Default", file: "ai-sources/default.tsx", Component: AiSourcesDefault },
+  ],
+  "ai-suggestion": [
+    { name: "Default", file: "ai-suggestion/default.tsx", Component: AiSuggestionDefault },
+  ],
+  "ai-task": [
+    { name: "Default", file: "ai-task/default.tsx", Component: AiTaskDefault },
+  ],
+  "ai-tool": [
+    { name: "Default", file: "ai-tool/default.tsx", Component: AiToolDefault },
+  ],
+  "ai-web-preview": [
+    { name: "Default", file: "ai-web-preview/default.tsx", Component: AiWebPreviewDefault },
   ],
   "alert": [
     { name: "Default", file: "alert/default.tsx", Component: AlertDefault },

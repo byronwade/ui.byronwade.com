@@ -24,11 +24,11 @@ const data = [
 const chartConfig: ChartConfig = {
   revenue: {
     label: "Revenue",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
   cost: {
     label: "Cost",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
   },
 }
 
@@ -37,10 +37,10 @@ export default function Example() {
     <div className="flex flex-col gap-6 w-full max-w-xl">
       {/* Dot indicator (default) */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Dot indicator</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Dot indicator</h2>
         <ChartContainer config={chartConfig} className="h-44 w-full">
           <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
             <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="dot" />} />
@@ -52,10 +52,10 @@ export default function Example() {
 
       {/* Line indicator */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Line indicator</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Line indicator</h2>
         <ChartContainer config={chartConfig} className="h-44 w-full">
           <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
             <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
@@ -67,10 +67,10 @@ export default function Example() {
 
       {/* Dashed indicator */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Dashed indicator</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Dashed indicator</h2>
         <ChartContainer config={chartConfig} className="h-44 w-full">
           <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
             <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="dashed" />} />

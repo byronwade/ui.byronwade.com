@@ -27,12 +27,12 @@ const data = [
 const chartConfigWithIcons: ChartConfig = {
   alpha: {
     label: "Alpha",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
     icon: TrendingUp,
   },
   beta: {
     label: "Beta",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
     icon: CircleDot,
   },
 }
@@ -40,11 +40,11 @@ const chartConfigWithIcons: ChartConfig = {
 const chartConfigNoIcons: ChartConfig = {
   alpha: {
     label: "Alpha",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
   beta: {
     label: "Beta",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
   },
 }
 
@@ -53,10 +53,10 @@ export default function Example() {
     <div className="flex flex-col gap-6 w-full max-w-xl">
       {/* Legend at bottom (default) */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Legend bottom (default)</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Legend bottom (default)</h2>
         <ChartContainer config={chartConfigNoIcons} className="h-44 w-full">
           <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
             <XAxis dataKey="q" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="dot" />} />
@@ -69,10 +69,10 @@ export default function Example() {
 
       {/* Legend at top */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Legend top</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Legend top</h2>
         <ChartContainer config={chartConfigNoIcons} className="h-44 w-full">
           <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
             <XAxis dataKey="q" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="dot" />} />
@@ -85,10 +85,10 @@ export default function Example() {
 
       {/* Legend with custom icons */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Legend with icons</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Legend with icons</h2>
         <ChartContainer config={chartConfigWithIcons} className="h-44 w-full">
           <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
             <XAxis dataKey="q" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="dot" />} />
