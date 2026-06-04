@@ -1,8 +1,8 @@
 import type { Violation, Manifest } from "../types.js";
 import type { ClassToken } from "../extract.js";
 import { findRawColor } from "../color.js";
+import { ARBITRARY } from "../patterns.js";
 
-const ARBITRARY = /^([a-z-]+)-\[([^\]]+)\]$/;
 const VAR_TOKEN = /^var\(--([a-z0-9-]+)\)$/;
 
 export function detectArbitraryValue(classes: ClassToken[], manifest: Manifest): Violation[] {

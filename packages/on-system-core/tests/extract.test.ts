@@ -19,6 +19,17 @@ describe("extractClassTokens", () => {
     const code = "const x = <div className={cls} />;";
     expect(extractClassTokens(parse(code))).toEqual([]);
   });
+
+  // FIX 2 regression: LogicalExpression, ConditionalExpression, ObjectExpression in cn()
+  it("extracts classes from conditional/logical/object cn() args", () => {
+    const code = `const x = <div className={cn(a && "bg-[#fff]", b ? "p-2" : "p-4", { "text-[#000]": c })} />;`;
+    const toks = extractClassTokens(parse(code));
+    const values = toks.map((t) => t.value);
+    expect(values).toContain("bg-[#fff]");
+    expect(values).toContain("p-2");
+    expect(values).toContain("p-4");
+    expect(values).toContain("text-[#000]");
+  });
 });
 
 describe("extractStyleStrings", () => {

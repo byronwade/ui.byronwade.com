@@ -28,6 +28,25 @@ function stringParts(node: Node): { text: string; base: number }[] {
     // cn(...) / clsx(...) / cva(...) — recurse into string + template args
     return (node.arguments as Node[]).flatMap((a) => stringParts(a));
   }
+  if (node.type === "LogicalExpression") {
+    // a && "cls" / a || "cls" — recurse both sides
+    return [...stringParts(node.left as Node), ...stringParts(node.right as Node)];
+  }
+  if (node.type === "ConditionalExpression") {
+    // a ? "x" : "y" — recurse both branches
+    return [...stringParts(node.consequent as Node), ...stringParts(node.alternate as Node)];
+  }
+  if (node.type === "ObjectExpression") {
+    // clsx object syntax { "cls": cond } — treat string-literal keys as class strings
+    const parts: { text: string; base: number }[] = [];
+    for (const prop of (node.properties as Node[])) {
+      const key = prop.key as Node | undefined;
+      if (key && key.type === "Literal" && typeof key.value === "string") {
+        parts.push({ text: key.value as string, base: key.range[0] + 1 });
+      }
+    }
+    return parts;
+  }
   return [];
 }
 

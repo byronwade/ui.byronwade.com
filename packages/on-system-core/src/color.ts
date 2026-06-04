@@ -32,9 +32,11 @@ export function nearestToken(
   let best: string | null = null;
   let bestD = Infinity;
   for (const [name, val] of Object.entries(candidates)) {
-    const t = parseColor(val.light);
-    if (!t) continue;
-    const d = diff(c, t);
+    const tLight = parseColor(val.light);
+    const tDark = parseColor(val.dark);
+    const dLight = tLight ? diff(c, tLight) : Infinity;
+    const dDark = tDark ? diff(c, tDark) : Infinity;
+    const d = Math.min(dLight, dDark);
     if (d < bestD) { bestD = d; best = name; }
   }
   if (best === null || bestD > maxDistance) return null;
