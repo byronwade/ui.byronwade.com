@@ -30,6 +30,9 @@ jobs:
       - name: On-system lint manifest sync
         run: node scripts/check-lint-manifest.mjs
 
+      - name: MCP data sync
+        run: node scripts/check-mcp-data.mjs
+
       - name: Test lint packages
         run: npm run test:packages
 
