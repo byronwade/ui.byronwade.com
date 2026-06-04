@@ -44,7 +44,7 @@ export function LazyPreview({
           io.disconnect();
         }
       },
-      { rootMargin: "2000px 0px" },
+      { rootMargin: "600px 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
