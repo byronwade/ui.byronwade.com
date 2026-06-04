@@ -18,7 +18,7 @@
  *     <div class="space-y-6 [className]">
  *       <div class="flex flex-wrap items-center justify-between gap-3">
  *         <div class="flex items-center gap-3">
- *           <h1 class="font-mono text-xl font-semibold tracking-tight">{title}</h1>
+ *           <h1 class="font-mono text-xl font-medium tracking-tight">{title}</h1>
  *           {badge}
  *         </div>
  *         {actions && <div class="flex items-center gap-2">{actions}</div>}
@@ -103,9 +103,9 @@ describe("DetailHeader — title prop", () => {
     expect(getH1()).toHaveClass("text-xl");
   });
 
-  it("title h1 has font-semibold class", () => {
+  it("title h1 has font-medium class", () => {
     render(<DetailHeader title="Test" />);
-    expect(getH1()).toHaveClass("font-semibold");
+    expect(getH1()).toHaveClass("font-medium");
   });
 
   it("title h1 has tracking-tight class", () => {

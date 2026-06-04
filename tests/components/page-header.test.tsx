@@ -45,10 +45,10 @@ describe("PageHeader – title prop", () => {
     expect(screen.getByText("Analytics")).toBeInTheDocument();
   });
 
-  it("h1 has font-semibold class in start alignment", () => {
+  it("h1 has font-medium class in start alignment", () => {
     render(<PageHeader title="Fonts" />);
     const h1 = screen.getByRole("heading", { level: 1 });
-    expect(h1.className).toContain("font-semibold");
+    expect(h1.className).toContain("font-medium");
   });
 
   it("h1 has tracking-tight class in start alignment", () => {

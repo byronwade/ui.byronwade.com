@@ -39,10 +39,10 @@ describe("EmptyState – title prop", () => {
     expect(heading).toHaveTextContent("No files yet");
   });
 
-  it("applies semibold font class to the title", () => {
+  it("applies medium font class to the title", () => {
     render(<EmptyState title="Title text" />);
     const heading = screen.getByRole("heading", { level: 3 });
-    expect(heading.className).toContain("font-semibold");
+    expect(heading.className).toContain("font-medium");
   });
 
   it("renders a title with special characters", () => {

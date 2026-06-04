@@ -58,11 +58,11 @@ describe("Section – title prop", () => {
     expect(heading).toHaveTextContent("My Section");
   });
 
-  it("h2 has text-sm font-semibold tracking-tight classes", () => {
+  it("h2 has text-sm font-medium tracking-tight classes", () => {
     render(<Section title="Styled Title"><div /></Section>);
     const h2 = screen.getByRole("heading", { level: 2 });
     expect(h2.className).toContain("text-sm");
-    expect(h2.className).toContain("font-semibold");
+    expect(h2.className).toContain("font-medium");
     expect(h2.className).toContain("tracking-tight");
   });
 
