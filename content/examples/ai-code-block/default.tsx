@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CodeBlock,
   CodeBlockCopyButton,
@@ -17,7 +19,7 @@ export async function summarize(input: string) {
 
 export default function Example() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
+    <div className="flex w-full items-center justify-center p-4">
       <div className="w-full max-w-xl">
         <CodeBlock code={code} language="ts" showLineNumbers>
           <CodeBlockCopyButton

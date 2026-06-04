@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Bot, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { categories, byCategory, components } from "@/content/components";
 import { archetypes } from "@/app/layouts/_archetypes";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { CodeBlock } from "@/app/(docs)/_components/code-block";
 
 export const metadata: Metadata = {
@@ -20,146 +13,158 @@ export const metadata: Metadata = {
     "What byronwade/ui is, why it exists, and every token-driven component in the registry — primitives, composites, and layout patterns.",
 };
 
-const principles = [
-  "One warm-green accent carries every bit of emphasis — the rest is calm ink and gray.",
-  "Depth from soft shadows and a hairline inset edge — not hard borders. Whitespace is a material.",
-  "Each page earns one signature hero — never a generic, repeated card grid.",
-  "Pure tokens. Override one variable and the whole system re-skins, light and dark.",
+/* ---------------------------------------------------------------------------
+   Introduction = the cover + the index. Distinct signature: an asymmetric
+   masthead with the component count as a giant graphic numeral, and the
+   catalog rendered as an editorial index (not card grids). #catalog preserved.
+--------------------------------------------------------------------------- */
+
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
+
+const PRINCIPLES = [
+  "One warm accent; the rest is calm ink and warm gray.",
+  "Depth from a single hairline edge — no shadows, no borders.",
+  "Every page earns one signature — never a repeated card grid.",
+  "Pure tokens — override --brand and the whole system re-skins.",
 ];
 
 export default function ComponentsIndexPage() {
   return (
-    <div className="mx-auto max-w-6xl space-y-12">
-      <header className="max-w-2xl">
-        <p className="text-sm font-medium text-brand">Get Started</p>
-        <h1 className="mt-2 font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-          Introduction
-        </h1>
-        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          <span className="text-foreground">byronwade/ui</span> is a personal master design system,
-          published as a namespaced{" "}
-          <a
-            href="https://ui.shadcn.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-brand underline-offset-4 hover:underline"
-          >
-            shadcn
-          </a>{" "}
-          registry. It ships {components.length} token-driven components and {archetypes.length}{" "}
-          full-page layout archetypes, all built around a single warm-green accent. Install with the
-          shadcn CLI into any Next.js + Tailwind v4 project — you own the copied code.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Button render={<Link href="/docs/installation" />}>
-            Install
-            <ArrowRight />
-          </Button>
-          <Button variant="outline" render={<a href="#catalog" />}>
-            Browse the catalog
-          </Button>
+    <article className="max-w-none">
+      {/* ============================ MASTHEAD ========================= */}
+      <section className="grid gap-8 py-12 lg:grid-cols-[1fr_auto] lg:items-end lg:py-16">
+        <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Introduction</p>
+          <h1 className="mt-4 text-[clamp(2.5rem,7vw,5rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
+            A master design system, <span className="text-muted-foreground">entirely yours.</span>
+          </h1>
+          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+            <span className="text-foreground">byronwade/ui</span> is a calm, content-first library
+            published as a namespaced{" "}
+            <a
+              href="https://ui.shadcn.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              shadcn
+            </a>{" "}
+            registry. Token-driven primitives, composites, and full-page layouts — install with the
+            shadcn CLI and you own the copied code.
+          </p>
         </div>
-      </header>
 
-      {/* Why it exists */}
-      <section className="space-y-4">
-        <h2 className="font-heading text-xl font-semibold tracking-tight">Why it exists</h2>
-        <p className="max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          Most products drift: each surface reinvents its own buttons, spacing, and color. This
-          registry is the opposite — one shared, calm, content-first aesthetic that every project can
-          adopt in minutes and re-skin to its own brand from a single CSS variable. Because it&apos;s
-          a shadcn registry, the code is copied into your repo: no runtime dependency, no version
-          lock-in, fully yours to edit.
-        </p>
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {principles.map((p) => (
-            <li key={p} className="flex items-start gap-2.5 text-sm leading-relaxed">
-              <Check className="mt-0.5 size-4 shrink-0 text-brand" />
-              <span className="text-muted-foreground">{p}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both shrink-0 text-left lg:text-right duration-700 [animation-delay:150ms]">
+          <p className="font-mono text-[clamp(4rem,13vw,9rem)] tabular-nums leading-[0.8] tracking-tighter text-brand">
+            {components.length}
+          </p>
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            components · {archetypes.length} layouts · 1 variable
+          </p>
+        </div>
       </section>
 
-      {/* Install everything in one command. */}
-      <Card className="gap-3 border-brand/20 bg-brand/5">
-        <CardHeader>
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <CardTitle className="text-sm">Install the whole catalog</CardTitle>
-            <Link
-              href="/docs/installation"
-              className="text-xs text-brand underline-offset-4 hover:underline"
-            >
-              Setup guide →
-            </Link>
+      {/* ============================ META + INSTALL =================== */}
+      <section className={`${BLEED} border-y border-border bg-card`}>
+        <div className="grid gap-6 py-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-wide text-muted-foreground">
+            <span>shadcn registry</span>
+            <span>·</span>
+            <span>Next.js + Tailwind v4</span>
+            <span>·</span>
+            <span>you own the code</span>
           </div>
-          <CardDescription className="text-[13px] leading-relaxed">
-            After initializing the foundation, one command pulls every component — dependencies
-            resolve automatically.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <CodeBlock lang="bash" code="npx shadcn@latest add @byronwade/all" />
-        </CardContent>
-      </Card>
-
-      {/* Keep your AI on-system. */}
-      <Card className="gap-3 border-brand/20 bg-brand/5">
-        <CardHeader>
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <CardTitle className="flex items-center gap-2 text-sm">
-              <Bot className="size-4 text-brand" />
-              Keep your AI on-system
-            </CardTitle>
-            <Link href="/docs/ai" className="text-xs text-brand underline-offset-4 hover:underline">
-              AI setup →
-            </Link>
+          <div className="flex flex-wrap gap-3">
+            <Button render={<Link href="/docs/installation" />}>
+              Install
+              <ArrowRight />
+            </Button>
+            <Button variant="outline" render={<a href="#catalog" />}>
+              Jump to catalog
+            </Button>
           </div>
-          <CardDescription className="text-[13px] leading-relaxed">
-            Add one rule and your AI agent (Cursor, Claude, Copilot…) keeps building with these
-            components and tokens — reaching for existing components instead of reinventing them, and
-            never hardcoding colors — on every edit.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <CodeBlock lang="bash" code="npx shadcn@latest add @byronwade/design-rules" />
-        </CardContent>
-      </Card>
+        </div>
+      </section>
 
-      <h2 id="catalog" className="scroll-mt-24 font-heading text-xl font-semibold tracking-tight">
-        All {components.length} components
-      </h2>
+      {/* ============================ PRINCIPLES (inline) ============== */}
+      <section className="py-12">
+        <ol className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+          {PRINCIPLES.map((p, i) => (
+            <li key={p} className="flex gap-3 text-[15px] leading-relaxed">
+              <span className="font-mono text-sm text-brand">{String(i + 1).padStart(2, "0")}</span>
+              <span className="text-muted-foreground text-pretty">{p}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-      {categories.map((cat) => {
-        const items = byCategory(cat);
-        if (items.length === 0) return null;
-        return (
-          <section key={cat} className="space-y-4">
-            <div className="flex items-baseline justify-between gap-3 border-b border-border pb-2">
-              <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-                {cat}
-              </h2>
-              <span className="text-xs tabular-nums text-muted-foreground">{items.length}</span>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((c) => (
-                <Link
-                  key={c.slug}
-                  href={`/docs/${c.slug}`}
-                  className="group flex flex-col gap-1.5 rounded-xl border border-transparent bg-card p-4 shadow-card outline-none transition-all hover:-translate-y-0.5 hover:border-brand/40 focus-visible:ring-3 focus-visible:ring-ring/50"
-                >
-                  <span className="text-sm font-semibold tracking-tight group-hover:text-foreground">
-                    {c.name}
+      {/* ============================ INSTALL ONE-LINER =============== */}
+      <section className="pb-12">
+        <CodeBlock lang="bash" code="npx shadcn@latest add @byronwade/all" />
+      </section>
+
+      {/* ============================ CATALOG INDEX =================== */}
+      <section id="catalog" className="scroll-mt-24">
+        <div className="flex items-baseline justify-between gap-4 border-b border-foreground/20 pb-3">
+          <h2 className="text-[clamp(1.75rem,5vw,2.75rem)] font-normal tracking-tight text-foreground">
+            The catalog
+          </h2>
+          <span className="font-mono text-xs tabular-nums text-muted-foreground">
+            {components.length} total
+          </span>
+        </div>
+
+        <div>
+          {categories.map((cat) => {
+            const items = byCategory(cat);
+            if (items.length === 0) return null;
+            return (
+              <div
+                key={cat}
+                className="grid gap-x-8 gap-y-3 border-b border-border py-6 sm:grid-cols-[10rem_1fr]"
+              >
+                <div className="flex items-baseline gap-2">
+                  <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                    {cat}
+                  </h3>
+                  <span className="font-mono text-[11px] tabular-nums text-muted-foreground/60">
+                    {items.length}
                   </span>
-                  <span className="line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
-                    {c.description}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </section>
-        );
-      })}
-    </div>
+                </div>
+                <ul className="flex flex-wrap gap-x-5 gap-y-2.5">
+                  {items.map((c) => (
+                    <li key={c.slug}>
+                      <Link
+                        href={`/docs/${c.slug}`}
+                        className="text-[15px] text-foreground underline-offset-4 transition-colors hover:text-brand hover:underline"
+                      >
+                        {c.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ============================ NAV ============================== */}
+      <div className="flex flex-wrap gap-x-6 gap-y-3 pt-10 text-sm">
+        <Link
+          href="/docs/philosophy"
+          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
+        >
+          Next: Philosophy
+          <ArrowRight className="size-3.5" />
+        </Link>
+        <Link
+          href="/docs/installation"
+          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+        >
+          Installation
+        </Link>
+      </div>
+    </article>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { Background, ReactFlow, ReactFlowProvider } from "@xyflow/react";
 import { Button } from "@/components/ui/button";
 import {

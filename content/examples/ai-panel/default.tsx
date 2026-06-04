@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactFlow, Background, ReactFlowProvider } from "@xyflow/react";
 import { Panel } from "@/components/ai-elements/panel";
 import "@xyflow/react/dist/style.css";

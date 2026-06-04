@@ -1,3 +1,5 @@
+"use client";
+
 import { CopyIcon, DownloadIcon } from "lucide-react";
 
 import {

@@ -24,7 +24,15 @@ agent following that rule would produce identical-looking code.** That means:
   Tone with opacity (`bg-brand/10`, `bg-success/10`) rather than introducing new colors.
 - **One accent variable.** The accent (rings, `--chart-1`, `--success`, active states) is derived
   from `--brand`. Anything brand/accent/success-colored must resolve to `--brand`, so a consumer
-  overriding `--brand` re-skins the whole system. Never pin those to a literal green.
+  overriding `--brand` re-skins the whole system. Never pin those to a literal green. **Two fixed
+  exceptions** stand apart on purpose and do *not* follow `--brand`: the `--chart-2…5` ramp and the
+  **agent-activity** pastels (`--activity-thinking/search/read/edit`) — a semantic palette encoding
+  what an AI agent is doing, for agent composites. Use via `bg-activity-*`; they carry meaning, so
+  don't repurpose them as a general accent.
+- **Editorial typography.** Hierarchy comes from size + tight tracking + the typeface, not weight:
+  display/section headings stay `font-normal`/`font-medium`, never `font-bold`. Use `font-mono` for
+  data (stats, timestamps, counts, IDs, `kbd`), and `font-serif` (`--font-serif`) only for long-form
+  prose / pull quotes.
 - **Base UI + CVA + `data-slot`.** Primitives build on `@base-ui/react`. Variants/sizes live in a
   `cva(...)` block (see `registry/ui/button.tsx`), each part carries a `data-slot` attribute, and the
   radius scale (`rounded-sm`…`rounded-4xl`, all from `--radius`) is used instead of pixel radii.

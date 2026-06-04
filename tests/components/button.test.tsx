@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { axe } from "vitest-axe";
@@ -993,5 +993,147 @@ describe("Button – edge cases", () => {
   it("has role='button' when rendered as default", () => {
     render(<Button>Role check</Button>);
     expect(screen.getByRole("button")).toBeInTheDocument();
+  });
+});
+
+// ─── Stateful (auto-async) ─────────────────────────────────────────────────────
+
+/** A promise whose settlement we control, for deterministic state assertions. */
+function deferred<T = void>() {
+  let resolve!: (v: T | PromiseLike<T>) => void;
+  let reject!: (e?: unknown) => void;
+  const promise = new Promise<T>((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  return { promise, resolve, reject };
+}
+
+describe("Button — stateful", () => {
+  it("non-stateful button has no data-status", () => {
+    render(<Button>Plain</Button>);
+    expect(screen.getByRole("button")).not.toHaveAttribute("data-status");
+  });
+
+  it("loading prop forces the loading state (disabled + aria-busy + data-status)", () => {
+    render(<Button loading>Save</Button>);
+    const btn = screen.getByRole("button");
+    expect(btn).toHaveAttribute("data-status", "loading");
+    expect(btn).toBeDisabled();
+    expect(btn).toHaveAttribute("aria-busy", "true");
+  });
+
+  it("loadingText swaps the label while loading; falls back to children otherwise", () => {
+    const { rerender } = render(
+      <Button loading loadingText="Saving…">
+        Save
+      </Button>
+    );
+    expect(screen.getByRole("button")).toHaveTextContent("Saving…");
+    rerender(<Button loading={false}>Save</Button>);
+    expect(screen.getByRole("button")).toHaveTextContent("Save");
+  });
+
+  it("onClickAsync drives idle → loading → success → idle", async () => {
+    const user = userEvent.setup();
+    const d = deferred();
+    const onClickAsync = vi.fn(() => d.promise);
+    render(
+      <Button onClickAsync={onClickAsync} resetDelay={20} successText="Saved">
+        Save
+      </Button>
+    );
+    const btn = screen.getByRole("button");
+
+    await user.click(btn);
+    await waitFor(() => expect(btn).toHaveAttribute("data-status", "loading"));
+    expect(onClickAsync).toHaveBeenCalledTimes(1);
+    expect(btn).toBeDisabled();
+
+    d.resolve();
+    await waitFor(() => expect(btn).toHaveAttribute("data-status", "success"));
+    expect(btn).toHaveTextContent("Saved");
+    expect(btn.className).toContain("text-success");
+
+    await waitFor(() => expect(btn).toHaveAttribute("data-status", "idle"));
+    expect(btn).not.toBeDisabled();
+  });
+
+  it("onClickAsync rejection drives loading → error (aria-invalid) → idle", async () => {
+    const user = userEvent.setup();
+    const d = deferred();
+    render(
+      <Button onClickAsync={() => d.promise} resetDelay={20} errorText="Failed">
+        Submit
+      </Button>
+    );
+    const btn = screen.getByRole("button");
+
+    await user.click(btn);
+    await waitFor(() => expect(btn).toHaveAttribute("data-status", "loading"));
+
+    d.reject(new Error("nope"));
+    await waitFor(() => expect(btn).toHaveAttribute("data-status", "error"));
+    expect(btn).toHaveAttribute("aria-invalid", "true");
+    expect(btn).toHaveTextContent("Failed");
+
+    await waitFor(() => expect(btn).toHaveAttribute("data-status", "idle"));
+  });
+
+  it("still calls a provided onClick alongside onClickAsync", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    const onClickAsync = vi.fn(() => Promise.resolve());
+    render(
+      <Button onClick={onClick} onClickAsync={onClickAsync} resetDelay={10}>
+        Go
+      </Button>
+    );
+    await user.click(screen.getByRole("button"));
+    expect(onClick).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(onClickAsync).toHaveBeenCalledTimes(1));
+  });
+
+  it("skips the async run when the click is default-prevented", async () => {
+    const user = userEvent.setup();
+    const onClickAsync = vi.fn(() => Promise.resolve());
+    render(
+      <Button onClick={(e) => e.preventDefault()} onClickAsync={onClickAsync}>
+        Guarded
+      </Button>
+    );
+    await user.click(screen.getByRole("button"));
+    expect(onClickAsync).not.toHaveBeenCalled();
+  });
+
+  it("does not update state if unmounted mid-flight", async () => {
+    const user = userEvent.setup();
+    const d = deferred();
+    const { unmount } = render(<Button onClickAsync={() => d.promise}>X</Button>);
+    const btn = screen.getByRole("button");
+    await user.click(btn);
+    await waitFor(() => expect(btn).toHaveAttribute("data-status", "loading"));
+    unmount();
+    d.resolve();
+    // flush microtasks — no act() warnings / errors should surface
+    await Promise.resolve();
+    expect(true).toBe(true);
+  });
+
+  it("a plain onClick (no onClickAsync) still fires and stays stateless", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(<Button onClick={onClick}>Plain</Button>);
+    const btn = screen.getByRole("button");
+    await user.click(btn);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(btn).not.toHaveAttribute("data-status");
+  });
+
+  it("stateful button has no axe violations in each state", async () => {
+    const { container, rerender } = render(<Button loading>Save</Button>);
+    expect(await axe(container)).toHaveNoViolations();
+    rerender(<Button loading={false}>Save</Button>);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });

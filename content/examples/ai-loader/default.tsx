@@ -1,3 +1,5 @@
+"use client";
+
 import { Loader } from "@/components/ai-elements/loader";
 
 export default function Example() {

@@ -28,8 +28,11 @@ export const navItems: DocsNavItem[] = [
     icon: BookOpen,
     match: (p) =>
       p === "/docs" ||
+      p === "/docs/philosophy" ||
       p === "/docs/installation" ||
+      p === "/docs/foundation" ||
       p === "/docs/theming" ||
+      p === "/docs/typography" ||
       p === "/docs/ai",
   },
   {
@@ -39,8 +42,11 @@ export const navItems: DocsNavItem[] = [
     icon: Component,
     match: (p) =>
       p.startsWith("/docs/") &&
+      p !== "/docs/philosophy" &&
       p !== "/docs/installation" &&
+      p !== "/docs/foundation" &&
       p !== "/docs/theming" &&
+      p !== "/docs/typography" &&
       p !== "/docs/ai",
   },
   {

@@ -8,7 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getArchetype } from "@/app/layouts/_archetypes";
 import { SegmentedControl } from "@/components/ui/segmented-control";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { ReskinBar, type Reskin } from "@/app/layouts/_components/reskin-bar";
 
 type ViewportKey = "desktop" | "tablet" | "mobile";

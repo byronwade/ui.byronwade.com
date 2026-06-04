@@ -1,3 +1,5 @@
+"use client";
+
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Loader } from "@/components/ai-elements/loader";
 

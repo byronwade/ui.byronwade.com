@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, TriangleAlert } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { CodeBlock } from "@/app/(docs)/_components/code-block";
-import { Step } from "@/app/(docs)/_components/step";
 import { REGISTRY_URL } from "@/content/guides";
 
 export const metadata: Metadata = {
@@ -14,145 +11,170 @@ export const metadata: Metadata = {
     "Every way to install byronwade/ui — the easiest being the namespaced shadcn registry.",
 };
 
-export default function InstallationPage() {
-  return (
-    <article className="mx-auto max-w-4xl space-y-12">
-      <header className="space-y-3">
-        <p className="text-sm font-medium text-brand">Get Started</p>
-        <div className="flex flex-wrap items-center gap-3">
-          <h1 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-            Installation
-          </h1>
-          <Badge variant="success">
-            <Sparkles className="size-3" />
-            Registry is easiest
-          </Badge>
-        </div>
-        <p className="max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          Install with the shadcn CLI into any Next.js + Tailwind v4 project. The recommended path
-          wires up the foundation once, then every component is a single{" "}
-          <code className="font-mono text-[13px]">add</code> away — dependencies resolve
-          automatically.
-        </p>
-      </header>
+/* ---------------------------------------------------------------------------
+   Installation = a CLI flow. Distinct signature: a terminal window hero and a
+   connected vertical step rail (not the shared clamp-split hero). All real
+   commands stay in copyable CodeBlocks; @byronwade/* refs are real items.
+--------------------------------------------------------------------------- */
 
-      {/* ── Registry path ─────────────────────────────────────────────── */}
-      <section className="space-y-6">
-        <div className="space-y-1">
-          <h2 className="text-lg font-semibold tracking-tight">shadcn registry</h2>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            Best for new projects. Grab the whole catalog with{" "}
-            <code className="font-mono text-[13px]">@byronwade/all</code> — shadcn&apos;s generic{" "}
-            <code className="font-mono text-[13px]">add --all</code> does not target custom
-            namespaces.
-          </p>
-        </div>
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
 
-        <div className="space-y-10">
-          <Step n={1} title="Initialize against the foundation base">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              The foundation owns your <code className="font-mono text-[13px]">:root</code> tokens
-              and Tailwind theme. Install it with <code className="font-mono text-[13px]">init</code>{" "}
-              on a fresh Next.js app (created with{" "}
-              <code className="font-mono text-[13px]">--tailwind</code>).
-            </p>
-            <CodeBlock lang="bash" code={`npx shadcn@latest init ${REGISTRY_URL}/r/foundation.json`} />
-          </Step>
+function Dot() {
+  return <span className="size-2.5 rounded-full bg-border" />;
+}
 
-          <Step n={2} title="Register the @byronwade namespace">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Add one line to your project&apos;s{" "}
-              <code className="font-mono text-[13px]">components.json</code> so the CLI knows where
-              to resolve <code className="font-mono text-[13px]">@byronwade/*</code>.
-            </p>
-            <CodeBlock
-              lang="json"
-              code={`{
+const STEPS: { title: string; body: React.ReactNode; code: string; lang: string }[] = [
+  {
+    title: "Initialize against the foundation base",
+    body: (
+      <>
+        The foundation owns your <code className="font-mono text-[13px]">:root</code> tokens and
+        Tailwind theme. Run <code className="font-mono text-[13px]">init</code> on a fresh Next.js app
+        (created with <code className="font-mono text-[13px]">--tailwind</code>).
+      </>
+    ),
+    lang: "bash",
+    code: `npx shadcn@latest init ${REGISTRY_URL}/r/foundation.json`,
+  },
+  {
+    title: "Register the @byronwade namespace",
+    body: (
+      <>
+        Add one line to <code className="font-mono text-[13px]">components.json</code> so the CLI
+        resolves <code className="font-mono text-[13px]">@byronwade/*</code>.
+      </>
+    ),
+    lang: "json",
+    code: `{
   "registries": {
     "@byronwade": "${REGISTRY_URL}/r/{name}.json"
   }
-}`}
-            />
-          </Step>
+}`,
+  },
+  {
+    title: "Add the catalog — or just what you need",
+    body: (
+      <>
+        Everything at once, or only the pieces you want — transitive deps come along (activity-ring
+        pulls <code className="font-mono text-[13px]">status-dot</code> + utils).
+      </>
+    ),
+    lang: "bash",
+    code: `npx shadcn@latest add @byronwade/all
 
-          <Step n={3} title="Add what you need — or everything at once">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Want the whole catalog? One command pulls every component (dependencies resolve
-              automatically):
-            </p>
-            <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/all`} />
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Or add only the pieces you want — transitive dependencies still come along (adding an
-              activity-ring pulls in <code className="font-mono text-[13px]">status-dot</code> and{" "}
-              <code className="font-mono text-[13px]">utils</code> for you):
-            </p>
-            <CodeBlock
-              lang="bash"
-              code={`npx shadcn@latest add @byronwade/activity-ring
 npx shadcn@latest add @byronwade/timeline-rail @byronwade/metric-stat
-npx shadcn@latest add @byronwade/sheet @byronwade/command @byronwade/morph-dock`}
-            />
-          </Step>
-        </div>
-      </section>
+npx shadcn@latest add @byronwade/sheet @byronwade/command @byronwade/morph-dock`,
+  },
+];
 
-      {/* ── Single component ──────────────────────────────────────────── */}
-      <section className="space-y-4 border-t border-border pt-10">
-        <div className="space-y-1">
-          <h2 className="text-lg font-semibold tracking-tight">Add a component</h2>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            Once the namespace is registered, every component page is one command away — each page
-            has a copy button for the exact line.
+export default function InstallationPage() {
+  return (
+    <article className="max-w-none">
+      {/* ============================ HERO — terminal =================== */}
+      <section className="grid items-center gap-10 py-12 lg:grid-cols-[5fr_7fr] lg:py-16">
+        <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Foundation · Installation
+          </p>
+          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">
+            Two commands to a wired system.
+          </h1>
+          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
+            shadcn CLI · Next.js + Tailwind v4. The code is copied into your repo — no runtime
+            dependency, fully yours.
           </p>
         </div>
-        <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/button`} />
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          You can also point the CLI directly at a built component URL without registering the
-          namespace first:
-        </p>
-        <CodeBlock lang="bash" code={`npx shadcn@latest add ${REGISTRY_URL}/r/card.json`} />
-      </section>
 
-      {/* ── Manual ────────────────────────────────────────────────────── */}
-      <section className="space-y-4 border-t border-border pt-10">
-        <div className="space-y-1">
-          <h2 className="text-lg font-semibold tracking-tight">Manual setup</h2>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            For existing projects that already have their own theme.
-          </p>
+        <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both overflow-hidden rounded-2xl edge bg-card font-mono text-[13px] duration-700 [animation-delay:150ms]">
+          <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
+            <Dot />
+            <Dot />
+            <Dot />
+            <span className="ml-2 text-[11px] text-muted-foreground">shadcn</span>
+          </div>
+          <pre className="overflow-x-auto p-5 leading-relaxed scrollbar-thin">
+            <code>
+              <span className="text-brand">$</span>{" "}
+              <span className="text-foreground">npx shadcn@latest init …/foundation.json</span>
+              {"\n"}
+              <span className="text-success">✓ foundation installed — :root tokens ready</span>
+              {"\n\n"}
+              <span className="text-brand">$</span>{" "}
+              <span className="text-foreground">npx shadcn@latest add @byronwade/all</span>
+              {"\n"}
+              <span className="text-success">✓ added the full catalog — deps resolved</span>
+            </code>
+          </pre>
         </div>
-        <Alert>
-          <AlertTitle>Don&apos;t run init on an existing theme</AlertTitle>
-          <AlertDescription>
-            Running <code className="font-mono text-[13px]">init</code> would overwrite your
-            existing <code className="font-mono text-[13px]">globals.css</code>. Merge the tokens by
-            hand instead, then add components.
-          </AlertDescription>
-        </Alert>
-        <ol className="space-y-2 text-sm leading-relaxed text-muted-foreground">
-          <li>
-            1. Copy the <code className="font-mono text-[13px]">cssVars</code> (light, dark, and
-            theme) from the foundation item in{" "}
-            <code className="font-mono text-[13px]">registry.json</code> into your{" "}
-            <code className="font-mono text-[13px]">globals.css</code>.
-          </li>
-          <li>
-            2. Make sure <code className="font-mono text-[13px]">--ring</code>,{" "}
-            <code className="font-mono text-[13px]">--chart-1</code>, and{" "}
-            <code className="font-mono text-[13px]">--success</code> derive from{" "}
-            <code className="font-mono text-[13px]">var(--brand)</code> so re-skinning holds.
-          </li>
-          <li>3. Register the namespace and add components as usual.</li>
-        </ol>
-        <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/badge`} />
       </section>
 
-      <div className="flex flex-wrap gap-3 border-t border-border pt-8 text-sm">
+      {/* ============================ STEP RAIL ========================= */}
+      <section className={`${BLEED} border-y border-border bg-card`}>
+        <div className="py-14">
+          <p className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            The fast path
+          </p>
+          <div>
+            {STEPS.map((s, i) => (
+              <div key={s.title} className="grid grid-cols-[auto_1fr] gap-x-5">
+                <div className="flex flex-col items-center">
+                  <span className="flex size-9 items-center justify-center rounded-full edge bg-background font-mono text-sm text-brand">
+                    {i + 1}
+                  </span>
+                  {i < STEPS.length - 1 ? <span className="w-px flex-1 bg-border" /> : null}
+                </div>
+                <div className="min-w-0 space-y-3 pb-10">
+                  <h2 className="text-lg font-medium tracking-tight text-foreground">{s.title}</h2>
+                  <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {s.body}
+                  </p>
+                  <CodeBlock lang={s.lang} code={s.code} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ ADD + MANUAL (two-up) ============= */}
+      <section className="grid gap-10 py-16 md:grid-cols-2">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Add a component</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
+            One command per component — each page has a copy button. Or point at a built URL with no
+            namespace.
+          </p>
+          <div className="mt-5 space-y-3">
+            <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/button`} />
+            <CodeBlock lang="bash" code={`npx shadcn@latest add ${REGISTRY_URL}/r/card.json`} />
+          </div>
+        </div>
+
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Manual setup</p>
+          <div className="mt-3 flex items-start gap-3 rounded-2xl edge bg-destructive/10 p-4">
+            <TriangleAlert className="mt-0.5 size-5 shrink-0 text-destructive" />
+            <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+              <span className="font-medium text-foreground">Don&apos;t run init on an existing theme</span>{" "}
+              — it overwrites <code className="font-mono text-[13px]">globals.css</code>. Merge the
+              foundation <code className="font-mono text-[13px]">cssVars</code> by hand, keep{" "}
+              <code className="font-mono text-[13px]">--ring/--chart-1/--success</code> deriving from{" "}
+              <code className="font-mono text-[13px]">var(--brand)</code>, then add components.
+            </p>
+          </div>
+          <div className="mt-5">
+            <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/badge`} />
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ NAV ============================== */}
+      <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">
         <Link
-          href="/docs/theming"
+          href="/docs/foundation"
           className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
         >
-          Next: Theming
+          Next: Foundation
           <ArrowRight className="size-3.5" />
         </Link>
         <Link

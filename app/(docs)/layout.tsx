@@ -7,8 +7,11 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       {/* Full-width docs shell — sidebar + main, shadcn-style. Top padding clears
           the floating launcher / breadcrumb / nav dock from the root chrome. */}
       <div className="flex w-full">
-        <aside className="hidden w-56 shrink-0 lg:block xl:w-60">
-          <div className="sticky top-20 max-h-[calc(100dvh-5rem)] overflow-y-auto border-r border-border py-8 pl-6 pr-4 scrollbar-thin">
+        {/* pt-20 reserves the floating-chrome height so the sticky nav clears the
+            header even at scroll-0 / on short pages (sticky top-20 alone only
+            engages once you scroll). Mirrors <main>'s top padding. */}
+        <aside className="hidden w-56 shrink-0 pt-20 lg:block xl:w-60">
+          <div className="sticky top-20 max-h-[calc(100dvh-5rem)] overflow-y-auto pb-8 pl-6 pr-4 scrollbar-thin">
             <SiteNav />
           </div>
         </aside>

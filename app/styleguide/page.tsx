@@ -2,7 +2,8 @@ import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, Check, CheckC
 
 import Link from "next/link";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

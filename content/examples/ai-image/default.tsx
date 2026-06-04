@@ -1,3 +1,5 @@
+"use client";
+
 import { Image } from "@/components/ai-elements/image";
 
 // A tiny 1x1 transparent PNG used as a stand-in for an AI-generated image.
