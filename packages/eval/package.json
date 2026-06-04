@@ -1,0 +1,17 @@
+{
+  "name": "@byronwade/eval",
+  "version": "0.1.0",
+  "description": "Measures how on-system Claude's UI is, with vs without the byronwade/ui rule.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "tsc --noEmit -p tsconfig.json && vitest run"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.1",
+    "@byronwade/on-system-core": "0.1.0"
+  },
+  "devDependencies": { "typescript": "^5", "vitest": "^4.1.7" }
+}
