@@ -4,12 +4,12 @@ import { useState } from "react";
 import { SegmentedControl } from "@/components/ui/segmented-control";
 import { CodeBlock } from "@/app/(docs)/_components/code-block";
 
-export function ExampleTabs({ title, preview, code }: { title: string; preview: React.ReactNode; code: string }) {
+export function ExampleTabs({ title, preview, code }: { title?: string; preview: React.ReactNode; code: string }) {
   const [view, setView] = useState<"preview" | "code">("preview");
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">{title}</span>
+        {title ? <span className="text-sm font-medium">{title}</span> : null}
         <SegmentedControl
           options={[
             { label: "Preview", value: "preview" as const },
