@@ -1033,6 +1033,12 @@ export const components: ComponentDoc[] = [
     registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/avatar"],
     examples: ["default"],
   },
+  {
+    slug: "relative-time", name: "Relative time", category: "UI",
+    description: "Multi-timezone live clock — per-zone time/date with mono labels, ticking each second. Adapted from kibo-ui.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;

@@ -1850,6 +1850,23 @@
       ]
     },
     {
+      "name": "relative-time",
+      "type": "registry:ui",
+      "title": "Relative time",
+      "description": "Multi-timezone live clock — per-zone time/date display with mono labels, ticking each second. Adapted from kibo-ui.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/relative-time.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/relative-time.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",
