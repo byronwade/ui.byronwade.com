@@ -26,7 +26,7 @@ Before writing any markup, check whether a component already exists. Reach for t
   `command`, `navigation-menu`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `kbd`, `separator`,
-  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`
+  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `file-tree`
 - **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
   `segmented-control`
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`

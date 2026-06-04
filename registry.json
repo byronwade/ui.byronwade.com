@@ -1746,6 +1746,29 @@
       ]
     },
     {
+      "name": "file-tree",
+      "type": "registry:ui",
+      "title": "File tree",
+      "description": "Collapsible file/folder tree with selection, sorting, and expand-all — rebuilt on Base UI (collapsible). Adapted from MagicUI.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/scroll-area",
+        "@byronwade/collapsible"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/file-tree.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/file-tree.tsx"
+        }
+      ]
+    },
+    {
       "name": "design-rules",
       "type": "registry:file",
       "title": "Design-system AI rules",

@@ -146,6 +146,7 @@ import EventTimelineSingleEvent from "./event-timeline/single-event";
 import EventTimelineTimestamps from "./event-timeline/timestamps";
 import EventTimelineTitleOnly from "./event-timeline/title-only";
 import EventTimelineTones from "./event-timeline/tones";
+import FileTreeDefault from "./file-tree/default";
 import FilterPillDefault from "./filter-pill/default";
 import FilterPillActiveState from "./filter-pill/active-state";
 import FilterPillAsSelectTrigger from "./filter-pill/as-select-trigger";
@@ -597,6 +598,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Timestamps", file: "event-timeline/timestamps.tsx", Component: EventTimelineTimestamps },
     { name: "Title Only", file: "event-timeline/title-only.tsx", Component: EventTimelineTitleOnly },
     { name: "Tones", file: "event-timeline/tones.tsx", Component: EventTimelineTones },
+  ],
+  "file-tree": [
+    { name: "Default", file: "file-tree/default.tsx", Component: FileTreeDefault },
   ],
   "filter-pill": [
     { name: "Default", file: "filter-pill/default.tsx", Component: FilterPillDefault },
