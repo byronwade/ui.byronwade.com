@@ -152,10 +152,15 @@ import CollapsibleUncontrolled from "./collapsible/uncontrolled";
 import CollapsibleWithRichContent from "./collapsible/with-rich-content";
 import ColorPickerDefault from "./color-picker/default";
 import CommandDefault from "./command/default";
+import CommandActions from "./command/actions";
+import CommandCards from "./command/cards";
 import CommandEmptyState from "./command/empty-state";
+import CommandFiles from "./command/files";
 import CommandGrouped from "./command/grouped";
 import CommandInline from "./command/inline";
+import CommandPeople from "./command/people";
 import CommandWithIcons from "./command/with-icons";
+import CommandResultDefault from "./command-result/default";
 import ConversationListDefault from "./conversation-list/default";
 import CreditCardDefault from "./credit-card/default";
 import CursorDefault from "./cursor/default";
@@ -717,10 +722,17 @@ export const examples: Record<string, Example[]> = {
   ],
   "command": [
     { name: "Default", file: "command/default.tsx", Component: CommandDefault },
+    { name: "Actions", file: "command/actions.tsx", Component: CommandActions },
+    { name: "Cards", file: "command/cards.tsx", Component: CommandCards },
     { name: "Empty State", file: "command/empty-state.tsx", Component: CommandEmptyState },
+    { name: "Files", file: "command/files.tsx", Component: CommandFiles },
     { name: "Grouped", file: "command/grouped.tsx", Component: CommandGrouped },
     { name: "Inline", file: "command/inline.tsx", Component: CommandInline },
+    { name: "People", file: "command/people.tsx", Component: CommandPeople },
     { name: "With Icons", file: "command/with-icons.tsx", Component: CommandWithIcons },
+  ],
+  "command-result": [
+    { name: "Default", file: "command-result/default.tsx", Component: CommandResultDefault },
   ],
   "conversation-list": [
     { name: "Default", file: "conversation-list/default.tsx", Component: ConversationListDefault },
