@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { bySlug, components } from "@/content/components";
 import { examples } from "@/content/examples/registry";
 import { ExampleTabs } from "@/app/(docs)/_components/example-tabs";
+import { VariantBrowser, type VariantView } from "@/app/(docs)/_components/variant-browser";
 import { InstallCommand } from "@/app/(docs)/_components/install-command";
 import {
   Table,
@@ -43,6 +44,24 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
     Component: d.Component,
     code: readFileSync(join(process.cwd(), "content/examples", d.file), "utf8").trimEnd(),
   }));
+
+  const byBase = new Map(
+    demos.map((d) => [d.file.split("/").pop()!.replace(/\.tsx$/, ""), d]),
+  );
+  const variantViews: VariantView[] = (doc.variants ?? []).map((v) => {
+    const demo = byBase.get(v.example);
+    const Comp = demo?.Component;
+    return {
+      id: v.id,
+      name: v.name,
+      tags: v.tags,
+      install: v.install ?? `npx shadcn@latest add @byronwade/${doc.slug}`,
+      preview: Comp ? <Comp /> : null,
+      code: demo
+        ? readFileSync(join(process.cwd(), "content/examples", demo.file), "utf8").trimEnd()
+        : "",
+    };
+  });
 
   const deps = [...(doc.registryDeps ?? []), ...(doc.npmDeps ?? [])];
 
@@ -95,15 +114,22 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
         )}
       </header>
 
-      {rendered.length > 0 && (
+      {variantViews.length > 0 ? (
         <section className="space-y-6">
-          <Label>{rendered.length > 1 ? "Examples" : "Example"}</Label>
-          <div className="space-y-8">
-            {rendered.map(({ name, Component, code }) => (
-              <ExampleTabs key={name} title={name} preview={<Component />} code={code} />
-            ))}
-          </div>
+          <Label>Variants</Label>
+          <VariantBrowser variants={variantViews} />
         </section>
+      ) : (
+        rendered.length > 0 && (
+          <section className="space-y-6">
+            <Label>{rendered.length > 1 ? "Examples" : "Example"}</Label>
+            <div className="space-y-8">
+              {rendered.map(({ name, Component, code }) => (
+                <ExampleTabs key={name} title={name} preview={<Component />} code={code} />
+              ))}
+            </div>
+          </section>
+        )
       )}
 
       {doc.slug !== "foundation" && (
