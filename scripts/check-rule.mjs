@@ -49,6 +49,7 @@ const NAMESPACE_ALLOW = new Set([
   "eslint-plugin-ui",
   "on-system-core",
   "lint",
+  "mcp",
 ]);
 
 const errors = [];
