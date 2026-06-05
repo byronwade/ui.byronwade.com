@@ -2088,6 +2088,23 @@
       ]
     },
     {
+      "name": "audio-waveform",
+      "type": "registry:ui",
+      "title": "Audio waveform",
+      "description": "Bar-style waveform scrubber. Played bars follow --brand; click and arrow keys report a 0–1 seek ratio. Exposes role=slider with aria-value*.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/audio-waveform.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/audio-waveform.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
