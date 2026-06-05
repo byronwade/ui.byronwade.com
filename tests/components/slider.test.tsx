@@ -40,6 +40,44 @@ describe("Slider — render", () => {
   });
 });
 
+describe("Slider — size", () => {
+  const track = (c: HTMLElement) =>
+    c.querySelector('[data-slot="slider-track"]');
+  const thumb = (c: HTMLElement) =>
+    c.querySelector('[data-slot="slider-thumb"]');
+
+  it("uses the default track + thumb size when no size prop is given", () => {
+    const { container } = render(<Slider aria-label="V" defaultValue={50} />);
+    expect(track(container)).toHaveClass("h-1.5");
+    expect(thumb(container)).toHaveClass("size-4");
+  });
+
+  it("applies the sm size to track + thumb", () => {
+    const { container } = render(
+      <Slider aria-label="V" defaultValue={50} size="sm" />,
+    );
+    expect(track(container)).toHaveClass("h-1");
+    expect(thumb(container)).toHaveClass("size-3");
+  });
+
+  it("applies the lg size to track + thumb", () => {
+    const { container } = render(
+      <Slider aria-label="V" defaultValue={50} size="lg" />,
+    );
+    expect(track(container)).toHaveClass("h-2");
+    expect(thumb(container)).toHaveClass("size-5");
+  });
+
+  it("sizes every thumb in a range slider", () => {
+    const { container } = render(
+      <Slider aria-label="V" defaultValue={[20, 80]} size="lg" />,
+    );
+    const thumbs = container.querySelectorAll('[data-slot="slider-thumb"]');
+    expect(thumbs).toHaveLength(2);
+    thumbs.forEach((t) => expect(t).toHaveClass("size-5"));
+  });
+});
+
 describe("Slider — value semantics", () => {
   it("reflects min/max/value on the thumb input", () => {
     render(<Slider aria-label="V" min={0} max={200} defaultValue={50} />);

@@ -100,6 +100,31 @@ describe("NumberField — interaction", () => {
   });
 });
 
+describe("NumberField — size", () => {
+  const group = (c: HTMLElement) =>
+    c.querySelector('[data-slot="number-field-group"]');
+  const stepBtn = (c: HTMLElement) =>
+    c.querySelector('[data-slot="number-field-increment"]');
+
+  it("uses the default group height when no size prop is given", () => {
+    const { container } = render(<Stepper defaultValue={5} />);
+    expect(group(container)).toHaveClass("h-8");
+    expect(stepBtn(container)).toHaveClass("w-7");
+  });
+
+  it("threads the sm size through the group and step buttons", () => {
+    const { container } = render(<Stepper defaultValue={5} size="sm" />);
+    expect(group(container)).toHaveClass("h-7");
+    expect(stepBtn(container)).toHaveClass("w-6");
+  });
+
+  it("threads the lg size through the group and step buttons", () => {
+    const { container } = render(<Stepper defaultValue={5} size="lg" />);
+    expect(group(container)).toHaveClass("h-9");
+    expect(stepBtn(container)).toHaveClass("w-8");
+  });
+});
+
 describe("NumberField — custom step content & className", () => {
   it("renders custom decrement/increment children and merges classNames", () => {
     render(

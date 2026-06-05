@@ -333,12 +333,14 @@ import MorphSidebarDefault from "./morph-sidebar/default";
 import MorphSurfaceDefault from "./morph-surface/default";
 import MorphTabsDefault from "./morph-tabs/default";
 import NativeSelectDefault from "./native-select/default";
+import NativeSelectSizes from "./native-select/sizes";
 import NavigationMenuDefault from "./navigation-menu/default";
 import NavigationMenuSimpleLinks from "./navigation-menu/simple-links";
 import NavigationMenuWithDescriptions from "./navigation-menu/with-descriptions";
 import NavigationMenuWithIcons from "./navigation-menu/with-icons";
 import NowPlayingBarDefault from "./now-playing-bar/default";
 import NumberFieldDefault from "./number-field/default";
+import NumberFieldSizes from "./number-field/sizes";
 import OrderSummaryDefault from "./order-summary/default";
 import PageHeaderDefault from "./page-header/default";
 import PageHeaderAlign from "./page-header/align";
@@ -432,6 +434,7 @@ import SkeletonProfile from "./skeleton/profile";
 import SkeletonTable from "./skeleton/table";
 import SkeletonWithLoadedState from "./skeleton/with-loaded-state";
 import SliderDefault from "./slider/default";
+import SliderSizes from "./slider/sizes";
 import SonnerDefault from "./sonner/default";
 import SonnerCustom from "./sonner/custom";
 import SonnerDismissible from "./sonner/dismissible";
@@ -1085,6 +1088,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "native-select": [
     { name: "Default", file: "native-select/default.tsx", Component: NativeSelectDefault },
+    { name: "Sizes", file: "native-select/sizes.tsx", Component: NativeSelectSizes },
   ],
   "navigation-menu": [
     { name: "Default", file: "navigation-menu/default.tsx", Component: NavigationMenuDefault },
@@ -1097,6 +1101,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "number-field": [
     { name: "Default", file: "number-field/default.tsx", Component: NumberFieldDefault },
+    { name: "Sizes", file: "number-field/sizes.tsx", Component: NumberFieldSizes },
   ],
   "order-summary": [
     { name: "Default", file: "order-summary/default.tsx", Component: OrderSummaryDefault },
@@ -1236,6 +1241,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "slider": [
     { name: "Default", file: "slider/default.tsx", Component: SliderDefault },
+    { name: "Sizes", file: "slider/sizes.tsx", Component: SliderSizes },
   ],
   "sonner": [
     { name: "Default", file: "sonner/default.tsx", Component: SonnerDefault },

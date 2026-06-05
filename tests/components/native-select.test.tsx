@@ -41,6 +41,33 @@ describe("NativeSelect", () => {
     );
   });
 
+  it("applies the default size when no size prop is given", () => {
+    render(<NativeSelect aria-label="fruit">{options()}</NativeSelect>);
+    expect(screen.getByRole("combobox", { name: "fruit" })).toHaveClass("h-8");
+  });
+
+  it("applies the sm size", () => {
+    render(
+      <NativeSelect aria-label="fruit" size="sm">
+        {options()}
+      </NativeSelect>
+    );
+    const select = screen.getByRole("combobox", { name: "fruit" });
+    expect(select).toHaveClass("h-7");
+    expect(select).toHaveClass("text-xs");
+  });
+
+  it("applies the lg size", () => {
+    render(
+      <NativeSelect aria-label="fruit" size="lg">
+        {options()}
+      </NativeSelect>
+    );
+    const select = screen.getByRole("combobox", { name: "fruit" });
+    expect(select).toHaveClass("h-9");
+    expect(select).toHaveClass("text-base");
+  });
+
   it("can be disabled", () => {
     render(<NativeSelect aria-label="fruit" disabled>{options()}</NativeSelect>);
     expect(screen.getByRole("combobox", { name: "fruit" })).toBeDisabled();
