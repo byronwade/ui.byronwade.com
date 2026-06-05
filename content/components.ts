@@ -4174,6 +4174,41 @@ export const components: ComponentDoc[] = [
     examples: ["default"],
     tags: ["tradingview", "market"],
   },
+  {
+    slug: "volume-profile",
+    name: "Volume profile",
+    category: "Market",
+    description:
+      "Session volume profile rendered in-house as SVG — horizontal histogram bars bucketed from candle OHLCV via `volumeProfileGeometry` in the `market` lib, with an optional point-of-control line.",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "time-and-sales",
+    name: "Time and sales",
+    category: "Market",
+    description:
+      "Compact time-and-sales tape — mono time, buy/sell-toned price, and size rows. Optional relative-time stamps, density variant, maxRows cap, and row select callback.",
+    registryDeps: ["@byronwade/relative-time", "@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "symbol-details",
+    name: "Symbol details",
+    category: "Market",
+    description:
+      "Symbol fundamentals panel — quote-header, exchange/sector/industry meta, and tabbed overview, financials, and statistics grids built from `metric-stat` and seeded `makeSymbolStats` defaults.",
+    registryDeps: [
+      "@byronwade/metric-stat",
+      "@byronwade/quote-header",
+      "@byronwade/tabs",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
 ]
 export const categories = [
   "Foundation",

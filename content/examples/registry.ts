@@ -509,6 +509,7 @@ import SwitchInvalid from "./switch/invalid";
 import SwitchSizes from "./switch/sizes";
 import SwitchWithLabel from "./switch/with-label";
 import SymbolSearchDefault from "./symbol-search/default";
+import SymbolDetailsDefault from "./symbol-details/default";
 import TableDefault from "./table/default";
 import TableEmptyState from "./table/empty-state";
 import TableLoadingSkeleton from "./table/loading-skeleton";
@@ -564,6 +565,7 @@ import TooltipSides from "./tooltip/sides";
 import TooltipWithDelay from "./tooltip/with-delay";
 import TooltipWithIcon from "./tooltip/with-icon";
 import TrackListDefault from "./track-list/default";
+import TimeAndSalesDefault from "./time-and-sales/default";
 import TradeHistoryDefault from "./trade-history/default";
 import VariantPickerDefault from "./variant-picker/default";
 import VerificationProgressDefault from "./verification-progress/default";
@@ -572,6 +574,7 @@ import VerificationProgressManySteps from "./verification-progress/many-steps";
 import VerificationProgressStatuses from "./verification-progress/statuses";
 import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
+import VolumeProfileDefault from "./volume-profile/default";
 import VideoPlayerDefault from "./video-player/default";
 import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
@@ -1409,6 +1412,9 @@ export const examples: Record<string, Example[]> = {
   "symbol-search": [
     { name: "Default", file: "symbol-search/default.tsx", Component: SymbolSearchDefault },
   ],
+  "symbol-details": [
+    { name: "Default", file: "symbol-details/default.tsx", Component: SymbolDetailsDefault },
+  ],
   "table": [
     { name: "Default", file: "table/default.tsx", Component: TableDefault },
     { name: "Empty State", file: "table/empty-state.tsx", Component: TableEmptyState },
@@ -1486,6 +1492,9 @@ export const examples: Record<string, Example[]> = {
   "track-list": [
     { name: "Default", file: "track-list/default.tsx", Component: TrackListDefault },
   ],
+  "time-and-sales": [
+    { name: "Default", file: "time-and-sales/default.tsx", Component: TimeAndSalesDefault },
+  ],
   "trade-history": [
     { name: "Default", file: "trade-history/default.tsx", Component: TradeHistoryDefault },
   ],
@@ -1499,6 +1508,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Statuses", file: "verification-progress/statuses.tsx", Component: VerificationProgressStatuses },
     { name: "Two Steps", file: "verification-progress/two-steps.tsx", Component: VerificationProgressTwoSteps },
     { name: "With Counts", file: "verification-progress/with-counts.tsx", Component: VerificationProgressWithCounts },
+  ],
+  "volume-profile": [
+    { name: "Default", file: "volume-profile/default.tsx", Component: VolumeProfileDefault },
   ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },

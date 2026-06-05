@@ -3125,7 +3125,7 @@
       "name": "market",
       "type": "registry:lib",
       "title": "Market utils",
-      "description": "Pure, DOM-free market helpers for the TradingView-style set: chart geometry (candles, depth, polyline/area paths), price/percent/volume formatting, change tones, and deterministic seeded mock generators (candles, quotes, order books, series).",
+      "description": "Pure, DOM-free market helpers for the TradingView-style set: chart geometry (candles, depth, volume profile, polyline/area paths), price/percent/volume/time formatting, change tones, and deterministic seeded mock generators (candles, quotes, order books, time-and-sales rows, symbol stats, series).",
       "files": [
         {
           "path": "registry/lib/market.ts",
@@ -3612,6 +3612,64 @@
       ]
     },
     {
+      "name": "volume-profile",
+      "type": "registry:ui",
+      "title": "Volume profile",
+      "description": "Session volume profile rendered in-house as SVG — horizontal histogram bars from candle OHLCV via the `market` lib, optional point-of-control line on `--chart-1` / `--brand`.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/market"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/volume-profile.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/volume-profile.tsx"
+        }
+      ]
+    },
+    {
+      "name": "time-and-sales",
+      "type": "registry:component",
+      "title": "Time and sales",
+      "description": "Compact time-and-sales tape — mono time, side-toned price, and size rows with optional relative-time stamps and row select.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/relative-time",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/time-and-sales.tsx",
+          "type": "registry:component",
+          "target": "components/time-and-sales.tsx"
+        }
+      ]
+    },
+    {
+      "name": "symbol-details",
+      "type": "registry:component",
+      "title": "Symbol details",
+      "description": "Symbol fundamentals panel — quote-header, exchange/sector meta, and tabbed overview/financials/statistics metric-stat grids.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/metric-stat",
+        "@byronwade/quote-header",
+        "@byronwade/tabs",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/symbol-details.tsx",
+          "type": "registry:component",
+          "target": "components/symbol-details.tsx"
+        }
+      ]
+    },
+    {
       "name": "money-input",
       "type": "registry:ui",
       "title": "Money input",
@@ -4077,6 +4135,9 @@
         "@byronwade/market-news",
         "@byronwade/price-alert",
         "@byronwade/symbol-search",
+        "@byronwade/volume-profile",
+        "@byronwade/time-and-sales",
+        "@byronwade/symbol-details",
         "@byronwade/money-input",
         "@byronwade/bulk-action-bar",
         "@byronwade/order-summary",

@@ -105,6 +105,37 @@ type HeatmapCell = {
   change: number
 }
 
+type TimeAndSale = {
+  id: string
+  time: number
+  price: number
+  size: number
+  side: "buy" | "sell"
+}
+
+type VolumeProfileBar = {
+  price: number
+  volume: number
+  y: number
+  height: number
+  width: number
+}
+
+type SymbolStatRow = {
+  label: string
+  value: string
+}
+
+type SymbolStats = {
+  quote: Quote
+  exchange: string
+  sector: string
+  industry: string
+  overview: SymbolStatRow[]
+  financials: SymbolStatRow[]
+  statistics: SymbolStatRow[]
+}
+
 type CandleGeometry = {
   x: number
   openY: number
@@ -292,6 +323,57 @@ const cumulativeDepthPath = (
   return d
 }
 
+/** Format an ISO trade timestamp as `HH:mm:ss` (UTC, deterministic). */
+const formatTradeTime = (time: number): string =>
+  new Date(time).toISOString().slice(11, 19)
+
+/** Bucket session volume by price into horizontal profile bars (geometry only). */
+const volumeProfileGeometry = (
+  candles: Candle[],
+  opts: { width: number; height: number; bins?: number },
+): VolumeProfileBar[] => {
+  if (candles.length === 0) return []
+  const bins = opts.bins ?? 24
+  const lows = candles.map((c) => c.low)
+  const highs = candles.map((c) => c.high)
+  const minPrice = Math.min(...lows)
+  const maxPrice = Math.max(...highs)
+  const span = maxPrice - minPrice || 1
+  const binSize = span / bins
+  const volumes = Array.from({ length: bins }, () => 0)
+  for (const candle of candles) {
+    const mid = (candle.high + candle.low) / 2
+    const index = Math.min(
+      bins - 1,
+      Math.max(0, Math.floor((mid - minPrice) / binSize)),
+    )
+    volumes[index] += candle.volume
+  }
+  const maxVolume = Math.max(...volumes, 1)
+  const barHeight = opts.height / bins
+  const yScale = linearScale(minPrice, minPrice + span, opts.height, 0)
+  return volumes.map((volume, index) => {
+    const priceTop = minPrice + index * binSize
+    return {
+      price: priceTop + binSize / 2,
+      volume,
+      y: yScale(priceTop + binSize) - barHeight,
+      height: barHeight,
+      width: (volume / maxVolume) * opts.width,
+    }
+  })
+}
+
+/** Index of the highest-volume price bin in a volume profile. */
+const volumeProfilePocIndex = (bars: VolumeProfileBar[]): number => {
+  if (bars.length === 0) return -1
+  let best = 0
+  for (let i = 1; i < bars.length; i += 1) {
+    if (bars[i].volume > bars[best].volume) best = i
+  }
+  return best
+}
+
 /** Map a signed change to a Tailwind text-token class fragment (success / destructive / muted). */
 const toneForChange = (value: number): string => {
   if (value > 0) return "text-success"
@@ -458,6 +540,75 @@ const makeTrades = (count: number, opts: SeedOpts = {}): Trade[] =>
     makeTrade({ seed: (opts.seed ?? DEFAULT_SEED) + index + 1 }),
   )
 
+/** Generate deterministic time-and-sales tape rows (newest first). */
+const makeTimeAndSalesRows = (
+  count: number,
+  opts: SeedOpts & { mid?: number } = {},
+): TimeAndSale[] => {
+  const seed = opts.seed ?? DEFAULT_SEED
+  const rand = mulberry32(seed)
+  const mid = opts.mid ?? 100
+  let price = mid
+  return Array.from({ length: count }, (_, index) => {
+    const side: TimeAndSale["side"] = rand() > 0.5 ? "buy" : "sell"
+    price = Math.max(0.01, price + (rand() - 0.5) * 0.25)
+    return {
+      id: `ts-${seed}-${index}`,
+      time: BASE_TIME - index * 850,
+      price,
+      size: Math.round(1 + rand() * 750),
+      side,
+    }
+  })
+}
+
+/** Generate deterministic symbol fundamentals grouped for details tabs. */
+const makeSymbolStats = (opts: SeedOpts = {}): SymbolStats => {
+  const seed = opts.seed ?? DEFAULT_SEED
+  const quote = makeQuote({ seed })
+  const rand = mulberry32(seed + 100)
+  const pe = 8 + rand() * 40
+  const eps = 1 + rand() * 12
+  const dividend = rand() * 4
+  const beta = 0.5 + rand() * 1.8
+  const revenue = (quote.marketCap ?? quote.price * 1e9) * (0.2 + rand() * 0.5)
+  return {
+    quote,
+    exchange: ["NASDAQ", "NYSE", "AMEX"][Math.floor(rand() * 3)],
+    sector: ["Technology", "Healthcare", "Energy", "Financials"][
+      Math.floor(rand() * 4)
+    ],
+    industry: "Software—Application",
+    overview: [
+      {
+        label: "Market cap",
+        value: formatCompact(quote.marketCap ?? quote.price * 1_000_000_000),
+      },
+      { label: "Volume", value: formatVolume(quote.volume ?? 0) },
+      { label: "Avg volume", value: formatVolume((quote.volume ?? 0) * 0.85) },
+      { label: "Beta", value: beta.toFixed(2) },
+    ],
+    financials: [
+      { label: "Revenue (TTM)", value: formatCompact(revenue) },
+      { label: "Profit margin", value: `${(rand() * 28 + 4).toFixed(1)}%` },
+      { label: "EPS (TTM)", value: eps.toFixed(2) },
+      { label: "P/E ratio", value: pe.toFixed(1) },
+    ],
+    statistics: [
+      { label: "Dividend yield", value: `${dividend.toFixed(2)}%` },
+      { label: "Shares out", value: formatCompact(revenue / quote.price) },
+      {
+        label: "52W high",
+        value: formatPrice(quote.price * (1.05 + rand() * 0.35)),
+      },
+      {
+        label: "52W low",
+        value: formatPrice(quote.price * (0.55 + rand() * 0.25)),
+      },
+    ],
+  }
+}
+
 const makeMoverRows = (count: number, opts: SeedOpts = {}): MoverRow[] => {
   const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
   return Array.from({ length: count }, (_, index) => {
@@ -574,10 +725,13 @@ export {
   formatChange,
   formatCompact,
   formatVolume,
+  formatTradeTime,
   seriesToPolyline,
   seriesToAreaPath,
   candleGeometry,
   cumulativeDepthPath,
+  volumeProfileGeometry,
+  volumeProfilePocIndex,
   toneForChange,
   makeCandles,
   makeQuote,
@@ -588,6 +742,8 @@ export {
   makePositions,
   makeTrade,
   makeTrades,
+  makeTimeAndSalesRows,
+  makeSymbolStats,
   makeMoverRows,
   makeScreenerRows,
   makeMarketEvents,
@@ -603,6 +759,10 @@ export type {
   OrderBookLevel,
   Position,
   Trade,
+  TimeAndSale,
+  VolumeProfileBar,
+  SymbolStatRow,
+  SymbolStats,
   MarketEvent,
   NewsItem,
   Alert,
