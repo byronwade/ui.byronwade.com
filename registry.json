@@ -8,7 +8,10 @@
       "type": "registry:lib",
       "title": "cn() utility",
       "description": "clsx + tailwind-merge class combiner.",
-      "dependencies": ["clsx", "tailwind-merge"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
         {
           "path": "registry/lib/utils.ts",
@@ -23,7 +26,9 @@
       "extends": "none",
       "title": "Design system foundation",
       "description": "Complete self-contained base: warm paper neutrals + brand-derived green accent (override --brand to re-skin), status/warning/dock/chart/sidebar tokens, fixed agent-activity pastels, radius scale, and sans/mono/serif font tokens. Install via `shadcn init` so it owns :root.",
-      "dependencies": ["tw-animate-css"],
+      "dependencies": [
+        "tw-animate-css"
+      ],
       "cssVars": {
         "theme": {
           "color-background": "var(--background)",
@@ -252,7 +257,10 @@
       "type": "registry:ui",
       "title": "Status dot",
       "description": "Atomic status indicator dot with tone + optional pulse.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/status-dot.tsx",
@@ -315,7 +323,10 @@
       "type": "registry:ui",
       "title": "Activity grid",
       "description": "GitHub-style grid of small circles, filled in brand where active.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/activity-grid.tsx",
@@ -329,8 +340,13 @@
       "type": "registry:ui",
       "title": "Filter pill",
       "description": "Pill-with-chevron filter/range selector control.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/filter-pill.tsx",
@@ -344,7 +360,10 @@
       "type": "registry:ui",
       "title": "Segmented control",
       "description": "Inline segmented toggle (Referrer · Links · Campaign style).",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/segmented-control.tsx",
@@ -358,7 +377,9 @@
       "type": "registry:component",
       "title": "Timeline rail",
       "description": "Vertical event/timeline rail with connectors and terminal marker.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -377,7 +398,10 @@
       "type": "registry:component",
       "title": "Split with rail",
       "description": "Summary column + vertical event/timeline rail archetype shell.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/split-with-rail.tsx",
@@ -391,7 +415,10 @@
       "type": "registry:component",
       "title": "Hero section",
       "description": "Full-bleed hero composition shell.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/hero-section.tsx",
@@ -405,8 +432,13 @@
       "type": "registry:component",
       "title": "Metric stat",
       "description": "Label + large value + delta badge metric row.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/metric-stat.tsx",
@@ -420,7 +452,10 @@
       "type": "registry:component",
       "title": "Centered focal",
       "description": "One centerpiece + floating card; first-run & single-action tools.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/centered-focal.tsx",
@@ -434,8 +469,14 @@
       "type": "registry:ui",
       "title": "Button",
       "description": "Button — design-system component.",
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/button-variants.ts",
@@ -454,7 +495,11 @@
       "type": "registry:ui",
       "title": "Calendar",
       "description": "Date picker built on react-day-picker, dressed in byronwade/ui tokens — selection follows --brand, the range bar uses bg-accent, and nav + day cells reuse buttonVariants.",
-      "dependencies": ["react-day-picker", "date-fns", "lucide-react"],
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -473,8 +518,13 @@
       "type": "registry:ui",
       "title": "Kbd",
       "description": "Keyboard-key indicator (and KbdGroup for shortcut sequences) — mono, token-driven.",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/kbd.tsx",
@@ -488,8 +538,13 @@
       "type": "registry:ui",
       "title": "Spinner",
       "description": "Pure-CSS loading spinner in currentColor with sm/default/lg sizes; role=status + aria-label.",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/spinner.tsx",
@@ -503,8 +558,13 @@
       "type": "registry:ui",
       "title": "Button group",
       "description": "Joins related buttons into one segmented control with shared, overlapped edges; horizontal or vertical.",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/button-group.tsx",
@@ -518,7 +578,10 @@
       "type": "registry:ui",
       "title": "Native select",
       "description": "A styled native <select> with an inline chevron and the standard input affordance edge + focus ring — token-driven, no icon dependency.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/native-select.tsx",
@@ -532,8 +595,14 @@
       "type": "registry:ui",
       "title": "Badge",
       "description": "Badge — design-system component.",
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/badge.tsx",
@@ -547,7 +616,10 @@
       "type": "registry:ui",
       "title": "Card",
       "description": "Card — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/card.tsx",
@@ -561,8 +633,13 @@
       "type": "registry:ui",
       "title": "Input",
       "description": "Input — design-system component.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/input.tsx",
@@ -576,7 +653,10 @@
       "type": "registry:ui",
       "title": "Textarea",
       "description": "Textarea — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/textarea.tsx",
@@ -590,7 +670,10 @@
       "type": "registry:ui",
       "title": "Label",
       "description": "Label — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/label.tsx",
@@ -604,8 +687,14 @@
       "type": "registry:ui",
       "title": "Select",
       "description": "Select — design-system component.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/select.tsx",
@@ -619,8 +708,14 @@
       "type": "registry:ui",
       "title": "Checkbox",
       "description": "Checkbox — design-system component.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/checkbox.tsx",
@@ -634,8 +729,13 @@
       "type": "registry:ui",
       "title": "Switch",
       "description": "Switch — design-system component.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/switch.tsx",
@@ -649,8 +749,13 @@
       "type": "registry:ui",
       "title": "Radio Group",
       "description": "Radio Group — design-system component.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/radio-group.tsx",
@@ -664,8 +769,13 @@
       "type": "registry:ui",
       "title": "Tooltip",
       "description": "Tooltip — design-system component.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/tooltip.tsx",
@@ -679,8 +789,13 @@
       "type": "registry:ui",
       "title": "Popover",
       "description": "Popover — design-system component.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/popover.tsx",
@@ -694,8 +809,14 @@
       "type": "registry:ui",
       "title": "Dropdown Menu",
       "description": "Dropdown Menu — design-system component.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/dropdown-menu.tsx",
@@ -709,7 +830,10 @@
       "type": "registry:ui",
       "title": "Dialog",
       "description": "Dialog — design-system component.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/button",
         "@byronwade/foundation",
@@ -728,8 +852,13 @@
       "type": "registry:ui",
       "title": "Hover Card",
       "description": "Hover Card — design-system component.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/hover-card.tsx",
@@ -743,8 +872,13 @@
       "type": "registry:ui",
       "title": "Alert",
       "description": "Compound inline alert with title, description, icon slot, and action — plus intent tones (default, success, warning, destructive) on the semantic token system.",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/alert.tsx",
@@ -758,8 +892,13 @@
       "type": "registry:ui",
       "title": "Progress",
       "description": "Linear progress bar (Base UI) with label + value and token-driven intent tones (default, brand, success, warning, destructive) on the indicator.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/progress.tsx",
@@ -773,7 +912,10 @@
       "type": "registry:ui",
       "title": "Skeleton",
       "description": "Skeleton — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/skeleton.tsx",
@@ -787,8 +929,14 @@
       "type": "registry:ui",
       "title": "Sonner",
       "description": "Sonner — design-system component.",
-      "dependencies": ["lucide-react", "next-themes", "sonner"],
-      "registryDependencies": ["@byronwade/foundation"],
+      "dependencies": [
+        "lucide-react",
+        "next-themes",
+        "sonner"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation"
+      ],
       "files": [
         {
           "path": "registry/ui/sonner.tsx",
@@ -802,8 +950,14 @@
       "type": "registry:ui",
       "title": "Tabs",
       "description": "Tabs — design-system component.",
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/tabs.tsx",
@@ -817,8 +971,14 @@
       "type": "registry:ui",
       "title": "Accordion",
       "description": "Accordion — design-system component.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/accordion.tsx",
@@ -832,8 +992,13 @@
       "type": "registry:ui",
       "title": "Avatar",
       "description": "Avatar — design-system component.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/avatar.tsx",
@@ -847,8 +1012,13 @@
       "type": "registry:ui",
       "title": "Separator",
       "description": "Separator — design-system component.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/separator.tsx",
@@ -862,8 +1032,14 @@
       "type": "registry:ui",
       "title": "Breadcrumb",
       "description": "Breadcrumb — design-system component.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/breadcrumb.tsx",
@@ -877,7 +1053,10 @@
       "type": "registry:ui",
       "title": "Table",
       "description": "Table — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/table.tsx",
@@ -891,8 +1070,13 @@
       "type": "registry:ui",
       "title": "Chart",
       "description": "Chart — design-system component.",
-      "dependencies": ["recharts"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/chart.tsx",
@@ -924,7 +1108,10 @@
       "type": "registry:component",
       "title": "Page Header",
       "description": "Page Header — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/page-header.tsx",
@@ -938,7 +1125,9 @@
       "type": "registry:component",
       "title": "Stat Card",
       "description": "Stat Card — design-system component.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/metric-stat",
@@ -957,8 +1146,13 @@
       "type": "registry:component",
       "title": "Empty State",
       "description": "Empty State — design-system component.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/empty-state.tsx",
@@ -972,7 +1166,10 @@
       "type": "registry:component",
       "title": "Detail Header",
       "description": "Detail Header — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/detail-header.tsx",
@@ -986,7 +1183,10 @@
       "type": "registry:component",
       "title": "Section",
       "description": "Section — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/section.tsx",
@@ -1000,7 +1200,10 @@
       "type": "registry:component",
       "title": "Event Timeline",
       "description": "Event Timeline — design-system component.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/event-timeline.tsx",
@@ -1027,7 +1230,9 @@
       "type": "registry:lib",
       "title": "Comms store",
       "description": "In-memory messaging backend for the Messages Cockpit layout — seeded mock data + reducer with simulated commit latency and an opt-in fake realtime feed. The swappable boundary for a real backend.",
-      "dependencies": ["react"],
+      "dependencies": [
+        "react"
+      ],
       "files": [
         {
           "path": "registry/lib/comms-store.tsx",
@@ -1041,7 +1246,9 @@
       "type": "registry:component",
       "title": "Conversation list",
       "description": "Messaging conversation list — live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1061,7 +1268,9 @@
       "type": "registry:ui",
       "title": "Morph dock",
       "description": "Config-driven morphing navigation dock built on the useChromeMorph hook — compact/expand items that bloom in place into a consumer panel.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1080,7 +1289,10 @@
       "type": "registry:ui",
       "title": "Aspect Ratio",
       "description": "Container that locks child content to a fixed width-to-height ratio.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/aspect-ratio.tsx",
@@ -1094,8 +1306,13 @@
       "type": "registry:ui",
       "title": "Scroll Area",
       "description": "Custom-styled scrollable viewport with optional scrollbars.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/scroll-area.tsx",
@@ -1109,8 +1326,13 @@
       "type": "registry:ui",
       "title": "Collapsible",
       "description": "Expand/collapse region with trigger and animated panel.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/collapsible.tsx",
@@ -1124,8 +1346,14 @@
       "type": "registry:ui",
       "title": "Toggle",
       "description": "Two-state pressable toggle button with variant and size styles.",
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/toggle.tsx",
@@ -1139,7 +1367,10 @@
       "type": "registry:ui",
       "title": "Toggle Group",
       "description": "Mutually exclusive or multi-select group of toggle buttons.",
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1158,7 +1389,9 @@
       "type": "registry:ui",
       "title": "Input Group",
       "description": "Grouped input shell with addons, buttons, and aligned controls.",
-      "dependencies": ["class-variance-authority"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1179,7 +1412,10 @@
       "type": "registry:ui",
       "title": "Sheet",
       "description": "Slide-over panel dialog anchored to any screen edge.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1198,7 +1434,10 @@
       "type": "registry:ui",
       "title": "Command",
       "description": "Command palette built on cmdk with dialog and input-group integration.",
-      "dependencies": ["cmdk", "lucide-react"],
+      "dependencies": [
+        "cmdk",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1241,7 +1480,10 @@
         "class-variance-authority",
         "lucide-react"
       ],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/navigation-menu.tsx",
@@ -1255,8 +1497,13 @@
       "type": "registry:component",
       "title": "Verification Progress",
       "description": "Multi-step verification status tracker with tone-colored steps, optional counts, and connecting rails.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/verification-progress.tsx",
@@ -1270,7 +1517,10 @@
       "type": "registry:ui",
       "title": "Safari",
       "description": "Safari browser device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/safari.tsx",
@@ -1284,7 +1534,10 @@
       "type": "registry:ui",
       "title": "iPhone",
       "description": "iPhone device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/iphone.tsx",
@@ -1298,7 +1551,9 @@
       "type": "registry:ui",
       "title": "Android",
       "description": "Android phone device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
-      "registryDependencies": ["@byronwade/foundation"],
+      "registryDependencies": [
+        "@byronwade/foundation"
+      ],
       "files": [
         {
           "path": "registry/ui/android.tsx",
@@ -1312,7 +1567,9 @@
       "type": "registry:ui",
       "title": "Kinetic text",
       "description": "Per-letter kinetic typography: letters thicken (weight + text-stroke) and breathe on hover, with neighbours easing in sympathy. currentColor only, dark-mode safe. Adapted from MagicUI.",
-      "registryDependencies": ["@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/kinetic-text.tsx",
@@ -1326,7 +1583,9 @@
       "type": "registry:ui",
       "title": "Backlight",
       "description": "Wraps a child in a saturated, blurred glow of its own pixels via an SVG filter — an RGB backlight that inherits the child’s token colors. Adapted from MagicUI.",
-      "registryDependencies": ["@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/backlight.tsx",
@@ -1340,8 +1599,15 @@
       "type": "registry:ui",
       "title": "World map",
       "description": "Dotted SVG world map with animated great-circle connection arcs. Arcs + points derive from --brand; dotted base resolves from --muted-foreground. Adapted from Aceternity UI.",
-      "dependencies": ["motion", "dotted-map", "next-themes"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "motion",
+        "dotted-map",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/world-map.tsx",
@@ -1355,8 +1621,14 @@
       "type": "registry:ui",
       "title": "Floating dock",
       "description": "macOS-style magnify-on-hover dock (desktop) + collapsible mobile dock, token surfaces and lucide icons. Adapted from Aceternity UI.",
-      "dependencies": ["motion", "lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/floating-dock.tsx",
@@ -1383,7 +1655,10 @@
       "type": "registry:ui",
       "title": "Apple cards carousel",
       "description": "Horizontal card carousel where cards expand into a full modal. Token surfaces, lucide controls, no next/image. Adapted from Aceternity UI.",
-      "dependencies": ["motion", "lucide-react"],
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1403,7 +1678,10 @@
       "title": "Canvas text",
       "description": "Animated bezier lines clipped to text via canvas compositing; palette defaults to the --chart-1…5 ramp. Adapted from Aceternity UI.",
       "dependencies": [],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/canvas-text.tsx",
@@ -1418,7 +1696,9 @@
       "title": "Pixelated canvas",
       "description": "Renders an image as an interactive grid of dots that distort around the pointer. Token-friendly defaults. Adapted from Aceternity UI.",
       "dependencies": [],
-      "registryDependencies": ["@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/pixelated-canvas.tsx",
@@ -1432,8 +1712,13 @@
       "type": "registry:ui",
       "title": "Slider",
       "description": "Single or range slider built on Base UI — one thumb per value, token track/indicator, keyboard + a11y.",
-      "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/slider.tsx",
@@ -1447,8 +1732,14 @@
       "type": "registry:ui",
       "title": "Number field",
       "description": "Numeric input with increment/decrement, clamping, scrub, and formatting — built on Base UI. Token surfaces, lucide steppers.",
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/number-field.tsx",
@@ -1482,7 +1773,9 @@
       "type": "registry:ui",
       "title": "File tree",
       "description": "Collapsible file/folder tree with selection, sorting, and expand-all, plus a `panel` variant (chevron disclosure, guide lines, count badges) and `multi`-select with cascading checkboxes — rebuilt on Base UI (collapsible). Base adapted from MagicUI; panel/multi-select an original implementation inspired by Untitled UI.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1505,7 +1798,10 @@
       "type": "registry:ui",
       "title": "Cursor",
       "description": "Live collaboration cursor — pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/cursor.tsx",
@@ -1519,7 +1815,9 @@
       "type": "registry:ui",
       "title": "Pill",
       "description": "Rounded pill with avatar/status/indicator/delta parts; tones map to success/destructive/warning/brand tokens. Adapted from kibo-ui.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1576,7 +1874,10 @@
       "type": "registry:ui",
       "title": "Relative time",
       "description": "Multi-timezone live clock — per-zone time/date display with mono labels, ticking each second. Adapted from kibo-ui.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/relative-time.tsx",
@@ -1590,8 +1891,13 @@
       "type": "registry:ui",
       "title": "QR code",
       "description": "Token-colored QR code (modules use --foreground/--background, so it re-skins). Adapted from kibo-ui.",
-      "dependencies": ["qrcode", "culori"],
-      "registryDependencies": ["@byronwade/utils"],
+      "dependencies": [
+        "qrcode",
+        "culori"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/qr-code.tsx",
@@ -1605,8 +1911,13 @@
       "type": "registry:ui",
       "title": "Rating",
       "description": "Interactive star rating (keyboard + hover) plus a read-only RatingBadge (score + star). Tone follows --brand. Adapted from kibo-ui (+ Untitled UI-style badge).",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/rating.tsx",
@@ -1620,8 +1931,12 @@
       "type": "registry:ui",
       "title": "Credit card",
       "description": "Flippable credit-card display (chip, number, expiry, CVV, mag stripe, payment icon). Token body that re-skins; legible in both themes. Adapted from kibo-ui.",
-      "dependencies": ["react-svg-credit-card-payment-icons"],
-      "registryDependencies": ["@byronwade/utils"],
+      "dependencies": [
+        "react-svg-credit-card-payment-icons"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/credit-card.tsx",
@@ -1635,8 +1950,14 @@
       "type": "registry:ui",
       "title": "Image crop",
       "description": "Crop a File to a PNG (react-image-crop + canvas); apply/reset controls, token crop chrome. Adapted from kibo-ui.",
-      "dependencies": ["lucide-react", "react-image-crop"],
-      "registryDependencies": ["@byronwade/utils", "@byronwade/button"],
+      "dependencies": [
+        "lucide-react",
+        "react-image-crop"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
       "files": [
         {
           "path": "registry/ui/image-crop.tsx",
@@ -1650,7 +1971,10 @@
       "type": "registry:ui",
       "title": "Color picker",
       "description": "HSL color picker with a 2D saturation/lightness field, hue and alpha sliders, an eyedropper, and hex/rgb/css/hsl format output. Adapted from kibo-ui.",
-      "dependencies": ["color", "@base-ui/react"],
+      "dependencies": [
+        "color",
+        "@base-ui/react"
+      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1671,8 +1995,13 @@
       "type": "registry:ui",
       "title": "Video player",
       "description": "Token-mapped media-chrome video player with a composable control bar and default/minimal/theater/poster variants. Adapted from kibo-ui.",
-      "dependencies": ["media-chrome"],
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "dependencies": [
+        "media-chrome"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/ui/video-player.tsx",
@@ -1795,7 +2124,10 @@
       "type": "registry:component",
       "title": "AI Loader",
       "description": "Spinning multi-opacity loader for AI/agent surfaces (adapted from AI Elements).",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/loader.tsx",
@@ -1809,8 +2141,13 @@
       "type": "registry:component",
       "title": "AI Shimmer",
       "description": "Animated text-shimmer that sweeps a token-driven light gradient across muted text for AI thinking/streaming states.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
-      "dependencies": ["motion"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "motion"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/shimmer.tsx",
@@ -1844,8 +2181,13 @@
       "type": "registry:component",
       "title": "AI Image",
       "description": "Renders an AI-generated image from the Experimental_GeneratedImage shape as an edge-framed, radius-clipped data URI (adapted from AI Elements).",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
-      "dependencies": ["ai"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "ai"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/image.tsx",
@@ -1865,7 +2207,9 @@
         "@byronwade/button",
         "@byronwade/dropdown-menu"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/open-in-chat.tsx",
@@ -1885,7 +2229,9 @@
         "@byronwade/badge",
         "@byronwade/hover-card"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/inline-citation.tsx",
@@ -1906,7 +2252,10 @@
         "@byronwade/hover-card",
         "@byronwade/progress"
       ],
-      "dependencies": ["ai", "tokenlens"],
+      "dependencies": [
+        "ai",
+        "tokenlens"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/context.tsx",
@@ -1925,7 +2274,10 @@
         "@byronwade/utils",
         "@byronwade/button"
       ],
-      "dependencies": ["shiki", "lucide-react"],
+      "dependencies": [
+        "shiki",
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/code-block.tsx",
@@ -1944,7 +2296,9 @@
         "@byronwade/utils",
         "@byronwade/collapsible"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/task.tsx",
@@ -1963,7 +2317,9 @@
         "@byronwade/utils",
         "@byronwade/collapsible"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/sources.tsx",
@@ -2003,7 +2359,9 @@
         "@byronwade/alert",
         "@byronwade/button"
       ],
-      "dependencies": ["ai"],
+      "dependencies": [
+        "ai"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/confirmation.tsx",
@@ -2024,7 +2382,9 @@
         "@byronwade/separator",
         "@byronwade/tooltip"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/checkpoint.tsx",
@@ -2046,7 +2406,9 @@
         "@byronwade/collapsible",
         "@byronwade/ai-shimmer"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/plan.tsx",
@@ -2067,7 +2429,9 @@
         "@byronwade/scroll-area",
         "@byronwade/button"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/queue.tsx",
@@ -2086,7 +2450,10 @@
         "@byronwade/utils",
         "@byronwade/button"
       ],
-      "dependencies": ["lucide-react", "use-stick-to-bottom"],
+      "dependencies": [
+        "lucide-react",
+        "use-stick-to-bottom"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/conversation.tsx",
@@ -2106,7 +2473,10 @@
         "@byronwade/collapsible",
         "@byronwade/ai-shimmer"
       ],
-      "dependencies": ["streamdown", "lucide-react"],
+      "dependencies": [
+        "streamdown",
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/reasoning.tsx",
@@ -2127,7 +2497,10 @@
         "@byronwade/collapsible",
         "@byronwade/ai-code-block"
       ],
-      "dependencies": ["ai", "lucide-react"],
+      "dependencies": [
+        "ai",
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/tool.tsx",
@@ -2148,7 +2521,11 @@
         "@byronwade/button-group",
         "@byronwade/tooltip"
       ],
-      "dependencies": ["ai", "streamdown", "lucide-react"],
+      "dependencies": [
+        "ai",
+        "streamdown",
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/message.tsx",
@@ -2168,7 +2545,9 @@
         "@byronwade/badge",
         "@byronwade/collapsible"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/chain-of-thought.tsx",
@@ -2188,7 +2567,9 @@
         "@byronwade/button",
         "@byronwade/tooltip"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/artifact.tsx",
@@ -2207,7 +2588,9 @@
         "@byronwade/utils",
         "@byronwade/card"
       ],
-      "dependencies": ["@xyflow/react"],
+      "dependencies": [
+        "@xyflow/react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/node.tsx",
@@ -2221,8 +2604,13 @@
       "type": "registry:component",
       "title": "AI Edge",
       "description": "React Flow custom edges: a dashed temporary connector and an animated edge with a brand dot traveling along the path.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
-      "dependencies": ["@xyflow/react"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/edge.tsx",
@@ -2236,8 +2624,13 @@
       "type": "registry:component",
       "title": "AI Panel",
       "description": "A React Flow overlay panel that floats over the flow canvas, pinned to a configurable corner.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
-      "dependencies": ["@xyflow/react"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/panel.tsx",
@@ -2251,8 +2644,13 @@
       "type": "registry:component",
       "title": "AI Canvas",
       "description": "A React Flow node-graph surface with opinionated interaction defaults and a token-driven, pattern-configurable background for agent/workflow UIs.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
-      "dependencies": ["@xyflow/react"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/canvas.tsx",
@@ -2266,8 +2664,13 @@
       "type": "registry:component",
       "title": "AI Controls",
       "description": "Token-styled React Flow zoom / fit-view / interactivity control panel for AI canvas surfaces (adapted from AI Elements).",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
-      "dependencies": ["@xyflow/react"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/controls.tsx",
@@ -2291,7 +2694,11 @@
         "@byronwade/input-group",
         "@byronwade/select"
       ],
-      "dependencies": ["ai", "lucide-react", "nanoid"],
+      "dependencies": [
+        "ai",
+        "lucide-react",
+        "nanoid"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/prompt-input.tsx",
@@ -2305,8 +2712,13 @@
       "type": "registry:component",
       "title": "AI Toolbar",
       "description": "A token-driven floating action toolbar that attaches to a React Flow custom node, with horizontal/vertical orientation variants.",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
-      "dependencies": ["@xyflow/react"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/toolbar.tsx",
@@ -2326,7 +2738,10 @@
         "@byronwade/button",
         "@byronwade/hover-card"
       ],
-      "dependencies": ["ai", "lucide-react"],
+      "dependencies": [
+        "ai",
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/attachments.tsx",
@@ -2340,8 +2755,13 @@
       "type": "registry:component",
       "title": "AI Connection",
       "description": "Token-styled React Flow connection line for AI canvas/workflow surfaces (adapted from AI Elements).",
-      "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
-      "dependencies": ["@xyflow/react"],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "@xyflow/react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/connection.tsx",
@@ -2363,7 +2783,9 @@
         "@byronwade/input",
         "@byronwade/tooltip"
       ],
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/components/ai-elements/web-preview.tsx",
