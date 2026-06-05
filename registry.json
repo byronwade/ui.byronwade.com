@@ -2160,6 +2160,26 @@
       ]
     },
     {
+      "name": "audio-player",
+      "type": "registry:ui",
+      "title": "Audio player",
+      "description": "Token-mapped media-chrome <audio> player with a composable control bar and default/minimal/card variants. Audio sibling of video-player; accent follows --brand.",
+      "dependencies": [
+        "media-chrome"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/audio-player.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/audio-player.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
