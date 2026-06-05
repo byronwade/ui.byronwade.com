@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Home, Inbox, BarChart3, Settings } from "lucide-react";
-import { MorphSidebar } from "@/components/ui/morph-sidebar";
+import { Home, Inbox, BarChart3, Settings } from "lucide-react"
+import { MorphSidebar } from "@/components/ui/morph-sidebar"
 
 export default function Example() {
   return (
@@ -17,5 +17,5 @@ export default function Example() {
       />
       <div className="flex-1 bg-background" />
     </div>
-  );
+  )
 }

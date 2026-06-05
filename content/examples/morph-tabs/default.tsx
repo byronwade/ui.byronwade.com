@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Home, Search, Bell, User } from "lucide-react";
-import { MorphTabs } from "@/components/ui/morph-tabs";
+import { Home, Search, Bell, User } from "lucide-react"
+import { MorphTabs } from "@/components/ui/morph-tabs"
 
 export default function Example() {
   return (
@@ -16,12 +16,16 @@ export default function Example() {
           ]}
           sheet={
             <div className="space-y-2">
-              <p className="text-sm font-medium tracking-tight">Quick actions</p>
-              <p className="text-[13px] text-muted-foreground">Pull up the sheet for more.</p>
+              <p className="text-sm font-medium tracking-tight">
+                Quick actions
+              </p>
+              <p className="text-[13px] text-muted-foreground">
+                Pull up the sheet for more.
+              </p>
             </div>
           }
         />
       </div>
     </div>
-  );
+  )
 }

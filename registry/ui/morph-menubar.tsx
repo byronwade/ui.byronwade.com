@@ -1,41 +1,48 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { MorphSurface } from "@/components/ui/morph-surface";
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { MorphSurface } from "@/components/ui/morph-surface"
 
 export interface MorphMenubarMenuItem {
-  id: string;
-  label: string;
-  onSelect?: () => void;
+  id: string
+  label: string
+  onSelect?: () => void
 }
 
 export interface MorphMenubarMenu {
-  id: string;
-  label: string;
-  items: MorphMenubarMenuItem[];
+  id: string
+  label: string
+  items: MorphMenubarMenuItem[]
 }
 
 export interface MorphMenubarProps {
-  menus: MorphMenubarMenu[];
-  navLabel?: string;
-  className?: string;
+  menus: MorphMenubarMenu[]
+  navLabel?: string
+  className?: string
 }
 
-const BAR_H = 40; // px — slim menubar row
-const ITEM_H = 32; // px — one dropdown item
+const BAR_H = 40 // px — slim menubar row
+const ITEM_H = 32 // px — one dropdown item
 
 /** A slim menubar that blooms the active menu's dropdown IN PLACE — positioned
  *  under its trigger — via the morph technique (`placement="top"`,
  *  `grow="height"`). The dropdown offset is measured inside this component, so
  *  the agnostic MorphSurface primitive stays untouched. */
-export function MorphMenubar({ menus, navLabel = "Menubar", className }: MorphMenubarProps) {
-  const [active, setActive] = React.useState<{ id: string; left: number } | null>(null);
-  const open = active !== null;
-  const activeMenu = active ? menus.find((m) => m.id === active.id) : undefined;
-  const dropdownH = activeMenu ? activeMenu.items.length * ITEM_H + 8 : 0;
+export function MorphMenubar({
+  menus,
+  navLabel = "Menubar",
+  className,
+}: MorphMenubarProps) {
+  const [active, setActive] = React.useState<{
+    id: string
+    left: number
+  } | null>(null)
+  const open = active !== null
+  const activeMenu = active ? menus.find((m) => m.id === active.id) : undefined
+  const dropdownH = activeMenu ? activeMenu.items.length * ITEM_H + 8 : 0
 
-  const close = () => setActive(null);
+  const close = () => setActive(null)
 
   const Bar = (
     <div className="flex items-center gap-0.5 px-2" style={{ height: BAR_H }}>
@@ -46,8 +53,10 @@ export function MorphMenubar({ menus, navLabel = "Menubar", className }: MorphMe
           aria-haspopup="menu"
           aria-expanded={open && active?.id === menu.id}
           onClick={(e) => {
-            const left = e.currentTarget.offsetLeft;
-            setActive((cur) => (cur?.id === menu.id ? null : { id: menu.id, left }));
+            const left = e.currentTarget.offsetLeft
+            setActive((cur) =>
+              cur?.id === menu.id ? null : { id: menu.id, left },
+            )
           }}
           className={cn(
             "rounded px-2.5 py-1 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
@@ -60,10 +69,11 @@ export function MorphMenubar({ menus, navLabel = "Menubar", className }: MorphMe
         </button>
       ))}
     </div>
-  );
+  )
 
   return (
     <MorphSurface
+      data-slot="morph-menubar"
       open={open}
       onOpenChange={() => close()}
       placement="top"
@@ -88,8 +98,8 @@ export function MorphMenubar({ menus, navLabel = "Menubar", className }: MorphMe
                   type="button"
                   role="menuitem"
                   onClick={() => {
-                    mi.onSelect?.();
-                    close();
+                    mi.onSelect?.()
+                    close()
                   }}
                   className="flex h-8 w-full items-center rounded-md px-2.5 text-sm text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
                 >
@@ -101,5 +111,5 @@ export function MorphMenubar({ menus, navLabel = "Menubar", className }: MorphMe
         </div>
       }
     />
-  );
+  )
 }
