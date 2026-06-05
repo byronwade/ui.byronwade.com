@@ -60,8 +60,11 @@ atoms (root slot is enough).
 
 ## Low — formatting (Prettier, `semi: false`)
 
-636 files across the repo differ from Prettier. Entirely mechanical — `prettier --write` fixes all.
-Largest bucket is `content/` examples (468). No review needed per-file; review the *diff shape* once.
+636 files in `registry`/`app`/`content`/`scripts`/`tests`/`lib` differ from Prettier (**761
+repo-wide** including `.md`/`.mdc`/`.css`, root, and `packages/`). Entirely mechanical — `prettier
+--write` fixes all. Largest bucket is `content/` examples (468). No review needed per-file; review
+the *diff shape* once. Note: the Phase-A docs just written (`CONVENTIONS.md`, the two agent files,
+this report) are in the repo-wide count and will reformat in Batch 0.
 
 ## Proposed Phase C batches (each ends green on `npm run test:ci`)
 
