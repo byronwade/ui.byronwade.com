@@ -359,7 +359,7 @@
       "name": "segmented-control",
       "type": "registry:ui",
       "title": "Segmented control",
-      "description": "Inline segmented toggle (Referrer · Links · Campaign style).",
+      "description": "Inline segmented toggle (Referrer \u00b7 Links \u00b7 Campaign style).",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -468,7 +468,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Button — design-system component.",
+      "description": "Button \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -494,7 +494,7 @@
       "name": "calendar",
       "type": "registry:ui",
       "title": "Calendar",
-      "description": "Date picker built on react-day-picker, dressed in byronwade/ui tokens — selection follows --brand, the range bar uses bg-accent, and nav + day cells reuse buttonVariants.",
+      "description": "Date picker built on react-day-picker, dressed in byronwade/ui tokens \u2014 selection follows --brand, the range bar uses bg-accent, and nav + day cells reuse buttonVariants.",
       "dependencies": [
         "react-day-picker",
         "date-fns",
@@ -517,7 +517,7 @@
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
-      "description": "Keyboard-key indicator (and KbdGroup for shortcut sequences) — mono, token-driven.",
+      "description": "Keyboard-key indicator (and KbdGroup for shortcut sequences) \u2014 mono, token-driven.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -577,7 +577,7 @@
       "name": "native-select",
       "type": "registry:ui",
       "title": "Native select",
-      "description": "A styled native <select> with an inline chevron and the standard input affordance edge + focus ring — token-driven, no icon dependency.",
+      "description": "A styled native <select> with an inline chevron and the standard input affordance edge + focus ring \u2014 token-driven, no icon dependency.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -594,7 +594,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "Badge — design-system component.",
+      "description": "Badge \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -615,7 +615,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "Card — design-system component.",
+      "description": "Card \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -632,7 +632,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Input — design-system component.",
+      "description": "Input \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -652,7 +652,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "Textarea — design-system component.",
+      "description": "Textarea \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -669,7 +669,7 @@
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
-      "description": "Label — design-system component.",
+      "description": "Label \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -686,7 +686,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Select — design-system component.",
+      "description": "Select \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -707,7 +707,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Checkbox — design-system component.",
+      "description": "Checkbox \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -728,7 +728,7 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "Switch — design-system component.",
+      "description": "Switch \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -748,7 +748,7 @@
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
-      "description": "Radio Group — design-system component.",
+      "description": "Radio Group \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -768,7 +768,7 @@
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
-      "description": "Tooltip — design-system component.",
+      "description": "Tooltip \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -788,7 +788,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "Popover — design-system component.",
+      "description": "Popover \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -808,7 +808,7 @@
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "Dropdown Menu",
-      "description": "Dropdown Menu — design-system component.",
+      "description": "Dropdown Menu \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -829,7 +829,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Dialog — design-system component.",
+      "description": "Dialog \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -851,7 +851,7 @@
       "name": "hover-card",
       "type": "registry:ui",
       "title": "Hover Card",
-      "description": "Hover Card — design-system component.",
+      "description": "Hover Card \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -871,7 +871,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "Compound inline alert with title, description, icon slot, and action — plus intent tones (default, success, warning, destructive) on the semantic token system.",
+      "description": "Compound inline alert with title, description, icon slot, and action \u2014 plus intent tones (default, success, warning, destructive) on the semantic token system.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -911,7 +911,7 @@
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
-      "description": "Skeleton — design-system component.",
+      "description": "Skeleton \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -928,7 +928,7 @@
       "name": "sonner",
       "type": "registry:ui",
       "title": "Sonner",
-      "description": "Sonner — design-system component.",
+      "description": "Sonner \u2014 design-system component.",
       "dependencies": [
         "lucide-react",
         "next-themes",
@@ -949,7 +949,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Tabs — design-system component.",
+      "description": "Tabs \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -970,7 +970,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Accordion — design-system component.",
+      "description": "Accordion \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -991,7 +991,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Avatar — design-system component.",
+      "description": "Avatar \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1011,7 +1011,7 @@
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
-      "description": "Separator — design-system component.",
+      "description": "Separator \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1031,7 +1031,7 @@
       "name": "breadcrumb",
       "type": "registry:ui",
       "title": "Breadcrumb",
-      "description": "Breadcrumb — design-system component.",
+      "description": "Breadcrumb \u2014 design-system component.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -1052,7 +1052,7 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "Table — design-system component.",
+      "description": "Table \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1069,7 +1069,7 @@
       "name": "chart",
       "type": "registry:ui",
       "title": "Chart",
-      "description": "Chart — design-system component.",
+      "description": "Chart \u2014 design-system component.",
       "dependencies": [
         "recharts"
       ],
@@ -1089,7 +1089,7 @@
       "name": "status-pill",
       "type": "registry:component",
       "title": "Status Pill",
-      "description": "Status Pill — design-system component.",
+      "description": "Status Pill \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/status-dot",
@@ -1107,7 +1107,7 @@
       "name": "page-header",
       "type": "registry:component",
       "title": "Page Header",
-      "description": "Page Header — design-system component.",
+      "description": "Page Header \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1124,7 +1124,7 @@
       "name": "stat-card",
       "type": "registry:component",
       "title": "Stat Card",
-      "description": "Stat Card — design-system component.",
+      "description": "Stat Card \u2014 design-system component.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1145,7 +1145,7 @@
       "name": "empty-state",
       "type": "registry:component",
       "title": "Empty State",
-      "description": "Empty State — design-system component.",
+      "description": "Empty State \u2014 design-system component.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1165,7 +1165,7 @@
       "name": "detail-header",
       "type": "registry:component",
       "title": "Detail Header",
-      "description": "Detail Header — design-system component.",
+      "description": "Detail Header \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1182,7 +1182,7 @@
       "name": "section",
       "type": "registry:component",
       "title": "Section",
-      "description": "Section — design-system component.",
+      "description": "Section \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1199,7 +1199,7 @@
       "name": "event-timeline",
       "type": "registry:component",
       "title": "Event Timeline",
-      "description": "Event Timeline — design-system component.",
+      "description": "Event Timeline \u2014 design-system component.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1216,7 +1216,7 @@
       "name": "use-chrome-morph",
       "type": "registry:lib",
       "title": "useChromeMorph",
-      "description": "Shared morph hook for floating chrome — sizes a container between its collapsed box and an open panel (width/height/border-radius), cross-fading rest and panel.",
+      "description": "Shared morph hook for floating chrome \u2014 sizes a container between its collapsed box and an open panel (width/height/border-radius), cross-fading rest and panel.",
       "files": [
         {
           "path": "registry/lib/use-chrome-morph.ts",
@@ -1229,7 +1229,7 @@
       "name": "comms-store",
       "type": "registry:lib",
       "title": "Comms store",
-      "description": "In-memory messaging backend for the Messages Cockpit layout — seeded mock data + reducer with simulated commit latency and an opt-in fake realtime feed. The swappable boundary for a real backend.",
+      "description": "In-memory messaging backend for the Messages Cockpit layout \u2014 seeded mock data + reducer with simulated commit latency and an opt-in fake realtime feed. The swappable boundary for a real backend.",
       "dependencies": [
         "react"
       ],
@@ -1245,7 +1245,7 @@
       "name": "conversation-list",
       "type": "registry:component",
       "title": "Conversation list",
-      "description": "Messaging conversation list — live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
+      "description": "Messaging conversation list \u2014 live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1267,7 +1267,7 @@
       "name": "morph-dock",
       "type": "registry:ui",
       "title": "Morph dock",
-      "description": "Config-driven morphing navigation dock built on the useChromeMorph hook — compact/expand items that bloom in place into a consumer panel.",
+      "description": "Config-driven morphing navigation dock built on the useChromeMorph hook \u2014 compact/expand items that bloom in place into a consumer panel.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1288,7 +1288,7 @@
       "name": "morph-surface",
       "type": "registry:ui",
       "title": "Morph Surface",
-      "description": "Agnostic morph primitive — open-state orchestration (refs, cross-fade, Esc/outside-close, box sizing) with no visual style. Navigation styles compose it.",
+      "description": "Agnostic morph primitive \u2014 open-state orchestration (refs, cross-fade, Esc/outside-close, box sizing) with no visual style. Navigation styles compose it.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1341,6 +1341,66 @@
           "path": "registry/ui/morph-sidebar.tsx",
           "type": "registry:ui",
           "target": "components/ui/morph-sidebar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "morph-tabs",
+      "type": "registry:ui",
+      "title": "Morph Tabs",
+      "description": "Bottom tab bar that blooms a sheet up via the morph technique.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "morph-menubar",
+      "type": "registry:ui",
+      "title": "Morph Menubar",
+      "description": "Slim menubar that blooms the active menu's dropdown in place via the morph technique.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-menubar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-menubar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "morph-rail",
+      "type": "registry:ui",
+      "title": "Morph Rail",
+      "description": "Right icon rail that blooms a wide labeled panel to the side via the morph technique.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-rail.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-rail.tsx"
         }
       ]
     },
@@ -1576,7 +1636,7 @@
       "name": "safari",
       "type": "registry:ui",
       "title": "Safari",
-      "description": "Safari browser device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "description": "Safari browser device mockup frame (SVG) wrapping a screenshot, image, or video \u2014 token-driven chrome, automatic dark mode. Adapted from MagicUI.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1593,7 +1653,7 @@
       "name": "iphone",
       "type": "registry:ui",
       "title": "iPhone",
-      "description": "iPhone device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "description": "iPhone device mockup frame (SVG) wrapping a screenshot, image, or video \u2014 token-driven chrome, automatic dark mode. Adapted from MagicUI.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1610,7 +1670,7 @@
       "name": "android",
       "type": "registry:ui",
       "title": "Android",
-      "description": "Android phone device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "description": "Android phone device mockup frame (SVG) wrapping a screenshot, image, or video \u2014 token-driven chrome, automatic dark mode. Adapted from MagicUI.",
       "registryDependencies": [
         "@byronwade/foundation"
       ],
@@ -1642,7 +1702,7 @@
       "name": "backlight",
       "type": "registry:ui",
       "title": "Backlight",
-      "description": "Wraps a child in a saturated, blurred glow of its own pixels via an SVG filter — an RGB backlight that inherits the child’s token colors. Adapted from MagicUI.",
+      "description": "Wraps a child in a saturated, blurred glow of its own pixels via an SVG filter \u2014 an RGB backlight that inherits the child\u2019s token colors. Adapted from MagicUI.",
       "registryDependencies": [
         "@byronwade/utils"
       ],
@@ -1736,7 +1796,7 @@
       "name": "canvas-text",
       "type": "registry:ui",
       "title": "Canvas text",
-      "description": "Animated bezier lines clipped to text via canvas compositing; palette defaults to the --chart-1…5 ramp. Adapted from Aceternity UI.",
+      "description": "Animated bezier lines clipped to text via canvas compositing; palette defaults to the --chart-1\u20265 ramp. Adapted from Aceternity UI.",
       "dependencies": [],
       "registryDependencies": [
         "@byronwade/foundation",
@@ -1771,7 +1831,7 @@
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
-      "description": "Single or range slider built on Base UI — one thumb per value, token track/indicator, keyboard + a11y.",
+      "description": "Single or range slider built on Base UI \u2014 one thumb per value, token track/indicator, keyboard + a11y.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1791,7 +1851,7 @@
       "name": "number-field",
       "type": "registry:ui",
       "title": "Number field",
-      "description": "Numeric input with increment/decrement, clamping, scrub, and formatting — built on Base UI. Token surfaces, lucide steppers.",
+      "description": "Numeric input with increment/decrement, clamping, scrub, and formatting \u2014 built on Base UI. Token surfaces, lucide steppers.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -1832,7 +1892,7 @@
       "name": "file-tree",
       "type": "registry:ui",
       "title": "File tree",
-      "description": "Collapsible file/folder tree with selection, sorting, and expand-all, plus a `panel` variant (chevron disclosure, guide lines, count badges) and `multi`-select with cascading checkboxes — rebuilt on Base UI (collapsible). Base adapted from MagicUI; panel/multi-select an original implementation inspired by Untitled UI.",
+      "description": "Collapsible file/folder tree with selection, sorting, and expand-all, plus a `panel` variant (chevron disclosure, guide lines, count badges) and `multi`-select with cascading checkboxes \u2014 rebuilt on Base UI (collapsible). Base adapted from MagicUI; panel/multi-select an original implementation inspired by Untitled UI.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1857,7 +1917,7 @@
       "name": "cursor",
       "type": "registry:ui",
       "title": "Cursor",
-      "description": "Live collaboration cursor — pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
+      "description": "Live collaboration cursor \u2014 pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -1915,7 +1975,7 @@
       "name": "ticker",
       "type": "registry:ui",
       "title": "Ticker",
-      "description": "Stock/crypto ticker — icon, symbol, formatted price, and up/down change (success/destructive tokens). Adapted from kibo-ui.",
+      "description": "Stock/crypto ticker \u2014 icon, symbol, formatted price, and up/down change (success/destructive tokens). Adapted from kibo-ui.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -1933,7 +1993,7 @@
       "name": "relative-time",
       "type": "registry:ui",
       "title": "Relative time",
-      "description": "Multi-timezone live clock — per-zone time/date display with mono labels, ticking each second. Adapted from kibo-ui.",
+      "description": "Multi-timezone live clock \u2014 per-zone time/date display with mono labels, ticking each second. Adapted from kibo-ui.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -2573,7 +2633,7 @@
       "name": "ai-message",
       "type": "registry:component",
       "title": "AI Message",
-      "description": "Chat message primitives for AI conversations — bubbles, actions, branch navigation, attachments, and a streaming markdown response.",
+      "description": "Chat message primitives for AI conversations \u2014 bubbles, actions, branch navigation, attachments, and a streaming markdown response.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",

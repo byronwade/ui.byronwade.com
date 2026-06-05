@@ -33,7 +33,10 @@ Before writing any markup, check whether a component already exists. Reach for t
   (config-driven nav dock that blooms into a panel via the hook), `morph-surface`
   (agnostic morph primitive — open-state orchestration with no visual style; navigation styles compose it), `morph-bar`
   (full-width top navigation bar that blooms a panel down via the morph technique), `morph-sidebar`
-  (left icon rail that morphs wider into a labeled sidebar via the morph technique)
+  (left icon rail that morphs wider into a labeled sidebar via the morph technique), `morph-tabs`
+  (bottom tab bar that blooms a sheet up via the morph technique), `morph-menubar`
+  (slim menubar that blooms the active menu's dropdown in place via the morph technique), `morph-rail`
+  (right icon rail that blooms a wide labeled panel to the side via the morph technique)
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
   `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`,

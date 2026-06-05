@@ -294,8 +294,11 @@ import MorphDockSeparators from "./morph-dock/separators";
 import MorphDockSplitToolbar from "./morph-dock/split-toolbar";
 import MorphDockTones from "./morph-dock/tones";
 import MorphDockToolsPrimary from "./morph-dock/tools-primary";
+import MorphMenubarDefault from "./morph-menubar/default";
+import MorphRailDefault from "./morph-rail/default";
 import MorphSidebarDefault from "./morph-sidebar/default";
 import MorphSurfaceDefault from "./morph-surface/default";
+import MorphTabsDefault from "./morph-tabs/default";
 import NativeSelectDefault from "./native-select/default";
 import NavigationMenuDefault from "./navigation-menu/default";
 import NavigationMenuSimpleLinks from "./navigation-menu/simple-links";
@@ -939,11 +942,20 @@ export const examples: Record<string, Example[]> = {
     { name: "Tones", file: "morph-dock/tones.tsx", Component: MorphDockTones },
     { name: "Tools Primary", file: "morph-dock/tools-primary.tsx", Component: MorphDockToolsPrimary },
   ],
+  "morph-menubar": [
+    { name: "Default", file: "morph-menubar/default.tsx", Component: MorphMenubarDefault },
+  ],
+  "morph-rail": [
+    { name: "Default", file: "morph-rail/default.tsx", Component: MorphRailDefault },
+  ],
   "morph-sidebar": [
     { name: "Default", file: "morph-sidebar/default.tsx", Component: MorphSidebarDefault },
   ],
   "morph-surface": [
     { name: "Default", file: "morph-surface/default.tsx", Component: MorphSurfaceDefault },
+  ],
+  "morph-tabs": [
+    { name: "Default", file: "morph-tabs/default.tsx", Component: MorphTabsDefault },
   ],
   "native-select": [
     { name: "Default", file: "native-select/default.tsx", Component: NativeSelectDefault },
