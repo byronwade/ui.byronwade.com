@@ -37,7 +37,7 @@ export default function Example() {
         label="Incident Status"
         value={
           <span className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-green-500" />
+            <span className="size-2 rounded-full bg-success" />
             <span>Resolved</span>
           </span>
         }

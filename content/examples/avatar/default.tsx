@@ -35,7 +35,7 @@ export default function Example() {
         <Avatar>
           <AvatarImage src="https://i.pravatar.cc/40?u=default2" alt="Pat Chen" />
           <AvatarFallback>PC</AvatarFallback>
-          <AvatarBadge className="bg-green-500" />
+          <AvatarBadge className="bg-success" />
         </Avatar>
       </div>
 

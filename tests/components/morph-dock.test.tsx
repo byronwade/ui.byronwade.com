@@ -41,7 +41,11 @@ beforeEach(() => {
   stubResizeObserver();
   stubMatchMedia();
 });
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  vi.restoreAllMocks();
+  // Don't leak the stubbed ResizeObserver into sibling files in this worker.
+  Reflect.deleteProperty(globalThis, "ResizeObserver");
+});
 
 const baseItems: MorphDockItem[] = [
   { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },

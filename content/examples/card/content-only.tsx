@@ -5,9 +5,9 @@ import {
 import { CheckCircle2, Clock, AlertCircle } from "lucide-react";
 
 const tasks = [
-  { icon: CheckCircle2, color: "text-emerald-500", label: "Database migration", meta: "Completed 9:14 AM" },
-  { icon: Clock, color: "text-amber-500", label: "Deploy to staging", meta: "In progress · ~4 min left" },
-  { icon: AlertCircle, color: "text-rose-500", label: "Run integration tests", meta: "Blocked — waiting on staging" },
+  { icon: CheckCircle2, color: "text-success", label: "Database migration", meta: "Completed 9:14 AM" },
+  { icon: Clock, color: "text-warning", label: "Deploy to staging", meta: "In progress · ~4 min left" },
+  { icon: AlertCircle, color: "text-destructive", label: "Run integration tests", meta: "Blocked — waiting on staging" },
 ];
 
 export default function Example() {

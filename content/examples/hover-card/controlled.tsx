@@ -44,7 +44,7 @@ export default function Example() {
         <span className="text-xs text-muted-foreground">
           State:{" "}
           <span
-            className={`font-medium ${open ? "text-green-600 dark:text-green-400" : "text-foreground"}`}
+            className={`font-medium ${open ? "text-success" : "text-foreground"}`}
           >
             {open ? "open" : "closed"}
           </span>

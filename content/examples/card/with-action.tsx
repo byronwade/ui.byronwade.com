@@ -25,7 +25,7 @@ export default function Example() {
         </CardHeader>
         <CardContent>
           <p className="text-3xl font-semibold">$18,240</p>
-          <span className="inline-flex items-center gap-1 mt-1 text-xs text-emerald-600 font-medium">
+          <span className="inline-flex items-center gap-1 mt-1 text-xs text-success font-medium">
             <TrendingUp className="w-3 h-3" />
             +8.4%
           </span>
@@ -51,7 +51,7 @@ export default function Example() {
         </CardHeader>
         <CardContent>
           <p className="text-3xl font-semibold">1,042</p>
-          <span className="inline-flex items-center gap-1 mt-1 text-xs text-rose-600 font-medium">
+          <span className="inline-flex items-center gap-1 mt-1 text-xs text-destructive font-medium">
             <TrendingDown className="w-3 h-3" />
             -2.1%
           </span>

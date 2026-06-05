@@ -313,6 +313,216 @@ describe("PixelatedCanvas — responsive", () => {
   });
 });
 
+describe("PixelatedCanvas — guard branches", () => {
+  it("falls back to dpr=1 when devicePixelRatio is 0", () => {
+    Object.defineProperty(window, "devicePixelRatio", {
+      configurable: true,
+      value: 0,
+    });
+    render(<PixelatedCanvas src="/a.png" interactive={false} {...SMALL} />);
+    expect(() => fireLoad()).not.toThrow();
+  });
+
+  it("bails out of compute when the main getContext returns null", () => {
+    // First getContext (main canvas, line 145) returns null → early return.
+    (HTMLCanvasElement.prototype.getContext as unknown as ReturnType<typeof vi.fn>).mockReturnValue(
+      null,
+    );
+    render(<PixelatedCanvas src="/a.png" interactive={false} {...SMALL} />);
+    expect(() => fireLoad()).not.toThrow();
+  });
+
+  it("bails out when the offscreen getContext returns null", () => {
+    // Main canvas gets a real ctx; the offscreen canvas (2nd getContext call,
+    // line 160) returns null → early return before sampling.
+    let call = 0;
+    (HTMLCanvasElement.prototype.getContext as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      () => {
+        call += 1;
+        return call === 1 ? (makeCtx() as unknown as CanvasRenderingContext2D) : null;
+      },
+    );
+    render(<PixelatedCanvas src="/a.png" interactive={false} {...SMALL} />);
+    expect(() => fireLoad()).not.toThrow();
+  });
+
+  it("uses display size when the image reports zero natural dimensions", () => {
+    render(<PixelatedCanvas src="/a.png" interactive={false} {...SMALL} />);
+    const img = images.at(-1)!;
+    // naturalWidth/naturalHeight falsy → `img.naturalWidth || displayWidth`
+    // right-hand side (lines 163-164).
+    img.naturalWidth = 0;
+    img.naturalHeight = 0;
+    expect(() => fireLoad()).not.toThrow();
+  });
+
+  it("ignores a load that fires after the effect was cancelled (unmount)", () => {
+    const { unmount } = render(
+      <PixelatedCanvas src="/a.png" interactive={false} {...SMALL} />,
+    );
+    const img = images.at(-1)!;
+    img.complete = true;
+    unmount(); // sets isCancelled = true in the cleanup
+    // onload now hits the `if (isCancelled) return;` guard (line 333).
+    expect(() => act(() => img.onload?.())).not.toThrow();
+  });
+});
+
+describe("PixelatedCanvas — interactive animation branches", () => {
+  function mountInteractive(props: Record<string, unknown> = {}) {
+    const { container } = render(
+      <PixelatedCanvas src="/a.png" {...SMALL} {...props} />,
+    );
+    fireLoad();
+    return container.querySelector("canvas") as HTMLCanvasElement;
+  }
+
+  it("runs the animate frame with activity off when fadeOnLeave=false and no pointer", () => {
+    // No pointer events → pointerInsideRef false → activityRef = 0 (line 429 `? 0`).
+    mountInteractive({ fadeOnLeave: false });
+    flushFrames(1);
+    expect(rafCbs.length).toBeGreaterThan(0);
+  });
+
+  it("clears instead of filling in the animate loop when backgroundColor is empty", () => {
+    // line 432 false side → clearRect in the animation loop.
+    mountInteractive({ backgroundColor: "" });
+    flushFrames(1);
+    expect(rafCbs.length).toBeGreaterThan(0);
+  });
+
+  it("early-returns from animate when the context becomes unavailable", () => {
+    const canvas = mountInteractive();
+    // Make getContext return null so the next animate() frame hits the
+    // `if (!ctx || !dims || !samples)` guard (line 412) and reschedules.
+    (HTMLCanvasElement.prototype.getContext as unknown as ReturnType<typeof vi.fn>).mockReturnValue(
+      null,
+    );
+    flushFrames(1);
+    expect(canvas).toBeInTheDocument();
+    expect(rafCbs.length).toBeGreaterThan(0);
+  });
+
+  it.each(["repel", "attract", "swirl"] as const)(
+    "applies distortion (mode=%s) when a dot is within pointer influence",
+    (distortionMode) => {
+      // followSpeed=1 snaps animMouse onto the pointer in ONE frame, and
+      // fadeOnLeave=false makes activity=1 immediately, so falloff*activity
+      // clears the `influence > 0.0005` gate (line 454) and the per-mode
+      // distortion math (455-478) + jitter (473) all execute.
+      const canvas = mountInteractive({
+        distortionMode,
+        followSpeed: 1,
+        fadeOnLeave: false,
+        jitterStrength: 4,
+      });
+      act(() => {
+        canvas.dispatchEvent(new Event("pointerenter"));
+        const move = new Event("pointermove") as PointerEvent;
+        Object.assign(move, { clientX: 6, clientY: 6 });
+        canvas.dispatchEvent(move);
+      });
+      flushFrames(1);
+      expect(canvas).toBeInTheDocument();
+    },
+  );
+
+  it("handles an unrecognized distortion mode (no branch matched)", () => {
+    // An out-of-union mode still enters the influence path but matches none of
+    // repel/attract/swirl, exercising the implicit else of the chain (line 463).
+    const canvas = mountInteractive({
+      distortionMode: "none-of-them",
+      followSpeed: 1,
+      fadeOnLeave: false,
+    });
+    act(() => {
+      canvas.dispatchEvent(new Event("pointerenter"));
+      const move = new Event("pointermove") as PointerEvent;
+      Object.assign(move, { clientX: 6, clientY: 6 });
+      canvas.dispatchEvent(move);
+    });
+    flushFrames(1);
+    expect(canvas).toBeInTheDocument();
+  });
+
+  it("applies distortion to circle dots within influence", () => {
+    const canvas = mountInteractive({
+      shape: "circle",
+      distortionMode: "repel",
+      followSpeed: 1,
+      fadeOnLeave: false,
+    });
+    act(() => {
+      canvas.dispatchEvent(new Event("pointerenter"));
+      const move = new Event("pointermove") as PointerEvent;
+      Object.assign(move, { clientX: 6, clientY: 6 });
+      canvas.dispatchEvent(move);
+    });
+    flushFrames(1);
+    expect(canvas).toBeInTheDocument();
+  });
+
+  it("skips jitter when jitterStrength is 0 but still distorts", () => {
+    // influence path runs, but the `if (jitterStrength > 0)` guard (line 473)
+    // takes its false side.
+    const canvas = mountInteractive({
+      distortionMode: "repel",
+      followSpeed: 1,
+      fadeOnLeave: false,
+      jitterStrength: 0,
+    });
+    act(() => {
+      canvas.dispatchEvent(new Event("pointerenter"));
+      const move = new Event("pointermove") as PointerEvent;
+      Object.assign(move, { clientX: 6, clientY: 6 });
+      canvas.dispatchEvent(move);
+    });
+    flushFrames(1);
+    expect(canvas).toBeInTheDocument();
+  });
+
+  it("cancels a pending RAF before scheduling a new animate loop", () => {
+    // On the second load (re-fire) rafRef.current is already set, so the
+    // `if (rafRef.current) cancelAnimationFrame(...)` (line 503) true side runs.
+    const { container } = render(<PixelatedCanvas src="/a.png" {...SMALL} />);
+    fireLoad();
+    expect(rafCbs.length).toBeGreaterThan(0);
+    // Fire onload again on the same image → re-enters the load handler with a
+    // live rafRef.
+    act(() => images.at(-1)!.onload?.());
+    expect(cancelAnimationFrame).toHaveBeenCalled();
+    expect(container.querySelector("canvas")).toBeInTheDocument();
+  });
+});
+
+describe("PixelatedCanvas — responsive resize guards", () => {
+  it("does not recompute on resize before the image is complete", () => {
+    render(<PixelatedCanvas src="/a.png" responsive {...SMALL} />);
+    const img = images.at(-1)!;
+    img.complete = false; // line 521 `img.complete && ...` false side
+    expect(() =>
+      act(() => window.dispatchEvent(new Event("resize"))),
+    ).not.toThrow();
+  });
+
+  it("cleans up responsive listener when no animation cleanup was registered", () => {
+    // Unmount BEFORE load → onload never ran → img._cleanup is undefined, so
+    // the `if ((img as any)._cleanup)` guard (line 529) takes its false side.
+    const { unmount } = render(
+      <PixelatedCanvas src="/a.png" responsive {...SMALL} />,
+    );
+    expect(() => unmount()).not.toThrow();
+  });
+
+  it("cleans up the non-responsive effect when no animation cleanup exists", () => {
+    // Unmount before load with responsive=false → line 535 `_cleanup` false side.
+    const { unmount } = render(
+      <PixelatedCanvas src="/a.png" {...SMALL} />,
+    );
+    expect(() => unmount()).not.toThrow();
+  });
+});
+
 describe("PixelatedCanvas — accessibility", () => {
   it("has no axe violations", async () => {
     const { container } = render(<PixelatedCanvas src="/a.png" {...SMALL} />);

@@ -35,7 +35,7 @@ function Row({ origin, align }: { origin: MorphDockOrigin; align: string }) {
           <input
             placeholder="Search…"
             aria-label="Search"
-            className="h-8 w-full rounded-lg bg-white/5 px-3 text-sm text-dock-active-foreground outline-none placeholder:text-dock-foreground/60"
+            className="h-8 w-full rounded-lg bg-dock-foreground/5 px-3 text-sm text-dock-active-foreground outline-none placeholder:text-dock-foreground/60"
           />
         </div>
       </MorphDock>

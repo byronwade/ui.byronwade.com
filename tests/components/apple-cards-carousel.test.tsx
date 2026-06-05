@@ -170,6 +170,18 @@ describe("Card — modal open/close", () => {
     );
   });
 
+  it("ignores non-Escape keys while the modal is open", async () => {
+    const user = userEvent.setup();
+    renderCarousel();
+    await user.click(screen.getByText("First card"));
+    expect(await screen.findByText("First body")).toBeInTheDocument();
+    // A non-Escape key exercises the keydown handler's false branch — it must
+    // NOT close the modal.
+    fireEvent.keyDown(window, { key: "a" });
+    fireEvent.keyDown(window, { key: "Tab" });
+    expect(screen.getByText("First body")).toBeInTheDocument();
+  });
+
   it("locks body scroll while open and restores it on close", async () => {
     const user = userEvent.setup();
     renderCarousel();

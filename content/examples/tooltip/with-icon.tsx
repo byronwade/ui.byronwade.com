@@ -26,7 +26,7 @@ export default function Example() {
 
         <Tooltip>
           <TooltipTrigger render={<Button variant="ghost" size="icon" />}>
-            <AlertTriangle className="size-4 text-amber-500" />
+            <AlertTriangle className="size-4 text-warning" />
             <span className="sr-only">Warning</span>
           </TooltipTrigger>
           <TooltipContent>
@@ -46,7 +46,7 @@ export default function Example() {
 
         <Tooltip>
           <TooltipTrigger render={<Button variant="ghost" size="icon" />}>
-            <Star className="size-4 text-yellow-500" />
+            <Star className="size-4 text-warning" />
             <span className="sr-only">Favorite</span>
           </TooltipTrigger>
           <TooltipContent>

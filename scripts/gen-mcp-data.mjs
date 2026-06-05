@@ -8,19 +8,36 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 const foundation = registry.items.find((i) => i.name === "foundation");
 
+const { components: docs, getVariants } = await import("../content/components.ts");
+const docBySlug = new Map(docs.map((d) => [d.slug, d]));
+
 const componentTypes = new Set(["registry:ui", "registry:component"]);
 const components = registry.items
   .filter((i) => componentTypes.has(i.type))
-  .map((i) => ({
-    name: i.name,
-    type: i.type,
-    description: i.description ?? "",
-    deps: i.registryDependencies ?? [],
-    install: `npx shadcn@latest add @byronwade/${i.name}`,
-    source: (i.files ?? [])
-      .map((f) => readFileSync(join(root, f.path), "utf8"))
-      .join("\n\n"),
-  }))
+  .map((i) => {
+    const doc = docBySlug.get(i.name);
+    return {
+      name: i.name,
+      type: i.type,
+      description: i.description ?? "",
+      group: doc?.category ?? "",
+      tags: doc?.tags ?? [],
+      deps: i.registryDependencies ?? [],
+      install: `npx shadcn@latest add @byronwade/${i.name}`,
+      variants: doc
+        ? getVariants(doc).map((v) => ({
+            id: v.id,
+            name: v.name,
+            tags: v.tags,
+            install: v.install ?? `npx shadcn@latest add @byronwade/${i.name}`,
+            deepLink: `/docs/${i.name}#${v.id}`,
+          }))
+        : [],
+      source: (i.files ?? [])
+        .map((f) => readFileSync(join(root, f.path), "utf8"))
+        .join("\n\n"),
+    };
+  })
   .sort((a, b) => a.name.localeCompare(b.name));
 
 const theme = foundation.cssVars.theme;

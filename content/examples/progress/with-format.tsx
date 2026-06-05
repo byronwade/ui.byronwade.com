@@ -40,7 +40,7 @@ export default function Example() {
         <ProgressLabel>Accuracy</ProgressLabel>
         <ProgressValue>{(formatted) => formatted}</ProgressValue>
         <ProgressTrack className="h-2">
-          <ProgressIndicator className="bg-emerald-500" />
+          <ProgressIndicator tone="success" />
         </ProgressTrack>
       </Progress>
 

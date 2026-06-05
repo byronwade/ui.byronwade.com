@@ -29,7 +29,7 @@ export default function Example() {
               </span>
               <span className="text-3xl font-semibold tabular-nums">5,540</span>
             </div>
-            <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400">
+            <span className="rounded-full bg-success/10 px-2.5 py-0.5 text-xs font-medium text-success">
               +18.2%
             </span>
           </>
@@ -39,8 +39,8 @@ export default function Example() {
           <AreaChart data={data} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="heroGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="oklch(0.6 0.17 148)" stopOpacity={0.25} />
-                <stop offset="100%" stopColor="oklch(0.6 0.17 148)" stopOpacity={0} />
+                <stop offset="0%" stopColor="var(--chart-1)" stopOpacity={0.25} />
+                <stop offset="100%" stopColor="var(--chart-1)" stopOpacity={0} />
               </linearGradient>
             </defs>
             <XAxis
@@ -63,11 +63,11 @@ export default function Example() {
             <Area
               type="monotone"
               dataKey="value"
-              stroke="oklch(0.6 0.17 148)"
+              stroke="var(--chart-1)"
               strokeWidth={2}
               fill="url(#heroGrad)"
               dot={false}
-              activeDot={{ r: 4, fill: "oklch(0.6 0.17 148)" }}
+              activeDot={{ r: 4, fill: "var(--chart-1)" }}
             />
           </AreaChart>
         </ResponsiveContainer>

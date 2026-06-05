@@ -29,7 +29,7 @@ const pageEntries: SearchEntry[] = [
   { kind: "Section", label: "Installation", href: "/docs/installation",   meta: "Guide", keywords: "install installation setup quick start shadcn registry cli init add namespace" },
   { kind: "Section", label: "Theming",      href: "/docs/theming",        meta: "Guide", keywords: "theming theme re-skin reskin brand color tokens css variable dark mode" },
   { kind: "Section", label: "AI rules",     href: "/docs/ai",             meta: "Guide", keywords: "ai rules cursor claude copilot windsurf codex agent on-system design rules" },
-  { kind: "Section", label: "Components",   href: "/docs#catalog",        meta: "Page", keywords: "all components index catalog list" },
+  { kind: "Section", label: "Catalog",      href: "/catalog",             meta: "Page", keywords: "catalog all components index list grid browse gallery search filter" },
   { kind: "Section", label: "Styleguide",   href: "/styleguide",                meta: "Page", keywords: "styleguide design philosophy tokens showcase" },
 ];
 
@@ -61,6 +61,19 @@ const componentEntries: SearchEntry[] = components.map((c) => ({
   // Slug words + category + description give cmdk plenty to fuzzy-match on.
   keywords: `${c.slug.replace(/-/g, " ")} ${c.category} ${c.description}`.toLowerCase(),
 }));
+
+/* ── Variants (authored only — derived from the canonical manifest) ─── */
+
+const variantEntries: SearchEntry[] = components.flatMap((c) =>
+  (c.variants ?? []).map((v) => ({
+    kind: "Component" as const,
+    label: `${c.name} — ${v.name}`,
+    href: `/docs/${c.slug}#${v.id}`,
+    meta: "Variant",
+    keywords:
+      `${c.slug.replace(/-/g, " ")} ${v.name} ${v.tags.join(" ")} ${c.category}`.toLowerCase(),
+  })),
+);
 
 /* ── Layout archetypes (derived from the gallery metadata) ────────── */
 
@@ -106,4 +119,5 @@ export const searchIndex: SearchEntry[] = [
   ...layoutEntries,
   ...templateEntries,
   ...componentEntries,
+  ...variantEntries,
 ];

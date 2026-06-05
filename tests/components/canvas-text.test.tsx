@@ -164,6 +164,27 @@ describe("CanvasText — draw pipeline", () => {
     expect(ctx.fillText).toHaveBeenCalled();
   });
 
+  it("falls back to the default height when the text box measures zero height", () => {
+    // The shared getBoundingClientRect mock hardcodes height:120; override it
+    // here so Math.ceil(rect.height) is 0 and the `|| 200` fallback fires.
+    vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(
+      () => ({ width: 300, height: 0 }) as DOMRect,
+    );
+    render(<CanvasText text="ZeroH" />);
+    // height falls back to 200, so the draw pipeline still runs.
+    expect(ctx.fillText).toHaveBeenCalled();
+  });
+
+  it("uses a device pixel ratio of 1 when devicePixelRatio is falsy", () => {
+    Object.defineProperty(window, "devicePixelRatio", {
+      configurable: true,
+      value: 0,
+    });
+    render(<CanvasText text="NoDpr" />);
+    // dpr falls back to 1; the transform is applied with that scale.
+    expect(ctx.setTransform).toHaveBeenCalledWith(1, 0, 0, 1, 0, 0);
+  });
+
   it("re-measures when the ResizeObserver fires", () => {
     render(<CanvasText text="Resize" />);
     expect(resizeObserverCb).toBeTypeOf("function");

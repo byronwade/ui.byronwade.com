@@ -11,7 +11,7 @@ export default function Example() {
       <div
         className={`rounded-lg border p-4 transition-colors ${
           maintenance
-            ? "border-amber-300 bg-amber-50 dark:bg-amber-950/20"
+            ? "border-warning/30 bg-warning/10"
             : "border-border bg-card"
         }`}
       >
@@ -29,7 +29,7 @@ export default function Example() {
           />
         </div>
         {maintenance && (
-          <p className="mt-3 text-xs text-amber-700 dark:text-amber-400 font-medium">
+          <p className="mt-3 text-xs text-warning font-medium">
             Site is now in maintenance mode. Visitors will see a downtime page.
           </p>
         )}

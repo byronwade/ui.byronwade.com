@@ -33,7 +33,7 @@ export default function Example() {
         items={items}
       >
         <div className="px-3 pb-3">
-          <pre className="rounded-lg bg-black/30 p-2.5 font-mono text-[11px] leading-relaxed text-dock-foreground">
+          <pre className="rounded-lg bg-dock-foreground/[0.06] p-2.5 font-mono text-[11px] leading-relaxed text-dock-foreground">
             <span className="text-brand">$</span> drag the corner grip ↘{"\n"}
             resizing…{"\n"}
             ready.

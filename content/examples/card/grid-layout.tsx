@@ -66,7 +66,7 @@ export default function Example() {
               <p className="text-2xl font-semibold">{value}</p>
               <span
                 className={`text-xs font-medium mt-0.5 inline-block ${
-                  positive ? "text-emerald-600" : "text-rose-600"
+                  positive ? "text-success" : "text-destructive"
                 }`}
               >
                 {delta} vs last week

@@ -1,4 +1,16 @@
 export type PropRow = { name: string; type: string; default?: string; description: string };
+export type Variant = {
+  /** Stable, unique within a type; kebab-case. Becomes the #anchor + search id. */
+  id: string;
+  /** Human label, e.g. "Ghost · small". */
+  name: string;
+  /** Facet tags: "variant:ghost", "size:sm", "content:icon-only", "state:loading", … */
+  tags: string[];
+  /** Example file base under content/examples/<slug>/ that renders this variant. */
+  example: string;
+  /** Optional per-variant install ref; falls back to the type install when absent. */
+  install?: string;
+};
 export type ComponentDoc = {
   slug: string;
   name: string;
@@ -8,6 +20,10 @@ export type ComponentDoc = {
   registryDeps?: string[];
   props?: PropRow[];
   examples: string[];
+  /** Type-level facet tags (drive catalog filters + AI match). */
+  tags?: string[];
+  /** Authored variants. Absent ⇒ getVariants() synthesizes a single default. */
+  variants?: Variant[];
 };
 
 export const components: ComponentDoc[] = [
@@ -35,7 +51,7 @@ export const components: ComponentDoc[] = [
       { name: "size", type: '"sm" | "md" | "lg"', default: '"sm"', description: "Dot size." },
       { name: "pulse", type: "boolean", default: "false", description: "Animated ping ring." },
     ],
-    examples: ["tones", "pulse"],
+    examples: ["default","tones","pulse","inline-text","sizes","table-rows"],
   },
   {
     slug: "activity-ring", name: "Activity ring", category: "UI",
@@ -66,7 +82,7 @@ export const components: ComponentDoc[] = [
       { name: "seed", type: "string", description: "Any string; same seed → same gradient." },
       { name: "size", type: '"sm" | "md" | "lg" | "xl"', default: '"md"', description: "Disc size." },
     ],
-    examples: ["seeds", "sizes"],
+    examples: ["default","seeds","sizes","grouped-stack","list-rows","with-name-badge"],
   },
   {
     slug: "activity-grid", name: "Activity grid", category: "UI",
@@ -76,49 +92,49 @@ export const components: ComponentDoc[] = [
       { name: "data", type: "number[]", description: "Activity counts per cell." },
       { name: "columns", type: "number", default: "26", description: "Columns in the grid." },
     ],
-    examples: ["default"],
+    examples: ["default","columns","empty","in-card","intensity-levels","interactive"],
   },
   {
     slug: "filter-pill", name: "Filter pill", category: "UI",
     description: "Pill-with-chevron filter / range selector control.",
     npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","active-state","as-select-trigger","disabled","filter-bar","with-icon"],
   },
   {
     slug: "segmented-control", name: "Segmented control", category: "UI",
     description: "Inline segmented toggle (Referrer · Links · Campaign style).",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","controlled-display","disabled","many-options","sizes","two-options"],
   },
   {
     slug: "timeline-rail", name: "Timeline rail", category: "Composites",
     description: "Vertical event/timeline rail with connectors and terminal marker.",
     npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/status-dot"],
-    examples: ["default"],
+    examples: ["default","custom-terminal","mixed-glyphs","multi-group","with-icons","with-tones"],
   },
   {
     slug: "split-with-rail", name: "Split with rail", category: "Composites",
     description: "Summary column + vertical rail archetype shell.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","custom-layout","metrics-summary","with-event-timeline","with-timeline-rail"],
   },
   {
     slug: "hero-section", name: "Hero section", category: "Composites",
     description: "Full-bleed hero composition shell.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","no-header","with-action-header","with-chart","with-custom-classname","with-metrics-header"],
   },
   {
     slug: "metric-stat", name: "Metric stat", category: "Composites",
     description: "Label + large value + delta badge metric row.",
     npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","custom-value","delta-directions","grid-layout","loading","no-delta","with-icon"],
   },
   {
     slug: "centered-focal", name: "Centered focal", category: "Composites",
     description: "One centerpiece + floating card; first-run & single-action tools.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","custom-classname","loading-state","no-backdrop","with-form","with-illustration-backdrop"],
   },
   {
     slug: "button", name: "Button", category: "Primitives",
@@ -131,7 +147,28 @@ export const components: ComponentDoc[] = [
       { name: "className", type: "string", description: "Additional Tailwind classes merged onto the variant styles." },
       { name: "disabled", type: "boolean", description: "Disables pointer events and reduces opacity via the disabled: utilities." },
     ],
-    examples: ["default"],
+    examples: ["default","count","destructive","disabled","error","ghost","icon","icon-sm","leading-icon","link","loading","outline","secondary","size-lg","size-sm","size-xs","sizes","solid","stateful","trailing-icon","variants","with-icon"],
+    tags: ["interactive", "action", "form", "cta"],
+    variants: [
+      { id: "overview", name: "All variants (overview)", tags: ["meta:overview"], example: "default" },
+      { id: "solid", name: "Solid", tags: ["variant:default", "size:default", "emphasis:high", "content:text"], example: "solid" },
+      { id: "outline", name: "Outline", tags: ["variant:outline", "emphasis:medium", "content:text"], example: "outline" },
+      { id: "secondary", name: "Secondary", tags: ["variant:secondary", "emphasis:medium", "content:text"], example: "secondary" },
+      { id: "ghost", name: "Ghost", tags: ["variant:ghost", "emphasis:low", "content:text"], example: "ghost" },
+      { id: "destructive", name: "Destructive", tags: ["variant:destructive", "emphasis:high", "content:leading-icon"], example: "destructive" },
+      { id: "link", name: "Link", tags: ["variant:link", "emphasis:low", "content:text"], example: "link" },
+      { id: "size-xs", name: "Extra small", tags: ["size:xs", "variant:default", "content:text"], example: "size-xs" },
+      { id: "size-sm", name: "Small", tags: ["size:sm", "variant:default", "content:text"], example: "size-sm" },
+      { id: "size-lg", name: "Large", tags: ["size:lg", "variant:default", "content:text"], example: "size-lg" },
+      { id: "icon", name: "Icon only", tags: ["shape:icon", "content:icon-only", "size:default"], example: "icon" },
+      { id: "icon-sm", name: "Icon only, small", tags: ["shape:icon", "content:icon-only", "size:icon-sm"], example: "icon-sm" },
+      { id: "leading-icon", name: "Leading icon", tags: ["content:leading-icon", "variant:default"], example: "leading-icon" },
+      { id: "trailing-icon", name: "Trailing icon", tags: ["content:trailing-icon", "variant:outline"], example: "trailing-icon" },
+      { id: "loading", name: "Loading", tags: ["state:loading", "variant:default"], example: "loading" },
+      { id: "disabled", name: "Disabled", tags: ["state:disabled", "variant:default"], example: "disabled" },
+      { id: "count", name: "With count", tags: ["content:badge", "variant:default"], example: "count" },
+      { id: "stateful", name: "Stateful", tags: ["state:interactive", "variant:default"], example: "stateful" },
+    ],
   },
   {
     slug: "calendar", name: "Calendar", category: "Forms",
@@ -144,19 +181,19 @@ export const components: ComponentDoc[] = [
     slug: "kbd", name: "Kbd", category: "Data display",
     description: "Keyboard-key indicator with sm/default/lg sizes; KbdGroup joins keys into a shortcut sequence. Mono, token-driven.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","sizes"],
   },
   {
     slug: "spinner", name: "Spinner", category: "Feedback",
     description: "Pure-CSS loading spinner in currentColor (sm/default/lg) with role=status and an accessible label.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","sizes"],
   },
   {
     slug: "button-group", name: "Button group", category: "Primitives",
     description: "Joins related buttons into one segmented control with shared, overlapped edges — horizontal or vertical.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","vertical"],
   },
   {
     slug: "native-select", name: "Native select", category: "Forms",
@@ -172,7 +209,7 @@ export const components: ComponentDoc[] = [
       { name: "render", type: 'useRender.RenderProp<"span">', description: "Base UI render prop for polymorphic rendering — override the default span element." },
       { name: "className", type: "string", description: "Additional CSS class names merged with the variant styles." },
     ],
-    examples: ["default"],
+    examples: ["default","as-link","inline-content","invalid","status","with-icon"],
   },
   {
     slug: "card", name: "Card", category: "Primitives",
@@ -182,7 +219,7 @@ export const components: ComponentDoc[] = [
       { name: "className", type: "string", description: "Additional CSS classes merged onto the root div." },
       { name: "children", type: "React.ReactNode", description: "Slot content — typically CardHeader, CardContent, CardFooter, and related sub-components." },
     ],
-    examples: ["default"],
+    examples: ["default","content-only","frame-empty","frame-footer","frame-header","frame-header-footer","grid-layout","login-form","sizes","with-action","with-image"],
   },
   {
     slug: "status-pill", name: "Status Pill", category: "Primitives",
@@ -193,7 +230,7 @@ export const components: ComponentDoc[] = [
       { name: "pulse", type: "boolean", default: "false", description: "When true, the status dot animates with a ping effect to indicate live activity." },
       { name: "className", type: "string", description: "Additional CSS classes to merge onto the pill element." },
     ],
-    examples: ["default"],
+    examples: ["default","custom-class","inline-text","pulse","table-rows","tones"],
   },
   {
     slug: "input", name: "Input", category: "Forms",
@@ -207,7 +244,7 @@ export const components: ComponentDoc[] = [
       { name: "value", type: "string | number | readonly string[]", description: "Controlled value of the input." },
       { name: "onChange", type: "React.ChangeEventHandler<HTMLInputElement>", description: "Change event handler called when the input value changes." },
     ],
-    examples: ["default"],
+    examples: ["default","disabled","error","file-upload","input-types","with-adornment","with-button","with-icon","with-label"],
   },
   {
     slug: "textarea", name: "Textarea", category: "Forms",
@@ -216,7 +253,7 @@ export const components: ComponentDoc[] = [
       { name: "className", type: "string", description: "Additional CSS classes to merge with the default textarea styles." },
       { name: "...props", type: 'React.ComponentProps<"textarea">', description: "All standard HTML textarea attributes (value, placeholder, onChange, rows, disabled, aria-invalid, etc.)." },
     ],
-    examples: ["default"],
+    examples: ["default","auto-resize","character-count","disabled","error-state","readonly","with-label-and-hint"],
   },
   {
     slug: "label", name: "Label", category: "Forms",
@@ -226,7 +263,7 @@ export const components: ComponentDoc[] = [
       { name: "htmlFor", type: "string", description: "Associates the label with a form control by its id." },
       { name: "children", type: "React.ReactNode", description: "The label text or content." },
     ],
-    examples: ["default"],
+    examples: ["default","disabled","error-state","form-layout","required","with-checkbox","with-icon"],
   },
   {
     slug: "select", name: "Select", category: "Forms",
@@ -239,7 +276,7 @@ export const components: ComponentDoc[] = [
       { name: "alignOffset", type: "number", default: "0", description: "Pixel offset applied along the alignment axis (passed to SelectContent)." },
       { name: "alignItemWithTrigger", type: "boolean", default: "true", description: "When true, the selected item inside the popup aligns with the trigger position (passed to SelectContent)." },
     ],
-    examples: ["default"],
+    examples: ["default","controlled","disabled","grouped","sizes","with-error","with-icon"],
   },
   {
     slug: "checkbox", name: "Checkbox", category: "Forms",
@@ -269,7 +306,7 @@ export const components: ComponentDoc[] = [
       { name: "onCheckedChange", type: "(checked: boolean) => void", description: "Callback fired when the checked state changes (from Base UI Root props)." },
       { name: "disabled", type: "boolean", description: "Disables the switch and applies reduced-opacity styling (from Base UI Root props)." },
     ],
-    examples: ["default"],
+    examples: ["default","controlled","disabled","invalid","sizes","with-label"],
   },
   {
     slug: "radio-group", name: "Radio Group", category: "Forms",
@@ -284,7 +321,7 @@ export const components: ComponentDoc[] = [
       { name: "name", type: "string", description: "Identifies the field when a form is submitted." },
       { name: "className", type: "string", description: "Additional CSS class names to apply to the group container." },
     ],
-    examples: ["default"],
+    examples: ["default","disabled","form-validation","horizontal","with-description","with-icon"],
   },
   {
     slug: "tooltip", name: "Tooltip", category: "Overlays",
@@ -297,7 +334,7 @@ export const components: ComponentDoc[] = [
       { name: "className", type: "string", description: "Additional CSS class names applied to the tooltip popup element." },
       { name: "children", type: "React.ReactNode", description: "Content rendered inside the tooltip popup." },
     ],
-    examples: ["default"],
+    examples: ["default","alignment","rich-content","sides","with-delay","with-icon"],
   },
   {
     slug: "popover", name: "Popover", category: "Overlays",
@@ -307,7 +344,7 @@ export const components: ComponentDoc[] = [
       { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback fired when the open state changes." },
       { name: "defaultOpen", type: "boolean", description: "Initial open state for uncontrolled usage." },
     ],
-    examples: ["default"],
+    examples: ["default","controlled","menu-like","placement","rich-content","with-form"],
   },
   {
     slug: "dropdown-menu", name: "Dropdown Menu", category: "Overlays",
@@ -318,7 +355,7 @@ export const components: ComponentDoc[] = [
       { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback fired when the open state changes." },
       { name: "modal", type: "boolean", default: "true", description: "Whether the menu should behave as a modal (trap focus)." },
     ],
-    examples: ["default"],
+    examples: ["default","disabled","with-checkboxes","with-icons","with-radio","with-shortcuts","with-submenu"],
   },
   {
     slug: "dialog", name: "Dialog", category: "Overlays",
@@ -329,7 +366,7 @@ export const components: ComponentDoc[] = [
       { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback fired when the open state changes." },
       { name: "modal", type: "boolean", default: "true", description: "Whether the dialog blocks interaction with the rest of the page." },
     ],
-    examples: ["default"],
+    examples: ["default","destructive","loading","no-close-button","scrollable","with-form","with-icon"],
   },
   {
     slug: "hover-card", name: "Hover Card", category: "Overlays",
@@ -341,26 +378,27 @@ export const components: ComponentDoc[] = [
       { name: "alignOffset", type: "number", default: "4", description: "Offset in pixels along the alignment axis (HoverCardContent only)." },
       { name: "className", type: "string", description: "Additional CSS class names to apply to the popup element (HoverCardContent only)." },
     ],
-    examples: ["default"],
+    examples: ["default","alignment","controlled","placement","rich-content","with-delay"],
   },
   {
     slug: "alert", name: "Alert", category: "Feedback",
-    description: "A compound alert component for surfacing inline feedback messages with an optional title, description, icon slot, and action button.",
+    description: "A compound alert component for surfacing inline feedback messages with an optional title, description, icon slot, and action button. Intent tones (success, warning, destructive) follow the semantic tokens.",
     props: [
-      { name: "variant", type: '"default" | "destructive"', default: '"default"', description: 'Controls the color style of the alert; use "destructive" for error or warning states.' },
+      { name: "variant", type: '"default" | "success" | "warning" | "destructive"', default: '"default"', description: "Intent tone of the alert — colors the title, icon, and description via semantic tokens (text on the card surface)." },
       { name: "className", type: "string", description: "Additional CSS class names merged onto the root element." },
     ],
-    examples: ["default"],
+    examples: ["default", "variants", "with-icon", "with-action", "with-link", "no-icon"],
   },
   {
     slug: "progress", name: "Progress", category: "Feedback",
-    description: "A linear progress bar built on Base UI that displays a labeled, accessible indicator of completion with optional label and numeric value display.",
+    description: "A linear progress bar built on Base UI that displays a labeled, accessible indicator of completion with optional label and numeric value display, plus token-driven intent tones (brand, success, warning, destructive).",
     props: [
       { name: "value", type: "number | null", description: "The current progress value (typically 0–100). Pass null for indeterminate state." },
+      { name: "tone", type: '"default" | "brand" | "success" | "warning" | "destructive"', default: '"default"', description: "Colors the indicator bar via semantic tokens — e.g. success for complete, warning/destructive for at-risk." },
       { name: "className", type: "string", description: "Additional CSS class names applied to the root wrapper element." },
       { name: "children", type: "React.ReactNode", description: "Optional children rendered inside the root before the built-in track (e.g. ProgressLabel, ProgressValue)." },
     ],
-    examples: ["default"],
+    examples: ["default","tones","controlled","indeterminate","sizes","with-format"],
   },
   {
     slug: "skeleton", name: "Skeleton", category: "Feedback",
@@ -368,7 +406,7 @@ export const components: ComponentDoc[] = [
     props: [
       { name: "className", type: "string", description: "Additional CSS classes to merge onto the skeleton div." },
     ],
-    examples: ["default"],
+    examples: ["default","card","list","media-grid","profile","table","with-loaded-state"],
   },
   {
     slug: "sonner", name: "Sonner", category: "Feedback",
@@ -376,7 +414,7 @@ export const components: ComponentDoc[] = [
     props: [
       { name: "...props", type: "ToasterProps", description: "All props from Sonner's ToasterProps are forwarded directly to the underlying Toaster (e.g. position, richColors, expand, duration, closeButton, offset)." },
     ],
-    examples: ["default"],
+    examples: ["default","custom","dismissible","positions","promise","rich-colors","variants","with-action","with-description"],
   },
   {
     slug: "tabs", name: "Tabs", category: "Data display",
@@ -388,7 +426,7 @@ export const components: ComponentDoc[] = [
       { name: "onValueChange", type: "(value: TabsTab.Value, eventDetails: TabsRoot.ChangeEventDetails) => void", description: "Callback fired when the active tab changes." },
       { name: "className", type: "string", description: "Additional CSS class names applied to the root element." },
     ],
-    examples: ["default"],
+    examples: ["default","controlled","disabled","keep-mounted","vertical","vertical-with-icons","with-icons"],
   },
   {
     slug: "accordion", name: "Accordion", category: "Data display",
@@ -414,7 +452,7 @@ export const components: ComponentDoc[] = [
       { name: "size", type: '"default" | "sm" | "lg"', default: '"default"', description: "Controls the overall size of the avatar (sm=24px, default=32px, lg=40px)." },
       { name: "className", type: "string", description: "Additional CSS classes merged onto the root element." },
     ],
-    examples: ["default"],
+    examples: ["default","fallback","group","sizes","user-list","with-badge"],
   },
   {
     slug: "separator", name: "Separator", category: "Data display",
@@ -423,7 +461,7 @@ export const components: ComponentDoc[] = [
       { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Controls whether the separator renders as a horizontal line or a vertical rule." },
       { name: "className", type: "string", description: "Additional CSS class names to apply to the separator element." },
     ],
-    examples: ["default"],
+    examples: ["default","custom-styling","in-card","in-nav","vertical","with-label"],
   },
   {
     slug: "breadcrumb", name: "Breadcrumb", category: "Data display",
@@ -432,7 +470,7 @@ export const components: ComponentDoc[] = [
       { name: "className", type: "string", description: "Additional CSS classes applied to the root <nav> element." },
       { name: "...props", type: 'React.ComponentProps<"nav">', description: "All standard HTML nav attributes are forwarded to the root element." },
     ],
-    examples: ["default"],
+    examples: ["default","custom-separator","long-path","responsive","with-ellipsis","with-icons","with-render-prop"],
   },
   {
     slug: "table", name: "Table", category: "Data display",
@@ -441,7 +479,7 @@ export const components: ComponentDoc[] = [
       { name: "className", type: "string", description: "Additional CSS classes merged onto the root table element." },
       { name: "children", type: "React.ReactNode", description: "Table content — typically TableHeader, TableBody, and TableFooter compound parts." },
     ],
-    examples: ["default"],
+    examples: ["default","empty-state","loading-skeleton","selectable-rows","sortable-columns","with-actions","with-status-badges"],
   },
   {
     slug: "page-header", name: "Page Header", category: "Patterns",
@@ -453,7 +491,7 @@ export const components: ComponentDoc[] = [
       { name: "align", type: '"start" | "center"', default: '"start"', description: "Controls layout alignment: start puts actions on the right; center stacks everything and centers it." },
       { name: "className", type: "string", description: "Additional Tailwind classes merged onto the root wrapper element." },
     ],
-    examples: ["default"],
+    examples: ["default","align","breadcrumb-context","description-only","with-actions","with-badge"],
   },
   {
     slug: "stat-card", name: "Stat Card", category: "Patterns",
@@ -466,7 +504,7 @@ export const components: ComponentDoc[] = [
       { name: "icon", type: "LucideIcon", default: "undefined", description: "Optional Lucide icon rendered in the top-right corner of the card." },
       { name: "className", type: "string", default: "undefined", description: "Additional CSS classes merged onto the card root element." },
     ],
-    examples: ["default"],
+    examples: ["default","delta-directions","grid-dashboard","no-delta","rich-value","with-icons"],
   },
   {
     slug: "empty-state", name: "Empty State", category: "Patterns",
@@ -478,7 +516,7 @@ export const components: ComponentDoc[] = [
       { name: "action", type: "React.ReactNode", default: "undefined", description: "Optional action element (e.g. a button) rendered below the description." },
       { name: "className", type: "string", default: "undefined", description: "Additional class names merged onto the root container." },
     ],
-    examples: ["default"],
+    examples: ["default","compact","error-state","minimal","no-icon","search-no-results","with-multiple-actions"],
   },
   {
     slug: "chart", name: "Chart", category: "Charts",
@@ -490,7 +528,7 @@ export const components: ComponentDoc[] = [
       { name: "initialDimension", type: "{ width: number; height: number }", default: "{ width: 320, height: 200 }", description: "Fallback dimensions passed to ResponsiveContainer before the first layout measurement." },
       { name: "className", type: "string", description: "Additional Tailwind / CSS classes merged onto the outer div." },
     ],
-    examples: ["default"],
+    examples: ["default","bar-chart","custom-tooltip","donut-chart","legend-variants","line-chart","pie-chart","radial-bar","stacked-bar","theme-colors","tooltip-variants"],
   },
   {
     slug: "detail-header", name: "Detail Header", category: "House components",
@@ -502,7 +540,7 @@ export const components: ComponentDoc[] = [
       { name: "meta", type: "{ label: string; value: React.ReactNode }[]", default: "undefined", description: "Array of label/value pairs rendered as a responsive metadata grid below the title." },
       { name: "className", type: "string", default: "undefined", description: "Additional CSS classes applied to the root wrapper element." },
     ],
-    examples: ["default"],
+    examples: ["default","custom-title-node","many-actions","meta-grid-standalone","no-meta","rich-meta-values","with-status-badges"],
   },
   {
     slug: "section", name: "Section", category: "House components",
@@ -514,7 +552,7 @@ export const components: ComponentDoc[] = [
       { name: "children", type: "React.ReactNode", description: "Content rendered inside the bordered card body." },
       { name: "className", type: "string", description: "Extra Tailwind classes merged onto the outer <section> element." },
     ],
-    examples: ["default"],
+    examples: ["default","inline-children","no-header","setting-row-controls","stacked-sections","with-action"],
   },
   {
     slug: "event-timeline", name: "Event Timeline", category: "House components",
@@ -523,7 +561,7 @@ export const components: ComponentDoc[] = [
       { name: "events", type: "TimelineEvent[]", description: "Array of timeline event objects to render, each with a title, optional description, optional timestamp, and optional tone." },
       { name: "className", type: "string", description: "Additional CSS classes applied to the root <ol> element." },
     ],
-    examples: ["default"],
+    examples: ["default","live-feed","rich-content","single-event","timestamps","title-only","tones"],
   },
   {
     slug: "use-chrome-morph", name: "useChromeMorph", category: "Morph",
@@ -658,7 +696,7 @@ export const components: ComponentDoc[] = [
       { name: "side", type: '"top" | "right" | "bottom" | "left"', default: '"right"', description: "Edge the sheet slides in from." },
       { name: "showCloseButton", type: "boolean", default: "true", description: "Render the corner close button." },
     ],
-    examples: ["default", "sides", "with-form", "scrollable", "no-close-button"],
+    examples: ["default","sides","with-form","scrollable","no-close-button","inset-nested","nested-steps"],
   },
   {
     slug: "command", name: "Command", category: "Overlays",
@@ -672,7 +710,7 @@ export const components: ComponentDoc[] = [
       { name: "description", type: "string", description: "CommandDialog: visually-hidden accessible description." },
       { name: "onSelect", type: "(value: string) => void", description: "CommandItem: fires when the item is chosen via click or Enter." },
     ],
-    examples: ["default", "inline", "with-icons", "grouped", "empty-state"],
+    examples: ["default","inline","with-icons","grouped","empty-state","actions","cards","files","people"],
   },
   {
     slug: "navigation-menu", name: "Navigation Menu", category: "Overlays",
@@ -790,10 +828,10 @@ export const components: ComponentDoc[] = [
   },
   {
     slug: "file-tree", name: "File tree", category: "Data display",
-    description: "Collapsible file/folder tree with selection, sorting, and expand-all — rebuilt on Base UI (collapsible). Adapted from MagicUI.",
+    description: "Collapsible file/folder tree with selection, sorting, and expand-all, plus a panel variant (chevron disclosure, guide lines, count badges) and multi-select with cascading checkboxes — rebuilt on Base UI. Base from MagicUI; panel/multi-select inspired by Untitled UI.",
     npmDeps: ["lucide-react"],
-    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/scroll-area", "@byronwade/collapsible"],
-    examples: ["default"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/badge", "@byronwade/checkbox", "@byronwade/scroll-area", "@byronwade/collapsible"],
+    examples: ["default", "panel", "multi-select"],
   },
   {
     slug: "ai-loader", name: "Loader", category: "AI",
@@ -806,7 +844,7 @@ export const components: ComponentDoc[] = [
     description: "Animated text-shimmer that sweeps a token-driven light gradient across muted text for AI thinking/streaming states.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     npmDeps: ["motion"],
-    examples: ["default"],
+    examples: ["default","tones"],
   },
   {
     slug: "ai-suggestion", name: "Suggestion", category: "AI",
@@ -993,7 +1031,7 @@ export const components: ComponentDoc[] = [
     description: "A compound component for displaying file, media, and source-document attachments in grid, inline, or list layouts with previews, remove buttons, and hover-card details.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/hover-card"],
     npmDeps: ["ai", "lucide-react"],
-    examples: ["default"],
+    examples: ["default","variants"],
   },
   {
     slug: "ai-connection", name: "Connection", category: "AI",
@@ -1009,8 +1047,102 @@ export const components: ComponentDoc[] = [
     npmDeps: ["lucide-react"],
     examples: ["default"],
   },
+  {
+    slug: "cursor", name: "Cursor", category: "UI",
+    description: "Live collaboration cursor — pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "pill", name: "Pill", category: "UI",
+    description: "Rounded pill with avatar/status/indicator/delta parts; tones map to semantic tokens. Adapted from kibo-ui.",
+    npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/avatar", "@byronwade/badge", "@byronwade/button"],
+    examples: ["default"],
+  },
+  {
+    slug: "glimpse", name: "Glimpse", category: "Overlays",
+    description: "Link/preview hover card (title, description, image) on the house hover-card. Adapted from kibo-ui.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/hover-card"],
+    examples: ["default"],
+  },
+  {
+    slug: "ticker", name: "Ticker", category: "UI",
+    description: "Stock/crypto ticker — icon, symbol, formatted price, up/down change. Adapted from kibo-ui.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/avatar"],
+    examples: ["default"],
+  },
+  {
+    slug: "relative-time", name: "Relative time", category: "UI",
+    description: "Multi-timezone live clock — per-zone time/date with mono labels, ticking each second. Adapted from kibo-ui.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "qr-code", name: "QR code", category: "UI",
+    description: "Token-colored QR code (modules use --foreground/--background, re-skins with the theme). Adapted from kibo-ui.",
+    npmDeps: ["qrcode", "culori"], registryDeps: ["@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "rating", name: "Rating", category: "Forms",
+    description: "Interactive star rating (keyboard + hover) + a read-only RatingBadge (score + star). Adapted from kibo-ui.",
+    npmDeps: ["lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "credit-card", name: "Credit card", category: "UI",
+    description: "Flippable credit-card display (chip, number, expiry, CVV, mag stripe, payment icon). Adapted from kibo-ui.",
+    npmDeps: ["react-svg-credit-card-payment-icons"], registryDeps: ["@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "image-crop", name: "Image crop", category: "UI",
+    description: "Crop a File to a PNG (react-image-crop + canvas); apply/reset controls. Adapted from kibo-ui.",
+    npmDeps: ["lucide-react", "react-image-crop"], registryDeps: ["@byronwade/utils", "@byronwade/button"],
+    examples: ["default"],
+  },
+  {
+    slug: "color-picker", name: "Color picker", category: "Forms",
+    description: "HSL color picker — 2D field + hue/alpha sliders, eyedropper, hex/rgb/css/hsl output. Adapted from kibo-ui.",
+    npmDeps: ["color", "@base-ui/react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/input", "@byronwade/select"],
+    examples: ["default"],
+  },
+  {
+    slug: "video-player", name: "Video player", category: "UI",
+    description: "media-chrome player with default/minimal/theater/poster variants. Adapted from kibo-ui.",
+    npmDeps: ["media-chrome"], registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default","variants"],
+  },
+  {
+    slug: "kanban", name: "Kanban", category: "Data display",
+    description: "Drag-and-drop kanban board with columns + sortable cards. Adapted from kibo-ui.",
+    npmDeps: ["@dnd-kit/core", "@dnd-kit/sortable", "@dnd-kit/utilities", "tunnel-rat"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/card", "@byronwade/scroll-area"],
+    examples: ["default"],
+  },
+  {
+    slug: "gantt", name: "Gantt", category: "Data display",
+    description: "Draggable timeline / roadmap chart — sidebar, multi-range header, status-tinted feature bars, milestone diamonds, today line. Auto-centers on today; a GanttControls toolbar drives timescale + zoom, with density and read-only presentation variants. Adapted from kibo-ui.",
+    npmDeps: ["@dnd-kit/core", "@dnd-kit/modifiers", "@uidotdev/usehooks", "date-fns", "jotai", "lodash.throttle", "lucide-react"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/card"],
+    examples: ["default", "controls", "compact", "read-only"],
+  },
+  {
+    slug: "editor", name: "Editor", category: "Forms",
+    description: "Tiptap rich-text editor — bubble toolbar, slash menu, tables, task lists, code blocks. Adapted from kibo-ui.",
+    npmDeps: ["@tiptap/react", "@tiptap/starter-kit", "lowlight", "tippy.js"], registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/command", "@byronwade/dropdown-menu", "@byronwade/popover", "@byronwade/separator", "@byronwade/tooltip"],
+    examples: ["default"],
+  },
 ];
 
 export const categories = ["Foundation", "Libraries", "UI", "Composites", "Primitives", "Forms", "Overlays", "Feedback", "Data display", "Patterns", "Charts", "House components", "Morph", "AI"] as const;
 export const byCategory = (cat: string) => components.filter((c) => c.category === cat);
 export const bySlug = (slug: string) => components.find((c) => c.slug === slug);
+
+/**
+ * Variants for a component. Authored `variants` win; otherwise synthesize one
+ * "default" variant from the type itself so every component exposes at least one
+ * addressable variant during the Phase 2 migration.
+ */
+export const getVariants = (doc: ComponentDoc): Variant[] =>
+  doc.variants && doc.variants.length > 0
+    ? doc.variants
+    : [{ id: "default", name: doc.name, tags: doc.tags ?? [], example: "default" }];

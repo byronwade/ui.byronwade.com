@@ -22,32 +22,19 @@ export const navItems: DocsNavItem[] = [
     match: (p) => p === "/",
   },
   {
-    // Written guides + the Introduction landing.
+    // Guides + the Introduction landing + every component reference page (the
+    // restored docs sidebar lists them all).
     label: "Docs",
     href: "/docs",
     icon: BookOpen,
-    match: (p) =>
-      p === "/docs" ||
-      p === "/docs/philosophy" ||
-      p === "/docs/installation" ||
-      p === "/docs/foundation" ||
-      p === "/docs/theming" ||
-      p === "/docs/typography" ||
-      p === "/docs/ai",
+    match: (p) => p === "/docs" || p.startsWith("/docs/"),
   },
   {
-    // The component catalog grid + every component reference page.
-    label: "Components",
-    href: "/docs#catalog",
+    // The faceted, searchable component catalog grid.
+    label: "Catalog",
+    href: "/catalog",
     icon: Component,
-    match: (p) =>
-      p.startsWith("/docs/") &&
-      p !== "/docs/philosophy" &&
-      p !== "/docs/installation" &&
-      p !== "/docs/foundation" &&
-      p !== "/docs/theming" &&
-      p !== "/docs/typography" &&
-      p !== "/docs/ai",
+    match: (p) => p.startsWith("/catalog"),
   },
   {
     label: "Layouts",

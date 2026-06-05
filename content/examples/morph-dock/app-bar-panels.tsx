@@ -158,7 +158,7 @@ export default function Example() {
             ) : panel === "profile" ? (
               <div className="p-1.5">
                 <div className="mb-1 flex items-center gap-2.5 px-2 py-1.5">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand text-[13px] font-bold text-brand-foreground">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand text-[13px] font-medium text-brand-foreground">
                     B
                   </span>
                   <span className="min-w-0">

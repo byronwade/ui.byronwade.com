@@ -15,17 +15,17 @@ export default function Example() {
                 meta: "0:00",
               },
               {
-                glyph: <CheckCircle2 className="size-4 text-emerald-500" />,
+                glyph: <CheckCircle2 className="size-4 text-success" />,
                 title: "Lint passed",
                 meta: "0:14",
               },
               {
-                glyph: <CheckCircle2 className="size-4 text-emerald-500" />,
+                glyph: <CheckCircle2 className="size-4 text-success" />,
                 title: "Unit tests passed (138/138)",
                 meta: "0:52",
               },
               {
-                glyph: <AlertTriangle className="size-4 text-amber-500" />,
+                glyph: <AlertTriangle className="size-4 text-warning" />,
                 title: "Coverage dropped below threshold",
                 meta: "0:53",
               },

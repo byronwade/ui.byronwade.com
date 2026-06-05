@@ -31,7 +31,7 @@ export default function Example() {
             label: "Health",
             value: (
               <span className="flex items-center gap-1.5 text-sm">
-                <span className="size-2 rounded-full bg-green-500" />
+                <span className="size-2 rounded-full bg-success" />
                 Healthy
               </span>
             ),

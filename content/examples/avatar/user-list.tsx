@@ -62,7 +62,7 @@ export default function Example() {
               <AvatarFallback>{getInitials(member.name)}</AvatarFallback>
               <AvatarBadge
                 className={
-                  member.online ? "bg-green-500" : "bg-muted-foreground"
+                  member.online ? "bg-success" : "bg-muted-foreground"
                 }
               />
             </Avatar>

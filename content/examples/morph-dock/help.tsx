@@ -66,7 +66,7 @@ export default function Example() {
             <input
               aria-label="Search help"
               placeholder="Search help…"
-              className="h-8 w-full rounded-lg bg-white/5 px-3 text-sm text-dock-active-foreground outline-none placeholder:text-dock-foreground/50"
+              className="h-8 w-full rounded-lg bg-dock-foreground/5 px-3 text-sm text-dock-active-foreground outline-none placeholder:text-dock-foreground/50"
             />
           </div>
 
@@ -78,7 +78,7 @@ export default function Example() {
                 onClick={() => setOpen(false)}
                 className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-dock-active"
               >
-                <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white/5 text-dock-foreground">
+                <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-dock-foreground/5 text-dock-foreground">
                   <topic.icon className="size-4" />
                 </span>
                 <span className="min-w-0 flex-1">

@@ -20,7 +20,7 @@ export default function Example() {
                   <span className="text-2xl font-semibold tabular-nums">{m.value}</span>
                   <span
                     className={`text-xs font-medium ${
-                      m.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-500"
+                      m.up ? "text-success" : "text-destructive"
                     }`}
                   >
                     {m.delta}
@@ -37,7 +37,7 @@ export default function Example() {
           </>
         }
       >
-        <div className="h-48 rounded-xl border border-border bg-gradient-to-b from-emerald-50/60 to-transparent dark:from-emerald-950/30 flex items-end justify-center pb-6 text-sm text-muted-foreground">
+        <div className="h-48 rounded-xl border border-border bg-gradient-to-b from-success/10 to-transparent flex items-end justify-center pb-6 text-sm text-muted-foreground">
           Full-bleed area chart
         </div>
       </HeroSection>

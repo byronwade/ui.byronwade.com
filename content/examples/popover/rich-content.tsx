@@ -11,15 +11,15 @@ import {
 } from "@/components/ui/popover";
 
 const MEMBERS = [
-  { id: 1, name: "Ada Lovelace", role: "Engineer", initials: "AL", color: "bg-violet-500" },
-  { id: 2, name: "Grace Hopper", role: "Architect", initials: "GH", color: "bg-sky-500" },
-  { id: 3, name: "Alan Turing", role: "Researcher", initials: "AT", color: "bg-amber-500" },
+  { id: 1, name: "Ada Lovelace", role: "Engineer", initials: "AL", color: "bg-chart-1/15 text-chart-1" },
+  { id: 2, name: "Grace Hopper", role: "Architect", initials: "GH", color: "bg-chart-2/15 text-chart-2" },
+  { id: 3, name: "Alan Turing", role: "Researcher", initials: "AT", color: "bg-chart-3/15 text-chart-3" },
 ];
 
 function Avatar({ initials, color }: { initials: string; color: string }) {
   return (
     <span
-      className={`inline-flex size-8 items-center justify-center rounded-full text-xs font-semibold text-white ${color}`}
+      className={`inline-flex size-8 items-center justify-center rounded-full text-xs font-semibold ${color}`}
     >
       {initials}
     </span>

@@ -871,7 +871,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "Alert — design-system component.",
+      "description": "Compound inline alert with title, description, icon slot, and action — plus intent tones (default, success, warning, destructive) on the semantic token system.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -891,7 +891,7 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "Progress — design-system component.",
+      "description": "Linear progress bar (Base UI) with label + value and token-driven intent tones (default, brand, success, warning, destructive) on the indicator.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1285,6 +1285,45 @@
       ]
     },
     {
+      "name": "morph-surface",
+      "type": "registry:ui",
+      "title": "Morph Surface",
+      "description": "Agnostic morph primitive — open-state orchestration (refs, cross-fade, Esc/outside-close, box sizing) with no visual style. Navigation styles compose it.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/use-chrome-morph"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-surface.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-surface.tsx"
+        }
+      ]
+    },
+    {
+      "name": "morph-bar",
+      "type": "registry:ui",
+      "title": "Morph Bar",
+      "description": "Full-width top navigation bar that blooms a panel down via the morph technique.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-bar.tsx"
+        }
+      ]
+    },
+    {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
@@ -1449,6 +1488,24 @@
           "path": "registry/ui/command.tsx",
           "type": "registry:ui",
           "target": "components/ui/command.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command-result",
+      "type": "registry:component",
+      "title": "Command Result",
+      "description": "Compact rich result row for a command palette: media, title, description, meta, and an action slot.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/command"
+      ],
+      "files": [
+        {
+          "path": "registry/components/command-result.tsx",
+          "type": "registry:component",
+          "target": "components/command-result.tsx"
         }
       ]
     },
@@ -1754,7 +1811,7 @@
       "name": "file-tree",
       "type": "registry:ui",
       "title": "File tree",
-      "description": "Collapsible file/folder tree with selection, sorting, and expand-all — rebuilt on Base UI (collapsible). Adapted from MagicUI.",
+      "description": "Collapsible file/folder tree with selection, sorting, and expand-all, plus a `panel` variant (chevron disclosure, guide lines, count badges) and `multi`-select with cascading checkboxes — rebuilt on Base UI (collapsible). Base adapted from MagicUI; panel/multi-select an original implementation inspired by Untitled UI.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1762,6 +1819,8 @@
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/button",
+        "@byronwade/badge",
+        "@byronwade/checkbox",
         "@byronwade/scroll-area",
         "@byronwade/collapsible"
       ],
@@ -1770,6 +1829,487 @@
           "path": "registry/ui/file-tree.tsx",
           "type": "registry:ui",
           "target": "components/ui/file-tree.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cursor",
+      "type": "registry:ui",
+      "title": "Cursor",
+      "description": "Live collaboration cursor — pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/cursor.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/cursor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pill",
+      "type": "registry:ui",
+      "title": "Pill",
+      "description": "Rounded pill with avatar/status/indicator/delta parts; tones map to success/destructive/warning/brand tokens. Adapted from kibo-ui.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/avatar",
+        "@byronwade/badge",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/pill.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pill.tsx"
+        }
+      ]
+    },
+    {
+      "name": "glimpse",
+      "type": "registry:ui",
+      "title": "Glimpse",
+      "description": "Link/preview hover card (title, description, image) built on the house hover-card. Adapted from kibo-ui.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/hover-card"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/glimpse.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/glimpse.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ticker",
+      "type": "registry:ui",
+      "title": "Ticker",
+      "description": "Stock/crypto ticker — icon, symbol, formatted price, and up/down change (success/destructive tokens). Adapted from kibo-ui.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/ticker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ticker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "relative-time",
+      "type": "registry:ui",
+      "title": "Relative time",
+      "description": "Multi-timezone live clock — per-zone time/date display with mono labels, ticking each second. Adapted from kibo-ui.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/relative-time.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/relative-time.tsx"
+        }
+      ]
+    },
+    {
+      "name": "qr-code",
+      "type": "registry:ui",
+      "title": "QR code",
+      "description": "Token-colored QR code (modules use --foreground/--background, so it re-skins). Adapted from kibo-ui.",
+      "dependencies": [
+        "qrcode",
+        "culori"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/qr-code.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/qr-code.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rating",
+      "type": "registry:ui",
+      "title": "Rating",
+      "description": "Interactive star rating (keyboard + hover) plus a read-only RatingBadge (score + star). Tone follows --brand. Adapted from kibo-ui (+ Untitled UI-style badge).",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ]
+    },
+    {
+      "name": "credit-card",
+      "type": "registry:ui",
+      "title": "Credit card",
+      "description": "Flippable credit-card display (chip, number, expiry, CVV, mag stripe, payment icon). Token body that re-skins; legible in both themes. Adapted from kibo-ui.",
+      "dependencies": [
+        "react-svg-credit-card-payment-icons"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/credit-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/credit-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-crop",
+      "type": "registry:ui",
+      "title": "Image crop",
+      "description": "Crop a File to a PNG (react-image-crop + canvas); apply/reset controls, token crop chrome. Adapted from kibo-ui.",
+      "dependencies": [
+        "lucide-react",
+        "react-image-crop"
+      ],
+      "registryDependencies": [
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/image-crop.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/image-crop.tsx"
+        }
+      ]
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color picker",
+      "description": "HSL color picker with a 2D saturation/lightness field, hue and alpha sliders, an eyedropper, and hex/rgb/css/hsl format output. Adapted from kibo-ui.",
+      "dependencies": [
+        "color",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/input",
+        "@byronwade/select"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/color-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/color-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "video-player",
+      "type": "registry:ui",
+      "title": "Video player",
+      "description": "Token-mapped media-chrome video player with a composable control bar and default/minimal/theater/poster variants. Adapted from kibo-ui.",
+      "dependencies": [
+        "media-chrome"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/video-player.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/video-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "equalizer-bars",
+      "type": "registry:ui",
+      "title": "Equalizer bars",
+      "description": "Animated now-playing equalizer bars. Accent follows --brand; freezes under prefers-reduced-motion. The shared playing-state primitive for album-cover, track-row, and now-playing-bar.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/equalizer-bars.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/equalizer-bars.tsx"
+        }
+      ]
+    },
+    {
+      "name": "album-cover",
+      "type": "registry:ui",
+      "title": "Album cover",
+      "description": "Square album/playlist artwork with an optional hover-reveal brand play button and an equalizer overlay for the active state. Accent follows --brand.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/equalizer-bars",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/album-cover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/album-cover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "audio-waveform",
+      "type": "registry:ui",
+      "title": "Audio waveform",
+      "description": "Bar-style waveform scrubber. Played bars follow --brand; click and arrow keys report a 0–1 seek ratio. Exposes role=slider with aria-value*.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/audio-waveform.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/audio-waveform.tsx"
+        }
+      ]
+    },
+    {
+      "name": "track-list",
+      "type": "registry:ui",
+      "title": "Track list",
+      "description": "Numbered song rows (TrackList + TrackRow). The index swaps to a play glyph on hover and to equalizer-bars when active. Active title and like follow --brand.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/equalizer-bars",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/track-list.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/track-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "lyrics",
+      "type": "registry:ui",
+      "title": "Lyrics",
+      "description": "Synced, scrolling lyric lines. The active line is emphasised and scrolls into view (instant under prefers-reduced-motion). Lines become seek-to-line buttons when onLineClick is set.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/lyrics.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/lyrics.tsx"
+        }
+      ]
+    },
+    {
+      "name": "now-playing-bar",
+      "type": "registry:ui",
+      "title": "Now playing bar",
+      "description": "Sticky transport bar composed from album-cover + slider. Controlled parts: NowPlayingBarTrack, NowPlayingBarControls, NowPlayingBarProgress, NowPlayingBarExtras. Active controls follow --brand.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/album-cover",
+        "@byronwade/slider",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/now-playing-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/now-playing-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "audio-player",
+      "type": "registry:ui",
+      "title": "Audio player",
+      "description": "Token-mapped media-chrome <audio> player with a composable control bar and default/minimal/card variants. Audio sibling of video-player; accent follows --brand.",
+      "dependencies": [
+        "media-chrome"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/audio-player.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/audio-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "playlist-card",
+      "type": "registry:component",
+      "title": "Playlist card",
+      "description": "Browse-grid tile composing album-cover + title + description. Surfaces the cover's hover play button and active equalizer; lifts on hover.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/album-cover",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/playlist-card.tsx",
+          "type": "registry:component",
+          "target": "components/playlist-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "artist-header",
+      "type": "registry:component",
+      "title": "Artist header",
+      "description": "Artist hero composing album-cover + verified badge + monthly-listeners stat (font-mono) + Play/Follow buttons. Editorial name typography; Play follows --brand.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/album-cover",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/artist-header.tsx",
+          "type": "registry:component",
+          "target": "components/artist-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kanban",
+      "type": "registry:ui",
+      "title": "Kanban",
+      "description": "Drag-and-drop kanban board with columns, sortable cards, and accessible drag announcements. Adapted from kibo-ui.",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities",
+        "tunnel-rat"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/card",
+        "@byronwade/scroll-area"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/kanban.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kanban.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gantt",
+      "type": "registry:ui",
+      "title": "Gantt",
+      "description": "Draggable timeline / roadmap chart with a sidebar, multi-range header, status-tinted feature bars, milestone diamonds, and a today line. Auto-centers on today; a GanttControls toolbar drives timescale + zoom, with density and read-only presentation variants. Adapted from kibo-ui.",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/modifiers",
+        "@uidotdev/usehooks",
+        "date-fns",
+        "jotai",
+        "lodash.throttle",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/card"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/gantt.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gantt.tsx"
+        }
+      ]
+    },
+    {
+      "name": "editor",
+      "type": "registry:ui",
+      "title": "Editor",
+      "description": "A Tiptap rich-text editor with a bubble toolbar, slash command menu, tables, task lists, and syntax-highlighted code blocks. Adapted from kibo-ui.",
+      "dependencies": [
+        "@floating-ui/dom",
+        "@tiptap/core",
+        "@tiptap/react",
+        "@tiptap/pm",
+        "@tiptap/starter-kit",
+        "@tiptap/suggestion",
+        "@tiptap/extensions",
+        "@tiptap/extension-code-block-lowlight",
+        "@tiptap/extension-list",
+        "@tiptap/extension-subscript",
+        "@tiptap/extension-superscript",
+        "@tiptap/extension-table",
+        "@tiptap/extension-text-style",
+        "@tiptap/extension-typography",
+        "fuse.js",
+        "lowlight",
+        "tippy.js",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/command",
+        "@byronwade/dropdown-menu",
+        "@byronwade/popover",
+        "@byronwade/separator",
+        "@byronwade/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/editor.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/editor.tsx"
         }
       ]
     },
@@ -2522,6 +3062,8 @@
         "@byronwade/comms-store",
         "@byronwade/conversation-list",
         "@byronwade/morph-dock",
+        "@byronwade/morph-surface",
+        "@byronwade/morph-bar",
         "@byronwade/aspect-ratio",
         "@byronwade/scroll-area",
         "@byronwade/collapsible",
@@ -2530,6 +3072,7 @@
         "@byronwade/input-group",
         "@byronwade/sheet",
         "@byronwade/command",
+        "@byronwade/command-result",
         "@byronwade/navigation-menu",
         "@byronwade/verification-progress",
         "@byronwade/safari",
@@ -2547,6 +3090,29 @@
         "@byronwade/number-field",
         "@byronwade/price-range-filter",
         "@byronwade/file-tree",
+        "@byronwade/cursor",
+        "@byronwade/pill",
+        "@byronwade/glimpse",
+        "@byronwade/ticker",
+        "@byronwade/relative-time",
+        "@byronwade/qr-code",
+        "@byronwade/rating",
+        "@byronwade/credit-card",
+        "@byronwade/image-crop",
+        "@byronwade/color-picker",
+        "@byronwade/video-player",
+        "@byronwade/equalizer-bars",
+        "@byronwade/album-cover",
+        "@byronwade/audio-waveform",
+        "@byronwade/track-list",
+        "@byronwade/lyrics",
+        "@byronwade/now-playing-bar",
+        "@byronwade/audio-player",
+        "@byronwade/playlist-card",
+        "@byronwade/artist-header",
+        "@byronwade/kanban",
+        "@byronwade/gantt",
+        "@byronwade/editor",
         "@byronwade/ai-loader",
         "@byronwade/ai-shimmer",
         "@byronwade/ai-suggestion",

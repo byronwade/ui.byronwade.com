@@ -59,10 +59,10 @@ export default function Example() {
             >
               <span
                 className={cn(
-                  "grid size-9 shrink-0 place-items-center rounded-lg text-[13px] font-bold",
+                  "grid size-9 shrink-0 place-items-center rounded-lg text-[13px] font-medium",
                   p.current
                     ? "bg-gradient-to-br from-brand to-brand/70 text-brand-foreground"
-                    : "bg-white/10 text-dock-active-foreground",
+                    : "bg-dock-foreground/10 text-dock-active-foreground",
                 )}
               >
                 {p.mark}
