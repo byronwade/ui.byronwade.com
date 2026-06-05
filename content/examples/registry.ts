@@ -216,6 +216,7 @@ import DropdownMenuWithIcons from "./dropdown-menu/with-icons";
 import DropdownMenuWithRadio from "./dropdown-menu/with-radio";
 import DropdownMenuWithShortcuts from "./dropdown-menu/with-shortcuts";
 import DropdownMenuWithSubmenu from "./dropdown-menu/with-submenu";
+import EconomicCalendarDefault from "./economic-calendar/default";
 import EditorDefault from "./editor/default";
 import EmptyStateDefault from "./empty-state/default";
 import EmptyStateCompact from "./empty-state/compact";
@@ -310,6 +311,8 @@ import LabelWithCheckbox from "./label/with-checkbox";
 import LabelWithIcon from "./label/with-icon";
 import LyricsDefault from "./lyrics/default";
 import MarketDepthDefault from "./market-depth/default";
+import MarketMoversDefault from "./market-movers/default";
+import MarketNewsDefault from "./market-news/default";
 import MarketingLayoutDefault from "./marketing-layout/default";
 import MetricStatDefault from "./metric-stat/default";
 import MetricStatCustomValue from "./metric-stat/custom-value";
@@ -358,6 +361,7 @@ import NowPlayingBarDefault from "./now-playing-bar/default";
 import NumberFieldDefault from "./number-field/default";
 import NumberFieldSizes from "./number-field/sizes";
 import OrderBookDefault from "./order-book/default";
+import OrderEntryDefault from "./order-entry/default";
 import OrderSummaryDefault from "./order-summary/default";
 import PageHeaderDefault from "./page-header/default";
 import PageHeaderAlign from "./page-header/align";
@@ -375,6 +379,10 @@ import PopoverMenuLike from "./popover/menu-like";
 import PopoverPlacement from "./popover/placement";
 import PopoverRichContent from "./popover/rich-content";
 import PopoverWithForm from "./popover/with-form";
+import PortfolioSummaryDefault from "./portfolio-summary/default";
+import PositionCardDefault from "./position-card/default";
+import PositionsTableDefault from "./positions-table/default";
+import PriceAlertDefault from "./price-alert/default";
 import PriceChangeDefault from "./price-change/default";
 import PriceRangeFilterDefault from "./price-range-filter/default";
 import ProductCardDefault from "./product-card/default";
@@ -412,6 +420,7 @@ import ResourceListNoMedia from "./resource-list/no-media";
 import ResourceListSelectable from "./resource-list/selectable";
 import ResourceListWithActions from "./resource-list/with-actions";
 import SafariDefault from "./safari/default";
+import ScreenerTableDefault from "./screener-table/default";
 import ScrollAreaDefault from "./scroll-area/default";
 import ScrollAreaCardList from "./scroll-area/card-list";
 import ScrollAreaCompact from "./scroll-area/compact";
@@ -499,6 +508,7 @@ import SwitchDisabled from "./switch/disabled";
 import SwitchInvalid from "./switch/invalid";
 import SwitchSizes from "./switch/sizes";
 import SwitchWithLabel from "./switch/with-label";
+import SymbolSearchDefault from "./symbol-search/default";
 import TableDefault from "./table/default";
 import TableEmptyState from "./table/empty-state";
 import TableLoadingSkeleton from "./table/loading-skeleton";
@@ -554,6 +564,7 @@ import TooltipSides from "./tooltip/sides";
 import TooltipWithDelay from "./tooltip/with-delay";
 import TooltipWithIcon from "./tooltip/with-icon";
 import TrackListDefault from "./track-list/default";
+import TradeHistoryDefault from "./trade-history/default";
 import VariantPickerDefault from "./variant-picker/default";
 import VerificationProgressDefault from "./verification-progress/default";
 import VerificationProgressAllTones from "./verification-progress/all-tones";
@@ -931,6 +942,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Shortcuts", file: "dropdown-menu/with-shortcuts.tsx", Component: DropdownMenuWithShortcuts },
     { name: "With Submenu", file: "dropdown-menu/with-submenu.tsx", Component: DropdownMenuWithSubmenu },
   ],
+  "economic-calendar": [
+    { name: "Default", file: "economic-calendar/default.tsx", Component: EconomicCalendarDefault },
+  ],
   "editor": [
     { name: "Default", file: "editor/default.tsx", Component: EditorDefault },
   ],
@@ -1083,6 +1097,12 @@ export const examples: Record<string, Example[]> = {
   "market-depth": [
     { name: "Default", file: "market-depth/default.tsx", Component: MarketDepthDefault },
   ],
+  "market-movers": [
+    { name: "Default", file: "market-movers/default.tsx", Component: MarketMoversDefault },
+  ],
+  "market-news": [
+    { name: "Default", file: "market-news/default.tsx", Component: MarketNewsDefault },
+  ],
   "marketing-layout": [
     { name: "Default", file: "marketing-layout/default.tsx", Component: MarketingLayoutDefault },
   ],
@@ -1161,6 +1181,9 @@ export const examples: Record<string, Example[]> = {
   "order-book": [
     { name: "Default", file: "order-book/default.tsx", Component: OrderBookDefault },
   ],
+  "order-entry": [
+    { name: "Default", file: "order-entry/default.tsx", Component: OrderEntryDefault },
+  ],
   "order-summary": [
     { name: "Default", file: "order-summary/default.tsx", Component: OrderSummaryDefault },
   ],
@@ -1189,6 +1212,18 @@ export const examples: Record<string, Example[]> = {
     { name: "Placement", file: "popover/placement.tsx", Component: PopoverPlacement },
     { name: "Rich Content", file: "popover/rich-content.tsx", Component: PopoverRichContent },
     { name: "With Form", file: "popover/with-form.tsx", Component: PopoverWithForm },
+  ],
+  "portfolio-summary": [
+    { name: "Default", file: "portfolio-summary/default.tsx", Component: PortfolioSummaryDefault },
+  ],
+  "position-card": [
+    { name: "Default", file: "position-card/default.tsx", Component: PositionCardDefault },
+  ],
+  "positions-table": [
+    { name: "Default", file: "positions-table/default.tsx", Component: PositionsTableDefault },
+  ],
+  "price-alert": [
+    { name: "Default", file: "price-alert/default.tsx", Component: PriceAlertDefault },
   ],
   "price-change": [
     { name: "Default", file: "price-change/default.tsx", Component: PriceChangeDefault },
@@ -1248,6 +1283,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "safari": [
     { name: "Default", file: "safari/default.tsx", Component: SafariDefault },
+  ],
+  "screener-table": [
+    { name: "Default", file: "screener-table/default.tsx", Component: ScreenerTableDefault },
   ],
   "scroll-area": [
     { name: "Default", file: "scroll-area/default.tsx", Component: ScrollAreaDefault },
@@ -1368,6 +1406,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Sizes", file: "switch/sizes.tsx", Component: SwitchSizes },
     { name: "With Label", file: "switch/with-label.tsx", Component: SwitchWithLabel },
   ],
+  "symbol-search": [
+    { name: "Default", file: "symbol-search/default.tsx", Component: SymbolSearchDefault },
+  ],
   "table": [
     { name: "Default", file: "table/default.tsx", Component: TableDefault },
     { name: "Empty State", file: "table/empty-state.tsx", Component: TableEmptyState },
@@ -1444,6 +1485,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "track-list": [
     { name: "Default", file: "track-list/default.tsx", Component: TrackListDefault },
+  ],
+  "trade-history": [
+    { name: "Default", file: "trade-history/default.tsx", Component: TradeHistoryDefault },
   ],
   "variant-picker": [
     { name: "Default", file: "variant-picker/default.tsx", Component: VariantPickerDefault },

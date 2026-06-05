@@ -3481,6 +3481,137 @@
       ]
     },
     {
+      "name": "market-movers",
+      "type": "registry:component",
+      "title": "Market movers",
+      "description": "Gainers, losers, and most-active tabs — each row shows last price, price-change, and sparkline with optional symbol select.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/tabs",
+        "@byronwade/price-change",
+        "@byronwade/sparkline",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/market-movers.tsx",
+          "type": "registry:component",
+          "target": "components/market-movers.tsx"
+        }
+      ]
+    },
+    {
+      "name": "screener-table",
+      "type": "registry:component",
+      "title": "Screener table",
+      "description": "Market screener — index-filters views plus sortable index-table columns for price, change, volume, market cap, and sparkline.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/index-filters",
+        "@byronwade/index-table",
+        "@byronwade/price-change",
+        "@byronwade/sparkline",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/screener-table.tsx",
+          "type": "registry:component",
+          "target": "components/screener-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "economic-calendar",
+      "type": "registry:component",
+      "title": "Economic calendar",
+      "description": "Macro event calendar grouped by day — time, country, impact badge, and actual/forecast/prior mono readings.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/relative-time",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/economic-calendar.tsx",
+          "type": "registry:component",
+          "target": "components/economic-calendar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "market-news",
+      "type": "registry:component",
+      "title": "Market news",
+      "description": "News feed rows — source avatar, headline, relative-time, sentiment badge, and related-symbol price-change chips.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/badge",
+        "@byronwade/relative-time",
+        "@byronwade/price-change",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/market-news.tsx",
+          "type": "registry:component",
+          "target": "components/market-news.tsx"
+        }
+      ]
+    },
+    {
+      "name": "price-alert",
+      "type": "registry:component",
+      "title": "Price alert",
+      "description": "Price alert list — condition text, active/triggered status dot, enable switch, and optional delete action.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/switch",
+        "@byronwade/badge",
+        "@byronwade/status-dot",
+        "@byronwade/button",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/price-alert.tsx",
+          "type": "registry:component",
+          "target": "components/price-alert.tsx"
+        }
+      ]
+    },
+    {
+      "name": "symbol-search",
+      "type": "registry:component",
+      "title": "Symbol search",
+      "description": "Symbol command palette — grouped search results with price-change, keyboard hints, and cmdk filtering.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/command",
+        "@byronwade/kbd",
+        "@byronwade/price-change",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "cmdk"
+      ],
+      "files": [
+        {
+          "path": "registry/components/symbol-search.tsx",
+          "type": "registry:component",
+          "target": "components/symbol-search.tsx"
+        }
+      ]
+    },
+    {
       "name": "money-input",
       "type": "registry:ui",
       "title": "Money input",
@@ -3940,6 +4071,12 @@
         "@byronwade/positions-table",
         "@byronwade/portfolio-summary",
         "@byronwade/trade-history",
+        "@byronwade/market-movers",
+        "@byronwade/screener-table",
+        "@byronwade/economic-calendar",
+        "@byronwade/market-news",
+        "@byronwade/price-alert",
+        "@byronwade/symbol-search",
         "@byronwade/money-input",
         "@byronwade/bulk-action-bar",
         "@byronwade/order-summary",

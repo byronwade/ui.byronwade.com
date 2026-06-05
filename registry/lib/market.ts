@@ -505,6 +505,68 @@ const makeMarketEvents = (
   }))
 }
 
+const makeNewsItems = (count: number, opts: SeedOpts = {}): NewsItem[] => {
+  const sentiments: NonNullable<NewsItem["sentiment"]>[] = [
+    "positive",
+    "negative",
+    "neutral",
+  ]
+  return Array.from({ length: count }, (_, index) => {
+    const quote = makeQuote({ seed: (opts.seed ?? DEFAULT_SEED) + index + 60 })
+    const rand = mulberry32((opts.seed ?? DEFAULT_SEED) + index + 70)
+    return {
+      id: `news-${index + 1}`,
+      source: ["Reuters", "Bloomberg", "CNBC", "WSJ"][index % 4],
+      headline: `${quote.symbol} ${index % 2 === 0 ? "rallies on earnings beat" : "slides after guidance cut"}`,
+      time: BASE_TIME - index * 1_800_000,
+      symbols: [quote.symbol],
+      sentiment: sentiments[Math.floor(rand() * sentiments.length)],
+    }
+  })
+}
+
+const makeAlerts = (count: number, opts: SeedOpts = {}): Alert[] => {
+  const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
+  return Array.from({ length: count }, (_, index) => {
+    const quote = makeQuote({ seed: (opts.seed ?? DEFAULT_SEED) + index + 80 })
+    return {
+      id: `alert-${index + 1}`,
+      symbol: quote.symbol,
+      condition: rand() > 0.5 ? "above" : "below",
+      target: quote.price,
+      enabled: rand() > 0.25,
+      status: rand() > 0.8 ? "triggered" : "active",
+    }
+  })
+}
+
+const makeQuotes = (count: number, opts: SeedOpts = {}): Quote[] =>
+  Array.from({ length: count }, (_, index) =>
+    makeQuote({ seed: (opts.seed ?? DEFAULT_SEED) + index + 1 }),
+  )
+
+const makeMarketMovers = (
+  count: number,
+  opts: SeedOpts = {},
+): { gainers: MoverRow[]; losers: MoverRow[]; active: MoverRow[] } => {
+  const gainers = makeMoverRows(count, {
+    seed: (opts.seed ?? DEFAULT_SEED) + 1,
+  }).map((row) => ({
+    ...row,
+    changePercent: Math.abs(row.changePercent) + 0.5,
+  }))
+  const losers = makeMoverRows(count, {
+    seed: (opts.seed ?? DEFAULT_SEED) + 2,
+  }).map((row) => ({
+    ...row,
+    changePercent: -Math.abs(row.changePercent) - 0.5,
+  }))
+  const active = makeMoverRows(count, {
+    seed: (opts.seed ?? DEFAULT_SEED) + 3,
+  }).map((row) => ({ ...row, changePercent: row.changePercent * 0.4 }))
+  return { gainers, losers, active }
+}
+
 export {
   linearScale,
   formatPrice,
@@ -529,6 +591,10 @@ export {
   makeMoverRows,
   makeScreenerRows,
   makeMarketEvents,
+  makeNewsItems,
+  makeAlerts,
+  makeQuotes,
+  makeMarketMovers,
 }
 
 export type {
