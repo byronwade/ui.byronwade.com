@@ -20,6 +20,7 @@ import {
   makeCandles,
   makeQuote,
   makeOrderBook,
+  makeHeatmapCells,
   makeSeries,
 } from "@/lib/market"
 
@@ -210,6 +211,22 @@ describe("makeOrderBook", () => {
     for (const level of [...book.bids, ...book.asks]) {
       expect(typeof level.price).toBe("number")
       expect(typeof level.size).toBe("number")
+    }
+  })
+})
+
+describe("makeHeatmapCells", () => {
+  it("is deterministic for the same seed", () => {
+    expect(makeHeatmapCells(8, { seed: 2 })).toEqual(makeHeatmapCells(8, { seed: 2 }))
+  })
+
+  it("returns the requested count of cells with symbol, weight, and change", () => {
+    const cells = makeHeatmapCells(6, { seed: 2 })
+    expect(cells).toHaveLength(6)
+    for (const cell of cells) {
+      expect(typeof cell.symbol).toBe("string")
+      expect(typeof cell.weight).toBe("number")
+      expect(typeof cell.change).toBe("number")
     }
   })
 })

@@ -52,7 +52,10 @@ const DepthChart = ({
       {bidPath ? (
         // Flip the left half horizontally so cumulative depth grows toward the
         // midline (best bid in the center, deepest book at the left edge).
-        <g data-slot="depth-bid-group" transform={`translate(${half},0) scale(-1,1)`}>
+        <g
+          data-slot="depth-bid-group"
+          transform={`translate(${half},0) scale(-1,1)`}
+        >
           <path
             data-slot="depth-bid"
             d={bidPath}

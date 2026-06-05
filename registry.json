@@ -3210,6 +3210,42 @@
       ]
     },
     {
+      "name": "order-book",
+      "type": "registry:ui",
+      "title": "Order book",
+      "description": "Token-themed DOM ladder for bid/ask depth: proportional depth bars (success bid, destructive ask), a spread row, split or vertical layout, and optional row-click price selection. Defaults to a seeded book from the `market` lib.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/market"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/order-book.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/order-book.tsx"
+        }
+      ]
+    },
+    {
+      "name": "heatmap-grid",
+      "type": "registry:ui",
+      "title": "Heatmap grid",
+      "description": "Performance heatmap grid with cell area sized by weight and color toned by change magnitude — either success/destructive opacity buckets or the `--chart-1…5` ramp. Seeded defaults from the `market` lib; optional cell selection callback.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/market"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/heatmap-grid.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/heatmap-grid.tsx"
+        }
+      ]
+    },
+    {
       "name": "money-input",
       "type": "registry:ui",
       "title": "Money input",

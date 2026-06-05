@@ -8,7 +8,10 @@ import { cn } from "@/lib/utils"
 const GRID_ROWS = 4
 const VOLUME_RATIO = 0.2
 
-type CandlestickChartProps = Omit<ComponentPropsWithoutRef<"svg">, "children"> & {
+type CandlestickChartProps = Omit<
+  ComponentPropsWithoutRef<"svg">,
+  "children"
+> & {
   data?: Candle[]
   width?: number
   height?: number
@@ -88,7 +91,9 @@ const CandlestickChart = ({
                 y={volumeTop + (volumeHeight - barHeight)}
                 width={bodyWidth}
                 height={Math.max(0, barHeight)}
-                className={g.bullish ? "fill-success/30" : "fill-destructive/30"}
+                className={
+                  g.bullish ? "fill-success/30" : "fill-destructive/30"
+                }
               />
             )
           })}

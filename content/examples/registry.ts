@@ -253,6 +253,7 @@ import GradientAvatarListRows from "./gradient-avatar/list-rows";
 import GradientAvatarSeeds from "./gradient-avatar/seeds";
 import GradientAvatarSizes from "./gradient-avatar/sizes";
 import GradientAvatarWithNameBadge from "./gradient-avatar/with-name-badge";
+import HeatmapGridDefault from "./heatmap-grid/default";
 import HeroSectionDefault from "./hero-section/default";
 import HeroSectionNoHeader from "./hero-section/no-header";
 import HeroSectionWithActionHeader from "./hero-section/with-action-header";
@@ -353,6 +354,7 @@ import NavigationMenuWithIcons from "./navigation-menu/with-icons";
 import NowPlayingBarDefault from "./now-playing-bar/default";
 import NumberFieldDefault from "./number-field/default";
 import NumberFieldSizes from "./number-field/sizes";
+import OrderBookDefault from "./order-book/default";
 import OrderSummaryDefault from "./order-summary/default";
 import PageHeaderDefault from "./page-header/default";
 import PageHeaderAlign from "./page-header/align";
@@ -980,6 +982,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Sizes", file: "gradient-avatar/sizes.tsx", Component: GradientAvatarSizes },
     { name: "With Name Badge", file: "gradient-avatar/with-name-badge.tsx", Component: GradientAvatarWithNameBadge },
   ],
+  "heatmap-grid": [
+    { name: "Default", file: "heatmap-grid/default.tsx", Component: HeatmapGridDefault },
+  ],
   "hero-section": [
     { name: "Default", file: "hero-section/default.tsx", Component: HeroSectionDefault },
     { name: "No Header", file: "hero-section/no-header.tsx", Component: HeroSectionNoHeader },
@@ -1137,6 +1142,9 @@ export const examples: Record<string, Example[]> = {
   "number-field": [
     { name: "Default", file: "number-field/default.tsx", Component: NumberFieldDefault },
     { name: "Sizes", file: "number-field/sizes.tsx", Component: NumberFieldSizes },
+  ],
+  "order-book": [
+    { name: "Default", file: "order-book/default.tsx", Component: OrderBookDefault },
   ],
   "order-summary": [
     { name: "Default", file: "order-summary/default.tsx", Component: OrderSummaryDefault },

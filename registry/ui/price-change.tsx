@@ -37,8 +37,14 @@ const priceChangeVariants = cva(
 // only colors the text; chip adds a matching tinted pill background.
 const toneClass: Record<Direction, { text: string; chip: string }> = {
   up: { text: "text-success", chip: "bg-success/10 text-success" },
-  down: { text: "text-destructive", chip: "bg-destructive/10 text-destructive" },
-  neutral: { text: "text-muted-foreground", chip: "bg-muted text-muted-foreground" },
+  down: {
+    text: "text-destructive",
+    chip: "bg-destructive/10 text-destructive",
+  },
+  neutral: {
+    text: "text-muted-foreground",
+    chip: "bg-muted text-muted-foreground",
+  },
 }
 
 const directionWord: Record<Direction, string> = {

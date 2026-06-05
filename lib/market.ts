@@ -392,6 +392,23 @@ const makeOrderBook = (
   return { bids, asks }
 }
 
+/** Generate a deterministic heatmap cell set seeded by `opts.seed`. */
+const makeHeatmapCells = (
+  count: number,
+  opts: SeedOpts = {},
+): HeatmapCell[] => {
+  const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
+  const cells: HeatmapCell[] = []
+  for (let i = 0; i < count; i += 1) {
+    cells.push({
+      symbol: SYMBOLS[i % SYMBOLS.length],
+      weight: 0.5 + rand() * 2.5,
+      change: (rand() - 0.5) * 8,
+    })
+  }
+  return cells
+}
+
 /** Generate a deterministic numeric series (random walk), seeded by `opts.seed`. */
 const makeSeries = (count: number, opts: SeedOpts = {}): number[] => {
   const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
@@ -419,6 +436,7 @@ export {
   makeCandles,
   makeQuote,
   makeOrderBook,
+  makeHeatmapCells,
   makeSeries,
 }
 
