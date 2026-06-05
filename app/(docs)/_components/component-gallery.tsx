@@ -30,7 +30,7 @@ function uniqueSorted(values: string[]) {
 function Thumb({ slug, name }: { slug: string; name: string }) {
   const [error, setError] = React.useState(false);
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl edge bg-muted/30 transition-all group-hover:-translate-y-0.5 group-hover:shadow-card">
+    <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border/60 bg-background">
       {error ? (
         <div className="grid h-full place-items-center">
           <GradientAvatar seed={name} size="lg" className="rounded-xl opacity-60" />
@@ -200,10 +200,10 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
               <Link
                 href={item.href}
                 aria-label={item.name}
-                className="group flex flex-col gap-3 rounded-2xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="group flex flex-col gap-3 rounded-2xl border border-border bg-card p-3 outline-none transition-all hover:-translate-y-0.5 hover:border-border hover:shadow-card focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <Thumb slug={item.slug} name={item.name} />
-                <div className="flex items-start gap-2.5 px-0.5">
+                <div className="flex items-start gap-2.5 px-1">
                   <GradientAvatar
                     seed={item.name}
                     size="sm"
