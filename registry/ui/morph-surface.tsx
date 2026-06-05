@@ -10,13 +10,17 @@ const useIsoLayoutEffect =
 export type MorphPlacement = "top" | "bottom" | "left" | "right"
 export type MorphGrow = "height" | "width" | "both"
 
-/** Anchor the morphing box so it grows the right direction (top edge fixed →
- *  grows down, bottom edge fixed → grows up, etc.). `top` stays in normal flow. */
+/** Anchor the morphing box so it grows the right direction. `top`/`left`/`right`
+ *  stay in normal flow (the box grows its size and the flex row reflows around it
+ *  — a left box grows rightward, a right box, placed last, grows leftward). Only
+ *  `bottom` is absolute (a bottom sheet must grow UP out of normal flow). An
+ *  in-flow box honors its explicit grow-axis size; an absolute box inside a
+ *  shrink-wrapped (0-size) nav does not. */
 const ANCHOR: Record<MorphPlacement, string> = {
   top: "",
   bottom: "absolute inset-x-0 bottom-0",
-  left: "absolute inset-y-0 left-0",
-  right: "absolute inset-y-0 right-0",
+  left: "h-full",
+  right: "h-full",
 }
 
 export interface MorphSurfaceProps {
