@@ -34,17 +34,45 @@ const useSupportsHover = () => {
   return supportsHover
 }
 
-export type CreditCardProps = HTMLAttributes<HTMLDivElement>
+// Surface theme for the card faces. `default` is the original ink card; the
+// other tones re-skin both faces from token pairs that stay legible. Published
+// on a context so the front, back, and root text color move together.
+type CreditCardTone = "default" | "brand" | "muted"
 
-export const CreditCard = ({ className, ...props }: CreditCardProps) => (
-  <div
-    data-slot="credit-card"
-    className={cn(
-      "group/credit-card aspect-[8560/5398] w-full max-w-96 text-background perspective-distant @container",
-      className,
-    )}
-    {...props}
-  />
+const cardSurface: Record<CreditCardTone, string> = {
+  default: "bg-foreground/90",
+  brand: "bg-brand",
+  muted: "bg-muted",
+}
+
+const cardText: Record<CreditCardTone, string> = {
+  default: "text-background",
+  brand: "text-brand-foreground",
+  muted: "text-foreground",
+}
+
+const CreditCardToneContext = createContext<CreditCardTone>("default")
+
+export type CreditCardProps = HTMLAttributes<HTMLDivElement> & {
+  tone?: CreditCardTone
+}
+
+export const CreditCard = ({
+  className,
+  tone = "default",
+  ...props
+}: CreditCardProps) => (
+  <CreditCardToneContext.Provider value={tone}>
+    <div
+      data-slot="credit-card"
+      className={cn(
+        "group/credit-card aspect-[8560/5398] w-full max-w-96 perspective-distant @container",
+        cardText[tone],
+        className,
+      )}
+      {...props}
+    />
+  </CreditCardToneContext.Provider>
 )
 
 const CreditCardFlipContext = createContext(false)
@@ -170,20 +198,24 @@ export const CreditCardFront = ({
   safeArea = 20,
   children,
   ...props
-}: CreditCardFrontProps) => (
-  <div
-    data-slot="credit-card-front"
-    className={cn(
-      "absolute inset-0 flex overflow-hidden rounded-lg bg-foreground/90 backface-hidden @xs:rounded-2xl",
-      className,
-    )}
-    {...props}
-  >
-    <div className="relative flex-1" style={{ margin: `${safeArea}px` }}>
-      {children}
+}: CreditCardFrontProps) => {
+  const tone = useContext(CreditCardToneContext)
+  return (
+    <div
+      data-slot="credit-card-front"
+      className={cn(
+        "absolute inset-0 flex overflow-hidden rounded-lg backface-hidden @xs:rounded-2xl",
+        cardSurface[tone],
+        className,
+      )}
+      {...props}
+    >
+      <div className="relative flex-1" style={{ margin: `${safeArea}px` }}>
+        {children}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export type CreditCardServiceProviderProps = ComponentProps<typeof PaymentIcon>
 
@@ -252,12 +284,14 @@ export const CreditCardBack = ({
   ...props
 }: CreditCardBackProps) => {
   const isInsideFlipper = useContext(CreditCardFlipContext)
+  const tone = useContext(CreditCardToneContext)
   return (
     <CreditCardBackContext.Provider value={{ safeArea }}>
       <div
         data-slot="credit-card-back"
         className={cn(
-          "absolute inset-0 flex overflow-hidden rounded-lg bg-foreground/90 backface-hidden @xs:rounded-2xl",
+          "absolute inset-0 flex overflow-hidden rounded-lg backface-hidden @xs:rounded-2xl",
+          cardSurface[tone],
           isInsideFlipper && "rotate-y-180",
           className,
         )}

@@ -6,6 +6,7 @@
  * emerald/rose/amber/sky, composes the house avatar/badge/button, and each part
  * carries a `data-slot`.
  */
+import { cva, type VariantProps } from "class-variance-authority"
 import { ChevronDownIcon, ChevronUpIcon, MinusIcon } from "lucide-react"
 import type { ComponentProps, ReactNode } from "react"
 
@@ -14,18 +15,33 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export type PillProps = ComponentProps<typeof Badge> & {
-  themed?: boolean
-}
+// Padding + gap + text scale together; `default` is unchanged from the
+// original pill so existing usages keep their exact footprint.
+const pillVariants = cva("rounded-full font-normal", {
+  variants: {
+    size: {
+      sm: "gap-1.5 px-2 py-0.5 text-xs",
+      default: "gap-2 px-3 py-1.5",
+      lg: "gap-2.5 px-4 py-2 text-base",
+    },
+  },
+  defaultVariants: { size: "default" },
+})
+
+export type PillProps = ComponentProps<typeof Badge> &
+  VariantProps<typeof pillVariants> & {
+    themed?: boolean
+  }
 
 export const Pill = ({
   variant = "secondary",
+  size,
   className,
   ...props
 }: PillProps) => (
   <Badge
     data-slot="pill"
-    className={cn("gap-2 rounded-full px-3 py-1.5 font-normal", className)}
+    className={cn(pillVariants({ size }), className)}
     variant={variant}
     {...props}
   />

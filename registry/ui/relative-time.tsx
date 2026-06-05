@@ -65,16 +65,27 @@ const formatTime = (
     },
   ).format(date)
 
+type RelativeTimeSize = "sm" | "default" | "lg"
+
+// Row density + text scale together; `default` keeps the original compact look.
+const zoneRowSize: Record<RelativeTimeSize, string> = {
+  sm: "gap-1 text-xs",
+  default: "gap-1.5 text-xs",
+  lg: "gap-2 text-sm",
+}
+
 type RelativeTimeContextType = {
   time: Date
   dateFormatOptions?: Intl.DateTimeFormatOptions
   timeFormatOptions?: Intl.DateTimeFormatOptions
+  size: RelativeTimeSize
 }
 
 const RelativeTimeContext = createContext<RelativeTimeContextType>({
   time: new Date(0),
   dateFormatOptions: { dateStyle: "long" },
   timeFormatOptions: { hour: "2-digit", minute: "2-digit" },
+  size: "default",
 })
 
 export type RelativeTimeProps = HTMLAttributes<HTMLDivElement> & {
@@ -83,6 +94,7 @@ export type RelativeTimeProps = HTMLAttributes<HTMLDivElement> & {
   onTimeChange?: (time: Date) => void
   dateFormatOptions?: Intl.DateTimeFormatOptions
   timeFormatOptions?: Intl.DateTimeFormatOptions
+  size?: RelativeTimeSize
 }
 
 export const RelativeTime = ({
@@ -91,6 +103,7 @@ export const RelativeTime = ({
   onTimeChange,
   dateFormatOptions,
   timeFormatOptions,
+  size = "default",
   className,
   ...props
 }: RelativeTimeProps) => {
@@ -108,7 +121,7 @@ export const RelativeTime = ({
 
   return (
     <RelativeTimeContext.Provider
-      value={{ time, dateFormatOptions, timeFormatOptions }}
+      value={{ time, dateFormatOptions, timeFormatOptions, size }}
     >
       <div
         data-slot="relative-time"
@@ -129,18 +142,22 @@ export const RelativeTimeZone = ({
   zone,
   className,
   ...props
-}: RelativeTimeZoneProps) => (
-  <RelativeTimeZoneContext.Provider value={{ zone }}>
-    <div
-      data-slot="relative-time-zone"
-      className={cn(
-        "flex items-center justify-between gap-1.5 text-xs",
-        className,
-      )}
-      {...props}
-    />
-  </RelativeTimeZoneContext.Provider>
-)
+}: RelativeTimeZoneProps) => {
+  const { size } = useContext(RelativeTimeContext)
+  return (
+    <RelativeTimeZoneContext.Provider value={{ zone }}>
+      <div
+        data-slot="relative-time-zone"
+        className={cn(
+          "flex items-center justify-between",
+          zoneRowSize[size],
+          className,
+        )}
+        {...props}
+      />
+    </RelativeTimeZoneContext.Provider>
+  )
+}
 
 export type RelativeTimeZoneDisplayProps = HTMLAttributes<HTMLDivElement>
 

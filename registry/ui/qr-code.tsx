@@ -14,6 +14,14 @@ import { type HTMLAttributes, useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
 
+// Fixed box presets. Omitting `size` keeps the original parent-controlled fill
+// (`size-full`), so existing layouts that size the wrapper are unaffected.
+const qrSize: Record<"sm" | "md" | "lg", string> = {
+  sm: "size-24",
+  md: "size-40",
+  lg: "size-56",
+}
+
 export type QRCodeProps = HTMLAttributes<HTMLDivElement> & {
   data: string
   /** Override the dark module color (defaults to the --foreground token). */
@@ -22,6 +30,8 @@ export type QRCodeProps = HTMLAttributes<HTMLDivElement> & {
   background?: string
   /** Error-correction level. */
   robustness?: "L" | "M" | "Q" | "H"
+  /** Fixed box size. Omit to fill the parent (the default). */
+  size?: "sm" | "md" | "lg"
 }
 
 const oklchRegex = /oklch\(([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\)/
@@ -41,6 +51,7 @@ export const QRCode = ({
   foreground,
   background,
   robustness = "M",
+  size,
   className,
   ...props
 }: QRCodeProps) => {
@@ -83,7 +94,11 @@ export const QRCode = ({
   return (
     <div
       data-slot="qr-code"
-      className={cn("size-full [&_svg]:size-full", className)}
+      className={cn(
+        "[&_svg]:size-full",
+        size ? qrSize[size] : "size-full",
+        className,
+      )}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: svg }}
       {...props}

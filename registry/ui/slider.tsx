@@ -5,14 +5,31 @@ import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 
 import { cn } from "@/lib/utils"
 
+type SliderSize = "sm" | "default" | "lg"
+
+// Track thickness + thumb diameter scale together so the thumb always reads as
+// a control sitting on the rail. Token surfaces are unchanged across sizes.
+const trackHeight: Record<SliderSize, string> = {
+  sm: "h-1",
+  default: "h-1.5",
+  lg: "h-2",
+}
+
+const thumbSize: Record<SliderSize, string> = {
+  sm: "size-3",
+  default: "size-4",
+  lg: "size-5",
+}
+
 function Slider({
   className,
   value,
   defaultValue,
   min = 0,
   max = 100,
+  size = "default",
   ...props
-}: SliderPrimitive.Root.Props) {
+}: SliderPrimitive.Root.Props & { size?: SliderSize }) {
   // One thumb per value; an array value/defaultValue makes it a range slider.
   const thumbCount = React.useMemo(() => {
     if (Array.isArray(value)) return value.length
@@ -51,7 +68,10 @@ function Slider({
       >
         <SliderPrimitive.Track
           data-slot="slider-track"
-          className="relative h-1.5 w-full grow rounded-full bg-muted"
+          className={cn(
+            "relative w-full grow rounded-full bg-muted",
+            trackHeight[size],
+          )}
         >
           <SliderPrimitive.Indicator
             data-slot="slider-indicator"
@@ -63,7 +83,10 @@ function Slider({
               index={i}
               aria-label={thumbLabel(i)}
               data-slot="slider-thumb"
-              className="size-4 rounded-full border border-primary bg-background outline-none transition-[box-shadow] focus-visible:ring-3 focus-visible:ring-ring/50 data-[disabled]:pointer-events-none"
+              className={cn(
+                "rounded-full border border-primary bg-background outline-none transition-[box-shadow] focus-visible:ring-3 focus-visible:ring-ring/50 data-[disabled]:pointer-events-none",
+                thumbSize[size],
+              )}
             />
           ))}
         </SliderPrimitive.Track>

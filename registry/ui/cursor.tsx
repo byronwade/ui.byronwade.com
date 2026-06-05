@@ -5,20 +5,62 @@
  * text-foreground), `cn()` + `className` passthrough, and `data-slot` hooks.
  * The pointer uses `currentColor`, so a live cursor is tinted via `text-*`.
  */
-import { Children, type HTMLAttributes, type SVGProps } from "react"
+"use client"
+
+import {
+  Children,
+  createContext,
+  type HTMLAttributes,
+  type SVGProps,
+  useContext,
+} from "react"
 
 import { cn } from "@/lib/utils"
 
-export type CursorProps = HTMLAttributes<HTMLSpanElement>
+// Multiplayer cursors need distinct, coherent colors. `tone` colors the pointer
+// (via currentColor on the root) and the body surface from one prop, using only
+// token pairs that have a readable foreground. `neutral` is the original look.
+type CursorTone = "neutral" | "brand" | "success" | "warning"
 
-export const Cursor = ({ className, children, ...props }: CursorProps) => (
-  <span
-    data-slot="cursor"
-    className={cn("pointer-events-none relative select-none", className)}
-    {...props}
-  >
-    {children}
-  </span>
+const cursorRootTone: Record<CursorTone, string> = {
+  neutral: "",
+  brand: "text-brand",
+  success: "text-success",
+  warning: "text-warning",
+}
+
+const cursorBodyTone: Record<CursorTone, string> = {
+  neutral: "bg-secondary text-foreground",
+  brand: "bg-brand text-brand-foreground",
+  success: "bg-success text-success-foreground",
+  warning: "bg-warning text-warning-foreground",
+}
+
+const CursorToneContext = createContext<CursorTone>("neutral")
+
+export type CursorProps = HTMLAttributes<HTMLSpanElement> & {
+  tone?: CursorTone
+}
+
+export const Cursor = ({
+  className,
+  children,
+  tone = "neutral",
+  ...props
+}: CursorProps) => (
+  <CursorToneContext.Provider value={tone}>
+    <span
+      data-slot="cursor"
+      className={cn(
+        "pointer-events-none relative select-none",
+        cursorRootTone[tone],
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </span>
+  </CursorToneContext.Provider>
 )
 
 export type CursorPointerProps = SVGProps<SVGSVGElement>
@@ -49,20 +91,24 @@ export const CursorBody = ({
   children,
   className,
   ...props
-}: CursorBodyProps) => (
-  <span
-    data-slot="cursor-body"
-    className={cn(
-      "relative ml-3.5 flex flex-col whitespace-nowrap rounded-xl py-1 pr-3 pl-2.5 text-xs",
-      Children.count(children) > 1 && "rounded-tl [&>:first-child]:opacity-70",
-      "bg-secondary text-foreground",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </span>
-)
+}: CursorBodyProps) => {
+  const tone = useContext(CursorToneContext)
+  return (
+    <span
+      data-slot="cursor-body"
+      className={cn(
+        "relative ml-3.5 flex flex-col whitespace-nowrap rounded-xl py-1 pr-3 pl-2.5 text-xs",
+        Children.count(children) > 1 &&
+          "rounded-tl [&>:first-child]:opacity-70",
+        cursorBodyTone[tone],
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </span>
+  )
+}
 
 export type CursorNameProps = HTMLAttributes<HTMLSpanElement>
 

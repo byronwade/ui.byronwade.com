@@ -54,6 +54,45 @@ describe("Cursor", () => {
     expect(screen.getByText("Editing…")).toBeInTheDocument();
   });
 
+  it("tints pointer + body together from a tone", () => {
+    const { container } = render(
+      <Cursor tone="brand">
+        <CursorPointer />
+        <CursorBody>
+          <CursorName>A</CursorName>
+        </CursorBody>
+      </Cursor>,
+    );
+    expect(container.querySelector('[data-slot="cursor"]')).toHaveClass("text-brand");
+    const body = container.querySelector('[data-slot="cursor-body"]');
+    expect(body).toHaveClass("bg-brand");
+    expect(body).toHaveClass("text-brand-foreground");
+  });
+
+  it("supports the success tone", () => {
+    const { container } = render(
+      <Cursor tone="success">
+        <CursorBody>
+          <CursorName>A</CursorName>
+        </CursorBody>
+      </Cursor>,
+    );
+    expect(container.querySelector('[data-slot="cursor"]')).toHaveClass("text-success");
+    expect(container.querySelector('[data-slot="cursor-body"]')).toHaveClass("bg-success");
+  });
+
+  it("keeps the neutral surface by default (no accent tint)", () => {
+    const { container } = render(
+      <Cursor>
+        <CursorBody>
+          <CursorName>A</CursorName>
+        </CursorBody>
+      </Cursor>,
+    );
+    expect(container.querySelector('[data-slot="cursor"]')).not.toHaveClass("text-brand");
+    expect(container.querySelector('[data-slot="cursor-body"]')).toHaveClass("bg-secondary");
+  });
+
   it("body uses token surface by default", () => {
     const { container } = render(
       <CursorBody>

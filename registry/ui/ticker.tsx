@@ -13,10 +13,25 @@ import { createContext, memo, useContext, useId, useMemo } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { cn } from "@/lib/utils"
 
-type TickerContextValue = { formatter: Intl.NumberFormat }
+type TickerSize = "sm" | "default" | "lg"
+
+type TickerContextValue = { formatter: Intl.NumberFormat; size: TickerSize }
 
 const DEFAULT_CURRENCY = "USD"
 const DEFAULT_LOCALE = "en-US"
+
+// Icon diameter + label text scale together; `default` matches the original.
+const tickerIconSize: Record<TickerSize, string> = {
+  sm: "size-6",
+  default: "size-7",
+  lg: "size-8",
+}
+
+const tickerTextSize: Record<TickerSize, string> = {
+  sm: "text-xs",
+  default: "",
+  lg: "text-base",
+}
 
 const defaultFormatter = new Intl.NumberFormat(DEFAULT_LOCALE, {
   style: "currency",
@@ -27,6 +42,7 @@ const defaultFormatter = new Intl.NumberFormat(DEFAULT_LOCALE, {
 
 const TickerContext = createContext<TickerContextValue>({
   formatter: defaultFormatter,
+  size: "default",
 })
 
 export const useTickerContext = () => useContext(TickerContext)
@@ -34,6 +50,7 @@ export const useTickerContext = () => useContext(TickerContext)
 export type TickerProps = HTMLAttributes<HTMLButtonElement> & {
   currency?: string
   locale?: string
+  size?: TickerSize
 }
 
 export const Ticker = memo(
@@ -42,6 +59,7 @@ export const Ticker = memo(
     className,
     currency = DEFAULT_CURRENCY,
     locale = DEFAULT_LOCALE,
+    size = "default",
     ...props
   }: TickerProps & { children: ReactNode }) => {
     const formatter = useMemo(() => {
@@ -58,11 +76,12 @@ export const Ticker = memo(
     }, [currency, locale])
 
     return (
-      <TickerContext.Provider value={{ formatter }}>
+      <TickerContext.Provider value={{ formatter, size }}>
         <button
           data-slot="ticker"
           className={cn(
             "inline-flex items-center gap-1.5 align-middle whitespace-nowrap",
+            tickerTextSize[size],
             className,
           )}
           type="button"
@@ -91,12 +110,14 @@ export const TickerIcon = memo(
     children,
     ...props
   }: TickerIconProps) => {
+    const { size } = useTickerContext()
     if (asChild) {
       return (
         <div
           data-slot="ticker-icon"
           className={cn(
             "overflow-hidden rounded-full border border-border bg-muted",
+            tickerIconSize[size],
             className,
           )}
         >
@@ -107,7 +128,11 @@ export const TickerIcon = memo(
     return (
       <Avatar
         data-slot="ticker-icon"
-        className={cn("size-7 border border-border bg-muted", className)}
+        className={cn(
+          "border border-border bg-muted",
+          tickerIconSize[size],
+          className,
+        )}
       >
         <AvatarImage src={src} {...props} />
         <AvatarFallback className="text-sm font-medium text-muted-foreground">
