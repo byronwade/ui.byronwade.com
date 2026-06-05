@@ -66,15 +66,18 @@ export function MorphSurface({
     panelRef,
     open,
     growHeight: grow !== "width",
-    // Non-growing axis holds current size; growing axis uses `size` or measures the panel.
+    // Non-growing axis holds current size; growing axis uses `size` or measures
+    // the panel. The panel is `absolute inset-0`, so its offset size is clamped
+    // to the collapsed box — measure scrollWidth/Height to get the panel's
+    // NATURAL content size, otherwise an auto-sized box never blooms.
     width: () =>
       grow === "height"
         ? (morphRef.current?.offsetWidth ?? 0)
-        : (size?.w ?? panelRef.current?.offsetWidth ?? 0),
+        : (size?.w ?? panelRef.current?.scrollWidth ?? 0),
     height:
       grow === "width"
         ? undefined
-        : () => size?.h ?? panelRef.current?.offsetHeight ?? 0,
+        : () => size?.h ?? panelRef.current?.scrollHeight ?? 0,
     deps: [grow, placement, size?.w, size?.h],
   })
 
