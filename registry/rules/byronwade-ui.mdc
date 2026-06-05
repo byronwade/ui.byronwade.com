@@ -43,6 +43,12 @@ Before writing any markup, check whether a component already exists. Reach for t
   `price-range-filter` (histogram + range slider + number inputs),
   `command-result` (compact rich result row for a command palette: media + title +
   description + meta + action, dropped inside a `command` item)
+- **Market / TradingView** — `ticker-tape` (scrolling market ticker marquee on `ticker`),
+  `quote-header` (symbol header — mono price, `price-change`, optional `sparkline`, `metric-stat` stats),
+  `chart-toolbar` (interval + chart-type controls on `segmented-control`/`toggle-group`),
+  `chart-panel` (`chart-toolbar` + `candlestick-chart` / sparkline fallback),
+  `watchlist` (table of quotes with `price-change` + `sparkline`), `market-depth`
+  (`depth-chart` + `order-book`, shared book data)
 - **Page layouts** — variant-driven, slot-based page scaffolds: `app-shell` (application
   shells — `dashboard`, `sidebar`, `stacked`, `three-column`, `master-detail`, `docs`,
   `editor`, `holy-grail`, `focused`, `command-center`) and `marketing-layout` (marketing /

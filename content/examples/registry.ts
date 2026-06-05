@@ -156,6 +156,8 @@ import ChartRadialBar from "./chart/radial-bar";
 import ChartStackedBar from "./chart/stacked-bar";
 import ChartThemeColors from "./chart/theme-colors";
 import ChartTooltipVariants from "./chart/tooltip-variants";
+import ChartPanelDefault from "./chart-panel/default";
+import ChartToolbarDefault from "./chart-toolbar/default";
 import CheckboxDefault from "./checkbox/default";
 import CheckboxCheckboxGroup from "./checkbox/checkbox-group";
 import CheckboxDisabled from "./checkbox/disabled";
@@ -307,6 +309,7 @@ import LabelRequired from "./label/required";
 import LabelWithCheckbox from "./label/with-checkbox";
 import LabelWithIcon from "./label/with-icon";
 import LyricsDefault from "./lyrics/default";
+import MarketDepthDefault from "./market-depth/default";
 import MarketingLayoutDefault from "./marketing-layout/default";
 import MetricStatDefault from "./metric-stat/default";
 import MetricStatCustomValue from "./metric-stat/custom-value";
@@ -383,6 +386,7 @@ import ProgressTones from "./progress/tones";
 import ProgressWithFormat from "./progress/with-format";
 import QrCodeDefault from "./qr-code/default";
 import QrCodeSizes from "./qr-code/sizes";
+import QuoteHeaderDefault from "./quote-header/default";
 import RadioGroupDefault from "./radio-group/default";
 import RadioGroupDisabled from "./radio-group/disabled";
 import RadioGroupFormValidation from "./radio-group/form-validation";
@@ -524,6 +528,7 @@ import TextareaReadonly from "./textarea/readonly";
 import TextareaWithLabelAndHint from "./textarea/with-label-and-hint";
 import TickerDefault from "./ticker/default";
 import TickerSizes from "./ticker/sizes";
+import TickerTapeDefault from "./ticker-tape/default";
 import TimelineRailDefault from "./timeline-rail/default";
 import TimelineRailCustomTerminal from "./timeline-rail/custom-terminal";
 import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
@@ -560,6 +565,7 @@ import VideoPlayerDefault from "./video-player/default";
 import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
 import VideoPlayerYoutube from "./video-player/youtube";
+import WatchlistDefault from "./watchlist/default";
 import WorldMapDefault from "./world-map/default";
 
 export type Example = { name: string; file: string; Component: ComponentType };
@@ -833,6 +839,12 @@ export const examples: Record<string, Example[]> = {
     { name: "Theme Colors", file: "chart/theme-colors.tsx", Component: ChartThemeColors },
     { name: "Tooltip Variants", file: "chart/tooltip-variants.tsx", Component: ChartTooltipVariants },
   ],
+  "chart-panel": [
+    { name: "Default", file: "chart-panel/default.tsx", Component: ChartPanelDefault },
+  ],
+  "chart-toolbar": [
+    { name: "Default", file: "chart-toolbar/default.tsx", Component: ChartToolbarDefault },
+  ],
   "checkbox": [
     { name: "Default", file: "checkbox/default.tsx", Component: CheckboxDefault },
     { name: "Checkbox Group", file: "checkbox/checkbox-group.tsx", Component: CheckboxCheckboxGroup },
@@ -1068,6 +1080,9 @@ export const examples: Record<string, Example[]> = {
   "lyrics": [
     { name: "Default", file: "lyrics/default.tsx", Component: LyricsDefault },
   ],
+  "market-depth": [
+    { name: "Default", file: "market-depth/default.tsx", Component: MarketDepthDefault },
+  ],
   "marketing-layout": [
     { name: "Default", file: "marketing-layout/default.tsx", Component: MarketingLayoutDefault },
   ],
@@ -1195,6 +1210,9 @@ export const examples: Record<string, Example[]> = {
   "qr-code": [
     { name: "Default", file: "qr-code/default.tsx", Component: QrCodeDefault },
     { name: "Sizes", file: "qr-code/sizes.tsx", Component: QrCodeSizes },
+  ],
+  "quote-header": [
+    { name: "Default", file: "quote-header/default.tsx", Component: QuoteHeaderDefault },
   ],
   "radio-group": [
     { name: "Default", file: "radio-group/default.tsx", Component: RadioGroupDefault },
@@ -1389,6 +1407,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Default", file: "ticker/default.tsx", Component: TickerDefault },
     { name: "Sizes", file: "ticker/sizes.tsx", Component: TickerSizes },
   ],
+  "ticker-tape": [
+    { name: "Default", file: "ticker-tape/default.tsx", Component: TickerTapeDefault },
+  ],
   "timeline-rail": [
     { name: "Default", file: "timeline-rail/default.tsx", Component: TimelineRailDefault },
     { name: "Custom Terminal", file: "timeline-rail/custom-terminal.tsx", Component: TimelineRailCustomTerminal },
@@ -1440,6 +1461,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Composable", file: "video-player/composable.tsx", Component: VideoPlayerComposable },
     { name: "Variants", file: "video-player/variants.tsx", Component: VideoPlayerVariants },
     { name: "Youtube", file: "video-player/youtube.tsx", Component: VideoPlayerYoutube },
+  ],
+  "watchlist": [
+    { name: "Default", file: "watchlist/default.tsx", Component: WatchlistDefault },
   ],
   "world-map": [
     { name: "Default", file: "world-map/default.tsx", Component: WorldMapDefault },
