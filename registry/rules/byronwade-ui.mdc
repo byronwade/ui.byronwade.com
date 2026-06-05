@@ -48,7 +48,10 @@ Before writing any markup, check whether a component already exists. Reach for t
   `chart-toolbar` (interval + chart-type controls on `segmented-control`/`toggle-group`),
   `chart-panel` (`chart-toolbar` + `candlestick-chart` / sparkline fallback),
   `watchlist` (table of quotes with `price-change` + `sparkline`), `market-depth`
-  (`depth-chart` + `order-book`, shared book data)
+  (`depth-chart` + `order-book`, shared book data), `order-entry` (buy/sell ticket on
+  `tabs` + `money-input`), `position-card` / `positions-table` (open positions with
+  side badges + `price-change` P&L), `portfolio-summary` (`stat-card` + equity
+  `sparkline` + allocation bars), `trade-history` (fills table with `relative-time`)
 - **Page layouts** — variant-driven, slot-based page scaffolds: `app-shell` (application
   shells — `dashboard`, `sidebar`, `stacked`, `three-column`, `master-detail`, `docs`,
   `editor`, `holy-grail`, `focused`, `command-center`) and `marketing-layout` (marketing /

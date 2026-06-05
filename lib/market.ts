@@ -421,6 +421,90 @@ const makeSeries = (count: number, opts: SeedOpts = {}): number[] => {
   return series
 }
 
+/** Generate a deterministic open position seeded by `opts.seed`. */
+const makePosition = (opts: SeedOpts = {}): Position => {
+  const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
+  const symbol = SYMBOLS[Math.floor(rand() * SYMBOLS.length)]
+  const side: Position["side"] = rand() > 0.5 ? "long" : "short"
+  const size = Math.round(1 + rand() * 500)
+  const entry = 50 + rand() * 200
+  const mark = entry * (1 + (rand() - 0.45) * 0.12)
+  const pnl = side === "long" ? (mark - entry) * size : (entry - mark) * size
+  const pnlPercent = entry * size === 0 ? 0 : (pnl / (entry * size)) * 100
+  return { symbol, side, size, entry, mark, pnl, pnlPercent }
+}
+
+const makePositions = (count: number, opts: SeedOpts = {}): Position[] =>
+  Array.from({ length: count }, (_, index) =>
+    makePosition({ seed: (opts.seed ?? DEFAULT_SEED) + index + 1 }),
+  )
+
+/** Generate a deterministic trade fill seeded by `opts.seed`. */
+const makeTrade = (opts: SeedOpts = {}): Trade => {
+  const seed = opts.seed ?? DEFAULT_SEED
+  const rand = mulberry32(seed)
+  return {
+    id: `trade-${seed}`,
+    symbol: SYMBOLS[Math.floor(rand() * SYMBOLS.length)],
+    time: BASE_TIME - Math.floor(rand() * 86_400_000),
+    side: rand() > 0.5 ? "buy" : "sell",
+    price: 50 + rand() * 200,
+    size: Math.round(1 + rand() * 100),
+  }
+}
+
+const makeTrades = (count: number, opts: SeedOpts = {}): Trade[] =>
+  Array.from({ length: count }, (_, index) =>
+    makeTrade({ seed: (opts.seed ?? DEFAULT_SEED) + index + 1 }),
+  )
+
+const makeMoverRows = (count: number, opts: SeedOpts = {}): MoverRow[] => {
+  const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
+  return Array.from({ length: count }, (_, index) => {
+    const quote = makeQuote({ seed: (opts.seed ?? DEFAULT_SEED) + index + 20 })
+    return {
+      symbol: quote.symbol,
+      name: quote.name,
+      price: quote.price,
+      changePercent: quote.changePercent,
+      spark: makeSeries(16, { seed: index + 30 }),
+    }
+  }).sort((a, b) => b.changePercent - a.changePercent)
+}
+
+const makeScreenerRows = (count: number, opts: SeedOpts = {}): ScreenerRow[] =>
+  Array.from({ length: count }, (_, index) => {
+    const quote = makeQuote({ seed: (opts.seed ?? DEFAULT_SEED) + index + 40 })
+    return {
+      symbol: quote.symbol,
+      name: quote.name,
+      price: quote.price,
+      change: quote.change,
+      changePercent: quote.changePercent,
+      volume: quote.volume ?? 0,
+      marketCap: quote.marketCap ?? 0,
+      spark: makeSeries(16, { seed: index + 50 }),
+    }
+  })
+
+const makeMarketEvents = (
+  count: number,
+  opts: SeedOpts = {},
+): MarketEvent[] => {
+  const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
+  const impacts: MarketEvent["impact"][] = ["low", "medium", "high"]
+  return Array.from({ length: count }, (_, index) => ({
+    id: `event-${index + 1}`,
+    country: ["US", "EU", "JP", "UK"][index % 4],
+    title: `Economic release ${index + 1}`,
+    time: BASE_TIME + index * 3_600_000,
+    impact: impacts[Math.floor(rand() * impacts.length)],
+    actual: rand() > 0.5 ? `${(rand() * 5).toFixed(1)}%` : undefined,
+    forecast: `${(rand() * 4).toFixed(1)}%`,
+    previous: `${(rand() * 3).toFixed(1)}%`,
+  }))
+}
+
 export {
   linearScale,
   formatPrice,
@@ -438,6 +522,13 @@ export {
   makeOrderBook,
   makeHeatmapCells,
   makeSeries,
+  makePosition,
+  makePositions,
+  makeTrade,
+  makeTrades,
+  makeMoverRows,
+  makeScreenerRows,
+  makeMarketEvents,
 }
 
 export type {

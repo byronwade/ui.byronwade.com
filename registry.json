@@ -3371,6 +3371,116 @@
       ]
     },
     {
+      "name": "order-entry",
+      "type": "registry:component",
+      "title": "Order entry",
+      "description": "Buy/sell order ticket — side tabs, order-type segmented control, qty input, money price field, computed total, and submit action.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/tabs",
+        "@byronwade/segmented-control",
+        "@byronwade/money-input",
+        "@byronwade/input",
+        "@byronwade/button",
+        "@byronwade/label",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/order-entry.tsx",
+          "type": "registry:component",
+          "target": "components/order-entry.tsx"
+        }
+      ]
+    },
+    {
+      "name": "position-card",
+      "type": "registry:component",
+      "title": "Position card",
+      "description": "Open position card — symbol, side badge, size/entry/mark, unrealized P&L via price-change, optional close action.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/price-change",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/position-card.tsx",
+          "type": "registry:component",
+          "target": "components/position-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "positions-table",
+      "type": "registry:component",
+      "title": "Positions table",
+      "description": "Open positions table — side badges, mono numerals, P&L via price-change, optional footer aggregate and close/select callbacks.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/table",
+        "@byronwade/price-change",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/positions-table.tsx",
+          "type": "registry:component",
+          "target": "components/positions-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "portfolio-summary",
+      "type": "registry:component",
+      "title": "Portfolio summary",
+      "description": "Portfolio overview — total value stat card, day change via price-change, equity sparkline, and token-tinted allocation bars.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/metric-stat",
+        "@byronwade/stat-card",
+        "@byronwade/sparkline",
+        "@byronwade/price-change",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/portfolio-summary.tsx",
+          "type": "registry:component",
+          "target": "components/portfolio-summary.tsx"
+        }
+      ]
+    },
+    {
+      "name": "trade-history",
+      "type": "registry:component",
+      "title": "Trade history",
+      "description": "Trade fills table — relative-time stamp, symbol, buy/sell badge, price, size, computed value, optional row select.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/table",
+        "@byronwade/badge",
+        "@byronwade/relative-time",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/trade-history.tsx",
+          "type": "registry:component",
+          "target": "components/trade-history.tsx"
+        }
+      ]
+    },
+    {
       "name": "money-input",
       "type": "registry:ui",
       "title": "Money input",
@@ -3825,6 +3935,11 @@
         "@byronwade/chart-panel",
         "@byronwade/watchlist",
         "@byronwade/market-depth",
+        "@byronwade/order-entry",
+        "@byronwade/position-card",
+        "@byronwade/positions-table",
+        "@byronwade/portfolio-summary",
+        "@byronwade/trade-history",
         "@byronwade/money-input",
         "@byronwade/bulk-action-bar",
         "@byronwade/order-summary",
