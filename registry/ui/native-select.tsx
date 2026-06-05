@@ -13,7 +13,10 @@ function NativeSelect({
   ...props
 }: React.ComponentProps<"select">) {
   return (
-    <div data-slot="native-select-wrapper" className="relative inline-flex w-full">
+    <div
+      data-slot="native-select-wrapper"
+      className="relative inline-flex w-full"
+    >
       <select
         data-slot="native-select"
         className={cn(
@@ -22,7 +25,7 @@ function NativeSelect({
           "disabled:cursor-not-allowed disabled:opacity-50",
           "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
           "dark:bg-input/30",
-          className
+          className,
         )}
         {...props}
       >

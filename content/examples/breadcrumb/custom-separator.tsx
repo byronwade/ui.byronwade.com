@@ -5,8 +5,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { SlashIcon } from "lucide-react";
+} from "@/components/ui/breadcrumb"
+import { SlashIcon } from "lucide-react"
 
 export default function Example() {
   return (
@@ -74,5 +74,5 @@ export default function Example() {
         </BreadcrumbList>
       </Breadcrumb>
     </div>
-  );
+  )
 }

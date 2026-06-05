@@ -1,19 +1,19 @@
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react"
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
 
 const DETAILS = [
   { label: "Plan", value: "Pro (annual)" },
   { label: "Seats", value: "12 of 20" },
   { label: "Renews", value: "Mar 1, 2026" },
   { label: "Owner", value: "ada@acme.com" },
-];
+]
 
-const PERKS = ["Priority support", "Custom domains", "Audit log export"];
+const PERKS = ["Priority support", "Custom domains", "Audit log export"]
 
 export default function Example() {
   return (
@@ -46,5 +46,5 @@ export default function Example() {
         </ul>
       </CollapsibleContent>
     </Collapsible>
-  );
+  )
 }

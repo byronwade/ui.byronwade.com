@@ -1,52 +1,64 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Search } from "lucide-react";
+import * as React from "react"
+import { Search } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { ExampleTabs } from "@/app/(docs)/_components/example-tabs";
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
-import { FilterPill } from "@/components/ui/filter-pill";
+import { cn } from "@/lib/utils"
+import { ExampleTabs } from "@/app/(docs)/_components/example-tabs"
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { FilterPill } from "@/components/ui/filter-pill"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export type VariantView = {
-  id: string;
-  name: string;
-  tags: string[];
-  install: string;
-  preview: React.ReactNode;
-  code: string;
-};
+  id: string
+  name: string
+  tags: string[]
+  install: string
+  preview: React.ReactNode
+  code: string
+}
 
-export type VariantFilter = { query: string; tags: string[] };
+export type VariantFilter = { query: string; tags: string[] }
 
-export function filterVariants(variants: VariantView[], f: VariantFilter): VariantView[] {
-  const q = f.query.trim().toLowerCase();
+export function filterVariants(
+  variants: VariantView[],
+  f: VariantFilter,
+): VariantView[] {
+  const q = f.query.trim().toLowerCase()
   return variants.filter(
     (v) =>
-      (q === "" || `${v.name} ${v.id} ${v.tags.join(" ")}`.toLowerCase().includes(q)) &&
+      (q === "" ||
+        `${v.name} ${v.id} ${v.tags.join(" ")}`.toLowerCase().includes(q)) &&
       (f.tags.length === 0 || f.tags.some((t) => v.tags.includes(t))),
-  );
+  )
 }
 
 function uniqueSorted(values: string[]) {
-  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b))
 }
 
 export function VariantBrowser({ variants }: { variants: VariantView[] }) {
-  const [query, setQuery] = React.useState("");
-  const [tags, setTags] = React.useState<string[]>([]);
+  const [query, setQuery] = React.useState("")
+  const [tags, setTags] = React.useState<string[]>([])
 
-  const allTags = React.useMemo(() => uniqueSorted(variants.flatMap((v) => v.tags)), [variants]);
-  const filtered = React.useMemo(() => filterVariants(variants, { query, tags }), [variants, query, tags]);
+  const allTags = React.useMemo(
+    () => uniqueSorted(variants.flatMap((v) => v.tags)),
+    [variants],
+  )
+  const filtered = React.useMemo(
+    () => filterVariants(variants, { query, tags }),
+    [variants, query, tags],
+  )
 
   const toggleTag = (t: string) =>
-    setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
+    setTags((prev) =>
+      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t],
+    )
 
   return (
     <div className="space-y-6">
@@ -97,8 +109,8 @@ export function VariantBrowser({ variants }: { variants: VariantView[] }) {
           <button
             type="button"
             onClick={() => {
-              setQuery("");
-              setTags([]);
+              setQuery("")
+              setTags([])
             }}
             className="mt-2 text-sm text-brand underline-offset-4 hover:underline"
           >
@@ -134,5 +146,5 @@ export function VariantBrowser({ variants }: { variants: VariantView[] }) {
         </div>
       )}
     </div>
-  );
+  )
 }

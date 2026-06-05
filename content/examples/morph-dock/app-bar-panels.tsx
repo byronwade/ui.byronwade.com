@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 import {
   Bell,
   Boxes,
@@ -14,28 +14,28 @@ import {
   Search,
   Settings,
   User,
-} from "lucide-react";
+} from "lucide-react"
 
-import { MorphDock } from "@/components/ui/morph-dock";
+import { MorphDock } from "@/components/ui/morph-dock"
 
 const APPS = [
   ["Design system", "Components, tokens"],
   ["Layouts", "Page archetypes"],
   ["Templates", "Starter kits"],
-];
-type Icon = React.ComponentType<{ className?: string }>;
+]
+type Icon = React.ComponentType<{ className?: string }>
 const NOTES: [string, string, Icon][] = [
   ["New release", "v2.4 shipped to production", Check],
   ["Mention", "@you in “Morph dock” review", Bell],
   ["Build passed", "CI green on main", Check],
-];
+]
 const ACCOUNT: [string, Icon][] = [
   ["Profile", User],
   ["Settings", Settings],
   ["Sign out", LogOut],
-];
+]
 
-type Panel = "search" | "notif" | "profile";
+type Panel = "search" | "notif" | "profile"
 
 /**
  * A full-width app bar where the pills bloom DIFFERENT panels: the launcher morphs
@@ -44,8 +44,8 @@ type Panel = "search" | "notif" | "profile";
  * menu — from the right edge. The centered nav stays put.
  */
 export default function Example() {
-  const [launcher, setLauncher] = React.useState(false);
-  const [panel, setPanel] = React.useState<Panel | null>(null);
+  const [launcher, setLauncher] = React.useState(false)
+  const [panel, setPanel] = React.useState<Panel | null>(null)
 
   return (
     <div className="flex min-h-80 w-full items-start p-8">
@@ -76,8 +76,12 @@ export default function Example() {
                   <span className="size-2 rounded-full bg-brand" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[13px] font-semibold text-dock-active-foreground">{title}</span>
-                  <span className="block truncate text-[11px] text-dock-foreground/60">{desc}</span>
+                  <span className="block text-[13px] font-semibold text-dock-active-foreground">
+                    {title}
+                  </span>
+                  <span className="block truncate text-[11px] text-dock-foreground/60">
+                    {desc}
+                  </span>
                 </span>
               </button>
             ))}
@@ -89,10 +93,35 @@ export default function Example() {
           navLabel="Primary"
           expandable={false}
           items={[
-            { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
-            { id: "components", label: "Components", icon: Boxes, href: "#", core: true },
-            { id: "layouts", label: "Layouts", icon: PanelsTopLeft, href: "#", core: true },
-            { id: "templates", label: "Templates", icon: LayoutTemplate, href: "#", core: true },
+            {
+              id: "home",
+              label: "Home",
+              icon: Home,
+              href: "#",
+              active: true,
+              core: true,
+            },
+            {
+              id: "components",
+              label: "Components",
+              icon: Boxes,
+              href: "#",
+              core: true,
+            },
+            {
+              id: "layouts",
+              label: "Layouts",
+              icon: PanelsTopLeft,
+              href: "#",
+              core: true,
+            },
+            {
+              id: "templates",
+              label: "Templates",
+              icon: LayoutTemplate,
+              href: "#",
+              core: true,
+            },
           ]}
         />
 
@@ -104,13 +133,32 @@ export default function Example() {
             origin="end"
             open={panel !== null}
             onOpenChange={(o) => {
-              if (!o) setPanel(null);
+              if (!o) setPanel(null)
             }}
             panelWidth={panel === "profile" ? 224 : 288}
             items={[
-              { id: "search", label: "Search", icon: Search, core: true, onSelect: () => setPanel("search") },
-              { id: "notif", label: "Notifications", icon: Bell, core: true, badge: 3, onSelect: () => setPanel("notif") },
-              { id: "profile", label: "Account", icon: User, core: true, onSelect: () => setPanel("profile") },
+              {
+                id: "search",
+                label: "Search",
+                icon: Search,
+                core: true,
+                onSelect: () => setPanel("search"),
+              },
+              {
+                id: "notif",
+                label: "Notifications",
+                icon: Bell,
+                core: true,
+                badge: 3,
+                onSelect: () => setPanel("notif"),
+              },
+              {
+                id: "profile",
+                label: "Account",
+                icon: User,
+                core: true,
+                onSelect: () => setPanel("profile"),
+              },
             ]}
           >
             {panel === "search" ? (
@@ -146,11 +194,18 @@ export default function Example() {
                     className="flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors hover:bg-dock-active"
                   >
                     <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-dock-active text-dock-active-foreground">
-                      {React.createElement(Icon as React.ComponentType<{ className?: string }>, { className: "size-3.5" })}
+                      {React.createElement(
+                        Icon as React.ComponentType<{ className?: string }>,
+                        { className: "size-3.5" },
+                      )}
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[13px] font-semibold text-dock-active-foreground">{title}</span>
-                      <span className="block truncate text-[11px] text-dock-foreground/60">{desc}</span>
+                      <span className="block text-[13px] font-semibold text-dock-active-foreground">
+                        {title}
+                      </span>
+                      <span className="block truncate text-[11px] text-dock-foreground/60">
+                        {desc}
+                      </span>
                     </span>
                   </button>
                 ))}
@@ -162,8 +217,12 @@ export default function Example() {
                     B
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-[13px] font-semibold text-dock-active-foreground">Byron</span>
-                    <span className="block truncate text-[11px] text-dock-foreground/60">bcw@byronwade.com</span>
+                    <span className="block text-[13px] font-semibold text-dock-active-foreground">
+                      Byron
+                    </span>
+                    <span className="block truncate text-[11px] text-dock-foreground/60">
+                      bcw@byronwade.com
+                    </span>
                   </span>
                 </div>
                 {ACCOUNT.map(([label, Icon]) => (
@@ -173,9 +232,12 @@ export default function Example() {
                     onClick={() => setPanel(null)}
                     className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] text-dock-foreground transition-colors hover:bg-dock-active hover:text-dock-active-foreground"
                   >
-                    {React.createElement(Icon as React.ComponentType<{ className?: string }>, {
-                      className: "size-4 shrink-0 opacity-70",
-                    })}
+                    {React.createElement(
+                      Icon as React.ComponentType<{ className?: string }>,
+                      {
+                        className: "size-4 shrink-0 opacity-70",
+                      },
+                    )}
                     {label}
                   </button>
                 ))}
@@ -185,5 +247,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

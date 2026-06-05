@@ -1,5 +1,5 @@
-import { Inbox } from "lucide-react";
-import { EmptyState } from "@/components/empty-state";
+import { Inbox } from "lucide-react"
+import { EmptyState } from "@/components/empty-state"
 
 export default function Example() {
   return (
@@ -14,5 +14,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

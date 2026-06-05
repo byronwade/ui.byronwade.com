@@ -1,22 +1,22 @@
 # Code conventions — byronwade/ui
 
 How code is **organized and written** in this repo. This is the structural/style companion to
-the *content* DNA in [`AGENTS.md`](../AGENTS.md) (tokens, typography, Base UI + CVA) and the shipped
+the _content_ DNA in [`AGENTS.md`](../AGENTS.md) (tokens, typography, Base UI + CVA) and the shipped
 rule [`registry/rules/byronwade-ui.mdc`](../registry/rules/byronwade-ui.mdc). Where AGENTS.md says
-*what a component must look like*, this says *where it lives, what it's named, and how it's shaped*.
+_what a component must look like_, this says _where it lives, what it's named, and how it's shaped_.
 
 Most of these are enforced automatically — see [Enforcement](#enforcement) at the bottom.
 
 ## File organization
 
-| Kind | Location | Example |
-|------|----------|---------|
-| UI primitive | `registry/ui/<slug>.tsx` | `registry/ui/button.tsx` |
-| Composite / pattern | `registry/components/<slug>.tsx` | `registry/components/status-pill.tsx` |
-| Shared helper / hook | `registry/lib/<slug>.ts` | `registry/lib/utils.ts` |
-| CVA variants (optional split) | `registry/ui/<slug>-variants.ts` | `registry/ui/button-variants.ts` |
-| Example | `content/examples/<slug>/default.tsx` | — |
-| Test | `tests/components/<slug>.test.tsx` | — |
+| Kind                          | Location                              | Example                               |
+| ----------------------------- | ------------------------------------- | ------------------------------------- |
+| UI primitive                  | `registry/ui/<slug>.tsx`              | `registry/ui/button.tsx`              |
+| Composite / pattern           | `registry/components/<slug>.tsx`      | `registry/components/status-pill.tsx` |
+| Shared helper / hook          | `registry/lib/<slug>.ts`              | `registry/lib/utils.ts`               |
+| CVA variants (optional split) | `registry/ui/<slug>-variants.ts`      | `registry/ui/button-variants.ts`      |
+| Example                       | `content/examples/<slug>/default.tsx` | —                                     |
+| Test                          | `tests/components/<slug>.test.tsx`    | —                                     |
 
 - **One component family per file.** A `Root` plus its sub-parts and types belong together; unrelated
   components do not.
@@ -54,7 +54,7 @@ Most of these are enforced automatically — see [Enforcement](#enforcement) at 
 - **Minimal and self-documenting.** Prefer a clear name over a comment. Comment only genuinely
   non-obvious logic, or tricky public API (the JSDoc-on-hard-props style in `button.tsx`).
 - **No header boilerplate** on component files, and no comments that restate the code. A comment
-  earns its place by explaining *why*, not *what*.
+  earns its place by explaining _why_, not _what_.
 
 ## Components — the shape
 
@@ -72,11 +72,11 @@ When in doubt, copy the shape of `registry/ui/button.tsx` (primitive) or
 
 ## Enforcement
 
-| Concern | Enforced by |
-|---------|-------------|
-| Formatting (semicolons, quotes, spacing) | `prettier --check` (`npm run check:format`) |
-| Filenames, import paths, exports, `data-slot` | `npm run check:conventions` (in `validate`) |
-| Tokens / no raw color / typography | `npm run lint:on-system` |
+| Concern                                            | Enforced by                                                     |
+| -------------------------------------------------- | --------------------------------------------------------------- |
+| Formatting (semicolons, quotes, spacing)           | `prettier --check` (`npm run check:format`)                     |
+| Filenames, import paths, exports, `data-slot`      | `npm run check:conventions` (in `validate`)                     |
+| Tokens / no raw color / typography                 | `npm run lint:on-system`                                        |
 | Registry integrity, examples, rule coverage, tests | `check:registry`, `check:examples`, `check:rule`, `check:tests` |
 
 `npm run validate` runs the structural + registry gates; `npm run test:ci` runs tests + coverage.

@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "description": "MCP server exposing the byronwade/ui registry to agents.",
   "type": "module",
-  "bin": { "byronwade-mcp": "./dist/cli.js" },
-  "files": ["dist"],
+  "bin": {
+    "byronwade-mcp": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "node ../../scripts/gen-mcp-data.mjs && tsc -p tsconfig.json && node -e \"require('node:fs').copyFileSync('src/data.generated.json','dist/data.generated.json')\"",
     "typecheck": "tsc --noEmit -p tsconfig.json",
@@ -15,5 +19,8 @@
     "@byronwade/on-system-core": "0.1.0",
     "zod": "^3.24.1"
   },
-  "devDependencies": { "typescript": "^5", "vitest": "^4.1.7" }
+  "devDependencies": {
+    "typescript": "^5",
+    "vitest": "^4.1.7"
+  }
 }

@@ -3,7 +3,7 @@ import {
   RelativeTimeZone,
   RelativeTimeZoneDisplay,
   RelativeTimeZoneLabel,
-} from "@/components/ui/relative-time";
+} from "@/components/ui/relative-time"
 
 export default function Example() {
   return (
@@ -17,5 +17,5 @@ export default function Example() {
         ))}
       </RelativeTime>
     </div>
-  );
+  )
 }

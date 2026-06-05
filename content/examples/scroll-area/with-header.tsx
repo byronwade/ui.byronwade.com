@@ -1,9 +1,9 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 const notifications = Array.from(
   { length: 12 },
-  (_, i) => `Notification ${i + 1}`
-);
+  (_, i) => `Notification ${i + 1}`,
+)
 
 export default function Example() {
   return (
@@ -22,5 +22,5 @@ export default function Example() {
         </ul>
       </ScrollArea>
     </div>
-  );
+  )
 }

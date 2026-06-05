@@ -1,24 +1,32 @@
-import Link from "next/link";
-import { ArrowRight, Bot, Check, GitFork, Layers, LayoutTemplate, Palette } from "lucide-react";
+import Link from "next/link"
+import {
+  ArrowRight,
+  Bot,
+  Check,
+  GitFork,
+  Layers,
+  LayoutTemplate,
+  Palette,
+} from "lucide-react"
 
-import { Button } from "@/components/ui/button";
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
-import { components } from "@/content/components";
-import { archetypes } from "@/app/layouts/_archetypes";
+import { Button } from "@/components/ui/button"
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { components } from "@/content/components"
+import { archetypes } from "@/app/layouts/_archetypes"
 
-const GITHUB_URL = "https://github.com/byronwade/ui";
+const GITHUB_URL = "https://github.com/byronwade/ui"
 
 const stats = [
   { value: components.length, label: "components" },
   { value: archetypes.length, label: "layout archetypes" },
   { value: 1, label: "brand variable" },
-];
+]
 
 const designRulePoints = [
   "Use installed @byronwade/ui components — add missing ones with shadcn, don't rebuild from scratch.",
   "Style with semantic tokens only (bg-brand, text-muted-foreground) — never hardcode hex or Tailwind colors.",
   "Re-skin through --brand only — rings, charts, and success states follow automatically.",
-];
+]
 
 const pillars = [
   {
@@ -36,7 +44,7 @@ const pillars = [
     title: "Whole pages, not just parts",
     body: "Ships opinionated, full-page layout archetypes — each built around one signature centerpiece.",
   },
-];
+]
 
 export default function HomePage() {
   return (
@@ -63,9 +71,10 @@ export default function HomePage() {
 
         <p className="animate-in fade-in slide-in-from-bottom-3 fill-mode-both mx-auto mt-7 max-w-xl text-[15px] leading-relaxed text-muted-foreground text-pretty duration-700 [animation-delay:240ms] sm:text-base">
           A calm, content-first component library published as a namespaced{" "}
-          <span className="text-foreground">shadcn registry</span>. Token-driven primitives,
-          composites, and full-page layouts — all built around a single warm accent you re-skin from
-          one CSS variable. Install with the shadcn CLI and you own the code.
+          <span className="text-foreground">shadcn registry</span>. Token-driven
+          primitives, composites, and full-page layouts — all built around a
+          single warm accent you re-skin from one CSS variable. Install with the
+          shadcn CLI and you own the code.
         </p>
 
         <div className="animate-in fade-in slide-in-from-bottom-3 fill-mode-both mt-9 flex flex-wrap items-center justify-center gap-3 duration-700 [animation-delay:320ms]">
@@ -73,7 +82,11 @@ export default function HomePage() {
             Enter
             <ArrowRight />
           </Button>
-          <Button size="lg" variant="outline" render={<Link href="/docs/installation" />}>
+          <Button
+            size="lg"
+            variant="outline"
+            render={<Link href="/docs/installation" />}
+          >
             Install
           </Button>
           <Button
@@ -109,7 +122,9 @@ export default function HomePage() {
 
       {/* =================================================== PILLARS ===== */}
       <section className="mx-auto max-w-5xl px-6 py-16">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Why it exists</p>
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+          Why it exists
+        </p>
         <div className="mt-6 grid gap-px overflow-hidden rounded-2xl edge bg-border sm:grid-cols-3">
           {pillars.map((p) => (
             <div key={p.title} className="bg-card p-6 text-left">
@@ -131,7 +146,9 @@ export default function HomePage() {
       <section className="mx-auto max-w-5xl px-6 py-8">
         <div className="overflow-hidden rounded-3xl edge bg-brand/5">
           <div className="p-6 text-left sm:p-10">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">For your agent</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+              For your agent
+            </p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="flex size-10 shrink-0 items-center justify-center rounded-xl edge bg-background text-brand">
                 <Bot className="size-5" strokeWidth={2} />
@@ -145,25 +162,38 @@ export default function HomePage() {
               <code className="font-mono text-[13px] text-foreground">
                 .cursor/rules/byronwade-ui.mdc
               </code>{" "}
-              (or paste it into Claude, Copilot, Codex, Windsurf…). After that your agent knows the
-              system&apos;s laws on every edit — which components to reach for, which tokens to use,
-              and how re-skinning works.
+              (or paste it into Claude, Copilot, Codex, Windsurf…). After that
+              your agent knows the system&apos;s laws on every edit — which
+              components to reach for, which tokens to use, and how re-skinning
+              works.
             </p>
 
             <ul className="mt-6 grid gap-2.5">
               {designRulePoints.map((point) => (
-                <li key={point} className="flex items-start gap-2.5 text-sm leading-relaxed">
+                <li
+                  key={point}
+                  className="flex items-start gap-2.5 text-sm leading-relaxed"
+                >
                   <Check className="mt-0.5 size-4 shrink-0 text-brand" />
-                  <span className="text-muted-foreground text-pretty">{point}</span>
+                  <span className="text-muted-foreground text-pretty">
+                    {point}
+                  </span>
                 </li>
               ))}
             </ul>
 
             <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="min-w-0 flex-1">
-                <CodeBlock lang="bash" code="npx shadcn@latest add @byronwade/design-rules" />
+                <CodeBlock
+                  lang="bash"
+                  code="npx shadcn@latest add @byronwade/design-rules"
+                />
               </div>
-              <Button variant="outline" className="shrink-0" render={<Link href="/docs/ai" />}>
+              <Button
+                variant="outline"
+                className="shrink-0"
+                render={<Link href="/docs/ai" />}
+              >
                 Full setup guide
                 <ArrowRight />
               </Button>
@@ -179,19 +209,23 @@ export default function HomePage() {
           <span className="text-gradient-brand">One install.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          Browse the catalog, the layout archetypes, and the foundation — then make it yours from a
-          single variable.
+          Browse the catalog, the layout archetypes, and the foundation — then
+          make it yours from a single variable.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button size="lg" render={<Link href="/docs" />}>
             Browse the catalog
             <ArrowRight />
           </Button>
-          <Button size="lg" variant="outline" render={<Link href="/docs/foundation" />}>
+          <Button
+            size="lg"
+            variant="outline"
+            render={<Link href="/docs/foundation" />}
+          >
             See the foundation
           </Button>
         </div>
       </section>
     </main>
-  );
+  )
 }

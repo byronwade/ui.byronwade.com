@@ -1,4 +1,4 @@
-import { CanvasText } from "@/components/ui/canvas-text";
+import { CanvasText } from "@/components/ui/canvas-text"
 
 export default function Example() {
   return (
@@ -8,5 +8,5 @@ export default function Example() {
         className="text-6xl font-medium tracking-tight"
       />
     </div>
-  );
+  )
 }

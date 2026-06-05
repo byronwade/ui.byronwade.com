@@ -27,7 +27,7 @@ files the "Adding a new component" checklist in `AGENTS.md` requires — never a
    shared helper/hook → `registry/lib/<slug>.ts`. CVA variants may stay inline or, if large, live
    in `registry/ui/<slug>-variants.ts`. Kebab-case filename = the slug.
 2. **registry.json item** — append `{ name, type, title, description, files, registryDependencies,
-   dependencies }` following a sibling item's exact shape. Never touch the auto-generated `all` item.
+dependencies }` following a sibling item's exact shape. Never touch the auto-generated `all` item.
 3. **Example** — `content/examples/<slug>/default.tsx`, then run `npm run gen:examples`.
 4. **Test** — `tests/components/<slug>.test.tsx` covering default render, **every** variant/size/state,
    all interactions, and `axe` (vitest-axe). Coverage gate is strict (functions 100%, lines/statements 99%).
@@ -53,6 +53,7 @@ files the "Adding a new component" checklist in `AGENTS.md` requires — never a
 ## Finish
 
 Run, in order, and report results:
+
 - `npm run update:registry` (or `npm run sync && npm run registry:build` if faster)
 - `npm run validate`
 - `npm run test:ci`

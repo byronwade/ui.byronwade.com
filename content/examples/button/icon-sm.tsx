@@ -1,12 +1,14 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { Plus } from "lucide-react"
 
 export default function Example() {
   return (
     <div className="flex flex-wrap items-center gap-3 p-6">
-      <Button size="icon-sm" aria-label="Add"><Plus /></Button>
+      <Button size="icon-sm" aria-label="Add">
+        <Plus />
+      </Button>
     </div>
-  );
+  )
 }

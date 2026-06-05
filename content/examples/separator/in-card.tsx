@@ -1,13 +1,15 @@
-"use client";
+"use client"
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator"
 
 export default function Example() {
   return (
     <div className="w-80 rounded-xl border bg-card p-5 shadow-sm">
       <div className="space-y-1">
         <h3 className="text-sm font-semibold">Account Summary</h3>
-        <p className="text-xs text-muted-foreground">Your usage this billing period</p>
+        <p className="text-xs text-muted-foreground">
+          Your usage this billing period
+        </p>
       </div>
 
       <Separator className="my-4" />
@@ -34,5 +36,5 @@ export default function Example() {
         <span className="font-semibold">$24.00</span>
       </div>
     </div>
-  );
+  )
 }

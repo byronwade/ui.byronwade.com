@@ -1,5 +1,5 @@
-import { MetricStat } from "@/components/metric-stat";
-import { Activity } from "lucide-react";
+import { MetricStat } from "@/components/metric-stat"
+import { Activity } from "lucide-react"
 
 export default function Example() {
   return (
@@ -27,11 +27,13 @@ export default function Example() {
         value={
           <span>
             142
-            <span className="ml-1 text-base font-normal text-muted-foreground">ms</span>
+            <span className="ml-1 text-base font-normal text-muted-foreground">
+              ms
+            </span>
           </span>
         }
         delta={{ value: "-18ms", direction: "up" }}
       />
     </div>
-  );
+  )
 }

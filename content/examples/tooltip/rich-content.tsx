@@ -20,7 +20,8 @@ export default function Example() {
             Multi-line
           </TooltipTrigger>
           <TooltipContent className="max-w-[200px] text-center">
-            This tooltip contains a longer description that wraps across multiple lines for extra context.
+            This tooltip contains a longer description that wraps across
+            multiple lines for extra context.
           </TooltipContent>
         </Tooltip>
 
@@ -33,8 +34,12 @@ export default function Example() {
           <TooltipContent className="flex items-center gap-2">
             <span>Save</span>
             <span className="flex items-center gap-0.5 text-[10px] opacity-70">
-              <span className="rounded bg-background/20 px-1 py-0.5 font-mono">⌘</span>
-              <span className="rounded bg-background/20 px-1 py-0.5 font-mono">S</span>
+              <span className="rounded bg-background/20 px-1 py-0.5 font-mono">
+                ⌘
+              </span>
+              <span className="rounded bg-background/20 px-1 py-0.5 font-mono">
+                S
+              </span>
             </span>
           </TooltipContent>
         </Tooltip>

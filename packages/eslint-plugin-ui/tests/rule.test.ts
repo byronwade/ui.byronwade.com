@@ -1,6 +1,6 @@
-import { RuleTester } from "eslint";
-import parser from "@typescript-eslint/parser";
-import { onSystem } from "../src/rule.js";
+import { RuleTester } from "eslint"
+import parser from "@typescript-eslint/parser"
+import { onSystem } from "../src/rule.js"
 
 // ESLint's RuleTester.run() registers its own `describe`/`it` blocks via the
 // global test hooks. Under Vitest 4 those suite functions may not be called from
@@ -9,7 +9,7 @@ import { onSystem } from "../src/rule.js";
 // suite/case registration.
 const tester = new RuleTester({
   languageOptions: { parser, parserOptions: { ecmaFeatures: { jsx: true } } },
-});
+})
 
 tester.run("on-system", onSystem, {
   valid: [{ code: `const x = <div className="bg-brand p-4" />;` }],
@@ -20,4 +20,4 @@ tester.run("on-system", onSystem, {
       errors: 1,
     },
   ],
-});
+})

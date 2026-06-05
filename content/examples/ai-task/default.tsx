@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Task,
@@ -6,7 +6,7 @@ import {
   TaskItem,
   TaskItemFile,
   TaskTrigger,
-} from "@/components/ai-elements/task";
+} from "@/components/ai-elements/task"
 
 export default function Example() {
   return (
@@ -38,5 +38,5 @@ export default function Example() {
         </TaskContent>
       </Task>
     </div>
-  );
+  )
 }

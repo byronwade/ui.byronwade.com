@@ -1,34 +1,39 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
 type Action = {
-  label: string;
-  icon: string;
-  description: string;
-  destructive?: boolean;
-};
+  label: string
+  icon: string
+  description: string
+  destructive?: boolean
+}
 
 const ACTIONS: Action[] = [
   { label: "Duplicate", icon: "⧉", description: "Create an identical copy" },
   { label: "Rename", icon: "✎", description: "Change the display name" },
   { label: "Export", icon: "↑", description: "Download as a file" },
   { label: "Share", icon: "⤴", description: "Invite others to collaborate" },
-  { label: "Delete", icon: "⊗", description: "Permanently remove", destructive: true },
-];
+  {
+    label: "Delete",
+    icon: "⊗",
+    description: "Permanently remove",
+    destructive: true,
+  },
+]
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
-  const [lastAction, setLastAction] = useState<string | null>(null);
+  const [open, setOpen] = useState(false)
+  const [lastAction, setLastAction] = useState<string | null>(null)
 
   function handleAction(label: string) {
-    setLastAction(label);
-    setOpen(false);
+    setLastAction(label)
+    setOpen(false)
   }
 
   return (
@@ -50,12 +55,18 @@ export default function Example() {
                   role="menuitem"
                   onClick={() => handleAction(action.label)}
                   className={`flex w-full items-start gap-2.5 rounded-md px-2.5 py-1.5 text-left transition-colors hover:bg-muted ${
-                    action.destructive ? "text-destructive hover:bg-destructive/10" : "text-foreground"
+                    action.destructive
+                      ? "text-destructive hover:bg-destructive/10"
+                      : "text-foreground"
                   }`}
                 >
-                  <span className="mt-px shrink-0 text-base leading-none">{action.icon}</span>
+                  <span className="mt-px shrink-0 text-base leading-none">
+                    {action.icon}
+                  </span>
                   <div className="flex flex-col">
-                    <span className="text-sm font-medium leading-tight">{action.label}</span>
+                    <span className="text-sm font-medium leading-tight">
+                      {action.label}
+                    </span>
                     <span className="text-xs text-muted-foreground leading-snug">
                       {action.description}
                     </span>
@@ -74,5 +85,5 @@ export default function Example() {
         </p>
       )}
     </div>
-  );
+  )
 }

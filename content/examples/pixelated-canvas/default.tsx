@@ -1,4 +1,4 @@
-import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
+import { PixelatedCanvas } from "@/components/ui/pixelated-canvas"
 
 export default function Example() {
   return (
@@ -12,5 +12,5 @@ export default function Example() {
         className="rounded-xl"
       />
     </div>
-  );
+  )
 }

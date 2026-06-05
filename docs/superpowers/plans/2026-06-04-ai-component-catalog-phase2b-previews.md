@@ -26,19 +26,20 @@
 
 ## File map
 
-| File | Responsibility | Task |
-|---|---|---|
-| `app/preview/components/[slug]/page.tsx` (new) | RSC: render a component's default example full-bleed | 1 |
-| `tests/app/preview-components.test.ts` (new) | `generateStaticParams` covers every component | 1 |
-| `app/(docs)/_components/lazy-preview.tsx` (new) | Client: viewport-lazy iframe with placeholder, IO-degrading | 2 |
-| `tests/app/lazy-preview.test.tsx` (new) | placeholder-only without IO; mounts iframe on intersection | 2 |
-| `app/(docs)/_components/component-gallery.tsx` (modify) | Preview-first card using `LazyPreview` | 3 |
+| File                                                    | Responsibility                                              | Task |
+| ------------------------------------------------------- | ----------------------------------------------------------- | ---- |
+| `app/preview/components/[slug]/page.tsx` (new)          | RSC: render a component's default example full-bleed        | 1    |
+| `tests/app/preview-components.test.ts` (new)            | `generateStaticParams` covers every component               | 1    |
+| `app/(docs)/_components/lazy-preview.tsx` (new)         | Client: viewport-lazy iframe with placeholder, IO-degrading | 2    |
+| `tests/app/lazy-preview.test.tsx` (new)                 | placeholder-only without IO; mounts iframe on intersection  | 2    |
+| `app/(docs)/_components/component-gallery.tsx` (modify) | Preview-first card using `LazyPreview`                      | 3    |
 
 ---
 
 ## Task 1: `/preview/components/[slug]` route
 
 **Files:**
+
 - Create: `app/preview/components/[slug]/page.tsx`
 - Test: `tests/app/preview-components.test.ts`
 
@@ -47,16 +48,16 @@
 Create `tests/app/preview-components.test.ts`:
 
 ```ts
-import { describe, it, expect } from "vitest";
-import { generateStaticParams } from "@/app/preview/components/[slug]/page";
+import { describe, it, expect } from "vitest"
+import { generateStaticParams } from "@/app/preview/components/[slug]/page"
 
 describe("/preview/components/[slug] generateStaticParams", () => {
   it("includes every catalog component slug", async () => {
-    const params = await generateStaticParams();
-    expect(params).toContainEqual({ slug: "button" });
-    expect(params.length).toBeGreaterThan(100);
-  });
-});
+    const params = await generateStaticParams()
+    expect(params).toContainEqual({ slug: "button" })
+    expect(params.length).toBeGreaterThan(100)
+  })
+})
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -67,27 +68,27 @@ Expected: FAIL — route module does not exist.
 - [ ] **Step 3: Create `app/preview/components/[slug]/page.tsx`**
 
 ```tsx
-import { components } from "@/content/components";
-import { examples } from "@/content/examples/registry";
+import { components } from "@/content/components"
+import { examples } from "@/content/examples/registry"
 
 // Component previews for the catalog gallery cards (scaled inside a lazy iframe).
 // Mirrors app/preview/[slug] (archetypes/templates) but renders a component's
 // DEFAULT example. Only known component slugs are valid.
-export const dynamicParams = false;
+export const dynamicParams = false
 
 export function generateStaticParams() {
-  return components.map((c) => ({ slug: c.slug }));
+  return components.map((c) => ({ slug: c.slug }))
 }
 
 export default async function ComponentPreview({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params;
-  const demos = examples[slug] ?? [];
-  const demo = demos.find((d) => d.file.endsWith("/default.tsx")) ?? demos[0];
-  const Component = demo?.Component;
+  const { slug } = await params
+  const demos = examples[slug] ?? []
+  const demo = demos.find((d) => d.file.endsWith("/default.tsx")) ?? demos[0]
+  const Component = demo?.Component
 
   return (
     <div className="grid min-h-dvh place-items-center bg-background p-8">
@@ -97,7 +98,7 @@ export default async function ComponentPreview({
         <span className="font-mono text-sm text-muted-foreground">{slug}</span>
       )}
     </div>
-  );
+  )
 }
 ```
 
@@ -120,6 +121,7 @@ git commit -m "feat(catalog): add /preview/components/[slug] route (default exam
 ## Task 2: `LazyPreview` client component
 
 **Files:**
+
 - Create: `app/(docs)/_components/lazy-preview.tsx`
 - Test: `tests/app/lazy-preview.test.tsx`
 
@@ -128,53 +130,67 @@ git commit -m "feat(catalog): add /preview/components/[slug] route (default exam
 Create `tests/app/lazy-preview.test.tsx`:
 
 ```tsx
-import * as React from "react";
-import { render, screen, act } from "@testing-library/react";
-import { describe, it, expect, vi, afterEach } from "vitest";
-import { LazyPreview } from "@/app/(docs)/_components/lazy-preview";
+import * as React from "react"
+import { render, screen, act } from "@testing-library/react"
+import { describe, it, expect, vi, afterEach } from "vitest"
+import { LazyPreview } from "@/app/(docs)/_components/lazy-preview"
 
 afterEach(() => {
-  vi.unstubAllGlobals();
-});
+  vi.unstubAllGlobals()
+})
 
 describe("LazyPreview", () => {
   it("shows only the placeholder when IntersectionObserver is unavailable", () => {
-    vi.stubGlobal("IntersectionObserver", undefined);
-    render(<LazyPreview src="/preview/components/button" title="Button preview" placeholder={<span>mark</span>} />);
-    expect(screen.getByText("mark")).toBeInTheDocument();
-    expect(document.querySelector("iframe")).toBeNull();
-  });
+    vi.stubGlobal("IntersectionObserver", undefined)
+    render(
+      <LazyPreview
+        src="/preview/components/button"
+        title="Button preview"
+        placeholder={<span>mark</span>}
+      />,
+    )
+    expect(screen.getByText("mark")).toBeInTheDocument()
+    expect(document.querySelector("iframe")).toBeNull()
+  })
 
   it("mounts the iframe once the container intersects the viewport", () => {
-    let trigger: ((entries: Array<{ isIntersecting: boolean }>) => void) | undefined;
-    const observe = vi.fn();
-    const disconnect = vi.fn();
+    let trigger:
+      | ((entries: Array<{ isIntersecting: boolean }>) => void)
+      | undefined
+    const observe = vi.fn()
+    const disconnect = vi.fn()
     vi.stubGlobal(
       "IntersectionObserver",
       class {
         constructor(cb: (entries: Array<{ isIntersecting: boolean }>) => void) {
-          trigger = cb;
+          trigger = cb
         }
-        observe = observe;
-        disconnect = disconnect;
-        unobserve = vi.fn();
-        takeRecords = vi.fn();
+        observe = observe
+        disconnect = disconnect
+        unobserve = vi.fn()
+        takeRecords = vi.fn()
       },
-    );
+    )
 
-    render(<LazyPreview src="/preview/components/button" title="Button preview" placeholder={<span>mark</span>} />);
-    expect(document.querySelector("iframe")).toBeNull();
-    expect(observe).toHaveBeenCalled();
+    render(
+      <LazyPreview
+        src="/preview/components/button"
+        title="Button preview"
+        placeholder={<span>mark</span>}
+      />,
+    )
+    expect(document.querySelector("iframe")).toBeNull()
+    expect(observe).toHaveBeenCalled()
 
-    act(() => trigger!([{ isIntersecting: true }]));
+    act(() => trigger!([{ isIntersecting: true }]))
 
-    const iframe = document.querySelector("iframe")!;
-    expect(iframe).not.toBeNull();
-    expect(iframe.getAttribute("src")).toBe("/preview/components/button");
-    expect(iframe.getAttribute("title")).toBe("Button preview");
-    expect(disconnect).toHaveBeenCalled();
-  });
-});
+    const iframe = document.querySelector("iframe")!
+    expect(iframe).not.toBeNull()
+    expect(iframe.getAttribute("src")).toBe("/preview/components/button")
+    expect(iframe.getAttribute("title")).toBe("Button preview")
+    expect(disconnect).toHaveBeenCalled()
+  })
+})
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -185,10 +201,10 @@ Expected: FAIL — module does not exist.
 - [ ] **Step 3: Create `app/(docs)/_components/lazy-preview.tsx`**
 
 ```tsx
-"use client";
+"use client"
 
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from "react"
+import { cn } from "@/lib/utils"
 
 /**
  * A viewport-lazy preview: renders `placeholder` immediately and mounts a scaled
@@ -201,30 +217,30 @@ export function LazyPreview({
   placeholder,
   className,
 }: {
-  src: string;
-  title: string;
-  placeholder?: React.ReactNode;
-  className?: string;
+  src: string
+  title: string
+  placeholder?: React.ReactNode
+  className?: string
 }) {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [show, setShow] = React.useState(false);
+  const ref = React.useRef<HTMLDivElement>(null)
+  const [show, setShow] = React.useState(false)
 
   React.useEffect(() => {
-    if (show || typeof IntersectionObserver === "undefined") return;
-    const el = ref.current;
-    if (!el) return;
+    if (show || typeof IntersectionObserver === "undefined") return
+    const el = ref.current
+    if (!el) return
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
-          setShow(true);
-          io.disconnect();
+          setShow(true)
+          io.disconnect()
         }
       },
       { rootMargin: "200px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [show]);
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [show])
 
   return (
     <div ref={ref} className={cn("relative overflow-hidden", className)}>
@@ -240,7 +256,7 @@ export function LazyPreview({
         />
       )}
     </div>
-  );
+  )
 }
 ```
 
@@ -261,14 +277,17 @@ git commit -m "feat(catalog): add LazyPreview (viewport-lazy iframe with placeho
 ## Task 3: Preview-first gallery cards
 
 **Files:**
+
 - Modify: `app/(docs)/_components/component-gallery.tsx`
 
 - [ ] **Step 1: Add imports**
 
 In `app/(docs)/_components/component-gallery.tsx`, add:
+
 ```ts
-import { LazyPreview } from "@/app/(docs)/_components/lazy-preview";
+import { LazyPreview } from "@/app/(docs)/_components/lazy-preview"
 ```
+
 (`GradientAvatar` is already imported.)
 
 - [ ] **Step 2: Replace the card body with a preview-first layout**
@@ -276,47 +295,49 @@ import { LazyPreview } from "@/app/(docs)/_components/lazy-preview";
 Find the grid's `<li key={item.slug}>` → `<Link …>` card. Replace the Link's INNER content (keep the `<Link href={item.href} aria-label={item.name} className="group …">` wrapper, but you may simplify its className to a column flex without the card padding since the preview is now edge-to-edge) so the card is preview-first:
 
 ```tsx
-            <li key={item.slug}>
-              <Link
-                href={item.href}
-                aria-label={item.name}
-                className="group flex flex-col gap-3 rounded-2xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-              >
-                <LazyPreview
-                  src={`/preview/components/${item.slug}`}
-                  title={`${item.name} preview`}
-                  placeholder={
-                    <div className="grid h-full place-items-center bg-card">
-                      <GradientAvatar seed={item.name} size="lg" className="rounded-lg" />
-                    </div>
-                  }
-                  className="aspect-[16/10] rounded-xl edge bg-background transition-all group-hover:-translate-y-0.5 group-hover:shadow-card"
-                />
-                <div className="flex items-center justify-between gap-3 px-0.5">
-                  <div className="flex min-w-0 items-center gap-2">
-                    <span className="truncate text-sm font-medium tracking-tight">{item.name}</span>
-                    <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
-                      {item.variantCount} variant{item.variantCount === 1 ? "" : "s"}
-                    </span>
-                  </div>
-                  <span className="shrink-0 rounded-full edge px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
-                    {item.group}
-                  </span>
-                </div>
-                {item.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1 px-0.5">
-                    {item.tags.slice(0, 3).map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </Link>
-            </li>
+<li key={item.slug}>
+  <Link
+    href={item.href}
+    aria-label={item.name}
+    className="group flex flex-col gap-3 rounded-2xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+  >
+    <LazyPreview
+      src={`/preview/components/${item.slug}`}
+      title={`${item.name} preview`}
+      placeholder={
+        <div className="grid h-full place-items-center bg-card">
+          <GradientAvatar seed={item.name} size="lg" className="rounded-lg" />
+        </div>
+      }
+      className="aspect-[16/10] rounded-xl edge bg-background transition-all group-hover:-translate-y-0.5 group-hover:shadow-card"
+    />
+    <div className="flex items-center justify-between gap-3 px-0.5">
+      <div className="flex min-w-0 items-center gap-2">
+        <span className="truncate text-sm font-medium tracking-tight">
+          {item.name}
+        </span>
+        <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
+          {item.variantCount} variant{item.variantCount === 1 ? "" : "s"}
+        </span>
+      </div>
+      <span className="shrink-0 rounded-full edge px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
+        {item.group}
+      </span>
+    </div>
+    {item.tags.length > 0 && (
+      <div className="flex flex-wrap gap-1 px-0.5">
+        {item.tags.slice(0, 3).map((t) => (
+          <span
+            key={t}
+            className="rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+    )}
+  </Link>
+</li>
 ```
 
 Keep everything else (search, facets, sort, empty state, `filterCatalog`) unchanged. The card still renders the name, the `{variantCount} variant(s)` text, the group chip, and tags — so the existing gallery test stays green (in jsdom, `IntersectionObserver` is undefined, so `LazyPreview` shows only the placeholder — no iframe, no axe issues).

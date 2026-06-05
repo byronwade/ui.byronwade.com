@@ -3,7 +3,7 @@ import {
   PillIndicator,
   PillDelta,
   PillStatus,
-} from "@/components/ui/pill";
+} from "@/components/ui/pill"
 
 export default function Example() {
   return (
@@ -28,5 +28,5 @@ export default function Example() {
         Down
       </Pill>
     </div>
-  );
+  )
 }

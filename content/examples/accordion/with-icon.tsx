@@ -3,13 +3,13 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
+} from "@/components/ui/accordion"
 import {
   ShieldCheckIcon,
   BellIcon,
   CreditCardIcon,
   UsersIcon,
-} from "lucide-react";
+} from "lucide-react"
 
 export default function Example() {
   return (
@@ -39,8 +39,8 @@ export default function Example() {
           </AccordionTrigger>
           <AccordionContent>
             <p>
-              Choose how and when you receive alerts — via email, SMS, or
-              in-app banners. Snooze all notifications for a set duration.
+              Choose how and when you receive alerts — via email, SMS, or in-app
+              banners. Snooze all notifications for a set duration.
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -69,12 +69,12 @@ export default function Example() {
           </AccordionTrigger>
           <AccordionContent>
             <p>
-              Invite members, assign roles, and control permissions across
-              your organization from one place.
+              Invite members, assign roles, and control permissions across your
+              organization from one place.
             </p>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
     </div>
-  );
+  )
 }

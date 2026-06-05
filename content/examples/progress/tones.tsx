@@ -4,7 +4,11 @@ import {
   ProgressValue,
 } from "@/components/ui/progress"
 
-const rows: { tone: "default" | "brand" | "success" | "warning" | "destructive"; label: string; value: number }[] = [
+const rows: {
+  tone: "default" | "brand" | "success" | "warning" | "destructive"
+  label: string
+  value: number
+}[] = [
   { tone: "default", label: "Default", value: 40 },
   { tone: "brand", label: "Brand", value: 60 },
   { tone: "success", label: "Complete", value: 100 },

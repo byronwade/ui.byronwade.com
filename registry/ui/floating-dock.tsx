@@ -9,10 +9,10 @@
  * Note: use position fixed according to your needs — desktop dock reads best
  * pinned to the bottom; the mobile dock to the bottom-right.
  */
-"use client";
+"use client"
 
-import { useRef, useState } from "react";
-import { ChevronUp } from "lucide-react";
+import { useRef, useState } from "react"
+import { ChevronUp } from "lucide-react"
 import {
   AnimatePresence,
   MotionValue,
@@ -20,37 +20,37 @@ import {
   useMotionValue,
   useSpring,
   useTransform,
-} from "motion/react";
+} from "motion/react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-type FloatingDockItem = { title: string; icon: React.ReactNode; href: string };
+type FloatingDockItem = { title: string; icon: React.ReactNode; href: string }
 
 export const FloatingDock = ({
   items,
   desktopClassName,
   mobileClassName,
 }: {
-  items: FloatingDockItem[];
-  desktopClassName?: string;
-  mobileClassName?: string;
+  items: FloatingDockItem[]
+  desktopClassName?: string
+  mobileClassName?: string
 }) => {
   return (
     <>
       <FloatingDockDesktop items={items} className={desktopClassName} />
       <FloatingDockMobile items={items} className={mobileClassName} />
     </>
-  );
-};
+  )
+}
 
 const FloatingDockMobile = ({
   items,
   className,
 }: {
-  items: FloatingDockItem[];
-  className?: string;
+  items: FloatingDockItem[]
+  className?: string
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   return (
     <div
       data-slot="floating-dock-mobile"
@@ -92,17 +92,17 @@ const FloatingDockMobile = ({
         <ChevronUp className="h-5 w-5 text-muted-foreground" />
       </button>
     </div>
-  );
-};
+  )
+}
 
 const FloatingDockDesktop = ({
   items,
   className,
 }: {
-  items: FloatingDockItem[];
-  className?: string;
+  items: FloatingDockItem[]
+  className?: string
 }) => {
-  const mouseX = useMotionValue(Infinity);
+  const mouseX = useMotionValue(Infinity)
   return (
     <motion.div
       data-slot="floating-dock"
@@ -117,8 +117,8 @@ const FloatingDockDesktop = ({
         <IconContainer mouseX={mouseX} key={item.title} {...item} />
       ))}
     </motion.div>
-  );
-};
+  )
+}
 
 function IconContainer({
   mouseX,
@@ -126,30 +126,38 @@ function IconContainer({
   icon,
   href,
 }: {
-  mouseX: MotionValue;
-  title: string;
-  icon: React.ReactNode;
-  href: string;
+  mouseX: MotionValue
+  title: string
+  icon: React.ReactNode
+  href: string
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null)
 
   const distance = useTransform(mouseX, (val) => {
-    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-    return val - bounds.x - bounds.width / 2;
-  });
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 }
+    return val - bounds.x - bounds.width / 2
+  })
 
-  const widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  const heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  const widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
-  const heightTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
+  const widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
+  const heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
+  const widthTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
+  )
+  const heightTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
+  )
 
-  const spring = { mass: 0.1, stiffness: 150, damping: 12 };
-  const width = useSpring(widthTransform, spring);
-  const height = useSpring(heightTransform, spring);
-  const widthIcon = useSpring(widthTransformIcon, spring);
-  const heightIcon = useSpring(heightTransformIcon, spring);
+  const spring = { mass: 0.1, stiffness: 150, damping: 12 }
+  const width = useSpring(widthTransform, spring)
+  const height = useSpring(heightTransform, spring)
+  const widthIcon = useSpring(widthTransformIcon, spring)
+  const heightIcon = useSpring(heightTransformIcon, spring)
 
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState(false)
 
   return (
     <a href={href} aria-label={title}>
@@ -180,7 +188,7 @@ function IconContainer({
         </motion.div>
       </motion.div>
     </a>
-  );
+  )
 }
 
-export type { FloatingDockItem };
+export type { FloatingDockItem }

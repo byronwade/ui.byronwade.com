@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator"
 
 export default function Example() {
   return (
@@ -31,9 +31,11 @@ export default function Example() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-xs text-muted-foreground">Centered short (50% width)</p>
+        <p className="text-xs text-muted-foreground">
+          Centered short (50% width)
+        </p>
         <Separator className="mx-auto w-1/2" />
       </div>
     </div>
-  );
+  )
 }

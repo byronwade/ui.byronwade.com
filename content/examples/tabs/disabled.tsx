@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Example() {
   return (
@@ -20,13 +20,19 @@ export default function Example() {
           </TabsList>
 
           <TabsContent value={0} className="p-4">
-            <p className="text-sm text-muted-foreground">Your documents are listed here.</p>
+            <p className="text-sm text-muted-foreground">
+              Your documents are listed here.
+            </p>
           </TabsContent>
           <TabsContent value={1} className="p-4">
-            <p className="text-sm text-muted-foreground">Image gallery appears here.</p>
+            <p className="text-sm text-muted-foreground">
+              Image gallery appears here.
+            </p>
           </TabsContent>
           <TabsContent value={2} className="p-4">
-            <p className="text-sm text-muted-foreground">Video library is coming soon.</p>
+            <p className="text-sm text-muted-foreground">
+              Video library is coming soon.
+            </p>
           </TabsContent>
         </Tabs>
       </div>
@@ -48,16 +54,22 @@ export default function Example() {
           </TabsList>
 
           <TabsContent value={0} className="p-4">
-            <p className="text-sm text-muted-foreground">Free plan features are available.</p>
+            <p className="text-sm text-muted-foreground">
+              Free plan features are available.
+            </p>
           </TabsContent>
           <TabsContent value={1} className="p-4">
-            <p className="text-sm text-muted-foreground">Upgrade to unlock Pro features.</p>
+            <p className="text-sm text-muted-foreground">
+              Upgrade to unlock Pro features.
+            </p>
           </TabsContent>
           <TabsContent value={2} className="p-4">
-            <p className="text-sm text-muted-foreground">Contact sales for Enterprise.</p>
+            <p className="text-sm text-muted-foreground">
+              Contact sales for Enterprise.
+            </p>
           </TabsContent>
         </Tabs>
       </div>
     </div>
-  );
+  )
 }

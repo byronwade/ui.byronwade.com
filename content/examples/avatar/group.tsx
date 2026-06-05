@@ -4,7 +4,7 @@ import {
   AvatarFallback,
   AvatarGroup,
   AvatarGroupCount,
-} from "@/components/ui/avatar";
+} from "@/components/ui/avatar"
 
 export default function Example() {
   return (
@@ -87,5 +87,5 @@ export default function Example() {
         </AvatarGroup>
       </div>
     </div>
-  );
+  )
 }

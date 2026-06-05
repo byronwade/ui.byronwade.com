@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
+} from "@/components/ui/accordion"
 
 export default function Example() {
   return (
@@ -41,8 +41,7 @@ export default function Example() {
           <AccordionTrigger>Resources &amp; links</AccordionTrigger>
           <AccordionContent>
             <p>
-              All assets and briefs are stored in the shared drive. Refer to
-              the{" "}
+              All assets and briefs are stored in the shared drive. Refer to the{" "}
               <a href="#" onClick={(e) => e.preventDefault()}>
                 design brief
               </a>{" "}
@@ -67,12 +66,12 @@ export default function Example() {
             <p>
               <strong>Who approves final designs?</strong>
               <br />
-              The product lead signs off on UX; the design lead approves
-              visual quality.
+              The product lead signs off on UX; the design lead approves visual
+              quality.
             </p>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
     </div>
-  );
+  )
 }

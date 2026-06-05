@@ -5,10 +5,29 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": { ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
-  "files": ["dist"],
-  "scripts": { "build": "tsc -p tsconfig.json", "test": "vitest run" },
-  "dependencies": { "@byronwade/on-system-core": "0.1.0" },
-  "peerDependencies": { "eslint": ">=9" },
-  "devDependencies": { "eslint": "^9", "typescript": "^5", "vitest": "^4.1.7", "@typescript-eslint/parser": "^8.20.0" }
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@byronwade/on-system-core": "0.1.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=9"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "typescript": "^5",
+    "vitest": "^4.1.7",
+    "@typescript-eslint/parser": "^8.20.0"
+  }
 }

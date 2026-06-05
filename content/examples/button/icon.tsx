@@ -1,12 +1,14 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { Download } from "lucide-react"
 
 export default function Example() {
   return (
     <div className="flex flex-wrap items-center gap-3 p-6">
-      <Button size="icon" aria-label="Download"><Download /></Button>
+      <Button size="icon" aria-label="Download">
+        <Download />
+      </Button>
     </div>
-  );
+  )
 }

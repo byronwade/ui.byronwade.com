@@ -14,7 +14,7 @@ const spinnerVariants = cva(
       },
     },
     defaultVariants: { size: "default" },
-  }
+  },
 )
 
 /**

@@ -19,8 +19,8 @@
 // Invariants:
 //   ENFORCE 1. Filenames     — every registry/**/*.{ts,tsx} is kebab-case.
 //   ENFORCE 2. Import paths   — no relative parent (`../`) imports; consumer `@/` only.
-//   RATCHET 3. No default     — components use named exports, never `export default`.
-//   RATCHET 4. data-slot      — every ui / component root carries a `data-slot`.
+//   ENFORCE 3. No default     — components use named exports, never `export default`.
+//   ENFORCE 4. data-slot      — every ui / component root carries a `data-slot`.
 //
 // Usage: node scripts/check-conventions.mjs
 //        node scripts/check-conventions.mjs --strict   (treat ratchets as enforce too)
@@ -95,7 +95,7 @@ if (crossing.length) {
   })
 }
 
-// ---- RATCHET 3. No default exports -----------------------------------------
+// ---- ENFORCE 3. No default exports -----------------------------------------
 // Components export named, at the file bottom, so consumers get stable import
 // names and the file can expose multiple parts (Root + sub-components + types).
 const defaultExport = /^export default\b/m
@@ -104,14 +104,14 @@ const defaulted = renderedFiles.filter((rel) => {
   return defaultExport.test(readFileSync(abs, "utf8"))
 })
 if (defaulted.length) {
-  ratchet.push({
+  enforce.push({
     title: "Components using `export default`",
     items: defaulted,
     hint: "Switch to a named export at the file bottom: export { Component }.",
   })
 }
 
-// ---- RATCHET 4. data-slot presence -----------------------------------------
+// ---- ENFORCE 4. data-slot presence -----------------------------------------
 // Every rendered part carries data-slot so consumers can target it without
 // reaching into class internals (the styling-handle contract from the DNA).
 const undatedSlot = renderedFiles.filter((rel) => {
@@ -119,7 +119,7 @@ const undatedSlot = renderedFiles.filter((rel) => {
   return !readFileSync(abs, "utf8").includes("data-slot")
 })
 if (undatedSlot.length) {
-  ratchet.push({
+  enforce.push({
     title: "Components missing a `data-slot` attribute",
     items: undatedSlot,
     hint: "Add data-slot to the rendered root (and notable parts) so consumers can target them.",

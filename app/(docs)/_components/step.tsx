@@ -4,9 +4,9 @@ export function Step({
   title,
   children,
 }: {
-  n: number;
-  title: string;
-  children: React.ReactNode;
+  n: number
+  title: string
+  children: React.ReactNode
 }) {
   return (
     <section className="flex gap-4">
@@ -14,9 +14,11 @@ export function Step({
         {n}
       </span>
       <div className="min-w-0 flex-1 space-y-3">
-        <h3 className="text-base font-semibold leading-snug tracking-tight">{title}</h3>
+        <h3 className="text-base font-semibold leading-snug tracking-tight">
+          {title}
+        </h3>
         {children}
       </div>
     </section>
-  );
+  )
 }

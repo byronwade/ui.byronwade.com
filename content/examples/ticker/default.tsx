@@ -4,7 +4,7 @@ import {
   TickerSymbol,
   TickerPrice,
   TickerPriceChange,
-} from "@/components/ui/ticker";
+} from "@/components/ui/ticker"
 
 export default function Example() {
   return (
@@ -22,5 +22,5 @@ export default function Example() {
         <TickerPriceChange change={-2.14} isPercent />
       </Ticker>
     </div>
-  );
+  )
 }

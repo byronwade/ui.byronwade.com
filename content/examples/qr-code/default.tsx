@@ -1,4 +1,4 @@
-import { QRCode } from "@/components/ui/qr-code";
+import { QRCode } from "@/components/ui/qr-code"
 
 export default function Example() {
   return (
@@ -7,5 +7,5 @@ export default function Example() {
         <QRCode data="https://ui.byronwade.com" />
       </div>
     </div>
-  );
+  )
 }

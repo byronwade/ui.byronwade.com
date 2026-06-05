@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   PromptInput,
@@ -20,29 +20,28 @@ import {
   PromptInputSubmit,
   PromptInputTextarea,
   PromptInputTools,
-} from "@/components/ai-elements/prompt-input";
-import { GlobeIcon } from "lucide-react";
-import { useState } from "react";
+} from "@/components/ai-elements/prompt-input"
+import { GlobeIcon } from "lucide-react"
+import { useState } from "react"
 
 const models = [
   { id: "sonnet", name: "Claude Sonnet" },
   { id: "opus", name: "Claude Opus" },
   { id: "haiku", name: "Claude Haiku" },
-];
+]
 
 export default function Example() {
-  const [model, setModel] = useState(models[0].id);
-  const [search, setSearch] = useState(false);
-  const [status, setStatus] =
-    useState<"ready" | "submitted">("ready");
+  const [model, setModel] = useState(models[0].id)
+  const [search, setSearch] = useState(false)
+  const [status, setStatus] = useState<"ready" | "submitted">("ready")
 
   const handleSubmit = (message: PromptInputMessage) => {
     if (!message.text.trim() && message.files.length === 0) {
-      return;
+      return
     }
-    setStatus("submitted");
-    setTimeout(() => setStatus("ready"), 1200);
-  };
+    setStatus("submitted")
+    setTimeout(() => setStatus("ready"), 1200)
+  }
 
   return (
     <div className="flex min-h-0 items-end justify-center bg-background p-8">
@@ -90,5 +89,5 @@ export default function Example() {
         </PromptInput>
       </div>
     </div>
-  );
+  )
 }

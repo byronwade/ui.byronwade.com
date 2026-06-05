@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/components/ui/breadcrumb"
 
 /**
  * Long paths collapse intermediate crumbs with BreadcrumbEllipsis so the
@@ -35,5 +35,5 @@ export default function Example() {
         </BreadcrumbList>
       </Breadcrumb>
     </div>
-  );
+  )
 }

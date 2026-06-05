@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/components/ui/breadcrumb"
 
 export default function Example() {
   return (
@@ -31,5 +31,5 @@ export default function Example() {
         </BreadcrumbList>
       </Breadcrumb>
     </div>
-  );
+  )
 }

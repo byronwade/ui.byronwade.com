@@ -65,13 +65,13 @@ packages/mcp/
 
 ### Unit responsibilities
 
-| Unit | Purpose | Depends on |
-|------|---------|-----------|
-| `gen-mcp-data.mjs` | Compile `registry.json` + rule + sources → bundle | fs, registry.json |
-| `data.ts` | Load + type the bundle | data.generated.json |
-| `tools/*` | One pure handler per tool: `(data/args) → MCP result content` | data, on-system-core |
-| `server.ts` | Register the six tools on an `McpServer` | @modelcontextprotocol/sdk |
-| `cli.ts` | Connect stdio transport and run | server.ts, sdk |
+| Unit               | Purpose                                                       | Depends on                |
+| ------------------ | ------------------------------------------------------------- | ------------------------- |
+| `gen-mcp-data.mjs` | Compile `registry.json` + rule + sources → bundle             | fs, registry.json         |
+| `data.ts`          | Load + type the bundle                                        | data.generated.json       |
+| `tools/*`          | One pure handler per tool: `(data/args) → MCP result content` | data, on-system-core      |
+| `server.ts`        | Register the six tools on an `McpServer`                      | @modelcontextprotocol/sdk |
+| `cli.ts`           | Connect stdio transport and run                               | server.ts, sdk            |
 
 ## The generated bundle
 
@@ -103,14 +103,14 @@ packages/mcp/
 Each handler is pure and returns MCP `content` (text). Schemas via the SDK's zod-style
 input definitions.
 
-| Tool | Input | Returns |
-|------|-------|---------|
-| `search_components` | `{ query: string }` | Components whose name/description match (substring, case-insensitive), each with description, install command, deps. Empty query → all, name-sorted. |
-| `get_design_rule` | `{}` | The full rule text. |
-| `list_design_tokens` | `{}` | Token names + light/dark OKLCH values, grouped. |
-| `list_house_utilities` | `{}` | The house utility class names + a one-line note to prefer them over re-rolling gradients/grids. |
-| `check_on_system` | `{ code: string, offSystemComponents?: "warn"\|"error"\|"off" }` | `detect()` violations (detector, message, line/col, suggestion) + a pass/fail summary. |
-| `get_component_source` | `{ name: string }` | The component's `.tsx` source, or a not-found message listing near matches. |
+| Tool                   | Input                                                            | Returns                                                                                                                                              |
+| ---------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `search_components`    | `{ query: string }`                                              | Components whose name/description match (substring, case-insensitive), each with description, install command, deps. Empty query → all, name-sorted. |
+| `get_design_rule`      | `{}`                                                             | The full rule text.                                                                                                                                  |
+| `list_design_tokens`   | `{}`                                                             | Token names + light/dark OKLCH values, grouped.                                                                                                      |
+| `list_house_utilities` | `{}`                                                             | The house utility class names + a one-line note to prefer them over re-rolling gradients/grids.                                                      |
+| `check_on_system`      | `{ code: string, offSystemComponents?: "warn"\|"error"\|"off" }` | `detect()` violations (detector, message, line/col, suggestion) + a pass/fail summary.                                                               |
+| `get_component_source` | `{ name: string }`                                               | The component's `.tsx` source, or a not-found message listing near matches.                                                                          |
 
 `check_on_system` computes line/col from the violation char range for readability.
 
@@ -119,7 +119,11 @@ input definitions.
 - MCP config snippet (documented on a NEW docs page `app/(docs)/docs/mcp/page.tsx`, not
   touching in-flight docs files):
   ```json
-  { "mcpServers": { "byronwade": { "command": "npx", "args": ["-y", "@byronwade/mcp"] } } }
+  {
+    "mcpServers": {
+      "byronwade": { "command": "npx", "args": ["-y", "@byronwade/mcp"] }
+    }
+  }
   ```
 - `packages/mcp/README.md` with the same + a tool list.
 
@@ -127,14 +131,15 @@ input definitions.
 
 All tool handlers are pure and unit-tested against a small fixture `McpData` (no real
 stdio, no SDK transport):
+
 - `search_components`: substring match on name + description; empty query → all; no match → empty.
 - `get_component_source`: returns source for a known name; not-found path for unknown.
 - `check_on_system`: a clean snippet → pass/zero; an off-system snippet → the expected
   detectors + line/col; respects `offSystemComponents`.
 - design-context: rule/tokens/utilities handlers return the bundle's content.
-The `server.ts` registration shell is thin; a smoke test asserts it registers six tools
-with the expected names (calling the registration with a fake/mock server object).
-Bundle generation + `check:mcp-data` are exercised by running the scripts.
+  The `server.ts` registration shell is thin; a smoke test asserts it registers six tools
+  with the expected names (calling the registration with a fake/mock server object).
+  Bundle generation + `check:mcp-data` are exercised by running the scripts.
 
 ## Out of scope (v1)
 
@@ -146,13 +151,13 @@ Bundle generation + `check:mcp-data` are exercised by running the scripts.
 
 ## Risks & mitigations
 
-| Risk | Mitigation |
-|------|-----------|
-| Published package can't reach the repo/registry | Bundle everything at build time; server reads only `data.generated.json` |
-| Bundle drifts from registry | `check:mcp-data` gate (regenerate + diff) in `validate` + CI |
-| `@modelcontextprotocol/sdk` API shape varies by version | `server.ts` is the only SDK-coupled file; pin a version and adjust the thin shell if needed |
-| Large bundle (all sources) | Acceptable (~text source of 56 components); JSON, gzip-friendly. Revisit only if it becomes a problem |
-| Tests accidentally spawn a transport | Handlers are pure functions tested directly; only `cli.ts` connects stdio |
+| Risk                                                    | Mitigation                                                                                            |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Published package can't reach the repo/registry         | Bundle everything at build time; server reads only `data.generated.json`                              |
+| Bundle drifts from registry                             | `check:mcp-data` gate (regenerate + diff) in `validate` + CI                                          |
+| `@modelcontextprotocol/sdk` API shape varies by version | `server.ts` is the only SDK-coupled file; pin a version and adjust the thin shell if needed           |
+| Large bundle (all sources)                              | Acceptable (~text source of 56 components); JSON, gzip-friendly. Revisit only if it becomes a problem |
+| Tests accidentally spawn a transport                    | Handlers are pure functions tested directly; only `cli.ts` connects stdio                             |
 
 ## Build order (for the plan)
 

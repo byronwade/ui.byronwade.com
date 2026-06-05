@@ -7,5 +7,5 @@ export default function Example() {
       <span className="size-10 rounded-lg bg-destructive" />
       <span className="size-10 rounded-lg bg-muted" />
     </div>
-  );
+  )
 }

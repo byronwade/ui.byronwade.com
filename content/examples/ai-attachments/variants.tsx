@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Attachment,
@@ -8,7 +8,7 @@ import {
   AttachmentRemove,
   type AttachmentData,
   type AttachmentVariant,
-} from "@/components/ai-elements/attachments";
+} from "@/components/ai-elements/attachments"
 
 const FILES: AttachmentData[] = [
   {
@@ -32,9 +32,9 @@ const FILES: AttachmentData[] = [
     title: "API Reference",
     mediaType: "text/html",
   },
-];
+]
 
-const VARIANTS: AttachmentVariant[] = ["grid", "inline", "list"];
+const VARIANTS: AttachmentVariant[] = ["grid", "inline", "list"]
 
 export default function Example() {
   return (
@@ -56,5 +56,5 @@ export default function Example() {
         </div>
       ))}
     </div>
-  );
+  )
 }

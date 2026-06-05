@@ -1,26 +1,63 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { useTheme } from "next-themes";
-import { ArrowUpRight, GitFork, LayoutGrid, Moon, Sun, X } from "lucide-react";
+import * as React from "react"
+import Link from "next/link"
+import { useTheme } from "next-themes"
+import { ArrowUpRight, GitFork, LayoutGrid, Moon, Sun, X } from "lucide-react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const GITHUB_URL = "https://github.com/byronwade/ui";
+const GITHUB_URL = "https://github.com/byronwade/ui"
 
 const useIsoLayoutEffect =
-  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 
 /** Every product under the byronwade umbrella — the launcher is the cross-app switcher. */
-const PRODUCTS: { name: string; desc: string; href: string; mark: string; main?: boolean }[] = [
-  { name: "byronwade.com", desc: "Portfolio & personal site", href: "https://byronwade.com", mark: "B", main: true },
-  { name: "GoodMarks", desc: "Review routing", href: "https://goodmarks.io", mark: "G" },
-  { name: "SignalRoute", desc: "Beautiful phone & SMS", href: "https://getsignalroute.com", mark: "S" },
-  { name: "Fakebase", desc: "Mock backend for prototyping", href: "https://fakebase.byronwade.com", mark: "F" },
-  { name: "Dits", desc: "Large-file version control", href: "https://dits.byronwade.com", mark: "D" },
-  { name: "Wormhole", desc: "Instant file transfer", href: "https://wormhole.byronwade.com", mark: "W" },
-];
+const PRODUCTS: {
+  name: string
+  desc: string
+  href: string
+  mark: string
+  main?: boolean
+}[] = [
+  {
+    name: "byronwade.com",
+    desc: "Portfolio & personal site",
+    href: "https://byronwade.com",
+    mark: "B",
+    main: true,
+  },
+  {
+    name: "GoodMarks",
+    desc: "Review routing",
+    href: "https://goodmarks.io",
+    mark: "G",
+  },
+  {
+    name: "SignalRoute",
+    desc: "Beautiful phone & SMS",
+    href: "https://getsignalroute.com",
+    mark: "S",
+  },
+  {
+    name: "Fakebase",
+    desc: "Mock backend for prototyping",
+    href: "https://fakebase.byronwade.com",
+    mark: "F",
+  },
+  {
+    name: "Dits",
+    desc: "Large-file version control",
+    href: "https://dits.byronwade.com",
+    mark: "D",
+  },
+  {
+    name: "Wormhole",
+    desc: "Instant file transfer",
+    href: "https://wormhole.byronwade.com",
+    mark: "W",
+  },
+]
 
 /**
  * Top-left launcher — a slim, HORIZONTAL identity pill (the inverse-material twin
@@ -32,127 +69,130 @@ const PRODUCTS: { name: string; desc: string; href: string; mark: string; main?:
  * docs site has no account to manage.
  */
 export function AppLauncher() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
-  const rootRef = React.useRef<HTMLDivElement>(null);
-  const morphRef = React.useRef<HTMLDivElement>(null);
-  const compactRef = React.useRef<HTMLDivElement>(null);
-  const panelRef = React.useRef<HTMLDivElement>(null);
-  const collapsedRef = React.useRef<{ w: number; h: number } | null>(null);
+  const rootRef = React.useRef<HTMLDivElement>(null)
+  const morphRef = React.useRef<HTMLDivElement>(null)
+  const compactRef = React.useRef<HTMLDivElement>(null)
+  const panelRef = React.useRef<HTMLDivElement>(null)
+  const collapsedRef = React.useRef<{ w: number; h: number } | null>(null)
 
-  const panelId = React.useId();
+  const panelId = React.useId()
 
   // The launcher is an overlay-in-a-slot: the absolutely-positioned morph blooms
   // right + down OVER the breadcrumb sibling rather than shoving it along the row.
   // The slot reserves the collapsed pill's footprint (seeded with the exact
   // collapsed box) so the breadcrumb never jumps on first paint.
-  const [slot, setSlot] = React.useState<{ w: number; h: number }>({ w: 76, h: 40 });
+  const [slot, setSlot] = React.useState<{ w: number; h: number }>({
+    w: 76,
+    h: 40,
+  })
 
   useIsoLayoutEffect(() => {
-    const compact = compactRef.current;
-    const morph = morphRef.current;
-    if (!compact || !morph) return;
+    const compact = compactRef.current
+    const morph = morphRef.current
+    if (!compact || !morph) return
     const sync = () => {
-      if (morph.style.width) return; // morphed open — leave the slot alone
-      setSlot({ w: morph.offsetWidth, h: morph.offsetHeight });
-    };
-    sync();
-    const ro = new ResizeObserver(sync);
-    ro.observe(compact);
-    return () => ro.disconnect();
-  }, []);
+      if (morph.style.width) return // morphed open — leave the slot alone
+      setSlot({ w: morph.offsetWidth, h: morph.offsetHeight })
+    }
+    sync()
+    const ro = new ResizeObserver(sync)
+    ro.observe(compact)
+    return () => ro.disconnect()
+  }, [])
 
   // Width + height + radius morph between the compact pill and the open panel,
   // cross-fading the contents — the signature SignalRoute launcher choreography.
   useIsoLayoutEffect(() => {
-    const morph = morphRef.current;
-    const compact = compactRef.current;
-    const panel = panelRef.current;
-    if (!morph || !compact || !panel) return;
+    const morph = morphRef.current
+    const compact = compactRef.current
+    const panel = panelRef.current
+    if (!morph || !compact || !panel) return
 
     const reduce =
       typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const ease = "cubic-bezier(.22,1,.36,1)";
-    const T = `width 200ms ${ease}, height 200ms ${ease}, border-radius 200ms ${ease}`;
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const ease = "cubic-bezier(.22,1,.36,1)"
+    const T = `width 200ms ${ease}, height 200ms ${ease}, border-radius 200ms ${ease}`
 
     const release = () => {
-      morph.style.transition = "none";
-      morph.style.width = "";
-      morph.style.height = "";
-      void morph.offsetWidth;
-      morph.style.transition = "";
-    };
+      morph.style.transition = "none"
+      morph.style.width = ""
+      morph.style.height = ""
+      void morph.offsetWidth
+      morph.style.transition = ""
+    }
 
     if (open) {
       if (!collapsedRef.current) {
-        collapsedRef.current = { w: morph.offsetWidth, h: morph.offsetHeight };
+        collapsedRef.current = { w: morph.offsetWidth, h: morph.offsetHeight }
       }
-      const sw = morph.offsetWidth;
-      const sh = morph.offsetHeight;
-      const ew = panel.offsetWidth;
-      const eh = panel.offsetHeight;
-      compact.style.transitionDelay = "0ms";
-      compact.style.opacity = "0";
-      panel.style.transitionDelay = reduce ? "0ms" : "30ms";
-      panel.style.opacity = "1";
+      const sw = morph.offsetWidth
+      const sh = morph.offsetHeight
+      const ew = panel.offsetWidth
+      const eh = panel.offsetHeight
+      compact.style.transitionDelay = "0ms"
+      compact.style.opacity = "0"
+      panel.style.transitionDelay = reduce ? "0ms" : "30ms"
+      panel.style.opacity = "1"
       if (reduce) {
-        morph.style.transition = "none";
-        morph.style.width = `${ew}px`;
-        morph.style.height = `${eh}px`;
-        return;
+        morph.style.transition = "none"
+        morph.style.width = `${ew}px`
+        morph.style.height = `${eh}px`
+        return
       }
-      morph.style.transition = "none";
-      morph.style.width = `${sw}px`;
-      morph.style.height = `${sh}px`;
-      void morph.offsetWidth; // reflow
-      morph.style.transition = T;
-      morph.style.width = `${ew}px`;
-      morph.style.height = `${eh}px`;
-      panel.focus({ preventScroll: true });
+      morph.style.transition = "none"
+      morph.style.width = `${sw}px`
+      morph.style.height = `${sh}px`
+      void morph.offsetWidth // reflow
+      morph.style.transition = T
+      morph.style.width = `${ew}px`
+      morph.style.height = `${eh}px`
+      panel.focus({ preventScroll: true })
     } else if (collapsedRef.current && morph.style.width) {
-      const { w: cw, h: ch } = collapsedRef.current;
-      panel.style.transitionDelay = "0ms";
-      panel.style.opacity = "0";
-      compact.style.transitionDelay = reduce ? "0ms" : "70ms";
-      compact.style.opacity = "1";
+      const { w: cw, h: ch } = collapsedRef.current
+      panel.style.transitionDelay = "0ms"
+      panel.style.opacity = "0"
+      compact.style.transitionDelay = reduce ? "0ms" : "70ms"
+      compact.style.opacity = "1"
       if (reduce) {
-        release();
-        return;
+        release()
+        return
       }
-      morph.style.transition = T;
-      morph.style.width = `${cw}px`;
-      morph.style.height = `${ch}px`;
+      morph.style.transition = T
+      morph.style.width = `${cw}px`
+      morph.style.height = `${ch}px`
       const onEnd = (e: TransitionEvent) => {
-        if (e.propertyName !== "height") return;
-        release();
-        morph.removeEventListener("transitionend", onEnd);
-      };
-      morph.addEventListener("transitionend", onEnd);
-      return () => morph.removeEventListener("transitionend", onEnd);
+        if (e.propertyName !== "height") return
+        release()
+        morph.removeEventListener("transitionend", onEnd)
+      }
+      morph.addEventListener("transitionend", onEnd)
+      return () => morph.removeEventListener("transitionend", onEnd)
     }
-  }, [open]);
+  }, [open])
 
   // Esc + click-away close.
   React.useEffect(() => {
-    if (!open) return;
+    if (!open) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
+      if (e.key === "Escape") setOpen(false)
+    }
     const onDown = (e: PointerEvent) => {
-      const target = e.target as Element | null;
-      if (!rootRef.current || rootRef.current.contains(target)) return;
-      setOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onDown);
+      const target = e.target as Element | null
+      if (!rootRef.current || rootRef.current.contains(target)) return
+      setOpen(false)
+    }
+    document.addEventListener("keydown", onKey)
+    document.addEventListener("pointerdown", onDown)
     return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onDown);
-    };
-  }, [open]);
+      document.removeEventListener("keydown", onKey)
+      document.removeEventListener("pointerdown", onDown)
+    }
+  }, [open])
 
-  const { resolvedTheme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme()
 
   return (
     <div
@@ -242,7 +282,9 @@ export function AppLauncher() {
                 <div className="truncate text-[13px] font-semibold text-dock-active-foreground">
                   byronwade<span className="text-dock-foreground">/ui</span>
                 </div>
-                <div className="truncate text-[11px] text-dock-foreground">Design system</div>
+                <div className="truncate text-[11px] text-dock-foreground">
+                  Design system
+                </div>
               </div>
               <span className="ml-auto shrink-0 rounded-full bg-brand/15 px-2 py-0.5 text-[10px] font-medium text-brand">
                 Current
@@ -271,7 +313,9 @@ export function AppLauncher() {
                   <div className="truncate text-[13px] font-semibold text-dock-active-foreground">
                     {p.name}
                   </div>
-                  <div className="truncate text-[11px] text-dock-foreground">{p.desc}</div>
+                  <div className="truncate text-[11px] text-dock-foreground">
+                    {p.desc}
+                  </div>
                 </div>
                 <ArrowUpRight className="ml-auto size-4 shrink-0 text-dock-foreground/40 transition-colors group-hover:text-dock-foreground" />
               </a>
@@ -289,7 +333,9 @@ export function AppLauncher() {
             </a>
             <button
               type="button"
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              onClick={() =>
+                setTheme(resolvedTheme === "dark" ? "light" : "dark")
+              }
               aria-label="Toggle theme"
               className="flex size-9 items-center justify-center rounded-xl text-dock-foreground transition-colors hover:bg-dock-active hover:text-dock-active-foreground"
             >
@@ -300,5 +346,5 @@ export function AppLauncher() {
         </div>
       </div>
     </div>
-  );
+  )
 }

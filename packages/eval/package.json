@@ -13,5 +13,8 @@
     "@anthropic-ai/sdk": "^0.40.1",
     "@byronwade/on-system-core": "0.1.0"
   },
-  "devDependencies": { "typescript": "^5", "vitest": "^4.1.7" }
+  "devDependencies": {
+    "typescript": "^5",
+    "vitest": "^4.1.7"
+  }
 }

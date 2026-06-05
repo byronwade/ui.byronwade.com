@@ -1,10 +1,13 @@
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea"
 
 export default function Example() {
   return (
     <div className="flex flex-col gap-4 p-6 max-w-md">
       <div className="flex flex-col gap-2">
-        <label htmlFor="disabled-empty" className="text-sm font-medium text-muted-foreground">
+        <label
+          htmlFor="disabled-empty"
+          className="text-sm font-medium text-muted-foreground"
+        >
           Disabled (empty)
         </label>
         <Textarea
@@ -15,7 +18,10 @@ export default function Example() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="disabled-prefilled" className="text-sm font-medium text-muted-foreground">
+        <label
+          htmlFor="disabled-prefilled"
+          className="text-sm font-medium text-muted-foreground"
+        >
           Disabled (pre-filled)
         </label>
         <Textarea
@@ -25,5 +31,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

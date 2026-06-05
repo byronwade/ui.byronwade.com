@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { Image } from "@/components/ai-elements/image";
+import { Image } from "@/components/ai-elements/image"
 
 // A tiny 1x1 transparent PNG used as a stand-in for an AI-generated image.
 const PIXEL =
-  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
 
 export default function Example() {
   return (
@@ -23,5 +23,5 @@ export default function Example() {
         </figcaption>
       </figure>
     </div>
-  );
+  )
 }

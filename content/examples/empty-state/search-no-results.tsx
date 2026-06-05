@@ -1,19 +1,26 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Search } from "lucide-react";
-import { EmptyState } from "@/components/empty-state";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useState } from "react"
+import { Search } from "lucide-react"
+import { EmptyState } from "@/components/empty-state"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
-const ALL_ITEMS = ["Dashboard", "Analytics", "Reports", "Settings", "Team", "Billing"];
+const ALL_ITEMS = [
+  "Dashboard",
+  "Analytics",
+  "Reports",
+  "Settings",
+  "Team",
+  "Billing",
+]
 
 export default function Example() {
-  const [query, setQuery] = useState("webhooks");
+  const [query, setQuery] = useState("webhooks")
 
   const results = ALL_ITEMS.filter((item) =>
-    item.toLowerCase().includes(query.toLowerCase())
-  );
+    item.toLowerCase().includes(query.toLowerCase()),
+  )
 
   return (
     <div className="flex flex-col items-center justify-center min-h-0 bg-background p-8 gap-4">
@@ -46,5 +53,5 @@ export default function Example() {
         )}
       </div>
     </div>
-  );
+  )
 }

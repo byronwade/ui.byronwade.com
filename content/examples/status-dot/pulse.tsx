@@ -1,4 +1,4 @@
-import { StatusDot } from "@/components/ui/status-dot";
+import { StatusDot } from "@/components/ui/status-dot"
 
 export default function Example() {
   return (
@@ -20,5 +20,5 @@ export default function Example() {
         <span className="text-sm">Syncing — fetching data</span>
       </div>
     </div>
-  );
+  )
 }

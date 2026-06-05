@@ -1,4 +1,4 @@
-import { StatusPill } from "@/components/status-pill";
+import { StatusPill } from "@/components/status-pill"
 
 export default function Example() {
   return (
@@ -8,7 +8,9 @@ export default function Example() {
       <StatusPill tone="danger">Outage</StatusPill>
       <StatusPill tone="info">Scheduled</StatusPill>
       <StatusPill tone="neutral">Unknown</StatusPill>
-      <StatusPill tone="success" pulse>Live</StatusPill>
+      <StatusPill tone="success" pulse>
+        Live
+      </StatusPill>
     </div>
-  );
+  )
 }

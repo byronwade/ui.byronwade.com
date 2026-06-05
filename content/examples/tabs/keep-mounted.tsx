@@ -1,18 +1,20 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useState } from "react"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Example() {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("")
 
   return (
     <div className="flex items-center justify-center p-8">
       <div className="w-full max-w-md space-y-2">
         <p className="text-xs text-muted-foreground">
           Switch tabs and come back — the input value is preserved because{" "}
-          <code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">keepMounted</code> keeps
-          the DOM node alive.
+          <code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">
+            keepMounted
+          </code>{" "}
+          keeps the DOM node alive.
         </p>
 
         <Tabs defaultValue={0}>
@@ -23,7 +25,11 @@ export default function Example() {
           </TabsList>
 
           {/* keepMounted — DOM node stays mounted while hidden */}
-          <TabsContent value={0} keepMounted className="rounded-xl border p-4 space-y-2">
+          <TabsContent
+            value={0}
+            keepMounted
+            className="rounded-xl border p-4 space-y-2"
+          >
             <label className="text-sm font-medium" htmlFor="editor-input">
               Draft content
             </label>
@@ -45,10 +51,12 @@ export default function Example() {
           </TabsContent>
 
           <TabsContent value={2} keepMounted className="rounded-xl border p-4">
-            <p className="text-sm text-muted-foreground">No revision history yet.</p>
+            <p className="text-sm text-muted-foreground">
+              No revision history yet.
+            </p>
           </TabsContent>
         </Tabs>
       </div>
     </div>
-  );
+  )
 }

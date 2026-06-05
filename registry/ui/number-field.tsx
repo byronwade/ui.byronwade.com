@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { NumberField as NumberFieldPrimitive } from "@base-ui/react/number-field";
-import { Minus, Plus } from "lucide-react";
+import * as React from "react"
+import { NumberField as NumberFieldPrimitive } from "@base-ui/react/number-field"
+import { Minus, Plus } from "lucide-react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 function NumberField({ className, ...props }: NumberFieldPrimitive.Root.Props) {
   return (
@@ -13,7 +13,7 @@ function NumberField({ className, ...props }: NumberFieldPrimitive.Root.Props) {
       className={cn("inline-flex flex-col gap-1", className)}
       {...props}
     />
-  );
+  )
 }
 
 function NumberFieldGroup({
@@ -29,7 +29,7 @@ function NumberFieldGroup({
       )}
       {...props}
     />
-  );
+  )
 }
 
 function NumberFieldInput({
@@ -45,11 +45,11 @@ function NumberFieldInput({
       )}
       {...props}
     />
-  );
+  )
 }
 
 const stepBtn =
-  "flex h-full w-7 shrink-0 items-center justify-center text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50";
+  "flex h-full w-7 shrink-0 items-center justify-center text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
 
 function NumberFieldDecrement({
   className,
@@ -65,7 +65,7 @@ function NumberFieldDecrement({
     >
       {children ?? <Minus className="size-3.5" />}
     </NumberFieldPrimitive.Decrement>
-  );
+  )
 }
 
 function NumberFieldIncrement({
@@ -82,7 +82,7 @@ function NumberFieldIncrement({
     >
       {children ?? <Plus className="size-3.5" />}
     </NumberFieldPrimitive.Increment>
-  );
+  )
 }
 
 export {
@@ -91,4 +91,4 @@ export {
   NumberFieldInput,
   NumberFieldDecrement,
   NumberFieldIncrement,
-};
+}

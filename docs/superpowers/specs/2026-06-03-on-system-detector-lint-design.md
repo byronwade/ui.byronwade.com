@@ -47,11 +47,11 @@ this layout is chosen to absorb them.
 
 ### Package responsibilities
 
-| Package | Depends on | Public surface | One-line purpose |
-|---------|-----------|----------------|------------------|
-| `@byronwade/on-system-core` | (none — pure) | `detect(code, opts) → Violation[]`, `loadManifest()` | Framework-agnostic detection logic + OKLCH nearest-token mapping |
-| `@byronwade/eslint-plugin-ui` | on-system-core | flat-config plugin, `recommended` preset | ESLint adapter: violation → `context.report()` + `fix` |
-| `@byronwade/lint` | on-system-core | `byronwade-lint [globs] [--fix]` | CLI adapter + the surface the eval harness calls |
+| Package                       | Depends on     | Public surface                                       | One-line purpose                                                 |
+| ----------------------------- | -------------- | ---------------------------------------------------- | ---------------------------------------------------------------- |
+| `@byronwade/on-system-core`   | (none — pure)  | `detect(code, opts) → Violation[]`, `loadManifest()` | Framework-agnostic detection logic + OKLCH nearest-token mapping |
+| `@byronwade/eslint-plugin-ui` | on-system-core | flat-config plugin, `recommended` preset             | ESLint adapter: violation → `context.report()` + `fix`           |
+| `@byronwade/lint`             | on-system-core | `byronwade-lint [globs] [--fix]`                     | CLI adapter + the surface the eval harness calls                 |
 
 Rationale for the split: detection logic lives in exactly one place. The ESLint plugin
 and CLI are thin adapters (< ~100 LOC each) over the same `detect()`. The eval grader
@@ -66,13 +66,35 @@ component name (registry items). A build step compiles these into
 
 ```ts
 export const MANIFEST = {
-  tokens: { brand: { light: "oklch(0.6 0.17 148)", dark: "oklch(0.7 0.17 148)" }, /* … */ },
-  utilities: ["bg-grid", "bg-grid-lines", "glow-brand", "text-gradient",
-              "text-gradient-brand", "mask-fade-x", "full-bleed", "edge", "scrollbar-thin"],
-  components: ["button", "input", "select", /* … all registry:ui/component names */],
-  nativeToComponent: { button: "Button", input: "Input", select: "Select",
-                       textarea: "Textarea", /* … */ },
-};
+  tokens: {
+    brand: {
+      light: "oklch(0.6 0.17 148)",
+      dark: "oklch(0.7 0.17 148)",
+    } /* … */,
+  },
+  utilities: [
+    "bg-grid",
+    "bg-grid-lines",
+    "glow-brand",
+    "text-gradient",
+    "text-gradient-brand",
+    "mask-fade-x",
+    "full-bleed",
+    "edge",
+    "scrollbar-thin",
+  ],
+  components: [
+    "button",
+    "input",
+    "select" /* … all registry:ui/component names */,
+  ],
+  nativeToComponent: {
+    button: "Button",
+    input: "Input",
+    select: "Select",
+    textarea: "Textarea" /* … */,
+  },
+}
 ```
 
 - Generator: `scripts/gen-lint-manifest.mjs`, run in `prebuild` and a new
@@ -96,15 +118,16 @@ All run inside `detect()`. Source is parsed once with a TS+JSX-capable parser
 (`@typescript-eslint/parser` via its `parseForESLint`, so offsets line up with what the
 ESLint plugin would produce). Each detector walks the AST / scans the relevant nodes.
 
-| # | Detector | What it flags | Default severity |
-|---|----------|---------------|------------------|
-| 1 | **Raw color** | hex (`#16a34a`), `rgb()/rgba()/hsl()/hsla()`, named CSS colors — inside `className` arbitrary values (`text-[#333]`), `style={{…}}` objects, and string literals assigned to style | error |
-| 2 | **Arbitrary values** | Tailwind arbitrary values off the token/radius scale: `bg-[…]`, `text-[…]`, `p-[13px]`, `m-[…]`, `rounded-[10px]`, `gap-[…]` | error |
-| 3 | **Hand-rolled gradient/grid/glow** | `bg-gradient-*` / inline `linear-gradient`/`radial-gradient` / repeating grid backgrounds, when a house utility (`glow-brand`, `text-gradient-brand`, `bg-grid`) covers it | error |
-| 4 | **Off-system components** | JSX raw `<button>`/`<input>`/`<select>`/`<textarea>`/… present in `nativeToComponent` | warn (configurable) |
-| 5 | **Typography (weight-hierarchy)** | a bold-family weight (`font-semibold`/`bold`/`extrabold`/`black`, or arbitrary `font-[≥600]`) on a native `<h1>`–`<h6>`; autofix → `font-medium` | error |
+| #   | Detector                           | What it flags                                                                                                                                                                      | Default severity    |
+| --- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| 1   | **Raw color**                      | hex (`#16a34a`), `rgb()/rgba()/hsl()/hsla()`, named CSS colors — inside `className` arbitrary values (`text-[#333]`), `style={{…}}` objects, and string literals assigned to style | error               |
+| 2   | **Arbitrary values**               | Tailwind arbitrary values off the token/radius scale: `bg-[…]`, `text-[…]`, `p-[13px]`, `m-[…]`, `rounded-[10px]`, `gap-[…]`                                                       | error               |
+| 3   | **Hand-rolled gradient/grid/glow** | `bg-gradient-*` / inline `linear-gradient`/`radial-gradient` / repeating grid backgrounds, when a house utility (`glow-brand`, `text-gradient-brand`, `bg-grid`) covers it         | error               |
+| 4   | **Off-system components**          | JSX raw `<button>`/`<input>`/`<select>`/`<textarea>`/… present in `nativeToComponent`                                                                                              | warn (configurable) |
+| 5   | **Typography (weight-hierarchy)**  | a bold-family weight (`font-semibold`/`bold`/`extrabold`/`black`, or arbitrary `font-[≥600]`) on a native `<h1>`–`<h6>`; autofix → `font-medium`                                   | error               |
 
 Scoping notes:
+
 - Detector 1 must NOT flag arbitrary values that reference tokens (`bg-[var(--brand)]`)
   as "raw color" — those are handled by detector 2's autofix (→ `bg-brand`).
 - Detector 4 is heuristic; it only fires on the curated native-element set and is
@@ -118,11 +141,15 @@ Scoping notes:
 
 ```ts
 interface Violation {
-  detector: "raw-color" | "arbitrary-value" | "hand-rolled" | "off-system-component";
-  range: [start: number, end: number];   // absolute char offsets in source
-  message: string;                         // includes the on-system suggestion
-  fix?: { range: [number, number]; text: string };  // present when autofixable
-  severity: "error" | "warn";
+  detector:
+    | "raw-color"
+    | "arbitrary-value"
+    | "hand-rolled"
+    | "off-system-component"
+  range: [start: number, end: number] // absolute char offsets in source
+  message: string // includes the on-system suggestion
+  fix?: { range: [number, number]; text: string } // present when autofixable
+  severity: "error" | "warn"
 }
 ```
 
@@ -137,7 +164,7 @@ OKLCH ΔE** and applies it under `--fix`.
 - **Nearest-token mapping**: for an off-system color, compute ΔE (OKLCH Euclidean is
   acceptable for v1) against every theme token and pick the minimum.
 - **Safety net (the guardrail on "aggressive")**: if the minimum ΔE exceeds a
-  configurable `maxColorDistance` threshold, the violation falls back to a *suggestion*
+  configurable `maxColorDistance` threshold, the violation falls back to a _suggestion_
   (no fix applied) rather than silently shifting the consumer's color to a wrong token.
   Default threshold is permissive (aggressive) but non-infinite.
 - Autofix only applies under ESLint `--fix` / CLI `--fix`; without it, violations
@@ -148,6 +175,7 @@ OKLCH ΔE** and applies it under `--fix`.
 ## Consumer surfaces
 
 ### ESLint plugin (`@byronwade/eslint-plugin-ui`)
+
 - Flat-config export with a `recommended` config enabling detectors 1–3 as error, 4 as
   warn.
 - Single rule (e.g. `byronwade-ui/on-system`) whose `create()` reads
@@ -156,6 +184,7 @@ OKLCH ΔE** and applies it under `--fix`.
 - Rule options: `{ maxColorDistance, offSystemComponents: "warn"|"error"|"off" }`.
 
 ### CLI (`@byronwade/lint`, bin `byronwade-lint`)
+
 - `byronwade-lint "src/**/*.{ts,tsx}" [--fix] [--max-color-distance N]`.
 - Globs files, runs `detect()` per file, prints a grouped report (file → violations
   with code frames), exits non-zero if any error-severity violation remains.
@@ -186,7 +215,7 @@ OKLCH ΔE** and applies it under `--fix`.
 ## Out of scope (v1, YAGNI)
 
 - No editor extension beyond standard ESLint integration.
-- No suggesting *which composite* to use — detector 4 maps native→primitive only.
+- No suggesting _which composite_ to use — detector 4 maps native→primitive only.
 - No scanning of standalone `.css` files (only inline styles + className); foundation
   CSS is generated and trusted.
 - No config presets beyond `recommended`.
@@ -200,13 +229,13 @@ OKLCH ΔE** and applies it under `--fix`.
 
 ## Risks & mitigations
 
-| Risk | Mitigation |
-|------|-----------|
-| Workspaces restructure breaks existing app build/CI | App stays at root; only additive `workspaces` field + new `packages/*`. Verify `npm run build` + existing CI green before/after. |
-| Aggressive autofix shifts a consumer's intended color | `maxColorDistance` safety net falls back to suggestion; autofix only under explicit `--fix`. |
-| className parsing false positives on dynamic classes | Statically-unreadable expressions are skipped, never flagged. |
-| Detector logic duplicated between ESLint + CLI | Both are thin adapters over a single `detect()` in `on-system-core`. |
-| Manifest drift from registry | Generated from `registry.json`; `check:manifest` gate in CI. |
+| Risk                                                  | Mitigation                                                                                                                       |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Workspaces restructure breaks existing app build/CI   | App stays at root; only additive `workspaces` field + new `packages/*`. Verify `npm run build` + existing CI green before/after. |
+| Aggressive autofix shifts a consumer's intended color | `maxColorDistance` safety net falls back to suggestion; autofix only under explicit `--fix`.                                     |
+| className parsing false positives on dynamic classes  | Statically-unreadable expressions are skipped, never flagged.                                                                    |
+| Detector logic duplicated between ESLint + CLI        | Both are thin adapters over a single `detect()` in `on-system-core`.                                                             |
+| Manifest drift from registry                          | Generated from `registry.json`; `check:manifest` gate in CI.                                                                     |
 
 ## Build order within this subsystem
 

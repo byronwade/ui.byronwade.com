@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { PackageIcon } from "lucide-react";
+import { PackageIcon } from "lucide-react"
 import {
   Command,
   CommandEmpty,
@@ -8,15 +8,19 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { CommandResult } from "@/components/command-result";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/command"
+import { CommandResult } from "@/components/command-result"
+import { Button } from "@/components/ui/button"
 
 const packages = [
-  { name: "@byronwade/ui", description: "Design-system registry", cta: "Install" },
+  {
+    name: "@byronwade/ui",
+    description: "Design-system registry",
+    cta: "Install",
+  },
   { name: "cmdk", description: "Command menu for React", cta: "Install" },
   { name: "lucide-react", description: "Icon library", cta: "Add" },
-];
+]
 
 export default function Example() {
   return (
@@ -48,5 +52,5 @@ export default function Example() {
         </CommandList>
       </Command>
     </div>
-  );
+  )
 }

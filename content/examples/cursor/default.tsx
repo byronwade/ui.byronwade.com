@@ -4,7 +4,7 @@ import {
   CursorMessage,
   CursorName,
   CursorPointer,
-} from "@/components/ui/cursor";
+} from "@/components/ui/cursor"
 
 export default function Example() {
   return (
@@ -19,5 +19,5 @@ export default function Example() {
         </CursorBody>
       </Cursor>
     </div>
-  );
+  )
 }

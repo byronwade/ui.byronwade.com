@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Home, Save } from "lucide-react";
+import * as React from "react"
+import { Home, Save } from "lucide-react"
 
-import { MorphDock, type MorphDockStatus } from "@/components/ui/morph-dock";
+import { MorphDock, type MorphDockStatus } from "@/components/ui/morph-dock"
 
 /**
  * The pill blooms into a tone-styled status. Success/info auto-dismiss; errors
@@ -12,12 +12,20 @@ import { MorphDock, type MorphDockStatus } from "@/components/ui/morph-dock";
  */
 const STATES: MorphDockStatus[] = [
   { tone: "success", title: "Saved", message: "All changes synced just now." },
-  { tone: "error", title: "Save failed", message: "ERR_CONN_RESET · Couldn't reach the server. Retry." },
-  { tone: "info", title: "Draft kept", message: "Saved a local draft on this device." },
-];
+  {
+    tone: "error",
+    title: "Save failed",
+    message: "ERR_CONN_RESET · Couldn't reach the server. Retry.",
+  },
+  {
+    tone: "info",
+    title: "Draft kept",
+    message: "Saved a local draft on this device.",
+  },
+]
 
 function StatusDock({ base }: { base: MorphDockStatus }) {
-  const [status, setStatus] = React.useState<MorphDockStatus | null>(base);
+  const [status, setStatus] = React.useState<MorphDockStatus | null>(base)
   return (
     <MorphDock
       navLabel={base.title}
@@ -26,10 +34,27 @@ function StatusDock({ base }: { base: MorphDockStatus }) {
       statusDismissMs={1_000_000}
       status={status}
       onStatusDismiss={() => setStatus(null)}
-      items={[{ id: "home", label: "Home", icon: Home, href: "#", active: true, core: true }]}
-      tools={[{ id: "save", label: "Save", icon: Save, primary: true, onSelect: () => setStatus(base) }]}
+      items={[
+        {
+          id: "home",
+          label: "Home",
+          icon: Home,
+          href: "#",
+          active: true,
+          core: true,
+        },
+      ]}
+      tools={[
+        {
+          id: "save",
+          label: "Save",
+          icon: Save,
+          primary: true,
+          onSelect: () => setStatus(base),
+        },
+      ]}
     />
-  );
+  )
 }
 
 export default function Example() {
@@ -41,5 +66,5 @@ export default function Example() {
         </div>
       ))}
     </div>
-  );
+  )
 }

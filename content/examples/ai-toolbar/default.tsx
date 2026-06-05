@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
 import {
   Background,
   Position,
   ReactFlow,
   ReactFlowProvider,
-} from "@xyflow/react";
-import { Button } from "@/components/ui/button";
-import { Toolbar } from "@/components/ai-elements/toolbar";
+} from "@xyflow/react"
+import { Button } from "@/components/ui/button"
+import { Toolbar } from "@/components/ai-elements/toolbar"
 import {
   Node,
   NodeContent,
   NodeDescription,
   NodeHeader,
   NodeTitle,
-} from "@/components/ai-elements/node";
+} from "@/components/ai-elements/node"
 
 function PromptNode() {
   return (
@@ -42,10 +42,10 @@ function PromptNode() {
         </NodeContent>
       </Node>
     </>
-  );
+  )
 }
 
-const nodeTypes = { prompt: PromptNode };
+const nodeTypes = { prompt: PromptNode }
 
 const nodes = [
   {
@@ -54,7 +54,7 @@ const nodes = [
     position: { x: 0, y: 0 },
     data: {},
   },
-];
+]
 
 export default function Example() {
   return (
@@ -70,5 +70,5 @@ export default function Example() {
         </ReactFlow>
       </ReactFlowProvider>
     </div>
-  );
+  )
 }

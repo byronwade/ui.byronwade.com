@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Progress,
@@ -6,7 +6,7 @@ import {
   ProgressLabel,
   ProgressTrack,
   ProgressValue,
-} from "@/components/ui/progress";
+} from "@/components/ui/progress"
 
 export default function Example() {
   return (
@@ -21,9 +21,7 @@ export default function Example() {
       <Progress value={340} min={0} max={512}>
         <ProgressLabel>Data transferred</ProgressLabel>
         <ProgressValue>
-          {(_formatted, value) =>
-            value !== null ? `${value} / 512 MB` : null
-          }
+          {(_formatted, value) => (value !== null ? `${value} / 512 MB` : null)}
         </ProgressValue>
         <ProgressTrack className="h-2">
           <ProgressIndicator />
@@ -60,5 +58,5 @@ export default function Example() {
         </ProgressTrack>
       </Progress>
     </div>
-  );
+  )
 }

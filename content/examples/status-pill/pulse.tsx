@@ -1,4 +1,4 @@
-import { StatusPill } from "@/components/status-pill";
+import { StatusPill } from "@/components/status-pill"
 
 export default function Example() {
   return (
@@ -8,10 +8,18 @@ export default function Example() {
           Pulse — live / active states
         </p>
         <div className="flex flex-wrap gap-3">
-          <StatusPill tone="success" pulse>Streaming</StatusPill>
-          <StatusPill tone="danger" pulse>Incident active</StatusPill>
-          <StatusPill tone="info" pulse>Syncing</StatusPill>
-          <StatusPill tone="warning" pulse>Throttled</StatusPill>
+          <StatusPill tone="success" pulse>
+            Streaming
+          </StatusPill>
+          <StatusPill tone="danger" pulse>
+            Incident active
+          </StatusPill>
+          <StatusPill tone="info" pulse>
+            Syncing
+          </StatusPill>
+          <StatusPill tone="warning" pulse>
+            Throttled
+          </StatusPill>
         </div>
       </div>
 
@@ -27,5 +35,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

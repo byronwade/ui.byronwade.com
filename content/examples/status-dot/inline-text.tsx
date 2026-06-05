@@ -1,4 +1,4 @@
-import { StatusDot } from "@/components/ui/status-dot";
+import { StatusDot } from "@/components/ui/status-dot"
 
 const services = [
   { name: "API Gateway", tone: "success" as const, label: "Operational" },
@@ -7,7 +7,7 @@ const services = [
   { name: "Email Delivery", tone: "danger" as const, label: "Outage" },
   { name: "CDN", tone: "info" as const, label: "Updating" },
   { name: "Analytics", tone: "neutral" as const, label: "Unknown" },
-];
+]
 
 export default function Example() {
   return (
@@ -25,5 +25,5 @@ export default function Example() {
         ))}
       </ul>
     </div>
-  );
+  )
 }

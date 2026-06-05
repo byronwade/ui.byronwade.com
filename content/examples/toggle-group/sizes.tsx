@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
-const sizes = ["sm", "default", "lg"] as const;
+const sizes = ["sm", "default", "lg"] as const
 
 export default function Example() {
   return (
@@ -25,5 +25,5 @@ export default function Example() {
         </div>
       ))}
     </div>
-  );
+  )
 }

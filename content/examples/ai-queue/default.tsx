@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Queue,
@@ -15,8 +15,8 @@ import {
   QueueItemAction,
   QueueItemAttachment,
   QueueItemFile,
-} from "@/components/ai-elements/queue";
-import { ListTodoIcon, PencilIcon, TrashIcon } from "lucide-react";
+} from "@/components/ai-elements/queue"
+import { ListTodoIcon, PencilIcon, TrashIcon } from "lucide-react"
 
 const todos = [
   {
@@ -36,7 +36,7 @@ const todos = [
     title: "Wire up the streaming response parser",
     status: "pending" as const,
   },
-];
+]
 
 export default function Example() {
   return (
@@ -53,7 +53,7 @@ export default function Example() {
           <QueueSectionContent>
             <QueueList>
               {todos.map((todo) => {
-                const completed = todo.status === "completed";
+                const completed = todo.status === "completed"
                 return (
                   <QueueItem key={todo.id}>
                     <div className="flex items-start gap-2">
@@ -81,12 +81,12 @@ export default function Example() {
                       </QueueItemAttachment>
                     ) : null}
                   </QueueItem>
-                );
+                )
               })}
             </QueueList>
           </QueueSectionContent>
         </QueueSection>
       </Queue>
     </div>
-  );
+  )
 }

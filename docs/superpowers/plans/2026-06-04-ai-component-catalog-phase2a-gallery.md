@@ -26,19 +26,20 @@
 
 ## File map
 
-| File | Responsibility | Task |
-|---|---|---|
-| `content/catalog.ts` (new) | `CatalogItem` type, `catalogItems()` adapter, `CatalogFilter` + pure `filterCatalog()` | 1 |
-| `tests/content/catalog.test.ts` (new) | Unit-test the adapter + filter logic | 1 |
-| `app/(docs)/_components/component-gallery.tsx` (new) | Client gallery: search + Group/Tag facets + card grid | 2 |
-| `tests/app/component-gallery.test.tsx` (new) | Render, search-filter, empty-state, axe | 2 |
-| `app/(docs)/docs/page.tsx` (modify) | Swap `#catalog` editorial index for `<ComponentGallery>` | 3 |
+| File                                                 | Responsibility                                                                         | Task |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------- | ---- |
+| `content/catalog.ts` (new)                           | `CatalogItem` type, `catalogItems()` adapter, `CatalogFilter` + pure `filterCatalog()` | 1    |
+| `tests/content/catalog.test.ts` (new)                | Unit-test the adapter + filter logic                                                   | 1    |
+| `app/(docs)/_components/component-gallery.tsx` (new) | Client gallery: search + Group/Tag facets + card grid                                  | 2    |
+| `tests/app/component-gallery.test.tsx` (new)         | Render, search-filter, empty-state, axe                                                | 2    |
+| `app/(docs)/docs/page.tsx` (modify)                  | Swap `#catalog` editorial index for `<ComponentGallery>`                               | 3    |
 
 ---
 
 ## Task 1: `content/catalog.ts` adapter + filter logic
 
 **Files:**
+
 - Create: `content/catalog.ts`
 - Test: `tests/content/catalog.test.ts`
 
@@ -47,58 +48,97 @@
 Create `tests/content/catalog.test.ts`:
 
 ```ts
-import { describe, it, expect } from "vitest";
-import { catalogItems, filterCatalog, type CatalogItem } from "@/content/catalog";
-import { components } from "@/content/components";
+import { describe, it, expect } from "vitest"
+import {
+  catalogItems,
+  filterCatalog,
+  type CatalogItem,
+} from "@/content/catalog"
+import { components } from "@/content/components"
 
 describe("catalogItems", () => {
-  const items = catalogItems();
+  const items = catalogItems()
 
   it("returns one item per component, sorted A–Z by name", () => {
-    expect(items.length).toBe(components.length);
-    const names = items.map((i) => i.name);
-    expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)));
-  });
+    expect(items.length).toBe(components.length)
+    const names = items.map((i) => i.name)
+    expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)))
+  })
 
   it("button item carries group, variant count, facet tags, and a searchable haystack", () => {
-    const button = items.find((i) => i.slug === "button")!;
-    expect(button.group).toBe("Primitives");
-    expect(button.variantCount).toBeGreaterThanOrEqual(18);
-    expect(button.tags).toContain("interactive");
-    expect(button.href).toBe("/docs/button");
-    expect(button.search).toContain("ghost"); // sourced from variant tags
-    expect(button.search).toBe(button.search.toLowerCase());
-  });
-});
+    const button = items.find((i) => i.slug === "button")!
+    expect(button.group).toBe("Primitives")
+    expect(button.variantCount).toBeGreaterThanOrEqual(18)
+    expect(button.tags).toContain("interactive")
+    expect(button.href).toBe("/docs/button")
+    expect(button.search).toContain("ghost") // sourced from variant tags
+    expect(button.search).toBe(button.search.toLowerCase())
+  })
+})
 
 describe("filterCatalog", () => {
   const items: CatalogItem[] = [
-    { slug: "button", name: "Button", group: "Primitives", description: "A button.", tags: ["interactive", "action"], variantCount: 18, href: "/docs/button", search: "button primitives a button interactive action ghost solid" },
-    { slug: "card", name: "Card", group: "Primitives", description: "A card.", tags: ["layout"], variantCount: 1, href: "/docs/card", search: "card primitives a card layout" },
-    { slug: "alert", name: "Alert", group: "Feedback", description: "An alert.", tags: ["status"], variantCount: 1, href: "/docs/alert", search: "alert feedback an alert status" },
-  ];
-  const base = { query: "", groups: [], tags: [], sort: "featured" as const };
+    {
+      slug: "button",
+      name: "Button",
+      group: "Primitives",
+      description: "A button.",
+      tags: ["interactive", "action"],
+      variantCount: 18,
+      href: "/docs/button",
+      search: "button primitives a button interactive action ghost solid",
+    },
+    {
+      slug: "card",
+      name: "Card",
+      group: "Primitives",
+      description: "A card.",
+      tags: ["layout"],
+      variantCount: 1,
+      href: "/docs/card",
+      search: "card primitives a card layout",
+    },
+    {
+      slug: "alert",
+      name: "Alert",
+      group: "Feedback",
+      description: "An alert.",
+      tags: ["status"],
+      variantCount: 1,
+      href: "/docs/alert",
+      search: "alert feedback an alert status",
+    },
+  ]
+  const base = { query: "", groups: [], tags: [], sort: "featured" as const }
 
   it("returns all items with no filters", () => {
-    expect(filterCatalog(items, base)).toHaveLength(3);
-  });
+    expect(filterCatalog(items, base)).toHaveLength(3)
+  })
   it("free-text query matches the haystack (incl. variant tokens)", () => {
-    const r = filterCatalog(items, { ...base, query: "GHOST" });
-    expect(r.map((i) => i.slug)).toEqual(["button"]);
-  });
+    const r = filterCatalog(items, { ...base, query: "GHOST" })
+    expect(r.map((i) => i.slug)).toEqual(["button"])
+  })
   it("group facet narrows to matching groups", () => {
-    expect(filterCatalog(items, { ...base, groups: ["Feedback"] }).map((i) => i.slug)).toEqual(["alert"]);
-  });
+    expect(
+      filterCatalog(items, { ...base, groups: ["Feedback"] }).map(
+        (i) => i.slug,
+      ),
+    ).toEqual(["alert"])
+  })
   it("tag facet matches any selected tag", () => {
-    expect(filterCatalog(items, { ...base, tags: ["layout"] }).map((i) => i.slug)).toEqual(["card"]);
-  });
+    expect(
+      filterCatalog(items, { ...base, tags: ["layout"] }).map((i) => i.slug),
+    ).toEqual(["card"])
+  })
   it("az sort orders by name", () => {
-    expect(filterCatalog(items, { ...base, sort: "az" }).map((i) => i.name)).toEqual(["Alert", "Button", "Card"]);
-  });
+    expect(
+      filterCatalog(items, { ...base, sort: "az" }).map((i) => i.name),
+    ).toEqual(["Alert", "Button", "Card"])
+  })
   it("returns empty when nothing matches", () => {
-    expect(filterCatalog(items, { ...base, query: "zzz" })).toHaveLength(0);
-  });
-});
+    expect(filterCatalog(items, { ...base, query: "zzz" })).toHaveLength(0)
+  })
+})
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -109,27 +149,31 @@ Expected: FAIL — `@/content/catalog` does not exist.
 - [ ] **Step 3: Create `content/catalog.ts`**
 
 ```ts
-import { components, getVariants, type ComponentDoc } from "@/content/components";
+import {
+  components,
+  getVariants,
+  type ComponentDoc,
+} from "@/content/components"
 
 export type CatalogItem = {
-  slug: string;
-  name: string;
+  slug: string
+  name: string
   /** Primary group — the component's `category`. */
-  group: string;
-  description: string;
+  group: string
+  description: string
   /** Clean type-level facet tags (`doc.tags`). */
-  tags: string[];
+  tags: string[]
   /** Authored (or synthesized) variant count. */
-  variantCount: number;
-  href: string;
+  variantCount: number
+  href: string
   /** Precomputed lowercased haystack for free-text search (name, slug, group, description, type tags, variant names + tags). */
-  search: string;
-};
+  search: string
+}
 
 const toItem = (doc: ComponentDoc): CatalogItem => {
-  const variants = getVariants(doc);
-  const tags = doc.tags ?? [];
-  const variantTokens = variants.flatMap((v) => [v.name, ...v.tags]);
+  const variants = getVariants(doc)
+  const tags = doc.tags ?? []
+  const variantTokens = variants.flatMap((v) => [v.name, ...v.tags])
   return {
     slug: doc.slug,
     name: doc.name,
@@ -138,31 +182,43 @@ const toItem = (doc: ComponentDoc): CatalogItem => {
     tags,
     variantCount: variants.length,
     href: `/docs/${doc.slug}`,
-    search: [doc.name, doc.slug.replace(/-/g, " "), doc.category, doc.description, ...tags, ...variantTokens]
+    search: [
+      doc.name,
+      doc.slug.replace(/-/g, " "),
+      doc.category,
+      doc.description,
+      ...tags,
+      ...variantTokens,
+    ]
       .join(" ")
       .toLowerCase(),
-  };
-};
+  }
+}
 
 export const catalogItems = (): CatalogItem[] =>
-  components.map(toItem).sort((a, b) => a.name.localeCompare(b.name));
+  components.map(toItem).sort((a, b) => a.name.localeCompare(b.name))
 
 export type CatalogFilter = {
-  query: string;
-  groups: string[];
-  tags: string[];
-  sort: "featured" | "az";
-};
+  query: string
+  groups: string[]
+  tags: string[]
+  sort: "featured" | "az"
+}
 
-export function filterCatalog(items: CatalogItem[], f: CatalogFilter): CatalogItem[] {
-  const q = f.query.trim().toLowerCase();
+export function filterCatalog(
+  items: CatalogItem[],
+  f: CatalogFilter,
+): CatalogItem[] {
+  const q = f.query.trim().toLowerCase()
   const r = items.filter(
     (i) =>
       (q === "" || i.search.includes(q)) &&
       (f.groups.length === 0 || f.groups.includes(i.group)) &&
       (f.tags.length === 0 || f.tags.some((t) => i.tags.includes(t))),
-  );
-  return f.sort === "az" ? [...r].sort((a, b) => a.name.localeCompare(b.name)) : r;
+  )
+  return f.sort === "az"
+    ? [...r].sort((a, b) => a.name.localeCompare(b.name))
+    : r
 }
 ```
 
@@ -183,6 +239,7 @@ git commit -m "feat(catalog): add catalog adapter + pure filter logic"
 ## Task 2: `ComponentGallery` client component
 
 **Files:**
+
 - Create: `app/(docs)/_components/component-gallery.tsx`
 - Test: `tests/app/component-gallery.test.tsx`
 
@@ -191,52 +248,87 @@ git commit -m "feat(catalog): add catalog adapter + pure filter logic"
 Create `tests/app/component-gallery.test.tsx`:
 
 ```tsx
-import * as React from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, it, expect } from "vitest";
-import { axe } from "vitest-axe";
-import { ComponentGallery } from "@/app/(docs)/_components/component-gallery";
-import type { CatalogItem } from "@/content/catalog";
+import * as React from "react"
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { describe, it, expect } from "vitest"
+import { axe } from "vitest-axe"
+import { ComponentGallery } from "@/app/(docs)/_components/component-gallery"
+import type { CatalogItem } from "@/content/catalog"
 
 const items: CatalogItem[] = [
-  { slug: "button", name: "Button", group: "Primitives", description: "A button.", tags: ["interactive", "action"], variantCount: 18, href: "/docs/button", search: "button primitives a button interactive action ghost solid" },
-  { slug: "card", name: "Card", group: "Primitives", description: "A card.", tags: ["layout"], variantCount: 1, href: "/docs/card", search: "card primitives a card layout" },
-  { slug: "alert", name: "Alert", group: "Feedback", description: "An alert.", tags: ["status"], variantCount: 1, href: "/docs/alert", search: "alert feedback an alert status" },
-];
+  {
+    slug: "button",
+    name: "Button",
+    group: "Primitives",
+    description: "A button.",
+    tags: ["interactive", "action"],
+    variantCount: 18,
+    href: "/docs/button",
+    search: "button primitives a button interactive action ghost solid",
+  },
+  {
+    slug: "card",
+    name: "Card",
+    group: "Primitives",
+    description: "A card.",
+    tags: ["layout"],
+    variantCount: 1,
+    href: "/docs/card",
+    search: "card primitives a card layout",
+  },
+  {
+    slug: "alert",
+    name: "Alert",
+    group: "Feedback",
+    description: "An alert.",
+    tags: ["status"],
+    variantCount: 1,
+    href: "/docs/alert",
+    search: "alert feedback an alert status",
+  },
+]
 
 describe("ComponentGallery", () => {
   it("renders a linked card per item with group + variant count", () => {
-    render(<ComponentGallery items={items} />);
-    expect(screen.getByRole("link", { name: /Button/ })).toHaveAttribute("href", "/docs/button");
-    expect(screen.getByText("18 variants")).toBeInTheDocument();
-    expect(screen.getAllByText("1 variant")).toHaveLength(2);
-  });
+    render(<ComponentGallery items={items} />)
+    expect(screen.getByRole("link", { name: /Button/ })).toHaveAttribute(
+      "href",
+      "/docs/button",
+    )
+    expect(screen.getByText("18 variants")).toBeInTheDocument()
+    expect(screen.getAllByText("1 variant")).toHaveLength(2)
+  })
 
   it("free-text search filters the grid (matches variant tokens in the haystack)", async () => {
-    const user = userEvent.setup();
-    render(<ComponentGallery items={items} />);
-    await user.type(screen.getByRole("searchbox", { name: /search components/i }), "ghost");
-    expect(screen.getByRole("link", { name: /Button/ })).toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /Card/ })).not.toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /Alert/ })).not.toBeInTheDocument();
-  });
+    const user = userEvent.setup()
+    render(<ComponentGallery items={items} />)
+    await user.type(
+      screen.getByRole("searchbox", { name: /search components/i }),
+      "ghost",
+    )
+    expect(screen.getByRole("link", { name: /Button/ })).toBeInTheDocument()
+    expect(screen.queryByRole("link", { name: /Card/ })).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole("link", { name: /Alert/ }),
+    ).not.toBeInTheDocument()
+  })
 
   it("shows an empty state and clears it", async () => {
-    const user = userEvent.setup();
-    render(<ComponentGallery items={items} />);
-    const box = screen.getByRole("searchbox", { name: /search components/i });
-    await user.type(box, "zzzznomatch");
-    expect(screen.getByText(/No components match/i)).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: /Clear all filters/i }));
-    expect(screen.getByRole("link", { name: /Button/ })).toBeInTheDocument();
-  });
+    const user = userEvent.setup()
+    render(<ComponentGallery items={items} />)
+    const box = screen.getByRole("searchbox", { name: /search components/i })
+    await user.type(box, "zzzznomatch")
+    expect(screen.getByText(/No components match/i)).toBeInTheDocument()
+    await user.click(screen.getByRole("button", { name: /Clear all filters/i }))
+    expect(screen.getByRole("link", { name: /Button/ })).toBeInTheDocument()
+  })
 
   it("has no axe violations", async () => {
-    const { container } = render(<ComponentGallery items={items} />);
-    expect(await axe(container)).toHaveNoViolations();
-  });
-});
+    const { container } = render(<ComponentGallery items={items} />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+})
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -247,16 +339,20 @@ Expected: FAIL — the component module does not exist.
 - [ ] **Step 3: Create `app/(docs)/_components/component-gallery.tsx`**
 
 ```tsx
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { Search, X } from "lucide-react";
+import * as React from "react"
+import Link from "next/link"
+import { Search, X } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { filterCatalog, type CatalogItem, type CatalogFilter } from "@/content/catalog";
-import { GradientAvatar } from "@/components/ui/gradient-avatar";
-import { FilterPill } from "@/components/ui/filter-pill";
+import { cn } from "@/lib/utils"
+import {
+  filterCatalog,
+  type CatalogItem,
+  type CatalogFilter,
+} from "@/content/catalog"
+import { GradientAvatar } from "@/components/ui/gradient-avatar"
+import { FilterPill } from "@/components/ui/filter-pill"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -264,14 +360,20 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 function uniqueSorted(values: string[]) {
-  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b))
 }
 
 /** A removable active-filter chip. */
-function ActivePill({ label, onRemove }: { label: string; onRemove: () => void }) {
+function ActivePill({
+  label,
+  onRemove,
+}: {
+  label: string
+  onRemove: () => void
+}) {
   return (
     <span className="inline-flex h-8 items-center gap-1 rounded-full edge bg-muted pl-3 pr-1.5 text-sm font-medium">
       {label}
@@ -284,32 +386,43 @@ function ActivePill({ label, onRemove }: { label: string; onRemove: () => void }
         <X className="size-3.5" />
       </button>
     </span>
-  );
+  )
 }
 
 export function ComponentGallery({ items }: { items: CatalogItem[] }) {
-  const [query, setQuery] = React.useState("");
-  const [groups, setGroups] = React.useState<string[]>([]);
-  const [tags, setTags] = React.useState<string[]>([]);
-  const [sort, setSort] = React.useState<CatalogFilter["sort"]>("featured");
+  const [query, setQuery] = React.useState("")
+  const [groups, setGroups] = React.useState<string[]>([])
+  const [tags, setTags] = React.useState<string[]>([])
+  const [sort, setSort] = React.useState<CatalogFilter["sort"]>("featured")
 
-  const allGroups = React.useMemo(() => uniqueSorted(items.map((i) => i.group)), [items]);
-  const allTags = React.useMemo(() => uniqueSorted(items.flatMap((i) => i.tags)), [items]);
+  const allGroups = React.useMemo(
+    () => uniqueSorted(items.map((i) => i.group)),
+    [items],
+  )
+  const allTags = React.useMemo(
+    () => uniqueSorted(items.flatMap((i) => i.tags)),
+    [items],
+  )
 
   const filtered = React.useMemo(
     () => filterCatalog(items, { query, groups, tags, sort }),
     [items, query, groups, tags, sort],
-  );
+  )
 
-  const toggle = (set: React.Dispatch<React.SetStateAction<string[]>>, v: string) =>
-    set((prev) => (prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v]));
+  const toggle = (
+    set: React.Dispatch<React.SetStateAction<string[]>>,
+    v: string,
+  ) =>
+    set((prev) =>
+      prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v],
+    )
 
-  const hasFilters = groups.length > 0 || tags.length > 0 || query.trim() !== "";
+  const hasFilters = groups.length > 0 || tags.length > 0 || query.trim() !== ""
   const clearAll = () => {
-    setGroups([]);
-    setTags([]);
-    setQuery("");
-  };
+    setGroups([])
+    setTags([])
+    setQuery("")
+  }
 
   return (
     <div>
@@ -364,10 +477,18 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
           )}
 
           {groups.map((g) => (
-            <ActivePill key={`g-${g}`} label={g} onRemove={() => toggle(setGroups, g)} />
+            <ActivePill
+              key={`g-${g}`}
+              label={g}
+              onRemove={() => toggle(setGroups, g)}
+            />
           ))}
           {tags.map((t) => (
-            <ActivePill key={`t-${t}`} label={t} onRemove={() => toggle(setTags, t)} />
+            <ActivePill
+              key={`t-${t}`}
+              label={t}
+              onRemove={() => toggle(setTags, t)}
+            />
           ))}
           {hasFilters && (
             <button
@@ -382,19 +503,28 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
 
         <div className="flex items-center gap-4">
           <p className="hidden text-sm text-muted-foreground sm:block">
-            <span className="tabular-nums text-foreground">{filtered.length}</span> component
+            <span className="tabular-nums text-foreground">
+              {filtered.length}
+            </span>{" "}
+            component
             {filtered.length === 1 ? "" : "s"}
           </p>
           <DropdownMenu>
             <DropdownMenuTrigger
-              render={<FilterPill>{sort === "featured" ? "Featured" : "A–Z"}</FilterPill>}
+              render={
+                <FilterPill>
+                  {sort === "featured" ? "Featured" : "A–Z"}
+                </FilterPill>
+              }
             />
             <DropdownMenuContent align="end" className="w-40">
               <DropdownMenuRadioGroup
                 value={sort}
                 onValueChange={(v) => setSort(v as CatalogFilter["sort"])}
               >
-                <DropdownMenuRadioItem value="featured">Featured</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="featured">
+                  Featured
+                </DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="az">A–Z</DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
@@ -427,8 +557,14 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex min-w-0 items-center gap-2.5">
-                    <GradientAvatar seed={item.name} size="sm" className="rounded-md" />
-                    <span className="truncate text-sm font-medium tracking-tight">{item.name}</span>
+                    <GradientAvatar
+                      seed={item.name}
+                      size="sm"
+                      className="rounded-md"
+                    />
+                    <span className="truncate text-sm font-medium tracking-tight">
+                      {item.name}
+                    </span>
                   </div>
                   <span className="shrink-0 rounded-full edge px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
                     {item.group}
@@ -449,7 +585,8 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
                     ))}
                   </div>
                   <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
-                    {item.variantCount} variant{item.variantCount === 1 ? "" : "s"}
+                    {item.variantCount} variant
+                    {item.variantCount === 1 ? "" : "s"}
                   </span>
                 </div>
               </Link>
@@ -458,7 +595,7 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
         </ul>
       )}
     </div>
-  );
+  )
 }
 ```
 
@@ -479,6 +616,7 @@ git commit -m "feat(catalog): add searchable, faceted ComponentGallery"
 ## Task 3: Wire the gallery into `/docs`
 
 **Files:**
+
 - Modify: `app/(docs)/docs/page.tsx`
 
 - [ ] **Step 1: Update imports**
@@ -486,15 +624,15 @@ git commit -m "feat(catalog): add searchable, faceted ComponentGallery"
 In `app/(docs)/docs/page.tsx`, replace the components import line:
 
 ```ts
-import { categories, byCategory, components } from "@/content/components";
+import { categories, byCategory, components } from "@/content/components"
 ```
 
 with:
 
 ```ts
-import { components } from "@/content/components";
-import { catalogItems } from "@/content/catalog";
-import { ComponentGallery } from "@/app/(docs)/_components/component-gallery";
+import { components } from "@/content/components"
+import { catalogItems } from "@/content/catalog"
+import { ComponentGallery } from "@/app/(docs)/_components/component-gallery"
 ```
 
 (`components` stays — the masthead uses `components.length`. `categories`/`byCategory` are no longer needed once the catalog section is swapped below.)
@@ -504,21 +642,23 @@ import { ComponentGallery } from "@/app/(docs)/_components/component-gallery";
 Find the `<section id="catalog" …>` block. Keep the heading row (the `<h2>The catalog</h2>` + the total count). Replace the `<div>` that does `{categories.map((cat) => { … })}` (the editorial index list) with the gallery. The resulting section should read:
 
 ```tsx
-      {/* ============================ CATALOG INDEX =================== */}
-      <section id="catalog" className="scroll-mt-24">
-        <div className="flex items-baseline justify-between gap-4 border-b border-foreground/20 pb-3">
-          <h2 className="text-[clamp(1.75rem,5vw,2.75rem)] font-normal tracking-tight text-foreground">
-            The catalog
-          </h2>
-          <span className="font-mono text-xs tabular-nums text-muted-foreground">
-            {components.length} total
-          </span>
-        </div>
+{
+  /* ============================ CATALOG INDEX =================== */
+}
+;<section id="catalog" className="scroll-mt-24">
+  <div className="flex items-baseline justify-between gap-4 border-b border-foreground/20 pb-3">
+    <h2 className="text-[clamp(1.75rem,5vw,2.75rem)] font-normal tracking-tight text-foreground">
+      The catalog
+    </h2>
+    <span className="font-mono text-xs tabular-nums text-muted-foreground">
+      {components.length} total
+    </span>
+  </div>
 
-        <div className="mt-8">
-          <ComponentGallery items={catalogItems()} />
-        </div>
-      </section>
+  <div className="mt-8">
+    <ComponentGallery items={catalogItems()} />
+  </div>
+</section>
 ```
 
 Leave the masthead, meta+install, principles, install one-liner, and footer nav sections unchanged.
@@ -578,4 +718,7 @@ If a dev server is available: `npm run dev`, open `/docs`, confirm the catalog r
 - **2b — Static thumbnails + windowed grid:** component preview route, `gen-thumbs` (gitignored output), swap card identity-mark for thumbnails, virtualize the grid for the hundreds/thousands case.
 - **2c — Detail page + level-2 variant gallery:** per-variant anchors (`#<id>`) + tag chips + per-variant install on `/docs/[slug]`; the variant-grid view; the contextual rail; simplify/retire the exhaustive `SiteNav` sidebar (gallery-first).
 - **2d — Full migration:** author `tags`/`variants` across the other ~118 components (best run when `content/components.ts` is not being edited concurrently). Then index all variants in search + llms.txt.
+
+```
+
 ```

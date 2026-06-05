@@ -1,7 +1,14 @@
-"use client";
+"use client"
 
-import { HeroSection } from "@/components/hero-section";
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { HeroSection } from "@/components/hero-section"
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts"
 
 const data = [
   { time: "00:00", value: 210 },
@@ -14,7 +21,7 @@ const data = [
   { time: "18:00", value: 530 },
   { time: "20:00", value: 410 },
   { time: "23:00", value: 290 },
-];
+]
 
 /** HeroSection wrapping a real full-bleed area chart — the hero-chart archetype. */
 export default function Example() {
@@ -36,11 +43,22 @@ export default function Example() {
         }
       >
         <ResponsiveContainer width="100%" height={192}>
-          <AreaChart data={data} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
+          <AreaChart
+            data={data}
+            margin={{ top: 4, right: 0, left: 0, bottom: 0 }}
+          >
             <defs>
               <linearGradient id="heroGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="var(--chart-1)" stopOpacity={0.25} />
-                <stop offset="100%" stopColor="var(--chart-1)" stopOpacity={0} />
+                <stop
+                  offset="0%"
+                  stopColor="var(--chart-1)"
+                  stopOpacity={0.25}
+                />
+                <stop
+                  offset="100%"
+                  stopColor="var(--chart-1)"
+                  stopOpacity={0}
+                />
               </linearGradient>
             </defs>
             <XAxis
@@ -73,5 +91,5 @@ export default function Example() {
         </ResponsiveContainer>
       </HeroSection>
     </div>
-  );
+  )
 }

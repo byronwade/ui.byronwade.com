@@ -1,4 +1,4 @@
-import { animalName } from "@/lib/identity";
+import { animalName } from "@/lib/identity"
 
 export default function Example() {
   return (
@@ -7,5 +7,5 @@ export default function Example() {
         <li key={s}>{animalName(s)}</li>
       ))}
     </ul>
-  );
+  )
 }

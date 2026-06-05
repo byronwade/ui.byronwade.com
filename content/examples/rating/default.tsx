@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Rating, RatingButton, RatingBadge } from "@/components/ui/rating";
+import { useState } from "react"
+import { Rating, RatingButton, RatingBadge } from "@/components/ui/rating"
 
 export default function Example() {
-  const [value, setValue] = useState(3);
+  const [value, setValue] = useState(3)
   return (
     <div className="flex flex-col items-center gap-4 p-8">
       <Rating value={value} onValueChange={setValue}>
@@ -22,5 +22,5 @@ export default function Example() {
         </Rating>
       </div>
     </div>
-  );
+  )
 }

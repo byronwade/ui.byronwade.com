@@ -1,4 +1,4 @@
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/page-header"
 
 export default function Example() {
   return (
@@ -22,5 +22,5 @@ export default function Example() {
         align="center"
       />
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Command,
@@ -7,16 +7,31 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { CommandResult } from "@/components/command-result";
-import { GradientAvatar } from "@/components/ui/gradient-avatar";
-import { StatusDot } from "@/components/ui/status-dot";
+} from "@/components/ui/command"
+import { CommandResult } from "@/components/command-result"
+import { GradientAvatar } from "@/components/ui/gradient-avatar"
+import { StatusDot } from "@/components/ui/status-dot"
 
 const people = [
-  { name: "Ada Lovelace", role: "Design", email: "ada@example.com", tone: "success" as const },
-  { name: "Alan Turing", role: "Engineering", email: "alan@example.com", tone: "neutral" as const },
-  { name: "Grace Hopper", role: "Product", email: "grace@example.com", tone: "warning" as const },
-];
+  {
+    name: "Ada Lovelace",
+    role: "Design",
+    email: "ada@example.com",
+    tone: "success" as const,
+  },
+  {
+    name: "Alan Turing",
+    role: "Engineering",
+    email: "alan@example.com",
+    tone: "neutral" as const,
+  },
+  {
+    name: "Grace Hopper",
+    role: "Product",
+    email: "grace@example.com",
+    tone: "warning" as const,
+  },
+]
 
 export default function Example() {
   return (
@@ -40,5 +55,5 @@ export default function Example() {
         </CommandList>
       </Command>
     </div>
-  );
+  )
 }

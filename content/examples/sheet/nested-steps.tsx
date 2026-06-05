@@ -8,8 +8,8 @@ import {
   SheetFooter,
   SheetTitle,
   SheetDescription,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
 
 /**
  * Nested bottom drawers with a grab bar — a multi-step flow where each
@@ -94,5 +94,5 @@ export default function Example() {
         </SheetContent>
       </Sheet>
     </div>
-  );
+  )
 }

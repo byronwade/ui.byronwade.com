@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
 import {
   Reasoning,
   ReasoningTrigger,
   ReasoningContent,
-} from "@/components/ai-elements/reasoning";
+} from "@/components/ai-elements/reasoning"
 
 const TRACE = `The user is asking for the capital of France.
 
 1. France is a country in Western Europe.
 2. Its capital and largest city is **Paris**.
 
-So the answer is **Paris**.`;
+So the answer is **Paris**.`
 
 export default function Example() {
   return (
@@ -23,5 +23,5 @@ export default function Example() {
         </Reasoning>
       </div>
     </div>
-  );
+  )
 }

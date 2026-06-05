@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { Shimmer } from "@/components/ai-elements/shimmer";
+import { Shimmer } from "@/components/ai-elements/shimmer"
 
-const TONES = ["muted", "brand", "foreground"] as const;
+const TONES = ["muted", "brand", "foreground"] as const
 
 export default function Example() {
   return (
@@ -18,5 +18,5 @@ export default function Example() {
         </div>
       ))}
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import { PageHeader } from "@/components/page-header";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/page-header"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -20,7 +20,9 @@ export default function Example() {
         description="Review your current plan and payment methods."
       >
         <Badge variant="warning">Past due</Badge>
-        <Button size="sm" variant="outline">Update Payment</Button>
+        <Button size="sm" variant="outline">
+          Update Payment
+        </Button>
       </PageHeader>
 
       {/* Success / live badge */}
@@ -32,5 +34,5 @@ export default function Example() {
         <Button size="sm">Add Endpoint</Button>
       </PageHeader>
     </div>
-  );
+  )
 }

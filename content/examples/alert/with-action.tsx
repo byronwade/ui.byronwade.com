@@ -1,6 +1,11 @@
-"use client";
+"use client"
 
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "@/components/ui/alert"
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+  AlertAction,
+} from "@/components/ui/alert"
 import { InfoIcon, TriangleAlertIcon, XCircleIcon } from "lucide-react"
 import { useState } from "react"
 

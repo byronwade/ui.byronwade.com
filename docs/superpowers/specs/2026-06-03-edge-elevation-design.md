@@ -34,14 +34,15 @@ So the change is: **strip the drop-shadow layers, keep the hairline** — i.e.
 
 Across `registry/ui/`, `registry/components/`:
 
-| From | To |
-|------|-----|
-| `shadow-float` | `edge` |
-| `shadow-card` | `edge` |
-| `shadow-sm` / `shadow-md` / `shadow-lg` / `shadow-xl` (incl. `group-hover:shadow-*`, `hover:shadow-*`) | **removed** (no shadow) |
-| `shadow-none` (explicit overrides) | removed where now redundant |
+| From                                                                                                   | To                          |
+| ------------------------------------------------------------------------------------------------------ | --------------------------- |
+| `shadow-float`                                                                                         | `edge`                      |
+| `shadow-card`                                                                                          | `edge`                      |
+| `shadow-sm` / `shadow-md` / `shadow-lg` / `shadow-xl` (incl. `group-hover:shadow-*`, `hover:shadow-*`) | **removed** (no shadow)     |
+| `shadow-none` (explicit overrides)                                                                     | removed where now redundant |
 
 **Component-specific:**
+
 - `morph-dock.tsx`: `t.shell`/`t.panel` lose `shadow-float`/`shadow-card`, gain
   `edge`. The `bare` branch becomes truly nothing (no `edge`, no bg) instead of
   `shadow-none`.
@@ -57,6 +58,7 @@ Across `registry/ui/`, `registry/components/`:
 ## Shipped AI rule (`registry/rules/byronwade-ui.mdc`)
 
 Reverse the elevation guidance:
+
 - The line stating floating chrome "use `shadow-float` and carry **no** border"
   → floating chrome and cards use the **`edge` hairline; no drop shadows**.
 - Update the house-utilities list (drop `shadow-float`/`shadow-card`, keep `edge`).

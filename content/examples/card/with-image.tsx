@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 
 export default function Example() {
   return (
@@ -28,8 +28,12 @@ export default function Example() {
           </p>
         </CardContent>
         <CardFooter>
-          <span className="text-xs font-medium text-foreground">$320 / night</span>
-          <span className="ml-auto text-xs text-muted-foreground">Available June–Sept</span>
+          <span className="text-xs font-medium text-foreground">
+            $320 / night
+          </span>
+          <span className="ml-auto text-xs text-muted-foreground">
+            Available June–Sept
+          </span>
         </CardFooter>
       </Card>
 
@@ -54,5 +58,5 @@ export default function Example() {
         </CardFooter>
       </Card>
     </div>
-  );
+  )
 }

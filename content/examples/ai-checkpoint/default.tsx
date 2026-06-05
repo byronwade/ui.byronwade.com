@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { RotateCcwIcon } from "lucide-react";
+import { useState } from "react"
+import { RotateCcwIcon } from "lucide-react"
 
 import {
   Checkpoint,
   CheckpointIcon,
   CheckpointTrigger,
-} from "@/components/ai-elements/checkpoint";
+} from "@/components/ai-elements/checkpoint"
 
 export default function Example() {
-  const [restoredAt, setRestoredAt] = useState<string | null>(null);
+  const [restoredAt, setRestoredAt] = useState<string | null>(null)
 
   return (
     <div className="flex min-h-0 flex-col items-center justify-center gap-6 bg-background p-8">
@@ -23,9 +23,7 @@ export default function Example() {
           <CheckpointIcon />
           <CheckpointTrigger
             tooltip="Restore conversation to this checkpoint"
-            onClick={() =>
-              setRestoredAt(new Date().toLocaleTimeString())
-            }
+            onClick={() => setRestoredAt(new Date().toLocaleTimeString())}
           >
             <RotateCcwIcon className="size-3.5" />
             <span className="font-mono text-xs">Checkpoint #3</span>
@@ -43,5 +41,5 @@ export default function Example() {
         </p>
       </div>
     </div>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { DetailHeader } from "@/components/detail-header";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { useState } from "react"
+import { DetailHeader } from "@/components/detail-header"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 /**
  * Demonstrates the actions slot with multiple buttons and interactive state
@@ -11,12 +11,12 @@ import { Button } from "@/components/ui/button";
  * on the right side of the header.
  */
 export default function Example() {
-  const [pinned, setPinned] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [pinned, setPinned] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   function handleCopy() {
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1500)
   }
 
   return (
@@ -39,11 +39,7 @@ export default function Example() {
             >
               {pinned ? "Unpin" : "Pin"}
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleCopy}
-            >
+            <Button variant="outline" size="sm" onClick={handleCopy}>
               {copied ? "Copied!" : "Copy path"}
             </Button>
             <Button variant="outline" size="sm">
@@ -60,5 +56,5 @@ export default function Example() {
         ]}
       />
     </div>
-  );
+  )
 }

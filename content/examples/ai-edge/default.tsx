@@ -21,20 +21,12 @@ const edgeTypes: EdgeTypes = {
 function StepNode({ data }: NodeProps) {
   return (
     <div className="rounded-lg bg-card px-4 py-3 text-card-foreground edge">
-      <Handle
-        className="!bg-ring"
-        position={Position.Left}
-        type="target"
-      />
+      <Handle className="!bg-ring" position={Position.Left} type="target" />
       <p className="text-sm font-medium">{String(data.label)}</p>
       <p className="font-mono text-xs text-muted-foreground">
         {String(data.id)}
       </p>
-      <Handle
-        className="!bg-ring"
-        position={Position.Right}
-        type="source"
-      />
+      <Handle className="!bg-ring" position={Position.Right} type="source" />
     </div>
   )
 }

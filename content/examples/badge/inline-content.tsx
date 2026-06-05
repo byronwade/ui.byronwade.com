@@ -1,8 +1,8 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge"
 
-const tags = ["typescript", "react", "performance", "accessibility", "testing"];
+const tags = ["typescript", "react", "performance", "accessibility", "testing"]
 
-const plan = { name: "Pro", seats: 5, used: 3 };
+const plan = { name: "Pro", seats: 5, used: 3 }
 
 export default function Example() {
   return (
@@ -51,5 +51,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,24 +1,24 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Progress,
   ProgressLabel,
   ProgressValue,
-} from "@/components/ui/progress";
+} from "@/components/ui/progress"
 
 export default function Example() {
-  const [value, setValue] = useState<number | null>(0);
+  const [value, setValue] = useState<number | null>(0)
 
-  const isIndeterminate = value === null;
-  const isComplete = value === 100;
+  const isIndeterminate = value === null
+  const isComplete = value === 100
 
   const step = (delta: number) => {
     setValue((prev) => {
-      if (prev === null) return 0;
-      return Math.min(100, Math.max(0, prev + delta));
-    });
-  };
+      if (prev === null) return 0
+      return Math.min(100, Math.max(0, prev + delta))
+    })
+  }
 
   return (
     <div className="w-full max-w-sm space-y-6 p-6">
@@ -27,8 +27,8 @@ export default function Example() {
           {isIndeterminate
             ? "Loading…"
             : isComplete
-            ? "Complete"
-            : "Processing"}
+              ? "Complete"
+              : "Processing"}
         </ProgressLabel>
         <ProgressValue>
           {(formatted) => (isIndeterminate ? "—" : formatted)}
@@ -75,5 +75,5 @@ export default function Example() {
         <code className="font-mono">{value === null ? "null" : value}</code>
       </p>
     </div>
-  );
+  )
 }

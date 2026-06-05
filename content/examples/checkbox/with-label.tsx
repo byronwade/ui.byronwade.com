@@ -1,12 +1,14 @@
-"use client";
+"use client"
 
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
   return (
     <div className="flex flex-col gap-4 p-6">
-      <p className="text-sm font-medium text-muted-foreground mb-1">Using Label component</p>
+      <p className="text-sm font-medium text-muted-foreground mb-1">
+        Using Label component
+      </p>
 
       <div className="flex items-center gap-2">
         <Checkbox id="marketing" defaultChecked />
@@ -27,11 +29,16 @@ export default function Example() {
         <Checkbox id="terms" className="mt-0.5" />
         <Label htmlFor="terms" className="leading-snug">
           I have read and agree to the{" "}
-          <span className="underline underline-offset-2 cursor-pointer">Terms of Service</span>{" "}
+          <span className="underline underline-offset-2 cursor-pointer">
+            Terms of Service
+          </span>{" "}
           and{" "}
-          <span className="underline underline-offset-2 cursor-pointer">Privacy Policy</span>.
+          <span className="underline underline-offset-2 cursor-pointer">
+            Privacy Policy
+          </span>
+          .
         </Label>
       </div>
     </div>
-  );
+  )
 }

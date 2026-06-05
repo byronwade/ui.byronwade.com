@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState, useEffect } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -64,7 +64,9 @@ export default function Example() {
   return (
     <div className="w-80 rounded-xl border bg-card p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-sm font-medium text-foreground">Featured Article</span>
+        <span className="text-sm font-medium text-foreground">
+          Featured Article
+        </span>
         <button
           onClick={() => setLoading((v) => !v)}
           className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors"

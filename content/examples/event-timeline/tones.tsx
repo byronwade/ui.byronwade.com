@@ -1,4 +1,4 @@
-import { EventTimeline, type TimelineEvent } from "@/components/event-timeline";
+import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
 
 const events: TimelineEvent[] = [
   {
@@ -25,7 +25,7 @@ const events: TimelineEvent[] = [
     title: "Neutral tone",
     description: "No tone specified — default appearance.",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -33,5 +33,5 @@ export default function Example() {
       <h2 className="mb-4 text-sm font-semibold">All Tones</h2>
       <EventTimeline events={events} />
     </div>
-  );
+  )
 }

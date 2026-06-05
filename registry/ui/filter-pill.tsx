@@ -1,6 +1,6 @@
-import * as React from "react";
-import { ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import * as React from "react"
+import { ChevronsUpDown } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 /** Pill+chevron filter/range trigger (AGENTS.md Controls). Pass as `render` to a Select/Menu trigger,
  *  or use standalone with onClick. */
@@ -23,5 +23,5 @@ export const FilterPill = React.forwardRef<
       {children}
       <ChevronsUpDown className="size-3.5 text-muted-foreground" />
     </button>
-  );
-});
+  )
+})

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Table,
   TableBody,
@@ -8,18 +8,36 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Inbox } from "lucide-react";
+} from "@/components/ui/table"
+import { Inbox } from "lucide-react"
 
 const allItems = [
-  { id: "T-101", title: "Fix login redirect", assignee: "Alex R.", priority: "High", due: "Jun 3" },
-  { id: "T-102", title: "Update onboarding flow", assignee: "Morgan C.", priority: "Medium", due: "Jun 7" },
-  { id: "T-103", title: "Audit accessibility", assignee: "Jordan P.", priority: "Low", due: "Jun 14" },
-];
+  {
+    id: "T-101",
+    title: "Fix login redirect",
+    assignee: "Alex R.",
+    priority: "High",
+    due: "Jun 3",
+  },
+  {
+    id: "T-102",
+    title: "Update onboarding flow",
+    assignee: "Morgan C.",
+    priority: "Medium",
+    due: "Jun 7",
+  },
+  {
+    id: "T-103",
+    title: "Audit accessibility",
+    assignee: "Jordan P.",
+    priority: "Low",
+    due: "Jun 14",
+  },
+]
 
 export default function Example() {
-  const [showEmpty, setShowEmpty] = useState(false);
-  const items = showEmpty ? [] : allItems;
+  const [showEmpty, setShowEmpty] = useState(false)
+  const items = showEmpty ? [] : allItems
 
   return (
     <div className="p-8 max-w-3xl mx-auto space-y-4">
@@ -46,11 +64,15 @@ export default function Example() {
           {items.length > 0 ? (
             items.map((item) => (
               <TableRow key={item.id}>
-                <TableCell className="font-mono text-xs text-muted-foreground">{item.id}</TableCell>
+                <TableCell className="font-mono text-xs text-muted-foreground">
+                  {item.id}
+                </TableCell>
                 <TableCell className="font-medium">{item.title}</TableCell>
                 <TableCell>{item.assignee}</TableCell>
                 <TableCell>{item.priority}</TableCell>
-                <TableCell className="text-muted-foreground">{item.due}</TableCell>
+                <TableCell className="text-muted-foreground">
+                  {item.due}
+                </TableCell>
               </TableRow>
             ))
           ) : (
@@ -67,5 +89,5 @@ export default function Example() {
         </TableBody>
       </Table>
     </div>
-  );
+  )
 }

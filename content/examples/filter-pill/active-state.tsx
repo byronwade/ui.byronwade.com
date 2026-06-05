@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { FilterPill } from "@/components/ui/filter-pill";
-import { Tag, X } from "lucide-react";
+import * as React from "react"
+import { FilterPill } from "@/components/ui/filter-pill"
+import { Tag, X } from "lucide-react"
 
-const OPTIONS = ["All", "Documents", "Images", "Video", "Audio", "Archives"];
+const OPTIONS = ["All", "Documents", "Images", "Video", "Audio", "Archives"]
 
 export default function Example() {
-  const [selected, setSelected] = React.useState("All");
+  const [selected, setSelected] = React.useState("All")
 
   return (
     <div className="flex flex-col gap-4 p-6">
@@ -52,5 +52,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

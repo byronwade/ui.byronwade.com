@@ -1,14 +1,17 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { readFileSync } from "node:fs"
+import { join } from "node:path"
+import Link from "next/link"
+import { notFound } from "next/navigation"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 
-import { bySlug, components } from "@/content/components";
-import { examples } from "@/content/examples/registry";
-import { ExampleTabs } from "@/app/(docs)/_components/example-tabs";
-import { VariantBrowser, type VariantView } from "@/app/(docs)/_components/variant-browser";
-import { InstallCommand } from "@/app/(docs)/_components/install-command";
+import { bySlug, components } from "@/content/components"
+import { examples } from "@/content/examples/registry"
+import { ExampleTabs } from "@/app/(docs)/_components/example-tabs"
+import {
+  VariantBrowser,
+  type VariantView,
+} from "@/app/(docs)/_components/variant-browser"
+import { InstallCommand } from "@/app/(docs)/_components/install-command"
 import {
   Table,
   TableBody,
@@ -16,12 +19,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table"
 
 export function generateStaticParams() {
   // `foundation` has a bespoke static route (./foundation/page.tsx) that takes
   // precedence; exclude it here so it isn't also prerendered by this template.
-  return components.filter((c) => c.slug !== "foundation").map((c) => ({ slug: c.slug }));
+  return components
+    .filter((c) => c.slug !== "foundation")
+    .map((c) => ({ slug: c.slug }))
 }
 
 /* Shared section label — the mono eyebrow used across the docs specimen pages. */
@@ -30,27 +35,40 @@ function Label({ children }: { children: React.ReactNode }) {
     <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
       {children}
     </h2>
-  );
+  )
 }
 
-export default async function ComponentPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const doc = bySlug(slug);
-  if (!doc) notFound();
+export default async function ComponentPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const doc = bySlug(slug)
+  if (!doc) notFound()
 
-  const demos = examples[slug] ?? [];
+  const demos = examples[slug] ?? []
   const rendered = demos.map((d) => ({
     name: d.name,
     Component: d.Component,
-    code: readFileSync(join(process.cwd(), "content/examples", d.file), "utf8").trimEnd(),
-  }));
+    code: readFileSync(
+      join(process.cwd(), "content/examples", d.file),
+      "utf8",
+    ).trimEnd(),
+  }))
 
   const byBase = new Map(
-    demos.map((d) => [d.file.split("/").pop()!.replace(/\.tsx$/, ""), d]),
-  );
+    demos.map((d) => [
+      d.file
+        .split("/")
+        .pop()!
+        .replace(/\.tsx$/, ""),
+      d,
+    ]),
+  )
   const variantViews: VariantView[] = (doc.variants ?? []).map((v) => {
-    const demo = byBase.get(v.example);
-    const Comp = demo?.Component;
+    const demo = byBase.get(v.example)
+    const Comp = demo?.Component
     return {
       id: v.id,
       name: v.name,
@@ -58,12 +76,15 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
       install: v.install ?? `npx shadcn@latest add @byronwade/${doc.slug}`,
       preview: Comp ? <Comp /> : null,
       code: demo
-        ? readFileSync(join(process.cwd(), "content/examples", demo.file), "utf8").trimEnd()
+        ? readFileSync(
+            join(process.cwd(), "content/examples", demo.file),
+            "utf8",
+          ).trimEnd()
         : "",
-    };
-  });
+    }
+  })
 
-  const deps = [...(doc.registryDeps ?? []), ...(doc.npmDeps ?? [])];
+  const deps = [...(doc.registryDeps ?? []), ...(doc.npmDeps ?? [])]
 
   return (
     <article className="mx-auto max-w-4xl space-y-12">
@@ -109,7 +130,8 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
               Vercel AI Elements
             </a>{" "}
             — the original components, repurposed onto the byronwade/ui design
-            system (semantic tokens, dark mode, small subtle refinements). © Vercel.
+            system (semantic tokens, dark mode, small subtle refinements). ©
+            Vercel.
           </p>
         )}
       </header>
@@ -125,7 +147,12 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
             <Label>{rendered.length > 1 ? "Examples" : "Example"}</Label>
             <div className="space-y-8">
               {rendered.map(({ name, Component, code }) => (
-                <ExampleTabs key={name} title={name} preview={<Component />} code={code} />
+                <ExampleTabs
+                  key={name}
+                  title={name}
+                  preview={<Component />}
+                  code={code}
+                />
               ))}
             </div>
           </section>
@@ -146,19 +173,33 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/40 hover:bg-muted/40">
-                  <TableHead className="pl-4 text-muted-foreground">Prop</TableHead>
+                  <TableHead className="pl-4 text-muted-foreground">
+                    Prop
+                  </TableHead>
                   <TableHead className="text-muted-foreground">Type</TableHead>
-                  <TableHead className="text-muted-foreground">Default</TableHead>
-                  <TableHead className="pr-4 text-muted-foreground">Description</TableHead>
+                  <TableHead className="text-muted-foreground">
+                    Default
+                  </TableHead>
+                  <TableHead className="pr-4 text-muted-foreground">
+                    Description
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {doc.props.map((p) => (
                   <TableRow key={p.name}>
-                    <TableCell className="pl-4 font-mono text-xs">{p.name}</TableCell>
-                    <TableCell className="font-mono text-xs text-muted-foreground">{p.type}</TableCell>
-                    <TableCell className="font-mono text-xs text-muted-foreground">{p.default ?? "—"}</TableCell>
-                    <TableCell className="pr-4 whitespace-normal text-muted-foreground">{p.description}</TableCell>
+                    <TableCell className="pl-4 font-mono text-xs">
+                      {p.name}
+                    </TableCell>
+                    <TableCell className="font-mono text-xs text-muted-foreground">
+                      {p.type}
+                    </TableCell>
+                    <TableCell className="font-mono text-xs text-muted-foreground">
+                      {p.default ?? "—"}
+                    </TableCell>
+                    <TableCell className="pr-4 whitespace-normal text-muted-foreground">
+                      {p.description}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -184,5 +225,5 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
         </Link>
       </div>
     </article>
-  );
+  )
 }

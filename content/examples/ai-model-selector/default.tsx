@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
 import {
   ModelSelector,
   ModelSelectorContent,
@@ -16,15 +16,15 @@ import {
   ModelSelectorSeparator,
   ModelSelectorShortcut,
   ModelSelectorTrigger,
-} from "@/components/ai-elements/model-selector";
+} from "@/components/ai-elements/model-selector"
 
 type Model = {
-  id: string;
-  name: string;
-  provider: string;
-  context: string;
-  shortcut?: string;
-};
+  id: string
+  name: string
+  provider: string
+  context: string
+  shortcut?: string
+}
 
 const frontier: Model[] = [
   {
@@ -48,15 +48,25 @@ const frontier: Model[] = [
     context: "2M",
     shortcut: "⌘3",
   },
-];
+]
 
 const fast: Model[] = [
-  { id: "haiku", name: "Claude Haiku 4", provider: "anthropic", context: "200K" },
-  { id: "mistral-l", name: "Mistral Large", provider: "mistral", context: "128K" },
-];
+  {
+    id: "haiku",
+    name: "Claude Haiku 4",
+    provider: "anthropic",
+    context: "200K",
+  },
+  {
+    id: "mistral-l",
+    name: "Mistral Large",
+    provider: "mistral",
+    context: "128K",
+  },
+]
 
 export default function Example() {
-  const [selected, setSelected] = useState<Model>(frontier[0]);
+  const [selected, setSelected] = useState<Model>(frontier[0])
 
   return (
     <div className="flex min-h-0 items-center justify-center bg-background p-8">
@@ -118,5 +128,5 @@ export default function Example() {
         </ModelSelectorContent>
       </ModelSelector>
     </div>
-  );
+  )
 }

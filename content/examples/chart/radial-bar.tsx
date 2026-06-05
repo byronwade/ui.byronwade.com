@@ -32,8 +32,12 @@ const chartConfig: ChartConfig = {
 export default function Example() {
   return (
     <div className="p-6 rounded-2xl border bg-card w-full max-w-sm">
-      <h2 className="text-sm font-medium mb-1 text-foreground">Resource Utilization</h2>
-      <p className="text-xs text-muted-foreground mb-2">Current usage percentages</p>
+      <h2 className="text-sm font-medium mb-1 text-foreground">
+        Resource Utilization
+      </h2>
+      <p className="text-xs text-muted-foreground mb-2">
+        Current usage percentages
+      </p>
       <ChartContainer config={chartConfig} className="h-56 w-full">
         <RadialBarChart
           data={data}
@@ -42,7 +46,12 @@ export default function Example() {
           startAngle={90}
           endAngle={-270}
         >
-          <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" />
+          <PolarGrid
+            gridType="circle"
+            radialLines={false}
+            stroke="none"
+            className="first:fill-muted last:fill-background"
+          />
           <ChartTooltip
             cursor={false}
             content={<ChartTooltipContent hideLabel nameKey="name" />}
@@ -52,8 +61,14 @@ export default function Example() {
       </ChartContainer>
       <div className="flex justify-center gap-4 pt-1">
         {data.map((entry) => (
-          <div key={entry.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <div className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: entry.fill }} />
+          <div
+            key={entry.name}
+            className="flex items-center gap-1.5 text-xs text-muted-foreground"
+          >
+            <div
+              className="h-2 w-2 rounded-full shrink-0"
+              style={{ backgroundColor: entry.fill }}
+            />
             {chartConfig[entry.name]?.label}
             <span className="font-medium text-foreground">{entry.value}%</span>
           </div>

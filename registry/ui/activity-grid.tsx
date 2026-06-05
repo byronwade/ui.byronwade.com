@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 /** GitHub-style activity grid. `data` = per-cell counts; intensity buckets fill --brand. */
 export function ActivityGrid({
@@ -6,15 +6,23 @@ export function ActivityGrid({
   columns = 26,
   className,
 }: {
-  data: number[];
-  columns?: number;
-  className?: string;
+  data: number[]
+  columns?: number
+  className?: string
 }) {
-  const max = Math.max(1, ...data);
-  const level = (n: number) => (n <= 0 ? 0 : Math.min(4, Math.ceil((n / max) * 4)));
-  const fill = ["bg-muted", "bg-brand/30", "bg-brand/50", "bg-brand/75", "bg-brand"];
+  const max = Math.max(1, ...data)
+  const level = (n: number) =>
+    n <= 0 ? 0 : Math.min(4, Math.ceil((n / max) * 4))
+  const fill = [
+    "bg-muted",
+    "bg-brand/30",
+    "bg-brand/50",
+    "bg-brand/75",
+    "bg-brand",
+  ]
   return (
     <div
+      data-slot="activity-grid"
       className={cn("grid w-fit gap-1", className)}
       style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
     >
@@ -22,5 +30,5 @@ export function ActivityGrid({
         <span key={i} className={cn("size-2.5 rounded-full", fill[level(n)])} />
       ))}
     </div>
-  );
+  )
 }

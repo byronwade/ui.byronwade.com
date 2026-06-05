@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
 // Conversation archetype — a focused assistant thread with a docked composer.
 // uses: GradientAvatar, Badge, Button, InputGroup, FilterPill, ScrollArea, Separator
-import * as React from "react";
+import * as React from "react"
 import {
   ArrowUp,
   Check,
@@ -11,21 +11,21 @@ import {
   Plus,
   Sparkles,
   ThumbsUp,
-} from "lucide-react";
+} from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { GradientAvatar } from "@/components/ui/gradient-avatar";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { GradientAvatar } from "@/components/ui/gradient-avatar"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
 
-type Role = "user" | "assistant";
+type Role = "user" | "assistant"
 
 interface Turn {
-  role: Role;
-  content: React.ReactNode;
-  sources?: { label: string; meta: string }[];
+  role: Role
+  content: React.ReactNode
+  sources?: { label: string; meta: string }[]
 }
 
 const history = [
@@ -33,7 +33,7 @@ const history = [
   { title: "Token contrast audit" },
   { title: "Draft launch changelog" },
   { title: "Explain the retry queue" },
-];
+]
 
 const turns: Turn[] = [
   {
@@ -46,13 +46,18 @@ const turns: Turn[] = [
       <>
         <p>
           The spike traces back to a stricter idempotency check shipped in{" "}
-          <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">14.0</code>.
-          Retries now collide on a key that was previously regenerated, so the queue
-          rejects them as duplicates and re-enqueues:
+          <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">
+            14.0
+          </code>
+          . Retries now collide on a key that was previously regenerated, so the
+          queue rejects them as duplicates and re-enqueues:
         </p>
         <ul className="mt-1 list-disc space-y-1 pl-5 text-muted-foreground">
           <li>Burst correlates with the 12:02 UTC rollout window.</li>
-          <li>Affected path is limited to <span className="text-foreground">checkout-api</span>.</li>
+          <li>
+            Affected path is limited to{" "}
+            <span className="text-foreground">checkout-api</span>.
+          </li>
           <li>No data loss — payments are deferred, not dropped.</li>
         </ul>
       </>
@@ -71,16 +76,27 @@ const turns: Turn[] = [
     content: (
       <p>
         Scope the idempotency key to{" "}
-        <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">order_id + attempt</code>{" "}
-        instead of <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">order_id</code> alone.
-        That preserves dedupe within an attempt while letting genuine retries through.
-        I can open a PR against <span className="text-foreground">checkout-api</span> with a test.
+        <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">
+          order_id + attempt
+        </code>{" "}
+        instead of{" "}
+        <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">
+          order_id
+        </code>{" "}
+        alone. That preserves dedupe within an attempt while letting genuine
+        retries through. I can open a PR against{" "}
+        <span className="text-foreground">checkout-api</span> with a test.
       </p>
     ),
   },
-];
+]
 
-const suggestions = ["Open the PR", "Show the diff", "Draft a status update", "Add a regression test"];
+const suggestions = [
+  "Open the PR",
+  "Show the diff",
+  "Draft a status update",
+  "Add a regression test",
+]
 
 export function ConversationArchetype() {
   return (
@@ -98,7 +114,9 @@ export function ConversationArchetype() {
         <Separator />
         <ScrollArea className="min-h-0 flex-1">
           <nav className="space-y-0.5 p-2">
-            <p className="px-2 py-1.5 text-xs font-medium text-muted-foreground">Today</p>
+            <p className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+              Today
+            </p>
             {history.map((h) => (
               <button
                 key={h.title}
@@ -116,7 +134,9 @@ export function ConversationArchetype() {
             <GradientAvatar seed="byron" size="sm" />
             <div className="min-w-0">
               <p className="truncate text-sm font-medium">Byron Wade</p>
-              <p className="truncate text-xs text-muted-foreground">Pro · gpt-5</p>
+              <p className="truncate text-xs text-muted-foreground">
+                Pro · gpt-5
+              </p>
             </div>
           </div>
         </div>
@@ -125,7 +145,9 @@ export function ConversationArchetype() {
       <div className="flex min-h-0 flex-col">
         <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border px-4 sm:px-6">
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold tracking-tight">Refactor billing webhook</p>
+            <p className="truncate text-sm font-semibold tracking-tight">
+              Refactor billing webhook
+            </p>
             <p className="hidden truncate text-xs text-muted-foreground sm:block">
               4 messages · 2 sources
             </p>
@@ -178,7 +200,7 @@ export function ConversationArchetype() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function Message({ turn }: { turn: Turn }) {
@@ -189,7 +211,7 @@ function Message({ turn }: { turn: Turn }) {
           {turn.content}
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -236,5 +258,5 @@ function Message({ turn }: { turn: Turn }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

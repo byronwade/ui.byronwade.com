@@ -1,7 +1,11 @@
-"use client";
+"use client"
 
 import { useState } from "react"
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card"
 
 export default function Example() {
   const [open, setOpen] = useState(false)
@@ -9,10 +13,7 @@ export default function Example() {
   return (
     <div className="flex flex-col items-center gap-6 p-16">
       {/* Controlled hover card */}
-      <HoverCard
-        open={open}
-        onOpenChange={(isOpen) => setOpen(isOpen)}
-      >
+      <HoverCard open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
         <HoverCardTrigger className="rounded-md border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted cursor-pointer">
           Hover or control me
         </HoverCardTrigger>
@@ -21,7 +22,9 @@ export default function Example() {
             <p className="text-xs font-semibold">Controlled state</p>
             <p className="text-xs text-muted-foreground">
               This card is driven by React state. Current value:{" "}
-              <span className="font-medium text-foreground">{open ? "open" : "closed"}</span>
+              <span className="font-medium text-foreground">
+                {open ? "open" : "closed"}
+              </span>
             </p>
           </div>
         </HoverCardContent>

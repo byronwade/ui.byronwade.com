@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -13,16 +13,32 @@ export default function Example() {
       </div>
 
       <div className="text-muted-foreground text-sm">
-        <p className="font-medium text-foreground mb-1">When to use each variant</p>
+        <p className="font-medium text-foreground mb-1">
+          When to use each variant
+        </p>
         <ul className="space-y-1 list-disc list-inside">
-          <li><strong>default</strong> — primary call-to-action</li>
-          <li><strong>outline</strong> — secondary action alongside a primary</li>
-          <li><strong>secondary</strong> — neutral emphasis, no competing with primary</li>
-          <li><strong>ghost</strong> — lowest emphasis, toolbars and inline actions</li>
-          <li><strong>destructive</strong> — irreversible or dangerous operations</li>
-          <li><strong>link</strong> — inline hyperlink-style action</li>
+          <li>
+            <strong>default</strong> — primary call-to-action
+          </li>
+          <li>
+            <strong>outline</strong> — secondary action alongside a primary
+          </li>
+          <li>
+            <strong>secondary</strong> — neutral emphasis, no competing with
+            primary
+          </li>
+          <li>
+            <strong>ghost</strong> — lowest emphasis, toolbars and inline
+            actions
+          </li>
+          <li>
+            <strong>destructive</strong> — irreversible or dangerous operations
+          </li>
+          <li>
+            <strong>link</strong> — inline hyperlink-style action
+          </li>
         </ul>
       </div>
     </div>
-  );
+  )
 }

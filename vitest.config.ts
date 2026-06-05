@@ -1,6 +1,6 @@
-import { defineConfig, coverageConfigDefaults } from "vitest/config";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { defineConfig, coverageConfigDefaults } from "vitest/config"
+import react from "@vitejs/plugin-react"
+import path from "path"
 
 export default defineConfig({
   plugins: [react()],
@@ -34,4 +34,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "."),
     },
   },
-});
+})

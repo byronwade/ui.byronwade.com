@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { CheckCircle2Icon, AlertTriangleIcon, InfoIcon } from "lucide-react";
+import { useState } from "react"
+import { CheckCircle2Icon, AlertTriangleIcon, InfoIcon } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -9,19 +9,19 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
-type Variant = "success" | "warning" | "info";
+type Variant = "success" | "warning" | "info"
 
 const variants: Record<
   Variant,
   {
-    icon: React.ElementType;
-    iconClass: string;
-    title: string;
-    description: string;
-    label: string;
+    icon: React.ElementType
+    iconClass: string
+    title: string
+    description: string
+    label: string
   }
 > = {
   success: {
@@ -48,18 +48,18 @@ const variants: Record<
       "A new version of the editor is available. Upgrade to access the latest improvements and fixes.",
     label: "Info",
   },
-};
+}
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
-  const [variant, setVariant] = useState<Variant>("success");
+  const [open, setOpen] = useState(false)
+  const [variant, setVariant] = useState<Variant>("success")
 
   function openWith(v: Variant) {
-    setVariant(v);
-    setOpen(true);
+    setVariant(v)
+    setOpen(true)
   }
 
-  const { icon: Icon, iconClass, title, description, label } = variants[variant];
+  const { icon: Icon, iconClass, title, description, label } = variants[variant]
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 p-16">
@@ -88,5 +88,5 @@ export default function Example() {
         </DialogContent>
       </Dialog>
     </div>
-  );
+  )
 }

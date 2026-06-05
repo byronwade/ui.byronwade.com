@@ -1,5 +1,5 @@
-import { PageHeader } from "@/components/page-header";
-import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/page-header"
+import { Button } from "@/components/ui/button"
 
 /**
  * Demonstrates PageHeader used inside a page layout with surrounding
@@ -22,7 +22,9 @@ export default function Example() {
         title="Project Alpha"
         description="Manage tasks, milestones, and collaborators for this project."
       >
-        <Button size="sm" variant="outline">Share</Button>
+        <Button size="sm" variant="outline">
+          Share
+        </Button>
         <Button size="sm">New Task</Button>
       </PageHeader>
 
@@ -32,5 +34,5 @@ export default function Example() {
         Page body content would follow here…
       </p>
     </div>
-  );
+  )
 }

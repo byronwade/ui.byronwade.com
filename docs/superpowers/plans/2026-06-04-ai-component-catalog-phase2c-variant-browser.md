@@ -26,17 +26,18 @@
 
 ## File map
 
-| File | Responsibility | Task |
-|---|---|---|
-| `app/(docs)/_components/variant-browser.tsx` (new) | `VariantView`/`VariantFilter` types, pure `filterVariants()`, client `VariantBrowser` (search + tag facet + anchored blocks) | 1 |
-| `tests/app/variant-browser.test.tsx` (new) | filter unit tests + render/filter/anchor/axe | 1 |
-| `app/(docs)/docs/[slug]/page.tsx` (modify) | Build `VariantView[]`; render `VariantBrowser` when variants authored, else keep examples | 2 |
+| File                                               | Responsibility                                                                                                               | Task |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---- |
+| `app/(docs)/_components/variant-browser.tsx` (new) | `VariantView`/`VariantFilter` types, pure `filterVariants()`, client `VariantBrowser` (search + tag facet + anchored blocks) | 1    |
+| `tests/app/variant-browser.test.tsx` (new)         | filter unit tests + render/filter/anchor/axe                                                                                 | 1    |
+| `app/(docs)/docs/[slug]/page.tsx` (modify)         | Build `VariantView[]`; render `VariantBrowser` when variants authored, else keep examples                                    | 2    |
 
 ---
 
 ## Task 1: `VariantBrowser` component + `filterVariants`
 
 **Files:**
+
 - Create: `app/(docs)/_components/variant-browser.tsx`
 - Test: `tests/app/variant-browser.test.tsx`
 
@@ -45,67 +46,110 @@
 Create `tests/app/variant-browser.test.tsx`:
 
 ```tsx
-import * as React from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, it, expect } from "vitest";
-import { axe } from "vitest-axe";
-import { VariantBrowser, filterVariants, type VariantView } from "@/app/(docs)/_components/variant-browser";
+import * as React from "react"
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { describe, it, expect } from "vitest"
+import { axe } from "vitest-axe"
+import {
+  VariantBrowser,
+  filterVariants,
+  type VariantView,
+} from "@/app/(docs)/_components/variant-browser"
 
 const variants: VariantView[] = [
-  { id: "solid", name: "Solid", tags: ["variant:default", "emphasis:high"], install: "npx shadcn@latest add @byronwade/button", preview: <button>Solid</button>, code: "<Button>Save</Button>" },
-  { id: "ghost", name: "Ghost", tags: ["variant:ghost", "emphasis:low"], install: "npx shadcn@latest add @byronwade/button", preview: <button>Ghost</button>, code: "<Button variant=\"ghost\">Learn</Button>" },
-  { id: "icon", name: "Icon only", tags: ["shape:icon"], install: "npx shadcn@latest add @byronwade/button", preview: <button>Icon</button>, code: "<Button size=\"icon\" />" },
-];
+  {
+    id: "solid",
+    name: "Solid",
+    tags: ["variant:default", "emphasis:high"],
+    install: "npx shadcn@latest add @byronwade/button",
+    preview: <button>Solid</button>,
+    code: "<Button>Save</Button>",
+  },
+  {
+    id: "ghost",
+    name: "Ghost",
+    tags: ["variant:ghost", "emphasis:low"],
+    install: "npx shadcn@latest add @byronwade/button",
+    preview: <button>Ghost</button>,
+    code: '<Button variant="ghost">Learn</Button>',
+  },
+  {
+    id: "icon",
+    name: "Icon only",
+    tags: ["shape:icon"],
+    install: "npx shadcn@latest add @byronwade/button",
+    preview: <button>Icon</button>,
+    code: '<Button size="icon" />',
+  },
+]
 
 describe("filterVariants", () => {
-  const base = { query: "", tags: [] };
+  const base = { query: "", tags: [] }
   it("returns all with no filter", () => {
-    expect(filterVariants(variants, base)).toHaveLength(3);
-  });
+    expect(filterVariants(variants, base)).toHaveLength(3)
+  })
   it("query matches name / id / tags", () => {
-    expect(filterVariants(variants, { ...base, query: "GHOST" }).map((v) => v.id)).toEqual(["ghost"]);
-    expect(filterVariants(variants, { ...base, query: "shape:icon" }).map((v) => v.id)).toEqual(["icon"]);
-  });
+    expect(
+      filterVariants(variants, { ...base, query: "GHOST" }).map((v) => v.id),
+    ).toEqual(["ghost"])
+    expect(
+      filterVariants(variants, { ...base, query: "shape:icon" }).map(
+        (v) => v.id,
+      ),
+    ).toEqual(["icon"])
+  })
   it("tag facet matches any selected tag", () => {
-    expect(filterVariants(variants, { ...base, tags: ["emphasis:low"] }).map((v) => v.id)).toEqual(["ghost"]);
-  });
+    expect(
+      filterVariants(variants, { ...base, tags: ["emphasis:low"] }).map(
+        (v) => v.id,
+      ),
+    ).toEqual(["ghost"])
+  })
   it("empty when nothing matches", () => {
-    expect(filterVariants(variants, { ...base, query: "zzz" })).toHaveLength(0);
-  });
-});
+    expect(filterVariants(variants, { ...base, query: "zzz" })).toHaveLength(0)
+  })
+})
 
 describe("VariantBrowser", () => {
   it("renders an anchored block per variant with name, tags, and install", () => {
-    const { container } = render(<VariantBrowser variants={variants} />);
-    expect(container.querySelector("#solid")).not.toBeNull();
-    expect(container.querySelector("#ghost")).not.toBeNull();
-    expect(screen.getByText("Solid")).toBeInTheDocument();
-    expect(screen.getByText("variant:ghost")).toBeInTheDocument();
+    const { container } = render(<VariantBrowser variants={variants} />)
+    expect(container.querySelector("#solid")).not.toBeNull()
+    expect(container.querySelector("#ghost")).not.toBeNull()
+    expect(screen.getByText("Solid")).toBeInTheDocument()
+    expect(screen.getByText("variant:ghost")).toBeInTheDocument()
     // per-variant install appears (at least once per variant)
-    expect(screen.getAllByText(/add @byronwade\/button/).length).toBeGreaterThanOrEqual(3);
-  });
+    expect(
+      screen.getAllByText(/add @byronwade\/button/).length,
+    ).toBeGreaterThanOrEqual(3)
+  })
 
   it("free-text search filters the rendered blocks", async () => {
-    const user = userEvent.setup();
-    const { container } = render(<VariantBrowser variants={variants} />);
-    await user.type(screen.getByRole("searchbox", { name: /search variants/i }), "ghost");
-    expect(container.querySelector("#ghost")).not.toBeNull();
-    expect(container.querySelector("#solid")).toBeNull();
-  });
+    const user = userEvent.setup()
+    const { container } = render(<VariantBrowser variants={variants} />)
+    await user.type(
+      screen.getByRole("searchbox", { name: /search variants/i }),
+      "ghost",
+    )
+    expect(container.querySelector("#ghost")).not.toBeNull()
+    expect(container.querySelector("#solid")).toBeNull()
+  })
 
   it("shows an empty state when nothing matches", async () => {
-    const user = userEvent.setup();
-    render(<VariantBrowser variants={variants} />);
-    await user.type(screen.getByRole("searchbox", { name: /search variants/i }), "zzz");
-    expect(screen.getByText(/No variants match/i)).toBeInTheDocument();
-  });
+    const user = userEvent.setup()
+    render(<VariantBrowser variants={variants} />)
+    await user.type(
+      screen.getByRole("searchbox", { name: /search variants/i }),
+      "zzz",
+    )
+    expect(screen.getByText(/No variants match/i)).toBeInTheDocument()
+  })
 
   it("has no axe violations", async () => {
-    const { container } = render(<VariantBrowser variants={variants} />);
-    expect(await axe(container)).toHaveNoViolations();
-  });
-});
+    const { container } = render(<VariantBrowser variants={variants} />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+})
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -116,55 +160,67 @@ Expected: FAIL — module does not exist.
 - [ ] **Step 3: Create `app/(docs)/_components/variant-browser.tsx`**
 
 ```tsx
-"use client";
+"use client"
 
-import * as React from "react";
-import { Search } from "lucide-react";
+import * as React from "react"
+import { Search } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { ExampleTabs } from "@/app/(docs)/_components/example-tabs";
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
-import { FilterPill } from "@/components/ui/filter-pill";
+import { cn } from "@/lib/utils"
+import { ExampleTabs } from "@/app/(docs)/_components/example-tabs"
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { FilterPill } from "@/components/ui/filter-pill"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export type VariantView = {
-  id: string;
-  name: string;
-  tags: string[];
-  install: string;
-  preview: React.ReactNode;
-  code: string;
-};
+  id: string
+  name: string
+  tags: string[]
+  install: string
+  preview: React.ReactNode
+  code: string
+}
 
-export type VariantFilter = { query: string; tags: string[] };
+export type VariantFilter = { query: string; tags: string[] }
 
-export function filterVariants(variants: VariantView[], f: VariantFilter): VariantView[] {
-  const q = f.query.trim().toLowerCase();
+export function filterVariants(
+  variants: VariantView[],
+  f: VariantFilter,
+): VariantView[] {
+  const q = f.query.trim().toLowerCase()
   return variants.filter(
     (v) =>
-      (q === "" || `${v.name} ${v.id} ${v.tags.join(" ")}`.toLowerCase().includes(q)) &&
+      (q === "" ||
+        `${v.name} ${v.id} ${v.tags.join(" ")}`.toLowerCase().includes(q)) &&
       (f.tags.length === 0 || f.tags.some((t) => v.tags.includes(t))),
-  );
+  )
 }
 
 function uniqueSorted(values: string[]) {
-  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b))
 }
 
 export function VariantBrowser({ variants }: { variants: VariantView[] }) {
-  const [query, setQuery] = React.useState("");
-  const [tags, setTags] = React.useState<string[]>([]);
+  const [query, setQuery] = React.useState("")
+  const [tags, setTags] = React.useState<string[]>([])
 
-  const allTags = React.useMemo(() => uniqueSorted(variants.flatMap((v) => v.tags)), [variants]);
-  const filtered = React.useMemo(() => filterVariants(variants, { query, tags }), [variants, query, tags]);
+  const allTags = React.useMemo(
+    () => uniqueSorted(variants.flatMap((v) => v.tags)),
+    [variants],
+  )
+  const filtered = React.useMemo(
+    () => filterVariants(variants, { query, tags }),
+    [variants, query, tags],
+  )
 
   const toggleTag = (t: string) =>
-    setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
+    setTags((prev) =>
+      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t],
+    )
 
   return (
     <div className="space-y-6">
@@ -212,8 +268,8 @@ export function VariantBrowser({ variants }: { variants: VariantView[] }) {
           <button
             type="button"
             onClick={() => {
-              setQuery("");
-              setTags([]);
+              setQuery("")
+              setTags([])
             }}
             className="mt-2 text-sm text-brand underline-offset-4 hover:underline"
           >
@@ -252,7 +308,7 @@ export function VariantBrowser({ variants }: { variants: VariantView[] }) {
         </div>
       )}
     </div>
-  );
+  )
 }
 ```
 
@@ -273,6 +329,7 @@ git commit -m "feat(catalog): add VariantBrowser (filterable, anchored variant s
 ## Task 2: Render the VariantBrowser on the detail page
 
 **Files:**
+
 - Modify: `app/(docs)/docs/[slug]/page.tsx`
 
 - [ ] **Step 1: Read the current page**
@@ -282,8 +339,12 @@ Read `app/(docs)/docs/[slug]/page.tsx`. Note: it imports `bySlug, components`; r
 - [ ] **Step 2: Add the VariantBrowser import**
 
 The page already imports `{ bySlug, components }` from `@/content/components` and `readFileSync`/`join` (used by the existing `rendered` builder). Add ONE new import line (the builder branches on `doc.variants` directly — no `getVariants` needed):
+
 ```ts
-import { VariantBrowser, type VariantView } from "@/app/(docs)/_components/variant-browser";
+import {
+  VariantBrowser,
+  type VariantView,
+} from "@/app/(docs)/_components/variant-browser"
 ```
 
 - [ ] **Step 3: Build `VariantView[]` and branch the Examples section**
@@ -291,46 +352,62 @@ import { VariantBrowser, type VariantView } from "@/app/(docs)/_components/varia
 After `const rendered = demos.map(...)` (the existing array), add a base→demo lookup and the authored-variant view builder:
 
 ```tsx
-  const byBase = new Map(
-    demos.map((d) => [d.file.split("/").pop()!.replace(/\.tsx$/, ""), d]),
-  );
-  const authoredVariants = doc.variants ?? [];
-  const variantViews: VariantView[] = authoredVariants.map((v) => {
-    const demo = byBase.get(v.example);
-    const Comp = demo?.Component;
-    return {
-      id: v.id,
-      name: v.name,
-      tags: v.tags,
-      install: v.install ?? `npx shadcn@latest add @byronwade/${doc.slug}`,
-      preview: Comp ? <Comp /> : null,
-      code: demo
-        ? readFileSync(join(process.cwd(), "content/examples", demo.file), "utf8").trimEnd()
-        : "",
-    };
-  });
+const byBase = new Map(
+  demos.map((d) => [
+    d.file
+      .split("/")
+      .pop()!
+      .replace(/\.tsx$/, ""),
+    d,
+  ]),
+)
+const authoredVariants = doc.variants ?? []
+const variantViews: VariantView[] = authoredVariants.map((v) => {
+  const demo = byBase.get(v.example)
+  const Comp = demo?.Component
+  return {
+    id: v.id,
+    name: v.name,
+    tags: v.tags,
+    install: v.install ?? `npx shadcn@latest add @byronwade/${doc.slug}`,
+    preview: Comp ? <Comp /> : null,
+    code: demo
+      ? readFileSync(
+          join(process.cwd(), "content/examples", demo.file),
+          "utf8",
+        ).trimEnd()
+      : "",
+  }
+})
 ```
 
 Then, in the JSX, replace the existing Examples `<section>` (the one with `<Label>{rendered.length > 1 ? "Examples" : "Example"}</Label>` and the `rendered.map(...)`) so it branches:
 
 ```tsx
-      {variantViews.length > 0 ? (
-        <section className="space-y-6">
-          <Label>Variants</Label>
-          <VariantBrowser variants={variantViews} />
-        </section>
-      ) : (
-        rendered.length > 0 && (
-          <section className="space-y-6">
-            <Label>{rendered.length > 1 ? "Examples" : "Example"}</Label>
-            <div className="space-y-8">
-              {rendered.map(({ name, Component, code }) => (
-                <ExampleTabs key={name} title={name} preview={<Component />} code={code} />
-              ))}
-            </div>
-          </section>
-        )
-      )}
+{
+  variantViews.length > 0 ? (
+    <section className="space-y-6">
+      <Label>Variants</Label>
+      <VariantBrowser variants={variantViews} />
+    </section>
+  ) : (
+    rendered.length > 0 && (
+      <section className="space-y-6">
+        <Label>{rendered.length > 1 ? "Examples" : "Example"}</Label>
+        <div className="space-y-8">
+          {rendered.map(({ name, Component, code }) => (
+            <ExampleTabs
+              key={name}
+              title={name}
+              preview={<Component />}
+              code={code}
+            />
+          ))}
+        </div>
+      </section>
+    )
+  )
+}
 ```
 
 Leave the Installation and Props sections unchanged.
@@ -384,4 +461,7 @@ If a dev server is available: `npm run dev`, open `/docs/button`, confirm: a "Va
 - **2b — Thumbnails + windowed grid** for the catalog cards.
 - **2c-nav — Retire the exhaustive `SiteNav` sidebar** in favor of gallery-first + a light contextual rail (deferred from 2c to keep this plan focused on the variant experience).
 - **2d — Full migration** of `tags`/`variants` across the other ~118 components (run when `content/components.ts` is not being edited concurrently), then index all variants in search + llms.txt.
+
+```
+
 ```

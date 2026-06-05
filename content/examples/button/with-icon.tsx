@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
   Check,
@@ -7,7 +7,7 @@ import {
   RefreshCw,
   Search,
   Upload,
-} from "lucide-react";
+} from "lucide-react"
 
 export default function Example() {
   return (
@@ -64,5 +64,5 @@ export default function Example() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

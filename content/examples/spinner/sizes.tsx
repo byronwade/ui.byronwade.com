@@ -1,4 +1,4 @@
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/components/ui/spinner"
 
 export default function Example() {
   return (
@@ -16,5 +16,5 @@ export default function Example() {
         <span className="font-mono text-xs text-muted-foreground">lg</span>
       </div>
     </div>
-  );
+  )
 }

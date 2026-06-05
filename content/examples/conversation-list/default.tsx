@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { MessagesProvider } from "@/lib/comms-store";
-import { ConversationList } from "@/components/conversation-list";
+import { MessagesProvider } from "@/lib/comms-store"
+import { ConversationList } from "@/components/conversation-list"
 
 export default function Example() {
   return (
@@ -12,5 +12,5 @@ export default function Example() {
         </MessagesProvider>
       </div>
     </div>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Slider as SliderPrimitive } from "@base-ui/react/slider";
+import * as React from "react"
+import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 function Slider({
   className,
@@ -15,22 +15,22 @@ function Slider({
 }: SliderPrimitive.Root.Props) {
   // One thumb per value; an array value/defaultValue makes it a range slider.
   const thumbCount = React.useMemo(() => {
-    if (Array.isArray(value)) return value.length;
-    if (Array.isArray(defaultValue)) return defaultValue.length;
-    return 1;
-  }, [value, defaultValue]);
+    if (Array.isArray(value)) return value.length
+    if (Array.isArray(defaultValue)) return defaultValue.length
+    return 1
+  }, [value, defaultValue])
 
   // The Root's aria-label labels the group; each thumb renders its own range
   // input that needs a label too (axe flags an unlabelled input otherwise).
   const ariaLabel = (props as Record<string, unknown>)["aria-label"] as
     | string
-    | undefined;
+    | undefined
   const thumbLabel = (i: number) =>
     ariaLabel
       ? thumbCount > 1
         ? `${ariaLabel} ${i + 1}`
         : ariaLabel
-      : undefined;
+      : undefined
 
   return (
     <SliderPrimitive.Root
@@ -69,7 +69,7 @@ function Slider({
         </SliderPrimitive.Track>
       </SliderPrimitive.Control>
     </SliderPrimitive.Root>
-  );
+  )
 }
 
-export { Slider };
+export { Slider }

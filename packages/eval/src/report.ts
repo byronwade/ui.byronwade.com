@@ -1,14 +1,14 @@
-import type { EvalReport } from "./types.js";
+import type { EvalReport } from "./types.js"
 
 export function toJson(report: EvalReport): string {
-  return JSON.stringify(report, null, 2) + "\n";
+  return JSON.stringify(report, null, 2) + "\n"
 }
 
-const pct = (n: number) => `${Math.round(n * 100)}%`;
+const pct = (n: number) => `${Math.round(n * 100)}%`
 
 export function toMarkdown(report: EvalReport): string {
-  const w = report.conditions["with-rule"];
-  const b = report.conditions.baseline;
+  const w = report.conditions["with-rule"]
+  const b = report.conditions.baseline
   const lines = [
     `# On-system eval — ${report.date}`,
     ``,
@@ -24,6 +24,6 @@ export function toMarkdown(report: EvalReport): string {
     `| with-rule | ${pct(w.passRate)} | ${w.meanViolations.toFixed(2)} |`,
     ``,
     `> Single generation per cell at temperature 0; a dated snapshot, not a guaranteed-stable number.`,
-  ];
-  return lines.join("\n") + "\n";
+  ]
+  return lines.join("\n") + "\n"
 }

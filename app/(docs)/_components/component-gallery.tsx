@@ -1,13 +1,17 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { Search, X } from "lucide-react";
+import * as React from "react"
+import Link from "next/link"
+import { Search, X } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { filterCatalog, type CatalogItem, type CatalogFilter } from "@/content/catalog";
-import { GradientAvatar } from "@/components/ui/gradient-avatar";
-import { FilterPill } from "@/components/ui/filter-pill";
+import { cn } from "@/lib/utils"
+import {
+  filterCatalog,
+  type CatalogItem,
+  type CatalogFilter,
+} from "@/content/catalog"
+import { GradientAvatar } from "@/components/ui/gradient-avatar"
+import { FilterPill } from "@/components/ui/filter-pill"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -15,10 +19,10 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 function uniqueSorted(values: string[]) {
-  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b))
 }
 
 /**
@@ -28,12 +32,16 @@ function uniqueSorted(values: string[]) {
  * freshly-added component not yet captured).
  */
 function Thumb({ slug, name }: { slug: string; name: string }) {
-  const [error, setError] = React.useState(false);
+  const [error, setError] = React.useState(false)
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border/60 bg-background">
       {error ? (
         <div className="grid h-full place-items-center">
-          <GradientAvatar seed={name} size="lg" className="rounded-xl opacity-60" />
+          <GradientAvatar
+            seed={name}
+            size="lg"
+            className="rounded-xl opacity-60"
+          />
         </div>
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
@@ -46,11 +54,17 @@ function Thumb({ slug, name }: { slug: string; name: string }) {
         />
       )}
     </div>
-  );
+  )
 }
 
 /** A removable active-filter chip. */
-function ActivePill({ label, onRemove }: { label: string; onRemove: () => void }) {
+function ActivePill({
+  label,
+  onRemove,
+}: {
+  label: string
+  onRemove: () => void
+}) {
   return (
     <span className="inline-flex h-8 items-center gap-1 rounded-full edge bg-muted pl-3 pr-1.5 text-sm font-medium">
       {label}
@@ -63,38 +77,52 @@ function ActivePill({ label, onRemove }: { label: string; onRemove: () => void }
         <X className="size-3.5" />
       </button>
     </span>
-  );
+  )
 }
 
 export function ComponentGallery({ items }: { items: CatalogItem[] }) {
-  const [query, setQuery] = React.useState("");
-  const [groups, setGroups] = React.useState<string[]>([]);
-  const [tags, setTags] = React.useState<string[]>([]);
-  const [sort, setSort] = React.useState<CatalogFilter["sort"]>("featured");
+  const [query, setQuery] = React.useState("")
+  const [groups, setGroups] = React.useState<string[]>([])
+  const [tags, setTags] = React.useState<string[]>([])
+  const [sort, setSort] = React.useState<CatalogFilter["sort"]>("featured")
 
-  const allGroups = React.useMemo(() => uniqueSorted(items.map((i) => i.group)), [items]);
-  const allTags = React.useMemo(() => uniqueSorted(items.flatMap((i) => i.tags)), [items]);
+  const allGroups = React.useMemo(
+    () => uniqueSorted(items.map((i) => i.group)),
+    [items],
+  )
+  const allTags = React.useMemo(
+    () => uniqueSorted(items.flatMap((i) => i.tags)),
+    [items],
+  )
 
   const filtered = React.useMemo(
     () => filterCatalog(items, { query, groups, tags, sort }),
     [items, query, groups, tags, sort],
-  );
+  )
 
-  const toggle = (set: React.Dispatch<React.SetStateAction<string[]>>, v: string) =>
-    set((prev) => (prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v]));
+  const toggle = (
+    set: React.Dispatch<React.SetStateAction<string[]>>,
+    v: string,
+  ) =>
+    set((prev) =>
+      prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v],
+    )
 
-  const hasFilters = groups.length > 0 || tags.length > 0 || query.trim() !== "";
+  const hasFilters = groups.length > 0 || tags.length > 0 || query.trim() !== ""
   const clearAll = () => {
-    setGroups([]);
-    setTags([]);
-    setQuery("");
-  };
+    setGroups([])
+    setTags([])
+    setQuery("")
+  }
 
   return (
     <div>
       {/* ── Search ──────────────────────────────────────────────────── */}
       <div className="relative mb-4">
-        <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+        <Search
+          className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+          aria-hidden
+        />
         <input
           type="search"
           value={query}
@@ -143,10 +171,18 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
           )}
 
           {groups.map((g) => (
-            <ActivePill key={`g-${g}`} label={g} onRemove={() => toggle(setGroups, g)} />
+            <ActivePill
+              key={`g-${g}`}
+              label={g}
+              onRemove={() => toggle(setGroups, g)}
+            />
           ))}
           {tags.map((t) => (
-            <ActivePill key={`t-${t}`} label={t} onRemove={() => toggle(setTags, t)} />
+            <ActivePill
+              key={`t-${t}`}
+              label={t}
+              onRemove={() => toggle(setTags, t)}
+            />
           ))}
           {hasFilters && (
             <button
@@ -161,19 +197,28 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
 
         <div className="flex items-center gap-4">
           <p className="hidden text-sm text-muted-foreground sm:block">
-            <span className="tabular-nums text-foreground">{filtered.length}</span> component
+            <span className="tabular-nums text-foreground">
+              {filtered.length}
+            </span>{" "}
+            component
             {filtered.length === 1 ? "" : "s"}
           </p>
           <DropdownMenu>
             <DropdownMenuTrigger
-              render={<FilterPill>{sort === "featured" ? "Featured" : "A–Z"}</FilterPill>}
+              render={
+                <FilterPill>
+                  {sort === "featured" ? "Featured" : "A–Z"}
+                </FilterPill>
+              }
             />
             <DropdownMenuContent align="end" className="w-40">
               <DropdownMenuRadioGroup
                 value={sort}
                 onValueChange={(v) => setSort(v as CatalogFilter["sort"])}
               >
-                <DropdownMenuRadioItem value="featured">Featured</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="featured">
+                  Featured
+                </DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="az">A–Z</DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
@@ -215,7 +260,8 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
                         {item.name}
                       </span>
                       <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
-                        {item.variantCount} variant{item.variantCount === 1 ? "" : "s"}
+                        {item.variantCount} variant
+                        {item.variantCount === 1 ? "" : "s"}
                       </span>
                     </div>
                     <p className="truncate text-[13px] leading-relaxed text-muted-foreground">
@@ -229,5 +275,5 @@ export function ComponentGallery({ items }: { items: CatalogItem[] }) {
         </ul>
       )}
     </div>
-  );
+  )
 }

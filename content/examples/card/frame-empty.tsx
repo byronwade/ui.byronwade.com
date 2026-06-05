@@ -1,4 +1,4 @@
-import { FolderIcon, PlusIcon } from "lucide-react";
+import { FolderIcon, PlusIcon } from "lucide-react"
 import {
   Card,
   CardPanel,
@@ -7,9 +7,9 @@ import {
   CardFrameTitle,
   CardFrameDescription,
   CardFrameAction,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { EmptyState } from "@/components/empty-state";
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { EmptyState } from "@/components/empty-state"
 
 export default function Example() {
   return (
@@ -37,5 +37,5 @@ export default function Example() {
         </Card>
       </CardFrame>
     </div>
-  );
+  )
 }

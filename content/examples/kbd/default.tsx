@@ -1,4 +1,4 @@
-import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import { Kbd, KbdGroup } from "@/components/ui/kbd"
 
 export default function Example() {
   return (
@@ -21,5 +21,5 @@ export default function Example() {
       <Kbd>Enter</Kbd>
       <Kbd size="lg">Shift</Kbd>
     </div>
-  );
+  )
 }

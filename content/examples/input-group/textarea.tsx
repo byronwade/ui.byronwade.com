@@ -1,18 +1,18 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { SendIcon } from "lucide-react";
+import { useState } from "react"
+import { SendIcon } from "lucide-react"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupText,
   InputGroupTextarea,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
 
 export default function Example() {
-  const [value, setValue] = useState("");
-  const max = 280;
+  const [value, setValue] = useState("")
+  const max = 280
 
   return (
     <InputGroup className="max-w-sm">
@@ -36,5 +36,5 @@ export default function Example() {
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
-  );
+  )
 }

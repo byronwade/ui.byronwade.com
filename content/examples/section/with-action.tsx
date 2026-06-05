@@ -1,7 +1,7 @@
-import { Section, SettingsList, SettingRow } from "@/components/section";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Section, SettingsList, SettingRow } from "@/components/section"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 export default function Example() {
   return (
@@ -83,5 +83,5 @@ export default function Example() {
         </SettingsList>
       </Section>
     </div>
-  );
+  )
 }

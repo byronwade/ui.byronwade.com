@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
 // Canvas archetype — a full-bleed spatial map with floating glass overlays.
 // uses: InputGroup, Button, StatusPill, StatusDot, GradientAvatar, FilterPill, Separator
-import * as React from "react";
+import * as React from "react"
 import {
   Bookmark,
   Clock,
@@ -13,42 +13,82 @@ import {
   Plus,
   Search,
   Star,
-} from "lucide-react";
+} from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { GradientAvatar } from "@/components/ui/gradient-avatar";
-import { Separator } from "@/components/ui/separator";
-import { StatusDot, type StatusTone } from "@/components/ui/status-dot";
-import { StatusPill } from "@/components/status-pill";
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { GradientAvatar } from "@/components/ui/gradient-avatar"
+import { Separator } from "@/components/ui/separator"
+import { StatusDot, type StatusTone } from "@/components/ui/status-dot"
+import { StatusPill } from "@/components/status-pill"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
 
 interface Place {
-  id: string;
-  name: string;
-  category: string;
-  rating: number;
-  distance: string;
-  open: boolean;
-  x: number;
-  y: number;
-  tone: StatusTone;
+  id: string
+  name: string
+  category: string
+  rating: number
+  distance: string
+  open: boolean
+  x: number
+  y: number
+  tone: StatusTone
 }
 
 const places: Place[] = [
-  { id: "p1", name: "Cartographer Coffee", category: "Café · $$", rating: 4.8, distance: "0.3 mi", open: true, x: 38, y: 42, tone: "success" },
-  { id: "p2", name: "Meridian Books", category: "Bookstore", rating: 4.6, distance: "0.5 mi", open: true, x: 62, y: 32, tone: "info" },
-  { id: "p3", name: "North Pier Market", category: "Grocery · $", rating: 4.4, distance: "0.7 mi", open: false, x: 55, y: 62, tone: "warning" },
-  { id: "p4", name: "Atlas Athletic Club", category: "Gym", rating: 4.2, distance: "1.1 mi", open: true, x: 26, y: 68, tone: "neutral" },
-];
+  {
+    id: "p1",
+    name: "Cartographer Coffee",
+    category: "Café · $$",
+    rating: 4.8,
+    distance: "0.3 mi",
+    open: true,
+    x: 38,
+    y: 42,
+    tone: "success",
+  },
+  {
+    id: "p2",
+    name: "Meridian Books",
+    category: "Bookstore",
+    rating: 4.6,
+    distance: "0.5 mi",
+    open: true,
+    x: 62,
+    y: 32,
+    tone: "info",
+  },
+  {
+    id: "p3",
+    name: "North Pier Market",
+    category: "Grocery · $",
+    rating: 4.4,
+    distance: "0.7 mi",
+    open: false,
+    x: 55,
+    y: 62,
+    tone: "warning",
+  },
+  {
+    id: "p4",
+    name: "Atlas Athletic Club",
+    category: "Gym",
+    rating: 4.2,
+    distance: "1.1 mi",
+    open: true,
+    x: 26,
+    y: 68,
+    tone: "neutral",
+  },
+]
 
 export function CanvasArchetype() {
-  const [activeId, setActiveId] = React.useState(places[0].id);
-  const active = places.find((p) => p.id === activeId) ?? places[0];
+  const [activeId, setActiveId] = React.useState(places[0].id)
+  const active = places.find((p) => p.id === activeId) ?? places[0]
 
   return (
     <div className="relative h-dvh overflow-hidden bg-muted/40 text-foreground">
@@ -70,7 +110,7 @@ export function CanvasArchetype() {
 
       {/* ── Pins ───────────────────────────────────────────────────── */}
       {places.map((p) => {
-        const isActive = p.id === activeId;
+        const isActive = p.id === activeId
         return (
           <button
             key={p.id}
@@ -98,7 +138,7 @@ export function CanvasArchetype() {
               </span>
             )}
           </button>
-        );
+        )
       })}
 
       {/* ── Top search bar (floating glass) ───────────────────────── */}
@@ -108,7 +148,10 @@ export function CanvasArchetype() {
             <InputGroupAddon>
               <Search />
             </InputGroupAddon>
-            <InputGroupInput placeholder="Search this area…" defaultValue="Near Mission District" />
+            <InputGroupInput
+              placeholder="Search this area…"
+              defaultValue="Near Mission District"
+            />
           </InputGroup>
           <div className="hidden items-center gap-1.5 sm:flex">
             <button
@@ -132,8 +175,12 @@ export function CanvasArchetype() {
       {/* ── Results panel (floating, left) ────────────────────────── */}
       <aside className="absolute left-3 top-20 z-10 hidden w-80 flex-col overflow-hidden rounded-2xl bg-card/85 shadow-float backdrop-blur lg:flex sm:left-4">
         <div className="flex items-center justify-between px-4 py-3">
-          <p className="text-sm font-semibold tracking-tight">{places.length} places nearby</p>
-          <span className="text-xs text-muted-foreground">Mission District</span>
+          <p className="text-sm font-semibold tracking-tight">
+            {places.length} places nearby
+          </p>
+          <span className="text-xs text-muted-foreground">
+            Mission District
+          </span>
         </div>
         <Separator />
         <div className="max-h-[min(60vh,420px)] divide-y divide-border overflow-y-auto">
@@ -172,8 +219,12 @@ export function CanvasArchetype() {
           <div className="space-y-3 p-4">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
-                <h2 className="truncate text-base font-semibold tracking-tight">{active.name}</h2>
-                <p className="text-xs text-muted-foreground">{active.category}</p>
+                <h2 className="truncate text-base font-semibold tracking-tight">
+                  {active.name}
+                </h2>
+                <p className="text-xs text-muted-foreground">
+                  {active.category}
+                </p>
               </div>
               <StatusPill tone={active.open ? "success" : "danger"}>
                 {active.open ? "Open" : "Closed"}
@@ -210,11 +261,19 @@ export function CanvasArchetype() {
       {/* ── Map controls (floating, bottom-right) ─────────────────── */}
       <div className="absolute bottom-4 right-3 z-10 flex flex-col gap-2 sm:right-4">
         <div className="flex flex-col overflow-hidden rounded-full bg-card/85 shadow-float backdrop-blur">
-          <button type="button" aria-label="Zoom in" className="grid size-9 place-items-center transition-colors hover:bg-muted">
+          <button
+            type="button"
+            aria-label="Zoom in"
+            className="grid size-9 place-items-center transition-colors hover:bg-muted"
+          >
             <Plus className="size-4" />
           </button>
           <Separator />
-          <button type="button" aria-label="Zoom out" className="grid size-9 place-items-center transition-colors hover:bg-muted">
+          <button
+            type="button"
+            aria-label="Zoom out"
+            className="grid size-9 place-items-center transition-colors hover:bg-muted"
+          >
             <Minus className="size-4" />
           </button>
         </div>
@@ -227,5 +286,5 @@ export function CanvasArchetype() {
         </button>
       </div>
     </div>
-  );
+  )
 }

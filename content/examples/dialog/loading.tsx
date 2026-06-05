@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Loader2Icon } from "lucide-react";
+import { useState } from "react"
+import { Loader2Icon } from "lucide-react"
 import {
   Dialog,
   DialogTrigger,
@@ -11,20 +11,20 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [done, setDone] = useState(false)
 
   async function handlePublish() {
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 2000));
-    setLoading(false);
-    setDone(true);
-    setOpen(false);
+    setLoading(true)
+    await new Promise((r) => setTimeout(r, 2000))
+    setLoading(false)
+    setDone(true)
+    setOpen(false)
   }
 
   return (
@@ -70,5 +70,5 @@ export default function Example() {
         </DialogContent>
       </Dialog>
     </div>
-  );
+  )
 }

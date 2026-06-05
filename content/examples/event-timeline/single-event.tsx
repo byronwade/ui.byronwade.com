@@ -1,12 +1,13 @@
-import { EventTimeline, type TimelineEvent } from "@/components/event-timeline";
+import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
 
 const events: TimelineEvent[] = [
   {
     title: "Waiting for first event",
-    description: "No activity recorded yet. Events will appear here as they occur.",
+    description:
+      "No activity recorded yet. Events will appear here as they occur.",
     tone: "neutral",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -17,5 +18,5 @@ export default function Example() {
       </p>
       <EventTimeline events={events} />
     </div>
-  );
+  )
 }

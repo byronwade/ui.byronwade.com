@@ -14,13 +14,13 @@
 
 ## Conventions / file structure (per component)
 
-| Path | Responsibility |
-|---|---|
-| `registry/components/ai-elements/<name>.tsx` | Ported component source (hand-maintained) |
-| `registry.json` → new item `ai-<name>` | type `registry:component`, `dependencies` (npm), `registryDependencies` (`@byronwade/foundation`, `@byronwade/utils`, + any of our primitives it composes, + cross `@byronwade/ai-<other>`), `files` → target `components/ai-elements/<name>.tsx` |
-| `registry/rules/byronwade-ui.mdc` | Add `ai-<name>` to the AI/agent components list (section 1) |
-| `content/examples/ai-<name>/default.tsx` | One runnable example (hand-maintained) |
-| `tests/components/ai-<name>.test.tsx` | Variants/states/interactions + axe, ≥ coverage thresholds |
+| Path                                         | Responsibility                                                                                                                                                                                                                                    |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `registry/components/ai-elements/<name>.tsx` | Ported component source (hand-maintained)                                                                                                                                                                                                         |
+| `registry.json` → new item `ai-<name>`       | type `registry:component`, `dependencies` (npm), `registryDependencies` (`@byronwade/foundation`, `@byronwade/utils`, + any of our primitives it composes, + cross `@byronwade/ai-<other>`), `files` → target `components/ai-elements/<name>.tsx` |
+| `registry/rules/byronwade-ui.mdc`            | Add `ai-<name>` to the AI/agent components list (section 1)                                                                                                                                                                                       |
+| `content/examples/ai-<name>/default.tsx`     | One runnable example (hand-maintained)                                                                                                                                                                                                            |
+| `tests/components/ai-<name>.test.tsx`        | Variants/states/interactions + axe, ≥ coverage thresholds                                                                                                                                                                                         |
 
 If a port needs a primitive we lack, build it as a proper `registry:ui` item first (its own item + test + example + rule entry).
 
@@ -40,10 +40,12 @@ If a port needs a primitive we lack, build it as a proper `registry:ui` item fir
 Legend: **L**=source lines, **ext**=external npm deps, **ui**=our primitives it composes.
 
 ### Tier 0 — trivial, no deps
+
 - [x] `loader` — 96L — ext: — — ui: — (pure SVG spinner + cn) ✅ committed f561222 (10 tests, axe)
 - [ ] `shimmer` — 64L — ext: — — ui: — (animated text shimmer)
 
 ### Tier 1 — composes our primitives / single functional dep
+
 - [ ] `suggestion` — 56L — ui: button
 - [ ] `image` — 26L — ext: ai (FileUIPart type)
 - [ ] `open-in-chat` — 365L — ui: button
@@ -62,14 +64,16 @@ Legend: **L**=source lines, **ext**=external npm deps, **ui**=our primitives it 
 - [ ] `attachments` — (GitHub) — ui: button, hover-card — ext: ai
 
 ### Tier 2 — heavier composites
+
 - [ ] `reasoning` — 180L — ext: streamdown (+ local controllable-state)
 - [ ] `tool` — 165L — ext: ai — ui: badge
 - [ ] `message` — 448L — ext: ai, streamdown — ui: button
-- [ ] `prompt-input` — 1413L — ext: ai, nanoid — ui: button  ⚠️ largest
+- [ ] `prompt-input` — 1413L — ext: ai, nanoid — ui: button ⚠️ largest
 - [ ] `chain-of-thought` — 231L — ui: badge (+ local controllable-state)
 - [ ] `artifact` — 147L — ui: button
 
 ### Tier 3 — React-Flow workflow canvas (hard dep `@xyflow/react`)
+
 - [ ] `node` — 71L
 - [ ] `edge` — 140L
 - [ ] `connection` — 28L
@@ -79,6 +83,7 @@ Legend: **L**=source lines, **ext**=external npm deps, **ui**=our primitives it 
 - [ ] `toolbar` — 16L
 
 ## Notes / risks
+
 - **Scale:** ~6,000 lines of source across 31 components + equivalent tests. This spans many sessions; commit each component green.
 - **Collision:** concurrent writer on `registry.json`/rule/`button.tsx` — append-only, re-read before edit.
 - **`@radix-ui/react-use-controllable-state`** (reasoning, chain-of-thought): replace with a small local `useControllableState` in `registry/lib/` (or inline) to avoid a Radix dep.

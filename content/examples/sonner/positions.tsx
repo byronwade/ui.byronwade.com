@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Toaster } from "@/components/ui/sonner";
-import { toast, type ToasterProps } from "sonner";
+import { useState } from "react"
+import { Toaster } from "@/components/ui/sonner"
+import { toast, type ToasterProps } from "sonner"
 
 const positions: ToasterProps["position"][] = [
   "top-left",
@@ -11,10 +11,11 @@ const positions: ToasterProps["position"][] = [
   "bottom-left",
   "bottom-center",
   "bottom-right",
-];
+]
 
 export default function Example() {
-  const [position, setPosition] = useState<ToasterProps["position"]>("bottom-right");
+  const [position, setPosition] =
+    useState<ToasterProps["position"]>("bottom-right")
 
   return (
     <div className="flex flex-col items-start gap-4 p-8">
@@ -34,8 +35,8 @@ export default function Example() {
                 : "bg-background text-foreground border-border hover:bg-muted"
             }`}
             onClick={() => {
-              setPosition(pos);
-              toast.info(`Toast at ${pos}.`);
+              setPosition(pos)
+              toast.info(`Toast at ${pos}.`)
             }}
           >
             {pos}
@@ -43,5 +44,5 @@ export default function Example() {
         ))}
       </div>
     </div>
-  );
+  )
 }

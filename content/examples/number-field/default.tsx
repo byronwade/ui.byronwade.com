@@ -4,7 +4,7 @@ import {
   NumberFieldInput,
   NumberFieldDecrement,
   NumberFieldIncrement,
-} from "@/components/ui/number-field";
+} from "@/components/ui/number-field"
 
 export default function Example() {
   return (
@@ -17,5 +17,5 @@ export default function Example() {
         </NumberFieldGroup>
       </NumberField>
     </div>
-  );
+  )
 }

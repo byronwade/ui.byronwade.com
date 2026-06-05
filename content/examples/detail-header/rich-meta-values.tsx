@@ -1,6 +1,6 @@
-import { DetailHeader } from "@/components/detail-header";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { DetailHeader } from "@/components/detail-header"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 /**
  * Shows that meta `value` accepts any ReactNode — inline badges,
@@ -14,8 +14,12 @@ export default function Example() {
         badge={<Badge variant="success">Running</Badge>}
         actions={
           <>
-            <Button variant="outline" size="sm">Pause</Button>
-            <Button variant="destructive" size="sm">Stop</Button>
+            <Button variant="outline" size="sm">
+              Pause
+            </Button>
+            <Button variant="destructive" size="sm">
+              Stop
+            </Button>
           </>
         }
         meta={[
@@ -68,5 +72,5 @@ export default function Example() {
         ]}
       />
     </div>
-  );
+  )
 }

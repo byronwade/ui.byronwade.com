@@ -32,6 +32,7 @@ one-frame snap to full panel width). `npx vitest run tests/components/morph-dock
 ## Task 1: Foundation token `--dock-tool`
 
 **Files:**
+
 - Modify: `registry.json` (foundation `cssVars`: `theme`, `light`, `dark`)
 - Modify: `registry/rules/byronwade-ui.mdc` (token list)
 
@@ -81,6 +82,7 @@ Adds `group?: string` to `MorphDockItem`; a seam is drawn between adjacent rende
 items whose `group` differs.
 
 **Files:**
+
 - Modify: `registry/ui/morph-dock.tsx`
 - Test: `tests/components/morph-dock.test.tsx`
 
@@ -96,10 +98,12 @@ it("draws a separator between adjacent items of different groups", () => {
         { id: "c", label: "C", icon: Search, core: true, group: "tools" },
       ]}
     />,
-  );
+  )
   // exactly one group boundary (nav -> tools)
-  expect(document.querySelectorAll('[data-slot="morph-dock-seam"]')).toHaveLength(1);
-});
+  expect(
+    document.querySelectorAll('[data-slot="morph-dock-seam"]'),
+  ).toHaveLength(1)
+})
 ```
 
 (Ensure `Search` is imported in the test file's lucide import; it already imports `Home`, `Inbox`, `BarChart3`, `Settings` — add `Search` if missing.)
@@ -116,7 +120,7 @@ Add `group?: string;` to `interface MorphDockItem`.
 Add a seam constant near `PILL`:
 
 ```tsx
-const SEAM = "mx-0.5 h-5 w-px shrink-0 self-center";
+const SEAM = "mx-0.5 h-5 w-px shrink-0 self-center"
 ```
 
 Add to the `TONES` map a `seam` key: `dock` → `"bg-dock-muted"`, `surface` → `"bg-border"`.
@@ -126,15 +130,21 @@ Replace the nav `mainItems.map(...)`/`pinnedItems.map(...)` with a helper that i
 ```tsx
 const renderItems = (list: MorphDockItem[]) =>
   list.map((item, i) => {
-    const prev = list[i - 1];
-    const boundary = prev && prev.group !== item.group;
+    const prev = list[i - 1]
+    const boundary = prev && prev.group !== item.group
     return (
       <React.Fragment key={item.id}>
-        {boundary ? <span aria-hidden data-slot="morph-dock-seam" className={cn(SEAM, t.seam)} /> : null}
+        {boundary ? (
+          <span
+            aria-hidden
+            data-slot="morph-dock-seam"
+            className={cn(SEAM, t.seam)}
+          />
+        ) : null}
         <DockItem item={item} collapsed={!isVisible(item, expanded)} t={t} />
       </React.Fragment>
-    );
-  });
+    )
+  })
 ```
 
 Use `{renderItems(mainItems)}` and `{renderItems(pinnedItems)}` in the `<nav>`.
@@ -156,6 +166,7 @@ git commit -m "feat(morph-dock): group separators via item.group"
 ## Task 3: Two-tone tool zone (`tools`)
 
 **Files:**
+
 - Modify: `registry/ui/morph-dock.tsx`
 - Test: `tests/components/morph-dock.test.tsx`
 
@@ -163,26 +174,35 @@ git commit -m "feat(morph-dock): group separators via item.group"
 
 ```tsx
 it("renders the tool zone with a brand primary and group seams", async () => {
-  const onSelect = vi.fn();
+  const onSelect = vi.fn()
   render(
     <MorphDock
       items={[{ id: "h", label: "Home", icon: Home, core: true }]}
       tools={[
-        { id: "save", label: "Save", icon: Settings, primary: true, onSelect, group: "a" },
+        {
+          id: "save",
+          label: "Save",
+          icon: Settings,
+          primary: true,
+          onSelect,
+          group: "a",
+        },
         { id: "share", label: "Share", icon: Search, group: "b" },
       ]}
     />,
-  );
-  const zone = document.querySelector('[data-slot="morph-dock-tools"]');
-  expect(zone).toBeInTheDocument();
-  expect(zone).toHaveClass("bg-dock-tool");
+  )
+  const zone = document.querySelector('[data-slot="morph-dock-tools"]')
+  expect(zone).toBeInTheDocument()
+  expect(zone).toHaveClass("bg-dock-tool")
   // primary carries brand fill
-  expect(screen.getByRole("button", { name: "Save" })).toHaveClass("bg-brand");
+  expect(screen.getByRole("button", { name: "Save" })).toHaveClass("bg-brand")
   // one seam between the two differing groups
-  expect(zone?.querySelectorAll('[data-slot="morph-dock-seam"]')).toHaveLength(1);
-  await userEvent.click(screen.getByRole("button", { name: "Save" }));
-  expect(onSelect).toHaveBeenCalledOnce();
-});
+  expect(zone?.querySelectorAll('[data-slot="morph-dock-seam"]')).toHaveLength(
+    1,
+  )
+  await userEvent.click(screen.getByRole("button", { name: "Save" }))
+  expect(onSelect).toHaveBeenCalledOnce()
+})
 
 it("renders tool-zone nav entries as links", () => {
   render(
@@ -190,9 +210,12 @@ it("renders tool-zone nav entries as links", () => {
       items={[{ id: "h", label: "Home", icon: Home, core: true }]}
       tools={[{ id: "docs", label: "Docs", icon: Search, href: "/docs" }]}
     />,
-  );
-  expect(screen.getByRole("link", { name: "Docs" })).toHaveAttribute("href", "/docs");
-});
+  )
+  expect(screen.getByRole("link", { name: "Docs" })).toHaveAttribute(
+    "href",
+    "/docs",
+  )
+})
 ```
 
 - [ ] **Step 2: Run, expect FAIL**
@@ -206,13 +229,13 @@ Add the action type + prop:
 
 ```tsx
 export interface MorphDockAction {
-  id: string;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-  onSelect?: () => void;
-  href?: string;
-  primary?: boolean;
-  group?: string;
+  id: string
+  label: string
+  icon: React.ComponentType<{ className?: string }>
+  onSelect?: () => void
+  href?: string
+  primary?: boolean
+  group?: string
 }
 ```
 
@@ -223,47 +246,77 @@ Add tone keys to `TONES`: `tool` (zone fill) → dock `"bg-dock-tool"`, surface 
 Add a `ToolAction` sub-component (mirrors `DockItem`'s link/button split):
 
 ```tsx
-function ToolAction({ action, t }: { action: MorphDockAction; t: (typeof TONES)[MorphDockTone] }) {
-  const Icon = action.icon;
+function ToolAction({
+  action,
+  t,
+}: {
+  action: MorphDockAction
+  t: (typeof TONES)[MorphDockTone]
+}) {
+  const Icon = action.icon
   const cls = cn(
     "flex h-8 shrink-0 items-center gap-2 rounded-full px-3 text-[13px] font-semibold outline-none transition-colors focus-visible:ring-2",
     t.ring,
     action.primary ? t.toolPrimary : t.toolQuiet,
-  );
-  const inner = (<><Icon className="size-4 shrink-0" />{action.label}</>);
+  )
+  const inner = (
+    <>
+      <Icon className="size-4 shrink-0" />
+      {action.label}
+    </>
+  )
   return action.href !== undefined ? (
-    <a href={action.href} aria-label={action.label} className={cls}>{inner}</a>
+    <a href={action.href} aria-label={action.label} className={cls}>
+      {inner}
+    </a>
   ) : (
-    <button type="button" aria-label={action.label}
-      onClick={(e) => { e.stopPropagation(); action.onSelect?.(); }} className={cls}>{inner}</button>
-  );
+    <button
+      type="button"
+      aria-label={action.label}
+      onClick={(e) => {
+        e.stopPropagation()
+        action.onSelect?.()
+      }}
+      className={cls}
+    >
+      {inner}
+    </button>
+  )
 }
 ```
 
 Render the zone inside the pill, after the `<nav>` (and before `cluster`/`action`). Round its right corners only when it is the trailing element (no `cluster`/`action`):
 
 ```tsx
-{tools && tools.length > 0 ? (
-  <div
-    data-slot="morph-dock-tools"
-    className={cn(
-      "-my-[3px] flex shrink-0 items-center gap-1 self-stretch px-1.5",
-      t.tool,
-      !cluster && !action ? "-mr-[3px] rounded-r-3xl pr-[7px]" : "rounded-xl",
-    )}
-  >
-    {tools.map((a, i) => {
-      const prev = tools[i - 1];
-      const boundary = prev && prev.group !== a.group;
-      return (
-        <React.Fragment key={a.id}>
-          {boundary ? <span aria-hidden data-slot="morph-dock-seam" className={cn(SEAM, t.seam)} /> : null}
-          <ToolAction action={a} t={t} />
-        </React.Fragment>
-      );
-    })}
-  </div>
-) : null}
+{
+  tools && tools.length > 0 ? (
+    <div
+      data-slot="morph-dock-tools"
+      className={cn(
+        "-my-[3px] flex shrink-0 items-center gap-1 self-stretch px-1.5",
+        t.tool,
+        !cluster && !action ? "-mr-[3px] rounded-r-3xl pr-[7px]" : "rounded-xl",
+      )}
+    >
+      {tools.map((a, i) => {
+        const prev = tools[i - 1]
+        const boundary = prev && prev.group !== a.group
+        return (
+          <React.Fragment key={a.id}>
+            {boundary ? (
+              <span
+                aria-hidden
+                data-slot="morph-dock-seam"
+                className={cn(SEAM, t.seam)}
+              />
+            ) : null}
+            <ToolAction action={a} t={t} />
+          </React.Fragment>
+        )
+      })}
+    </div>
+  ) : null
+}
 ```
 
 - [ ] **Step 4: Run, expect PASS**
@@ -283,6 +336,7 @@ git commit -m "feat(morph-dock): two-tone tool zone via tools prop"
 ## Task 4: Breadcrumb region (`breadcrumb`)
 
 **Files:**
+
 - Modify: `registry/ui/morph-dock.tsx`
 - Test: `tests/components/morph-dock.test.tsx`
 
@@ -299,11 +353,14 @@ it("renders a breadcrumb trail with the last crumb as current", () => {
         { label: "Q2" },
       ]}
     />,
-  );
-  expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
-  const current = screen.getByText("Q2");
-  expect(current).toHaveAttribute("aria-current", "page");
-});
+  )
+  expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute(
+    "href",
+    "/",
+  )
+  const current = screen.getByText("Q2")
+  expect(current).toHaveAttribute("aria-current", "page")
+})
 ```
 
 - [ ] **Step 2: Run, expect FAIL**
@@ -318,24 +375,49 @@ Add tone key `crumb` → dock `"text-dock-foreground/60"`, surface `"text-muted-
 Render at the leading edge of the `<nav>` (before items), only when `breadcrumb?.length`:
 
 ```tsx
-{breadcrumb && breadcrumb.length > 0 ? (
-  <div data-slot="morph-dock-breadcrumb" className="flex min-w-0 items-center gap-1 px-2">
-    {breadcrumb.map((c, i) => {
-      const last = i === breadcrumb.length - 1;
-      return (
-        <React.Fragment key={`${c.label}-${i}`}>
-          {i > 0 ? <ChevronRight aria-hidden className={cn("size-3.5 shrink-0", t.crumb)} /> : null}
-          {last || !c.href ? (
-            <span aria-current={last ? "page" : undefined}
-              className={cn("truncate text-[13px] font-semibold", last ? t.title : t.crumb)}>{c.label}</span>
-          ) : (
-            <a href={c.href} className={cn("truncate text-[13px] font-medium hover:underline", t.crumb)}>{c.label}</a>
-          )}
-        </React.Fragment>
-      );
-    })}
-  </div>
-) : null}
+{
+  breadcrumb && breadcrumb.length > 0 ? (
+    <div
+      data-slot="morph-dock-breadcrumb"
+      className="flex min-w-0 items-center gap-1 px-2"
+    >
+      {breadcrumb.map((c, i) => {
+        const last = i === breadcrumb.length - 1
+        return (
+          <React.Fragment key={`${c.label}-${i}`}>
+            {i > 0 ? (
+              <ChevronRight
+                aria-hidden
+                className={cn("size-3.5 shrink-0", t.crumb)}
+              />
+            ) : null}
+            {last || !c.href ? (
+              <span
+                aria-current={last ? "page" : undefined}
+                className={cn(
+                  "truncate text-[13px] font-semibold",
+                  last ? t.title : t.crumb,
+                )}
+              >
+                {c.label}
+              </span>
+            ) : (
+              <a
+                href={c.href}
+                className={cn(
+                  "truncate text-[13px] font-medium hover:underline",
+                  t.crumb,
+                )}
+              >
+                {c.label}
+              </a>
+            )}
+          </React.Fragment>
+        )
+      })}
+    </div>
+  ) : null
+}
 ```
 
 - [ ] **Step 4: Run, expect PASS**
@@ -358,6 +440,7 @@ When `status` is set, the panel blooms into a tone-styled status body; success/i
 auto-dismiss after `statusDismissMs` (default 4000), errors persist.
 
 **Files:**
+
 - Modify: `registry/ui/morph-dock.tsx`
 - Test: `tests/components/morph-dock.test.tsx`
 
@@ -366,33 +449,47 @@ auto-dismiss after `statusDismissMs` (default 4000), errors persist.
 ```tsx
 it("blooms a status body and shows the tone title/message", () => {
   render(
-    <MorphDock items={[{ id: "h", label: "Home", icon: Home, core: true }]}
-      status={{ tone: "error", title: "Save failed", message: "Network error" }} />,
-  );
-  const dialog = screen.getByRole("dialog");
-  expect(within(dialog).getByText("Save failed")).toBeInTheDocument();
-  expect(within(dialog).getByText("Network error")).toBeInTheDocument();
-});
+    <MorphDock
+      items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+      status={{ tone: "error", title: "Save failed", message: "Network error" }}
+    />,
+  )
+  const dialog = screen.getByRole("dialog")
+  expect(within(dialog).getByText("Save failed")).toBeInTheDocument()
+  expect(within(dialog).getByText("Network error")).toBeInTheDocument()
+})
 
 it("auto-dismisses success but keeps errors", () => {
-  vi.useFakeTimers();
-  const onStatusDismiss = vi.fn();
+  vi.useFakeTimers()
+  const onStatusDismiss = vi.fn()
   const { rerender } = render(
-    <MorphDock items={[{ id: "h", label: "Home", icon: Home, core: true }]}
-      status={{ tone: "success", title: "Saved" }} statusDismissMs={1000} onStatusDismiss={onStatusDismiss} />,
-  );
-  act(() => { vi.advanceTimersByTime(1000); });
-  expect(onStatusDismiss).toHaveBeenCalledOnce();
+    <MorphDock
+      items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+      status={{ tone: "success", title: "Saved" }}
+      statusDismissMs={1000}
+      onStatusDismiss={onStatusDismiss}
+    />,
+  )
+  act(() => {
+    vi.advanceTimersByTime(1000)
+  })
+  expect(onStatusDismiss).toHaveBeenCalledOnce()
 
-  onStatusDismiss.mockClear();
+  onStatusDismiss.mockClear()
   rerender(
-    <MorphDock items={[{ id: "h", label: "Home", icon: Home, core: true }]}
-      status={{ tone: "error", title: "Nope" }} statusDismissMs={1000} onStatusDismiss={onStatusDismiss} />,
-  );
-  act(() => { vi.advanceTimersByTime(5000); });
-  expect(onStatusDismiss).not.toHaveBeenCalled();
-  vi.useRealTimers();
-});
+    <MorphDock
+      items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+      status={{ tone: "error", title: "Nope" }}
+      statusDismissMs={1000}
+      onStatusDismiss={onStatusDismiss}
+    />,
+  )
+  act(() => {
+    vi.advanceTimersByTime(5000)
+  })
+  expect(onStatusDismiss).not.toHaveBeenCalled()
+  vi.useRealTimers()
+})
 ```
 
 Ensure the test file imports `within` and `act` from `@testing-library/react` (add to the existing import).
@@ -405,8 +502,12 @@ Expected: FAIL.
 - [ ] **Step 3: Implement.** Add to the lucide import: `Check, Info` (X already imported). Add types + props:
 
 ```tsx
-export type MorphDockStatusTone = "success" | "error" | "info";
-export interface MorphDockStatus { tone: MorphDockStatusTone; title: string; message?: string }
+export type MorphDockStatusTone = "success" | "error" | "info"
+export interface MorphDockStatus {
+  tone: MorphDockStatusTone
+  title: string
+  message?: string
+}
 ```
 
 In `MorphDockProps`: `status?: MorphDockStatus | null; onStatusDismiss?: () => void; statusDismissMs?: number;`
@@ -418,36 +519,66 @@ Auto-dismiss effect:
 
 ```tsx
 React.useEffect(() => {
-  if (!status || status.tone === "error") return;
-  const id = window.setTimeout(() => onStatusDismiss?.(), statusDismissMs);
-  return () => window.clearTimeout(id);
-}, [status, statusDismissMs, onStatusDismiss]);
+  if (!status || status.tone === "error") return
+  const id = window.setTimeout(() => onStatusDismiss?.(), statusDismissMs)
+  return () => window.clearTimeout(id)
+}, [status, statusDismissMs, onStatusDismiss])
 ```
 
 A status-body sub-component (token-only tones):
 
 ```tsx
-function StatusBody({ status, t, onClose }: {
-  status: MorphDockStatus; t: (typeof TONES)[MorphDockTone]; onClose: () => void;
+function StatusBody({
+  status,
+  t,
+  onClose,
+}: {
+  status: MorphDockStatus
+  t: (typeof TONES)[MorphDockTone]
+  onClose: () => void
 }) {
   return (
     <div className="flex w-full items-start gap-3 p-3.5">
-      <span className={cn("mt-0.5 grid size-9 shrink-0 place-items-center rounded-full",
-        status.tone === "success" && "bg-brand text-brand-foreground",
-        status.tone === "error" && "bg-destructive text-destructive-foreground",
-        status.tone === "info" && t.statusInfo)}>
-        {status.tone === "error" ? <X className="size-4.5" /> : status.tone === "info" ? <Info className="size-4.5" /> : <Check className="size-4.5" />}
+      <span
+        className={cn(
+          "mt-0.5 grid size-9 shrink-0 place-items-center rounded-full",
+          status.tone === "success" && "bg-brand text-brand-foreground",
+          status.tone === "error" &&
+            "bg-destructive text-destructive-foreground",
+          status.tone === "info" && t.statusInfo,
+        )}
+      >
+        {status.tone === "error" ? (
+          <X className="size-4.5" />
+        ) : status.tone === "info" ? (
+          <Info className="size-4.5" />
+        ) : (
+          <Check className="size-4.5" />
+        )}
       </span>
       <div className="min-w-0 flex-1 pt-0.5">
-        <div className={cn("text-[13px] font-semibold", t.title)}>{status.title}</div>
-        {status.message ? <p className={cn("mt-0.5 text-[12px] leading-snug", t.crumb)}>{status.message}</p> : null}
+        <div className={cn("text-[13px] font-semibold", t.title)}>
+          {status.title}
+        </div>
+        {status.message ? (
+          <p className={cn("mt-0.5 text-[12px] leading-snug", t.crumb)}>
+            {status.message}
+          </p>
+        ) : null}
       </div>
-      <button type="button" onClick={onClose} aria-label="Dismiss"
-        className={cn("-mr-0.5 -mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg transition-colors", t.close)}>
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Dismiss"
+        className={cn(
+          "-mr-0.5 -mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg transition-colors",
+          t.close,
+        )}
+      >
         <X className="size-3.5" />
       </button>
     </div>
-  );
+  )
 }
 ```
 
@@ -457,7 +588,11 @@ In the panel body, render the status body when present, else children:
 
 ```tsx
 <div className={cn(panelH != null && "min-h-0 flex-1 overflow-auto")}>
-  {hasStatus ? <StatusBody status={status!} t={t} onClose={() => onStatusDismiss?.()} /> : children}
+  {hasStatus ? (
+    <StatusBody status={status!} t={t} onClose={() => onStatusDismiss?.()} />
+  ) : (
+    children
+  )}
 </div>
 ```
 
@@ -480,6 +615,7 @@ git commit -m "feat(morph-dock): save/error status bloom via status prop"
 ## Task 6: Example gallery
 
 **Files:**
+
 - Delete: `content/examples/morph-dock/sizes.tsx`, `content/examples/morph-dock/save.tsx`
 - Create: `split-toolbar.tsx`, `tools-primary.tsx`, `breadcrumb.tsx`, `separators.tsx`, `save-status.tsx` under `content/examples/morph-dock/`
 - Modify: `content/examples/registry.ts` (regenerated)
@@ -526,6 +662,7 @@ git commit -m "docs(morph-dock): expand variant gallery, drop sizes/save demos"
 ## Task 7: Props table, registry validation, full gate
 
 **Files:**
+
 - Modify: `content/components.ts` (morph-dock `props`)
 - Modify: `registry.json` (only if a new dep is needed — none expected)
 
@@ -567,4 +704,7 @@ git commit -m "chore(morph-dock): props table + registry rebuild for variants"
 - **Token consistency:** new `dock-tool` token + `t.tool/toolPrimary/toolQuiet/seam/crumb/statusInfo` tone keys defined once (T1/T3/T4/T5), referenced thereafter. ✓
 - **No raw colors:** error → `bg-destructive text-destructive-foreground`; info → token tone keys; no hex/`text-white`. ✓
 - **Open risk to validate during build:** tool-zone `-my-[3px]/-mr-[3px]/rounded-r-3xl` fill against the pill corner — confirm visually at http://localhost:3002/docs/morph-dock.
+
+```
+
 ```

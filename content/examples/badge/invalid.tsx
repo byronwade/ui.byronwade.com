@@ -1,5 +1,5 @@
-import { Badge } from "@/components/ui/badge";
-import { AlertCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge"
+import { AlertCircle } from "lucide-react"
 
 export default function Example() {
   return (
@@ -36,5 +36,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

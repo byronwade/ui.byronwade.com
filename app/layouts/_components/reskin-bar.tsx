@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { SegmentedControl } from "@/components/ui/segmented-control";
+import { cn } from "@/lib/utils"
+import { SegmentedControl } from "@/components/ui/segmented-control"
 
 export interface Reskin {
   /** oklch/hex string applied to `--brand` (cascades to ring/success/chart-1). */
-  brand?: string;
+  brand?: string
   /** length applied to `--radius` (reshapes every rounded surface). */
-  radius?: string;
+  radius?: string
 }
 
 const swatches: { name: string; value?: string }[] = [
@@ -18,13 +18,13 @@ const swatches: { name: string; value?: string }[] = [
   { name: "Violet", value: "oklch(0.60 0.20 290)" },
   { name: "Amber", value: "oklch(0.78 0.15 75)" },
   { name: "Rose", value: "oklch(0.64 0.21 18)" },
-];
+]
 
 const radii = [
   { label: "Sharp", value: "0rem" },
   { label: "Default", value: "default" },
   { label: "Round", value: "1.25rem" },
-];
+]
 
 /**
  * Live re-skin playground. Dogfoods the "override `--brand` to re-skin
@@ -35,11 +35,11 @@ export function ReskinBar({
   value,
   onChange,
 }: {
-  value: Reskin;
-  onChange: (next: Reskin) => void;
+  value: Reskin
+  onChange: (next: Reskin) => void
 }) {
-  const activeRadius = value.radius ?? "default";
-  const dirty = Boolean(value.brand || value.radius);
+  const activeRadius = value.radius ?? "default"
+  const dirty = Boolean(value.brand || value.radius)
 
   return (
     <div className="flex items-center gap-2 rounded-full bg-card px-2 py-1 shadow-card">
@@ -48,7 +48,7 @@ export function ReskinBar({
       </span>
       <div className="flex items-center gap-1">
         {swatches.map((s) => {
-          const active = s.value === value.brand;
+          const active = s.value === value.brand
           return (
             <button
               key={s.name}
@@ -59,16 +59,19 @@ export function ReskinBar({
               onClick={() => onChange({ ...value, brand: s.value })}
               className={cn(
                 "size-5 rounded-full border border-border outline-none transition-transform hover:scale-110 focus-visible:ring-3 focus-visible:ring-ring/50",
-                active && "ring-2 ring-foreground ring-offset-1 ring-offset-card",
+                active &&
+                  "ring-2 ring-foreground ring-offset-1 ring-offset-card",
               )}
               style={{ background: s.value ?? "var(--brand)" }}
             />
-          );
+          )
         })}
       </div>
       <SegmentedControl
         value={activeRadius}
-        onValueChange={(v) => onChange({ ...value, radius: v === "default" ? undefined : v })}
+        onValueChange={(v) =>
+          onChange({ ...value, radius: v === "default" ? undefined : v })
+        }
         options={radii}
       />
       {dirty && (
@@ -83,5 +86,5 @@ export function ReskinBar({
         </button>
       )}
     </div>
-  );
+  )
 }

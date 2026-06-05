@@ -8,7 +8,7 @@ subagents, written conventions, and editor rules on top of the gates that alread
 
 ## Why
 
-The repo already enforces *content* DNA strongly (tokens, typography, Base UI + CVA, registry
+The repo already enforces _content_ DNA strongly (tokens, typography, Base UI + CVA, registry
 integrity, tests, coverage) via `registry/rules/byronwade-ui.mdc` and `scripts/check-*.mjs`. The
 thinner layer is **code organization + consistency**:
 
@@ -24,7 +24,7 @@ thinner layer is **code organization + consistency**:
 
 - **Do not reinvent Prettier/ESLint as a custom guard.** Formatting → Prettier. Lint → ESLint.
   Token/raw-color/hand-rolled → existing `lint:on-system` + `check-*.mjs`. The new custom guard
-  checks *only* structural invariants those tools can't express.
+  checks _only_ structural invariants those tools can't express.
 - **Do not duplicate existing gates.** `check-examples.mjs` (every component has an example),
   `check-test-coverage.mjs` (every component has a test + coverage), `check-rule.mjs` (every
   component named in the shipped rule) stay authoritative. The new guard references, never copies.
@@ -46,7 +46,7 @@ plurality of the existing tree plus the canonical `button.tsx`.
    Matches canonical `button.tsx`.
 5. **Imports** — consumer paths only: `@/components/ui/…`, `@/components/…`, `@/lib/…`.
 6. **`data-slot`** — every rendered root/part of a `registry:ui`/`registry:component` carries a
-   `data-slot`. *(Ratchet — see below; 7 UI + 12 composites lack it today.)*
+   `data-slot`. _(Ratchet — see below; 7 UI + 12 composites lack it today.)_
 7. **`cn()` + `className` passthrough** — components accept and merge `className` via `cn()`.
 8. **Comments — minimal / self-documenting.** Prefer clear names over comments. Comment only
    genuinely non-obvious logic or public-API intent (the `button.tsx` JSDoc-on-tricky-props style).
@@ -55,6 +55,7 @@ plurality of the existing tree plus the canonical `button.tsx`.
 ## Architecture — what gets built (Phase A)
 
 ### A1. Formatting + lint layer
+
 - Add `prettier` devDependency + `.prettierrc.json` (`{ "semi": false }`, defaults otherwise) +
   `.prettierignore` (generated/git-ignored paths: `.next`, `components/`, `lib/`,
   `app/foundation.generated.css`, `public/r/`, `coverage/`, content/registry generated indexes).
@@ -64,27 +65,32 @@ plurality of the existing tree plus the canonical `button.tsx`.
   rule that fights `eslint-config-next`.)
 
 ### A2. Structural guard — `scripts/check-conventions.mjs`
+
 Mirrors the existing gate idiom exactly: `#!/usr/bin/env node` shebang, WHY-first header comment,
 `errors[]` of `{ title, items, hint }`, `process.exit(1)`, `✓` success line, ESM + `node:fs`.
 
 Checks (each independently toggleable between **fail** and **report-only**):
-- **Filename casing** — every `registry/**/*.{ts,tsx}` is kebab-case. *(enforce — tree passes)*
+
+- **Filename casing** — every `registry/**/*.{ts,tsx}` is kebab-case. _(enforce — tree passes)_
 - **Export style** — component files end with a named `export { … }` block; no `export default`.
-  *(enforce or report after a quick full-tree scan; flip to enforce once green)*
+  _(enforce or report after a quick full-tree scan; flip to enforce once green)_
 - **Import paths** — no relative `../` crossing registry roots; consumer `@/` paths only.
-  *(enforce — verify green first)*
-- **`data-slot` presence** on `registry:ui`/`registry:component` roots. *(report-only ratchet)*
+  _(enforce — verify green first)_
+- **`data-slot` presence** on `registry:ui`/`registry:component` roots. _(report-only ratchet)_
 
 It reads `registry.json` for the authoritative ui/component lists (same source as `check-rule.mjs`),
 so it never drifts from the manifest.
 
 ### A3. Wire into `validate` + CI
+
 - `validate` gains `check:format` and `check:conventions` (enforce-mode checks only).
 - `.github/workflows/registry.yml` already runs the validate chain — no workflow edit needed beyond
   confirming `npm ci` installs the new `prettier` dep.
 
 ### A4. Two subagents — `.claude/agents/`
+
 Kept few and non-overlapping with existing `code-review`/`simplify`/superpowers.
+
 - **`component-author.md`** — scaffolds a new component fully to-spec in one pass: source file in
   the right root, inline `cva()` if variant-bearing, `data-slot`, `cn()` passthrough, bottom named
   exports, no-semi; plus `registry.json` item, `content/examples/<slug>/default.tsx`,
@@ -96,21 +102,25 @@ Kept few and non-overlapping with existing `code-review`/`simplify`/superpowers.
   (labels/aria/focus-visible), and the house conventions above. Reports findings; makes no edits.
 
 ### A5. Written conventions + editor rule
+
 - `docs/CONVENTIONS.md` — the house conventions above, in prose, as the human-facing source of
   truth. Linked from `AGENTS.md` (new short "Code conventions" section pointing to it, so the LLM
   contract and the doc stay one click apart).
 - `.cursor/rules/byronwade-conventions.mdc` — `alwaysApply: true`, mirroring the conventions so
-  Cursor/other AI editors follow the same rules as Claude Code. Distinct from the *shipped*
+  Cursor/other AI editors follow the same rules as Claude Code. Distinct from the _shipped_
   `byronwade-ui.mdc` (which is consumer-facing DNA); this one is repo-internal authoring hygiene.
 
 ## Phase B — Audit → report (gated)
+
 After A is green, run `check:conventions` in full-report mode + a `design-dna-reviewer` sweep across
 all ~90 components. Produce `docs/superpowers/specs/2026-06-04-governance-audit-report.md`: a
 prioritized violations list (data-slot gaps, any stragglers on naming/exports/formatting,
 DNA/token violations the on-system lint surfaces). **No code changes.** User reviews before Phase C.
 
 ## Phase C — Fix to conformance (gated on B, separate plan)
+
 Bring existing components into conformance in **reviewed batches**:
+
 - Run in a **git worktree** (a concurrent session edits this branch live — memory-noted hazard).
 - `prettier --write` the whole tree as batch 0 (mechanical, low-risk), then structural fixes
   (add `data-slot`, normalize exports) in small batches.
@@ -119,6 +129,7 @@ Bring existing components into conformance in **reviewed batches**:
 - When a ratcheted check (`data-slot`) reaches zero violations, flip it from report-only to enforce.
 
 ## Testing strategy
+
 - New `scripts/check-conventions.mjs` is a node script in the `check-*` family; validated by running
   it against the live tree (must exit 0 in enforce mode before wiring into `validate`).
 - `check:format` validated by `prettier --check` exiting 0 after a format pass.
@@ -129,6 +140,7 @@ Bring existing components into conformance in **reviewed batches**:
   throughout (`npm run test:run`).
 
 ## Risks & mitigations
+
 - **Coverage gate brittleness (Phase C)** → per-batch `test:ci`, never end-of-run.
 - **Concurrent session on branch** → Phase C in a worktree; Phase A commits only its own new files,
   never the unrelated `public/thumbs/*` + `gen-thumbs.mjs` changes already in the working tree.

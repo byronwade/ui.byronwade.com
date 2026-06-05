@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
 import {
   DropdownMenu,
@@ -9,14 +9,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export default function Example() {
-  const [showTitle, setShowTitle] = useState(true);
-  const [showStatus, setShowStatus] = useState(true);
-  const [showAssignee, setShowAssignee] = useState(false);
-  const [showPriority, setShowPriority] = useState(false);
-  const [showCreatedAt, setShowCreatedAt] = useState(true);
+  const [showTitle, setShowTitle] = useState(true)
+  const [showStatus, setShowStatus] = useState(true)
+  const [showAssignee, setShowAssignee] = useState(false)
+  const [showPriority, setShowPriority] = useState(false)
+  const [showCreatedAt, setShowCreatedAt] = useState(true)
 
   return (
     <div className="flex items-center justify-center p-16">
@@ -60,5 +60,5 @@ export default function Example() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

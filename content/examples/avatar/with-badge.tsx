@@ -3,7 +3,7 @@ import {
   AvatarImage,
   AvatarFallback,
   AvatarBadge,
-} from "@/components/ui/avatar";
+} from "@/components/ui/avatar"
 
 export default function Example() {
   return (
@@ -76,5 +76,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

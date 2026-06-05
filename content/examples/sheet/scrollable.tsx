@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Sheet,
   SheetClose,
@@ -10,8 +10,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
 
 const SECTIONS = [
   {
@@ -46,10 +46,10 @@ const SECTIONS = [
     heading: "Upgrade notes",
     body: "No breaking changes are required for most projects. Re-run the registry sync to pull the latest component source, then review the migration guide if you relied on the deprecated drawer.",
   },
-];
+]
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -78,5 +78,5 @@ export default function Example() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  );
+  )
 }

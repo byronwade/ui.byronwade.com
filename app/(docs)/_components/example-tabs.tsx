@@ -1,11 +1,19 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { SegmentedControl } from "@/components/ui/segmented-control";
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
+import { useState } from "react"
+import { SegmentedControl } from "@/components/ui/segmented-control"
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
 
-export function ExampleTabs({ title, preview, code }: { title?: string; preview: React.ReactNode; code: string }) {
-  const [view, setView] = useState<"preview" | "code">("preview");
+export function ExampleTabs({
+  title,
+  preview,
+  code,
+}: {
+  title?: string
+  preview: React.ReactNode
+  code: string
+}) {
+  const [view, setView] = useState<"preview" | "code">("preview")
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
@@ -29,5 +37,5 @@ export function ExampleTabs({ title, preview, code }: { title?: string; preview:
         <CodeBlock code={code} />
       )}
     </div>
-  );
+  )
 }

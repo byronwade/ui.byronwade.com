@@ -1,5 +1,5 @@
-import { Clock, Globe, Hash } from "lucide-react";
-import { StatCard } from "@/components/stat-card";
+import { Clock, Globe, Hash } from "lucide-react"
+import { StatCard } from "@/components/stat-card"
 
 /** Cards that display a value and hint without any delta indicator — useful for absolute metrics. */
 export default function Example() {
@@ -24,5 +24,5 @@ export default function Example() {
         hint="current pipeline"
       />
     </div>
-  );
+  )
 }

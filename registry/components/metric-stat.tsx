@@ -35,7 +35,7 @@ export function MetricStat({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-1", className)}>
+    <div data-slot="metric-stat" className={cn("flex flex-col gap-1", className)}>
       <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
         {Icon && <Icon className="size-3.5" />}
         {label}

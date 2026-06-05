@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { format } from "date-fns";
+import { useState } from "react"
+import { format } from "date-fns"
 
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
 
 /**
  * Appointment picker — calendar + time slots. Adapted from coss `p-calendar-19`
@@ -12,15 +12,25 @@ import { Calendar } from "@/components/ui/calendar";
  * taken = disabled).
  */
 const SLOTS = [
-  "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-  "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
-];
-const TAKEN = new Set(["09:00", "09:30", "11:30", "14:30"]);
+  "09:00",
+  "09:30",
+  "10:00",
+  "10:30",
+  "11:00",
+  "11:30",
+  "13:00",
+  "13:30",
+  "14:00",
+  "14:30",
+  "15:00",
+  "15:30",
+]
+const TAKEN = new Set(["09:00", "09:30", "11:30", "14:30"])
 
 export default function Example() {
-  const today = new Date();
-  const [date, setDate] = useState<Date>(today);
-  const [time, setTime] = useState<string | null>(null);
+  const today = new Date()
+  const [date, setDate] = useState<Date>(today)
+  const [time, setTime] = useState<string | null>(null)
 
   return (
     <div className="flex justify-center p-6">
@@ -30,8 +40,8 @@ export default function Example() {
           selected={date}
           onSelect={(d) => {
             if (d) {
-              setDate(d);
-              setTime(null);
+              setDate(d)
+              setTime(null)
             }
           }}
           disabled={{ before: today }}
@@ -57,5 +67,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

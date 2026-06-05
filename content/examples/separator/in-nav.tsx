@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator"
 
-const navItems = ["Dashboard", "Projects", "Team", "Billing"];
-const footerItems = ["Help", "Sign out"];
+const navItems = ["Dashboard", "Projects", "Team", "Billing"]
+const footerItems = ["Help", "Sign out"]
 
 export default function Example() {
   return (
@@ -34,5 +34,5 @@ export default function Example() {
         ))}
       </div>
     </div>
-  );
+  )
 }

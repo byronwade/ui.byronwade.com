@@ -3,7 +3,7 @@ import {
   AvatarImage,
   AvatarFallback,
   AvatarBadge,
-} from "@/components/ui/avatar";
+} from "@/components/ui/avatar"
 
 const members = [
   {
@@ -41,14 +41,14 @@ const members = [
     src: "https://i.pravatar.cc/40?u=ul5",
     online: true,
   },
-];
+]
 
 function getInitials(name: string) {
   return name
     .split(" ")
     .map((n) => n[0])
     .join("")
-    .toUpperCase();
+    .toUpperCase()
 }
 
 export default function Example() {
@@ -61,18 +61,20 @@ export default function Example() {
               <AvatarImage src={member.src} alt={member.name} />
               <AvatarFallback>{getInitials(member.name)}</AvatarFallback>
               <AvatarBadge
-                className={
-                  member.online ? "bg-success" : "bg-muted-foreground"
-                }
+                className={member.online ? "bg-success" : "bg-muted-foreground"}
               />
             </Avatar>
             <div className="flex flex-col min-w-0">
-              <span className="text-sm font-medium truncate">{member.name}</span>
-              <span className="text-xs text-muted-foreground">{member.role}</span>
+              <span className="text-sm font-medium truncate">
+                {member.name}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {member.role}
+              </span>
             </div>
           </li>
         ))}
       </ul>
     </div>
-  );
+  )
 }

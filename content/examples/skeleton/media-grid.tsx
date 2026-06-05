@@ -12,7 +12,10 @@ export default function Example() {
       {/* 2×2 grid of media cards */}
       <div className="grid grid-cols-2 gap-3">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="flex flex-col gap-2 rounded-lg border bg-card p-2 shadow-sm">
+          <div
+            key={i}
+            className="flex flex-col gap-2 rounded-lg border bg-card p-2 shadow-sm"
+          >
             {/* Thumbnail */}
             <Skeleton className="h-28 w-full rounded-md" />
             {/* Title */}

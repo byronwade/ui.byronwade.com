@@ -1,7 +1,11 @@
-import { SiteNav } from "@/app/(docs)/_components/site-nav";
-import { DocsNavDock } from "@/app/(docs)/_components/docs-nav-dock";
+import { SiteNav } from "@/app/(docs)/_components/site-nav"
+import { DocsNavDock } from "@/app/(docs)/_components/docs-nav-dock"
 
-export default function DocsLayout({ children }: { children: React.ReactNode }) {
+export default function DocsLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <div className="min-h-dvh bg-background text-foreground">
       {/* Full-width docs shell — sidebar + main, shadcn-style. Top padding clears
@@ -26,5 +30,5 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       {/* Mobile/tablet docs nav — hamburger bottom-left blooming SiteNav (lg:hidden). */}
       <DocsNavDock />
     </div>
-  );
+  )
 }

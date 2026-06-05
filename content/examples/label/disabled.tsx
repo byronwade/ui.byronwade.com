@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
   return (
@@ -51,5 +51,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

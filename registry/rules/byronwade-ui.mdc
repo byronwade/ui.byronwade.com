@@ -161,6 +161,11 @@ tracking + the typeface**, not through heavy weight or color. Base styles alread
 `full-bleed`, `edge`, `scrollbar-thin`. Prefer these over
 re-implementing gradients, grids, or shadows by hand.
 
+A few utilities hold a deliberate **fixed-color exception** that tokens can't express — the raw value
+lives here in `foundation`, audited in one place, never inline in a component: `scrim-top` (top-down
+dark scrim for image legibility), `color-picker-hue` (the hue rainbow), `color-picker-alpha-fade`
+(the alpha transparency fade). Use the utility; don't re-roll the gradient in markup.
+
 ### Depth via the inset `edge` hairline — not shadows or hard borders
 
 Surfaces read as **crisp, flat planes**, not outlined boxes and not drop-shadowed cards. The trick

@@ -1,5 +1,5 @@
-import { TimelineRail } from "@/components/timeline-rail";
-import { GitCommit, GitMerge, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { TimelineRail } from "@/components/timeline-rail"
+import { GitCommit, GitMerge, AlertTriangle, CheckCircle2 } from "lucide-react"
 
 export default function Example() {
   return (
@@ -40,5 +40,5 @@ export default function Example() {
         terminalLabel="Pipeline started"
       />
     </div>
-  );
+  )
 }

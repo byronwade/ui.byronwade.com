@@ -1,4 +1,4 @@
-import { MetricStat } from "@/components/metric-stat";
+import { MetricStat } from "@/components/metric-stat"
 
 export default function Example() {
   return (
@@ -19,5 +19,5 @@ export default function Example() {
         delta={{ value: "0.0%", direction: "flat" }}
       />
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Context,
@@ -11,7 +11,7 @@ import {
   ContextOutputUsage,
   ContextReasoningUsage,
   ContextTrigger,
-} from "@/components/ai-elements/context";
+} from "@/components/ai-elements/context"
 
 export default function Example() {
   return (
@@ -52,5 +52,5 @@ export default function Example() {
         </ContextContent>
       </Context>
     </div>
-  );
+  )
 }

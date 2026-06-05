@@ -14,7 +14,7 @@ const kbdVariants = cva(
       },
     },
     defaultVariants: { size: "default" },
-  }
+  },
 )
 
 function Kbd({
@@ -22,7 +22,13 @@ function Kbd({
   size,
   ...props
 }: React.ComponentProps<"kbd"> & VariantProps<typeof kbdVariants>) {
-  return <kbd data-slot="kbd" className={cn(kbdVariants({ size, className }))} {...props} />
+  return (
+    <kbd
+      data-slot="kbd"
+      className={cn(kbdVariants({ size, className }))}
+      {...props}
+    />
+  )
 }
 
 /** Groups multiple <Kbd> into a shortcut sequence (e.g. ⌘ + K). */

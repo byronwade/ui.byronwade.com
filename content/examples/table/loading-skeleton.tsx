@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import {
   Table,
   TableBody,
@@ -8,15 +8,45 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table"
 
 const data = [
-  { id: "P-001", name: "Wireless Mouse", category: "Peripherals", stock: 142, price: "$29.99" },
-  { id: "P-002", name: "Laptop Stand", category: "Accessories", stock: 58, price: "$49.99" },
-  { id: "P-003", name: "Mechanical Keyboard", category: "Peripherals", stock: 23, price: "$119.99" },
-  { id: "P-004", name: "HDMI Cable 2m", category: "Cables", stock: 310, price: "$12.99" },
-  { id: "P-005", name: "Noise Cancelling Headset", category: "Audio", stock: 7, price: "$199.99" },
-];
+  {
+    id: "P-001",
+    name: "Wireless Mouse",
+    category: "Peripherals",
+    stock: 142,
+    price: "$29.99",
+  },
+  {
+    id: "P-002",
+    name: "Laptop Stand",
+    category: "Accessories",
+    stock: 58,
+    price: "$49.99",
+  },
+  {
+    id: "P-003",
+    name: "Mechanical Keyboard",
+    category: "Peripherals",
+    stock: 23,
+    price: "$119.99",
+  },
+  {
+    id: "P-004",
+    name: "HDMI Cable 2m",
+    category: "Cables",
+    stock: 310,
+    price: "$12.99",
+  },
+  {
+    id: "P-005",
+    name: "Noise Cancelling Headset",
+    category: "Audio",
+    stock: 7,
+    price: "$199.99",
+  },
+]
 
 function SkeletonRow() {
   return (
@@ -30,20 +60,20 @@ function SkeletonRow() {
         </TableCell>
       ))}
     </TableRow>
-  );
+  )
 }
 
 export default function Example() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(t);
-  }, []);
+    const t = setTimeout(() => setLoading(false), 2000)
+    return () => clearTimeout(t)
+  }, [])
 
   function reload() {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+    setLoading(true)
+    setTimeout(() => setLoading(false), 2000)
   }
 
   return (
@@ -76,19 +106,27 @@ export default function Example() {
             ? Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)
             : data.map((p) => (
                 <TableRow key={p.id}>
-                  <TableCell className="font-mono text-xs text-muted-foreground">{p.id}</TableCell>
+                  <TableCell className="font-mono text-xs text-muted-foreground">
+                    {p.id}
+                  </TableCell>
                   <TableCell className="font-medium">{p.name}</TableCell>
-                  <TableCell className="text-muted-foreground">{p.category}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {p.category}
+                  </TableCell>
                   <TableCell
-                    className={p.stock < 20 ? "text-destructive font-medium" : ""}
+                    className={
+                      p.stock < 20 ? "text-destructive font-medium" : ""
+                    }
                   >
                     {p.stock}
                   </TableCell>
-                  <TableCell className="text-right font-mono">{p.price}</TableCell>
+                  <TableCell className="text-right font-mono">
+                    {p.price}
+                  </TableCell>
                 </TableRow>
               ))}
         </TableBody>
       </Table>
     </div>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import { TimelineRail } from "@/components/timeline-rail";
-import { Eye, MousePointer, Star, Download, Share2 } from "lucide-react";
+import { TimelineRail } from "@/components/timeline-rail"
+import { Eye, MousePointer, Star, Download, Share2 } from "lucide-react"
 
 export default function Example() {
   return (
@@ -39,5 +39,5 @@ export default function Example() {
         ]}
       />
     </div>
-  );
+  )
 }
