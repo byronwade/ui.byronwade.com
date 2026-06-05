@@ -82,6 +82,11 @@ import BadgeInlineContent from "./badge/inline-content";
 import BadgeInvalid from "./badge/invalid";
 import BadgeStatus from "./badge/status";
 import BadgeWithIcon from "./badge/with-icon";
+import BannerDefault from "./banner/default";
+import BannerDismissible from "./banner/dismissible";
+import BannerInline from "./banner/inline";
+import BannerTones from "./banner/tones";
+import BannerWithActions from "./banner/with-actions";
 import BreadcrumbDefault from "./breadcrumb/default";
 import BreadcrumbCustomSeparator from "./breadcrumb/custom-separator";
 import BreadcrumbLongPath from "./breadcrumb/long-path";
@@ -187,6 +192,12 @@ import DialogNoCloseButton from "./dialog/no-close-button";
 import DialogScrollable from "./dialog/scrollable";
 import DialogWithForm from "./dialog/with-form";
 import DialogWithIcon from "./dialog/with-icon";
+import DropZoneDefault from "./drop-zone/default";
+import DropZoneDisabled from "./drop-zone/disabled";
+import DropZoneError from "./drop-zone/error";
+import DropZoneFileList from "./drop-zone/file-list";
+import DropZoneSingle from "./drop-zone/single";
+import DropZoneSizes from "./drop-zone/sizes";
 import DropdownMenuDefault from "./dropdown-menu/default";
 import DropdownMenuDisabled from "./dropdown-menu/disabled";
 import DropdownMenuWithCheckboxes from "./dropdown-menu/with-checkboxes";
@@ -247,6 +258,16 @@ import HoverCardRichContent from "./hover-card/rich-content";
 import HoverCardWithDelay from "./hover-card/with-delay";
 import IdentityNames from "./identity/names";
 import ImageCropDefault from "./image-crop/default";
+import IndexFiltersDefault from "./index-filters/default";
+import IndexFiltersNoTabs from "./index-filters/no-tabs";
+import IndexFiltersSearchOnly from "./index-filters/search-only";
+import IndexFiltersWithAppliedFilters from "./index-filters/with-applied-filters";
+import IndexTableDefault from "./index-table/default";
+import IndexTableCondensed from "./index-table/condensed";
+import IndexTableEmpty from "./index-table/empty";
+import IndexTableLoading from "./index-table/loading";
+import IndexTableSelection from "./index-table/selection";
+import IndexTableWithPagination from "./index-table/with-pagination";
 import InputDefault from "./input/default";
 import InputDisabled from "./input/disabled";
 import InputError from "./input/error";
@@ -350,6 +371,12 @@ import RadioGroupWithDescription from "./radio-group/with-description";
 import RadioGroupWithIcon from "./radio-group/with-icon";
 import RatingDefault from "./rating/default";
 import RelativeTimeDefault from "./relative-time/default";
+import ResourceListDefault from "./resource-list/default";
+import ResourceListEmpty from "./resource-list/empty";
+import ResourceListLoading from "./resource-list/loading";
+import ResourceListNoMedia from "./resource-list/no-media";
+import ResourceListSelectable from "./resource-list/selectable";
+import ResourceListWithActions from "./resource-list/with-actions";
 import SafariDefault from "./safari/default";
 import ScrollAreaDefault from "./scroll-area/default";
 import ScrollAreaCardList from "./scroll-area/card-list";
@@ -450,6 +477,12 @@ import TabsKeepMounted from "./tabs/keep-mounted";
 import TabsVertical from "./tabs/vertical";
 import TabsVerticalWithIcons from "./tabs/vertical-with-icons";
 import TabsWithIcons from "./tabs/with-icons";
+import TagInputDefault from "./tag-input/default";
+import TagInputDisabled from "./tag-input/disabled";
+import TagInputError from "./tag-input/error";
+import TagInputMaxTags from "./tag-input/max-tags";
+import TagInputSizes from "./tag-input/sizes";
+import TagInputWithSuggestions from "./tag-input/with-suggestions";
 import TextareaDefault from "./textarea/default";
 import TextareaAutoResize from "./textarea/auto-resize";
 import TextareaCharacterCount from "./textarea/character-count";
@@ -671,6 +704,13 @@ export const examples: Record<string, Example[]> = {
     { name: "Status", file: "badge/status.tsx", Component: BadgeStatus },
     { name: "With Icon", file: "badge/with-icon.tsx", Component: BadgeWithIcon },
   ],
+  "banner": [
+    { name: "Default", file: "banner/default.tsx", Component: BannerDefault },
+    { name: "Dismissible", file: "banner/dismissible.tsx", Component: BannerDismissible },
+    { name: "Inline", file: "banner/inline.tsx", Component: BannerInline },
+    { name: "Tones", file: "banner/tones.tsx", Component: BannerTones },
+    { name: "With Actions", file: "banner/with-actions.tsx", Component: BannerWithActions },
+  ],
   "breadcrumb": [
     { name: "Default", file: "breadcrumb/default.tsx", Component: BreadcrumbDefault },
     { name: "Custom Separator", file: "breadcrumb/custom-separator.tsx", Component: BreadcrumbCustomSeparator },
@@ -816,6 +856,14 @@ export const examples: Record<string, Example[]> = {
     { name: "With Form", file: "dialog/with-form.tsx", Component: DialogWithForm },
     { name: "With Icon", file: "dialog/with-icon.tsx", Component: DialogWithIcon },
   ],
+  "drop-zone": [
+    { name: "Default", file: "drop-zone/default.tsx", Component: DropZoneDefault },
+    { name: "Disabled", file: "drop-zone/disabled.tsx", Component: DropZoneDisabled },
+    { name: "Error", file: "drop-zone/error.tsx", Component: DropZoneError },
+    { name: "File List", file: "drop-zone/file-list.tsx", Component: DropZoneFileList },
+    { name: "Single", file: "drop-zone/single.tsx", Component: DropZoneSingle },
+    { name: "Sizes", file: "drop-zone/sizes.tsx", Component: DropZoneSizes },
+  ],
   "dropdown-menu": [
     { name: "Default", file: "dropdown-menu/default.tsx", Component: DropdownMenuDefault },
     { name: "Disabled", file: "dropdown-menu/disabled.tsx", Component: DropdownMenuDisabled },
@@ -909,6 +957,20 @@ export const examples: Record<string, Example[]> = {
   ],
   "image-crop": [
     { name: "Default", file: "image-crop/default.tsx", Component: ImageCropDefault },
+  ],
+  "index-filters": [
+    { name: "Default", file: "index-filters/default.tsx", Component: IndexFiltersDefault },
+    { name: "No Tabs", file: "index-filters/no-tabs.tsx", Component: IndexFiltersNoTabs },
+    { name: "Search Only", file: "index-filters/search-only.tsx", Component: IndexFiltersSearchOnly },
+    { name: "With Applied Filters", file: "index-filters/with-applied-filters.tsx", Component: IndexFiltersWithAppliedFilters },
+  ],
+  "index-table": [
+    { name: "Default", file: "index-table/default.tsx", Component: IndexTableDefault },
+    { name: "Condensed", file: "index-table/condensed.tsx", Component: IndexTableCondensed },
+    { name: "Empty", file: "index-table/empty.tsx", Component: IndexTableEmpty },
+    { name: "Loading", file: "index-table/loading.tsx", Component: IndexTableLoading },
+    { name: "Selection", file: "index-table/selection.tsx", Component: IndexTableSelection },
+    { name: "With Pagination", file: "index-table/with-pagination.tsx", Component: IndexTableWithPagination },
   ],
   "input": [
     { name: "Default", file: "input/default.tsx", Component: InputDefault },
@@ -1083,6 +1145,14 @@ export const examples: Record<string, Example[]> = {
   "relative-time": [
     { name: "Default", file: "relative-time/default.tsx", Component: RelativeTimeDefault },
   ],
+  "resource-list": [
+    { name: "Default", file: "resource-list/default.tsx", Component: ResourceListDefault },
+    { name: "Empty", file: "resource-list/empty.tsx", Component: ResourceListEmpty },
+    { name: "Loading", file: "resource-list/loading.tsx", Component: ResourceListLoading },
+    { name: "No Media", file: "resource-list/no-media.tsx", Component: ResourceListNoMedia },
+    { name: "Selectable", file: "resource-list/selectable.tsx", Component: ResourceListSelectable },
+    { name: "With Actions", file: "resource-list/with-actions.tsx", Component: ResourceListWithActions },
+  ],
   "safari": [
     { name: "Default", file: "safari/default.tsx", Component: SafariDefault },
   ],
@@ -1218,6 +1288,14 @@ export const examples: Record<string, Example[]> = {
     { name: "Vertical", file: "tabs/vertical.tsx", Component: TabsVertical },
     { name: "Vertical With Icons", file: "tabs/vertical-with-icons.tsx", Component: TabsVerticalWithIcons },
     { name: "With Icons", file: "tabs/with-icons.tsx", Component: TabsWithIcons },
+  ],
+  "tag-input": [
+    { name: "Default", file: "tag-input/default.tsx", Component: TagInputDefault },
+    { name: "Disabled", file: "tag-input/disabled.tsx", Component: TagInputDisabled },
+    { name: "Error", file: "tag-input/error.tsx", Component: TagInputError },
+    { name: "Max Tags", file: "tag-input/max-tags.tsx", Component: TagInputMaxTags },
+    { name: "Sizes", file: "tag-input/sizes.tsx", Component: TagInputSizes },
+    { name: "With Suggestions", file: "tag-input/with-suggestions.tsx", Component: TagInputWithSuggestions },
   ],
   "textarea": [
     { name: "Default", file: "textarea/default.tsx", Component: TextareaDefault },

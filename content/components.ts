@@ -3741,6 +3741,120 @@ export const components: ComponentDoc[] = [
     ],
     examples: ["default"],
   },
+  {
+    slug: "index-table",
+    name: "Index table",
+    category: "Data display",
+    description:
+      "Sortable, row-selectable data table with an integrated bulk-action bar, sticky header, loading and empty states, and pagination. The signature Shopify-admin index.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/table",
+      "@byronwade/checkbox",
+      "@byronwade/bulk-action-bar",
+      "@byronwade/skeleton",
+      "@byronwade/button",
+      "@byronwade/empty-state",
+      "@byronwade/utils",
+    ],
+    examples: [
+      "default",
+      "condensed",
+      "empty",
+      "loading",
+      "selection",
+      "with-pagination",
+    ],
+  },
+  {
+    slug: "resource-list",
+    name: "Resource list",
+    category: "Data display",
+    description:
+      "List-view of selectable rich rows (ResourceList + ResourceItem) — media, title, metadata, badges, hover actions, bulk selection. The list counterpart of index-table.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/badge",
+      "@byronwade/bulk-action-bar",
+      "@byronwade/checkbox",
+      "@byronwade/utils",
+    ],
+    examples: [
+      "default",
+      "empty",
+      "loading",
+      "no-media",
+      "selectable",
+      "with-actions",
+    ],
+  },
+  {
+    slug: "index-filters",
+    name: "Index filters",
+    category: "Composites",
+    description:
+      "Filter bar for an index: saved-view tabs, search, sort dropdown, and removable applied-filter pills. Pairs with index-table / resource-list.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/segmented-control",
+      "@byronwade/input",
+      "@byronwade/filter-pill",
+      "@byronwade/dropdown-menu",
+      "@byronwade/button",
+      "@byronwade/utils",
+    ],
+    examples: ["default", "no-tabs", "search-only", "with-applied-filters"],
+  },
+  {
+    slug: "tag-input",
+    name: "Tag input",
+    category: "Forms",
+    description:
+      "Tags field — type to add chips (Enter/comma), remove with × or Backspace, optional autocomplete suggestions, sizes, and error state.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/badge",
+      "@byronwade/utils",
+    ],
+    examples: [
+      "default",
+      "disabled",
+      "error",
+      "max-tags",
+      "sizes",
+      "with-suggestions",
+    ],
+  },
+  {
+    slug: "drop-zone",
+    name: "Drop zone",
+    category: "Forms",
+    description:
+      "Drag-and-drop file/media upload with drag-over and rejected-file states, image preview thumbnails or a file list, and size variants.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/button",
+      "@byronwade/utils",
+    ],
+    examples: ["default", "disabled", "error", "file-list", "single", "sizes"],
+  },
+  {
+    slug: "banner",
+    name: "Banner",
+    category: "Feedback",
+    description:
+      "Prominent inline status message with tone (info/success/warning/critical), title, body, actions, and dismiss. Distinct from the compact alert.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/button",
+      "@byronwade/utils",
+    ],
+    examples: ["default", "dismissible", "inline", "tones", "with-actions"],
+  },
 ]
 
 export const categories = [

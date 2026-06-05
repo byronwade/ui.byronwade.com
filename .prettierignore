@@ -9,6 +9,10 @@ out
 build
 coverage
 
+# Claude Code throwaway worktrees of OTHER branches — never format foreign
+# checkouts (mirrors the `**/.claude/**` exclusion in vitest.config.ts).
+.claude
+
 # generated registry output (shadcn build)
 public/r
 public/llms.txt

@@ -48,7 +48,13 @@ Before writing any markup, check whether a component already exists. Reach for t
   / resource lists), `order-summary` (line items + cost breakdown), `product-card` (products-index
   tile), `variant-picker` (product option selector), `inventory-bar` (stock-level bar on
   `progress`), `customer-card` (customer summary with `metric-stat` stats), `fulfillment-tracker`
-  (payment + fulfillment status with a step rail on `verification-progress`)
+  (payment + fulfillment status with a step rail on `verification-progress`),
+  `index-table` (sortable, row-selectable data table with an integrated `bulk-action-bar`,
+  sticky header, loading/empty states, pagination), `resource-list` / `resource-item`
+  (list-view rows: media + title + metadata + badges + hover actions + bulk select),
+  `index-filters` (saved-view tabs + search + sort + removable applied-filter pills),
+  `tag-input` (chip tags with autocomplete), `drop-zone` (drag-and-drop file/media upload),
+  `banner` (prominent inline status message with tone, actions, and dismiss)
 - **Design mocks** — device + browser frames for screenshots/video: `safari`, `iphone`,
   `android` (drop a screenshot or `videoSrc` in to show a product in context)
 - **Marketing / motion** — `world-map` (dotted map with animated connection arcs),

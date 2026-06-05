@@ -3268,6 +3268,137 @@
       ]
     },
     {
+      "name": "index-table",
+      "type": "registry:component",
+      "title": "Index table",
+      "description": "Sortable, row-selectable data table with an integrated bulk-action bar, sticky header, loading and empty states, and pagination. The signature Shopify-admin index.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/table",
+        "@byronwade/checkbox",
+        "@byronwade/bulk-action-bar",
+        "@byronwade/skeleton",
+        "@byronwade/button",
+        "@byronwade/empty-state",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/index-table.tsx",
+          "type": "registry:component",
+          "target": "components/index-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resource-list",
+      "type": "registry:component",
+      "title": "Resource list",
+      "description": "List-view of selectable rich rows (ResourceList + ResourceItem) — media, title, metadata, badges, hover actions, bulk selection. The list counterpart of index-table.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/bulk-action-bar",
+        "@byronwade/checkbox",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/resource-list.tsx",
+          "type": "registry:component",
+          "target": "components/resource-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "index-filters",
+      "type": "registry:component",
+      "title": "Index filters",
+      "description": "Filter bar for an index: saved-view tabs, search, sort dropdown, and removable applied-filter pills. Pairs with index-table / resource-list.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/segmented-control",
+        "@byronwade/input",
+        "@byronwade/filter-pill",
+        "@byronwade/dropdown-menu",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/index-filters.tsx",
+          "type": "registry:component",
+          "target": "components/index-filters.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tag-input",
+      "type": "registry:ui",
+      "title": "Tag input",
+      "description": "Tags field — type to add chips (Enter/comma), remove with × or Backspace, optional autocomplete suggestions, sizes, and error state.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/tag-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tag-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drop-zone",
+      "type": "registry:ui",
+      "title": "Drop zone",
+      "description": "Drag-and-drop file/media upload with drag-over and rejected-file states, image preview thumbnails or a file list, and size variants.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/drop-zone.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/drop-zone.tsx"
+        }
+      ]
+    },
+    {
+      "name": "banner",
+      "type": "registry:component",
+      "title": "Banner",
+      "description": "Prominent inline status message with tone (info/success/warning/critical), title, body, actions, and dismiss. Distinct from the compact alert.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/banner.tsx",
+          "type": "registry:component",
+          "target": "components/banner.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -3422,7 +3553,13 @@
         "@byronwade/variant-picker",
         "@byronwade/inventory-bar",
         "@byronwade/customer-card",
-        "@byronwade/fulfillment-tracker"
+        "@byronwade/fulfillment-tracker",
+        "@byronwade/index-table",
+        "@byronwade/resource-list",
+        "@byronwade/index-filters",
+        "@byronwade/tag-input",
+        "@byronwade/drop-zone",
+        "@byronwade/banner"
       ]
     }
   ]
