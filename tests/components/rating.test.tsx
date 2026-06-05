@@ -8,6 +8,7 @@ import * as React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
+import { HeartIcon } from "lucide-react";
 
 import {
   Rating,
@@ -25,6 +26,33 @@ function Stars(props: React.ComponentProps<typeof Rating>) {
   );
 }
 
+// Each star renders two layers: an outline base + a `fill-current` copy clipped
+// to `width: <fill>%`. Helpers read the fill widths to assert what's shown.
+function fillWidths(container: HTMLElement): string[] {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>('[data-slot="rating-button-fill"]'),
+  ).map((el) => el.style.width);
+}
+function fullyFilled(container: HTMLElement): number {
+  return fillWidths(container).filter((w) => w === "100%").length;
+}
+
+// Stub layout so the half-select pointer math (getBoundingClientRect) is
+// deterministic in jsdom, which otherwise reports a zero-width rect.
+function stubRect(el: Element, left: number, width: number) {
+  vi.spyOn(el, "getBoundingClientRect").mockReturnValue({
+    left,
+    width,
+    right: left + width,
+    top: 0,
+    bottom: 0,
+    height: 0,
+    x: left,
+    y: 0,
+    toJSON: () => ({}),
+  } as DOMRect);
+}
+
 describe("Rating — render", () => {
   it("renders a radiogroup of 5 star buttons", () => {
     render(<Stars defaultValue={0} />);
@@ -32,10 +60,16 @@ describe("Rating — render", () => {
     expect(screen.getAllByRole("radio")).toHaveLength(5);
   });
 
-  it("marks stars up to the value active (fill-current)", () => {
+  it("fills the stars up to the value", () => {
     const { container } = render(<Stars value={3} readOnly />);
-    const filled = container.querySelectorAll("svg.fill-current");
-    expect(filled).toHaveLength(3);
+    expect(fullyFilled(container)).toBe(3);
+    expect(fillWidths(container)).toEqual([
+      "100%",
+      "100%",
+      "100%",
+      "0%",
+      "0%",
+    ]);
   });
 
   it("tone follows the brand token", () => {
@@ -98,10 +132,10 @@ describe("Rating — interaction", () => {
     const { container } = render(<Stars defaultValue={1} />);
     const buttons = screen.getAllByRole("radio");
     await user.hover(buttons[3]);
-    expect(container.querySelectorAll("svg.fill-current")).toHaveLength(4);
+    expect(fullyFilled(container)).toBe(4);
     await user.unhover(buttons[3]);
     fireEvent.mouseLeave(container.querySelector('[data-slot="rating"]')!);
-    expect(container.querySelectorAll("svg.fill-current")).toHaveLength(1);
+    expect(fullyFilled(container)).toBe(1);
   });
 });
 
@@ -186,6 +220,162 @@ describe("RatingBadge", () => {
   it("omits max/count when absent", () => {
     render(<RatingBadge value={4.2} />);
     expect(screen.queryByText(/\//)).not.toBeInTheDocument();
+  });
+});
+
+function HalfStars(props: React.ComponentProps<typeof Rating>) {
+  return (
+    <Rating allowHalf {...props}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <RatingButton key={i} />
+      ))}
+    </Rating>
+  );
+}
+
+describe("Rating — fractional display", () => {
+  it("renders a partial fill for a .5 value", () => {
+    const { container } = render(<HalfStars value={3.5} readOnly />);
+    expect(fillWidths(container)).toEqual([
+      "100%",
+      "100%",
+      "100%",
+      "50%",
+      "0%",
+    ]);
+  });
+
+  it("renders arbitrary fractions for a read-only average", () => {
+    const { container } = render(<HalfStars value={3.7} readOnly />);
+    expect(fillWidths(container)[3]).toBe("70%");
+  });
+});
+
+describe("Rating — half mode (slider)", () => {
+  it("exposes slider semantics instead of a radiogroup", () => {
+    render(<HalfStars value={2.5} />);
+    const slider = screen.getByRole("slider", { name: "Rating" });
+    expect(slider).toHaveAttribute("aria-valuemin", "0");
+    expect(slider).toHaveAttribute("aria-valuemax", "5");
+    expect(slider).toHaveAttribute("aria-valuenow", "2.5");
+    expect(slider).toHaveAttribute("aria-valuetext", "2.5 of 5 stars");
+    expect(screen.queryByRole("radiogroup")).toBeNull();
+    expect(screen.queryAllByRole("radio")).toHaveLength(0);
+  });
+
+  it("steps by 0.5 with arrow keys (right/up, left/down)", () => {
+    const onValueChange = vi.fn();
+    render(<HalfStars value={3} onValueChange={onValueChange} />);
+    const slider = screen.getByRole("slider");
+    slider.focus();
+    fireEvent.keyDown(slider, { key: "ArrowRight" });
+    expect(onValueChange).toHaveBeenLastCalledWith(3.5);
+    fireEvent.keyDown(slider, { key: "ArrowUp" });
+    expect(onValueChange).toHaveBeenLastCalledWith(3.5);
+    fireEvent.keyDown(slider, { key: "ArrowDown" });
+    expect(onValueChange).toHaveBeenLastCalledWith(2.5);
+  });
+
+  it("jumps to bounds with shift + arrow", () => {
+    const onValueChange = vi.fn();
+    render(<HalfStars value={3} onValueChange={onValueChange} />);
+    const slider = screen.getByRole("slider");
+    fireEvent.keyDown(slider, { key: "ArrowRight", shiftKey: true });
+    expect(onValueChange).toHaveBeenLastCalledWith(5);
+    fireEvent.keyDown(slider, { key: "ArrowLeft", metaKey: true });
+    expect(onValueChange).toHaveBeenLastCalledWith(0.5);
+  });
+
+  it("ignores unrelated slider keys", () => {
+    const onValueChange = vi.fn();
+    render(<HalfStars value={3} onValueChange={onValueChange} />);
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "Enter" });
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+
+  it("selects a half on a star's left side, whole on its right", () => {
+    const onValueChange = vi.fn();
+    const { container } = render(
+      <HalfStars defaultValue={0} onValueChange={onValueChange} />,
+    );
+    const third = container.querySelectorAll('[data-slot="rating-button"]')[2];
+    stubRect(third, 0, 20);
+    fireEvent.click(third, { clientX: 5 }); // left half → 2.5
+    expect(onValueChange).toHaveBeenLastCalledWith(2.5);
+    fireEvent.click(third, { clientX: 15 }); // right half → 3
+    expect(onValueChange).toHaveBeenLastCalledWith(3);
+  });
+
+  it("previews the hovered half and resets on leave", () => {
+    const { container } = render(<HalfStars defaultValue={0} />);
+    const fourth = container.querySelectorAll('[data-slot="rating-button"]')[3];
+    stubRect(fourth, 0, 20);
+    fireEvent.mouseMove(fourth, { clientX: 5 }); // index 3 + 0.5 = 3.5
+    expect(fillWidths(container)).toEqual([
+      "100%",
+      "100%",
+      "100%",
+      "50%",
+      "0%",
+    ]);
+    fireEvent.mouseLeave(container.querySelector('[data-slot="rating"]')!);
+    expect(fullyFilled(container)).toBe(0);
+  });
+
+  it("is inert when read-only", () => {
+    const onValueChange = vi.fn();
+    const { container } = render(
+      <HalfStars value={2.5} readOnly onValueChange={onValueChange} />,
+    );
+    const slider = screen.getByRole("slider");
+    expect(slider).toHaveAttribute("aria-readonly", "true");
+    expect(slider).toHaveAttribute("tabindex", "-1");
+    fireEvent.keyDown(slider, { key: "ArrowRight" });
+    const star = container.querySelectorAll('[data-slot="rating-button"]')[0];
+    stubRect(star, 0, 20);
+    fireEvent.click(star, { clientX: 15 });
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+
+  it("has no axe violations in half mode", async () => {
+    const { container } = render(<HalfStars value={3.5} readOnly />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+});
+
+describe("Rating — form support", () => {
+  it("renders a hidden input carrying the value when named", () => {
+    const { container } = render(<Stars value={3} name="score" />);
+    const input = container.querySelector<HTMLInputElement>(
+      'input[type="hidden"][name="score"]',
+    );
+    expect(input).not.toBeNull();
+    expect(input!.value).toBe("3");
+  });
+
+  it("omits the hidden input without a name", () => {
+    const { container } = render(<Stars value={3} />);
+    expect(container.querySelector('input[type="hidden"]')).toBeNull();
+  });
+});
+
+describe("Rating — customization", () => {
+  it("honors a custom icon size", () => {
+    const { container } = render(
+      <Rating value={1} readOnly>
+        <RatingButton size={14} />
+      </Rating>,
+    );
+    expect(container.querySelector("svg")).toHaveAttribute("width", "14");
+  });
+
+  it("renders a custom icon", () => {
+    const { container } = render(
+      <Rating value={1} readOnly>
+        <RatingButton icon={<HeartIcon />} />
+      </Rating>,
+    );
+    expect(container.querySelector("svg.lucide-heart")).not.toBeNull();
   });
 });
 
