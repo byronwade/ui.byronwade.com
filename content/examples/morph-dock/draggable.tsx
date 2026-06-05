@@ -37,7 +37,7 @@ export default function Example() {
           <textarea
             aria-label="Notes"
             placeholder="Drag the header to move me anywhere…"
-            className="h-24 w-full resize-none rounded-lg bg-white/5 p-2 text-[13px] text-dock-active-foreground outline-none placeholder:text-dock-foreground/50"
+            className="h-24 w-full resize-none rounded-lg bg-dock-foreground/5 p-2 text-[13px] text-dock-active-foreground outline-none placeholder:text-dock-foreground/50"
           />
         </div>
       </MorphDock>

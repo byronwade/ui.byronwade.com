@@ -76,7 +76,7 @@ export default function Example() {
                 key={k.d}
                 type="button"
                 onClick={() => setValue((v) => v + k.d)}
-                className="flex size-14 flex-col items-center justify-center rounded-full bg-dock-active text-dock-active-foreground ring-brand/40 transition-[transform,background-color] duration-100 hover:bg-white/15 active:scale-95 active:bg-white/20 active:ring-1 motion-reduce:active:scale-100"
+                className="flex size-14 flex-col items-center justify-center rounded-full bg-dock-active text-dock-active-foreground ring-brand/40 transition-[transform,background-color] duration-100 hover:bg-dock-foreground/15 active:scale-95 active:bg-dock-foreground/20 active:ring-1 motion-reduce:active:scale-100"
               >
                 <span className="text-xl font-medium leading-none">{k.d}</span>
                 {k.sub ? (

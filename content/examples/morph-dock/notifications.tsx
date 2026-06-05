@@ -47,8 +47,8 @@ const EARLIER: Note[] = [
 function Row({ note }: { note: Note }) {
   const Icon = note.icon;
   return (
-    <div className="group/n relative flex gap-2.5 rounded-lg p-2 transition-colors hover:bg-white/[0.04]">
-      <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-white/[0.07]">
+    <div className="group/n relative flex gap-2.5 rounded-lg p-2 transition-colors hover:bg-dock-foreground/[0.04]">
+      <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-dock-foreground/[0.07]">
         <Icon className={cn("size-3.5", note.tone)} />
       </span>
       <div className="min-w-0 flex-1">
@@ -62,7 +62,7 @@ function Row({ note }: { note: Note }) {
       <button
         type="button"
         aria-label="Dismiss"
-        className="absolute right-1.5 top-1.5 flex size-6 items-center justify-center rounded-md text-dock-foreground opacity-0 transition hover:bg-white/[0.08] hover:text-dock-active-foreground focus-visible:opacity-100 group-hover/n:opacity-100"
+        className="absolute right-1.5 top-1.5 flex size-6 items-center justify-center rounded-md text-dock-foreground opacity-0 transition hover:bg-dock-foreground/[0.08] hover:text-dock-active-foreground focus-visible:opacity-100 group-hover/n:opacity-100"
       >
         <X className="size-3.5" strokeWidth={2} />
       </button>
@@ -117,7 +117,7 @@ export default function Example() {
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close notifications"
-                className="flex size-7 items-center justify-center rounded-full text-dock-foreground transition-colors hover:bg-white/[0.08] hover:text-dock-active-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                className="flex size-7 items-center justify-center rounded-full text-dock-foreground transition-colors hover:bg-dock-foreground/[0.08] hover:text-dock-active-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
               >
                 <X className="size-4" strokeWidth={2} />
               </button>

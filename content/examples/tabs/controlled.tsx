@@ -63,7 +63,7 @@ export default function Example() {
           <button
             onClick={() => setActiveTab((v) => Math.min(STEPS.length - 1, v + 1))}
             disabled={isLast}
-            className="rounded-full bg-brand px-4 py-1.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:pointer-events-none disabled:opacity-40"
+            className="rounded-full bg-brand px-4 py-1.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 disabled:pointer-events-none disabled:opacity-40"
           >
             Next
           </button>
