@@ -58,6 +58,25 @@ describe("QRCode", () => {
     expect(container.querySelector('[data-slot="qr-code"] svg')).not.toBeNull();
   });
 
+  it("fills its parent when no size prop is given", async () => {
+    const { container } = render(<QRCode data="x" />);
+    const el = await svgOf(container);
+    expect(el).toHaveClass("size-full");
+  });
+
+  it("applies a fixed sm size", async () => {
+    const { container } = render(<QRCode data="x" size="sm" />);
+    const el = await svgOf(container);
+    expect(el).toHaveClass("size-24");
+    expect(el).not.toHaveClass("size-full");
+  });
+
+  it("applies a fixed lg size", async () => {
+    const { container } = render(<QRCode data="x" size="lg" />);
+    const el = await svgOf(container);
+    expect(el).toHaveClass("size-56");
+  });
+
   it("merges a custom className", async () => {
     const { container } = render(<QRCode data="x" className="rounded-lg" />);
     const el = await svgOf(container);

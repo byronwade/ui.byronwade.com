@@ -167,6 +167,7 @@ import CollapsibleFaq from "./collapsible/faq";
 import CollapsibleUncontrolled from "./collapsible/uncontrolled";
 import CollapsibleWithRichContent from "./collapsible/with-rich-content";
 import ColorPickerDefault from "./color-picker/default";
+import ColorPickerInline from "./color-picker/inline";
 import CommandDefault from "./command/default";
 import CommandActions from "./command/actions";
 import CommandCards from "./command/cards";
@@ -179,7 +180,9 @@ import CommandWithIcons from "./command/with-icons";
 import CommandResultDefault from "./command-result/default";
 import ConversationListDefault from "./conversation-list/default";
 import CreditCardDefault from "./credit-card/default";
+import CreditCardTones from "./credit-card/tones";
 import CursorDefault from "./cursor/default";
+import CursorTones from "./cursor/tones";
 import CustomerCardDefault from "./customer-card/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
@@ -355,6 +358,7 @@ import PageHeaderDescriptionOnly from "./page-header/description-only";
 import PageHeaderWithActions from "./page-header/with-actions";
 import PageHeaderWithBadge from "./page-header/with-badge";
 import PillDefault from "./pill/default";
+import PillSizes from "./pill/sizes";
 import PixelatedCanvasDefault from "./pixelated-canvas/default";
 import PlaylistCardDefault from "./playlist-card/default";
 import PopoverDefault from "./popover/default";
@@ -372,6 +376,7 @@ import ProgressSizes from "./progress/sizes";
 import ProgressTones from "./progress/tones";
 import ProgressWithFormat from "./progress/with-format";
 import QrCodeDefault from "./qr-code/default";
+import QrCodeSizes from "./qr-code/sizes";
 import RadioGroupDefault from "./radio-group/default";
 import RadioGroupDisabled from "./radio-group/disabled";
 import RadioGroupFormValidation from "./radio-group/form-validation";
@@ -388,6 +393,7 @@ import RatingReadOnly from "./rating/read-only";
 import RatingScoreBadge from "./rating/score-badge";
 import RatingWithForm from "./rating/with-form";
 import RelativeTimeDefault from "./relative-time/default";
+import RelativeTimeWorldClock from "./relative-time/world-clock";
 import ResourceListDefault from "./resource-list/default";
 import ResourceListEmpty from "./resource-list/empty";
 import ResourceListLoading from "./resource-list/loading";
@@ -509,6 +515,7 @@ import TextareaErrorState from "./textarea/error-state";
 import TextareaReadonly from "./textarea/readonly";
 import TextareaWithLabelAndHint from "./textarea/with-label-and-hint";
 import TickerDefault from "./ticker/default";
+import TickerSizes from "./ticker/sizes";
 import TimelineRailDefault from "./timeline-rail/default";
 import TimelineRailCustomTerminal from "./timeline-rail/custom-terminal";
 import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
@@ -832,6 +839,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "color-picker": [
     { name: "Default", file: "color-picker/default.tsx", Component: ColorPickerDefault },
+    { name: "Inline", file: "color-picker/inline.tsx", Component: ColorPickerInline },
   ],
   "command": [
     { name: "Default", file: "command/default.tsx", Component: CommandDefault },
@@ -852,9 +860,11 @@ export const examples: Record<string, Example[]> = {
   ],
   "credit-card": [
     { name: "Default", file: "credit-card/default.tsx", Component: CreditCardDefault },
+    { name: "Tones", file: "credit-card/tones.tsx", Component: CreditCardTones },
   ],
   "cursor": [
     { name: "Default", file: "cursor/default.tsx", Component: CursorDefault },
+    { name: "Tones", file: "cursor/tones.tsx", Component: CursorTones },
   ],
   "customer-card": [
     { name: "Default", file: "customer-card/default.tsx", Component: CustomerCardDefault },
@@ -1128,6 +1138,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "pill": [
     { name: "Default", file: "pill/default.tsx", Component: PillDefault },
+    { name: "Sizes", file: "pill/sizes.tsx", Component: PillSizes },
   ],
   "pixelated-canvas": [
     { name: "Default", file: "pixelated-canvas/default.tsx", Component: PixelatedCanvasDefault },
@@ -1159,6 +1170,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "qr-code": [
     { name: "Default", file: "qr-code/default.tsx", Component: QrCodeDefault },
+    { name: "Sizes", file: "qr-code/sizes.tsx", Component: QrCodeSizes },
   ],
   "radio-group": [
     { name: "Default", file: "radio-group/default.tsx", Component: RadioGroupDefault },
@@ -1181,6 +1193,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "relative-time": [
     { name: "Default", file: "relative-time/default.tsx", Component: RelativeTimeDefault },
+    { name: "World Clock", file: "relative-time/world-clock.tsx", Component: RelativeTimeWorldClock },
   ],
   "resource-list": [
     { name: "Default", file: "resource-list/default.tsx", Component: ResourceListDefault },
@@ -1346,6 +1359,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "ticker": [
     { name: "Default", file: "ticker/default.tsx", Component: TickerDefault },
+    { name: "Sizes", file: "ticker/sizes.tsx", Component: TickerSizes },
   ],
   "timeline-rail": [
     { name: "Default", file: "timeline-rail/default.tsx", Component: TimelineRailDefault },

@@ -28,6 +28,37 @@ describe("Ticker", () => {
     expect(screen.getByText("AAPL")).toBeInTheDocument();
   });
 
+  it("sizes the icon from the default size", () => {
+    const { container } = render(
+      <Ticker>
+        <TickerIcon symbol="AA" />
+      </Ticker>,
+    );
+    expect(container.querySelector('[data-slot="ticker-icon"]')).toHaveClass("size-7");
+  });
+
+  it("sizes the icon down for the sm size", () => {
+    const { container } = render(
+      <Ticker size="sm">
+        <TickerIcon symbol="AA" />
+        <TickerSymbol symbol="aa" />
+        <TickerPrice price={1} />
+      </Ticker>,
+    );
+    expect(container.querySelector('[data-slot="ticker-icon"]')).toHaveClass("size-6");
+  });
+
+  it("sizes the icon up for the lg size", () => {
+    const { container } = render(
+      <Ticker size="lg">
+        <TickerIcon symbol="AA" />
+        <TickerSymbol symbol="aa" />
+        <TickerPrice price={1} />
+      </Ticker>,
+    );
+    expect(container.querySelector('[data-slot="ticker-icon"]')).toHaveClass("size-8");
+  });
+
   it("formats price with the default USD currency", () => {
     render(
       <Ticker>

@@ -35,6 +35,28 @@ describe("Pill — base", () => {
   });
 });
 
+describe("Pill — size", () => {
+  const pill = (c: HTMLElement) => c.querySelector('[data-slot="pill"]');
+
+  it("keeps the default padding when no size prop is given", () => {
+    const { container } = render(<Pill>x</Pill>);
+    expect(pill(container)).toHaveClass("px-3");
+    expect(pill(container)).toHaveClass("py-1.5");
+  });
+
+  it("applies the sm size", () => {
+    const { container } = render(<Pill size="sm">x</Pill>);
+    expect(pill(container)).toHaveClass("px-2");
+    expect(pill(container)).toHaveClass("text-xs");
+  });
+
+  it("applies the lg size", () => {
+    const { container } = render(<Pill size="lg">x</Pill>);
+    expect(pill(container)).toHaveClass("px-4");
+    expect(pill(container)).toHaveClass("text-base");
+  });
+});
+
 describe("Pill — indicator tones (tokenized)", () => {
   it.each([
     ["success", "bg-success"],

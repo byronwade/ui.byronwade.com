@@ -91,6 +91,35 @@ describe("CreditCard — structure", () => {
     expect(container.innerHTML).not.toMatch(/text-white|bg-gray-900/);
   });
 
+  it("recolors the surface + text for the brand tone", () => {
+    const { container } = render(
+      <CreditCard tone="brand">
+        <CreditCardFront>
+          <CreditCardName>Byron Wade</CreditCardName>
+        </CreditCardFront>
+      </CreditCard>,
+    );
+    expect(container.querySelector('[data-slot="credit-card"]')).toHaveClass("text-brand-foreground");
+    expect(container.querySelector('[data-slot="credit-card-front"]')).toHaveClass("bg-brand");
+    expect(container.querySelector('[data-slot="credit-card-front"]')).not.toHaveClass("bg-foreground/90");
+  });
+
+  it("recolors the surface for the muted tone (both faces)", () => {
+    const { container } = render(
+      <CreditCard tone="muted">
+        <CreditCardFront>
+          <CreditCardName>Byron Wade</CreditCardName>
+        </CreditCardFront>
+        <CreditCardBack>
+          <CreditCardCvv>123</CreditCardCvv>
+        </CreditCardBack>
+      </CreditCard>,
+    );
+    expect(container.querySelector('[data-slot="credit-card"]')).toHaveClass("text-foreground");
+    expect(container.querySelector('[data-slot="credit-card-front"]')).toHaveClass("bg-muted");
+    expect(container.querySelector('[data-slot="credit-card-back"]')).toHaveClass("bg-muted");
+  });
+
   it("name is editorial-weight uppercase", () => {
     const { container } = render(<FullCard />);
     const name = container.querySelector('[data-slot="credit-card-name"]');
