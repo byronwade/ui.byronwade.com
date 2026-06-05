@@ -77,6 +77,36 @@ Before writing any markup, check whether a component already exists. Reach for t
   `audio-player` (media-chrome `<audio>` player, sibling of video-player),
   `lyrics` (synced scrolling lyric lines), `playlist-card` (cover + title + description tile),
   `artist-header` (artist hero: artwork + verified badge + monthly-listeners stat + play/follow)
+- **Video / YouTube** — YouTube-modeled video UI. Primitives: `thumbnail` (video tile:
+  image/placeholder + duration pill, watched-progress bar, live chip), `verified-badge` (inline
+  verified check beside channel/author names; default check-seal + artist music-seal,
+  muted-foreground token), `live-badge` (LIVE pill on `bg-destructive` — the live/attention red,
+  not `--brand`; pulsing `bg-current` dot, optional `font-mono` compact viewer count),
+  `subscribe-button` (two-state subscribe toggle + notification-level dropdown menu), `chip-bar`
+  (single-select horizontally-scrolling filter chip row with edge fade + scroll chevrons),
+  `action-rail` (vertical/horizontal stack of icon+count action buttons; active tint via
+  `bg-primary`, counts `font-mono tabular-nums` compact). Browse composites: `video-card`
+  (YouTube grid video tile: `thumbnail` + channel byline + compact view/timestamp meta +
+  overflow menu), `video-shelf` (titled horizontal content shelf — scroll track with edge fade +
+  chevron controls + optional action; generic, takes children), `channel-header` (channel page
+  header: banner + avatar, verified handle and compact sub/video counts, `subscribe-button` /
+  join actions, section `tabs`). Watch-page composites: `up-next-item` (compact horizontal video
+  row: left 16/9 thumbnail + title, channel/verified, views·timestamp meta, optional ⋯ menu),
+  `channel-byline` (watch-page channel identity row: avatar + name/verified + subscriber count and
+  a subscribe button), `engagement-bar` (watch-page like/dislike + share/save/overflow action
+  row), `description-box` (tinted panel with a views/date header and a collapsible "...more" /
+  "Show less" body), `comment` (threaded comment: avatar + author/time, like/dislike, reply,
+  pinned + creator-heart, replies disclosure), `comment-composer` (avatar + underline input that
+  reveals Cancel/Comment on focus; Comment disabled while empty). Shorts & player chrome:
+  `shorts-player` (vertical 9:16 Shorts player: media frame + engagement `action-rail` +
+  author/caption/sound overlay), `mini-player` (corner PiP "continue watching" card: poster +
+  play/pause overlay, progress, close + expand), `chapter-list` (video chapter rows with mono
+  timestamps + active-chapter highlight derived from the playhead), `playback-menu` (player
+  settings dropdown; setting rows open single-select option submenus). Studio & creator:
+  `studio-video-row` (Studio content-table row: checkbox + thumbnail/title + visibility tone +
+  date + mono metric cells + overflow menu), `upload-row` (upload/processing row: preview,
+  filename, progress, status badge + cancel/retry), `comment-moderation-row` (held-for-review
+  comment row: approve/remove/heart/reply actions + status tag + optional video context)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),

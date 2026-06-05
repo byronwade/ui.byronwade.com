@@ -3415,6 +3415,471 @@
       ]
     },
     {
+      "name": "thumbnail",
+      "type": "registry:ui",
+      "title": "Thumbnail",
+      "description": "Video thumbnail tile with optional duration pill, watched-progress bar, and live chip.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/aspect-ratio",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/thumbnail.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/thumbnail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verified-badge",
+      "type": "registry:ui",
+      "title": "Verified badge",
+      "description": "Inline verified check shown next to channel or author names, with default check-seal and artist music-seal variants.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/verified-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/verified-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "live-badge",
+      "type": "registry:ui",
+      "title": "Live badge",
+      "description": "A YouTube-style LIVE indicator pill with an optional pulsing dot and compact-formatted concurrent-viewer count.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/live-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/live-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "subscribe-button",
+      "type": "registry:ui",
+      "title": "Subscribe button",
+      "description": "YouTube-style subscribe control with a two-state toggle and a notification-level dropdown menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/button",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/subscribe-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/subscribe-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chip-bar",
+      "type": "registry:ui",
+      "title": "Chip bar",
+      "description": "YouTube-style single-select horizontal filter chip bar with edge fade and scroll affordance.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/chip-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/chip-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "action-rail",
+      "type": "registry:ui",
+      "title": "Action rail",
+      "description": "Vertical or horizontal stack of icon and compact-count action buttons — a YouTube Shorts-style like/comment/share rail.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/action-rail.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/action-rail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "video-card",
+      "type": "registry:component",
+      "title": "Video card",
+      "description": "YouTube-style vertical video tile composing a thumbnail, channel byline, compact view/timestamp meta, and an overflow menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/verified-badge",
+        "@byronwade/avatar",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/video-card.tsx",
+          "type": "registry:component",
+          "target": "components/video-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "video-shelf",
+      "type": "registry:component",
+      "title": "Video shelf",
+      "description": "Titled, horizontally-scrolling content row with edge-fade, chevron controls, and an optional action — the YouTube home/category shelf.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/video-shelf.tsx",
+          "type": "registry:component",
+          "target": "components/video-shelf.tsx"
+        }
+      ]
+    },
+    {
+      "name": "channel-header",
+      "type": "registry:component",
+      "title": "Channel header",
+      "description": "YouTube-style channel page header with banner, avatar, verified handle and counts, subscribe/join actions, and section tabs.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/verified-badge",
+        "@byronwade/subscribe-button",
+        "@byronwade/button",
+        "@byronwade/tabs",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/channel-header.tsx",
+          "type": "registry:component",
+          "target": "components/channel-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "up-next-item",
+      "type": "registry:component",
+      "title": "Up next item",
+      "description": "Compact horizontal video row for watch-page up-next lists and search results, composing a thumbnail with title, channel, view/timestamp meta, and an overflow menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/verified-badge",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/up-next-item.tsx",
+          "type": "registry:component",
+          "target": "components/up-next-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "channel-byline",
+      "type": "registry:component",
+      "title": "Channel byline",
+      "description": "Watch-page channel identity row: avatar, name with verified badge and subscriber count, plus a SubscribeButton and optional action slot.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/verified-badge",
+        "@byronwade/subscribe-button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/channel-byline.tsx",
+          "type": "registry:component",
+          "target": "components/channel-byline.tsx"
+        }
+      ]
+    },
+    {
+      "name": "engagement-bar",
+      "type": "registry:component",
+      "title": "Engagement bar",
+      "description": "YouTube-style watch-page action row: connected like/dislike segmented pill, plus share, save, custom action, and overflow-menu pills.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/separator",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/engagement-bar.tsx",
+          "type": "registry:component",
+          "target": "components/engagement-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "description-box",
+      "type": "registry:component",
+      "title": "Description box",
+      "description": "YouTube watch-page description panel with a views/date header and collapsible body text that expands via \"...more\" / \"Show less\".",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/description-box.tsx",
+          "type": "registry:component",
+          "target": "components/description-box.tsx"
+        }
+      ]
+    },
+    {
+      "name": "comment",
+      "type": "registry:component",
+      "title": "Comment",
+      "description": "A YouTube-style threaded comment with author, like/dislike, reply, pinned/creator-heart tags, and a replies disclosure.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/verified-badge",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/comment.tsx",
+          "type": "registry:component",
+          "target": "components/comment.tsx"
+        }
+      ]
+    },
+    {
+      "name": "comment-composer",
+      "type": "registry:component",
+      "title": "Comment composer",
+      "description": "YouTube-style comment composer: an avatar plus an underline text input that reveals Cancel/Comment actions on focus or input.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/comment-composer.tsx",
+          "type": "registry:component",
+          "target": "components/comment-composer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "shorts-player",
+      "type": "registry:component",
+      "title": "Shorts player",
+      "description": "A YouTube Shorts-style vertical 9:16 player with a right-side engagement rail and a bottom-left author, caption, and sound overlay.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/action-rail",
+        "@byronwade/avatar",
+        "@byronwade/verified-badge",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/shorts-player.tsx",
+          "type": "registry:component",
+          "target": "components/shorts-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mini-player",
+      "type": "registry:component",
+      "title": "Mini player",
+      "description": "Picture-in-picture mini player card with a play/pause poster overlay, progress, and close/expand controls.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/mini-player.tsx",
+          "type": "registry:component",
+          "target": "components/mini-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chapter-list",
+      "type": "registry:component",
+      "title": "Chapter list",
+      "description": "A YouTube-style chapter list with timestamps, thumbnails, and an active chapter derived from the playhead.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/chapter-list.tsx",
+          "type": "registry:component",
+          "target": "components/chapter-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "playback-menu",
+      "type": "registry:component",
+      "title": "Playback menu",
+      "description": "YouTube-style player settings menu: gear-triggered dropdown of setting groups (quality, speed, subtitles), each opening a single-select radio submenu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/playback-menu.tsx",
+          "type": "registry:component",
+          "target": "components/playback-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "studio-video-row",
+      "type": "registry:component",
+      "title": "Studio video row",
+      "description": "A YouTube Studio content-table row composing a selection checkbox, thumbnail, title/description, visibility status, date, and compact mono view/comment/like metrics with an overflow menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/checkbox",
+        "@byronwade/status-dot",
+        "@byronwade/badge",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/studio-video-row.tsx",
+          "type": "registry:component",
+          "target": "components/studio-video-row.tsx"
+        }
+      ]
+    },
+    {
+      "name": "upload-row",
+      "type": "registry:component",
+      "title": "Upload row",
+      "description": "YouTube Studio-style upload/processing row: preview, filename, progress bar, status badge, and a cancel/retry action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/progress",
+        "@byronwade/thumbnail",
+        "@byronwade/status-dot",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/upload-row.tsx",
+          "type": "registry:component",
+          "target": "components/upload-row.tsx"
+        }
+      ]
+    },
+    {
+      "name": "comment-moderation-row",
+      "type": "registry:component",
+      "title": "Comment moderation row",
+      "description": "A YouTube Studio comment-moderation row with approve/remove/heart/reply actions, a status tag, and optional video context.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/button",
+        "@byronwade/badge",
+        "@byronwade/verified-badge",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/comment-moderation-row.tsx",
+          "type": "registry:component",
+          "target": "components/comment-moderation-row.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -3576,7 +4041,29 @@
         "@byronwade/index-filters",
         "@byronwade/tag-input",
         "@byronwade/drop-zone",
-        "@byronwade/banner"
+        "@byronwade/banner",
+        "@byronwade/thumbnail",
+        "@byronwade/verified-badge",
+        "@byronwade/live-badge",
+        "@byronwade/subscribe-button",
+        "@byronwade/chip-bar",
+        "@byronwade/action-rail",
+        "@byronwade/video-card",
+        "@byronwade/video-shelf",
+        "@byronwade/channel-header",
+        "@byronwade/up-next-item",
+        "@byronwade/channel-byline",
+        "@byronwade/engagement-bar",
+        "@byronwade/description-box",
+        "@byronwade/comment",
+        "@byronwade/comment-composer",
+        "@byronwade/shorts-player",
+        "@byronwade/mini-player",
+        "@byronwade/chapter-list",
+        "@byronwade/playback-menu",
+        "@byronwade/studio-video-row",
+        "@byronwade/upload-row",
+        "@byronwade/comment-moderation-row"
       ]
     }
   ]
