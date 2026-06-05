@@ -2,10 +2,11 @@
  * Adapted for byronwade/ui from kibo-ui.
  * Original interactive star rating © kibo-ui — https://www.kibo-ui.com
  * Reworked to the byronwade/ui design system: drops @radix-ui for an inlined
- * useControllableState, `data-slot` hooks, `fill-current` so the active color
- * follows whatever `text-*` token you set (defaults to the brand accent). Adds a
- * consolidated read-only `RatingBadge` variant (compact score + star) in the
- * spirit of Untitled UI's rating-badge.
+ * useControllableState, `data-slot` hooks, and a two-layer fill so the active
+ * color follows whatever `text-*` token you set (defaults to the brand accent).
+ * Adds fractional/half-star support (display + interactive `allowHalf` select),
+ * native form submission via `name`, and a consolidated read-only `RatingBadge`
+ * variant (compact score + star) in the spirit of Untitled UI's rating-badge.
  */
 "use client"
 
@@ -46,13 +47,17 @@ function useControllableState<T>({
   return [value, setValue] as const
 }
 
+const clamp = (n: number, min: number, max: number) =>
+  Math.min(max, Math.max(min, n))
+
 type RatingContextValue = {
   value: number
   readOnly: boolean
+  allowHalf: boolean
   hoverValue: number | null
   focusedStar: number | null
   handleValueChange: (
-    event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>,
+    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
     value: number,
   ) => void
   handleKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void
@@ -84,6 +89,7 @@ export const RatingButton = ({
   const {
     value,
     readOnly,
+    allowHalf,
     hoverValue,
     focusedStar,
     handleValueChange,
@@ -93,7 +99,68 @@ export const RatingButton = ({
   } = useRating()
 
   const index = providedIndex ?? 0
-  const isActive = index < (hoverValue ?? focusedStar ?? value ?? 0)
+  // Current value driving the visual: hover wins, then keyboard focus, then value.
+  const current = hoverValue ?? focusedStar ?? value ?? 0
+  // Round to avoid float noise in the rendered width (e.g. 3.7 → "70%", not "70.0000001%").
+  const fill = +(clamp(current - index, 0, 1) * 100).toFixed(2)
+  const isInteger = !allowHalf
+
+  // Map a pointer position inside the star to the half it points at.
+  const halfFromPointer = (event: MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const ratio = rect.width ? (event.clientX - rect.left) / rect.width : 1
+    return ratio <= 0.5 ? index + 0.5 : index + 1
+  }
+
+  const renderIcon = (extra: string) =>
+    cloneElement(icon, {
+      size,
+      className: cn("transition-colors duration-200", extra),
+      "aria-hidden": "true",
+    })
+
+  const iconLayers = (
+    <span data-slot="rating-button-icon" className="relative inline-block">
+      {renderIcon(cn(!readOnly && "cursor-pointer", "text-current/35"))}
+      <span
+        data-slot="rating-button-fill"
+        className="absolute inset-0 overflow-hidden"
+        style={{ width: `${fill}%` }}
+      >
+        {renderIcon(cn(!readOnly && "cursor-pointer", "fill-current"))}
+      </span>
+    </span>
+  )
+
+  // Half mode: the container is the slider, so each star is a presentational
+  // pointer target — not focusable, so `aria-hidden` stays valid for axe.
+  if (!isInteger) {
+    return (
+      <span
+        data-slot="rating-button"
+        aria-hidden="true"
+        className={cn(
+          "inline-flex rounded-full p-0.5",
+          readOnly ? "cursor-default" : "cursor-pointer",
+          className,
+        )}
+        onClick={
+          readOnly
+            ? undefined
+            : (event) => handleValueChange(event, halfFromPointer(event))
+        }
+        onMouseMove={
+          readOnly
+            ? undefined
+            : (event) => setHoverValue(halfFromPointer(event))
+        }
+      >
+        {iconLayers}
+      </span>
+    )
+  }
+
+  // Integer mode: accessible radio button with roving tabindex + keyboard.
   let tabIndex = -1
   if (!readOnly) tabIndex = value === index + 1 ? 0 : -1
 
@@ -117,15 +184,7 @@ export const RatingButton = ({
       tabIndex={tabIndex}
       type="button"
     >
-      {cloneElement(icon, {
-        size,
-        className: cn(
-          "transition-colors duration-200",
-          isActive && "fill-current",
-          !readOnly && "cursor-pointer",
-        ),
-        "aria-hidden": "true",
-      })}
+      {iconLayers}
     </button>
   )
 }
@@ -134,11 +193,15 @@ export type RatingProps = {
   defaultValue?: number
   value?: number
   onChange?: (
-    event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>,
+    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
     value: number,
   ) => void
   onValueChange?: (value: number) => void
   readOnly?: boolean
+  /** Allow half-star (0.5-step) display and interactive selection. */
+  allowHalf?: boolean
+  /** When set, renders a hidden input so the score submits in a native form. */
+  name?: string
   className?: string
   children?: ReactNode
 }
@@ -149,6 +212,8 @@ export const Rating = ({
   defaultValue = 0,
   onChange,
   readOnly = false,
+  allowHalf = false,
+  name,
   className,
   children,
 }: RatingProps) => {
@@ -161,9 +226,12 @@ export const Rating = ({
     onChange: controlledOnValueChange,
   })
 
+  const total = Children.count(children)
+  const step = allowHalf ? 0.5 : 1
+
   const handleValueChange = useCallback(
     (
-      event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>,
+      event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
       newValue: number,
     ) => {
       if (readOnly) return
@@ -173,44 +241,84 @@ export const Rating = ({
     [readOnly, onChange, onValueChange],
   )
 
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLButtonElement>) => {
-      if (readOnly) return
-      const total = Children.count(children)
-      let newValue = focusedStar !== null ? focusedStar : (value ?? 0)
+  // Shared arrow-key math for both the radio and slider keyboard models.
+  const stepValue = useCallback(
+    (event: KeyboardEvent<HTMLElement>, base: number) => {
+      let newValue = base
       switch (event.key) {
         case "ArrowRight":
+        case "ArrowUp":
           newValue =
             event.shiftKey || event.metaKey
               ? total
-              : Math.min(total, newValue + 1)
+              : clamp(base + step, step, total)
           break
         case "ArrowLeft":
+        case "ArrowDown":
           newValue =
-            event.shiftKey || event.metaKey ? 1 : Math.max(1, newValue - 1)
+            event.shiftKey || event.metaKey
+              ? step
+              : clamp(base - step, step, total)
           break
         default:
-          return
+          return null
       }
       event.preventDefault()
+      return newValue
+    },
+    [step, total],
+  )
+
+  // Integer (radio) model: roving focus across the star buttons.
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLButtonElement>) => {
+      if (readOnly) return
+      const newValue = stepValue(event, focusedStar ?? value ?? 0)
+      if (newValue === null) return
       setFocusedStar(newValue)
       handleValueChange(event, newValue)
     },
-    [focusedStar, value, children, readOnly, handleValueChange],
+    [focusedStar, value, readOnly, stepValue, handleValueChange],
+  )
+
+  // Half (slider) model: keyboard handled at the container.
+  const handleSliderKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (readOnly) return
+      const newValue = stepValue(event, value ?? 0)
+      if (newValue === null) return
+      handleValueChange(event, newValue)
+    },
+    [readOnly, value, stepValue, handleValueChange],
   )
 
   useEffect(() => {
+    if (allowHalf) return
     if (focusedStar !== null && containerRef.current) {
       const buttons = containerRef.current.querySelectorAll("button")
-      buttons[focusedStar - 1]?.focus()
+      buttons[Math.ceil(focusedStar) - 1]?.focus()
     }
-  }, [focusedStar])
+  }, [focusedStar, allowHalf])
+
+  const sliderProps = allowHalf
+    ? ({
+        role: "slider",
+        "aria-valuemin": 0,
+        "aria-valuemax": total,
+        "aria-valuenow": value ?? 0,
+        "aria-valuetext": `${value ?? 0} of ${total} stars`,
+        "aria-readonly": readOnly || undefined,
+        tabIndex: readOnly ? -1 : 0,
+        onKeyDown: handleSliderKeyDown,
+      } as const)
+    : ({ role: "radiogroup" } as const)
 
   return (
     <RatingContext.Provider
       value={{
         value: value ?? 0,
         readOnly,
+        allowHalf,
         hoverValue,
         focusedStar,
         handleValueChange,
@@ -220,12 +328,12 @@ export const Rating = ({
       }}
     >
       <div
+        {...sliderProps}
         data-slot="rating"
         aria-label="Rating"
         className={cn("inline-flex items-center gap-0.5 text-brand", className)}
         onMouseLeave={() => setHoverValue(null)}
         ref={containerRef}
-        role="radiogroup"
       >
         {Children.map(children, (child, index) => {
           if (!child) return null
@@ -233,6 +341,9 @@ export const Rating = ({
             index,
           })
         })}
+        {name ? (
+          <input type="hidden" name={name} value={value ?? 0} readOnly />
+        ) : null}
       </div>
     </RatingContext.Provider>
   )

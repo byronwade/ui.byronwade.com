@@ -371,6 +371,14 @@ import RadioGroupHorizontal from "./radio-group/horizontal";
 import RadioGroupWithDescription from "./radio-group/with-description";
 import RadioGroupWithIcon from "./radio-group/with-icon";
 import RatingDefault from "./rating/default";
+import RatingCustomColor from "./rating/custom-color";
+import RatingCustomIcon from "./rating/custom-icon";
+import RatingCustomSize from "./rating/custom-size";
+import RatingFractional from "./rating/fractional";
+import RatingHalf from "./rating/half";
+import RatingReadOnly from "./rating/read-only";
+import RatingScoreBadge from "./rating/score-badge";
+import RatingWithForm from "./rating/with-form";
 import RelativeTimeDefault from "./relative-time/default";
 import ResourceListDefault from "./resource-list/default";
 import ResourceListEmpty from "./resource-list/empty";
@@ -1145,6 +1153,14 @@ export const examples: Record<string, Example[]> = {
   ],
   "rating": [
     { name: "Default", file: "rating/default.tsx", Component: RatingDefault },
+    { name: "Custom Color", file: "rating/custom-color.tsx", Component: RatingCustomColor },
+    { name: "Custom Icon", file: "rating/custom-icon.tsx", Component: RatingCustomIcon },
+    { name: "Custom Size", file: "rating/custom-size.tsx", Component: RatingCustomSize },
+    { name: "Fractional", file: "rating/fractional.tsx", Component: RatingFractional },
+    { name: "Half", file: "rating/half.tsx", Component: RatingHalf },
+    { name: "Read Only", file: "rating/read-only.tsx", Component: RatingReadOnly },
+    { name: "Score Badge", file: "rating/score-badge.tsx", Component: RatingScoreBadge },
+    { name: "With Form", file: "rating/with-form.tsx", Component: RatingWithForm },
   ],
   "relative-time": [
     { name: "Default", file: "relative-time/default.tsx", Component: RelativeTimeDefault },
