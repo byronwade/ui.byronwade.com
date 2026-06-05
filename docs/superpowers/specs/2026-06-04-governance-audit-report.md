@@ -69,25 +69,34 @@ repo-wide** including `.md`/`.mdc`/`.css`, root, and `packages/`). Entirely mech
 the _diff shape_ once. Note: the Phase-A docs just written (`CONVENTIONS.md`, the two agent files,
 this report) are in the repo-wide count and will reformat in Batch 0.
 
+## Phase C status (branch `chore/governance-phase-c`)
+
+**Batches 0–3 done & green** (`validate` + `test:ci` + `npm run build` all exit 0). All four
+structural checks (`check:conventions`) and `check:format` are now CI-enforced. **Batch 4 remains** —
+deferred pending the open decisions below (every item is an aesthetic/semantic call on a *shipped*
+component, so it should not be guessed). Two issues surfaced during full validation and were fixed
+in-branch: `badge` needed a type-safe `data-slot` cast (Base UI `mergeProps` object literal), and
+`registry.json` + `content/examples/registry.ts` are now Prettier-ignored because their generators
+(`gen-all-item` / `gen-examples`) own the format (Prettier was fighting them, making `check:format`
+flaky after every build).
+
 ## Proposed Phase C batches (each ends green on `npm run test:ci`)
 
 Ordered to keep every diff reviewable and coverage stable. Run in a **git worktree** (a concurrent
-session edits this branch live).
+session edits this branch live). ✅ = done on `chore/governance-phase-c`.
 
-- **Batch 0 — Format.** `npm run format` (whole tree). Mechanical; no behavior change. Then add
-  `check:format` to `validate`. One commit.
-- **Batch 1 — `export default` → named (3).** Update the 3 files + importers. Then promote the
-  `export default` ratchet to enforce in `check-conventions.mjs`.
-- **Batch 2 — `data-slot`, primitives (6).** Add slots; extend each component's test. Keep green.
-- **Batch 3 — `data-slot`, composites (12).** Same, split into 2 commits of 6 if the diff is large.
-  Then promote the `data-slot` ratchet to enforce.
-- **Batch 4 — On-system DNA (7 files).** Resolve the judgment calls above first (color-picker
-  spectrum, morph-dock insets), then fix; finish with `npm run lint:on-system` clean. Consider adding
-  `lint:on-system` to `validate` once green.
+- ✅ **Batch 0 — Format.** `npm run format` (whole tree). `check:format` added to `validate`.
+- ✅ **Batch 1 — `export default` → named (3).** All three already had named exports; removed the
+  dead defaults. `export default` check promoted to enforce.
+- ✅ **Batch 2 — `data-slot`, primitives (6).**
+- ✅ **Batch 3 — `data-slot`, composites (12).** `data-slot` check promoted to enforce.
+- ⏳ **Batch 4 — On-system DNA (7 files).** NOT started — blocked on decisions 1 & 2. Resolve the
+  judgment calls first (color-picker spectrum, morph-dock insets), then fix; finish with
+  `npm run lint:on-system` clean. Consider adding `lint:on-system` to `validate` once green.
 
 ## Open decisions for the reviewer
 
 1. **color-picker raw spectrum** — keep-and-isolate vs move-to-foundation? (blocks Batch 4)
 2. **morph-dock sub-pixel insets** — intentional chrome (keep) or snap to scale? (blocks Batch 4)
-3. **`sonner` data-slot** — wrapper-only slot acceptable? (affects Batch 2)
-4. **Add `lint:on-system` + `check:format` to `validate`/CI** after Batches 0/4 — confirm.
+3. ~~**`sonner` data-slot**~~ — resolved: `data-slot="sonner"` added to the `<Sonner>` wrapper.
+4. **Add `lint:on-system` to `validate`/CI** after Batch 4 — confirm. (`check:format` already added.)
