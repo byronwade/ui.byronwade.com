@@ -4171,6 +4171,7 @@ export const categories = [
   "House components",
   "Morph",
   "Media",
+  "Video",
   "Commerce",
   "AI",
 ] as const
