@@ -721,7 +721,11 @@ export const VideoPlayerAmbient = ({
   React.useEffect(() => {
     const mirror = mirrorRef.current
     if (!mirror) return
-    const root = mirror.closest('[data-slot="video-player"]')
+    // Works whether the ambient sits inside the player (composable) or beside it
+    // in a stage wrapper (the preset, where it must spill past the clipped frame).
+    const root = mirror.closest(
+      '[data-slot="video-player-stage"], [data-slot="video-player"]',
+    )
     const primary = root?.querySelector(
       'video:not([data-slot="video-player-ambient-media"])',
     ) as HTMLVideoElement | null
@@ -748,10 +752,7 @@ export const VideoPlayerAmbient = ({
     <div
       aria-hidden
       data-slot="video-player-ambient"
-      className={cn(
-        "pointer-events-none absolute inset-0 -z-10 overflow-hidden",
-        className,
-      )}
+      className={cn("pointer-events-none absolute -inset-8 -z-10", className)}
       {...props}
     >
       <video
@@ -762,7 +763,7 @@ export const VideoPlayerAmbient = ({
         playsInline
         tabIndex={-1}
         aria-hidden
-        className="size-full scale-110 object-cover opacity-70 blur-3xl saturate-150"
+        className="size-full scale-110 object-cover opacity-60 blur-3xl saturate-150"
       />
     </div>
   )
@@ -899,6 +900,29 @@ export const VideoPlayerEndScreen = ({
     return () => clearTimeout(id)
   }, [ended, remaining, next, countdownSeconds])
 
+  const cardClassName =
+    "flex w-full max-w-sm items-center gap-3 rounded-lg border border-border bg-card p-3 text-left transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+  const cardBody = next ? (
+    <>
+      {next.thumbnail ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={next.thumbnail}
+          alt=""
+          className="aspect-video w-28 shrink-0 rounded-md object-cover"
+        />
+      ) : null}
+      <span className="flex flex-col gap-1">
+        <span className="font-mono text-xs text-muted-foreground">
+          {countdownSeconds > 0 ? `Up next in ${remaining}s` : "Up next"}
+        </span>
+        <span className="text-sm font-medium text-foreground">
+          {next.title}
+        </span>
+      </span>
+    </>
+  ) : null
+
   return (
     <div
       ref={rootRef}
@@ -914,31 +938,25 @@ export const VideoPlayerEndScreen = ({
       {ended
         ? (children ??
           (next ? (
-            <button
-              type="button"
-              data-slot="video-player-end-screen-next"
-              onClick={next.onSelect}
-              className="flex w-full max-w-sm items-center gap-3 rounded-lg border border-border bg-card p-3 text-left transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-            >
-              {next.thumbnail ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={next.thumbnail}
-                  alt=""
-                  className="aspect-video w-28 shrink-0 rounded-md object-cover"
-                />
-              ) : null}
-              <span className="flex flex-col gap-1">
-                <span className="font-mono text-xs text-muted-foreground">
-                  {countdownSeconds > 0
-                    ? `Up next in ${remaining}s`
-                    : "Up next"}
-                </span>
-                <span className="text-sm font-medium text-foreground">
-                  {next.title}
-                </span>
-              </span>
-            </button>
+            next.href ? (
+              <a
+                href={next.href}
+                data-slot="video-player-end-screen-next"
+                onClick={next.onSelect}
+                className={cardClassName}
+              >
+                {cardBody}
+              </a>
+            ) : (
+              <button
+                type="button"
+                data-slot="video-player-end-screen-next"
+                onClick={next.onSelect}
+                className={cardClassName}
+              >
+                {cardBody}
+              </button>
+            )
           ) : null))
         : null}
     </div>
@@ -1162,164 +1180,176 @@ export const MediaPlayer = ({
   }
 
   return (
-    <VideoPlayer
-      ref={rootRef as never}
-      variant={variant}
-      className={cn("aspect-video", className)}
-      onKeyDown={onKeyDown}
-      {...props}
-    >
+    <div data-slot="video-player-stage" className={cn("relative", className)}>
+      {/* Ambient sits beside the player, not inside its clipped frame, so the
+          blurred glow can spill past the edges onto the page (YouTube ambient). */}
       {ambient ? <VideoPlayerAmbient src={src} /> : null}
 
-      <VideoPlayerContent
-        slot="media"
-        src={src}
-        poster={poster}
-        preload={preload}
-        autoPlay={autoPlay}
-        muted={muted}
-        crossOrigin={crossOrigin}
+      <VideoPlayer
+        ref={rootRef as never}
+        variant={variant}
+        className="aspect-video"
+        onKeyDown={onKeyDown}
+        {...props}
       >
-        {captions?.map((track) => (
-          <track
-            key={track.srcLang}
-            kind="subtitles"
-            src={track.src}
-            srcLang={track.srcLang}
-            label={track.label}
-            default={track.default}
-          />
-        ))}
-        {chaptersVttUrl ? (
-          <track kind="chapters" src={chaptersVttUrl} default />
-        ) : null}
-        {storyboard ? (
-          <track kind="metadata" label="thumbnails" src={storyboard} default />
-        ) : null}
-      </VideoPlayerContent>
-
-      {title ? (
-        <div
-          data-slot="video-player-title"
-          className="pointer-events-none absolute inset-x-0 top-0 z-10 bg-gradient-to-b from-background/80 to-transparent p-4 opacity-0 transition-opacity group-hover/video-player:opacity-100"
+        <VideoPlayerContent
+          slot="media"
+          src={src}
+          poster={poster}
+          preload={preload}
+          autoPlay={autoPlay}
+          muted={muted}
+          crossOrigin={crossOrigin}
         >
-          <span className="text-sm font-medium text-foreground">{title}</span>
-        </div>
-      ) : null}
-
-      <VideoPlayerLoadingIndicator />
-
-      {/* Tap = play/pause; double-tap on a side = seek ±10s. The real controls
-          live in the control bar, so these pointer affordances are aria-hidden. */}
-      <div
-        data-slot="video-player-gestures"
-        className="absolute inset-0 z-0 grid grid-cols-[1fr_1.2fr_1fr]"
-      >
-        <button
-          type="button"
-          aria-hidden
-          tabIndex={-1}
-          data-slot="video-player-gesture-left"
-          className="size-full outline-none"
-          onClick={tapToggle}
-          onDoubleClick={seekZone("left")}
-        />
-        <button
-          type="button"
-          aria-hidden
-          tabIndex={-1}
-          data-slot="video-player-gesture-center"
-          className="size-full outline-none"
-          onClick={tapToggle}
-        />
-        <button
-          type="button"
-          aria-hidden
-          tabIndex={-1}
-          data-slot="video-player-gesture-right"
-          className="size-full outline-none"
-          onClick={tapToggle}
-          onDoubleClick={seekZone("right")}
-        />
-      </div>
-
-      {ripple ? (
-        <span
-          key={ripple}
-          aria-hidden
-          data-slot="video-player-ripple"
-          data-zone={ripple}
-          className={cn(
-            "pointer-events-none absolute top-1/2 z-10 size-24 -translate-y-1/2 rounded-full bg-foreground/15 motion-safe:animate-ping",
-            ripple === "left" ? "left-[12%]" : "right-[12%]",
-          )}
-        />
-      ) : null}
-
-      {next || countdownSeconds > 0 ? (
-        <VideoPlayerEndScreen next={next} countdownSeconds={countdownSeconds} />
-      ) : null}
-
-      <div
-        data-slot="video-player-scrubber"
-        className="absolute inset-x-0 bottom-12 z-10 px-1"
-      >
-        {heatmap && heatmap.length > 0 ? (
-          <VideoPlayerHeatmap
-            values={heatmap}
-            className="opacity-0 transition-opacity group-hover/video-player:opacity-100"
-          />
-        ) : null}
-        <VideoPlayerTimeRange className="relative">
-          <VideoPlayerPreviewThumbnail slot="preview" />
-          <VideoPlayerPreviewChapterDisplay slot="preview" />
-          <VideoPlayerPreviewTimeDisplay slot="preview" />
-          {chapters && chapters.length > 0 ? (
-            <VideoPlayerChapterMarkers
-              chapters={chapters}
-              duration={duration}
+          {captions?.map((track) => (
+            <track
+              key={track.srcLang}
+              kind="subtitles"
+              src={track.src}
+              srcLang={track.srcLang}
+              label={track.label}
+              default={track.default}
+            />
+          ))}
+          {chaptersVttUrl ? (
+            <track kind="chapters" src={chaptersVttUrl} default />
+          ) : null}
+          {storyboard ? (
+            <track
+              kind="metadata"
+              label="thumbnails"
+              src={storyboard}
+              default
             />
           ) : null}
-        </VideoPlayerTimeRange>
-      </div>
+        </VideoPlayerContent>
 
-      <VideoPlayerControlBar className="absolute inset-x-0 bottom-0 z-10">
-        <VideoPlayerPlayButton />
-        <VideoPlayerSeekBackwardButton />
-        <VideoPlayerSeekForwardButton />
-        <VideoPlayerMuteButton />
-        <VideoPlayerVolumeRange />
-        <VideoPlayerTimeDisplay />
-        <span className="px-1 text-sm text-muted-foreground">/</span>
-        <VideoPlayerDurationDisplay />
-        <VideoPlayerSpacer />
-        <VideoPlayerCaptionsButton />
-        <VideoPlayerSettingsMenuButton />
-        <VideoPlayerPipButton />
-        <VideoPlayerFullscreenButton />
-      </VideoPlayerControlBar>
+        {title ? (
+          <div
+            data-slot="video-player-title"
+            className="pointer-events-none absolute inset-x-0 top-0 z-10 bg-gradient-to-b from-background/80 to-transparent p-4 opacity-0 transition-opacity group-hover/video-player:opacity-100"
+          >
+            <span className="text-sm font-medium text-foreground">{title}</span>
+          </div>
+        ) : null}
 
-      <VideoPlayerSettingsMenu hidden anchor="auto">
-        <VideoPlayerSettingsMenuItem>
-          Speed
-          <VideoPlayerPlaybackRateMenu slot="submenu" hidden>
-            <div slot="header">Speed</div>
-          </VideoPlayerPlaybackRateMenu>
-        </VideoPlayerSettingsMenuItem>
-        <VideoPlayerSettingsMenuItem>
-          Quality
-          <VideoPlayerRenditionMenu slot="submenu" hidden>
-            <div slot="header">Quality</div>
-          </VideoPlayerRenditionMenu>
-        </VideoPlayerSettingsMenuItem>
-        <VideoPlayerSettingsMenuItem>
-          Captions
-          <VideoPlayerCaptionsMenu slot="submenu" hidden>
-            <div slot="header">Captions</div>
-          </VideoPlayerCaptionsMenu>
-        </VideoPlayerSettingsMenuItem>
-      </VideoPlayerSettingsMenu>
-    </VideoPlayer>
+        <VideoPlayerLoadingIndicator />
+
+        {/* Tap = play/pause; double-tap on a side = seek ±10s. The real controls
+          live in the control bar, so these pointer affordances are aria-hidden. */}
+        <div
+          data-slot="video-player-gestures"
+          className="absolute inset-0 z-0 grid grid-cols-[1fr_1.2fr_1fr]"
+        >
+          <button
+            type="button"
+            aria-hidden
+            tabIndex={-1}
+            data-slot="video-player-gesture-left"
+            className="size-full outline-none"
+            onClick={tapToggle}
+            onDoubleClick={seekZone("left")}
+          />
+          <button
+            type="button"
+            aria-hidden
+            tabIndex={-1}
+            data-slot="video-player-gesture-center"
+            className="size-full outline-none"
+            onClick={tapToggle}
+          />
+          <button
+            type="button"
+            aria-hidden
+            tabIndex={-1}
+            data-slot="video-player-gesture-right"
+            className="size-full outline-none"
+            onClick={tapToggle}
+            onDoubleClick={seekZone("right")}
+          />
+        </div>
+
+        {ripple ? (
+          <span
+            key={ripple}
+            aria-hidden
+            data-slot="video-player-ripple"
+            data-zone={ripple}
+            className={cn(
+              "pointer-events-none absolute top-1/2 z-10 size-24 -translate-y-1/2 rounded-full bg-foreground/15 motion-safe:animate-ping",
+              ripple === "left" ? "left-[12%]" : "right-[12%]",
+            )}
+          />
+        ) : null}
+
+        {next || countdownSeconds > 0 ? (
+          <VideoPlayerEndScreen
+            next={next}
+            countdownSeconds={countdownSeconds}
+          />
+        ) : null}
+
+        <div
+          data-slot="video-player-scrubber"
+          className="absolute inset-x-0 bottom-12 z-10 px-1"
+        >
+          {heatmap && heatmap.length > 0 ? (
+            <VideoPlayerHeatmap
+              values={heatmap}
+              className="opacity-0 transition-opacity group-hover/video-player:opacity-100"
+            />
+          ) : null}
+          <VideoPlayerTimeRange className="relative">
+            <VideoPlayerPreviewThumbnail slot="preview" />
+            <VideoPlayerPreviewChapterDisplay slot="preview" />
+            <VideoPlayerPreviewTimeDisplay slot="preview" />
+            {chapters && chapters.length > 0 ? (
+              <VideoPlayerChapterMarkers
+                chapters={chapters}
+                duration={duration}
+              />
+            ) : null}
+          </VideoPlayerTimeRange>
+        </div>
+
+        <VideoPlayerControlBar className="absolute inset-x-0 bottom-0 z-10">
+          <VideoPlayerPlayButton />
+          <VideoPlayerSeekBackwardButton />
+          <VideoPlayerSeekForwardButton />
+          <VideoPlayerMuteButton />
+          <VideoPlayerVolumeRange />
+          <VideoPlayerTimeDisplay />
+          <span className="px-1 text-sm text-muted-foreground">/</span>
+          <VideoPlayerDurationDisplay />
+          <VideoPlayerSpacer />
+          <VideoPlayerCaptionsButton />
+          <VideoPlayerSettingsMenuButton />
+          <VideoPlayerPipButton />
+          <VideoPlayerFullscreenButton />
+        </VideoPlayerControlBar>
+
+        <VideoPlayerSettingsMenu hidden anchor="auto">
+          <VideoPlayerSettingsMenuItem>
+            Speed
+            <VideoPlayerPlaybackRateMenu slot="submenu" hidden>
+              <div slot="header">Speed</div>
+            </VideoPlayerPlaybackRateMenu>
+          </VideoPlayerSettingsMenuItem>
+          <VideoPlayerSettingsMenuItem>
+            Quality
+            <VideoPlayerRenditionMenu slot="submenu" hidden>
+              <div slot="header">Quality</div>
+            </VideoPlayerRenditionMenu>
+          </VideoPlayerSettingsMenuItem>
+          <VideoPlayerSettingsMenuItem>
+            Captions
+            <VideoPlayerCaptionsMenu slot="submenu" hidden>
+              <div slot="header">Captions</div>
+            </VideoPlayerCaptionsMenu>
+          </VideoPlayerSettingsMenuItem>
+        </VideoPlayerSettingsMenu>
+      </VideoPlayer>
+    </div>
   )
 }
 
