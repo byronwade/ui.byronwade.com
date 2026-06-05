@@ -8,13 +8,7 @@ import {
   ChartLegendContent,
   type ChartConfig,
 } from "@/components/ui/chart"
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts"
 import { CircleDot, TrendingUp } from "lucide-react"
 
 const data = [
@@ -53,48 +47,120 @@ export default function Example() {
     <div className="flex flex-col gap-6 w-full max-w-xl">
       {/* Legend at bottom (default) */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Legend bottom (default)</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
+          Legend bottom (default)
+        </h2>
         <ChartContainer config={chartConfigNoIcons} className="h-44 w-full">
-          <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
-            <XAxis dataKey="q" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+          <BarChart
+            data={data}
+            margin={{ top: 4, right: 8, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid
+              vertical={false}
+              strokeDasharray="3 3"
+              stroke="var(--border)"
+              strokeOpacity={0.6}
+            />
+            <XAxis
+              dataKey="q"
+              tickLine={false}
+              axisLine={false}
+              tick={{ fontSize: 11 }}
+            />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="dot" />} />
             <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="alpha" fill="var(--color-alpha)" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="beta" fill="var(--color-beta)" radius={[4, 4, 0, 0]} />
+            <Bar
+              dataKey="alpha"
+              fill="var(--color-alpha)"
+              radius={[4, 4, 0, 0]}
+            />
+            <Bar
+              dataKey="beta"
+              fill="var(--color-beta)"
+              radius={[4, 4, 0, 0]}
+            />
           </BarChart>
         </ChartContainer>
       </div>
 
       {/* Legend at top */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Legend top</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
+          Legend top
+        </h2>
         <ChartContainer config={chartConfigNoIcons} className="h-44 w-full">
-          <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
-            <XAxis dataKey="q" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+          <BarChart
+            data={data}
+            margin={{ top: 4, right: 8, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid
+              vertical={false}
+              strokeDasharray="3 3"
+              stroke="var(--border)"
+              strokeOpacity={0.6}
+            />
+            <XAxis
+              dataKey="q"
+              tickLine={false}
+              axisLine={false}
+              tick={{ fontSize: 11 }}
+            />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="dot" />} />
-            <ChartLegend verticalAlign="top" content={<ChartLegendContent verticalAlign="top" />} />
-            <Bar dataKey="alpha" fill="var(--color-alpha)" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="beta" fill="var(--color-beta)" radius={[4, 4, 0, 0]} />
+            <ChartLegend
+              verticalAlign="top"
+              content={<ChartLegendContent verticalAlign="top" />}
+            />
+            <Bar
+              dataKey="alpha"
+              fill="var(--color-alpha)"
+              radius={[4, 4, 0, 0]}
+            />
+            <Bar
+              dataKey="beta"
+              fill="var(--color-beta)"
+              radius={[4, 4, 0, 0]}
+            />
           </BarChart>
         </ChartContainer>
       </div>
 
       {/* Legend with custom icons */}
       <div className="p-6 rounded-2xl border bg-card">
-        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">Legend with icons</h2>
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
+          Legend with icons
+        </h2>
         <ChartContainer config={chartConfigWithIcons} className="h-44 w-full">
-          <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" strokeOpacity={0.6} />
-            <XAxis dataKey="q" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+          <BarChart
+            data={data}
+            margin={{ top: 4, right: 8, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid
+              vertical={false}
+              strokeDasharray="3 3"
+              stroke="var(--border)"
+              strokeOpacity={0.6}
+            />
+            <XAxis
+              dataKey="q"
+              tickLine={false}
+              axisLine={false}
+              tick={{ fontSize: 11 }}
+            />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <ChartTooltip content={<ChartTooltipContent indicator="dot" />} />
             <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="alpha" fill="var(--color-alpha)" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="beta" fill="var(--color-beta)" radius={[4, 4, 0, 0]} />
+            <Bar
+              dataKey="alpha"
+              fill="var(--color-alpha)"
+              radius={[4, 4, 0, 0]}
+            />
+            <Bar
+              dataKey="beta"
+              fill="var(--color-beta)"
+              radius={[4, 4, 0, 0]}
+            />
           </BarChart>
         </ChartContainer>
       </div>

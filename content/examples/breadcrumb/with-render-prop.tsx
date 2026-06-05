@@ -5,7 +5,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/components/ui/breadcrumb"
 
 /**
  * BreadcrumbLink accepts a `render` prop (Base UI useRender pattern) to swap
@@ -67,5 +67,5 @@ export default function Example() {
         </BreadcrumbList>
       </Breadcrumb>
     </div>
-  );
+  )
 }

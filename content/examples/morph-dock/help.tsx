@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 import {
   BarChart3,
   BookOpen,
@@ -13,26 +13,51 @@ import {
   Settings,
   X,
   Zap,
-} from "lucide-react";
+} from "lucide-react"
 
-import { MorphDock } from "@/components/ui/morph-dock";
+import { MorphDock } from "@/components/ui/morph-dock"
 
 const items = [
-  { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
+  {
+    id: "home",
+    label: "Home",
+    icon: Home,
+    href: "#",
+    active: true,
+    core: true,
+  },
   { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
   { id: "reports", label: "Reports", icon: BarChart3, href: "#", core: true },
-  { id: "settings", label: "Settings", icon: Settings, href: "#", pinned: true },
-];
+  {
+    id: "settings",
+    label: "Settings",
+    icon: Settings,
+    href: "#",
+    pinned: true,
+  },
+]
 
 const topics = [
-  { icon: BookOpen, title: "Getting started", desc: "Set up your first project" },
-  { icon: Zap, title: "Keyboard shortcuts", desc: "Work faster across the app" },
-  { icon: MessageCircle, title: "Contact support", desc: "We usually reply within an hour" },
-];
+  {
+    icon: BookOpen,
+    title: "Getting started",
+    desc: "Set up your first project",
+  },
+  {
+    icon: Zap,
+    title: "Keyboard shortcuts",
+    desc: "Work faster across the app",
+  },
+  {
+    icon: MessageCircle,
+    title: "Contact support",
+    desc: "We usually reply within an hour",
+  },
+]
 
 /** A help center blooming from the dock — the SignalRoute help panel design. */
 export default function Example() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="flex min-h-72 items-start justify-center p-8">
       <MorphDock
@@ -49,8 +74,12 @@ export default function Example() {
               <CircleHelp className="size-4" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-dock-active-foreground">Help center</p>
-              <p className="truncate text-xs text-dock-foreground/60">Search the docs or ask us</p>
+              <p className="truncate text-sm font-semibold text-dock-active-foreground">
+                Help center
+              </p>
+              <p className="truncate text-xs text-dock-foreground/60">
+                Search the docs or ask us
+              </p>
             </div>
             <button
               type="button"
@@ -66,7 +95,7 @@ export default function Example() {
             <input
               aria-label="Search help"
               placeholder="Search help…"
-              className="h-8 w-full rounded-lg bg-white/5 px-3 text-sm text-dock-active-foreground outline-none placeholder:text-dock-foreground/50"
+              className="h-8 w-full rounded-lg bg-dock-foreground/5 px-3 text-sm text-dock-active-foreground outline-none placeholder:text-dock-foreground/50"
             />
           </div>
 
@@ -78,14 +107,16 @@ export default function Example() {
                 onClick={() => setOpen(false)}
                 className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-dock-active"
               >
-                <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white/5 text-dock-foreground">
+                <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-dock-foreground/5 text-dock-foreground">
                   <topic.icon className="size-4" />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-[13px] font-medium text-dock-active-foreground">
                     {topic.title}
                   </span>
-                  <span className="block truncate text-[11px] text-dock-foreground/60">{topic.desc}</span>
+                  <span className="block truncate text-[11px] text-dock-foreground/60">
+                    {topic.desc}
+                  </span>
                 </span>
                 <ChevronRight className="size-4 shrink-0 text-dock-foreground/40" />
               </button>
@@ -94,5 +125,5 @@ export default function Example() {
         </div>
       </MorphDock>
     </div>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export default function Example() {
   return (
@@ -16,5 +16,5 @@ export default function Example() {
         <UnderlineIcon />
       </ToggleGroupItem>
     </ToggleGroup>
-  );
+  )
 }

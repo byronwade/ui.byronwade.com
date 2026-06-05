@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Table,
@@ -9,15 +9,25 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table"
 
 const invoices = [
   { id: "INV-001", customer: "Acme Corp", amount: "$250.00", status: "Paid" },
-  { id: "INV-002", customer: "Globex Inc", amount: "$125.00", status: "Pending" },
+  {
+    id: "INV-002",
+    customer: "Globex Inc",
+    amount: "$125.00",
+    status: "Pending",
+  },
   { id: "INV-003", customer: "Initech", amount: "$400.00", status: "Overdue" },
-  { id: "INV-004", customer: "Umbrella Ltd", amount: "$310.00", status: "Paid" },
+  {
+    id: "INV-004",
+    customer: "Umbrella Ltd",
+    amount: "$310.00",
+    status: "Paid",
+  },
   { id: "INV-005", customer: "Hooli", amount: "$90.00", status: "Pending" },
-];
+]
 
 export default function Example() {
   return (
@@ -50,5 +60,5 @@ export default function Example() {
         </TableFooter>
       </Table>
     </div>
-  );
+  )
 }

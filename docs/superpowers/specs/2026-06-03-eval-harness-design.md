@@ -41,7 +41,7 @@ New workspace package `@byronwade/eval` under `packages/eval/`. Pure Node/TS (ES
 reusing `@byronwade/on-system-core`'s `detect()`. The Anthropic client is injected so
 tests never hit the network.
 
-```
+````
 packages/eval/
   package.json  tsconfig.json  vitest.config.ts
   prompts/                      ← ~12 committed *.md build prompts
@@ -58,19 +58,19 @@ packages/eval/
     fixtures/                  ← recorded responses for --dry-run + tests
   tests/
     extract-code.test.ts  grade.test.ts  aggregate.test.ts  report.test.ts
-```
+````
 
 ### Unit responsibilities
 
-| Unit | Purpose | Depends on |
-|------|---------|-----------|
-| `prompts.ts` | Load + hash the committed prompt set | fs |
-| `extract-code.ts` | Extract the first ```tsx/```jsx fenced block; null if none | (pure) |
-| `generate.ts` | `AnthropicClient` interface + real SDK impl; `generate()` returns raw text | @anthropic-ai/sdk (injected) |
-| `grade.ts` | `detect()` a generation → violations; pass = zero | @byronwade/on-system-core |
-| `run-eval.ts` | Matrix (prompt × condition), collect `GradedResult[]`, aggregate to `EvalReport` | the above |
-| `report.ts` | Serialize `EvalReport` → json + markdown | (pure) |
-| `cli.ts` | Parse flags, wire real client (or fixtures for `--dry-run`), write outputs | all |
+| Unit              | Purpose                                                                          | Depends on                   |
+| ----------------- | -------------------------------------------------------------------------------- | ---------------------------- |
+| `prompts.ts`      | Load + hash the committed prompt set                                             | fs                           |
+| `extract-code.ts` | Extract the first `tsx/`jsx fenced block; null if none                           | (pure)                       |
+| `generate.ts`     | `AnthropicClient` interface + real SDK impl; `generate()` returns raw text       | @anthropic-ai/sdk (injected) |
+| `grade.ts`        | `detect()` a generation → violations; pass = zero                                | @byronwade/on-system-core    |
+| `run-eval.ts`     | Matrix (prompt × condition), collect `GradedResult[]`, aggregate to `EvalReport` | the above                    |
+| `report.ts`       | Serialize `EvalReport` → json + markdown                                         | (pure)                       |
+| `cli.ts`          | Parse flags, wire real client (or fixtures for `--dry-run`), write outputs       | all                          |
 
 ## Prompt set
 
@@ -97,6 +97,7 @@ report so a changed prompt set is visible).
 
 `grade.ts` runs `detect(code, { offSystemComponents: "error" })` (all five detectors,
 all error severity) over each extracted generation.
+
 - **Pass** = zero violations.
 - A generation whose response has **no extractable code block** (or code that throws on
   parse) is a **fail** with `reason: "no-code" | "parse-error"` (counts against the
@@ -104,16 +105,19 @@ all error severity) over each extracted generation.
 - Per generation we keep: pass boolean, violation count, per-detector counts, reason.
 
 ### Aggregation / metrics
+
 Per condition (with-rule, baseline):
+
 - `passRate` = passes / total (the headline per condition).
 - `meanViolations` = mean violations across generations.
 - `byDetector` = total violations per detector.
-The report also computes `lift = withRule.passRate - baseline.passRate` and the
-per-detector reduction.
+  The report also computes `lift = withRule.passRate - baseline.passRate` and the
+  per-detector reduction.
 
 ## Output
 
 `run-eval.ts` returns an `EvalReport`; `report.ts` writes:
+
 - `results/latest.json` — `{ date, model, promptSetHash, conditions: { withRule, baseline }, lift, perPrompt: [...] }`. Committed; the homepage/docs (subsystems 4–5) read this.
 - `results/latest.md` — a human summary table (per-prompt pass/fail per condition + the headline lift).
 
@@ -131,14 +135,15 @@ temp 0; the report is a dated snapshot, not a guaranteed-stable number — noted
 ## Testing
 
 All harness logic is unit-tested with **no network**:
+
 - `extract-code`: fenced-block extraction (tsx/jsx/no-fence/multiple blocks → first).
 - `grade`: a clean generation → pass; a generation with a raw hex / native `<button>` /
   `font-bold` heading → fail with the right per-detector counts; no-code → fail reason.
 - `aggregate`: from a hand-built `GradedResult[]`, passRate/meanViolations/byDetector/lift
   math is exact.
 - `report`: `EvalReport` → json/md serialization shape.
-The `AnthropicClient` is an interface; tests and `--dry-run` pass a fake returning fixture
-text. The real SDK impl is a thin adapter, exercised only in a live `npm run eval`.
+  The `AnthropicClient` is an interface; tests and `--dry-run` pass a fake returning fixture
+  text. The real SDK impl is a thin adapter, exercised only in a live `npm run eval`.
 
 ## Out of scope (v1)
 
@@ -147,18 +152,18 @@ text. The real SDK impl is a thin adapter, exercised only in a live `npm run eva
 - No automatic CI run (manual only).
 - No UI — the homepage/docs that surface the number are subsystems 4–5.
 - No multi-model matrix (Sonnet only).
-- No grading of whether the generation is *functional*/renders — only whether it is
+- No grading of whether the generation is _functional_/renders — only whether it is
   on-system (static analysis), which is what the thesis claims.
 
 ## Risks & mitigations
 
-| Risk | Mitigation |
-|------|-----------|
-| Model wraps code in prose / multiple blocks | `extract-code` takes the first fenced tsx/jsx block; no block → recorded fail, not a crash |
-| API non-determinism makes the number wobble | temp 0 + dated snapshot + note in md; `--samples` as future work |
-| Tests accidentally hit the network / cost money | `AnthropicClient` injected; tests use fixtures only; real client only in `cli.ts` live path |
-| Generated code references components that don't resolve | `detect()` is static (text/AST), needs no installs — unaffected |
-| Grader drift vs the lint | Same `@byronwade/on-system-core` package; metric == lint definition by construction |
+| Risk                                                    | Mitigation                                                                                  |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Model wraps code in prose / multiple blocks             | `extract-code` takes the first fenced tsx/jsx block; no block → recorded fail, not a crash  |
+| API non-determinism makes the number wobble             | temp 0 + dated snapshot + note in md; `--samples` as future work                            |
+| Tests accidentally hit the network / cost money         | `AnthropicClient` injected; tests use fixtures only; real client only in `cli.ts` live path |
+| Generated code references components that don't resolve | `detect()` is static (text/AST), needs no installs — unaffected                             |
+| Grader drift vs the lint                                | Same `@byronwade/on-system-core` package; metric == lint definition by construction         |
 
 ## Build order (for the plan)
 

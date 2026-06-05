@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
 import {
   CodeBlock,
   CodeBlockCopyButton,
-} from "@/components/ai-elements/code-block";
+} from "@/components/ai-elements/code-block"
 
 const code = `import { generateText } from "ai";
 import { openai } from "@ai-sdk/openai";
@@ -15,7 +15,7 @@ export async function summarize(input: string) {
   });
 
   return text;
-}`;
+}`
 
 export default function Example() {
   return (
@@ -29,5 +29,5 @@ export default function Example() {
         </CodeBlock>
       </div>
     </div>
-  );
+  )
 }

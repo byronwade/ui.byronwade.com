@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   DropdownMenu,
@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export default function Example() {
   return (
@@ -33,5 +33,5 @@ export default function Example() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

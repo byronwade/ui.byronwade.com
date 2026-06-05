@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Sheet,
   SheetClose,
@@ -10,13 +10,13 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
 
-const LINKS = ["Dashboard", "Projects", "Settings"] as const;
+const LINKS = ["Dashboard", "Projects", "Settings"] as const
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -46,5 +46,5 @@ export default function Example() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  );
+  )
 }

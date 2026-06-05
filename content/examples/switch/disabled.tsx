@@ -1,19 +1,15 @@
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@/components/ui/switch"
 
 export default function Example() {
   return (
     <div className="flex flex-col gap-4 p-6">
       <div className="flex items-center gap-3">
         <Switch disabled />
-        <span className="text-sm text-muted-foreground">
-          Disabled (off)
-        </span>
+        <span className="text-sm text-muted-foreground">Disabled (off)</span>
       </div>
       <div className="flex items-center gap-3">
         <Switch disabled defaultChecked />
-        <span className="text-sm text-muted-foreground">
-          Disabled (on)
-        </span>
+        <span className="text-sm text-muted-foreground">Disabled (on)</span>
       </div>
       <div className="flex items-center gap-3">
         <Switch disabled size="sm" />
@@ -22,5 +18,5 @@ export default function Example() {
         </span>
       </div>
     </div>
-  );
+  )
 }

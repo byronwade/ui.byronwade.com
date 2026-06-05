@@ -153,6 +153,22 @@ describe("Command – standalone usage", () => {
     expect(container.querySelector("[data-slot='command-item']")).toBeInTheDocument();
   });
 
+  it("only highlights the active item (value-matched, not attribute-presence)", () => {
+    // Regression: cmdk renders data-selected="false" on inactive items, so a bare
+    // `data-selected:` Tailwind variant (attribute presence) would fill every row.
+    // The class must scope the fill to data-[selected=true].
+    const { container } = render(
+      <Command>
+        <CommandList>
+          <CommandItem>Run</CommandItem>
+        </CommandList>
+      </Command>
+    );
+    const item = container.querySelector("[data-slot='command-item']")!;
+    expect(item.className).toContain("data-[selected=true]:bg-muted");
+    expect(item.className).not.toMatch(/(?<!\[)\bdata-selected:bg-muted/);
+  });
+
   it("CommandGroup has data-slot", () => {
     const { container } = render(
       <Command>

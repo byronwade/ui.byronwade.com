@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import { MessageSquareIcon } from "lucide-react";
+import { MessageSquareIcon } from "lucide-react"
 
 import {
   Conversation,
   ConversationContent,
   ConversationEmptyState,
   ConversationScrollButton,
-} from "@/components/ai-elements/conversation";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+} from "@/components/ai-elements/conversation"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 type Message = {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-};
+  id: string
+  role: "user" | "assistant"
+  content: string
+}
 
 const messages: Message[] = [
   {
@@ -39,7 +39,7 @@ const messages: Message[] = [
     content:
       "Exactly. Tone a token with opacity (bg-brand/10) instead of inventing a new color, and dark mode comes for free.",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -83,5 +83,5 @@ export default function Example() {
         <ConversationScrollButton />
       </Conversation>
     </div>
-  );
+  )
 }

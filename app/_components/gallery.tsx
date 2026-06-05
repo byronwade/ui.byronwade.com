@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
 // Shared Mobbin-style gallery shell — used by both /templates and /layouts.
 // A minimal filter bar (Category + Component facets, live client-side filtering,
 // removable active pills, count + sort) over a generous preview-first card grid.
 // Pure tokens; the per-item "logo" is a seeded GradientAvatar so every card has a
 // unique mark without bespoke art.
-import * as React from "react";
-import Link from "next/link";
-import { ArrowRight, X } from "lucide-react";
+import * as React from "react"
+import Link from "next/link"
+import { ArrowRight, X } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { GradientAvatar } from "@/components/ui/gradient-avatar";
-import { FilterPill } from "@/components/ui/filter-pill";
+import { cn } from "@/lib/utils"
+import { GradientAvatar } from "@/components/ui/gradient-avatar"
+import { FilterPill } from "@/components/ui/filter-pill"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -19,31 +19,37 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export type GalleryItem = {
-  slug: string;
-  name: string;
+  slug: string
+  name: string
   /** Coarse grouping; powers the Category facet + the card's tag. */
-  category: string;
+  category: string
   /** Registry items composed; powers the Component facet. */
-  uses: string[];
+  uses: string[]
   /** Detail / inspector route. */
-  href: string;
+  href: string
   /** Full-bleed preview route rendered (scaled) inside the card iframe. */
-  previewSrc: string;
+  previewSrc: string
   /** Optional price marker (templates are paid; layouts are free). */
-  price?: string;
-};
+  price?: string
+}
 
-type Sort = "featured" | "az";
+type Sort = "featured" | "az"
 
 function uniqueSorted(values: string[]) {
-  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b))
 }
 
 /** A removable active-filter chip (Mobbin's "Hero ✕"). */
-function ActivePill({ label, onRemove }: { label: string; onRemove: () => void }) {
+function ActivePill({
+  label,
+  onRemove,
+}: {
+  label: string
+  onRemove: () => void
+}) {
   return (
     <span className="inline-flex h-8 items-center gap-1 rounded-full edge bg-muted pl-3 pr-1.5 text-sm font-medium">
       {label}
@@ -56,34 +62,53 @@ function ActivePill({ label, onRemove }: { label: string; onRemove: () => void }
         <X className="size-3.5" />
       </button>
     </span>
-  );
+  )
 }
 
-export function Gallery({ items, noun }: { items: GalleryItem[]; noun: string }) {
-  const [categories, setCategories] = React.useState<string[]>([]);
-  const [comps, setComps] = React.useState<string[]>([]);
-  const [sort, setSort] = React.useState<Sort>("featured");
+export function Gallery({
+  items,
+  noun,
+}: {
+  items: GalleryItem[]
+  noun: string
+}) {
+  const [categories, setCategories] = React.useState<string[]>([])
+  const [comps, setComps] = React.useState<string[]>([])
+  const [sort, setSort] = React.useState<Sort>("featured")
 
-  const allCategories = React.useMemo(() => uniqueSorted(items.map((i) => i.category)), [items]);
-  const allComponents = React.useMemo(() => uniqueSorted(items.flatMap((i) => i.uses)), [items]);
+  const allCategories = React.useMemo(
+    () => uniqueSorted(items.map((i) => i.category)),
+    [items],
+  )
+  const allComponents = React.useMemo(
+    () => uniqueSorted(items.flatMap((i) => i.uses)),
+    [items],
+  )
 
   const filtered = React.useMemo(() => {
     const r = items.filter(
       (i) =>
         (categories.length === 0 || categories.includes(i.category)) &&
         (comps.length === 0 || comps.some((c) => i.uses.includes(c))),
-    );
-    return sort === "az" ? [...r].sort((a, b) => a.name.localeCompare(b.name)) : r;
-  }, [items, categories, comps, sort]);
+    )
+    return sort === "az"
+      ? [...r].sort((a, b) => a.name.localeCompare(b.name))
+      : r
+  }, [items, categories, comps, sort])
 
-  const toggle = (set: React.Dispatch<React.SetStateAction<string[]>>, v: string) =>
-    set((prev) => (prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v]));
+  const toggle = (
+    set: React.Dispatch<React.SetStateAction<string[]>>,
+    v: string,
+  ) =>
+    set((prev) =>
+      prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v],
+    )
 
-  const hasFilters = categories.length > 0 || comps.length > 0;
+  const hasFilters = categories.length > 0 || comps.length > 0
   const clearAll = () => {
-    setCategories([]);
-    setComps([]);
-  };
+    setCategories([])
+    setComps([])
+  }
 
   return (
     <div>
@@ -123,10 +148,18 @@ export function Gallery({ items, noun }: { items: GalleryItem[]; noun: string })
           </DropdownMenu>
 
           {categories.map((c) => (
-            <ActivePill key={`cat-${c}`} label={c} onRemove={() => toggle(setCategories, c)} />
+            <ActivePill
+              key={`cat-${c}`}
+              label={c}
+              onRemove={() => toggle(setCategories, c)}
+            />
           ))}
           {comps.map((c) => (
-            <ActivePill key={`comp-${c}`} label={c} onRemove={() => toggle(setComps, c)} />
+            <ActivePill
+              key={`comp-${c}`}
+              label={c}
+              onRemove={() => toggle(setComps, c)}
+            />
           ))}
           {hasFilters && (
             <button
@@ -141,17 +174,29 @@ export function Gallery({ items, noun }: { items: GalleryItem[]; noun: string })
 
         <div className="flex items-center gap-4">
           <p className="hidden text-sm text-muted-foreground sm:block">
-            Showing <span className="tabular-nums text-foreground">{filtered.length}</span>{" "}
+            Showing{" "}
+            <span className="tabular-nums text-foreground">
+              {filtered.length}
+            </span>{" "}
             {noun}
             {filtered.length === 1 ? "" : "s"}
           </p>
           <DropdownMenu>
             <DropdownMenuTrigger
-              render={<FilterPill>{sort === "featured" ? "Featured" : "A–Z"}</FilterPill>}
+              render={
+                <FilterPill>
+                  {sort === "featured" ? "Featured" : "A–Z"}
+                </FilterPill>
+              }
             />
             <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuRadioGroup value={sort} onValueChange={(v) => setSort(v as Sort)}>
-                <DropdownMenuRadioItem value="featured">Featured</DropdownMenuRadioItem>
+              <DropdownMenuRadioGroup
+                value={sort}
+                onValueChange={(v) => setSort(v as Sort)}
+              >
+                <DropdownMenuRadioItem value="featured">
+                  Featured
+                </DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="az">A–Z</DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
@@ -201,7 +246,11 @@ export function Gallery({ items, noun }: { items: GalleryItem[]; noun: string })
               </div>
               <div className="flex items-center justify-between gap-3 px-0.5">
                 <div className="flex min-w-0 items-center gap-2">
-                  <GradientAvatar seed={item.name} size="sm" className="rounded-md" />
+                  <GradientAvatar
+                    seed={item.name}
+                    size="sm"
+                    className="rounded-md"
+                  />
                   <span className="truncate text-sm font-medium tracking-tight group-hover:text-foreground">
                     {item.name}
                   </span>
@@ -215,5 +264,5 @@ export function Gallery({ items, noun }: { items: GalleryItem[]; noun: string })
         </div>
       )}
     </div>
-  );
+  )
 }

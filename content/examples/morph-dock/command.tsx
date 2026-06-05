@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 import {
   BarChart3,
   Command,
@@ -9,19 +9,19 @@ import {
   Plus,
   Search,
   Settings,
-} from "lucide-react";
+} from "lucide-react"
 
-import { MorphDock } from "@/components/ui/morph-dock";
+import { MorphDock } from "@/components/ui/morph-dock"
 
 const actions = [
   { icon: Plus, label: "New file" },
   { icon: Search, label: "Search everything" },
   { icon: Settings, label: "Open settings" },
-];
+]
 
 /** The panel can be any content — here a command list blooms out of the dock. */
 export default function Example() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="flex min-h-56 items-start justify-center p-8">
       <MorphDock
@@ -31,10 +31,29 @@ export default function Example() {
         action={{ label: "Command", icon: Command }}
         panelWidth={340}
         items={[
-          { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
+          {
+            id: "home",
+            label: "Home",
+            icon: Home,
+            href: "#",
+            active: true,
+            core: true,
+          },
           { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
-          { id: "reports", label: "Reports", icon: BarChart3, href: "#", core: true },
-          { id: "settings", label: "Settings", icon: Settings, href: "#", pinned: true },
+          {
+            id: "reports",
+            label: "Reports",
+            icon: BarChart3,
+            href: "#",
+            core: true,
+          },
+          {
+            id: "settings",
+            label: "Settings",
+            icon: Settings,
+            href: "#",
+            pinned: true,
+          },
         ]}
       >
         <div className="p-1.5">
@@ -55,5 +74,5 @@ export default function Example() {
         </div>
       </MorphDock>
     </div>
-  );
+  )
 }

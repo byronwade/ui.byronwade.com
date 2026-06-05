@@ -1,4 +1,4 @@
-import { CircleAlertIcon } from "lucide-react";
+import { CircleAlertIcon } from "lucide-react"
 import {
   Card,
   CardHeader,
@@ -7,17 +7,17 @@ import {
   CardPanel,
   CardFrame,
   CardFrameFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
 export default function Example() {
   return (
@@ -26,7 +26,9 @@ export default function Example() {
         <Card>
           <CardHeader>
             <CardTitle>Create project</CardTitle>
-            <CardDescription>Deploy your new project in one-click.</CardDescription>
+            <CardDescription>
+              Deploy your new project in one-click.
+            </CardDescription>
           </CardHeader>
           <CardPanel>
             <form className="flex w-full flex-col gap-4">
@@ -67,5 +69,5 @@ export default function Example() {
         </CardFrameFooter>
       </CardFrame>
     </div>
-  );
+  )
 }

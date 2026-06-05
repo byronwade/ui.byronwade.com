@@ -1,66 +1,73 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { use } from "react";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import * as React from "react"
+import { use } from "react"
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { getTemplate } from "@/app/templates/_templates";
-import { SegmentedControl } from "@/components/ui/segmented-control";
-import { buttonVariants } from "@/components/ui/button-variants";
-import { ReskinBar, type Reskin } from "@/app/layouts/_components/reskin-bar";
+import { cn } from "@/lib/utils"
+import { getTemplate } from "@/app/templates/_templates"
+import { SegmentedControl } from "@/components/ui/segmented-control"
+import { buttonVariants } from "@/components/ui/button-variants"
+import { ReskinBar, type Reskin } from "@/app/layouts/_components/reskin-bar"
 
-type ViewportKey = "desktop" | "tablet" | "mobile";
+type ViewportKey = "desktop" | "tablet" | "mobile"
 
 const widths: Record<ViewportKey, number | null> = {
   desktop: null,
   tablet: 834,
   mobile: 390,
-};
+}
 
 export default function TemplateFramePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }) {
-  const { slug } = use(params);
-  const meta = getTemplate(slug);
+  const { slug } = use(params)
+  const meta = getTemplate(slug)
 
-  const [viewport, setViewport] = React.useState<ViewportKey>("desktop");
-  const [reskin, setReskin] = React.useState<Reskin>({});
+  const [viewport, setViewport] = React.useState<ViewportKey>("desktop")
+  const [reskin, setReskin] = React.useState<Reskin>({})
 
   if (!meta) {
     return (
       <div className="grid h-full place-items-center p-10 text-center">
         <div>
-          <p className="text-lg font-semibold tracking-tight">Unknown template</p>
+          <p className="text-lg font-semibold tracking-tight">
+            Unknown template
+          </p>
           <p className="mt-1 text-sm text-muted-foreground">
             “{slug}” is not a known template.
           </p>
           <Link
             href="/templates"
-            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "mt-4")}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "sm" }),
+              "mt-4",
+            )}
           >
             Back to gallery
           </Link>
         </div>
       </div>
-    );
+    )
   }
 
-  const query = new URLSearchParams();
-  if (reskin.brand) query.set("brand", reskin.brand);
-  if (reskin.radius) query.set("radius", reskin.radius);
-  const qs = query.toString();
-  const src = `/preview/${meta.slug}${qs ? `?${qs}` : ""}`;
-  const width = widths[viewport];
+  const query = new URLSearchParams()
+  if (reskin.brand) query.set("brand", reskin.brand)
+  if (reskin.radius) query.set("radius", reskin.radius)
+  const qs = query.toString()
+  const src = `/preview/${meta.slug}${qs ? `?${qs}` : ""}`
+  const width = widths[viewport]
 
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3 sm:px-6">
         <div className="min-w-0">
-          <p className="truncate text-sm font-semibold tracking-tight">{meta.name}</p>
+          <p className="truncate text-sm font-semibold tracking-tight">
+            {meta.name}
+          </p>
           <p className="hidden truncate text-xs text-muted-foreground sm:block">
             {meta.tagline}
           </p>
@@ -103,5 +110,5 @@ export default function TemplateFramePage({
         </div>
       </div>
     </div>
-  );
+  )
 }

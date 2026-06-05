@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { useRef, useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { useRef, useState } from "react"
+import { Textarea } from "@/components/ui/textarea"
 
 export default function Example() {
-  const [value, setValue] = useState("");
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [value, setValue] = useState("")
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   // field-sizing-content (already in the component's className) handles
   // auto-grow natively in modern browsers; this demo makes it visible.
@@ -34,7 +34,8 @@ export default function Example() {
           Fixed height (rows=6)
         </label>
         <p className="text-xs text-muted-foreground">
-          Explicit row count disables auto-grow; scroll appears when content overflows.
+          Explicit row count disables auto-grow; scroll appears when content
+          overflows.
         </p>
         <Textarea
           id="fixed-rows"
@@ -44,5 +45,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

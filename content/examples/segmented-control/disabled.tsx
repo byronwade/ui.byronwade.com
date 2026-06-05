@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { SegmentedControl } from "@/components/ui/segmented-control";
+import { useState } from "react"
+import { SegmentedControl } from "@/components/ui/segmented-control"
 
 export default function Example() {
-  const [active, setActive] = useState("table");
+  const [active, setActive] = useState("table")
 
   return (
     <div className="flex flex-col items-center gap-6">
@@ -38,5 +38,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
 import {
   Source,
   Sources,
   SourcesContent,
   SourcesTrigger,
-} from "@/components/ai-elements/sources";
+} from "@/components/ai-elements/sources"
 
 const CITATIONS = [
   { href: "https://example.com/edge-runtime", title: "Edge Runtime overview" },
   { href: "https://example.com/streaming", title: "Streaming responses guide" },
   { href: "https://example.com/tokens", title: "Token usage & limits" },
-];
+]
 
 export default function Example() {
   return (
@@ -35,5 +35,5 @@ export default function Example() {
         </Sources>
       </div>
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { EventTimeline, type TimelineEvent } from "@/components/event-timeline";
+import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
 
 const events: TimelineEvent[] = [
   {
@@ -25,7 +25,7 @@ const events: TimelineEvent[] = [
     timestamp: "2026-05-31T08:19:02Z",
     tone: "success",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -36,5 +36,5 @@ export default function Example() {
       </p>
       <EventTimeline events={events} />
     </div>
-  );
+  )
 }

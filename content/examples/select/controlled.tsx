@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
 const COUNTRY_CURRENCIES: Record<string, string> = {
   usd: "US Dollar",
@@ -19,10 +19,10 @@ const COUNTRY_CURRENCIES: Record<string, string> = {
   jpy: "Japanese Yen",
   cad: "Canadian Dollar",
   aud: "Australian Dollar",
-};
+}
 
 export default function Example() {
-  const [currency, setCurrency] = useState<string>("");
+  const [currency, setCurrency] = useState<string>("")
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[200px] gap-4">
@@ -73,5 +73,5 @@ export default function Example() {
         </button>
       )}
     </div>
-  );
+  )
 }

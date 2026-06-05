@@ -17,9 +17,7 @@ export default function Example() {
             <TooltipTrigger render={<Button variant="outline" />}>
               {side.charAt(0).toUpperCase() + side.slice(1)}
             </TooltipTrigger>
-            <TooltipContent side={side}>
-              Tooltip on the {side}
-            </TooltipContent>
+            <TooltipContent side={side}>Tooltip on the {side}</TooltipContent>
           </Tooltip>
         ))}
       </div>

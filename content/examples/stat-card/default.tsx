@@ -1,5 +1,5 @@
-import { Users } from "lucide-react";
-import { StatCard } from "@/components/stat-card";
+import { Users } from "lucide-react"
+import { StatCard } from "@/components/stat-card"
 
 export default function Example() {
   return (
@@ -18,5 +18,5 @@ export default function Example() {
         hint="monthly average"
       />
     </div>
-  );
+  )
 }

@@ -1,77 +1,95 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { flushSync } from "react-dom";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
-import { Box, CornerDownLeft, GitFork, Hash, Moon, Search, Sun } from "lucide-react";
+import * as React from "react"
+import { flushSync } from "react-dom"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { useTheme } from "next-themes"
+import {
+  Box,
+  CornerDownLeft,
+  GitFork,
+  Hash,
+  Moon,
+  Search,
+  Sun,
+} from "lucide-react"
 
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import { searchIndex, type SearchEntry } from "@/content/search-index";
-import { isActive, navItems, type DocsNavItem } from "./nav-config";
+} from "@/components/ui/tooltip"
+import { cn } from "@/lib/utils"
+import { searchIndex, type SearchEntry } from "@/content/search-index"
+import { isActive, navItems, type DocsNavItem } from "./nav-config"
 
-const GITHUB_URL = "https://github.com/byronwade/ui";
+const GITHUB_URL = "https://github.com/byronwade/ui"
 
 // Minimal shape of the object returned by document.startViewTransition().
 type ViewTransitionLike = {
-  ready: Promise<void>;
-  finished?: Promise<void>;
-  skipTransition?: () => void;
-};
+  ready: Promise<void>
+  finished?: Promise<void>
+  skipTransition?: () => void
+}
 
 const ITEM =
-  "relative flex size-8 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white/30";
+  "relative flex size-8 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white/30"
 const ITEM_IDLE =
-  "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground";
-const ITEM_ACTIVE = "bg-dock-active text-dock-active-foreground";
+  "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground"
+const ITEM_ACTIVE = "bg-dock-active text-dock-active-foreground"
 
 const useIsoLayoutEffect =
-  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 
-const EASE = "cubic-bezier(.22,1,.36,1)";
-const MORPH = `width 240ms ${EASE}, height 240ms ${EASE}, border-radius 240ms ${EASE}`;
+const EASE = "cubic-bezier(.22,1,.36,1)"
+const MORPH = `width 240ms ${EASE}, height 240ms ${EASE}, border-radius 240ms ${EASE}`
 
 /* ── search data ─────────────────────────────────────────────────── */
 
-const ENTRIES = searchIndex;
+const ENTRIES = searchIndex
 
 function score(entry: SearchEntry, q: string): boolean {
-  if (!q) return true;
-  const hay = `${entry.label} ${entry.meta ?? ""} ${entry.keywords ?? ""}`.toLowerCase();
+  if (!q) return true
+  const hay =
+    `${entry.label} ${entry.meta ?? ""} ${entry.keywords ?? ""}`.toLowerCase()
   return q
     .toLowerCase()
     .split(/\s+/)
     .filter(Boolean)
-    .every((tok) => hay.includes(tok));
+    .every((tok) => hay.includes(tok))
 }
 
 /** Hash-aware navigation (smooth-scroll if the anchor is on the current page). */
 function go(href: string, router: ReturnType<typeof useRouter>) {
-  const hash = href.indexOf("#");
-  if (hash === -1) return router.push(href);
-  const path = href.slice(0, hash) || "/";
-  const id = href.slice(hash + 1);
-  const here = typeof window !== "undefined" ? window.location.pathname : "";
-  const el = here === path && typeof document !== "undefined" ? document.getElementById(id) : null;
+  const hash = href.indexOf("#")
+  if (hash === -1) return router.push(href)
+  const path = href.slice(0, hash) || "/"
+  const id = href.slice(hash + 1)
+  const here = typeof window !== "undefined" ? window.location.pathname : ""
+  const el =
+    here === path && typeof document !== "undefined"
+      ? document.getElementById(id)
+      : null
   if (el) {
-    el.scrollIntoView({ behavior: "smooth" });
-    history.replaceState(null, "", href);
+    el.scrollIntoView({ behavior: "smooth" })
+    history.replaceState(null, "", href)
   } else {
-    router.push(href);
+    router.push(href)
   }
 }
 
 /* ── compact nav item ────────────────────────────────────────────── */
 
-function NavDockItem({ item, pathname }: { item: DocsNavItem; pathname: string }) {
-  const active = isActive(item, pathname);
+function NavDockItem({
+  item,
+  pathname,
+}: {
+  item: DocsNavItem
+  pathname: string
+}) {
+  const active = isActive(item, pathname)
   return (
     <Tooltip>
       <TooltipTrigger
@@ -94,7 +112,7 @@ function NavDockItem({ item, pathname }: { item: DocsNavItem; pathname: string }
         {item.label}
       </TooltipContent>
     </Tooltip>
-  );
+  )
 }
 
 /**
@@ -113,69 +131,82 @@ function NavDockItem({ item, pathname }: { item: DocsNavItem; pathname: string }
  * `prefers-reduced-motion` collapses it to an instant swap.
  */
 export function NavDock() {
-  const pathname = usePathname();
-  const router = useRouter();
-  const { resolvedTheme, setTheme } = useTheme();
+  const pathname = usePathname()
+  const router = useRouter()
+  const { resolvedTheme, setTheme } = useTheme()
 
-  const [open, setOpen] = React.useState(false);
-  const [query, setQuery] = React.useState("");
-  const [active, setActive] = React.useState(0);
+  const [open, setOpen] = React.useState(false)
+  const [query, setQuery] = React.useState("")
+  const [active, setActive] = React.useState(0)
 
-  const rootRef = React.useRef<HTMLDivElement>(null);
-  const morphRef = React.useRef<HTMLDivElement>(null);
-  const compactRef = React.useRef<HTMLDivElement>(null);
-  const panelRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const listRef = React.useRef<HTMLDivElement>(null);
-  const collapsedRef = React.useRef<{ w: number; h: number } | null>(null);
-  const panelId = React.useId();
+  const rootRef = React.useRef<HTMLDivElement>(null)
+  const morphRef = React.useRef<HTMLDivElement>(null)
+  const compactRef = React.useRef<HTMLDivElement>(null)
+  const panelRef = React.useRef<HTMLDivElement>(null)
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  const listRef = React.useRef<HTMLDivElement>(null)
+  const collapsedRef = React.useRef<{ w: number; h: number } | null>(null)
+  const panelId = React.useId()
 
-  const results = React.useMemo(() => ENTRIES.filter((e) => score(e, query)), [query]);
-  const sections = results.filter((e) => e.kind === "Section");
-  const components = results.filter((e) => e.kind === "Component");
+  const results = React.useMemo(
+    () => ENTRIES.filter((e) => score(e, query)),
+    [query],
+  )
+  const sections = results.filter((e) => e.kind === "Section")
+  const components = results.filter((e) => e.kind === "Component")
   // Flat order must match render order (Sections then Components) for ↑↓ to line up.
-  const flat = React.useMemo(() => [...sections, ...components], [sections, components]);
+  const flat = React.useMemo(
+    () => [...sections, ...components],
+    [sections, components],
+  )
 
   const close = React.useCallback(() => {
-    setOpen(false);
-    setQuery("");
-    setActive(0);
-  }, []);
+    setOpen(false)
+    setQuery("")
+    setActive(0)
+  }, [])
 
   const run = React.useCallback(
     (href: string) => {
-      close();
-      go(href, router);
+      close()
+      go(href, router)
     },
     [close, router],
-  );
+  )
 
   // Theme swap as a morph: the incoming theme blooms via an expanding clip-path
   // circle anchored on the toggle button (View Transitions API + globals.css),
   // so the change radiates from the trigger like the dock/launcher morphs.
-  const vtRef = React.useRef<ViewTransitionLike | null>(null);
+  const vtRef = React.useRef<ViewTransitionLike | null>(null)
   const toggleTheme = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      const next = resolvedTheme === "dark" ? "light" : "dark";
+      const next = resolvedTheme === "dark" ? "light" : "dark"
       const doc = document as Document & {
-        startViewTransition?: (cb: () => void) => ViewTransitionLike;
-      };
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        startViewTransition?: (cb: () => void) => ViewTransitionLike
+      }
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches
       if (!doc.startViewTransition || reduce) {
-        setTheme(next);
-        return;
+        setTheme(next)
+        return
       }
       // A rapid second click would start a new transition while the previous one
       // is still capturing/animating, which aborts the old one and rejects its
       // `ready` promise with InvalidStateError. Skip the in-flight transition
       // first, then ignore the resulting (expected) rejection below.
-      vtRef.current?.skipTransition?.();
-      const rect = e.currentTarget.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-      const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-      const transition = doc.startViewTransition(() => flushSync(() => setTheme(next)));
-      vtRef.current = transition;
+      vtRef.current?.skipTransition?.()
+      const rect = e.currentTarget.getBoundingClientRect()
+      const x = rect.left + rect.width / 2
+      const y = rect.top + rect.height / 2
+      const r = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y),
+      )
+      const transition = doc.startViewTransition(() =>
+        flushSync(() => setTheme(next)),
+      )
+      vtRef.current = transition
       transition.ready
         .then(() => {
           document.documentElement.animate(
@@ -185,181 +216,188 @@ export function NavDock() {
                 `circle(${r}px at ${x}px ${y}px)`,
               ],
             },
-            { duration: 480, easing: EASE, pseudoElement: "::view-transition-new(root)" },
-          );
+            {
+              duration: 480,
+              easing: EASE,
+              pseudoElement: "::view-transition-new(root)",
+            },
+          )
         })
         // The transition was interrupted by a newer toggle — expected, not an error.
-        .catch(() => {});
+        .catch(() => {})
       Promise.resolve(transition.finished)
         .catch(() => {})
         .finally(() => {
-          if (vtRef.current === transition) vtRef.current = null;
-        });
+          if (vtRef.current === transition) vtRef.current = null
+        })
     },
     [resolvedTheme, setTheme],
-  );
+  )
 
   /* — slot sizing: keep the reserved footprint synced to the compact pill — */
-  const [slot, setSlot] = React.useState<{ w: number; h: number }>({ w: 0, h: 40 });
+  const [slot, setSlot] = React.useState<{ w: number; h: number }>({
+    w: 0,
+    h: 40,
+  })
   useIsoLayoutEffect(() => {
-    const compact = compactRef.current;
-    const morph = morphRef.current;
-    if (!compact || !morph) return;
+    const compact = compactRef.current
+    const morph = morphRef.current
+    if (!compact || !morph) return
     const sync = () => {
-      if (morph.style.width) return; // morphed open — leave the slot alone
-      setSlot({ w: morph.offsetWidth, h: morph.offsetHeight });
-    };
-    sync();
-    const ro = new ResizeObserver(sync);
-    ro.observe(compact);
-    return () => ro.disconnect();
-  }, []);
+      if (morph.style.width) return // morphed open — leave the slot alone
+      setSlot({ w: morph.offsetWidth, h: morph.offsetHeight })
+    }
+    sync()
+    const ro = new ResizeObserver(sync)
+    ro.observe(compact)
+    return () => ro.disconnect()
+  }, [])
 
   /* — the morph: animate the shared capsule between pill and panel — */
   useIsoLayoutEffect(() => {
-    const morph = morphRef.current;
-    const compact = compactRef.current;
-    const panel = panelRef.current;
-    if (!morph || !compact || !panel) return;
+    const morph = morphRef.current
+    const compact = compactRef.current
+    const panel = panelRef.current
+    if (!morph || !compact || !panel) return
 
     const reduce =
       typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
     const release = () => {
-      morph.style.transition = "none";
-      morph.style.width = "";
-      morph.style.height = "";
-      void morph.offsetWidth;
-      morph.style.transition = "";
-    };
+      morph.style.transition = "none"
+      morph.style.width = ""
+      morph.style.height = ""
+      void morph.offsetWidth
+      morph.style.transition = ""
+    }
 
     if (open) {
       if (!collapsedRef.current) {
-        collapsedRef.current = { w: morph.offsetWidth, h: morph.offsetHeight };
+        collapsedRef.current = { w: morph.offsetWidth, h: morph.offsetHeight }
       }
-      const sw = morph.offsetWidth;
-      const sh = morph.offsetHeight;
-      const ew = panel.offsetWidth;
-      const eh = panel.offsetHeight;
-      compact.style.transitionDelay = "0ms";
-      compact.style.opacity = "0";
-      panel.style.transitionDelay = reduce ? "0ms" : "40ms";
-      panel.style.opacity = "1";
+      const sw = morph.offsetWidth
+      const sh = morph.offsetHeight
+      const ew = panel.offsetWidth
+      const eh = panel.offsetHeight
+      compact.style.transitionDelay = "0ms"
+      compact.style.opacity = "0"
+      panel.style.transitionDelay = reduce ? "0ms" : "40ms"
+      panel.style.opacity = "1"
       if (reduce) {
-        morph.style.transition = "none";
-        morph.style.width = `${ew}px`;
-        morph.style.height = `${eh}px`;
+        morph.style.transition = "none"
+        morph.style.width = `${ew}px`
+        morph.style.height = `${eh}px`
       } else {
-        morph.style.transition = "none";
-        morph.style.width = `${sw}px`;
-        morph.style.height = `${sh}px`;
-        void morph.offsetWidth; // reflow → real "from" state
-        morph.style.transition = MORPH;
-        morph.style.width = `${ew}px`;
-        morph.style.height = `${eh}px`;
+        morph.style.transition = "none"
+        morph.style.width = `${sw}px`
+        morph.style.height = `${sh}px`
+        void morph.offsetWidth // reflow → real "from" state
+        morph.style.transition = MORPH
+        morph.style.width = `${ew}px`
+        morph.style.height = `${eh}px`
       }
-      inputRef.current?.focus({ preventScroll: true });
+      inputRef.current?.focus({ preventScroll: true })
     } else if (collapsedRef.current && morph.style.width) {
-      const { w: cw, h: ch } = collapsedRef.current;
-      panel.style.transitionDelay = "0ms";
-      panel.style.opacity = "0";
-      compact.style.transitionDelay = reduce ? "0ms" : "80ms";
-      compact.style.opacity = "1";
+      const { w: cw, h: ch } = collapsedRef.current
+      panel.style.transitionDelay = "0ms"
+      panel.style.opacity = "0"
+      compact.style.transitionDelay = reduce ? "0ms" : "80ms"
+      compact.style.opacity = "1"
       if (reduce) {
-        release();
-        return;
+        release()
+        return
       }
-      morph.style.transition = MORPH;
-      morph.style.width = `${cw}px`;
-      morph.style.height = `${ch}px`;
+      morph.style.transition = MORPH
+      morph.style.width = `${cw}px`
+      morph.style.height = `${ch}px`
       const onEnd = (e: TransitionEvent) => {
-        if (e.propertyName !== "height") return;
-        release();
-        morph.removeEventListener("transitionend", onEnd);
-      };
-      morph.addEventListener("transitionend", onEnd);
-      return () => morph.removeEventListener("transitionend", onEnd);
+        if (e.propertyName !== "height") return
+        release()
+        morph.removeEventListener("transitionend", onEnd)
+      }
+      morph.addEventListener("transitionend", onEnd)
+      return () => morph.removeEventListener("transitionend", onEnd)
     }
-  }, [open]);
+  }, [open])
 
   /* — follow the panel's live height as results filter while open — */
   useIsoLayoutEffect(() => {
-    const morph = morphRef.current;
-    const panel = panelRef.current;
-    if (!morph || !panel || !open) return;
+    const morph = morphRef.current
+    const panel = panelRef.current
+    if (!morph || !panel || !open) return
     const ro = new ResizeObserver(() => {
-      if (!morph.style.width) return;
-      morph.style.height = `${panel.offsetHeight}px`;
-      morph.style.width = `${panel.offsetWidth}px`;
-    });
-    ro.observe(panel);
-    return () => ro.disconnect();
-  }, [open]);
+      if (!morph.style.width) return
+      morph.style.height = `${panel.offsetHeight}px`
+      morph.style.width = `${panel.offsetWidth}px`
+    })
+    ro.observe(panel)
+    return () => ro.disconnect()
+  }, [open])
 
   // Clamp the active index to the current results during render, so a shrinking
   // result set never points past the end — no effect, no cascading setState.
-  const safeActive = Math.min(active, Math.max(0, flat.length - 1));
+  const safeActive = Math.min(active, Math.max(0, flat.length - 1))
   /* — keep the active result scrolled into view — */
   React.useEffect(() => {
-    if (!open) return;
+    if (!open) return
     listRef.current
       ?.querySelector<HTMLElement>(`[data-idx="${safeActive}"]`)
-      ?.scrollIntoView({ block: "nearest" });
-  }, [safeActive, open]);
+      ?.scrollIntoView({ block: "nearest" })
+  }, [safeActive, open])
 
   /* — global ⌘K toggle + legacy open event — */
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        setOpen((p) => !p);
+        e.preventDefault()
+        setOpen((p) => !p)
       }
-    };
-    const onOpen = () => setOpen(true);
-    window.addEventListener("keydown", onKey);
-    window.addEventListener("open-command-palette", onOpen);
+    }
+    const onOpen = () => setOpen(true)
+    window.addEventListener("keydown", onKey)
+    window.addEventListener("open-command-palette", onOpen)
     return () => {
-      window.removeEventListener("keydown", onKey);
-      window.removeEventListener("open-command-palette", onOpen);
-    };
-  }, []);
+      window.removeEventListener("keydown", onKey)
+      window.removeEventListener("open-command-palette", onOpen)
+    }
+  }, [])
 
   /* — Esc + click-away close — */
   React.useEffect(() => {
-    if (!open) return;
+    if (!open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        e.preventDefault();
-        close();
+        e.preventDefault()
+        close()
       }
-    };
+    }
     const onDown = (e: PointerEvent) => {
-      const t = e.target as Element | null;
-      if (!rootRef.current || rootRef.current.contains(t)) return;
-      close();
-    };
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onDown);
+      const t = e.target as Element | null
+      if (!rootRef.current || rootRef.current.contains(t)) return
+      close()
+    }
+    document.addEventListener("keydown", onKey)
+    document.addEventListener("pointerdown", onDown)
     return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onDown);
-    };
-  }, [open, close]);
+      document.removeEventListener("keydown", onKey)
+      document.removeEventListener("pointerdown", onDown)
+    }
+  }, [open, close])
 
   const onInputKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setActive(Math.min(safeActive + 1, flat.length - 1));
+      e.preventDefault()
+      setActive(Math.min(safeActive + 1, flat.length - 1))
     } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setActive(Math.max(safeActive - 1, 0));
+      e.preventDefault()
+      setActive(Math.max(safeActive - 1, 0))
     } else if (e.key === "Enter") {
-      e.preventDefault();
-      const hit = flat[safeActive];
-      if (hit) run(hit.href);
+      e.preventDefault()
+      const hit = flat[safeActive]
+      if (hit) run(hit.href)
     }
-  };
+  }
 
   // Render a result row; `idx` is the flat keyboard index.
   const Row = (entry: SearchEntry, idx: number) => (
@@ -383,12 +421,14 @@ export function NavDock() {
       )}
       <span className="flex-1 truncate">{entry.label}</span>
       {entry.meta && (
-        <span className="shrink-0 text-[11px] text-dock-foreground/60">{entry.meta}</span>
+        <span className="shrink-0 text-[11px] text-dock-foreground/60">
+          {entry.meta}
+        </span>
       )}
     </button>
-  );
+  )
 
-  let cursor = 0;
+  let cursor = 0
 
   return (
     <TooltipProvider delay={350}>
@@ -417,11 +457,18 @@ export function NavDock() {
             >
               <nav aria-label="Primary" className="flex items-center gap-1">
                 {navItems.map((item) => (
-                  <NavDockItem key={item.href} item={item} pathname={pathname} />
+                  <NavDockItem
+                    key={item.href}
+                    item={item}
+                    pathname={pathname}
+                  />
                 ))}
               </nav>
 
-              <span className="mx-1.5 h-5 w-px shrink-0 self-center bg-white/10" aria-hidden />
+              <span
+                className="mx-1.5 h-5 w-px shrink-0 self-center bg-white/10"
+                aria-hidden
+              />
 
               <Tooltip>
                 <TooltipTrigger
@@ -467,8 +514,14 @@ export function NavDock() {
                     />
                   }
                 >
-                  <Moon className="size-4 shrink-0 dark:hidden" strokeWidth={2} />
-                  <Sun className="hidden size-4 shrink-0 dark:block" strokeWidth={2} />
+                  <Moon
+                    className="size-4 shrink-0 dark:hidden"
+                    strokeWidth={2}
+                  />
+                  <Sun
+                    className="hidden size-4 shrink-0 dark:block"
+                    strokeWidth={2}
+                  />
                 </TooltipTrigger>
                 <TooltipContent sideOffset={10}>Toggle theme</TooltipContent>
               </Tooltip>
@@ -493,8 +546,8 @@ export function NavDock() {
                   ref={inputRef}
                   value={query}
                   onChange={(e) => {
-                    setQuery(e.target.value);
-                    setActive(0);
+                    setQuery(e.target.value)
+                    setActive(0)
                   }}
                   onKeyDown={onInputKey}
                   placeholder="Search components, sections, templates…"
@@ -509,7 +562,10 @@ export function NavDock() {
               <div className="h-px bg-white/5" aria-hidden />
 
               {/* Results */}
-              <div ref={listRef} className="max-h-80 overflow-y-auto scrollbar-thin p-1.5">
+              <div
+                ref={listRef}
+                className="max-h-80 overflow-y-auto scrollbar-thin p-1.5"
+              >
                 {flat.length === 0 ? (
                   <div className="px-2.5 py-8 text-center text-[13px] text-dock-foreground/70">
                     No results for “{query}”.
@@ -539,7 +595,9 @@ export function NavDock() {
               {/* Footer hints */}
               <div className="flex items-center gap-3 border-t border-white/5 bg-black/20 px-3.5 py-2 text-[11px] text-dock-foreground/70">
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded border border-white/10 bg-white/5 px-1 font-mono">↑↓</kbd>
+                  <kbd className="rounded border border-white/10 bg-white/5 px-1 font-mono">
+                    ↑↓
+                  </kbd>
                   navigate
                 </span>
                 <span className="flex items-center gap-1">
@@ -548,12 +606,14 @@ export function NavDock() {
                   </kbd>
                   open
                 </span>
-                <span className="ml-auto tabular-nums">{flat.length} results</span>
+                <span className="ml-auto tabular-nums">
+                  {flat.length} results
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </TooltipProvider>
-  );
+  )
 }

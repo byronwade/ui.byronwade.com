@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { ClipboardPaste, Copy, Redo2, Scissors, Undo2 } from "lucide-react";
+import { ClipboardPaste, Copy, Redo2, Scissors, Undo2 } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export default function Example() {
   return (
@@ -61,5 +61,5 @@ export default function Example() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import { ThumbsUp, Star, GitFork } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ThumbsUp, Star, GitFork } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 /**
  * Outline button with a trailing count, divided by a hairline — adapted to our
@@ -33,5 +33,5 @@ export default function Example() {
         </span>
       </Button>
     </div>
-  );
+  )
 }

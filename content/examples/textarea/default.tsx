@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react"
+import { Textarea } from "@/components/ui/textarea"
 
 export default function Example() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("")
 
   return (
     <div className="flex flex-col gap-2 p-6 max-w-md">
@@ -19,5 +19,5 @@ export default function Example() {
       />
       <p className="text-xs text-muted-foreground">{value.length} characters</p>
     </div>
-  );
+  )
 }

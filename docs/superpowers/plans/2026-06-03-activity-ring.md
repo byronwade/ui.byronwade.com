@@ -29,6 +29,7 @@
 ## Task 1: Gauge — reduced-motion + accessible label
 
 **Files:**
+
 - Modify: `registry/ui/gauge.tsx`
 - Test: `tests/components/gauge.test.tsx`
 - Sync target (generated): `components/ui/gauge.tsx`
@@ -46,42 +47,64 @@ export function Gauge({
   className,
   "aria-label": ariaLabel,
 }: {
-  value: number;
-  label?: string;
-  tone?: StatusTone;
-  size?: number;
-  thickness?: number;
-  className?: string;
-  "aria-label"?: string;
+  value: number
+  label?: string
+  tone?: StatusTone
+  size?: number
+  thickness?: number
+  className?: string
+  "aria-label"?: string
 }) {
-  const t = tone ?? scoreTone(value);
-  const r = (size - thickness) / 2;
-  const c = 2 * Math.PI * r;
-  const pct = Math.max(0, Math.min(100, value));
-  const offset = c - (pct / 100) * c;
+  const t = tone ?? scoreTone(value)
+  const r = (size - thickness) / 2
+  const c = 2 * Math.PI * r
+  const pct = Math.max(0, Math.min(100, value))
+  const offset = c - (pct / 100) * c
   return (
     <div
       role="img"
-      aria-label={ariaLabel ?? `${Math.round(value)}${label ? ` ${label}` : ""}`}
+      aria-label={
+        ariaLabel ?? `${Math.round(value)}${label ? ` ${label}` : ""}`
+      }
       className={cn("relative inline-grid place-items-center", className)}
       style={{ width: size, height: size }}
     >
       <svg width={size} height={size} className="-rotate-90" aria-hidden>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={thickness} className="stroke-muted" />
         <circle
-          cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={thickness} strokeLinecap="round"
-          className={cn("transition-[stroke-dashoffset] duration-700 motion-reduce:transition-none", stroke[t])}
-          strokeDasharray={c} strokeDashoffset={offset}
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          strokeWidth={thickness}
+          className="stroke-muted"
+        />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          strokeWidth={thickness}
+          strokeLinecap="round"
+          className={cn(
+            "transition-[stroke-dashoffset] duration-700 motion-reduce:transition-none",
+            stroke[t],
+          )}
+          strokeDasharray={c}
+          strokeDashoffset={offset}
         />
       </svg>
       <div className="absolute inset-0 grid place-items-center text-center">
         <div>
-          <div className="text-3xl font-semibold tracking-tight tabular-nums">{Math.round(value)}</div>
-          {label && <div className="text-xs text-muted-foreground">{label}</div>}
+          <div className="text-3xl font-semibold tracking-tight tabular-nums">
+            {Math.round(value)}
+          </div>
+          {label && (
+            <div className="text-xs text-muted-foreground">{label}</div>
+          )}
         </div>
       </div>
     </div>
-  );
+  )
 }
 ```
 
@@ -99,37 +122,46 @@ Expected: copies `registry/ui/gauge.tsx` → `components/ui/gauge.tsx` (no error
 
 describe("Gauge component – accessible label + reduced motion", () => {
   it("wrapper has role='img'", () => {
-    const { container } = render(<Gauge value={78} />);
-    expect(container.firstChild).toHaveAttribute("role", "img");
-  });
+    const { container } = render(<Gauge value={78} />)
+    expect(container.firstChild).toHaveAttribute("role", "img")
+  })
 
   it("default aria-label is the rounded value + label", () => {
-    const { container } = render(<Gauge value={78.6} label="Performance" />);
-    expect(container.firstChild).toHaveAttribute("aria-label", "79 Performance");
-  });
+    const { container } = render(<Gauge value={78.6} label="Performance" />)
+    expect(container.firstChild).toHaveAttribute("aria-label", "79 Performance")
+  })
 
   it("default aria-label omits label segment when label absent", () => {
-    const { container } = render(<Gauge value={42} />);
-    expect(container.firstChild).toHaveAttribute("aria-label", "42");
-  });
+    const { container } = render(<Gauge value={42} />)
+    expect(container.firstChild).toHaveAttribute("aria-label", "42")
+  })
 
   it("explicit aria-label overrides the default", () => {
-    const { container } = render(<Gauge value={78} label="Performance" aria-label="Overall health 78 of 100" />);
-    expect(container.firstChild).toHaveAttribute("aria-label", "Overall health 78 of 100");
-  });
+    const { container } = render(
+      <Gauge
+        value={78}
+        label="Performance"
+        aria-label="Overall health 78 of 100"
+      />,
+    )
+    expect(container.firstChild).toHaveAttribute(
+      "aria-label",
+      "Overall health 78 of 100",
+    )
+  })
 
   it("progress arc carries motion-reduce:transition-none", () => {
-    const { container } = render(<Gauge value={78} />);
-    const progressCircle = getProgressCircle(container);
-    expect(cls(progressCircle)).toContain("motion-reduce:transition-none");
-  });
+    const { container } = render(<Gauge value={78} />)
+    const progressCircle = getProgressCircle(container)
+    expect(cls(progressCircle)).toContain("motion-reduce:transition-none")
+  })
 
   it("has no axe violations with default aria-label (no wrapping region needed)", async () => {
-    const { container } = render(<Gauge value={78} label="Performance" />);
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-  });
-});
+    const { container } = render(<Gauge value={78} label="Performance" />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
+})
 ```
 
 - [ ] **Step 4: Run the Gauge tests.**
@@ -149,18 +181,19 @@ git commit -m "feat(gauge): reduced-motion arc + accessible role/aria-label"
 ## Task 2: Create the `activity-ring` component
 
 **Files:**
+
 - Create: `registry/ui/activity-ring.tsx`
 - Sync target (generated): `components/ui/activity-ring.tsx`
 
 - [ ] **Step 1: Write the component file** `registry/ui/activity-ring.tsx` with this exact content.
 
 ```tsx
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
-import { cn } from "@/lib/utils";
-import { StatusDot, type StatusTone } from "@/components/ui/status-dot";
+import { cn } from "@/lib/utils"
+import { StatusDot, type StatusTone } from "@/components/ui/status-dot"
 
 /**
  * Per-segment stroke utility — same token map as Gauge, with the neutral tone
@@ -173,34 +206,40 @@ const segmentStroke: Record<StatusTone, string> = {
   danger: "stroke-destructive",
   info: "stroke-brand",
   neutral: "stroke-muted-foreground/40",
-};
+}
 
 /**
  * Default tone per segment index when a segment omits `tone` — brand first, then
  * soft neutral, so a two-segment ring reads as brand + neutral by default.
  */
-const toneCycle: StatusTone[] = ["info", "neutral", "success", "warning", "danger"];
+const toneCycle: StatusTone[] = [
+  "info",
+  "neutral",
+  "success",
+  "warning",
+  "danger",
+]
 
 export type RingSegment = {
-  value: number;
-  label: string;
+  value: number
+  label: string
   /** Stroke tone; defaults by position via `toneCycle`. */
-  tone?: StatusTone;
+  tone?: StatusTone
   /** Optional drill-down metadata passed back through `onSegmentClick`. */
-  href?: string;
-};
+  href?: string
+}
 
 /** Respect the OS "reduce motion" setting — skips the draw-in animation. */
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = React.useState(false);
+  const [reduced, setReduced] = React.useState(false)
   React.useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setReduced(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
-  return reduced;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const sync = () => setReduced(mq.matches)
+    sync()
+    mq.addEventListener("change", sync)
+    return () => mq.removeEventListener("change", sync)
+  }, [])
+  return reduced
 }
 
 /**
@@ -222,75 +261,75 @@ export function ActivityRing({
   onSegmentClick,
   className,
 }: {
-  segments: RingSegment[];
-  size?: number;
-  thickness?: number;
-  gap?: number;
-  centerLabel?: string;
-  formatValue?: (n: number) => string;
-  onSegmentClick?: (segment: RingSegment, index: number) => void;
-  className?: string;
+  segments: RingSegment[]
+  size?: number
+  thickness?: number
+  gap?: number
+  centerLabel?: string
+  formatValue?: (n: number) => string
+  onSegmentClick?: (segment: RingSegment, index: number) => void
+  className?: string
 }) {
-  const reduced = usePrefersReducedMotion();
+  const reduced = usePrefersReducedMotion()
 
-  const [hovered, setHovered] = React.useState<number | null>(null);
-  const [pinned, setPinned] = React.useState<number | null>(null);
-  const active = hovered ?? pinned;
+  const [hovered, setHovered] = React.useState<number | null>(null)
+  const [pinned, setPinned] = React.useState<number | null>(null)
+  const active = hovered ?? pinned
 
   // Draw-in: segments start collapsed, then expand to their share on mount.
-  const [drawn, setDrawn] = React.useState(false);
+  const [drawn, setDrawn] = React.useState(false)
   React.useEffect(() => {
-    const id = requestAnimationFrame(() => setDrawn(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-  const show = drawn || reduced;
+    const id = requestAnimationFrame(() => setDrawn(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
+  const show = drawn || reduced
 
-  const total = segments.reduce((sum, s) => sum + s.value, 0);
+  const total = segments.reduce((sum, s) => sum + s.value, 0)
 
   // Geometry
-  const radius = (size - thickness) / 2;
-  const circumference = 2 * Math.PI * radius;
+  const radius = (size - thickness) / 2
+  const circumference = 2 * Math.PI * radius
 
   // Resolve tone + share for each segment.
   const resolved = segments.map((seg, i) => {
-    const tone = seg.tone ?? toneCycle[i % toneCycle.length];
-    const share = total > 0 ? seg.value / total : 0;
-    const pct = Math.round(share * 100);
-    return { seg, i, tone, share, pct };
-  });
+    const tone = seg.tone ?? toneCycle[i % toneCycle.length]
+    const share = total > 0 ? seg.value / total : 0
+    const pct = Math.round(share * 100)
+    return { seg, i, tone, share, pct }
+  })
 
   // Cumulative arc placement. A gap at each junction so segments read as
   // distinct pills rather than a hard seam. Rounded caps eat ~stroke/2 per end,
   // so keep gap > stroke.
-  let cursor = 0;
+  let cursor = 0
   const arcs = resolved.map((r) => {
-    const start = cursor;
-    cursor += r.share;
-    const len = circumference * r.share;
-    const visible = show ? Math.max(len - gap, 0) : 0;
-    const offset = -(circumference * start + gap / 2);
-    return { ...r, visible, offset };
-  });
+    const start = cursor
+    cursor += r.share
+    const len = circumference * r.share
+    const visible = show ? Math.max(len - gap, 0) : 0
+    const offset = -(circumference * start + gap / 2)
+    return { ...r, visible, offset }
+  })
 
-  const togglePin = (i: number) => setPinned((p) => (p === i ? null : i));
+  const togglePin = (i: number) => setPinned((p) => (p === i ? null : i))
 
   const onSegment = (i: number) => {
-    if (onSegmentClick) onSegmentClick(segments[i], i);
-    else togglePin(i);
-  };
+    if (onSegmentClick) onSegmentClick(segments[i], i)
+    else togglePin(i)
+  }
 
   // Centre figure follows the active segment, else shows the total.
   const centre =
     active !== null
       ? { value: segments[active].value, label: segments[active].label }
-      : { value: total, label: centerLabel };
+      : { value: total, label: centerLabel }
 
-  const activeArc = active !== null ? arcs[active] : null;
+  const activeArc = active !== null ? arcs[active] : null
 
   // Per-segment presentation derived from the active state.
   const segProps = (i: number) => {
-    const isActive = active === i;
-    const dim = active !== null && !isActive;
+    const isActive = active === i
+    const dim = active !== null && !isActive
     return {
       strokeWidth: isActive ? thickness + 3 : thickness,
       opacity: dim ? 0.4 : 1,
@@ -305,8 +344,8 @@ export function ActivityRing({
       onMouseEnter: () => total > 0 && setHovered(i),
       onMouseLeave: () => setHovered(null),
       onClick: () => total > 0 && onSegment(i),
-    };
-  };
+    }
+  }
 
   return (
     <div
@@ -323,7 +362,8 @@ export function ActivityRing({
           >
             <span className="inline-flex items-center gap-1.5">
               <StatusDot tone={activeArc.tone} />
-              {activeArc.seg.label} · {formatValue(activeArc.seg.value)} · {activeArc.pct}%
+              {activeArc.seg.label} · {formatValue(activeArc.seg.value)} ·{" "}
+              {activeArc.pct}%
             </span>
           </div>
         )}
@@ -387,7 +427,7 @@ export function ActivityRing({
         ))}
       </div>
     </div>
-  );
+  )
 }
 
 function LegendChip({
@@ -400,14 +440,14 @@ function LegendChip({
   onLeave,
   onClick,
 }: {
-  tone: StatusTone;
-  label: string;
-  active: boolean;
-  pinned: boolean;
-  disabled?: boolean;
-  onEnter: () => void;
-  onLeave: () => void;
-  onClick: () => void;
+  tone: StatusTone
+  label: string
+  active: boolean
+  pinned: boolean
+  disabled?: boolean
+  onEnter: () => void
+  onLeave: () => void
+  onClick: () => void
 }) {
   return (
     <button
@@ -423,13 +463,19 @@ function LegendChip({
       className={cn(
         "flex items-center gap-1.5 rounded-full px-2 py-1 text-xs transition-colors",
         "outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-default disabled:opacity-60",
-        active ? "font-medium text-foreground" : "text-muted-foreground hover:text-foreground",
+        active
+          ? "font-medium text-foreground"
+          : "text-muted-foreground hover:text-foreground",
       )}
     >
-      <StatusDot tone={tone} size="md" className={cn("transition-transform", active && "scale-125")} />
+      <StatusDot
+        tone={tone}
+        size="md"
+        className={cn("transition-transform", active && "scale-125")}
+      />
       {label}
     </button>
-  );
+  )
 }
 ```
 
@@ -452,6 +498,7 @@ git commit -m "feat(activity-ring): tokenized interactive segmented ring compone
 ## Task 3: Exhaustive tests for `activity-ring`
 
 **Files:**
+
 - Create: `tests/components/activity-ring.test.tsx`
 
 This test file is written to exercise every branch and function (coverage gates: functions ≥ 99, branches ≥ 90 global). It stubs `window.matchMedia` per the established `morph-dock.test.tsx` pattern. Geometry assertions run under `reduce: true` so segments render full-length synchronously; one test exercises the animated (`reduce: false`) draw-in branch via `waitFor`.
@@ -474,10 +521,10 @@ This test file is written to exercise every branch and function (coverage gates:
  *   - SVG camelCase props serialize to kebab-case attrs (stroke-dasharray, etc.).
  */
 
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { expect, describe, it, vi, beforeEach } from "vitest";
-import { axe } from "vitest-axe";
-import { ActivityRing, type RingSegment } from "@/components/ui/activity-ring";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react"
+import { expect, describe, it, vi, beforeEach } from "vitest"
+import { axe } from "vitest-axe"
+import { ActivityRing, type RingSegment } from "@/components/ui/activity-ring"
 
 // ---------------------------------------------------------------------------
 // matchMedia stub (mirrors morph-dock.test.tsx)
@@ -493,24 +540,26 @@ function stubMatchMedia({ reduce = false }: { reduce?: boolean } = {}) {
     addListener: vi.fn(),
     removeListener: vi.fn(),
     dispatchEvent: vi.fn(),
-  }));
+  }))
 }
 
 beforeEach(() => {
   // Default to reduced motion so segments are full-length synchronously.
-  stubMatchMedia({ reduce: true });
-});
+  stubMatchMedia({ reduce: true })
+})
 
 const SEGMENTS: RingSegment[] = [
   { value: 120, label: "Inbound" },
   { value: 80, label: "Outbound" },
-];
+]
 
 function segmentCircles(container: HTMLElement): Element[] {
-  return Array.from(container.querySelectorAll('[data-slot="activity-ring-segment"]'));
+  return Array.from(
+    container.querySelectorAll('[data-slot="activity-ring-segment"]'),
+  )
 }
 function cls(el: Element): string {
-  return el.getAttribute("class") ?? "";
+  return el.getAttribute("class") ?? ""
 }
 
 // ---------------------------------------------------------------------------
@@ -519,54 +568,64 @@ function cls(el: Element): string {
 
 describe("ActivityRing – rendering", () => {
   it("renders the root wrapper with data-slot", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    expect(container.querySelector('[data-slot="activity-ring"]')).toBeInTheDocument();
-  });
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    expect(
+      container.querySelector('[data-slot="activity-ring"]'),
+    ).toBeInTheDocument()
+  })
 
   it("renders an SVG with a track circle", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    expect(container.querySelector("svg")).toBeInTheDocument();
-    expect(container.querySelector('[data-slot="activity-ring-track"]')).toHaveClass("stroke-muted");
-  });
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    expect(container.querySelector("svg")).toBeInTheDocument()
+    expect(
+      container.querySelector('[data-slot="activity-ring-track"]'),
+    ).toHaveClass("stroke-muted")
+  })
 
   it("renders one segment circle per segment", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    expect(segmentCircles(container)).toHaveLength(2);
-  });
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    expect(segmentCircles(container)).toHaveLength(2)
+  })
 
   it("renders three segments when given three", () => {
     const three: RingSegment[] = [
       { value: 1, label: "A" },
       { value: 1, label: "B" },
       { value: 1, label: "C" },
-    ];
-    const { container } = render(<ActivityRing segments={three} />);
-    expect(segmentCircles(container)).toHaveLength(3);
-  });
+    ]
+    const { container } = render(<ActivityRing segments={three} />)
+    expect(segmentCircles(container)).toHaveLength(3)
+  })
 
   it("shows the total in the centre by default", () => {
-    render(<ActivityRing segments={SEGMENTS} centerLabel="interactions" />);
-    expect(screen.getByText("200")).toBeInTheDocument();
-    expect(screen.getByText("interactions")).toBeInTheDocument();
-  });
+    render(<ActivityRing segments={SEGMENTS} centerLabel="interactions" />)
+    expect(screen.getByText("200")).toBeInTheDocument()
+    expect(screen.getByText("interactions")).toBeInTheDocument()
+  })
 
   it("defaults centerLabel to 'total'", () => {
-    render(<ActivityRing segments={SEGMENTS} />);
-    expect(screen.getByText("total")).toBeInTheDocument();
-  });
+    render(<ActivityRing segments={SEGMENTS} />)
+    expect(screen.getByText("total")).toBeInTheDocument()
+  })
 
   it("applies custom className to the root", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} className="my-ring" />);
-    expect(container.querySelector('[data-slot="activity-ring"]')).toHaveClass("my-ring");
-  });
+    const { container } = render(
+      <ActivityRing segments={SEGMENTS} className="my-ring" />,
+    )
+    expect(container.querySelector('[data-slot="activity-ring"]')).toHaveClass(
+      "my-ring",
+    )
+  })
 
   it("applies size to the ring box", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} size={200} />);
-    const svg = container.querySelector("svg");
-    expect(svg).toHaveAttribute("width", "200");
-    expect(svg).toHaveAttribute("height", "200");
-  });
-});
+    const { container } = render(
+      <ActivityRing segments={SEGMENTS} size={200} />,
+    )
+    const svg = container.querySelector("svg")
+    expect(svg).toHaveAttribute("width", "200")
+    expect(svg).toHaveAttribute("height", "200")
+  })
+})
 
 // ---------------------------------------------------------------------------
 // Tone mapping
@@ -574,81 +633,101 @@ describe("ActivityRing – rendering", () => {
 
 describe("ActivityRing – tone mapping", () => {
   it("cycles default tones: segment 0 = stroke-brand, segment 1 = stroke-muted-foreground/40", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    const [a, b] = segmentCircles(container);
-    expect(cls(a)).toContain("stroke-brand");
-    expect(cls(b)).toContain("stroke-muted-foreground/40");
-  });
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    const [a, b] = segmentCircles(container)
+    expect(cls(a)).toContain("stroke-brand")
+    expect(cls(b)).toContain("stroke-muted-foreground/40")
+  })
 
   it("honours explicit tones", () => {
     const segs: RingSegment[] = [
       { value: 1, label: "Up", tone: "success" },
       { value: 1, label: "Down", tone: "danger" },
-    ];
-    const { container } = render(<ActivityRing segments={segs} />);
-    const [a, b] = segmentCircles(container);
-    expect(cls(a)).toContain("stroke-success");
-    expect(cls(b)).toContain("stroke-destructive");
-  });
+    ]
+    const { container } = render(<ActivityRing segments={segs} />)
+    const [a, b] = segmentCircles(container)
+    expect(cls(a)).toContain("stroke-success")
+    expect(cls(b)).toContain("stroke-destructive")
+  })
 
   it("wraps the tone cycle past 5 segments", () => {
-    const segs: RingSegment[] = Array.from({ length: 6 }, (_, i) => ({ value: 1, label: `S${i}` }));
-    const { container } = render(<ActivityRing segments={segs} />);
-    const circles = segmentCircles(container);
+    const segs: RingSegment[] = Array.from({ length: 6 }, (_, i) => ({
+      value: 1,
+      label: `S${i}`,
+    }))
+    const { container } = render(<ActivityRing segments={segs} />)
+    const circles = segmentCircles(container)
     // index 5 wraps back to toneCycle[0] = info = stroke-brand
-    expect(cls(circles[5])).toContain("stroke-brand");
-  });
-});
+    expect(cls(circles[5])).toContain("stroke-brand")
+  })
+})
 
 // ---------------------------------------------------------------------------
 // Geometry (reduced motion → full-length synchronously)
 // ---------------------------------------------------------------------------
 
 describe("ActivityRing – geometry", () => {
-  const size = 168;
-  const thickness = 12;
-  const gap = 18;
-  const radius = (size - thickness) / 2;
-  const circumference = 2 * Math.PI * radius;
+  const size = 168
+  const thickness = 12
+  const gap = 18
+  const radius = (size - thickness) / 2
+  const circumference = 2 * Math.PI * radius
 
   it("segment visible length = share*circumference - gap", () => {
     const { container } = render(
-      <ActivityRing segments={SEGMENTS} size={size} thickness={thickness} gap={gap} />
-    );
-    const [a] = segmentCircles(container);
-    const share = 120 / 200;
-    const expected = circumference * share - gap;
-    const dasharray = a.getAttribute("stroke-dasharray") ?? "";
-    const visible = Number(dasharray.split(" ")[0]);
-    expect(visible).toBeCloseTo(expected, 2);
-  });
+      <ActivityRing
+        segments={SEGMENTS}
+        size={size}
+        thickness={thickness}
+        gap={gap}
+      />,
+    )
+    const [a] = segmentCircles(container)
+    const share = 120 / 200
+    const expected = circumference * share - gap
+    const dasharray = a.getAttribute("stroke-dasharray") ?? ""
+    const visible = Number(dasharray.split(" ")[0])
+    expect(visible).toBeCloseTo(expected, 2)
+  })
 
   it("first segment offset = -(gap/2)", () => {
     const { container } = render(
-      <ActivityRing segments={SEGMENTS} size={size} thickness={thickness} gap={gap} />
-    );
-    const [a] = segmentCircles(container);
-    expect(Number(a.getAttribute("stroke-dashoffset"))).toBeCloseTo(-(gap / 2), 2);
-  });
+      <ActivityRing
+        segments={SEGMENTS}
+        size={size}
+        thickness={thickness}
+        gap={gap}
+      />,
+    )
+    const [a] = segmentCircles(container)
+    expect(Number(a.getAttribute("stroke-dashoffset"))).toBeCloseTo(
+      -(gap / 2),
+      2,
+    )
+  })
 
   it("second segment offset accounts for the first segment length", () => {
     const { container } = render(
-      <ActivityRing segments={SEGMENTS} size={size} thickness={thickness} gap={gap} />
-    );
-    const [, b] = segmentCircles(container);
-    const firstShare = 120 / 200;
-    const expected = -(circumference * firstShare + gap / 2);
-    expect(Number(b.getAttribute("stroke-dashoffset"))).toBeCloseTo(expected, 2);
-  });
+      <ActivityRing
+        segments={SEGMENTS}
+        size={size}
+        thickness={thickness}
+        gap={gap}
+      />,
+    )
+    const [, b] = segmentCircles(container)
+    const firstShare = 120 / 200
+    const expected = -(circumference * firstShare + gap / 2)
+    expect(Number(b.getAttribute("stroke-dashoffset"))).toBeCloseTo(expected, 2)
+  })
 
   it("default thickness drives stroke-width 12 on the track", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    expect(container.querySelector('[data-slot="activity-ring-track"]')).toHaveAttribute(
-      "stroke-width",
-      "12"
-    );
-  });
-});
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    expect(
+      container.querySelector('[data-slot="activity-ring-track"]'),
+    ).toHaveAttribute("stroke-width", "12")
+  })
+})
 
 // ---------------------------------------------------------------------------
 // Quiet state (total === 0)
@@ -658,37 +737,39 @@ describe("ActivityRing – quiet state", () => {
   const QUIET: RingSegment[] = [
     { value: 0, label: "Inbound" },
     { value: 0, label: "Outbound" },
-  ];
+  ]
 
   it("renders no segment circles when total is 0", () => {
-    const { container } = render(<ActivityRing segments={QUIET} />);
-    expect(segmentCircles(container)).toHaveLength(0);
-  });
+    const { container } = render(<ActivityRing segments={QUIET} />)
+    expect(segmentCircles(container)).toHaveLength(0)
+  })
 
   it("still renders the track when total is 0", () => {
-    const { container } = render(<ActivityRing segments={QUIET} />);
-    expect(container.querySelector('[data-slot="activity-ring-track"]')).toBeInTheDocument();
-  });
+    const { container } = render(<ActivityRing segments={QUIET} />)
+    expect(
+      container.querySelector('[data-slot="activity-ring-track"]'),
+    ).toBeInTheDocument()
+  })
 
   it("centre shows 0 total", () => {
-    render(<ActivityRing segments={QUIET} centerLabel="calls" />);
-    expect(screen.getByText("0")).toBeInTheDocument();
-    expect(screen.getByText("calls")).toBeInTheDocument();
-  });
+    render(<ActivityRing segments={QUIET} centerLabel="calls" />)
+    expect(screen.getByText("0")).toBeInTheDocument()
+    expect(screen.getByText("calls")).toBeInTheDocument()
+  })
 
   it("legend chips are disabled when total is 0", () => {
-    render(<ActivityRing segments={QUIET} />);
-    const chips = screen.getAllByRole("button");
-    chips.forEach((c) => expect(c).toBeDisabled());
-  });
+    render(<ActivityRing segments={QUIET} />)
+    const chips = screen.getAllByRole("button")
+    chips.forEach((c) => expect(c).toBeDisabled())
+  })
 
   it("disabled legend chip click does not change the centre", () => {
-    render(<ActivityRing segments={QUIET} centerLabel="calls" />);
-    fireEvent.click(screen.getByRole("button", { name: /Inbound/ }));
+    render(<ActivityRing segments={QUIET} centerLabel="calls" />)
+    fireEvent.click(screen.getByRole("button", { name: /Inbound/ }))
     // still showing the idle total label
-    expect(screen.getByText("calls")).toBeInTheDocument();
-  });
-});
+    expect(screen.getByText("calls")).toBeInTheDocument()
+  })
+})
 
 // ---------------------------------------------------------------------------
 // Hover / pin emphasis + tooltip
@@ -696,63 +777,71 @@ describe("ActivityRing – quiet state", () => {
 
 describe("ActivityRing – hover/pin + tooltip", () => {
   it("hovering a segment shows the tooltip and swaps the centre figure", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    const [a] = segmentCircles(container);
-    fireEvent.mouseEnter(a);
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    const [a] = segmentCircles(container)
+    fireEvent.mouseEnter(a)
     // tooltip appears
-    const tooltip = container.querySelector('[data-slot="activity-ring-tooltip"]');
-    expect(tooltip).toBeInTheDocument();
-    expect(tooltip).toHaveTextContent("Inbound");
-    expect(tooltip).toHaveTextContent("60%"); // 120/200
+    const tooltip = container.querySelector(
+      '[data-slot="activity-ring-tooltip"]',
+    )
+    expect(tooltip).toBeInTheDocument()
+    expect(tooltip).toHaveTextContent("Inbound")
+    expect(tooltip).toHaveTextContent("60%") // 120/200
     // centre swaps to the active segment value
-    expect(screen.getByText("120")).toBeInTheDocument();
-  });
+    expect(screen.getByText("120")).toBeInTheDocument()
+  })
 
   it("mouseLeave clears the tooltip", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    const [a] = segmentCircles(container);
-    fireEvent.mouseEnter(a);
-    expect(container.querySelector('[data-slot="activity-ring-tooltip"]')).toBeInTheDocument();
-    fireEvent.mouseLeave(a);
-    expect(container.querySelector('[data-slot="activity-ring-tooltip"]')).not.toBeInTheDocument();
-  });
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    const [a] = segmentCircles(container)
+    fireEvent.mouseEnter(a)
+    expect(
+      container.querySelector('[data-slot="activity-ring-tooltip"]'),
+    ).toBeInTheDocument()
+    fireEvent.mouseLeave(a)
+    expect(
+      container.querySelector('[data-slot="activity-ring-tooltip"]'),
+    ).not.toBeInTheDocument()
+  })
 
   it("active segment gets a thicker stroke; the other dims", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} thickness={12} />);
-    const [a, b] = segmentCircles(container);
-    fireEvent.mouseEnter(a);
-    expect(a).toHaveAttribute("stroke-width", "15"); // thickness + 3
-    expect(b).toHaveAttribute("stroke-width", "12");
-    expect(Number((b as SVGElement).style.opacity)).toBeCloseTo(0.4, 5);
-  });
+    const { container } = render(
+      <ActivityRing segments={SEGMENTS} thickness={12} />,
+    )
+    const [a, b] = segmentCircles(container)
+    fireEvent.mouseEnter(a)
+    expect(a).toHaveAttribute("stroke-width", "15") // thickness + 3
+    expect(b).toHaveAttribute("stroke-width", "12")
+    expect(Number((b as SVGElement).style.opacity)).toBeCloseTo(0.4, 5)
+  })
 
   it("clicking a legend chip pins emphasis (aria-pressed) and swaps centre", () => {
-    render(<ActivityRing segments={SEGMENTS} />);
-    const chip = screen.getByRole("button", { name: /Outbound/ });
-    fireEvent.click(chip);
-    expect(chip).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByText("80")).toBeInTheDocument();
-  });
+    render(<ActivityRing segments={SEGMENTS} />)
+    const chip = screen.getByRole("button", { name: /Outbound/ })
+    fireEvent.click(chip)
+    expect(chip).toHaveAttribute("aria-pressed", "true")
+    expect(screen.getByText("80")).toBeInTheDocument()
+  })
 
   it("clicking a pinned legend chip again unpins it", () => {
-    render(<ActivityRing segments={SEGMENTS} centerLabel="total" />);
-    const chip = screen.getByRole("button", { name: /Outbound/ });
-    fireEvent.click(chip);
-    expect(chip).toHaveAttribute("aria-pressed", "true");
-    fireEvent.click(chip);
-    expect(chip).toHaveAttribute("aria-pressed", "false");
-    expect(screen.getByText("total")).toBeInTheDocument();
-  });
+    render(<ActivityRing segments={SEGMENTS} centerLabel="total" />)
+    const chip = screen.getByRole("button", { name: /Outbound/ })
+    fireEvent.click(chip)
+    expect(chip).toHaveAttribute("aria-pressed", "true")
+    fireEvent.click(chip)
+    expect(chip).toHaveAttribute("aria-pressed", "false")
+    expect(screen.getByText("total")).toBeInTheDocument()
+  })
 
   it("legend chip focus/blur drives hover emphasis", () => {
-    render(<ActivityRing segments={SEGMENTS} />);
-    const chip = screen.getByRole("button", { name: /Inbound/ });
-    fireEvent.focus(chip);
-    expect(screen.getByText("120")).toBeInTheDocument(); // centre follows
-    fireEvent.blur(chip);
-    expect(screen.getByText("200")).toBeInTheDocument(); // back to total
-  });
-});
+    render(<ActivityRing segments={SEGMENTS} />)
+    const chip = screen.getByRole("button", { name: /Inbound/ })
+    fireEvent.focus(chip)
+    expect(screen.getByText("120")).toBeInTheDocument() // centre follows
+    fireEvent.blur(chip)
+    expect(screen.getByText("200")).toBeInTheDocument() // back to total
+  })
+})
 
 // ---------------------------------------------------------------------------
 // Click behavior: callback vs pin
@@ -760,23 +849,26 @@ describe("ActivityRing – hover/pin + tooltip", () => {
 
 describe("ActivityRing – segment click", () => {
   it("calls onSegmentClick with the segment and index", () => {
-    const onSegmentClick = vi.fn();
+    const onSegmentClick = vi.fn()
     const { container } = render(
-      <ActivityRing segments={SEGMENTS} onSegmentClick={onSegmentClick} />
-    );
-    const [a] = segmentCircles(container);
-    fireEvent.click(a);
-    expect(onSegmentClick).toHaveBeenCalledWith(SEGMENTS[0], 0);
-  });
+      <ActivityRing segments={SEGMENTS} onSegmentClick={onSegmentClick} />,
+    )
+    const [a] = segmentCircles(container)
+    fireEvent.click(a)
+    expect(onSegmentClick).toHaveBeenCalledWith(SEGMENTS[0], 0)
+  })
 
   it("without onSegmentClick, clicking a segment pins emphasis", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    const [, b] = segmentCircles(container);
-    fireEvent.click(b);
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    const [, b] = segmentCircles(container)
+    fireEvent.click(b)
     // legend chip for that segment is now pinned
-    expect(screen.getByRole("button", { name: /Outbound/ })).toHaveAttribute("aria-pressed", "true");
-  });
-});
+    expect(screen.getByRole("button", { name: /Outbound/ })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    )
+  })
+})
 
 // ---------------------------------------------------------------------------
 // formatValue
@@ -787,26 +879,26 @@ describe("ActivityRing – formatValue", () => {
     const big: RingSegment[] = [
       { value: 1200, label: "A" },
       { value: 800, label: "B" },
-    ];
-    render(<ActivityRing segments={big} />);
-    expect(screen.getByText("2,000")).toBeInTheDocument();
-  });
+    ]
+    render(<ActivityRing segments={big} />)
+    expect(screen.getByText("2,000")).toBeInTheDocument()
+  })
 
   it("custom formatter is applied to the centre", () => {
-    render(<ActivityRing segments={SEGMENTS} formatValue={(n) => `$${n}`} />);
-    expect(screen.getByText("$200")).toBeInTheDocument();
-  });
+    render(<ActivityRing segments={SEGMENTS} formatValue={(n) => `$${n}`} />)
+    expect(screen.getByText("$200")).toBeInTheDocument()
+  })
 
   it("custom formatter is applied in the tooltip", () => {
     const { container } = render(
-      <ActivityRing segments={SEGMENTS} formatValue={(n) => `${n} pcs`} />
-    );
-    fireEvent.mouseEnter(segmentCircles(container)[0]);
-    expect(container.querySelector('[data-slot="activity-ring-tooltip"]')).toHaveTextContent(
-      "120 pcs"
-    );
-  });
-});
+      <ActivityRing segments={SEGMENTS} formatValue={(n) => `${n} pcs`} />,
+    )
+    fireEvent.mouseEnter(segmentCircles(container)[0])
+    expect(
+      container.querySelector('[data-slot="activity-ring-tooltip"]'),
+    ).toHaveTextContent("120 pcs")
+  })
+})
 
 // ---------------------------------------------------------------------------
 // Animation branch (reduce: false) + cleanup
@@ -814,31 +906,35 @@ describe("ActivityRing – formatValue", () => {
 
 describe("ActivityRing – draw-in animation", () => {
   it("animated branch: segments start collapsed then draw in via rAF", async () => {
-    stubMatchMedia({ reduce: false });
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    const [a] = segmentCircles(container);
+    stubMatchMedia({ reduce: false })
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    const [a] = segmentCircles(container)
     // On first render (drawn=false, reduced=false) the visible length is 0.
-    const initial = Number((a.getAttribute("stroke-dasharray") ?? "").split(" ")[0]);
-    expect(initial).toBe(0);
+    const initial = Number(
+      (a.getAttribute("stroke-dasharray") ?? "").split(" ")[0],
+    )
+    expect(initial).toBe(0)
     // After the rAF fires, it expands to its share length.
     await waitFor(() => {
-      const after = Number((a.getAttribute("stroke-dasharray") ?? "").split(" ")[0]);
-      expect(after).toBeGreaterThan(0);
-    });
-  });
+      const after = Number(
+        (a.getAttribute("stroke-dasharray") ?? "").split(" ")[0],
+      )
+      expect(after).toBeGreaterThan(0)
+    })
+  })
 
   it("animated branch attaches the multi-property transition to segments", () => {
-    stubMatchMedia({ reduce: false });
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    const [a] = segmentCircles(container) as unknown as SVGElement[];
-    expect(a.style.transition).toContain("stroke-dasharray");
-  });
+    stubMatchMedia({ reduce: false })
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    const [a] = segmentCircles(container) as unknown as SVGElement[]
+    expect(a.style.transition).toContain("stroke-dasharray")
+  })
 
   it("unmounts cleanly (cancels rAF + removes matchMedia listener)", () => {
-    const { unmount } = render(<ActivityRing segments={SEGMENTS} />);
-    expect(() => unmount()).not.toThrow();
-  });
-});
+    const { unmount } = render(<ActivityRing segments={SEGMENTS} />)
+    expect(() => unmount()).not.toThrow()
+  })
+})
 
 // ---------------------------------------------------------------------------
 // Accessibility
@@ -846,25 +942,25 @@ describe("ActivityRing – draw-in animation", () => {
 
 describe("ActivityRing – accessibility", () => {
   it("legend entries are real buttons with aria-pressed", () => {
-    render(<ActivityRing segments={SEGMENTS} />);
-    const chips = screen.getAllByRole("button");
-    expect(chips).toHaveLength(2);
-    chips.forEach((c) => expect(c).toHaveAttribute("aria-pressed"));
-  });
+    render(<ActivityRing segments={SEGMENTS} />)
+    const chips = screen.getAllByRole("button")
+    expect(chips).toHaveLength(2)
+    chips.forEach((c) => expect(c).toHaveAttribute("aria-pressed"))
+  })
 
   it("decorative SVG is aria-hidden", () => {
-    const { container } = render(<ActivityRing segments={SEGMENTS} />);
-    expect(container.querySelector("svg")).toHaveAttribute("aria-hidden");
-  });
+    const { container } = render(<ActivityRing segments={SEGMENTS} />)
+    expect(container.querySelector("svg")).toHaveAttribute("aria-hidden")
+  })
 
   it("has no axe violations – default", async () => {
     const { container } = render(
       <div role="region" aria-label="Activity">
         <ActivityRing segments={SEGMENTS} />
-      </div>
-    );
-    expect(await axe(container)).toHaveNoViolations();
-  });
+      </div>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
 
   it("has no axe violations – quiet state", async () => {
     const { container } = render(
@@ -875,21 +971,21 @@ describe("ActivityRing – accessibility", () => {
             { value: 0, label: "Outbound" },
           ]}
         />
-      </div>
-    );
-    expect(await axe(container)).toHaveNoViolations();
-  });
+      </div>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
 
   it("has no axe violations – pinned/active state", async () => {
     const { container } = render(
       <div role="region" aria-label="Activity">
         <ActivityRing segments={SEGMENTS} />
-      </div>
-    );
-    fireEvent.click(screen.getByRole("button", { name: /Inbound/ }));
-    expect(await axe(container)).toHaveNoViolations();
-  });
-});
+      </div>,
+    )
+    fireEvent.click(screen.getByRole("button", { name: /Inbound/ }))
+    expect(await axe(container)).toHaveNoViolations()
+  })
+})
 ```
 
 - [ ] **Step 2: Run the activity-ring tests** (requires the component to be synced into `components/` — if Task 2 Step 2 did not create it, run Task 4 first, then return here).
@@ -909,6 +1005,7 @@ git commit -m "test(activity-ring): exhaustive suite (geometry, hover/pin, toolt
 ## Task 4: Registry manifest + example + build
 
 **Files:**
+
 - Modify: `registry.json`
 - Create: `content/examples/activity-ring/default.tsx`
 
@@ -938,7 +1035,7 @@ git commit -m "test(activity-ring): exhaustive suite (geometry, hover/pin, toolt
 - [ ] **Step 2: Create the example** `content/examples/activity-ring/default.tsx`.
 
 ```tsx
-import { ActivityRing } from "@/components/ui/activity-ring";
+import { ActivityRing } from "@/components/ui/activity-ring"
 
 export default function Example() {
   return (
@@ -951,7 +1048,7 @@ export default function Example() {
         centerLabel="interactions"
       />
     </div>
-  );
+  )
 }
 ```
 

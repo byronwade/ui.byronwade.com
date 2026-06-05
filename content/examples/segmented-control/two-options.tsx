@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { SegmentedControl } from "@/components/ui/segmented-control";
+import { useState } from "react"
+import { SegmentedControl } from "@/components/ui/segmented-control"
 
 export default function Example() {
-  const [mode, setMode] = useState<"light" | "dark">("light");
+  const [mode, setMode] = useState<"light" | "dark">("light")
 
   return (
     <SegmentedControl
@@ -15,5 +15,5 @@ export default function Example() {
       value={mode}
       onValueChange={setMode}
     />
-  );
+  )
 }

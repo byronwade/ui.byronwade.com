@@ -1,5 +1,5 @@
-import { StarIcon } from "lucide-react";
-import { Toggle } from "@/components/ui/toggle";
+import { StarIcon } from "lucide-react"
+import { Toggle } from "@/components/ui/toggle"
 
 export default function Example() {
   return (
@@ -25,5 +25,5 @@ export default function Example() {
         <span className="text-xs text-muted-foreground">lg</span>
       </div>
     </div>
-  );
+  )
 }

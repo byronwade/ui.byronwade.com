@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Tool,
@@ -6,7 +6,7 @@ import {
   ToolHeader,
   ToolInput,
   ToolOutput,
-} from "@/components/ai-elements/tool";
+} from "@/components/ai-elements/tool"
 
 export default function Example() {
   return (
@@ -39,5 +39,5 @@ export default function Example() {
         </Tool>
       </div>
     </div>
-  );
+  )
 }

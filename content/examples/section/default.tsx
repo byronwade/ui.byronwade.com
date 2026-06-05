@@ -1,6 +1,6 @@
-import { Section, SettingsList, SettingRow } from "@/components/section";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
+import { Section, SettingsList, SettingRow } from "@/components/section"
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
 
 export default function Example() {
   return (
@@ -8,7 +8,11 @@ export default function Example() {
       <Section
         title="Notifications"
         description="Choose which events trigger an email or push alert."
-        action={<Button variant="outline" size="sm">Save</Button>}
+        action={
+          <Button variant="outline" size="sm">
+            Save
+          </Button>
+        }
       >
         <SettingsList>
           <SettingRow
@@ -29,5 +33,5 @@ export default function Example() {
         </SettingsList>
       </Section>
     </div>
-  );
+  )
 }

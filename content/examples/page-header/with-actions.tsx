@@ -1,6 +1,6 @@
-import { PageHeader } from "@/components/page-header";
-import { Button } from "@/components/ui/button";
-import { Download, Plus, Settings } from "lucide-react";
+import { PageHeader } from "@/components/page-header"
+import { Button } from "@/components/ui/button"
+import { Download, Plus, Settings } from "lucide-react"
 
 export default function Example() {
   return (
@@ -45,5 +45,5 @@ export default function Example() {
         </Button>
       </PageHeader>
     </div>
-  );
+  )
 }

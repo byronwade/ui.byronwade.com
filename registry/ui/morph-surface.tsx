@@ -1,0 +1,155 @@
+"use client"
+
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { useChromeMorph } from "@/lib/use-chrome-morph"
+
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
+
+export type MorphPlacement = "top" | "bottom" | "left" | "right"
+export type MorphGrow = "height" | "width" | "both"
+
+/** Anchor the morphing box so it grows the right direction. `top`/`left`/`right`
+ *  stay in normal flow (the box grows its size and the flex row reflows around it
+ *  — a left box grows rightward, a right box, placed last, grows leftward). Only
+ *  `bottom` is absolute (a bottom sheet must grow UP out of normal flow). An
+ *  in-flow box honors its explicit grow-axis size; an absolute box inside a
+ *  shrink-wrapped (0-size) nav does not. */
+const ANCHOR: Record<MorphPlacement, string> = {
+  top: "",
+  bottom: "absolute inset-x-0 bottom-0",
+  left: "h-full",
+  right: "h-full",
+}
+
+export interface MorphSurfaceProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  /** Grow direction (sets the box's anchoring). */
+  placement?: MorphPlacement
+  /** Which axes animate. The non-growing axis holds the box's current size. */
+  grow?: MorphGrow
+  /** Resting nav content; fades OUT as the panel blooms. */
+  collapsed: React.ReactNode
+  /** Bloomed panel; fades IN. */
+  panel: React.ReactNode
+  /** Open-box target in px; the growing axis falls back to measuring the panel. */
+  size?: { w?: number; h?: number }
+  /** Accessible name for the nav landmark. */
+  navLabel?: string
+  /** Consumer styles the vessel (bg, radius, shadow, border). Applied to the box. */
+  className?: string
+}
+
+/**
+ * The morph technique, made agnostic. Wraps `useChromeMorph` with the common
+ * orchestration — open state's refs, the rest↔panel cross-fade, box sizing per
+ * `grow`, and Esc + outside-click close — and NO visual style of its own. Nav
+ * styles (bar, sidebar, tabs, menubar, rail) compose it with their layout.
+ */
+export function MorphSurface({
+  open,
+  onOpenChange,
+  placement = "top",
+  grow = "height",
+  collapsed,
+  panel,
+  size,
+  navLabel = "Navigation",
+  className,
+}: MorphSurfaceProps) {
+  const rootRef = React.useRef<HTMLElement>(null)
+  const morphRef = React.useRef<HTMLDivElement>(null)
+  const restRef = React.useRef<HTMLDivElement>(null)
+  const panelRef = React.useRef<HTMLDivElement>(null)
+
+  useChromeMorph({
+    morphRef,
+    restRef,
+    panelRef,
+    open,
+    growHeight: grow !== "width",
+    // Non-growing axis holds current size; growing axis uses `size` or measures
+    // the panel. The panel is `absolute inset-0`, so its offset size is clamped
+    // to the collapsed box — measure scrollWidth/Height to get the panel's
+    // NATURAL content size, otherwise an auto-sized box never blooms.
+    width: () =>
+      grow === "height"
+        ? (morphRef.current?.offsetWidth ?? 0)
+        : (size?.w ?? panelRef.current?.scrollWidth ?? 0),
+    height:
+      grow === "width"
+        ? undefined
+        : () => size?.h ?? panelRef.current?.scrollHeight ?? 0,
+    deps: [grow, placement, size?.w, size?.h],
+  })
+
+  // The hook cross-fades rest↔panel only for height-grow (its width-only branch
+  // is for consumers that swap their own content). For width-grow we own the
+  // cross-fade here: reveal the panel + hide the rest on open. On close (any
+  // grow) restore the collapsed view so the panel doesn't linger.
+  useIsoLayoutEffect(() => {
+    if (open) {
+      if (grow === "width") {
+        if (panelRef.current) panelRef.current.style.opacity = "1"
+        if (restRef.current) restRef.current.style.opacity = "0"
+      }
+      return
+    }
+    if (panelRef.current) panelRef.current.style.opacity = "0"
+    if (restRef.current) restRef.current.style.opacity = ""
+  })
+
+  React.useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onOpenChange(false)
+    }
+    const onDown = (e: PointerEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node))
+        onOpenChange(false)
+    }
+    document.addEventListener("keydown", onKey)
+    document.addEventListener("pointerdown", onDown)
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.removeEventListener("pointerdown", onDown)
+    }
+  }, [open, onOpenChange])
+
+  return (
+    <nav
+      ref={rootRef}
+      data-slot="morph-surface"
+      data-placement={placement}
+      data-open={open || undefined}
+      aria-label={navLabel}
+      className={cn(
+        "relative",
+        placement === "left" || placement === "right" ? "h-full" : "w-full",
+      )}
+    >
+      <div
+        ref={morphRef}
+        data-slot="morph-box"
+        className={cn("relative overflow-hidden", ANCHOR[placement], className)}
+      >
+        <div ref={restRef} data-slot="morph-rest" aria-hidden={open}>
+          {collapsed}
+        </div>
+        <div
+          ref={panelRef}
+          data-slot="morph-panel"
+          aria-hidden={!open}
+          className={cn(
+            "absolute inset-0 opacity-0 transition-opacity duration-150",
+            !open && "pointer-events-none",
+          )}
+        >
+          {panel}
+        </div>
+      </div>
+    </nav>
+  )
+}

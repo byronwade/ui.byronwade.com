@@ -70,14 +70,16 @@ Common rules applied to all five:
 ### Per-component specifics
 
 **canvas-text** (`registry/ui/canvas-text.tsx`)
+
 - Keep the canvas masking technique verbatim (`source-in`/`source-atop`), DPR scaling,
   ResizeObserver font sync, MutationObserver dark-mode re-resolve, `var(--token)` resolution.
-- Internal `#000`/`#fff` fills are the *mask mechanism*, NOT styling — leave them.
+- Internal `#000`/`#fff` fills are the _mask mechanism_, NOT styling — leave them.
 - Default `colors` → `["var(--chart-1)" … "var(--chart-5)"]`. Default
   `backgroundClassName` → `bg-background`. Initial `bgColor` transient → harmless neutral.
 - Props/API unchanged (drop-in vs Aceternity docs).
 
 **apple-cards-carousel** (`registry/ui/apple-cards-carousel.tsx`)
+
 - `@tabler/icons-react` → `lucide-react` (`ArrowLeft`, `ArrowRight`, `X`).
 - Drop `next/image`; type `BlurImage` as `React.ImgHTMLAttributes<HTMLImageElement>`
   and drop the leaking `fill`/`blurDataURL` props.
@@ -94,6 +96,7 @@ Common rules applied to all five:
 - Add `aria-label` to prev/next buttons.
 
 **floating-dock** (`registry/ui/floating-dock.tsx`)
+
 - `IconLayoutNavbarCollapse` → lucide `ChevronUp` (or `LayoutPanelTop`); tokenize all
   `bg-gray-*` / `bg-neutral-*` / `text-neutral-*` → `bg-muted`/`bg-accent`/
   `text-muted-foreground`, tooltip → `bg-popover text-popover-foreground border-border`.
@@ -101,6 +104,7 @@ Common rules applied to all five:
 - Coexists with `morph-dock` as a separate primitive.
 
 **world-map** (`registry/ui/world-map.tsx`)
+
 - `useTheme()` retained for dotted-map fg/bg; replace literal dot colors with
   token-derived values read at runtime (or keep the documented theme branch but source
   from CSS vars). Container `dark:bg-black bg-white` → `bg-background`.
@@ -110,6 +114,7 @@ Common rules applied to all five:
   `components/ui/world-map.tsx`.
 
 **pixelated-canvas** (`registry/ui/pixelated-canvas.tsx`)
+
 - Default `backgroundColor`/`tintColor` hex → token-resolved values; the per-pixel RGB
   fills are sampled image data (not styling) and stay numeric.
 - Keep all distortion modes/objectFit/shape branches; `role="img"` + `aria-label` kept.
@@ -117,6 +122,7 @@ Common rules applied to all five:
 ## Per-component deliverables (AGENTS.md checklist ×5)
 
 For each component:
+
 1. Source in `registry/ui/<slug>.tsx` (+ `registry/lib/use-outside-click.ts` for carousel).
 2. `registry.json` item: `type: registry:ui`, `files`, `dependencies`, `registryDependencies`
    (`@byronwade/utils`; `@byronwade/foundation` where tokens/chart ramp used).

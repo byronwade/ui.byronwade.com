@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Boxes,
@@ -9,9 +9,9 @@ import {
   Search,
   SunMedium,
   Terminal,
-} from "lucide-react";
+} from "lucide-react"
 
-import { MorphDock } from "@/components/ui/morph-dock";
+import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
  * A full app bar built from several MorphDock pills inline — exactly how the docs
@@ -27,7 +27,15 @@ export default function Example() {
         <MorphDock
           navLabel="Launcher"
           expandable={false}
-          items={[{ id: "menu", label: "Menu", icon: LayoutGrid, core: true, onSelect: () => {} }]}
+          items={[
+            {
+              id: "menu",
+              label: "Menu",
+              icon: LayoutGrid,
+              core: true,
+              onSelect: () => {},
+            },
+          ]}
         />
 
         {/* Breadcrumb — where you are */}
@@ -45,10 +53,35 @@ export default function Example() {
           navLabel="Primary"
           expandable={false}
           items={[
-            { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
-            { id: "components", label: "Components", icon: Boxes, href: "#", core: true },
-            { id: "layouts", label: "Layouts", icon: PanelsTopLeft, href: "#", core: true },
-            { id: "templates", label: "Templates", icon: LayoutTemplate, href: "#", core: true },
+            {
+              id: "home",
+              label: "Home",
+              icon: Home,
+              href: "#",
+              active: true,
+              core: true,
+            },
+            {
+              id: "components",
+              label: "Components",
+              icon: Boxes,
+              href: "#",
+              core: true,
+            },
+            {
+              id: "layouts",
+              label: "Layouts",
+              icon: PanelsTopLeft,
+              href: "#",
+              core: true,
+            },
+            {
+              id: "templates",
+              label: "Templates",
+              icon: LayoutTemplate,
+              href: "#",
+              core: true,
+            },
           ]}
         />
 
@@ -58,13 +91,25 @@ export default function Example() {
             navLabel="Tools"
             expandable={false}
             items={[
-              { id: "search", label: "Search", icon: Search, core: true, onSelect: () => {} },
-              { id: "theme", label: "Theme", icon: SunMedium, core: true, onSelect: () => {} },
+              {
+                id: "search",
+                label: "Search",
+                icon: Search,
+                core: true,
+                onSelect: () => {},
+              },
+              {
+                id: "theme",
+                label: "Theme",
+                icon: SunMedium,
+                core: true,
+                onSelect: () => {},
+              },
             ]}
             action={{ label: "Install", icon: Terminal }}
           />
         </div>
       </div>
     </div>
-  );
+  )
 }

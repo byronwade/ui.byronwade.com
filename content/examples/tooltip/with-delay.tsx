@@ -17,9 +17,7 @@ export default function Example() {
           <TooltipTrigger render={<Button variant="outline" />}>
             Instant
           </TooltipTrigger>
-          <TooltipContent>
-            Appears immediately (delay: 0ms)
-          </TooltipContent>
+          <TooltipContent>Appears immediately (delay: 0ms)</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

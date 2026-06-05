@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Popover,
@@ -7,7 +7,7 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
 export default function Example() {
   return (
@@ -30,5 +30,5 @@ export default function Example() {
         </PopoverContent>
       </Popover>
     </div>
-  );
+  )
 }

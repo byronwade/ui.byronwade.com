@@ -1,7 +1,7 @@
-import { SplitWithRail } from "@/components/split-with-rail";
-import { EventTimeline, type TimelineEvent } from "@/components/event-timeline";
-import { Badge } from "@/components/ui/badge";
-import { StatusDot } from "@/components/ui/status-dot";
+import { SplitWithRail } from "@/components/split-with-rail"
+import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
+import { Badge } from "@/components/ui/badge"
+import { StatusDot } from "@/components/ui/status-dot"
 
 const events: TimelineEvent[] = [
   {
@@ -34,7 +34,7 @@ const events: TimelineEvent[] = [
     timestamp: "2026-05-31T14:19:55Z",
     tone: "neutral",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -43,15 +43,21 @@ export default function Example() {
         summary={
           <div className="space-y-5 rounded-2xl border border-border bg-card p-6">
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Deployment</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                Deployment
+              </p>
               <h2 className="mt-1 text-lg font-semibold">v2.14.0</h2>
-              <p className="text-sm text-muted-foreground">Triggered by push to main</p>
+              <p className="text-sm text-muted-foreground">
+                Triggered by push to main
+              </p>
             </div>
 
             <div className="flex items-center gap-2">
               <StatusDot tone="success" size="md" pulse />
               <span className="text-sm font-medium text-success">Live</span>
-              <Badge variant="success" className="ml-auto">Healthy</Badge>
+              <Badge variant="success" className="ml-auto">
+                Healthy
+              </Badge>
             </div>
 
             <div className="divide-y divide-border rounded-xl border border-border">
@@ -62,7 +68,10 @@ export default function Example() {
                 { label: "Duration", value: "2m 7s" },
                 { label: "Environment", value: "Production" },
               ].map((row) => (
-                <div key={row.label} className="flex justify-between px-3 py-2 text-sm">
+                <div
+                  key={row.label}
+                  className="flex justify-between px-3 py-2 text-sm"
+                >
                   <span className="text-muted-foreground">{row.label}</span>
                   <span className="font-medium font-mono">{row.value}</span>
                 </div>
@@ -78,5 +87,5 @@ export default function Example() {
         }
       />
     </div>
-  );
+  )
 }

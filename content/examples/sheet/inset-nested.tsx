@@ -8,10 +8,10 @@ import {
   SheetFooter,
   SheetTitle,
   SheetDescription,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 /**
  * Nested inset drawers on the right edge — view a record, then open a second
@@ -27,7 +27,9 @@ export default function Example() {
         <SheetContent side="right" variant="inset">
           <SheetHeader>
             <SheetTitle>Manage team member</SheetTitle>
-            <SheetDescription>View and manage a user in your team.</SheetDescription>
+            <SheetDescription>
+              View and manage a user in your team.
+            </SheetDescription>
           </SheetHeader>
           <SheetPanel className="grid gap-4">
             <div className="grid gap-1">
@@ -81,5 +83,5 @@ export default function Example() {
         </SheetContent>
       </Sheet>
     </div>
-  );
+  )
 }

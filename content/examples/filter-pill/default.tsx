@@ -1,4 +1,4 @@
-import { FilterPill } from "@/components/ui/filter-pill";
+import { FilterPill } from "@/components/ui/filter-pill"
 
 export default function Example() {
   return (
@@ -9,5 +9,5 @@ export default function Example() {
       <FilterPill>Last 7 days</FilterPill>
       <FilterPill>Last 30 days</FilterPill>
     </div>
-  );
+  )
 }

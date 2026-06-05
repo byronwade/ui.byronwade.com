@@ -15,7 +15,7 @@ const buttonGroupVariants = cva(
       },
     },
     defaultVariants: { orientation: "horizontal" },
-  }
+  },
 )
 
 /**

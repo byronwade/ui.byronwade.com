@@ -1,5 +1,5 @@
-import { PinIcon } from "lucide-react";
-import { Toggle } from "@/components/ui/toggle";
+import { PinIcon } from "lucide-react"
+import { Toggle } from "@/components/ui/toggle"
 
 export default function Example() {
   return (
@@ -11,5 +11,5 @@ export default function Example() {
 
       <Toggle variant="outline">Show details</Toggle>
     </div>
-  );
+  )
 }

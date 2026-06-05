@@ -1,4 +1,4 @@
-import { NativeSelect } from "@/components/ui/native-select";
+import { NativeSelect } from "@/components/ui/native-select"
 
 export default function Example() {
   return (
@@ -16,5 +16,5 @@ export default function Example() {
         <option value="banana">Banana (disabled)</option>
       </NativeSelect>
     </div>
-  );
+  )
 }

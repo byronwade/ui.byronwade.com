@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Dialog,
   DialogTrigger,
@@ -9,21 +9,21 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [open, setOpen] = useState(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setOpen(false);
-    setName("");
-    setEmail("");
+    e.preventDefault()
+    setOpen(false)
+    setName("")
+    setEmail("")
   }
 
   return (
@@ -67,5 +67,5 @@ export default function Example() {
         </DialogContent>
       </Dialog>
     </div>
-  );
+  )
 }

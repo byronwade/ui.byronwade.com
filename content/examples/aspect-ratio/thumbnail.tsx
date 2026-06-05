@@ -1,4 +1,4 @@
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 export default function Example() {
   return (
@@ -10,5 +10,5 @@ export default function Example() {
         </div>
       </AspectRatio>
     </div>
-  );
+  )
 }

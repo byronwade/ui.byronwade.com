@@ -1,10 +1,10 @@
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react"
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
 
 const FAQS = [
   {
@@ -22,7 +22,7 @@ const FAQS = [
     answer:
       "Open Settings → Billing and choose Cancel plan. You keep access until the period ends.",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -47,5 +47,5 @@ export default function Example() {
         </Collapsible>
       ))}
     </div>
-  );
+  )
 }

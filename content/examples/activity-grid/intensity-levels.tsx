@@ -1,12 +1,14 @@
-import { ActivityGrid } from "@/components/ui/activity-grid";
+import { ActivityGrid } from "@/components/ui/activity-grid"
 
 // Explicit data showing all 5 intensity buckets (0 = empty, 1–4 = brand at increasing opacity)
 // The component buckets relative to the max value in the data array.
 // With values [0, 1, 2, 3, 4] the max is 4, so each maps to its own bucket.
-const levelDemo = [0, 1, 2, 3, 4];
+const levelDemo = [0, 1, 2, 3, 4]
 
 // A gradient strip across a full row
-const gradientRow = Array.from({ length: 26 }, (_, i) => Math.round((i / 25) * 12));
+const gradientRow = Array.from({ length: 26 }, (_, i) =>
+  Math.round((i / 25) * 12),
+)
 
 export default function Example() {
   return (
@@ -33,12 +35,16 @@ export default function Example() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <p className="text-xs font-medium">Sparse activity — most cells empty</p>
+        <p className="text-xs font-medium">
+          Sparse activity — most cells empty
+        </p>
         <ActivityGrid
-          data={Array.from({ length: 26 * 7 }, (_, i) => (i % 19 === 0 ? 5 : 0))}
+          data={Array.from({ length: 26 * 7 }, (_, i) =>
+            i % 19 === 0 ? 5 : 0,
+          )}
           columns={26}
         />
       </div>
     </div>
-  );
+  )
 }

@@ -8,7 +8,8 @@ export default function Example() {
         <InfoIcon />
         <AlertTitle>New update available</AlertTitle>
         <AlertDescription>
-          Version 2.4.0 is ready to install. Restart the application to apply changes.
+          Version 2.4.0 is ready to install. Restart the application to apply
+          changes.
         </AlertDescription>
       </Alert>
     </div>

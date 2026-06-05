@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { SegmentedControl } from "@/components/ui/segmented-control";
+import { useState } from "react"
+import { SegmentedControl } from "@/components/ui/segmented-control"
 
 const timeRangeOptions = [
   { label: "1h", value: "1h" },
@@ -10,10 +10,10 @@ const timeRangeOptions = [
   { label: "7d", value: "7d" },
   { label: "30d", value: "30d" },
   { label: "90d", value: "90d" },
-];
+]
 
 export default function Example() {
-  const [range, setRange] = useState("24h");
+  const [range, setRange] = useState("24h")
 
   return (
     <SegmentedControl
@@ -21,5 +21,5 @@ export default function Example() {
       value={range}
       onValueChange={setRange}
     />
-  );
+  )
 }

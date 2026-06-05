@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Popover,
@@ -7,13 +7,13 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
-type Side = "top" | "bottom" | "left" | "right";
-type Align = "start" | "center" | "end";
+type Side = "top" | "bottom" | "left" | "right"
+type Align = "start" | "center" | "end"
 
-const sides: Side[] = ["top", "bottom", "left", "right"];
-const aligns: Align[] = ["start", "center", "end"];
+const sides: Side[] = ["top", "bottom", "left", "right"]
+const aligns: Align[] = ["start", "center", "end"]
 
 export default function Example() {
   return (
@@ -90,5 +90,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

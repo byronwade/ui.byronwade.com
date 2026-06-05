@@ -1,4 +1,4 @@
-import { ShieldAlertIcon } from "lucide-react";
+import { ShieldAlertIcon } from "lucide-react"
 import {
   Card,
   CardHeader,
@@ -6,10 +6,10 @@ import {
   CardDescription,
   CardPanel,
   CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
   return (
@@ -52,5 +52,5 @@ export default function Example() {
         </CardFooter>
       </Card>
     </div>
-  );
+  )
 }

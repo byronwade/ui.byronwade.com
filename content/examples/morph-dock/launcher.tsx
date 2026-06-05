@@ -1,27 +1,48 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { BarChart3, Check, Home, Inbox, LayoutGrid, Settings, X } from "lucide-react";
+import * as React from "react"
+import {
+  BarChart3,
+  Check,
+  Home,
+  Inbox,
+  LayoutGrid,
+  Settings,
+  X,
+} from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { MorphDock } from "@/components/ui/morph-dock";
+import { cn } from "@/lib/utils"
+import { MorphDock } from "@/components/ui/morph-dock"
 
 const items = [
-  { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
+  {
+    id: "home",
+    label: "Home",
+    icon: Home,
+    href: "#",
+    active: true,
+    core: true,
+  },
   { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
   { id: "reports", label: "Reports", icon: BarChart3, href: "#", core: true },
-  { id: "settings", label: "Settings", icon: Settings, href: "#", pinned: true },
-];
+  {
+    id: "settings",
+    label: "Settings",
+    icon: Settings,
+    href: "#",
+    pinned: true,
+  },
+]
 
 const products = [
   { name: "Line", desc: "Calls, texts & voicemail", mark: "L", current: true },
   { name: "Developer", desc: "API, numbers & observability", mark: "D" },
   { name: "Operator", desc: "AI receptionist", mark: "O" },
-];
+]
 
 /** A product switcher blooming from the dock — the SignalRoute launcher design. */
 export default function Example() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="flex min-h-72 items-start justify-center p-8">
       <MorphDock
@@ -59,23 +80,29 @@ export default function Example() {
             >
               <span
                 className={cn(
-                  "grid size-9 shrink-0 place-items-center rounded-lg text-[13px] font-bold",
+                  "grid size-9 shrink-0 place-items-center rounded-lg text-[13px] font-medium",
                   p.current
                     ? "bg-gradient-to-br from-brand to-brand/70 text-brand-foreground"
-                    : "bg-white/10 text-dock-active-foreground",
+                    : "bg-dock-foreground/10 text-dock-active-foreground",
                 )}
               >
                 {p.mark}
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[13px] font-semibold text-dock-active-foreground">{p.name}</span>
-                <span className="block truncate text-[11px] text-dock-foreground">{p.desc}</span>
+                <span className="block text-[13px] font-semibold text-dock-active-foreground">
+                  {p.name}
+                </span>
+                <span className="block truncate text-[11px] text-dock-foreground">
+                  {p.desc}
+                </span>
               </span>
-              {p.current ? <Check className="size-4 shrink-0 text-brand" /> : null}
+              {p.current ? (
+                <Check className="size-4 shrink-0 text-brand" />
+              ) : null}
             </button>
           ))}
         </div>
       </MorphDock>
     </div>
-  );
+  )
 }

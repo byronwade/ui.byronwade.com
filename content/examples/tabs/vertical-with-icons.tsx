@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Bell, CreditCard, Lock, UserCircle } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Bell, CreditCard, Lock, UserCircle } from "lucide-react"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Example() {
   return (
@@ -55,5 +55,5 @@ export default function Example() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

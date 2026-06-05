@@ -13,19 +13,19 @@ export type ArchetypeSlug =
   | "board"
   | "conversation"
   | "canvas"
-  | "studio";
+  | "studio"
 
 export interface ArchetypeMeta {
-  slug: ArchetypeSlug;
-  name: string;
+  slug: ArchetypeSlug
+  name: string
   /** One-line description shown on the gallery card and frame. */
-  tagline: string;
+  tagline: string
   /** The single signature centerpiece this archetype is built around. */
-  centerpiece: string;
+  centerpiece: string
   /** Coarse grouping used by the gallery's category facet + card tag. */
-  category: string;
+  category: string
   /** Registry items composed by this archetype (promotion-ready manifest). */
-  uses: string[];
+  uses: string[]
 }
 
 export const archetypes: ArchetypeMeta[] = [
@@ -36,7 +36,16 @@ export const archetypes: ArchetypeMeta[] = [
       "A dense two-pane operations console — a scannable list rail beside a deep detail pane.",
     centerpiece: "Information density",
     category: "Application",
-    uses: ["ScrollArea", "Tabs", "StatusDot", "Avatar", "Badge", "Separator", "InputGroup", "EventTimeline"],
+    uses: [
+      "ScrollArea",
+      "Tabs",
+      "StatusDot",
+      "Avatar",
+      "Badge",
+      "Separator",
+      "InputGroup",
+      "EventTimeline",
+    ],
   },
   {
     slug: "centered-tool",
@@ -54,7 +63,16 @@ export const archetypes: ArchetypeMeta[] = [
       "A directory led by a dense, filterable table with live search and a view rail.",
     centerpiece: "The table",
     category: "Application",
-    uses: ["Table", "SegmentedControl", "FilterPill", "StatusPill", "Avatar", "InputGroup", "Button", "PageHeader"],
+    uses: [
+      "Table",
+      "SegmentedControl",
+      "FilterPill",
+      "StatusPill",
+      "Avatar",
+      "InputGroup",
+      "Button",
+      "PageHeader",
+    ],
   },
   {
     slug: "split-rail",
@@ -63,7 +81,16 @@ export const archetypes: ArchetypeMeta[] = [
       "Settings and configuration with a sticky nav rail and explain-everything rows.",
     centerpiece: "The rail",
     category: "Settings",
-    uses: ["Section", "SettingRow", "Switch", "Select", "Input", "SplitWithRail", "Button", "PageHeader"],
+    uses: [
+      "Section",
+      "SettingRow",
+      "Switch",
+      "Select",
+      "Input",
+      "SplitWithRail",
+      "Button",
+      "PageHeader",
+    ],
   },
   {
     slug: "gauge",
@@ -72,7 +99,14 @@ export const archetypes: ArchetypeMeta[] = [
       "A health page built around one ring gauge, flanked by metrics, activity, and a timeline.",
     centerpiece: "The ring gauge",
     category: "Dashboard",
-    uses: ["ActivityRing", "StatCard", "ActivityGrid", "EventTimeline", "StatusPill", "PageHeader"],
+    uses: [
+      "ActivityRing",
+      "StatCard",
+      "ActivityGrid",
+      "EventTimeline",
+      "StatusPill",
+      "PageHeader",
+    ],
   },
   {
     slug: "hero-chart",
@@ -90,7 +124,15 @@ export const archetypes: ArchetypeMeta[] = [
       "A horizontally-scrolling Kanban with WIP-limited columns and draggable issue cards.",
     centerpiece: "The columns",
     category: "Application",
-    uses: ["Badge", "GradientAvatar", "StatusDot", "FilterPill", "InputGroup", "Button", "ScrollArea"],
+    uses: [
+      "Badge",
+      "GradientAvatar",
+      "StatusDot",
+      "FilterPill",
+      "InputGroup",
+      "Button",
+      "ScrollArea",
+    ],
   },
   {
     slug: "conversation",
@@ -108,7 +150,14 @@ export const archetypes: ArchetypeMeta[] = [
       "A full-bleed spatial map with floating glass overlays, pins, and a results rail.",
     centerpiece: "The map",
     category: "Application",
-    uses: ["InputGroup", "StatusPill", "StatusDot", "GradientAvatar", "Button", "Separator"],
+    uses: [
+      "InputGroup",
+      "StatusPill",
+      "StatusDot",
+      "GradientAvatar",
+      "Button",
+      "Separator",
+    ],
   },
   {
     slug: "studio",
@@ -117,10 +166,18 @@ export const archetypes: ArchetypeMeta[] = [
       "A now-playing media surface built around one big artwork, waveform, and a live queue.",
     centerpiece: "The artwork",
     category: "Media",
-    uses: ["Button", "Badge", "StatusPill", "GradientAvatar", "ScrollArea", "Separator", "InputGroup"],
+    uses: [
+      "Button",
+      "Badge",
+      "StatusPill",
+      "GradientAvatar",
+      "ScrollArea",
+      "Separator",
+      "InputGroup",
+    ],
   },
-];
+]
 
 export function getArchetype(slug: string): ArchetypeMeta | undefined {
-  return archetypes.find((a) => a.slug === slug);
+  return archetypes.find((a) => a.slug === slug)
 }

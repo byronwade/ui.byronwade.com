@@ -1,4 +1,4 @@
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/components/ui/spinner"
 
 export default function Example() {
   return (
@@ -12,5 +12,5 @@ export default function Example() {
         Loading…
       </span>
     </div>
-  );
+  )
 }

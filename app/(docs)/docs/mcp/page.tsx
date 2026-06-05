@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next"
 
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
 
 export const metadata: Metadata = {
   title: "MCP — byronwade/ui",
   description:
     "The byronwade/ui MCP server gives an AI agent live access to components, tokens, the design rule, and a real-time on-system check.",
-};
+}
 
 /* ---------------------------------------------------------------------------
    MCP docs — a single-page reference for the @byronwade/mcp server.
@@ -14,12 +14,13 @@ export const metadata: Metadata = {
    headings, font-mono labels, CodeBlock for all code.
 --------------------------------------------------------------------------- */
 
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const TOOLS: { name: string; description: string }[] = [
   {
     name: "search_components",
-    description: "Full-text search across all registry components and their metadata.",
+    description:
+      "Full-text search across all registry components and their metadata.",
   },
   {
     name: "get_component_source",
@@ -32,18 +33,20 @@ const TOOLS: { name: string; description: string }[] = [
   },
   {
     name: "get_design_rule",
-    description: "Return the full byronwade-ui.mdc design rule so the agent stays on-system.",
+    description:
+      "Return the full byronwade-ui.mdc design rule so the agent stays on-system.",
   },
   {
     name: "list_design_tokens",
-    description: "List every CSS custom property defined in the foundation token set.",
+    description:
+      "List every CSS custom property defined in the foundation token set.",
   },
   {
     name: "list_house_utilities",
     description:
       "List all house utility classes (bg-grid, glow-brand, text-gradient, mask-fade-x, …).",
   },
-];
+]
 
 const MCP_CONFIG = `{
   "mcpServers": {
@@ -52,7 +55,7 @@ const MCP_CONFIG = `{
       "args": ["-y", "@byronwade/mcp"]
     }
   }
-}`;
+}`
 
 export default function McpPage() {
   return (
@@ -67,11 +70,11 @@ export default function McpPage() {
             MCP — byronwade/ui
           </h1>
           <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            The{" "}
-            <code className="font-mono text-[13px]">@byronwade/mcp</code> server gives an AI agent
-            live access to every component, the full token set, the design rule, and a real-time
-            on-system check — so the agent authors code that is always on-system, without needing a
-            copy of the registry embedded in its context.
+            The <code className="font-mono text-[13px]">@byronwade/mcp</code>{" "}
+            server gives an AI agent live access to every component, the full
+            token set, the design rule, and a real-time on-system check — so the
+            agent authors code that is always on-system, without needing a copy
+            of the registry embedded in its context.
           </p>
         </div>
       </section>
@@ -79,14 +82,17 @@ export default function McpPage() {
       {/* ============================ INSTALL =========================== */}
       <section className={`${BLEED} border-y border-border bg-card`}>
         <div className="py-14">
-          <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-brand">Install</p>
+          <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Install
+          </p>
           <h2 className="mb-6 text-lg font-medium tracking-tight text-foreground">
             Add the server to your MCP host
           </h2>
           <p className="mb-6 max-w-xl text-sm leading-relaxed text-muted-foreground text-pretty">
-            Drop this config into your MCP host (Cursor, Windsurf, Claude Desktop, or any
-            MCP-compatible client). No global install needed —{" "}
-            <code className="font-mono text-[13px]">npx</code> pulls the package on first use.
+            Drop this config into your MCP host (Cursor, Windsurf, Claude
+            Desktop, or any MCP-compatible client). No global install needed —{" "}
+            <code className="font-mono text-[13px]">npx</code> pulls the package
+            on first use.
           </p>
           <CodeBlock lang="json" code={MCP_CONFIG} />
         </div>
@@ -94,13 +100,16 @@ export default function McpPage() {
 
       {/* ============================ TOOLS ============================= */}
       <section className="py-16">
-        <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-brand">Tools</p>
+        <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-brand">
+          Tools
+        </p>
         <h2 className="mb-6 text-lg font-medium tracking-tight text-foreground">
           Six tools exposed to the agent
         </h2>
         <p className="mb-8 max-w-xl text-sm leading-relaxed text-muted-foreground text-pretty">
-          Every tool is read-only. The server never writes to the consumer&apos;s project — it only
-          surfaces information the agent needs to stay on-system.
+          Every tool is read-only. The server never writes to the
+          consumer&apos;s project — it only surfaces information the agent needs
+          to stay on-system.
         </p>
         <ul className="space-y-4">
           {TOOLS.map((tool) => (
@@ -116,5 +125,5 @@ export default function McpPage() {
         </ul>
       </section>
     </article>
-  );
+  )
 }

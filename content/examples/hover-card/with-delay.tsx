@@ -1,12 +1,36 @@
 "use client"
 
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card"
 
 const delays = [
-  { label: "Instant", delay: 0, closeDelay: 0, description: "No delay — opens immediately on hover." },
-  { label: "Short (300ms)", delay: 300, closeDelay: 200, description: "Opens after 300ms — feels snappy." },
-  { label: "Default (600ms)", delay: 600, closeDelay: 300, description: "Default 600ms delay — comfortable for reading." },
-  { label: "Long (1000ms)", delay: 1000, closeDelay: 500, description: "Longer delay — prevents accidental triggers." },
+  {
+    label: "Instant",
+    delay: 0,
+    closeDelay: 0,
+    description: "No delay — opens immediately on hover.",
+  },
+  {
+    label: "Short (300ms)",
+    delay: 300,
+    closeDelay: 200,
+    description: "Opens after 300ms — feels snappy.",
+  },
+  {
+    label: "Default (600ms)",
+    delay: 600,
+    closeDelay: 300,
+    description: "Default 600ms delay — comfortable for reading.",
+  },
+  {
+    label: "Long (1000ms)",
+    delay: 1000,
+    closeDelay: 500,
+    description: "Longer delay — prevents accidental triggers.",
+  },
 ]
 
 export default function Example() {
@@ -26,8 +50,10 @@ export default function Example() {
               <p className="text-xs font-semibold">{label}</p>
               <p className="text-xs text-muted-foreground">{description}</p>
               <p className="text-xs text-muted-foreground">
-                <span className="font-medium text-foreground">open:</span> {delay}ms &middot;{" "}
-                <span className="font-medium text-foreground">close:</span> {closeDelay}ms
+                <span className="font-medium text-foreground">open:</span>{" "}
+                {delay}ms &middot;{" "}
+                <span className="font-medium text-foreground">close:</span>{" "}
+                {closeDelay}ms
               </p>
             </div>
           </HoverCardContent>

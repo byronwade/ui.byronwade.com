@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { Home, Inbox, MessageSquare, Phone, Plus } from "lucide-react";
+import { Home, Inbox, MessageSquare, Phone, Plus } from "lucide-react"
 
-import { MorphDock } from "@/components/ui/morph-dock";
+import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
  * Combined nav + toolbar in one pill. The `tools` zone paints a lighter
@@ -14,15 +14,40 @@ export default function Example() {
       <MorphDock
         navLabel="Workspace"
         items={[
-          { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
-          { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true, badge: 2 },
+          {
+            id: "home",
+            label: "Home",
+            icon: Home,
+            href: "#",
+            active: true,
+            core: true,
+          },
+          {
+            id: "inbox",
+            label: "Inbox",
+            icon: Inbox,
+            href: "#",
+            core: true,
+            badge: 2,
+          },
         ]}
         tools={[
           { id: "call", label: "Call", icon: Phone, onSelect: () => {} },
-          { id: "text", label: "Text", icon: MessageSquare, onSelect: () => {} },
-          { id: "new", label: "New", icon: Plus, primary: true, onSelect: () => {} },
+          {
+            id: "text",
+            label: "Text",
+            icon: MessageSquare,
+            onSelect: () => {},
+          },
+          {
+            id: "new",
+            label: "New",
+            icon: Plus,
+            primary: true,
+            onSelect: () => {},
+          },
         ]}
       />
     </div>
-  );
+  )
 }

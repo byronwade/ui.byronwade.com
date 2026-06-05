@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
 
 export default function Example() {
   return (
@@ -19,5 +19,5 @@ export default function Example() {
         <InputGroupButton>Go</InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea"
 
 export default function Example() {
   return (
@@ -8,11 +8,7 @@ export default function Example() {
         <label htmlFor="notes" className="text-sm font-medium">
           Notes
         </label>
-        <Textarea
-          id="notes"
-          placeholder="Add any relevant notes…"
-          rows={3}
-        />
+        <Textarea id="notes" placeholder="Add any relevant notes…" rows={3} />
         <p className="text-xs text-muted-foreground">
           These notes are only visible to you and your team.
         </p>
@@ -45,12 +41,8 @@ export default function Example() {
           </label>
           <span className="text-xs text-muted-foreground">Optional</span>
         </div>
-        <Textarea
-          id="feedback"
-          placeholder="Share your thoughts…"
-          rows={3}
-        />
+        <Textarea id="feedback" placeholder="Share your thoughts…" rows={3} />
       </div>
     </div>
-  );
+  )
 }

@@ -5,7 +5,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu"
 
 const solutions = [
   {
@@ -24,7 +24,7 @@ const solutions = [
     title: "Security",
     description: "SSO, audit logs, and granular access controls.",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -54,5 +54,5 @@ export default function Example() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  );
+  )
 }

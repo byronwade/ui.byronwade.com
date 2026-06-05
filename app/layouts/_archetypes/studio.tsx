@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
 // Studio archetype — a now-playing media surface built around one big artwork.
 // uses: Button, Badge, StatusPill, GradientAvatar, ScrollArea, Separator, InputGroup
-import * as React from "react";
+import * as React from "react"
 import {
   Heart,
   ListMusic,
@@ -14,48 +14,78 @@ import {
   SkipBack,
   SkipForward,
   Volume2,
-} from "lucide-react";
+} from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { GradientAvatar } from "@/components/ui/gradient-avatar";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import { StatusPill } from "@/components/status-pill";
+import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { GradientAvatar } from "@/components/ui/gradient-avatar"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
+import { StatusPill } from "@/components/status-pill"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
 
 interface Track {
-  id: string;
-  title: string;
-  artist: string;
-  length: string;
-  seed: string;
+  id: string
+  title: string
+  artist: string
+  length: string
+  seed: string
 }
 
 const queue: Track[] = [
-  { id: "t1", title: "Parallax", artist: "Holloway", length: "4:12", seed: "parallax" },
-  { id: "t2", title: "Slow Tide", artist: "Mirena", length: "3:48", seed: "slowtide" },
-  { id: "t3", title: "Northbound", artist: "Holloway", length: "5:02", seed: "northbound" },
-  { id: "t4", title: "Glasshouse", artist: "VELD", length: "3:21", seed: "glasshouse" },
-  { id: "t5", title: "Afterglow", artist: "Mirena", length: "4:40", seed: "afterglow" },
-];
+  {
+    id: "t1",
+    title: "Parallax",
+    artist: "Holloway",
+    length: "4:12",
+    seed: "parallax",
+  },
+  {
+    id: "t2",
+    title: "Slow Tide",
+    artist: "Mirena",
+    length: "3:48",
+    seed: "slowtide",
+  },
+  {
+    id: "t3",
+    title: "Northbound",
+    artist: "Holloway",
+    length: "5:02",
+    seed: "northbound",
+  },
+  {
+    id: "t4",
+    title: "Glasshouse",
+    artist: "VELD",
+    length: "3:21",
+    seed: "glasshouse",
+  },
+  {
+    id: "t5",
+    title: "Afterglow",
+    artist: "Mirena",
+    length: "4:40",
+    seed: "afterglow",
+  },
+]
 
 // Deterministic waveform amplitudes (0–1) so SSR and client agree.
 const wave = Array.from({ length: 56 }, (_, i) => {
-  const v = Math.sin(i * 0.55) * 0.5 + Math.sin(i * 0.21 + 1.3) * 0.35 + 0.55;
-  return Math.min(1, Math.max(0.18, v));
-});
+  const v = Math.sin(i * 0.55) * 0.5 + Math.sin(i * 0.21 + 1.3) * 0.35 + 0.55
+  return Math.min(1, Math.max(0.18, v))
+})
 
-const PROGRESS = 0.42;
+const PROGRESS = 0.42
 
 export function StudioArchetype() {
-  const [playing, setPlaying] = React.useState(true);
-  const now = queue[0];
+  const [playing, setPlaying] = React.useState(true)
+  const now = queue[0]
 
   return (
     <div className="flex h-dvh flex-col bg-background text-foreground">
@@ -91,14 +121,19 @@ export function StudioArchetype() {
             {/* reflection */}
             <div
               className="absolute inset-x-6 top-full h-16 rounded-3xl opacity-30 blur-md"
-              style={{ backgroundImage: "radial-gradient(circle at 50% 0%, var(--brand), transparent 70%)" }}
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 50% 0%, var(--brand), transparent 70%)",
+              }}
             />
           </div>
 
           <div className="w-full max-w-md space-y-4 text-center">
             <div className="space-y-1">
               <div className="flex items-center justify-center gap-2">
-                <h1 className="text-2xl font-semibold tracking-tight">{now.title}</h1>
+                <h1 className="text-2xl font-semibold tracking-tight">
+                  {now.title}
+                </h1>
                 <StatusPill tone="info">Lossless</StatusPill>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -110,7 +145,7 @@ export function StudioArchetype() {
             <div className="space-y-1.5">
               <div className="flex h-14 items-center gap-[2px]">
                 {wave.map((amp, i) => {
-                  const played = i / wave.length < PROGRESS;
+                  const played = i / wave.length < PROGRESS
                   return (
                     <span
                       key={i}
@@ -120,7 +155,7 @@ export function StudioArchetype() {
                       )}
                       style={{ height: `${Math.round(amp * 100)}%` }}
                     />
-                  );
+                  )
                 })}
               </div>
               <div className="flex justify-between font-mono text-[11px] text-muted-foreground">
@@ -144,7 +179,11 @@ export function StudioArchetype() {
                 onClick={() => setPlaying((p) => !p)}
                 className="size-12"
               >
-                {playing ? <Pause className="size-5" /> : <Play className="size-5" />}
+                {playing ? (
+                  <Pause className="size-5" />
+                ) : (
+                  <Play className="size-5" />
+                )}
               </Button>
               <Button variant="ghost" size="icon" aria-label="Next">
                 <SkipForward />
@@ -166,7 +205,7 @@ export function StudioArchetype() {
           <ScrollArea className="min-h-0 flex-1">
             <ul className="p-2">
               {queue.map((t, i) => {
-                const isNow = i === 0;
+                const isNow = i === 0
                 return (
                   <li key={t.id}>
                     <button
@@ -175,7 +214,11 @@ export function StudioArchetype() {
                       className="group flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left transition-colors hover:bg-muted data-[active=true]:bg-muted"
                     >
                       <span className="relative shrink-0">
-                        <GradientAvatar seed={t.seed} size="lg" className="rounded-lg" />
+                        <GradientAvatar
+                          seed={t.seed}
+                          size="lg"
+                          className="rounded-lg"
+                        />
                         {isNow && playing && (
                           <span className="absolute inset-0 grid place-items-center rounded-lg bg-background/55">
                             <Equalizer />
@@ -183,7 +226,12 @@ export function StudioArchetype() {
                         )}
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className={cn("block truncate text-sm", isNow ? "font-semibold text-brand" : "font-medium")}>
+                        <span
+                          className={cn(
+                            "block truncate text-sm",
+                            isNow ? "font-semibold text-brand" : "font-medium",
+                          )}
+                        >
                           {t.title}
                         </span>
                         <span className="block truncate text-xs text-muted-foreground">
@@ -195,7 +243,7 @@ export function StudioArchetype() {
                       </span>
                     </button>
                   </li>
-                );
+                )
               })}
             </ul>
           </ScrollArea>
@@ -208,9 +256,16 @@ export function StudioArchetype() {
           <GradientAvatar seed={now.seed} size="lg" className="rounded-lg" />
           <div className="min-w-0">
             <p className="truncate text-sm font-medium">{now.title}</p>
-            <p className="truncate text-xs text-muted-foreground">{now.artist}</p>
+            <p className="truncate text-xs text-muted-foreground">
+              {now.artist}
+            </p>
           </div>
-          <Button variant="ghost" size="icon-sm" aria-label="Like" className="hidden text-brand sm:inline-flex">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            aria-label="Like"
+            className="hidden text-brand sm:inline-flex"
+          >
             <Heart className="fill-brand" />
           </Button>
         </div>
@@ -239,7 +294,7 @@ export function StudioArchetype() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function Equalizer() {
@@ -249,9 +304,12 @@ function Equalizer() {
         <span
           key={i}
           className="w-0.5 animate-pulse rounded-full bg-brand"
-          style={{ height: `${[10, 14, 8][i]}px`, animationDelay: `${i * 150}ms` }}
+          style={{
+            height: `${[10, 14, 8][i]}px`,
+            animationDelay: `${i * 150}ms`,
+          }}
         />
       ))}
     </span>
-  );
+  )
 }

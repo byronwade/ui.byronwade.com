@@ -1,15 +1,36 @@
 "use client"
 
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+
+const progressIndicatorVariants = cva("h-full transition-all", {
+  variants: {
+    tone: {
+      default: "bg-primary",
+      brand: "bg-brand",
+      success: "bg-success",
+      warning: "bg-warning",
+      destructive: "bg-destructive",
+    },
+  },
+  defaultVariants: {
+    tone: "default",
+  },
+})
+
+export type ProgressTone = NonNullable<
+  VariantProps<typeof progressIndicatorVariants>["tone"]
+>
 
 function Progress({
   className,
   children,
   value,
+  tone,
   ...props
-}: ProgressPrimitive.Root.Props) {
+}: ProgressPrimitive.Root.Props & { tone?: ProgressTone }) {
   return (
     <ProgressPrimitive.Root
       value={value}
@@ -19,7 +40,7 @@ function Progress({
     >
       {children}
       <ProgressTrack>
-        <ProgressIndicator />
+        <ProgressIndicator tone={tone} />
       </ProgressTrack>
     </ProgressPrimitive.Root>
   )
@@ -30,7 +51,7 @@ function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
     <ProgressPrimitive.Track
       className={cn(
         "relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
-        className
+        className,
       )}
       data-slot="progress-track"
       {...props}
@@ -40,12 +61,14 @@ function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
 
 function ProgressIndicator({
   className,
+  tone,
   ...props
-}: ProgressPrimitive.Indicator.Props) {
+}: ProgressPrimitive.Indicator.Props &
+  VariantProps<typeof progressIndicatorVariants>) {
   return (
     <ProgressPrimitive.Indicator
       data-slot="progress-indicator"
-      className={cn("h-full bg-primary transition-all", className)}
+      className={cn(progressIndicatorVariants({ tone }), className)}
       {...props}
     />
   )
@@ -66,7 +89,7 @@ function ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {
     <ProgressPrimitive.Value
       className={cn(
         "ml-auto text-sm text-muted-foreground tabular-nums",
-        className
+        className,
       )}
       data-slot="progress-value"
       {...props}

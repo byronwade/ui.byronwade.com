@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Popover,
   PopoverContent,
@@ -8,34 +8,52 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
 const MEMBERS = [
-  { id: 1, name: "Ada Lovelace", role: "Engineer", initials: "AL", color: "bg-violet-500" },
-  { id: 2, name: "Grace Hopper", role: "Architect", initials: "GH", color: "bg-sky-500" },
-  { id: 3, name: "Alan Turing", role: "Researcher", initials: "AT", color: "bg-amber-500" },
-];
+  {
+    id: 1,
+    name: "Ada Lovelace",
+    role: "Engineer",
+    initials: "AL",
+    color: "bg-chart-1/15 text-chart-1",
+  },
+  {
+    id: 2,
+    name: "Grace Hopper",
+    role: "Architect",
+    initials: "GH",
+    color: "bg-chart-2/15 text-chart-2",
+  },
+  {
+    id: 3,
+    name: "Alan Turing",
+    role: "Researcher",
+    initials: "AT",
+    color: "bg-chart-3/15 text-chart-3",
+  },
+]
 
 function Avatar({ initials, color }: { initials: string; color: string }) {
   return (
     <span
-      className={`inline-flex size-8 items-center justify-center rounded-full text-xs font-semibold text-white ${color}`}
+      className={`inline-flex size-8 items-center justify-center rounded-full text-xs font-semibold ${color}`}
     >
       {initials}
     </span>
-  );
+  )
 }
 
 export default function Example() {
-  const [following, setFollowing] = useState<Set<number>>(new Set());
+  const [following, setFollowing] = useState<Set<number>>(new Set())
 
   function toggle(id: number) {
     setFollowing((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
   }
 
   return (
@@ -50,9 +68,14 @@ export default function Example() {
           <PopoverContent side="bottom" align="center" className="w-64">
             {/* Profile header */}
             <div className="flex items-center gap-3">
-              <Avatar initials={member.initials} color={`${member.color} size-10`} />
+              <Avatar
+                initials={member.initials}
+                color={`${member.color} size-10`}
+              />
               <div>
-                <p className="text-sm font-semibold leading-tight">{member.name}</p>
+                <p className="text-sm font-semibold leading-tight">
+                  {member.name}
+                </p>
                 <p className="text-xs text-muted-foreground">{member.role}</p>
               </div>
             </div>
@@ -86,5 +109,5 @@ export default function Example() {
         </Popover>
       ))}
     </div>
-  );
+  )
 }

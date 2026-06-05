@@ -1,6 +1,10 @@
 "use client"
 
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card"
 
 export default function Example() {
   return (
@@ -21,7 +25,10 @@ export default function Example() {
                 Designer & developer. Crafting digital products since 2015.
               </p>
               <p className="text-xs text-muted-foreground">
-                Joined <span className="font-medium text-foreground">January 2023</span>
+                Joined{" "}
+                <span className="font-medium text-foreground">
+                  January 2023
+                </span>
               </p>
             </div>
           </div>

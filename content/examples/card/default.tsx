@@ -6,7 +6,7 @@ import {
   CardAction,
   CardContent,
   CardFooter,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 
 export default function Example() {
   return (
@@ -23,12 +23,16 @@ export default function Example() {
         </CardHeader>
         <CardContent>
           <p className="text-2xl font-semibold">$4,820.00</p>
-          <p className="text-sm text-muted-foreground mt-1">+12% from last month</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            +12% from last month
+          </p>
         </CardContent>
         <CardFooter>
-          <span className="text-xs text-muted-foreground">Last updated: today</span>
+          <span className="text-xs text-muted-foreground">
+            Last updated: today
+          </span>
         </CardFooter>
       </Card>
     </div>
-  );
+  )
 }

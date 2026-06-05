@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 
 export default function Example() {
   return (
@@ -22,12 +22,14 @@ export default function Example() {
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              A standard card with default sizing. Padding, gap, and font
-              sizes are at their base values.
+              A standard card with default sizing. Padding, gap, and font sizes
+              are at their base values.
             </p>
           </CardContent>
           <CardFooter>
-            <span className="text-xs text-muted-foreground">Updated 2 hours ago</span>
+            <span className="text-xs text-muted-foreground">
+              Updated 2 hours ago
+            </span>
           </CardFooter>
         </Card>
       </div>
@@ -49,10 +51,12 @@ export default function Example() {
             </p>
           </CardContent>
           <CardFooter>
-            <span className="text-xs text-muted-foreground">Updated 2 hours ago</span>
+            <span className="text-xs text-muted-foreground">
+              Updated 2 hours ago
+            </span>
           </CardFooter>
         </Card>
       </div>
     </div>
-  );
+  )
 }

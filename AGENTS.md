@@ -1,7 +1,9 @@
 <!-- BEGIN:nextjs-agent-rules -->
+
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+
 <!-- END:nextjs-agent-rules -->
 
 # byronwade/ui design-system registry
@@ -25,7 +27,7 @@ agent following that rule would produce identical-looking code.** That means:
 - **One accent variable.** The accent (rings, `--chart-1`, `--success`, active states) is derived
   from `--brand`. Anything brand/accent/success-colored must resolve to `--brand`, so a consumer
   overriding `--brand` re-skins the whole system. Never pin those to a literal green. **Two fixed
-  exceptions** stand apart on purpose and do *not* follow `--brand`: the `--chart-2…5` ramp and the
+  exceptions** stand apart on purpose and do _not_ follow `--brand`: the `--chart-2…5` ramp and the
   **agent-activity** pastels (`--activity-thinking/search/read/edit`) — a semantic palette encoding
   what an AI agent is doing, for agent composites. Use via `bg-activity-*`; they carry meaning, so
   don't repurpose them as a general accent.
@@ -58,6 +60,18 @@ agent following that rule would produce identical-looking code.** That means:
 - **Composites** — Layout and pattern components live in `registry/components/` and compose UI primitives.
 - **Shipped AI rule** — `registry/rules/byronwade-ui.mdc` is published as the `design-rules` item (`@byronwade/design-rules`). It is the consumer-facing version of the Design DNA above; keep the two aligned.
 
+## Code conventions
+
+The Design DNA above governs what a component _looks like_; **`docs/CONVENTIONS.md`** governs how the
+code is _organized and written_ — file location, kebab-case naming, named exports at the file bottom,
+consumer-only imports, Prettier (`semi: false`), `data-slot` presence, and minimal/self-documenting
+comments. It is mirrored for editors in `.cursor/rules/byronwade-conventions.mdc` and enforced by
+`npm run check:conventions` (structural) + `npm run check:format` (Prettier). Read it before authoring.
+
+Two agents back this up: **`component-author`** scaffolds a new component fully to-spec (source +
+registry item + example + test + rule line), and **`design-dna-reviewer`** audits a diff against the
+DNA and conventions before merging. Both live in `.claude/agents/`.
+
 ## Registry automation
 
 This repo is organized for **automated shadcn registry publishing**. Source flows one direction:
@@ -68,35 +82,35 @@ registry/ + registry.json → sync → shadcn build → public/r/
 
 ### Maintenance commands
 
-| Command | Purpose |
-|---------|---------|
-| `npm run update:registry` | Full pipeline: gen `all` → sync → build → validate |
-| `npm run sync` | Copy `registry/` → app `components/` + foundation CSS |
-| `npm run registry:build` | Compile `registry.json` → `public/r/*.json` |
-| `npm run check:registry` | Validate manifest integrity (names, deps, files, orphans) |
-| `npm run check:registry:built` | Also verify `public/r/` matches manifest |
-| `npm run check:examples` | Every UI/composite has `content/examples/<slug>/default.tsx` |
-| `npm run check:rule` | Rule (`byronwade-ui.mdc`) names every component + house utility; no ghost `@byronwade/*` install refs across docs; accent-DNA tokens intact |
-| `npm run validate` | All non-test gates (registry + examples + rule sync + test file presence) |
+| Command                        | Purpose                                                                                                                                     |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run update:registry`      | Full pipeline: gen `all` → sync → build → validate                                                                                          |
+| `npm run sync`                 | Copy `registry/` → app `components/` + foundation CSS                                                                                       |
+| `npm run registry:build`       | Compile `registry.json` → `public/r/*.json`                                                                                                 |
+| `npm run check:registry`       | Validate manifest integrity (names, deps, files, orphans)                                                                                   |
+| `npm run check:registry:built` | Also verify `public/r/` matches manifest                                                                                                    |
+| `npm run check:examples`       | Every UI/composite has `content/examples/<slug>/default.tsx`                                                                                |
+| `npm run check:rule`           | Rule (`byronwade-ui.mdc`) names every component + house utility; no ghost `@byronwade/*` install refs across docs; accent-DNA tokens intact |
+| `npm run validate`             | All non-test gates (registry + examples + rule sync + test file presence)                                                                   |
 
 ### What is hand-maintained vs generated
 
-| Path | Maintained by |
-|------|---------------|
-| `registry/ui/`, `registry/components/`, `registry/lib/` | **Hand-maintained** — edit component source here |
-| `registry/rules/byronwade-ui.mdc` | **Hand-maintained** — shipped AI rule (`@byronwade/design-rules`); keep aligned with the Design DNA |
-| `registry.json` | **Hand-maintained** — deps, metadata, foundation tokens, item structure. Exception: the `all` aggregator item is **auto-generated** by `scripts/gen-all-item.mjs` (runs in `prebuild`/`update:registry`) — never edit it by hand |
-| `public/r/` | **Generated** — `shadcn build`, git-ignored, rebuilt on every deploy |
-| `components/`, `lib/`, `app/foundation.generated.css` | **Generated** — `npm run sync`, git-ignored |
-| `content/examples/` | **Hand-maintained** — add `default.tsx` for every new component |
-| `tests/components/` | **Hand-maintained** — required for every `registry:ui`/`registry:component` |
+| Path                                                    | Maintained by                                                                                                                                                                                                                    |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `registry/ui/`, `registry/components/`, `registry/lib/` | **Hand-maintained** — edit component source here                                                                                                                                                                                 |
+| `registry/rules/byronwade-ui.mdc`                       | **Hand-maintained** — shipped AI rule (`@byronwade/design-rules`); keep aligned with the Design DNA                                                                                                                              |
+| `registry.json`                                         | **Hand-maintained** — deps, metadata, foundation tokens, item structure. Exception: the `all` aggregator item is **auto-generated** by `scripts/gen-all-item.mjs` (runs in `prebuild`/`update:registry`) — never edit it by hand |
+| `public/r/`                                             | **Generated** — `shadcn build`, git-ignored, rebuilt on every deploy                                                                                                                                                             |
+| `components/`, `lib/`, `app/foundation.generated.css`   | **Generated** — `npm run sync`, git-ignored                                                                                                                                                                                      |
+| `content/examples/`                                     | **Hand-maintained** — add `default.tsx` for every new component                                                                                                                                                                  |
+| `tests/components/`                                     | **Hand-maintained** — required for every `registry:ui`/`registry:component`                                                                                                                                                      |
 
 ### CI gates
 
-| Workflow | Checks |
-|----------|--------|
+| Workflow                         | Checks                                                      |
+| -------------------------------- | ----------------------------------------------------------- |
 | `.github/workflows/registry.yml` | Manifest, examples, rule sync, `shadcn build`, built output |
-| `.github/workflows/test.yml` | Test file presence, full suite, coverage thresholds |
+| `.github/workflows/test.yml`     | Test file presence, full suite, coverage thresholds         |
 
 ### Adding a new component (checklist)
 
@@ -112,6 +126,7 @@ registry/ + registry.json → sync → shadcn build → public/r/
 ## Testing is mandatory and enforced
 
 Every `registry:ui` and `registry:component` item must have a test file at `tests/components/<slug>.test.tsx`. Tests must cover:
+
 - Default render (component mounts without crashing)
 - Every variant, size, and visual state exposed by props
 - All interactive behaviors (clicks, keyboard, callbacks)
@@ -121,11 +136,11 @@ Every `registry:ui` and `registry:component` item must have a test file at `test
 
 ### Gates
 
-| Command | What it checks |
-|---------|---------------|
-| `npm run check:tests` | Every `registry:ui`/`registry:component` has a `tests/components/<slug>.test.tsx` |
-| `npm run test:ci` | `check:tests` + full suite + coverage thresholds (statements ≥ 99%, branches ≥ 96%, functions ≥ 100%, lines ≥ 99%) |
-| `npm run test:run` | Full suite only (no coverage) — for rapid local iteration |
+| Command               | What it checks                                                                                                                            |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run check:tests` | Every `registry:ui`/`registry:component` has a `tests/components/<slug>.test.tsx`                                                         |
+| `npm run test:ci`     | `check:tests` + full suite + coverage thresholds (statements ≥ 95%, branches ≥ 90%, functions ≥ 99%, lines ≥ 96%; see `vitest.config.ts`) |
+| `npm run test:run`    | Full suite only (no coverage) — for rapid local iteration                                                                                 |
 
 Both gates run automatically in CI on every push and pull request (`.github/workflows/test.yml`). A PR that drops coverage below the ratcheted thresholds or lacks a test file for a new component will fail CI.
 

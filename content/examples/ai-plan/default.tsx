@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import {
   Plan,
   PlanAction,
@@ -10,14 +10,22 @@ import {
   PlanHeader,
   PlanTitle,
   PlanTrigger,
-} from "@/components/ai-elements/plan";
+} from "@/components/ai-elements/plan"
 
 const steps = [
-  { id: "scan", label: "Scan the registry for affected components", done: true },
-  { id: "edit", label: "Update token references to follow --brand", done: true },
+  {
+    id: "scan",
+    label: "Scan the registry for affected components",
+    done: true,
+  },
+  {
+    id: "edit",
+    label: "Update token references to follow --brand",
+    done: true,
+  },
   { id: "test", label: "Re-run the component test suite", done: false },
   { id: "build", label: "Rebuild the registry manifest", done: false },
-];
+]
 
 export default function Example() {
   return (
@@ -49,7 +57,9 @@ export default function Example() {
                 </span>
                 <span
                   className={
-                    step.done ? "text-muted-foreground line-through" : "text-foreground"
+                    step.done
+                      ? "text-muted-foreground line-through"
+                      : "text-foreground"
                   }
                 >
                   {step.label}
@@ -59,12 +69,14 @@ export default function Example() {
           </ol>
         </PlanContent>
         <PlanFooter className="justify-between">
-          <span className="font-mono text-xs text-muted-foreground">2 / 4 done</span>
+          <span className="font-mono text-xs text-muted-foreground">
+            2 / 4 done
+          </span>
           <Button size="sm" variant="outline">
             Approve plan
           </Button>
         </PlanFooter>
       </Plan>
     </div>
-  );
+  )
 }

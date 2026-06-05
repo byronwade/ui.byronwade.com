@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Switch } from "@/components/ui/switch";
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
 
 export default function Example() {
-  const [maintenance, setMaintenance] = useState(false);
+  const [maintenance, setMaintenance] = useState(false)
 
   return (
     <div className="flex flex-col gap-6 p-6 max-w-sm mx-auto">
       <div
         className={`rounded-lg border p-4 transition-colors ${
           maintenance
-            ? "border-amber-300 bg-amber-50 dark:bg-amber-950/20"
+            ? "border-warning/30 bg-warning/10"
             : "border-border bg-card"
         }`}
       >
@@ -29,7 +29,7 @@ export default function Example() {
           />
         </div>
         {maintenance && (
-          <p className="mt-3 text-xs text-amber-700 dark:text-amber-400 font-medium">
+          <p className="mt-3 text-xs text-warning font-medium">
             Site is now in maintenance mode. Visitors will see a downtime page.
           </p>
         )}
@@ -49,5 +49,5 @@ export default function Example() {
         </button>
       </div>
     </div>
-  );
+  )
 }

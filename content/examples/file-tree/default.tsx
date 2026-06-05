@@ -1,4 +1,4 @@
-import { Tree, type TreeViewElement } from "@/components/ui/file-tree";
+import { Tree, type TreeViewElement } from "@/components/ui/file-tree"
 
 const ELEMENTS: TreeViewElement[] = [
   {
@@ -19,12 +19,16 @@ const ELEMENTS: TreeViewElement[] = [
   },
   { id: "7", name: "package.json" },
   { id: "8", name: "tsconfig.json" },
-];
+]
 
 export default function Example() {
   return (
     <div className="h-72 w-full max-w-xs rounded-lg border border-border p-2">
-      <Tree elements={ELEMENTS} initialExpandedItems={["1", "4"]} initialSelectedId="3" />
+      <Tree
+        elements={ELEMENTS}
+        initialExpandedItems={["1", "4"]}
+        initialSelectedId="3"
+      />
     </div>
-  );
+  )
 }

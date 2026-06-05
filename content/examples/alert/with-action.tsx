@@ -1,6 +1,11 @@
-"use client";
+"use client"
 
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "@/components/ui/alert"
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+  AlertAction,
+} from "@/components/ui/alert"
 import { InfoIcon, TriangleAlertIcon, XCircleIcon } from "lucide-react"
 import { useState } from "react"
 
@@ -31,8 +36,8 @@ export default function Example() {
       )}
 
       {!isDismissed("warning") && (
-        <Alert>
-          <TriangleAlertIcon className="text-amber-500" />
+        <Alert variant="warning">
+          <TriangleAlertIcon />
           <AlertTitle>Unsaved changes</AlertTitle>
           <AlertDescription>
             You have uncommitted edits. Save before leaving this page.

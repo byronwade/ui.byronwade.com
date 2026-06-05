@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
-import { Suggestion, Suggestions } from "@/components/ai-elements/suggestion";
+import { Suggestion, Suggestions } from "@/components/ai-elements/suggestion"
 
 const PROMPTS = [
   "Summarize this thread",
@@ -11,10 +11,10 @@ const PROMPTS = [
   "Find related issues",
   "Write unit tests",
   "Refactor for readability",
-];
+]
 
 export default function Example() {
-  const [picked, setPicked] = useState<string | null>(null);
+  const [picked, setPicked] = useState<string | null>(null)
 
   return (
     <div className="flex min-h-0 flex-col items-center justify-center gap-4 bg-background p-8">
@@ -24,11 +24,7 @@ export default function Example() {
         </p>
         <Suggestions>
           {PROMPTS.map((prompt) => (
-            <Suggestion
-              key={prompt}
-              onClick={setPicked}
-              suggestion={prompt}
-            />
+            <Suggestion key={prompt} onClick={setPicked} suggestion={prompt} />
           ))}
         </Suggestions>
       </div>
@@ -36,5 +32,5 @@ export default function Example() {
         {picked ? `selected: ${picked}` : "nothing selected yet"}
       </p>
     </div>
-  );
+  )
 }

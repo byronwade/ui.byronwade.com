@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Philosophy — byronwade/ui",
   description:
     "The whole idea, start to finish — why byronwade/ui is calm, warm, token-driven, and entirely yours.",
-};
+}
 
 /* ---------------------------------------------------------------------------
    Philosophy = the manifesto. Distinct signature: editorial, serif-led prose
@@ -15,9 +15,14 @@ export const metadata: Metadata = {
    demos woven in.
 --------------------------------------------------------------------------- */
 
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
-const TENETS: { n: string; title: string; body: string; demo?: React.ReactNode }[] = [
+const TENETS: {
+  n: string
+  title: string
+  body: string
+  demo?: React.ReactNode
+}[] = [
   {
     n: "01",
     title: "Warm, never stark",
@@ -37,7 +42,13 @@ const TENETS: { n: string; title: string; body: string; demo?: React.ReactNode }
     body: "Every emphatic thing — rings, charts, success, active states — derives from a single brand token. One voltage, used sparingly, reads as confidence; a rainbow reads as noise.",
     demo: (
       <div className="flex items-center gap-2">
-        {["bg-brand", "bg-brand/60", "bg-brand/30", "bg-brand/15", "bg-brand/10"].map((c) => (
+        {[
+          "bg-brand",
+          "bg-brand/60",
+          "bg-brand/30",
+          "bg-brand/15",
+          "bg-brand/10",
+        ].map((c) => (
           <span key={c} className={`h-10 flex-1 rounded-lg edge ${c}`} />
         ))}
       </div>
@@ -54,8 +65,12 @@ const TENETS: { n: string; title: string; body: string; demo?: React.ReactNode }
     body: "No drop shadows. A single inset edge gives a surface just enough presence to sit into its background. Flatness, executed with care, reads as quality.",
     demo: (
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-xl edge bg-card p-3 text-xs text-muted-foreground">edge</div>
-        <div className="rounded-xl bg-card p-3 text-xs text-muted-foreground">none</div>
+        <div className="rounded-xl edge bg-card p-3 text-xs text-muted-foreground">
+          edge
+        </div>
+        <div className="rounded-xl bg-card p-3 text-xs text-muted-foreground">
+          none
+        </div>
       </div>
     ),
   },
@@ -79,22 +94,55 @@ const TENETS: { n: string; title: string; body: string; demo?: React.ReactNode }
     title: "Yours to own",
     body: "Installed via the shadcn registry, the code is copied into your repo — no runtime dependency, no lock-in. And the design rules ship too, so your AI agent stays on-system on every edit.",
   },
-];
+]
 
-const JOURNEY: { step: string; href: string; label: string; blurb: string }[] = [
-  { step: "01", href: "/docs", label: "Introduction", blurb: "What it is and the catalog at a glance." },
-  { step: "02", href: "/docs/installation", label: "Installation", blurb: "Wire the foundation, add components." },
-  { step: "03", href: "/docs/foundation", label: "Foundation", blurb: "The tokens everything is built on." },
-  { step: "04", href: "/docs/theming", label: "Theming", blurb: "Re-skin the whole system from one variable." },
-  { step: "05", href: "/docs/typography", label: "Typography", blurb: "The three families and the scale." },
-  { step: "06", href: "/docs/ai", label: "AI rules", blurb: "Keep your agent building on-system." },
-];
+const JOURNEY: { step: string; href: string; label: string; blurb: string }[] =
+  [
+    {
+      step: "01",
+      href: "/docs",
+      label: "Introduction",
+      blurb: "What it is and the catalog at a glance.",
+    },
+    {
+      step: "02",
+      href: "/docs/installation",
+      label: "Installation",
+      blurb: "Wire the foundation, add components.",
+    },
+    {
+      step: "03",
+      href: "/docs/foundation",
+      label: "Foundation",
+      blurb: "The tokens everything is built on.",
+    },
+    {
+      step: "04",
+      href: "/docs/theming",
+      label: "Theming",
+      blurb: "Re-skin the whole system from one variable.",
+    },
+    {
+      step: "05",
+      href: "/docs/typography",
+      label: "Typography",
+      blurb: "The three families and the scale.",
+    },
+    {
+      step: "06",
+      href: "/docs/ai",
+      label: "AI rules",
+      blurb: "Keep your agent building on-system.",
+    },
+  ]
 
 export default function PhilosophyPage() {
   return (
     <article className="max-w-none">
       {/* ============================ HERO ============================= */}
-      <section className={`relative ${BLEED} overflow-hidden border-b border-border`}>
+      <section
+        className={`relative ${BLEED} overflow-hidden border-b border-border`}
+      >
         <div className="glow-brand pointer-events-none absolute inset-x-0 -top-24 h-56 opacity-50" />
         <div className="relative max-w-3xl py-16 sm:py-24">
           <p className="animate-in fade-in slide-in-from-bottom-3 font-mono text-xs uppercase tracking-[0.2em] text-brand duration-700">
@@ -104,10 +152,11 @@ export default function PhilosophyPage() {
             Calm software, built to last.
           </h1>
           <p className="mt-8 font-serif text-[clamp(1.25rem,2.5vw,1.75rem)] leading-[1.5] text-foreground text-pretty">
-            Most systems drift — every surface reinvents its own buttons, spacing, and color. This
-            one is the opposite: a single, quiet, content-first aesthetic that any project can adopt
-            in minutes and make its own from one variable. These are the convictions it&apos;s built
-            on.
+            Most systems drift — every surface reinvents its own buttons,
+            spacing, and color. This one is the opposite: a single, quiet,
+            content-first aesthetic that any project can adopt in minutes and
+            make its own from one variable. These are the convictions it&apos;s
+            built on.
           </p>
         </div>
       </section>
@@ -119,7 +168,9 @@ export default function PhilosophyPage() {
             <div key={t.n}>
               <div className="flex items-baseline gap-3">
                 <span className="font-mono text-sm text-brand">{t.n}</span>
-                <h2 className="text-xl font-normal tracking-tight text-foreground">{t.title}</h2>
+                <h2 className="text-xl font-normal tracking-tight text-foreground">
+                  {t.title}
+                </h2>
               </div>
               <p className="mt-3 font-serif text-[1.0625rem] leading-relaxed text-muted-foreground text-pretty">
                 {t.body}
@@ -134,15 +185,17 @@ export default function PhilosophyPage() {
       <section className={`${BLEED} border-y border-border bg-card`}>
         <div className="py-20">
           <blockquote className="mx-auto max-w-3xl text-center font-serif text-[clamp(1.75rem,5vw,3rem)] italic leading-snug text-foreground text-balance">
-            “Good design gets out of the way. The system stays quiet so your product can be the
-            loudest thing in the room.”
+            “Good design gets out of the way. The system stays quiet so your
+            product can be the loudest thing in the room.”
           </blockquote>
         </div>
       </section>
 
       {/* ============================ JOURNEY ========================= */}
       <section className="py-16">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Start to finish</p>
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+          Start to finish
+        </p>
         <h2 className="mt-3 max-w-2xl text-3xl font-normal tracking-tight text-foreground text-balance sm:text-4xl">
           The whole path, in order.
         </h2>
@@ -154,7 +207,9 @@ export default function PhilosophyPage() {
               className="group flex items-center gap-4 bg-card px-5 py-4 transition-colors hover:bg-accent/50"
             >
               <span className="font-mono text-sm text-brand">{j.step}</span>
-              <span className="w-32 shrink-0 text-sm font-medium text-foreground">{j.label}</span>
+              <span className="w-32 shrink-0 text-sm font-medium text-foreground">
+                {j.label}
+              </span>
               <span className="min-w-0 flex-1 truncate text-sm text-muted-foreground">
                 {j.blurb}
               </span>
@@ -181,5 +236,5 @@ export default function PhilosophyPage() {
         </Link>
       </div>
     </article>
-  );
+  )
 }

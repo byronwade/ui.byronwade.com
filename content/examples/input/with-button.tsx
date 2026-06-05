@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Search, ArrowRight, Copy, Check } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import * as React from "react"
+import { Search, ArrowRight, Copy, Check } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
-  const [query, setQuery] = React.useState("");
-  const [invite, setInvite] = React.useState("");
-  const [copied, setCopied] = React.useState(false);
-  const shareUrl = "https://example.com/share/abc123";
+  const [query, setQuery] = React.useState("")
+  const [invite, setInvite] = React.useState("")
+  const [copied, setCopied] = React.useState(false)
+  const shareUrl = "https://example.com/share/abc123"
 
   function handleCopy() {
-    void navigator.clipboard.writeText(shareUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    void navigator.clipboard.writeText(shareUrl)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   return (
@@ -71,10 +71,14 @@ export default function Example() {
             onClick={handleCopy}
             aria-label="Copy link"
           >
-            {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+            {copied ? (
+              <Check className="size-4" />
+            ) : (
+              <Copy className="size-4" />
+            )}
           </Button>
         </div>
       </div>
     </div>
-  );
+  )
 }

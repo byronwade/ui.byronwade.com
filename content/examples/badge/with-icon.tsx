@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge"
 import {
   CheckCircle,
   AlertTriangle,
@@ -6,7 +6,7 @@ import {
   Info,
   Star,
   Clock,
-} from "lucide-react";
+} from "lucide-react"
 
 export default function Example() {
   return (
@@ -56,5 +56,5 @@ export default function Example() {
         </Badge>
       </div>
     </div>
-  );
+  )
 }

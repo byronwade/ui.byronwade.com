@@ -1,5 +1,5 @@
-import { SplitWithRail } from "@/components/split-with-rail";
-import { EventTimeline, type TimelineEvent } from "@/components/event-timeline";
+import { SplitWithRail } from "@/components/split-with-rail"
+import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
 
 const steps: TimelineEvent[] = [
   {
@@ -32,7 +32,7 @@ const steps: TimelineEvent[] = [
     timestamp: "Step 5 of 5",
     tone: "neutral",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -46,10 +46,10 @@ export default function Example() {
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Onboarding
               </p>
-              <h2 className="mt-1 text-2xl font-bold">Get started</h2>
+              <h2 className="mt-1 text-2xl font-medium">Get started</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Complete each step to unlock the full product experience. You can come back to any
-                step at any time from your settings page.
+                Complete each step to unlock the full product experience. You
+                can come back to any step at any time from your settings page.
               </p>
             </div>
 
@@ -81,5 +81,5 @@ export default function Example() {
         }
       />
     </div>
-  );
+  )
 }

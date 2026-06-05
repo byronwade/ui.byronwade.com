@@ -21,27 +21,74 @@ Before writing any markup, check whether a component already exists. Reach for t
 
 - **Forms** — `button`, `button-group`, `input`, `textarea`, `label`, `select`, `native-select`,
   `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, `calendar`,
-  `slider`, `number-field`
+  `slider`, `number-field`, `rating`, `color-picker`, `editor`
 - **Overlays** — `dialog`, `sheet`, `popover`, `tooltip`, `hover-card`, `dropdown-menu`,
-  `command`, `navigation-menu`
+  `command`, `navigation-menu`, `glimpse`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `kbd`, `separator`,
-  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `file-tree`
+  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `candlestick-chart` (token-themed SVG OHLC chart — success/destructive candles, optional volume band, grid, crosshair; geometry from the `market` lib), `depth-chart` (token-themed SVG market-depth chart — cumulative success bid depth mirrored against destructive ask depth about a dashed midline; geometry from the `market` lib), `order-book` (DOM ladder — bid/ask rows with proportional depth bars, spread row, split or vertical layout, optional row price select), `heatmap-grid` (performance grid — cell area by weight, tone by change magnitude via success/destructive opacity or `--chart-1…5`), `file-tree` (minimal + panel variants, multi-select), `kanban` (drag-drop board), `gantt` (timeline chart — auto-centers on today; `GanttControls` for timescale/zoom, density + read-only variants, status-tinted bars, `GanttMilestone`)
 - **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
-  `segmented-control`
+  `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `sparkline` (compact line/area trend chart, auto up/down tone), `price-change` (signed price/percent change — runtime success/destructive/muted tone + trend caret, text or tinted chip), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR), `credit-card` (flippable card), `image-crop` (crop a file to PNG)
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
-  (config-driven nav dock that blooms into a panel via the hook)
+  (config-driven nav dock that blooms into a panel via the hook), `morph-surface`
+  (agnostic morph primitive — open-state orchestration with no visual style; navigation styles compose it), `morph-bar`
+  (full-width top navigation bar that blooms a panel down via the morph technique), `morph-sidebar`
+  (left icon rail that morphs wider into a labeled sidebar via the morph technique), `morph-tabs`
+  (bottom tab bar that blooms a sheet up via the morph technique), `morph-menubar`
+  (slim menubar that blooms the active menu's dropdown in place via the morph technique), `morph-rail`
+  (right icon rail that blooms a wide labeled panel to the side via the morph technique)
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
   `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`,
-  `price-range-filter` (histogram + range slider + number inputs)
+  `price-range-filter` (histogram + range slider + number inputs),
+  `command-result` (compact rich result row for a command palette: media + title +
+  description + meta + action, dropped inside a `command` item)
+- **Market / TradingView** — `ticker-tape` (scrolling market ticker marquee on `ticker`),
+  `quote-header` (symbol header — mono price, `price-change`, optional `sparkline`, `metric-stat` stats),
+  `chart-toolbar` (interval + chart-type controls on `segmented-control`/`toggle-group`),
+  `chart-panel` (`chart-toolbar` + `candlestick-chart` / sparkline fallback),
+  `watchlist` (table of quotes with `price-change` + `sparkline`), `market-depth`
+  (`depth-chart` + `order-book`, shared book data), `order-entry` (buy/sell ticket on
+  `tabs` + `money-input`), `position-card` / `positions-table` (open positions with
+  side badges + `price-change` P&L), `portfolio-summary` (`stat-card` + equity
+  `sparkline` + allocation bars), `trade-history` (fills table with `relative-time`),
+  `market-movers` (gainers/losers/active tabs), `screener-table` (`index-filters` + `index-table`),
+  `economic-calendar` (macro events by day), `market-news` (headline feed with sentiment + symbol chips),
+  `price-alert` (alert list with `switch` + `status-dot`), `symbol-search` (`command` palette with `price-change`)
+- **Page layouts** — variant-driven, slot-based page scaffolds: `app-shell` (application
+  shells — `dashboard`, `sidebar`, `stacked`, `three-column`, `master-detail`, `docs`,
+  `editor`, `holy-grail`, `focused`, `command-center`) and `marketing-layout` (marketing /
+  landing pages — `landing`, `split-hero`, `centered`, `bento`, `pricing`, `feature-rows`,
+  `article`, `docs-marketing`, `gallery`, `coming-soon`). Drop real `sidebar`/`header`/
+  `pill`/`toolbar`/`footer` components into the named slots.
+- **Commerce / admin** — ecommerce admin-panel patterns modeled on Shopify: `money-input`
+  (currency price field on `number-field`), `bulk-action-bar` (selection action bar for tables
+  / resource lists), `order-summary` (line items + cost breakdown), `product-card` (products-index
+  tile), `variant-picker` (product option selector), `inventory-bar` (stock-level bar on
+  `progress`), `customer-card` (customer summary with `metric-stat` stats), `fulfillment-tracker`
+  (payment + fulfillment status with a step rail on `verification-progress`),
+  `index-table` (sortable, row-selectable data table with an integrated `bulk-action-bar`,
+  sticky header, loading/empty states, pagination), `resource-list` / `resource-item`
+  (list-view rows: media + title + metadata + badges + hover actions + bulk select),
+  `index-filters` (saved-view tabs + search + sort + removable applied-filter pills),
+  `tag-input` (chip tags with autocomplete), `drop-zone` (drag-and-drop file/media upload),
+  `banner` (prominent inline status message with tone, actions, and dismiss)
 - **Design mocks** — device + browser frames for screenshots/video: `safari`, `iphone`,
   `android` (drop a screenshot or `videoSrc` in to show a product in context)
 - **Marketing / motion** — `world-map` (dotted map with animated connection arcs),
   `floating-dock` (magnify-on-hover dock), `kinetic-text` (per-letter hover typography),
   `backlight` (saturated RGB glow behind a child), `apple-cards-carousel` (cards that
-  expand into a modal), `canvas-text` (animated lines clipped to text),
-  `pixelated-canvas` (image as an interactive dot grid)
+  expand into a modal), `pixelated-canvas` (image as an interactive dot grid),
+  `video-player` (YouTube-grade media-chrome player: composable parts + settings/quality/captions
+  menus, scrub previews, chapters, heatmap, ambient, end-screen, and a `MediaPlayer` preset)
+- **Music / media** — Spotify-style music UI: `equalizer-bars` (animated now-playing bars),
+  `album-cover` (square artwork with hover play FAB + equalizer overlay),
+  `audio-waveform` (bar waveform scrubber with click/keyboard seek),
+  `track-list` / `track-row` (numbered song rows: index → play glyph → equalizer),
+  `now-playing-bar` (sticky transport bar composed from album-cover + slider),
+  `audio-player` (media-chrome `<audio>` player, sibling of video-player),
+  `lyrics` (synced scrolling lyric lines), `playlist-card` (cover + title + description tile),
+  `artist-header` (artist hero: artwork + verified badge + monthly-listeners stat + play/follow)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),
@@ -146,6 +193,11 @@ tracking + the typeface**, not through heavy weight or color. Base styles alread
 `bg-grid`, `bg-grid-lines`, `glow-brand`, `text-gradient`, `text-gradient-brand`, `mask-fade-x`,
 `full-bleed`, `edge`, `scrollbar-thin`. Prefer these over
 re-implementing gradients, grids, or shadows by hand.
+
+A few utilities hold a deliberate **fixed-color exception** that tokens can't express — the raw value
+lives here in `foundation`, audited in one place, never inline in a component: `scrim-top` (top-down
+dark scrim for image legibility), `color-picker-hue` (the hue rainbow), `color-picker-alpha-fade`
+(the alpha transparency fade). Use the utility; don't re-roll the gradient in markup.
 
 ### Depth via the inset `edge` hairline — not shadows or hard borders
 

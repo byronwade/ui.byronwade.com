@@ -1,15 +1,21 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, Blocks, Palette, SlidersHorizontal, Accessibility } from "lucide-react";
+import type { Metadata } from "next"
+import Link from "next/link"
+import {
+  ArrowRight,
+  Blocks,
+  Palette,
+  SlidersHorizontal,
+  Accessibility,
+} from "lucide-react"
 
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
-import { REGISTRY_URL } from "@/content/guides";
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
   title: "AI rules — byronwade/ui",
   description:
     "Install one design-system rule so your AI agent keeps building with byronwade/ui components and tokens.",
-};
+}
 
 /* ---------------------------------------------------------------------------
    AI rules = a file you hand your agent. Distinct signature: the hero is the
@@ -17,7 +23,7 @@ export const metadata: Metadata = {
    design-rules is a real registry item.
 --------------------------------------------------------------------------- */
 
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const RULE_LINES = [
   "---",
@@ -34,22 +40,42 @@ const RULE_LINES = [
   "- Re-skin through --brand alone — rings, charts,",
   "  and success states follow automatically.",
   "- Depth is the `edge` hairline. No drop shadows.",
-];
+]
 
 const ENFORCES = [
-  { icon: Blocks, title: "Compose, don't reinvent", body: "Existing component before a bespoke div." },
-  { icon: Palette, title: "Tokens, not hex", body: "Semantic tokens only — never raw colors." },
-  { icon: SlidersHorizontal, title: "Re-skin via --brand", body: "One variable drives the accent." },
-  { icon: Accessibility, title: "A11y + dark free", body: "Labels, focus, keyboard; dark from tokens." },
-];
+  {
+    icon: Blocks,
+    title: "Compose, don't reinvent",
+    body: "Existing component before a bespoke div.",
+  },
+  {
+    icon: Palette,
+    title: "Tokens, not hex",
+    body: "Semantic tokens only — never raw colors.",
+  },
+  {
+    icon: SlidersHorizontal,
+    title: "Re-skin via --brand",
+    body: "One variable drives the accent.",
+  },
+  {
+    icon: Accessibility,
+    title: "A11y + dark free",
+    body: "Labels, focus, keyboard; dark from tokens.",
+  },
+]
 
 const TOOLS: { name: string; path: string; note?: string }[] = [
-  { name: "Cursor", path: ".cursor/rules/byronwade-ui.mdc", note: "installed by the command" },
+  {
+    name: "Cursor",
+    path: ".cursor/rules/byronwade-ui.mdc",
+    note: "installed by the command",
+  },
   { name: "Claude Code", path: "CLAUDE.md" },
   { name: "GitHub Copilot", path: ".github/copilot-instructions.md" },
   { name: "Codex / AGENTS", path: "AGENTS.md" },
   { name: "Windsurf", path: ".windsurfrules" },
-];
+]
 
 export default function AiPage() {
   return (
@@ -64,11 +90,14 @@ export default function AiPage() {
             Teach your agent the system once.
           </h1>
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            One installable rule keeps Cursor, Claude, Copilot, Windsurf and Codex building on-system
-            — no re-explaining on every edit.
+            One installable rule keeps Cursor, Claude, Copilot, Windsurf and
+            Codex building on-system — no re-explaining on every edit.
           </p>
           <div className="mt-6">
-            <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/design-rules`} />
+            <CodeBlock
+              lang="bash"
+              code={`npx shadcn@latest add @byronwade/design-rules`}
+            />
           </div>
         </div>
 
@@ -122,7 +151,9 @@ export default function AiPage() {
       {/* ============================ EVERY TOOL ======================== */}
       <section className="py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Every tool, one rule</p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Every tool, one rule
+          </p>
           <p className="font-mono text-[11px] text-muted-foreground">
             raw: {REGISTRY_URL}/r/design-rules.json
           </p>
@@ -133,10 +164,18 @@ export default function AiPage() {
               key={t.name}
               className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 bg-card px-5 py-4"
             >
-              <span className="text-sm font-medium text-foreground">{t.name}</span>
+              <span className="text-sm font-medium text-foreground">
+                {t.name}
+              </span>
               <div className="flex items-center gap-3">
-                {t.note ? <span className="text-xs text-muted-foreground">{t.note}</span> : null}
-                <code className="font-mono text-[12px] text-brand">{t.path}</code>
+                {t.note ? (
+                  <span className="text-xs text-muted-foreground">
+                    {t.note}
+                  </span>
+                ) : null}
+                <code className="font-mono text-[12px] text-brand">
+                  {t.path}
+                </code>
               </div>
             </div>
           ))}
@@ -160,5 +199,5 @@ export default function AiPage() {
         </Link>
       </div>
     </article>
-  );
+  )
 }

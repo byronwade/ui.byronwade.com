@@ -8,7 +8,11 @@ serves the registry it was published with (no network/repo needed).
 Add to your agent's MCP config:
 
 ```json
-{ "mcpServers": { "byronwade": { "command": "npx", "args": ["-y", "@byronwade/mcp"] } } }
+{
+  "mcpServers": {
+    "byronwade": { "command": "npx", "args": ["-y", "@byronwade/mcp"] }
+  }
+}
 ```
 
 ## Tools

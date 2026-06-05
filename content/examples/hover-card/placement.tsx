@@ -1,6 +1,10 @@
 "use client"
 
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card"
 
 type Side = "top" | "bottom" | "left" | "right"
 

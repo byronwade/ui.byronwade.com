@@ -1,19 +1,19 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { SegmentedControl } from "@/components/ui/segmented-control";
-import { cn } from "@/lib/utils";
+import { useState } from "react"
+import { SegmentedControl } from "@/components/ui/segmented-control"
+import { cn } from "@/lib/utils"
 
 const options = [
   { label: "List", value: "list" },
   { label: "Grid", value: "grid" },
   { label: "Board", value: "board" },
-];
+]
 
 export default function Example() {
-  const [sm, setSm] = useState("list");
-  const [md, setMd] = useState("grid");
-  const [lg, setLg] = useState("board");
+  const [sm, setSm] = useState("list")
+  const [md, setMd] = useState("grid")
+  const [lg, setLg] = useState("board")
 
   return (
     <div className="flex flex-col items-center gap-6">
@@ -31,11 +31,7 @@ export default function Example() {
       {/* Default (medium) */}
       <div className="flex flex-col items-center gap-1.5">
         <span className="text-xs text-muted-foreground">Default</span>
-        <SegmentedControl
-          options={options}
-          value={md}
-          onValueChange={setMd}
-        />
+        <SegmentedControl options={options} value={md} onValueChange={setMd} />
       </div>
 
       {/* Large */}
@@ -49,5 +45,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

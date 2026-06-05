@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   CalendarIcon,
@@ -6,7 +6,7 @@ import {
   SettingsIcon,
   SmileIcon,
   UserIcon,
-} from "lucide-react";
+} from "lucide-react"
 import {
   Command,
   CommandEmpty,
@@ -15,7 +15,7 @@ import {
   CommandItem,
   CommandList,
   CommandShortcut,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 
 export default function Example() {
   return (
@@ -53,5 +53,5 @@ export default function Example() {
         </CommandList>
       </Command>
     </div>
-  );
+  )
 }

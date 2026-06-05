@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
-import { categories, byCategory, components } from "@/content/components";
-import { archetypes } from "@/app/layouts/_archetypes";
-import { Button } from "@/components/ui/button";
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
+import { categories, byCategory, components } from "@/content/components"
+import { archetypes } from "@/app/layouts/_archetypes"
+import { Button } from "@/components/ui/button"
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
 
 export const metadata: Metadata = {
   title: "Introduction — byronwade/ui",
   description:
     "What byronwade/ui is, why it exists, and every token-driven component in the registry — primitives, composites, and layout patterns.",
-};
+}
 
 /* ---------------------------------------------------------------------------
    Introduction = the cover + the index. Distinct signature: an asymmetric
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
    catalog rendered as an editorial index (not card grids). #catalog preserved.
 --------------------------------------------------------------------------- */
 
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const PRINCIPLES = [
   "One warm accent; the rest is calm ink and warm gray.",
   "Depth from a single hairline edge — no shadows, no borders.",
   "Every page earns one signature — never a repeated card grid.",
   "Pure tokens — override --brand and the whole system re-skins.",
-];
+]
 
 export default function ComponentsIndexPage() {
   return (
@@ -34,13 +34,16 @@ export default function ComponentsIndexPage() {
       {/* ============================ MASTHEAD ========================= */}
       <section className="grid gap-8 py-12 lg:grid-cols-[1fr_auto] lg:items-end lg:py-16">
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Introduction</p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Introduction
+          </p>
           <h1 className="mt-4 text-[clamp(2.5rem,7vw,5rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
-            A master design system, <span className="text-muted-foreground">entirely yours.</span>
+            A master design system,{" "}
+            <span className="text-muted-foreground">entirely yours.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            <span className="text-foreground">byronwade/ui</span> is a calm, content-first library
-            published as a namespaced{" "}
+            <span className="text-foreground">byronwade/ui</span> is a calm,
+            content-first library published as a namespaced{" "}
             <a
               href="https://ui.shadcn.com"
               target="_blank"
@@ -49,8 +52,8 @@ export default function ComponentsIndexPage() {
             >
               shadcn
             </a>{" "}
-            registry. Token-driven primitives, composites, and full-page layouts — install with the
-            shadcn CLI and you own the copied code.
+            registry. Token-driven primitives, composites, and full-page layouts
+            — install with the shadcn CLI and you own the copied code.
           </p>
         </div>
 
@@ -91,7 +94,9 @@ export default function ComponentsIndexPage() {
         <ol className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
           {PRINCIPLES.map((p, i) => (
             <li key={p} className="flex gap-3 text-[15px] leading-relaxed">
-              <span className="font-mono text-sm text-brand">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-mono text-sm text-brand">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <span className="text-muted-foreground text-pretty">{p}</span>
             </li>
           ))}
@@ -116,8 +121,8 @@ export default function ComponentsIndexPage() {
 
         <div>
           {categories.map((cat) => {
-            const items = byCategory(cat);
-            if (items.length === 0) return null;
+            const items = byCategory(cat)
+            if (items.length === 0) return null
             return (
               <div
                 key={cat}
@@ -144,7 +149,7 @@ export default function ComponentsIndexPage() {
                   ))}
                 </ul>
               </div>
-            );
+            )
           })}
         </div>
       </section>
@@ -166,5 +171,5 @@ export default function ComponentsIndexPage() {
         </Link>
       </div>
     </article>
-  );
+  )
 }

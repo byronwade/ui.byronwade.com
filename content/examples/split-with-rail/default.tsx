@@ -1,4 +1,4 @@
-import { SplitWithRail } from "@/components/split-with-rail";
+import { SplitWithRail } from "@/components/split-with-rail"
 
 export default function Example() {
   return (
@@ -7,12 +7,14 @@ export default function Example() {
         summary={
           <div className="space-y-4 rounded-2xl border border-border bg-card p-6">
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Project</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                Project
+              </p>
               <h2 className="mt-1 text-xl font-semibold">my-dashboard</h2>
             </div>
             <p className="text-sm text-muted-foreground">
-              A summary column is ideal for identity, stats, or a profile snapshot. The right column
-              holds a timeline, log, or event rail.
+              A summary column is ideal for identity, stats, or a profile
+              snapshot. The right column holds a timeline, log, or event rail.
             </p>
             <div className="grid grid-cols-2 gap-3 pt-2">
               <div className="rounded-xl border border-border p-3">
@@ -30,18 +32,21 @@ export default function Example() {
           <div className="rounded-2xl border border-border bg-card p-6">
             <p className="mb-3 text-sm font-semibold">Recent activity</p>
             <ol className="space-y-3">
-              {["Deployment triggered", "Build completed", "Tests passed", "Config updated"].map(
-                (item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm">
-                    <span className="size-2 rounded-full bg-muted-foreground/40 shrink-0" />
-                    <span className="flex-1 text-muted-foreground">{item}</span>
-                  </li>
-                )
-              )}
+              {[
+                "Deployment triggered",
+                "Build completed",
+                "Tests passed",
+                "Config updated",
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-sm">
+                  <span className="size-2 rounded-full bg-muted-foreground/40 shrink-0" />
+                  <span className="flex-1 text-muted-foreground">{item}</span>
+                </li>
+              ))}
             </ol>
           </div>
         }
       />
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Command,
   CommandDialog,
@@ -11,11 +11,11 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/command"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <>
@@ -43,5 +43,5 @@ export default function Example() {
         </Command>
       </CommandDialog>
     </>
-  );
+  )
 }

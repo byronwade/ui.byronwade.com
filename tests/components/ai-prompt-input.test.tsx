@@ -1716,3 +1716,661 @@ describe("PromptInputSpeechButton — error handler", () => {
     delete window.SpeechRecognition;
   });
 });
+
+// ---------------------------------------------------------------------------
+// 18. Branch coverage — attachment label/alt fallbacks (empty filename)
+// ---------------------------------------------------------------------------
+
+describe("PromptInputAttachment — empty-filename fallbacks", () => {
+  // Render an attachment chip with caller-controlled `data`, so we can drive the
+  // `filename || …` / `isImage ? "Image" : "Attachment"` fallbacks directly.
+  function ChipHarness({
+    data,
+  }: {
+    data: { id: string; type: "file"; url?: string; mediaType?: string; filename?: string };
+  }) {
+    return (
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputBody>
+          {/* @ts-expect-error — partial FileUIPart is intentional for fallbacks */}
+          <PromptInputAttachment data={data} />
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+  }
+
+  it("non-image attachment with no filename shows the 'Attachment' label", () => {
+    render(
+      <ChipHarness
+        data={{ id: "1", type: "file", mediaType: "application/pdf", url: "blob:x" }}
+      />
+    );
+    // filename "" → attachmentLabel falls back; isImage false → "Attachment"
+    expect(screen.getByText("Attachment")).toBeInTheDocument();
+  });
+
+  it("image attachment with no filename shows the 'Image' label + alt='attachment'", () => {
+    const { container } = render(
+      <ChipHarness
+        data={{ id: "2", type: "file", mediaType: "image/png", url: "blob:y" }}
+      />
+    );
+    // isImage true (mediaType image/* AND url present), filename "" → "Image"
+    expect(screen.getByText("Image")).toBeInTheDocument();
+    // img alt falls back to "attachment" (L317 false side)
+    expect(container.querySelector("img")?.getAttribute("alt")).toBe("attachment");
+  });
+
+  it("image/* mediaType but NO url is treated as a file (paperclip), not image", () => {
+    const { container } = render(
+      <ChipHarness data={{ id: "3", type: "file", mediaType: "image/png" }} />
+    );
+    // data.url falsy → mediaType resolves to "file" → paperclip, no <img>
+    expect(container.querySelector("img")).toBeNull();
+    expect(screen.getByText("Attachment")).toBeInTheDocument();
+  });
+
+  it("non-image, no-filename hover preview falls back to 'Attachment' (no mediaType line)", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      // No mediaType at all → the `data.mediaType && …` <p> is skipped (L368 false)
+      <ChipHarness data={{ id: "4", type: "file", url: "blob:z" }} />
+    );
+    const chip = container.querySelector(
+      "[data-slot='prompt-input-attachment']"
+    ) as HTMLElement;
+    await user.hover(chip);
+    // The hover card heading uses the same `filename || (isImage ? … : "Attachment")`
+    // fallback (L366). Two "Attachment" texts now (chip + preview heading).
+    await waitFor(() =>
+      expect(screen.getAllByText("Attachment").length).toBeGreaterThanOrEqual(2)
+    );
+  });
+
+  it("image, no-filename hover preview uses alt='attachment preview' + 'Image' heading", async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <ChipHarness
+        data={{ id: "5", type: "file", mediaType: "image/png", url: "blob:w" }}
+      />
+    );
+    const chip = container.querySelector(
+      "[data-slot='prompt-input-attachment']"
+    ) as HTMLElement;
+    await user.hover(chip);
+    await waitFor(() =>
+      expect(
+        document.querySelector("img[alt='attachment preview']")
+      ).toBeInTheDocument()
+    );
+    // heading also resolves to "Image" via the isImage branch (L366 true side)
+    expect(screen.getAllByText("Image").length).toBeGreaterThanOrEqual(1);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 19. Branch coverage — accept exact-match (no trailing /*)
+// ---------------------------------------------------------------------------
+
+describe("PromptInput — accept exact mime match", () => {
+  it("accepts a file whose type exactly equals a non-wildcard accept pattern", async () => {
+    const onError = vi.fn();
+    const user = userEvent.setup({ applyAccept: false });
+    render(
+      <PromptInput accept="image/png" onError={onError} onSubmit={() => {}}>
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const fileInput = screen.getByLabelText("Upload files") as HTMLInputElement;
+    // Exact-match path: pattern "image/png" has no "/*", so f.type === pattern.
+    await user.upload(fileInput, makeFile("ok.png", "image/png"));
+    await waitFor(() => expect(screen.getByText("ok.png")).toBeInTheDocument());
+    expect(onError).not.toHaveBeenCalled();
+  });
+
+  it("rejects a file whose type does not equal a non-wildcard accept pattern", async () => {
+    const onError = vi.fn();
+    const user = userEvent.setup({ applyAccept: false });
+    render(
+      <PromptInput accept="image/png" onError={onError} onSubmit={() => {}}>
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const fileInput = screen.getByLabelText("Upload files") as HTMLInputElement;
+    await user.upload(fileInput, makeFile("nope.jpg", "image/jpeg"));
+    await waitFor(() =>
+      expect(onError).toHaveBeenCalledWith(
+        expect.objectContaining({ code: "accept" })
+      )
+    );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 20. Branch coverage — provider/local remove + clear with missing ids/urls
+// ---------------------------------------------------------------------------
+
+describe("PromptInput — remove/clear edge cases", () => {
+  it("provider remove(unknown-id) is a no-op (found undefined, no revoke)", () => {
+    let api: ReturnType<typeof useProviderAttachments> | null = null;
+    function Probe() {
+      api = useProviderAttachments();
+      return <span>n:{api.files.length}</span>;
+    }
+    render(
+      <PromptInputProvider>
+        <Probe />
+      </PromptInputProvider>
+    );
+    React.act(() => {
+      api!.add([makeFile("a.png", "image/png")]);
+    });
+    expect(screen.getByText("n:1")).toBeInTheDocument();
+    // found?.url short-circuits when id is not present (found === undefined).
+    React.act(() => api!.remove("does-not-exist"));
+    expect(screen.getByText("n:1")).toBeInTheDocument();
+    expect(global.URL.revokeObjectURL).not.toHaveBeenCalled();
+  });
+
+  it("local remove(unknown-id) is a no-op (found undefined)", async () => {
+    const user = userEvent.setup();
+    let attApi: ReturnType<typeof usePromptInputAttachments> | null = null;
+    function Probe() {
+      attApi = usePromptInputAttachments();
+      return null;
+    }
+    render(
+      <PromptInput onSubmit={() => {}}>
+        <Probe />
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const fileInput = screen.getByLabelText("Upload files") as HTMLInputElement;
+    await user.upload(fileInput, makeFile("keep.png", "image/png"));
+    await waitFor(() => screen.getByText("keep.png"));
+    React.act(() => attApi!.remove("missing"));
+    expect(screen.getByText("keep.png")).toBeInTheDocument();
+  });
+
+  it("provider clear with a url-less file skips revoke (f.url false branch)", () => {
+    // Force createObjectURL to return an empty string so the stored file has a
+    // falsy url, exercising the `if (f.url)` false branch in clear()/unmount.
+    (global.URL.createObjectURL as ReturnType<typeof vi.fn>).mockReturnValue("");
+    let api: ReturnType<typeof useProviderAttachments> | null = null;
+    function Probe() {
+      api = useProviderAttachments();
+      return <span>n:{api.files.length}</span>;
+    }
+    render(
+      <PromptInputProvider>
+        <Probe />
+      </PromptInputProvider>
+    );
+    React.act(() => {
+      api!.add([makeFile("u.png", "image/png")]);
+    });
+    expect(screen.getByText("n:1")).toBeInTheDocument();
+    React.act(() => api!.clear());
+    expect(screen.getByText("n:0")).toBeInTheDocument();
+    expect(global.URL.revokeObjectURL).not.toHaveBeenCalled();
+  });
+
+  it("local clear with a url-less file skips revoke; unmount cleanup too", async () => {
+    (global.URL.createObjectURL as ReturnType<typeof vi.fn>).mockReturnValue("");
+    const user = userEvent.setup();
+    let attApi: ReturnType<typeof usePromptInputAttachments> | null = null;
+    function Probe() {
+      attApi = usePromptInputAttachments();
+      return null;
+    }
+    const { unmount } = render(
+      <PromptInput onSubmit={() => {}}>
+        <Probe />
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const fileInput = screen.getByLabelText("Upload files") as HTMLInputElement;
+    await user.upload(fileInput, makeFile("nourl.png", "image/png"));
+    await waitFor(() => expect(attApi!.files.length).toBe(1));
+    React.act(() => attApi!.clear());
+    expect(global.URL.revokeObjectURL).not.toHaveBeenCalled();
+    unmount();
+  });
+
+  it("LOCAL unmount cleanup skips revoke for url-less files (no clear first)", async () => {
+    (global.URL.createObjectURL as ReturnType<typeof vi.fn>).mockReturnValue("");
+    const user = userEvent.setup();
+    let attApi: ReturnType<typeof usePromptInputAttachments> | null = null;
+    function Probe() {
+      attApi = usePromptInputAttachments();
+      return null;
+    }
+    const { unmount } = render(
+      <PromptInput onSubmit={() => {}}>
+        <Probe />
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const fileInput = screen.getByLabelText("Upload files") as HTMLInputElement;
+    await user.upload(fileInput, makeFile("leak.png", "image/png"));
+    await waitFor(() => expect(attApi!.files.length).toBe(1));
+    // Unmount WHILE the url-less file is still present → cleanup loop runs its
+    // `if (f.url)` false side for the local (non-provider) cleanup effect.
+    unmount();
+    expect(global.URL.revokeObjectURL).not.toHaveBeenCalled();
+  });
+
+  it("PROVIDER unmount cleanup skips revoke for url-less files (no clear first)", () => {
+    (global.URL.createObjectURL as ReturnType<typeof vi.fn>).mockReturnValue("");
+    let api: ReturnType<typeof useProviderAttachments> | null = null;
+    function Probe() {
+      api = useProviderAttachments();
+      return <span>n:{api.files.length}</span>;
+    }
+    const { unmount } = render(
+      <PromptInputProvider>
+        <Probe />
+      </PromptInputProvider>
+    );
+    React.act(() => {
+      api!.add([makeFile("p.png", "image/png")]);
+    });
+    expect(screen.getByText("n:1")).toBeInTheDocument();
+    // Unmount with the url-less file still present → provider cleanup effect's
+    // `if (f.url)` false side.
+    unmount();
+    expect(global.URL.revokeObjectURL).not.toHaveBeenCalled();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 21. Branch coverage — drop/dragover guards (no Files, no files)
+// ---------------------------------------------------------------------------
+
+describe("PromptInput — drop/dragover guard branches", () => {
+  function fireEvt(
+    target: EventTarget,
+    name: string,
+    dataTransfer: unknown
+  ): Event {
+    const evt = new Event(name, { bubbles: true, cancelable: true });
+    // @ts-expect-error — fake dataTransfer
+    evt.dataTransfer = dataTransfer;
+    React.act(() => {
+      target.dispatchEvent(evt);
+    });
+    return evt;
+  }
+
+  it("form dragover WITHOUT Files does not preventDefault", () => {
+    const { container } = render(
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputBody>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const form = container.querySelector(
+      "[data-slot='prompt-input']"
+    ) as HTMLFormElement;
+    const evt = fireEvt(form, "dragover", { types: ["text/plain"] });
+    expect(evt.defaultPrevented).toBe(false);
+  });
+
+  it("form drop WITHOUT Files in types and with empty files is a no-op", () => {
+    const onError = vi.fn();
+    const { container } = render(
+      <PromptInput onError={onError} onSubmit={() => {}}>
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const form = container.querySelector(
+      "[data-slot='prompt-input']"
+    ) as HTMLFormElement;
+    // types lacks "Files" (first guard false) AND files empty (second guard false)
+    const evt = fireEvt(form, "drop", { types: ["text/plain"], files: [] });
+    expect(evt.defaultPrevented).toBe(false);
+    expect(
+      container.querySelector("[data-slot='prompt-input-attachments']")
+    ).toBeNull();
+  });
+
+  it("globalDrop dragover WITHOUT Files does not preventDefault", () => {
+    render(
+      <PromptInput globalDrop onSubmit={() => {}}>
+        <PromptInputBody>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const evt = fireEvt(document, "dragover", { types: ["text/plain"] });
+    expect(evt.defaultPrevented).toBe(false);
+  });
+
+  it("globalDrop drop WITHOUT Files and empty files is a no-op", () => {
+    const { container } = render(
+      <PromptInput globalDrop onSubmit={() => {}}>
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const evt = fireEvt(document, "drop", { types: ["text/plain"], files: [] });
+    expect(evt.defaultPrevented).toBe(false);
+    expect(
+      container.querySelector("[data-slot='prompt-input-attachments']")
+    ).toBeNull();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 22. Branch coverage — file input onChange with null files
+// ---------------------------------------------------------------------------
+
+describe("PromptInput — file input change guard", () => {
+  it("change event with no files does not add attachments", () => {
+    const { container } = render(
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const fileInput = screen.getByLabelText("Upload files") as HTMLInputElement;
+    // jsdom gives an empty (but truthy) FileList by default; force `.files` to
+    // null so the `if (event.currentTarget.files)` guard takes its false side.
+    Object.defineProperty(fileInput, "files", {
+      configurable: true,
+      get: () => null,
+    });
+    React.act(() => {
+      fileInput.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    expect(
+      container.querySelector("[data-slot='prompt-input-attachments']")
+    ).toBeNull();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 23. Branch coverage — submit text fallback + provider sync clear + non-blob url
+// ---------------------------------------------------------------------------
+
+describe("PromptInput — submit branch coverage", () => {
+  it("uncontrolled submit with no message field uses '' fallback", async () => {
+    const onSubmit = vi.fn();
+    const user = userEvent.setup();
+    // No PromptInputTextarea → FormData has no "message"; formData.get returns
+    // null → `|| ""` fallback path (L737 false side).
+    render(
+      <PromptInput onSubmit={onSubmit}>
+        <PromptInputSubmit />
+      </PromptInput>
+    );
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+    await waitFor(() => expect(onSubmit).toHaveBeenCalled());
+    expect(onSubmit.mock.calls[0][0]).toEqual({ text: "", files: [] });
+  });
+
+  it("sync onSubmit inside a provider clears the controller input", async () => {
+    const onSubmit = vi.fn(); // returns undefined (sync) → sync clear branch
+    const user = userEvent.setup();
+    render(
+      <PromptInputProvider initialInput="draft">
+        <PromptInput onSubmit={onSubmit}>
+          <PromptInputTextarea />
+          <PromptInputSubmit />
+        </PromptInput>
+      </PromptInputProvider>
+    );
+    const ta = screen.getByRole("textbox");
+    expect(ta).toHaveValue("draft");
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+    // Sync path: usingProvider true → controller.textInput.clear() (L779 true).
+    await waitFor(() => expect(ta).toHaveValue(""));
+  });
+
+  it("async onSubmit WITHOUT a provider resolves and clears attachments", async () => {
+    let resolve: (() => void) | undefined;
+    const onSubmit = vi.fn(
+      () =>
+        new Promise<void>((r) => {
+          resolve = r;
+        })
+    );
+    const user = userEvent.setup();
+    // Use a data: URL for the attachment so the blob→data-url conversion (and a
+    // real fetch() of the blob URL, which would settle late after the test) is
+    // skipped. No provider → on async resolve, `if (usingProvider)` takes its
+    // false side (only clear() runs, no controller.textInput.clear()).
+    (global.URL.createObjectURL as ReturnType<typeof vi.fn>).mockReturnValue(
+      "data:image/png;base64,QQQ"
+    );
+    render(<FullPrompt onSubmit={onSubmit} />);
+    const fileInput = screen.getByLabelText("Upload files") as HTMLInputElement;
+    await user.upload(fileInput, makeFile("a.png", "image/png"));
+    await waitFor(() => screen.getByText("a.png"));
+    await user.type(screen.getByRole("textbox"), "hi");
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+    await waitFor(() => expect(onSubmit).toHaveBeenCalled());
+    React.act(() => resolve!());
+    // Attachment chip is cleared once the async submit resolves.
+    await waitFor(() =>
+      expect(screen.queryByText("a.png")).not.toBeInTheDocument()
+    );
+  });
+
+  it("submit keeps a non-blob (data) url unchanged (skips conversion)", async () => {
+    const onSubmit = vi.fn();
+    const user = userEvent.setup();
+    // createObjectURL returns a data: URL so the stored attachment is not blob:,
+    // exercising the `item.url.startsWith("blob:")` false branch.
+    (global.URL.createObjectURL as ReturnType<typeof vi.fn>).mockReturnValue(
+      "data:image/png;base64,ZZZ"
+    );
+    render(<FullPrompt onSubmit={onSubmit} />);
+    const fileInput = screen.getByLabelText("Upload files") as HTMLInputElement;
+    await user.upload(fileInput, makeFile("d.png", "image/png"));
+    await waitFor(() => screen.getByText("d.png"));
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+    await waitFor(() => expect(onSubmit).toHaveBeenCalled());
+    const msg = onSubmit.mock.calls[0][0] as PromptInputMessage;
+    expect(msg.files[0].url).toBe("data:image/png;base64,ZZZ");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 24. Branch coverage — paste guards (null getAsFile, no files)
+// ---------------------------------------------------------------------------
+
+describe("PromptInputTextarea — paste guards", () => {
+  it("paste of file-kind items that all return null adds nothing", () => {
+    const { container } = render(
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputBody>
+          <PromptInputAttachments>
+            {(f) => <PromptInputAttachment data={f} />}
+          </PromptInputAttachments>
+          <PromptInputTextarea />
+        </PromptInputBody>
+      </PromptInput>
+    );
+    const ta = screen.getByRole("textbox");
+    const preventDefault = vi.fn();
+    React.act(() => {
+      ta.dispatchEvent(
+        Object.assign(new Event("paste", { bubbles: true, cancelable: true }), {
+          clipboardData: {
+            // kind "file" but getAsFile returns null → `if (file)` false side,
+            // and files stays empty → `if (files.length > 0)` false side.
+            items: [{ kind: "file", getAsFile: () => null }],
+          },
+          preventDefault,
+        })
+      );
+    });
+    expect(preventDefault).not.toHaveBeenCalled();
+    expect(
+      container.querySelector("[data-slot='prompt-input-attachments']")
+    ).toBeNull();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 25. Branch coverage — SpeechRecognition webkit fallback + result branches
+// ---------------------------------------------------------------------------
+
+describe("PromptInputSpeechButton — recognition branches", () => {
+  function makeFakeSR(captured: { instance?: Record<string, unknown> }) {
+    return class FakeSR {
+      continuous = false;
+      interimResults = false;
+      lang = "";
+      onstart: (() => void) | null = null;
+      onend: (() => void) | null = null;
+      onresult: ((e: unknown) => void) | null = null;
+      onerror: ((e: unknown) => void) | null = null;
+      start = () => this.onstart?.();
+      stop = () => this.onend?.();
+      constructor() {
+        captured.instance = this as unknown as Record<string, unknown>;
+      }
+    };
+  }
+
+  it("uses webkitSpeechRecognition when only the prefixed global exists", () => {
+    const captured: { instance?: Record<string, unknown> } = {};
+    // Only webkit-prefixed present → `SpeechRecognition || webkit…` right side.
+    // @ts-expect-error — define test global
+    window.webkitSpeechRecognition = makeFakeSR(captured);
+    render(
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputTextarea />
+        <PromptInputSpeechButton />
+      </PromptInput>
+    );
+    // Button is enabled because a recognition instance was constructed.
+    expect(screen.getByRole("button")).not.toBeDisabled();
+    expect(captured.instance).toBeDefined();
+    // @ts-expect-error — cleanup
+    delete window.webkitSpeechRecognition;
+  });
+
+  it("ignores non-final results and missing transcripts; appends with a space", async () => {
+    const captured: { instance?: Record<string, unknown> } = {};
+    // @ts-expect-error — define test global
+    window.SpeechRecognition = makeFakeSR(captured);
+    const onTranscriptionChange = vi.fn();
+    const textareaRef = React.createRef<HTMLTextAreaElement>();
+    const user = userEvent.setup();
+    render(
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputTextarea ref={textareaRef} />
+        <PromptInputSpeechButton
+          textareaRef={textareaRef}
+          onTranscriptionChange={onTranscriptionChange}
+        />
+      </PromptInput>
+    );
+    await user.click(screen.getByRole("button"));
+    // Seed existing textarea value so the `currentValue ? " " : ""` true side runs.
+    React.act(() => {
+      textareaRef.current!.value = "existing";
+    });
+    React.act(() => {
+      (captured.instance!.onresult as (e: unknown) => void)({
+        resultIndex: 0,
+        results: {
+          length: 2,
+          // non-final result → `if (result.isFinal)` false side
+          0: { isFinal: false, 0: { transcript: "skip" } },
+          // final result with missing alternative → `?? ""` fallback (transcript undefined)
+          1: { isFinal: true, 0: {} },
+        },
+      });
+    });
+    // final transcript === "" (undefined ?? "") → `if (finalTranscript && …)` false
+    expect(onTranscriptionChange).not.toHaveBeenCalled();
+
+    // Now a real final transcript with existing text → appends with a space.
+    React.act(() => {
+      (captured.instance!.onresult as (e: unknown) => void)({
+        resultIndex: 0,
+        results: {
+          length: 1,
+          0: { isFinal: true, 0: { transcript: "world" } },
+        },
+      });
+    });
+    expect(onTranscriptionChange).toHaveBeenCalledWith("existing world");
+    // @ts-expect-error — cleanup
+    delete window.SpeechRecognition;
+  });
+
+  it("final transcript without a textareaRef does not write/notify", async () => {
+    const captured: { instance?: Record<string, unknown> } = {};
+    // @ts-expect-error — define test global
+    window.SpeechRecognition = makeFakeSR(captured);
+    const onTranscriptionChange = vi.fn();
+    const user = userEvent.setup();
+    // No textareaRef passed → `textareaRef?.current` is undefined (L1213 false).
+    render(
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputTextarea />
+        <PromptInputSpeechButton onTranscriptionChange={onTranscriptionChange} />
+      </PromptInput>
+    );
+    await user.click(screen.getByRole("button"));
+    React.act(() => {
+      (captured.instance!.onresult as (e: unknown) => void)({
+        resultIndex: 0,
+        results: { length: 1, 0: { isFinal: true, 0: { transcript: "hi" } } },
+      });
+    });
+    expect(onTranscriptionChange).not.toHaveBeenCalled();
+    // @ts-expect-error — cleanup
+    delete window.SpeechRecognition;
+  });
+
+  // Note: the `if (!recognition) return;` guard in toggleListening (the false
+  // side of the !recognition check, i.e. when recognition is null) is not
+  // reachable through the public UI: the button is `disabled` exactly when
+  // recognition is null, so React never dispatches its onClick. Left uncovered.
+});

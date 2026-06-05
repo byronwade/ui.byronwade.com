@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Sheet,
   SheetContent,
@@ -8,15 +8,17 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger render={<Button variant="outline" />}>Open sheet</SheetTrigger>
+      <SheetTrigger render={<Button variant="outline" />}>
+        Open sheet
+      </SheetTrigger>
       <SheetContent side="right">
         <SheetHeader>
           <SheetTitle>Filters</SheetTitle>
@@ -30,5 +32,5 @@ export default function Example() {
         </p>
       </SheetContent>
     </Sheet>
-  );
+  )
 }

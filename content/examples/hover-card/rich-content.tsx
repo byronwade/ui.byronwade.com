@@ -1,6 +1,10 @@
 "use client"
 
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card"
 
 const articles = [
   {
@@ -60,13 +64,19 @@ export default function Example() {
                   {article.initials}
                 </div>
                 <div>
-                  <p className="text-xs font-semibold leading-none">{article.author}</p>
-                  <p className="text-xs text-muted-foreground">{article.date}</p>
+                  <p className="text-xs font-semibold leading-none">
+                    {article.author}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {article.date}
+                  </p>
                 </div>
               </div>
               {/* Title & excerpt */}
               <div>
-                <p className="text-sm font-semibold leading-snug">{article.title}</p>
+                <p className="text-sm font-semibold leading-snug">
+                  {article.title}
+                </p>
                 <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-3">
                   {article.excerpt}
                 </p>

@@ -1,4 +1,11 @@
-import { Home, BookOpen, Component, LayoutTemplate, AppWindow, type LucideIcon } from "lucide-react";
+import {
+  Home,
+  BookOpen,
+  Component,
+  LayoutTemplate,
+  AppWindow,
+  type LucideIcon,
+} from "lucide-react"
 
 /**
  * Primary destinations surfaced in the floating nav dock — the docs-site analogue
@@ -7,11 +14,11 @@ import { Home, BookOpen, Component, LayoutTemplate, AppWindow, type LucideIcon }
  * the launcher's browse panel, the breadcrumb, and the ⌘K command palette.
  */
 export interface DocsNavItem {
-  label: string;
-  href: string;
-  icon: LucideIcon;
+  label: string
+  href: string
+  icon: LucideIcon
   /** Custom active matcher; defaults to exact / prefix match on `href`. */
-  match?: (pathname: string) => boolean;
+  match?: (pathname: string) => boolean
 }
 
 export const navItems: DocsNavItem[] = [
@@ -22,32 +29,19 @@ export const navItems: DocsNavItem[] = [
     match: (p) => p === "/",
   },
   {
-    // Written guides + the Introduction landing.
+    // Guides + the Introduction landing + every component reference page (the
+    // restored docs sidebar lists them all).
     label: "Docs",
     href: "/docs",
     icon: BookOpen,
-    match: (p) =>
-      p === "/docs" ||
-      p === "/docs/philosophy" ||
-      p === "/docs/installation" ||
-      p === "/docs/foundation" ||
-      p === "/docs/theming" ||
-      p === "/docs/typography" ||
-      p === "/docs/ai",
+    match: (p) => p === "/docs" || p.startsWith("/docs/"),
   },
   {
-    // The component catalog grid + every component reference page.
-    label: "Components",
-    href: "/docs#catalog",
+    // The faceted, searchable component catalog grid.
+    label: "Catalog",
+    href: "/catalog",
     icon: Component,
-    match: (p) =>
-      p.startsWith("/docs/") &&
-      p !== "/docs/philosophy" &&
-      p !== "/docs/installation" &&
-      p !== "/docs/foundation" &&
-      p !== "/docs/theming" &&
-      p !== "/docs/typography" &&
-      p !== "/docs/ai",
+    match: (p) => p.startsWith("/catalog"),
   },
   {
     label: "Layouts",
@@ -61,9 +55,9 @@ export const navItems: DocsNavItem[] = [
     icon: AppWindow,
     match: (p) => p.startsWith("/templates"),
   },
-];
+]
 
 export function isActive(item: DocsNavItem, pathname: string): boolean {
-  if (item.match) return item.match(pathname);
-  return pathname === item.href || pathname.startsWith(item.href + "/");
+  if (item.match) return item.match(pathname)
+  return pathname === item.href || pathname.startsWith(item.href + "/")
 }

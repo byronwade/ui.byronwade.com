@@ -35,11 +35,18 @@ import { InfoIcon, XCircleIcon, TriangleAlertIcon } from "lucide-react";
 // Helpers
 // ---------------------------------------------------------------------------
 
-const ALL_VARIANTS = ["default", "destructive"] as const;
+const ALL_VARIANTS = [
+  "default",
+  "success",
+  "warning",
+  "destructive",
+] as const;
 type Variant = (typeof ALL_VARIANTS)[number];
 
 const VARIANT_CLASSES: Record<Variant, string[]> = {
   default: ["bg-card", "text-card-foreground"],
+  success: ["bg-card", "text-success"],
+  warning: ["bg-card", "text-warning"],
   destructive: ["bg-card", "text-destructive"],
 };
 

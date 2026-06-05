@@ -1,4 +1,4 @@
-import { Slider } from "@/components/ui/slider";
+import { Slider } from "@/components/ui/slider"
 
 export default function Example() {
   return (
@@ -6,5 +6,5 @@ export default function Example() {
       <Slider aria-label="Volume" defaultValue={40} />
       <Slider aria-label="Price range" defaultValue={[25, 75]} />
     </div>
-  );
+  )
 }

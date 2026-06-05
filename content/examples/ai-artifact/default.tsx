@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { CopyIcon, DownloadIcon } from "lucide-react";
+import { CopyIcon, DownloadIcon } from "lucide-react"
 
 import {
   Artifact,
@@ -11,7 +11,7 @@ import {
   ArtifactDescription,
   ArtifactHeader,
   ArtifactTitle,
-} from "@/components/ai-elements/artifact";
+} from "@/components/ai-elements/artifact"
 
 export default function Example() {
   return (
@@ -44,5 +44,5 @@ export default function Example() {
         </ArtifactContent>
       </Artifact>
     </div>
-  );
+  )
 }

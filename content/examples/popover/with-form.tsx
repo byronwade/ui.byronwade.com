@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Popover,
   PopoverContent,
@@ -8,26 +8,28 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [saved, setSaved] = useState<{ name: string; email: string } | null>(null);
+  const [open, setOpen] = useState(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [saved, setSaved] = useState<{ name: string; email: string } | null>(
+    null,
+  )
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!name.trim() || !email.trim()) return;
-    setSaved({ name, email });
-    setOpen(false);
+    e.preventDefault()
+    if (!name.trim() || !email.trim()) return
+    setSaved({ name, email })
+    setOpen(false)
   }
 
   function handleOpenChange(next: boolean) {
-    setOpen(next);
+    setOpen(next)
     if (!next) {
-      setName("");
-      setEmail("");
+      setName("")
+      setEmail("")
     }
   }
 
@@ -47,7 +49,10 @@ export default function Example() {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-1">
             <div className="flex flex-col gap-1">
-              <label htmlFor="profile-name" className="text-xs font-medium text-foreground">
+              <label
+                htmlFor="profile-name"
+                className="text-xs font-medium text-foreground"
+              >
                 Display name
               </label>
               <input
@@ -61,7 +66,10 @@ export default function Example() {
             </div>
 
             <div className="flex flex-col gap-1">
-              <label htmlFor="profile-email" className="text-xs font-medium text-foreground">
+              <label
+                htmlFor="profile-email"
+                className="text-xs font-medium text-foreground"
+              >
                 Email
               </label>
               <input
@@ -96,10 +104,10 @@ export default function Example() {
       {saved && (
         <p className="text-sm text-muted-foreground">
           Saved:{" "}
-          <span className="font-medium text-foreground">{saved.name}</span>{" "}
-          &lt;{saved.email}&gt;
+          <span className="font-medium text-foreground">{saved.name}</span> &lt;
+          {saved.email}&gt;
         </p>
       )}
     </div>
-  );
+  )
 }

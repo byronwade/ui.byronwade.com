@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
 
 export default function Example() {
   return (
@@ -61,5 +61,5 @@ export default function Example() {
         Message
       </button>
     </div>
-  );
+  )
 }

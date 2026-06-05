@@ -20,7 +20,7 @@ export function Section({
   const hasHeader = Boolean(title || description || action);
 
   return (
-    <section className={cn("space-y-4", className)}>
+    <section data-slot="section" className={cn("space-y-4", className)}>
       {hasHeader && (
         <div className="flex items-end justify-between gap-4">
           <div className="space-y-1">

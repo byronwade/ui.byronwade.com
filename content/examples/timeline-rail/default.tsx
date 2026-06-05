@@ -1,4 +1,4 @@
-import { TimelineRail } from "@/components/timeline-rail";
+import { TimelineRail } from "@/components/timeline-rail"
 
 export default function Example() {
   return (
@@ -23,5 +23,5 @@ export default function Example() {
         ]}
       />
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Select,
   SelectContent,
@@ -9,17 +9,17 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
 export default function Example() {
-  const [value, setValue] = useState<string>("");
-  const [submitted, setSubmitted] = useState(false);
+  const [value, setValue] = useState<string>("")
+  const [submitted, setSubmitted] = useState(false)
 
-  const hasError = submitted && !value;
+  const hasError = submitted && !value
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSubmitted(true);
+    e.preventDefault()
+    setSubmitted(true)
   }
 
   return (
@@ -34,7 +34,13 @@ export default function Example() {
           </label>
 
           {/* aria-invalid drives the error ring via the trigger's className */}
-          <Select value={value} onValueChange={(v) => { setValue(v ?? ""); setSubmitted(false); }}>
+          <Select
+            value={value}
+            onValueChange={(v) => {
+              setValue(v ?? "")
+              setSubmitted(false)
+            }}
+          >
             <SelectTrigger aria-invalid={hasError} id="role-select">
               <SelectValue placeholder="Select a role…" />
             </SelectTrigger>
@@ -50,7 +56,9 @@ export default function Example() {
           </Select>
 
           {hasError && (
-            <p className="text-xs text-destructive">Please select a role to continue.</p>
+            <p className="text-xs text-destructive">
+              Please select a role to continue.
+            </p>
           )}
         </div>
 
@@ -62,5 +70,5 @@ export default function Example() {
         </button>
       </form>
     </div>
-  );
+  )
 }

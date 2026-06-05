@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export default function Example() {
-  const [accepted, setAccepted] = useState(false);
+  const [accepted, setAccepted] = useState(false)
 
   return (
     <div className="flex flex-col gap-4 p-6">
@@ -30,5 +30,5 @@ export default function Example() {
         Terms accepted: {accepted ? "Yes" : "No"}
       </p>
     </div>
-  );
+  )
 }

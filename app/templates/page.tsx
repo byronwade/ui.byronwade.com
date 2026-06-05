@@ -1,5 +1,5 @@
-import { templates } from "@/app/templates/_templates";
-import { Gallery, type GalleryItem } from "@/app/_components/gallery";
+import { templates } from "@/app/templates/_templates"
+import { Gallery, type GalleryItem } from "@/app/_components/gallery"
 
 const items: GalleryItem[] = templates.map((t) => ({
   slug: t.slug,
@@ -9,7 +9,7 @@ const items: GalleryItem[] = templates.map((t) => ({
   href: `/templates/${t.slug}`,
   previewSrc: `/preview/${t.slug}`,
   price: t.price,
-}));
+}))
 
 export default function TemplatesGalleryPage() {
   return (
@@ -20,9 +20,10 @@ export default function TemplatesGalleryPage() {
           Full website templates, ready to ship.
         </h1>
         <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          Complete, content-filled pages — marketing, dashboard, account — composed
-          entirely from the byronwade/ui tokens and primitives. Buy one, drop it in,
-          and re-skin it to your brand from a single CSS variable.
+          Complete, content-filled pages — marketing, dashboard, account —
+          composed entirely from the byronwade/ui tokens and primitives. Buy
+          one, drop it in, and re-skin it to your brand from a single CSS
+          variable.
         </p>
       </header>
 
@@ -30,5 +31,5 @@ export default function TemplatesGalleryPage() {
         <Gallery items={items} noun="template" />
       </div>
     </div>
-  );
+  )
 }

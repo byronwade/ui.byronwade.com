@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Popover,
   PopoverContent,
@@ -8,16 +8,18 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <div className="flex flex-col items-center gap-6 p-8">
       <p className="text-sm text-muted-foreground">
         State:{" "}
-        <span className={`font-mono font-medium ${open ? "text-green-600 dark:text-green-400" : "text-foreground"}`}>
+        <span
+          className={`font-mono font-medium ${open ? "text-success" : "text-foreground"}`}
+        >
           {open ? "open" : "closed"}
         </span>
       </p>
@@ -50,7 +52,10 @@ export default function Example() {
             <PopoverTitle>Controlled popover</PopoverTitle>
             <PopoverDescription>
               Both the trigger and external buttons drive the same{" "}
-              <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono">open</code> state.
+              <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono">
+                open
+              </code>{" "}
+              state.
             </PopoverDescription>
           </PopoverHeader>
           <button
@@ -62,5 +67,5 @@ export default function Example() {
         </PopoverContent>
       </Popover>
     </div>
-  );
+  )
 }

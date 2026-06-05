@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import * as React from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Menu } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { MorphDock } from "@/components/ui/morph-dock";
-import { categories, byCategory } from "@/content/components";
-import { guides } from "@/content/guides";
+import { cn } from "@/lib/utils"
+import { MorphDock } from "@/components/ui/morph-dock"
+import { categories, byCategory } from "@/content/components"
+import { guides } from "@/content/guides"
 
 /**
  * Mobile docs navigation — a hamburger pill pinned bottom-left (below `lg`, where
@@ -19,16 +19,16 @@ import { guides } from "@/content/guides";
  * Esc, and click-away.
  */
 export function DocsNavDock() {
-  const [open, setOpen] = React.useState(false);
-  const pathname = usePathname();
+  const [open, setOpen] = React.useState(false)
+  const pathname = usePathname()
 
   // Close the panel whenever the route changes (a nav link was tapped).
   React.useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+    setOpen(false)
+  }, [pathname])
 
   const row = (href: string, label: string) => {
-    const active = pathname === href;
+    const active = pathname === href
     return (
       <Link
         key={href}
@@ -43,8 +43,8 @@ export function DocsNavDock() {
       >
         {label}
       </Link>
-    );
-  };
+    )
+  }
 
   const section = (label: string, children: React.ReactNode) => (
     <div key={label} className="mb-1 last:mb-0">
@@ -53,7 +53,7 @@ export function DocsNavDock() {
       </div>
       {children}
     </div>
-  );
+  )
 
   return (
     <div className="fixed bottom-4 left-4 z-50 lg:hidden print:hidden">
@@ -78,12 +78,18 @@ export function DocsNavDock() {
         ]}
       >
         <div className="p-1.5">
-          {section("Get Started", guides.map((g) => row(g.href, g.label)))}
+          {section(
+            "Get Started",
+            guides.map((g) => row(g.href, g.label)),
+          )}
           {categories.map((cat) =>
-            section(cat, byCategory(cat).map((c) => row(`/docs/${c.slug}`, c.name))),
+            section(
+              cat,
+              byCategory(cat).map((c) => row(`/docs/${c.slug}`, c.name)),
+            ),
           )}
         </div>
       </MorphDock>
     </div>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
 import {
   Progress,
   ProgressLabel,
   ProgressValue,
-} from "@/components/ui/progress";
+} from "@/components/ui/progress"
 
 export default function Example() {
   return (
@@ -24,5 +24,5 @@ export default function Example() {
         <ProgressValue>{(formatted) => formatted}</ProgressValue>
       </Progress>
     </div>
-  );
+  )
 }

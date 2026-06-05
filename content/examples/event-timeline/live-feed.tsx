@@ -1,41 +1,73 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import { EventTimeline, type TimelineEvent } from "@/components/event-timeline";
+import { useState, useEffect } from "react"
+import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
 
 const pool: TimelineEvent[] = [
-  { title: "Request received", description: "POST /api/process — 1.2 KB payload", tone: "neutral" },
-  { title: "Validation passed", description: "Schema and auth checks succeeded", tone: "success" },
-  { title: "Job enqueued", description: "Position 4 in the default queue", tone: "info" },
-  { title: "Worker assigned", description: "Worker-07 picked up the job", tone: "info" },
-  { title: "Processing", description: "Step 1/3 — parsing input data", tone: "info" },
-  { title: "Step 2 complete", description: "Transformation applied in 38 ms", tone: "success" },
-  { title: "Step 3 complete", description: "Output written to storage", tone: "success" },
-  { title: "Webhook dispatched", description: "Callback URL notified — 200 OK", tone: "success" },
-];
+  {
+    title: "Request received",
+    description: "POST /api/process — 1.2 KB payload",
+    tone: "neutral",
+  },
+  {
+    title: "Validation passed",
+    description: "Schema and auth checks succeeded",
+    tone: "success",
+  },
+  {
+    title: "Job enqueued",
+    description: "Position 4 in the default queue",
+    tone: "info",
+  },
+  {
+    title: "Worker assigned",
+    description: "Worker-07 picked up the job",
+    tone: "info",
+  },
+  {
+    title: "Processing",
+    description: "Step 1/3 — parsing input data",
+    tone: "info",
+  },
+  {
+    title: "Step 2 complete",
+    description: "Transformation applied in 38 ms",
+    tone: "success",
+  },
+  {
+    title: "Step 3 complete",
+    description: "Output written to storage",
+    tone: "success",
+  },
+  {
+    title: "Webhook dispatched",
+    description: "Callback URL notified — 200 OK",
+    tone: "success",
+  },
+]
 
 export default function Example() {
-  const [events, setEvents] = useState<TimelineEvent[]>([pool[0]]);
-  const [idx, setIdx] = useState(1);
-  const [running, setRunning] = useState(true);
+  const [events, setEvents] = useState<TimelineEvent[]>([pool[0]])
+  const [idx, setIdx] = useState(1)
+  const [running, setRunning] = useState(true)
 
   useEffect(() => {
-    if (!running) return;
+    if (!running) return
     if (idx >= pool.length) {
-      setRunning(false);
-      return;
+      setRunning(false)
+      return
     }
     const t = setTimeout(() => {
-      setEvents((prev) => [pool[idx], ...prev]);
-      setIdx((i) => i + 1);
-    }, 1200);
-    return () => clearTimeout(t);
-  }, [idx, running]);
+      setEvents((prev) => [pool[idx], ...prev])
+      setIdx((i) => i + 1)
+    }, 1200)
+    return () => clearTimeout(t)
+  }, [idx, running])
 
   function reset() {
-    setEvents([pool[0]]);
-    setIdx(1);
-    setRunning(true);
+    setEvents([pool[0]])
+    setIdx(1)
+    setRunning(true)
   }
 
   return (
@@ -54,5 +86,5 @@ export default function Example() {
       </p>
       <EventTimeline events={events} />
     </div>
-  );
+  )
 }

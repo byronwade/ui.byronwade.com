@@ -3,7 +3,7 @@ import {
   AvatarImage,
   AvatarFallback,
   AvatarBadge,
-} from "@/components/ui/avatar";
+} from "@/components/ui/avatar"
 
 export default function Example() {
   return (
@@ -49,7 +49,7 @@ export default function Example() {
           <Avatar>
             <AvatarImage src="https://i.pravatar.cc/40?u=badge4" alt="Online" />
             <AvatarFallback>ON</AvatarFallback>
-            <AvatarBadge className="bg-green-500" />
+            <AvatarBadge className="bg-success" />
           </Avatar>
           <span className="text-xs text-muted-foreground">online</span>
         </div>
@@ -58,7 +58,7 @@ export default function Example() {
           <Avatar>
             <AvatarImage src="https://i.pravatar.cc/40?u=badge5" alt="Away" />
             <AvatarFallback>AW</AvatarFallback>
-            <AvatarBadge className="bg-yellow-400" />
+            <AvatarBadge className="bg-warning" />
           </Avatar>
           <span className="text-xs text-muted-foreground">away</span>
         </div>
@@ -76,5 +76,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

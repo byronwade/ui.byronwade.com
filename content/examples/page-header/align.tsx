@@ -1,5 +1,5 @@
-import { PageHeader } from "@/components/page-header";
-import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/page-header"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -13,7 +13,9 @@ export default function Example() {
           title="Documents"
           description="Browse and manage your files."
         >
-          <Button size="sm" variant="outline">Import</Button>
+          <Button size="sm" variant="outline">
+            Import
+          </Button>
           <Button size="sm">Upload</Button>
         </PageHeader>
       </div>
@@ -28,10 +30,12 @@ export default function Example() {
           description="Follow these steps to set up your workspace."
           align="center"
         >
-          <Button size="sm" variant="outline">View Docs</Button>
+          <Button size="sm" variant="outline">
+            View Docs
+          </Button>
           <Button size="sm">Continue</Button>
         </PageHeader>
       </div>
     </div>
-  );
+  )
 }

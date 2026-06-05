@@ -16,9 +16,7 @@ export default function Example() {
           <TooltipTrigger render={<Button variant="outline" />}>
             Hover me
           </TooltipTrigger>
-          <TooltipContent>
-            This is a helpful tooltip
-          </TooltipContent>
+          <TooltipContent>This is a helpful tooltip</TooltipContent>
         </Tooltip>
       </div>
     </TooltipProvider>

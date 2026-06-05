@@ -1,6 +1,6 @@
-import { DetailHeader } from "@/components/detail-header";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { DetailHeader } from "@/components/detail-header"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 /**
  * Title-only header — no meta grid. Useful for pages where context is
@@ -13,9 +13,7 @@ export default function Example() {
       <DetailHeader
         title="API Keys"
         badge={<Badge variant="secondary">3 active</Badge>}
-        actions={
-          <Button size="sm">Create key</Button>
-        }
+        actions={<Button size="sm">Create key</Button>}
       />
 
       {/* Minimal: title only */}
@@ -26,11 +24,13 @@ export default function Example() {
         title="Webhooks"
         actions={
           <>
-            <Button variant="outline" size="sm">Documentation</Button>
+            <Button variant="outline" size="sm">
+              Documentation
+            </Button>
             <Button size="sm">Add endpoint</Button>
           </>
         }
       />
     </div>
-  );
+  )
 }

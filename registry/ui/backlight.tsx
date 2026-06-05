@@ -6,19 +6,19 @@
  * pixels (SVG filter), so it inherits whatever token colors the child uses —
  * no raw color, dark mode for free.
  */
-import { useId, type ReactElement } from "react";
+import { useId, type ReactElement } from "react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 type BacklightProps = {
-  children?: ReactElement;
-  className?: string;
+  children?: ReactElement
+  className?: string
   /** Gaussian blur radius for the backlight glow. */
-  blur?: number;
-};
+  blur?: number
+}
 
 export function Backlight({ blur = 20, children, className }: BacklightProps) {
-  const id = useId();
+  const id = useId()
 
   return (
     <div data-slot="backlight" className={cn(className)}>
@@ -38,5 +38,5 @@ export function Backlight({ blur = 20, children, className }: BacklightProps) {
         {children}
       </div>
     </div>
-  );
+  )
 }

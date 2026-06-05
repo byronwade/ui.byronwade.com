@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Dialog,
   DialogTrigger,
@@ -9,8 +9,8 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 const TERMS = [
   {
@@ -45,15 +45,15 @@ const TERMS = [
     heading: "8. Governing Law",
     body: "These terms and conditions are governed by and construed in accordance with applicable law and you irrevocably submit to the exclusive jurisdiction of the courts in that location.",
   },
-];
+]
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
-  const [accepted, setAccepted] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [accepted, setAccepted] = useState(false)
 
   function handleAccept() {
-    setAccepted(true);
-    setOpen(false);
+    setAccepted(true)
+    setOpen(false)
   }
 
   return (
@@ -100,5 +100,5 @@ export default function Example() {
         </Dialog>
       )}
     </div>
-  );
+  )
 }

@@ -11,7 +11,7 @@ export function CenteredFocal({
   className?: string;
 }) {
   return (
-    <div className={cn("relative grid min-h-[60vh] place-items-center", className)}>
+    <div data-slot="centered-focal" className={cn("relative grid min-h-[60vh] place-items-center", className)}>
       {backdrop && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center opacity-60">{backdrop}</div>
       )}

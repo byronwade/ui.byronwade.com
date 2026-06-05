@@ -1,24 +1,24 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ChevronLeft, MoreHorizontal } from "lucide-react";
+import * as React from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { ChevronLeft, MoreHorizontal } from "lucide-react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { resolveTrail, type Crumb } from "./breadcrumb-trail";
+} from "@/components/ui/popover"
+import { resolveTrail, type Crumb } from "./breadcrumb-trail"
 
 const useIsoLayoutEffect =
-  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 
 /** Room reserved around the centered nav dock so the breadcrumb never crowds it. */
-const NAV_RESERVE = 360;
-const GAP = 12;
+const NAV_RESERVE = 360
+const GAP = 12
 
 /**
  * The breadcrumb — a matched-sibling overlay in the top-left header group, sharing
@@ -29,43 +29,43 @@ const GAP = 12;
  * `root / … / current` on desktop and `‹ Current` on mobile.
  */
 export function AppBreadcrumb() {
-  const pathname = usePathname();
-  const crumbs = resolveTrail(pathname);
-  const trailKey = crumbs.map((c) => `${c.href}|${c.label}`).join(">");
+  const pathname = usePathname()
+  const crumbs = resolveTrail(pathname)
+  const trailKey = crumbs.map((c) => `${c.href}|${c.label}`).join(">")
 
-  const rootRef = React.useRef<HTMLOListElement>(null);
-  const twinRef = React.useRef<HTMLOListElement>(null);
+  const rootRef = React.useRef<HTMLOListElement>(null)
+  const twinRef = React.useRef<HTMLOListElement>(null)
   const [{ collapsed, maxW }, setFit] = React.useState<{
-    collapsed: boolean;
-    maxW: number;
-  }>({ collapsed: false, maxW: Number.POSITIVE_INFINITY });
+    collapsed: boolean
+    maxW: number
+  }>({ collapsed: false, maxW: Number.POSITIVE_INFINITY })
 
   useIsoLayoutEffect(() => {
-    const root = rootRef.current;
-    const twin = twinRef.current;
-    if (!root || !twin) return;
+    const root = rootRef.current
+    const twin = twinRef.current
+    if (!root || !twin) return
     const compute = () => {
-      const W = window.innerWidth;
-      const left = root.getBoundingClientRect().left;
-      const budget = Math.max(0, W / 2 - NAV_RESERVE / 2 - GAP - left);
-      const full = twin.scrollWidth;
-      setFit({ collapsed: full > budget && crumbs.length >= 3, maxW: budget });
-    };
-    compute();
-    const ro = new ResizeObserver(compute);
-    ro.observe(twin);
-    window.addEventListener("resize", compute);
+      const W = window.innerWidth
+      const left = root.getBoundingClientRect().left
+      const budget = Math.max(0, W / 2 - NAV_RESERVE / 2 - GAP - left)
+      const full = twin.scrollWidth
+      setFit({ collapsed: full > budget && crumbs.length >= 3, maxW: budget })
+    }
+    compute()
+    const ro = new ResizeObserver(compute)
+    ro.observe(twin)
+    window.addEventListener("resize", compute)
     return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", compute);
-    };
-  }, [trailKey, crumbs.length]);
+      ro.disconnect()
+      window.removeEventListener("resize", compute)
+    }
+  }, [trailKey, crumbs.length])
 
-  if (crumbs.length <= 1) return null;
+  if (crumbs.length <= 1) return null
 
-  const last = crumbs[crumbs.length - 1];
-  const parent = crumbs[crumbs.length - 2];
-  const middle = crumbs.slice(1, -1);
+  const last = crumbs[crumbs.length - 1]
+  const parent = crumbs[crumbs.length - 2]
+  const middle = crumbs.slice(1, -1)
 
   return (
     <nav
@@ -75,7 +75,9 @@ export function AppBreadcrumb() {
       {/* DESKTOP — full trail, collapsing to root / … / current. */}
       <ol
         ref={rootRef}
-        style={maxW === Number.POSITIVE_INFINITY ? undefined : { maxWidth: maxW }}
+        style={
+          maxW === Number.POSITIVE_INFINITY ? undefined : { maxWidth: maxW }
+        }
         className="hidden min-w-0 items-center gap-1.5 sm:flex"
       >
         {collapsed ? (
@@ -154,14 +156,19 @@ export function AppBreadcrumb() {
         {crumbs.map((c, i) => (
           <React.Fragment key={c.href}>
             {i > 0 && <Sep />}
-            <span className={cn("shrink-0", i === crumbs.length - 1 ? "font-semibold" : "")}>
+            <span
+              className={cn(
+                "shrink-0",
+                i === crumbs.length - 1 ? "font-semibold" : "",
+              )}
+            >
               {c.label}
             </span>
           </React.Fragment>
         ))}
       </ol>
     </nav>
-  );
+  )
 }
 
 function CrumbLink({ crumb, current }: { crumb: Crumb; current?: boolean }) {
@@ -180,7 +187,7 @@ function CrumbLink({ crumb, current }: { crumb: Crumb; current?: boolean }) {
         {crumb.label}
       </Link>
     </li>
-  );
+  )
 }
 
 function Sep() {
@@ -188,5 +195,5 @@ function Sep() {
     <li aria-hidden className="shrink-0 text-dock-foreground/50">
       /
     </li>
-  );
+  )
 }

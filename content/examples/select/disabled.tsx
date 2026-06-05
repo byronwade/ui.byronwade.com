@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Select,
@@ -9,14 +9,16 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
 export default function Example() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[200px] gap-6">
       {/* Entire select disabled */}
       <div className="flex flex-col gap-1.5">
-        <span className="text-xs text-muted-foreground">Entire select disabled</span>
+        <span className="text-xs text-muted-foreground">
+          Entire select disabled
+        </span>
         <Select disabled>
           <SelectTrigger>
             <SelectValue placeholder="Unavailable" />
@@ -32,7 +34,9 @@ export default function Example() {
 
       {/* Individual items disabled */}
       <div className="flex flex-col gap-1.5">
-        <span className="text-xs text-muted-foreground">Individual items disabled</span>
+        <span className="text-xs text-muted-foreground">
+          Individual items disabled
+        </span>
         <Select>
           <SelectTrigger>
             <SelectValue placeholder="Select a plan…" />
@@ -57,5 +61,5 @@ export default function Example() {
         </Select>
       </div>
     </div>
-  );
+  )
 }

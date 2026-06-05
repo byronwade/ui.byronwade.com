@@ -18,10 +18,10 @@ in-memory mock data + React state with simulated latency, behind a swappable int
    files are app pages, exempt from the per-component registry test mandate) **plus**
    extracted tested registry items: the fake data lib + the key composites.
 3. **Features:** **everything** — list/search/flags/archive/read/bulk, thread + bubbles
-   + reactions, composer, new-message flow, templates, scheduled messages, command
-   palette, hotkeys, thread morph-bar, skeleton/error states.
+   - reactions, composer, new-message flow, templates, scheduled messages, command
+     palette, hotkeys, thread morph-bar, skeleton/error states.
 4. **Backend:** in-memory mock module + `useReducer` state + simulated-latency `commit`
-   + a fake realtime emitter (replaces Supabase). Swappable for a real source.
+   - a fake realtime emitter (replaces Supabase). Swappable for a real source.
 
 ## Source architecture (what we're porting)
 
@@ -38,6 +38,7 @@ use-realtime-messages.
 ## Target file layout (byronwade/ui)
 
 **Reusable registry items (tested, coverage-gated):**
+
 - `registry/lib/comms-store.tsx` — the fake data layer: types (`Conversation`,
   `Message`, `Contact`, `ConversationFlag`), seed data, `MessagesProvider`,
   `useMessages`/`useMessagesActions`, all actions, simulated `commit`, and a fake
@@ -48,6 +49,7 @@ use-realtime-messages.
   schedule hooks).
 
 **Archetype-private (on `/layouts`, exempt from per-component test mandate):**
+
 - `app/layouts/_archetypes/messages-cockpit/` — `index.tsx` (the cockpit shell wiring
   the registry composites + the store), plus the feature-specific overlays that aren't
   general-purpose: cockpit-shell, cockpit-new-message, command-palette, template-picker,
@@ -60,12 +62,13 @@ use-realtime-messages.
 
 Types (ported/trimmed from SignalRoute, messaging-relevant fields only — exact fields
 finalized against `@/lib/types` during implementation):
+
 - `Contact { id, name, handle (phone/email), avatarSeed }`
 - `Message { id, conversationId, body, direction: "in"|"out", at, status:
-  "sending"|"sent"|"delivered"|"read"|"failed", reactions: string[], scheduledAt?,
-  attachments?: { name, kind }[] }`
+"sending"|"sent"|"delivered"|"read"|"failed", reactions: string[], scheduledAt?,
+attachments?: { name, kind }[] }`
 - `Conversation { id, contact, number, lastMessage, unread: number, flags:
-  ConversationFlag[] (pinned|archived|unread|spam…), updatedAt, hidden? }`
+ConversationFlag[] (pinned|archived|unread|spam…), updatedAt, hidden? }`
 
 Actions (mirror the source `ActionsCtx`, all referentially stable):
 `send`, `markRead`, `markUnread`, `toggleFlag`, `archive`, `remove`, `bulk`,

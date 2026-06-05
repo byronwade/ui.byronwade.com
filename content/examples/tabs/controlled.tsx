@@ -1,24 +1,27 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useState } from "react"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 const STEPS = [
   { value: 0, label: "Details" },
   { value: 1, label: "Review" },
   { value: 2, label: "Confirm" },
-] as const;
+] as const
 
 export default function Example() {
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<number>(0)
 
-  const isFirst = activeTab === 0;
-  const isLast = activeTab === STEPS.length - 1;
+  const isFirst = activeTab === 0
+  const isLast = activeTab === STEPS.length - 1
 
   return (
     <div className="flex items-center justify-center p-8">
       <div className="w-full max-w-sm space-y-4">
-        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as number)}>
+        <Tabs
+          value={activeTab}
+          onValueChange={(v) => setActiveTab(v as number)}
+        >
           <TabsList>
             {STEPS.map((step) => (
               <TabsTrigger key={step.value} value={step.value}>
@@ -61,14 +64,16 @@ export default function Example() {
             Step {activeTab + 1} of {STEPS.length}
           </span>
           <button
-            onClick={() => setActiveTab((v) => Math.min(STEPS.length - 1, v + 1))}
+            onClick={() =>
+              setActiveTab((v) => Math.min(STEPS.length - 1, v + 1))
+            }
             disabled={isLast}
-            className="rounded-full bg-brand px-4 py-1.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:pointer-events-none disabled:opacity-40"
+            className="rounded-full bg-brand px-4 py-1.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 disabled:pointer-events-none disabled:opacity-40"
           >
             Next
           </button>
         </div>
       </div>
     </div>
-  );
+  )
 }

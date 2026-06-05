@@ -1,23 +1,26 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { useState } from "react"
+import { Label } from "@/components/ui/label"
+import { AlertCircle, CheckCircle2 } from "lucide-react"
 
 export default function Example() {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("taken_name");
-  const [website, setWebsite] = useState("https://example.com");
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("taken_name")
+  const [website, setWebsite] = useState("https://example.com")
 
-  const emailError = email.length > 0 && !email.includes("@");
-  const usernameError = username === "taken_name";
-  const websiteValid = website.startsWith("https://") && website.length > 10;
+  const emailError = email.length > 0 && !email.includes("@")
+  const usernameError = username === "taken_name"
+  const websiteValid = website.startsWith("https://") && website.length > 10
 
   return (
     <div className="flex flex-col gap-6 p-6 max-w-sm w-full">
       {/* Error state */}
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="err-email" className={emailError ? "text-destructive" : ""}>
+        <Label
+          htmlFor="err-email"
+          className={emailError ? "text-destructive" : ""}
+        >
           {emailError && <AlertCircle className="size-3.5" />}
           Email address
         </Label>
@@ -42,7 +45,10 @@ export default function Example() {
 
       {/* Error with helper */}
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="err-username" className={usernameError ? "text-destructive" : ""}>
+        <Label
+          htmlFor="err-username"
+          className={usernameError ? "text-destructive" : ""}
+        >
           {usernameError && <AlertCircle className="size-3.5" />}
           Username
         </Label>
@@ -65,7 +71,10 @@ export default function Example() {
 
       {/* Valid / success state */}
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="ok-website" className={websiteValid ? "text-green-600 dark:text-green-500" : ""}>
+        <Label
+          htmlFor="ok-website"
+          className={websiteValid ? "text-success" : ""}
+        >
           {websiteValid && <CheckCircle2 className="size-3.5" />}
           Website
         </Label>
@@ -75,15 +84,11 @@ export default function Example() {
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
           className={`rounded-md border px-3 py-2 text-sm ${
-            websiteValid ? "border-green-500" : ""
+            websiteValid ? "border-success" : ""
           }`}
         />
-        {websiteValid && (
-          <p className="text-xs text-green-600 dark:text-green-500">
-            Looks good!
-          </p>
-        )}
+        {websiteValid && <p className="text-xs text-success">Looks good!</p>}
       </div>
     </div>
-  );
+  )
 }

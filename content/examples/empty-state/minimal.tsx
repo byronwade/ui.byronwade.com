@@ -1,4 +1,4 @@
-import { EmptyState } from "@/components/empty-state";
+import { EmptyState } from "@/components/empty-state"
 
 export default function Example() {
   return (
@@ -7,5 +7,5 @@ export default function Example() {
         <EmptyState title="No results found" />
       </div>
     </div>
-  );
+  )
 }

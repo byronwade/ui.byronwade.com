@@ -19,14 +19,12 @@ export default function Example() {
             <Info className="size-4" />
             <span className="sr-only">More info</span>
           </TooltipTrigger>
-          <TooltipContent>
-            More information about this field
-          </TooltipContent>
+          <TooltipContent>More information about this field</TooltipContent>
         </Tooltip>
 
         <Tooltip>
           <TooltipTrigger render={<Button variant="ghost" size="icon" />}>
-            <AlertTriangle className="size-4 text-amber-500" />
+            <AlertTriangle className="size-4 text-warning" />
             <span className="sr-only">Warning</span>
           </TooltipTrigger>
           <TooltipContent>
@@ -39,19 +37,15 @@ export default function Example() {
             <HelpCircle className="size-4" />
             <span className="sr-only">Help</span>
           </TooltipTrigger>
-          <TooltipContent>
-            Need help? Visit our documentation
-          </TooltipContent>
+          <TooltipContent>Need help? Visit our documentation</TooltipContent>
         </Tooltip>
 
         <Tooltip>
           <TooltipTrigger render={<Button variant="ghost" size="icon" />}>
-            <Star className="size-4 text-yellow-500" />
+            <Star className="size-4 text-warning" />
             <span className="sr-only">Favorite</span>
           </TooltipTrigger>
-          <TooltipContent>
-            Mark as favorite
-          </TooltipContent>
+          <TooltipContent>Mark as favorite</TooltipContent>
         </Tooltip>
       </div>
     </TooltipProvider>

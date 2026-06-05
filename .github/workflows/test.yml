@@ -21,6 +21,9 @@ jobs:
       - name: Sync generated components
         run: node scripts/sync-registry.mjs
 
+      - name: Generate lint manifest
+        run: npm run gen:lint-manifest
+
       - name: Check test coverage gate
         run: npm run check:tests
 

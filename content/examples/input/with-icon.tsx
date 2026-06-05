@@ -1,5 +1,5 @@
-import { Search, Mail, Lock, User } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Search, Mail, Lock, User } from "lucide-react"
+import { Input } from "@/components/ui/input"
 
 export default function Example() {
   return (
@@ -28,5 +28,5 @@ export default function Example() {
         <Input type="password" placeholder="Password" className="pl-8" />
       </div>
     </div>
-  );
+  )
 }

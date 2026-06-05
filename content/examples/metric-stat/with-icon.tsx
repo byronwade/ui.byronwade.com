@@ -1,5 +1,5 @@
-import { MetricStat } from "@/components/metric-stat";
-import { Users, ShoppingCart, TrendingUp, Star } from "lucide-react";
+import { MetricStat } from "@/components/metric-stat"
+import { Users, ShoppingCart, TrendingUp, Star } from "lucide-react"
 
 export default function Example() {
   return (
@@ -29,5 +29,5 @@ export default function Example() {
         delta={{ value: "0.0%", direction: "flat" }}
       />
     </div>
-  );
+  )
 }

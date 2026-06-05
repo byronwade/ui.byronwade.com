@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   BarChart3,
@@ -8,9 +8,9 @@ import {
   Inbox,
   Settings,
   Users,
-} from "lucide-react";
+} from "lucide-react"
 
-import { MorphDock } from "@/components/ui/morph-dock";
+import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
  * Compact ↔ full. Only core + pinned + active items show at rest; the chevron
@@ -27,15 +27,35 @@ export default function Example() {
           </span>
         }
         items={[
-          { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
-          { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true, badge: 3 },
+          {
+            id: "home",
+            label: "Home",
+            icon: Home,
+            href: "#",
+            active: true,
+            core: true,
+          },
+          {
+            id: "inbox",
+            label: "Inbox",
+            icon: Inbox,
+            href: "#",
+            core: true,
+            badge: 3,
+          },
           { id: "reports", label: "Reports", icon: BarChart3, href: "#" },
           { id: "team", label: "Team", icon: Users, href: "#" },
           { id: "docs", label: "Docs", icon: FileText, href: "#" },
           { id: "billing", label: "Billing", icon: CreditCard, href: "#" },
-          { id: "settings", label: "Settings", icon: Settings, href: "#", pinned: true },
+          {
+            id: "settings",
+            label: "Settings",
+            icon: Settings,
+            href: "#",
+            pinned: true,
+          },
         ]}
       />
     </div>
-  );
+  )
 }

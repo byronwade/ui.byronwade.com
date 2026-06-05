@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -9,11 +9,11 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <div className="flex items-center justify-center p-16">
@@ -22,11 +22,7 @@ export default function Example() {
       </Button>
 
       {/* disablePointerDismissal — user must choose an action to close */}
-      <Dialog
-        open={open}
-        onOpenChange={setOpen}
-        disablePointerDismissal={true}
-      >
+      <Dialog open={open} onOpenChange={setOpen} disablePointerDismissal={true}>
         <DialogContent showCloseButton={false}>
           <DialogHeader>
             <DialogTitle>Session expired</DialogTitle>
@@ -44,5 +40,5 @@ export default function Example() {
         </DialogContent>
       </Dialog>
     </div>
-  );
+  )
 }

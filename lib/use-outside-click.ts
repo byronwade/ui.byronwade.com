@@ -1,4 +1,4 @@
-import { useEffect, type RefObject } from "react";
+import { useEffect, type RefObject } from "react"
 
 /**
  * Calls `callback` when a pointer/touch interaction lands outside `ref`.
@@ -11,20 +11,20 @@ export function useOutsideClick(
 ) {
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
-      const el = ref.current;
+      const el = ref.current
       // Do nothing if the click is on the ref element or its descendants.
       if (!el || el.contains(event.target as Node)) {
-        return;
+        return
       }
-      callback(event);
-    };
+      callback(event)
+    }
 
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
+    document.addEventListener("mousedown", listener)
+    document.addEventListener("touchstart", listener)
 
     return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
-    };
-  }, [ref, callback]);
+      document.removeEventListener("mousedown", listener)
+      document.removeEventListener("touchstart", listener)
+    }
+  }, [ref, callback])
 }

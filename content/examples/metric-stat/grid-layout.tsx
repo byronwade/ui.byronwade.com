@@ -1,5 +1,12 @@
-import { MetricStat } from "@/components/metric-stat";
-import { BarChart2, Users, DollarSign, Percent, Package, RefreshCw } from "lucide-react";
+import { MetricStat } from "@/components/metric-stat"
+import {
+  BarChart2,
+  Users,
+  DollarSign,
+  Percent,
+  Package,
+  RefreshCw,
+} from "lucide-react"
 
 export default function Example() {
   return (
@@ -41,5 +48,5 @@ export default function Example() {
         delta={{ value: "+1.2%", direction: "up" }}
       />
     </div>
-  );
+  )
 }

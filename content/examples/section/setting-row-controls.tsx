@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { Section, SettingsList, SettingRow } from "@/components/section";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { useState } from "react";
+import { Section, SettingsList, SettingRow } from "@/components/section"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Switch } from "@/components/ui/switch"
+import { useState } from "react"
 
 export default function Example() {
-  const [value, setValue] = useState("John Doe");
+  const [value, setValue] = useState("John Doe")
 
   return (
     <div className="max-w-2xl mx-auto p-8 space-y-8">
@@ -69,5 +69,5 @@ export default function Example() {
         </SettingsList>
       </Section>
     </div>
-  );
+  )
 }

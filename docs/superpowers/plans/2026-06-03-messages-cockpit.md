@@ -22,14 +22,14 @@
 
 ## File structure
 
-| Target | Responsibility | Tested as |
-|--------|---------------|-----------|
-| `registry/lib/comms-store.tsx` | Types, seed, `MessagesProvider`, `useMessages`/`useMessagesActions`, actions, simulated `commit`, fake realtime | registry:lib (test) |
-| `registry/components/conversation-list.tsx` | List + search + filter + bulk + rows | registry:component |
-| `registry/components/message-thread.tsx` | Thread pane + bubbles + reactions + empty | registry:component |
-| `registry/components/message-composer.tsx` | Composer (text/attachments/template+schedule hooks) | registry:component |
-| `app/layouts/_archetypes/messages-cockpit/index.tsx` | Cockpit shell wiring store + composites | archetype smoke |
-| `…/new-message.tsx`, `command-palette.tsx`, `template-picker.tsx`, `schedule.tsx`, `thread-bar.tsx`, `hotkeys.ts`, `states.tsx` | Feature overlays | archetype smoke |
+| Target                                                                                                                          | Responsibility                                                                                                  | Tested as           |
+| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `registry/lib/comms-store.tsx`                                                                                                  | Types, seed, `MessagesProvider`, `useMessages`/`useMessagesActions`, actions, simulated `commit`, fake realtime | registry:lib (test) |
+| `registry/components/conversation-list.tsx`                                                                                     | List + search + filter + bulk + rows                                                                            | registry:component  |
+| `registry/components/message-thread.tsx`                                                                                        | Thread pane + bubbles + reactions + empty                                                                       | registry:component  |
+| `registry/components/message-composer.tsx`                                                                                      | Composer (text/attachments/template+schedule hooks)                                                             | registry:component  |
+| `app/layouts/_archetypes/messages-cockpit/index.tsx`                                                                            | Cockpit shell wiring store + composites                                                                         | archetype smoke     |
+| `…/new-message.tsx`, `command-palette.tsx`, `template-picker.tsx`, `schedule.tsx`, `thread-bar.tsx`, `hotkeys.ts`, `states.tsx` | Feature overlays                                                                                                | archetype smoke     |
 
 ---
 
@@ -41,21 +41,33 @@
 - [ ] **Step 1: Define types + seed.** In `comms-store.tsx`:
 
 ```tsx
-export type ConversationFlag = "pinned" | "archived" | "unread" | "spam";
-export interface Contact { id: string; name: string; handle: string; avatarSeed: string }
+export type ConversationFlag = "pinned" | "archived" | "unread" | "spam"
+export interface Contact {
+  id: string
+  name: string
+  handle: string
+  avatarSeed: string
+}
 export interface Message {
-  id: string; conversationId: string; body: string;
-  direction: "in" | "out";
-  at: number;
-  status: "sending" | "sent" | "delivered" | "read" | "failed";
-  reactions: string[];
-  scheduledAt?: number;
-  attachments?: { name: string; kind: "image" | "file" }[];
+  id: string
+  conversationId: string
+  body: string
+  direction: "in" | "out"
+  at: number
+  status: "sending" | "sent" | "delivered" | "read" | "failed"
+  reactions: string[]
+  scheduledAt?: number
+  attachments?: { name: string; kind: "image" | "file" }[]
 }
 export interface Conversation {
-  id: string; contact: Contact; number: string;
-  lastMessage: string; unread: number;
-  flags: ConversationFlag[]; updatedAt: number; hidden?: boolean;
+  id: string
+  contact: Contact
+  number: string
+  lastMessage: string
+  unread: number
+  flags: ConversationFlag[]
+  updatedAt: number
+  hidden?: boolean
 }
 // SEED: ~8 conversations + their messages, deterministic timestamps passed in (no Date.now in module scope).
 ```
@@ -63,16 +75,24 @@ export interface Conversation {
 - [ ] **Step 2: Write the failing reducer/actions test.**
 
 ```tsx
-import { renderHook, act } from "@testing-library/react";
-import { MessagesProvider, useMessages, useMessagesActions } from "@/components/lib/comms-store"; // adjust import path to synced location
+import { renderHook, act } from "@testing-library/react"
+import {
+  MessagesProvider,
+  useMessages,
+  useMessagesActions,
+} from "@/components/lib/comms-store" // adjust import path to synced location
 // markRead clears unread; send appends an outgoing message; toggleFlag pins.
-test("markRead zeroes unread", () => { /* render provider, call actions.markRead(id), assert conv.unread === 0 */ });
-test("send appends an outgoing message with status sending→sent", async () => { /* fake timers advance commit */ });
-test("toggleFlag pins/unpins", () => {});
+test("markRead zeroes unread", () => {
+  /* render provider, call actions.markRead(id), assert conv.unread === 0 */
+})
+test("send appends an outgoing message with status sending→sent", async () => {
+  /* fake timers advance commit */
+})
+test("toggleFlag pins/unpins", () => {})
 ```
 
 - [ ] **Step 3: Implement provider + reducer + actions.** Mirror source `ActionsCtx`:
-  `send, markRead, markUnread, toggleFlag, archive, remove, bulk, createConversation, react, schedule, setActive, liveUpsert, liveDrop`. `commit = (mutator) => new Promise(r => setTimeout(r, LATENCY))` (LATENCY default 400, injectable for tests). Optimistic update first, then resolve. `MessagesProvider` accepts optional `source` (default = built-in seed) for swappability. Fake realtime: a `useEffect` timer that occasionally `liveUpsert`s an inbound reply (opt-in via `simulateRealtime` prop, off in tests).
+      `send, markRead, markUnread, toggleFlag, archive, remove, bulk, createConversation, react, schedule, setActive, liveUpsert, liveDrop`. `commit = (mutator) => new Promise(r => setTimeout(r, LATENCY))` (LATENCY default 400, injectable for tests). Optimistic update first, then resolve. `MessagesProvider` accepts optional `source` (default = built-in seed) for swappability. Fake realtime: a `useEffect` timer that occasionally `liveUpsert`s an inbound reply (opt-in via `simulateRealtime` prop, off in tests).
 
 - [ ] **Step 4: Run tests → PASS.** `npm run sync && npx vitest run tests/components/comms-store.test.tsx`
 

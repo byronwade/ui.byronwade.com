@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { ReactFlow, Background, ReactFlowProvider } from "@xyflow/react";
-import { Panel } from "@/components/ai-elements/panel";
-import "@xyflow/react/dist/style.css";
+import { ReactFlow, Background, ReactFlowProvider } from "@xyflow/react"
+import { Panel } from "@/components/ai-elements/panel"
+import "@xyflow/react/dist/style.css"
 
 export default function Example() {
   return (
@@ -33,5 +33,5 @@ export default function Example() {
         </ReactFlowProvider>
       </div>
     </div>
-  );
+  )
 }

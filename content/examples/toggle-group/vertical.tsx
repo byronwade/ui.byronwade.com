@@ -1,11 +1,15 @@
-"use client";
+"use client"
 
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export default function Example() {
   return (
-    <ToggleGroup orientation="vertical" defaultValue={["left"]} variant="outline">
+    <ToggleGroup
+      orientation="vertical"
+      defaultValue={["left"]}
+      variant="outline"
+    >
       <ToggleGroupItem value="left" aria-label="Align left">
         <AlignLeftIcon />
       </ToggleGroupItem>
@@ -16,5 +20,5 @@ export default function Example() {
         <AlignRightIcon />
       </ToggleGroupItem>
     </ToggleGroup>
-  );
+  )
 }

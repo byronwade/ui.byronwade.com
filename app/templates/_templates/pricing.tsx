@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 // Pricing template — a three-tier marketing pricing page.
 // uses: Card, Badge, Button, SegmentedControl, Table, Separator
@@ -7,10 +7,10 @@
 // plan lifts out of the row on a brand-tinted card with a glow, while the billing
 // toggle re-prices every tier live. A full comparison table and an FAQ carry the
 // detail a real buyer needs before converting. Pure tokens; re-skins from --brand.
-import * as React from "react";
-import { ArrowRight, Check, Minus } from "lucide-react";
+import * as React from "react"
+import { ArrowRight, Check, Minus } from "lucide-react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 import {
   Card,
   CardContent,
@@ -18,11 +18,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { SegmentedControl } from "@/components/ui/segmented-control";
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { SegmentedControl } from "@/components/ui/segmented-control"
 import {
   Table,
   TableBody,
@@ -30,9 +30,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table"
 
-type Cycle = "monthly" | "annual";
+type Cycle = "monthly" | "annual"
 
 const tiers = [
   {
@@ -42,7 +42,12 @@ const tiers = [
     annual: 0,
     cta: "Start for free",
     featured: false,
-    points: ["1 project", "Community support", "1 GB bandwidth", "Basic analytics"],
+    points: [
+      "1 project",
+      "Community support",
+      "1 GB bandwidth",
+      "Basic analytics",
+    ],
   },
   {
     name: "Pro",
@@ -66,9 +71,15 @@ const tiers = [
     annual: 64,
     cta: "Talk to sales",
     featured: false,
-    points: ["SSO / SAML", "Audit log", "1 TB bandwidth", "SLA & DPA", "Dedicated support"],
+    points: [
+      "SSO / SAML",
+      "Audit log",
+      "1 TB bandwidth",
+      "SLA & DPA",
+      "Dedicated support",
+    ],
   },
-];
+]
 
 const matrix: { feature: string; values: (string | boolean)[] }[] = [
   { feature: "Projects", values: ["1", "Unlimited", "Unlimited"] },
@@ -79,7 +90,7 @@ const matrix: { feature: string; values: (string | boolean)[] }[] = [
   { feature: "SSO / SAML", values: [false, false, true] },
   { feature: "Audit log", values: [false, false, true] },
   { feature: "Support", values: ["Community", "Priority", "Dedicated"] },
-];
+]
 
 const faqs = [
   {
@@ -98,15 +109,15 @@ const faqs = [
     q: "Which payment methods do you accept?",
     a: "All major cards and, on the Scale plan, invoicing with net-30 terms.",
   },
-];
+]
 
 function price(tier: (typeof tiers)[number], cycle: Cycle) {
-  const n = cycle === "monthly" ? tier.monthly : tier.annual;
-  return n === 0 ? "$0" : `$${n}`;
+  const n = cycle === "monthly" ? tier.monthly : tier.annual
+  return n === 0 ? "$0" : `$${n}`
 }
 
 export function PricingTemplate() {
-  const [cycle, setCycle] = React.useState<Cycle>("annual");
+  const [cycle, setCycle] = React.useState<Cycle>("annual")
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-background text-foreground">
@@ -114,18 +125,24 @@ export function PricingTemplate() {
         aria-hidden
         className="bg-grid pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(70%_45%_at_50%_0%,#000,transparent)]"
       />
-      <div aria-hidden className="glow-brand pointer-events-none absolute inset-x-0 -top-24 h-80 opacity-60" />
+      <div
+        aria-hidden
+        className="glow-brand pointer-events-none absolute inset-x-0 -top-24 h-80 opacity-60"
+      />
 
       <div className="relative mx-auto max-w-5xl px-6 py-16 sm:py-20">
         {/* ── Header ──────────────────────────────────────────────── */}
         <header className="mx-auto max-w-2xl text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand">Pricing</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand">
+            Pricing
+          </p>
           <h1 className="mt-3 font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-            Simple pricing that <span className="text-gradient-brand">scales with you</span>.
+            Simple pricing that{" "}
+            <span className="text-gradient-brand">scales with you</span>.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            Start free, then pick a plan when you&apos;re ready to ship. Every tier includes the full
-            component library — you only pay for scale.
+            Start free, then pick a plan when you&apos;re ready to ship. Every
+            tier includes the full component library — you only pay for scale.
           </p>
 
           <div className="mt-7 flex items-center justify-center gap-3">
@@ -148,7 +165,8 @@ export function PricingTemplate() {
               key={tier.name}
               className={cn(
                 "relative",
-                tier.featured && "border-brand/40 shadow-float ring-1 ring-brand/20",
+                tier.featured &&
+                  "border-brand/40 shadow-float ring-1 ring-brand/20",
               )}
             >
               {tier.featured && (
@@ -218,7 +236,9 @@ export function PricingTemplate() {
               <TableBody>
                 {matrix.map((row) => (
                   <TableRow key={row.feature}>
-                    <TableCell className="pl-5 font-medium">{row.feature}</TableCell>
+                    <TableCell className="pl-5 font-medium">
+                      {row.feature}
+                    </TableCell>
                     {row.values.map((v, i) => (
                       <TableCell key={i} className="text-center last:pr-5">
                         {typeof v === "boolean" ? (
@@ -228,7 +248,9 @@ export function PricingTemplate() {
                             <Minus className="mx-auto size-4 text-muted-foreground/50" />
                           )
                         ) : (
-                          <span className="text-sm text-muted-foreground">{v}</span>
+                          <span className="text-sm text-muted-foreground">
+                            {v}
+                          </span>
                         )}
                       </TableCell>
                     ))}
@@ -248,7 +270,9 @@ export function PricingTemplate() {
             {faqs.map((f) => (
               <div key={f.q} className="py-5">
                 <dt className="text-sm font-medium">{f.q}</dt>
-                <dd className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.a}</dd>
+                <dd className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  {f.a}
+                </dd>
               </div>
             ))}
           </dl>
@@ -256,12 +280,16 @@ export function PricingTemplate() {
 
         {/* ── CTA band ────────────────────────────────────────────── */}
         <section className="relative mt-16 overflow-hidden rounded-3xl border border-brand/30 bg-brand/5 px-6 py-12 text-center">
-          <div aria-hidden className="glow-brand pointer-events-none absolute inset-x-0 -top-10 h-40 opacity-70" />
+          <div
+            aria-hidden
+            className="glow-brand pointer-events-none absolute inset-x-0 -top-10 h-40 opacity-70"
+          />
           <h2 className="relative font-heading text-2xl font-semibold tracking-tight text-balance">
             Ready to ship something calm?
           </h2>
           <p className="relative mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Spin up a workspace in under a minute. No credit card required on the Starter plan.
+            Spin up a workspace in under a minute. No credit card required on
+            the Starter plan.
           </p>
           <div className="relative mt-6 flex flex-wrap items-center justify-center gap-3">
             <Button size="lg">
@@ -275,5 +303,5 @@ export function PricingTemplate() {
         </section>
       </div>
     </div>
-  );
+  )
 }

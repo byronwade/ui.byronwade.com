@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react"
+import { Textarea } from "@/components/ui/textarea"
 
-const LIMIT = 280;
+const LIMIT = 280
 
 export default function Example() {
-  const [value, setValue] = useState("");
-  const remaining = LIMIT - value.length;
-  const isNearLimit = remaining <= 20 && remaining >= 0;
-  const isOver = remaining < 0;
+  const [value, setValue] = useState("")
+  const remaining = LIMIT - value.length
+  const isNearLimit = remaining <= 20 && remaining >= 0
+  const isOver = remaining < 0
 
   return (
     <div className="flex flex-col gap-3 p-6 max-w-md">
@@ -22,8 +22,8 @@ export default function Example() {
             isOver
               ? "text-destructive"
               : isNearLimit
-              ? "text-amber-500"
-              : "text-muted-foreground"
+                ? "text-warning"
+                : "text-muted-foreground"
           }`}
         >
           {remaining}
@@ -48,5 +48,5 @@ export default function Example() {
         </button>
       </div>
     </div>
-  );
+  )
 }

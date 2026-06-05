@@ -1,9 +1,9 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 const projects = Array.from({ length: 8 }, (_, i) => ({
   title: `Project ${i + 1}`,
   subtitle: `Updated ${i + 1} day${i === 0 ? "" : "s"} ago`,
-}));
+}))
 
 export default function Example() {
   return (
@@ -17,5 +17,5 @@ export default function Example() {
         ))}
       </div>
     </ScrollArea>
-  );
+  )
 }

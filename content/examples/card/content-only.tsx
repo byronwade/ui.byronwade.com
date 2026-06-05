@@ -1,14 +1,26 @@
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
-import { CheckCircle2, Clock, AlertCircle } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card"
+import { CheckCircle2, Clock, AlertCircle } from "lucide-react"
 
 const tasks = [
-  { icon: CheckCircle2, color: "text-emerald-500", label: "Database migration", meta: "Completed 9:14 AM" },
-  { icon: Clock, color: "text-amber-500", label: "Deploy to staging", meta: "In progress · ~4 min left" },
-  { icon: AlertCircle, color: "text-rose-500", label: "Run integration tests", meta: "Blocked — waiting on staging" },
-];
+  {
+    icon: CheckCircle2,
+    color: "text-success",
+    label: "Database migration",
+    meta: "Completed 9:14 AM",
+  },
+  {
+    icon: Clock,
+    color: "text-warning",
+    label: "Deploy to staging",
+    meta: "In progress · ~4 min left",
+  },
+  {
+    icon: AlertCircle,
+    color: "text-destructive",
+    label: "Run integration tests",
+    meta: "Blocked — waiting on staging",
+  },
+]
 
 export default function Example() {
   return (
@@ -16,7 +28,9 @@ export default function Example() {
       {/* Content-only: no header, no footer — just a clean container */}
       <Card className="w-72">
         <CardContent>
-          <p className="text-sm font-medium text-foreground mb-3">Deployment checklist</p>
+          <p className="text-sm font-medium text-foreground mb-3">
+            Deployment checklist
+          </p>
           <ul className="space-y-3">
             {tasks.map(({ icon: Icon, color, label, meta }) => (
               <li key={label} className="flex items-start gap-3">
@@ -40,5 +54,5 @@ export default function Example() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

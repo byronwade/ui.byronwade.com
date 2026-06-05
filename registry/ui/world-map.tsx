@@ -6,42 +6,42 @@
  * `--muted-foreground` token at runtime (re-skins with the theme), the container
  * uses `bg-background`, and `cn()` + `className` + `data-slot` are wired in.
  */
-"use client";
+"use client"
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
-import DottedMap from "dotted-map";
-import { useTheme } from "next-themes";
+import { useEffect, useRef, useState } from "react"
+import { motion } from "motion/react"
+import DottedMap from "dotted-map"
+import { useTheme } from "next-themes"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 // Building the dotted geometry is expensive (~1s), so construct it once per
 // client bundle and memoize the generated SVG per dot color rather than
 // regenerating the whole map on every mount.
-const dottedMap = new DottedMap({ height: 100, grid: "diagonal" });
-const svgCache = new Map<string, string>();
+const dottedMap = new DottedMap({ height: 100, grid: "diagonal" })
+const svgCache = new Map<string, string>()
 
 function baseMapSvg(color: string): string {
-  const cached = svgCache.get(color);
-  if (cached) return cached;
+  const cached = svgCache.get(color)
+  if (cached) return cached
   const svg = dottedMap.getSVG({
     radius: 0.22,
     color,
     shape: "circle",
     backgroundColor: "transparent",
-  });
-  svgCache.set(color, svg);
-  return svg;
+  })
+  svgCache.set(color, svg)
+  return svg
 }
 
 interface MapProps {
   dots?: Array<{
-    start: { lat: number; lng: number; label?: string };
-    end: { lat: number; lng: number; label?: string };
-  }>;
+    start: { lat: number; lng: number; label?: string }
+    end: { lat: number; lng: number; label?: string }
+  }>
   /** Color of the connection arcs and points. Defaults to the brand token. */
-  lineColor?: string;
-  className?: string;
+  lineColor?: string
+  className?: string
 }
 
 export function WorldMap({
@@ -49,33 +49,33 @@ export function WorldMap({
   lineColor = "var(--brand)",
   className,
 }: MapProps) {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const { theme } = useTheme();
-  const [svgMap, setSvgMap] = useState("");
+  const svgRef = useRef<SVGSVGElement>(null)
+  const { theme } = useTheme()
+  const [svgMap, setSvgMap] = useState("")
 
   // Resolve the dotted base-map color from the design tokens so it re-skins with
   // the theme instead of hardcoding black/white. Re-runs on theme change.
   useEffect(() => {
-    const root = getComputedStyle(document.documentElement);
+    const root = getComputedStyle(document.documentElement)
     const dotColor =
-      root.getPropertyValue("--muted-foreground").trim() || "currentColor";
-    setSvgMap(baseMapSvg(dotColor));
-  }, [theme]);
+      root.getPropertyValue("--muted-foreground").trim() || "currentColor"
+    setSvgMap(baseMapSvg(dotColor))
+  }, [theme])
 
   const projectPoint = (lat: number, lng: number) => {
-    const x = (lng + 180) * (800 / 360);
-    const y = (90 - lat) * (400 / 180);
-    return { x, y };
-  };
+    const x = (lng + 180) * (800 / 360)
+    const y = (90 - lat) * (400 / 180)
+    return { x, y }
+  }
 
   const createCurvedPath = (
     start: { x: number; y: number },
     end: { x: number; y: number },
   ) => {
-    const midX = (start.x + end.x) / 2;
-    const midY = Math.min(start.y, end.y) - 50;
-    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
-  };
+    const midX = (start.x + end.x) / 2
+    const midY = Math.min(start.y, end.y) - 50
+    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`
+  }
 
   return (
     <div
@@ -102,8 +102,8 @@ export function WorldMap({
         className="pointer-events-none absolute inset-0 h-full w-full select-none"
       >
         {dots.map((dot, i) => {
-          const startPoint = projectPoint(dot.start.lat, dot.start.lng);
-          const endPoint = projectPoint(dot.end.lat, dot.end.lng);
+          const startPoint = projectPoint(dot.start.lat, dot.start.lng)
+          const endPoint = projectPoint(dot.end.lat, dot.end.lng)
           return (
             <g key={`path-group-${i}`}>
               <motion.path
@@ -116,7 +116,7 @@ export function WorldMap({
                 transition={{ duration: 1, delay: 0.5 * i, ease: "easeOut" }}
               />
             </g>
-          );
+          )
         })}
 
         <defs>
@@ -131,7 +131,7 @@ export function WorldMap({
         {dots.map((dot, i) => (
           <g key={`points-group-${i}`}>
             {[dot.start, dot.end].map((point, j) => {
-              const { x, y } = projectPoint(point.lat, point.lng);
+              const { x, y } = projectPoint(point.lat, point.lng)
               return (
                 <g key={`point-${i}-${j}`}>
                   <circle cx={x} cy={y} r="2" fill={lineColor} />
@@ -154,13 +154,11 @@ export function WorldMap({
                     />
                   </circle>
                 </g>
-              );
+              )
             })}
           </g>
         ))}
       </svg>
     </div>
-  );
+  )
 }
-
-export default WorldMap;

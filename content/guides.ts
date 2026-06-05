@@ -8,18 +8,18 @@
  */
 
 /** Deployed registry base URL (the Vercel deployment or your custom domain). */
-export const REGISTRY_URL = "https://ui.byronwade.com";
+export const REGISTRY_URL = "https://ui.byronwade.com"
 
 export type Guide = {
   /** Path segment under /docs ("" is the Introduction / catalog index). */
-  slug: string;
-  href: string;
+  slug: string
+  href: string
   /** Sidebar label. */
-  label: string;
+  label: string
   /** In-page heading + document title. */
-  title: string;
-  description: string;
-};
+  title: string
+  description: string
+}
 
 export const guides: Guide[] = [
   {
@@ -27,7 +27,8 @@ export const guides: Guide[] = [
     href: "/docs",
     label: "Introduction",
     title: "Introduction",
-    description: "What byronwade/ui is, why it exists, and the whole catalog at a glance.",
+    description:
+      "What byronwade/ui is, why it exists, and the whole catalog at a glance.",
   },
   {
     slug: "philosophy",
@@ -58,7 +59,8 @@ export const guides: Guide[] = [
     href: "/docs/theming",
     label: "Theming",
     title: "Theming",
-    description: "Re-skin the entire system — light and dark — from a single CSS variable.",
+    description:
+      "Re-skin the entire system — light and dark — from a single CSS variable.",
   },
   {
     slug: "typography",
@@ -76,7 +78,7 @@ export const guides: Guide[] = [
     description:
       "Install one rule so Cursor, Claude, Copilot, and others keep building with these components and tokens.",
   },
-];
+]
 
 /** Guides that are real sub-pages (everything except the Introduction index). */
-export const guidePages = guides.filter((g) => g.slug !== "");
+export const guidePages = guides.filter((g) => g.slug !== "")

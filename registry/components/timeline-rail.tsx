@@ -20,7 +20,7 @@ export function TimelineRail({
   className?: string;
 }) {
   return (
-    <div className={cn("space-y-4", className)}>
+    <div data-slot="timeline-rail" className={cn("space-y-4", className)}>
       {groups.map((g, gi) => (
         <div key={gi} className="space-y-2">
           <div className="flex justify-center">

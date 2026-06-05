@@ -72,22 +72,22 @@ A generalized, tokenized port of `NumberActivityRing`. Client component (`"use c
 
 ```ts
 type RingSegment = {
-  value: number;
-  label: string;
-  tone?: StatusTone;   // from status-dot; maps to a stroke-<tone> utility
-  href?: string;       // optional drill-down target (rendered/handled by consumer wiring)
-};
+  value: number
+  label: string
+  tone?: StatusTone // from status-dot; maps to a stroke-<tone> utility
+  href?: string // optional drill-down target (rendered/handled by consumer wiring)
+}
 
 function ActivityRing(props: {
-  segments: RingSegment[];                 // 2+ segments supported
-  size?: number;                           // default 168
-  thickness?: number;                      // default 12
-  gap?: number;                            // arc gap between segments, default 18
-  centerLabel?: string;                    // label shown with the total when idle, default "total"
-  formatValue?: (n: number) => string;     // default: n => n.toLocaleString()
-  onSegmentClick?: (segment: RingSegment, index: number) => void;
-  className?: string;
-}): JSX.Element;
+  segments: RingSegment[] // 2+ segments supported
+  size?: number // default 168
+  thickness?: number // default 12
+  gap?: number // arc gap between segments, default 18
+  centerLabel?: string // label shown with the total when idle, default "total"
+  formatValue?: (n: number) => string // default: n => n.toLocaleString()
+  onSegmentClick?: (segment: RingSegment, index: number) => void
+  className?: string
+}): JSX.Element
 ```
 
 Tone defaulting: segments without an explicit `tone` cycle through a deterministic order
@@ -98,14 +98,14 @@ brand + soft-neutral like the signalroute original.
 
 signalroute used raw CSS vars and `color-mix` inline. Translate to token utilities:
 
-| signalroute | registry |
-|---|---|
-| `var(--brand)` (inbound) | `stroke-brand` (tone `info`) |
+| signalroute                                                                | registry                                                                                                                                                                  |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `var(--brand)` (inbound)                                                   | `stroke-brand` (tone `info`)                                                                                                                                              |
 | `color-mix(in oklch, var(--muted-foreground) 45%, var(--card))` (outbound) | `stroke-muted-foreground/40` — **preserves the deliberate "soften neutral so brand stays the accent" refinement** via tone-with-opacity (Design DNA), not full muted-gray |
-| other tones | `stroke-success` / `stroke-warning` / `stroke-destructive` / `stroke-muted-foreground` (same map as `Gauge`) |
-| track | `stroke-muted` |
-| dark tooltip | `bg-foreground text-background shadow-float` (already tokenized) |
-| legend dot color | reuse `StatusDot` tones (`bg-*` utilities) |
+| other tones                                                                | `stroke-success` / `stroke-warning` / `stroke-destructive` / `stroke-muted-foreground` (same map as `Gauge`)                                                              |
+| track                                                                      | `stroke-muted`                                                                                                                                                            |
+| dark tooltip                                                               | `bg-foreground text-background shadow-float` (already tokenized)                                                                                                          |
+| legend dot color                                                           | reuse `StatusDot` tones (`bg-*` utilities)                                                                                                                                |
 
 `data-slot` attributes on parts: `activity-ring`, `activity-ring-track`, `activity-ring-segment`,
 `activity-ring-center`, `activity-ring-tooltip`, `activity-ring-legend`, `activity-ring-legend-chip`.
