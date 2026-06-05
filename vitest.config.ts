@@ -1,4 +1,4 @@
-import { defineConfig, coverageConfigDefaults } from "vitest/config";
+import { defineConfig, configDefaults, coverageConfigDefaults } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
@@ -8,6 +8,12 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: ["./tests/setup.ts"],
+    // Claude Code creates throwaway git worktrees of OTHER branches under
+    // `.claude/worktrees/**` (1000s of foreign test files). Without this the
+    // main suite globs and runs them, so its pass/fail depends on unrelated
+    // branches' WIP — an intermittent, confusing "flake". Scope discovery to
+    // this checkout only.
+    exclude: [...configDefaults.exclude, "**/.claude/**"],
     coverage: {
       provider: "v8",
       // The gate covers design-system component source only. `include` is matched
