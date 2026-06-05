@@ -58,6 +58,18 @@ agent following that rule would produce identical-looking code.** That means:
 - **Composites** — Layout and pattern components live in `registry/components/` and compose UI primitives.
 - **Shipped AI rule** — `registry/rules/byronwade-ui.mdc` is published as the `design-rules` item (`@byronwade/design-rules`). It is the consumer-facing version of the Design DNA above; keep the two aligned.
 
+## Code conventions
+
+The Design DNA above governs what a component *looks like*; **`docs/CONVENTIONS.md`** governs how the
+code is *organized and written* — file location, kebab-case naming, named exports at the file bottom,
+consumer-only imports, Prettier (`semi: false`), `data-slot` presence, and minimal/self-documenting
+comments. It is mirrored for editors in `.cursor/rules/byronwade-conventions.mdc` and enforced by
+`npm run check:conventions` (structural) + `npm run check:format` (Prettier). Read it before authoring.
+
+Two agents back this up: **`component-author`** scaffolds a new component fully to-spec (source +
+registry item + example + test + rule line), and **`design-dna-reviewer`** audits a diff against the
+DNA and conventions before merging. Both live in `.claude/agents/`.
+
 ## Registry automation
 
 This repo is organized for **automated shadcn registry publishing**. Source flows one direction:
