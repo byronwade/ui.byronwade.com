@@ -97,7 +97,12 @@ Before writing any markup, check whether a component already exists. Reach for t
   row), `description-box` (tinted panel with a views/date header and a collapsible "...more" /
   "Show less" body), `comment` (threaded comment: avatar + author/time, like/dislike, reply,
   pinned + creator-heart, replies disclosure), `comment-composer` (avatar + underline input that
-  reveals Cancel/Comment on focus; Comment disabled while empty)
+  reveals Cancel/Comment on focus; Comment disabled while empty). Shorts & player chrome:
+  `shorts-player` (vertical 9:16 Shorts player: media frame + engagement `action-rail` +
+  author/caption/sound overlay), `mini-player` (corner PiP "continue watching" card: poster +
+  play/pause overlay, progress, close + expand), `chapter-list` (video chapter rows with mono
+  timestamps + active-chapter highlight derived from the playhead), `playback-menu` (player
+  settings dropdown; setting rows open single-select option submenus)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),

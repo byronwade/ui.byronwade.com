@@ -3721,6 +3721,91 @@
       ]
     },
     {
+      "name": "shorts-player",
+      "type": "registry:component",
+      "title": "Shorts player",
+      "description": "A YouTube Shorts-style vertical 9:16 player with a right-side engagement rail and a bottom-left author, caption, and sound overlay.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/action-rail",
+        "@byronwade/avatar",
+        "@byronwade/verified-badge",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/shorts-player.tsx",
+          "type": "registry:component",
+          "target": "components/shorts-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mini-player",
+      "type": "registry:component",
+      "title": "Mini player",
+      "description": "Picture-in-picture mini player card with a play/pause poster overlay, progress, and close/expand controls.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/mini-player.tsx",
+          "type": "registry:component",
+          "target": "components/mini-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chapter-list",
+      "type": "registry:component",
+      "title": "Chapter list",
+      "description": "A YouTube-style chapter list with timestamps, thumbnails, and an active chapter derived from the playhead.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/chapter-list.tsx",
+          "type": "registry:component",
+          "target": "components/chapter-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "playback-menu",
+      "type": "registry:component",
+      "title": "Playback menu",
+      "description": "YouTube-style player settings menu: gear-triggered dropdown of setting groups (quality, speed, subtitles), each opening a single-select radio submenu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/playback-menu.tsx",
+          "type": "registry:component",
+          "target": "components/playback-menu.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -3897,7 +3982,11 @@
         "@byronwade/engagement-bar",
         "@byronwade/description-box",
         "@byronwade/comment",
-        "@byronwade/comment-composer"
+        "@byronwade/comment-composer",
+        "@byronwade/shorts-player",
+        "@byronwade/mini-player",
+        "@byronwade/chapter-list",
+        "@byronwade/playback-menu"
       ]
     }
   ]
