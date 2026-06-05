@@ -81,11 +81,18 @@ export function MorphSurface({
     deps: [grow, placement, size?.w, size?.h],
   })
 
-  // The hook sets panel opacity:1 / rest opacity:0 inline on open but doesn't
-  // reset them on close. Restore the collapsed view (panel hidden, rest shown)
-  // so the panel doesn't stay visible inside the shrunken box.
+  // The hook cross-fades rest↔panel only for height-grow (its width-only branch
+  // is for consumers that swap their own content). For width-grow we own the
+  // cross-fade here: reveal the panel + hide the rest on open. On close (any
+  // grow) restore the collapsed view so the panel doesn't linger.
   useIsoLayoutEffect(() => {
-    if (open) return
+    if (open) {
+      if (grow === "width") {
+        if (panelRef.current) panelRef.current.style.opacity = "1"
+        if (restRef.current) restRef.current.style.opacity = "0"
+      }
+      return
+    }
     if (panelRef.current) panelRef.current.style.opacity = "0"
     if (restRef.current) restRef.current.style.opacity = ""
   })

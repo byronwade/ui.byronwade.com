@@ -5,7 +5,9 @@ import { MorphSidebar } from "@/components/ui/morph-sidebar"
 
 export default function Example() {
   return (
-    <div className="flex h-80 overflow-hidden rounded-xl edge">
+    // App-shell frame: the rail is absolute-anchored to the left edge and
+    // blooms WIDER over the content, so the content clears it with left padding.
+    <div className="relative h-80 w-full overflow-hidden rounded-xl edge bg-background">
       <MorphSidebar
         brand="UI"
         items={[
@@ -15,12 +17,12 @@ export default function Example() {
           { id: "settings", label: "Settings", icon: Settings },
         ]}
       />
-      <div className="flex-1 space-y-3 bg-background p-5">
-        <div className="h-6 w-40 rounded-md bg-muted" />
-        <div className="h-24 rounded-lg border border-border bg-card" />
+      <div className="h-full space-y-3 overflow-auto py-5 pr-5 pl-[76px]">
+        <div className="h-7 w-40 rounded-md bg-muted" />
+        <div className="h-28 rounded-lg bg-muted/60" />
         <div className="grid grid-cols-2 gap-3">
-          <div className="h-16 rounded-lg border border-border bg-card" />
-          <div className="h-16 rounded-lg border border-border bg-card" />
+          <div className="h-20 rounded-lg bg-muted/60" />
+          <div className="h-20 rounded-lg bg-muted/60" />
         </div>
       </div>
     </div>
