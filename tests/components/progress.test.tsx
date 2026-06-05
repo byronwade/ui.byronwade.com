@@ -1512,3 +1512,27 @@ describe("Progress — edge cases", () => {
     expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "42");
   });
 });
+
+describe("Progress — tone", () => {
+  it.each([
+    ["default", "bg-primary"],
+    ["brand", "bg-brand"],
+    ["success", "bg-success"],
+    ["warning", "bg-warning"],
+    ["destructive", "bg-destructive"],
+  ] as const)("tone=%s tints the indicator with %s", (tone, cls) => {
+    const { container } = render(<Progress value={50} tone={tone} />);
+    const indicator = container.querySelector(
+      '[data-slot="progress-indicator"]'
+    );
+    expect(indicator).not.toBeNull();
+    expect(indicator).toHaveClass(cls);
+  });
+
+  it("defaults to bg-primary when tone is omitted", () => {
+    const { container } = render(<Progress value={50} />);
+    expect(
+      container.querySelector('[data-slot="progress-indicator"]')
+    ).toHaveClass("bg-primary");
+  });
+});

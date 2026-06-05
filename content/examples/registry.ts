@@ -20,6 +20,7 @@ import ActivityRingTones from "./activity-ring/tones";
 import ActivityRingWithVerdict from "./activity-ring/with-verdict";
 import AiArtifactDefault from "./ai-artifact/default";
 import AiAttachmentsDefault from "./ai-attachments/default";
+import AiAttachmentsVariants from "./ai-attachments/variants";
 import AiCanvasDefault from "./ai-canvas/default";
 import AiChainOfThoughtDefault from "./ai-chain-of-thought/default";
 import AiCheckpointDefault from "./ai-checkpoint/default";
@@ -43,6 +44,7 @@ import AiPromptInputDefault from "./ai-prompt-input/default";
 import AiQueueDefault from "./ai-queue/default";
 import AiReasoningDefault from "./ai-reasoning/default";
 import AiShimmerDefault from "./ai-shimmer/default";
+import AiShimmerTones from "./ai-shimmer/tones";
 import AiSourcesDefault from "./ai-sources/default";
 import AiSuggestionDefault from "./ai-suggestion/default";
 import AiTaskDefault from "./ai-task/default";
@@ -106,6 +108,7 @@ import ButtonTrailingIcon from "./button/trailing-icon";
 import ButtonVariants from "./button/variants";
 import ButtonWithIcon from "./button/with-icon";
 import ButtonGroupDefault from "./button-group/default";
+import ButtonGroupVertical from "./button-group/vertical";
 import CalendarDefault from "./calendar/default";
 import CalendarAppointment from "./calendar/appointment";
 import CalendarPricing from "./calendar/pricing";
@@ -254,6 +257,7 @@ import InputGroupWithText from "./input-group/with-text";
 import IphoneDefault from "./iphone/default";
 import KanbanDefault from "./kanban/default";
 import KbdDefault from "./kbd/default";
+import KbdSizes from "./kbd/sizes";
 import KineticTextDefault from "./kinetic-text/default";
 import LabelDefault from "./label/default";
 import LabelDisabled from "./label/disabled";
@@ -311,10 +315,10 @@ import PopoverRichContent from "./popover/rich-content";
 import PopoverWithForm from "./popover/with-form";
 import PriceRangeFilterDefault from "./price-range-filter/default";
 import ProgressDefault from "./progress/default";
-import ProgressColors from "./progress/colors";
 import ProgressControlled from "./progress/controlled";
 import ProgressIndeterminate from "./progress/indeterminate";
 import ProgressSizes from "./progress/sizes";
+import ProgressTones from "./progress/tones";
 import ProgressWithFormat from "./progress/with-format";
 import QrCodeDefault from "./qr-code/default";
 import RadioGroupDefault from "./radio-group/default";
@@ -381,6 +385,7 @@ import SonnerVariants from "./sonner/variants";
 import SonnerWithAction from "./sonner/with-action";
 import SonnerWithDescription from "./sonner/with-description";
 import SpinnerDefault from "./spinner/default";
+import SpinnerSizes from "./spinner/sizes";
 import SplitWithRailDefault from "./split-with-rail/default";
 import SplitWithRailCustomLayout from "./split-with-rail/custom-layout";
 import SplitWithRailMetricsSummary from "./split-with-rail/metrics-summary";
@@ -463,6 +468,7 @@ import VerificationProgressStatuses from "./verification-progress/statuses";
 import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
 import VideoPlayerDefault from "./video-player/default";
+import VideoPlayerVariants from "./video-player/variants";
 import WorldMapDefault from "./world-map/default";
 
 export type Example = { name: string; file: string; Component: ComponentType };
@@ -497,6 +503,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "ai-attachments": [
     { name: "Default", file: "ai-attachments/default.tsx", Component: AiAttachmentsDefault },
+    { name: "Variants", file: "ai-attachments/variants.tsx", Component: AiAttachmentsVariants },
   ],
   "ai-canvas": [
     { name: "Default", file: "ai-canvas/default.tsx", Component: AiCanvasDefault },
@@ -566,6 +573,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "ai-shimmer": [
     { name: "Default", file: "ai-shimmer/default.tsx", Component: AiShimmerDefault },
+    { name: "Tones", file: "ai-shimmer/tones.tsx", Component: AiShimmerTones },
   ],
   "ai-sources": [
     { name: "Default", file: "ai-sources/default.tsx", Component: AiSourcesDefault },
@@ -661,6 +669,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "button-group": [
     { name: "Default", file: "button-group/default.tsx", Component: ButtonGroupDefault },
+    { name: "Vertical", file: "button-group/vertical.tsx", Component: ButtonGroupVertical },
   ],
   "calendar": [
     { name: "Default", file: "calendar/default.tsx", Component: CalendarDefault },
@@ -879,6 +888,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "kbd": [
     { name: "Default", file: "kbd/default.tsx", Component: KbdDefault },
+    { name: "Sizes", file: "kbd/sizes.tsx", Component: KbdSizes },
   ],
   "kinetic-text": [
     { name: "Default", file: "kinetic-text/default.tsx", Component: KineticTextDefault },
@@ -962,10 +972,10 @@ export const examples: Record<string, Example[]> = {
   ],
   "progress": [
     { name: "Default", file: "progress/default.tsx", Component: ProgressDefault },
-    { name: "Colors", file: "progress/colors.tsx", Component: ProgressColors },
     { name: "Controlled", file: "progress/controlled.tsx", Component: ProgressControlled },
     { name: "Indeterminate", file: "progress/indeterminate.tsx", Component: ProgressIndeterminate },
     { name: "Sizes", file: "progress/sizes.tsx", Component: ProgressSizes },
+    { name: "Tones", file: "progress/tones.tsx", Component: ProgressTones },
     { name: "With Format", file: "progress/with-format.tsx", Component: ProgressWithFormat },
   ],
   "qr-code": [
@@ -1062,6 +1072,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "spinner": [
     { name: "Default", file: "spinner/default.tsx", Component: SpinnerDefault },
+    { name: "Sizes", file: "spinner/sizes.tsx", Component: SpinnerSizes },
   ],
   "split-with-rail": [
     { name: "Default", file: "split-with-rail/default.tsx", Component: SplitWithRailDefault },
@@ -1174,6 +1185,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },
+    { name: "Variants", file: "video-player/variants.tsx", Component: VideoPlayerVariants },
   ],
   "world-map": [
     { name: "Default", file: "world-map/default.tsx", Component: WorldMapDefault },

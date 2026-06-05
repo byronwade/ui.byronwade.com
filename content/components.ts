@@ -181,19 +181,19 @@ export const components: ComponentDoc[] = [
     slug: "kbd", name: "Kbd", category: "Data display",
     description: "Keyboard-key indicator with sm/default/lg sizes; KbdGroup joins keys into a shortcut sequence. Mono, token-driven.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","sizes"],
   },
   {
     slug: "spinner", name: "Spinner", category: "Feedback",
     description: "Pure-CSS loading spinner in currentColor (sm/default/lg) with role=status and an accessible label.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","sizes"],
   },
   {
     slug: "button-group", name: "Button group", category: "Primitives",
     description: "Joins related buttons into one segmented control with shared, overlapped edges — horizontal or vertical.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","vertical"],
   },
   {
     slug: "native-select", name: "Native select", category: "Forms",
@@ -382,22 +382,23 @@ export const components: ComponentDoc[] = [
   },
   {
     slug: "alert", name: "Alert", category: "Feedback",
-    description: "A compound alert component for surfacing inline feedback messages with an optional title, description, icon slot, and action button.",
+    description: "A compound alert component for surfacing inline feedback messages with an optional title, description, icon slot, and action button. Intent tones (success, warning, destructive) follow the semantic tokens.",
     props: [
-      { name: "variant", type: '"default" | "destructive"', default: '"default"', description: 'Controls the color style of the alert; use "destructive" for error or warning states.' },
+      { name: "variant", type: '"default" | "success" | "warning" | "destructive"', default: '"default"', description: "Intent tone of the alert — colors the title, icon, and description via semantic tokens (text on the card surface)." },
       { name: "className", type: "string", description: "Additional CSS class names merged onto the root element." },
     ],
-    examples: ["default"],
+    examples: ["default", "variants", "with-icon", "with-action", "with-link", "no-icon"],
   },
   {
     slug: "progress", name: "Progress", category: "Feedback",
-    description: "A linear progress bar built on Base UI that displays a labeled, accessible indicator of completion with optional label and numeric value display.",
+    description: "A linear progress bar built on Base UI that displays a labeled, accessible indicator of completion with optional label and numeric value display, plus token-driven intent tones (brand, success, warning, destructive).",
     props: [
       { name: "value", type: "number | null", description: "The current progress value (typically 0–100). Pass null for indeterminate state." },
+      { name: "tone", type: '"default" | "brand" | "success" | "warning" | "destructive"', default: '"default"', description: "Colors the indicator bar via semantic tokens — e.g. success for complete, warning/destructive for at-risk." },
       { name: "className", type: "string", description: "Additional CSS class names applied to the root wrapper element." },
       { name: "children", type: "React.ReactNode", description: "Optional children rendered inside the root before the built-in track (e.g. ProgressLabel, ProgressValue)." },
     ],
-    examples: ["default"],
+    examples: ["default", "tones"],
   },
   {
     slug: "skeleton", name: "Skeleton", category: "Feedback",
@@ -843,7 +844,7 @@ export const components: ComponentDoc[] = [
     description: "Animated text-shimmer that sweeps a token-driven light gradient across muted text for AI thinking/streaming states.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     npmDeps: ["motion"],
-    examples: ["default"],
+    examples: ["default","tones"],
   },
   {
     slug: "ai-suggestion", name: "Suggestion", category: "AI",
@@ -1030,7 +1031,7 @@ export const components: ComponentDoc[] = [
     description: "A compound component for displaying file, media, and source-document attachments in grid, inline, or list layouts with previews, remove buttons, and hover-card details.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils", "@byronwade/button", "@byronwade/hover-card"],
     npmDeps: ["ai", "lucide-react"],
-    examples: ["default"],
+    examples: ["default","variants"],
   },
   {
     slug: "ai-connection", name: "Connection", category: "AI",
@@ -1110,7 +1111,7 @@ export const components: ComponentDoc[] = [
     slug: "video-player", name: "Video player", category: "UI",
     description: "media-chrome player with default/minimal/theater/poster variants. Adapted from kibo-ui.",
     npmDeps: ["media-chrome"], registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
+    examples: ["default","variants"],
   },
   {
     slug: "kanban", name: "Kanban", category: "Data display",
