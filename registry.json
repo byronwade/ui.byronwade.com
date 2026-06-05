@@ -2141,6 +2141,25 @@
       ]
     },
     {
+      "name": "now-playing-bar",
+      "type": "registry:ui",
+      "title": "Now playing bar",
+      "description": "Sticky transport bar composed from album-cover + slider. Controlled parts: NowPlayingBarTrack, NowPlayingBarControls, NowPlayingBarProgress, NowPlayingBarExtras. Active controls follow --brand.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/album-cover",
+        "@byronwade/slider",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/now-playing-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/now-playing-bar.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
