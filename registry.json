@@ -2180,6 +2180,24 @@
       ]
     },
     {
+      "name": "playlist-card",
+      "type": "registry:component",
+      "title": "Playlist card",
+      "description": "Browse-grid tile composing album-cover + title + description. Surfaces the cover's hover play button and active equalizer; lifts on hover.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/album-cover",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/playlist-card.tsx",
+          "type": "registry:component",
+          "target": "components/playlist-card.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
