@@ -2198,6 +2198,26 @@
       ]
     },
     {
+      "name": "artist-header",
+      "type": "registry:component",
+      "title": "Artist header",
+      "description": "Artist hero composing album-cover + verified badge + monthly-listeners stat (font-mono) + Play/Follow buttons. Editorial name typography; Play follows --brand.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/album-cover",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/artist-header.tsx",
+          "type": "registry:component",
+          "target": "components/artist-header.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
