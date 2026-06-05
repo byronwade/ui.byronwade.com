@@ -7,6 +7,7 @@ import AccordionKeepMounted from "./accordion/keep-mounted";
 import AccordionMultiple from "./accordion/multiple";
 import AccordionNestedContent from "./accordion/nested-content";
 import AccordionWithIcon from "./accordion/with-icon";
+import ActionRailDefault from "./action-rail/default";
 import ActivityGridDefault from "./activity-grid/default";
 import ActivityGridColumns from "./activity-grid/columns";
 import ActivityGridEmpty from "./activity-grid/empty";
@@ -144,6 +145,9 @@ import CenteredFocalLoadingState from "./centered-focal/loading-state";
 import CenteredFocalNoBackdrop from "./centered-focal/no-backdrop";
 import CenteredFocalWithForm from "./centered-focal/with-form";
 import CenteredFocalWithIllustrationBackdrop from "./centered-focal/with-illustration-backdrop";
+import ChannelBylineDefault from "./channel-byline/default";
+import ChannelHeaderDefault from "./channel-header/default";
+import ChapterListDefault from "./chapter-list/default";
 import ChartDefault from "./chart/default";
 import ChartBarChart from "./chart/bar-chart";
 import ChartCustomTooltip from "./chart/custom-tooltip";
@@ -161,6 +165,7 @@ import CheckboxDisabled from "./checkbox/disabled";
 import CheckboxIndeterminate from "./checkbox/indeterminate";
 import CheckboxReadonly from "./checkbox/readonly";
 import CheckboxWithLabel from "./checkbox/with-label";
+import ChipBarDefault from "./chip-bar/default";
 import CollapsibleDefault from "./collapsible/default";
 import CollapsibleDisabled from "./collapsible/disabled";
 import CollapsibleFaq from "./collapsible/faq";
@@ -179,12 +184,16 @@ import CommandInline from "./command/inline";
 import CommandPeople from "./command/people";
 import CommandWithIcons from "./command/with-icons";
 import CommandResultDefault from "./command-result/default";
+import CommentDefault from "./comment/default";
+import CommentComposerDefault from "./comment-composer/default";
+import CommentModerationRowDefault from "./comment-moderation-row/default";
 import ConversationListDefault from "./conversation-list/default";
 import CreditCardDefault from "./credit-card/default";
 import CreditCardTones from "./credit-card/tones";
 import CursorDefault from "./cursor/default";
 import CursorTones from "./cursor/tones";
 import CustomerCardDefault from "./customer-card/default";
+import DescriptionBoxDefault from "./description-box/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
 import DetailHeaderManyActions from "./detail-header/many-actions";
@@ -220,6 +229,7 @@ import EmptyStateMinimal from "./empty-state/minimal";
 import EmptyStateNoIcon from "./empty-state/no-icon";
 import EmptyStateSearchNoResults from "./empty-state/search-no-results";
 import EmptyStateWithMultipleActions from "./empty-state/with-multiple-actions";
+import EngagementBarDefault from "./engagement-bar/default";
 import EqualizerBarsDefault from "./equalizer-bars/default";
 import EventTimelineDefault from "./event-timeline/default";
 import EventTimelineLiveFeed from "./event-timeline/live-feed";
@@ -303,6 +313,7 @@ import LabelFormLayout from "./label/form-layout";
 import LabelRequired from "./label/required";
 import LabelWithCheckbox from "./label/with-checkbox";
 import LabelWithIcon from "./label/with-icon";
+import LiveBadgeDefault from "./live-badge/default";
 import LyricsDefault from "./lyrics/default";
 import MarketingLayoutDefault from "./marketing-layout/default";
 import MetricStatDefault from "./metric-stat/default";
@@ -312,6 +323,7 @@ import MetricStatGridLayout from "./metric-stat/grid-layout";
 import MetricStatLoading from "./metric-stat/loading";
 import MetricStatNoDelta from "./metric-stat/no-delta";
 import MetricStatWithIcon from "./metric-stat/with-icon";
+import MiniPlayerDefault from "./mini-player/default";
 import MoneyInputDefault from "./money-input/default";
 import MoneyInputCurrencies from "./money-input/currencies";
 import MoneyInputSizes from "./money-input/sizes";
@@ -361,6 +373,7 @@ import PageHeaderWithBadge from "./page-header/with-badge";
 import PillDefault from "./pill/default";
 import PillSizes from "./pill/sizes";
 import PixelatedCanvasDefault from "./pixelated-canvas/default";
+import PlaybackMenuDefault from "./playback-menu/default";
 import PlaylistCardDefault from "./playlist-card/default";
 import PopoverDefault from "./popover/default";
 import PopoverControlled from "./popover/controlled";
@@ -440,6 +453,7 @@ import SheetNoCloseButton from "./sheet/no-close-button";
 import SheetScrollable from "./sheet/scrollable";
 import SheetSides from "./sheet/sides";
 import SheetWithForm from "./sheet/with-form";
+import ShortsPlayerDefault from "./shorts-player/default";
 import SkeletonDefault from "./skeleton/default";
 import SkeletonCard from "./skeleton/card";
 import SkeletonList from "./skeleton/list";
@@ -483,6 +497,8 @@ import StatusPillInlineText from "./status-pill/inline-text";
 import StatusPillPulse from "./status-pill/pulse";
 import StatusPillTableRows from "./status-pill/table-rows";
 import StatusPillTones from "./status-pill/tones";
+import StudioVideoRowDefault from "./studio-video-row/default";
+import SubscribeButtonDefault from "./subscribe-button/default";
 import SwitchDefault from "./switch/default";
 import SwitchControlled from "./switch/controlled";
 import SwitchDisabled from "./switch/disabled";
@@ -516,8 +532,12 @@ import TextareaDisabled from "./textarea/disabled";
 import TextareaErrorState from "./textarea/error-state";
 import TextareaReadonly from "./textarea/readonly";
 import TextareaWithLabelAndHint from "./textarea/with-label-and-hint";
+import ThumbnailDefault from "./thumbnail/default";
 import TickerDefault from "./ticker/default";
 import TickerSizes from "./ticker/sizes";
+import TickerStacked from "./ticker/stacked";
+import TickerVariants from "./ticker/variants";
+import TickerWatchlist from "./ticker/watchlist";
 import TimelineRailDefault from "./timeline-rail/default";
 import TimelineRailCustomTerminal from "./timeline-rail/custom-terminal";
 import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
@@ -543,6 +563,8 @@ import TooltipSides from "./tooltip/sides";
 import TooltipWithDelay from "./tooltip/with-delay";
 import TooltipWithIcon from "./tooltip/with-icon";
 import TrackListDefault from "./track-list/default";
+import UpNextItemDefault from "./up-next-item/default";
+import UploadRowDefault from "./upload-row/default";
 import VariantPickerDefault from "./variant-picker/default";
 import VerificationProgressDefault from "./verification-progress/default";
 import VerificationProgressAllTones from "./verification-progress/all-tones";
@@ -550,10 +572,13 @@ import VerificationProgressManySteps from "./verification-progress/many-steps";
 import VerificationProgressStatuses from "./verification-progress/statuses";
 import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
+import VerifiedBadgeDefault from "./verified-badge/default";
+import VideoCardDefault from "./video-card/default";
 import VideoPlayerDefault from "./video-player/default";
 import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
 import VideoPlayerYoutube from "./video-player/youtube";
+import VideoShelfDefault from "./video-shelf/default";
 import WorldMapDefault from "./world-map/default";
 
 export type Example = { name: string; file: string; Component: ComponentType };
@@ -567,6 +592,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Multiple", file: "accordion/multiple.tsx", Component: AccordionMultiple },
     { name: "Nested Content", file: "accordion/nested-content.tsx", Component: AccordionNestedContent },
     { name: "With Icon", file: "accordion/with-icon.tsx", Component: AccordionWithIcon },
+  ],
+  "action-rail": [
+    { name: "Default", file: "action-rail/default.tsx", Component: ActionRailDefault },
   ],
   "activity-grid": [
     { name: "Default", file: "activity-grid/default.tsx", Component: ActivityGridDefault },
@@ -811,6 +839,15 @@ export const examples: Record<string, Example[]> = {
     { name: "With Form", file: "centered-focal/with-form.tsx", Component: CenteredFocalWithForm },
     { name: "With Illustration Backdrop", file: "centered-focal/with-illustration-backdrop.tsx", Component: CenteredFocalWithIllustrationBackdrop },
   ],
+  "channel-byline": [
+    { name: "Default", file: "channel-byline/default.tsx", Component: ChannelBylineDefault },
+  ],
+  "channel-header": [
+    { name: "Default", file: "channel-header/default.tsx", Component: ChannelHeaderDefault },
+  ],
+  "chapter-list": [
+    { name: "Default", file: "chapter-list/default.tsx", Component: ChapterListDefault },
+  ],
   "chart": [
     { name: "Default", file: "chart/default.tsx", Component: ChartDefault },
     { name: "Bar Chart", file: "chart/bar-chart.tsx", Component: ChartBarChart },
@@ -831,6 +868,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Indeterminate", file: "checkbox/indeterminate.tsx", Component: CheckboxIndeterminate },
     { name: "Readonly", file: "checkbox/readonly.tsx", Component: CheckboxReadonly },
     { name: "With Label", file: "checkbox/with-label.tsx", Component: CheckboxWithLabel },
+  ],
+  "chip-bar": [
+    { name: "Default", file: "chip-bar/default.tsx", Component: ChipBarDefault },
   ],
   "collapsible": [
     { name: "Default", file: "collapsible/default.tsx", Component: CollapsibleDefault },
@@ -858,6 +898,15 @@ export const examples: Record<string, Example[]> = {
   "command-result": [
     { name: "Default", file: "command-result/default.tsx", Component: CommandResultDefault },
   ],
+  "comment": [
+    { name: "Default", file: "comment/default.tsx", Component: CommentDefault },
+  ],
+  "comment-composer": [
+    { name: "Default", file: "comment-composer/default.tsx", Component: CommentComposerDefault },
+  ],
+  "comment-moderation-row": [
+    { name: "Default", file: "comment-moderation-row/default.tsx", Component: CommentModerationRowDefault },
+  ],
   "conversation-list": [
     { name: "Default", file: "conversation-list/default.tsx", Component: ConversationListDefault },
   ],
@@ -871,6 +920,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "customer-card": [
     { name: "Default", file: "customer-card/default.tsx", Component: CustomerCardDefault },
+  ],
+  "description-box": [
+    { name: "Default", file: "description-box/default.tsx", Component: DescriptionBoxDefault },
   ],
   "detail-header": [
     { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },
@@ -918,6 +970,9 @@ export const examples: Record<string, Example[]> = {
     { name: "No Icon", file: "empty-state/no-icon.tsx", Component: EmptyStateNoIcon },
     { name: "Search No Results", file: "empty-state/search-no-results.tsx", Component: EmptyStateSearchNoResults },
     { name: "With Multiple Actions", file: "empty-state/with-multiple-actions.tsx", Component: EmptyStateWithMultipleActions },
+  ],
+  "engagement-bar": [
+    { name: "Default", file: "engagement-bar/default.tsx", Component: EngagementBarDefault },
   ],
   "equalizer-bars": [
     { name: "Default", file: "equalizer-bars/default.tsx", Component: EqualizerBarsDefault },
@@ -1050,6 +1105,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Checkbox", file: "label/with-checkbox.tsx", Component: LabelWithCheckbox },
     { name: "With Icon", file: "label/with-icon.tsx", Component: LabelWithIcon },
   ],
+  "live-badge": [
+    { name: "Default", file: "live-badge/default.tsx", Component: LiveBadgeDefault },
+  ],
   "lyrics": [
     { name: "Default", file: "lyrics/default.tsx", Component: LyricsDefault },
   ],
@@ -1064,6 +1122,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Loading", file: "metric-stat/loading.tsx", Component: MetricStatLoading },
     { name: "No Delta", file: "metric-stat/no-delta.tsx", Component: MetricStatNoDelta },
     { name: "With Icon", file: "metric-stat/with-icon.tsx", Component: MetricStatWithIcon },
+  ],
+  "mini-player": [
+    { name: "Default", file: "mini-player/default.tsx", Component: MiniPlayerDefault },
   ],
   "money-input": [
     { name: "Default", file: "money-input/default.tsx", Component: MoneyInputDefault },
@@ -1145,6 +1206,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "pixelated-canvas": [
     { name: "Default", file: "pixelated-canvas/default.tsx", Component: PixelatedCanvasDefault },
+  ],
+  "playback-menu": [
+    { name: "Default", file: "playback-menu/default.tsx", Component: PlaybackMenuDefault },
   ],
   "playlist-card": [
     { name: "Default", file: "playlist-card/default.tsx", Component: PlaylistCardDefault },
@@ -1259,6 +1323,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Sides", file: "sheet/sides.tsx", Component: SheetSides },
     { name: "With Form", file: "sheet/with-form.tsx", Component: SheetWithForm },
   ],
+  "shorts-player": [
+    { name: "Default", file: "shorts-player/default.tsx", Component: ShortsPlayerDefault },
+  ],
   "skeleton": [
     { name: "Default", file: "skeleton/default.tsx", Component: SkeletonDefault },
     { name: "Card", file: "skeleton/card.tsx", Component: SkeletonCard },
@@ -1318,6 +1385,12 @@ export const examples: Record<string, Example[]> = {
     { name: "Table Rows", file: "status-pill/table-rows.tsx", Component: StatusPillTableRows },
     { name: "Tones", file: "status-pill/tones.tsx", Component: StatusPillTones },
   ],
+  "studio-video-row": [
+    { name: "Default", file: "studio-video-row/default.tsx", Component: StudioVideoRowDefault },
+  ],
+  "subscribe-button": [
+    { name: "Default", file: "subscribe-button/default.tsx", Component: SubscribeButtonDefault },
+  ],
   "switch": [
     { name: "Default", file: "switch/default.tsx", Component: SwitchDefault },
     { name: "Controlled", file: "switch/controlled.tsx", Component: SwitchControlled },
@@ -1361,9 +1434,15 @@ export const examples: Record<string, Example[]> = {
     { name: "Readonly", file: "textarea/readonly.tsx", Component: TextareaReadonly },
     { name: "With Label And Hint", file: "textarea/with-label-and-hint.tsx", Component: TextareaWithLabelAndHint },
   ],
+  "thumbnail": [
+    { name: "Default", file: "thumbnail/default.tsx", Component: ThumbnailDefault },
+  ],
   "ticker": [
     { name: "Default", file: "ticker/default.tsx", Component: TickerDefault },
     { name: "Sizes", file: "ticker/sizes.tsx", Component: TickerSizes },
+    { name: "Stacked", file: "ticker/stacked.tsx", Component: TickerStacked },
+    { name: "Variants", file: "ticker/variants.tsx", Component: TickerVariants },
+    { name: "Watchlist", file: "ticker/watchlist.tsx", Component: TickerWatchlist },
   ],
   "timeline-rail": [
     { name: "Default", file: "timeline-rail/default.tsx", Component: TimelineRailDefault },
@@ -1400,6 +1479,12 @@ export const examples: Record<string, Example[]> = {
   "track-list": [
     { name: "Default", file: "track-list/default.tsx", Component: TrackListDefault },
   ],
+  "up-next-item": [
+    { name: "Default", file: "up-next-item/default.tsx", Component: UpNextItemDefault },
+  ],
+  "upload-row": [
+    { name: "Default", file: "upload-row/default.tsx", Component: UploadRowDefault },
+  ],
   "variant-picker": [
     { name: "Default", file: "variant-picker/default.tsx", Component: VariantPickerDefault },
   ],
@@ -1411,11 +1496,20 @@ export const examples: Record<string, Example[]> = {
     { name: "Two Steps", file: "verification-progress/two-steps.tsx", Component: VerificationProgressTwoSteps },
     { name: "With Counts", file: "verification-progress/with-counts.tsx", Component: VerificationProgressWithCounts },
   ],
+  "verified-badge": [
+    { name: "Default", file: "verified-badge/default.tsx", Component: VerifiedBadgeDefault },
+  ],
+  "video-card": [
+    { name: "Default", file: "video-card/default.tsx", Component: VideoCardDefault },
+  ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },
     { name: "Composable", file: "video-player/composable.tsx", Component: VideoPlayerComposable },
     { name: "Variants", file: "video-player/variants.tsx", Component: VideoPlayerVariants },
     { name: "Youtube", file: "video-player/youtube.tsx", Component: VideoPlayerYoutube },
+  ],
+  "video-shelf": [
+    { name: "Default", file: "video-shelf/default.tsx", Component: VideoShelfDefault },
   ],
   "world-map": [
     { name: "Default", file: "world-map/default.tsx", Component: WorldMapDefault },

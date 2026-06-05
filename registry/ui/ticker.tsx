@@ -14,11 +14,21 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { cn } from "@/lib/utils"
 
 type TickerSize = "sm" | "default" | "lg"
+type TickerVariant = "bare" | "soft" | "outline" | "card"
 
 type TickerContextValue = { formatter: Intl.NumberFormat; size: TickerSize }
 
 const DEFAULT_CURRENCY = "USD"
 const DEFAULT_LOCALE = "en-US"
+
+// Container chrome wrapping the row. `bare` is the original inline treatment;
+// the rest give the whole ticker a chip/card surface from tokens.
+const tickerVariant: Record<TickerVariant, string> = {
+  bare: "",
+  soft: "rounded-full bg-muted px-3 py-1.5",
+  outline: "rounded-full border border-border px-3 py-1.5",
+  card: "rounded-lg border border-border bg-card px-3 py-2 shadow-sm",
+}
 
 // Icon diameter + label text scale together; `default` matches the original.
 const tickerIconSize: Record<TickerSize, string> = {
@@ -51,6 +61,7 @@ export type TickerProps = HTMLAttributes<HTMLButtonElement> & {
   currency?: string
   locale?: string
   size?: TickerSize
+  variant?: TickerVariant
 }
 
 export const Ticker = memo(
@@ -60,6 +71,7 @@ export const Ticker = memo(
     currency = DEFAULT_CURRENCY,
     locale = DEFAULT_LOCALE,
     size = "default",
+    variant = "bare",
     ...props
   }: TickerProps & { children: ReactNode }) => {
     const formatter = useMemo(() => {
@@ -82,6 +94,7 @@ export const Ticker = memo(
           className={cn(
             "inline-flex items-center gap-1.5 align-middle whitespace-nowrap",
             tickerTextSize[size],
+            tickerVariant[variant],
             className,
           )}
           type="button"
