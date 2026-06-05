@@ -2105,6 +2105,25 @@
       ]
     },
     {
+      "name": "track-list",
+      "type": "registry:ui",
+      "title": "Track list",
+      "description": "Numbered song rows (TrackList + TrackRow). The index swaps to a play glyph on hover and to equalizer-bars when active. Active title and like follow --brand.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/equalizer-bars",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/track-list.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/track-list.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
