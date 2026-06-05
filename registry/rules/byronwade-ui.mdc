@@ -102,7 +102,11 @@ Before writing any markup, check whether a component already exists. Reach for t
   author/caption/sound overlay), `mini-player` (corner PiP "continue watching" card: poster +
   play/pause overlay, progress, close + expand), `chapter-list` (video chapter rows with mono
   timestamps + active-chapter highlight derived from the playhead), `playback-menu` (player
-  settings dropdown; setting rows open single-select option submenus)
+  settings dropdown; setting rows open single-select option submenus). Studio & creator:
+  `studio-video-row` (Studio content-table row: checkbox + thumbnail/title + visibility tone +
+  date + mono metric cells + overflow menu), `upload-row` (upload/processing row: preview,
+  filename, progress, status badge + cancel/retry), `comment-moderation-row` (held-for-review
+  comment row: approve/remove/heart/reply actions + status tag + optional video context)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),

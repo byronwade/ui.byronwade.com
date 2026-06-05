@@ -3806,6 +3806,80 @@
       ]
     },
     {
+      "name": "studio-video-row",
+      "type": "registry:component",
+      "title": "Studio video row",
+      "description": "A YouTube Studio content-table row composing a selection checkbox, thumbnail, title/description, visibility status, date, and compact mono view/comment/like metrics with an overflow menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/checkbox",
+        "@byronwade/status-dot",
+        "@byronwade/badge",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/studio-video-row.tsx",
+          "type": "registry:component",
+          "target": "components/studio-video-row.tsx"
+        }
+      ]
+    },
+    {
+      "name": "upload-row",
+      "type": "registry:component",
+      "title": "Upload row",
+      "description": "YouTube Studio-style upload/processing row: preview, filename, progress bar, status badge, and a cancel/retry action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/progress",
+        "@byronwade/thumbnail",
+        "@byronwade/status-dot",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/upload-row.tsx",
+          "type": "registry:component",
+          "target": "components/upload-row.tsx"
+        }
+      ]
+    },
+    {
+      "name": "comment-moderation-row",
+      "type": "registry:component",
+      "title": "Comment moderation row",
+      "description": "A YouTube Studio comment-moderation row with approve/remove/heart/reply actions, a status tag, and optional video context.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/button",
+        "@byronwade/badge",
+        "@byronwade/verified-badge",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/comment-moderation-row.tsx",
+          "type": "registry:component",
+          "target": "components/comment-moderation-row.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -3986,7 +4060,10 @@
         "@byronwade/shorts-player",
         "@byronwade/mini-player",
         "@byronwade/chapter-list",
-        "@byronwade/playback-menu"
+        "@byronwade/playback-menu",
+        "@byronwade/studio-video-row",
+        "@byronwade/upload-row",
+        "@byronwade/comment-moderation-row"
       ]
     }
   ]
