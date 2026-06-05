@@ -38,11 +38,11 @@ export default function Example() {
           className="flex flex-row gap-3 w-auto"
         >
           {[
-            { value: "slate", bg: "bg-slate-500" },
-            { value: "red", bg: "bg-red-500" },
-            { value: "amber", bg: "bg-amber-500" },
-            { value: "emerald", bg: "bg-emerald-500" },
-            { value: "sky", bg: "bg-sky-500" },
+            { value: "slate", bg: "bg-chart-1" },
+            { value: "red", bg: "bg-chart-2" },
+            { value: "amber", bg: "bg-chart-3" },
+            { value: "emerald", bg: "bg-chart-4" },
+            { value: "sky", bg: "bg-chart-5" },
           ].map(({ value, bg }) => (
             <label key={value} htmlFor={`color-${value}`} className="cursor-pointer">
               <RadioGroupItem value={value} id={`color-${value}`} className="sr-only" />

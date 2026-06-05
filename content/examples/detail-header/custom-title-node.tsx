@@ -14,7 +14,7 @@ export default function Example() {
       <DetailHeader
         title={
           <span className="flex items-center gap-2">
-            <span className="size-2.5 rounded-full bg-green-500" />
+            <span className="size-2.5 rounded-full bg-success" />
             api.acme.com
           </span>
         }

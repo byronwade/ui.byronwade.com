@@ -65,7 +65,7 @@ export default function Example() {
 
       {/* Valid / success state */}
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="ok-website" className={websiteValid ? "text-green-600 dark:text-green-500" : ""}>
+        <Label htmlFor="ok-website" className={websiteValid ? "text-success" : ""}>
           {websiteValid && <CheckCircle2 className="size-3.5" />}
           Website
         </Label>
@@ -75,11 +75,11 @@ export default function Example() {
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
           className={`rounded-md border px-3 py-2 text-sm ${
-            websiteValid ? "border-green-500" : ""
+            websiteValid ? "border-success" : ""
           }`}
         />
         {websiteValid && (
-          <p className="text-xs text-green-600 dark:text-green-500">
+          <p className="text-xs text-success">
             Looks good!
           </p>
         )}

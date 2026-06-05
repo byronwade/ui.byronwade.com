@@ -17,7 +17,7 @@ export default function Example() {
     <div className="flex flex-col items-center gap-6 p-8">
       <p className="text-sm text-muted-foreground">
         State:{" "}
-        <span className={`font-mono font-medium ${open ? "text-green-600 dark:text-green-400" : "text-foreground"}`}>
+        <span className={`font-mono font-medium ${open ? "text-success" : "text-foreground"}`}>
           {open ? "open" : "closed"}
         </span>
       </p>

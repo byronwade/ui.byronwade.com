@@ -22,7 +22,7 @@ export default function Example() {
             isOver
               ? "text-destructive"
               : isNearLimit
-              ? "text-amber-500"
+              ? "text-warning"
               : "text-muted-foreground"
           }`}
         >

@@ -31,8 +31,8 @@ export default function Example() {
       )}
 
       {!isDismissed("warning") && (
-        <Alert>
-          <TriangleAlertIcon className="text-amber-500" />
+        <Alert variant="warning">
+          <TriangleAlertIcon />
           <AlertTitle>Unsaved changes</AlertTitle>
           <AlertDescription>
             You have uncommitted edits. Save before leaving this page.

@@ -26,7 +26,7 @@ const variants: Record<
 > = {
   success: {
     icon: CheckCircle2Icon,
-    iconClass: "text-emerald-500",
+    iconClass: "text-success",
     title: "Changes saved",
     description:
       "Your settings have been updated and are now live. No further action is required.",
@@ -34,7 +34,7 @@ const variants: Record<
   },
   warning: {
     icon: AlertTriangleIcon,
-    iconClass: "text-amber-500",
+    iconClass: "text-warning",
     title: "Unsaved changes",
     description:
       "You have unsaved changes. Leaving now will discard them. Do you want to continue?",
@@ -42,7 +42,7 @@ const variants: Record<
   },
   info: {
     icon: InfoIcon,
-    iconClass: "text-blue-500",
+    iconClass: "text-brand",
     title: "New feature available",
     description:
       "A new version of the editor is available. Upgrade to access the latest improvements and fixes.",
