@@ -73,7 +73,7 @@ this report) are in the repo-wide count and will reformat in Batch 0.
 
 **Batches 0–3 done & green** (`validate` + `test:ci` + `npm run build` all exit 0). All four
 structural checks (`check:conventions`) and `check:format` are now CI-enforced. **Batch 4 remains** —
-deferred pending the open decisions below (every item is an aesthetic/semantic call on a *shipped*
+deferred pending the open decisions below (every item is an aesthetic/semantic call on a _shipped_
 component, so it should not be guessed). Two issues surfaced during full validation and were fixed
 in-branch: `badge` needed a type-safe `data-slot` cast (Base UI `mergeProps` object literal), and
 `registry.json` + `content/examples/registry.ts` are now Prettier-ignored because their generators

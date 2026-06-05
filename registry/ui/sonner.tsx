@@ -14,6 +14,9 @@ const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()
 
   return (
+    // data-slot is declarative here: sonner's ToasterProps doesn't extend
+    // HTMLAttributes, so it isn't forwarded to the rendered [data-sonner-toaster]
+    // root. Kept for source-level consistency with the rest of the system.
     <Sonner
       data-slot="sonner"
       theme={theme as ToasterProps["theme"]}

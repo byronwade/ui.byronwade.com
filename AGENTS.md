@@ -136,11 +136,11 @@ Every `registry:ui` and `registry:component` item must have a test file at `test
 
 ### Gates
 
-| Command               | What it checks                                                                                                     |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `npm run check:tests` | Every `registry:ui`/`registry:component` has a `tests/components/<slug>.test.tsx`                                  |
-| `npm run test:ci`     | `check:tests` + full suite + coverage thresholds (statements ≥ 99%, branches ≥ 96%, functions ≥ 100%, lines ≥ 99%) |
-| `npm run test:run`    | Full suite only (no coverage) — for rapid local iteration                                                          |
+| Command               | What it checks                                                                                                                            |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run check:tests` | Every `registry:ui`/`registry:component` has a `tests/components/<slug>.test.tsx`                                                         |
+| `npm run test:ci`     | `check:tests` + full suite + coverage thresholds (statements ≥ 95%, branches ≥ 90%, functions ≥ 99%, lines ≥ 96%; see `vitest.config.ts`) |
+| `npm run test:run`    | Full suite only (no coverage) — for rapid local iteration                                                                                 |
 
 Both gates run automatically in CI on every push and pull request (`.github/workflows/test.yml`). A PR that drops coverage below the ratcheted thresholds or lacks a test file for a new component will fail CI.
 
