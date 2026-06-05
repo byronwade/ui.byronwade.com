@@ -47,6 +47,14 @@ Before writing any markup, check whether a component already exists. Reach for t
   expand into a modal), `canvas-text` (animated lines clipped to text),
   `pixelated-canvas` (image as an interactive dot grid),
   `video-player` (media-chrome player with variants)
+- **Music / media** — Spotify-style music UI: `equalizer-bars` (animated now-playing bars),
+  `album-cover` (square artwork with hover play FAB + equalizer overlay),
+  `audio-waveform` (bar waveform scrubber with click/keyboard seek),
+  `track-list` / `track-row` (numbered song rows: index → play glyph → equalizer),
+  `now-playing-bar` (sticky transport bar composed from album-cover + slider),
+  `audio-player` (media-chrome `<audio>` player, sibling of video-player),
+  `lyrics` (synced scrolling lyric lines), `playlist-card` (cover + title + description tile),
+  `artist-header` (artist hero: artwork + verified badge + monthly-listeners stat + play/follow)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),

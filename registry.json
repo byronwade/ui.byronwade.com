@@ -2050,6 +2050,26 @@
       ]
     },
     {
+      "name": "equalizer-bars",
+      "type": "registry:ui",
+      "title": "Equalizer bars",
+      "description": "Animated now-playing equalizer bars. Accent follows --brand; freezes under prefers-reduced-motion. The shared playing-state primitive for album-cover, track-row, and now-playing-bar.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/equalizer-bars.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/equalizer-bars.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
