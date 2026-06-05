@@ -686,6 +686,9 @@ export function MorphDock({
     <div ref={rootRef} className={cn("relative inline-flex", className)}>
       {/* PILL — always present (the dock footprint). Fades only while a panel
           sits over it in place; it returns the moment the panel is torn off. */}
+      {/* The sub-pixel insets here (p-[3px], -my-[3px], -mr-[3px], pr-[7px]) are
+          intentional hairline chrome for the dock's seam/rail alignment — finer than
+          the spacing scale can express. on-system lint flags them as warnings by design. */}
       <div
         ref={barRef}
         className={cn(

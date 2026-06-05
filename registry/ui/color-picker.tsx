@@ -250,10 +250,11 @@ export const ColorPickerHue = ({
         data-slot="color-picker-hue-control"
         className="flex w-full items-center"
       >
-        {/* The rainbow IS the hue spectrum — kept per the DNA color-exception. */}
+        {/* The rainbow IS the hue spectrum — `color-picker-hue` is the foundation
+            utility that holds the raw-color exception in one audited place. */}
         <SliderPrimitive.Track
           data-slot="color-picker-hue-track"
-          className="relative h-3 w-full grow rounded-full bg-[linear-gradient(90deg,#FF0000,#FFFF00,#00FF00,#00FFFF,#0000FF,#FF00FF,#FF0000)]"
+          className="color-picker-hue relative h-3 w-full grow rounded-full"
         >
           <SliderPrimitive.Thumb
             aria-label="Hue"
@@ -298,7 +299,7 @@ export const ColorPickerAlpha = ({
           data-slot="color-picker-alpha-track"
           className="relative h-3 w-full grow rounded-full bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3uCTZhw1gGGYhAGBZIA/nYDCgBDAm9BGDWAAJyRCgLaBCAAgXwixzAS0pgAAAABJRU5ErkJggg==')] bg-center bg-repeat-x dark:bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAALklEQVR4nGP8+vWrCAMewM3N/QafPBM+SWLAqAGDwQBGQgoIpZOB98KoAVQwAADxzQcSVIRCfQAAAABJRU5ErkJggg==')]"
         >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent to-foreground/50" />
+          <div className="color-picker-alpha-fade absolute inset-0 rounded-full" />
           <SliderPrimitive.Thumb
             aria-label="Alpha"
             data-slot="color-picker-alpha-thumb"
