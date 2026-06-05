@@ -19,7 +19,7 @@
 // Invariants:
 //   ENFORCE 1. Filenames     — every registry/**/*.{ts,tsx} is kebab-case.
 //   ENFORCE 2. Import paths   — no relative parent (`../`) imports; consumer `@/` only.
-//   RATCHET 3. No default     — components use named exports, never `export default`.
+//   ENFORCE 3. No default     — components use named exports, never `export default`.
 //   RATCHET 4. data-slot      — every ui / component root carries a `data-slot`.
 //
 // Usage: node scripts/check-conventions.mjs
@@ -95,7 +95,7 @@ if (crossing.length) {
   })
 }
 
-// ---- RATCHET 3. No default exports -----------------------------------------
+// ---- ENFORCE 3. No default exports -----------------------------------------
 // Components export named, at the file bottom, so consumers get stable import
 // names and the file can expose multiple parts (Root + sub-components + types).
 const defaultExport = /^export default\b/m
@@ -104,7 +104,7 @@ const defaulted = renderedFiles.filter((rel) => {
   return defaultExport.test(readFileSync(abs, "utf8"))
 })
 if (defaulted.length) {
-  ratchet.push({
+  enforce.push({
     title: "Components using `export default`",
     items: defaulted,
     hint: "Switch to a named export at the file bottom: export { Component }.",

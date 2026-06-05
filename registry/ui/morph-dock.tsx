@@ -967,5 +967,3 @@ export function MorphDock({
     </div>
   )
 }
-
-export default MorphDock

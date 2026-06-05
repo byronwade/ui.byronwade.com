@@ -162,5 +162,3 @@ export function WorldMap({
     </div>
   )
 }
-
-export default WorldMap

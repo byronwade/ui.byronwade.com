@@ -299,4 +299,3 @@ function BulkBtn({ label, onClick, children }: { label: string; onClick: () => v
   );
 }
 
-export default ConversationList;
