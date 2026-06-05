@@ -1333,6 +1333,87 @@
       ]
     },
     {
+      "name": "morph-sidebar",
+      "type": "registry:ui",
+      "title": "Morph Sidebar",
+      "description": "Left icon rail that morphs wider into a labeled sidebar via the morph technique.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-sidebar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-sidebar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "morph-tabs",
+      "type": "registry:ui",
+      "title": "Morph Tabs",
+      "description": "Bottom tab bar that blooms a sheet up via the morph technique.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "morph-menubar",
+      "type": "registry:ui",
+      "title": "Morph Menubar",
+      "description": "Slim menubar that blooms the active menu's dropdown in place via the morph technique.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-menubar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-menubar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "morph-rail",
+      "type": "registry:ui",
+      "title": "Morph Rail",
+      "description": "Right icon rail that blooms a wide labeled panel to the side via the morph technique.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-rail.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-rail.tsx"
+        }
+      ]
+    },
+    {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
@@ -3249,6 +3330,10 @@
         "@byronwade/morph-dock",
         "@byronwade/morph-surface",
         "@byronwade/morph-bar",
+        "@byronwade/morph-sidebar",
+        "@byronwade/morph-tabs",
+        "@byronwade/morph-menubar",
+        "@byronwade/morph-rail",
         "@byronwade/aspect-ratio",
         "@byronwade/scroll-area",
         "@byronwade/collapsible",
