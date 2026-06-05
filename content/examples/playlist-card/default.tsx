@@ -1,3 +1,5 @@
+"use client"
+
 import { PlaylistCard } from "@/components/playlist-card"
 
 const COVER =

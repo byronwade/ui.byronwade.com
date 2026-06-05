@@ -33,6 +33,8 @@ export type ComponentDoc = {
     | "Charts"
     | "House components"
     | "Morph"
+    | "Media"
+    | "Commerce"
     | "AI"
   description: string
   npmDeps?: string[]
@@ -3404,6 +3406,341 @@ export const components: ComponentDoc[] = [
     ],
     examples: ["default"],
   },
+  {
+    slug: "morph-surface",
+    name: "Morph Surface",
+    category: "Morph",
+    description:
+      "Agnostic morph primitive — open-state orchestration (refs, cross-fade, Esc/outside-close, box sizing) with no visual style. Navigation styles compose it.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/use-chrome-morph",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "morph-bar",
+    name: "Morph Bar",
+    category: "Morph",
+    description:
+      "Full-width top navigation bar that blooms a panel down via the morph technique.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/morph-surface",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "morph-sidebar",
+    name: "Morph Sidebar",
+    category: "Morph",
+    description:
+      "Left icon rail that morphs wider into a labeled sidebar via the morph technique.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/morph-surface",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "morph-tabs",
+    name: "Morph Tabs",
+    category: "Morph",
+    description:
+      "Bottom tab bar that blooms a sheet up via the morph technique.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/morph-surface",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "morph-menubar",
+    name: "Morph Menubar",
+    category: "Morph",
+    description:
+      "Slim menubar that blooms the active menu's dropdown in place via the morph technique.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/morph-surface",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "morph-rail",
+    name: "Morph Rail",
+    category: "Morph",
+    description:
+      "Right icon rail that blooms a wide labeled panel to the side via the morph technique.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/morph-surface",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "command-result",
+    name: "Command Result",
+    category: "Composites",
+    description:
+      "Compact rich result row for a command palette: media, title, description, meta, and an action slot.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/command",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "conversation-list",
+    name: "Conversation list",
+    category: "Composites",
+    description:
+      "Messaging conversation list — live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/comms-store",
+      "@byronwade/gradient-avatar",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "equalizer-bars",
+    name: "Equalizer bars",
+    category: "Media",
+    description:
+      "Animated now-playing equalizer bars. Accent follows --brand; freezes under prefers-reduced-motion. The shared playing-state primitive for album-cover, track-row, and now-playing-bar.",
+    npmDeps: ["motion"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "album-cover",
+    name: "Album cover",
+    category: "Media",
+    description:
+      "Square album/playlist artwork with an optional hover-reveal brand play button and an equalizer overlay for the active state. Accent follows --brand.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/equalizer-bars",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "audio-waveform",
+    name: "Audio waveform",
+    category: "Media",
+    description:
+      "Bar-style waveform scrubber. Played bars follow --brand; click and arrow keys report a 0–1 seek ratio. Exposes role=slider with aria-value*.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "track-list",
+    name: "Track list",
+    category: "Media",
+    description:
+      "Numbered song rows (TrackList + TrackRow). The index swaps to a play glyph on hover and to equalizer-bars when active. Active title and like follow --brand.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/badge",
+      "@byronwade/equalizer-bars",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "lyrics",
+    name: "Lyrics",
+    category: "Media",
+    description:
+      "Synced, scrolling lyric lines. The active line is emphasised and scrolls into view (instant under prefers-reduced-motion). Lines become seek-to-line buttons when onLineClick is set.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "now-playing-bar",
+    name: "Now playing bar",
+    category: "Media",
+    description:
+      "Sticky transport bar composed from album-cover + slider. Controlled parts: NowPlayingBarTrack, NowPlayingBarControls, NowPlayingBarProgress, NowPlayingBarExtras. Active controls follow --brand.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/album-cover",
+      "@byronwade/slider",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "audio-player",
+    name: "Audio player",
+    category: "Media",
+    description:
+      "Token-mapped media-chrome <audio> player with a composable control bar and default/minimal/card variants. Audio sibling of video-player; accent follows --brand.",
+    npmDeps: ["media-chrome"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "playlist-card",
+    name: "Playlist card",
+    category: "Media",
+    description:
+      "Browse-grid tile composing album-cover + title + description. Surfaces the cover's hover play button and active equalizer; lifts on hover.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/album-cover",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "artist-header",
+    name: "Artist header",
+    category: "Media",
+    description:
+      "Artist hero composing album-cover + verified badge + monthly-listeners stat (font-mono) + Play/Follow buttons. Editorial name typography; Play follows --brand.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/album-cover",
+      "@byronwade/badge",
+      "@byronwade/button",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "money-input",
+    name: "Money input",
+    category: "Commerce",
+    description:
+      "Currency-formatted price input built on the number-field primitive, with a leading symbol and optional ISO-code adornment.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/number-field",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "bulk-action-bar",
+    name: "Bulk action bar",
+    category: "Commerce",
+    description:
+      "Selection action bar for tables and resource lists — a selected-count label, promoted and grouped actions, and a clear-selection control. Renders nothing when nothing is selected.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/button",
+      "@byronwade/button-group",
+      "@byronwade/checkbox",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "order-summary",
+    name: "Order summary",
+    category: "Commerce",
+    description:
+      "Order line-items list with a subtotal, discount, shipping, tax, and total cost breakdown. The signature Shopify order/checkout card.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/avatar",
+      "@byronwade/badge",
+      "@byronwade/separator",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "product-card",
+    name: "Product card",
+    category: "Commerce",
+    description:
+      "Products-index product tile — image, title, status badge with status dot, price with optional compare-at, and inventory state.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/aspect-ratio",
+      "@byronwade/badge",
+      "@byronwade/card",
+      "@byronwade/status-dot",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "variant-picker",
+    name: "Variant picker",
+    category: "Commerce",
+    description:
+      "Product option/variant selector — one labelled toggle-group row per option with unavailable values disabled.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/label",
+      "@byronwade/toggle-group",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "inventory-bar",
+    name: "Inventory bar",
+    category: "Commerce",
+    description:
+      "Stock-level indicator composing the progress primitive — a count plus a tonal bar for in-stock, low-stock, and out-of-stock states.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/progress",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "customer-card",
+    name: "Customer card",
+    category: "Commerce",
+    description:
+      "Customer summary card — avatar, name and email, orders and lifetime-spend stats, and a default address.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/avatar",
+      "@byronwade/card",
+      "@byronwade/metric-stat",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "fulfillment-tracker",
+    name: "Fulfillment tracker",
+    category: "Commerce",
+    description:
+      "Order status header — payment and fulfillment status pills plus an optional fulfillment step rail. Models Shopify's dual payment/fulfillment status.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/status-pill",
+      "@byronwade/status-dot",
+      "@byronwade/verification-progress",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
 ]
 
 export const categories = [
@@ -3420,6 +3757,8 @@ export const categories = [
   "Charts",
   "House components",
   "Morph",
+  "Media",
+  "Commerce",
   "AI",
 ] as const
 export const byCategory = (cat: string) =>

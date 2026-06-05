@@ -1,3 +1,5 @@
+"use client"
+
 import { Lyrics } from "@/components/ui/lyrics"
 
 const LINES = [

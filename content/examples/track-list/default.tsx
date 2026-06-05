@@ -1,3 +1,5 @@
+"use client"
+
 import { TrackList, TrackRow } from "@/components/ui/track-list"
 
 export default function Example() {

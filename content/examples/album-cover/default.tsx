@@ -1,3 +1,5 @@
+"use client"
+
 import { AlbumCover } from "@/components/ui/album-cover"
 
 const COVER =

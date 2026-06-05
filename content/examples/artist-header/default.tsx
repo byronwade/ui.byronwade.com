@@ -1,3 +1,5 @@
+"use client"
+
 import { ArtistHeader } from "@/components/artist-header"
 
 const IMAGE =
