@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
 
 export default function Example() {
   return (
@@ -17,8 +17,12 @@ export default function Example() {
                 🎉
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium leading-tight">Milestone reached!</p>
-                <p className="text-xs text-muted-foreground mt-0.5">You&apos;ve completed 100 tasks.</p>
+                <p className="text-sm font-medium leading-tight">
+                  Milestone reached!
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  You&apos;ve completed 100 tasks.
+                </p>
               </div>
               <button
                 className="text-muted-foreground hover:text-foreground text-xs shrink-0"
@@ -41,7 +45,8 @@ export default function Example() {
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-brand">Invite sent</p>
                 <p className="text-xs text-brand/90 mt-0.5">
-                  An invitation has been sent to <strong>alex@example.com</strong>.
+                  An invitation has been sent to{" "}
+                  <strong>alex@example.com</strong>.
                 </p>
                 <div className="flex gap-2 mt-2">
                   <button
@@ -65,5 +70,5 @@ export default function Example() {
         Custom styled toast with actions
       </button>
     </div>
-  );
+  )
 }

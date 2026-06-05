@@ -1,13 +1,13 @@
-import { FileTextIcon, ImageIcon, FolderIcon } from "lucide-react";
-import { CommandResult } from "@/components/command-result";
+import { FileTextIcon, ImageIcon, FolderIcon } from "lucide-react"
+import { CommandResult } from "@/components/command-result"
 import {
   Command,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/ui/command"
+import { Badge } from "@/components/ui/badge"
 
 export default function Example() {
   return (
@@ -55,5 +55,5 @@ export default function Example() {
         </CommandList>
       </Command>
     </div>
-  );
+  )
 }

@@ -1,8 +1,4 @@
-import {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export default function Example() {
   return (
@@ -57,5 +53,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

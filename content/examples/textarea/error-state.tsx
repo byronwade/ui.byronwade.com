@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react"
+import { Textarea } from "@/components/ui/textarea"
 
-const MAX_CHARS = 120;
+const MAX_CHARS = 120
 
 export default function Example() {
   const [value, setValue] = useState(
-    "This is a very long piece of text that exceeds the allowed character limit for this field. Please shorten it before submitting your form to the server."
-  );
+    "This is a very long piece of text that exceeds the allowed character limit for this field. Please shorten it before submitting your form to the server.",
+  )
 
-  const isInvalid = value.length > MAX_CHARS;
+  const isInvalid = value.length > MAX_CHARS
 
   return (
     <div className="flex flex-col gap-2 p-6 max-w-md">
@@ -33,10 +33,12 @@ export default function Example() {
         ) : (
           <span />
         )}
-        <p className={`text-xs ml-auto ${isInvalid ? "text-destructive" : "text-muted-foreground"}`}>
+        <p
+          className={`text-xs ml-auto ${isInvalid ? "text-destructive" : "text-muted-foreground"}`}
+        >
           {value.length} / {MAX_CHARS}
         </p>
       </div>
     </div>
-  );
+  )
 }

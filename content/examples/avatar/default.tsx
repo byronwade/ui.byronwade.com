@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Avatar,
@@ -7,7 +7,7 @@ import {
   AvatarBadge,
   AvatarGroup,
   AvatarGroupCount,
-} from "@/components/ui/avatar";
+} from "@/components/ui/avatar"
 
 export default function Example() {
   return (
@@ -16,7 +16,10 @@ export default function Example() {
       <div className="flex flex-col gap-2">
         <span className="text-xs text-muted-foreground">With image</span>
         <Avatar>
-          <AvatarImage src="https://i.pravatar.cc/40?u=default1" alt="Sam Rivera" />
+          <AvatarImage
+            src="https://i.pravatar.cc/40?u=default1"
+            alt="Sam Rivera"
+          />
           <AvatarFallback>SR</AvatarFallback>
         </Avatar>
       </div>
@@ -33,7 +36,10 @@ export default function Example() {
       <div className="flex flex-col gap-2">
         <span className="text-xs text-muted-foreground">With badge</span>
         <Avatar>
-          <AvatarImage src="https://i.pravatar.cc/40?u=default2" alt="Pat Chen" />
+          <AvatarImage
+            src="https://i.pravatar.cc/40?u=default2"
+            alt="Pat Chen"
+          />
           <AvatarFallback>PC</AvatarFallback>
           <AvatarBadge className="bg-success" />
         </Avatar>
@@ -44,20 +50,29 @@ export default function Example() {
         <span className="text-xs text-muted-foreground">Group</span>
         <AvatarGroup>
           <Avatar>
-            <AvatarImage src="https://i.pravatar.cc/40?u=default3" alt="User A" />
+            <AvatarImage
+              src="https://i.pravatar.cc/40?u=default3"
+              alt="User A"
+            />
             <AvatarFallback>UA</AvatarFallback>
           </Avatar>
           <Avatar>
-            <AvatarImage src="https://i.pravatar.cc/40?u=default4" alt="User B" />
+            <AvatarImage
+              src="https://i.pravatar.cc/40?u=default4"
+              alt="User B"
+            />
             <AvatarFallback>UB</AvatarFallback>
           </Avatar>
           <Avatar>
-            <AvatarImage src="https://i.pravatar.cc/40?u=default5" alt="User C" />
+            <AvatarImage
+              src="https://i.pravatar.cc/40?u=default5"
+              alt="User C"
+            />
             <AvatarFallback>UC</AvatarFallback>
           </Avatar>
           <AvatarGroupCount>+5</AvatarGroupCount>
         </AvatarGroup>
       </div>
     </div>
-  );
+  )
 }

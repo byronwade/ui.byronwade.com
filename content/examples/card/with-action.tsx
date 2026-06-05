@@ -6,8 +6,8 @@ import {
   CardAction,
   CardContent,
   CardFooter,
-} from "@/components/ui/card";
-import { MoreHorizontal, TrendingUp, TrendingDown } from "lucide-react";
+} from "@/components/ui/card"
+import { MoreHorizontal, TrendingUp, TrendingDown } from "lucide-react"
 
 export default function Example() {
   return (
@@ -31,7 +31,9 @@ export default function Example() {
           </span>
         </CardContent>
         <CardFooter>
-          <span className="text-xs text-muted-foreground">vs. previous 30 days</span>
+          <span className="text-xs text-muted-foreground">
+            vs. previous 30 days
+          </span>
         </CardFooter>
       </Card>
 
@@ -61,5 +63,5 @@ export default function Example() {
         </CardFooter>
       </Card>
     </div>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area"
 
-const tags = Array.from({ length: 24 }, (_, i) => `Tag ${i + 1}`);
+const tags = Array.from({ length: 24 }, (_, i) => `Tag ${i + 1}`)
 
 export default function Example() {
   return (
@@ -15,5 +15,5 @@ export default function Example() {
         ))}
       </div>
     </ScrollArea>
-  );
+  )
 }

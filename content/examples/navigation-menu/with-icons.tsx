@@ -1,4 +1,4 @@
-import { BookOpen, LifeBuoy, Newspaper, Rocket } from "lucide-react";
+import { BookOpen, LifeBuoy, Newspaper, Rocket } from "lucide-react"
 
 import {
   NavigationMenu,
@@ -7,7 +7,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu"
 
 export default function Example() {
   return (
@@ -46,5 +46,5 @@ export default function Example() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  );
+  )
 }

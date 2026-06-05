@@ -7,49 +7,165 @@
  * hand-curated because they map to anchors on the home styleguide page.
  */
 
-import { components } from "@/content/components";
-import { archetypes } from "@/app/layouts/_archetypes";
-import { templates } from "@/app/templates/_templates";
+import { components } from "@/content/components"
+import { archetypes } from "@/app/layouts/_archetypes"
+import { templates } from "@/app/templates/_templates"
 
 export type SearchEntry = {
-  label: string;
-  kind: "Component" | "Section";
-  href: string;
+  label: string
+  kind: "Component" | "Section"
+  href: string
   /** Space-separated additional terms for fuzzy matching. */
-  keywords?: string;
+  keywords?: string
   /** Category label shown on the right for components. */
-  meta?: string;
-};
+  meta?: string
+}
 
 /* ── Pages (top-level destinations) ────────────────────────────────── */
 
 const pageEntries: SearchEntry[] = [
-  { kind: "Section", label: "Home",         href: "/",                          meta: "Page", keywords: "landing hero start" },
-  { kind: "Section", label: "Introduction", href: "/docs",                meta: "Guide", keywords: "introduction overview get started why shadcn registry" },
-  { kind: "Section", label: "Installation", href: "/docs/installation",   meta: "Guide", keywords: "install installation setup quick start shadcn registry cli init add namespace" },
-  { kind: "Section", label: "Theming",      href: "/docs/theming",        meta: "Guide", keywords: "theming theme re-skin reskin brand color tokens css variable dark mode" },
-  { kind: "Section", label: "AI rules",     href: "/docs/ai",             meta: "Guide", keywords: "ai rules cursor claude copilot windsurf codex agent on-system design rules" },
-  { kind: "Section", label: "Catalog",      href: "/catalog",             meta: "Page", keywords: "catalog all components index list grid browse gallery search filter" },
-  { kind: "Section", label: "Styleguide",   href: "/styleguide",                meta: "Page", keywords: "styleguide design philosophy tokens showcase" },
-];
+  {
+    kind: "Section",
+    label: "Home",
+    href: "/",
+    meta: "Page",
+    keywords: "landing hero start",
+  },
+  {
+    kind: "Section",
+    label: "Introduction",
+    href: "/docs",
+    meta: "Guide",
+    keywords: "introduction overview get started why shadcn registry",
+  },
+  {
+    kind: "Section",
+    label: "Installation",
+    href: "/docs/installation",
+    meta: "Guide",
+    keywords:
+      "install installation setup quick start shadcn registry cli init add namespace",
+  },
+  {
+    kind: "Section",
+    label: "Theming",
+    href: "/docs/theming",
+    meta: "Guide",
+    keywords:
+      "theming theme re-skin reskin brand color tokens css variable dark mode",
+  },
+  {
+    kind: "Section",
+    label: "AI rules",
+    href: "/docs/ai",
+    meta: "Guide",
+    keywords:
+      "ai rules cursor claude copilot windsurf codex agent on-system design rules",
+  },
+  {
+    kind: "Section",
+    label: "Catalog",
+    href: "/catalog",
+    meta: "Page",
+    keywords:
+      "catalog all components index list grid browse gallery search filter",
+  },
+  {
+    kind: "Section",
+    label: "Styleguide",
+    href: "/styleguide",
+    meta: "Page",
+    keywords: "styleguide design philosophy tokens showcase",
+  },
+]
 
 /* ── Sections (styleguide anchors) ─────────────────────────────────── */
 
 const sectionEntries: SearchEntry[] = [
-  { kind: "Section", label: "Philosophy",        href: "/styleguide#philosophy",  keywords: "calm chrome single accent" },
-  { kind: "Section", label: "Principles",        href: "/styleguide#principles",  keywords: "rules do dont status spacing radius" },
-  { kind: "Section", label: "Foundations",       href: "/styleguide#foundations", keywords: "color tokens radius elevation typography utilities" },
-  { kind: "Section", label: "Primitives",        href: "/styleguide#primitives",  keywords: "button badge card filter pill segmented control status dot" },
-  { kind: "Section", label: "Forms",             href: "/styleguide#forms",       keywords: "input textarea select checkbox switch radio label toggle" },
-  { kind: "Section", label: "Overlays",          href: "/styleguide#overlays",    keywords: "tooltip popover dropdown menu dialog hover card sheet command navigation" },
-  { kind: "Section", label: "Feedback",          href: "/styleguide#feedback",    keywords: "alert progress skeleton toast" },
-  { kind: "Section", label: "Data display",      href: "/styleguide#data",        keywords: "tabs accordion avatar separator breadcrumb table aspect ratio scroll collapsible" },
-  { kind: "Section", label: "Patterns",          href: "/styleguide#patterns",    keywords: "page header metric stat stat card gauge activity grid gradient avatar empty state" },
-  { kind: "Section", label: "Charts",            href: "/styleguide#charts",      keywords: "area chart bar chart recharts" },
-  { kind: "Section", label: "House components",  href: "/styleguide#house",       keywords: "detail header settings panel event timeline section verification" },
-  { kind: "Section", label: "Layout archetypes", href: "/styleguide#layouts",     keywords: "hero section centered focal split with rail timeline rail layouts" },
-  { kind: "Section", label: "Side by side",      href: "/styleguide#comparison",  keywords: "comparison vercel linear stripe github shopify" },
-];
+  {
+    kind: "Section",
+    label: "Philosophy",
+    href: "/styleguide#philosophy",
+    keywords: "calm chrome single accent",
+  },
+  {
+    kind: "Section",
+    label: "Principles",
+    href: "/styleguide#principles",
+    keywords: "rules do dont status spacing radius",
+  },
+  {
+    kind: "Section",
+    label: "Foundations",
+    href: "/styleguide#foundations",
+    keywords: "color tokens radius elevation typography utilities",
+  },
+  {
+    kind: "Section",
+    label: "Primitives",
+    href: "/styleguide#primitives",
+    keywords: "button badge card filter pill segmented control status dot",
+  },
+  {
+    kind: "Section",
+    label: "Forms",
+    href: "/styleguide#forms",
+    keywords: "input textarea select checkbox switch radio label toggle",
+  },
+  {
+    kind: "Section",
+    label: "Overlays",
+    href: "/styleguide#overlays",
+    keywords:
+      "tooltip popover dropdown menu dialog hover card sheet command navigation",
+  },
+  {
+    kind: "Section",
+    label: "Feedback",
+    href: "/styleguide#feedback",
+    keywords: "alert progress skeleton toast",
+  },
+  {
+    kind: "Section",
+    label: "Data display",
+    href: "/styleguide#data",
+    keywords:
+      "tabs accordion avatar separator breadcrumb table aspect ratio scroll collapsible",
+  },
+  {
+    kind: "Section",
+    label: "Patterns",
+    href: "/styleguide#patterns",
+    keywords:
+      "page header metric stat stat card gauge activity grid gradient avatar empty state",
+  },
+  {
+    kind: "Section",
+    label: "Charts",
+    href: "/styleguide#charts",
+    keywords: "area chart bar chart recharts",
+  },
+  {
+    kind: "Section",
+    label: "House components",
+    href: "/styleguide#house",
+    keywords:
+      "detail header settings panel event timeline section verification",
+  },
+  {
+    kind: "Section",
+    label: "Layout archetypes",
+    href: "/styleguide#layouts",
+    keywords:
+      "hero section centered focal split with rail timeline rail layouts",
+  },
+  {
+    kind: "Section",
+    label: "Side by side",
+    href: "/styleguide#comparison",
+    keywords: "comparison vercel linear stripe github shopify",
+  },
+]
 
 /* ── Components (derived from the canonical docs manifest) ─────────── */
 
@@ -59,8 +175,9 @@ const componentEntries: SearchEntry[] = components.map((c) => ({
   href: `/docs/${c.slug}`,
   meta: c.category,
   // Slug words + category + description give cmdk plenty to fuzzy-match on.
-  keywords: `${c.slug.replace(/-/g, " ")} ${c.category} ${c.description}`.toLowerCase(),
-}));
+  keywords:
+    `${c.slug.replace(/-/g, " ")} ${c.category} ${c.description}`.toLowerCase(),
+}))
 
 /* ── Variants (authored only — derived from the canonical manifest) ─── */
 
@@ -73,7 +190,7 @@ const variantEntries: SearchEntry[] = components.flatMap((c) =>
     keywords:
       `${c.slug.replace(/-/g, " ")} ${v.name} ${v.tags.join(" ")} ${c.category}`.toLowerCase(),
   })),
-);
+)
 
 /* ── Layout archetypes (derived from the gallery metadata) ────────── */
 
@@ -92,7 +209,7 @@ const layoutEntries: SearchEntry[] = [
     meta: "Layout",
     keywords: `${a.tagline} ${a.uses.join(" ")} archetype layout`.toLowerCase(),
   })),
-];
+]
 
 /* ── Starter templates (derived from the gallery metadata) ────────── */
 
@@ -102,16 +219,18 @@ const templateEntries: SearchEntry[] = [
     label: "Templates gallery",
     href: "/templates",
     meta: "Templates",
-    keywords: "templates starter screens pages gallery pricing dashboard settings",
+    keywords:
+      "templates starter screens pages gallery pricing dashboard settings",
   },
   ...templates.map<SearchEntry>((t) => ({
     kind: "Section",
     label: `${t.name} template`,
     href: `/templates/${t.slug}`,
     meta: "Template",
-    keywords: `${t.tagline} ${t.uses.join(" ")} ${t.category} starter template screen`.toLowerCase(),
+    keywords:
+      `${t.tagline} ${t.uses.join(" ")} ${t.category} starter template screen`.toLowerCase(),
   })),
-];
+]
 
 export const searchIndex: SearchEntry[] = [
   ...pageEntries,
@@ -120,4 +239,4 @@ export const searchIndex: SearchEntry[] = [
   ...templateEntries,
   ...componentEntries,
   ...variantEntries,
-];
+]

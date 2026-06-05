@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Command,
   CommandEmpty,
@@ -8,11 +8,11 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 
 export default function Example() {
   // Seed the query with text that matches nothing so CommandEmpty is shown.
-  const [query, setQuery] = useState("flux capacitor");
+  const [query, setQuery] = useState("flux capacitor")
 
   return (
     <div className="w-80 rounded-xl border">
@@ -31,5 +31,5 @@ export default function Example() {
         </CommandList>
       </Command>
     </div>
-  );
+  )
 }

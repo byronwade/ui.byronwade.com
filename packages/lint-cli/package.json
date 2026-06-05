@@ -3,13 +3,23 @@
   "version": "0.1.0",
   "description": "CLI that flags off-system byronwade/ui code.",
   "type": "module",
-  "bin": { "byronwade-lint": "./dist/cli.js" },
-  "files": ["dist"],
-  "scripts": { "build": "tsc -p tsconfig.json", "test": "vitest run" },
+  "bin": {
+    "byronwade-lint": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
   "dependencies": {
     "@byronwade/on-system-core": "0.1.0",
     "fast-glob": "^3.3.2",
     "picocolors": "^1.1.1"
   },
-  "devDependencies": { "typescript": "^5", "vitest": "^4.1.7" }
+  "devDependencies": {
+    "typescript": "^5",
+    "vitest": "^4.1.7"
+  }
 }

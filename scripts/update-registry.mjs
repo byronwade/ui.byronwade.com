@@ -11,33 +11,37 @@
 //   npm run update:registry
 //   npm run update:registry -- --skip-validate
 
-import { spawnSync } from "node:child_process";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process"
+import { dirname, join } from "node:path"
+import { fileURLToPath } from "node:url"
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const root = join(__dirname, "..");
-const skipValidate = process.argv.includes("--skip-validate");
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const root = join(__dirname, "..")
+const skipValidate = process.argv.includes("--skip-validate")
 
 function run(label, cmd, args = []) {
-  console.log(`\n▶ ${label}`);
-  const result = spawnSync(cmd, args, { cwd: root, stdio: "inherit", shell: false });
+  console.log(`\n▶ ${label}`)
+  const result = spawnSync(cmd, args, {
+    cwd: root,
+    stdio: "inherit",
+    shell: false,
+  })
   if (result.status !== 0) {
-    console.error(`\n✗ ${label} failed (exit ${result.status ?? 1})`);
-    process.exit(result.status ?? 1);
+    console.error(`\n✗ ${label} failed (exit ${result.status ?? 1})`)
+    process.exit(result.status ?? 1)
   }
 }
 
-console.log("update-registry: starting pipeline");
+console.log("update-registry: starting pipeline")
 
-run("Generate `all` aggregator", "node", ["scripts/gen-all-item.mjs"]);
-run("Sync registry → app", "node", ["scripts/sync-registry.mjs"]);
-run("Build shadcn registry", "npx", ["shadcn", "build"]);
+run("Generate `all` aggregator", "node", ["scripts/gen-all-item.mjs"])
+run("Sync registry → app", "node", ["scripts/sync-registry.mjs"])
+run("Build shadcn registry", "npx", ["shadcn", "build"])
 
 if (!skipValidate) {
-  run("Validate manifest", "node", ["scripts/check-registry.mjs", "--built"]);
-  run("Validate examples", "node", ["scripts/check-examples.mjs"]);
+  run("Validate manifest", "node", ["scripts/check-registry.mjs", "--built"])
+  run("Validate examples", "node", ["scripts/check-examples.mjs"])
 }
 
-console.log("\n✓ update-registry complete");
-console.log("  Next: run `npm run test:ci` before committing.");
+console.log("\n✓ update-registry complete")
+console.log("  Next: run `npm run test:ci` before committing.")

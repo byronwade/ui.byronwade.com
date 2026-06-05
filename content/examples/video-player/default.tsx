@@ -9,7 +9,7 @@ import {
   VideoPlayerTimeDisplay,
   VideoPlayerTimeRange,
   VideoPlayerVolumeRange,
-} from "@/components/ui/video-player";
+} from "@/components/ui/video-player"
 
 export default function Example() {
   return (
@@ -31,5 +31,5 @@ export default function Example() {
         </VideoPlayerControlBar>
       </VideoPlayer>
     </div>
-  );
+  )
 }

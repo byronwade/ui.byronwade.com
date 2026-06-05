@@ -1,26 +1,26 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
 
-const SIDES = ["top", "right", "bottom", "left"] as const;
+const SIDES = ["top", "right", "bottom", "left"] as const
 
-type Side = (typeof SIDES)[number];
+type Side = (typeof SIDES)[number]
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
-  const [side, setSide] = useState<Side>("right");
+  const [open, setOpen] = useState(false)
+  const [side, setSide] = useState<Side>("right")
 
   function openSide(value: Side) {
-    setSide(value);
-    setOpen(true);
+    setSide(value)
+    setOpen(true)
   }
 
   return (
@@ -48,5 +48,5 @@ export default function Example() {
         </SheetContent>
       </Sheet>
     </div>
-  );
+  )
 }

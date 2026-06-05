@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { ChevronRight, Globe, Moon, Sun } from "lucide-react";
+import { ChevronRight, Globe, Moon, Sun } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -13,7 +13,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export default function Example() {
   return (
@@ -66,5 +66,5 @@ export default function Example() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

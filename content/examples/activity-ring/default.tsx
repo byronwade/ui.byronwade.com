@@ -1,4 +1,4 @@
-import { ActivityRing } from "@/components/ui/activity-ring";
+import { ActivityRing } from "@/components/ui/activity-ring"
 
 export default function Example() {
   return (
@@ -11,5 +11,5 @@ export default function Example() {
         centerLabel="interactions"
       />
     </div>
-  );
+  )
 }

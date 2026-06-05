@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { ShieldCheck } from "lucide-react";
+import type { Metadata } from "next"
+import { ShieldCheck } from "lucide-react"
 
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
 
 export const metadata: Metadata = {
   title: "Lint — byronwade/ui",
   description:
     "Keep consumer code on-system with the @byronwade/eslint-plugin-ui ESLint plugin and the byronwade-lint CLI.",
-};
+}
 
 /* ---------------------------------------------------------------------------
    Docs page: on-system lint — ESLint plugin + CLI
@@ -15,10 +15,14 @@ export const metadata: Metadata = {
    Headings: font-normal or font-medium (never font-semibold / font-bold).
 --------------------------------------------------------------------------- */
 
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">{children}</p>;
+  return (
+    <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+      {children}
+    </p>
+  )
 }
 
 const DETECTORS: { label: string; description: string }[] = [
@@ -47,7 +51,7 @@ const DETECTORS: { label: string; description: string }[] = [
     description:
       "font-semibold and font-bold on h1–h6 elements (or heading-role components) are flagged — the editorial-typography DNA requires font-medium or font-normal.",
   },
-];
+]
 
 export default function LintPage() {
   return (
@@ -68,9 +72,9 @@ export default function LintPage() {
             </span>
           </h1>
           <p className="mt-8 max-w-xl animate-in fade-in fill-mode-both font-mono text-sm leading-relaxed text-muted-foreground [animation-delay:240ms] duration-700">
-            The on-system lint enforces tokens, primitives, and house utilities in consumer
-            codebases — the same engine that grades the design system itself. One plugin, one CLI,
-            zero raw colors.
+            The on-system lint enforces tokens, primitives, and house utilities
+            in consumer codebases — the same engine that grades the design
+            system itself. One plugin, one CLI, zero raw colors.
           </p>
         </div>
       </section>
@@ -83,8 +87,8 @@ export default function LintPage() {
             <code className="font-mono text-[13px] text-foreground">
               @byronwade/eslint-plugin-ui
             </code>{" "}
-            ships a flat-config-ready recommended preset that enables all five detectors. Works with
-            ESLint 9+ and the flat-config format.
+            ships a flat-config-ready recommended preset that enables all five
+            detectors. Works with ESLint 9+ and the flat-config format.
           </p>
 
           <div className="mt-8 space-y-6">
@@ -92,7 +96,10 @@ export default function LintPage() {
               <p className="mb-2 font-mono text-[11px] uppercase tracking-wide text-muted-foreground">
                 install
               </p>
-              <CodeBlock lang="bash" code={`npm i -D @byronwade/eslint-plugin-ui`} />
+              <CodeBlock
+                lang="bash"
+                code={`npm i -D @byronwade/eslint-plugin-ui`}
+              />
             </div>
 
             <div>
@@ -130,10 +137,13 @@ export default [ byronwadeUi.configs.recommended ];`}
                     <td className="px-4 py-3 font-mono text-[13px] text-foreground">
                       maxColorDistance
                     </td>
-                    <td className="px-4 py-3 font-mono text-[13px] text-muted-foreground">10</td>
+                    <td className="px-4 py-3 font-mono text-[13px] text-muted-foreground">
+                      10
+                    </td>
                     <td className="px-4 py-3 text-[13px] leading-relaxed text-muted-foreground">
-                      Maximum ΔE distance before a raw color is flagged as &quot;too far from any
-                      token&quot;. Lower values are stricter.
+                      Maximum ΔE distance before a raw color is flagged as
+                      &quot;too far from any token&quot;. Lower values are
+                      stricter.
                     </td>
                   </tr>
                   <tr>
@@ -141,11 +151,12 @@ export default [ byronwadeUi.configs.recommended ];`}
                       offSystemComponents
                     </td>
                     <td className="px-4 py-3 font-mono text-[13px] text-muted-foreground">
-                      [&quot;button&quot;, &quot;input&quot;, &quot;select&quot;]
+                      [&quot;button&quot;, &quot;input&quot;,
+                      &quot;select&quot;]
                     </td>
                     <td className="px-4 py-3 text-[13px] leading-relaxed text-muted-foreground">
-                      Native HTML elements for which a design-system primitive exists. Override to
-                      expand or reduce the set.
+                      Native HTML elements for which a design-system primitive
+                      exists. Override to expand or reduce the set.
                     </td>
                   </tr>
                 </tbody>
@@ -160,11 +171,14 @@ export default [ byronwadeUi.configs.recommended ];`}
         <div className="mx-auto max-w-5xl py-16">
           <Eyebrow>02 — CLI</Eyebrow>
           <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            <code className="font-mono text-[13px] text-foreground">byronwade-lint</code> runs the
-            same detectors outside of ESLint — useful in CI, pre-commit hooks, and editors that
-            don&apos;t speak ESLint flat config yet. The{" "}
-            <code className="font-mono text-[13px] text-foreground">--fix</code> flag auto-applies
-            safe codemods where a unique nearest token can be found.
+            <code className="font-mono text-[13px] text-foreground">
+              byronwade-lint
+            </code>{" "}
+            runs the same detectors outside of ESLint — useful in CI, pre-commit
+            hooks, and editors that don&apos;t speak ESLint flat config yet. The{" "}
+            <code className="font-mono text-[13px] text-foreground">--fix</code>{" "}
+            flag auto-applies safe codemods where a unique nearest token can be
+            found.
           </p>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -195,8 +209,9 @@ export default [ byronwadeUi.configs.recommended ];`}
         <div className="mx-auto max-w-5xl">
           <Eyebrow>03 — What it catches</Eyebrow>
           <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            Five detectors cover the most common ways consumer code drifts off-system. Each maps
-            a violation to a specific token or utility so the fix is always clear.
+            Five detectors cover the most common ways consumer code drifts
+            off-system. Each maps a violation to a specific token or utility so
+            the fix is always clear.
           </p>
 
           <ul className="mt-8 space-y-0 divide-y divide-border rounded-xl edge overflow-hidden">
@@ -218,5 +233,5 @@ export default [ byronwadeUi.configs.recommended ];`}
         </div>
       </section>
     </article>
-  );
+  )
 }

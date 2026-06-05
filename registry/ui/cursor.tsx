@@ -5,11 +5,11 @@
  * text-foreground), `cn()` + `className` passthrough, and `data-slot` hooks.
  * The pointer uses `currentColor`, so a live cursor is tinted via `text-*`.
  */
-import { Children, type HTMLAttributes, type SVGProps } from "react";
+import { Children, type HTMLAttributes, type SVGProps } from "react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-export type CursorProps = HTMLAttributes<HTMLSpanElement>;
+export type CursorProps = HTMLAttributes<HTMLSpanElement>
 
 export const Cursor = ({ className, children, ...props }: CursorProps) => (
   <span
@@ -19,9 +19,9 @@ export const Cursor = ({ className, children, ...props }: CursorProps) => (
   >
     {children}
   </span>
-);
+)
 
-export type CursorPointerProps = SVGProps<SVGSVGElement>;
+export type CursorPointerProps = SVGProps<SVGSVGElement>
 
 export const CursorPointer = ({ className, ...props }: CursorPointerProps) => (
   <svg
@@ -41,9 +41,9 @@ export const CursorPointer = ({ className, ...props }: CursorPointerProps) => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
-export type CursorBodyProps = HTMLAttributes<HTMLSpanElement>;
+export type CursorBodyProps = HTMLAttributes<HTMLSpanElement>
 
 export const CursorBody = ({
   children,
@@ -62,15 +62,19 @@ export const CursorBody = ({
   >
     {children}
   </span>
-);
+)
 
-export type CursorNameProps = HTMLAttributes<HTMLSpanElement>;
+export type CursorNameProps = HTMLAttributes<HTMLSpanElement>
 
 export const CursorName = ({ className, ...props }: CursorNameProps) => (
-  <span data-slot="cursor-name" className={cn("font-medium", className)} {...props} />
-);
+  <span
+    data-slot="cursor-name"
+    className={cn("font-medium", className)}
+    {...props}
+  />
+)
 
-export type CursorMessageProps = HTMLAttributes<HTMLSpanElement>;
+export type CursorMessageProps = HTMLAttributes<HTMLSpanElement>
 
 export const CursorMessage = ({ className, ...props }: CursorMessageProps) => (
   <span
@@ -78,4 +82,4 @@ export const CursorMessage = ({ className, ...props }: CursorMessageProps) => (
     className={cn("text-muted-foreground", className)}
     {...props}
   />
-);
+)

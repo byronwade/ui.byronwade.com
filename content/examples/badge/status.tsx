@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge"
 
 const items = [
   { label: "Deployment #847", status: "success" as const, text: "Live" },
@@ -6,7 +6,7 @@ const items = [
   { label: "Deployment #845", status: "destructive" as const, text: "Failed" },
   { label: "Deployment #844", status: "secondary" as const, text: "Cancelled" },
   { label: "Deployment #843", status: "outline" as const, text: "Queued" },
-];
+]
 
 export default function Example() {
   return (
@@ -21,5 +21,5 @@ export default function Example() {
         </div>
       ))}
     </div>
-  );
+  )
 }

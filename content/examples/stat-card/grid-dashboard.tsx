@@ -1,5 +1,5 @@
-import { Activity, Database, Server, Users, Zap } from "lucide-react";
-import { StatCard } from "@/components/stat-card";
+import { Activity, Database, Server, Users, Zap } from "lucide-react"
+import { StatCard } from "@/components/stat-card"
 
 /**
  * A realistic four-card dashboard grid showing how StatCards compose
@@ -54,5 +54,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

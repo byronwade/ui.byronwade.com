@@ -1,16 +1,29 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { BarChart3, Home, Inbox, Settings, StickyNote } from "lucide-react";
+import * as React from "react"
+import { BarChart3, Home, Inbox, Settings, StickyNote } from "lucide-react"
 
-import { MorphDock } from "@/components/ui/morph-dock";
+import { MorphDock } from "@/components/ui/morph-dock"
 
 const items = [
-  { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
+  {
+    id: "home",
+    label: "Home",
+    icon: Home,
+    href: "#",
+    active: true,
+    core: true,
+  },
   { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
   { id: "reports", label: "Reports", icon: BarChart3, href: "#", core: true },
-  { id: "settings", label: "Settings", icon: Settings, href: "#", pinned: true },
-];
+  {
+    id: "settings",
+    label: "Settings",
+    icon: Settings,
+    href: "#",
+    pinned: true,
+  },
+]
 
 /**
  * `draggable` detaches the open panel — grab the header to drag it free, then
@@ -18,7 +31,7 @@ const items = [
  * handle, the title, and the close button; `onSave` would add a Save button.
  */
 export default function Example() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="flex min-h-72 items-start justify-center p-8">
       <MorphDock
@@ -42,5 +55,5 @@ export default function Example() {
         </div>
       </MorphDock>
     </div>
-  );
+  )
 }

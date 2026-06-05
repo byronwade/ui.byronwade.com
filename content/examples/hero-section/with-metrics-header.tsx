@@ -1,11 +1,11 @@
-import { HeroSection } from "@/components/hero-section";
+import { HeroSection } from "@/components/hero-section"
 
 /** HeroSection with a multi-metric row in the header and a full-bleed chart area. */
 const metrics = [
   { label: "Total Users", value: "24,830", delta: "+12.4%", up: true },
   { label: "Revenue", value: "$91,200", delta: "+8.1%", up: true },
   { label: "Bounce Rate", value: "34.5%", delta: "-2.3%", up: false },
-];
+]
 
 export default function Example() {
   return (
@@ -16,8 +16,12 @@ export default function Example() {
             <div className="flex flex-wrap gap-8">
               {metrics.map((m) => (
                 <div key={m.label} className="flex flex-col gap-0.5">
-                  <span className="text-xs text-muted-foreground">{m.label}</span>
-                  <span className="text-2xl font-semibold tabular-nums">{m.value}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {m.label}
+                  </span>
+                  <span className="text-2xl font-semibold tabular-nums">
+                    {m.value}
+                  </span>
                   <span
                     className={`text-xs font-medium ${
                       m.up ? "text-success" : "text-destructive"
@@ -42,5 +46,5 @@ export default function Example() {
         </div>
       </HeroSection>
     </div>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
 import {
   CreditCardIcon,
   UsersIcon,
   KeyRoundIcon,
   type LucideIcon,
-} from "lucide-react";
+} from "lucide-react"
 import {
   Command,
   CommandEmpty,
@@ -13,16 +13,16 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { CommandResult } from "@/components/command-result";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/ui/command"
+import { CommandResult } from "@/components/command-result"
+import { Badge } from "@/components/ui/badge"
 
 function Tile({ icon: Icon }: { icon: LucideIcon }) {
   return (
     <span className="flex size-9 items-center justify-center rounded-md bg-brand/10 text-brand">
       <Icon className="size-4" />
     </span>
-  );
+  )
 }
 
 const settings = [
@@ -44,7 +44,7 @@ const settings = [
     icon: KeyRoundIcon,
     badge: null,
   },
-];
+]
 
 export default function Example() {
   return (
@@ -61,7 +61,9 @@ export default function Example() {
                   title={s.title}
                   description={s.description}
                   action={
-                    s.badge ? <Badge variant="secondary">{s.badge}</Badge> : undefined
+                    s.badge ? (
+                      <Badge variant="secondary">{s.badge}</Badge>
+                    ) : undefined
                   }
                 />
               </CommandItem>
@@ -70,5 +72,5 @@ export default function Example() {
         </CommandList>
       </Command>
     </div>
-  );
+  )
 }

@@ -3,7 +3,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
+} from "@/components/ui/accordion"
 
 /**
  * keepMounted — panels stay in the DOM when closed (useful for forms or
@@ -49,9 +49,9 @@ export default function Example() {
           <AccordionItem value="overview">
             <AccordionTrigger>Product overview</AccordionTrigger>
             <AccordionContent>
-              Try using your browser's find-in-page (⌘F / Ctrl+F) to search
-              for text inside this accordion. Closed panels will open
-              automatically when a match is found.
+              Try using your browser's find-in-page (⌘F / Ctrl+F) to search for
+              text inside this accordion. Closed panels will open automatically
+              when a match is found.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="specs">
@@ -64,5 +64,5 @@ export default function Example() {
         </Accordion>
       </div>
     </div>
-  );
+  )
 }

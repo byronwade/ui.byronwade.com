@@ -5,17 +5,17 @@ import {
   CardFrameHeader,
   CardFrameTitle,
   CardFrameDescription,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
 export default function Example() {
   return (
@@ -61,5 +61,5 @@ export default function Example() {
         </Card>
       </CardFrame>
     </div>
-  );
+  )
 }

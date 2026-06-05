@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { Pencil } from "lucide-react";
+import { Pencil } from "lucide-react"
 
-import { MorphDock } from "@/components/ui/morph-dock";
+import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
  * A breadcrumb dock — the leading region is a crumb trail (last crumb is the
@@ -19,8 +19,16 @@ export default function Example() {
           { label: "Reports", href: "#" },
           { label: "Q2 2026" },
         ]}
-        tools={[{ id: "edit", label: "Edit", icon: Pencil, primary: true, onSelect: () => {} }]}
+        tools={[
+          {
+            id: "edit",
+            label: "Edit",
+            icon: Pencil,
+            primary: true,
+            onSelect: () => {},
+          },
+        ]}
       />
     </div>
-  );
+  )
 }

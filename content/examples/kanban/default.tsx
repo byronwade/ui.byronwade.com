@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
 import {
   KanbanBoard,
@@ -8,30 +8,35 @@ import {
   KanbanCards,
   KanbanHeader,
   KanbanProvider,
-} from "@/components/ui/kanban";
+} from "@/components/ui/kanban"
 
 const columns = [
   { id: "todo", name: "To do" },
   { id: "in-progress", name: "In progress" },
   { id: "done", name: "Done" },
-];
+]
 
 type Task = {
-  id: string;
-  name: string;
-  column: string;
-  owner: string;
-};
+  id: string
+  name: string
+  column: string
+  owner: string
+}
 
 const initialData: Task[] = [
   { id: "1", name: "Draft design tokens", column: "todo", owner: "Avery" },
   { id: "2", name: "Wire up the registry", column: "todo", owner: "Jordan" },
-  { id: "3", name: "Build the kanban board", column: "in-progress", owner: "Riley" },
+  {
+    id: "3",
+    name: "Build the kanban board",
+    column: "in-progress",
+    owner: "Riley",
+  },
   { id: "4", name: "Ship the dark theme", column: "done", owner: "Sam" },
-];
+]
 
 export default function Example() {
-  const [data, setData] = useState<Task[]>(initialData);
+  const [data, setData] = useState<Task[]>(initialData)
 
   return (
     <div className="h-96 w-full">
@@ -60,5 +65,5 @@ export default function Example() {
         )}
       </KanbanProvider>
     </div>
-  );
+  )
 }

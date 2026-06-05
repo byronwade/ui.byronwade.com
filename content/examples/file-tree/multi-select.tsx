@@ -1,4 +1,4 @@
-import { Tree, type TreeViewElement } from "@/components/ui/file-tree";
+import { Tree, type TreeViewElement } from "@/components/ui/file-tree"
 
 const ELEMENTS: TreeViewElement[] = [
   {
@@ -17,7 +17,7 @@ const ELEMENTS: TreeViewElement[] = [
     ],
   },
   { id: "6", name: "README.md" },
-];
+]
 
 export default function Example() {
   return (
@@ -31,5 +31,5 @@ export default function Example() {
         defaultCheckedIds={["4"]}
       />
     </div>
-  );
+  )
 }

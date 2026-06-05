@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   OpenIn,
@@ -12,10 +12,9 @@ import {
   OpenInScira,
   OpenInT3,
   OpenInv0,
-} from "@/components/ai-elements/open-in-chat";
+} from "@/components/ai-elements/open-in-chat"
 
-const query =
-  "Explain how React Server Components stream HTML to the browser.";
+const query = "Explain how React Server Components stream HTML to the browser."
 
 export default function Example() {
   return (
@@ -34,5 +33,5 @@ export default function Example() {
         </OpenInContent>
       </OpenIn>
     </div>
-  );
+  )
 }

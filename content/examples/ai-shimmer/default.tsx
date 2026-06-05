@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Shimmer } from "@/components/ai-elements/shimmer";
-import { Loader } from "@/components/ai-elements/loader";
+import { Shimmer } from "@/components/ai-elements/shimmer"
+import { Loader } from "@/components/ai-elements/loader"
 
 export default function Example() {
   return (
@@ -22,5 +22,5 @@ export default function Example() {
         Streaming tokens
       </Shimmer>
     </div>
-  );
+  )
 }

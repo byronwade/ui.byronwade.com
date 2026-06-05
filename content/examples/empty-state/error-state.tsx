@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { AlertCircle } from "lucide-react";
-import { EmptyState } from "@/components/empty-state";
-import { Button } from "@/components/ui/button";
+import { AlertCircle } from "lucide-react"
+import { EmptyState } from "@/components/empty-state"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   const handleRetry = () => {
     // Simulate retry
-    console.log("Retrying...");
-  };
+    console.log("Retrying...")
+  }
 
   return (
     <div className="flex items-center justify-center min-h-0 bg-background p-8">
@@ -26,5 +26,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

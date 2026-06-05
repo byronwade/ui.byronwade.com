@@ -23,8 +23,8 @@ an AI orchestrates." The current docs IA does not survive that volume:
   `category` string, and `examples: string[]` (demo file names). A "variant" today is just
   a demo file — not an addressable, taggable record.
 - **Machine layer** (`scripts/gen-mcp-data.mjs` → `packages/mcp/src/data.generated.json`):
-  exists, but is **per-type only** — no tags, no variants, so an AI can match a *type* but
-  not a *variant* or a *use-case*.
+  exists, but is **per-type only** — no tags, no variants, so an AI can match a _type_ but
+  not a _variant_ or a _use-case_.
 
 What must be preserved (the "same concepts"): the editorial Introduction/catalog, Philosophy,
 Foundation, Installation, Theming, Typography, AI-rules pages; the per-component specimen
@@ -35,16 +35,16 @@ utilities — per `AGENTS.md` Design DNA).
 
 ## 2. Locked decisions (from brainstorming)
 
-| Decision | Choice | Consequence |
-|---|---|---|
-| **Variant model** | **Hybrid** — type is the page/nav unit; each variant is an addressable record (id, tags, anchor, install ref) living on the type page | Hundreds of pages, *not* tens of thousands; every variant individually searchable + AI-addressable |
-| **Taxonomy** | **Primary `group` + `tags[]` facets** (type-level AND variant-level) | Light migration (add `tags[]`); unlocks cross-cutting discovery a single category can't |
-| **Machine layer** | **Emit in the same pass** — one source (`content/components.ts`) feeds human docs *and* the machine index | No drift; the existing `searchIndex` already proves the derive-from-one-source pattern |
-| **Primary nav** | **Gallery-first, two levels** (types → variants) + ⌘K palette as universal jump; **no exhaustive sidebar** (contextual rail only on detail pages) | Matches the `/templates` + `/layouts` pages the user already likes; nothing to maintain twice |
-| **Card previews** | **Static build-time thumbnails over a windowed grid** | Flat render cost at any catalog size; identical look; reuses `/preview` route + `.screenshots/` |
+| Decision          | Choice                                                                                                                                            | Consequence                                                                                        |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Variant model** | **Hybrid** — type is the page/nav unit; each variant is an addressable record (id, tags, anchor, install ref) living on the type page             | Hundreds of pages, _not_ tens of thousands; every variant individually searchable + AI-addressable |
+| **Taxonomy**      | **Primary `group` + `tags[]` facets** (type-level AND variant-level)                                                                              | Light migration (add `tags[]`); unlocks cross-cutting discovery a single category can't            |
+| **Machine layer** | **Emit in the same pass** — one source (`content/components.ts`) feeds human docs _and_ the machine index                                         | No drift; the existing `searchIndex` already proves the derive-from-one-source pattern             |
+| **Primary nav**   | **Gallery-first, two levels** (types → variants) + ⌘K palette as universal jump; **no exhaustive sidebar** (contextual rail only on detail pages) | Matches the `/templates` + `/layouts` pages the user already likes; nothing to maintain twice      |
+| **Card previews** | **Static build-time thumbnails over a windowed grid**                                                                                             | Flat render cost at any catalog size; identical look; reuses `/preview` route + `.screenshots/`    |
 
-**The scaling invariant** that makes this work: *no single view and no render cost grows with
-the total catalog — only with what is on screen.* The two-level gallery guarantees each grid
+**The scaling invariant** that makes this work: _no single view and no render cost grows with
+the total catalog — only with what is on screen._ The two-level gallery guarantees each grid
 stays in the hundreds (a type's variants), never the tens of thousands (every variant).
 
 ---
@@ -83,25 +83,25 @@ in the plan (rename touches `site-nav`, the index page, `[slug]` page, `search-i
 
 ```ts
 export type Variant = {
-  id: string;          // stable, unique within a type — e.g. "ghost-sm"  → #ghost-sm anchor
-  name: string;        // human label
-  tags: string[];      // facets: use-case / density / tone / surface …
-  example: string;     // existing demo file name (variants ⊇ today's examples[])
-  install?: string;    // optional per-variant install ref (else the type's install)
-};
+  id: string // stable, unique within a type — e.g. "ghost-sm"  → #ghost-sm anchor
+  name: string // human label
+  tags: string[] // facets: use-case / density / tone / surface …
+  example: string // existing demo file name (variants ⊇ today's examples[])
+  install?: string // optional per-variant install ref (else the type's install)
+}
 
 export type ComponentDoc = {
-  slug: string;
-  name: string;
-  group: Group;        // primary bucket (today's `category`) — drives gallery grouping
-  tags: string[];      // type-level facets — drive catalog filters + AI match
-  description: string;
-  npmDeps?: string[];
-  registryDeps?: string[];
-  props?: PropRow[];
-  variants: Variant[]; // supersedes examples[]; back-compat shim derives a default
-                       // variant list from examples[] until a type is authored out
-};
+  slug: string
+  name: string
+  group: Group // primary bucket (today's `category`) — drives gallery grouping
+  tags: string[] // type-level facets — drive catalog filters + AI match
+  description: string
+  npmDeps?: string[]
+  registryDeps?: string[]
+  props?: PropRow[]
+  variants: Variant[] // supersedes examples[]; back-compat shim derives a default
+  // variant list from examples[] until a type is authored out
+}
 ```
 
 **Migration:** additive. `tags[]` defaults to `[]`; `variants` is derived from `examples[]`
@@ -117,14 +117,14 @@ rewrite of all 84 items.
   Gallery), removable active pills, count, A–Z/Featured sort, **windowed** card grid, static
   thumbnails. Keep the editorial masthead (count numeral, principles, install one-liner) — a
   preserved concept — above the gallery. Each card → `/docs/[type]`.
-- **(B′) Type page grid `/docs/[type]`:** the *same* gallery shell, scoped to one type's
+- **(B′) Type page grid `/docs/[type]`:** the _same_ gallery shell, scoped to one type's
   **variants**. Faceted by variant `tags`. Each variant card deep-links to its anchor.
 - **(C) Detail/specimen page:** keep `ExampleTabs`; add per-variant **anchor** (`#variant-id`),
   **tag chips**, and per-variant **install/copy**, making each variant addressable (the hybrid
   payoff). Replace the exhaustive sidebar with a **light contextual rail** (related types,
   jump-to-variant).
 - **(D) Search:** extend `content/search-index.ts` to emit a **Variant** entry kind (label,
-  type, tags, deep-link href) so ⌘K spans types *and* variants. Palette stays in root chrome
+  type, tags, deep-link href) so ⌘K spans types _and_ variants. Palette stays in root chrome
   as the universal jump.
 
 ---
@@ -134,8 +134,8 @@ rewrite of all 84 items.
 - **(E) Thumbnails — `scripts/gen-thumbs.mjs`:** add a component preview route (extend
   `app/preview/[slug]` or a sibling) that renders a type's **default variant** full-bleed;
   screenshot it at build time into `public/thumbs/<slug>.png`. Wire into `prebuild` /
-  `update:registry`. Cards reference the static image. (Phase 2 nicety: swap the *focused/
-  hovered* card to a live preview — pay for liveness only where you look.)
+  `update:registry`. Cards reference the static image. (Phase 2 nicety: swap the _focused/
+  hovered_ card to a live preview — pay for liveness only where you look.)
 - **(F) AI index — evolve `scripts/gen-mcp-data.mjs`:** emit **per-variant** records carrying
   `{ id, type, name, group, tags, install, deepLink, deps }` alongside the existing per-type
   records, sourced from the enriched `components.ts`. Add an **`/llms.txt`** entry point
@@ -147,6 +147,7 @@ rewrite of all 84 items.
 ## 7. Phasing (decomposed — Phase 1 is the spec's build target)
 
 **Phase 1 — Foundation + proof (this plan):**
+
 1. Enrich the `ComponentDoc` / `Variant` types + back-compat shim (A).
 2. **Author ONE real component out to ~20–30 genuine variants** (e.g. `button` or `badge`) —
    the proving ground. Let the schema (`tags` vocabulary, `density`/`tone` traits, `id`
@@ -157,7 +158,7 @@ rewrite of all 84 items.
 
 **Exit criteria for Phase 1:** the schema is stable against real variants; `npm run validate`
 (incl. new `check:index`) is green; the one proven type's variants appear in ⌘K and the
-machine index. *Then* the schema is frozen and the remaining migration + full UI begin.
+machine index. _Then_ the schema is frozen and the remaining migration + full UI begin.
 
 **Phase 2 — Roll out (separate plan):** migrate the other 83 types' `tags`/`variants`; build
 `ComponentGallery` + windowed grid + thumbnails (B, B′, E); the contextual rail + per-variant
@@ -179,11 +180,14 @@ anchors/install on the detail page (C); full variant indexing in search (D).
 
 ## 9. Risks & mitigations
 
-| Risk | Mitigation |
-|---|---|
-| Schema guessed wrong → migrate 84 items twice | **Phase 1 proves the schema on one real type first** |
-| `category`→`group` rename churn | Keep field name `category` unless the plan finds rename is cheap; `group` is the *concept*, not necessarily the key |
-| Windowed grid + static thumbs perf at thousands | Two-level gallery keeps any grid in the hundreds; windowing caps DOM |
-| Thumbnail staleness | Regenerate in `prebuild`/CI on change; `check:thumbs` gate |
-| Machine index drifts from docs | Both derive from `content/components.ts`; `check:index` gate |
+| Risk                                            | Mitigation                                                                                                          |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Schema guessed wrong → migrate 84 items twice   | **Phase 1 proves the schema on one real type first**                                                                |
+| `category`→`group` rename churn                 | Keep field name `category` unless the plan finds rename is cheap; `group` is the _concept_, not necessarily the key |
+| Windowed grid + static thumbs perf at thousands | Two-level gallery keeps any grid in the hundreds; windowing caps DOM                                                |
+| Thumbnail staleness                             | Regenerate in `prebuild`/CI on change; `check:thumbs` gate                                                          |
+| Machine index drifts from docs                  | Both derive from `content/components.ts`; `check:index` gate                                                        |
+
+```
+
 ```

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 export function SegmentedControl<T extends string>({
   options,
@@ -8,13 +8,19 @@ export function SegmentedControl<T extends string>({
   onValueChange,
   className,
 }: {
-  options: { label: string; value: T }[];
-  value: T;
-  onValueChange: (v: T) => void;
-  className?: string;
+  options: { label: string; value: T }[]
+  value: T
+  onValueChange: (v: T) => void
+  className?: string
 }) {
   return (
-    <div role="group" className={cn("inline-flex items-center gap-0.5 rounded-full border border-border bg-muted/60 p-0.5", className)}>
+    <div
+      role="group"
+      className={cn(
+        "inline-flex items-center gap-0.5 rounded-full border border-border bg-muted/60 p-0.5",
+        className,
+      )}
+    >
       {options.map((o) => (
         <button
           key={o.value}
@@ -31,5 +37,5 @@ export function SegmentedControl<T extends string>({
         </button>
       ))}
     </div>
-  );
+  )
 }

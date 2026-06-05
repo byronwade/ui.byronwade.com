@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@/components/ui/switch"
 
 export default function Example() {
   return (
@@ -20,5 +20,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

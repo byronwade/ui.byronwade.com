@@ -6,34 +6,34 @@
  * and `data-slot` hooks. (kibo's server-side `glimpse(url)` metadata fetcher is
  * intentionally omitted — feed title/description/image yourself.)
  */
-"use client";
+"use client"
 
-import type { ComponentProps } from "react";
+import type { ComponentProps } from "react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
+} from "@/components/ui/hover-card"
 
-export type GlimpseProps = ComponentProps<typeof HoverCard>;
+export type GlimpseProps = ComponentProps<typeof HoverCard>
 
-export const Glimpse = (props: GlimpseProps) => <HoverCard {...props} />;
+export const Glimpse = (props: GlimpseProps) => <HoverCard {...props} />
 
-export type GlimpseContentProps = ComponentProps<typeof HoverCardContent>;
+export type GlimpseContentProps = ComponentProps<typeof HoverCardContent>
 
 export const GlimpseContent = (props: GlimpseContentProps) => (
   <HoverCardContent {...props} />
-);
+)
 
-export type GlimpseTriggerProps = ComponentProps<typeof HoverCardTrigger>;
+export type GlimpseTriggerProps = ComponentProps<typeof HoverCardTrigger>
 
 export const GlimpseTrigger = (props: GlimpseTriggerProps) => (
   <HoverCardTrigger {...props} />
-);
+)
 
-export type GlimpseTitleProps = ComponentProps<"p">;
+export type GlimpseTitleProps = ComponentProps<"p">
 
 export const GlimpseTitle = ({ className, ...props }: GlimpseTitleProps) => (
   <p
@@ -41,9 +41,9 @@ export const GlimpseTitle = ({ className, ...props }: GlimpseTitleProps) => (
     className={cn("truncate text-sm font-medium", className)}
     {...props}
   />
-);
+)
 
-export type GlimpseDescriptionProps = ComponentProps<"p">;
+export type GlimpseDescriptionProps = ComponentProps<"p">
 
 export const GlimpseDescription = ({
   className,
@@ -54,11 +54,15 @@ export const GlimpseDescription = ({
     className={cn("line-clamp-2 text-sm text-muted-foreground", className)}
     {...props}
   />
-);
+)
 
-export type GlimpseImageProps = ComponentProps<"img">;
+export type GlimpseImageProps = ComponentProps<"img">
 
-export const GlimpseImage = ({ className, alt, ...props }: GlimpseImageProps) => (
+export const GlimpseImage = ({
+  className,
+  alt,
+  ...props
+}: GlimpseImageProps) => (
   // eslint-disable-next-line @next/next/no-img-element
   <img
     data-slot="glimpse-image"
@@ -69,4 +73,4 @@ export const GlimpseImage = ({ className, alt, ...props }: GlimpseImageProps) =>
     )}
     {...props}
   />
-);
+)

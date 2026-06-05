@@ -1,4 +1,4 @@
-import { StatCard } from "@/components/stat-card";
+import { StatCard } from "@/components/stat-card"
 
 /** Demonstrates all three delta directions: up (positive), down (negative), and flat (neutral). */
 export default function Example() {
@@ -23,5 +23,5 @@ export default function Example() {
         hint="no change"
       />
     </div>
-  );
+  )
 }

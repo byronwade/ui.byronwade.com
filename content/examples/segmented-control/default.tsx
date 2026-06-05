@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { SegmentedControl } from "@/components/ui/segmented-control";
+import { useState } from "react"
+import { SegmentedControl } from "@/components/ui/segmented-control"
 
 export default function Example() {
-  const [view, setView] = useState("week");
+  const [view, setView] = useState("week")
   return (
     <SegmentedControl
       options={[
@@ -15,5 +15,5 @@ export default function Example() {
       value={view}
       onValueChange={setView}
     />
-  );
+  )
 }

@@ -22,6 +22,7 @@ component. If no scope is given, audit the working-tree diff (`git diff` + `git 
 ## What you check (cite file:line for every finding)
 
 **Design DNA**
+
 1. **Tokens only** — flag any hex, `rgb()`, `hsl()`, named colors, or arbitrary values
    (`text-[#333]`, `bg-[...]`). Color must be a semantic token utility; accent must resolve to
    `--brand` (the only fixed exceptions are the `--chart-2…5` ramp and the `--activity-*` pastels).
@@ -33,18 +34,13 @@ component. If no scope is given, audit the working-tree diff (`git diff` + `git 
    `glow-brand`, `text-gradient`, `mask-fade-x`, `edge`, `scrollbar-thin`, …).
 4. **`cn()` + `className` passthrough** — component accepts `className` and merges via `cn()`.
 
-**House conventions**
-5. **Structure** — kebab-case filename; UI primitive in `registry/ui/`, composite in
-   `registry/components/`, helper in `registry/lib/`; consumer `@/` imports only (no `../`).
-6. **Exports** — named, at the file bottom; no `export default`.
-7. **Formatting** — no semicolons (Prettier `semi: false`). (Don't nitpick spacing Prettier owns;
-   just flag the semicolon style if it slipped.)
-8. **Comments** — minimal / self-documenting. Flag noisy header boilerplate or comments that
-   restate the code; flag genuinely non-obvious logic that has *no* comment.
+**House conventions** 5. **Structure** — kebab-case filename; UI primitive in `registry/ui/`, composite in
+`registry/components/`, helper in `registry/lib/`; consumer `@/` imports only (no `../`). 6. **Exports** — named, at the file bottom; no `export default`. 7. **Formatting** — no semicolons (Prettier `semi: false`). (Don't nitpick spacing Prettier owns;
+just flag the semicolon style if it slipped.) 8. **Comments** — minimal / self-documenting. Flag noisy header boilerplate or comments that
+restate the code; flag genuinely non-obvious logic that has _no_ comment.
 
-**Accessibility**
-9. Labels, `aria-*`, keyboard behavior, and `focus-visible:ring-ring` preserved; dark mode comes
-   from tokens (no branching on a hardcoded color).
+**Accessibility** 9. Labels, `aria-*`, keyboard behavior, and `focus-visible:ring-ring` preserved; dark mode comes
+from tokens (no branching on a hardcoded color).
 
 ## How to be efficient
 

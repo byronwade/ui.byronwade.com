@@ -1,24 +1,24 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react"
+import { Checkbox } from "@/components/ui/checkbox"
 
-const ITEMS = ["Apples", "Bananas", "Cherries"];
+const ITEMS = ["Apples", "Bananas", "Cherries"]
 
 export default function Example() {
-  const [selected, setSelected] = useState<string[]>(["Apples"]);
+  const [selected, setSelected] = useState<string[]>(["Apples"])
 
-  const allChecked = selected.length === ITEMS.length;
-  const someChecked = selected.length > 0 && !allChecked;
+  const allChecked = selected.length === ITEMS.length
+  const someChecked = selected.length > 0 && !allChecked
 
   function toggleAll(checked: boolean) {
-    setSelected(checked ? [...ITEMS] : []);
+    setSelected(checked ? [...ITEMS] : [])
   }
 
   function toggleItem(item: string, checked: boolean) {
     setSelected((prev) =>
-      checked ? [...prev, item] : prev.filter((i) => i !== item)
-    );
+      checked ? [...prev, item] : prev.filter((i) => i !== item),
+    )
   }
 
   return (
@@ -48,5 +48,5 @@ export default function Example() {
         Selected: {selected.length === 0 ? "none" : selected.join(", ")}
       </p>
     </div>
-  );
+  )
 }

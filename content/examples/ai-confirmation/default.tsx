@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Confirmation,
   ConfirmationTitle,
@@ -9,23 +9,20 @@ import {
   ConfirmationRejected,
   ConfirmationActions,
   ConfirmationAction,
-} from "@/components/ai-elements/confirmation";
+} from "@/components/ai-elements/confirmation"
 
-type Phase = "approval-requested" | "approval-responded";
+type Phase = "approval-requested" | "approval-responded"
 
 export default function Example() {
-  const [phase, setPhase] = useState<Phase>("approval-requested");
-  const [approved, setApproved] = useState<boolean | undefined>(undefined);
+  const [phase, setPhase] = useState<Phase>("approval-requested")
+  const [approved, setApproved] = useState<boolean | undefined>(undefined)
 
-  const approval = { id: "deploy-1", approved };
+  const approval = { id: "deploy-1", approved }
 
   return (
     <div className="flex min-h-0 items-center justify-center bg-background p-8">
       <div className="w-full max-w-md">
-        <Confirmation
-          approval={approval}
-          state={phase as never}
-        >
+        <Confirmation approval={approval} state={phase as never}>
           <ConfirmationTitle>
             The agent wants to deploy{" "}
             <span className="font-mono text-foreground">api-gateway</span> to
@@ -37,16 +34,16 @@ export default function Example() {
               <ConfirmationAction
                 variant="outline"
                 onClick={() => {
-                  setApproved(false);
-                  setPhase("approval-responded");
+                  setApproved(false)
+                  setPhase("approval-responded")
                 }}
               >
                 Reject
               </ConfirmationAction>
               <ConfirmationAction
                 onClick={() => {
-                  setApproved(true);
-                  setPhase("approval-responded");
+                  setApproved(true)
+                  setPhase("approval-responded")
                 }}
               >
                 Approve
@@ -68,5 +65,5 @@ export default function Example() {
         </Confirmation>
       </div>
     </div>
-  );
+  )
 }

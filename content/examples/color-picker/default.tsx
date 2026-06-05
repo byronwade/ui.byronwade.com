@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   ColorPicker,
@@ -8,7 +8,7 @@ import {
   ColorPickerHue,
   ColorPickerOutput,
   ColorPickerSelection,
-} from "@/components/ui/color-picker";
+} from "@/components/ui/color-picker"
 
 export default function Example() {
   return (
@@ -29,5 +29,5 @@ export default function Example() {
         <ColorPickerFormat />
       </div>
     </ColorPicker>
-  );
+  )
 }

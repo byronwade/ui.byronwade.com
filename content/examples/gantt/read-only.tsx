@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { addDays, startOfMonth, subDays } from "date-fns";
+import { addDays, startOfMonth, subDays } from "date-fns"
 
 import {
   GanttFeatureItem,
@@ -15,9 +15,9 @@ import {
   GanttTimeline,
   GanttToday,
   type GanttFeature,
-} from "@/components/ui/gantt";
+} from "@/components/ui/gantt"
 
-const monthStart = startOfMonth(new Date());
+const monthStart = startOfMonth(new Date())
 
 const features: GanttFeature[] = [
   {
@@ -41,7 +41,7 @@ const features: GanttFeature[] = [
     endAt: addDays(monthStart, 55),
     status: { id: "at-risk", name: "At Risk", color: "bg-warning" },
   },
-];
+]
 
 // `readOnly` drops the drag handles for a clean presentation/dashboard view;
 // bars are tinted by status and a milestone diamond marks a key date.
@@ -65,10 +65,13 @@ export default function Example() {
               ))}
             </GanttFeatureListGroup>
           </GanttFeatureList>
-          <GanttMilestone date={addDays(monthStart, 35)} label="Public launch" />
+          <GanttMilestone
+            date={addDays(monthStart, 35)}
+            label="Public launch"
+          />
           <GanttToday />
         </GanttTimeline>
       </GanttProvider>
     </div>
-  );
+  )
 }

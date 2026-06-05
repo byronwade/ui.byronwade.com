@@ -1,6 +1,6 @@
-import { PlusCircle } from "lucide-react";
-import { EmptyState } from "@/components/empty-state";
-import { Button } from "@/components/ui/button";
+import { PlusCircle } from "lucide-react"
+import { EmptyState } from "@/components/empty-state"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -13,11 +13,13 @@ export default function Example() {
           action={
             <div className="flex gap-2">
               <Button size="sm">Create project</Button>
-              <Button size="sm" variant="outline">Invite team</Button>
+              <Button size="sm" variant="outline">
+                Invite team
+              </Button>
             </div>
           }
         />
       </div>
     </div>
-  );
+  )
 }

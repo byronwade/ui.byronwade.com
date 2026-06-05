@@ -1,13 +1,16 @@
-import { CenteredFocal } from "@/components/centered-focal";
+import { CenteredFocal } from "@/components/centered-focal"
 
 function PulsingRings() {
   return (
-    <div className="relative flex size-48 items-center justify-center" aria-hidden>
+    <div
+      className="relative flex size-48 items-center justify-center"
+      aria-hidden
+    >
       <div className="absolute size-48 animate-ping rounded-full bg-brand/10 [animation-duration:2s]" />
       <div className="absolute size-36 animate-ping rounded-full bg-brand/15 [animation-duration:2s] [animation-delay:0.3s]" />
       <div className="absolute size-24 animate-ping rounded-full bg-brand/20 [animation-duration:2s] [animation-delay:0.6s]" />
     </div>
-  );
+  )
 }
 
 export default function Example() {
@@ -30,10 +33,14 @@ export default function Example() {
           </svg>
         </div>
         <div>
-          <p className="text-sm font-medium text-foreground">Syncing data&hellip;</p>
-          <p className="mt-0.5 text-xs text-muted-foreground">This may take a few seconds.</p>
+          <p className="text-sm font-medium text-foreground">
+            Syncing data&hellip;
+          </p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            This may take a few seconds.
+          </p>
         </div>
       </div>
     </CenteredFocal>
-  );
+  )
 }

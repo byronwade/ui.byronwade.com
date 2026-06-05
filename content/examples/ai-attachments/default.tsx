@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Attachment,
@@ -7,7 +7,7 @@ import {
   AttachmentPreview,
   AttachmentRemove,
   type AttachmentData,
-} from "@/components/ai-elements/attachments";
+} from "@/components/ai-elements/attachments"
 
 const FILES: AttachmentData[] = [
   {
@@ -31,7 +31,7 @@ const FILES: AttachmentData[] = [
     title: "API Reference",
     mediaType: "text/html",
   },
-];
+]
 
 export default function Example() {
   return (
@@ -49,5 +49,5 @@ export default function Example() {
         </Attachments>
       </div>
     </div>
-  );
+  )
 }

@@ -135,6 +135,7 @@ Replace the flat prop-demo list with a curated-but-generous gallery. Final list
 (subject to spec-review tweaks):
 
 **Structural / new built-ins**
+
 - `split-toolbar` — two-tone nav + `tools` (combined nav+toolbar)
 - `tools-primary` — tool zone with a brand `primary` action + grouped seams
 - `breadcrumb` — leading crumb trail
@@ -142,6 +143,7 @@ Replace the flat prop-demo list with a curated-but-generous gallery. Final list
 - `save-status` — Save → success / error / info status bloom
 
 **Real-world bloom panels (kept / promising)**
+
 - `default` — nav + search bloom
 - `command` — command palette
 - `dialer` — phone dialer
@@ -150,6 +152,7 @@ Replace the flat prop-demo list with a curated-but-generous gallery. Final list
 - `help` — help / shortcuts panel
 
 **Layout & config**
+
 - `expand` — compact ↔ full toggle (core behavior)
 - `orientations` — placement top / bottom / left / right
 - `origins` — start / center / end bloom origin
@@ -164,6 +167,7 @@ into `content/examples/registry.ts` via `npm run gen:examples`.
 ## Testing (mandatory — see AGENTS.md)
 
 `tests/components/morph-dock.test.tsx` must extend to cover, for every new prop:
+
 - `tools` renders, `primary` styling, `onSelect`/`href` behavior, `More` overflow
   (if ported) — and group seams appear between differing groups.
 - `breadcrumb` renders crumbs, last is `aria-current="page"`, links navigate.

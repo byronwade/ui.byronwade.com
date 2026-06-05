@@ -3,70 +3,70 @@
  * Original code, concept, and design © kibo-ui — https://www.kibo-ui.com
  * Reworked to the byronwade/ui design system (tokens, house primitives, data-slot).
  */
-"use client";
+"use client"
 
-import type { Editor, Range } from "@tiptap/core";
-import { mergeAttributes, Node } from "@tiptap/core";
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
-import { TaskItem, TaskList } from "@tiptap/extension-list";
-import Subscript from "@tiptap/extension-subscript";
-import Superscript from "@tiptap/extension-superscript";
+import type { Editor, Range } from "@tiptap/core"
+import { mergeAttributes, Node } from "@tiptap/core"
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
+import { TaskItem, TaskList } from "@tiptap/extension-list"
+import Subscript from "@tiptap/extension-subscript"
+import Superscript from "@tiptap/extension-superscript"
 import {
   Table,
   TableCell,
   TableHeader,
   TableRow,
-} from "@tiptap/extension-table";
-import { TextStyleKit } from "@tiptap/extension-text-style";
-import Typography from "@tiptap/extension-typography";
-import { CharacterCount, Placeholder } from "@tiptap/extensions";
-import type { DOMOutputSpec, Node as ProseMirrorNode } from "@tiptap/pm/model";
-import { PluginKey } from "@tiptap/pm/state";
+} from "@tiptap/extension-table"
+import { TextStyleKit } from "@tiptap/extension-text-style"
+import Typography from "@tiptap/extension-typography"
+import { CharacterCount, Placeholder } from "@tiptap/extensions"
+import type { DOMOutputSpec, Node as ProseMirrorNode } from "@tiptap/pm/model"
+import { PluginKey } from "@tiptap/pm/state"
 import {
   ReactRenderer,
   EditorProvider as TiptapEditorProvider,
   type EditorProviderProps as TiptapEditorProviderProps,
   useCurrentEditor,
-} from "@tiptap/react";
+} from "@tiptap/react"
 import {
   BubbleMenu,
   type BubbleMenuProps,
   FloatingMenu,
   type FloatingMenuProps,
-} from "@tiptap/react/menus";
-import { Button } from "@/components/ui/button";
+} from "@tiptap/react/menus"
+import { Button } from "@/components/ui/button"
 import {
   Command,
   CommandEmpty,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
+} from "@/components/ui/popover"
+import { Separator } from "@/components/ui/separator"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+} from "@/components/ui/tooltip"
+import { cn } from "@/lib/utils"
 
-export type { Editor, JSONContent } from "@tiptap/react";
+export type { Editor, JSONContent } from "@tiptap/react"
 
-import StarterKit from "@tiptap/starter-kit";
-import Suggestion, { type SuggestionOptions } from "@tiptap/suggestion";
-import Fuse from "fuse.js";
-import { all, createLowlight } from "lowlight";
+import StarterKit from "@tiptap/starter-kit"
+import Suggestion, { type SuggestionOptions } from "@tiptap/suggestion"
+import Fuse from "fuse.js"
+import { all, createLowlight } from "lowlight"
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
@@ -102,45 +102,45 @@ import {
   TextQuoteIcon,
   TrashIcon,
   UnderlineIcon,
-} from "lucide-react";
-import type { FormEventHandler, HTMLAttributes, ReactNode } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import tippy, { type Instance as TippyInstance } from "tippy.js";
+} from "lucide-react"
+import type { FormEventHandler, HTMLAttributes, ReactNode } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
+import tippy, { type Instance as TippyInstance } from "tippy.js"
 
 type SlashNodeAttrs = {
-  id: string | null;
-  label?: string | null;
-};
+  id: string | null
+  label?: string | null
+}
 
 type SlashOptions<
   SlashOptionSuggestionItem = unknown,
   Attrs = SlashNodeAttrs,
 > = {
-  HTMLAttributes: Record<string, unknown>;
+  HTMLAttributes: Record<string, unknown>
   renderText: (props: {
-    options: SlashOptions<SlashOptionSuggestionItem, Attrs>;
-    node: ProseMirrorNode;
-  }) => string;
+    options: SlashOptions<SlashOptionSuggestionItem, Attrs>
+    node: ProseMirrorNode
+  }) => string
   renderHTML: (props: {
-    options: SlashOptions<SlashOptionSuggestionItem, Attrs>;
-    node: ProseMirrorNode;
-  }) => DOMOutputSpec;
-  deleteTriggerWithBackspace: boolean;
+    options: SlashOptions<SlashOptionSuggestionItem, Attrs>
+    node: ProseMirrorNode
+  }) => DOMOutputSpec
+  deleteTriggerWithBackspace: boolean
   suggestion: Omit<
     SuggestionOptions<SlashOptionSuggestionItem, Attrs>,
     "editor"
-  >;
-};
+  >
+}
 
-const SlashPluginKey = new PluginKey("slash");
+const SlashPluginKey = new PluginKey("slash")
 
 export type SuggestionItem = {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  searchTerms: string[];
-  command: (props: { editor: Editor; range: Range }) => void;
-};
+  title: string
+  description: string
+  icon: LucideIcon
+  searchTerms: string[]
+  command: (props: { editor: Editor; range: Range }) => void
+}
 
 export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"] =
   () => [
@@ -155,7 +155,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"]
           .focus()
           .deleteRange(range)
           .toggleNode("paragraph", "paragraph")
-          .run();
+          .run()
       },
     },
     {
@@ -169,7 +169,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"]
           .focus()
           .deleteRange(range)
           .toggleList("taskList", "taskItem")
-          .run();
+          .run()
       },
     },
     {
@@ -183,7 +183,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"]
           .focus()
           .deleteRange(range)
           .setNode("heading", { level: 1 })
-          .run();
+          .run()
       },
     },
     {
@@ -197,7 +197,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"]
           .focus()
           .deleteRange(range)
           .setNode("heading", { level: 2 })
-          .run();
+          .run()
       },
     },
     {
@@ -211,7 +211,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"]
           .focus()
           .deleteRange(range)
           .setNode("heading", { level: 3 })
-          .run();
+          .run()
       },
     },
     {
@@ -220,7 +220,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"]
       searchTerms: ["unordered", "point"],
       icon: ListIcon,
       command: ({ editor, range }) => {
-        editor.chain().focus().deleteRange(range).toggleBulletList().run();
+        editor.chain().focus().deleteRange(range).toggleBulletList().run()
       },
     },
     {
@@ -229,7 +229,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"]
       searchTerms: ["ordered"],
       icon: ListOrderedIcon,
       command: ({ editor, range }) => {
-        editor.chain().focus().deleteRange(range).toggleOrderedList().run();
+        editor.chain().focus().deleteRange(range).toggleOrderedList().run()
       },
     },
     {
@@ -267,7 +267,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"]
           .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
           .run(),
     },
-  ];
+  ]
 
 const Slash = Node.create<SlashOptions>({
   name: "slash",
@@ -276,7 +276,7 @@ const Slash = Node.create<SlashOptions>({
     return {
       HTMLAttributes: {},
       renderText({ options, node }) {
-        return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`;
+        return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`
       },
       deleteTriggerWithBackspace: false,
       renderHTML({ options, node }) {
@@ -284,7 +284,7 @@ const Slash = Node.create<SlashOptions>({
           "span",
           mergeAttributes(this.HTMLAttributes, options.HTMLAttributes),
           `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`,
-        ];
+        ]
       },
       suggestion: {
         char: "/",
@@ -292,11 +292,11 @@ const Slash = Node.create<SlashOptions>({
         command: ({ editor, range, props }) => {
           // increase range.to by one when the next node is of type "text"
           // and starts with a space character
-          const nodeAfter = editor.view.state.selection.$to.nodeAfter;
-          const overrideSpace = nodeAfter?.text?.startsWith(" ");
+          const nodeAfter = editor.view.state.selection.$to.nodeAfter
+          const overrideSpace = nodeAfter?.text?.startsWith(" ")
 
           if (overrideSpace) {
-            range.to += 1;
+            range.to += 1
           }
 
           editor
@@ -312,22 +312,22 @@ const Slash = Node.create<SlashOptions>({
                 text: " ",
               },
             ])
-            .run();
+            .run()
 
           // get reference to `window` object from editor element, to support cross-frame JS usage
           editor.view.dom.ownerDocument.defaultView
             ?.getSelection()
-            ?.collapseToEnd();
+            ?.collapseToEnd()
         },
         allow: ({ state, range }) => {
-          const $from = state.doc.resolve(range.from);
-          const type = state.schema.nodes[this.name];
-          const allow = !!$from.parent.type.contentMatch.matchType(type);
+          const $from = state.doc.resolve(range.from)
+          const type = state.schema.nodes[this.name]
+          const allow = !!$from.parent.type.contentMatch.matchType(type)
 
-          return allow;
+          return allow
         },
       },
-    };
+    }
   },
 
   group: "inline",
@@ -345,12 +345,12 @@ const Slash = Node.create<SlashOptions>({
         parseHTML: (element) => element.getAttribute("data-id"),
         renderHTML: (attributes) => {
           if (!attributes.id) {
-            return {};
+            return {}
           }
 
           return {
             "data-id": attributes.id,
-          };
+          }
         },
       },
 
@@ -359,15 +359,15 @@ const Slash = Node.create<SlashOptions>({
         parseHTML: (element) => element.getAttribute("data-label"),
         renderHTML: (attributes) => {
           if (!attributes.label) {
-            return {};
+            return {}
           }
 
           return {
             "data-label": attributes.label,
-          };
+          }
         },
       },
-    };
+    }
   },
 
   parseHTML() {
@@ -375,21 +375,21 @@ const Slash = Node.create<SlashOptions>({
       {
         tag: `span[data-type="${this.name}"]`,
       },
-    ];
+    ]
   },
 
   renderHTML({ node, HTMLAttributes }) {
-    const mergedOptions = { ...this.options };
+    const mergedOptions = { ...this.options }
 
     mergedOptions.HTMLAttributes = mergeAttributes(
       { "data-type": this.name },
       this.options.HTMLAttributes,
-      HTMLAttributes
-    );
+      HTMLAttributes,
+    )
     const html = this.options.renderHTML({
       options: mergedOptions,
       node,
-    });
+    })
 
     if (typeof html === "string") {
       return [
@@ -397,51 +397,51 @@ const Slash = Node.create<SlashOptions>({
         mergeAttributes(
           { "data-type": this.name },
           this.options.HTMLAttributes,
-          HTMLAttributes
+          HTMLAttributes,
         ),
         html,
-      ];
+      ]
     }
-    return html;
+    return html
   },
 
   renderText({ node }) {
     return this.options.renderText({
       options: this.options,
       node,
-    });
+    })
   },
 
   addKeyboardShortcuts() {
     return {
       Backspace: () =>
         this.editor.commands.command(({ tr, state }) => {
-          let isMention = false;
-          const { selection } = state;
-          const { empty, anchor } = selection;
+          let isMention = false
+          const { selection } = state
+          const { empty, anchor } = selection
 
           if (!empty) {
-            return false;
+            return false
           }
 
           state.doc.nodesBetween(anchor - 1, anchor, (node, pos) => {
             if (node.type.name === this.name) {
-              isMention = true;
+              isMention = true
               tr.insertText(
                 this.options.deleteTriggerWithBackspace
                   ? ""
                   : this.options.suggestion.char || "",
                 pos,
-                pos + node.nodeSize
-              );
+                pos + node.nodeSize,
+              )
 
-              return false;
+              return false
             }
-          });
+          })
 
-          return isMention;
+          return isMention
         }),
-    };
+    }
   },
 
   addProseMirrorPlugins() {
@@ -450,19 +450,19 @@ const Slash = Node.create<SlashOptions>({
         editor: this.editor,
         ...this.options.suggestion,
       }),
-    ];
+    ]
   },
-});
+})
 
 // Create a lowlight instance with all languages loaded
-const lowlight = createLowlight(all);
+const lowlight = createLowlight(all)
 
 type EditorSlashMenuProps = {
-  items: SuggestionItem[];
-  command: (item: SuggestionItem) => void;
-  editor: Editor;
-  range: Range;
-};
+  items: SuggestionItem[]
+  command: (item: SuggestionItem) => void
+  editor: Editor
+  range: Range
+}
 
 const EditorSlashMenu = ({ items, editor, range }: EditorSlashMenuProps) => (
   <Command
@@ -470,7 +470,7 @@ const EditorSlashMenu = ({ items, editor, range }: EditorSlashMenuProps) => (
     data-slot="editor-slash-menu"
     id="slash-command"
     onKeyDown={(e) => {
-      e.stopPropagation();
+      e.stopPropagation()
     }}
   >
     <CommandEmpty className="flex w-full items-center justify-center p-4 text-sm text-muted-foreground">
@@ -496,33 +496,33 @@ const EditorSlashMenu = ({ items, editor, range }: EditorSlashMenuProps) => (
       ))}
     </CommandList>
   </Command>
-);
+)
 
 const handleCommandNavigation = (event: KeyboardEvent) => {
   if (["ArrowUp", "ArrowDown", "Enter"].includes(event.key)) {
-    const slashCommand = document.querySelector("#slash-command");
+    const slashCommand = document.querySelector("#slash-command")
 
     if (slashCommand) {
-      event.preventDefault();
+      event.preventDefault()
 
       slashCommand.dispatchEvent(
         new KeyboardEvent("keydown", {
           key: event.key,
           cancelable: true,
           bubbles: true,
-        })
-      );
+        }),
+      )
 
-      return true;
+      return true
     }
   }
-};
+}
 
 export type EditorProviderProps = TiptapEditorProviderProps & {
-  className?: string;
-  limit?: number;
-  placeholder?: string;
-};
+  className?: string
+  limit?: number
+  placeholder?: string
+}
 
 export const EditorProvider = ({
   className,
@@ -556,9 +556,7 @@ export const EditorProvider = ({
       },
       code: {
         HTMLAttributes: {
-          class: cn(
-            "rounded-md bg-muted px-1.5 py-1 font-mono font-medium"
-          ),
+          class: cn("rounded-md bg-muted px-1.5 py-1 font-mono font-medium"),
           spellcheck: "false",
         },
       },
@@ -604,7 +602,7 @@ export const EditorProvider = ({
           "[&_.hljs-emphasis]:text-foreground [&_.hljs-emphasis]:italic",
           "[&_.hljs-strong]:font-medium [&_.hljs-strong]:text-foreground",
           "[&_.hljs-addition]:bg-success/10 [&_.hljs-addition]:text-success",
-          "[&_.hljs-deletion]:bg-destructive/10 [&_.hljs-deletion]:text-destructive"
+          "[&_.hljs-deletion]:bg-destructive/10 [&_.hljs-deletion]:text-destructive",
         ),
       },
     }),
@@ -613,33 +611,33 @@ export const EditorProvider = ({
     Slash.configure({
       suggestion: {
         items: async ({ editor, query }) => {
-          const items = await defaultSlashSuggestions({ editor, query });
+          const items = await defaultSlashSuggestions({ editor, query })
 
           if (!query) {
-            return items;
+            return items
           }
 
           const slashFuse = new Fuse(items, {
             keys: ["title", "description", "searchTerms"],
             threshold: 0.2,
             minMatchCharLength: 1,
-          });
+          })
 
-          const results = slashFuse.search(query);
+          const results = slashFuse.search(query)
 
-          return results.map((result) => result.item);
+          return results.map((result) => result.item)
         },
         char: "/",
         render: () => {
-          let component: ReactRenderer<EditorSlashMenuProps>;
-          let popup: TippyInstance;
+          let component: ReactRenderer<EditorSlashMenuProps>
+          let popup: TippyInstance
 
           return {
             onStart: (onStartProps) => {
               component = new ReactRenderer(EditorSlashMenu, {
                 props: onStartProps,
                 editor: onStartProps.editor,
-              });
+              })
 
               popup = tippy(document.body, {
                 getReferenceClientRect: () =>
@@ -650,41 +648,41 @@ export const EditorProvider = ({
                 interactive: true,
                 trigger: "manual",
                 placement: "bottom-start",
-              });
+              })
             },
 
             onUpdate(onUpdateProps) {
-              component.updateProps(onUpdateProps);
+              component.updateProps(onUpdateProps)
 
               popup.setProps({
                 getReferenceClientRect: () =>
                   onUpdateProps.clientRect?.() || new DOMRect(),
-              });
+              })
             },
 
             onKeyDown(onKeyDownProps) {
               if (onKeyDownProps.event.key === "Escape") {
-                popup.hide();
-                component.destroy();
+                popup.hide()
+                component.destroy()
 
-                return true;
+                return true
               }
 
-              return handleCommandNavigation(onKeyDownProps.event) ?? false;
+              return handleCommandNavigation(onKeyDownProps.event) ?? false
             },
 
             onExit() {
-              popup.destroy();
-              component.destroy();
+              popup.destroy()
+              component.destroy()
             },
-          };
+          }
         },
       },
     }),
     Table.configure({
       HTMLAttributes: {
         class: cn(
-          "relative m-0 mx-auto my-3 w-full table-fixed border-collapse overflow-hidden text-sm"
+          "relative m-0 mx-auto my-3 w-full table-fixed border-collapse overflow-hidden text-sm",
         ),
       },
       allowTableNodeSelection: true,
@@ -692,21 +690,21 @@ export const EditorProvider = ({
     TableRow.configure({
       HTMLAttributes: {
         class: cn(
-          "relative box-border min-w-[1em] border border-border p-1 text-start align-top"
+          "relative box-border min-w-[1em] border border-border p-1 text-start align-top",
         ),
       },
     }),
     TableCell.configure({
       HTMLAttributes: {
         class: cn(
-          "relative box-border min-w-[1em] border border-border p-1 text-start align-top"
+          "relative box-border min-w-[1em] border border-border p-1 text-start align-top",
         ),
       },
     }),
     TableHeader.configure({
       HTMLAttributes: {
         class: cn(
-          "relative box-border min-w-[1em] border border-border bg-secondary p-1 text-start align-top font-medium text-muted-foreground"
+          "relative box-border min-w-[1em] border border-border bg-secondary p-1 text-start align-top font-medium text-muted-foreground",
         ),
       },
     }),
@@ -721,7 +719,7 @@ export const EditorProvider = ({
         class: "flex items-start gap-1",
       },
     }),
-  ];
+  ]
 
   return (
     <TooltipProvider>
@@ -738,7 +736,7 @@ export const EditorProvider = ({
               "aria-label": placeholder ?? "Rich text editor",
             },
             handleKeyDown: (_view, event) => {
-              handleCommandNavigation(event);
+              handleCommandNavigation(event)
             },
           }}
           extensions={[
@@ -751,16 +749,16 @@ export const EditorProvider = ({
         />
       </div>
     </TooltipProvider>
-  );
-};
+  )
+}
 
-export type EditorFloatingMenuProps = Omit<FloatingMenuProps, "editor">;
+export type EditorFloatingMenuProps = Omit<FloatingMenuProps, "editor">
 
 export const EditorFloatingMenu = ({
   className,
   ...props
 }: EditorFloatingMenuProps) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
   return (
     <FloatingMenu
       className={cn("flex items-center bg-secondary", className)}
@@ -768,24 +766,24 @@ export const EditorFloatingMenu = ({
       editor={editor ?? null}
       {...props}
     />
-  );
-};
+  )
+}
 
-export type EditorBubbleMenuProps = Omit<BubbleMenuProps, "editor">;
+export type EditorBubbleMenuProps = Omit<BubbleMenuProps, "editor">
 
 export const EditorBubbleMenu = ({
   className,
   children,
   ...props
 }: EditorBubbleMenuProps) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
   return (
     <BubbleMenu
       className={cn(
         "flex rounded-xl border border-border bg-background p-0.5 edge",
         "[&>*:first-child]:rounded-l-lg",
         "[&>*:last-child]:rounded-r-lg",
-        className
+        className,
       )}
       data-slot="editor-bubble-menu"
       editor={editor ?? undefined}
@@ -794,26 +792,26 @@ export const EditorBubbleMenu = ({
       {children && Array.isArray(children)
         ? children.reduce((acc: ReactNode[], child, index) => {
             if (index === 0) {
-              return [child];
+              return [child]
             }
 
             // biome-ignore lint/suspicious/noArrayIndexKey: "only iterator we have"
-            acc.push(<Separator key={index} orientation="vertical" />);
-            acc.push(child);
-            return acc;
+            acc.push(<Separator key={index} orientation="vertical" />)
+            acc.push(child)
+            return acc
           }, [])
         : children}
     </BubbleMenu>
-  );
-};
+  )
+}
 
 type EditorButtonProps = {
-  name: string;
-  isActive: () => boolean;
-  command: () => void;
-  icon: LucideIcon | ((props: LucideProps) => ReactNode);
-  hideName?: boolean;
-};
+  name: string
+  isActive: () => boolean
+  command: () => void
+  icon: LucideIcon | ((props: LucideProps) => ReactNode)
+  hideName?: boolean
+}
 
 const BubbleMenuButton = ({
   name,
@@ -836,17 +834,17 @@ const BubbleMenuButton = ({
       <CheckIcon className="shrink-0 text-muted-foreground" size={12} />
     ) : null}
   </Button>
-);
+)
 
-export type EditorClearFormattingProps = Pick<EditorButtonProps, "hideName">;
+export type EditorClearFormattingProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorClearFormatting = ({
   hideName = true,
 }: EditorClearFormattingProps) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -857,18 +855,18 @@ export const EditorClearFormatting = ({
       isActive={() => false}
       name="Clear Formatting"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeTextProps = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeTextProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeText = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -887,18 +885,18 @@ export const EditorNodeText = ({
       }
       name="Text"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeHeading1Props = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeHeading1Props = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeHeading1 = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -909,18 +907,18 @@ export const EditorNodeHeading1 = ({
       isActive={() => editor.isActive("heading", { level: 1 }) ?? false}
       name="Heading 1"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeHeading2Props = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeHeading2Props = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeHeading2 = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -931,18 +929,18 @@ export const EditorNodeHeading2 = ({
       isActive={() => editor.isActive("heading", { level: 2 }) ?? false}
       name="Heading 2"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeHeading3Props = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeHeading3Props = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeHeading3 = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -953,18 +951,18 @@ export const EditorNodeHeading3 = ({
       isActive={() => editor.isActive("heading", { level: 3 }) ?? false}
       name="Heading 3"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeBulletListProps = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeBulletListProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeBulletList = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -975,18 +973,18 @@ export const EditorNodeBulletList = ({
       isActive={() => editor.isActive("bulletList") ?? false}
       name="Bullet List"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeOrderedListProps = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeOrderedListProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeOrderedList = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -997,18 +995,18 @@ export const EditorNodeOrderedList = ({
       isActive={() => editor.isActive("orderedList") ?? false}
       name="Numbered List"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeTaskListProps = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeTaskListProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeTaskList = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1021,18 +1019,18 @@ export const EditorNodeTaskList = ({
       isActive={() => editor.isActive("taskItem") ?? false}
       name="To-do List"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeQuoteProps = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeQuoteProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeQuote = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1050,18 +1048,18 @@ export const EditorNodeQuote = ({
       isActive={() => editor.isActive("blockquote") ?? false}
       name="Quote"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeCodeProps = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeCodeProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeCode = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1072,18 +1070,18 @@ export const EditorNodeCode = ({
       isActive={() => editor.isActive("codeBlock") ?? false}
       name="Code"
     />
-  );
-};
+  )
+}
 
-export type EditorNodeTableProps = Pick<EditorButtonProps, "hideName">;
+export type EditorNodeTableProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorNodeTable = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1100,14 +1098,14 @@ export const EditorNodeTable = ({
       isActive={() => editor.isActive("table") ?? false}
       name="Table"
     />
-  );
-};
+  )
+}
 
 export type EditorSelectorProps = HTMLAttributes<HTMLDivElement> & {
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  title: string;
-};
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  title: string
+}
 
 export const EditorSelector = ({
   open,
@@ -1117,10 +1115,10 @@ export const EditorSelector = ({
   children,
   ...props
 }: EditorSelectorProps) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1147,18 +1145,18 @@ export const EditorSelector = ({
         {children}
       </PopoverContent>
     </Popover>
-  );
-};
+  )
+}
 
-export type EditorFormatBoldProps = Pick<EditorButtonProps, "hideName">;
+export type EditorFormatBoldProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorFormatBold = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1169,18 +1167,18 @@ export const EditorFormatBold = ({
       isActive={() => editor.isActive("bold") ?? false}
       name="Bold"
     />
-  );
-};
+  )
+}
 
-export type EditorFormatItalicProps = Pick<EditorButtonProps, "hideName">;
+export type EditorFormatItalicProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorFormatItalic = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1191,18 +1189,18 @@ export const EditorFormatItalic = ({
       isActive={() => editor.isActive("italic") ?? false}
       name="Italic"
     />
-  );
-};
+  )
+}
 
-export type EditorFormatStrikeProps = Pick<EditorButtonProps, "hideName">;
+export type EditorFormatStrikeProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorFormatStrike = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1213,18 +1211,18 @@ export const EditorFormatStrike = ({
       isActive={() => editor.isActive("strike") ?? false}
       name="Strikethrough"
     />
-  );
-};
+  )
+}
 
-export type EditorFormatCodeProps = Pick<EditorButtonProps, "hideName">;
+export type EditorFormatCodeProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorFormatCode = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1235,18 +1233,18 @@ export const EditorFormatCode = ({
       isActive={() => editor.isActive("code") ?? false}
       name="Code"
     />
-  );
-};
+  )
+}
 
-export type EditorFormatSubscriptProps = Pick<EditorButtonProps, "hideName">;
+export type EditorFormatSubscriptProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorFormatSubscript = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1257,18 +1255,18 @@ export const EditorFormatSubscript = ({
       isActive={() => editor.isActive("subscript") ?? false}
       name="Subscript"
     />
-  );
-};
+  )
+}
 
-export type EditorFormatSuperscriptProps = Pick<EditorButtonProps, "hideName">;
+export type EditorFormatSuperscriptProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorFormatSuperscript = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1279,18 +1277,18 @@ export const EditorFormatSuperscript = ({
       isActive={() => editor.isActive("superscript") ?? false}
       name="Superscript"
     />
-  );
-};
+  )
+}
 
-export type EditorFormatUnderlineProps = Pick<EditorButtonProps, "hideName">;
+export type EditorFormatUnderlineProps = Pick<EditorButtonProps, "hideName">
 
 export const EditorFormatUnderline = ({
   hideName = false,
 }: Pick<EditorButtonProps, "hideName">) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1301,66 +1299,66 @@ export const EditorFormatUnderline = ({
       isActive={() => editor.isActive("underline") ?? false}
       name="Underline"
     />
-  );
-};
+  )
+}
 
 export type EditorLinkSelectorProps = {
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-};
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+}
 
 export const EditorLinkSelector = ({
   open,
   onOpenChange,
 }: EditorLinkSelectorProps) => {
-  const [url, setUrl] = useState<string>("");
-  const inputReference = useRef<HTMLInputElement>(null);
-  const { editor } = useCurrentEditor();
+  const [url, setUrl] = useState<string>("")
+  const inputReference = useRef<HTMLInputElement>(null)
+  const { editor } = useCurrentEditor()
 
   const isValidUrl = (text: string): boolean => {
     try {
-      new URL(text);
-      return true;
+      new URL(text)
+      return true
     } catch {
-      return false;
+      return false
     }
-  };
+  }
 
   const getUrlFromString = (text: string): string | null => {
     if (isValidUrl(text)) {
-      return text;
+      return text
     }
     try {
       if (text.includes(".") && !text.includes(" ")) {
-        return new URL(`https://${text}`).toString();
+        return new URL(`https://${text}`).toString()
       }
 
-      return null;
+      return null
     } catch {
-      return null;
+      return null
     }
-  };
+  }
 
   useEffect(() => {
-    inputReference.current?.focus();
-  }, []);
+    inputReference.current?.focus()
+  }, [])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const href = getUrlFromString(url);
+    const href = getUrlFromString(url)
 
     if (href) {
-      editor.chain().focus().setLink({ href }).run();
-      onOpenChange?.(false);
+      editor.chain().focus().setLink({ href }).run()
+      onOpenChange?.(false)
     }
-  };
+  }
 
-  const defaultValue = (editor.getAttributes("link") as { href?: string }).href;
+  const defaultValue = (editor.getAttributes("link") as { href?: string }).href
 
   return (
     <Popover modal onOpenChange={onOpenChange} open={open}>
@@ -1380,7 +1378,7 @@ export const EditorLinkSelector = ({
             "text-xs underline decoration-muted-foreground underline-offset-4",
             {
               "text-primary": editor.isActive("link"),
-            }
+            },
           )}
         >
           Link
@@ -1403,8 +1401,8 @@ export const EditorLinkSelector = ({
               aria-label="Remove link"
               className="flex h-8 items-center rounded-sm p-1 text-destructive transition-all hover:bg-destructive/10"
               onClick={() => {
-                editor.chain().focus().unsetLink().run();
-                onOpenChange?.(false);
+                editor.chain().focus().unsetLink().run()
+                onOpenChange?.(false)
               }}
               size="icon"
               type="button"
@@ -1425,21 +1423,21 @@ export const EditorLinkSelector = ({
         </form>
       </PopoverContent>
     </Popover>
-  );
-};
+  )
+}
 
 export type EditorTableMenuProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export const EditorTableMenu = ({ children }: EditorTableMenuProps) => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   if (!editor) {
-    return null;
+    return null
   }
 
-  const isActive = editor.isActive("table");
+  const isActive = editor.isActive("table")
 
   return (
     <div
@@ -1450,55 +1448,55 @@ export const EditorTableMenu = ({ children }: EditorTableMenuProps) => {
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
 export type EditorTableGlobalMenuProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export const EditorTableGlobalMenu = ({
   children,
 }: EditorTableGlobalMenuProps) => {
-  const { editor } = useCurrentEditor();
-  const [top, setTop] = useState(0);
-  const [left, setLeft] = useState(0);
+  const { editor } = useCurrentEditor()
+  const [top, setTop] = useState(0)
+  const [left, setLeft] = useState(0)
 
   useEffect(() => {
     if (!editor) {
-      return;
+      return
     }
 
     editor.on("selectionUpdate", () => {
-      const selection = window.getSelection();
+      const selection = window.getSelection()
 
       if (!selection || selection.rangeCount === 0) {
-        return;
+        return
       }
 
-      const range = selection.getRangeAt(0);
-      let startContainer = range.startContainer as HTMLElement | string;
+      const range = selection.getRangeAt(0)
+      let startContainer = range.startContainer as HTMLElement | string
 
       if (!(startContainer instanceof HTMLElement)) {
-        startContainer = range.startContainer.parentElement as HTMLElement;
+        startContainer = range.startContainer.parentElement as HTMLElement
       }
 
-      const tableNode = startContainer?.closest("table");
+      const tableNode = startContainer?.closest("table")
 
       if (!tableNode) {
-        return;
+        return
       }
 
-      const tableRect = tableNode.getBoundingClientRect();
+      const tableRect = tableNode.getBoundingClientRect()
 
-      setTop(tableRect.top + tableRect.height);
-      setLeft(tableRect.left + tableRect.width / 2);
-    });
+      setTop(tableRect.top + tableRect.height)
+      setLeft(tableRect.left + tableRect.width / 2)
+    })
 
     return () => {
-      editor.off("selectionUpdate");
-    };
-  }, [editor]);
+      editor.off("selectionUpdate")
+    }
+  }, [editor])
 
   return (
     <div
@@ -1506,63 +1504,63 @@ export const EditorTableGlobalMenu = ({
         "absolute flex -translate-x-1/2 translate-y-1/2 items-center rounded-full border border-border bg-background edge",
         {
           hidden: !(left || top),
-        }
+        },
       )}
       data-slot="editor-table-global-menu"
       style={{ top, left }}
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
 export type EditorTableColumnMenuProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export const EditorTableColumnMenu = ({
   children,
 }: EditorTableColumnMenuProps) => {
-  const { editor } = useCurrentEditor();
-  const [top, setTop] = useState(0);
-  const [left, setLeft] = useState(0);
+  const { editor } = useCurrentEditor()
+  const [top, setTop] = useState(0)
+  const [left, setLeft] = useState(0)
 
   useEffect(() => {
     if (!editor) {
-      return;
+      return
     }
 
     editor.on("selectionUpdate", () => {
-      const selection = window.getSelection();
+      const selection = window.getSelection()
 
       if (!selection || selection.rangeCount === 0) {
-        return;
+        return
       }
 
-      const range = selection.getRangeAt(0);
-      let startContainer = range.startContainer as HTMLElement | string;
+      const range = selection.getRangeAt(0)
+      let startContainer = range.startContainer as HTMLElement | string
 
       if (!(startContainer instanceof HTMLElement)) {
-        startContainer = range.startContainer.parentElement as HTMLElement;
+        startContainer = range.startContainer.parentElement as HTMLElement
       }
 
       // Get the closest table cell (td or th)
-      const tableCell = startContainer?.closest("td, th");
+      const tableCell = startContainer?.closest("td, th")
 
       if (!tableCell) {
-        return;
+        return
       }
 
-      const cellRect = tableCell.getBoundingClientRect();
+      const cellRect = tableCell.getBoundingClientRect()
 
-      setTop(cellRect.top);
-      setLeft(cellRect.left + cellRect.width / 2);
-    });
+      setTop(cellRect.top)
+      setLeft(cellRect.left + cellRect.width / 2)
+    })
 
     return () => {
-      editor.off("selectionUpdate");
-    };
-  }, [editor]);
+      editor.off("selectionUpdate")
+    }
+  }, [editor])
 
   return (
     <DropdownMenu>
@@ -1571,7 +1569,7 @@ export const EditorTableColumnMenu = ({
           "absolute flex h-4 w-7 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md border border-border bg-background edge",
           {
             hidden: !(left || top),
-          }
+          },
         )}
         data-slot="editor-table-column-menu"
         render={
@@ -1583,53 +1581,53 @@ export const EditorTableColumnMenu = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent>{children}</DropdownMenuContent>
     </DropdownMenu>
-  );
-};
+  )
+}
 
 export type EditorTableRowMenuProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
-  const { editor } = useCurrentEditor();
-  const [top, setTop] = useState(0);
-  const [left, setLeft] = useState(0);
+  const { editor } = useCurrentEditor()
+  const [top, setTop] = useState(0)
+  const [left, setLeft] = useState(0)
 
   useEffect(() => {
     if (!editor) {
-      return;
+      return
     }
 
     editor.on("selectionUpdate", () => {
-      const selection = window.getSelection();
+      const selection = window.getSelection()
 
       if (!selection || selection.rangeCount === 0) {
-        return;
+        return
       }
 
-      const range = selection.getRangeAt(0);
-      let startContainer = range.startContainer as HTMLElement | string;
+      const range = selection.getRangeAt(0)
+      let startContainer = range.startContainer as HTMLElement | string
 
       if (!(startContainer instanceof HTMLElement)) {
-        startContainer = range.startContainer.parentElement as HTMLElement;
+        startContainer = range.startContainer.parentElement as HTMLElement
       }
 
-      const tableRow = startContainer?.closest("tr");
+      const tableRow = startContainer?.closest("tr")
 
       if (!tableRow) {
-        return;
+        return
       }
 
-      const rowRect = tableRow.getBoundingClientRect();
+      const rowRect = tableRow.getBoundingClientRect()
 
-      setTop(rowRect.top + rowRect.height / 2);
-      setLeft(rowRect.left);
-    });
+      setTop(rowRect.top + rowRect.height / 2)
+      setLeft(rowRect.left)
+    })
 
     return () => {
-      editor.off("selectionUpdate");
-    };
-  }, [editor]);
+      editor.off("selectionUpdate")
+    }
+  }, [editor])
 
   return (
     <DropdownMenu>
@@ -1638,32 +1636,30 @@ export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
           "absolute flex h-7 w-4 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md border border-border bg-background edge",
           {
             hidden: !(left || top),
-          }
+          },
         )}
         data-slot="editor-table-row-menu"
-        render={
-          <Button aria-label="Row options" size="icon" variant="ghost" />
-        }
+        render={<Button aria-label="Row options" size="icon" variant="ghost" />}
         style={{ top, left }}
       >
         <EllipsisVerticalIcon className="text-muted-foreground" size={12} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>{children}</DropdownMenuContent>
     </DropdownMenu>
-  );
-};
+  )
+}
 
 export const EditorTableColumnBefore = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().addColumnBefore().run();
+      editor.chain().focus().addColumnBefore().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1671,20 +1667,20 @@ export const EditorTableColumnBefore = () => {
       <ArrowLeftIcon className="text-muted-foreground" size={16} />
       <span>Add column before</span>
     </DropdownMenuItem>
-  );
-};
+  )
+}
 
 export const EditorTableColumnAfter = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().addColumnAfter().run();
+      editor.chain().focus().addColumnAfter().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1692,20 +1688,20 @@ export const EditorTableColumnAfter = () => {
       <ArrowRightIcon className="text-muted-foreground" size={16} />
       <span>Add column after</span>
     </DropdownMenuItem>
-  );
-};
+  )
+}
 
 export const EditorTableRowBefore = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().addRowBefore().run();
+      editor.chain().focus().addRowBefore().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1713,20 +1709,20 @@ export const EditorTableRowBefore = () => {
       <ArrowUpIcon className="text-muted-foreground" size={16} />
       <span>Add row before</span>
     </DropdownMenuItem>
-  );
-};
+  )
+}
 
 export const EditorTableRowAfter = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().addRowAfter().run();
+      editor.chain().focus().addRowAfter().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1734,20 +1730,20 @@ export const EditorTableRowAfter = () => {
       <ArrowDownIcon className="text-muted-foreground" size={16} />
       <span>Add row after</span>
     </DropdownMenuItem>
-  );
-};
+  )
+}
 
 export const EditorTableColumnDelete = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().deleteColumn().run();
+      editor.chain().focus().deleteColumn().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1755,20 +1751,20 @@ export const EditorTableColumnDelete = () => {
       <TrashIcon className="text-destructive" size={16} />
       <span>Delete column</span>
     </DropdownMenuItem>
-  );
-};
+  )
+}
 
 export const EditorTableRowDelete = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().deleteRow().run();
+      editor.chain().focus().deleteRow().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1776,20 +1772,20 @@ export const EditorTableRowDelete = () => {
       <TrashIcon className="text-destructive" size={16} />
       <span>Delete row</span>
     </DropdownMenuItem>
-  );
-};
+  )
+}
 
 export const EditorTableHeaderColumnToggle = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().toggleHeaderColumn().run();
+      editor.chain().focus().toggleHeaderColumn().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1811,20 +1807,20 @@ export const EditorTableHeaderColumnToggle = () => {
         <span>Toggle header column</span>
       </TooltipContent>
     </Tooltip>
-  );
-};
+  )
+}
 
 export const EditorTableHeaderRowToggle = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().toggleHeaderRow().run();
+      editor.chain().focus().toggleHeaderRow().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1846,20 +1842,20 @@ export const EditorTableHeaderRowToggle = () => {
         <span>Toggle header row</span>
       </TooltipContent>
     </Tooltip>
-  );
-};
+  )
+}
 
 export const EditorTableDelete = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().deleteTable().run();
+      editor.chain().focus().deleteTable().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1881,20 +1877,20 @@ export const EditorTableDelete = () => {
         <span>Delete table</span>
       </TooltipContent>
     </Tooltip>
-  );
-};
+  )
+}
 
 export const EditorTableMergeCells = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().mergeCells().run();
+      editor.chain().focus().mergeCells().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1916,20 +1912,20 @@ export const EditorTableMergeCells = () => {
         <span>Merge cells</span>
       </TooltipContent>
     </Tooltip>
-  );
-};
+  )
+}
 
 export const EditorTableSplitCell = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().splitCell().run();
+      editor.chain().focus().splitCell().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1951,20 +1947,20 @@ export const EditorTableSplitCell = () => {
         <span>Split cell</span>
       </TooltipContent>
     </Tooltip>
-  );
-};
+  )
+}
 
 export const EditorTableFix = () => {
-  const { editor } = useCurrentEditor();
+  const { editor } = useCurrentEditor()
 
   const handleClick = useCallback(() => {
     if (editor) {
-      editor.chain().focus().fixTables().run();
+      editor.chain().focus().fixTables().run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -1986,54 +1982,54 @@ export const EditorTableFix = () => {
         <span>Fix table</span>
       </TooltipContent>
     </Tooltip>
-  );
-};
+  )
+}
 
 export type EditorCharacterCountProps = {
-  children: ReactNode;
-  className?: string;
-};
+  children: ReactNode
+  className?: string
+}
 
 export const EditorCharacterCount = {
   Characters({ children, className }: EditorCharacterCountProps) {
-    const { editor } = useCurrentEditor();
+    const { editor } = useCurrentEditor()
 
     if (!editor) {
-      return null;
+      return null
     }
 
     return (
       <div
         className={cn(
           "absolute right-4 bottom-4 rounded-md border border-border bg-background p-2 font-mono text-sm text-muted-foreground edge",
-          className
+          className,
         )}
         data-slot="editor-character-count"
       >
         {children}
         {editor.storage.characterCount.characters()}
       </div>
-    );
+    )
   },
 
   Words({ children, className }: EditorCharacterCountProps) {
-    const { editor } = useCurrentEditor();
+    const { editor } = useCurrentEditor()
 
     if (!editor) {
-      return null;
+      return null
     }
 
     return (
       <div
         className={cn(
           "absolute right-4 bottom-4 rounded-md border border-border bg-background p-2 font-mono text-sm text-muted-foreground edge",
-          className
+          className,
         )}
         data-slot="editor-word-count"
       >
         {children}
         {editor.storage.characterCount.words()}
       </div>
-    );
+    )
   },
-};
+}

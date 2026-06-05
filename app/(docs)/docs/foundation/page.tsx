@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
-import { REGISTRY_URL } from "@/content/guides";
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
   title: "Foundation — byronwade/ui",
   description:
     "The complete token base — surfaces, brand & status, charts, agent-activity pastels, the radius scale, the hairline depth model, and house utilities.",
-};
+}
 
 /* ---------------------------------------------------------------------------
    Foundation = the tokens. Distinct signature: the hero is a wall of the
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
    foundation — change a token and this page changes with it.
 --------------------------------------------------------------------------- */
 
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const WALL: { box: string; token: string }[] = [
   { box: "bg-background", token: "background" },
@@ -39,7 +39,7 @@ const WALL: { box: string; token: string }[] = [
   { box: "bg-activity-search", token: "act·search" },
   { box: "bg-activity-read", token: "act·read" },
   { box: "bg-activity-edit", token: "act·edit" },
-];
+]
 
 const RADII = [
   "rounded-sm",
@@ -49,7 +49,7 @@ const RADII = [
   "rounded-2xl",
   "rounded-3xl",
   "rounded-4xl",
-];
+]
 
 export default function FoundationPage() {
   return (
@@ -60,7 +60,9 @@ export default function FoundationPage() {
           <h1 className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Foundation
           </h1>
-          <p className="font-mono text-[11px] text-muted-foreground">{WALL.length}+ tokens · :root</p>
+          <p className="font-mono text-[11px] text-muted-foreground">
+            {WALL.length}+ tokens · :root
+          </p>
         </div>
         <div className="grid grid-cols-3 gap-2 pb-10 sm:grid-cols-5 lg:grid-cols-7">
           <div className="col-span-3 flex flex-col justify-center sm:col-span-2 lg:col-span-3">
@@ -68,8 +70,8 @@ export default function FoundationPage() {
               The palette, <span className="text-brand">in full.</span>
             </p>
             <p className="mt-3 max-w-md font-mono text-[13px] leading-relaxed text-muted-foreground">
-              Warm paper neutrals, one brand accent, fixed data hues. It owns your :root — install
-              with init.
+              Warm paper neutrals, one brand accent, fixed data hues. It owns
+              your :root — install with init.
             </p>
           </div>
           {WALL.map((s) => (
@@ -86,7 +88,10 @@ export default function FoundationPage() {
       {/* ============================ INSTALL strip ===================== */}
       <section className="py-10">
         <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
-          <CodeBlock lang="bash" code={`npx shadcn@latest init ${REGISTRY_URL}/r/foundation.json`} />
+          <CodeBlock
+            lang="bash"
+            code={`npx shadcn@latest init ${REGISTRY_URL}/r/foundation.json`}
+          />
           <p className="font-mono text-[11px] text-muted-foreground md:text-right">
             the base owns :root — install once
           </p>
@@ -97,8 +102,12 @@ export default function FoundationPage() {
       <section className={`${BLEED} border-y border-border bg-card`}>
         <div className="py-14">
           <div className="flex items-baseline justify-between gap-4">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Radius scale</p>
-            <p className="font-mono text-[11px] text-muted-foreground">from --radius</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+              Radius scale
+            </p>
+            <p className="font-mono text-[11px] text-muted-foreground">
+              from --radius
+            </p>
           </div>
           <div className="mt-8 flex items-end gap-3 sm:gap-5">
             {RADII.map((r) => (
@@ -120,38 +129,54 @@ export default function FoundationPage() {
             Depth is a hairline
           </p>
           <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            No drop shadows. A single inset <span className="text-foreground">edge</span> catches
-            light so a surface sits into its background.
+            No drop shadows. A single inset{" "}
+            <span className="text-foreground">edge</span> catches light so a
+            surface sits into its background.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-4">
             <div className="rounded-2xl edge bg-card p-5">
               <p className="font-mono text-[11px] text-brand">edge</p>
-              <p className="mt-2 text-xs text-muted-foreground">hairline — the house model</p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                hairline — the house model
+              </p>
             </div>
             <div className="rounded-2xl bg-card p-5">
-              <p className="font-mono text-[11px] text-muted-foreground">none</p>
-              <p className="mt-2 text-xs text-muted-foreground">dissolves into the page</p>
+              <p className="font-mono text-[11px] text-muted-foreground">
+                none
+              </p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                dissolves into the page
+              </p>
             </div>
           </div>
         </div>
 
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">House utilities</p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            House utilities
+          </p>
           <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            Texture and treatments the foundation ships — reuse instead of re-rolling.
+            Texture and treatments the foundation ships — reuse instead of
+            re-rolling.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-4">
             <div className="overflow-hidden rounded-2xl edge bg-background">
               <div className="bg-grid h-24" />
-              <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">bg-grid</p>
+              <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">
+                bg-grid
+              </p>
             </div>
             <div className="overflow-hidden rounded-2xl edge bg-background">
               <div className="glow-brand h-24" />
-              <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">glow-brand</p>
+              <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">
+                glow-brand
+              </p>
             </div>
             <div className="overflow-hidden rounded-2xl edge bg-background">
               <div className="flex h-24 items-center justify-center">
-                <span className="text-gradient-brand text-3xl font-medium tracking-tight">Aa</span>
+                <span className="text-gradient-brand text-3xl font-medium tracking-tight">
+                  Aa
+                </span>
               </div>
               <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">
                 text-gradient-brand
@@ -163,7 +188,9 @@ export default function FoundationPage() {
                   fades softly at both edges as it runs past the frame
                 </p>
               </div>
-              <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">mask-fade-x</p>
+              <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">
+                mask-fade-x
+              </p>
             </div>
           </div>
         </div>
@@ -173,7 +200,9 @@ export default function FoundationPage() {
       <section className={`${BLEED} border-y border-border bg-muted/30`}>
         <div className="grid gap-12 py-16 md:grid-cols-2">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Type tokens</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+              Type tokens
+            </p>
             <div className="mt-5 space-y-2">
               <p className="font-sans text-2xl text-foreground">font-sans</p>
               <p className="font-mono text-2xl text-foreground">font-mono</p>
@@ -192,8 +221,8 @@ export default function FoundationPage() {
               One knob re-skins it
             </p>
             <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
-              Override <span className="text-foreground">--brand</span> and rings, charts, success,
-              and active states all follow.
+              Override <span className="text-foreground">--brand</span> and
+              rings, charts, success, and active states all follow.
             </p>
             <div className="mt-5">
               <CodeBlock
@@ -223,5 +252,5 @@ export default function FoundationPage() {
         </Link>
       </div>
     </article>
-  );
+  )
 }

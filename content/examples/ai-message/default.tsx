@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { CopyIcon, RefreshCwIcon, ThumbsUpIcon } from "lucide-react";
+import { CopyIcon, RefreshCwIcon, ThumbsUpIcon } from "lucide-react"
 
 import {
   Message,
@@ -9,7 +9,7 @@ import {
   MessageContent,
   MessageResponse,
   MessageToolbar,
-} from "@/components/ai-elements/message";
+} from "@/components/ai-elements/message"
 
 export default function Example() {
   return (
@@ -49,5 +49,5 @@ export default function Example() {
         </MessageContent>
       </Message>
     </div>
-  );
+  )
 }

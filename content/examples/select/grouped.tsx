@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Select,
@@ -9,7 +9,7 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
 export default function Example() {
   return (
@@ -50,5 +50,5 @@ export default function Example() {
         </SelectContent>
       </Select>
     </div>
-  );
+  )
 }

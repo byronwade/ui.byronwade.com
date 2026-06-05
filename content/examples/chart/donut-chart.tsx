@@ -31,15 +31,24 @@ const chartConfig: ChartConfig = {
 }
 
 export default function Example() {
-  const total = React.useMemo(() => data.reduce((sum, d) => sum + d.count, 0), [])
+  const total = React.useMemo(
+    () => data.reduce((sum, d) => sum + d.count, 0),
+    [],
+  )
 
   return (
     <div className="p-6 rounded-2xl border bg-card w-full max-w-sm">
-      <h2 className="text-sm font-medium mb-1 text-foreground">Device Status</h2>
-      <p className="text-xs text-muted-foreground mb-2">Current session overview</p>
+      <h2 className="text-sm font-medium mb-1 text-foreground">
+        Device Status
+      </h2>
+      <p className="text-xs text-muted-foreground mb-2">
+        Current session overview
+      </p>
       <ChartContainer config={chartConfig} className="h-56 w-full">
         <PieChart>
-          <ChartTooltip content={<ChartTooltipContent nameKey="status" hideLabel />} />
+          <ChartTooltip
+            content={<ChartTooltipContent nameKey="status" hideLabel />}
+          />
           <Pie
             data={data}
             dataKey="count"
@@ -55,13 +64,27 @@ export default function Example() {
             ))}
             <Label
               content={({ viewBox }) => {
-                if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) return null
+                if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox))
+                  return null
                 return (
-                  <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                    <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-2xl font-medium">
+                  <text
+                    x={viewBox.cx}
+                    y={viewBox.cy}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                  >
+                    <tspan
+                      x={viewBox.cx}
+                      y={viewBox.cy}
+                      className="fill-foreground text-2xl font-medium"
+                    >
                       {total}
                     </tspan>
-                    <tspan x={viewBox.cx} y={(viewBox.cy ?? 0) + 18} className="fill-muted-foreground text-xs">
+                    <tspan
+                      x={viewBox.cx}
+                      y={(viewBox.cy ?? 0) + 18}
+                      className="fill-muted-foreground text-xs"
+                    >
                       devices
                     </tspan>
                   </text>
@@ -73,7 +96,10 @@ export default function Example() {
       </ChartContainer>
       <div className="flex justify-center gap-4 pt-2">
         {data.map((entry) => (
-          <div key={entry.status} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <div
+            key={entry.status}
+            className="flex items-center gap-1.5 text-xs text-muted-foreground"
+          >
             <div
               className="h-2 w-2 rounded-full shrink-0"
               style={{ backgroundColor: `var(--color-${entry.status})` }}

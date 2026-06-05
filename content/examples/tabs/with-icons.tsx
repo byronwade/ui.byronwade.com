@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { BarChart2, Bell, Settings, User } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { BarChart2, Bell, Settings, User } from "lucide-react"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Example() {
   return (
@@ -51,5 +51,5 @@ export default function Example() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

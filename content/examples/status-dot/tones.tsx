@@ -1,12 +1,24 @@
-import { StatusDot, type StatusTone } from "@/components/ui/status-dot";
+import { StatusDot, type StatusTone } from "@/components/ui/status-dot"
 
 const tones: { tone: StatusTone; label: string; description: string }[] = [
-  { tone: "success", label: "Success", description: "Healthy, active, passing" },
-  { tone: "warning", label: "Warning", description: "Degraded, slow, near-limit" },
+  {
+    tone: "success",
+    label: "Success",
+    description: "Healthy, active, passing",
+  },
+  {
+    tone: "warning",
+    label: "Warning",
+    description: "Degraded, slow, near-limit",
+  },
   { tone: "danger", label: "Danger", description: "Failed, offline, critical" },
-  { tone: "info", label: "Info", description: "Pending, syncing, informational" },
+  {
+    tone: "info",
+    label: "Info",
+    description: "Pending, syncing, informational",
+  },
   { tone: "neutral", label: "Neutral", description: "Unknown, idle, disabled" },
-];
+]
 
 export default function Example() {
   return (
@@ -19,5 +31,5 @@ export default function Example() {
         </div>
       ))}
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Loader } from "@/components/ai-elements/loader";
+import { Loader } from "@/components/ai-elements/loader"
 
 export default function Example() {
   return (
@@ -17,5 +17,5 @@ export default function Example() {
         Thinking…
       </span>
     </div>
-  );
+  )
 }

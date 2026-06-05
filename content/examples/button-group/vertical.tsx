@@ -1,5 +1,5 @@
-import { ButtonGroup } from "@/components/ui/button-group";
-import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -10,5 +10,5 @@ export default function Example() {
         <Button variant="outline">Bottom</Button>
       </ButtonGroup>
     </div>
-  );
+  )
 }

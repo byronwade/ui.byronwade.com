@@ -29,7 +29,7 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
       data-slot="sheet-overlay"
       className={cn(
         "fixed inset-0 z-50 bg-black/10 transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-backdrop-filter:backdrop-blur-xs",
-        className
+        className,
       )}
       {...props}
     />
@@ -84,7 +84,7 @@ function SheetContent({
         className={cn(
           "fixed z-50 flex flex-col gap-4 overflow-hidden bg-popover bg-clip-padding text-sm text-popover-foreground edge transition duration-200 ease-in-out data-ending-style:opacity-0 data-starting-style:opacity-0",
           sheetSide[variant][side],
-          className
+          className,
         )}
         {...props}
       >
@@ -107,8 +107,7 @@ function SheetContent({
               />
             }
           >
-            <XIcon
-            />
+            <XIcon />
             <span className="sr-only">Close</span>
           </SheetPrimitive.Close>
         )}
@@ -152,7 +151,7 @@ function SheetFooter({
       className={cn(
         "mt-auto flex gap-2 p-4",
         variant === "bare" ? "flex-row items-center" : "flex-col",
-        className
+        className,
       )}
       {...props}
     />
@@ -165,7 +164,7 @@ function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
       data-slot="sheet-title"
       className={cn(
         "font-heading text-base font-medium text-foreground",
-        className
+        className,
       )}
       {...props}
     />

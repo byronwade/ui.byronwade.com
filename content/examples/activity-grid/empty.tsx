@@ -1,4 +1,4 @@
-import { ActivityGrid } from "@/components/ui/activity-grid";
+import { ActivityGrid } from "@/components/ui/activity-grid"
 
 export default function Example() {
   return (
@@ -9,5 +9,5 @@ export default function Example() {
       />
       <p className="text-sm text-muted-foreground">No activity recorded yet</p>
     </div>
-  );
+  )
 }

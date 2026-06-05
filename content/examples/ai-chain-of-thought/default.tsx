@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   ChainOfThought,
@@ -8,8 +8,8 @@ import {
   ChainOfThoughtSearchResult,
   ChainOfThoughtSearchResults,
   ChainOfThoughtStep,
-} from "@/components/ai-elements/chain-of-thought";
-import { FileSearchIcon, GlobeIcon, ListChecksIcon } from "lucide-react";
+} from "@/components/ai-elements/chain-of-thought"
+import { FileSearchIcon, GlobeIcon, ListChecksIcon } from "lucide-react"
 
 export default function Example() {
   return (
@@ -29,9 +29,7 @@ export default function Example() {
               <ChainOfThoughtSearchResult>
                 nextjs.org/docs
               </ChainOfThoughtSearchResult>
-              <ChainOfThoughtSearchResult>
-                react.dev
-              </ChainOfThoughtSearchResult>
+              <ChainOfThoughtSearchResult>react.dev</ChainOfThoughtSearchResult>
             </ChainOfThoughtSearchResults>
           </ChainOfThoughtStep>
 
@@ -56,5 +54,5 @@ export default function Example() {
         </ChainOfThoughtContent>
       </ChainOfThought>
     </div>
-  );
+  )
 }

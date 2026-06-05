@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Label } from "@/components/ui/label";
+import { useState } from "react"
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
-  const [notifications, setNotifications] = useState(true);
-  const [marketing, setMarketing] = useState(false);
-  const [updates, setUpdates] = useState(true);
+  const [notifications, setNotifications] = useState(true)
+  const [marketing, setMarketing] = useState(false)
+  const [updates, setUpdates] = useState(true)
 
   return (
     <div className="flex flex-col gap-4 p-6 max-w-sm w-full">
@@ -64,5 +64,5 @@ export default function Example() {
         </Label>
       </div>
     </div>
-  );
+  )
 }

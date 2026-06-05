@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Switch } from "@/components/ui/switch";
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
 
 export default function Example() {
-  const [agreed, setAgreed] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [agreed, setAgreed] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
-  const isInvalid = submitted && !agreed;
+  const isInvalid = submitted && !agreed
 
   return (
     <div className="flex flex-col gap-4 p-6 max-w-sm mx-auto">
@@ -20,8 +20,8 @@ export default function Example() {
           <Switch
             checked={agreed}
             onCheckedChange={(v) => {
-              setAgreed(v);
-              if (v) setSubmitted(false);
+              setAgreed(v)
+              if (v) setSubmitted(false)
             }}
             aria-invalid={isInvalid}
             aria-label="Accept terms of service"
@@ -41,5 +41,5 @@ export default function Example() {
         Submit
       </button>
     </div>
-  );
+  )
 }

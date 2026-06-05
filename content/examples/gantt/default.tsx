@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { addDays, startOfMonth, subDays } from "date-fns";
+import { addDays, startOfMonth, subDays } from "date-fns"
 
 import {
   GanttCreateMarkerTrigger,
@@ -16,10 +16,10 @@ import {
   GanttTimeline,
   GanttToday,
   type GanttFeature,
-} from "@/components/ui/gantt";
+} from "@/components/ui/gantt"
 
-const today = new Date();
-const monthStart = startOfMonth(today);
+const today = new Date()
+const monthStart = startOfMonth(today)
 
 const features: GanttFeature[] = [
   {
@@ -43,7 +43,7 @@ const features: GanttFeature[] = [
     endAt: addDays(monthStart, 55),
     status: { id: "at-risk", name: "At Risk", color: "bg-warning" },
   },
-];
+]
 
 export default function Example() {
   return (
@@ -75,5 +75,5 @@ export default function Example() {
         </GanttTimeline>
       </GanttProvider>
     </div>
-  );
+  )
 }

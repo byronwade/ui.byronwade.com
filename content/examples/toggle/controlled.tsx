@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { Toggle } from "@/components/ui/toggle";
+import { useState } from "react"
+import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { Toggle } from "@/components/ui/toggle"
 
 export default function Example() {
-  const [pressed, setPressed] = useState(false);
+  const [pressed, setPressed] = useState(false)
 
   return (
     <div className="flex flex-col items-center gap-4 p-8">
@@ -26,5 +26,5 @@ export default function Example() {
         </span>
       </p>
     </div>
-  );
+  )
 }

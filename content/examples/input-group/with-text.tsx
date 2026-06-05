@@ -3,7 +3,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
 
 export default function Example() {
   return (
@@ -16,5 +16,5 @@ export default function Example() {
         <InputGroupText>.com</InputGroupText>
       </InputGroupAddon>
     </InputGroup>
-  );
+  )
 }

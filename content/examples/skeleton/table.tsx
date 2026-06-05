@@ -9,7 +9,11 @@ export default function Example() {
       {/* Table header */}
       <div className="flex items-center gap-4 px-4 py-3 border-b bg-muted/40">
         {cols.map((w, i) => (
-          <Skeleton key={i} className="h-3.5 rounded" style={{ width: w / 2 }} />
+          <Skeleton
+            key={i}
+            className="h-3.5 rounded"
+            style={{ width: w / 2 }}
+          />
         ))}
       </div>
 
@@ -23,7 +27,7 @@ export default function Example() {
             <Skeleton
               key={colIdx}
               className="h-4 rounded"
-              style={{ width: w - (rowIdx * 7 + colIdx * 11) % 30 }}
+              style={{ width: w - ((rowIdx * 7 + colIdx * 11) % 30) }}
             />
           ))}
         </div>

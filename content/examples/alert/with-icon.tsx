@@ -15,7 +15,8 @@ export default function Example() {
         <MailIcon />
         <AlertTitle>Verify your email</AlertTitle>
         <AlertDescription>
-          We sent a confirmation link to <strong>user@example.com</strong>. Check your inbox.
+          We sent a confirmation link to <strong>user@example.com</strong>.
+          Check your inbox.
         </AlertDescription>
       </Alert>
 
@@ -23,7 +24,8 @@ export default function Example() {
         <BellIcon />
         <AlertTitle>Notifications paused</AlertTitle>
         <AlertDescription>
-          You won&apos;t receive any alerts until you re-enable notifications in settings.
+          You won&apos;t receive any alerts until you re-enable notifications in
+          settings.
         </AlertDescription>
       </Alert>
 
@@ -54,9 +56,7 @@ export default function Example() {
       <Alert>
         <LockIcon />
         <AlertTitle>Session locked</AlertTitle>
-        <AlertDescription>
-          Re-enter your password to continue.
-        </AlertDescription>
+        <AlertDescription>Re-enter your password to continue.</AlertDescription>
       </Alert>
     </div>
   )

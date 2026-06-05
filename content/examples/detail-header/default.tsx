@@ -1,6 +1,6 @@
-import { DetailHeader } from "@/components/detail-header";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { DetailHeader } from "@/components/detail-header"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -10,7 +10,9 @@ export default function Example() {
         badge={<Badge variant="success">Active</Badge>}
         actions={
           <>
-            <Button variant="outline" size="sm">Edit</Button>
+            <Button variant="outline" size="sm">
+              Edit
+            </Button>
             <Button size="sm">Deploy</Button>
           </>
         }
@@ -22,5 +24,5 @@ export default function Example() {
         ]}
       />
     </div>
-  );
+  )
 }

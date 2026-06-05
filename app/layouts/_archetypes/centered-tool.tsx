@@ -5,26 +5,35 @@
 // lines, glow, a gradient wordmark, and a floating glass testimonial) frames the one
 // decision; the focal form floats on a calm right column with designed states. The
 // brand panel collapses on mobile so the single task always leads.
-import { ArrowRight, Command, KeyRound, Lock, Mail } from "lucide-react";
+import { ArrowRight, Command, KeyRound, Lock, Mail } from "lucide-react"
 
-import { CenteredFocal } from "@/components/centered-focal";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { GradientAvatar } from "@/components/ui/gradient-avatar";
+import { CenteredFocal } from "@/components/centered-focal"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { GradientAvatar } from "@/components/ui/gradient-avatar"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
 
 export function CenteredToolArchetype() {
   return (
     <div className="grid min-h-dvh bg-background text-foreground lg:grid-cols-2">
       {/* ── Brand story panel ────────────────────────────────────── */}
       <aside className="relative hidden flex-col justify-between overflow-hidden border-r border-border p-12 lg:flex">
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-brand/12 via-background to-background" />
-        <div aria-hidden className="bg-grid-lines absolute inset-0 opacity-50 [mask-image:radial-gradient(120%_90%_at_0%_0%,#000,transparent_75%)]" />
-        <div aria-hidden className="glow-brand absolute inset-x-0 -top-24 h-96 opacity-80" />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-br from-brand/12 via-background to-background"
+        />
+        <div
+          aria-hidden
+          className="bg-grid-lines absolute inset-0 opacity-50 [mask-image:radial-gradient(120%_90%_at_0%_0%,#000,transparent_75%)]"
+        />
+        <div
+          aria-hidden
+          className="glow-brand absolute inset-x-0 -top-24 h-96 opacity-80"
+        />
 
         <div className="relative flex items-center gap-2 font-semibold tracking-tight">
           <span className="grid size-7 place-items-center rounded-lg bg-brand text-brand-foreground">
@@ -51,7 +60,9 @@ export function CenteredToolArchetype() {
               <GradientAvatar seed="ana reyes" size="md" />
               <div className="text-xs">
                 <div className="font-medium text-foreground">Ana Reyes</div>
-                <div className="text-muted-foreground">Head of Platform, Acme</div>
+                <div className="text-muted-foreground">
+                  Head of Platform, Acme
+                </div>
               </div>
             </figcaption>
           </figure>
@@ -117,5 +128,5 @@ export function CenteredToolArchetype() {
         </p>
       </CenteredFocal>
     </div>
-  );
+  )
 }

@@ -1,26 +1,51 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { BarChart3, Home, Inbox, Search, Settings } from "lucide-react";
+import * as React from "react"
+import { BarChart3, Home, Inbox, Search, Settings } from "lucide-react"
 
-import type { MorphDockOrigin } from "@/components/ui/morph-dock";
-import { MorphDock } from "@/components/ui/morph-dock";
+import type { MorphDockOrigin } from "@/components/ui/morph-dock"
+import { MorphDock } from "@/components/ui/morph-dock"
 
 const items = [
-  { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
+  {
+    id: "home",
+    label: "Home",
+    icon: Home,
+    href: "#",
+    active: true,
+    core: true,
+  },
   { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
   { id: "reports", label: "Reports", icon: BarChart3, href: "#" },
-  { id: "settings", label: "Settings", icon: Settings, href: "#", pinned: true },
-];
+  {
+    id: "settings",
+    label: "Settings",
+    icon: Settings,
+    href: "#",
+    pinned: true,
+  },
+]
 
 const ROWS: { origin: MorphDockOrigin; align: string; label: string }[] = [
-  { origin: "start", align: "justify-start", label: "Left dock → blooms from the start" },
-  { origin: "center", align: "justify-center", label: "Centered dock → blooms from the center" },
-  { origin: "end", align: "justify-end", label: "Right dock → blooms from the end" },
-];
+  {
+    origin: "start",
+    align: "justify-start",
+    label: "Left dock → blooms from the start",
+  },
+  {
+    origin: "center",
+    align: "justify-center",
+    label: "Centered dock → blooms from the center",
+  },
+  {
+    origin: "end",
+    align: "justify-end",
+    label: "Right dock → blooms from the end",
+  },
+]
 
 function Row({ origin, align }: { origin: MorphDockOrigin; align: string }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <div className={`flex w-full ${align}`}>
       <MorphDock
@@ -40,7 +65,7 @@ function Row({ origin, align }: { origin: MorphDockOrigin; align: string }) {
         </div>
       </MorphDock>
     </div>
-  );
+  )
 }
 
 /**
@@ -52,10 +77,12 @@ export default function Example() {
     <div className="flex min-h-72 w-full flex-col gap-8 p-8">
       {ROWS.map((r) => (
         <div key={r.origin} className="w-full space-y-2">
-          <p className="text-[11px] font-medium text-muted-foreground">{r.label}</p>
+          <p className="text-[11px] font-medium text-muted-foreground">
+            {r.label}
+          </p>
           <Row origin={r.origin} align={r.align} />
         </div>
       ))}
     </div>
-  );
+  )
 }

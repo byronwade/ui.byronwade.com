@@ -1,6 +1,6 @@
-import { Section, SettingsList, SettingRow } from "@/components/section";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Section, SettingsList, SettingRow } from "@/components/section"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -67,5 +67,5 @@ export default function Example() {
         </SettingsList>
       </Section>
     </div>
-  );
+  )
 }

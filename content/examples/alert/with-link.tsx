@@ -9,8 +9,8 @@ export default function Example() {
         <InfoIcon />
         <AlertTitle>Cookie preferences updated</AlertTitle>
         <AlertDescription>
-          Your settings have been saved. Read our{" "}
-          <a href="#">Privacy Policy</a> to learn how we use your data.
+          Your settings have been saved. Read our <a href="#">Privacy Policy</a>{" "}
+          to learn how we use your data.
         </AlertDescription>
       </Alert>
 
@@ -19,9 +19,8 @@ export default function Example() {
         <BookOpenIcon />
         <AlertTitle>Setup required</AlertTitle>
         <AlertDescription>
-          Before you start, review the{" "}
-          <a href="#">quick-start guide</a> and configure your{" "}
-          <a href="#">environment variables</a>.
+          Before you start, review the <a href="#">quick-start guide</a> and
+          configure your <a href="#">environment variables</a>.
         </AlertDescription>
       </Alert>
 
@@ -30,8 +29,8 @@ export default function Example() {
         <ExternalLinkIcon />
         <AlertTitle>Credentials expired</AlertTitle>
         <AlertDescription>
-          Your access token has expired. <a href="#">Renew your credentials</a> to
-          restore access.
+          Your access token has expired. <a href="#">Renew your credentials</a>{" "}
+          to restore access.
         </AlertDescription>
       </Alert>
     </div>

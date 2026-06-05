@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation"
 
-import { AppLauncher } from "./app-launcher";
-import { AppBreadcrumb } from "./app-breadcrumb";
-import { DockToolbar } from "./dock-toolbar";
-import { NavDock } from "./nav-dock";
+import { AppLauncher } from "./app-launcher"
+import { AppBreadcrumb } from "./app-breadcrumb"
+import { DockToolbar } from "./dock-toolbar"
+import { NavDock } from "./nav-dock"
 
 /**
  * The global floating shell, ported from SignalRoute's app shell. The top-left
@@ -16,10 +16,10 @@ import { NavDock } from "./nav-dock";
  * blocking content; each pill re-enables its own events.
  */
 export function AppChrome() {
-  const pathname = usePathname();
+  const pathname = usePathname()
   // Embedded archetype previews (`/preview/<slug>`) render inside iframes and
   // are meant to be pure, chrome-free surfaces — never overlay the shell there.
-  if (pathname?.startsWith("/preview")) return null;
+  if (pathname?.startsWith("/preview")) return null
 
   return (
     <>
@@ -30,5 +30,5 @@ export function AppChrome() {
       <DockToolbar />
       <NavDock />
     </>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
 import {
   DropdownMenu,
@@ -10,10 +10,10 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export default function Example() {
-  const [view, setView] = useState("comfortable");
+  const [view, setView] = useState("comfortable")
 
   return (
     <div className="flex items-center justify-center p-16">
@@ -25,12 +25,18 @@ export default function Example() {
           <DropdownMenuLabel>Row density</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup value={view} onValueChange={setView}>
-            <DropdownMenuRadioItem value="compact">Compact</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="comfortable">Comfortable</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="spacious">Spacious</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="compact">
+              Compact
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="comfortable">
+              Comfortable
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="spacious">
+              Spacious
+            </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Loader2, Send, Upload } from "lucide-react";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Loader2, Send, Upload } from "lucide-react"
 
 export default function Example() {
-  const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [saving, setSaving] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
   function handleSave() {
-    setSaving(true);
-    setTimeout(() => setSaving(false), 2000);
+    setSaving(true)
+    setTimeout(() => setSaving(false), 2000)
   }
 
   function handleUpload() {
-    setUploading(true);
-    setTimeout(() => setUploading(false), 2500);
+    setUploading(true)
+    setTimeout(() => setUploading(false), 2500)
   }
 
   return (
@@ -67,9 +67,10 @@ export default function Example() {
       </div>
 
       <p className="text-muted-foreground text-sm">
-        Loading state is composed with a spinner icon + <code className="text-xs bg-muted px-1 py-0.5 rounded">disabled</code> prop.
-        Click the buttons above to trigger a 2-second simulated action.
+        Loading state is composed with a spinner icon +{" "}
+        <code className="text-xs bg-muted px-1 py-0.5 rounded">disabled</code>{" "}
+        prop. Click the buttons above to trigger a 2-second simulated action.
       </p>
     </div>
-  );
+  )
 }

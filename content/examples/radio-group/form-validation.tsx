@@ -1,29 +1,29 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+import { useState } from "react"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
 
 const options = [
   { value: "email", label: "Email" },
   { value: "sms", label: "SMS" },
   { value: "push", label: "Push notification" },
-];
+]
 
 export default function Example() {
-  const [contact, setContact] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [contact, setContact] = useState("")
+  const [submitted, setSubmitted] = useState(false)
 
-  const hasError = submitted && !contact;
+  const hasError = submitted && !contact
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSubmitted(true);
+    e.preventDefault()
+    setSubmitted(true)
     if (contact) {
       // success — reset for demo
-      setContact("");
-      setSubmitted(false);
-      alert(`Preference saved: ${contact}`);
+      setContact("")
+      setSubmitted(false)
+      alert(`Preference saved: ${contact}`)
     }
   }
 
@@ -36,8 +36,8 @@ export default function Example() {
         <RadioGroup
           value={contact}
           onValueChange={(v) => {
-            setContact(v);
-            if (submitted) setSubmitted(false);
+            setContact(v)
+            if (submitted) setSubmitted(false)
           }}
           aria-invalid={hasError || undefined}
           className="gap-2"
@@ -54,7 +54,9 @@ export default function Example() {
           ))}
         </RadioGroup>
         {hasError && (
-          <p className="text-sm text-destructive">Please select a contact method.</p>
+          <p className="text-sm text-destructive">
+            Please select a contact method.
+          </p>
         )}
       </div>
 
@@ -65,5 +67,5 @@ export default function Example() {
         Save preference
       </button>
     </form>
-  );
+  )
 }

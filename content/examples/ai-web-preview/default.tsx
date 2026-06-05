@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   WebPreview,
@@ -7,13 +7,13 @@ import {
   WebPreviewUrl,
   WebPreviewBody,
   WebPreviewConsole,
-} from "@/components/ai-elements/web-preview";
+} from "@/components/ai-elements/web-preview"
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   RotateCwIcon,
   ExternalLinkIcon,
-} from "lucide-react";
+} from "lucide-react"
 
 export default function Example() {
   const logs = [
@@ -32,11 +32,14 @@ export default function Example() {
       message: "Failed to fetch /api/session (401)",
       timestamp: new Date("2026-06-03T10:24:03"),
     },
-  ];
+  ]
 
   return (
     <div className="flex min-h-0 items-center justify-center bg-background p-8">
-      <WebPreview defaultUrl="https://byronwade.ui" className="h-[480px] max-w-2xl">
+      <WebPreview
+        defaultUrl="https://byronwade.ui"
+        className="h-[480px] max-w-2xl"
+      >
         <WebPreviewNavigation>
           <WebPreviewNavigationButton tooltip="Back" disabled>
             <ArrowLeftIcon />
@@ -56,5 +59,5 @@ export default function Example() {
         <WebPreviewConsole logs={logs} />
       </WebPreview>
     </div>
-  );
+  )
 }

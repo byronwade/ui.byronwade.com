@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Save, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { Save, Trash2 } from "lucide-react"
 
 export default function Example() {
   return (
@@ -7,14 +7,22 @@ export default function Example() {
       {/* All variants in disabled state */}
       <div className="flex flex-wrap items-center gap-3">
         <Button disabled>Default</Button>
-        <Button variant="outline" disabled>Outline</Button>
-        <Button variant="secondary" disabled>Secondary</Button>
-        <Button variant="ghost" disabled>Ghost</Button>
+        <Button variant="outline" disabled>
+          Outline
+        </Button>
+        <Button variant="secondary" disabled>
+          Secondary
+        </Button>
+        <Button variant="ghost" disabled>
+          Ghost
+        </Button>
         <Button variant="destructive" disabled>
           <Trash2 />
           Destructive
         </Button>
-        <Button variant="link" disabled>Link</Button>
+        <Button variant="link" disabled>
+          Link
+        </Button>
       </div>
 
       {/* Disabled icon buttons */}
@@ -28,9 +36,12 @@ export default function Example() {
       </div>
 
       <p className="text-muted-foreground text-sm">
-        Disabled buttons use <code className="text-xs bg-muted px-1 py-0.5 rounded">pointer-events-none</code> and
-        reduced opacity — they cannot be focused or triggered.
+        Disabled buttons use{" "}
+        <code className="text-xs bg-muted px-1 py-0.5 rounded">
+          pointer-events-none
+        </code>{" "}
+        and reduced opacity — they cannot be focused or triggered.
       </p>
     </div>
-  );
+  )
 }

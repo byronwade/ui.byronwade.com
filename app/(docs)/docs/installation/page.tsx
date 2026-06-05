@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, TriangleAlert } from "lucide-react";
+import type { Metadata } from "next"
+import Link from "next/link"
+import { ArrowRight, TriangleAlert } from "lucide-react"
 
-import { CodeBlock } from "@/app/(docs)/_components/code-block";
-import { REGISTRY_URL } from "@/content/guides";
+import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
   title: "Installation — byronwade/ui",
   description:
     "Every way to install byronwade/ui — the easiest being the namespaced shadcn registry.",
-};
+}
 
 /* ---------------------------------------------------------------------------
    Installation = a CLI flow. Distinct signature: a terminal window hero and a
@@ -17,20 +17,27 @@ export const metadata: Metadata = {
    commands stay in copyable CodeBlocks; @byronwade/* refs are real items.
 --------------------------------------------------------------------------- */
 
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10";
+const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 function Dot() {
-  return <span className="size-2.5 rounded-full bg-border" />;
+  return <span className="size-2.5 rounded-full bg-border" />
 }
 
-const STEPS: { title: string; body: React.ReactNode; code: string; lang: string }[] = [
+const STEPS: {
+  title: string
+  body: React.ReactNode
+  code: string
+  lang: string
+}[] = [
   {
     title: "Initialize against the foundation base",
     body: (
       <>
-        The foundation owns your <code className="font-mono text-[13px]">:root</code> tokens and
-        Tailwind theme. Run <code className="font-mono text-[13px]">init</code> on a fresh Next.js app
-        (created with <code className="font-mono text-[13px]">--tailwind</code>).
+        The foundation owns your{" "}
+        <code className="font-mono text-[13px]">:root</code> tokens and Tailwind
+        theme. Run <code className="font-mono text-[13px]">init</code> on a
+        fresh Next.js app (created with{" "}
+        <code className="font-mono text-[13px]">--tailwind</code>).
       </>
     ),
     lang: "bash",
@@ -40,8 +47,10 @@ const STEPS: { title: string; body: React.ReactNode; code: string; lang: string 
     title: "Register the @byronwade namespace",
     body: (
       <>
-        Add one line to <code className="font-mono text-[13px]">components.json</code> so the CLI
-        resolves <code className="font-mono text-[13px]">@byronwade/*</code>.
+        Add one line to{" "}
+        <code className="font-mono text-[13px]">components.json</code> so the
+        CLI resolves <code className="font-mono text-[13px]">@byronwade/*</code>
+        .
       </>
     ),
     lang: "json",
@@ -55,8 +64,9 @@ const STEPS: { title: string; body: React.ReactNode; code: string; lang: string 
     title: "Add the catalog — or just what you need",
     body: (
       <>
-        Everything at once, or only the pieces you want — transitive deps come along (activity-ring
-        pulls <code className="font-mono text-[13px]">status-dot</code> + utils).
+        Everything at once, or only the pieces you want — transitive deps come
+        along (activity-ring pulls{" "}
+        <code className="font-mono text-[13px]">status-dot</code> + utils).
       </>
     ),
     lang: "bash",
@@ -65,7 +75,7 @@ const STEPS: { title: string; body: React.ReactNode; code: string; lang: string 
 npx shadcn@latest add @byronwade/timeline-rail @byronwade/metric-stat
 npx shadcn@latest add @byronwade/sheet @byronwade/command @byronwade/morph-dock`,
   },
-];
+]
 
 export default function InstallationPage() {
   return (
@@ -80,8 +90,8 @@ export default function InstallationPage() {
             Two commands to a wired system.
           </h1>
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            shadcn CLI · Next.js + Tailwind v4. The code is copied into your repo — no runtime
-            dependency, fully yours.
+            shadcn CLI · Next.js + Tailwind v4. The code is copied into your
+            repo — no runtime dependency, fully yours.
           </p>
         </div>
 
@@ -90,19 +100,29 @@ export default function InstallationPage() {
             <Dot />
             <Dot />
             <Dot />
-            <span className="ml-2 text-[11px] text-muted-foreground">shadcn</span>
+            <span className="ml-2 text-[11px] text-muted-foreground">
+              shadcn
+            </span>
           </div>
           <pre className="overflow-x-auto p-5 leading-relaxed scrollbar-thin">
             <code>
               <span className="text-brand">$</span>{" "}
-              <span className="text-foreground">npx shadcn@latest init …/foundation.json</span>
+              <span className="text-foreground">
+                npx shadcn@latest init …/foundation.json
+              </span>
               {"\n"}
-              <span className="text-success">✓ foundation installed — :root tokens ready</span>
+              <span className="text-success">
+                ✓ foundation installed — :root tokens ready
+              </span>
               {"\n\n"}
               <span className="text-brand">$</span>{" "}
-              <span className="text-foreground">npx shadcn@latest add @byronwade/all</span>
+              <span className="text-foreground">
+                npx shadcn@latest add @byronwade/all
+              </span>
               {"\n"}
-              <span className="text-success">✓ added the full catalog — deps resolved</span>
+              <span className="text-success">
+                ✓ added the full catalog — deps resolved
+              </span>
             </code>
           </pre>
         </div>
@@ -121,10 +141,14 @@ export default function InstallationPage() {
                   <span className="flex size-9 items-center justify-center rounded-full edge bg-background font-mono text-sm text-brand">
                     {i + 1}
                   </span>
-                  {i < STEPS.length - 1 ? <span className="w-px flex-1 bg-border" /> : null}
+                  {i < STEPS.length - 1 ? (
+                    <span className="w-px flex-1 bg-border" />
+                  ) : null}
                 </div>
                 <div className="min-w-0 space-y-3 pb-10">
-                  <h2 className="text-lg font-medium tracking-tight text-foreground">{s.title}</h2>
+                  <h2 className="text-lg font-medium tracking-tight text-foreground">
+                    {s.title}
+                  </h2>
                   <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
                     {s.body}
                   </p>
@@ -139,31 +163,53 @@ export default function InstallationPage() {
       {/* ============================ ADD + MANUAL (two-up) ============= */}
       <section className="grid gap-10 py-16 md:grid-cols-2">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Add a component</p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Add a component
+          </p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
-            One command per component — each page has a copy button. Or point at a built URL with no
-            namespace.
+            One command per component — each page has a copy button. Or point at
+            a built URL with no namespace.
           </p>
           <div className="mt-5 space-y-3">
-            <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/button`} />
-            <CodeBlock lang="bash" code={`npx shadcn@latest add ${REGISTRY_URL}/r/card.json`} />
+            <CodeBlock
+              lang="bash"
+              code={`npx shadcn@latest add @byronwade/button`}
+            />
+            <CodeBlock
+              lang="bash"
+              code={`npx shadcn@latest add ${REGISTRY_URL}/r/card.json`}
+            />
           </div>
         </div>
 
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">Manual setup</p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Manual setup
+          </p>
           <div className="mt-3 flex items-start gap-3 rounded-2xl edge bg-destructive/10 p-4">
             <TriangleAlert className="mt-0.5 size-5 shrink-0 text-destructive" />
             <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
-              <span className="font-medium text-foreground">Don&apos;t run init on an existing theme</span>{" "}
-              — it overwrites <code className="font-mono text-[13px]">globals.css</code>. Merge the
-              foundation <code className="font-mono text-[13px]">cssVars</code> by hand, keep{" "}
-              <code className="font-mono text-[13px]">--ring/--chart-1/--success</code> deriving from{" "}
-              <code className="font-mono text-[13px]">var(--brand)</code>, then add components.
+              <span className="font-medium text-foreground">
+                Don&apos;t run init on an existing theme
+              </span>{" "}
+              — it overwrites{" "}
+              <code className="font-mono text-[13px]">globals.css</code>. Merge
+              the foundation{" "}
+              <code className="font-mono text-[13px]">cssVars</code> by hand,
+              keep{" "}
+              <code className="font-mono text-[13px]">
+                --ring/--chart-1/--success
+              </code>{" "}
+              deriving from{" "}
+              <code className="font-mono text-[13px]">var(--brand)</code>, then
+              add components.
             </p>
           </div>
           <div className="mt-5">
-            <CodeBlock lang="bash" code={`npx shadcn@latest add @byronwade/badge`} />
+            <CodeBlock
+              lang="bash"
+              code={`npx shadcn@latest add @byronwade/badge`}
+            />
           </div>
         </div>
       </section>
@@ -185,5 +231,5 @@ export default function InstallationPage() {
         </Link>
       </div>
     </article>
-  );
+  )
 }

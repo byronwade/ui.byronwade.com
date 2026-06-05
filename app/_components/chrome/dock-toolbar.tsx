@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { usePathname } from "next/navigation";
-import { Check, Terminal } from "lucide-react";
+import * as React from "react"
+import { usePathname } from "next/navigation"
+import { Check, Terminal } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { bySlug } from "@/content/components";
+import { cn } from "@/lib/utils"
+import { bySlug } from "@/content/components"
 
 /**
  * The contextual toolbar, pinned top-right (the inverse corner of the launcher) —
@@ -15,35 +15,35 @@ import { bySlug } from "@/content/components";
  * (home, foundation) the pill is absent, mirroring the source's empty-state return.
  */
 export function DockToolbar() {
-  const pathname = usePathname();
-  const [copied, setCopied] = React.useState(false);
+  const pathname = usePathname()
+  const [copied, setCopied] = React.useState(false)
 
   const slug = React.useMemo(() => {
-    const m = pathname.match(/^\/docs\/([^/]+)\/?$/);
-    return m ? m[1] : null;
-  }, [pathname]);
+    const m = pathname.match(/^\/docs\/([^/]+)\/?$/)
+    return m ? m[1] : null
+  }, [pathname])
 
-  const doc = slug ? bySlug(slug) : null;
+  const doc = slug ? bySlug(slug) : null
   // Foundation installs via `shadcn init`, not `add` — no command to copy.
-  const showInstall = !!doc && doc.slug !== "foundation";
+  const showInstall = !!doc && doc.slug !== "foundation"
 
   React.useEffect(() => {
-    if (!copied) return;
-    const t = window.setTimeout(() => setCopied(false), 1600);
-    return () => window.clearTimeout(t);
-  }, [copied]);
+    if (!copied) return
+    const t = window.setTimeout(() => setCopied(false), 1600)
+    return () => window.clearTimeout(t)
+  }, [copied])
 
-  if (!showInstall) return null;
+  if (!showInstall) return null
 
-  const command = `npx shadcn@latest add @byronwade/${doc.slug}`;
+  const command = `npx shadcn@latest add @byronwade/${doc.slug}`
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(command);
-      setCopied(true);
+      await navigator.clipboard.writeText(command)
+      setCopied(true)
     } catch {
       /* clipboard unavailable — no-op */
     }
-  };
+  }
 
   return (
     <div className="pointer-events-none fixed top-3 right-3 z-50 print:hidden">
@@ -65,9 +65,11 @@ export function DockToolbar() {
           ) : (
             <Terminal className="size-4 shrink-0" strokeWidth={2} />
           )}
-          <span className="whitespace-nowrap">{copied ? "Copied" : "Copy install"}</span>
+          <span className="whitespace-nowrap">
+            {copied ? "Copied" : "Copy install"}
+          </span>
         </button>
       </div>
     </div>
-  );
+  )
 }

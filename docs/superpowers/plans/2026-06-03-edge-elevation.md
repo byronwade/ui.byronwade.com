@@ -34,6 +34,7 @@ grep -rlE "shadow-(float|card)" registry/ui registry/components \
 // bare now means truly nothing — no edge hairline, no bg
 bare ? "" : t.shell,
 ```
+
 (was `bare ? "shadow-none" : t.shell`)
 
 - [ ] **Step 4: Verify no shadow-float/card left, and edge present**
@@ -41,6 +42,7 @@ bare ? "" : t.shell,
 ```bash
 grep -rnE "shadow-(float|card|xl|md)" registry/ui registry/components   # expect: none
 ```
+
 (Leave the `shadow-none` resets in input-group.tsx / command.tsx — they reset
 default form/input shadows, consistent with the no-shadow goal.)
 
@@ -62,10 +64,10 @@ grep -n "\.edge" registry.json                       # expect: still present
 **Files:** `registry/rules/byronwade-ui.mdc`, `AGENTS.md`
 
 - [ ] **Step 1:** In `byronwade-ui.mdc`, change the elevation guidance — floating
-  chrome and cards use the **`edge` hairline; no drop shadows**. Drop
-  `shadow-float`/`shadow-card` from the house-utilities list; keep `edge`.
+      chrome and cards use the **`edge` hairline; no drop shadows**. Drop
+      `shadow-float`/`shadow-card` from the house-utilities list; keep `edge`.
 - [ ] **Step 2:** In `AGENTS.md` "House utilities", remove `shadow-float`,
-  `shadow-card`; keep `edge`/`bg-grid`/etc.
+      `shadow-card`; keep `edge`/`bg-grid`/etc.
 
 ## Task 4: Update tests
 
@@ -79,9 +81,9 @@ grep -rlE "shadow-(float|card)" tests/components \
 ```
 
 - [ ] **Step 2:** morph-dock `bare` test — it asserts `shadow-none` on the bare
-  bar; with `bare ? ""`, change that assertion to expect the bar does NOT include
-  `bg-dock` and does NOT include `edge` (truly bare):
-  `expect(bareBar).not.toHaveClass("edge")`.
+      bar; with `bare ? ""`, change that assertion to expect the bar does NOT include
+      `bg-dock` and does NOT include `edge` (truly bare):
+      `expect(bareBar).not.toHaveClass("edge")`.
 
 ## Task 5: Sync, rebuild, gate, commit
 

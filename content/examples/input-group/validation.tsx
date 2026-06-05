@@ -1,9 +1,9 @@
-import { CircleAlertIcon } from "lucide-react";
+import { CircleAlertIcon } from "lucide-react"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
 
 export default function Example() {
   return (
@@ -19,12 +19,9 @@ export default function Example() {
           defaultValue="not-an-email"
         />
       </InputGroup>
-      <p
-        id="input-group-validation-error"
-        className="text-sm text-destructive"
-      >
+      <p id="input-group-validation-error" className="text-sm text-destructive">
         Enter a valid email address.
       </p>
     </div>
-  );
+  )
 }

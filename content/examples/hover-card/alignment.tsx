@@ -1,6 +1,10 @@
 "use client"
 
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card"
 
 type Align = "start" | "center" | "end"
 
@@ -22,9 +26,12 @@ export default function Example() {
               </HoverCardTrigger>
               <HoverCardContent side="bottom" align={align}>
                 <div className="space-y-1">
-                  <p className="text-xs font-semibold capitalize">Align: {align}</p>
+                  <p className="text-xs font-semibold capitalize">
+                    Align: {align}
+                  </p>
                   <p className="text-xs text-muted-foreground">
-                    Popup aligns to the <strong>{align}</strong> edge of the trigger.
+                    Popup aligns to the <strong>{align}</strong> edge of the
+                    trigger.
                   </p>
                 </div>
               </HoverCardContent>
@@ -44,11 +51,16 @@ export default function Example() {
               <HoverCardTrigger className="inline-flex items-center rounded-full border border-border bg-background px-4 py-1.5 text-sm font-medium transition-colors hover:bg-muted cursor-pointer">
                 alignOffset={offset}
               </HoverCardTrigger>
-              <HoverCardContent side="bottom" align="start" alignOffset={offset}>
+              <HoverCardContent
+                side="bottom"
+                align="start"
+                alignOffset={offset}
+              >
                 <div className="space-y-1">
                   <p className="text-xs font-semibold">alignOffset={offset}</p>
                   <p className="text-xs text-muted-foreground">
-                    Popup is shifted <strong>{offset}px</strong> from the start edge.
+                    Popup is shifted <strong>{offset}px</strong> from the start
+                    edge.
                   </p>
                 </div>
               </HoverCardContent>

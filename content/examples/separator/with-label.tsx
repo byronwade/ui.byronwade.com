@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator"
 
 export default function Example() {
   return (
@@ -14,15 +14,19 @@ export default function Example() {
 
       {/* Left-aligned label */}
       <div className="flex items-center gap-3">
-        <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">Continue with</span>
+        <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">
+          Continue with
+        </span>
         <Separator className="flex-1" />
       </div>
 
       {/* Right-aligned label */}
       <div className="flex items-center gap-3">
         <Separator className="flex-1" />
-        <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">see all</span>
+        <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">
+          see all
+        </span>
       </div>
     </div>
-  );
+  )
 }

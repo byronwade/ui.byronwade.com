@@ -1,4 +1,4 @@
-import { StatCard } from "@/components/stat-card";
+import { StatCard } from "@/components/stat-card"
 
 /**
  * The `value` prop accepts any ReactNode.
@@ -12,7 +12,9 @@ export default function Example() {
         label="Monthly Revenue"
         value={
           <span className="flex items-start gap-0.5">
-            <span className="mt-1 text-base font-semibold text-muted-foreground">$</span>
+            <span className="mt-1 text-base font-semibold text-muted-foreground">
+              $
+            </span>
             <span>84,312</span>
           </span>
         }
@@ -26,7 +28,9 @@ export default function Example() {
         value={
           <span className="flex items-baseline gap-1">
             <span>142</span>
-            <span className="text-base font-normal text-muted-foreground">/ 160</span>
+            <span className="text-base font-normal text-muted-foreground">
+              / 160
+            </span>
           </span>
         }
         hint="88% done this sprint"
@@ -44,5 +48,5 @@ export default function Example() {
         hint="last updated 3 min ago"
       />
     </div>
-  );
+  )
 }

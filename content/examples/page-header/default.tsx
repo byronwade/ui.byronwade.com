@@ -1,5 +1,5 @@
-import { PageHeader } from "@/components/page-header";
-import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/page-header"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -19,5 +19,5 @@ export default function Example() {
         align="center"
       />
     </div>
-  );
+  )
 }

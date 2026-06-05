@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -9,7 +9,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/components/ui/breadcrumb"
 
 const crumbs = [
   { label: "Home", href: "/" },
@@ -17,18 +17,18 @@ const crumbs = [
   { label: "Collections", href: "#" },
   { label: "Architecture", href: "#" },
   { label: "Modern Structures", href: null }, // current page
-];
+]
 
 /**
  * Responsive breadcrumb: shows all items on large screens, collapses middle
  * crumbs on smaller screens using BreadcrumbEllipsis.
  */
 export default function Example() {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false)
 
-  const first = crumbs[0];
-  const last = crumbs[crumbs.length - 1];
-  const middle = crumbs.slice(1, -1);
+  const first = crumbs[0]
+  const last = crumbs[crumbs.length - 1]
+  const middle = crumbs.slice(1, -1)
 
   return (
     <div className="p-8">
@@ -98,5 +98,5 @@ export default function Example() {
         </Breadcrumb>
       </div>
     </div>
-  );
+  )
 }

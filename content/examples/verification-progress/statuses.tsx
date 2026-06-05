@@ -1,4 +1,4 @@
-import { VerificationProgress } from "@/components/verification-progress";
+import { VerificationProgress } from "@/components/verification-progress"
 
 export default function Example() {
   return (
@@ -28,5 +28,5 @@ export default function Example() {
         ]}
       />
     </div>
-  );
+  )
 }

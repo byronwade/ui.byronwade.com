@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Input } from "@/components/ui/input";
+import * as React from "react"
+import { Input } from "@/components/ui/input"
 
 export default function Example() {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState("")
 
   return (
     <div className="flex flex-col gap-4 p-6 max-w-sm w-full">
@@ -18,5 +18,5 @@ export default function Example() {
       <Input type="password" placeholder="Password" />
       <Input type="search" placeholder="Search…" />
     </div>
-  );
+  )
 }

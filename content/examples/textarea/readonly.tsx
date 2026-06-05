@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react"
+import { Textarea } from "@/components/ui/textarea"
 
 const SNIPPET = `// Generated configuration
 export const config = {
@@ -11,15 +11,15 @@ export const config = {
   headers: {
     "Content-Type": "application/json",
   },
-};`;
+};`
 
 export default function Example() {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(false)
 
   async function handleCopy() {
-    await navigator.clipboard.writeText(SNIPPET);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    await navigator.clipboard.writeText(SNIPPET)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   return (
@@ -46,5 +46,5 @@ export default function Example() {
         Read-only — select and copy the text above.
       </p>
     </div>
-  );
+  )
 }

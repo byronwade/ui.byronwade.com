@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   EditorBubbleMenu,
@@ -16,7 +16,7 @@ import {
   EditorNodeQuote,
   EditorNodeText,
   EditorProvider,
-} from "@/components/ui/editor";
+} from "@/components/ui/editor"
 
 const content = `
 <h2>byronwade/ui editor</h2>
@@ -26,7 +26,7 @@ const content = `
   <li>House primitives — Button, Command, Popover, Tooltip</li>
 </ul>
 <blockquote>Hierarchy comes from size and tracking, not weight.</blockquote>
-`;
+`
 
 export default function Example() {
   return (
@@ -54,5 +54,5 @@ export default function Example() {
         <EditorCharacterCount.Words>Words: </EditorCharacterCount.Words>
       </EditorProvider>
     </div>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
 
 export default function Example() {
   return (
@@ -14,7 +14,9 @@ export default function Example() {
 
       <button
         className="rounded px-4 py-2 bg-primary text-primary-foreground"
-        onClick={() => toast.success("Account created successfully.", { richColors: true })}
+        onClick={() =>
+          toast.success("Account created successfully.", { richColors: true })
+        }
       >
         Rich success
       </button>
@@ -28,17 +30,21 @@ export default function Example() {
 
       <button
         className="rounded px-4 py-2 bg-primary text-primary-foreground"
-        onClick={() => toast.info("Two-factor authentication enabled.", { richColors: true })}
+        onClick={() =>
+          toast.info("Two-factor authentication enabled.", { richColors: true })
+        }
       >
         Rich info
       </button>
 
       <button
         className="rounded px-4 py-2 bg-primary text-primary-foreground"
-        onClick={() => toast.warning("Password expires in 3 days.", { richColors: true })}
+        onClick={() =>
+          toast.warning("Password expires in 3 days.", { richColors: true })
+        }
       >
         Rich warning
       </button>
     </div>
-  );
+  )
 }

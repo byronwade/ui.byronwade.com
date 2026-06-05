@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Command,
@@ -9,7 +9,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 
 export default function Example() {
   return (
@@ -38,5 +38,5 @@ export default function Example() {
         </CommandList>
       </Command>
     </div>
-  );
+  )
 }

@@ -4,7 +4,7 @@
  * Reworked to the byronwade/ui design system (token-mapped media-chrome,
  * data-slot) and expanded with cva variants.
  */
-"use client";
+"use client"
 
 import {
   MediaControlBar,
@@ -16,12 +16,12 @@ import {
   MediaTimeDisplay,
   MediaTimeRange,
   MediaVolumeRange,
-} from "media-chrome/react";
-import { cva, type VariantProps } from "class-variance-authority";
-import * as React from "react";
-import type { ComponentProps, CSSProperties } from "react";
+} from "media-chrome/react"
+import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react"
+import type { ComponentProps, CSSProperties } from "react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 /**
  * media-chrome controls are themed entirely through CSS variables. We map every
@@ -44,7 +44,7 @@ const mediaVariables = {
   "--media-range-bar-color": "var(--brand)",
   "--media-range-thumb-background": "var(--brand)",
   "--media-time-range-buffered-color": "var(--muted-foreground)",
-} as CSSProperties;
+} as CSSProperties
 
 const videoPlayerVariants = cva(
   "group/video-player relative isolate w-full overflow-hidden bg-card text-foreground outline-none [&_video]:w-full [&_video]:object-cover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -62,21 +62,21 @@ const videoPlayerVariants = cva(
       variant: "default",
     },
   },
-);
+)
 
 type VideoPlayerVariant = NonNullable<
   VariantProps<typeof videoPlayerVariants>["variant"]
->;
+>
 
 const VideoPlayerVariantContext =
-  React.createContext<VideoPlayerVariant>("default");
+  React.createContext<VideoPlayerVariant>("default")
 
 /** Read the current player variant from any descendant part. */
 export const useVideoPlayerVariant = () =>
-  React.useContext(VideoPlayerVariantContext);
+  React.useContext(VideoPlayerVariantContext)
 
 export type VideoPlayerProps = ComponentProps<typeof MediaController> &
-  VariantProps<typeof videoPlayerVariants>;
+  VariantProps<typeof videoPlayerVariants>
 
 export const VideoPlayer = ({
   className,
@@ -84,19 +84,22 @@ export const VideoPlayer = ({
   variant,
   ...props
 }: VideoPlayerProps) => {
-  const resolvedVariant: VideoPlayerVariant = variant ?? "default";
+  const resolvedVariant: VideoPlayerVariant = variant ?? "default"
   return (
     <VideoPlayerVariantContext.Provider value={resolvedVariant}>
       <MediaController
         data-slot="video-player"
         data-variant={resolvedVariant}
-        className={cn(videoPlayerVariants({ variant: resolvedVariant }), className)}
+        className={cn(
+          videoPlayerVariants({ variant: resolvedVariant }),
+          className,
+        )}
         style={{ ...mediaVariables, ...style }}
         {...props}
       />
     </VideoPlayerVariantContext.Provider>
-  );
-};
+  )
+}
 
 const controlBarVariants = cva(
   "flex w-full items-center gap-0.5 bg-background/80 backdrop-blur-sm",
@@ -111,27 +114,25 @@ const controlBarVariants = cva(
     },
     defaultVariants: { variant: "default" },
   },
-);
+)
 
-export type VideoPlayerControlBarProps = ComponentProps<
-  typeof MediaControlBar
->;
+export type VideoPlayerControlBarProps = ComponentProps<typeof MediaControlBar>
 
 export const VideoPlayerControlBar = ({
   className,
   ...props
 }: VideoPlayerControlBarProps) => {
-  const variant = useVideoPlayerVariant();
+  const variant = useVideoPlayerVariant()
   return (
     <MediaControlBar
       data-slot="video-player-control-bar"
       className={cn(controlBarVariants({ variant }), className)}
       {...props}
     />
-  );
-};
+  )
+}
 
-export type VideoPlayerTimeRangeProps = ComponentProps<typeof MediaTimeRange>;
+export type VideoPlayerTimeRangeProps = ComponentProps<typeof MediaTimeRange>
 
 export const VideoPlayerTimeRange = ({
   className,
@@ -142,11 +143,11 @@ export const VideoPlayerTimeRange = ({
     className={cn("flex-1 p-2.5", className)}
     {...props}
   />
-);
+)
 
 export type VideoPlayerTimeDisplayProps = ComponentProps<
   typeof MediaTimeDisplay
->;
+>
 
 export const VideoPlayerTimeDisplay = ({
   className,
@@ -157,11 +158,11 @@ export const VideoPlayerTimeDisplay = ({
     className={cn("p-2.5 font-mono text-sm tabular-nums", className)}
     {...props}
   />
-);
+)
 
 export type VideoPlayerVolumeRangeProps = ComponentProps<
   typeof MediaVolumeRange
->;
+>
 
 export const VideoPlayerVolumeRange = ({
   className,
@@ -172,9 +173,9 @@ export const VideoPlayerVolumeRange = ({
     className={cn("p-2.5", className)}
     {...props}
   />
-);
+)
 
-export type VideoPlayerPlayButtonProps = ComponentProps<typeof MediaPlayButton>;
+export type VideoPlayerPlayButtonProps = ComponentProps<typeof MediaPlayButton>
 
 export const VideoPlayerPlayButton = ({
   className,
@@ -185,11 +186,11 @@ export const VideoPlayerPlayButton = ({
     className={cn("p-2.5", className)}
     {...props}
   />
-);
+)
 
 export type VideoPlayerSeekBackwardButtonProps = ComponentProps<
   typeof MediaSeekBackwardButton
->;
+>
 
 export const VideoPlayerSeekBackwardButton = ({
   className,
@@ -200,11 +201,11 @@ export const VideoPlayerSeekBackwardButton = ({
     className={cn("p-2.5", className)}
     {...props}
   />
-);
+)
 
 export type VideoPlayerSeekForwardButtonProps = ComponentProps<
   typeof MediaSeekForwardButton
->;
+>
 
 export const VideoPlayerSeekForwardButton = ({
   className,
@@ -215,9 +216,9 @@ export const VideoPlayerSeekForwardButton = ({
     className={cn("p-2.5", className)}
     {...props}
   />
-);
+)
 
-export type VideoPlayerMuteButtonProps = ComponentProps<typeof MediaMuteButton>;
+export type VideoPlayerMuteButtonProps = ComponentProps<typeof MediaMuteButton>
 
 export const VideoPlayerMuteButton = ({
   className,
@@ -228,9 +229,9 @@ export const VideoPlayerMuteButton = ({
     className={cn("p-2.5", className)}
     {...props}
   />
-);
+)
 
-export type VideoPlayerContentProps = ComponentProps<"video">;
+export type VideoPlayerContentProps = ComponentProps<"video">
 
 export const VideoPlayerContent = ({
   className,
@@ -241,14 +242,14 @@ export const VideoPlayerContent = ({
     className={cn("mt-0 mb-0", className)}
     {...props}
   />
-);
+)
 
 export type VideoPlayerPosterProps = ComponentProps<"button"> & {
   /** Poster image shown until the viewer presses play. */
-  src?: string;
+  src?: string
   /** Alt text for the poster image. */
-  alt?: string;
-};
+  alt?: string
+}
 
 /**
  * Big centered play affordance for the `poster` variant. Renders an overlay
@@ -263,20 +264,18 @@ export const VideoPlayerPoster = ({
   children,
   ...props
 }: VideoPlayerPosterProps) => {
-  const [played, setPlayed] = React.useState(false);
+  const [played, setPlayed] = React.useState(false)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onClick?.(event);
-    setPlayed(true);
-    const root = event.currentTarget.closest(
-      '[data-slot="video-player"]',
-    );
-    const video = root?.querySelector("video");
-    video?.play?.();
-  };
+    onClick?.(event)
+    setPlayed(true)
+    const root = event.currentTarget.closest('[data-slot="video-player"]')
+    const video = root?.querySelector("video")
+    video?.play?.()
+  }
 
   if (played) {
-    return null;
+    return null
   }
 
   return (
@@ -306,13 +305,17 @@ export const VideoPlayerPoster = ({
           data-slot="video-player-poster-button"
           className="flex size-16 items-center justify-center rounded-full bg-brand text-primary-foreground shadow-lg transition-transform group-hover/video-player:scale-105"
         >
-          <svg viewBox="0 0 24 24" fill="currentColor" className="ml-0.5 size-7">
+          <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="ml-0.5 size-7"
+          >
             <path d="M8 5v14l11-7z" />
           </svg>
         </span>
       )}
     </button>
-  );
-};
+  )
+}
 
-export { videoPlayerVariants };
+export { videoPlayerVariants }

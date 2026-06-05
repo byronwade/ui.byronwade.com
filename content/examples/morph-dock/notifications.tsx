@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 import {
   BarChart3,
   Bell,
@@ -12,40 +12,82 @@ import {
   Settings,
   ShieldCheck,
   X,
-} from "lucide-react";
+} from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { MorphDock } from "@/components/ui/morph-dock";
+import { cn } from "@/lib/utils"
+import { MorphDock } from "@/components/ui/morph-dock"
 
 const items = [
-  { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
+  {
+    id: "home",
+    label: "Home",
+    icon: Home,
+    href: "#",
+    active: true,
+    core: true,
+  },
   { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
   { id: "reports", label: "Reports", icon: BarChart3, href: "#" },
-  { id: "settings", label: "Settings", icon: Settings, href: "#", pinned: true },
-];
+  {
+    id: "settings",
+    label: "Settings",
+    icon: Settings,
+    href: "#",
+    pinned: true,
+  },
+]
 
 type Note = {
-  id: number;
-  icon: typeof Bell;
-  tone: string;
-  title: string;
-  body?: string;
-  time: string;
-  unread?: boolean;
-};
+  id: number
+  icon: typeof Bell
+  tone: string
+  title: string
+  body?: string
+  time: string
+  unread?: boolean
+}
 
 const TODAY: Note[] = [
-  { id: 1, icon: MessageSquare, tone: "text-brand", title: "New message from Mira", body: "Can you review the latest flow?", time: "2m ago", unread: true },
-  { id: 2, icon: PhoneMissed, tone: "text-destructive", title: "Missed call", body: "+1 (415) 555-0136", time: "18m ago", unread: true },
-  { id: 3, icon: ShieldCheck, tone: "text-success", title: "Verification approved", time: "1h ago" },
-];
+  {
+    id: 1,
+    icon: MessageSquare,
+    tone: "text-brand",
+    title: "New message from Mira",
+    body: "Can you review the latest flow?",
+    time: "2m ago",
+    unread: true,
+  },
+  {
+    id: 2,
+    icon: PhoneMissed,
+    tone: "text-destructive",
+    title: "Missed call",
+    body: "+1 (415) 555-0136",
+    time: "18m ago",
+    unread: true,
+  },
+  {
+    id: 3,
+    icon: ShieldCheck,
+    tone: "text-success",
+    title: "Verification approved",
+    time: "1h ago",
+  },
+]
 
 const EARLIER: Note[] = [
-  { id: 4, icon: BarChart3, tone: "text-brand", title: "Weekly report is ready", body: "Calls up 12% over last week", time: "Yesterday" },
-];
+  {
+    id: 4,
+    icon: BarChart3,
+    tone: "text-brand",
+    title: "Weekly report is ready",
+    body: "Calls up 12% over last week",
+    time: "Yesterday",
+  },
+]
 
 function Row({ note }: { note: Note }) {
-  const Icon = note.icon;
+  const Icon = note.icon
   return (
     <div className="group/n relative flex gap-2.5 rounded-lg p-2 transition-colors hover:bg-dock-foreground/[0.04]">
       <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-dock-foreground/[0.07]">
@@ -53,11 +95,19 @@ function Row({ note }: { note: Note }) {
       </span>
       <div className="min-w-0 flex-1">
         <div className="flex items-start gap-1.5 text-sm font-medium leading-snug text-dock-active-foreground">
-          {note.unread ? <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand" /> : null}
+          {note.unread ? (
+            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand" />
+          ) : null}
           <span className="min-w-0">{note.title}</span>
         </div>
-        {note.body ? <p className="mt-0.5 truncate text-xs text-dock-foreground">{note.body}</p> : null}
-        <p className="mt-0.5 text-[11px] text-dock-foreground/60">{note.time}</p>
+        {note.body ? (
+          <p className="mt-0.5 truncate text-xs text-dock-foreground">
+            {note.body}
+          </p>
+        ) : null}
+        <p className="mt-0.5 text-[11px] text-dock-foreground/60">
+          {note.time}
+        </p>
       </div>
       <button
         type="button"
@@ -67,7 +117,7 @@ function Row({ note }: { note: Note }) {
         <X className="size-3.5" strokeWidth={2} />
       </button>
     </div>
-  );
+  )
 }
 
 function Section({ label, notes }: { label: string; notes: Note[] }) {
@@ -80,7 +130,7 @@ function Section({ label, notes }: { label: string; notes: Note[] }) {
         <Row key={n.id} note={n} />
       ))}
     </div>
-  );
+  )
 }
 
 /**
@@ -89,7 +139,7 @@ function Section({ label, notes }: { label: string; notes: Note[] }) {
  * and a corner resize grip (drag it to set the body height).
  */
 export default function Example() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="flex min-h-[28rem] items-start justify-center p-8">
       <MorphDock
@@ -104,7 +154,9 @@ export default function Example() {
       >
         <div className="flex h-full flex-col">
           <div className="flex shrink-0 items-center justify-between gap-3 px-4 pb-2 pt-3.5">
-            <div className="pl-1 text-[15px] font-semibold text-dock-active-foreground">Notifications</div>
+            <div className="pl-1 text-[15px] font-semibold text-dock-active-foreground">
+              Notifications
+            </div>
             <div className="flex items-center gap-0.5">
               <button
                 type="button"
@@ -140,5 +192,5 @@ export default function Example() {
         </div>
       </MorphDock>
     </div>
-  );
+  )
 }

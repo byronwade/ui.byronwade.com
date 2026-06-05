@@ -1,6 +1,6 @@
-import { FolderOpen } from "lucide-react";
-import { EmptyState } from "@/components/empty-state";
-import { Button } from "@/components/ui/button";
+import { FolderOpen } from "lucide-react"
+import { EmptyState } from "@/components/empty-state"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
@@ -14,5 +14,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

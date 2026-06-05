@@ -1,4 +1,4 @@
-import { StatusDot } from "@/components/ui/status-dot";
+import { StatusDot } from "@/components/ui/status-dot"
 
 export default function Example() {
   return (
@@ -24,5 +24,5 @@ export default function Example() {
         <span className="text-sm text-muted-foreground">Neutral</span>
       </div>
     </div>
-  );
+  )
 }

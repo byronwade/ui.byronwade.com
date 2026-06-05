@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { Download, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { Download, Trash2 } from "lucide-react"
 
 export default function Example() {
   return (
@@ -23,5 +23,5 @@ export default function Example() {
       </Button>
       <Button disabled>Disabled</Button>
     </div>
-  );
+  )
 }

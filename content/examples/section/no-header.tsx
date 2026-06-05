@@ -1,6 +1,6 @@
-import { Section, SettingsList, SettingRow } from "@/components/section";
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
+import { Section, SettingsList, SettingRow } from "@/components/section"
+import { Badge } from "@/components/ui/badge"
+import { Switch } from "@/components/ui/switch"
 
 export default function Example() {
   return (
@@ -45,10 +45,10 @@ export default function Example() {
       {/* Section with a plain body (no SettingsList) */}
       <Section title="Danger zone">
         <div className="px-5 py-5 text-sm text-muted-foreground">
-          Destructive actions in this section are irreversible. Contact support if
-          you need help recovering data.
+          Destructive actions in this section are irreversible. Contact support
+          if you need help recovering data.
         </div>
       </Section>
     </div>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Switch } from "@/components/ui/switch";
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
 
 export default function Example() {
-  const [maintenance, setMaintenance] = useState(false);
+  const [maintenance, setMaintenance] = useState(false)
 
   return (
     <div className="flex flex-col gap-6 p-6 max-w-sm mx-auto">
@@ -49,5 +49,5 @@ export default function Example() {
         </button>
       </div>
     </div>
-  );
+  )
 }

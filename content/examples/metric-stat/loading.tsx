@@ -1,15 +1,17 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { MetricStat } from "@/components/metric-stat";
-import { Loader2 } from "lucide-react";
+import { useState } from "react"
+import { MetricStat } from "@/components/metric-stat"
+import { Loader2 } from "lucide-react"
 
 function SkeletonValue() {
-  return <span className="inline-block h-8 w-20 animate-pulse rounded-md bg-muted" />;
+  return (
+    <span className="inline-block h-8 w-20 animate-pulse rounded-md bg-muted" />
+  )
 }
 
 export default function Example() {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false)
 
   return (
     <div className="flex flex-col gap-6">
@@ -44,8 +46,14 @@ export default function Example() {
         onClick={() => setLoaded((v) => !v)}
         className="inline-flex w-fit items-center gap-2 rounded-full border px-4 py-1.5 text-sm text-muted-foreground hover:bg-muted"
       >
-        {loaded ? "Reset" : <><Loader2 className="size-3.5 animate-spin" /> Simulate load</>}
+        {loaded ? (
+          "Reset"
+        ) : (
+          <>
+            <Loader2 className="size-3.5 animate-spin" /> Simulate load
+          </>
+        )}
       </button>
     </div>
-  );
+  )
 }

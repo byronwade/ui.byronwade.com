@@ -1,10 +1,17 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { toast } from "sonner";
-import { Bell, FileTextIcon, MenuIcon, Settings, Trash2, XIcon } from "lucide-react";
-import { bySlug } from "@/content/components";
+import * as React from "react"
+import Link from "next/link"
+import { toast } from "sonner"
+import {
+  Bell,
+  FileTextIcon,
+  MenuIcon,
+  Settings,
+  Trash2,
+  XIcon,
+} from "lucide-react"
+import { bySlug } from "@/content/components"
 import {
   Area,
   AreaChart,
@@ -13,33 +20,33 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-} from "recharts";
+} from "recharts"
 
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/components/ui/chart";
-import { cn } from "@/lib/utils";
-import { SegmentedControl } from "@/components/ui/segmented-control";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Switch } from "@/components/ui/switch";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+} from "@/components/ui/chart"
+import { cn } from "@/lib/utils"
+import { SegmentedControl } from "@/components/ui/segmented-control"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Switch } from "@/components/ui/switch"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/components/ui/tooltip"
 import {
   Popover,
   PopoverContent,
@@ -47,7 +54,7 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -55,7 +62,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 import {
   Dialog,
   DialogClose,
@@ -65,13 +72,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog"
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+} from "@/components/ui/hover-card"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
   Sheet,
   SheetContent,
@@ -79,7 +86,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@/components/ui/sheet"
 import {
   Command,
   CommandEmpty,
@@ -87,7 +94,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -95,7 +102,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu"
 
 export const SECTIONS = [
   { id: "philosophy", label: "Philosophy" },
@@ -111,14 +118,21 @@ export const SECTIONS = [
   { id: "house", label: "House components" },
   { id: "layouts", label: "Layouts" },
   { id: "comparison", label: "Side by side" },
-] as const;
+] as const
 
 /** Derive a URL-safe anchor id from an arbitrary string. */
 export const slugify = (s: string) =>
-  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
 
 /** Curated table-of-contents model: one entry per component; prose sections are header-only. */
-export const NAV: { id: string; label: string; items: { id: string; label: string }[] }[] = [
+export const NAV: {
+  id: string
+  label: string
+  items: { id: string; label: string }[]
+}[] = [
   {
     id: "philosophy",
     label: "Philosophy",
@@ -229,16 +243,16 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
       { id: slugify("Bar chart"), label: "Bar chart" },
     ],
   },
-    {
-      id: "house",
-      label: "House components",
-      items: [
-        { id: slugify("DetailHeader"), label: "DetailHeader" },
-        { id: slugify("Section (settings panel)"), label: "Section" },
-        { id: slugify("EventTimeline"), label: "EventTimeline" },
-        { id: slugify("VerificationProgress"), label: "VerificationProgress" },
-      ],
-    },
+  {
+    id: "house",
+    label: "House components",
+    items: [
+      { id: slugify("DetailHeader"), label: "DetailHeader" },
+      { id: slugify("Section (settings panel)"), label: "Section" },
+      { id: slugify("EventTimeline"), label: "EventTimeline" },
+      { id: slugify("VerificationProgress"), label: "VerificationProgress" },
+    ],
+  },
   {
     id: "layouts",
     label: "Layouts",
@@ -253,87 +267,87 @@ export const NAV: { id: string; label: string; items: { id: string; label: strin
     label: "Side by side",
     items: [],
   },
-];
+]
 
 /** Sticky in-page nav — one entry per component, calm/airy style. */
 export function SideNav() {
-  const [active, setActive] = React.useState<string>(SECTIONS[0].id);
-  const navRef = React.useRef<HTMLElement>(null);
-  const prevActiveRef = React.useRef<string>(SECTIONS[0].id);
+  const [active, setActive] = React.useState<string>(SECTIONS[0].id)
+  const navRef = React.useRef<HTMLElement>(null)
+  const prevActiveRef = React.useRef<string>(SECTIONS[0].id)
 
   // Build a flat ordered list of all anchor ids (section then specimens, in DOM order)
   const allIds = React.useMemo(() => {
-    const ids: string[] = [];
+    const ids: string[] = []
     for (const section of NAV) {
-      ids.push(section.id);
+      ids.push(section.id)
       for (const item of section.items) {
-        ids.push(item.id);
+        ids.push(item.id)
       }
     }
-    return ids;
-  }, []);
+    return ids
+  }, [])
 
   // Build a lookup: itemId -> parent sectionId
   const parentSection = React.useMemo(() => {
-    const map: Record<string, string> = {};
+    const map: Record<string, string> = {}
     for (const section of NAV) {
       for (const item of section.items) {
-        map[item.id] = section.id;
+        map[item.id] = section.id
       }
-      map[section.id] = section.id;
+      map[section.id] = section.id
     }
-    return map;
-  }, []);
+    return map
+  }, [])
 
   React.useEffect(() => {
-    const visibleIds = new Set<string>();
+    const visibleIds = new Set<string>()
 
     const obs = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (e.isIntersecting) {
-            visibleIds.add(e.target.id);
+            visibleIds.add(e.target.id)
           } else {
-            visibleIds.delete(e.target.id);
+            visibleIds.delete(e.target.id)
           }
         }
         // Pick the FIRST id in DOM order that is currently visible
         // (topmost-in-view), falling back to the previously-active id.
-        let nextActive = prevActiveRef.current;
+        let nextActive = prevActiveRef.current
         for (const id of allIds) {
           if (visibleIds.has(id)) {
-            nextActive = id;
-            break;
+            nextActive = id
+            break
           }
         }
         if (nextActive !== prevActiveRef.current) {
-          prevActiveRef.current = nextActive;
-          setActive(nextActive);
+          prevActiveRef.current = nextActive
+          setActive(nextActive)
         }
       },
       { rootMargin: "-15% 0px -60% 0px" },
-    );
+    )
 
     for (const id of allIds) {
-      const el = document.getElementById(id);
-      if (el) obs.observe(el);
+      const el = document.getElementById(id)
+      if (el) obs.observe(el)
     }
 
-    return () => obs.disconnect();
-  }, [allIds]); // eslint-disable-line react-hooks/exhaustive-deps
+    return () => obs.disconnect()
+  }, [allIds]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Auto-scroll the active nav link into view when active changes.
   // When we're back at the very first section, reset the nav to the top so
   // the contents list shows its header again.
   React.useEffect(() => {
-    if (!navRef.current) return;
+    if (!navRef.current) return
     if (active === SECTIONS[0].id) {
-      navRef.current.scrollTop = 0;
-      return;
+      navRef.current.scrollTop = 0
+      return
     }
-    const el = navRef.current.querySelector(`[data-nav-id="${active}"]`);
-    if (el) (el as HTMLElement).scrollIntoView({ block: "nearest" });
-  }, [active]);
+    const el = navRef.current.querySelector(`[data-nav-id="${active}"]`)
+    if (el) (el as HTMLElement).scrollIntoView({ block: "nearest" })
+  }, [active])
 
   return (
     <nav
@@ -345,8 +359,8 @@ export function SideNav() {
       </p>
       <ul className="space-y-0.5">
         {NAV.map((section, i) => {
-          const sectionIsActive = parentSection[active] === section.id;
-          const isHeaderOnly = section.items.length === 0;
+          const sectionIsActive = parentSection[active] === section.id
+          const isHeaderOnly = section.items.length === 0
           return (
             <li key={section.id} className={i === 0 ? "" : "mt-6"}>
               {/* Section header — always a clickable link */}
@@ -360,8 +374,8 @@ export function SideNav() {
                       ? "bg-accent font-semibold text-foreground"
                       : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
                     : sectionIsActive
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground",
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {section.label}
@@ -388,11 +402,11 @@ export function SideNav() {
                 </ul>
               )}
             </li>
-          );
+          )
         })}
       </ul>
     </nav>
-  );
+  )
 }
 
 /** A documentation section: titled header + count, then specimens separated by hairlines. */
@@ -403,21 +417,23 @@ export function Section({
   count,
   children,
 }: {
-  id: string;
-  title: string;
-  description?: string;
-  count?: number;
-  children: React.ReactNode;
+  id: string
+  title: string
+  description?: string
+  count?: number
+  children: React.ReactNode
 }) {
   // Auto-derive the badge from the rendered specimens so it can never drift
   // from the actual content. Pass `count` to override (e.g. the comparison
   // section renders one child that stands in for many items).
-  const resolvedCount = count ?? React.Children.count(children);
+  const resolvedCount = count ?? React.Children.count(children)
   return (
     <section id={id} className="scroll-mt-24">
       <div className="flex items-end justify-between gap-4 border-b border-border pb-4">
         <div>
-          <h2 className="font-heading text-xl font-semibold tracking-tight">{title}</h2>
+          <h2 className="font-heading text-xl font-semibold tracking-tight">
+            {title}
+          </h2>
           {description && (
             <p className="mt-1 text-sm text-muted-foreground">{description}</p>
           )}
@@ -430,7 +446,7 @@ export function Section({
         {children}
       </div>
     </section>
-  );
+  )
 }
 
 /** A single component specimen: name + import path, then the live example. */
@@ -440,18 +456,18 @@ export function Specimen({
   plain = false,
   children,
 }: {
-  name: string;
-  from?: string;
+  name: string
+  from?: string
   /** Drop the framed surface — for components that are already self-contained (cards, headers). */
-  plain?: boolean;
-  children: React.ReactNode;
+  plain?: boolean
+  children: React.ReactNode
 }) {
   // Derive a detail-page link when `from` maps to a known component slug.
-  let detailHref: string | null = null;
+  let detailHref: string | null = null
   if (from?.startsWith("@/components/")) {
-    const slug = from.split("/").pop() ?? "";
+    const slug = from.split("/").pop() ?? ""
     if (slug && bySlug(slug)) {
-      detailHref = `/docs/${slug}`;
+      detailHref = `/docs/${slug}`
     }
   }
 
@@ -479,7 +495,7 @@ export function Specimen({
         {children}
       </div>
     </div>
-  );
+  )
 }
 
 /** Token swatch: a colored tile + token name + role. */
@@ -488,21 +504,27 @@ export function Swatch({
   className,
   role,
 }: {
-  name: string;
-  className: string;
-  role?: string;
+  name: string
+  className: string
+  role?: string
 }) {
   return (
     <div className="space-y-1.5">
-      <div className={cn("h-14 w-full rounded-xl border border-border", className)} />
+      <div
+        className={cn("h-14 w-full rounded-xl border border-border", className)}
+      />
       <p className="font-mono text-[11px] text-foreground">{name}</p>
-      {role && <p className="text-[11px] leading-tight text-muted-foreground">{role}</p>}
+      {role && (
+        <p className="text-[11px] leading-tight text-muted-foreground">
+          {role}
+        </p>
+      )}
     </div>
-  );
+  )
 }
 
 export function SegmentedDemo() {
-  const [value, setValue] = React.useState("top");
+  const [value, setValue] = React.useState("top")
   return (
     <SegmentedControl
       options={[
@@ -513,13 +535,13 @@ export function SegmentedDemo() {
       value={value}
       onValueChange={setValue}
     />
-  );
+  )
 }
 
 /* ── Forms ───────────────────────────────────────────────────────────── */
 
 export function SelectDemo() {
-  const [value, setValue] = React.useState("editor");
+  const [value, setValue] = React.useState("editor")
   return (
     <Select value={value} onValueChange={(v) => setValue(v as string)}>
       <SelectTrigger id="capability" className="w-full">
@@ -531,11 +553,11 @@ export function SelectDemo() {
         <SelectItem value="admin">Admin</SelectItem>
       </SelectContent>
     </Select>
-  );
+  )
 }
 
 export function CheckboxDemo() {
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(true)
   return (
     <div className="flex items-center gap-2">
       <Checkbox
@@ -545,21 +567,21 @@ export function CheckboxDemo() {
       />
       <Label htmlFor="forward">Email me a weekly summary</Label>
     </div>
-  );
+  )
 }
 
 export function SwitchDemo() {
-  const [on, setOn] = React.useState(true);
+  const [on, setOn] = React.useState(true)
   return (
     <div className="flex items-center gap-2">
       <Switch id="ai-answer" checked={on} onCheckedChange={setOn} />
       <Label htmlFor="ai-answer">Enable two-factor authentication</Label>
     </div>
-  );
+  )
 }
 
 export function RadioGroupDemo() {
-  const [value, setValue] = React.useState("monthly");
+  const [value, setValue] = React.useState("monthly")
   return (
     <RadioGroup value={value} onValueChange={(v) => setValue(v as string)}>
       <Label className="gap-2">
@@ -575,7 +597,7 @@ export function RadioGroupDemo() {
         Pay by invoice
       </Label>
     </RadioGroup>
-  );
+  )
 }
 
 /* ── Overlays ────────────────────────────────────────────────────────── */
@@ -586,13 +608,15 @@ export function TooltipDemo() {
       <TooltipTrigger render={<Button variant="outline">Hover me</Button>} />
       <TooltipContent>Copy the project ID to your clipboard</TooltipContent>
     </Tooltip>
-  );
+  )
 }
 
 export function PopoverDemo() {
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="outline">Open popover</Button>} />
+      <PopoverTrigger
+        render={<Button variant="outline">Open popover</Button>}
+      />
       <PopoverContent>
         <PopoverHeader>
           <PopoverTitle>Display name</PopoverTitle>
@@ -602,7 +626,7 @@ export function PopoverDemo() {
         </PopoverHeader>
       </PopoverContent>
     </Popover>
-  );
+  )
 }
 
 export function DropdownMenuDemo() {
@@ -628,7 +652,7 @@ export function DropdownMenuDemo() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }
 
 export function DialogDemo() {
@@ -644,24 +668,18 @@ export function DialogDemo() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose
-            render={<Button variant="outline">Cancel</Button>}
-          />
-          <DialogClose
-            render={<Button variant="destructive">Delete</Button>}
-          />
+          <DialogClose render={<Button variant="outline">Cancel</Button>} />
+          <DialogClose render={<Button variant="destructive">Delete</Button>} />
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
 
 export function HoverCardDemo() {
   return (
     <HoverCard>
-      <HoverCardTrigger
-        render={<Button variant="link">@penguin</Button>}
-      />
+      <HoverCardTrigger render={<Button variant="link">@penguin</Button>} />
       <HoverCardContent>
         <div className="flex items-center gap-3">
           <Avatar size="lg">
@@ -669,14 +687,12 @@ export function HoverCardDemo() {
           </Avatar>
           <div>
             <p className="font-medium">Penguin</p>
-            <p className="font-mono text-xs text-muted-foreground">
-              @penguin
-            </p>
+            <p className="font-mono text-xs text-muted-foreground">@penguin</p>
           </div>
         </div>
       </HoverCardContent>
     </HoverCard>
-  );
+  )
 }
 
 /* ── Feedback ────────────────────────────────────────────────────────── */
@@ -712,34 +728,48 @@ export function ToastDemo() {
         Default
       </Button>
     </div>
-  );
+  )
 }
 
 /* ── Charts ──────────────────────────────────────────────────────────── */
 
 const areaConfig = {
   value: { label: "Sessions", color: "var(--chart-1)" },
-} satisfies ChartConfig;
+} satisfies ChartConfig
 
 // 24 hourly points — a calm, single-series curve.
 const areaData = Array.from({ length: 24 }, (_, i) => {
-  const wave = Math.sin((i / 23) * Math.PI * 1.6) * 18 + 26;
-  const drift = (i * 13) % 9;
+  const wave = Math.sin((i / 23) * Math.PI * 1.6) * 18 + 26
+  const drift = (i * 13) % 9
   return {
     hour: `${String(i).padStart(2, "0")}:00`,
     value: Math.max(2, Math.round(wave + drift)),
-  };
-});
+  }
+})
 
 /** Hero-style area chart: smooth chart-1 curve, soft gradient, endpoint labels only. */
 export function AreaChartDemo() {
   return (
-    <ChartContainer config={areaConfig} className="aspect-auto h-[220px] w-full">
-      <AreaChart data={areaData} margin={{ left: 4, right: 12, top: 8, bottom: 0 }}>
+    <ChartContainer
+      config={areaConfig}
+      className="aspect-auto h-[220px] w-full"
+    >
+      <AreaChart
+        data={areaData}
+        margin={{ left: 4, right: 12, top: 8, bottom: 0 }}
+      >
         <defs>
           <linearGradient id="sg-fill-value" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="var(--color-value)" stopOpacity={0.35} />
-            <stop offset="95%" stopColor="var(--color-value)" stopOpacity={0.02} />
+            <stop
+              offset="5%"
+              stopColor="var(--color-value)"
+              stopOpacity={0.35}
+            />
+            <stop
+              offset="95%"
+              stopColor="var(--color-value)"
+              stopOpacity={0.02}
+            />
           </linearGradient>
         </defs>
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
@@ -773,12 +803,12 @@ export function AreaChartDemo() {
         />
       </AreaChart>
     </ChartContainer>
-  );
+  )
 }
 
 const barConfig = {
   value: { label: "Signups", color: "var(--chart-1)" },
-} satisfies ChartConfig;
+} satisfies ChartConfig
 
 const barData = [
   { day: "Mon", value: 42 },
@@ -788,13 +818,16 @@ const barData = [
   { day: "Fri", value: 49 },
   { day: "Sat", value: 18 },
   { day: "Sun", value: 12 },
-];
+]
 
 /** Small single-series bar chart in chart-1. */
 export function BarChartDemo() {
   return (
     <ChartContainer config={barConfig} className="aspect-auto h-[200px] w-full">
-      <BarChart data={barData} margin={{ left: 4, right: 12, top: 8, bottom: 0 }}>
+      <BarChart
+        data={barData}
+        margin={{ left: 4, right: 12, top: 8, bottom: 0 }}
+      >
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
         <XAxis
           dataKey="day"
@@ -818,7 +851,7 @@ export function BarChartDemo() {
         <Bar dataKey="value" fill="var(--color-value)" radius={[6, 6, 0, 0]} />
       </BarChart>
     </ChartContainer>
-  );
+  )
 }
 
 /* ── New overlay demos ───────────────────────────────────────────────── */
@@ -826,7 +859,14 @@ export function BarChartDemo() {
 export function SheetDemo() {
   return (
     <Sheet>
-      <SheetTrigger render={<Button variant="outline"><MenuIcon className="mr-2 size-4" />Open sheet</Button>} />
+      <SheetTrigger
+        render={
+          <Button variant="outline">
+            <MenuIcon className="mr-2 size-4" />
+            Open sheet
+          </Button>
+        }
+      />
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Project settings</SheetTitle>
@@ -835,16 +875,21 @@ export function SheetDemo() {
           </SheetDescription>
         </SheetHeader>
         <div className="p-6 pt-0 space-y-4">
-          <p className="text-sm text-muted-foreground">Settings content goes here.</p>
+          <p className="text-sm text-muted-foreground">
+            Settings content goes here.
+          </p>
         </div>
       </SheetContent>
     </Sheet>
-  );
+  )
 }
 
 export function CommandDemo() {
   return (
-    <div className="overflow-hidden rounded-xl shadow-float" style={{ maxWidth: "22rem" }}>
+    <div
+      className="overflow-hidden rounded-xl shadow-float"
+      style={{ maxWidth: "22rem" }}
+    >
       <Command>
         <CommandInput placeholder="Search commands…" />
         <CommandList>
@@ -866,7 +911,7 @@ export function CommandDemo() {
         </CommandList>
       </Command>
     </div>
-  );
+  )
 }
 
 export function NavigationMenuDemo() {
@@ -884,11 +929,15 @@ export function NavigationMenuDemo() {
             <div className="grid w-56 gap-1 p-2">
               <NavigationMenuLink href="#" className="rounded-md">
                 <span className="font-medium text-sm">Analytics</span>
-                <p className="text-xs text-muted-foreground">Track usage and events.</p>
+                <p className="text-xs text-muted-foreground">
+                  Track usage and events.
+                </p>
               </NavigationMenuLink>
               <NavigationMenuLink href="#" className="rounded-md">
                 <span className="font-medium text-sm">Messaging</span>
-                <p className="text-xs text-muted-foreground">Calls, SMS, and voicemail.</p>
+                <p className="text-xs text-muted-foreground">
+                  Calls, SMS, and voicemail.
+                </p>
               </NavigationMenuLink>
             </div>
           </NavigationMenuContent>
@@ -900,5 +949,5 @@ export function NavigationMenuDemo() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  );
+  )
 }

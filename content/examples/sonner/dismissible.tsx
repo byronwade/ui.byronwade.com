@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
+import { useRef } from "react"
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
 
 export default function Example() {
-  const toastIdRef = useRef<string | number | null>(null);
+  const toastIdRef = useRef<string | number | null>(null)
 
   return (
     <div className="flex flex-col items-start gap-3 p-8">
@@ -40,7 +40,7 @@ export default function Example() {
         onClick={() => {
           toastIdRef.current = toast.loading("Running background job…", {
             duration: Infinity,
-          });
+          })
         }}
       >
         Start background job
@@ -50,8 +50,8 @@ export default function Example() {
         className="rounded px-4 py-2 border border-border text-foreground"
         onClick={() => {
           if (toastIdRef.current !== null) {
-            toast.success("Job completed!", { id: toastIdRef.current });
-            toastIdRef.current = null;
+            toast.success("Job completed!", { id: toastIdRef.current })
+            toastIdRef.current = null
           }
         }}
       >
@@ -65,5 +65,5 @@ export default function Example() {
         Dismiss all
       </button>
     </div>
-  );
+  )
 }

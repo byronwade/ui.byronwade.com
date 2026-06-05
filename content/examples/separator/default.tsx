@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator"
 
 export default function Example() {
   return (
@@ -14,5 +14,5 @@ export default function Example() {
         <span className="text-sm">Right</span>
       </div>
     </div>
-  );
+  )
 }

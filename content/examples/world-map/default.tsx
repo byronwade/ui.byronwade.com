@@ -1,4 +1,4 @@
-import { WorldMap } from "@/components/ui/world-map";
+import { WorldMap } from "@/components/ui/world-map"
 
 export default function Example() {
   return (
@@ -20,5 +20,5 @@ export default function Example() {
         ]}
       />
     </div>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { FilterPill } from "@/components/ui/filter-pill";
+import * as React from "react"
+import { FilterPill } from "@/components/ui/filter-pill"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -9,20 +9,32 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu";
-import { CalendarDays, Users, Tag, RotateCcw } from "lucide-react";
+} from "@/components/ui/dropdown-menu"
+import { CalendarDays, Users, Tag, RotateCcw } from "lucide-react"
 
-const STATUSES = ["Any status", "Active", "Draft", "Archived", "Paused"];
-const ASSIGNEES = ["Anyone", "Alice Chen", "Bob Martinez", "Carol Kim", "David Lee"];
-const DATE_RANGES = ["All time", "Today", "This week", "This month", "Last quarter"];
+const STATUSES = ["Any status", "Active", "Draft", "Archived", "Paused"]
+const ASSIGNEES = [
+  "Anyone",
+  "Alice Chen",
+  "Bob Martinez",
+  "Carol Kim",
+  "David Lee",
+]
+const DATE_RANGES = [
+  "All time",
+  "Today",
+  "This week",
+  "This month",
+  "Last quarter",
+]
 
 export default function Example() {
-  const [status, setStatus] = React.useState("Any status");
-  const [assignee, setAssignee] = React.useState("Anyone");
-  const [range, setRange] = React.useState("This week");
+  const [status, setStatus] = React.useState("Any status")
+  const [assignee, setAssignee] = React.useState("Anyone")
+  const [range, setRange] = React.useState("This week")
 
   const isFiltered =
-    status !== "Any status" || assignee !== "Anyone" || range !== "This week";
+    status !== "Any status" || assignee !== "Anyone" || range !== "This week"
 
   return (
     <div className="flex flex-col gap-4 p-6">
@@ -30,7 +42,9 @@ export default function Example() {
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
-              <FilterPill icon={<Tag className="size-3.5 text-muted-foreground" />}>
+              <FilterPill
+                icon={<Tag className="size-3.5 text-muted-foreground" />}
+              >
                 {status}
               </FilterPill>
             }
@@ -49,7 +63,9 @@ export default function Example() {
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
-              <FilterPill icon={<Users className="size-3.5 text-muted-foreground" />}>
+              <FilterPill
+                icon={<Users className="size-3.5 text-muted-foreground" />}
+              >
                 {assignee}
               </FilterPill>
             }
@@ -68,7 +84,11 @@ export default function Example() {
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
-              <FilterPill icon={<CalendarDays className="size-3.5 text-muted-foreground" />}>
+              <FilterPill
+                icon={
+                  <CalendarDays className="size-3.5 text-muted-foreground" />
+                }
+              >
                 {range}
               </FilterPill>
             }
@@ -88,9 +108,9 @@ export default function Example() {
           <button
             type="button"
             onClick={() => {
-              setStatus("Any status");
-              setAssignee("Anyone");
-              setRange("This week");
+              setStatus("Any status")
+              setAssignee("Anyone")
+              setRange("This week")
             }}
             className="inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
           >
@@ -108,5 +128,5 @@ export default function Example() {
         </p>
       )}
     </div>
-  );
+  )
 }

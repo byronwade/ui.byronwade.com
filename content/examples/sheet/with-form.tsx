@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Sheet,
   SheetClose,
@@ -10,19 +10,19 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState("Ada Lovelace");
-  const [email, setEmail] = useState("ada@example.com");
+  const [open, setOpen] = useState(false)
+  const [name, setName] = useState("Ada Lovelace")
+  const [email, setEmail] = useState("ada@example.com")
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setOpen(false);
+    e.preventDefault()
+    setOpen(false)
   }
 
   return (
@@ -70,5 +70,5 @@ export default function Example() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  );
+  )
 }

@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import * as React from "react"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
-  const [email, setEmail] = React.useState("not-an-email");
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("abc");
+  const [email, setEmail] = React.useState("not-an-email")
+  const [username, setUsername] = React.useState("")
+  const [password, setPassword] = React.useState("abc")
 
-  const emailInvalid = email.length > 0 && !email.includes("@");
-  const usernameInvalid = username.length > 0 && username.length < 3;
-  const passwordInvalid = password.length > 0 && password.length < 8;
+  const emailInvalid = email.length > 0 && !email.includes("@")
+  const usernameInvalid = username.length > 0 && username.length < 3
+  const passwordInvalid = password.length > 0 && password.length < 8
 
   return (
     <div className="flex flex-col gap-5 p-6 max-w-sm w-full">
@@ -71,5 +71,5 @@ export default function Example() {
         )}
       </div>
     </div>
-  );
+  )
 }

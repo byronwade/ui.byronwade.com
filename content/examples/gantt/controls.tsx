@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { addDays, startOfMonth, subDays } from "date-fns";
+import { addDays, startOfMonth, subDays } from "date-fns"
 
 import {
   GanttControls,
@@ -15,9 +15,9 @@ import {
   GanttTimeline,
   GanttToday,
   type GanttFeature,
-} from "@/components/ui/gantt";
+} from "@/components/ui/gantt"
 
-const monthStart = startOfMonth(new Date());
+const monthStart = startOfMonth(new Date())
 
 const features: GanttFeature[] = [
   {
@@ -41,7 +41,7 @@ const features: GanttFeature[] = [
     endAt: addDays(monthStart, 55),
     status: { id: "at-risk", name: "At Risk", color: "bg-warning" },
   },
-];
+]
 
 // <GanttControls /> drives the timescale (Day/Month/Quarter) and zoom live. It
 // reads/writes the provider through context, so it sits inside <GanttProvider />
@@ -51,7 +51,9 @@ export default function Example() {
     <div className="h-[420px] w-full">
       <GanttProvider range="monthly" zoom={100} className="h-full border">
         <div className="sticky top-0 left-0 z-30 col-[1/-1] flex items-center justify-between gap-2 border-border border-b bg-background/90 px-3 py-2 backdrop-blur">
-          <span className="font-mono text-muted-foreground text-xs">Roadmap</span>
+          <span className="font-mono text-muted-foreground text-xs">
+            Roadmap
+          </span>
           <GanttControls />
         </div>
         <GanttSidebar>
@@ -74,5 +76,5 @@ export default function Example() {
         </GanttTimeline>
       </GanttProvider>
     </div>
-  );
+  )
 }

@@ -15,7 +15,7 @@
     "check:conventions": "node scripts/check-conventions.mjs",
     "format": "prettier --write .",
     "check:format": "prettier --check .",
-    "validate": "node scripts/check-registry.mjs && node scripts/check-examples.mjs && node scripts/check-rule.mjs && node scripts/check-conventions.mjs && npm run check:tests && node scripts/check-lint-manifest.mjs && node scripts/check-mcp-data.mjs && node scripts/check-llms-txt.mjs",
+    "validate": "node scripts/check-registry.mjs && node scripts/check-examples.mjs && node scripts/check-rule.mjs && node scripts/check-conventions.mjs && npm run check:format && npm run check:tests && node scripts/check-lint-manifest.mjs && node scripts/check-mcp-data.mjs && node scripts/check-llms-txt.mjs",
     "predev": "node scripts/sync-registry.mjs",
     "dev": "next dev",
     "registry:build": "shadcn build",

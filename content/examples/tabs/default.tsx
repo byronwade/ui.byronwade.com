@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Example() {
   return (
@@ -31,5 +31,5 @@ export default function Example() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

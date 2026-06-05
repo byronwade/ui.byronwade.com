@@ -1,22 +1,22 @@
-"use client";
+"use client"
 
-import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
 
 function fakeUpload(): Promise<{ filename: string }> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (Math.random() > 0.3) {
-        resolve({ filename: "report-2024.pdf" });
+        resolve({ filename: "report-2024.pdf" })
       } else {
-        reject(new Error("Network timeout"));
+        reject(new Error("Network timeout"))
       }
-    }, 2000);
-  });
+    }, 2000)
+  })
 }
 
 function fakeSave(): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, 1500));
+  return new Promise((resolve) => setTimeout(resolve, 1500))
 }
 
 export default function Example() {
@@ -55,8 +55,8 @@ export default function Example() {
         className="rounded px-4 py-2 bg-primary text-primary-foreground"
         onClick={() => {
           const promise = new Promise<{ count: number }>((resolve) =>
-            setTimeout(() => resolve({ count: 42 }), 2000)
-          );
+            setTimeout(() => resolve({ count: 42 }), 2000),
+          )
           toast.promise(promise, {
             loading: "Processing records…",
             success: (data) => ({
@@ -64,11 +64,11 @@ export default function Example() {
               description: "The batch job completed without errors.",
             }),
             error: "Batch job failed.",
-          });
+          })
         }}
       >
         Promise with extended result
       </button>
     </div>
-  );
+  )
 }

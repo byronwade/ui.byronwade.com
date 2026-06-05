@@ -1,4 +1,4 @@
-import { Backlight } from "@/components/ui/backlight";
+import { Backlight } from "@/components/ui/backlight"
 
 export default function Example() {
   return (
@@ -9,5 +9,5 @@ export default function Example() {
         </div>
       </Backlight>
     </div>
-  );
+  )
 }

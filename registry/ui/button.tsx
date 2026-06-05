@@ -10,7 +10,9 @@ import { buttonVariants } from "@/components/ui/button-variants"
 type ButtonStatus = "idle" | "loading" | "success" | "error"
 
 /** The click event Base UI's Button passes to onClick (a BaseUIEvent superset). */
-type ButtonClickEvent = Parameters<NonNullable<ButtonPrimitive.Props["onClick"]>>[0]
+type ButtonClickEvent = Parameters<
+  NonNullable<ButtonPrimitive.Props["onClick"]>
+>[0]
 
 /* Dependency-free state icons — button stays self-contained (no lucide import). */
 function StatusSpinner() {
@@ -25,7 +27,15 @@ function StatusSpinner() {
 
 function StatusCheck() {
   return (
-    <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M20 6 9 17l-5-5" />
     </svg>
   )
@@ -33,7 +43,15 @@ function StatusCheck() {
 
 function StatusAlert() {
   return (
-    <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <path d="M12 8v4" />
       <path d="M12 16h.01" />
@@ -50,7 +68,7 @@ type ButtonProps = ButtonPrimitive.Props &
      * `aria-invalid` (reusing the destructive ring).
      */
     onClickAsync?: (
-      event: React.MouseEvent<HTMLButtonElement>
+      event: React.MouseEvent<HTMLButtonElement>,
     ) => void | Promise<void>
     /** Controlled loading — forces the loading state regardless of onClickAsync. */
     loading?: boolean
@@ -162,7 +180,7 @@ function Button({
       className={cn(
         buttonVariants({ variant, size }),
         effectiveStatus === "success" && "text-success",
-        className
+        className,
       )}
       render={render}
       nativeButton={resolvedNativeButton}

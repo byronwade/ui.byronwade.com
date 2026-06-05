@@ -1,13 +1,8 @@
-"use client";
+"use client"
 
-import { Controls } from "@/components/ai-elements/controls";
-import {
-  Background,
-  ReactFlow,
-  type Edge,
-  type Node,
-} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
+import { Controls } from "@/components/ai-elements/controls"
+import { Background, ReactFlow, type Edge, type Node } from "@xyflow/react"
+import "@xyflow/react/dist/style.css"
 
 const nodes: Node[] = [
   {
@@ -20,11 +15,11 @@ const nodes: Node[] = [
     position: { x: 220, y: 80 },
     data: { label: "Model" },
   },
-];
+]
 
 const edges: Edge[] = [
   { id: "prompt-model", source: "prompt", target: "model" },
-];
+]
 
 export default function Example() {
   return (
@@ -36,5 +31,5 @@ export default function Example() {
         </ReactFlow>
       </div>
     </div>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { AlertCircle, RefreshCw } from "lucide-react";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { AlertCircle, RefreshCw } from "lucide-react"
 
 export default function Example() {
-  const [hasError, setHasError] = useState(true);
+  const [hasError, setHasError] = useState(true)
 
   return (
     <div className="flex flex-col gap-6 p-6">
@@ -36,15 +36,21 @@ export default function Example() {
           {hasError ? "Retry (error state)" : "Retry"}
         </Button>
         <span className="text-muted-foreground text-sm">
-          {hasError ? "Click to clear the error." : "No error — click to restore."}
+          {hasError
+            ? "Click to clear the error."
+            : "No error — click to restore."}
         </span>
       </div>
 
       <p className="text-muted-foreground text-sm">
-        Set <code className="text-xs bg-muted px-1 py-0.5 rounded">aria-invalid</code> to surface a
-        destructive border + ring. This is distinct from the <em>destructive</em> variant — use it to signal a
-        validation or submission error on a button in a form.
+        Set{" "}
+        <code className="text-xs bg-muted px-1 py-0.5 rounded">
+          aria-invalid
+        </code>{" "}
+        to surface a destructive border + ring. This is distinct from the{" "}
+        <em>destructive</em> variant — use it to signal a validation or
+        submission error on a button in a form.
       </p>
     </div>
-  );
+  )
 }

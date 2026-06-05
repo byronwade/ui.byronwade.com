@@ -4,13 +4,13 @@
  * Reworked to the byronwade/ui design system: semantic tokens (no raw hex),
  * automatic dark mode, and a `data-slot` hook.
  */
-import { SVGProps } from "react";
+import { SVGProps } from "react"
 
 export interface AndroidProps extends SVGProps<SVGSVGElement> {
-  width?: number;
-  height?: number;
-  src?: string;
-  videoSrc?: string;
+  width?: number
+  height?: number
+  src?: string
+  videoSrc?: string
 }
 
 export function Android({
@@ -95,5 +95,5 @@ export function Android({
         </clipPath>
       </defs>
     </svg>
-  );
+  )
 }

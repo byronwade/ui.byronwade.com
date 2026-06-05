@@ -10,7 +10,7 @@ import {
   CreditCardCvv,
   CreditCardServiceProvider,
   CreditCardMagStripe,
-} from "@/components/ui/credit-card";
+} from "@/components/ui/credit-card"
 
 export default function Example() {
   return (
@@ -39,5 +39,5 @@ export default function Example() {
         </CreditCardFlipper>
       </CreditCard>
     </div>
-  );
+  )
 }

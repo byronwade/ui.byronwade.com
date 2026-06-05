@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Select,
@@ -9,7 +9,7 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 import {
   Globe2Icon,
   MoonIcon,
@@ -21,7 +21,7 @@ import {
   LayoutGridIcon,
   LayoutListIcon,
   LayoutIcon,
-} from "lucide-react";
+} from "lucide-react"
 
 export default function Example() {
   return (
@@ -55,7 +55,9 @@ export default function Example() {
 
       {/* Icon in trigger with placeholder */}
       <div className="flex flex-col gap-1.5">
-        <span className="text-xs text-muted-foreground">Notification style</span>
+        <span className="text-xs text-muted-foreground">
+          Notification style
+        </span>
         <Select>
           <SelectTrigger>
             <BellIcon className="size-4 text-muted-foreground" />
@@ -108,5 +110,5 @@ export default function Example() {
         </Select>
       </div>
     </div>
-  );
+  )
 }

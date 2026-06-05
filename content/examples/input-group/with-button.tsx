@@ -1,10 +1,10 @@
-import { MailIcon, SendIcon } from "lucide-react";
+import { MailIcon, SendIcon } from "lucide-react"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
 
 export default function Example() {
   return (
@@ -19,5 +19,5 @@ export default function Example() {
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
-  );
+  )
 }

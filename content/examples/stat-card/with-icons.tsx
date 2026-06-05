@@ -1,5 +1,5 @@
-import { BarChart2, ShoppingCart, Star, TrendingUp } from "lucide-react";
-import { StatCard } from "@/components/stat-card";
+import { BarChart2, ShoppingCart, Star, TrendingUp } from "lucide-react"
+import { StatCard } from "@/components/stat-card"
 
 /** Each card uses a different Lucide icon to show how the icon slot is rendered. */
 export default function Example() {
@@ -34,5 +34,5 @@ export default function Example() {
         hint="month-over-month"
       />
     </div>
-  );
+  )
 }

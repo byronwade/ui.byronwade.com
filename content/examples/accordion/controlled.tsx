@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
+} from "@/components/ui/accordion"
 
 const ITEMS = [
   {
@@ -29,13 +29,13 @@ const ITEMS = [
     label: "Step 4: Invite your team",
     body: "Send invitations by email. Invitees get a link to join your workspace directly.",
   },
-];
+]
 
 export default function Example() {
-  const [openItems, setOpenItems] = useState<string[]>(["step-1"]);
+  const [openItems, setOpenItems] = useState<string[]>(["step-1"])
 
-  const expandAll = () => setOpenItems(ITEMS.map((i) => i.value));
-  const collapseAll = () => setOpenItems([]);
+  const expandAll = () => setOpenItems(ITEMS.map((i) => i.value))
+  const collapseAll = () => setOpenItems([])
 
   return (
     <div className="mx-auto max-w-md py-10">
@@ -73,9 +73,8 @@ export default function Example() {
       </Accordion>
 
       <p className="mt-4 text-xs text-muted-foreground">
-        Currently open:{" "}
-        {openItems.length > 0 ? openItems.join(", ") : "none"}
+        Currently open: {openItems.length > 0 ? openItems.join(", ") : "none"}
       </p>
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Archive, Download, Lock, Share2, Trash2 } from "lucide-react";
+import { Archive, Download, Lock, Share2, Trash2 } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 export default function Example() {
   return (
@@ -51,5 +51,5 @@ export default function Example() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

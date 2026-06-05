@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
-import { Toggle } from "@/components/ui/toggle";
+import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react"
+import { Toggle } from "@/components/ui/toggle"
 
 export default function Example() {
   return (
@@ -16,5 +16,5 @@ export default function Example() {
         <UnderlineIcon />
       </Toggle>
     </div>
-  );
+  )
 }

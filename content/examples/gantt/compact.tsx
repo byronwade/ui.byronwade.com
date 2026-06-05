@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { addDays, startOfMonth, subDays } from "date-fns";
+import { addDays, startOfMonth, subDays } from "date-fns"
 
 import {
   GanttFeatureItem,
@@ -14,27 +14,45 @@ import {
   GanttTimeline,
   GanttToday,
   type GanttFeature,
-} from "@/components/ui/gantt";
+} from "@/components/ui/gantt"
 
-const monthStart = startOfMonth(new Date());
+const monthStart = startOfMonth(new Date())
 
 const features: GanttFeature[] = Array.from({ length: 6 }).map((_, i) => ({
   id: String(i + 1),
-  name: ["Design system", "API integration", "Beta launch", "Docs", "Audit", "GA"][i],
+  name: [
+    "Design system",
+    "API integration",
+    "Beta launch",
+    "Docs",
+    "Audit",
+    "GA",
+  ][i],
   startAt: addDays(monthStart, i * 8 - 20),
   endAt: addDays(monthStart, i * 8 + 10),
   status: {
     id: "s",
     name: "Status",
-    color: ["bg-brand", "bg-secondary", "bg-warning", "bg-success", "bg-chart-4", "bg-brand"][i],
+    color: [
+      "bg-brand",
+      "bg-secondary",
+      "bg-warning",
+      "bg-success",
+      "bg-chart-4",
+      "bg-brand",
+    ][i],
   },
-}));
+}))
 
 // `density="compact"` tightens row height for dense, many-row roadmaps.
 export default function Example() {
   return (
     <div className="h-[420px] w-full">
-      <GanttProvider range="monthly" density="compact" className="h-full border">
+      <GanttProvider
+        range="monthly"
+        density="compact"
+        className="h-full border"
+      >
         <GanttSidebar>
           <GanttSidebarGroup name="Roadmap">
             {features.map((feature) => (
@@ -55,5 +73,5 @@ export default function Example() {
         </GanttTimeline>
       </GanttProvider>
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { KineticText } from "@/components/ui/kinetic-text";
+import { KineticText } from "@/components/ui/kinetic-text"
 
 export default function Example() {
   return (
@@ -8,5 +8,5 @@ export default function Example() {
         className="text-4xl tracking-tight text-foreground"
       />
     </div>
-  );
+  )
 }

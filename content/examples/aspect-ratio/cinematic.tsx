@@ -1,13 +1,16 @@
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 export default function Example() {
   return (
     <div className="w-96">
-      <AspectRatio ratio={21 / 9} className="overflow-hidden rounded-xl border bg-muted">
+      <AspectRatio
+        ratio={21 / 9}
+        className="overflow-hidden rounded-xl border bg-muted"
+      >
         <div className="flex size-full items-center justify-center text-sm text-muted-foreground">
           21:9
         </div>
       </AspectRatio>
     </div>
-  );
+  )
 }

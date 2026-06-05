@@ -1,6 +1,6 @@
-import { FileTextIcon, ImageIcon, SettingsIcon } from "lucide-react";
+import { FileTextIcon, ImageIcon, SettingsIcon } from "lucide-react"
 
-import { Tree, type TreeViewElement } from "@/components/ui/file-tree";
+import { Tree, type TreeViewElement } from "@/components/ui/file-tree"
 
 const ELEMENTS: TreeViewElement[] = [
   {
@@ -22,10 +22,16 @@ const ELEMENTS: TreeViewElement[] = [
   {
     id: "7",
     name: "config",
-    children: [{ id: "8", name: "tailwind.config.ts", icon: <SettingsIcon className="size-4" /> }],
+    children: [
+      {
+        id: "8",
+        name: "tailwind.config.ts",
+        icon: <SettingsIcon className="size-4" />,
+      },
+    ],
   },
   { id: "9", name: "package.json" },
-];
+]
 
 export default function Example() {
   return (
@@ -39,5 +45,5 @@ export default function Example() {
         initialSelectedId="3"
       />
     </div>
-  );
+  )
 }

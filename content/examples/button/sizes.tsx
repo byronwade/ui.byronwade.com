@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { Settings } from "lucide-react"
 
 export default function Example() {
   return (
@@ -28,5 +28,5 @@ export default function Example() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

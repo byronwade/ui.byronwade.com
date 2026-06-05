@@ -32,67 +32,76 @@ function Calendar({
         month: cn("flex w-full flex-col gap-4", defaults.month),
         nav: cn(
           "absolute inset-x-0 top-0 flex items-center justify-between",
-          defaults.nav
+          defaults.nav,
         ),
         button_previous: cn(
           buttonVariants({ variant: "ghost", size: "icon-sm" }),
           "text-muted-foreground",
-          defaults.button_previous
+          defaults.button_previous,
         ),
         button_next: cn(
           buttonVariants({ variant: "ghost", size: "icon-sm" }),
           "text-muted-foreground",
-          defaults.button_next
+          defaults.button_next,
         ),
         month_caption: cn(
           "flex h-7 items-center justify-center px-9",
-          defaults.month_caption
+          defaults.month_caption,
         ),
         caption_label: cn("text-sm font-medium", defaults.caption_label),
         month_grid: cn("w-full border-collapse", defaults.month_grid),
         weekdays: cn("flex", defaults.weekdays),
         weekday: cn(
           "flex-1 select-none rounded-md text-[0.8rem] font-normal text-muted-foreground",
-          defaults.weekday
+          defaults.weekday,
         ),
         week: cn("mt-2 flex w-full", defaults.week),
         day: cn(
           "relative size-9 flex-1 select-none p-0 text-center text-sm",
-          defaults.day
+          defaults.day,
         ),
         day_button: cn(
           buttonVariants({ variant: "ghost", size: "icon-sm" }),
           "size-9 select-none font-normal text-foreground",
-          defaults.day_button
+          defaults.day_button,
         ),
         // SelectionState — endpoints + single selection follow --brand.
         selected: cn(
           "[&>button]:bg-brand [&>button]:text-brand-foreground [&>button]:hover:bg-brand [&>button]:hover:text-brand-foreground",
-          defaults.selected
+          defaults.selected,
         ),
         range_start: cn("rounded-l-md bg-accent", defaults.range_start),
         range_end: cn("rounded-r-md bg-accent", defaults.range_end),
         range_middle: cn(
           "rounded-none bg-accent [&>button]:bg-transparent [&>button]:text-foreground [&>button]:hover:bg-transparent",
-          defaults.range_middle
+          defaults.range_middle,
         ),
         // DayFlags.
         today: cn(
           "[&>button:not([aria-selected])]:bg-accent [&>button:not([aria-selected])]:font-medium [&>button:not([aria-selected])]:text-accent-foreground",
-          defaults.today
+          defaults.today,
         ),
         outside: cn(
           "text-muted-foreground aria-selected:text-muted-foreground",
-          defaults.outside
+          defaults.outside,
         ),
         disabled: cn("text-muted-foreground opacity-50", defaults.disabled),
         hidden: cn("invisible", defaults.hidden),
         ...classNames,
       }}
       components={{
-        Chevron: ({ orientation, className: chevronClassName, ...chevronProps }) => {
+        Chevron: ({
+          orientation,
+          className: chevronClassName,
+          ...chevronProps
+        }) => {
           const Icon = orientation === "left" ? ChevronLeft : ChevronRight
-          return <Icon className={cn("size-4", chevronClassName)} {...chevronProps} />
+          return (
+            <Icon
+              className={cn("size-4", chevronClassName)}
+              {...chevronProps}
+            />
+          )
         },
       }}
       {...props}

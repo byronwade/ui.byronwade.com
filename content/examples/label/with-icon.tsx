@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Label } from "@/components/ui/label";
-import { Mail, Lock, User, Search } from "lucide-react";
+import { Label } from "@/components/ui/label"
+import { Mail, Lock, User, Search } from "lucide-react"
 
 export default function Example() {
   return (
@@ -58,5 +58,5 @@ export default function Example() {
         />
       </div>
     </div>
-  );
+  )
 }

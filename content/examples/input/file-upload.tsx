@@ -1,22 +1,22 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Upload, X, FileText } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import * as React from "react"
+import { Upload, X, FileText } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [file, setFile] = React.useState<File | null>(null)
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setFile(e.target.files?.[0] ?? null);
+    setFile(e.target.files?.[0] ?? null)
   }
 
   function handleClear() {
-    setFile(null);
-    if (inputRef.current) inputRef.current.value = "";
+    setFile(null)
+    if (inputRef.current) inputRef.current.value = ""
   }
 
   return (
@@ -25,7 +25,9 @@ export default function Example() {
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="file-native">Attachment</Label>
         <Input id="file-native" type="file" accept=".pdf,.doc,.docx" />
-        <p className="text-xs text-muted-foreground">PDF or Word, up to 10 MB.</p>
+        <p className="text-xs text-muted-foreground">
+          PDF or Word, up to 10 MB.
+        </p>
       </div>
 
       {/* Custom styled trigger */}
@@ -74,5 +76,5 @@ export default function Example() {
         )}
       </div>
     </div>
-  );
+  )
 }

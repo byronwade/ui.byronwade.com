@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import type { ReactNode } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { categories, byCategory } from "@/content/components";
-import { guides } from "@/content/guides";
+import type { ReactNode } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
+import { categories, byCategory } from "@/content/components"
+import { guides } from "@/content/guides"
 
 /** A section header + its items, grouped under a vertical rail. */
 function Group({ label, children }: { label: string; children: ReactNode }) {
@@ -16,14 +16,14 @@ function Group({ label, children }: { label: string; children: ReactNode }) {
       </div>
       <div className="flex flex-col border-l border-border">{children}</div>
     </div>
-  );
+  )
 }
 
 export function SiteNav() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const item = (href: string, label: string) => {
-    const active = pathname === href;
+    const active = pathname === href
     return (
       <Link
         key={href}
@@ -35,17 +35,19 @@ export function SiteNav() {
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
           active
             ? "border-brand text-foreground"
-            : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
+            : "border-transparent text-muted-foreground hover:border-border hover:text-foreground",
         )}
       >
         {label}
       </Link>
-    );
-  };
+    )
+  }
 
   return (
     <nav className="flex flex-col gap-7">
-      <Group label="Get Started">{guides.map((g) => item(g.href, g.label))}</Group>
+      <Group label="Get Started">
+        {guides.map((g) => item(g.href, g.label))}
+      </Group>
 
       {/* "Foundation" lives in Get Started (it's a base, not a browseable
           component), so skip its lone catalog category here. */}
@@ -57,5 +59,5 @@ export function SiteNav() {
           </Group>
         ))}
     </nav>
-  );
+  )
 }

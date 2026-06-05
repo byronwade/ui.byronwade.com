@@ -1,29 +1,45 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { FilterPill } from "@/components/ui/filter-pill";
+import * as React from "react"
+import { FilterPill } from "@/components/ui/filter-pill"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
-import { CalendarDays, Tag } from "lucide-react";
+} from "@/components/ui/dropdown-menu"
+import { CalendarDays, Tag } from "lucide-react"
 
-const DATE_OPTIONS = ["Today", "Yesterday", "Last 7 days", "Last 30 days", "Last 90 days", "Custom range"];
-const CATEGORY_OPTIONS = ["All categories", "Design", "Engineering", "Marketing", "Product", "Research"];
+const DATE_OPTIONS = [
+  "Today",
+  "Yesterday",
+  "Last 7 days",
+  "Last 30 days",
+  "Last 90 days",
+  "Custom range",
+]
+const CATEGORY_OPTIONS = [
+  "All categories",
+  "Design",
+  "Engineering",
+  "Marketing",
+  "Product",
+  "Research",
+]
 
 export default function Example() {
-  const [dateRange, setDateRange] = React.useState("Last 7 days");
-  const [category, setCategory] = React.useState("All categories");
+  const [dateRange, setDateRange] = React.useState("Last 7 days")
+  const [category, setCategory] = React.useState("All categories")
 
   return (
     <div className="flex flex-wrap items-center gap-2 p-6">
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <FilterPill icon={<CalendarDays className="size-3.5 text-muted-foreground" />}>
+            <FilterPill
+              icon={<CalendarDays className="size-3.5 text-muted-foreground" />}
+            >
               {dateRange}
             </FilterPill>
           }
@@ -41,7 +57,9 @@ export default function Example() {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <FilterPill icon={<Tag className="size-3.5 text-muted-foreground" />}>
+            <FilterPill
+              icon={<Tag className="size-3.5 text-muted-foreground" />}
+            >
               {category}
             </FilterPill>
           }
@@ -60,5 +78,5 @@ export default function Example() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

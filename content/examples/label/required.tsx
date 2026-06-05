@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
   return (
@@ -9,7 +9,9 @@ export default function Example() {
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="req-name">
           Full name
-          <span className="text-destructive" aria-hidden="true">*</span>
+          <span className="text-destructive" aria-hidden="true">
+            *
+          </span>
         </Label>
         <input
           id="req-name"
@@ -23,7 +25,9 @@ export default function Example() {
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="req-email">
           Email address
-          <span className="text-destructive" aria-hidden="true">*</span>
+          <span className="text-destructive" aria-hidden="true">
+            *
+          </span>
         </Label>
         <input
           id="req-email"
@@ -38,7 +42,9 @@ export default function Example() {
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="opt-website">
           Website
-          <span className="text-muted-foreground font-normal text-xs ml-1">(optional)</span>
+          <span className="text-muted-foreground font-normal text-xs ml-1">
+            (optional)
+          </span>
         </Label>
         <input
           id="opt-website"
@@ -49,8 +55,9 @@ export default function Example() {
       </div>
 
       <p className="text-xs text-muted-foreground">
-        Fields marked with <span className="text-destructive">*</span> are required.
+        Fields marked with <span className="text-destructive">*</span> are
+        required.
       </p>
     </div>
-  );
+  )
 }

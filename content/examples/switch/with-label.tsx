@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Switch } from "@/components/ui/switch";
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
 
 const settings = [
   {
@@ -22,12 +22,12 @@ const settings = [
     description: "Help us improve by sharing anonymous data",
     defaultChecked: false,
   },
-];
+]
 
 export default function Example() {
   const [states, setStates] = useState<Record<string, boolean>>(
-    Object.fromEntries(settings.map((s) => [s.id, s.defaultChecked]))
-  );
+    Object.fromEntries(settings.map((s) => [s.id, s.defaultChecked])),
+  )
 
   return (
     <div className="flex flex-col divide-y rounded-lg border p-0 overflow-hidden max-w-sm mx-auto">
@@ -38,7 +38,9 @@ export default function Example() {
         >
           <div className="space-y-0.5">
             <p className="text-sm font-medium">{setting.label}</p>
-            <p className="text-xs text-muted-foreground">{setting.description}</p>
+            <p className="text-xs text-muted-foreground">
+              {setting.description}
+            </p>
           </div>
           <Switch
             checked={states[setting.id]}
@@ -49,5 +51,5 @@ export default function Example() {
         </label>
       ))}
     </div>
-  );
+  )
 }

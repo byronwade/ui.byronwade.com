@@ -1,4 +1,4 @@
-import { EventTimeline, type TimelineEvent } from "@/components/event-timeline";
+import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
 
 const events: TimelineEvent[] = [
   { title: "Account created", tone: "success" },
@@ -6,7 +6,7 @@ const events: TimelineEvent[] = [
   { title: "Profile completed", tone: "info" },
   { title: "Two-factor enabled", tone: "success" },
   { title: "First login", tone: "neutral" },
-];
+]
 
 export default function Example() {
   return (
@@ -17,5 +17,5 @@ export default function Example() {
       </p>
       <EventTimeline events={events} />
     </div>
-  );
+  )
 }

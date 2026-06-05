@@ -5,7 +5,7 @@ import {
   GlimpseTitle,
   GlimpseDescription,
   GlimpseImage,
-} from "@/components/ui/glimpse";
+} from "@/components/ui/glimpse"
 
 export default function Example() {
   return (
@@ -14,7 +14,10 @@ export default function Example() {
       <Glimpse>
         <GlimpseTrigger
           render={
-            <a href="#" className="ml-1 text-brand underline-offset-4 hover:underline">
+            <a
+              href="#"
+              className="ml-1 text-brand underline-offset-4 hover:underline"
+            >
               design tokens
             </a>
           }
@@ -28,5 +31,5 @@ export default function Example() {
         </GlimpseContent>
       </Glimpse>
     </div>
-  );
+  )
 }

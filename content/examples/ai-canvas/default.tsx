@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Canvas } from "@/components/ai-elements/canvas";
-import { ReactFlowProvider } from "@xyflow/react";
+import { Canvas } from "@/components/ai-elements/canvas"
+import { ReactFlowProvider } from "@xyflow/react"
 
 const nodes = [
   {
@@ -21,12 +21,12 @@ const nodes = [
     data: { label: "Output" },
     type: "output",
   },
-];
+]
 
 const edges = [
   { id: "prompt-model", source: "prompt", target: "model" },
   { id: "model-output", source: "model", target: "output" },
-];
+]
 
 export default function Example() {
   return (
@@ -42,5 +42,5 @@ export default function Example() {
         </ReactFlowProvider>
       </div>
     </div>
-  );
+  )
 }

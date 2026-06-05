@@ -1,6 +1,6 @@
-import { DetailHeader } from "@/components/detail-header";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { DetailHeader } from "@/components/detail-header"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 /**
  * Demonstrates the badge prop with all meaningful status variants:
@@ -13,7 +13,7 @@ export default function Example() {
     { label: "Failed", badge: <Badge variant="destructive">Failed</Badge> },
     { label: "Archived", badge: <Badge variant="secondary">Archived</Badge> },
     { label: "Draft", badge: <Badge variant="outline">Draft</Badge> },
-  ] as const;
+  ] as const
 
   return (
     <div className="max-w-4xl space-y-10 p-8">
@@ -35,5 +35,5 @@ export default function Example() {
         />
       ))}
     </div>
-  );
+  )
 }

@@ -39,11 +39,17 @@ const chartConfig: ChartConfig = {
 export default function Example() {
   return (
     <div className="p-6 rounded-2xl border bg-card w-full max-w-sm">
-      <h2 className="text-sm font-medium mb-1 text-foreground">Traffic Sources</h2>
-      <p className="text-xs text-muted-foreground mb-4">Breakdown by acquisition channel</p>
+      <h2 className="text-sm font-medium mb-1 text-foreground">
+        Traffic Sources
+      </h2>
+      <p className="text-xs text-muted-foreground mb-4">
+        Breakdown by acquisition channel
+      </p>
       <ChartContainer config={chartConfig} className="h-56 w-full">
         <PieChart>
-          <ChartTooltip content={<ChartTooltipContent nameKey="category" hideLabel />} />
+          <ChartTooltip
+            content={<ChartTooltipContent nameKey="category" hideLabel />}
+          />
           <ChartLegend content={<ChartLegendContent nameKey="category" />} />
           <Pie
             data={data}

@@ -12,21 +12,22 @@ each ratchet to hard-fail.
 
 ## Summary
 
-| Area | Count | Severity | Nature |
-|------|-------|----------|--------|
-| Formatting (Prettier) — registry source | 77 files | Low | Mechanical (`prettier --write`) |
-| Formatting — `content/` (examples) | 468 files | Low | Mechanical |
-| Formatting — `app` / `scripts` / `tests` / `lib` | 62 / 16 / 9 / 4 | Low | Mechanical |
-| Missing `data-slot` | 18 components | Medium | Per-file edit + test |
-| `export default` on a component | 3 components | Medium | Rename to named export |
-| On-system lint — errors | 4 (2 files) | **High** | Raw color / hand-rolled gradient |
-| On-system lint — warnings | 9 (6 files) | Medium | Arbitrary px radius/spacing |
+| Area                                             | Count           | Severity | Nature                           |
+| ------------------------------------------------ | --------------- | -------- | -------------------------------- |
+| Formatting (Prettier) — registry source          | 77 files        | Low      | Mechanical (`prettier --write`)  |
+| Formatting — `content/` (examples)               | 468 files       | Low      | Mechanical                       |
+| Formatting — `app` / `scripts` / `tests` / `lib` | 62 / 16 / 9 / 4 | Low      | Mechanical                       |
+| Missing `data-slot`                              | 18 components   | Medium   | Per-file edit + test             |
+| `export default` on a component                  | 3 components    | Medium   | Rename to named export           |
+| On-system lint — errors                          | 4 (2 files)     | **High** | Raw color / hand-rolled gradient |
+| On-system lint — warnings                        | 9 (6 files)     | Medium   | Arbitrary px radius/spacing      |
 
 ## High — on-system DNA violations (fix first; some need a judgment call)
 
 From `npm run lint:on-system` (4 errors, 9 warnings, 7 files):
 
 **Errors**
+
 - `registry/ui/color-picker.tsx` — raw color `#FF0000` + two hand-rolled gradients (the hue
   spectrum). **Judgment call:** a color picker legitimately renders a literal spectrum; tokens can't
   express a rainbow. Options: (a) keep but isolate the raw spectrum behind a documented, lint-ignored
@@ -35,6 +36,7 @@ From `npm run lint:on-system` (4 errors, 9 warnings, 7 files):
   utility (`mask-fade-y`/`glow-brand`) or a documented foundation gradient.
 
 **Warnings — arbitrary px values** (replace with the `--radius`/spacing scale):
+
 - `chart.tsx` (`rounded-[2px]` ×2), `checkbox.tsx` (`rounded-[4px]`), `gantt.tsx` (`rounded-[2px]`),
   `tooltip.tsx` (`rounded-[2px]`), `morph-dock.tsx` (`p-[3px]`, `-my-[3px]`, `-mr-[3px]`, `pr-[7px]`).
   Some (e.g. `morph-dock` hairline insets) may be intentional sub-pixel chrome — confirm each.
@@ -42,6 +44,7 @@ From `npm run lint:on-system` (4 errors, 9 warnings, 7 files):
 ## Medium — `export default` → named export (3)
 
 Switch to a bottom named export (`export { X }`) and update any importers (`app/`, examples):
+
 - `registry/ui/world-map.tsx`
 - `registry/ui/morph-dock.tsx`
 - `registry/components/conversation-list.tsx`
@@ -63,7 +66,7 @@ atoms (root slot is enough).
 636 files in `registry`/`app`/`content`/`scripts`/`tests`/`lib` differ from Prettier (**761
 repo-wide** including `.md`/`.mdc`/`.css`, root, and `packages/`). Entirely mechanical — `prettier
 --write` fixes all. Largest bucket is `content/` examples (468). No review needed per-file; review
-the *diff shape* once. Note: the Phase-A docs just written (`CONVENTIONS.md`, the two agent files,
+the _diff shape_ once. Note: the Phase-A docs just written (`CONVENTIONS.md`, the two agent files,
 this report) are in the repo-wide count and will reformat in Batch 0.
 
 ## Proposed Phase C batches (each ends green on `npm run test:ci`)

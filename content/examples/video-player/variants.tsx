@@ -10,11 +10,11 @@ import {
   VideoPlayerTimeDisplay,
   VideoPlayerTimeRange,
   VideoPlayerVolumeRange,
-} from "@/components/ui/video-player";
+} from "@/components/ui/video-player"
 
-const SRC = "https://www.w3schools.com/html/mov_bbb.mp4";
+const SRC = "https://www.w3schools.com/html/mov_bbb.mp4"
 
-const VARIANTS = ["default", "minimal", "theater"] as const;
+const VARIANTS = ["default", "minimal", "theater"] as const
 
 export default function Example() {
   return (
@@ -56,5 +56,5 @@ export default function Example() {
         </VideoPlayer>
       </div>
     </div>
-  );
+  )
 }

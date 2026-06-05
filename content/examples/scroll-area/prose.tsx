@@ -1,4 +1,4 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function Example() {
   return (
@@ -13,8 +13,8 @@ export default function Example() {
         <p>
           Because the bar overlays the content rather than reserving its own
           column, the reading measure stays constant whether or not the region
-          is scrollable. This avoids the subtle layout shift that plain
-          overflow containers introduce.
+          is scrollable. This avoids the subtle layout shift that plain overflow
+          containers introduce.
         </p>
         <p>
           Keyboard users can focus the viewport and move through the text with
@@ -29,5 +29,5 @@ export default function Example() {
         </p>
       </div>
     </ScrollArea>
-  );
+  )
 }

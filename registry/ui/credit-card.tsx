@@ -7,7 +7,7 @@
  * weight, and `data-slot` hooks. The gold chip stays — it's a physical-chip
  * illustration, not UI chrome.
  */
-"use client";
+"use client"
 
 import {
   type ComponentProps,
@@ -17,24 +17,24 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { PaymentIcon } from "react-svg-credit-card-payment-icons";
+} from "react"
+import { PaymentIcon } from "react-svg-credit-card-payment-icons"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 const useSupportsHover = () => {
-  const [supportsHover, setSupportsHover] = useState(false);
+  const [supportsHover, setSupportsHover] = useState(false)
   useEffect(() => {
-    const mql = window.matchMedia("(hover: hover)");
-    const handler = (e: MediaQueryListEvent) => setSupportsHover(e.matches);
-    setSupportsHover(mql.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
-  return supportsHover;
-};
+    const mql = window.matchMedia("(hover: hover)")
+    const handler = (e: MediaQueryListEvent) => setSupportsHover(e.matches)
+    setSupportsHover(mql.matches)
+    mql.addEventListener("change", handler)
+    return () => mql.removeEventListener("change", handler)
+  }, [])
+  return supportsHover
+}
 
-export type CreditCardProps = HTMLAttributes<HTMLDivElement>;
+export type CreditCardProps = HTMLAttributes<HTMLDivElement>
 
 export const CreditCard = ({ className, ...props }: CreditCardProps) => (
   <div
@@ -45,19 +45,19 @@ export const CreditCard = ({ className, ...props }: CreditCardProps) => (
     )}
     {...props}
   />
-);
+)
 
-const CreditCardFlipContext = createContext(false);
+const CreditCardFlipContext = createContext(false)
 
-export type CreditCardFlipperProps = HTMLAttributes<HTMLDivElement>;
+export type CreditCardFlipperProps = HTMLAttributes<HTMLDivElement>
 
 export const CreditCardFlipper = ({
   className,
   children,
   ...props
 }: CreditCardFlipperProps & { children?: ReactNode }) => {
-  const supportsHover = useSupportsHover();
-  const [isFlipped, setIsFlipped] = useState(false);
+  const supportsHover = useSupportsHover()
+  const [isFlipped, setIsFlipped] = useState(false)
 
   return (
     <CreditCardFlipContext.Provider value={true}>
@@ -77,34 +77,48 @@ export const CreditCardFlipper = ({
         {children}
       </button>
     </CreditCardFlipContext.Provider>
-  );
-};
+  )
+}
 
-export type CreditCardNameProps = HTMLAttributes<HTMLParagraphElement>;
+export type CreditCardNameProps = HTMLAttributes<HTMLParagraphElement>
 
-export const CreditCardName = ({ className, style, ...props }: CreditCardNameProps) => (
+export const CreditCardName = ({
+  className,
+  style,
+  ...props
+}: CreditCardNameProps) => (
   <p
     data-slot="credit-card-name"
     className={cn("font-medium uppercase", className)}
     style={{ lineHeight: "100%", ...style }}
     {...props}
   />
-);
+)
 
-export type CreditCardChipProps = HTMLAttributes<SVGSVGElement>;
+export type CreditCardChipProps = HTMLAttributes<SVGSVGElement>
 
-export const CreditCardChip = ({ className, children, ...props }: CreditCardChipProps) =>
+export const CreditCardChip = ({
+  className,
+  children,
+  ...props
+}: CreditCardChipProps) =>
   children ? (
     <div
       data-slot="credit-card-chip"
-      className={cn("absolute top-1/2 left-0 w-1/6 shrink-0 -translate-y-1/2 rounded-[18%]", className)}
+      className={cn(
+        "absolute top-1/2 left-0 w-1/6 shrink-0 -translate-y-1/2 rounded-[18%]",
+        className,
+      )}
     >
       {children}
     </div>
   ) : (
     <svg
       data-slot="credit-card-chip"
-      className={cn("absolute top-1/2 left-0 w-1/6 shrink-0 -translate-y-1/2 rounded-[18%]", className)}
+      className={cn(
+        "absolute top-1/2 left-0 w-1/6 shrink-0 -translate-y-1/2 rounded-[18%]",
+        className,
+      )}
       viewBox="0 0 110 92"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
@@ -119,35 +133,59 @@ export const CreditCardChip = ({ className, children, ...props }: CreditCardChip
         fill="#000"
       />
       <defs>
-        <linearGradient gradientUnits="userSpaceOnUse" id="credit-card-chip-gradient" x1="1" x2="112.7" y1="46" y2="78.12">
+        <linearGradient
+          gradientUnits="userSpaceOnUse"
+          id="credit-card-chip-gradient"
+          x1="1"
+          x2="112.7"
+          y1="46"
+          y2="78.12"
+        >
           <stop stopColor="#EDE5A6" />
           <stop offset="1" stopColor="#CFA255" />
         </linearGradient>
       </defs>
     </svg>
-  );
+  )
 
-export type CreditCardLogoProps = HTMLAttributes<HTMLDivElement>;
+export type CreditCardLogoProps = HTMLAttributes<HTMLDivElement>
 
-export const CreditCardLogo = ({ className, ...props }: CreditCardLogoProps) => (
-  <div data-slot="credit-card-logo" className={cn("absolute top-0 right-0 size-1/6", className)} {...props} />
-);
+export const CreditCardLogo = ({
+  className,
+  ...props
+}: CreditCardLogoProps) => (
+  <div
+    data-slot="credit-card-logo"
+    className={cn("absolute top-0 right-0 size-1/6", className)}
+    {...props}
+  />
+)
 
-export type CreditCardFrontProps = HTMLAttributes<HTMLDivElement> & { safeArea?: number };
+export type CreditCardFrontProps = HTMLAttributes<HTMLDivElement> & {
+  safeArea?: number
+}
 
-export const CreditCardFront = ({ className, safeArea = 20, children, ...props }: CreditCardFrontProps) => (
+export const CreditCardFront = ({
+  className,
+  safeArea = 20,
+  children,
+  ...props
+}: CreditCardFrontProps) => (
   <div
     data-slot="credit-card-front"
-    className={cn("absolute inset-0 flex overflow-hidden rounded-lg bg-foreground/90 backface-hidden @xs:rounded-2xl", className)}
+    className={cn(
+      "absolute inset-0 flex overflow-hidden rounded-lg bg-foreground/90 backface-hidden @xs:rounded-2xl",
+      className,
+    )}
     {...props}
   >
     <div className="relative flex-1" style={{ margin: `${safeArea}px` }}>
       {children}
     </div>
   </div>
-);
+)
 
-export type CreditCardServiceProviderProps = ComponentProps<typeof PaymentIcon>;
+export type CreditCardServiceProviderProps = ComponentProps<typeof PaymentIcon>
 
 export const CreditCardServiceProvider = ({
   className,
@@ -157,10 +195,16 @@ export const CreditCardServiceProvider = ({
 }: CreditCardServiceProviderProps) => {
   if (children) {
     return (
-      <div data-slot="credit-card-service-provider" className={cn("absolute right-0 bottom-0 max-h-1/3 max-w-1/3", className)}>
+      <div
+        data-slot="credit-card-service-provider"
+        className={cn(
+          "absolute right-0 bottom-0 max-h-1/3 max-w-1/3",
+          className,
+        )}
+      >
         {children}
       </div>
-    );
+    )
   }
   return (
     <PaymentIcon
@@ -169,30 +213,45 @@ export const CreditCardServiceProvider = ({
       type={type}
       {...props}
     />
-  );
-};
+  )
+}
 
-export type CreditCardMagStripeProps = HTMLAttributes<HTMLDivElement>;
+export type CreditCardMagStripeProps = HTMLAttributes<HTMLDivElement>
 
-type CreditCardBackContextValue = { safeArea: number };
-const CreditCardBackContext = createContext<CreditCardBackContextValue>({ safeArea: 20 });
+type CreditCardBackContextValue = { safeArea: number }
+const CreditCardBackContext = createContext<CreditCardBackContextValue>({
+  safeArea: 20,
+})
 
-export const CreditCardMagStripe = ({ className, ...props }: CreditCardMagStripeProps) => {
-  const context = useContext(CreditCardBackContext);
+export const CreditCardMagStripe = ({
+  className,
+  ...props
+}: CreditCardMagStripeProps) => {
+  const context = useContext(CreditCardBackContext)
   return (
     <div
       data-slot="credit-card-mag-stripe"
-      className={cn("absolute top-[3%] left-1/2 h-1/4 -translate-x-1/2 bg-foreground", className)}
+      className={cn(
+        "absolute top-[3%] left-1/2 h-1/4 -translate-x-1/2 bg-foreground",
+        className,
+      )}
       style={{ width: `calc(100% + 2 * ${context.safeArea}px)` }}
       {...props}
     />
-  );
-};
+  )
+}
 
-export type CreditCardBackProps = HTMLAttributes<HTMLDivElement> & { safeArea?: number };
+export type CreditCardBackProps = HTMLAttributes<HTMLDivElement> & {
+  safeArea?: number
+}
 
-export const CreditCardBack = ({ safeArea = 16, children, className, ...props }: CreditCardBackProps) => {
-  const isInsideFlipper = useContext(CreditCardFlipContext);
+export const CreditCardBack = ({
+  safeArea = 16,
+  children,
+  className,
+  ...props
+}: CreditCardBackProps) => {
+  const isInsideFlipper = useContext(CreditCardFlipContext)
   return (
     <CreditCardBackContext.Provider value={{ safeArea }}>
       <div
@@ -209,25 +268,53 @@ export const CreditCardBack = ({ safeArea = 16, children, className, ...props }:
         </div>
       </div>
     </CreditCardBackContext.Provider>
-  );
-};
+  )
+}
 
-export type CreditCardNumberProps = HTMLAttributes<HTMLParagraphElement>;
+export type CreditCardNumberProps = HTMLAttributes<HTMLParagraphElement>
 
-export const CreditCardNumber = ({ className, children, style, ...props }: CreditCardNumberProps) => (
-  <p data-slot="credit-card-number" className={cn("font-mono @xs:text-2xl", className)} style={{ lineHeight: "100%", ...style }} {...props}>
+export const CreditCardNumber = ({
+  className,
+  children,
+  style,
+  ...props
+}: CreditCardNumberProps) => (
+  <p
+    data-slot="credit-card-number"
+    className={cn("font-mono @xs:text-2xl", className)}
+    style={{ lineHeight: "100%", ...style }}
+    {...props}
+  >
     {children}
   </p>
-);
+)
 
-export type CreditCardExpiryProps = HTMLAttributes<HTMLParagraphElement>;
+export type CreditCardExpiryProps = HTMLAttributes<HTMLParagraphElement>
 
-export const CreditCardExpiry = ({ className, style, ...props }: CreditCardExpiryProps) => (
-  <p data-slot="credit-card-expiry" className={cn("font-mono", className)} style={{ lineHeight: "100%", ...style }} {...props} />
-);
+export const CreditCardExpiry = ({
+  className,
+  style,
+  ...props
+}: CreditCardExpiryProps) => (
+  <p
+    data-slot="credit-card-expiry"
+    className={cn("font-mono", className)}
+    style={{ lineHeight: "100%", ...style }}
+    {...props}
+  />
+)
 
-export type CreditCardCvvProps = HTMLAttributes<HTMLParagraphElement>;
+export type CreditCardCvvProps = HTMLAttributes<HTMLParagraphElement>
 
-export const CreditCardCvv = ({ className, style, ...props }: CreditCardCvvProps) => (
-  <p data-slot="credit-card-cvv" className={cn("font-mono", className)} style={{ lineHeight: "100%", ...style }} {...props} />
-);
+export const CreditCardCvv = ({
+  className,
+  style,
+  ...props
+}: CreditCardCvvProps) => (
+  <p
+    data-slot="credit-card-cvv"
+    className={cn("font-mono", className)}
+    style={{ lineHeight: "100%", ...style }}
+    {...props}
+  />
+)
