@@ -46,7 +46,8 @@ Before writing any markup, check whether a component already exists. Reach for t
   `backlight` (saturated RGB glow behind a child), `apple-cards-carousel` (cards that
   expand into a modal), `canvas-text` (animated lines clipped to text),
   `pixelated-canvas` (image as an interactive dot grid),
-  `video-player` (media-chrome player with variants)
+  `video-player` (YouTube-grade media-chrome player: composable parts + settings/quality/captions
+  menus, scrub previews, chapters, heatmap, ambient, end-screen, and a `MediaPlayer` preset)
 - **Music / media** — Spotify-style music UI: `equalizer-bars` (animated now-playing bars),
   `album-cover` (square artwork with hover play FAB + equalizer overlay),
   `audio-waveform` (bar waveform scrubber with click/keyboard seek),
