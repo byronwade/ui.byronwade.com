@@ -2033,19 +2033,33 @@
       "name": "video-player",
       "type": "registry:ui",
       "title": "Video player",
-      "description": "Token-mapped media-chrome video player with a composable control bar and default/minimal/theater/poster variants. Adapted from kibo-ui.",
+      "description": "YouTube-grade media-chrome video player: composable parts (settings/quality/captions menus, fullscreen, PiP, scrub preview, chapters, heatmap, ambient, end-screen) plus a batteries-included MediaPlayer preset with resume, keyboard/gesture smarts, and default/minimal/theater/poster/youtube variants. Adapted from kibo-ui.",
       "dependencies": [
         "media-chrome"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/video-player-utils"
       ],
       "files": [
         {
           "path": "registry/ui/video-player.tsx",
           "type": "registry:ui",
           "target": "components/ui/video-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "video-player-utils",
+      "type": "registry:lib",
+      "title": "Video player utils",
+      "description": "Pure, DOM-free helpers for the video player: resume/watch-memory, the extra keymap, tap gestures, chapters→VTT, heatmap math, and the media-action applier.",
+      "files": [
+        {
+          "path": "registry/lib/video-player-utils.ts",
+          "type": "registry:lib",
+          "target": "lib/video-player-utils.ts"
         }
       ]
     },
@@ -2933,6 +2947,7 @@
         "@byronwade/image-crop",
         "@byronwade/color-picker",
         "@byronwade/video-player",
+        "@byronwade/video-player-utils",
         "@byronwade/kanban",
         "@byronwade/gantt",
         "@byronwade/editor",

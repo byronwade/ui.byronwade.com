@@ -470,7 +470,9 @@ import VerificationProgressStatuses from "./verification-progress/statuses";
 import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
 import VideoPlayerDefault from "./video-player/default";
+import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
+import VideoPlayerYoutube from "./video-player/youtube";
 import WorldMapDefault from "./world-map/default";
 
 export type Example = { name: string; file: string; Component: ComponentType };
@@ -1193,7 +1195,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },
+    { name: "Composable", file: "video-player/composable.tsx", Component: VideoPlayerComposable },
     { name: "Variants", file: "video-player/variants.tsx", Component: VideoPlayerVariants },
+    { name: "Youtube", file: "video-player/youtube.tsx", Component: VideoPlayerYoutube },
   ],
   "world-map": [
     { name: "Default", file: "world-map/default.tsx", Component: WorldMapDefault },

@@ -46,7 +46,8 @@ Before writing any markup, check whether a component already exists. Reach for t
   `backlight` (saturated RGB glow behind a child), `apple-cards-carousel` (cards that
   expand into a modal), `canvas-text` (animated lines clipped to text),
   `pixelated-canvas` (image as an interactive dot grid),
-  `video-player` (media-chrome player with variants)
+  `video-player` (YouTube-grade media-chrome player: composable parts + settings/quality/captions
+  menus, scrub previews, chapters, heatmap, ambient, end-screen, and a `MediaPlayer` preset)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),
