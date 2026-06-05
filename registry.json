@@ -1324,6 +1324,27 @@
       ]
     },
     {
+      "name": "morph-sidebar",
+      "type": "registry:ui",
+      "title": "Morph Sidebar",
+      "description": "Left icon rail that morphs wider into a labeled sidebar via the morph technique.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-sidebar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-sidebar.tsx"
+        }
+      ]
+    },
+    {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
@@ -2896,6 +2917,7 @@
         "@byronwade/morph-dock",
         "@byronwade/morph-surface",
         "@byronwade/morph-bar",
+        "@byronwade/morph-sidebar",
         "@byronwade/aspect-ratio",
         "@byronwade/scroll-area",
         "@byronwade/collapsible",

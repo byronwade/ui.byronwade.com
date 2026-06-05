@@ -32,7 +32,8 @@ Before writing any markup, check whether a component already exists. Reach for t
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
   (config-driven nav dock that blooms into a panel via the hook), `morph-surface`
   (agnostic morph primitive — open-state orchestration with no visual style; navigation styles compose it), `morph-bar`
-  (full-width top navigation bar that blooms a panel down via the morph technique)
+  (full-width top navigation bar that blooms a panel down via the morph technique), `morph-sidebar`
+  (left icon rail that morphs wider into a labeled sidebar via the morph technique)
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
   `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`,
