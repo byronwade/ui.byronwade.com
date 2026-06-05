@@ -168,6 +168,7 @@ import CollapsibleUncontrolled from "./collapsible/uncontrolled";
 import CollapsibleWithRichContent from "./collapsible/with-rich-content";
 import ColorPickerDefault from "./color-picker/default";
 import ColorPickerInline from "./color-picker/inline";
+import ColorPickerSizes from "./color-picker/sizes";
 import CommandDefault from "./command/default";
 import CommandActions from "./command/actions";
 import CommandCards from "./command/cards";
@@ -841,6 +842,7 @@ export const examples: Record<string, Example[]> = {
   "color-picker": [
     { name: "Default", file: "color-picker/default.tsx", Component: ColorPickerDefault },
     { name: "Inline", file: "color-picker/inline.tsx", Component: ColorPickerInline },
+    { name: "Sizes", file: "color-picker/sizes.tsx", Component: ColorPickerSizes },
   ],
   "command": [
     { name: "Default", file: "command/default.tsx", Component: CommandDefault },

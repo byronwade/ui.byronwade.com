@@ -172,6 +172,36 @@ describe("ColorPicker — selection surface", () => {
   });
 });
 
+describe("ColorPicker — size", () => {
+  const sel = (c: HTMLElement) =>
+    c.querySelector('[data-slot="color-picker-selection"]');
+  const track = (c: HTMLElement) =>
+    c.querySelector('[data-slot="color-picker-hue-track"]');
+  const thumb = (c: HTMLElement) =>
+    c.querySelector('[data-slot="color-picker-hue-thumb"]');
+
+  it("keeps the default scale when no size prop is given", () => {
+    const { container } = render(<FullPicker />);
+    expect(sel(container)).toHaveClass("min-h-40");
+    expect(track(container)).toHaveClass("h-3");
+    expect(thumb(container)).toHaveClass("size-4");
+  });
+
+  it("scales the whole picker down for sm", () => {
+    const { container } = render(<FullPicker size="sm" />);
+    expect(sel(container)).toHaveClass("min-h-32");
+    expect(track(container)).toHaveClass("h-2");
+    expect(thumb(container)).toHaveClass("size-3");
+  });
+
+  it("scales the whole picker up for lg", () => {
+    const { container } = render(<FullPicker size="lg" />);
+    expect(sel(container)).toHaveClass("min-h-52");
+    expect(track(container)).toHaveClass("h-4");
+    expect(thumb(container)).toHaveClass("size-5");
+  });
+});
+
 describe("ColorPicker — hue + alpha sliders", () => {
   it("renders both sliders with labelled thumbs", () => {
     render(<FullPicker />);

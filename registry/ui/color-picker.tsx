@@ -32,6 +32,52 @@ import {
 } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 
+// Overall-scale presets: the saturation field's floor height, its drag handle,
+// the hue/alpha rails (container + track + thumb), the eyedropper button, and
+// the readout text all step together. `default` reproduces the original dims.
+type ColorPickerSize = "sm" | "default" | "lg"
+
+const cpSize: Record<
+  ColorPickerSize,
+  {
+    field: string
+    pointer: string
+    rail: string
+    track: string
+    thumb: string
+    button: string
+    text: string
+  }
+> = {
+  sm: {
+    field: "min-h-32",
+    pointer: "h-3 w-3",
+    rail: "h-3",
+    track: "h-2",
+    thumb: "size-3",
+    button: "size-7",
+    text: "text-xs",
+  },
+  default: {
+    field: "min-h-40",
+    pointer: "h-4 w-4",
+    rail: "h-4",
+    track: "h-3",
+    thumb: "size-4",
+    button: "size-8",
+    text: "text-sm",
+  },
+  lg: {
+    field: "min-h-52",
+    pointer: "h-5 w-5",
+    rail: "h-5",
+    track: "h-4",
+    thumb: "size-5",
+    button: "size-9",
+    text: "text-base",
+  },
+}
+
 type ColorPickerContextValue = {
   hue: number
   saturation: number
@@ -43,6 +89,7 @@ type ColorPickerContextValue = {
   setLightness: (lightness: number) => void
   setAlpha: (alpha: number) => void
   setMode: (mode: string) => void
+  size: ColorPickerSize
 }
 
 const ColorPickerContext = createContext<ColorPickerContextValue | undefined>(
@@ -63,12 +110,14 @@ export type ColorPickerProps = HTMLAttributes<HTMLDivElement> & {
   value?: Parameters<typeof Color>[0]
   defaultValue?: Parameters<typeof Color>[0]
   onChange?: (value: Parameters<typeof Color.rgb>[0]) => void
+  size?: ColorPickerSize
 }
 
 export const ColorPicker = ({
   value,
   defaultValue = "#000000",
   onChange,
+  size = "default",
   className,
   ...props
 }: ColorPickerProps) => {
@@ -122,6 +171,7 @@ export const ColorPicker = ({
         setLightness,
         setAlpha,
         setMode,
+        size,
       }}
     >
       <div
@@ -141,7 +191,7 @@ export const ColorPickerSelection = memo(
     const [isDragging, setIsDragging] = useState(false)
     const [positionX, setPositionX] = useState(0)
     const [positionY, setPositionY] = useState(0)
-    const { hue, setSaturation, setLightness } = useColorPicker()
+    const { hue, setSaturation, setLightness, size } = useColorPicker()
 
     // The 2D field IS the saturation/lightness spectrum — these literal colors
     // are the thing being illustrated (the DNA color-exception), not chrome.
@@ -195,6 +245,7 @@ export const ColorPickerSelection = memo(
         data-slot="color-picker-selection"
         className={cn(
           "relative size-full cursor-crosshair rounded-sm",
+          cpSize[size].field,
           className,
         )}
         onPointerDown={(e) => {
@@ -212,7 +263,10 @@ export const ColorPickerSelection = memo(
             stays readable over any hue while resolving from tokens (dark-mode safe). */}
         <div
           data-slot="color-picker-selection-pointer"
-          className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute h-4 w-4 rounded-full border-2 border-background ring-1 ring-foreground/50"
+          className={cn(
+            "-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute rounded-full border-2 border-background ring-1 ring-foreground/50",
+            cpSize[size].pointer,
+          )}
           style={{
             left: `${positionX * 100}%`,
             top: `${positionY * 100}%`,
@@ -231,13 +285,14 @@ export const ColorPickerHue = ({
   className,
   ...props
 }: ColorPickerHueProps) => {
-  const { hue, setHue } = useColorPicker()
+  const { hue, setHue, size } = useColorPicker()
 
   return (
     <SliderPrimitive.Root
       data-slot="color-picker-hue"
       className={cn(
-        "relative flex h-4 w-full touch-none items-center select-none",
+        "relative flex w-full touch-none items-center select-none",
+        cpSize[size].rail,
         className,
       )}
       max={360}
@@ -254,12 +309,18 @@ export const ColorPickerHue = ({
             utility that holds the raw-color exception in one audited place. */}
         <SliderPrimitive.Track
           data-slot="color-picker-hue-track"
-          className="color-picker-hue relative h-3 w-full grow rounded-full"
+          className={cn(
+            "color-picker-hue relative w-full grow rounded-full",
+            cpSize[size].track,
+          )}
         >
           <SliderPrimitive.Thumb
             aria-label="Hue"
             data-slot="color-picker-hue-thumb"
-            className="size-4 rounded-full border border-primary/50 bg-background outline-none transition-[box-shadow] focus-visible:ring-3 focus-visible:ring-ring/50"
+            className={cn(
+              "rounded-full border border-primary/50 bg-background outline-none transition-[box-shadow] focus-visible:ring-3 focus-visible:ring-ring/50",
+              cpSize[size].thumb,
+            )}
           />
         </SliderPrimitive.Track>
       </SliderPrimitive.Control>
@@ -273,13 +334,14 @@ export const ColorPickerAlpha = ({
   className,
   ...props
 }: ColorPickerAlphaProps) => {
-  const { alpha, setAlpha } = useColorPicker()
+  const { alpha, setAlpha, size } = useColorPicker()
 
   return (
     <SliderPrimitive.Root
       data-slot="color-picker-alpha"
       className={cn(
-        "relative flex h-4 w-full touch-none items-center select-none",
+        "relative flex w-full touch-none items-center select-none",
+        cpSize[size].rail,
         className,
       )}
       max={100}
@@ -297,13 +359,19 @@ export const ColorPickerAlpha = ({
         {/* The checkerboard IS the transparency illustration — DNA exception. */}
         <SliderPrimitive.Track
           data-slot="color-picker-alpha-track"
-          className="relative h-3 w-full grow rounded-full bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3uCTZhw1gGGYhAGBZIA/nYDCgBDAm9BGDWAAJyRCgLaBCAAgXwixzAS0pgAAAABJRU5ErkJggg==')] bg-center bg-repeat-x dark:bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAALklEQVR4nGP8+vWrCAMewM3N/QafPBM+SWLAqAGDwQBGQgoIpZOB98KoAVQwAADxzQcSVIRCfQAAAABJRU5ErkJggg==')]"
+          className={cn(
+            "relative w-full grow rounded-full bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3uCTZhw1gGGYhAGBZIA/nYDCgBDAm9BGDWAAJyRCgLaBCAAgXwixzAS0pgAAAABJRU5ErkJggg==')] bg-center bg-repeat-x dark:bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAALklEQVR4nGP8+vWrCAMewM3N/QafPBM+SWLAqAGDwQBGQgoIpZOB98KoAVQwAADxzQcSVIRCfQAAAABJRU5ErkJggg==')]",
+            cpSize[size].track,
+          )}
         >
           <div className="color-picker-alpha-fade absolute inset-0 rounded-full" />
           <SliderPrimitive.Thumb
             aria-label="Alpha"
             data-slot="color-picker-alpha-thumb"
-            className="size-4 rounded-full border border-primary/50 bg-background outline-none transition-[box-shadow] focus-visible:ring-3 focus-visible:ring-ring/50"
+            className={cn(
+              "rounded-full border border-primary/50 bg-background outline-none transition-[box-shadow] focus-visible:ring-3 focus-visible:ring-ring/50",
+              cpSize[size].thumb,
+            )}
           />
         </SliderPrimitive.Track>
       </SliderPrimitive.Control>
@@ -317,7 +385,8 @@ export const ColorPickerEyeDropper = ({
   className,
   ...props
 }: ColorPickerEyeDropperProps) => {
-  const { setHue, setSaturation, setLightness, setAlpha } = useColorPicker()
+  const { setHue, setSaturation, setLightness, setAlpha, size } =
+    useColorPicker()
 
   const handleEyeDropper = async () => {
     try {
@@ -339,7 +408,11 @@ export const ColorPickerEyeDropper = ({
   return (
     <Button
       aria-label="Pick a color from the screen"
-      className={cn("shrink-0 text-muted-foreground", className)}
+      className={cn(
+        "shrink-0 text-muted-foreground",
+        cpSize[size].button,
+        className,
+      )}
       onClick={handleEyeDropper}
       size="icon"
       type="button"
@@ -359,14 +432,14 @@ export const ColorPickerOutput = ({
   className,
   ...props
 }: ColorPickerOutputProps) => {
-  const { mode, setMode } = useColorPicker()
+  const { mode, setMode, size } = useColorPicker()
 
   return (
     <Select onValueChange={(value) => setMode(value ?? "hex")} value={mode}>
       <SelectTrigger
         aria-label="Color format"
         data-slot="color-picker-output"
-        className={cn("h-8 w-20 shrink-0 text-xs", className)}
+        className={cn("h-8 w-20 shrink-0", cpSize[size].text, className)}
         {...props}
       >
         <SelectValue placeholder="Mode" />
