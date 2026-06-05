@@ -3598,6 +3598,129 @@
       ]
     },
     {
+      "name": "up-next-item",
+      "type": "registry:component",
+      "title": "Up next item",
+      "description": "Compact horizontal video row for watch-page up-next lists and search results, composing a thumbnail with title, channel, view/timestamp meta, and an overflow menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/verified-badge",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/up-next-item.tsx",
+          "type": "registry:component",
+          "target": "components/up-next-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "channel-byline",
+      "type": "registry:component",
+      "title": "Channel byline",
+      "description": "Watch-page channel identity row: avatar, name with verified badge and subscriber count, plus a SubscribeButton and optional action slot.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/verified-badge",
+        "@byronwade/subscribe-button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/channel-byline.tsx",
+          "type": "registry:component",
+          "target": "components/channel-byline.tsx"
+        }
+      ]
+    },
+    {
+      "name": "engagement-bar",
+      "type": "registry:component",
+      "title": "Engagement bar",
+      "description": "YouTube-style watch-page action row: connected like/dislike segmented pill, plus share, save, custom action, and overflow-menu pills.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/separator",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/engagement-bar.tsx",
+          "type": "registry:component",
+          "target": "components/engagement-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "description-box",
+      "type": "registry:component",
+      "title": "Description box",
+      "description": "YouTube watch-page description panel with a views/date header and collapsible body text that expands via \"...more\" / \"Show less\".",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/description-box.tsx",
+          "type": "registry:component",
+          "target": "components/description-box.tsx"
+        }
+      ]
+    },
+    {
+      "name": "comment",
+      "type": "registry:component",
+      "title": "Comment",
+      "description": "A YouTube-style threaded comment with author, like/dislike, reply, pinned/creator-heart tags, and a replies disclosure.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/verified-badge",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/comment.tsx",
+          "type": "registry:component",
+          "target": "components/comment.tsx"
+        }
+      ]
+    },
+    {
+      "name": "comment-composer",
+      "type": "registry:component",
+      "title": "Comment composer",
+      "description": "YouTube-style comment composer: an avatar plus an underline text input that reveals Cancel/Comment actions on focus or input.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/button",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/comment-composer.tsx",
+          "type": "registry:component",
+          "target": "components/comment-composer.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -3768,7 +3891,13 @@
         "@byronwade/action-rail",
         "@byronwade/video-card",
         "@byronwade/video-shelf",
-        "@byronwade/channel-header"
+        "@byronwade/channel-header",
+        "@byronwade/up-next-item",
+        "@byronwade/channel-byline",
+        "@byronwade/engagement-bar",
+        "@byronwade/description-box",
+        "@byronwade/comment",
+        "@byronwade/comment-composer"
       ]
     }
   ]

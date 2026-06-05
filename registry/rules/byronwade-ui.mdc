@@ -90,7 +90,14 @@ Before writing any markup, check whether a component already exists. Reach for t
   overflow menu), `video-shelf` (titled horizontal content shelf — scroll track with edge fade +
   chevron controls + optional action; generic, takes children), `channel-header` (channel page
   header: banner + avatar, verified handle and compact sub/video counts, `subscribe-button` /
-  join actions, section `tabs`)
+  join actions, section `tabs`). Watch-page composites: `up-next-item` (compact horizontal video
+  row: left 16/9 thumbnail + title, channel/verified, views·timestamp meta, optional ⋯ menu),
+  `channel-byline` (watch-page channel identity row: avatar + name/verified + subscriber count and
+  a subscribe button), `engagement-bar` (watch-page like/dislike + share/save/overflow action
+  row), `description-box` (tinted panel with a views/date header and a collapsible "...more" /
+  "Show less" body), `comment` (threaded comment: avatar + author/time, like/dislike, reply,
+  pinned + creator-heart, replies disclosure), `comment-composer` (avatar + underline input that
+  reveals Cancel/Comment on focus; Comment disabled while empty)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),
