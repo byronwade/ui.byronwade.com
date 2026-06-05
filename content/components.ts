@@ -36,6 +36,7 @@ export type ComponentDoc = {
     | "Media"
     | "Commerce"
     | "AI"
+    | "Market"
   description: string
   npmDeps?: string[]
   registryDeps?: string[]
@@ -3846,8 +3847,334 @@ export const components: ComponentDoc[] = [
     ],
     examples: ["default", "dismissible", "inline", "tones", "with-actions"],
   },
+  {
+    slug: "market",
+    name: "Market utils",
+    category: "Libraries",
+    description:
+      "Pure, DOM-free market helpers for the TradingView-style set: chart geometry (candles, depth, polyline/area paths), price/percent/volume formatting, change tones, and deterministic seeded mock generators (candles, quotes, order books, series).",
+    examples: [],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "sparkline",
+    name: "Sparkline",
+    category: "Market",
+    description:
+      "Compact inline trend chart (line or filled area) rendered from a numeric series; tone auto-derives from first→last value (success/destructive/muted) or is set explicitly (incl. brand).",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "price-change",
+    name: "Price change",
+    category: "Market",
+    description:
+      "Signed price/percent change with a runtime-derived tone (success/destructive/muted from sign + neutralThreshold) and trend caret. `format` absolute/percent/both, `size` sm/default/lg, and a `chip` variant for a tinted pill. Reused across the TradingView-style set.",
+    npmDeps: ["lucide-react"],
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "candlestick-chart",
+    name: "Candlestick chart",
+    category: "Market",
+    description:
+      "Token-themed OHLC candlestick chart rendered in-house as SVG: bullish candles success-toned, bearish destructive-toned, an optional bottom volume band, a background grid, and an optional crosshair. All geometry is computed by the pure `market` lib from numeric props, so it renders deterministically.",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "depth-chart",
+    name: "Depth chart",
+    category: "Market",
+    description:
+      "Token-themed market-depth chart rendered in-house as SVG: cumulative bid depth (success-toned) mirrored against cumulative ask depth (destructive-toned) about a dashed midline. All geometry is computed by the pure `market` lib (`cumulativeDepthPath`) from numeric props, so it renders deterministically.",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "order-book",
+    name: "Order book",
+    category: "Market",
+    description:
+      "Token-themed DOM ladder for bid/ask depth: proportional depth bars (success bid, destructive ask), a spread row, split or vertical layout, and optional row-click price selection. Defaults to a seeded book from the `market` lib.",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "heatmap-grid",
+    name: "Heatmap grid",
+    category: "Market",
+    description:
+      "Performance heatmap grid with cell area sized by weight and color toned by change magnitude — either success/destructive opacity buckets or the `--chart-1…5` ramp. Seeded defaults from the `market` lib; optional cell selection callback.",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "ticker-tape",
+    name: "Ticker tape",
+    category: "Market",
+    description:
+      "Horizontally scrolling market ticker marquee — composes the ticker primitive into a seamless loop with speed and pause controls.",
+    registryDeps: ["@byronwade/ticker", "@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "quote-header",
+    name: "Quote header",
+    category: "Market",
+    description:
+      "Symbol quote header — large mono price, price-change chip, optional sparkline, and metric-stat row for open/high/low/volume/mkt cap.",
+    registryDeps: [
+      "@byronwade/metric-stat",
+      "@byronwade/price-change",
+      "@byronwade/sparkline",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "chart-toolbar",
+    name: "Chart toolbar",
+    category: "Market",
+    description:
+      "Trading chart toolbar — symbol button, interval segmented-control, chart-type toggle group, and indicators action.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/button",
+      "@byronwade/segmented-control",
+      "@byronwade/toggle-group",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "chart-panel",
+    name: "Chart panel",
+    category: "Market",
+    description:
+      "Chart panel composite — chart-toolbar atop a candlestick chart (or sparkline fallback for line/area modes) with controlled/uncontrolled interval.",
+    registryDeps: [
+      "@byronwade/chart-toolbar",
+      "@byronwade/candlestick-chart",
+      "@byronwade/sparkline",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "watchlist",
+    name: "Watchlist",
+    category: "Market",
+    description:
+      "Market watchlist table — symbol rows with last price, price-change, sparkline, and volume columns; optional row selection.",
+    registryDeps: [
+      "@byronwade/table",
+      "@byronwade/price-change",
+      "@byronwade/sparkline",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "market-depth",
+    name: "Market depth",
+    category: "Market",
+    description:
+      "Market depth panel — stacks depth-chart over order-book (or shows either view alone) with shared book data and price-select passthrough.",
+    registryDeps: [
+      "@byronwade/depth-chart",
+      "@byronwade/order-book",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "order-entry",
+    name: "Order entry",
+    category: "Market",
+    description:
+      "Buy/sell order ticket — side tabs, order-type segmented control, qty input, money price field, computed total, and submit action.",
+    registryDeps: [
+      "@byronwade/tabs",
+      "@byronwade/segmented-control",
+      "@byronwade/money-input",
+      "@byronwade/input",
+      "@byronwade/button",
+      "@byronwade/label",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "position-card",
+    name: "Position card",
+    category: "Market",
+    description:
+      "Open position card — symbol, side badge, size/entry/mark, unrealized P&L via price-change, optional close action.",
+    registryDeps: [
+      "@byronwade/price-change",
+      "@byronwade/badge",
+      "@byronwade/button",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "positions-table",
+    name: "Positions table",
+    category: "Market",
+    description:
+      "Open positions table — side badges, mono numerals, P&L via price-change, optional footer aggregate and close/select callbacks.",
+    registryDeps: [
+      "@byronwade/table",
+      "@byronwade/price-change",
+      "@byronwade/badge",
+      "@byronwade/button",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "portfolio-summary",
+    name: "Portfolio summary",
+    category: "Market",
+    description:
+      "Portfolio overview — total value stat card, day change via price-change, equity sparkline, and token-tinted allocation bars.",
+    registryDeps: [
+      "@byronwade/metric-stat",
+      "@byronwade/stat-card",
+      "@byronwade/sparkline",
+      "@byronwade/price-change",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "trade-history",
+    name: "Trade history",
+    category: "Market",
+    description:
+      "Trade fills table — relative-time stamp, symbol, buy/sell badge, price, size, computed value, optional row select.",
+    registryDeps: [
+      "@byronwade/table",
+      "@byronwade/badge",
+      "@byronwade/relative-time",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "market-movers",
+    name: "Market movers",
+    category: "Market",
+    description:
+      "Gainers, losers, and most-active tabs — each row shows last price, price-change, and sparkline with optional symbol select.",
+    registryDeps: [
+      "@byronwade/tabs",
+      "@byronwade/price-change",
+      "@byronwade/sparkline",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "screener-table",
+    name: "Screener table",
+    category: "Market",
+    description:
+      "Market screener — index-filters views plus sortable index-table columns for price, change, volume, market cap, and sparkline.",
+    registryDeps: [
+      "@byronwade/index-filters",
+      "@byronwade/index-table",
+      "@byronwade/price-change",
+      "@byronwade/sparkline",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "economic-calendar",
+    name: "Economic calendar",
+    category: "Market",
+    description:
+      "Macro event calendar grouped by day — time, country, impact badge, and actual/forecast/prior mono readings.",
+    registryDeps: [
+      "@byronwade/badge",
+      "@byronwade/relative-time",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "market-news",
+    name: "Market news",
+    category: "Market",
+    description:
+      "News feed rows — source avatar, headline, relative-time, sentiment badge, and related-symbol price-change chips.",
+    registryDeps: [
+      "@byronwade/avatar",
+      "@byronwade/badge",
+      "@byronwade/relative-time",
+      "@byronwade/price-change",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "price-alert",
+    name: "Price alert",
+    category: "Market",
+    description:
+      "Price alert list — condition text, active/triggered status dot, enable switch, and optional delete action.",
+    registryDeps: [
+      "@byronwade/switch",
+      "@byronwade/badge",
+      "@byronwade/status-dot",
+      "@byronwade/button",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "symbol-search",
+    name: "Symbol search",
+    category: "Market",
+    description:
+      "Symbol command palette — grouped search results with price-change, keyboard hints, and cmdk filtering.",
+    npmDeps: ["cmdk"],
+    registryDeps: [
+      "@byronwade/command",
+      "@byronwade/kbd",
+      "@byronwade/price-change",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
 ]
-
 export const categories = [
   "Foundation",
   "Libraries",
@@ -3860,6 +4187,7 @@ export const categories = [
   "Data display",
   "Patterns",
   "Charts",
+  "Market",
   "House components",
   "Morph",
   "Media",

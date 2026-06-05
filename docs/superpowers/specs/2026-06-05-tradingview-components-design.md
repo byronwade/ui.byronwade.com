@@ -8,12 +8,12 @@ authored fully to the Design DNA and code conventions, with examples + tests for
 
 ## Decisions (confirmed)
 
-| Decision | Choice | Why |
-| --- | --- | --- |
-| Chart engine | **In-house SVG + CSS, token-themed** | Dark mode + `--brand` re-skin come free; zero new deps; matches the registry's token-only DNA. |
-| Data model | **Props + deterministic mock defaults** | Pure presentational, like the rest of the registry. No streaming/network. |
-| Scope | **Full set (23 components)** | One cohesive themed batch, the established pattern (YouTube / music / ecommerce). |
-| Branch | **`feat/tradingview-components` off `main`** | Isolated from `feat/youtube-components`. |
+| Decision     | Choice                                       | Why                                                                                            |
+| ------------ | -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Chart engine | **In-house SVG + CSS, token-themed**         | Dark mode + `--brand` re-skin come free; zero new deps; matches the registry's token-only DNA. |
+| Data model   | **Props + deterministic mock defaults**      | Pure presentational, like the rest of the registry. No streaming/network.                      |
+| Scope        | **Full set (23 components)**                 | One cohesive themed batch, the established pattern (YouTube / music / ecommerce).              |
+| Branch       | **`feat/tradingview-components` off `main`** | Isolated from `feat/youtube-components`.                                                       |
 
 ## Architecture
 
@@ -42,6 +42,7 @@ statements ≥95%, branches ≥90%, lines ≥96%). SVG in jsdom has no layout (`
 ## The set — 6 primitives + 17 composites = 23
 
 ### Primitives (`registry/ui/`)
+
 1. `sparkline` — micro line/area trend SVG.
 2. `candlestick-chart` — OHLC candles + volume bars (+ optional crosshair readout).
 3. `depth-chart` — cumulative bid/ask depth area.
@@ -50,25 +51,26 @@ statements ≥95%, branches ≥90%, lines ≥96%). SVG in jsdom has no layout (`
 6. `heatmap-grid` — performance grid, cells toned by metric.
 
 ### Composites (`registry/components/`) — bound to what they reuse
-| # | Component | Reuses |
-| --- | --- | --- |
-| 7 | `ticker-tape` | existing `ticker` (scrolling marquee) |
-| 8 | `quote-header` | `price-change`, `sparkline`, `metric-stat` |
-| 9 | `chart-toolbar` | `segmented-control`, `toggle-group`, `button` |
-| 10 | `chart-panel` | `chart-toolbar`, `candlestick-chart` |
-| 11 | `watchlist` | `table`, `price-change`, `sparkline` |
-| 12 | `market-depth` | `order-book`, `depth-chart` |
-| 13 | `order-entry` | `tabs`, `segmented-control`, `money-input`, `button` |
-| 14 | `position-card` | `price-change`, `badge`/`status-dot` |
-| 15 | `positions-table` | `table`, `price-change` |
-| 16 | `portfolio-summary` | `metric-stat`, `stat-card`, `sparkline` |
-| 17 | `market-movers` | `tabs`, `sparkline`, `price-change` |
-| 18 | `screener-table` | existing `index-filters`, `index-table`, `price-change` |
-| 19 | `economic-calendar` | list, `badge`, `relative-time` |
-| 20 | `market-news` | list, `avatar`, `relative-time`, `price-change` |
-| 21 | `price-alert` | `switch`, `badge`, `price-change` |
-| 22 | `trade-history` | `table`, `price-change`, `relative-time` |
-| 23 | `symbol-search` | `command` (cmdk), `price-change`, `kbd` |
+
+| #   | Component           | Reuses                                                  |
+| --- | ------------------- | ------------------------------------------------------- |
+| 7   | `ticker-tape`       | existing `ticker` (scrolling marquee)                   |
+| 8   | `quote-header`      | `price-change`, `sparkline`, `metric-stat`              |
+| 9   | `chart-toolbar`     | `segmented-control`, `toggle-group`, `button`           |
+| 10  | `chart-panel`       | `chart-toolbar`, `candlestick-chart`                    |
+| 11  | `watchlist`         | `table`, `price-change`, `sparkline`                    |
+| 12  | `market-depth`      | `order-book`, `depth-chart`                             |
+| 13  | `order-entry`       | `tabs`, `segmented-control`, `money-input`, `button`    |
+| 14  | `position-card`     | `price-change`, `badge`/`status-dot`                    |
+| 15  | `positions-table`   | `table`, `price-change`                                 |
+| 16  | `portfolio-summary` | `metric-stat`, `stat-card`, `sparkline`                 |
+| 17  | `market-movers`     | `tabs`, `sparkline`, `price-change`                     |
+| 18  | `screener-table`    | existing `index-filters`, `index-table`, `price-change` |
+| 19  | `economic-calendar` | list, `badge`, `relative-time`                          |
+| 20  | `market-news`       | list, `avatar`, `relative-time`, `price-change`         |
+| 21  | `price-alert`       | `switch`, `badge`, `price-change`                       |
+| 22  | `trade-history`     | `table`, `price-change`, `relative-time`                |
+| 23  | `symbol-search`     | `command` (cmdk), `price-change`, `kbd`                 |
 
 **Dropped** (no behavior over an existing primitive): `interval-tabs` (use `segmented-control`
 inline), `symbol-tag` (use `badge`/`avatar` inline).
@@ -101,7 +103,13 @@ default render, every variant/size/state, every interaction (clicks/keyboard/cal
 - **DNA:** tokens only, `data-slot` on every part, `cn()` + `className` passthrough, CVA for
   variants, editorial typography (`font-mono` for prices/stats/IDs), Base UI primitives.
 
-## Out of scope
+## Out of scope (Phase 1)
 
 - Live data, websockets, broker integration, Pine Script, drawing tools, multi-chart layouts.
 - New third-party dependencies.
+
+## Phase 2
+
+Phase 1 deliberately stopped at 23 components. A TradingView UI audit for follow-on work lives in
+`docs/superpowers/specs/2026-06-05-tradingview-phase2-audit.md` (prioritized: time & sales, volume
+profile, symbol details, chart layout grid, indicator legend, drawing toolbar, options chain, …).

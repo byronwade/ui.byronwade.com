@@ -43,18 +43,18 @@ Design spec: `docs/superpowers/specs/2026-06-05-tradingview-components-design.md
 For component `<slug>` of kind `<ui|component>`:
 
 - [ ] **S1 — Write the failing test** at `tests/components/<slug>.test.tsx`. Must cover: default render
-  (mounts, root has `data-slot`), **every** prop variant/size/visual state listed in the task, **every**
-  interaction (click/keyboard/callback) listed, and `axe` (`expect(await axe(container)).toHaveNoViolations()`).
+      (mounts, root has `data-slot`), **every** prop variant/size/visual state listed in the task, **every**
+      interaction (click/keyboard/callback) listed, and `axe` (`expect(await axe(container)).toHaveNoViolations()`).
 - [ ] **S2 — Run it, confirm it fails:** `npm run test:run -- <slug>` → FAIL (module not found).
 - [ ] **S3 — Write the source** at `registry/ui/<slug>.tsx` or `registry/components/<slug>.tsx` per the
-  task's API + reuse, honoring all hard constraints. Compute any geometry via `@/lib/market`.
+      task's API + reuse, honoring all hard constraints. Compute any geometry via `@/lib/market`.
 - [ ] **S4 — Add the `registry.json` item** (copy a sibling item's shape): `name`, `type`
-  (`registry:ui`/`registry:component`), `title`, `description`, `files` (`path`, `type`, `target`),
-  `registryDependencies` (`@byronwade/foundation`, `@byronwade/utils`, plus each reused item as
-  `@byronwade/<name>`, and `@byronwade/market` for chart users), `dependencies` (npm, e.g. `lucide-react`).
-  Never edit the auto-generated `all` item.
+      (`registry:ui`/`registry:component`), `title`, `description`, `files` (`path`, `type`, `target`),
+      `registryDependencies` (`@byronwade/foundation`, `@byronwade/utils`, plus each reused item as
+      `@byronwade/<name>`, and `@byronwade/market` for chart users), `dependencies` (npm, e.g. `lucide-react`).
+      Never edit the auto-generated `all` item.
 - [ ] **S5 — Add the example** `content/examples/<slug>/default.tsx` (a realistic standalone render with a
-  definite width wrapper — see memory: centering-flex collapses `w-full` children to 0).
+      definite width wrapper — see memory: centering-flex collapses `w-full` children to 0).
 - [ ] **S6 — Add the rule line** — append `<slug>` to the correct list in `registry/rules/byronwade-ui.mdc`.
 - [ ] **S7 — Run it, confirm pass:** `npm run test:run -- <slug>` → PASS.
 
@@ -65,8 +65,8 @@ For component `<slug>` of kind `<ui|component>`:
 - [ ] `npm run build` → typechecks (test:ci skips types; build catches server/client + `size`-prop traps).
 - [ ] `npm run test:ci` → full suite + coverage thresholds green.
 - [ ] Commit with explicit paths only (never `git add -A`):
-  `git add registry/ registry.json content/examples/<each> tests/components/<each> registry/rules/byronwade-ui.mdc`
-  then `git commit -m "feat(tradingview): batch N — <title>"` ending with the Co-Authored-By trailer.
+      `git add registry/ registry.json content/examples/<each> tests/components/<each> registry/rules/byronwade-ui.mdc`
+      then `git commit -m "feat(tradingview): batch N — <title>"` ending with the Co-Authored-By trailer.
 
 ---
 
@@ -112,17 +112,20 @@ This lib is coverage-excluded but MUST be unit-tested for correctness (geometry 
 - [ ] **Step 5 — Add `registry.json` item** for `market` (shape like the `video-player-utils` lib item).
 
 ### Task 2: `sparkline` (primitive)
+
 **Reuse:** `@/lib/market` (`seriesToPolyline`/`seriesToAreaPath`, `toneForChange`).
 **API:** `data: number[]`, `variant?: "line" | "area"` (cva, default `line`), `tone?: "auto" | "success" | "destructive" | "muted" | "brand"` (default `auto` — derived from first vs last value), `width?`/`height?` (default 96×32), `strokeWidth?`, `className`. Renders one `<svg data-slot="sparkline">` with a `<title>` (unique `useId`) for a11y.
 **Tests must cover:** default render; `variant="area"` (path has fill); each `tone`; `auto` tone resolves up→success / down→destructive; empty `data` renders an empty svg without crashing; custom width/height applied; axe.
 
 ### Task 3: `price-change` (primitive)
+
 **Reuse:** `@/lib/market` (`formatPrice`/`formatPercent`/`toneForChange`), `lucide-react` (caret icons).
 **API:** `value: number`, `percent?: number`, `format?: "absolute" | "percent" | "both"` (default `both`),
 `size?: "sm" | "default" | "lg"` (cva), `variant?: "text" | "chip"` (cva — chip = tinted `bg-success/10`/`bg-destructive/10` pill), `showIcon?` (default true), `neutralThreshold?` (default 0 → values within → muted, no icon), `className`. Caret up/down/flat from sign; `font-mono`. Root `data-slot="price-change"`, `aria-label` describing direction + value.
 **Tests must cover:** positive→success + up caret; negative→destructive + down caret; zero/within-threshold→muted + no caret; each `format` (absolute/percent/both); each `size`; `variant="chip"` tint; `showIcon={false}`; axe.
 
 ### Task 4: `candlestick-chart` (primitive)
+
 **Reuse:** `@/lib/market` (`candleGeometry`, `linearScale`, `formatPrice`).
 **API:** `data: Candle[]` (default seeded `makeCandles`), `width?`/`height?` (default 480×280),
 `showVolume?` (default true — volume bars in a bottom band), `showGrid?` (default true),
@@ -136,6 +139,7 @@ custom width/height; axe. (Crosshair: if implemented, gate it behind `showCrossh
 renders/omits the crosshair layer — do NOT depend on getBoundingClientRect values.)
 
 ### Task 5: `depth-chart` (primitive)
+
 **Reuse:** `@/lib/market` (`cumulativeDepthPath`, `linearScale`, `formatPrice`/`formatCompact`).
 **API:** `bids: OrderBookLevel[]`, `asks: OrderBookLevel[]` (defaults via `makeOrderBook`), `width?`/`height?`
 (default 480×200), `showMidline?` (default true), `className`. Bid area `fill-success/15` + `stroke-success`,
@@ -144,6 +148,7 @@ ask area `fill-destructive/15` + `stroke-destructive`. Root `data-slot="depth-ch
 `showMidline={false}` hides midline; custom dims; axe.
 
 ### Task 6: `order-book` (primitive)
+
 **Reuse:** `@/lib/market` (`formatPrice`/`formatCompact`), `@/lib/utils`.
 **API:** `bids: OrderBookLevel[]`, `asks: OrderBookLevel[]` (defaults via `makeOrderBook`),
 `depth?` (rows per side, default 8), `layout?: "split" | "vertical"` (cva — split = asks left/bids right;
@@ -161,6 +166,7 @@ clicking a row calls `onSelectPrice` with that price; both layouts; `depth` prop
 # Batch 2 — Chart & watch
 
 ### Task 7: `heatmap-grid` (primitive)
+
 **Reuse:** `@/lib/market` (`toneForChange`, `formatPercent`), `@/lib/utils`.
 **API:** `cells: HeatmapCell[]` (default seeded), `metric?: "change"` , `columns?` (default auto from count),
 `scale?: "tone" | "chart"` (cva — `tone` = success/destructive opacity by magnitude; `chart` = `--chart-1…5`),
@@ -171,6 +177,7 @@ clicking a row calls `onSelectPrice` with that price; both layouts; `depth` prop
 differs between small and large change; axe.
 
 ### Task 8: `ticker-tape` (composite)
+
 **Reuse:** existing `ticker` (`@byronwade/ticker`), `@/lib/market`.
 **API:** `items: Quote[]` (default seeded), `speed?: "slow" | "default" | "fast"` (cva → animation-duration via
 inline style or class), `paused?` (default false), `className`. A horizontally scrolling marquee (CSS keyframes
@@ -180,6 +187,7 @@ duplicated track for seamless loop, `motion-reduce:animate-none`). Each item com
 each speed maps to its duration class; `motion-reduce` class present; axe.
 
 ### Task 9: `quote-header` (composite)
+
 **Reuse:** `price-change`, `sparkline`, `metric-stat`, `@/lib/market`.
 **API:** `quote: Quote` (default seeded), `stats?: { label: string; value: string }[]` (open/high/low/vol/mktcap),
 `spark?: number[]`, `size?: "default" | "lg"` (cva), `className`. Big `font-mono` price, `price-change` for
@@ -188,6 +196,7 @@ change+percent, optional `sparkline`, a `metric-stat` row (or grid) for stats. R
 sparkline shown when `spark` given / omitted otherwise; each size; axe.
 
 ### Task 10: `chart-toolbar` (composite)
+
 **Reuse:** `segmented-control`, `toggle-group`, `button`, `lucide-react`.
 **API:** `symbol: string`, `interval: string`, `intervals?: string[]` (default `["1m","5m","15m","1H","1D","1W"]`),
 `onIntervalChange?: (i: string) => void`, `chartType?: "candles" | "line" | "area"`,
@@ -198,6 +207,7 @@ chart-type toggle calls `onChartTypeChange`; symbol button calls `onSymbolClick`
 custom `intervals` render; axe.
 
 ### Task 11: `chart-panel` (composite)
+
 **Reuse:** `chart-toolbar`, `candlestick-chart`, `@/lib/market`.
 **API:** `symbol`, `quote?: Quote`, `data?: Candle[]` (default seeded), `interval?` (default `"1D"`),
 controlled-or-uncontrolled interval (internal `useState` fallback when `onIntervalChange` absent),
@@ -208,6 +218,7 @@ Root `data-slot="chart-panel"`.
 updates the active button; controlled `interval`+`onIntervalChange` calls handler and reflects prop; axe.
 
 ### Task 12: `watchlist` (composite)
+
 **Reuse:** `table`, `price-change`, `sparkline`, `@/lib/market`.
 **API:** `items: Quote[]` (default seeded), `columns?: ("price" | "change" | "spark" | "volume")[]`
 (default all), `onSelect?: (symbol: string) => void`, `selectedSymbol?`, `dense?` (cva), `className`.
@@ -217,6 +228,7 @@ A `table` of rows: symbol/name, last (`font-mono`), `price-change`, `sparkline`,
 highlights that row; column subset hides others; `dense` class; change tone via price-change; axe.
 
 ### Task 13: `market-depth` (composite)
+
 **Reuse:** `order-book`, `depth-chart`, `@/lib/market`.
 **API:** `bids`, `asks` (defaults via `makeOrderBook`), `view?: "both" | "book" | "chart"` (cva, default both),
 `depth?`, `onSelectPrice?`, `className`. Stacks `depth-chart` over `order-book` (or shows only one per `view`).
@@ -231,6 +243,7 @@ Root `data-slot="market-depth"`.
 # Batch 3 — Trading
 
 ### Task 14: `order-entry` (composite)
+
 **Reuse:** `tabs`, `segmented-control`, `money-input`, `input`, `button`, `label`, `@/lib/market`.
 **API:** `symbol: string`, `lastPrice?: number`, `defaultSide?: "buy" | "sell"`,
 `onSubmit?: (order: { side; type; qty; price?; total }) => void`, `className`. Buy/Sell `tabs` (buy tab
@@ -242,6 +255,7 @@ field (Market disables it); typing qty/price updates the computed total; submit 
 assembled order object (assert side, type, qty, total); axe.
 
 ### Task 15: `position-card` (composite)
+
 **Reuse:** `price-change`, `badge`, `status-dot` (or `badge`), `@/lib/market`.
 **API:** `position: Position` (default seeded), `onClose?: (symbol: string) => void`, `className`.
 Card: symbol + side badge (`long`→success tint, `short`→destructive tint), size/entry/mark (`font-mono`),
@@ -250,6 +264,7 @@ unrealized P&L via `price-change`, optional close button. Root `data-slot="posit
 P&L, loss→destructive; close button calls `onClose` with symbol (and is absent without handler); axe.
 
 ### Task 16: `positions-table` (composite)
+
 **Reuse:** `table`, `price-change`, `badge`, `@/lib/market`.
 **API:** `positions: Position[]` (default seeded), `onSelect?`, `onClose?`, `showFooter?` (default true —
 aggregate P&L row), `className`. Table: symbol, side badge, size, entry, mark, P&L (`price-change`), close.
@@ -258,6 +273,7 @@ Footer totals via `font-mono`. Root `data-slot="positions-table"`; rows `data-sl
 when `showFooter` (absent when false); row click → `onSelect`; close click → `onClose`; axe.
 
 ### Task 17: `portfolio-summary` (composite)
+
 **Reuse:** `metric-stat`, `stat-card`, `sparkline`, `price-change`, `@/lib/market`.
 **API:** `totalValue: number`, `dayChange: number`, `dayChangePercent: number`, `spark?: number[]`,
 `allocations?: { label: string; percent: number }[]`, `className`. Big total (`font-mono`), day `price-change`,
@@ -266,6 +282,7 @@ equity-curve `sparkline`, allocation bars (token-tinted, brand for primary). Roo
 allocation bars render one per entry with width from percent; axe.
 
 ### Task 18: `trade-history` (composite)
+
 **Reuse:** `table`, `price-change`, `badge`, `relative-time`, `@/lib/market`.
 **API:** `trades: Trade[]` (default seeded), `onSelect?`, `className`. Table: time (`relative-time`),
 symbol, side badge (buy→success / sell→destructive tint), price, size, value (`font-mono`).
@@ -280,6 +297,7 @@ row click → `onSelect` with trade id; relative-time rendered; axe.
 # Batch 4 — Discovery
 
 ### Task 19: `market-movers` (composite)
+
 **Reuse:** `tabs`, `sparkline`, `price-change`, `@/lib/market`.
 **API:** `gainers: MoverRow[]`, `losers: MoverRow[]`, `active: MoverRow[]` (defaults seeded),
 `onSelect?: (symbol) => void`, `className`. `tabs` for Gainers/Losers/Active; each tab a list of rows
@@ -288,6 +306,7 @@ row click → `onSelect` with trade id; relative-time rendered; axe.
 switching to Active shows active rows; row click → `onSelect`; price-change tone per row; axe.
 
 ### Task 20: `screener-table` (composite)
+
 **Reuse:** existing `index-filters` + `index-table` (read them first), `price-change`, `sparkline`, `@/lib/market`.
 **API:** `rows: ScreenerRow[]` (default seeded), `filters?` (sector/market-cap pills via `index-filters`),
 `onSelect?`, `sortBy?`/`onSortChange?`, `className`. Columns: symbol, price, change (`price-change`),
@@ -296,6 +315,7 @@ volume, mkt cap, sparkline. Root `data-slot="screener-table"`.
 clicking a sortable header calls `onSortChange` / reorders; row click → `onSelect`; change tone; axe.
 
 ### Task 21: `economic-calendar` (composite)
+
 **Reuse:** `badge`, `relative-time`, `status-dot`, `@/lib/market` (`MarketEvent`).
 **API:** `events: MarketEvent[]` (default seeded), `onSelect?`, `className`. List grouped by day; each row:
 time, country (text/code), event name, impact badge (low/med/high → muted/`bg-warning/15`/`bg-destructive/15`),
@@ -304,6 +324,7 @@ actual/forecast/prior (`font-mono`). Root `data-slot="economic-calendar"`; rows 
 row click → `onSelect`; day grouping headers render; axe.
 
 ### Task 22: `market-news` (composite)
+
 **Reuse:** `avatar`, `relative-time`, `badge`, `price-change`, `@/lib/market` (`NewsItem`).
 **API:** `items: NewsItem[]` (default seeded), `onSelect?`, `compact?` (cva), `className`. List rows: source
 avatar, headline, relative-time, related-symbol chips with `price-change`, optional sentiment badge
@@ -313,6 +334,7 @@ rows `data-slot="news-item"`.
 related symbol chip change tone; `compact` class; row click → `onSelect`; axe.
 
 ### Task 23: `price-alert` (composite)
+
 **Reuse:** `switch`, `badge`, `price-change`, `status-dot`, `@/lib/market` (`Alert`).
 **API:** `alerts: Alert[]` (default seeded), `onToggle?: (id, enabled) => void`, `onDelete?: (id) => void`,
 `className`. List rows: symbol, condition (e.g. "Price ≥ 230.00", `font-mono`), status `status-dot`
@@ -323,6 +345,7 @@ delete button calls `onDelete` with id; triggered vs active status-dot/state cla
 axe.
 
 ### Task 24: `symbol-search` (composite)
+
 **Reuse:** `command` (cmdk, read `registry/ui/command.tsx`), `price-change`, `kbd`, `avatar`, `@/lib/market`.
 **API:** `symbols: Quote[]` (default seeded), `onSelect?: (symbol) => void`, `placeholder?`,
 `groups?` (e.g. Stocks/Crypto/Forex), `className`. A `command` palette: search input, grouped results
@@ -338,11 +361,18 @@ groups render; empty-query/empty-result state; axe. (Heed memory: cmdk uses `dat
 
 ## Final verification (after Batch 4)
 
-- [ ] `npm run validate` — registry + examples + rule sync + test-file presence all green.
-- [ ] `npm run build` — full typecheck passes.
-- [ ] `npm run test:ci` — suite + coverage thresholds green.
-- [ ] `git log --oneline main..HEAD` shows the spec commit + 4 batch commits.
-- [ ] Invoke `superpowers:finishing-a-development-branch` to decide merge/PR.
+- [x] `npm run validate` — registry + examples + rule sync + test-file presence all green.
+- [x] `npm run build` — full typecheck passes.
+- [x] `npm run test:ci` — suite + coverage thresholds green.
+- [x] `git log --oneline main..HEAD` shows the spec commit + 4 batch commits.
+- [x] Docs catalog — 24 `Market` entries in `content/components.ts`; `npm run gen:llms` + `npm run gen:mcp-data`.
+- [x] Phase 2 audit — `docs/superpowers/specs/2026-06-05-tradingview-phase2-audit.md`.
+- [ ] Open PR → `main`; follow `superpowers:finishing-a-development-branch` after review.
+
+## Phase 2
+
+See `docs/superpowers/specs/2026-06-05-tradingview-phase2-audit.md` for prioritized gaps
+(`time-and-sales`, `volume-profile`, `symbol-details`, …).
 
 ## Self-review notes (done by author)
 
