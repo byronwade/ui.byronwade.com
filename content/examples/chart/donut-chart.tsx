@@ -58,7 +58,7 @@ export default function Example() {
                 if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) return null
                 return (
                   <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                    <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-2xl font-bold">
+                    <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-2xl font-medium">
                       {total}
                     </tspan>
                     <tspan x={viewBox.cx} y={(viewBox.cy ?? 0) + 18} className="fill-muted-foreground text-xs">

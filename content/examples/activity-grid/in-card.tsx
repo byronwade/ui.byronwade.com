@@ -21,7 +21,7 @@ export default function Example() {
           <p className="text-sm font-semibold">Contributions</p>
           <p className="text-xs text-muted-foreground">Last 6 months</p>
         </div>
-        <span className="text-2xl font-bold tabular-nums">{totalCount.toLocaleString()}</span>
+        <span className="text-2xl font-medium tabular-nums">{totalCount.toLocaleString()}</span>
       </div>
 
       <ActivityGrid data={weeklyData} columns={26} />
