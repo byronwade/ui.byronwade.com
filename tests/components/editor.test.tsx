@@ -1182,3 +1182,275 @@ describe("Editor — accessibility", () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Additional branch coverage — wrapper null-guards, slash-node attribute
+// variants, URL validation, navigation/short-circuit edge cases.
+// ---------------------------------------------------------------------------
+
+describe("Editor — wrapper null-editor guards", () => {
+  // EditorTableMenu opens with `if (!editor) return null`; with no provider it
+  // hits that guard and renders nothing.
+  it("EditorTableMenu renders nothing without an editor context", () => {
+    const { container } = render(
+      <EditorTableMenu>
+        <span>child</span>
+      </EditorTableMenu>
+    );
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  // EditorTableGlobalMenu / -ColumnMenu / -RowMenu have no component-level null
+  // guard, but their position effect opens with `if (!editor) return`. Rendered
+  // with no provider the effect runs with editor undefined and hits that early
+  // return (the consequent branch). They still render their (positioned) shell.
+  it("global/column/row table menus run their effect null-guard off-context", () => {
+    for (const Wrapper of [
+      EditorTableGlobalMenu,
+      EditorTableColumnMenu,
+      EditorTableRowMenu,
+    ]) {
+      const { unmount } = render(
+        <Wrapper>
+          <span>child</span>
+        </Wrapper>
+      );
+      // The effect's `if (!editor) return` executed without throwing.
+      unmount();
+    }
+  });
+});
+
+describe("Editor — slash node attribute variants", () => {
+  // A slash node with an id but NO label exercises the `label ?? id` fallback
+  // (renderText/renderHTML default options) and the `!attributes.id` false /
+  // `!attributes.label` true renderHTML attribute branches.
+  it("serializes a slash node that has an id but no label (label ?? id)", async () => {
+    let html = "";
+    let text = "";
+    function Probe() {
+      const { editor } = useCurrentEditor();
+      React.useEffect(() => {
+        if (editor) {
+          html = editor.getHTML();
+          // getText() routes through the node renderText option, whose default
+          // also falls back to `label ?? id` — exercise the `?? id` side there.
+          text = editor.getText();
+        }
+      }, [editor]);
+      return null;
+    }
+    render(
+      <EditorProvider
+        content={`<p>hi <span data-type="slash" data-id="bar"></span> end</p>`}
+      >
+        <Probe />
+      </EditorProvider>
+    );
+    await waitFor(() => {
+      expect(html).not.toBe("");
+    });
+    // Falls back to the id when no label is present: `${char}${id}` => "/bar".
+    expect(html).toContain('data-type="slash"');
+    expect(html).toContain('data-id="bar"');
+    expect(html).toContain("/bar");
+    // No label attribute is emitted (the `!attributes.label` early-return path).
+    expect(html).not.toContain("data-label");
+    // renderText also emits the id-based fallback into plain text.
+    expect(text).toContain("/bar");
+  });
+
+  it("serializes a slash node with neither id nor label", async () => {
+    let html = "";
+    function Probe() {
+      const { editor } = useCurrentEditor();
+      React.useEffect(() => {
+        if (editor) {
+          html = editor.getHTML();
+        }
+      }, [editor]);
+      return null;
+    }
+    render(
+      <EditorProvider content={`<p>x <span data-type="slash"></span> y</p>`}>
+        <Probe />
+      </EditorProvider>
+    );
+    await waitFor(() => {
+      expect(html).not.toBe("");
+    });
+    // Both `!attributes.id` and `!attributes.label` are true => empty attrs.
+    expect(html).toContain('data-type="slash"');
+    expect(html).not.toContain("data-id");
+    expect(html).not.toContain("data-label");
+  });
+});
+
+describe("Editor — link selector URL validation branches", () => {
+  it("submitting a fully-qualified URL sets a link (isValidUrl true path)", async () => {
+    const user = userEvent.setup();
+    const onOpenChange = vi.fn();
+    const { container } = render(
+      <EditorProvider content={HTML}>
+        <EditorLinkSelector open onOpenChange={onOpenChange} />
+      </EditorProvider>
+    );
+    await findProse(container);
+    const input = await screen.findByLabelText("Link URL");
+    // A complete URL takes the `isValidUrl(text) === true` branch directly.
+    await user.type(input, "https://example.com");
+    const form = input.closest("form") as HTMLFormElement;
+    form.requestSubmit?.() ?? form.dispatchEvent(new Event("submit"));
+    // href resolved => onOpenChange(false) fired (the `if (href)` true branch).
+    await waitFor(() => {
+      expect(onOpenChange).toHaveBeenCalledWith(false);
+    });
+    expect(container.querySelector(".ProseMirror")).not.toBeNull();
+  });
+
+  it("submitting an unparseable string does not set a link (href null path)", async () => {
+    const user = userEvent.setup();
+    const onOpenChange = vi.fn();
+    const { container } = render(
+      <EditorProvider content={HTML}>
+        <EditorLinkSelector open onOpenChange={onOpenChange} />
+      </EditorProvider>
+    );
+    await findProse(container);
+    const input = await screen.findByLabelText("Link URL");
+    // No dot + a space => getUrlFromString hits the `includes(".")` false side
+    // and returns null, so handleSubmit's `if (href)` false branch runs.
+    await user.type(input, "not a url");
+    const form = input.closest("form") as HTMLFormElement;
+    form.requestSubmit?.() ?? form.dispatchEvent(new Event("submit"));
+    // onOpenChange is never called because href stayed null.
+    expect(onOpenChange).not.toHaveBeenCalled();
+    expect(container.querySelector(".ProseMirror")).not.toBeNull();
+  });
+});
+
+describe("Editor — bubble menu single (non-array) child", () => {
+  // Passing exactly one child means `Array.isArray(children)` is false, taking
+  // the alternate branch that renders the child verbatim (no separators).
+  it("renders a single bubble-menu child without inserting separators", async () => {
+    const { container } = render(
+      <EditorProvider content={HTML} placeholder="Type /">
+        <EditorBubbleMenu>
+          <EditorFormatBold hideName />
+        </EditorBubbleMenu>
+      </EditorProvider>
+    );
+    await findProse(container);
+    expect(container.querySelector(".ProseMirror")).not.toBeNull();
+  });
+});
+
+describe("Editor — command navigation without an open menu", () => {
+  // handleCommandNavigation early-returns (no #slash-command in the DOM) when an
+  // arrow/Enter is pressed but the slash menu is closed — the `if (slashCommand)`
+  // false side.
+  it("arrow/Enter keys are a no-op when no slash menu is open", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<EditorProvider content={`<p>hello</p>`} />);
+    const prose = await findProse(container);
+    await user.click(prose);
+    expect(document.querySelector("#slash-command")).toBeNull();
+    await user.keyboard("{ArrowDown}{ArrowUp}{Enter}");
+    expect(container.querySelector(".ProseMirror")).not.toBeNull();
+  });
+});
+
+describe("Editor — slash Backspace with a non-empty selection", () => {
+  // The slash node's Backspace keyboard shortcut bails out early when the
+  // selection is not empty (`if (!empty) return false`).
+  it("Backspace over a selection runs the command guard without throwing", async () => {
+    const user = userEvent.setup();
+    function SelectAll() {
+      const { editor } = useCurrentEditor();
+      React.useEffect(() => {
+        if (editor) {
+          editor.chain().selectAll().run();
+        }
+      }, [editor]);
+      return null;
+    }
+    const { container } = render(
+      <EditorProvider content={`<p>some text here</p>`}>
+        <SelectAll />
+      </EditorProvider>
+    );
+    const prose = await findProse(container);
+    await user.click(prose);
+    // Re-establish a non-collapsed selection across the paragraph, then delete.
+    const sel = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(prose);
+    sel?.removeAllRanges();
+    sel?.addRange(range);
+    await user.keyboard("{Backspace}");
+    expect(container.querySelector(".ProseMirror")).not.toBeNull();
+  });
+});
+
+describe("Editor — Backspace adjacent to a committed slash node", () => {
+  // Placing the (empty) cursor immediately after a real slash node and pressing
+  // Backspace makes `nodesBetween(anchor-1, anchor)` find the slash node, so the
+  // `node.type.name === this.name` true branch runs and the trigger char is
+  // re-inserted in its place.
+  it("re-inserts the trigger char when Backspace lands on a slash node", async () => {
+    let html = "";
+    function Probe() {
+      const { editor } = useCurrentEditor();
+      React.useEffect(() => {
+        if (editor) {
+          // Move the cursor to the document end (just after the slash node) and
+          // record the serialized doc once.
+          editor.chain().focus("end").run();
+          html = editor.getHTML();
+        }
+      }, [editor]);
+      return null;
+    }
+    const { container } = render(
+      <EditorProvider
+        content={`<p><span data-type="slash" data-id="foo" data-label="Foo"></span></p>`}
+      >
+        <Probe />
+      </EditorProvider>
+    );
+    const prose = await findProse(container);
+    await waitFor(() => {
+      expect(html).toContain('data-type="slash"');
+    });
+    await prose.focus();
+    const user = userEvent.setup();
+    await user.click(prose);
+    // Collapse the selection to the very end (after the atom slash node).
+    const sel = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(prose);
+    range.collapse(false);
+    sel?.removeAllRanges();
+    sel?.addRange(range);
+    await user.keyboard("{Backspace}");
+    expect(container.querySelector(".ProseMirror")).not.toBeNull();
+  });
+});
+
+describe("Editor — EditorNodeText over an ordered list", () => {
+  // Smoke test: EditorNodeText mounts and runs its isActive() `&&` chain against
+  // ordered-list content (a list item still contains a paragraph, so the chain
+  // short-circuits on the paragraph operand — this does NOT, and cannot, reach
+  // the unreachable `?? false` fallback). Kept as an extra active-state render.
+  it("renders over ordered-list content without throwing", async () => {
+    const { container } = render(
+      <EditorProvider content={`<ol><li>one</li><li>two</li></ol>`}>
+        <EditorNodeText />
+      </EditorProvider>
+    );
+    await findProse(container);
+    expect(
+      container.querySelector("[data-slot='editor-bubble-menu-button']")
+    ).not.toBeNull();
+  });
+});

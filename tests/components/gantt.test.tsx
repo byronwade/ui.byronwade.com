@@ -16,6 +16,7 @@ import { addDays, startOfMonth, subDays } from "date-fns";
 import { Provider as JotaiProvider } from "jotai";
 
 import {
+  GanttAddFeatureHelper,
   GanttColumns,
   GanttControls,
   GanttCreateMarkerTrigger,
@@ -674,6 +675,314 @@ describe("gantt — controls", () => {
     }
     expect(screen.getByText("50%")).toBeInTheDocument();
     expect(out).toBeDisabled();
+  });
+});
+
+describe("gantt — getWidth date branches", () => {
+  // daily range, startAt === endAt → differenceInDays is 0 → falls back to `1`.
+  it("daily same-day feature falls back to a single-column width", () => {
+    const sameDay = addDays(monthStart, 4);
+    const feat: GanttFeature = {
+      id: "d",
+      name: "Day spike",
+      startAt: sameDay,
+      endAt: sameDay,
+      status: { id: "s", name: "S", color: "bg-brand" },
+    };
+    const { container } = render(
+      <GanttProvider range="daily">
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttFeatureItem {...feat} />
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    expect(
+      container.querySelector('[data-slot="gantt-feature-item-card"]')
+    ).not.toBeNull();
+  });
+
+  // monthly range, startAt === endAt → isSameDay(startAt, endAt) true branch.
+  it("monthly same-day feature uses the single-day width branch", () => {
+    const sameDay = addDays(monthStart, 6);
+    const feat: GanttFeature = {
+      id: "ms",
+      name: "Same day",
+      startAt: sameDay,
+      endAt: sameDay,
+      status: { id: "s", name: "S", color: "bg-brand" },
+    };
+    const { container } = render(
+      <GanttProvider range="monthly">
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttFeatureItem {...feat} />
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    expect(
+      container.querySelector('[data-slot="gantt-feature-item-card"]')
+    ).not.toBeNull();
+  });
+
+  // monthly range, start & end in the SAME month but different days →
+  // isSameDay(startOf(startAt), startOf(endAt)) true (inner-difference branch).
+  it("monthly same-month span uses the inner-difference width branch", () => {
+    const start = startOfMonth(new Date());
+    const feat: GanttFeature = {
+      id: "mm",
+      name: "Same month",
+      startAt: addDays(start, 2),
+      endAt: addDays(start, 9),
+      status: { id: "s", name: "S", color: "bg-brand" },
+    };
+    const { container } = render(
+      <GanttProvider range="monthly">
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttFeatureItem {...feat} />
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    expect(
+      container.querySelector('[data-slot="gantt-feature-item-card"]')
+    ).not.toBeNull();
+  });
+});
+
+describe("gantt — null endAt (open-ended feature)", () => {
+  // With no GanttProvider the component reads the DEFAULT context
+  // (ref: null, timelineData: []). That exercises three fallbacks at once:
+  //   • getWidth `!endAt` → width = columnWidth * 2  (b14)
+  //   • timelineData.at(0)?.year ?? 0                (b48)
+  //   • right drag-helper date `endAt ?? addRange`   (b58)
+  // and gives us a handle on the drag callbacks whose ganttRect is undefined.
+  const openFeature = {
+    id: "open",
+    name: "Open ended",
+    startAt: monthStart,
+    endAt: null as unknown as Date,
+    status: { id: "s", name: "S", color: "bg-brand" },
+  } as unknown as GanttFeature;
+
+  it("renders an open-ended bar (null endAt) with drag handles", () => {
+    const onMove = vi.fn();
+    const { container } = render(
+      <GanttFeatureList>
+        <GanttFeatureItem {...openFeature} onMove={onMove} />
+      </GanttFeatureList>
+    );
+    const card = container.querySelector(
+      '[data-slot="gantt-feature-item-card"]'
+    );
+    expect(card).not.toBeNull();
+    // left + right resize handles present.
+    expect(
+      container.querySelectorAll('[data-slot="gantt-feature-drag-helper"]')
+        .length
+    ).toBe(2);
+  });
+
+  // The drag math (getDateByMousePosition) dereferences timelineData[0], so the
+  // drag callbacks must run inside a provider. Pair the provider with a null
+  // endAt to reach handleItemDragMove's `previousEndAt ? … : null` (b50) branch.
+  it("drives the card drag with a null endAt (previousEndAt → null branch)", () => {
+    const onMove = vi.fn();
+    const { container } = render(
+      <GanttProvider range="monthly">
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttFeatureItem {...openFeature} onMove={onMove} />
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    const card = container.querySelector(
+      '[data-slot="gantt-feature-item-card"]'
+    )!;
+    const handle = card.querySelector("div")!;
+    fireEvent.mouseDown(handle, { clientX: 0, clientY: 0 });
+    fireEvent.mouseMove(document, { clientX: 60, clientY: 0 });
+    fireEvent.mouseMove(document, { clientX: 120, clientY: 0 });
+    fireEvent.mouseUp(document);
+    expect(card).toBeInTheDocument();
+  });
+
+  it("sidebar duration shows '…so far' when endAt is null", () => {
+    render(
+      <GanttProvider range="monthly">
+        <GanttSidebar>
+          <GanttSidebarGroup name="G">
+            <GanttSidebarItem feature={openFeature} />
+          </GanttSidebarGroup>
+        </GanttSidebar>
+      </GanttProvider>
+    );
+    expect(screen.getByText(/so far/i)).toBeInTheDocument();
+  });
+
+  it("renders a feature bar without a status color (statusColor → undefined)", () => {
+    const noColor = {
+      id: "nc",
+      name: "No color",
+      startAt: monthStart,
+      endAt: addDays(monthStart, 5),
+      status: { id: "s", name: "S", color: "" },
+    } as GanttFeature;
+    const { container } = render(
+      <GanttProvider range="monthly">
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttFeatureItem {...noColor} />
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    const card = container.querySelector(
+      '[data-slot="gantt-feature-item-card"]'
+    ) as HTMLElement;
+    expect(card.getAttribute("data-status-color")).toBeNull();
+  });
+});
+
+describe("gantt — default-context fallbacks (no provider)", () => {
+  // Each of these reads timelineData.at(0)?.year ?? 0 from the DEFAULT context.
+  it("GanttMarker renders against an empty timeline", () => {
+    const { container } = render(
+      <GanttMarker id="solo" date={monthStart} label="Solo" />
+    );
+    expect(
+      container.querySelector('[data-slot="gantt-marker"]')
+    ).not.toBeNull();
+    expect(screen.getByText("Solo")).toBeInTheDocument();
+  });
+
+  it("GanttToday renders against an empty timeline", () => {
+    const { container } = render(<GanttToday />);
+    expect(container.querySelector('[data-slot="gantt-today"]')).not.toBeNull();
+  });
+
+  it("GanttMilestone renders against an empty timeline", () => {
+    const { container } = render(
+      <GanttMilestone date={monthStart} label="Solo milestone" />
+    );
+    expect(
+      container.querySelector('[data-slot="gantt-milestone"]')
+    ).not.toBeNull();
+  });
+
+  // GanttAddFeatureHelper renders standalone (default context → ref null) to
+  // exercise its render path without a provider.
+  it("GanttAddFeatureHelper renders an add button against the default context", () => {
+    const { container } = render(<GanttAddFeatureHelper top={0} />);
+    expect(
+      container.querySelector('[data-slot="gantt-add-feature-helper"]')
+    ).not.toBeNull();
+    expect(
+      container.querySelector('button[aria-label="Add feature"]')
+    ).not.toBeNull();
+  });
+});
+
+describe("gantt — sidebar click on a child element", () => {
+  it("does not fire onSelectItem when a child (not the row) is clicked", () => {
+    const onSelectItem = vi.fn();
+    const { container } = render(<Board onSelectItem={onSelectItem} />);
+    const item = container.querySelector(
+      '[data-slot="gantt-sidebar-item"]'
+    ) as HTMLElement;
+    // The status dot / labels are children → event.target !== currentTarget.
+    const child = item.querySelector("p")!;
+    fireEvent.click(child);
+    expect(onSelectItem).not.toHaveBeenCalled();
+  });
+});
+
+describe("gantt — non-overlapping sub-row reuse", () => {
+  it("reuses sub-row 0 for sequential (non-overlapping) features", () => {
+    const sequential: GanttFeature[] = [
+      {
+        id: "a",
+        name: "First",
+        startAt: addDays(monthStart, 0),
+        endAt: addDays(monthStart, 3),
+        status: { id: "s", name: "S", color: "bg-brand" },
+      },
+      {
+        id: "b",
+        name: "Second",
+        startAt: addDays(monthStart, 10),
+        endAt: addDays(monthStart, 14),
+        status: { id: "s", name: "S", color: "bg-brand" },
+      },
+    ];
+    const { container } = render(
+      <GanttProvider range="monthly">
+        <GanttTimeline>
+          <GanttFeatureList>
+            <GanttFeatureListGroup>
+              <GanttFeatureRow features={sequential} />
+            </GanttFeatureListGroup>
+          </GanttFeatureList>
+        </GanttTimeline>
+      </GanttProvider>
+    );
+    const row = container.querySelector(
+      '[data-slot="gantt-feature-row"]'
+    ) as HTMLElement;
+    // Both bars share sub-row 0 → the row height stays a single sub-row (36px).
+    expect(row.style.height).toBe("36px");
+    expect(
+      container.querySelectorAll('[data-slot="gantt-feature-item"]').length
+    ).toBe(2);
+  });
+});
+
+describe("gantt — infinite-scroll edges (per-render, throttle leading edge)", () => {
+  // lodash.throttle runs only the FIRST scroll of a 100ms window synchronously,
+  // so each edge needs its own fresh render to hit the leading edge.
+  function measured(root: HTMLElement) {
+    Object.defineProperty(root, "scrollWidth", {
+      configurable: true,
+      value: 4000,
+    });
+    Object.defineProperty(root, "clientWidth", {
+      configurable: true,
+      value: 1000,
+    });
+  }
+
+  it("extends the timeline into the future at the far-right edge", () => {
+    const { container } = render(<Board />);
+    const root = container.querySelector('[data-slot="gantt"]') as HTMLElement;
+    measured(root);
+    const before = container.querySelectorAll(
+      '[data-slot="gantt-content-header"]'
+    ).length;
+    root.scrollLeft = 3000; // scrollLeft + clientWidth (1000) >= scrollWidth
+    fireEvent.scroll(root);
+    const after = container.querySelectorAll(
+      '[data-slot="gantt-content-header"]'
+    ).length;
+    expect(after).toBeGreaterThan(before);
+  });
+
+  it("extends the timeline into the past at the far-left edge", () => {
+    const { container } = render(<Board />);
+    const root = container.querySelector('[data-slot="gantt"]') as HTMLElement;
+    measured(root);
+    const before = container.querySelectorAll(
+      '[data-slot="gantt-content-header"]'
+    ).length;
+    root.scrollLeft = 0; // scrollLeft === 0 → extend into the past
+    fireEvent.scroll(root);
+    const after = container.querySelectorAll(
+      '[data-slot="gantt-content-header"]'
+    ).length;
+    expect(after).toBeGreaterThan(before);
   });
 });
 

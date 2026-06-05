@@ -1285,6 +1285,24 @@
       ]
     },
     {
+      "name": "morph-surface",
+      "type": "registry:ui",
+      "title": "Morph Surface",
+      "description": "Agnostic morph primitive — open-state orchestration (refs, cross-fade, Esc/outside-close, box sizing) with no visual style. Navigation styles compose it.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/use-chrome-morph"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-surface.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-surface.tsx"
+        }
+      ]
+    },
+    {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
@@ -2855,6 +2873,7 @@
         "@byronwade/comms-store",
         "@byronwade/conversation-list",
         "@byronwade/morph-dock",
+        "@byronwade/morph-surface",
         "@byronwade/aspect-ratio",
         "@byronwade/scroll-area",
         "@byronwade/collapsible",

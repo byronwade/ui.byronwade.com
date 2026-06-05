@@ -293,6 +293,7 @@ import MorphDockSeparators from "./morph-dock/separators";
 import MorphDockSplitToolbar from "./morph-dock/split-toolbar";
 import MorphDockTones from "./morph-dock/tones";
 import MorphDockToolsPrimary from "./morph-dock/tools-primary";
+import MorphSurfaceDefault from "./morph-surface/default";
 import NativeSelectDefault from "./native-select/default";
 import NavigationMenuDefault from "./navigation-menu/default";
 import NavigationMenuSimpleLinks from "./navigation-menu/simple-links";
@@ -932,6 +933,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Split Toolbar", file: "morph-dock/split-toolbar.tsx", Component: MorphDockSplitToolbar },
     { name: "Tones", file: "morph-dock/tones.tsx", Component: MorphDockTones },
     { name: "Tools Primary", file: "morph-dock/tools-primary.tsx", Component: MorphDockToolsPrimary },
+  ],
+  "morph-surface": [
+    { name: "Default", file: "morph-surface/default.tsx", Component: MorphSurfaceDefault },
   ],
   "native-select": [
     { name: "Default", file: "native-select/default.tsx", Component: NativeSelectDefault },
