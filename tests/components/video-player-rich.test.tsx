@@ -340,6 +340,24 @@ describe("VideoPlayerEndScreen", () => {
     expect(overlay).toHaveAttribute("data-ended", "false")
   })
 
+  it("renders the next card as a link when href is provided", () => {
+    const { container } = render(
+      <VideoPlayer>
+        <VideoPlayerContent slot="media" src="/v.mp4" />
+        <VideoPlayerEndScreen
+          next={{ title: "Linked", href: "/watch/next" }}
+        />
+      </VideoPlayer>,
+    )
+    const video = container.querySelector("video") as HTMLVideoElement
+    fireEvent(video, new Event("ended"))
+    const card = container.querySelector(
+      '[data-slot="video-player-end-screen-next"]',
+    ) as HTMLAnchorElement
+    expect(card.tagName).toBe("A")
+    expect(card).toHaveAttribute("href", "/watch/next")
+  })
+
   it("renders a thumbnail and custom children when provided", () => {
     const { container } = render(
       <VideoPlayer>
