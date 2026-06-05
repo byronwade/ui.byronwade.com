@@ -127,6 +127,7 @@ import CalendarDefault from "./calendar/default";
 import CalendarAppointment from "./calendar/appointment";
 import CalendarPricing from "./calendar/pricing";
 import CalendarRangePresets from "./calendar/range-presets";
+import CandlestickChartDefault from "./candlestick-chart/default";
 import CardDefault from "./card/default";
 import CardContentOnly from "./card/content-only";
 import CardFrameEmpty from "./card/frame-empty";
@@ -185,6 +186,7 @@ import CreditCardTones from "./credit-card/tones";
 import CursorDefault from "./cursor/default";
 import CursorTones from "./cursor/tones";
 import CustomerCardDefault from "./customer-card/default";
+import DepthChartDefault from "./depth-chart/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
 import DetailHeaderManyActions from "./detail-header/many-actions";
@@ -368,6 +370,7 @@ import PopoverMenuLike from "./popover/menu-like";
 import PopoverPlacement from "./popover/placement";
 import PopoverRichContent from "./popover/rich-content";
 import PopoverWithForm from "./popover/with-form";
+import PriceChangeDefault from "./price-change/default";
 import PriceRangeFilterDefault from "./price-range-filter/default";
 import ProductCardDefault from "./product-card/default";
 import ProgressDefault from "./progress/default";
@@ -458,6 +461,7 @@ import SonnerRichColors from "./sonner/rich-colors";
 import SonnerVariants from "./sonner/variants";
 import SonnerWithAction from "./sonner/with-action";
 import SonnerWithDescription from "./sonner/with-description";
+import SparklineDefault from "./sparkline/default";
 import SpinnerDefault from "./spinner/default";
 import SpinnerSizes from "./spinner/sizes";
 import SplitWithRailDefault from "./split-with-rail/default";
@@ -790,6 +794,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Pricing", file: "calendar/pricing.tsx", Component: CalendarPricing },
     { name: "Range Presets", file: "calendar/range-presets.tsx", Component: CalendarRangePresets },
   ],
+  "candlestick-chart": [
+    { name: "Default", file: "candlestick-chart/default.tsx", Component: CandlestickChartDefault },
+  ],
   "card": [
     { name: "Default", file: "card/default.tsx", Component: CardDefault },
     { name: "Content Only", file: "card/content-only.tsx", Component: CardContentOnly },
@@ -871,6 +878,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "customer-card": [
     { name: "Default", file: "customer-card/default.tsx", Component: CustomerCardDefault },
+  ],
+  "depth-chart": [
+    { name: "Default", file: "depth-chart/default.tsx", Component: DepthChartDefault },
   ],
   "detail-header": [
     { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },
@@ -1157,6 +1167,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Rich Content", file: "popover/rich-content.tsx", Component: PopoverRichContent },
     { name: "With Form", file: "popover/with-form.tsx", Component: PopoverWithForm },
   ],
+  "price-change": [
+    { name: "Default", file: "price-change/default.tsx", Component: PriceChangeDefault },
+  ],
   "price-range-filter": [
     { name: "Default", file: "price-range-filter/default.tsx", Component: PriceRangeFilterDefault },
   ],
@@ -1282,6 +1295,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Variants", file: "sonner/variants.tsx", Component: SonnerVariants },
     { name: "With Action", file: "sonner/with-action.tsx", Component: SonnerWithAction },
     { name: "With Description", file: "sonner/with-description.tsx", Component: SonnerWithDescription },
+  ],
+  "sparkline": [
+    { name: "Default", file: "sparkline/default.tsx", Component: SparklineDefault },
   ],
   "spinner": [
     { name: "Default", file: "spinner/default.tsx", Component: SpinnerDefault },
