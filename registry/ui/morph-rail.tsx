@@ -62,9 +62,7 @@ export function MorphRail({
   return (
     <MorphSurface
       open={open}
-      onOpenChange={(o) => {
-        if (!o) setActiveId(null);
-      }}
+      onOpenChange={() => setActiveId(null)}
       placement="right"
       grow="width"
       navLabel={navLabel}

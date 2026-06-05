@@ -43,6 +43,13 @@ describe("MorphSidebar", () => {
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
+  it("navigates without error for an item that has no onSelect", async () => {
+    const user = userEvent.setup();
+    render(<MorphSidebar items={items} />);
+    await user.click(screen.getByRole("link", { name: "Inbox" }));
+    expect(screen.getByRole("link", { name: "Inbox" })).toBeInTheDocument();
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(<MorphSidebar items={items} brand={<span>UI</span>} />);
     expect(await axe(container)).toHaveNoViolations();

@@ -33,6 +33,19 @@ describe("MorphMenubar", () => {
     expect(panel).toHaveAttribute("aria-hidden", "true");
   });
 
+  it("toggles a menu closed when re-clicked and switches between menus", async () => {
+    const user = userEvent.setup();
+    render(<MorphMenubar menus={menus} />);
+    const panel = document.querySelector('[data-slot="morph-panel"]')!;
+    await user.click(screen.getByRole("button", { name: "File" })); // open File
+    expect(panel).toHaveAttribute("aria-hidden", "false");
+    await user.click(screen.getByRole("button", { name: "File" })); // re-click File → close
+    expect(panel).toHaveAttribute("aria-hidden", "true");
+    await user.click(screen.getByRole("button", { name: "File" })); // open File again
+    await user.click(screen.getByRole("button", { name: "Edit" })); // switch to Edit
+    expect(screen.getByRole("menuitem", { name: "Undo" })).toBeInTheDocument();
+  });
+
   it("fires onSelect and closes when a menu item is chosen", async () => {
     const user = userEvent.setup();
     const onSelect = vi.fn();

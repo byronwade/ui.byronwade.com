@@ -32,7 +32,7 @@ const ITEM_H = 32; // px — one dropdown item
 export function MorphMenubar({ menus, navLabel = "Menubar", className }: MorphMenubarProps) {
   const [active, setActive] = React.useState<{ id: string; left: number } | null>(null);
   const open = active !== null;
-  const activeMenu = active ? (menus.find((m) => m.id === active.id) ?? null) : null;
+  const activeMenu = active ? menus.find((m) => m.id === active.id) : undefined;
   const dropdownH = activeMenu ? activeMenu.items.length * ITEM_H + 8 : 0;
 
   const close = () => setActive(null);
@@ -65,9 +65,7 @@ export function MorphMenubar({ menus, navLabel = "Menubar", className }: MorphMe
   return (
     <MorphSurface
       open={open}
-      onOpenChange={(o) => {
-        if (!o) close();
-      }}
+      onOpenChange={() => close()}
       placement="top"
       grow="height"
       navLabel={navLabel}
