@@ -35,6 +35,12 @@ Before writing any markup, check whether a component already exists. Reach for t
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
   `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`,
   `price-range-filter` (histogram + range slider + number inputs)
+- **Commerce / admin** — ecommerce admin-panel patterns modeled on Shopify: `money-input`
+  (currency price field on `number-field`), `bulk-action-bar` (selection action bar for tables
+  / resource lists), `order-summary` (line items + cost breakdown), `product-card` (products-index
+  tile), `variant-picker` (product option selector), `inventory-bar` (stock-level bar on
+  `progress`), `customer-card` (customer summary with `metric-stat` stats), `fulfillment-tracker`
+  (payment + fulfillment status with a step rail on `verification-progress`)
 - **Design mocks** — device + browser frames for screenshots/video: `safari`, `iphone`,
   `android` (drop a screenshot or `videoSrc` in to show a product in context)
 - **Marketing / motion** — `world-map` (dotted map with animated connection arcs),

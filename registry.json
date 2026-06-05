@@ -2462,6 +2462,168 @@
       ]
     },
     {
+      "name": "money-input",
+      "type": "registry:ui",
+      "title": "Money input",
+      "description": "Currency-formatted price input built on the number-field primitive, with a leading symbol and optional ISO-code adornment.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/number-field",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/money-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/money-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bulk-action-bar",
+      "type": "registry:ui",
+      "title": "Bulk action bar",
+      "description": "Selection action bar for tables and resource lists — a selected-count label, promoted and grouped actions, and a clear-selection control. Renders nothing when nothing is selected.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/button",
+        "@byronwade/button-group",
+        "@byronwade/checkbox",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/bulk-action-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/bulk-action-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "order-summary",
+      "type": "registry:component",
+      "title": "Order summary",
+      "description": "Order line-items list with a subtotal, discount, shipping, tax, and total cost breakdown. The signature Shopify order/checkout card.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/badge",
+        "@byronwade/separator",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/order-summary.tsx",
+          "type": "registry:component",
+          "target": "components/order-summary.tsx"
+        }
+      ]
+    },
+    {
+      "name": "product-card",
+      "type": "registry:component",
+      "title": "Product card",
+      "description": "Products-index product tile — image, title, status badge with status dot, price with optional compare-at, and inventory state.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/aspect-ratio",
+        "@byronwade/badge",
+        "@byronwade/card",
+        "@byronwade/status-dot",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/product-card.tsx",
+          "type": "registry:component",
+          "target": "components/product-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "variant-picker",
+      "type": "registry:component",
+      "title": "Variant picker",
+      "description": "Product option/variant selector — one labelled toggle-group row per option with unavailable values disabled.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/label",
+        "@byronwade/toggle-group",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/variant-picker.tsx",
+          "type": "registry:component",
+          "target": "components/variant-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "inventory-bar",
+      "type": "registry:component",
+      "title": "Inventory bar",
+      "description": "Stock-level indicator composing the progress primitive — a count plus a tonal bar for in-stock, low-stock, and out-of-stock states.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/progress",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/inventory-bar.tsx",
+          "type": "registry:component",
+          "target": "components/inventory-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "customer-card",
+      "type": "registry:component",
+      "title": "Customer card",
+      "description": "Customer summary card — avatar, name and email, orders and lifetime-spend stats, and a default address.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/card",
+        "@byronwade/metric-stat",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/customer-card.tsx",
+          "type": "registry:component",
+          "target": "components/customer-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "fulfillment-tracker",
+      "type": "registry:component",
+      "title": "Fulfillment tracker",
+      "description": "Order status header — payment and fulfillment status pills plus an optional fulfillment step rail. Models Shopify's dual payment/fulfillment status.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/status-pill",
+        "@byronwade/status-dot",
+        "@byronwade/verification-progress",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/fulfillment-tracker.tsx",
+          "type": "registry:component",
+          "target": "components/fulfillment-tracker.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -2577,7 +2739,15 @@
         "@byronwade/ai-toolbar",
         "@byronwade/ai-attachments",
         "@byronwade/ai-connection",
-        "@byronwade/ai-web-preview"
+        "@byronwade/ai-web-preview",
+        "@byronwade/money-input",
+        "@byronwade/bulk-action-bar",
+        "@byronwade/order-summary",
+        "@byronwade/product-card",
+        "@byronwade/variant-picker",
+        "@byronwade/inventory-bar",
+        "@byronwade/customer-card",
+        "@byronwade/fulfillment-tracker"
       ]
     }
   ]
