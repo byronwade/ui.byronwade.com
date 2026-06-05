@@ -3125,7 +3125,7 @@
       "name": "market",
       "type": "registry:lib",
       "title": "Market utils",
-      "description": "Pure, DOM-free market helpers for the TradingView-style set: chart geometry (candles, depth, polyline/area paths), price/percent/volume formatting, change tones, and deterministic seeded mock generators (candles, quotes, order books, series).",
+      "description": "Pure, DOM-free market helpers for the TradingView-style set: chart geometry (candles, depth, volume profile, polyline/area paths), price/percent/volume/time formatting, change tones, and deterministic seeded mock generators (candles, quotes, order books, time-and-sales rows, symbol stats, series).",
       "files": [
         {
           "path": "registry/lib/market.ts",
@@ -3612,6 +3612,151 @@
       ]
     },
     {
+      "name": "volume-profile",
+      "type": "registry:ui",
+      "title": "Volume profile",
+      "description": "Session volume profile rendered in-house as SVG — horizontal histogram bars from candle OHLCV via the `market` lib, optional point-of-control line on `--chart-1` / `--brand`.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/market"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/volume-profile.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/volume-profile.tsx"
+        }
+      ]
+    },
+    {
+      "name": "time-and-sales",
+      "type": "registry:component",
+      "title": "Time and sales",
+      "description": "Compact time-and-sales tape — mono time, side-toned price, and size rows with optional relative-time stamps and row select.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/relative-time",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/time-and-sales.tsx",
+          "type": "registry:component",
+          "target": "components/time-and-sales.tsx"
+        }
+      ]
+    },
+    {
+      "name": "symbol-details",
+      "type": "registry:component",
+      "title": "Symbol details",
+      "description": "Symbol fundamentals panel — quote-header, exchange/sector meta, and tabbed overview/financials/statistics metric-stat grids.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/metric-stat",
+        "@byronwade/quote-header",
+        "@byronwade/tabs",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/symbol-details.tsx",
+          "type": "registry:component",
+          "target": "components/symbol-details.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chart-layout-grid",
+      "type": "registry:component",
+      "title": "Chart layout grid",
+      "description": "Multi-chart layout shell — 1×2 or 2×2 grid of chart-panel slots with bordered panel frames.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/chart-panel",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/chart-layout-grid.tsx",
+          "type": "registry:component",
+          "target": "components/chart-layout-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "indicator-legend",
+      "type": "registry:component",
+      "title": "Indicator legend",
+      "description": "Active chart indicators list — swatch, visibility switch, optional remove, and hidden badge.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/switch",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/indicator-legend.tsx",
+          "type": "registry:component",
+          "target": "components/indicator-legend.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drawing-toolbar",
+      "type": "registry:component",
+      "title": "Drawing toolbar",
+      "description": "Chart drawing tool rail — vertical or horizontal toggle group with tooltip-labeled trendline, fib, text, and shape tools.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/toggle-group",
+        "@byronwade/tooltip",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/drawing-toolbar.tsx",
+          "type": "registry:component",
+          "target": "components/drawing-toolbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "compare-symbols",
+      "type": "registry:component",
+      "title": "Compare symbols",
+      "description": "Compare overlay header — symbol chips with price-change percent, optional add/remove actions, and max cap.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/price-change",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/compare-symbols.tsx",
+          "type": "registry:component",
+          "target": "components/compare-symbols.tsx"
+        }
+      ]
+    },
+    {
       "name": "money-input",
       "type": "registry:ui",
       "title": "Money input",
@@ -4077,6 +4222,13 @@
         "@byronwade/market-news",
         "@byronwade/price-alert",
         "@byronwade/symbol-search",
+        "@byronwade/volume-profile",
+        "@byronwade/time-and-sales",
+        "@byronwade/symbol-details",
+        "@byronwade/chart-layout-grid",
+        "@byronwade/indicator-legend",
+        "@byronwade/drawing-toolbar",
+        "@byronwade/compare-symbols",
         "@byronwade/money-input",
         "@byronwade/bulk-action-bar",
         "@byronwade/order-summary",

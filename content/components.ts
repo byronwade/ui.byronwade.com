@@ -4174,6 +4174,93 @@ export const components: ComponentDoc[] = [
     examples: ["default"],
     tags: ["tradingview", "market"],
   },
+  {
+    slug: "volume-profile",
+    name: "Volume profile",
+    category: "Market",
+    description:
+      "Session volume profile rendered in-house as SVG — horizontal histogram bars bucketed from candle OHLCV via `volumeProfileGeometry` in the `market` lib, with an optional point-of-control line.",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "time-and-sales",
+    name: "Time and sales",
+    category: "Market",
+    description:
+      "Compact time-and-sales tape — mono time, buy/sell-toned price, and size rows. Optional relative-time stamps, density variant, maxRows cap, and row select callback.",
+    registryDeps: ["@byronwade/relative-time", "@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "symbol-details",
+    name: "Symbol details",
+    category: "Market",
+    description:
+      "Symbol fundamentals panel — quote-header, exchange/sector/industry meta, and tabbed overview, financials, and statistics grids built from `metric-stat` and seeded `makeSymbolStats` defaults.",
+    registryDeps: [
+      "@byronwade/metric-stat",
+      "@byronwade/quote-header",
+      "@byronwade/tabs",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "chart-layout-grid",
+    name: "Chart layout grid",
+    category: "Market",
+    description:
+      "Multi-chart layout shell — 1×2 or 2×2 grid of bordered panel slots for composing multiple `chart-panel` instances.",
+    registryDeps: ["@byronwade/chart-panel"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "indicator-legend",
+    name: "Indicator legend",
+    category: "Market",
+    description:
+      "Active chart indicators list — tone swatch, visibility switch, hidden badge, and optional remove callback.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/badge",
+      "@byronwade/button",
+      "@byronwade/switch",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "drawing-toolbar",
+    name: "Drawing toolbar",
+    category: "Market",
+    description:
+      "Chart drawing tool rail — vertical or horizontal toggle group with tooltip-labeled cursor, trendline, fib, text, and shape tools (presentation only).",
+    npmDeps: ["lucide-react"],
+    registryDeps: ["@byronwade/toggle-group", "@byronwade/tooltip"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "compare-symbols",
+    name: "Compare symbols",
+    category: "Market",
+    description:
+      "Compare overlay header — symbol chips with `price-change` percent, optional add/remove actions, and a max symbol cap.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/badge",
+      "@byronwade/button",
+      "@byronwade/price-change",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
 ]
 export const categories = [
   "Foundation",

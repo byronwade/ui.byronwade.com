@@ -157,6 +157,7 @@ import ChartStackedBar from "./chart/stacked-bar";
 import ChartThemeColors from "./chart/theme-colors";
 import ChartTooltipVariants from "./chart/tooltip-variants";
 import ChartPanelDefault from "./chart-panel/default";
+import ChartLayoutGridDefault from "./chart-layout-grid/default";
 import ChartToolbarDefault from "./chart-toolbar/default";
 import CheckboxDefault from "./checkbox/default";
 import CheckboxCheckboxGroup from "./checkbox/checkbox-group";
@@ -172,6 +173,7 @@ import CollapsibleWithRichContent from "./collapsible/with-rich-content";
 import ColorPickerDefault from "./color-picker/default";
 import ColorPickerInline from "./color-picker/inline";
 import ColorPickerSizes from "./color-picker/sizes";
+import CompareSymbolsDefault from "./compare-symbols/default";
 import CommandDefault from "./command/default";
 import CommandActions from "./command/actions";
 import CommandCards from "./command/cards";
@@ -203,6 +205,7 @@ import DialogNoCloseButton from "./dialog/no-close-button";
 import DialogScrollable from "./dialog/scrollable";
 import DialogWithForm from "./dialog/with-form";
 import DialogWithIcon from "./dialog/with-icon";
+import DrawingToolbarDefault from "./drawing-toolbar/default";
 import DropZoneDefault from "./drop-zone/default";
 import DropZoneDisabled from "./drop-zone/disabled";
 import DropZoneError from "./drop-zone/error";
@@ -271,6 +274,7 @@ import HoverCardRichContent from "./hover-card/rich-content";
 import HoverCardWithDelay from "./hover-card/with-delay";
 import IdentityNames from "./identity/names";
 import ImageCropDefault from "./image-crop/default";
+import IndicatorLegendDefault from "./indicator-legend/default";
 import IndexFiltersDefault from "./index-filters/default";
 import IndexFiltersNoTabs from "./index-filters/no-tabs";
 import IndexFiltersSearchOnly from "./index-filters/search-only";
@@ -509,6 +513,7 @@ import SwitchInvalid from "./switch/invalid";
 import SwitchSizes from "./switch/sizes";
 import SwitchWithLabel from "./switch/with-label";
 import SymbolSearchDefault from "./symbol-search/default";
+import SymbolDetailsDefault from "./symbol-details/default";
 import TableDefault from "./table/default";
 import TableEmptyState from "./table/empty-state";
 import TableLoadingSkeleton from "./table/loading-skeleton";
@@ -564,6 +569,7 @@ import TooltipSides from "./tooltip/sides";
 import TooltipWithDelay from "./tooltip/with-delay";
 import TooltipWithIcon from "./tooltip/with-icon";
 import TrackListDefault from "./track-list/default";
+import TimeAndSalesDefault from "./time-and-sales/default";
 import TradeHistoryDefault from "./trade-history/default";
 import VariantPickerDefault from "./variant-picker/default";
 import VerificationProgressDefault from "./verification-progress/default";
@@ -572,6 +578,7 @@ import VerificationProgressManySteps from "./verification-progress/many-steps";
 import VerificationProgressStatuses from "./verification-progress/statuses";
 import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
+import VolumeProfileDefault from "./volume-profile/default";
 import VideoPlayerDefault from "./video-player/default";
 import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
@@ -853,6 +860,9 @@ export const examples: Record<string, Example[]> = {
   "chart-panel": [
     { name: "Default", file: "chart-panel/default.tsx", Component: ChartPanelDefault },
   ],
+  "chart-layout-grid": [
+    { name: "Default", file: "chart-layout-grid/default.tsx", Component: ChartLayoutGridDefault },
+  ],
   "chart-toolbar": [
     { name: "Default", file: "chart-toolbar/default.tsx", Component: ChartToolbarDefault },
   ],
@@ -875,6 +885,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Default", file: "color-picker/default.tsx", Component: ColorPickerDefault },
     { name: "Inline", file: "color-picker/inline.tsx", Component: ColorPickerInline },
     { name: "Sizes", file: "color-picker/sizes.tsx", Component: ColorPickerSizes },
+  ],
+  "compare-symbols": [
+    { name: "Default", file: "compare-symbols/default.tsx", Component: CompareSymbolsDefault },
   ],
   "command": [
     { name: "Default", file: "command/default.tsx", Component: CommandDefault },
@@ -924,6 +937,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Scrollable", file: "dialog/scrollable.tsx", Component: DialogScrollable },
     { name: "With Form", file: "dialog/with-form.tsx", Component: DialogWithForm },
     { name: "With Icon", file: "dialog/with-icon.tsx", Component: DialogWithIcon },
+  ],
+  "drawing-toolbar": [
+    { name: "Default", file: "drawing-toolbar/default.tsx", Component: DrawingToolbarDefault },
   ],
   "drop-zone": [
     { name: "Default", file: "drop-zone/default.tsx", Component: DropZoneDefault },
@@ -1032,6 +1048,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "image-crop": [
     { name: "Default", file: "image-crop/default.tsx", Component: ImageCropDefault },
+  ],
+  "indicator-legend": [
+    { name: "Default", file: "indicator-legend/default.tsx", Component: IndicatorLegendDefault },
   ],
   "index-filters": [
     { name: "Default", file: "index-filters/default.tsx", Component: IndexFiltersDefault },
@@ -1409,6 +1428,9 @@ export const examples: Record<string, Example[]> = {
   "symbol-search": [
     { name: "Default", file: "symbol-search/default.tsx", Component: SymbolSearchDefault },
   ],
+  "symbol-details": [
+    { name: "Default", file: "symbol-details/default.tsx", Component: SymbolDetailsDefault },
+  ],
   "table": [
     { name: "Default", file: "table/default.tsx", Component: TableDefault },
     { name: "Empty State", file: "table/empty-state.tsx", Component: TableEmptyState },
@@ -1486,6 +1508,9 @@ export const examples: Record<string, Example[]> = {
   "track-list": [
     { name: "Default", file: "track-list/default.tsx", Component: TrackListDefault },
   ],
+  "time-and-sales": [
+    { name: "Default", file: "time-and-sales/default.tsx", Component: TimeAndSalesDefault },
+  ],
   "trade-history": [
     { name: "Default", file: "trade-history/default.tsx", Component: TradeHistoryDefault },
   ],
@@ -1499,6 +1524,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Statuses", file: "verification-progress/statuses.tsx", Component: VerificationProgressStatuses },
     { name: "Two Steps", file: "verification-progress/two-steps.tsx", Component: VerificationProgressTwoSteps },
     { name: "With Counts", file: "verification-progress/with-counts.tsx", Component: VerificationProgressWithCounts },
+  ],
+  "volume-profile": [
+    { name: "Default", file: "volume-profile/default.tsx", Component: VolumeProfileDefault },
   ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },

@@ -22,6 +22,11 @@ import {
   makeOrderBook,
   makeHeatmapCells,
   makeSeries,
+  volumeProfileGeometry,
+  volumeProfilePocIndex,
+  formatTradeTime,
+  makeTimeAndSalesRows,
+  makeSymbolStats,
 } from "@/lib/market"
 
 describe("linearScale", () => {
@@ -242,5 +247,84 @@ describe("makeSeries", () => {
       expect(typeof n).toBe("number")
       expect(Number.isNaN(n)).toBe(false)
     }
+  })
+})
+
+describe("formatTradeTime", () => {
+  it("formats as HH:mm:ss UTC", () => {
+    expect(formatTradeTime(Date.parse("2026-06-04T15:30:45Z"))).toBe("15:30:45")
+  })
+})
+
+describe("volumeProfileGeometry", () => {
+  it("returns one bar per bin with numeric geometry", () => {
+    const bars = volumeProfileGeometry(makeCandles(20, { seed: 3 }), {
+      width: 100,
+      height: 200,
+      bins: 8,
+    })
+    expect(bars).toHaveLength(8)
+    for (const bar of bars) {
+      expect(typeof bar.price).toBe("number")
+      expect(typeof bar.volume).toBe("number")
+      expect(typeof bar.width).toBe("number")
+      expect(bar.width).toBeGreaterThanOrEqual(0)
+      expect(bar.width).toBeLessThanOrEqual(100)
+    }
+  })
+
+  it("returns an empty array for no candles", () => {
+    expect(volumeProfileGeometry([], { width: 100, height: 200 })).toEqual([])
+  })
+})
+
+describe("volumeProfilePocIndex", () => {
+  it("returns the index of the highest-volume bar", () => {
+    const bars = volumeProfileGeometry(makeCandles(20, { seed: 4 }), {
+      width: 100,
+      height: 200,
+      bins: 6,
+    })
+    const index = volumeProfilePocIndex(bars)
+    expect(index).toBeGreaterThanOrEqual(0)
+    expect(bars[index].volume).toBe(Math.max(...bars.map((b) => b.volume)))
+  })
+
+  it("returns -1 for empty bars", () => {
+    expect(volumeProfilePocIndex([])).toBe(-1)
+  })
+})
+
+describe("makeTimeAndSalesRows", () => {
+  it("is deterministic for the same seed", () => {
+    expect(makeTimeAndSalesRows(10, { seed: 2 })).toEqual(
+      makeTimeAndSalesRows(10, { seed: 2 }),
+    )
+  })
+
+  it("returns rows with side, price, size, and time", () => {
+    const rows = makeTimeAndSalesRows(6, { seed: 2 })
+    expect(rows).toHaveLength(6)
+    for (const row of rows) {
+      expect(row.side === "buy" || row.side === "sell").toBe(true)
+      expect(typeof row.price).toBe("number")
+      expect(typeof row.size).toBe("number")
+      expect(typeof row.time).toBe("number")
+    }
+  })
+})
+
+describe("makeSymbolStats", () => {
+  it("is deterministic for the same seed", () => {
+    expect(makeSymbolStats({ seed: 5 })).toEqual(makeSymbolStats({ seed: 5 }))
+  })
+
+  it("returns grouped stat rows for each tab", () => {
+    const stats = makeSymbolStats({ seed: 5 })
+    expect(stats.overview.length).toBeGreaterThan(0)
+    expect(stats.financials.length).toBeGreaterThan(0)
+    expect(stats.statistics.length).toBeGreaterThan(0)
+    expect(typeof stats.exchange).toBe("string")
+    expect(typeof stats.quote.symbol).toBe("string")
   })
 })
