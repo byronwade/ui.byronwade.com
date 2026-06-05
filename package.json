@@ -38,7 +38,8 @@
     "gen:mcp-data": "node --import tsx scripts/gen-mcp-data.mjs",
     "check:mcp-data": "node scripts/check-mcp-data.mjs",
     "gen:llms": "node --import tsx scripts/gen-llms-txt.mjs",
-    "check:llms": "node scripts/check-llms-txt.mjs"
+    "check:llms": "node scripts/check-llms-txt.mjs",
+    "gen:thumbs": "node --import tsx scripts/gen-thumbs.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -118,6 +119,7 @@
     "fast-glob": "^3.3.2",
     "jsdom": "^29.1.1",
     "picocolors": "^1.1.1",
+    "playwright": "^1.60.0",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5",
