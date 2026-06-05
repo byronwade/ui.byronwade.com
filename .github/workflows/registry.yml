@@ -27,6 +27,9 @@ jobs:
       - name: Validate shipped AI rule sync
         run: node scripts/check-rule.mjs
 
+      - name: Generate lint manifest
+        run: npm run gen:lint-manifest
+
       - name: On-system lint manifest sync
         run: node scripts/check-lint-manifest.mjs
 
