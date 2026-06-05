@@ -77,6 +77,15 @@ Before writing any markup, check whether a component already exists. Reach for t
   `audio-player` (media-chrome `<audio>` player, sibling of video-player),
   `lyrics` (synced scrolling lyric lines), `playlist-card` (cover + title + description tile),
   `artist-header` (artist hero: artwork + verified badge + monthly-listeners stat + play/follow)
+- **Video / YouTube** — YouTube-modeled video UI. Primitives: `thumbnail` (video tile:
+  image/placeholder + duration pill, watched-progress bar, live chip), `verified-badge` (inline
+  verified check beside channel/author names; default check-seal + artist music-seal,
+  muted-foreground token), `live-badge` (LIVE pill on `bg-destructive` — the live/attention red,
+  not `--brand`; pulsing `bg-current` dot, optional `font-mono` compact viewer count),
+  `subscribe-button` (two-state subscribe toggle + notification-level dropdown menu), `chip-bar`
+  (single-select horizontally-scrolling filter chip row with edge fade + scroll chevrons),
+  `action-rail` (vertical/horizontal stack of icon+count action buttons; active tint via
+  `bg-primary`, counts `font-mono tabular-nums` compact)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):
   `ai-loader` (spinning multi-opacity loader),
   `ai-shimmer` (animated text-shimmer sweeping a token-driven highlight across muted text for thinking/streaming states),

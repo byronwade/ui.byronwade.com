@@ -3415,6 +3415,123 @@
       ]
     },
     {
+      "name": "thumbnail",
+      "type": "registry:ui",
+      "title": "Thumbnail",
+      "description": "Video thumbnail tile with optional duration pill, watched-progress bar, and live chip.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/aspect-ratio",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/thumbnail.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/thumbnail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verified-badge",
+      "type": "registry:ui",
+      "title": "Verified badge",
+      "description": "Inline verified check shown next to channel or author names, with default check-seal and artist music-seal variants.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/verified-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/verified-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "live-badge",
+      "type": "registry:ui",
+      "title": "Live badge",
+      "description": "A YouTube-style LIVE indicator pill with an optional pulsing dot and compact-formatted concurrent-viewer count.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/live-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/live-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "subscribe-button",
+      "type": "registry:ui",
+      "title": "Subscribe button",
+      "description": "YouTube-style subscribe control with a two-state toggle and a notification-level dropdown menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/button",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/subscribe-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/subscribe-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chip-bar",
+      "type": "registry:ui",
+      "title": "Chip bar",
+      "description": "YouTube-style single-select horizontal filter chip bar with edge fade and scroll affordance.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/chip-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/chip-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "action-rail",
+      "type": "registry:ui",
+      "title": "Action rail",
+      "description": "Vertical or horizontal stack of icon and compact-count action buttons — a YouTube Shorts-style like/comment/share rail.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/action-rail.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/action-rail.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -3576,7 +3693,13 @@
         "@byronwade/index-filters",
         "@byronwade/tag-input",
         "@byronwade/drop-zone",
-        "@byronwade/banner"
+        "@byronwade/banner",
+        "@byronwade/thumbnail",
+        "@byronwade/verified-badge",
+        "@byronwade/live-badge",
+        "@byronwade/subscribe-button",
+        "@byronwade/chip-bar",
+        "@byronwade/action-rail"
       ]
     }
   ]
