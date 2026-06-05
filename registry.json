@@ -2070,6 +2070,24 @@
       ]
     },
     {
+      "name": "album-cover",
+      "type": "registry:ui",
+      "title": "Album cover",
+      "description": "Square album/playlist artwork with an optional hover-reveal brand play button and an equalizer overlay for the active state. Accent follows --brand.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/equalizer-bars",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/album-cover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/album-cover.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
