@@ -273,7 +273,10 @@ const VolumeGlyph = () => (
   </svg>
 )
 
-export type NowPlayingBarExtrasProps = React.ComponentProps<"div"> & {
+export type NowPlayingBarExtrasProps = Omit<
+  React.ComponentProps<"div">,
+  "onVolumeChange"
+> & {
   /** Volume, 0–100. */
   volume?: number
   onVolumeChange?: (volume: number) => void

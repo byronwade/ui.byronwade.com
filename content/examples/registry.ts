@@ -51,6 +51,7 @@ import AiTaskDefault from "./ai-task/default";
 import AiToolDefault from "./ai-tool/default";
 import AiToolbarDefault from "./ai-toolbar/default";
 import AiWebPreviewDefault from "./ai-web-preview/default";
+import AlbumCoverDefault from "./album-cover/default";
 import AlertDefault from "./alert/default";
 import AlertNoIcon from "./alert/no-icon";
 import AlertVariants from "./alert/variants";
@@ -59,11 +60,14 @@ import AlertWithIcon from "./alert/with-icon";
 import AlertWithLink from "./alert/with-link";
 import AndroidDefault from "./android/default";
 import AppleCardsCarouselDefault from "./apple-cards-carousel/default";
+import ArtistHeaderDefault from "./artist-header/default";
 import AspectRatioDefault from "./aspect-ratio/default";
 import AspectRatioCinematic from "./aspect-ratio/cinematic";
 import AspectRatioPortrait from "./aspect-ratio/portrait";
 import AspectRatioSquare from "./aspect-ratio/square";
 import AspectRatioThumbnail from "./aspect-ratio/thumbnail";
+import AudioPlayerDefault from "./audio-player/default";
+import AudioWaveformDefault from "./audio-waveform/default";
 import AvatarDefault from "./avatar/default";
 import AvatarFallback from "./avatar/fallback";
 import AvatarGroup from "./avatar/group";
@@ -196,6 +200,7 @@ import EmptyStateMinimal from "./empty-state/minimal";
 import EmptyStateNoIcon from "./empty-state/no-icon";
 import EmptyStateSearchNoResults from "./empty-state/search-no-results";
 import EmptyStateWithMultipleActions from "./empty-state/with-multiple-actions";
+import EqualizerBarsDefault from "./equalizer-bars/default";
 import EventTimelineDefault from "./event-timeline/default";
 import EventTimelineLiveFeed from "./event-timeline/live-feed";
 import EventTimelineRichContent from "./event-timeline/rich-content";
@@ -266,6 +271,7 @@ import LabelFormLayout from "./label/form-layout";
 import LabelRequired from "./label/required";
 import LabelWithCheckbox from "./label/with-checkbox";
 import LabelWithIcon from "./label/with-icon";
+import LyricsDefault from "./lyrics/default";
 import MetricStatDefault from "./metric-stat/default";
 import MetricStatCustomValue from "./metric-stat/custom-value";
 import MetricStatDeltaDirections from "./metric-stat/delta-directions";
@@ -300,6 +306,7 @@ import NavigationMenuDefault from "./navigation-menu/default";
 import NavigationMenuSimpleLinks from "./navigation-menu/simple-links";
 import NavigationMenuWithDescriptions from "./navigation-menu/with-descriptions";
 import NavigationMenuWithIcons from "./navigation-menu/with-icons";
+import NowPlayingBarDefault from "./now-playing-bar/default";
 import NumberFieldDefault from "./number-field/default";
 import PageHeaderDefault from "./page-header/default";
 import PageHeaderAlign from "./page-header/align";
@@ -309,6 +316,7 @@ import PageHeaderWithActions from "./page-header/with-actions";
 import PageHeaderWithBadge from "./page-header/with-badge";
 import PillDefault from "./pill/default";
 import PixelatedCanvasDefault from "./pixelated-canvas/default";
+import PlaylistCardDefault from "./playlist-card/default";
 import PopoverDefault from "./popover/default";
 import PopoverControlled from "./popover/controlled";
 import PopoverMenuLike from "./popover/menu-like";
@@ -463,6 +471,7 @@ import TooltipRichContent from "./tooltip/rich-content";
 import TooltipSides from "./tooltip/sides";
 import TooltipWithDelay from "./tooltip/with-delay";
 import TooltipWithIcon from "./tooltip/with-icon";
+import TrackListDefault from "./track-list/default";
 import VerificationProgressDefault from "./verification-progress/default";
 import VerificationProgressAllTones from "./verification-progress/all-tones";
 import VerificationProgressManySteps from "./verification-progress/many-steps";
@@ -595,6 +604,9 @@ export const examples: Record<string, Example[]> = {
   "ai-web-preview": [
     { name: "Default", file: "ai-web-preview/default.tsx", Component: AiWebPreviewDefault },
   ],
+  "album-cover": [
+    { name: "Default", file: "album-cover/default.tsx", Component: AlbumCoverDefault },
+  ],
   "alert": [
     { name: "Default", file: "alert/default.tsx", Component: AlertDefault },
     { name: "No Icon", file: "alert/no-icon.tsx", Component: AlertNoIcon },
@@ -609,12 +621,21 @@ export const examples: Record<string, Example[]> = {
   "apple-cards-carousel": [
     { name: "Default", file: "apple-cards-carousel/default.tsx", Component: AppleCardsCarouselDefault },
   ],
+  "artist-header": [
+    { name: "Default", file: "artist-header/default.tsx", Component: ArtistHeaderDefault },
+  ],
   "aspect-ratio": [
     { name: "Default", file: "aspect-ratio/default.tsx", Component: AspectRatioDefault },
     { name: "Cinematic", file: "aspect-ratio/cinematic.tsx", Component: AspectRatioCinematic },
     { name: "Portrait", file: "aspect-ratio/portrait.tsx", Component: AspectRatioPortrait },
     { name: "Square", file: "aspect-ratio/square.tsx", Component: AspectRatioSquare },
     { name: "Thumbnail", file: "aspect-ratio/thumbnail.tsx", Component: AspectRatioThumbnail },
+  ],
+  "audio-player": [
+    { name: "Default", file: "audio-player/default.tsx", Component: AudioPlayerDefault },
+  ],
+  "audio-waveform": [
+    { name: "Default", file: "audio-waveform/default.tsx", Component: AudioWaveformDefault },
   ],
   "avatar": [
     { name: "Default", file: "avatar/default.tsx", Component: AvatarDefault },
@@ -796,6 +817,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Search No Results", file: "empty-state/search-no-results.tsx", Component: EmptyStateSearchNoResults },
     { name: "With Multiple Actions", file: "empty-state/with-multiple-actions.tsx", Component: EmptyStateWithMultipleActions },
   ],
+  "equalizer-bars": [
+    { name: "Default", file: "equalizer-bars/default.tsx", Component: EqualizerBarsDefault },
+  ],
   "event-timeline": [
     { name: "Default", file: "event-timeline/default.tsx", Component: EventTimelineDefault },
     { name: "Live Feed", file: "event-timeline/live-feed.tsx", Component: EventTimelineLiveFeed },
@@ -904,6 +928,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Checkbox", file: "label/with-checkbox.tsx", Component: LabelWithCheckbox },
     { name: "With Icon", file: "label/with-icon.tsx", Component: LabelWithIcon },
   ],
+  "lyrics": [
+    { name: "Default", file: "lyrics/default.tsx", Component: LyricsDefault },
+  ],
   "metric-stat": [
     { name: "Default", file: "metric-stat/default.tsx", Component: MetricStatDefault },
     { name: "Custom Value", file: "metric-stat/custom-value.tsx", Component: MetricStatCustomValue },
@@ -950,6 +977,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Descriptions", file: "navigation-menu/with-descriptions.tsx", Component: NavigationMenuWithDescriptions },
     { name: "With Icons", file: "navigation-menu/with-icons.tsx", Component: NavigationMenuWithIcons },
   ],
+  "now-playing-bar": [
+    { name: "Default", file: "now-playing-bar/default.tsx", Component: NowPlayingBarDefault },
+  ],
   "number-field": [
     { name: "Default", file: "number-field/default.tsx", Component: NumberFieldDefault },
   ],
@@ -966,6 +996,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "pixelated-canvas": [
     { name: "Default", file: "pixelated-canvas/default.tsx", Component: PixelatedCanvasDefault },
+  ],
+  "playlist-card": [
+    { name: "Default", file: "playlist-card/default.tsx", Component: PlaylistCardDefault },
   ],
   "popover": [
     { name: "Default", file: "popover/default.tsx", Component: PopoverDefault },
@@ -1182,6 +1215,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Sides", file: "tooltip/sides.tsx", Component: TooltipSides },
     { name: "With Delay", file: "tooltip/with-delay.tsx", Component: TooltipWithDelay },
     { name: "With Icon", file: "tooltip/with-icon.tsx", Component: TooltipWithIcon },
+  ],
+  "track-list": [
+    { name: "Default", file: "track-list/default.tsx", Component: TrackListDefault },
   ],
   "verification-progress": [
     { name: "Default", file: "verification-progress/default.tsx", Component: VerificationProgressDefault },
