@@ -31,7 +31,8 @@ Before writing any markup, check whether a component already exists. Reach for t
   `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR), `credit-card` (flippable card), `image-crop` (crop a file to PNG)
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
   (config-driven nav dock that blooms into a panel via the hook), `morph-surface`
-  (agnostic morph primitive — open-state orchestration with no visual style; navigation styles compose it)
+  (agnostic morph primitive — open-state orchestration with no visual style; navigation styles compose it), `morph-bar`
+  (full-width top navigation bar that blooms a panel down via the morph technique)
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
   `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`,

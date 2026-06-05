@@ -273,6 +273,7 @@ import MetricStatGridLayout from "./metric-stat/grid-layout";
 import MetricStatLoading from "./metric-stat/loading";
 import MetricStatNoDelta from "./metric-stat/no-delta";
 import MetricStatWithIcon from "./metric-stat/with-icon";
+import MorphBarDefault from "./morph-bar/default";
 import MorphDockDefault from "./morph-dock/default";
 import MorphDockAppBar from "./morph-dock/app-bar";
 import MorphDockAppBarPanels from "./morph-dock/app-bar-panels";
@@ -911,6 +912,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Loading", file: "metric-stat/loading.tsx", Component: MetricStatLoading },
     { name: "No Delta", file: "metric-stat/no-delta.tsx", Component: MetricStatNoDelta },
     { name: "With Icon", file: "metric-stat/with-icon.tsx", Component: MetricStatWithIcon },
+  ],
+  "morph-bar": [
+    { name: "Default", file: "morph-bar/default.tsx", Component: MorphBarDefault },
   ],
   "morph-dock": [
     { name: "Default", file: "morph-dock/default.tsx", Component: MorphDockDefault },

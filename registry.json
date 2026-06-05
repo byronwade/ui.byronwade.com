@@ -1303,6 +1303,27 @@
       ]
     },
     {
+      "name": "morph-bar",
+      "type": "registry:ui",
+      "title": "Morph Bar",
+      "description": "Full-width top navigation bar that blooms a panel down via the morph technique.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/morph-surface"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/morph-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morph-bar.tsx"
+        }
+      ]
+    },
+    {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
@@ -2874,6 +2895,7 @@
         "@byronwade/conversation-list",
         "@byronwade/morph-dock",
         "@byronwade/morph-surface",
+        "@byronwade/morph-bar",
         "@byronwade/aspect-ratio",
         "@byronwade/scroll-area",
         "@byronwade/collapsible",
