@@ -13,8 +13,15 @@ import { act, render, screen, within } from "@testing-library/react";
 import { axe } from "vitest-axe";
 
 // Capture the props DndContext receives so we can invoke the provider's
-// handlers/announcements directly.
-const h = vi.hoisted(() => ({ props: null as any }));
+// handlers/announcements directly. `forceOver`/`forceDragging` let a test opt
+// into the drag-visual branches (ring on the drop target, dimmed dragged card)
+// that dnd-kit only sets during a real pointer/keyboard drag — unreachable in
+// jsdom otherwise. Default off so structure/a11y tests see normal state.
+const h = vi.hoisted(() => ({
+  props: null as any,
+  forceOver: false,
+  forceDragging: false,
+}));
 
 vi.mock("@dnd-kit/core", async (orig) => {
   const actual = (await orig()) as typeof import("@dnd-kit/core");
@@ -23,6 +30,21 @@ vi.mock("@dnd-kit/core", async (orig) => {
     DndContext: (props: any) => {
       h.props = props;
       return <actual.DndContext {...props} />;
+    },
+    useDroppable: (args: any) => {
+      const real = actual.useDroppable(args);
+      return h.forceOver ? { ...real, isOver: true } : real;
+    },
+  };
+});
+
+vi.mock("@dnd-kit/sortable", async (orig) => {
+  const actual = (await orig()) as typeof import("@dnd-kit/sortable");
+  return {
+    ...actual,
+    useSortable: (args: any) => {
+      const real = actual.useSortable(args);
+      return h.forceDragging ? { ...real, isDragging: true } : real;
     },
   };
 });
@@ -55,6 +77,8 @@ afterAll(() => {
 
 beforeEach(() => {
   h.props = null;
+  h.forceOver = false;
+  h.forceDragging = false;
 });
 
 const columns = [
@@ -180,6 +204,33 @@ describe("kanban — structure & rendering", () => {
     expect(screen.getByText("Beta")).toBeInTheDocument();
   });
 
+  it("applies the active drop-target ring when a board isOver", () => {
+    h.forceOver = true;
+    const { container } = render(<Board />);
+    // isOver === true selects the `ring-ring` arm of the board's ring class.
+    const board = container.querySelector('[data-slot="kanban-board"]');
+    expect(board).toHaveClass("ring-ring");
+    expect(board).not.toHaveClass("ring-transparent");
+  });
+
+  it("dims the dragged card and styles the overlay clone while isDragging", () => {
+    h.forceDragging = true;
+    const { container } = render(<Board />);
+    // isDragging === true on every card → the in-place card gets the dimmed
+    // grabbing treatment (b1). All cards carry the dragging classes here.
+    const cards = container.querySelectorAll('[data-slot="kanban-card"]');
+    expect(cards.length).toBeGreaterThan(0);
+    expect(cards[0]).toHaveClass("pointer-events-none", "opacity-30");
+
+    // Promote one card to the overlay clone (activeCardId === "1"); its t.In
+    // clone evaluates the `isDragging && "cursor-grabbing"` arm (b4) without
+    // throwing while isDragging is forced true.
+    act(() => {
+      h.props.onDragStart({ active: { id: "1" } });
+    });
+    expect(screen.getByText("Alpha body")).toBeInTheDocument();
+  });
+
   it("passes className through to provider grid, board, and card", () => {
     const { container } = render(
       <Board boardClassName="board-extra" className="grid-extra" />
@@ -216,6 +267,19 @@ describe("kanban — drag handlers (driven via captured DndContext props)", () =
     // duplicated DOM node.
     expect(onDragStart).toHaveBeenCalledTimes(1);
     expect(screen.getByText("Alpha body")).toBeInTheDocument();
+  });
+
+  it("renders the overlay clone's default name fallback when the card has no children", () => {
+    render(<Board cardChildren={false} />);
+    act(() => {
+      h.props.onDragStart({ active: { id: "1" } });
+    });
+    // activeCardId === "1" mounts the t.In overlay clone with no children, so
+    // it evaluates the `children ?? <p>{name}</p>` fallback branch. As with the
+    // children-bearing overlay test above, DragOverlay only paints the tunnel
+    // during a real drag, so we assert the branch ran via the still-stable board
+    // copy rather than a duplicated DOM node.
+    expect(screen.getByText("Alpha")).toBeInTheDocument();
   });
 
   it("onDragStart ignores an unknown active id (no overlay)", () => {
@@ -346,6 +410,10 @@ describe("kanban — accessibility announcements", () => {
     expect(a.onDragOver({ active: { id: "x" }, over: undefined })).toContain(
       "undefined"
     );
+    // onDragEnd's `data.find(...) ?? {}` fallback for an unknown active card.
+    expect(
+      a.onDragEnd({ active: { id: "x" }, over: { id: "done" } })
+    ).toBe('Dropped the card "undefined" into the "Done" column');
     expect(a.onDragCancel({ active: { id: "x" } })).toContain("undefined");
   });
 });

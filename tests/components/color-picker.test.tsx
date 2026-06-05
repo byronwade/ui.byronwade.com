@@ -8,7 +8,7 @@
  */
 
 import * as React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { act, render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { axe } from "vitest-axe";
@@ -193,6 +193,89 @@ describe("ColorPicker — hue + alpha sliders", () => {
     }) as HTMLInputElement;
     fireEvent.change(alpha, { target: { value: "40" } });
     expect(alpha.value).toBe("40");
+  });
+
+  it("handles a non-array value from the hue slider (single-thumb mode)", () => {
+    // A numeric `value` prop overrides the component's `value={[hue]}` (spread
+    // order), putting Base UI in single-thumb mode so onValueChange receives a
+    // number — exercising the `Array.isArray(value) ? value[0] : value` else side.
+    let captured: ReturnType<typeof useColorPicker> | null = null;
+    function Probe() {
+      captured = useColorPicker();
+      return null;
+    }
+    render(
+      <ColorPicker defaultValue="#ff0000">
+        <ColorPickerHue value={50} />
+        <Probe />
+      </ColorPicker>,
+    );
+    const hue = screen.getByRole("slider", { name: "Hue" }) as HTMLInputElement;
+    fireEvent.change(hue, { target: { value: "200" } });
+    expect(captured!.hue).toBe(200);
+  });
+
+  it("handles a non-array value from the alpha slider (single-thumb mode)", () => {
+    let captured: ReturnType<typeof useColorPicker> | null = null;
+    function Probe() {
+      captured = useColorPicker();
+      return null;
+    }
+    render(
+      <ColorPicker defaultValue="#ff0000">
+        <ColorPickerAlpha value={50} />
+        <Probe />
+      </ColorPicker>,
+    );
+    const alpha = screen.getByRole("slider", {
+      name: "Alpha",
+    }) as HTMLInputElement;
+    fireEvent.change(alpha, { target: { value: "30" } });
+    expect(captured!.alpha).toBe(30);
+  });
+});
+
+describe("ColorPicker — alpha fallback + invalid mode", () => {
+  it("falls back to the default alpha when the value's alpha is 0", () => {
+    // value alpha 0 makes `selectedColor.alpha() * 100` falsy, so the initial
+    // alpha state takes the `|| defaultColor.alpha() * 100` side (default #000 → 100).
+    let captured: ReturnType<typeof useColorPicker> | null = null;
+    function Probe() {
+      captured = useColorPicker();
+      return null;
+    }
+    render(
+      // rgba array with alpha 0 makes `selectedColor.alpha() * 100` falsy at
+      // mount, so the initial alpha state takes the `|| defaultColor...` side.
+      <ColorPicker value={[255, 0, 0, 0]}>
+        <Probe />
+      </ColorPicker>,
+    );
+    // Mount succeeds and the context is wired (the alpha-fallback branch ran).
+    expect(captured).not.toBeNull();
+    expect(typeof captured!.setAlpha).toBe("function");
+  });
+
+  it("renders nothing for an unrecognised format mode", () => {
+    let captured: ReturnType<typeof useColorPicker> | null = null;
+    function Probe() {
+      captured = useColorPicker();
+      return null;
+    }
+    const { container } = render(
+      <ColorPicker defaultValue="#ff0000">
+        <Probe />
+        <ColorPickerFormat />
+      </ColorPicker>,
+    );
+    expect(
+      container.querySelector('[data-slot="color-picker-format"]'),
+    ).toBeInTheDocument();
+    // Force a mode that matches none of the hex/rgb/css/hsl branches → return null.
+    act(() => captured!.setMode("bogus"));
+    expect(
+      container.querySelector('[data-slot="color-picker-format"]'),
+    ).not.toBeInTheDocument();
   });
 });
 

@@ -8,8 +8,17 @@
 import * as React from "react";
 import { render, waitFor } from "@testing-library/react";
 import { axe } from "vitest-axe";
+import { formatHex } from "culori";
 
 import { QRCode } from "@/components/ui/qr-code";
+
+// Partial mock so we can force `formatHex` to return undefined for a single
+// effect run and exercise the `?? "#000000"` / `?? "#ffffff"` fallbacks. The
+// `mockReturnValueOnce` calls below mean every other test keeps real behaviour.
+vi.mock("culori", async (orig) => {
+  const actual = await orig<typeof import("culori")>();
+  return { ...actual, formatHex: vi.fn(actual.formatHex) };
+});
 
 async function svgOf(container: HTMLElement) {
   await waitFor(() =>
@@ -53,6 +62,18 @@ describe("QRCode", () => {
     const { container } = render(<QRCode data="x" className="rounded-lg" />);
     const el = await svgOf(container);
     expect(el).toHaveClass("rounded-lg");
+  });
+
+  it("falls back to #000/#fff when formatHex yields no hex", async () => {
+    // Both color channels (dark, then light) fail to format this effect run,
+    // forcing the `?? "#000000"` and `?? "#ffffff"` fallbacks. The QR must
+    // still render with the literal black/white defaults.
+    vi.mocked(formatHex)
+      .mockReturnValueOnce(undefined)
+      .mockReturnValueOnce(undefined);
+    const { container } = render(<QRCode data="fallback-colors" />);
+    const el = await svgOf(container);
+    expect(el.querySelector("svg")).not.toBeNull();
   });
 
   it("logs and renders nothing if generation fails", async () => {

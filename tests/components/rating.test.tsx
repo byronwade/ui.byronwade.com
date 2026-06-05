@@ -115,6 +115,61 @@ describe("Rating — read only", () => {
     await user.click(btn).catch(() => {});
     expect(onValueChange).not.toHaveBeenCalled();
   });
+
+  it("ignores arrow keys (handleKeyDown readOnly guard)", () => {
+    const onValueChange = vi.fn();
+    render(<Stars value={3} readOnly onValueChange={onValueChange} />);
+    // Keydown events still fire on disabled buttons; the readOnly guard returns
+    // before any value change.
+    fireEvent.keyDown(screen.getAllByRole("radio")[2], { key: "ArrowRight" });
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+});
+
+describe("Rating — controlled vs uncontrolled", () => {
+  it("does not write internal state when controlled (skips setUncontrolled)", async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    // Controlled (value supplied) but NOT readOnly — clicking exercises the
+    // `if (!isControlled) setUncontrolled` false side: notify only, no internal write.
+    render(<Stars value={2} onValueChange={onValueChange} />);
+    await user.click(screen.getAllByRole("radio")[3]);
+    expect(onValueChange).toHaveBeenCalledWith(4);
+    // Value is owned by the parent, so the rendered selection stays at 2.
+    expect(screen.getByRole("radio", { name: "2 stars" })).toHaveAttribute(
+      "aria-checked",
+      "true",
+    );
+  });
+
+  it("falls back to index 0 when a button has no provided index", () => {
+    // Wrapping RatingButton in a function component means Children.map injects
+    // `index` onto the wrapper, not the button — so providedIndex is undefined
+    // and `providedIndex ?? 0` takes the `?? 0` side.
+    const Star = () => <RatingButton />;
+    render(
+      <Rating value={0}>
+        <Star />
+        <Star />
+      </Rating>,
+    );
+    const radios = screen.getAllByRole("radio");
+    // Both buttons render with index 0 → both labelled "1 star".
+    expect(radios).toHaveLength(2);
+    radios.forEach((r) => expect(r).toHaveAttribute("aria-label", "1 star"));
+  });
+
+  it("skips falsy children in Children.map", () => {
+    render(
+      <Rating value={0}>
+        {null}
+        {false}
+        <RatingButton />
+      </Rating>,
+    );
+    // Only the real RatingButton renders; the null/false children are dropped.
+    expect(screen.getAllByRole("radio")).toHaveLength(1);
+  });
 });
 
 describe("RatingBadge", () => {

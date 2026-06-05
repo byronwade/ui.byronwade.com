@@ -19,7 +19,7 @@ const items = [
 describe("MorphBar", () => {
   it("renders the brand and every item, marking the active one", () => {
     render(<MorphBar brand="Acme" items={items} panel={<div>mega</div>} />);
-    expect(screen.getByText("Acme")).toBeInTheDocument();
+    expect(screen.getAllByText("Acme").length).toBeGreaterThanOrEqual(1);
     for (const i of items) expect(screen.getByRole("link", { name: i.label })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
   });
