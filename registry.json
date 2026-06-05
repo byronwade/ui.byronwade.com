@@ -2124,6 +2124,23 @@
       ]
     },
     {
+      "name": "lyrics",
+      "type": "registry:ui",
+      "title": "Lyrics",
+      "description": "Synced, scrolling lyric lines. The active line is emphasised and scrolls into view (instant under prefers-reduced-motion). Lines become seek-to-line buttons when onLineClick is set.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/lyrics.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/lyrics.tsx"
+        }
+      ]
+    },
+    {
       "name": "kanban",
       "type": "registry:ui",
       "title": "Kanban",
