@@ -71,14 +71,14 @@ this report) are in the repo-wide count and will reformat in Batch 0.
 
 ## Phase C status (branch `chore/governance-phase-c`)
 
-**Batches 0–3 done & green** (`validate` + `test:ci` + `npm run build` all exit 0). All four
-structural checks (`check:conventions`) and `check:format` are now CI-enforced. **Batch 4 remains** —
-deferred pending the open decisions below (every item is an aesthetic/semantic call on a _shipped_
-component, so it should not be guessed). Two issues surfaced during full validation and were fixed
-in-branch: `badge` needed a type-safe `data-slot` cast (Base UI `mergeProps` object literal), and
-`registry.json` + `content/examples/registry.ts` are now Prettier-ignored because their generators
-(`gen-all-item` / `gen-examples`) own the format (Prettier was fighting them, making `check:format`
-flaky after every build).
+**Batches 0–4 ALL done & green** (`validate` + `test:ci` + `npm run build` all exit 0;
+`lint:on-system` 0 errors). All four structural checks (`check:conventions`) and `check:format` are
+CI-enforced. Two issues surfaced during full validation and were fixed in-branch: `badge` needed a
+type-safe `data-slot` cast (Base UI `mergeProps` object literal), and `registry.json` +
+`content/examples/registry.ts` are now Prettier-ignored because their generators (`gen-all-item` /
+`gen-examples`) own the format (Prettier was fighting them, making `check:format` flaky after every
+build). **Integration into `feat/brand-reskin-hero` is deferred** until that branch (advanced ≥5
+commits) is quiet — merge will conflict on co-touched files from the 761-file format sweep.
 
 ## Proposed Phase C batches (each ends green on `npm run test:ci`)
 
@@ -90,13 +90,17 @@ session edits this branch live). ✅ = done on `chore/governance-phase-c`.
   dead defaults. `export default` check promoted to enforce.
 - ✅ **Batch 2 — `data-slot`, primitives (6).**
 - ✅ **Batch 3 — `data-slot`, composites (12).** `data-slot` check promoted to enforce.
-- ⏳ **Batch 4 — On-system DNA (7 files).** NOT started — blocked on decisions 1 & 2. Resolve the
-  judgment calls first (color-picker spectrum, morph-dock insets), then fix; finish with
-  `npm run lint:on-system` clean. Consider adding `lint:on-system` to `validate` once green.
+- ✅ **Batch 4 — On-system DNA.** Cleared all 3 lint ERRORS: `color-picker` hue/alpha and
+  `apple-cards-carousel` scrim now use new foundation utilities (`.color-picker-hue`,
+  `.color-picker-alpha-fade`, `.scrim-top`); `morph-dock` insets kept as intentional chrome +
+  comment. 9 non-blocking px warnings remain by design.
 
-## Open decisions for the reviewer
+## Open decisions — all resolved
 
-1. **color-picker raw spectrum** — keep-and-isolate vs move-to-foundation? (blocks Batch 4)
-2. **morph-dock sub-pixel insets** — intentional chrome (keep) or snap to scale? (blocks Batch 4)
-3. ~~**`sonner` data-slot**~~ — resolved: `data-slot="sonner"` added to the `<Sonner>` wrapper.
-4. **Add `lint:on-system` to `validate`/CI** after Batch 4 — confirm. (`check:format` already added.)
+1. ✅ **color-picker raw spectrum** — moved to foundation utilities (`.color-picker-hue`,
+   `.color-picker-alpha-fade`), documented in the rule.
+2. ✅ **morph-dock sub-pixel insets** — kept as intentional chrome with an explanatory comment.
+3. ✅ **`sonner` data-slot** — on the `<Sonner>` wrapper (declarative; doesn't forward to the DOM).
+4. ⏳ **Add `lint:on-system` to `validate`/CI** — optional, not done: it requires building two
+   workspaces (`build:lint`), a real per-run cost. It's green (0 errors) and can be wired into CI
+   separately if desired. `check:format` is already in `validate`.
