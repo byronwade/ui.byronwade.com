@@ -43,6 +43,12 @@ Before writing any markup, check whether a component already exists. Reach for t
   `price-range-filter` (histogram + range slider + number inputs),
   `command-result` (compact rich result row for a command palette: media + title +
   description + meta + action, dropped inside a `command` item)
+- **Page layouts** — variant-driven, slot-based page scaffolds: `app-shell` (application
+  shells — `dashboard`, `sidebar`, `stacked`, `three-column`, `master-detail`, `docs`,
+  `editor`, `holy-grail`, `focused`, `command-center`) and `marketing-layout` (marketing /
+  landing pages — `landing`, `split-hero`, `centered`, `bento`, `pricing`, `feature-rows`,
+  `article`, `docs-marketing`, `gallery`, `coming-soon`). Drop real `sidebar`/`header`/
+  `pill`/`toolbar`/`footer` components into the named slots.
 - **Commerce / admin** — ecommerce admin-panel patterns modeled on Shopify: `money-input`
   (currency price field on `number-field`), `bulk-action-bar` (selection action bar for tables
   / resource lists), `order-summary` (line items + cost breakdown), `product-card` (products-index
@@ -60,8 +66,7 @@ Before writing any markup, check whether a component already exists. Reach for t
 - **Marketing / motion** — `world-map` (dotted map with animated connection arcs),
   `floating-dock` (magnify-on-hover dock), `kinetic-text` (per-letter hover typography),
   `backlight` (saturated RGB glow behind a child), `apple-cards-carousel` (cards that
-  expand into a modal), `canvas-text` (animated lines clipped to text),
-  `pixelated-canvas` (image as an interactive dot grid),
+  expand into a modal), `pixelated-canvas` (image as an interactive dot grid),
   `video-player` (YouTube-grade media-chrome player: composable parts + settings/quality/captions
   menus, scrub previews, chapters, heatmap, ambient, end-screen, and a `MediaPlayer` preset)
 - **Music / media** — Spotify-style music UI: `equalizer-bars` (animated now-playing bars),

@@ -97,7 +97,7 @@ const mediaVariables = {
 } as CSSProperties
 
 const videoPlayerVariants = cva(
-  "group/video-player relative isolate w-full overflow-hidden bg-card text-foreground outline-none [&_video]:w-full [&_video]:object-cover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  "group/video-player relative isolate aspect-video w-full overflow-hidden bg-card text-foreground outline-none [&_video]:h-full [&_video]:w-full [&_video]:object-cover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
   {
     variants: {
       variant: {

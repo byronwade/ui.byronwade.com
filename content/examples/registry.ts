@@ -59,6 +59,7 @@ import AlertWithAction from "./alert/with-action";
 import AlertWithIcon from "./alert/with-icon";
 import AlertWithLink from "./alert/with-link";
 import AndroidDefault from "./android/default";
+import AppShellDefault from "./app-shell/default";
 import AppleCardsCarouselDefault from "./apple-cards-carousel/default";
 import ArtistHeaderDefault from "./artist-header/default";
 import AspectRatioDefault from "./aspect-ratio/default";
@@ -123,7 +124,6 @@ import CalendarDefault from "./calendar/default";
 import CalendarAppointment from "./calendar/appointment";
 import CalendarPricing from "./calendar/pricing";
 import CalendarRangePresets from "./calendar/range-presets";
-import CanvasTextDefault from "./canvas-text/default";
 import CardDefault from "./card/default";
 import CardContentOnly from "./card/content-only";
 import CardFrameEmpty from "./card/frame-empty";
@@ -297,6 +297,7 @@ import LabelRequired from "./label/required";
 import LabelWithCheckbox from "./label/with-checkbox";
 import LabelWithIcon from "./label/with-icon";
 import LyricsDefault from "./lyrics/default";
+import MarketingLayoutDefault from "./marketing-layout/default";
 import MetricStatDefault from "./metric-stat/default";
 import MetricStatCustomValue from "./metric-stat/custom-value";
 import MetricStatDeltaDirections from "./metric-stat/delta-directions";
@@ -665,6 +666,9 @@ export const examples: Record<string, Example[]> = {
   "android": [
     { name: "Default", file: "android/default.tsx", Component: AndroidDefault },
   ],
+  "app-shell": [
+    { name: "Default", file: "app-shell/default.tsx", Component: AppShellDefault },
+  ],
   "apple-cards-carousel": [
     { name: "Default", file: "apple-cards-carousel/default.tsx", Component: AppleCardsCarouselDefault },
   ],
@@ -756,9 +760,6 @@ export const examples: Record<string, Example[]> = {
     { name: "Appointment", file: "calendar/appointment.tsx", Component: CalendarAppointment },
     { name: "Pricing", file: "calendar/pricing.tsx", Component: CalendarPricing },
     { name: "Range Presets", file: "calendar/range-presets.tsx", Component: CalendarRangePresets },
-  ],
-  "canvas-text": [
-    { name: "Default", file: "canvas-text/default.tsx", Component: CanvasTextDefault },
   ],
   "card": [
     { name: "Default", file: "card/default.tsx", Component: CardDefault },
@@ -1018,6 +1019,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "lyrics": [
     { name: "Default", file: "lyrics/default.tsx", Component: LyricsDefault },
+  ],
+  "marketing-layout": [
+    { name: "Default", file: "marketing-layout/default.tsx", Component: MarketingLayoutDefault },
   ],
   "metric-stat": [
     { name: "Default", file: "metric-stat/default.tsx", Component: MetricStatDefault },

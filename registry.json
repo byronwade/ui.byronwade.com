@@ -420,6 +420,40 @@
       ]
     },
     {
+      "name": "app-shell",
+      "type": "registry:component",
+      "title": "App shell",
+      "description": "Variant-driven application layout scaffolds (dashboard, three-column, master-detail, docs, editor, holy-grail, command-center, and more) built from header/sidebar/panel/toolbar/aside/footer slots.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/app-shell.tsx",
+          "type": "registry:component",
+          "target": "components/app-shell.tsx"
+        }
+      ]
+    },
+    {
+      "name": "marketing-layout",
+      "type": "registry:component",
+      "title": "Marketing layout",
+      "description": "Variant-driven marketing/landing page scaffolds (landing, split-hero, centered, bento, pricing, feature-rows, article, docs, gallery, coming-soon) built from nav/hero/media/sections/footer slots.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/marketing-layout.tsx",
+          "type": "registry:component",
+          "target": "components/marketing-layout.tsx"
+        }
+      ]
+    },
+    {
       "name": "hero-section",
       "type": "registry:component",
       "title": "Hero section",
@@ -1798,24 +1832,6 @@
           "path": "registry/ui/apple-cards-carousel.tsx",
           "type": "registry:ui",
           "target": "components/ui/apple-cards-carousel.tsx"
-        }
-      ]
-    },
-    {
-      "name": "canvas-text",
-      "type": "registry:ui",
-      "title": "Canvas text",
-      "description": "Animated bezier lines clipped to text via canvas compositing; palette defaults to the --chart-1…5 ramp. Adapted from Aceternity UI.",
-      "dependencies": [],
-      "registryDependencies": [
-        "@byronwade/foundation",
-        "@byronwade/utils"
-      ],
-      "files": [
-        {
-          "path": "registry/ui/canvas-text.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/canvas-text.tsx"
         }
       ]
     },
@@ -3414,6 +3430,8 @@
         "@byronwade/segmented-control",
         "@byronwade/timeline-rail",
         "@byronwade/split-with-rail",
+        "@byronwade/app-shell",
+        "@byronwade/marketing-layout",
         "@byronwade/hero-section",
         "@byronwade/metric-stat",
         "@byronwade/centered-focal",
@@ -3485,7 +3503,6 @@
         "@byronwade/floating-dock",
         "@byronwade/use-outside-click",
         "@byronwade/apple-cards-carousel",
-        "@byronwade/canvas-text",
         "@byronwade/pixelated-canvas",
         "@byronwade/slider",
         "@byronwade/number-field",

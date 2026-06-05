@@ -2723,15 +2723,6 @@ export const components: ComponentDoc[] = [
     examples: ["default"],
   },
   {
-    slug: "canvas-text",
-    name: "Canvas text",
-    category: "UI",
-    description:
-      "Animated bezier lines clipped to text via canvas compositing; palette defaults to the --chart-1…5 ramp. Adapted from Aceternity UI.",
-    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    examples: ["default"],
-  },
-  {
     slug: "pixelated-canvas",
     name: "Pixelated canvas",
     category: "UI",

@@ -15,17 +15,20 @@ import {
 export default function Example() {
   return (
     <div className="flex items-center justify-center p-8">
-      <CreditCard>
+      <CreditCard className="w-80">
         <CreditCardFlipper>
           <CreditCardFront>
-            <CreditCardChip />
-            <CreditCardName className="absolute bottom-7 text-sm">
+            <CreditCardChip className="top-0 translate-y-0" />
+            <CreditCardServiceProvider
+              type="Visa"
+              className="top-0 bottom-auto"
+            />
+            <CreditCardName className="absolute bottom-8 text-sm">
               Byron Wade
             </CreditCardName>
             <CreditCardNumber className="absolute bottom-0">
               4242 4242 4242 4242
             </CreditCardNumber>
-            <CreditCardServiceProvider type="Visa" />
           </CreditCardFront>
           <CreditCardBack>
             <CreditCardMagStripe />
