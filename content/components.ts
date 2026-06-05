@@ -3846,6 +3846,314 @@ export const components: ComponentDoc[] = [
     ],
     examples: ["default", "dismissible", "inline", "tones", "with-actions"],
   },
+  // Video / YouTube — YouTube-modeled video UI
+  {
+    slug: "thumbnail",
+    name: "Thumbnail",
+    category: "Video",
+    description:
+      "Video thumbnail tile with optional duration pill, watched-progress bar, and live chip.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/aspect-ratio",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "verified-badge",
+    name: "Verified badge",
+    category: "Video",
+    description:
+      "Inline verified check shown next to channel or author names, with default check-seal and artist music-seal variants.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "live-badge",
+    name: "Live badge",
+    category: "Video",
+    description:
+      "A YouTube-style LIVE indicator pill with an optional pulsing dot and compact-formatted concurrent-viewer count.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "subscribe-button",
+    name: "Subscribe button",
+    category: "Video",
+    description:
+      "YouTube-style subscribe control with a two-state toggle and a notification-level dropdown menu.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/button",
+      "@byronwade/dropdown-menu",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "chip-bar",
+    name: "Chip bar",
+    category: "Video",
+    description:
+      "YouTube-style single-select horizontal filter chip bar with edge fade and scroll affordance.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "action-rail",
+    name: "Action rail",
+    category: "Video",
+    description:
+      "Vertical or horizontal stack of icon and compact-count action buttons — a YouTube Shorts-style like/comment/share rail.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "video-card",
+    name: "Video card",
+    category: "Video",
+    description:
+      "YouTube-style vertical video tile composing a thumbnail, channel byline, compact view/timestamp meta, and an overflow menu.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/thumbnail",
+      "@byronwade/verified-badge",
+      "@byronwade/avatar",
+      "@byronwade/dropdown-menu",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "video-shelf",
+    name: "Video shelf",
+    category: "Video",
+    description:
+      "Titled, horizontally-scrolling content row with edge-fade, chevron controls, and an optional action — the YouTube home/category shelf.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "channel-header",
+    name: "Channel header",
+    category: "Video",
+    description:
+      "YouTube-style channel page header with banner, avatar, verified handle and counts, subscribe/join actions, and section tabs.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/avatar",
+      "@byronwade/verified-badge",
+      "@byronwade/subscribe-button",
+      "@byronwade/button",
+      "@byronwade/tabs",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "up-next-item",
+    name: "Up next item",
+    category: "Video",
+    description:
+      "Compact horizontal video row for watch-page up-next lists and search results, composing a thumbnail with title, channel, view/timestamp meta, and an overflow menu.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/thumbnail",
+      "@byronwade/verified-badge",
+      "@byronwade/dropdown-menu",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "channel-byline",
+    name: "Channel byline",
+    category: "Video",
+    description:
+      "Watch-page channel identity row: avatar, name with verified badge and subscriber count, plus a SubscribeButton and optional action slot.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/avatar",
+      "@byronwade/verified-badge",
+      "@byronwade/subscribe-button",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "engagement-bar",
+    name: "Engagement bar",
+    category: "Video",
+    description:
+      "YouTube-style watch-page action row: connected like/dislike segmented pill, plus share, save, custom action, and overflow-menu pills.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/separator",
+      "@byronwade/dropdown-menu",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "description-box",
+    name: "Description box",
+    category: "Video",
+    description:
+      'YouTube watch-page description panel with a views/date header and collapsible body text that expands via "...more" / "Show less".',
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "comment",
+    name: "Comment",
+    category: "Video",
+    description:
+      "A YouTube-style threaded comment with author, like/dislike, reply, pinned/creator-heart tags, and a replies disclosure.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/avatar",
+      "@byronwade/verified-badge",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "comment-composer",
+    name: "Comment composer",
+    category: "Video",
+    description:
+      "YouTube-style comment composer: an avatar plus an underline text input that reveals Cancel/Comment actions on focus or input.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/avatar",
+      "@byronwade/button",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "shorts-player",
+    name: "Shorts player",
+    category: "Video",
+    description:
+      "A YouTube Shorts-style vertical 9:16 player with a right-side engagement rail and a bottom-left author, caption, and sound overlay.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/action-rail",
+      "@byronwade/avatar",
+      "@byronwade/verified-badge",
+      "@byronwade/button",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "mini-player",
+    name: "Mini player",
+    category: "Video",
+    description:
+      "Picture-in-picture mini player card with a play/pause poster overlay, progress, and close/expand controls.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/thumbnail",
+      "@byronwade/button",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "chapter-list",
+    name: "Chapter list",
+    category: "Video",
+    description:
+      "A YouTube-style chapter list with timestamps, thumbnails, and an active chapter derived from the playhead.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/thumbnail",
+      "@byronwade/utils",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "playback-menu",
+    name: "Playback menu",
+    category: "Video",
+    description:
+      "YouTube-style player settings menu: gear-triggered dropdown of setting groups (quality, speed, subtitles), each opening a single-select radio submenu.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/dropdown-menu",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "studio-video-row",
+    name: "Studio video row",
+    category: "Video",
+    description:
+      "A YouTube Studio content-table row composing a selection checkbox, thumbnail, title/description, visibility status, date, and compact mono view/comment/like metrics with an overflow menu.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/thumbnail",
+      "@byronwade/checkbox",
+      "@byronwade/status-dot",
+      "@byronwade/badge",
+      "@byronwade/dropdown-menu",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "upload-row",
+    name: "Upload row",
+    category: "Video",
+    description:
+      "YouTube Studio-style upload/processing row: preview, filename, progress bar, status badge, and a cancel/retry action.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/progress",
+      "@byronwade/thumbnail",
+      "@byronwade/status-dot",
+      "@byronwade/badge",
+      "@byronwade/button",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
+  {
+    slug: "comment-moderation-row",
+    name: "Comment moderation row",
+    category: "Video",
+    description:
+      "A YouTube Studio comment-moderation row with approve/remove/heart/reply actions, a status tag, and optional video context.",
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/avatar",
+      "@byronwade/button",
+      "@byronwade/badge",
+      "@byronwade/verified-badge",
+      "@byronwade/utils",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+  },
 ]
 
 export const categories = [
