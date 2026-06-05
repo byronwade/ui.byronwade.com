@@ -128,6 +128,7 @@ import CalendarDefault from "./calendar/default";
 import CalendarAppointment from "./calendar/appointment";
 import CalendarPricing from "./calendar/pricing";
 import CalendarRangePresets from "./calendar/range-presets";
+import CandlestickChartDefault from "./candlestick-chart/default";
 import CardDefault from "./card/default";
 import CardContentOnly from "./card/content-only";
 import CardFrameEmpty from "./card/frame-empty";
@@ -159,6 +160,9 @@ import ChartRadialBar from "./chart/radial-bar";
 import ChartStackedBar from "./chart/stacked-bar";
 import ChartThemeColors from "./chart/theme-colors";
 import ChartTooltipVariants from "./chart/tooltip-variants";
+import ChartPanelDefault from "./chart-panel/default";
+import ChartLayoutGridDefault from "./chart-layout-grid/default";
+import ChartToolbarDefault from "./chart-toolbar/default";
 import CheckboxDefault from "./checkbox/default";
 import CheckboxCheckboxGroup from "./checkbox/checkbox-group";
 import CheckboxDisabled from "./checkbox/disabled";
@@ -174,6 +178,7 @@ import CollapsibleWithRichContent from "./collapsible/with-rich-content";
 import ColorPickerDefault from "./color-picker/default";
 import ColorPickerInline from "./color-picker/inline";
 import ColorPickerSizes from "./color-picker/sizes";
+import CompareSymbolsDefault from "./compare-symbols/default";
 import CommandDefault from "./command/default";
 import CommandActions from "./command/actions";
 import CommandCards from "./command/cards";
@@ -194,6 +199,7 @@ import CursorDefault from "./cursor/default";
 import CursorTones from "./cursor/tones";
 import CustomerCardDefault from "./customer-card/default";
 import DescriptionBoxDefault from "./description-box/default";
+import DepthChartDefault from "./depth-chart/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
 import DetailHeaderManyActions from "./detail-header/many-actions";
@@ -208,6 +214,7 @@ import DialogNoCloseButton from "./dialog/no-close-button";
 import DialogScrollable from "./dialog/scrollable";
 import DialogWithForm from "./dialog/with-form";
 import DialogWithIcon from "./dialog/with-icon";
+import DrawingToolbarDefault from "./drawing-toolbar/default";
 import DropZoneDefault from "./drop-zone/default";
 import DropZoneDisabled from "./drop-zone/disabled";
 import DropZoneError from "./drop-zone/error";
@@ -221,6 +228,7 @@ import DropdownMenuWithIcons from "./dropdown-menu/with-icons";
 import DropdownMenuWithRadio from "./dropdown-menu/with-radio";
 import DropdownMenuWithShortcuts from "./dropdown-menu/with-shortcuts";
 import DropdownMenuWithSubmenu from "./dropdown-menu/with-submenu";
+import EconomicCalendarDefault from "./economic-calendar/default";
 import EditorDefault from "./editor/default";
 import EmptyStateDefault from "./empty-state/default";
 import EmptyStateCompact from "./empty-state/compact";
@@ -261,6 +269,7 @@ import GradientAvatarListRows from "./gradient-avatar/list-rows";
 import GradientAvatarSeeds from "./gradient-avatar/seeds";
 import GradientAvatarSizes from "./gradient-avatar/sizes";
 import GradientAvatarWithNameBadge from "./gradient-avatar/with-name-badge";
+import HeatmapGridDefault from "./heatmap-grid/default";
 import HeroSectionDefault from "./hero-section/default";
 import HeroSectionNoHeader from "./hero-section/no-header";
 import HeroSectionWithActionHeader from "./hero-section/with-action-header";
@@ -275,6 +284,7 @@ import HoverCardRichContent from "./hover-card/rich-content";
 import HoverCardWithDelay from "./hover-card/with-delay";
 import IdentityNames from "./identity/names";
 import ImageCropDefault from "./image-crop/default";
+import IndicatorLegendDefault from "./indicator-legend/default";
 import IndexFiltersDefault from "./index-filters/default";
 import IndexFiltersNoTabs from "./index-filters/no-tabs";
 import IndexFiltersSearchOnly from "./index-filters/search-only";
@@ -315,6 +325,9 @@ import LabelWithCheckbox from "./label/with-checkbox";
 import LabelWithIcon from "./label/with-icon";
 import LiveBadgeDefault from "./live-badge/default";
 import LyricsDefault from "./lyrics/default";
+import MarketDepthDefault from "./market-depth/default";
+import MarketMoversDefault from "./market-movers/default";
+import MarketNewsDefault from "./market-news/default";
 import MarketingLayoutDefault from "./marketing-layout/default";
 import MetricStatDefault from "./metric-stat/default";
 import MetricStatCustomValue from "./metric-stat/custom-value";
@@ -363,6 +376,8 @@ import NavigationMenuWithIcons from "./navigation-menu/with-icons";
 import NowPlayingBarDefault from "./now-playing-bar/default";
 import NumberFieldDefault from "./number-field/default";
 import NumberFieldSizes from "./number-field/sizes";
+import OrderBookDefault from "./order-book/default";
+import OrderEntryDefault from "./order-entry/default";
 import OrderSummaryDefault from "./order-summary/default";
 import PageHeaderDefault from "./page-header/default";
 import PageHeaderAlign from "./page-header/align";
@@ -381,6 +396,11 @@ import PopoverMenuLike from "./popover/menu-like";
 import PopoverPlacement from "./popover/placement";
 import PopoverRichContent from "./popover/rich-content";
 import PopoverWithForm from "./popover/with-form";
+import PortfolioSummaryDefault from "./portfolio-summary/default";
+import PositionCardDefault from "./position-card/default";
+import PositionsTableDefault from "./positions-table/default";
+import PriceAlertDefault from "./price-alert/default";
+import PriceChangeDefault from "./price-change/default";
 import PriceRangeFilterDefault from "./price-range-filter/default";
 import ProductCardDefault from "./product-card/default";
 import ProgressDefault from "./progress/default";
@@ -391,6 +411,7 @@ import ProgressTones from "./progress/tones";
 import ProgressWithFormat from "./progress/with-format";
 import QrCodeDefault from "./qr-code/default";
 import QrCodeSizes from "./qr-code/sizes";
+import QuoteHeaderDefault from "./quote-header/default";
 import RadioGroupDefault from "./radio-group/default";
 import RadioGroupDisabled from "./radio-group/disabled";
 import RadioGroupFormValidation from "./radio-group/form-validation";
@@ -416,6 +437,7 @@ import ResourceListNoMedia from "./resource-list/no-media";
 import ResourceListSelectable from "./resource-list/selectable";
 import ResourceListWithActions from "./resource-list/with-actions";
 import SafariDefault from "./safari/default";
+import ScreenerTableDefault from "./screener-table/default";
 import ScrollAreaDefault from "./scroll-area/default";
 import ScrollAreaCardList from "./scroll-area/card-list";
 import ScrollAreaCompact from "./scroll-area/compact";
@@ -472,6 +494,7 @@ import SonnerRichColors from "./sonner/rich-colors";
 import SonnerVariants from "./sonner/variants";
 import SonnerWithAction from "./sonner/with-action";
 import SonnerWithDescription from "./sonner/with-description";
+import SparklineDefault from "./sparkline/default";
 import SpinnerDefault from "./spinner/default";
 import SpinnerSizes from "./spinner/sizes";
 import SplitWithRailDefault from "./split-with-rail/default";
@@ -505,6 +528,8 @@ import SwitchDisabled from "./switch/disabled";
 import SwitchInvalid from "./switch/invalid";
 import SwitchSizes from "./switch/sizes";
 import SwitchWithLabel from "./switch/with-label";
+import SymbolSearchDefault from "./symbol-search/default";
+import SymbolDetailsDefault from "./symbol-details/default";
 import TableDefault from "./table/default";
 import TableEmptyState from "./table/empty-state";
 import TableLoadingSkeleton from "./table/loading-skeleton";
@@ -535,6 +560,7 @@ import TextareaWithLabelAndHint from "./textarea/with-label-and-hint";
 import ThumbnailDefault from "./thumbnail/default";
 import TickerDefault from "./ticker/default";
 import TickerSizes from "./ticker/sizes";
+import TickerTapeDefault from "./ticker-tape/default";
 import TimelineRailDefault from "./timeline-rail/default";
 import TimelineRailCustomTerminal from "./timeline-rail/custom-terminal";
 import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
@@ -562,6 +588,8 @@ import TooltipWithIcon from "./tooltip/with-icon";
 import TrackListDefault from "./track-list/default";
 import UpNextItemDefault from "./up-next-item/default";
 import UploadRowDefault from "./upload-row/default";
+import TimeAndSalesDefault from "./time-and-sales/default";
+import TradeHistoryDefault from "./trade-history/default";
 import VariantPickerDefault from "./variant-picker/default";
 import VerificationProgressDefault from "./verification-progress/default";
 import VerificationProgressAllTones from "./verification-progress/all-tones";
@@ -571,11 +599,13 @@ import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
 import VerifiedBadgeDefault from "./verified-badge/default";
 import VideoCardDefault from "./video-card/default";
+import VolumeProfileDefault from "./volume-profile/default";
 import VideoPlayerDefault from "./video-player/default";
 import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
 import VideoPlayerYoutube from "./video-player/youtube";
 import VideoShelfDefault from "./video-shelf/default";
+import WatchlistDefault from "./watchlist/default";
 import WorldMapDefault from "./world-map/default";
 
 export type Example = { name: string; file: string; Component: ComponentType };
@@ -815,6 +845,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Pricing", file: "calendar/pricing.tsx", Component: CalendarPricing },
     { name: "Range Presets", file: "calendar/range-presets.tsx", Component: CalendarRangePresets },
   ],
+  "candlestick-chart": [
+    { name: "Default", file: "candlestick-chart/default.tsx", Component: CandlestickChartDefault },
+  ],
   "card": [
     { name: "Default", file: "card/default.tsx", Component: CardDefault },
     { name: "Content Only", file: "card/content-only.tsx", Component: CardContentOnly },
@@ -858,6 +891,15 @@ export const examples: Record<string, Example[]> = {
     { name: "Theme Colors", file: "chart/theme-colors.tsx", Component: ChartThemeColors },
     { name: "Tooltip Variants", file: "chart/tooltip-variants.tsx", Component: ChartTooltipVariants },
   ],
+  "chart-panel": [
+    { name: "Default", file: "chart-panel/default.tsx", Component: ChartPanelDefault },
+  ],
+  "chart-layout-grid": [
+    { name: "Default", file: "chart-layout-grid/default.tsx", Component: ChartLayoutGridDefault },
+  ],
+  "chart-toolbar": [
+    { name: "Default", file: "chart-toolbar/default.tsx", Component: ChartToolbarDefault },
+  ],
   "checkbox": [
     { name: "Default", file: "checkbox/default.tsx", Component: CheckboxDefault },
     { name: "Checkbox Group", file: "checkbox/checkbox-group.tsx", Component: CheckboxCheckboxGroup },
@@ -880,6 +922,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Default", file: "color-picker/default.tsx", Component: ColorPickerDefault },
     { name: "Inline", file: "color-picker/inline.tsx", Component: ColorPickerInline },
     { name: "Sizes", file: "color-picker/sizes.tsx", Component: ColorPickerSizes },
+  ],
+  "compare-symbols": [
+    { name: "Default", file: "compare-symbols/default.tsx", Component: CompareSymbolsDefault },
   ],
   "command": [
     { name: "Default", file: "command/default.tsx", Component: CommandDefault },
@@ -921,6 +966,9 @@ export const examples: Record<string, Example[]> = {
   "description-box": [
     { name: "Default", file: "description-box/default.tsx", Component: DescriptionBoxDefault },
   ],
+  "depth-chart": [
+    { name: "Default", file: "depth-chart/default.tsx", Component: DepthChartDefault },
+  ],
   "detail-header": [
     { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },
     { name: "Custom Title Node", file: "detail-header/custom-title-node.tsx", Component: DetailHeaderCustomTitleNode },
@@ -939,6 +987,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Form", file: "dialog/with-form.tsx", Component: DialogWithForm },
     { name: "With Icon", file: "dialog/with-icon.tsx", Component: DialogWithIcon },
   ],
+  "drawing-toolbar": [
+    { name: "Default", file: "drawing-toolbar/default.tsx", Component: DrawingToolbarDefault },
+  ],
   "drop-zone": [
     { name: "Default", file: "drop-zone/default.tsx", Component: DropZoneDefault },
     { name: "Disabled", file: "drop-zone/disabled.tsx", Component: DropZoneDisabled },
@@ -955,6 +1006,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Radio", file: "dropdown-menu/with-radio.tsx", Component: DropdownMenuWithRadio },
     { name: "With Shortcuts", file: "dropdown-menu/with-shortcuts.tsx", Component: DropdownMenuWithShortcuts },
     { name: "With Submenu", file: "dropdown-menu/with-submenu.tsx", Component: DropdownMenuWithSubmenu },
+  ],
+  "economic-calendar": [
+    { name: "Default", file: "economic-calendar/default.tsx", Component: EconomicCalendarDefault },
   ],
   "editor": [
     { name: "Default", file: "editor/default.tsx", Component: EditorDefault },
@@ -1022,6 +1076,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Sizes", file: "gradient-avatar/sizes.tsx", Component: GradientAvatarSizes },
     { name: "With Name Badge", file: "gradient-avatar/with-name-badge.tsx", Component: GradientAvatarWithNameBadge },
   ],
+  "heatmap-grid": [
+    { name: "Default", file: "heatmap-grid/default.tsx", Component: HeatmapGridDefault },
+  ],
   "hero-section": [
     { name: "Default", file: "hero-section/default.tsx", Component: HeroSectionDefault },
     { name: "No Header", file: "hero-section/no-header.tsx", Component: HeroSectionNoHeader },
@@ -1043,6 +1100,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "image-crop": [
     { name: "Default", file: "image-crop/default.tsx", Component: ImageCropDefault },
+  ],
+  "indicator-legend": [
+    { name: "Default", file: "indicator-legend/default.tsx", Component: IndicatorLegendDefault },
   ],
   "index-filters": [
     { name: "Default", file: "index-filters/default.tsx", Component: IndexFiltersDefault },
@@ -1107,6 +1167,15 @@ export const examples: Record<string, Example[]> = {
   ],
   "lyrics": [
     { name: "Default", file: "lyrics/default.tsx", Component: LyricsDefault },
+  ],
+  "market-depth": [
+    { name: "Default", file: "market-depth/default.tsx", Component: MarketDepthDefault },
+  ],
+  "market-movers": [
+    { name: "Default", file: "market-movers/default.tsx", Component: MarketMoversDefault },
+  ],
+  "market-news": [
+    { name: "Default", file: "market-news/default.tsx", Component: MarketNewsDefault },
   ],
   "marketing-layout": [
     { name: "Default", file: "marketing-layout/default.tsx", Component: MarketingLayoutDefault },
@@ -1186,6 +1255,12 @@ export const examples: Record<string, Example[]> = {
     { name: "Default", file: "number-field/default.tsx", Component: NumberFieldDefault },
     { name: "Sizes", file: "number-field/sizes.tsx", Component: NumberFieldSizes },
   ],
+  "order-book": [
+    { name: "Default", file: "order-book/default.tsx", Component: OrderBookDefault },
+  ],
+  "order-entry": [
+    { name: "Default", file: "order-entry/default.tsx", Component: OrderEntryDefault },
+  ],
   "order-summary": [
     { name: "Default", file: "order-summary/default.tsx", Component: OrderSummaryDefault },
   ],
@@ -1218,6 +1293,21 @@ export const examples: Record<string, Example[]> = {
     { name: "Rich Content", file: "popover/rich-content.tsx", Component: PopoverRichContent },
     { name: "With Form", file: "popover/with-form.tsx", Component: PopoverWithForm },
   ],
+  "portfolio-summary": [
+    { name: "Default", file: "portfolio-summary/default.tsx", Component: PortfolioSummaryDefault },
+  ],
+  "position-card": [
+    { name: "Default", file: "position-card/default.tsx", Component: PositionCardDefault },
+  ],
+  "positions-table": [
+    { name: "Default", file: "positions-table/default.tsx", Component: PositionsTableDefault },
+  ],
+  "price-alert": [
+    { name: "Default", file: "price-alert/default.tsx", Component: PriceAlertDefault },
+  ],
+  "price-change": [
+    { name: "Default", file: "price-change/default.tsx", Component: PriceChangeDefault },
+  ],
   "price-range-filter": [
     { name: "Default", file: "price-range-filter/default.tsx", Component: PriceRangeFilterDefault },
   ],
@@ -1235,6 +1325,9 @@ export const examples: Record<string, Example[]> = {
   "qr-code": [
     { name: "Default", file: "qr-code/default.tsx", Component: QrCodeDefault },
     { name: "Sizes", file: "qr-code/sizes.tsx", Component: QrCodeSizes },
+  ],
+  "quote-header": [
+    { name: "Default", file: "quote-header/default.tsx", Component: QuoteHeaderDefault },
   ],
   "radio-group": [
     { name: "Default", file: "radio-group/default.tsx", Component: RadioGroupDefault },
@@ -1270,6 +1363,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "safari": [
     { name: "Default", file: "safari/default.tsx", Component: SafariDefault },
+  ],
+  "screener-table": [
+    { name: "Default", file: "screener-table/default.tsx", Component: ScreenerTableDefault },
   ],
   "scroll-area": [
     { name: "Default", file: "scroll-area/default.tsx", Component: ScrollAreaDefault },
@@ -1347,6 +1443,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Action", file: "sonner/with-action.tsx", Component: SonnerWithAction },
     { name: "With Description", file: "sonner/with-description.tsx", Component: SonnerWithDescription },
   ],
+  "sparkline": [
+    { name: "Default", file: "sparkline/default.tsx", Component: SparklineDefault },
+  ],
   "spinner": [
     { name: "Default", file: "spinner/default.tsx", Component: SpinnerDefault },
     { name: "Sizes", file: "spinner/sizes.tsx", Component: SpinnerSizes },
@@ -1396,6 +1495,12 @@ export const examples: Record<string, Example[]> = {
     { name: "Sizes", file: "switch/sizes.tsx", Component: SwitchSizes },
     { name: "With Label", file: "switch/with-label.tsx", Component: SwitchWithLabel },
   ],
+  "symbol-search": [
+    { name: "Default", file: "symbol-search/default.tsx", Component: SymbolSearchDefault },
+  ],
+  "symbol-details": [
+    { name: "Default", file: "symbol-details/default.tsx", Component: SymbolDetailsDefault },
+  ],
   "table": [
     { name: "Default", file: "table/default.tsx", Component: TableDefault },
     { name: "Empty State", file: "table/empty-state.tsx", Component: TableEmptyState },
@@ -1438,6 +1543,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Default", file: "ticker/default.tsx", Component: TickerDefault },
     { name: "Sizes", file: "ticker/sizes.tsx", Component: TickerSizes },
   ],
+  "ticker-tape": [
+    { name: "Default", file: "ticker-tape/default.tsx", Component: TickerTapeDefault },
+  ],
   "timeline-rail": [
     { name: "Default", file: "timeline-rail/default.tsx", Component: TimelineRailDefault },
     { name: "Custom Terminal", file: "timeline-rail/custom-terminal.tsx", Component: TimelineRailCustomTerminal },
@@ -1478,6 +1586,11 @@ export const examples: Record<string, Example[]> = {
   ],
   "upload-row": [
     { name: "Default", file: "upload-row/default.tsx", Component: UploadRowDefault },
+  "time-and-sales": [
+    { name: "Default", file: "time-and-sales/default.tsx", Component: TimeAndSalesDefault },
+  ],
+  "trade-history": [
+    { name: "Default", file: "trade-history/default.tsx", Component: TradeHistoryDefault },
   ],
   "variant-picker": [
     { name: "Default", file: "variant-picker/default.tsx", Component: VariantPickerDefault },
@@ -1496,6 +1609,9 @@ export const examples: Record<string, Example[]> = {
   "video-card": [
     { name: "Default", file: "video-card/default.tsx", Component: VideoCardDefault },
   ],
+  "volume-profile": [
+    { name: "Default", file: "volume-profile/default.tsx", Component: VolumeProfileDefault },
+  ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },
     { name: "Composable", file: "video-player/composable.tsx", Component: VideoPlayerComposable },
@@ -1504,6 +1620,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "video-shelf": [
     { name: "Default", file: "video-shelf/default.tsx", Component: VideoShelfDefault },
+  ],
+  "watchlist": [
+    { name: "Default", file: "watchlist/default.tsx", Component: WatchlistDefault },
   ],
   "world-map": [
     { name: "Default", file: "world-map/default.tsx", Component: WorldMapDefault },

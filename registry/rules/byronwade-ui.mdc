@@ -26,9 +26,9 @@ Before writing any markup, check whether a component already exists. Reach for t
   `command`, `navigation-menu`, `glimpse`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `kbd`, `separator`,
-  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `file-tree` (minimal + panel variants, multi-select), `kanban` (drag-drop board), `gantt` (timeline chart — auto-centers on today; `GanttControls` for timescale/zoom, density + read-only variants, status-tinted bars, `GanttMilestone`)
+  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `candlestick-chart` (token-themed SVG OHLC chart — success/destructive candles, optional volume band, grid, crosshair; geometry from the `market` lib), `depth-chart` (token-themed SVG market-depth chart — cumulative success bid depth mirrored against destructive ask depth about a dashed midline; geometry from the `market` lib), `order-book` (DOM ladder — bid/ask rows with proportional depth bars, spread row, split or vertical layout, optional row price select), `heatmap-grid` (performance grid — cell area by weight, tone by change magnitude via success/destructive opacity or `--chart-1…5`), `volume-profile` (session volume histogram — horizontal bars from `volumeProfileGeometry` in the `market` lib, optional POC line on `--chart-1` / `--brand`), `file-tree` (minimal + panel variants, multi-select), `kanban` (drag-drop board), `gantt` (timeline chart — auto-centers on today; `GanttControls` for timescale/zoom, density + read-only variants, status-tinted bars, `GanttMilestone`)
 - **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
-  `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR), `credit-card` (flippable card), `image-crop` (crop a file to PNG)
+  `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `sparkline` (compact line/area trend chart, auto up/down tone), `price-change` (signed price/percent change — runtime success/destructive/muted tone + trend caret, text or tinted chip), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR), `credit-card` (flippable card), `image-crop` (crop a file to PNG)
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
   (config-driven nav dock that blooms into a panel via the hook), `morph-surface`
   (agnostic morph primitive — open-state orchestration with no visual style; navigation styles compose it), `morph-bar`
@@ -43,6 +43,18 @@ Before writing any markup, check whether a component already exists. Reach for t
   `price-range-filter` (histogram + range slider + number inputs),
   `command-result` (compact rich result row for a command palette: media + title +
   description + meta + action, dropped inside a `command` item)
+- **Market / TradingView** — `ticker-tape` (scrolling market ticker marquee on `ticker`),
+  `quote-header` (symbol header — mono price, `price-change`, optional `sparkline`, `metric-stat` stats),
+  `chart-toolbar` (interval + chart-type controls on `segmented-control`/`toggle-group`),
+  `chart-panel` (`chart-toolbar` + `candlestick-chart` / sparkline fallback),
+  `watchlist` (table of quotes with `price-change` + `sparkline`), `market-depth`
+  (`depth-chart` + `order-book`, shared book data), `order-entry` (buy/sell ticket on
+  `tabs` + `money-input`), `position-card` / `positions-table` (open positions with
+  side badges + `price-change` P&L), `portfolio-summary` (`stat-card` + equity
+  `sparkline` + allocation bars), `trade-history` (fills table with `relative-time`),
+  `market-movers` (gainers/losers/active tabs), `screener-table` (`index-filters` + `index-table`),
+  `economic-calendar` (macro events by day), `market-news` (headline feed with sentiment + symbol chips),
+  `price-alert` (alert list with `switch` + `status-dot`), `symbol-search` (`command` palette with `price-change`), `time-and-sales` (compact trade tape — mono time/price/size rows, buy/sell price tones, optional `relative-time`), `symbol-details` (`quote-header` + `tabs` + `metric-stat` fundamentals grid), `chart-layout-grid` (1×2 / 2×2 multi-chart grid of `chart-panel` slots), `indicator-legend` (active indicators list with swatch + visibility switch + optional remove), `drawing-toolbar` (left/right tool rail on `toggle-group` + `tooltip` — presentation-only drawing modes), `compare-symbols` (overlay compare chips with `price-change` + add/remove)
 - **Page layouts** — variant-driven, slot-based page scaffolds: `app-shell` (application
   shells — `dashboard`, `sidebar`, `stacked`, `three-column`, `master-detail`, `docs`,
   `editor`, `holy-grail`, `focused`, `command-center`) and `marketing-layout` (marketing /
