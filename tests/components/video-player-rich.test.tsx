@@ -506,6 +506,63 @@ describe("MediaPlayer preset", () => {
     ).toHaveAttribute("data-zone", "left")
   })
 
+  it("single-taps toggle play, and a double-tap cancels the pending toggle", () => {
+    vi.useFakeTimers()
+    const { container } = render(<MediaPlayer src="/v.mp4" />)
+    const video = container.querySelector("video") as HTMLVideoElement
+    const state = stubVideo(video, { duration: 100, currentTime: 30 })
+    const playSpy = vi.spyOn(video, "play").mockResolvedValue(undefined)
+
+    // Drop any pending timers from earlier tests so we measure only ours.
+    vi.clearAllTimers()
+    playSpy.mockClear()
+
+    // Two quick taps collapse to one toggle (the second resets the debounce).
+    const center = container.querySelector(
+      '[data-slot="video-player-gesture-center"]',
+    ) as HTMLElement
+    fireEvent.click(center)
+    fireEvent.click(center)
+    act(() => vi.advanceTimersByTime(220))
+    expect(playSpy).toHaveBeenCalledTimes(1)
+
+    // A pending tap immediately followed by a double-tap seeks instead of toggling.
+    const right = container.querySelector(
+      '[data-slot="video-player-gesture-right"]',
+    ) as HTMLElement
+    fireEvent.click(right)
+    fireEvent.doubleClick(right)
+    expect(state.currentTime).toBe(40)
+    act(() => vi.advanceTimersByTime(300))
+    // The cancelled tap did not fire a second play.
+    expect(playSpy).toHaveBeenCalledTimes(1)
+  })
+
+  it("tap toggle no-ops when the media element is gone", () => {
+    vi.useFakeTimers()
+    const { container } = render(<MediaPlayer src="/v.mp4" />)
+    container.querySelector("video")?.remove()
+    fireEvent.click(
+      container.querySelector(
+        '[data-slot="video-player-gesture-center"]',
+      ) as HTMLElement,
+    )
+    expect(() => act(() => vi.advanceTimersByTime(300))).not.toThrow()
+  })
+
+  it("clears a pending tap timer on unmount", () => {
+    vi.useFakeTimers()
+    const { container, unmount } = render(<MediaPlayer src="/v.mp4" />)
+    fireEvent.click(
+      container.querySelector(
+        '[data-slot="video-player-gesture-center"]',
+      ) as HTMLElement,
+    )
+    // Unmounting with a tap still pending must not throw or fire later.
+    expect(() => unmount()).not.toThrow()
+    expect(() => act(() => vi.advanceTimersByTime(300))).not.toThrow()
+  })
+
   it("restores saved playback state on load and persists on timeupdate", () => {
     window.localStorage.setItem(
       resumeStorageKey("clip"),

@@ -56,7 +56,10 @@ export type Chapter = { startTime: number; title: string }
  * chapter's start; the final cue ends at `duration` (or a 1s tail when unknown
  * or non-increasing). The component turns the result into a `<track>` blob.
  */
-export const chaptersToVtt = (chapters: Chapter[], duration?: number): string => {
+export const chaptersToVtt = (
+  chapters: Chapter[],
+  duration?: number,
+): string => {
   if (chapters.length === 0) return "WEBVTT\n"
   const sorted = [...chapters].sort((a, b) => a.startTime - b.startTime)
   const lines = ["WEBVTT", ""]
@@ -225,7 +228,10 @@ type MediaLike = {
  * helpers (not in the component) so each branch — seek clamping, the rate
  * ladder, the PiP toggle — is unit-testable against a plain object.
  */
-export const applyMediaAction = (media: MediaLike, action: MediaAction): void => {
+export const applyMediaAction = (
+  media: MediaLike,
+  action: MediaAction,
+): void => {
   switch (action.type) {
     case "toggle-play": {
       if (media.paused) media.play()
@@ -244,7 +250,8 @@ export const applyMediaAction = (media: MediaLike, action: MediaAction): void =>
     }
     case "rate-step": {
       const nearest = PLAYBACK_RATES.reduce((best, rate) =>
-        Math.abs(rate - media.playbackRate) < Math.abs(best - media.playbackRate)
+        Math.abs(rate - media.playbackRate) <
+        Math.abs(best - media.playbackRate)
           ? rate
           : best,
       )

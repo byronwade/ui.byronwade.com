@@ -20,7 +20,8 @@ import {
   VideoPlayerVolumeRange,
 } from "@/components/ui/video-player"
 
-const SRC = "https://www.w3schools.com/html/mov_bbb.mp4"
+const SRC =
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
 export default function Example() {
   return (
@@ -47,7 +48,7 @@ export default function Example() {
           <VideoPlayerSettingsMenuItem>
             Speed
             <VideoPlayerPlaybackRateMenu slot="submenu" hidden>
-              <div slot="title">Speed</div>
+              <div slot="header">Speed</div>
             </VideoPlayerPlaybackRateMenu>
           </VideoPlayerSettingsMenuItem>
         </VideoPlayerSettingsMenu>

@@ -202,7 +202,9 @@ export const VideoPlayerTimeRange = ({
   </MediaTimeRange>
 )
 
-export type VideoPlayerTimeDisplayProps = ComponentProps<typeof MediaTimeDisplay>
+export type VideoPlayerTimeDisplayProps = ComponentProps<
+  typeof MediaTimeDisplay
+>
 
 export const VideoPlayerTimeDisplay = ({
   className,
@@ -230,7 +232,9 @@ export const VideoPlayerDurationDisplay = ({
   />
 )
 
-export type VideoPlayerVolumeRangeProps = ComponentProps<typeof MediaVolumeRange>
+export type VideoPlayerVolumeRangeProps = ComponentProps<
+  typeof MediaVolumeRange
+>
 
 export const VideoPlayerVolumeRange = ({
   className,
@@ -611,8 +615,11 @@ export const VideoPlayerContent = ({
   className,
   ...props
 }: VideoPlayerContentProps) => (
+  // media-chrome manages the slotted <video> on the client (e.g. adds tabindex),
+  // so suppress the resulting SSR attribute mismatch.
   <video
     data-slot="video-player-content"
+    suppressHydrationWarning
     className={cn("mt-0 mb-0", className)}
     {...props}
   />
@@ -679,7 +686,11 @@ export const VideoPlayerPoster = ({
           data-slot="video-player-poster-button"
           className="flex size-16 items-center justify-center rounded-full bg-brand text-primary-foreground shadow-lg transition-transform group-hover/video-player:scale-105"
         >
-          <svg viewBox="0 0 24 24" fill="currentColor" className="ml-0.5 size-7">
+          <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="ml-0.5 size-7"
+          >
             <path d="M8 5v14l11-7z" />
           </svg>
         </span>
@@ -738,7 +749,7 @@ export const VideoPlayerAmbient = ({
       aria-hidden
       data-slot="video-player-ambient"
       className={cn(
-        "pointer-events-none absolute -inset-8 -z-10 overflow-hidden",
+        "pointer-events-none absolute inset-0 -z-10 overflow-hidden",
         className,
       )}
       {...props}
@@ -919,7 +930,9 @@ export const VideoPlayerEndScreen = ({
               ) : null}
               <span className="flex flex-col gap-1">
                 <span className="font-mono text-xs text-muted-foreground">
-                  {countdownSeconds > 0 ? `Up next in ${remaining}s` : "Up next"}
+                  {countdownSeconds > 0
+                    ? `Up next in ${remaining}s`
+                    : "Up next"}
                 </span>
                 <span className="text-sm font-medium text-foreground">
                   {next.title}
@@ -968,6 +981,8 @@ export type MediaPlayerProps = Omit<VideoPlayerProps, "children"> & {
   autoPlay?: boolean
   muted?: boolean
   preload?: ComponentProps<"video">["preload"]
+  /** CORS mode for the `<video>` — only set for cross-origin sources that send CORS headers. */
+  crossOrigin?: ComponentProps<"video">["crossOrigin"]
   /** Fires when the media ends. */
   onEnded?: () => void
 }
@@ -1003,6 +1018,7 @@ export const MediaPlayer = ({
   autoPlay,
   muted,
   preload = "metadata",
+  crossOrigin,
   onEnded,
   className,
   ...props
@@ -1011,21 +1027,27 @@ export const MediaPlayer = ({
   const [duration, setDuration] = React.useState(0)
   const [ripple, setRipple] = React.useState<"left" | "right" | null>(null)
   const rippleTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  const clickTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const chaptersVttUrl = React.useMemo(() => {
-    if (!chapters || chapters.length === 0) return null
-    if (typeof URL === "undefined" || !URL.createObjectURL) return null
+  // Object URLs must be created on the client only — a server-rendered blob URL
+  // never matches the client's, causing a hydration mismatch. So this stays null
+  // through SSR + first paint and the chapters track is attached after mount.
+  const [chaptersVttUrl, setChaptersVttUrl] = React.useState<string | null>(
+    null,
+  )
+
+  React.useEffect(() => {
+    if (!chapters || chapters.length === 0) {
+      setChaptersVttUrl(null)
+      return
+    }
     const blob = new Blob([chaptersToVtt(chapters, duration || undefined)], {
       type: "text/vtt",
     })
-    return URL.createObjectURL(blob)
+    const url = URL.createObjectURL(blob)
+    setChaptersVttUrl(url)
+    return () => URL.revokeObjectURL(url)
   }, [chapters, duration])
-
-  React.useEffect(() => {
-    return () => {
-      if (chaptersVttUrl) URL.revokeObjectURL(chaptersVttUrl)
-    }
-  }, [chaptersVttUrl])
 
   const queryVideo = React.useCallback(
     () => rootRef.current?.querySelector("video") as HTMLVideoElement | null,
@@ -1111,11 +1133,26 @@ export const MediaPlayer = ({
   React.useEffect(
     () => () => {
       if (rippleTimer.current) clearTimeout(rippleTimer.current)
+      if (clickTimer.current) clearTimeout(clickTimer.current)
     },
     [],
   )
 
-  const handleZone = (zone: "left" | "right") => () => {
+  // Single tap toggles play; deferred so a double tap (seek) can cancel it.
+  const tapToggle = () => {
+    if (clickTimer.current) clearTimeout(clickTimer.current)
+    clickTimer.current = setTimeout(() => {
+      clickTimer.current = null
+      const video = queryVideo()
+      if (video) applyMediaAction(video, { type: "toggle-play" })
+    }, 220)
+  }
+
+  const seekZone = (zone: "left" | "right") => () => {
+    if (clickTimer.current) {
+      clearTimeout(clickTimer.current)
+      clickTimer.current = null
+    }
     const video = queryVideo()
     const action = resolveGesture(zone, 2)
     if (video && action) applyMediaAction(video, action)
@@ -1141,7 +1178,7 @@ export const MediaPlayer = ({
         preload={preload}
         autoPlay={autoPlay}
         muted={muted}
-        crossOrigin="anonymous"
+        crossOrigin={crossOrigin}
       >
         {captions?.map((track) => (
           <track
@@ -1172,25 +1209,37 @@ export const MediaPlayer = ({
 
       <VideoPlayerLoadingIndicator />
 
-      {/* Double-tap seek zones (center tap → play/pause via media-chrome). */}
+      {/* Tap = play/pause; double-tap on a side = seek ±10s. The real controls
+          live in the control bar, so these pointer affordances are aria-hidden. */}
       <div
         data-slot="video-player-gestures"
         className="absolute inset-0 z-0 grid grid-cols-[1fr_1.2fr_1fr]"
       >
         <button
           type="button"
-          aria-label="Rewind 10 seconds"
+          aria-hidden
+          tabIndex={-1}
           data-slot="video-player-gesture-left"
           className="size-full outline-none"
-          onDoubleClick={handleZone("left")}
+          onClick={tapToggle}
+          onDoubleClick={seekZone("left")}
         />
-        <span />
         <button
           type="button"
-          aria-label="Forward 10 seconds"
+          aria-hidden
+          tabIndex={-1}
+          data-slot="video-player-gesture-center"
+          className="size-full outline-none"
+          onClick={tapToggle}
+        />
+        <button
+          type="button"
+          aria-hidden
+          tabIndex={-1}
           data-slot="video-player-gesture-right"
           className="size-full outline-none"
-          onDoubleClick={handleZone("right")}
+          onClick={tapToggle}
+          onDoubleClick={seekZone("right")}
         />
       </div>
 
@@ -1226,7 +1275,10 @@ export const MediaPlayer = ({
           <VideoPlayerPreviewChapterDisplay slot="preview" />
           <VideoPlayerPreviewTimeDisplay slot="preview" />
           {chapters && chapters.length > 0 ? (
-            <VideoPlayerChapterMarkers chapters={chapters} duration={duration} />
+            <VideoPlayerChapterMarkers
+              chapters={chapters}
+              duration={duration}
+            />
           ) : null}
         </VideoPlayerTimeRange>
       </div>
@@ -1251,19 +1303,19 @@ export const MediaPlayer = ({
         <VideoPlayerSettingsMenuItem>
           Speed
           <VideoPlayerPlaybackRateMenu slot="submenu" hidden>
-            <div slot="title">Speed</div>
+            <div slot="header">Speed</div>
           </VideoPlayerPlaybackRateMenu>
         </VideoPlayerSettingsMenuItem>
         <VideoPlayerSettingsMenuItem>
           Quality
           <VideoPlayerRenditionMenu slot="submenu" hidden>
-            <div slot="title">Quality</div>
+            <div slot="header">Quality</div>
           </VideoPlayerRenditionMenu>
         </VideoPlayerSettingsMenuItem>
         <VideoPlayerSettingsMenuItem>
           Captions
           <VideoPlayerCaptionsMenu slot="submenu" hidden>
-            <div slot="title">Captions</div>
+            <div slot="header">Captions</div>
           </VideoPlayerCaptionsMenu>
         </VideoPlayerSettingsMenuItem>
       </VideoPlayerSettingsMenu>

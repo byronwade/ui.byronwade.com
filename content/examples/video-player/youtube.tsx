@@ -1,6 +1,7 @@
 import { MediaPlayer } from "@/components/ui/video-player"
 
-const SRC = "https://www.w3schools.com/html/mov_bbb.mp4"
+const SRC =
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
 export default function Example() {
   return (
@@ -17,7 +18,10 @@ export default function Example() {
           { startTime: 8, title: "Finale" },
         ]}
         heatmap={[2, 4, 7, 9, 6, 3, 5, 8, 10, 7, 4, 2]}
-        next={{ title: "Up next: Sintel", thumbnail: "https://placehold.co/320x180/png" }}
+        next={{
+          title: "Up next: Sintel",
+          thumbnail: "https://placehold.co/320x180/png",
+        }}
         countdownSeconds={5}
       />
     </div>
