@@ -92,8 +92,20 @@ applicable, `data-slot` on parts, `cn()` + `className` passthrough.
 | `MorphBar` | `top` | `height` | Full-width top bar: brand + nav items + trailing actions | Blooms a panel **down** beneath the bar (mega-menu / command / search) |
 | `MorphSidebar` | `left` | `width` | Vertical icon rail (collapsed) | Morphs **wider** to the labeled sidebar; items can bloom flyout panels |
 | `MorphTabs` | `bottom` | `height` | Mobile bottom tab bar | A tab blooms a **sheet up** (height morph from the bottom edge) |
-| `MorphMenubar` | `top` | `both` | Slim horizontal menubar (File / Edit / View …) | The active item blooms its dropdown in place |
-| `MorphRail` | `right` | `both` | Compact icon rail (activity-bar style) | Blooms a wide labeled panel to the side |
+| `MorphMenubar` | `top` | `height` | Slim horizontal menubar (File / Edit / View …) | The active item blooms its dropdown in place |
+| `MorphRail` | `right` | `width` | Compact icon rail (activity-bar style) | Blooms a wide labeled panel to the side |
+
+> **Corrected during implementation (Phase 2):** Menubar and Rail were originally sketched as
+> `grow="both"`. Tracing the geometry against `MorphSurface`'s `ANCHOR` map showed `both` betrays the
+> intended form-factor: `placement="right"` already pins `inset-y-0` (full height), so a Rail must only
+> grow **width** (`both` would drop the bottom anchor and make a top-right corner widget); and a
+> full-width Menubar must only grow **height** (`both` shrinks the bar to the panel width and clips the
+> File/Edit/View row under `overflow-hidden`). Both now match their proven analogs — Rail mirrors
+> Sidebar, Menubar mirrors Bar. **Two further constraints, true for every style:** (1) `MorphSurface`'s
+> `panelRef` is `absolute inset-0`, so measuring it for the growing axis is circular — each style passes
+> an explicit `size` on its growing axis (as `MorphBar` does). (2) Menubar's "dropdown in place" is
+> resolved **inside `MorphMenubar`** (a trigger-ref map positions the dropdown via `offsetLeft`), so the
+> frozen `MorphSurface` API is not touched.
 
 Common item shape (shared type, per component as needed):
 ```tsx
