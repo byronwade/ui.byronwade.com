@@ -3532,6 +3532,72 @@
       ]
     },
     {
+      "name": "video-card",
+      "type": "registry:component",
+      "title": "Video card",
+      "description": "YouTube-style vertical video tile composing a thumbnail, channel byline, compact view/timestamp meta, and an overflow menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/thumbnail",
+        "@byronwade/verified-badge",
+        "@byronwade/avatar",
+        "@byronwade/dropdown-menu",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/video-card.tsx",
+          "type": "registry:component",
+          "target": "components/video-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "video-shelf",
+      "type": "registry:component",
+      "title": "Video shelf",
+      "description": "Titled, horizontally-scrolling content row with edge-fade, chevron controls, and an optional action — the YouTube home/category shelf.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/video-shelf.tsx",
+          "type": "registry:component",
+          "target": "components/video-shelf.tsx"
+        }
+      ]
+    },
+    {
+      "name": "channel-header",
+      "type": "registry:component",
+      "title": "Channel header",
+      "description": "YouTube-style channel page header with banner, avatar, verified handle and counts, subscribe/join actions, and section tabs.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/avatar",
+        "@byronwade/verified-badge",
+        "@byronwade/subscribe-button",
+        "@byronwade/button",
+        "@byronwade/tabs",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/channel-header.tsx",
+          "type": "registry:component",
+          "target": "components/channel-header.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -3699,7 +3765,10 @@
         "@byronwade/live-badge",
         "@byronwade/subscribe-button",
         "@byronwade/chip-bar",
-        "@byronwade/action-rail"
+        "@byronwade/action-rail",
+        "@byronwade/video-card",
+        "@byronwade/video-shelf",
+        "@byronwade/channel-header"
       ]
     }
   ]
