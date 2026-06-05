@@ -88,7 +88,7 @@ export function AudioWaveform({
             key={i}
             data-slot="audio-waveform-bar"
             className={cn(
-              "min-h-[2px] flex-1 rounded-full transition-colors motion-reduce:transition-none",
+              "min-h-0.5 flex-1 rounded-full transition-colors motion-reduce:transition-none",
               played ? "bg-brand" : "bg-muted-foreground/30",
             )}
             style={{ height: `${Math.max(4, clamp(peak) * 100)}%` }}
