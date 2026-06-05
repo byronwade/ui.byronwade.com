@@ -54,7 +54,7 @@ Before writing any markup, check whether a component already exists. Reach for t
   `sparkline` + allocation bars), `trade-history` (fills table with `relative-time`),
   `market-movers` (gainers/losers/active tabs), `screener-table` (`index-filters` + `index-table`),
   `economic-calendar` (macro events by day), `market-news` (headline feed with sentiment + symbol chips),
-  `price-alert` (alert list with `switch` + `status-dot`), `symbol-search` (`command` palette with `price-change`), `time-and-sales` (compact trade tape — mono time/price/size rows, buy/sell price tones, optional `relative-time`), `symbol-details` (`quote-header` + `tabs` + `metric-stat` fundamentals grid)
+  `price-alert` (alert list with `switch` + `status-dot`), `symbol-search` (`command` palette with `price-change`), `time-and-sales` (compact trade tape — mono time/price/size rows, buy/sell price tones, optional `relative-time`), `symbol-details` (`quote-header` + `tabs` + `metric-stat` fundamentals grid), `chart-layout-grid` (1×2 / 2×2 multi-chart grid of `chart-panel` slots), `indicator-legend` (active indicators list with swatch + visibility switch + optional remove), `drawing-toolbar` (left/right tool rail on `toggle-group` + `tooltip` — presentation-only drawing modes), `compare-symbols` (overlay compare chips with `price-change` + add/remove)
 - **Page layouts** — variant-driven, slot-based page scaffolds: `app-shell` (application
   shells — `dashboard`, `sidebar`, `stacked`, `three-column`, `master-detail`, `docs`,
   `editor`, `holy-grail`, `focused`, `command-center`) and `marketing-layout` (marketing /

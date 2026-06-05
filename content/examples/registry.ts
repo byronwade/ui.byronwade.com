@@ -157,6 +157,7 @@ import ChartStackedBar from "./chart/stacked-bar";
 import ChartThemeColors from "./chart/theme-colors";
 import ChartTooltipVariants from "./chart/tooltip-variants";
 import ChartPanelDefault from "./chart-panel/default";
+import ChartLayoutGridDefault from "./chart-layout-grid/default";
 import ChartToolbarDefault from "./chart-toolbar/default";
 import CheckboxDefault from "./checkbox/default";
 import CheckboxCheckboxGroup from "./checkbox/checkbox-group";
@@ -172,6 +173,7 @@ import CollapsibleWithRichContent from "./collapsible/with-rich-content";
 import ColorPickerDefault from "./color-picker/default";
 import ColorPickerInline from "./color-picker/inline";
 import ColorPickerSizes from "./color-picker/sizes";
+import CompareSymbolsDefault from "./compare-symbols/default";
 import CommandDefault from "./command/default";
 import CommandActions from "./command/actions";
 import CommandCards from "./command/cards";
@@ -203,6 +205,7 @@ import DialogNoCloseButton from "./dialog/no-close-button";
 import DialogScrollable from "./dialog/scrollable";
 import DialogWithForm from "./dialog/with-form";
 import DialogWithIcon from "./dialog/with-icon";
+import DrawingToolbarDefault from "./drawing-toolbar/default";
 import DropZoneDefault from "./drop-zone/default";
 import DropZoneDisabled from "./drop-zone/disabled";
 import DropZoneError from "./drop-zone/error";
@@ -271,6 +274,7 @@ import HoverCardRichContent from "./hover-card/rich-content";
 import HoverCardWithDelay from "./hover-card/with-delay";
 import IdentityNames from "./identity/names";
 import ImageCropDefault from "./image-crop/default";
+import IndicatorLegendDefault from "./indicator-legend/default";
 import IndexFiltersDefault from "./index-filters/default";
 import IndexFiltersNoTabs from "./index-filters/no-tabs";
 import IndexFiltersSearchOnly from "./index-filters/search-only";
@@ -856,6 +860,9 @@ export const examples: Record<string, Example[]> = {
   "chart-panel": [
     { name: "Default", file: "chart-panel/default.tsx", Component: ChartPanelDefault },
   ],
+  "chart-layout-grid": [
+    { name: "Default", file: "chart-layout-grid/default.tsx", Component: ChartLayoutGridDefault },
+  ],
   "chart-toolbar": [
     { name: "Default", file: "chart-toolbar/default.tsx", Component: ChartToolbarDefault },
   ],
@@ -878,6 +885,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Default", file: "color-picker/default.tsx", Component: ColorPickerDefault },
     { name: "Inline", file: "color-picker/inline.tsx", Component: ColorPickerInline },
     { name: "Sizes", file: "color-picker/sizes.tsx", Component: ColorPickerSizes },
+  ],
+  "compare-symbols": [
+    { name: "Default", file: "compare-symbols/default.tsx", Component: CompareSymbolsDefault },
   ],
   "command": [
     { name: "Default", file: "command/default.tsx", Component: CommandDefault },
@@ -927,6 +937,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Scrollable", file: "dialog/scrollable.tsx", Component: DialogScrollable },
     { name: "With Form", file: "dialog/with-form.tsx", Component: DialogWithForm },
     { name: "With Icon", file: "dialog/with-icon.tsx", Component: DialogWithIcon },
+  ],
+  "drawing-toolbar": [
+    { name: "Default", file: "drawing-toolbar/default.tsx", Component: DrawingToolbarDefault },
   ],
   "drop-zone": [
     { name: "Default", file: "drop-zone/default.tsx", Component: DropZoneDefault },
@@ -1035,6 +1048,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "image-crop": [
     { name: "Default", file: "image-crop/default.tsx", Component: ImageCropDefault },
+  ],
+  "indicator-legend": [
+    { name: "Default", file: "indicator-legend/default.tsx", Component: IndicatorLegendDefault },
   ],
   "index-filters": [
     { name: "Default", file: "index-filters/default.tsx", Component: IndexFiltersDefault },

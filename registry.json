@@ -3670,6 +3670,93 @@
       ]
     },
     {
+      "name": "chart-layout-grid",
+      "type": "registry:component",
+      "title": "Chart layout grid",
+      "description": "Multi-chart layout shell — 1×2 or 2×2 grid of chart-panel slots with bordered panel frames.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/chart-panel",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/chart-layout-grid.tsx",
+          "type": "registry:component",
+          "target": "components/chart-layout-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "indicator-legend",
+      "type": "registry:component",
+      "title": "Indicator legend",
+      "description": "Active chart indicators list — swatch, visibility switch, optional remove, and hidden badge.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/switch",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/indicator-legend.tsx",
+          "type": "registry:component",
+          "target": "components/indicator-legend.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drawing-toolbar",
+      "type": "registry:component",
+      "title": "Drawing toolbar",
+      "description": "Chart drawing tool rail — vertical or horizontal toggle group with tooltip-labeled trendline, fib, text, and shape tools.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/toggle-group",
+        "@byronwade/tooltip",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/drawing-toolbar.tsx",
+          "type": "registry:component",
+          "target": "components/drawing-toolbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "compare-symbols",
+      "type": "registry:component",
+      "title": "Compare symbols",
+      "description": "Compare overlay header — symbol chips with price-change percent, optional add/remove actions, and max cap.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/badge",
+        "@byronwade/button",
+        "@byronwade/price-change",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/compare-symbols.tsx",
+          "type": "registry:component",
+          "target": "components/compare-symbols.tsx"
+        }
+      ]
+    },
+    {
       "name": "money-input",
       "type": "registry:ui",
       "title": "Money input",
@@ -4138,6 +4225,10 @@
         "@byronwade/volume-profile",
         "@byronwade/time-and-sales",
         "@byronwade/symbol-details",
+        "@byronwade/chart-layout-grid",
+        "@byronwade/indicator-legend",
+        "@byronwade/drawing-toolbar",
+        "@byronwade/compare-symbols",
         "@byronwade/money-input",
         "@byronwade/bulk-action-bar",
         "@byronwade/order-summary",

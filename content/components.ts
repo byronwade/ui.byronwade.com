@@ -4209,6 +4209,58 @@ export const components: ComponentDoc[] = [
     examples: ["default"],
     tags: ["tradingview", "market"],
   },
+  {
+    slug: "chart-layout-grid",
+    name: "Chart layout grid",
+    category: "Market",
+    description:
+      "Multi-chart layout shell — 1×2 or 2×2 grid of bordered panel slots for composing multiple `chart-panel` instances.",
+    registryDeps: ["@byronwade/chart-panel"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "indicator-legend",
+    name: "Indicator legend",
+    category: "Market",
+    description:
+      "Active chart indicators list — tone swatch, visibility switch, hidden badge, and optional remove callback.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/badge",
+      "@byronwade/button",
+      "@byronwade/switch",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "drawing-toolbar",
+    name: "Drawing toolbar",
+    category: "Market",
+    description:
+      "Chart drawing tool rail — vertical or horizontal toggle group with tooltip-labeled cursor, trendline, fib, text, and shape tools (presentation only).",
+    npmDeps: ["lucide-react"],
+    registryDeps: ["@byronwade/toggle-group", "@byronwade/tooltip"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "compare-symbols",
+    name: "Compare symbols",
+    category: "Market",
+    description:
+      "Compare overlay header — symbol chips with `price-change` percent, optional add/remove actions, and a max symbol cap.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/badge",
+      "@byronwade/button",
+      "@byronwade/price-change",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
 ]
 export const categories = [
   "Foundation",

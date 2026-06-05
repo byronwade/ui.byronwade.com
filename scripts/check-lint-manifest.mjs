@@ -21,17 +21,19 @@ const before = existed ? readFileSync(genPath, "utf8") : null
 regen()
 const after = readFileSync(genPath, "utf8")
 if (existed && before !== after)
-  errors.push("manifest.generated.ts is stale — run `npm run gen:lint-manifest`.")
+  errors.push(
+    "manifest.generated.ts is stale — run `npm run gen:lint-manifest`.",
+  )
 
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"))
-  const names = new Set(registry.items.map((i) => i.name))
-  // ensure each nativeToComponent slug (lowercase key -> Capitalized value) exists
-  const slugs = [...after.matchAll(/"([a-z-]+)":\s*"[A-Z][A-Za-z]+"/g)].map(
-    (x) => x[1],
-  )
-  for (const slug of slugs)
-    if (!names.has(slug))
-      errors.push(`nativeToComponent maps to missing component: ${slug}`)
+const names = new Set(registry.items.map((i) => i.name))
+// ensure each nativeToComponent slug (lowercase key -> Capitalized value) exists
+const slugs = [...after.matchAll(/"([a-z-]+)":\s*"[A-Z][A-Za-z]+"/g)].map(
+  (x) => x[1],
+)
+for (const slug of slugs)
+  if (!names.has(slug))
+    errors.push(`nativeToComponent maps to missing component: ${slug}`)
 
 if (errors.length) {
   for (const e of errors) console.error("  - " + e)
