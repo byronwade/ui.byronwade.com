@@ -70,6 +70,39 @@ describe("RelativeTime — controlled", () => {
   });
 });
 
+describe("RelativeTime — size", () => {
+  const row = (c: HTMLElement) =>
+    c.querySelector('[data-slot="relative-time-zone"]');
+
+  function Sized({ size }: { size?: "sm" | "default" | "lg" }) {
+    return (
+      <RelativeTime time={FIXED} size={size}>
+        <RelativeTimeZone zone="UTC">
+          <RelativeTimeZoneLabel>UTC</RelativeTimeZoneLabel>
+          <RelativeTimeZoneDisplay />
+        </RelativeTimeZone>
+      </RelativeTime>
+    );
+  }
+
+  it("keeps the compact text by default", () => {
+    const { container } = render(<Sized />);
+    expect(row(container)).toHaveClass("text-xs");
+    expect(row(container)).toHaveClass("gap-1.5");
+  });
+
+  it("tightens density for the sm size", () => {
+    const { container } = render(<Sized size="sm" />);
+    expect(row(container)).toHaveClass("gap-1");
+  });
+
+  it("enlarges the row text for the lg size", () => {
+    const { container } = render(<Sized size="lg" />);
+    expect(row(container)).toHaveClass("text-sm");
+    expect(row(container)).toHaveClass("gap-2");
+  });
+});
+
 describe("RelativeTime — uncontrolled (ticks)", () => {
   beforeEach(() => vi.useFakeTimers());
   afterEach(() => vi.useRealTimers());

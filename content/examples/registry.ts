@@ -393,6 +393,7 @@ import RatingReadOnly from "./rating/read-only";
 import RatingScoreBadge from "./rating/score-badge";
 import RatingWithForm from "./rating/with-form";
 import RelativeTimeDefault from "./relative-time/default";
+import RelativeTimeSizes from "./relative-time/sizes";
 import RelativeTimeWorldClock from "./relative-time/world-clock";
 import ResourceListDefault from "./resource-list/default";
 import ResourceListEmpty from "./resource-list/empty";
@@ -1193,6 +1194,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "relative-time": [
     { name: "Default", file: "relative-time/default.tsx", Component: RelativeTimeDefault },
+    { name: "Sizes", file: "relative-time/sizes.tsx", Component: RelativeTimeSizes },
     { name: "World Clock", file: "relative-time/world-clock.tsx", Component: RelativeTimeWorldClock },
   ],
   "resource-list": [
