@@ -89,6 +89,7 @@ import BreadcrumbResponsive from "./breadcrumb/responsive";
 import BreadcrumbWithEllipsis from "./breadcrumb/with-ellipsis";
 import BreadcrumbWithIcons from "./breadcrumb/with-icons";
 import BreadcrumbWithRenderProp from "./breadcrumb/with-render-prop";
+import BulkActionBarDefault from "./bulk-action-bar/default";
 import ButtonDefault from "./button/default";
 import ButtonCount from "./button/count";
 import ButtonDestructive from "./button/destructive";
@@ -171,6 +172,7 @@ import CommandResultDefault from "./command-result/default";
 import ConversationListDefault from "./conversation-list/default";
 import CreditCardDefault from "./credit-card/default";
 import CursorDefault from "./cursor/default";
+import CustomerCardDefault from "./customer-card/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
 import DetailHeaderManyActions from "./detail-header/many-actions";
@@ -219,6 +221,7 @@ import FilterPillFilterBar from "./filter-pill/filter-bar";
 import FilterPillWithIcon from "./filter-pill/with-icon";
 import FloatingDockDefault from "./floating-dock/default";
 import FoundationTokens from "./foundation/tokens";
+import FulfillmentTrackerDefault from "./fulfillment-tracker/default";
 import GanttDefault from "./gantt/default";
 import GanttCompact from "./gantt/compact";
 import GanttControls from "./gantt/controls";
@@ -259,6 +262,7 @@ import InputGroupValidation from "./input-group/validation";
 import InputGroupWithButton from "./input-group/with-button";
 import InputGroupWithKbd from "./input-group/with-kbd";
 import InputGroupWithText from "./input-group/with-text";
+import InventoryBarDefault from "./inventory-bar/default";
 import IphoneDefault from "./iphone/default";
 import KanbanDefault from "./kanban/default";
 import KbdDefault from "./kbd/default";
@@ -279,6 +283,7 @@ import MetricStatGridLayout from "./metric-stat/grid-layout";
 import MetricStatLoading from "./metric-stat/loading";
 import MetricStatNoDelta from "./metric-stat/no-delta";
 import MetricStatWithIcon from "./metric-stat/with-icon";
+import MoneyInputDefault from "./money-input/default";
 import MorphBarDefault from "./morph-bar/default";
 import MorphDockDefault from "./morph-dock/default";
 import MorphDockAppBar from "./morph-dock/app-bar";
@@ -312,6 +317,7 @@ import NavigationMenuWithDescriptions from "./navigation-menu/with-descriptions"
 import NavigationMenuWithIcons from "./navigation-menu/with-icons";
 import NowPlayingBarDefault from "./now-playing-bar/default";
 import NumberFieldDefault from "./number-field/default";
+import OrderSummaryDefault from "./order-summary/default";
 import PageHeaderDefault from "./page-header/default";
 import PageHeaderAlign from "./page-header/align";
 import PageHeaderBreadcrumbContext from "./page-header/breadcrumb-context";
@@ -328,6 +334,7 @@ import PopoverPlacement from "./popover/placement";
 import PopoverRichContent from "./popover/rich-content";
 import PopoverWithForm from "./popover/with-form";
 import PriceRangeFilterDefault from "./price-range-filter/default";
+import ProductCardDefault from "./product-card/default";
 import ProgressDefault from "./progress/default";
 import ProgressControlled from "./progress/controlled";
 import ProgressIndeterminate from "./progress/indeterminate";
@@ -476,6 +483,7 @@ import TooltipSides from "./tooltip/sides";
 import TooltipWithDelay from "./tooltip/with-delay";
 import TooltipWithIcon from "./tooltip/with-icon";
 import TrackListDefault from "./track-list/default";
+import VariantPickerDefault from "./variant-picker/default";
 import VerificationProgressDefault from "./verification-progress/default";
 import VerificationProgressAllTones from "./verification-progress/all-tones";
 import VerificationProgressManySteps from "./verification-progress/many-steps";
@@ -672,6 +680,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Icons", file: "breadcrumb/with-icons.tsx", Component: BreadcrumbWithIcons },
     { name: "With Render Prop", file: "breadcrumb/with-render-prop.tsx", Component: BreadcrumbWithRenderProp },
   ],
+  "bulk-action-bar": [
+    { name: "Default", file: "bulk-action-bar/default.tsx", Component: BulkActionBarDefault },
+  ],
   "button": [
     { name: "Default", file: "button/default.tsx", Component: ButtonDefault },
     { name: "Count", file: "button/count.tsx", Component: ButtonCount },
@@ -784,6 +795,9 @@ export const examples: Record<string, Example[]> = {
   "cursor": [
     { name: "Default", file: "cursor/default.tsx", Component: CursorDefault },
   ],
+  "customer-card": [
+    { name: "Default", file: "customer-card/default.tsx", Component: CustomerCardDefault },
+  ],
   "detail-header": [
     { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },
     { name: "Custom Title Node", file: "detail-header/custom-title-node.tsx", Component: DetailHeaderCustomTitleNode },
@@ -854,6 +868,9 @@ export const examples: Record<string, Example[]> = {
   "foundation": [
     { name: "Tokens", file: "foundation/tokens.tsx", Component: FoundationTokens },
   ],
+  "fulfillment-tracker": [
+    { name: "Default", file: "fulfillment-tracker/default.tsx", Component: FulfillmentTrackerDefault },
+  ],
   "gantt": [
     { name: "Default", file: "gantt/default.tsx", Component: GanttDefault },
     { name: "Compact", file: "gantt/compact.tsx", Component: GanttCompact },
@@ -912,6 +929,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Kbd", file: "input-group/with-kbd.tsx", Component: InputGroupWithKbd },
     { name: "With Text", file: "input-group/with-text.tsx", Component: InputGroupWithText },
   ],
+  "inventory-bar": [
+    { name: "Default", file: "inventory-bar/default.tsx", Component: InventoryBarDefault },
+  ],
   "iphone": [
     { name: "Default", file: "iphone/default.tsx", Component: IphoneDefault },
   ],
@@ -945,6 +965,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Loading", file: "metric-stat/loading.tsx", Component: MetricStatLoading },
     { name: "No Delta", file: "metric-stat/no-delta.tsx", Component: MetricStatNoDelta },
     { name: "With Icon", file: "metric-stat/with-icon.tsx", Component: MetricStatWithIcon },
+  ],
+  "money-input": [
+    { name: "Default", file: "money-input/default.tsx", Component: MoneyInputDefault },
   ],
   "morph-bar": [
     { name: "Default", file: "morph-bar/default.tsx", Component: MorphBarDefault },
@@ -1001,6 +1024,9 @@ export const examples: Record<string, Example[]> = {
   "number-field": [
     { name: "Default", file: "number-field/default.tsx", Component: NumberFieldDefault },
   ],
+  "order-summary": [
+    { name: "Default", file: "order-summary/default.tsx", Component: OrderSummaryDefault },
+  ],
   "page-header": [
     { name: "Default", file: "page-header/default.tsx", Component: PageHeaderDefault },
     { name: "Align", file: "page-header/align.tsx", Component: PageHeaderAlign },
@@ -1028,6 +1054,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "price-range-filter": [
     { name: "Default", file: "price-range-filter/default.tsx", Component: PriceRangeFilterDefault },
+  ],
+  "product-card": [
+    { name: "Default", file: "product-card/default.tsx", Component: ProductCardDefault },
   ],
   "progress": [
     { name: "Default", file: "progress/default.tsx", Component: ProgressDefault },
@@ -1236,6 +1265,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "track-list": [
     { name: "Default", file: "track-list/default.tsx", Component: TrackListDefault },
+  ],
+  "variant-picker": [
+    { name: "Default", file: "variant-picker/default.tsx", Component: VariantPickerDefault },
   ],
   "verification-progress": [
     { name: "Default", file: "verification-progress/default.tsx", Component: VerificationProgressDefault },
