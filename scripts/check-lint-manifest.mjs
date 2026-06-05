@@ -21,9 +21,7 @@ const before = existed ? readFileSync(genPath, "utf8") : null
 regen()
 const after = readFileSync(genPath, "utf8")
 if (existed && before !== after)
-  errors.push(
-    "manifest.generated.ts is stale — run `npm run gen:lint-manifest`.",
-  )
+  errors.push("manifest.generated.ts is stale — run `npm run gen:lint-manifest`.")
 
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"))
 const names = new Set(registry.items.map((i) => i.name))
