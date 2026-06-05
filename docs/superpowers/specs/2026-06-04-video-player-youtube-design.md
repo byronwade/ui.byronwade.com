@@ -46,11 +46,11 @@ escape hatch but does not bundle a streaming engine.
 
 One registry item, three source concerns, isolated for testability:
 
-| File | Role | Tested by |
-|------|------|-----------|
-| `registry/ui/video-player.tsx` | All React parts + `MediaPlayer` preset (DOM/JSX, thin) | component DOM tests |
+| File                                 | Role                                                                                   | Tested by             |
+| ------------------------------------ | -------------------------------------------------------------------------------------- | --------------------- |
+| `registry/ui/video-player.tsx`       | All React parts + `MediaPlayer` preset (DOM/JSX, thin)                                 | component DOM tests   |
 | `registry/lib/video-player-utils.ts` | **Pure, no-DOM** logic (resume, keymap, gesture, chapters→VTT, heatmap math, time fmt) | exhaustive unit tests |
-| `content/examples/video-player/*` | `default`, `variants`, plus `youtube` + `composable` | `check:examples` |
+| `content/examples/video-player/*`    | `default`, `variants`, plus `youtube` + `composable`                                   | `check:examples`      |
 
 **Why the split:** the coverage gate is functions ≥ 100%, branches ≥ 96%, statements/lines ≥ 99%.
 The "intelligent" behaviors are exactly the browser-API-heavy code that resists jsdom coverage
@@ -117,6 +117,7 @@ row above the bar, a big-play / loading affordance centered, a top gradient scri
 ## 6. The four "intelligent" features — DNA-clean & testable
 
 ### 6.1 Resume + watch memory
+
 Pure functions in `video-player-utils.ts`, storage injected (defaults to `window.localStorage`,
 guarded so a throwing/absent store is a no-op):
 
@@ -130,6 +131,7 @@ small floor and before a near-end ceiling, seek to it; restore volume/rate/muted
 throttled `timeupdate`, persist. On `ended`, clear. Resume only active when `resumeKey` is set.
 
 ### 6.2 Keyboard + gestures
+
 Pure mappers, applied by a thin listener that translates the action onto the media element:
 
 - `resolveMediaKey(event) → MediaAction | null` — layers the **extra** keys on top of
@@ -145,6 +147,7 @@ Pure mappers, applied by a thin listener that translates the action onto the med
 a mocked media element.
 
 ### 6.3 Chapters + heatmap
+
 - `chaptersToVtt(chapters, duration?) → string` (pure WebVTT serializer) + `formatVttTime(sec)`.
   The component turns the VTT string into a `Blob` object URL and mounts it as
   `<track kind="chapters">` so media-chrome's `PreviewChapterDisplay` and the scrubber pick it up.
@@ -156,6 +159,7 @@ a mocked media element.
   color. This is the explicit DNA contract for the heatmap.
 
 ### 6.4 Ambient + auto-UI
+
 - **Ambient** = a blurred, scaled, low-opacity **mirror of the video's own pixels** — a muted,
   `aria-hidden`, `tabIndex={-1}`, `pointer-events-none` clone of the same source layered behind the
   frame (`blur-2xl scale-110 opacity-…`, `-z-10`), loosely kept in sync. It paints the video's own

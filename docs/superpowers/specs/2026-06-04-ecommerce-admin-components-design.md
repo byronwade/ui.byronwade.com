@@ -29,21 +29,21 @@ Composites compose existing primitives — never bespoke one-offs.
 
 ### Primitives (`registry:ui`)
 
-| Component | Builds on | Core API |
-|---|---|---|
-| **money-input** | `number-field` + `input-group` | `currency`, `value`, `onValueChange`, `locale`, symbol/code adornment, sizes. Base UI NumberField `format={{ style: "currency" }}` does the formatting; this is the styled currency preset. |
-| **bulk-action-bar** | `button`/`button-group`, `checkbox`, `pill` | `selectedCount`, `actions[]` (promoted vs default), `onClearSelection`, sticky positioning. The "3 selected → [actions]" bar over a table/resource list. |
+| Component           | Builds on                                   | Core API                                                                                                                                                                                    |
+| ------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **money-input**     | `number-field` + `input-group`              | `currency`, `value`, `onValueChange`, `locale`, symbol/code adornment, sizes. Base UI NumberField `format={{ style: "currency" }}` does the formatting; this is the styled currency preset. |
+| **bulk-action-bar** | `button`/`button-group`, `checkbox`, `pill` | `selectedCount`, `actions[]` (promoted vs default), `onClearSelection`, sticky positioning. The "3 selected → [actions]" bar over a table/resource list.                                    |
 
 ### Composites (`registry:component`)
 
-| Component | Composes | Core API |
-|---|---|---|
-| **order-summary** | `separator`, thumbnail/avatar, `badge` | `lineItems[]` (title, variant, qty, price, image), `subtotal`, `discounts[]`, `shipping`, `tax`, `total`, `currency`. The signature order/checkout cost-breakdown card. |
-| **product-card** | `card`, `badge`/`status-pill`, `status-dot` | `title`, `image`, `status`, `price`, `inventory`, `tone`. Core of the products index. |
-| **variant-picker** | `toggle-group`, `label` | `options[]` (name, values[], availability), `value`, `onChange`. Size/color/material option grid with unavailable states. |
-| **inventory-bar** | `progress` | `available`, `total`, low/out thresholds → tonal states, `showCount`. Stock-level indicator. |
-| **customer-card** | `card`, `avatar`, `metric-stat` | `name`, `email`, `avatar`, `ordersCount`, `totalSpent`, `address`. Customer summary. |
-| **fulfillment-tracker** | `status-pill`/`badge`, `verification-progress` | `paymentStatus`, `fulfillmentStatus`, `steps[]`. Net-new model = dual payment + fulfillment status; reuses the step rail rather than redrawing a stepper. |
+| Component               | Composes                                       | Core API                                                                                                                                                                |
+| ----------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **order-summary**       | `separator`, thumbnail/avatar, `badge`         | `lineItems[]` (title, variant, qty, price, image), `subtotal`, `discounts[]`, `shipping`, `tax`, `total`, `currency`. The signature order/checkout cost-breakdown card. |
+| **product-card**        | `card`, `badge`/`status-pill`, `status-dot`    | `title`, `image`, `status`, `price`, `inventory`, `tone`. Core of the products index.                                                                                   |
+| **variant-picker**      | `toggle-group`, `label`                        | `options[]` (name, values[], availability), `value`, `onChange`. Size/color/material option grid with unavailable states.                                               |
+| **inventory-bar**       | `progress`                                     | `available`, `total`, low/out thresholds → tonal states, `showCount`. Stock-level indicator.                                                                            |
+| **customer-card**       | `card`, `avatar`, `metric-stat`                | `name`, `email`, `avatar`, `ordersCount`, `totalSpent`, `address`. Customer summary.                                                                                    |
+| **fulfillment-tracker** | `status-pill`/`badge`, `verification-progress` | `paymentStatus`, `fulfillmentStatus`, `steps[]`. Net-new model = dual payment + fulfillment status; reuses the step rail rather than redrawing a stepper.               |
 
 ## Tone / token discipline
 

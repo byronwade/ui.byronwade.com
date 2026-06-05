@@ -1,27 +1,27 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Menu } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { MorphSurface } from "@/components/ui/morph-surface";
+import * as React from "react"
+import { Menu } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { MorphSurface } from "@/components/ui/morph-surface"
 
 export interface MorphBarItem {
-  id: string;
-  label: string;
-  href?: string;
-  onSelect?: () => void;
-  active?: boolean;
+  id: string
+  label: string
+  href?: string
+  onSelect?: () => void
+  active?: boolean
 }
 
 export interface MorphBarProps {
-  brand: React.ReactNode;
-  items: MorphBarItem[];
+  brand: React.ReactNode
+  items: MorphBarItem[]
   /** Content bloomed below the bar (mega-menu / search / command). */
-  panel: React.ReactNode;
+  panel: React.ReactNode
   /** Open height in px (the bloomed bar + panel). */
-  panelHeight?: number;
-  navLabel?: string;
-  className?: string;
+  panelHeight?: number
+  navLabel?: string
+  className?: string
 }
 
 /** A full-width top navigation bar that blooms a panel DOWN via the morph
@@ -36,10 +36,10 @@ export function MorphBar({
   navLabel = "Primary",
   className,
 }: MorphBarProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
   const links = (
-    <ul className="flex items-center gap-1">
+    <ul data-slot="morph-bar-nav" className="flex items-center gap-1">
       {items.map((item) => (
         <li key={item.id}>
           <a
@@ -47,13 +47,15 @@ export function MorphBar({
             aria-current={item.active ? "page" : undefined}
             onClick={(e) => {
               if (item.onSelect) {
-                e.preventDefault();
-                item.onSelect();
+                e.preventDefault()
+                item.onSelect()
               }
             }}
             className={cn(
               "rounded-md px-3 py-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-              item.active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+              item.active
+                ? "text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {item.label}
@@ -61,10 +63,13 @@ export function MorphBar({
         </li>
       ))}
     </ul>
-  );
+  )
 
   const Row = (
-    <div className="flex h-14 items-center justify-between gap-4 px-4">
+    <div
+      data-slot="morph-bar-row"
+      className="flex h-14 items-center justify-between gap-4 px-4"
+    >
       <span className="text-sm font-medium tracking-tight">{brand}</span>
       <div className="flex items-center gap-2">
         {links}
@@ -79,10 +84,11 @@ export function MorphBar({
         </button>
       </div>
     </div>
-  );
+  )
 
   return (
     <MorphSurface
+      data-slot="morph-bar"
       open={open}
       onOpenChange={setOpen}
       placement="top"
@@ -94,9 +100,11 @@ export function MorphBar({
       panel={
         <div className="flex h-full flex-col">
           {Row}
-          <div className="min-h-0 flex-1 overflow-auto border-t border-border p-4">{panel}</div>
+          <div className="min-h-0 flex-1 overflow-auto border-t border-border p-4">
+            {panel}
+          </div>
         </div>
       }
     />
-  );
+  )
 }

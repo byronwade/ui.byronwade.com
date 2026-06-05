@@ -57,6 +57,7 @@ consumer wires their own audio engine — with **one exception**: `audio-player`
 ## Primitives → `registry/ui/`
 
 ### 1. `equalizer-bars`
+
 The shared "is playing" primitive — small animated bars.
 
 - **Props:** `bars?: number` (default 4), `playing?: boolean`, `size?: "sm" | "md" | "lg"`,
@@ -69,6 +70,7 @@ The shared "is playing" primitive — small animated bars.
 - **Deps:** foundation, utils.
 
 ### 2. `album-cover`
+
 Square artwork with hover play affordance.
 
 - **Built on:** `aspect-ratio` (square).
@@ -84,6 +86,7 @@ Square artwork with hover play affordance.
 - **Deps:** foundation, aspect-ratio, equalizer-bars, utils.
 
 ### 3. `audio-waveform`
+
 Bar-style waveform scrubber.
 
 - **Props:** `peaks: number[]` (0–1 heights), `progress?: number` (0–1), `onSeek?: (ratio) => void`,
@@ -96,6 +99,7 @@ Bar-style waveform scrubber.
 - **Deps:** foundation, utils.
 
 ### 4. `track-list` / `track-row`
+
 Numbered song rows (one file, two exports).
 
 - **`TrackList`:** wrapper (`role="list"` / table-ish stack), optional header row.
@@ -111,6 +115,7 @@ Numbered song rows (one file, two exports).
 - **Deps:** foundation, badge, equalizer-bars, utils.
 
 ### 5. `now-playing-bar`
+
 Sticky bottom transport bar — composable parts, fully controlled.
 
 - **Exports:** `NowPlayingBar` (sticky/bottom container, `bg-card`/`bg-background`, top border),
@@ -126,7 +131,8 @@ Sticky bottom transport bar — composable parts, fully controlled.
 - **Slot:** `data-slot="now-playing-bar"` (+ part slots).
 - **Deps:** foundation, slider, album-cover, utils.
 
-### 6. `audio-player`  *(real playback)*
+### 6. `audio-player` _(real playback)_
+
 Audio sibling of `video-player`, themed media-chrome.
 
 - **Built on:** `media-chrome/react` (`MediaController`, `MediaControlBar`, `MediaPlayButton`,
@@ -142,6 +148,7 @@ Audio sibling of `video-player`, themed media-chrome.
 - **Deps:** `media-chrome` (npm dependency), foundation, utils.
 
 ### 7. `lyrics`
+
 Synced, scrolling lyric lines.
 
 - **Props:** `lines: { time?: number; text: string }[]`, `activeIndex?: number`,
@@ -158,6 +165,7 @@ Synced, scrolling lyric lines.
 ## Composites → `registry/components/`
 
 ### 8. `playlist-card`
+
 Grid tile composing `album-cover`.
 
 - **Props:** `src`, `alt`/`title`, `description?`, `playing?`, `onPlay?`, `href?` (optional anchor
@@ -169,6 +177,7 @@ Grid tile composing `album-cover`.
 - **Deps:** foundation, album-cover, utils.
 
 ### 9. `artist-header`
+
 Hero header composing artwork + stats + actions.
 
 - **Props:** `name`, `image`, `verified?`, `monthlyListeners?: number`, `isFollowing?`,

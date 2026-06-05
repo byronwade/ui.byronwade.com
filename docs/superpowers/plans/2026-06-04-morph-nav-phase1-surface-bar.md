@@ -24,22 +24,23 @@
 
 ## File map
 
-| File | Responsibility | Task |
-|---|---|---|
-| `registry/ui/morph-surface.tsx` (new) | Agnostic morph primitive: refs, cross-fade, sizing, Esc/outside-close | 1 |
-| `tests/components/morph-surface.test.tsx` (new) | Render, open/aria, Esc, outside-click, all placements | 1 |
-| `registry.json` (modify) | `morph-surface` + `morph-bar` items | 2, 4 |
-| `registry/rules/byronwade-ui.mdc` (modify) | List both component names | 2, 4 |
-| `content/examples/morph-surface/default.tsx` (new) | Example | 2 |
-| `registry/ui/morph-bar.tsx` (new) | Full-width top bar composing MorphSurface | 3 |
-| `tests/components/morph-bar.test.tsx` (new) | Items, active, open/close, axe | 3 |
-| `content/examples/morph-bar/default.tsx` (new) | Example | 4 |
+| File                                               | Responsibility                                                        | Task |
+| -------------------------------------------------- | --------------------------------------------------------------------- | ---- |
+| `registry/ui/morph-surface.tsx` (new)              | Agnostic morph primitive: refs, cross-fade, sizing, Esc/outside-close | 1    |
+| `tests/components/morph-surface.test.tsx` (new)    | Render, open/aria, Esc, outside-click, all placements                 | 1    |
+| `registry.json` (modify)                           | `morph-surface` + `morph-bar` items                                   | 2, 4 |
+| `registry/rules/byronwade-ui.mdc` (modify)         | List both component names                                             | 2, 4 |
+| `content/examples/morph-surface/default.tsx` (new) | Example                                                               | 2    |
+| `registry/ui/morph-bar.tsx` (new)                  | Full-width top bar composing MorphSurface                             | 3    |
+| `tests/components/morph-bar.test.tsx` (new)        | Items, active, open/close, axe                                        | 3    |
+| `content/examples/morph-bar/default.tsx` (new)     | Example                                                               | 4    |
 
 ---
 
 ## Task 1: `MorphSurface` primitive
 
 **Files:**
+
 - Create: `registry/ui/morph-surface.tsx`
 - Test: `tests/components/morph-surface.test.tsx`
 
@@ -48,20 +49,37 @@
 Create `tests/components/morph-surface.test.tsx`:
 
 ```tsx
-import * as React from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { axe } from "vitest-axe";
-import { MorphSurface, type MorphPlacement } from "@/components/ui/morph-surface";
+import * as React from "react"
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { describe, it, expect, vi, beforeEach } from "vitest"
+import { axe } from "vitest-axe"
+import {
+  MorphSurface,
+  type MorphPlacement,
+} from "@/components/ui/morph-surface"
 
 beforeEach(() => {
-  vi.stubGlobal("matchMedia", vi.fn().mockReturnValue({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
-  vi.stubGlobal("ResizeObserver", class { observe() {} unobserve() {} disconnect() {} });
-});
+  vi.stubGlobal(
+    "matchMedia",
+    vi.fn().mockReturnValue({
+      matches: false,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }),
+  )
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  )
+})
 
 function Harness({ placement = "top" as MorphPlacement }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <MorphSurface
       open={open}
@@ -72,66 +90,75 @@ function Harness({ placement = "top" as MorphPlacement }) {
       collapsed={<button onClick={() => setOpen(true)}>open</button>}
       panel={<div>panel body</div>}
     />
-  );
+  )
 }
 
 describe("MorphSurface", () => {
   it("renders the collapsed content inside a labeled nav landmark", () => {
-    render(<Harness />);
-    const nav = screen.getByRole("navigation", { name: "Demo nav" });
-    expect(nav).toHaveAttribute("data-slot", "morph-surface");
-    expect(screen.getByRole("button", { name: "open" })).toBeInTheDocument();
-  });
+    render(<Harness />)
+    const nav = screen.getByRole("navigation", { name: "Demo nav" })
+    expect(nav).toHaveAttribute("data-slot", "morph-surface")
+    expect(screen.getByRole("button", { name: "open" })).toBeInTheDocument()
+  })
 
   it("toggles aria-hidden on rest/panel when opened", async () => {
-    const user = userEvent.setup();
-    const { container } = render(<Harness />);
-    const rest = container.querySelector('[data-slot="morph-rest"]')!;
-    const panel = container.querySelector('[data-slot="morph-panel"]')!;
-    expect(rest).toHaveAttribute("aria-hidden", "false");
-    expect(panel).toHaveAttribute("aria-hidden", "true");
-    await user.click(screen.getByRole("button", { name: "open" }));
-    expect(rest).toHaveAttribute("aria-hidden", "true");
-    expect(panel).toHaveAttribute("aria-hidden", "false");
-  });
+    const user = userEvent.setup()
+    const { container } = render(<Harness />)
+    const rest = container.querySelector('[data-slot="morph-rest"]')!
+    const panel = container.querySelector('[data-slot="morph-panel"]')!
+    expect(rest).toHaveAttribute("aria-hidden", "false")
+    expect(panel).toHaveAttribute("aria-hidden", "true")
+    await user.click(screen.getByRole("button", { name: "open" }))
+    expect(rest).toHaveAttribute("aria-hidden", "true")
+    expect(panel).toHaveAttribute("aria-hidden", "false")
+  })
 
   it("closes on Escape", async () => {
-    const user = userEvent.setup();
-    render(<Harness />);
-    await user.click(screen.getByRole("button", { name: "open" }));
-    const panel = document.querySelector('[data-slot="morph-panel"]')!;
-    expect(panel).toHaveAttribute("aria-hidden", "false");
-    await user.keyboard("{Escape}");
-    expect(panel).toHaveAttribute("aria-hidden", "true");
-  });
+    const user = userEvent.setup()
+    render(<Harness />)
+    await user.click(screen.getByRole("button", { name: "open" }))
+    const panel = document.querySelector('[data-slot="morph-panel"]')!
+    expect(panel).toHaveAttribute("aria-hidden", "false")
+    await user.keyboard("{Escape}")
+    expect(panel).toHaveAttribute("aria-hidden", "true")
+  })
 
   it("closes on outside pointer-down", async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup()
     render(
       <div>
         <Harness />
         <div data-testid="outside">outside</div>
       </div>,
-    );
-    await user.click(screen.getByRole("button", { name: "open" }));
-    expect(document.querySelector('[data-slot="morph-panel"]')!).toHaveAttribute("aria-hidden", "false");
-    await user.pointer({ keys: "[MouseLeft]", target: screen.getByTestId("outside") });
-    expect(document.querySelector('[data-slot="morph-panel"]')!).toHaveAttribute("aria-hidden", "true");
-  });
+    )
+    await user.click(screen.getByRole("button", { name: "open" }))
+    expect(
+      document.querySelector('[data-slot="morph-panel"]')!,
+    ).toHaveAttribute("aria-hidden", "false")
+    await user.pointer({
+      keys: "[MouseLeft]",
+      target: screen.getByTestId("outside"),
+    })
+    expect(
+      document.querySelector('[data-slot="morph-panel"]')!,
+    ).toHaveAttribute("aria-hidden", "true")
+  })
 
   it("renders for every placement and reflects it via data-placement", () => {
     for (const p of ["top", "bottom", "left", "right"] as MorphPlacement[]) {
-      const { container, unmount } = render(<Harness placement={p} />);
-      expect(container.querySelector('[data-slot="morph-surface"]')).toHaveAttribute("data-placement", p);
-      unmount();
+      const { container, unmount } = render(<Harness placement={p} />)
+      expect(
+        container.querySelector('[data-slot="morph-surface"]'),
+      ).toHaveAttribute("data-placement", p)
+      unmount()
     }
-  });
+  })
 
   it("has no axe violations", async () => {
-    const { container } = render(<Harness />);
-    expect(await axe(container)).toHaveNoViolations();
-  });
-});
+    const { container } = render(<Harness />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+})
 ```
 
 - [ ] **Step 2: Run the test, verify it FAILS**
@@ -142,14 +169,14 @@ Expected: FAIL — `@/components/ui/morph-surface` does not exist. (`npm run syn
 - [ ] **Step 3: Create `registry/ui/morph-surface.tsx`**
 
 ```tsx
-"use client";
+"use client"
 
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { useChromeMorph } from "@/lib/use-chrome-morph";
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { useChromeMorph } from "@/lib/use-chrome-morph"
 
-export type MorphPlacement = "top" | "bottom" | "left" | "right";
-export type MorphGrow = "height" | "width" | "both";
+export type MorphPlacement = "top" | "bottom" | "left" | "right"
+export type MorphGrow = "height" | "width" | "both"
 
 /** Anchor the morphing box so it grows the right direction (top edge fixed →
  *  grows down, bottom edge fixed → grows up, etc.). `top` stays in normal flow. */
@@ -158,25 +185,25 @@ const ANCHOR: Record<MorphPlacement, string> = {
   bottom: "absolute inset-x-0 bottom-0",
   left: "absolute inset-y-0 left-0",
   right: "absolute inset-y-0 right-0",
-};
+}
 
 export interface MorphSurfaceProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  open: boolean
+  onOpenChange: (open: boolean) => void
   /** Grow direction (sets the box's anchoring). */
-  placement?: MorphPlacement;
+  placement?: MorphPlacement
   /** Which axes animate. The non-growing axis holds the box's current size. */
-  grow?: MorphGrow;
+  grow?: MorphGrow
   /** Resting nav content; fades OUT as the panel blooms. */
-  collapsed: React.ReactNode;
+  collapsed: React.ReactNode
   /** Bloomed panel; fades IN. */
-  panel: React.ReactNode;
+  panel: React.ReactNode
   /** Open-box target in px; the growing axis falls back to measuring the panel. */
-  size?: { w?: number; h?: number };
+  size?: { w?: number; h?: number }
   /** Accessible name for the nav landmark. */
-  navLabel?: string;
+  navLabel?: string
   /** Consumer styles the vessel (bg, radius, shadow, border). Applied to the box. */
-  className?: string;
+  className?: string
 }
 
 /**
@@ -196,10 +223,10 @@ export function MorphSurface({
   navLabel = "Navigation",
   className,
 }: MorphSurfaceProps) {
-  const rootRef = React.useRef<HTMLElement>(null);
-  const morphRef = React.useRef<HTMLDivElement>(null);
-  const restRef = React.useRef<HTMLDivElement>(null);
-  const panelRef = React.useRef<HTMLDivElement>(null);
+  const rootRef = React.useRef<HTMLElement>(null)
+  const morphRef = React.useRef<HTMLDivElement>(null)
+  const restRef = React.useRef<HTMLDivElement>(null)
+  const panelRef = React.useRef<HTMLDivElement>(null)
 
   useChromeMorph({
     morphRef,
@@ -213,25 +240,28 @@ export function MorphSurface({
         ? (morphRef.current?.offsetWidth ?? 0)
         : (size?.w ?? panelRef.current?.offsetWidth ?? 0),
     height:
-      grow === "width" ? undefined : () => size?.h ?? panelRef.current?.offsetHeight ?? 0,
+      grow === "width"
+        ? undefined
+        : () => size?.h ?? panelRef.current?.offsetHeight ?? 0,
     deps: [grow, placement, size?.w, size?.h],
-  });
+  })
 
   React.useEffect(() => {
-    if (!open) return;
+    if (!open) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onOpenChange(false);
-    };
+      if (e.key === "Escape") onOpenChange(false)
+    }
     const onDown = (e: PointerEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) onOpenChange(false);
-    };
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onDown);
+      if (rootRef.current && !rootRef.current.contains(e.target as Node))
+        onOpenChange(false)
+    }
+    document.addEventListener("keydown", onKey)
+    document.addEventListener("pointerdown", onDown)
     return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onDown);
-    };
-  }, [open, onOpenChange]);
+      document.removeEventListener("keydown", onKey)
+      document.removeEventListener("pointerdown", onDown)
+    }
+  }, [open, onOpenChange])
 
   return (
     <nav
@@ -266,7 +296,7 @@ export function MorphSurface({
         </div>
       </div>
     </nav>
-  );
+  )
 }
 ```
 
@@ -287,6 +317,7 @@ git commit -m "feat(ui): add MorphSurface — agnostic morph primitive"
 ## Task 2: Register `MorphSurface`
 
 **Files:**
+
 - Modify: `registry.json`
 - Modify: `registry/rules/byronwade-ui.mdc`
 - Create: `content/examples/morph-surface/default.tsx`
@@ -301,9 +332,17 @@ In `registry.json`, in the `items` array (next to the existing `morph-dock` item
   "type": "registry:ui",
   "title": "Morph Surface",
   "description": "Agnostic morph primitive — open-state orchestration (refs, cross-fade, Esc/outside-close, box sizing) with no visual style. Navigation styles compose it.",
-  "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/use-chrome-morph"],
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils",
+    "@byronwade/use-chrome-morph"
+  ],
   "files": [
-    { "path": "registry/ui/morph-surface.tsx", "type": "registry:ui", "target": "components/ui/morph-surface.tsx" }
+    {
+      "path": "registry/ui/morph-surface.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/morph-surface.tsx"
+    }
   ]
 }
 ```
@@ -317,13 +356,13 @@ In `registry/rules/byronwade-ui.mdc`, find the line that lists Morph components 
 Create `content/examples/morph-surface/default.tsx`:
 
 ```tsx
-"use client";
+"use client"
 
-import * as React from "react";
-import { MorphSurface } from "@/components/ui/morph-surface";
+import * as React from "react"
+import { MorphSurface } from "@/components/ui/morph-surface"
 
 export default function Example() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="grid w-full max-w-md gap-3 p-6">
       <MorphSurface
@@ -353,7 +392,7 @@ export default function Example() {
         }
       />
     </div>
-  );
+  )
 }
 ```
 
@@ -374,6 +413,7 @@ git commit -m "feat(ui): register MorphSurface (item, rule, example)"
 ## Task 3: `MorphBar` style
 
 **Files:**
+
 - Create: `registry/ui/morph-bar.tsx`
 - Test: `tests/components/morph-bar.test.tsx`
 
@@ -382,56 +422,84 @@ git commit -m "feat(ui): register MorphSurface (item, rule, example)"
 Create `tests/components/morph-bar.test.tsx`:
 
 ```tsx
-import * as React from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { axe } from "vitest-axe";
-import { MorphBar } from "@/components/ui/morph-bar";
+import * as React from "react"
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { describe, it, expect, vi, beforeEach } from "vitest"
+import { axe } from "vitest-axe"
+import { MorphBar } from "@/components/ui/morph-bar"
 
 beforeEach(() => {
-  vi.stubGlobal("matchMedia", vi.fn().mockReturnValue({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
-  vi.stubGlobal("ResizeObserver", class { observe() {} unobserve() {} disconnect() {} });
-});
+  vi.stubGlobal(
+    "matchMedia",
+    vi.fn().mockReturnValue({
+      matches: false,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }),
+  )
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  )
+})
 
 const items = [
   { id: "home", label: "Home", active: true },
   { id: "docs", label: "Docs" },
   { id: "pricing", label: "Pricing" },
-];
+]
 
 describe("MorphBar", () => {
   it("renders the brand and every item, marking the active one", () => {
-    render(<MorphBar brand="Acme" items={items} panel={<div>mega</div>} />);
-    expect(screen.getByText("Acme")).toBeInTheDocument();
-    for (const i of items) expect(screen.getByRole("link", { name: i.label })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
-  });
+    render(<MorphBar brand="Acme" items={items} panel={<div>mega</div>} />)
+    expect(screen.getByText("Acme")).toBeInTheDocument()
+    for (const i of items)
+      expect(screen.getByRole("link", { name: i.label })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    )
+  })
 
   it("blooms the panel when the menu trigger is clicked and closes on Escape", async () => {
-    const user = userEvent.setup();
-    render(<MorphBar brand="Acme" items={items} panel={<div>mega menu body</div>} />);
-    const panel = document.querySelector('[data-slot="morph-panel"]')!;
-    expect(panel).toHaveAttribute("aria-hidden", "true");
-    await user.click(screen.getByRole("button", { name: /menu/i }));
-    expect(panel).toHaveAttribute("aria-hidden", "false");
-    await user.keyboard("{Escape}");
-    expect(panel).toHaveAttribute("aria-hidden", "true");
-  });
+    const user = userEvent.setup()
+    render(
+      <MorphBar brand="Acme" items={items} panel={<div>mega menu body</div>} />,
+    )
+    const panel = document.querySelector('[data-slot="morph-panel"]')!
+    expect(panel).toHaveAttribute("aria-hidden", "true")
+    await user.click(screen.getByRole("button", { name: /menu/i }))
+    expect(panel).toHaveAttribute("aria-hidden", "false")
+    await user.keyboard("{Escape}")
+    expect(panel).toHaveAttribute("aria-hidden", "true")
+  })
 
   it("fires onSelect when an item is chosen", async () => {
-    const user = userEvent.setup();
-    const onSelect = vi.fn();
-    render(<MorphBar brand="Acme" items={[{ id: "docs", label: "Docs", onSelect }]} panel={<div />} />);
-    await user.click(screen.getByRole("link", { name: "Docs" }));
-    expect(onSelect).toHaveBeenCalledTimes(1);
-  });
+    const user = userEvent.setup()
+    const onSelect = vi.fn()
+    render(
+      <MorphBar
+        brand="Acme"
+        items={[{ id: "docs", label: "Docs", onSelect }]}
+        panel={<div />}
+      />,
+    )
+    await user.click(screen.getByRole("link", { name: "Docs" }))
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
 
   it("has no axe violations", async () => {
-    const { container } = render(<MorphBar brand="Acme" items={items} panel={<div>mega</div>} />);
-    expect(await axe(container)).toHaveNoViolations();
-  });
-});
+    const { container } = render(
+      <MorphBar brand="Acme" items={items} panel={<div>mega</div>} />,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+})
 ```
 
 - [ ] **Step 2: Run the test, verify it FAILS**
@@ -442,30 +510,30 @@ Expected: FAIL — `@/components/ui/morph-bar` does not exist.
 - [ ] **Step 3: Create `registry/ui/morph-bar.tsx`**
 
 ```tsx
-"use client";
+"use client"
 
-import * as React from "react";
-import { Menu } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { MorphSurface } from "@/components/ui/morph-surface";
+import * as React from "react"
+import { Menu } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { MorphSurface } from "@/components/ui/morph-surface"
 
 export interface MorphBarItem {
-  id: string;
-  label: string;
-  href?: string;
-  onSelect?: () => void;
-  active?: boolean;
+  id: string
+  label: string
+  href?: string
+  onSelect?: () => void
+  active?: boolean
 }
 
 export interface MorphBarProps {
-  brand: React.ReactNode;
-  items: MorphBarItem[];
+  brand: React.ReactNode
+  items: MorphBarItem[]
   /** Content bloomed below the bar (mega-menu / search / command). */
-  panel: React.ReactNode;
+  panel: React.ReactNode
   /** Open height in px (the bloomed bar + panel). */
-  panelHeight?: number;
-  navLabel?: string;
-  className?: string;
+  panelHeight?: number
+  navLabel?: string
+  className?: string
 }
 
 /** A full-width top navigation bar that blooms a panel DOWN via the morph
@@ -478,7 +546,7 @@ export function MorphBar({
   navLabel = "Primary",
   className,
 }: MorphBarProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
   const links = (
     <ul className="flex items-center gap-1">
@@ -489,13 +557,15 @@ export function MorphBar({
             aria-current={item.active ? "page" : undefined}
             onClick={(e) => {
               if (item.onSelect) {
-                e.preventDefault();
-                item.onSelect();
+                e.preventDefault()
+                item.onSelect()
               }
             }}
             className={cn(
               "rounded-md px-3 py-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-              item.active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+              item.active
+                ? "text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {item.label}
@@ -503,7 +573,7 @@ export function MorphBar({
         </li>
       ))}
     </ul>
-  );
+  )
 
   const Row = (
     <div className="flex h-14 items-center justify-between gap-4 px-4">
@@ -521,7 +591,7 @@ export function MorphBar({
         </button>
       </div>
     </div>
-  );
+  )
 
   return (
     <MorphSurface
@@ -536,11 +606,13 @@ export function MorphBar({
       panel={
         <div className="flex h-full flex-col">
           {Row}
-          <div className="min-h-0 flex-1 overflow-auto border-t border-border p-4">{panel}</div>
+          <div className="min-h-0 flex-1 overflow-auto border-t border-border p-4">
+            {panel}
+          </div>
         </div>
       }
     />
-  );
+  )
 }
 ```
 
@@ -561,6 +633,7 @@ git commit -m "feat(ui): add MorphBar — full-width top nav on MorphSurface"
 ## Task 4: Register `MorphBar`
 
 **Files:**
+
 - Modify: `registry.json`
 - Modify: `registry/rules/byronwade-ui.mdc`
 - Create: `content/examples/morph-bar/default.tsx`
@@ -576,9 +649,17 @@ In `registry.json` `items`, add:
   "title": "Morph Bar",
   "description": "Full-width top navigation bar that blooms a panel down via the morph technique.",
   "dependencies": ["lucide-react"],
-  "registryDependencies": ["@byronwade/foundation", "@byronwade/utils", "@byronwade/morph-surface"],
+  "registryDependencies": [
+    "@byronwade/foundation",
+    "@byronwade/utils",
+    "@byronwade/morph-surface"
+  ],
   "files": [
-    { "path": "registry/ui/morph-bar.tsx", "type": "registry:ui", "target": "components/ui/morph-bar.tsx" }
+    {
+      "path": "registry/ui/morph-bar.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/morph-bar.tsx"
+    }
   ]
 }
 ```
@@ -592,9 +673,9 @@ In `registry/rules/byronwade-ui.mdc`, add `MorphBar` to the Morph components lis
 Create `content/examples/morph-bar/default.tsx`:
 
 ```tsx
-"use client";
+"use client"
 
-import { MorphBar } from "@/components/ui/morph-bar";
+import { MorphBar } from "@/components/ui/morph-bar"
 
 export default function Example() {
   return (
@@ -611,15 +692,19 @@ export default function Example() {
           <div className="grid grid-cols-3 gap-4">
             {["Primitives", "Composites", "Patterns"].map((g) => (
               <div key={g} className="space-y-1">
-                <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{g}</p>
-                <p className="text-[13px] text-muted-foreground">Browse {g.toLowerCase()} →</p>
+                <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                  {g}
+                </p>
+                <p className="text-[13px] text-muted-foreground">
+                  Browse {g.toLowerCase()} →
+                </p>
               </div>
             ))}
           </div>
         }
       />
     </div>
-  );
+  )
 }
 ```
 
@@ -671,4 +756,7 @@ Expected: `clean`.
 - **`grow` / non-growing axis** (spec §2): handled in `MorphSurface` — `grow="height"` holds `width` at the box's current width; `grow="width"` is width-only; `grow="both"` measures/uses both.
 - **Frozen API:** Phase 2 styles consume `MorphSurface` unchanged; only its internal anchoring CSS for `bottom`/`left`/`right` may be refined as Tabs/Sidebar/Rail exercise them — the props don't change.
 - **No placeholders:** all component/test/example code is complete; registry JSON is literal.
+
+```
+
 ```

@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { MorphSurface } from "@/components/ui/morph-surface";
+import * as React from "react"
+import { MorphSurface } from "@/components/ui/morph-surface"
 
 export default function Example() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="grid w-full max-w-md gap-3 p-6">
       <MorphSurface
@@ -34,5 +34,5 @@ export default function Example() {
         }
       />
     </div>
-  );
+  )
 }

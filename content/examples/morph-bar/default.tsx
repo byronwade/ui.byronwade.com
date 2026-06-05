@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { MorphBar } from "@/components/ui/morph-bar";
+import { MorphBar } from "@/components/ui/morph-bar"
 
 export default function Example() {
   return (
@@ -17,13 +17,17 @@ export default function Example() {
           <div className="grid grid-cols-3 gap-4">
             {["Primitives", "Composites", "Patterns"].map((g) => (
               <div key={g} className="space-y-1">
-                <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{g}</p>
-                <p className="text-[13px] text-muted-foreground">Browse {g.toLowerCase()} →</p>
+                <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                  {g}
+                </p>
+                <p className="text-[13px] text-muted-foreground">
+                  Browse {g.toLowerCase()} →
+                </p>
               </div>
             ))}
           </div>
         }
       />
     </div>
-  );
+  )
 }

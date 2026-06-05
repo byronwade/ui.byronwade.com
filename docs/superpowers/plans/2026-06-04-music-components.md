@@ -45,6 +45,7 @@ Add all nine names at once so `check:rule` passes as each registry item lands. (
 ## Task 1: `equalizer-bars`
 
 **Files:**
+
 - Create: `registry/ui/equalizer-bars.tsx`
 - Create: `content/examples/equalizer-bars/default.tsx`
 - Create: `tests/components/equalizer-bars.test.tsx`
@@ -55,51 +56,59 @@ Add all nine names at once so `check:rule` passes as each registry item lands. (
 - [ ] **Step 2: Write the failing test** `tests/components/equalizer-bars.test.tsx`:
 
 ```tsx
-import { render } from "@testing-library/react";
-import { expect, describe, it, vi } from "vitest";
-import { axe } from "vitest-axe";
-import { EqualizerBars } from "@/components/ui/equalizer-bars";
+import { render } from "@testing-library/react"
+import { expect, describe, it, vi } from "vitest"
+import { axe } from "vitest-axe"
+import { EqualizerBars } from "@/components/ui/equalizer-bars"
 
 vi.mock("motion/react", async () => {
-  const actual = await vi.importActual<typeof import("motion/react")>("motion/react");
-  return { ...actual, useReducedMotion: () => false };
-});
+  const actual =
+    await vi.importActual<typeof import("motion/react")>("motion/react")
+  return { ...actual, useReducedMotion: () => false }
+})
 
 describe("EqualizerBars", () => {
   it("renders the default number of bars (4)", () => {
-    const { container } = render(<EqualizerBars />);
-    expect(container.querySelectorAll('[data-slot="equalizer-bars-bar"]')).toHaveLength(4);
-  });
+    const { container } = render(<EqualizerBars />)
+    expect(
+      container.querySelectorAll('[data-slot="equalizer-bars-bar"]'),
+    ).toHaveLength(4)
+  })
   it("honors a custom bar count", () => {
-    const { container } = render(<EqualizerBars bars={6} />);
-    expect(container.querySelectorAll('[data-slot="equalizer-bars-bar"]')).toHaveLength(6);
-  });
+    const { container } = render(<EqualizerBars bars={6} />)
+    expect(
+      container.querySelectorAll('[data-slot="equalizer-bars-bar"]'),
+    ).toHaveLength(6)
+  })
   it("sets data-playing from the playing prop", () => {
-    const { container, rerender } = render(<EqualizerBars playing />);
-    expect(container.firstElementChild).toHaveAttribute("data-playing", "true");
-    rerender(<EqualizerBars playing={false} />);
-    expect(container.firstElementChild).toHaveAttribute("data-playing", "false");
-  });
+    const { container, rerender } = render(<EqualizerBars playing />)
+    expect(container.firstElementChild).toHaveAttribute("data-playing", "true")
+    rerender(<EqualizerBars playing={false} />)
+    expect(container.firstElementChild).toHaveAttribute("data-playing", "false")
+  })
   it("applies size classes", () => {
-    const { container } = render(<EqualizerBars size="lg" />);
-    expect(container.firstElementChild).toHaveClass("h-5");
-  });
+    const { container } = render(<EqualizerBars size="lg" />)
+    expect(container.firstElementChild).toHaveClass("h-5")
+  })
   it("is aria-hidden by default and labeled when given aria-label", () => {
-    const { container, rerender } = render(<EqualizerBars />);
-    expect(container.firstElementChild).toHaveAttribute("aria-hidden", "true");
-    rerender(<EqualizerBars aria-label="Now playing" />);
-    expect(container.firstElementChild).toHaveAttribute("role", "img");
-    expect(container.firstElementChild).toHaveAttribute("aria-label", "Now playing");
-  });
+    const { container, rerender } = render(<EqualizerBars />)
+    expect(container.firstElementChild).toHaveAttribute("aria-hidden", "true")
+    rerender(<EqualizerBars aria-label="Now playing" />)
+    expect(container.firstElementChild).toHaveAttribute("role", "img")
+    expect(container.firstElementChild).toHaveAttribute(
+      "aria-label",
+      "Now playing",
+    )
+  })
   it("merges className", () => {
-    const { container } = render(<EqualizerBars className="custom" />);
-    expect(container.firstElementChild).toHaveClass("custom");
-  });
+    const { container } = render(<EqualizerBars className="custom" />)
+    expect(container.firstElementChild).toHaveClass("custom")
+  })
   it("has no axe violations", async () => {
-    const { container } = render(<EqualizerBars aria-label="Now playing" />);
-    expect(await axe(container)).toHaveNoViolations();
-  });
-});
+    const { container } = render(<EqualizerBars aria-label="Now playing" />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+})
 ```
 
 Add a second describe block with the mock returning `useReducedMotion: () => true` (separate file or `vi.doMock`) to cover the reduced-motion branch — assert bars still render and `data-reduced-motion="true"`.
@@ -165,10 +174,19 @@ export function EqualizerBars({
           data-slot="equalizer-bars-bar"
           className={cn("block rounded-full bg-brand", BAR_WIDTH[size ?? "md"])}
           initial={{ height: "30%" }}
-          animate={animate ? { height: ["30%", "100%", "45%", "80%", "30%"] } : { height: "30%" }}
+          animate={
+            animate
+              ? { height: ["30%", "100%", "45%", "80%", "30%"] }
+              : { height: "30%" }
+          }
           transition={
             animate
-              ? { duration: 0.9, repeat: Infinity, ease: "easeInOut", delay: (i % 4) * 0.15 }
+              ? {
+                  duration: 0.9,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: (i % 4) * 0.15,
+                }
               : { duration: 0 }
           }
         />
@@ -191,7 +209,11 @@ export function EqualizerBars({
   "dependencies": ["motion"],
   "registryDependencies": ["@byronwade/foundation", "@byronwade/utils"],
   "files": [
-    { "path": "registry/ui/equalizer-bars.tsx", "type": "registry:ui", "target": "components/ui/equalizer-bars.tsx" }
+    {
+      "path": "registry/ui/equalizer-bars.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/equalizer-bars.tsx"
+    }
   ]
 }
 ```
@@ -252,26 +274,40 @@ describe("AlbumCover", () => {
     expect(onPlay).toHaveBeenCalledOnce()
   })
   it("shows equalizer + pause label when playing", () => {
-    const { container } = render(<AlbumCover src={SRC} alt="Album X" playing onPlay={() => {}} />)
-    expect(container.querySelector('[data-slot="equalizer-bars"]')).toBeInTheDocument()
-    expect(screen.getByRole("button", { name: "Pause Album X" })).toBeInTheDocument()
+    const { container } = render(
+      <AlbumCover src={SRC} alt="Album X" playing onPlay={() => {}} />,
+    )
+    expect(
+      container.querySelector('[data-slot="equalizer-bars"]'),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole("button", { name: "Pause Album X" }),
+    ).toBeInTheDocument()
   })
   it("applies size and rounded variants", () => {
-    const { container } = render(<AlbumCover src={SRC} alt="X" size="xl" rounded="full" />)
+    const { container } = render(
+      <AlbumCover src={SRC} alt="X" size="xl" rounded="full" />,
+    )
     const root = container.querySelector('[data-slot="album-cover"]')!
     expect(root.className).toMatch(/max-w/)
     expect(root.className).toMatch(/rounded-full/)
   })
   it("merges className", () => {
-    const { container } = render(<AlbumCover src={SRC} alt="X" className="custom" />)
-    expect(container.querySelector('[data-slot="album-cover"]')).toHaveClass("custom")
+    const { container } = render(
+      <AlbumCover src={SRC} alt="X" className="custom" />,
+    )
+    expect(container.querySelector('[data-slot="album-cover"]')).toHaveClass(
+      "custom",
+    )
   })
   it("renders without a play button when onPlay is omitted", () => {
     render(<AlbumCover src={SRC} alt="X" />)
     expect(screen.queryByRole("button")).toBeNull()
   })
   it("has no axe violations", async () => {
-    const { container } = render(<AlbumCover src={SRC} alt="Album X" onPlay={() => {}} />)
+    const { container } = render(
+      <AlbumCover src={SRC} alt="Album X" onPlay={() => {}} />,
+    )
     expect(await axe(container)).toHaveNoViolations()
   })
 })
@@ -308,11 +344,16 @@ const albumCoverVariants = cva(
       shadow: { true: "shadow-md", false: "" },
     },
     defaultVariants: { size: "md", rounded: "md", shadow: false },
-  }
+  },
 )
 
 const PlayIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="ml-0.5 size-5">
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden
+    className="ml-0.5 size-5"
+  >
     <path d="M8 5v14l11-7z" />
   </svg>
 )
@@ -365,7 +406,7 @@ export function AlbumCover({
             "absolute right-2 bottom-2 z-10 flex size-10 items-center justify-center rounded-full bg-brand text-primary-foreground shadow-lg outline-none transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             playing
               ? "opacity-100"
-              : "translate-y-1 opacity-0 group-hover/album-cover:translate-y-0 group-hover/album-cover:opacity-100 group-focus-within/album-cover:translate-y-0 group-focus-within/album-cover:opacity-100"
+              : "translate-y-1 opacity-0 group-hover/album-cover:translate-y-0 group-hover/album-cover:opacity-100 group-focus-within/album-cover:translate-y-0 group-focus-within/album-cover:opacity-100",
           )}
         >
           {playing ? <PauseIcon /> : <PlayIcon />}
@@ -386,7 +427,7 @@ export function AlbumCover({
 
 - [ ] **Step 4: Run — expect PASS.**
 
-- [ ] **Step 5: registry.json item** (`registryDependencies`: `@byronwade/foundation`, `@byronwade/aspect-ratio`, `@byronwade/equalizer-bars`, `@byronwade/utils`; description noting hover play FAB + equalizer). *(aspect-ratio not strictly imported — using `aspect-square` utility — so omit it; deps = foundation, equalizer-bars, utils.)*
+- [ ] **Step 5: registry.json item** (`registryDependencies`: `@byronwade/foundation`, `@byronwade/aspect-ratio`, `@byronwade/equalizer-bars`, `@byronwade/utils`; description noting hover play FAB + equalizer). _(aspect-ratio not strictly imported — using `aspect-square` utility — so omit it; deps = foundation, equalizer-bars, utils.)_
 
 - [ ] **Step 6: Example** — a 2×2 grid of covers, one with `playing`, one with `onPlay`, varying `rounded`.
 
@@ -410,7 +451,14 @@ export function AlbumCover({
 // key interaction assertions
 it("seeks on ArrowRight", async () => {
   const onSeek = vi.fn()
-  render(<AudioWaveform peaks={[0.2,0.5,0.8,1,0.6]} progress={0.5} onSeek={onSeek} aria-label="Seek" />)
+  render(
+    <AudioWaveform
+      peaks={[0.2, 0.5, 0.8, 1, 0.6]}
+      progress={0.5}
+      onSeek={onSeek}
+      aria-label="Seek"
+    />,
+  )
   const slider = screen.getByRole("slider")
   slider.focus()
   await userEvent.keyboard("{ArrowRight}")
@@ -419,9 +467,28 @@ it("seeks on ArrowRight", async () => {
 })
 it("seeks on click using pointer position", () => {
   const onSeek = vi.fn()
-  const { container } = render(<AudioWaveform peaks={[0,0,0,0]} progress={0} onSeek={onSeek} aria-label="Seek" />)
-  const root = container.querySelector('[data-slot="audio-waveform"]') as HTMLElement
-  vi.spyOn(root, "getBoundingClientRect").mockReturnValue({ left: 0, width: 100, top:0,right:100,bottom:0,height:0,x:0,y:0,toJSON(){} } as DOMRect)
+  const { container } = render(
+    <AudioWaveform
+      peaks={[0, 0, 0, 0]}
+      progress={0}
+      onSeek={onSeek}
+      aria-label="Seek"
+    />,
+  )
+  const root = container.querySelector(
+    '[data-slot="audio-waveform"]',
+  ) as HTMLElement
+  vi.spyOn(root, "getBoundingClientRect").mockReturnValue({
+    left: 0,
+    width: 100,
+    top: 0,
+    right: 100,
+    bottom: 0,
+    height: 0,
+    x: 0,
+    y: 0,
+    toJSON() {},
+  } as DOMRect)
   fireEvent.click(root, { clientX: 25 })
   expect(onSeek).toHaveBeenCalledWith(0.25)
 })
@@ -470,10 +537,19 @@ export function AudioWaveform({
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (!onSeek) return
-    if (e.key === "ArrowRight") { e.preventDefault(); onSeek(clamp(progress + STEP)) }
-    else if (e.key === "ArrowLeft") { e.preventDefault(); onSeek(clamp(progress - STEP)) }
-    else if (e.key === "Home") { e.preventDefault(); onSeek(0) }
-    else if (e.key === "End") { e.preventDefault(); onSeek(1) }
+    if (e.key === "ArrowRight") {
+      e.preventDefault()
+      onSeek(clamp(progress + STEP))
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault()
+      onSeek(clamp(progress - STEP))
+    } else if (e.key === "Home") {
+      e.preventDefault()
+      onSeek(0)
+    } else if (e.key === "End") {
+      e.preventDefault()
+      onSeek(1)
+    }
   }
 
   return (
@@ -491,7 +567,7 @@ export function AudioWaveform({
       className={cn(
         "flex h-12 w-full items-center gap-px outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         onSeek && "cursor-pointer",
-        className
+        className,
       )}
       {...props}
     >
@@ -503,7 +579,7 @@ export function AudioWaveform({
             data-slot="audio-waveform-bar"
             className={cn(
               "min-h-[2px] flex-1 rounded-full transition-colors motion-reduce:transition-none",
-              played ? "bg-brand" : "bg-muted-foreground/30"
+              played ? "bg-brand" : "bg-muted-foreground/30",
             )}
             style={{ height: `${Math.max(4, clamp(peak) * 100)}%` }}
           />
@@ -537,8 +613,20 @@ export function AudioWaveform({
 
 ```tsx
 it("does not trigger onPlay when the like button is clicked", async () => {
-  const onPlay = vi.fn(); const onLikeToggle = vi.fn()
-  render(<TrackList><TrackRow index={1} title="T" artist="A" duration="3:01" onPlay={onPlay} onLikeToggle={onLikeToggle} /></TrackList>)
+  const onPlay = vi.fn()
+  const onLikeToggle = vi.fn()
+  render(
+    <TrackList>
+      <TrackRow
+        index={1}
+        title="T"
+        artist="A"
+        duration="3:01"
+        onPlay={onPlay}
+        onLikeToggle={onLikeToggle}
+      />
+    </TrackList>,
+  )
   await userEvent.click(screen.getByRole("button", { name: /like|unlike/i }))
   expect(onLikeToggle).toHaveBeenCalledOnce()
   expect(onPlay).not.toHaveBeenCalled()
@@ -579,7 +667,14 @@ const PlayGlyph = () => (
   </svg>
 )
 const HeartGlyph = ({ filled }: { filled?: boolean }) => (
-  <svg viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth={2} aria-hidden className="size-4">
+  <svg
+    viewBox="0 0 24 24"
+    fill={filled ? "currentColor" : "none"}
+    stroke="currentColor"
+    strokeWidth={2}
+    aria-hidden
+    className="size-4"
+  >
     <path d="M12 21s-7-4.5-9.5-8.5C1 9 2.5 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.5 0 5 3.5 3.5 7C19 16.5 12 21 12 21z" />
   </svg>
 )
@@ -615,7 +710,10 @@ export function TrackRow({
 }: TrackRowProps) {
   const handleKey = (e: React.KeyboardEvent) => {
     if (!onPlay) return
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPlay() }
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      onPlay()
+    }
   }
   return (
     <div
@@ -628,11 +726,14 @@ export function TrackRow({
       className={cn(
         "group/track-row grid grid-cols-[2rem_1fr_auto] items-center gap-3 rounded-md px-3 py-2 outline-none transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:ring-2 focus-visible:ring-ring",
         onPlay && "cursor-pointer",
-        className
+        className,
       )}
       {...props}
     >
-      <span data-slot="track-row-index" className="flex w-8 justify-center text-sm text-muted-foreground">
+      <span
+        data-slot="track-row-index"
+        className="flex w-8 justify-center text-sm text-muted-foreground"
+      >
         {active && playing ? (
           <EqualizerBars size="sm" playing aria-label={`${title} is playing`} />
         ) : (
@@ -648,15 +749,28 @@ export function TrackRow({
       </span>
 
       <span data-slot="track-row-meta" className="min-w-0">
-        <span className={cn("block truncate text-sm font-medium", active ? "text-brand" : "text-foreground")}>
+        <span
+          className={cn(
+            "block truncate text-sm font-medium",
+            active ? "text-brand" : "text-foreground",
+          )}
+        >
           {title}
         </span>
         {artist || album ? (
           <span className="flex items-center gap-1.5 truncate text-xs text-muted-foreground">
             {explicit ? (
-              <Badge variant="secondary" aria-label="Explicit" className="h-3.5 px-1 text-[0.6rem]">E</Badge>
+              <Badge
+                variant="secondary"
+                aria-label="Explicit"
+                className="h-3.5 px-1 text-[0.6rem]"
+              >
+                E
+              </Badge>
             ) : null}
-            <span className="truncate">{[artist, album].filter(Boolean).join(" • ")}</span>
+            <span className="truncate">
+              {[artist, album].filter(Boolean).join(" • ")}
+            </span>
           </span>
         ) : null}
       </span>
@@ -668,16 +782,23 @@ export function TrackRow({
             data-slot="track-row-like"
             aria-label={liked ? "Unlike" : "Like"}
             aria-pressed={liked}
-            onClick={(e) => { e.stopPropagation(); onLikeToggle() }}
+            onClick={(e) => {
+              e.stopPropagation()
+              onLikeToggle()
+            }}
             className={cn(
               "outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-              liked ? "text-brand" : "text-muted-foreground hover:text-foreground"
+              liked
+                ? "text-brand"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             <HeartGlyph filled={liked} />
           </button>
         ) : null}
-        <span className="font-mono text-xs tabular-nums text-muted-foreground">{duration}</span>
+        <span className="font-mono text-xs tabular-nums text-muted-foreground">
+          {duration}
+        </span>
       </span>
     </div>
   )
@@ -705,10 +826,22 @@ export function TrackRow({
   - axe clean.
 
 ```tsx
-beforeEach(() => { Element.prototype.scrollIntoView = vi.fn() })
+beforeEach(() => {
+  Element.prototype.scrollIntoView = vi.fn()
+})
 it("scrolls the active line into view when activeIndex changes", () => {
-  const { rerender } = render(<Lyrics lines={[{text:"a"},{text:"b"},{text:"c"}]} activeIndex={0} />)
-  rerender(<Lyrics lines={[{text:"a"},{text:"b"},{text:"c"}]} activeIndex={2} />)
+  const { rerender } = render(
+    <Lyrics
+      lines={[{ text: "a" }, { text: "b" }, { text: "c" }]}
+      activeIndex={0}
+    />,
+  )
+  rerender(
+    <Lyrics
+      lines={[{ text: "a" }, { text: "b" }, { text: "c" }]}
+      activeIndex={2}
+    />,
+  )
   expect(Element.prototype.scrollIntoView).toHaveBeenCalled()
 })
 ```
@@ -747,7 +880,10 @@ export function Lyrics({
     const reduced =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-    el.scrollIntoView({ block: "center", behavior: reduced ? "auto" : "smooth" })
+    el.scrollIntoView({
+      block: "center",
+      behavior: reduced ? "auto" : "smooth",
+    })
   }, [activeIndex])
 
   return (
@@ -763,7 +899,9 @@ export function Lyrics({
             <span
               className={cn(
                 "block text-2xl tracking-tight transition-colors motion-reduce:transition-none",
-                active ? "font-medium text-foreground" : "text-muted-foreground"
+                active
+                  ? "font-medium text-foreground"
+                  : "text-muted-foreground",
               )}
             >
               {line.text}
@@ -796,7 +934,7 @@ export function Lyrics({
 }
 ```
 
-- [ ] **Step 4: Run — PASS.** *(Note: `scrollbar-thin` is a foundation utility.)*
+- [ ] **Step 4: Run — PASS.** _(Note: `scrollbar-thin` is a foundation utility.)_
 - [ ] **Step 5: registry.json** (deps: foundation, utils).
 - [ ] **Step 6: Example** — 6 lines, `activeIndex={2}`.
 - [ ] **Step 7: Gates + commit** `feat(ui): add lyrics — synced scrolling lyric lines`.
@@ -832,7 +970,11 @@ import { Slider } from "@/components/ui/slider"
 
 export type NowPlayingBarProps = React.ComponentProps<"div">
 
-export function NowPlayingBar({ className, children, ...props }: NowPlayingBarProps) {
+export function NowPlayingBar({
+  className,
+  children,
+  ...props
+}: NowPlayingBarProps) {
   return (
     <div
       data-slot="now-playing-bar"
@@ -840,7 +982,7 @@ export function NowPlayingBar({ className, children, ...props }: NowPlayingBarPr
       aria-label="Now playing"
       className={cn(
         "flex w-full items-center gap-4 border-t border-border bg-card px-4 py-3",
-        className
+        className,
       )}
       {...props}
     >
@@ -858,14 +1000,30 @@ export type NowPlayingBarTrackProps = React.ComponentProps<"div"> & {
 }
 
 export function NowPlayingBarTrack({
-  src, title, artist, liked, onLikeToggle, className, ...props
+  src,
+  title,
+  artist,
+  liked,
+  onLikeToggle,
+  className,
+  ...props
 }: NowPlayingBarTrackProps) {
   return (
-    <div data-slot="now-playing-bar-track" className={cn("flex min-w-0 flex-1 items-center gap-3", className)} {...props}>
+    <div
+      data-slot="now-playing-bar-track"
+      className={cn("flex min-w-0 flex-1 items-center gap-3", className)}
+      {...props}
+    >
       <AlbumCover src={src} alt={title} size="sm" rounded="md" />
       <span className="min-w-0">
-        <span className="block truncate text-sm font-medium text-foreground">{title}</span>
-        {artist ? <span className="block truncate text-xs text-muted-foreground">{artist}</span> : null}
+        <span className="block truncate text-sm font-medium text-foreground">
+          {title}
+        </span>
+        {artist ? (
+          <span className="block truncate text-xs text-muted-foreground">
+            {artist}
+          </span>
+        ) : null}
       </span>
       {onLikeToggle ? (
         <button
@@ -873,9 +1031,21 @@ export function NowPlayingBarTrack({
           aria-label={liked ? "Unlike" : "Like"}
           aria-pressed={liked}
           onClick={onLikeToggle}
-          className={cn("ml-1 outline-none focus-visible:ring-2 focus-visible:ring-ring", liked ? "text-brand" : "text-muted-foreground hover:text-foreground")}
+          className={cn(
+            "ml-1 outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            liked
+              ? "text-brand"
+              : "text-muted-foreground hover:text-foreground",
+          )}
         >
-          <svg viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor" strokeWidth={2} aria-hidden className="size-4">
+          <svg
+            viewBox="0 0 24 24"
+            fill={liked ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth={2}
+            aria-hidden
+            className="size-4"
+          >
             <path d="M12 21s-7-4.5-9.5-8.5C1 9 2.5 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.5 0 5 3.5 3.5 7C19 16.5 12 21 12 21z" />
           </svg>
         </button>
@@ -885,7 +1055,12 @@ export function NowPlayingBarTrack({
 }
 
 const Icon = ({ d, className }: { d: string; className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={cn("size-4", className)}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden
+    className={cn("size-4", className)}
+  >
     <path d={d} />
   </svg>
 )
@@ -895,7 +1070,8 @@ const ICONS = {
   next: "M18 5v14M4 5l11 7L4 19z",
   play: "M8 5v14l11-7z",
   pause: "M6 5h4v14H6zM14 5h4v14h-4z",
-  repeat: "M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3",
+  repeat:
+    "M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3",
 }
 
 export type NowPlayingBarControlsProps = React.ComponentProps<"div"> & {
@@ -910,18 +1086,73 @@ export type NowPlayingBarControlsProps = React.ComponentProps<"div"> & {
 }
 
 export function NowPlayingBarControls({
-  isPlaying = false, shuffle = false, repeat = false,
-  onPlayPause, onPrev, onNext, onShuffleToggle, onRepeatToggle, className, ...props
+  isPlaying = false,
+  shuffle = false,
+  repeat = false,
+  onPlayPause,
+  onPrev,
+  onNext,
+  onShuffleToggle,
+  onRepeatToggle,
+  className,
+  ...props
 }: NowPlayingBarControlsProps) {
-  const ctrl = "flex items-center justify-center outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring rounded-full"
-  const tone = (on?: boolean) => (on ? "text-brand" : "text-muted-foreground hover:text-foreground")
+  const ctrl =
+    "flex items-center justify-center outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring rounded-full"
+  const tone = (on?: boolean) =>
+    on ? "text-brand" : "text-muted-foreground hover:text-foreground"
   return (
-    <div data-slot="now-playing-bar-controls" className={cn("flex items-center gap-3", className)} {...props}>
-      <button type="button" aria-label="Shuffle" aria-pressed={shuffle} onClick={onShuffleToggle} className={cn(ctrl, "size-7", tone(shuffle))}><Icon d={ICONS.shuffle} /></button>
-      <button type="button" aria-label="Previous" onClick={onPrev} className={cn(ctrl, "size-7", tone())}><Icon d={ICONS.prev} /></button>
-      <button type="button" aria-label={isPlaying ? "Pause" : "Play"} aria-pressed={isPlaying} onClick={onPlayPause} className={cn(ctrl, "size-9 bg-brand text-primary-foreground hover:scale-105")}><Icon d={isPlaying ? ICONS.pause : ICONS.play} className="size-5" /></button>
-      <button type="button" aria-label="Next" onClick={onNext} className={cn(ctrl, "size-7", tone())}><Icon d={ICONS.next} /></button>
-      <button type="button" aria-label="Repeat" aria-pressed={repeat} onClick={onRepeatToggle} className={cn(ctrl, "size-7", tone(repeat))}><Icon d={ICONS.repeat} /></button>
+    <div
+      data-slot="now-playing-bar-controls"
+      className={cn("flex items-center gap-3", className)}
+      {...props}
+    >
+      <button
+        type="button"
+        aria-label="Shuffle"
+        aria-pressed={shuffle}
+        onClick={onShuffleToggle}
+        className={cn(ctrl, "size-7", tone(shuffle))}
+      >
+        <Icon d={ICONS.shuffle} />
+      </button>
+      <button
+        type="button"
+        aria-label="Previous"
+        onClick={onPrev}
+        className={cn(ctrl, "size-7", tone())}
+      >
+        <Icon d={ICONS.prev} />
+      </button>
+      <button
+        type="button"
+        aria-label={isPlaying ? "Pause" : "Play"}
+        aria-pressed={isPlaying}
+        onClick={onPlayPause}
+        className={cn(
+          ctrl,
+          "size-9 bg-brand text-primary-foreground hover:scale-105",
+        )}
+      >
+        <Icon d={isPlaying ? ICONS.pause : ICONS.play} className="size-5" />
+      </button>
+      <button
+        type="button"
+        aria-label="Next"
+        onClick={onNext}
+        className={cn(ctrl, "size-7", tone())}
+      >
+        <Icon d={ICONS.next} />
+      </button>
+      <button
+        type="button"
+        aria-label="Repeat"
+        aria-pressed={repeat}
+        onClick={onRepeatToggle}
+        className={cn(ctrl, "size-7", tone(repeat))}
+      >
+        <Icon d={ICONS.repeat} />
+      </button>
     </div>
   )
 }
@@ -932,16 +1163,31 @@ const fmt = (s: number) => {
   return `${m}:${sec.toString().padStart(2, "0")}`
 }
 
-export type NowPlayingBarProgressProps = Omit<React.ComponentProps<"div">, "onSeek"> & {
+export type NowPlayingBarProgressProps = Omit<
+  React.ComponentProps<"div">,
+  "onSeek"
+> & {
   progress?: number // seconds
   duration?: number // seconds
   onSeek?: (seconds: number) => void
 }
 
-export function NowPlayingBarProgress({ progress = 0, duration = 0, onSeek, className, ...props }: NowPlayingBarProgressProps) {
+export function NowPlayingBarProgress({
+  progress = 0,
+  duration = 0,
+  onSeek,
+  className,
+  ...props
+}: NowPlayingBarProgressProps) {
   return (
-    <div data-slot="now-playing-bar-progress" className={cn("flex flex-1 items-center gap-2", className)} {...props}>
-      <span className="font-mono text-xs tabular-nums text-muted-foreground">{fmt(progress)}</span>
+    <div
+      data-slot="now-playing-bar-progress"
+      className={cn("flex flex-1 items-center gap-2", className)}
+      {...props}
+    >
+      <span className="font-mono text-xs tabular-nums text-muted-foreground">
+        {fmt(progress)}
+      </span>
       <Slider
         aria-label="Seek"
         value={progress}
@@ -950,7 +1196,9 @@ export function NowPlayingBarProgress({ progress = 0, duration = 0, onSeek, clas
         onValueChange={(v) => onSeek?.(Array.isArray(v) ? v[0] : v)}
         className="flex-1"
       />
-      <span className="font-mono text-xs tabular-nums text-muted-foreground">{fmt(duration)}</span>
+      <span className="font-mono text-xs tabular-nums text-muted-foreground">
+        {fmt(duration)}
+      </span>
     </div>
   )
 }
@@ -960,12 +1208,36 @@ export type NowPlayingBarExtrasProps = React.ComponentProps<"div"> & {
   onVolumeChange?: (volume: number) => void
 }
 
-export function NowPlayingBarExtras({ volume = 100, onVolumeChange, className, children, ...props }: NowPlayingBarExtrasProps) {
+export function NowPlayingBarExtras({
+  volume = 100,
+  onVolumeChange,
+  className,
+  children,
+  ...props
+}: NowPlayingBarExtrasProps) {
   return (
-    <div data-slot="now-playing-bar-extras" className={cn("flex flex-1 items-center justify-end gap-3", className)} {...props}>
+    <div
+      data-slot="now-playing-bar-extras"
+      className={cn("flex flex-1 items-center justify-end gap-3", className)}
+      {...props}
+    >
       {children}
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="size-4 text-muted-foreground"><path d="M3 9v6h4l5 5V4L7 9H3z" /></svg>
-      <Slider aria-label="Volume" value={volume} min={0} max={100} onValueChange={(v) => onVolumeChange?.(Array.isArray(v) ? v[0] : v)} className="w-24" />
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden
+        className="size-4 text-muted-foreground"
+      >
+        <path d="M3 9v6h4l5 5V4L7 9H3z" />
+      </svg>
+      <Slider
+        aria-label="Volume"
+        value={volume}
+        min={0}
+        max={100}
+        onValueChange={(v) => onVolumeChange?.(Array.isArray(v) ? v[0] : v)}
+        className="w-24"
+      />
     </div>
   )
 }
@@ -1018,7 +1290,10 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { AlbumCover } from "@/components/ui/album-cover"
 
-export type PlaylistCardProps = Omit<React.ComponentProps<"div">, "onPlay" | "title"> & {
+export type PlaylistCardProps = Omit<
+  React.ComponentProps<"div">,
+  "onPlay" | "title"
+> & {
   src: string
   title: string
   description?: string
@@ -1027,20 +1302,37 @@ export type PlaylistCardProps = Omit<React.ComponentProps<"div">, "onPlay" | "ti
 }
 
 export function PlaylistCard({
-  src, title, description, playing, onPlay, className, ...props
+  src,
+  title,
+  description,
+  playing,
+  onPlay,
+  className,
+  ...props
 }: PlaylistCardProps) {
   return (
     <div
       data-slot="playlist-card"
       className={cn(
         "group/playlist-card flex w-full max-w-56 flex-col gap-3 rounded-lg bg-card p-3 transition-colors hover:bg-accent",
-        className
+        className,
       )}
       {...props}
     >
-      <AlbumCover src={src} alt={title} size="lg" rounded="md" shadow playing={playing} onPlay={onPlay} className="max-w-none" />
+      <AlbumCover
+        src={src}
+        alt={title}
+        size="lg"
+        rounded="md"
+        shadow
+        playing={playing}
+        onPlay={onPlay}
+        className="max-w-none"
+      />
       <span className="min-w-0">
-        <span className="block truncate text-sm font-medium text-foreground">{title}</span>
+        <span className="block truncate text-sm font-medium text-foreground">
+          {title}
+        </span>
         {description ? (
           <span className="mt-0.5 block text-xs text-muted-foreground [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
             {description}
@@ -1052,7 +1344,7 @@ export function PlaylistCard({
 }
 ```
 
-*(Decision: drop the optional `href` anchor wrap to keep router-free + simpler; the card surfaces `onPlay` via the cover. If a link is needed, consumers wrap the card. Update the test accordingly — no anchor case.)*
+_(Decision: drop the optional `href` anchor wrap to keep router-free + simpler; the card surfaces `onPlay` via the cover. If a link is needed, consumers wrap the card. Update the test accordingly — no anchor case.)_
 
 - [ ] **Step 4: Run — PASS.**
 - [ ] **Step 5: registry.json** (`type: registry:component`, deps: foundation, album-cover, utils).
@@ -1105,32 +1397,62 @@ const VerifiedGlyph = () => (
 )
 
 export function ArtistHeader({
-  name, image, verified, monthlyListeners, isFollowing = false, isPlaying = false,
-  onPlay, onFollowToggle, className, ...props
+  name,
+  image,
+  verified,
+  monthlyListeners,
+  isFollowing = false,
+  isPlaying = false,
+  onPlay,
+  onFollowToggle,
+  className,
+  ...props
 }: ArtistHeaderProps) {
-  const formatted = monthlyListeners != null ? new Intl.NumberFormat("en-US").format(monthlyListeners) : null
+  const formatted =
+    monthlyListeners != null
+      ? new Intl.NumberFormat("en-US").format(monthlyListeners)
+      : null
   return (
     <div
       data-slot="artist-header"
       className={cn("flex flex-col gap-6 sm:flex-row sm:items-end", className)}
       {...props}
     >
-      <AlbumCover src={image} alt={name} size="lg" rounded="full" shadow className="shrink-0" />
+      <AlbumCover
+        src={image}
+        alt={name}
+        size="lg"
+        rounded="full"
+        shadow
+        className="shrink-0"
+      />
       <div className="flex flex-col gap-3">
         {verified ? (
           <Badge variant="secondary" className="w-fit gap-1">
             <VerifiedGlyph /> Verified Artist
           </Badge>
         ) : null}
-        <h1 className="text-5xl font-normal tracking-tight text-foreground">{name}</h1>
+        <h1 className="text-5xl font-normal tracking-tight text-foreground">
+          {name}
+        </h1>
         {formatted ? (
-          <p className="font-mono text-sm tabular-nums text-muted-foreground">{formatted} monthly listeners</p>
+          <p className="font-mono text-sm tabular-nums text-muted-foreground">
+            {formatted} monthly listeners
+          </p>
         ) : null}
         <div className="mt-1 flex items-center gap-3">
-          <Button onClick={onPlay} aria-label={isPlaying ? "Pause" : "Play"} className="bg-brand text-primary-foreground hover:bg-brand/90">
+          <Button
+            onClick={onPlay}
+            aria-label={isPlaying ? "Pause" : "Play"}
+            className="bg-brand text-primary-foreground hover:bg-brand/90"
+          >
             {isPlaying ? "Pause" : "Play"}
           </Button>
-          <Button variant="outline" aria-pressed={isFollowing} onClick={onFollowToggle}>
+          <Button
+            variant="outline"
+            aria-pressed={isFollowing}
+            onClick={onFollowToggle}
+          >
             {isFollowing ? "Following" : "Follow"}
           </Button>
         </div>
