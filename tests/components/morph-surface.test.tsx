@@ -3,21 +3,21 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { axe } from "vitest-axe";
-import { MorphSurface, type MorphPlacement } from "@/components/ui/morph-surface";
+import { MorphSurface, type MorphPlacement, type MorphGrow } from "@/components/ui/morph-surface";
 
 beforeEach(() => {
   vi.stubGlobal("matchMedia", vi.fn().mockReturnValue({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
   vi.stubGlobal("ResizeObserver", class { observe() {} unobserve() {} disconnect() {} });
 });
 
-function Harness({ placement = "top" as MorphPlacement }) {
+function Harness({ placement = "top" as MorphPlacement, grow = "height" as MorphGrow }) {
   const [open, setOpen] = React.useState(false);
   return (
     <MorphSurface
       open={open}
       onOpenChange={setOpen}
       placement={placement}
-      grow="height"
+      grow={grow}
       navLabel="Demo nav"
       collapsed={<button onClick={() => setOpen(true)}>open</button>}
       panel={<div>panel body</div>}
@@ -73,6 +73,17 @@ describe("MorphSurface", () => {
     for (const p of ["top", "bottom", "left", "right"] as MorphPlacement[]) {
       const { container, unmount } = render(<Harness placement={p} />);
       expect(container.querySelector('[data-slot="morph-surface"]')).toHaveAttribute("data-placement", p);
+      unmount();
+    }
+  });
+
+  it("opens in every grow mode without crashing", async () => {
+    const user = userEvent.setup();
+    for (const g of ["height", "width", "both"] as MorphGrow[]) {
+      const { unmount } = render(<Harness grow={g} />);
+      const open = screen.getByRole("button", { name: "open" });
+      await user.click(open);
+      expect(document.querySelector('[data-slot="morph-panel"]')).toHaveAttribute("aria-hidden", "false");
       unmount();
     }
   });
