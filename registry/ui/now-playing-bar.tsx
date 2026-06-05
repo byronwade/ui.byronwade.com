@@ -241,7 +241,7 @@ export function NowPlayingBarProgress({
   return (
     <div
       data-slot="now-playing-bar-progress"
-      className={cn("flex flex-1 items-center gap-2", className)}
+      className={cn("flex w-full flex-1 items-center gap-2", className)}
       {...props}
     >
       <span className="font-mono text-xs tabular-nums text-muted-foreground">

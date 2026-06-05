@@ -6,7 +6,11 @@ import { MorphRail } from "@/components/ui/morph-rail"
 export default function Example() {
   return (
     <div className="flex h-80 overflow-hidden rounded-xl edge">
-      <div className="flex-1 bg-background" />
+      <div className="flex-1 space-y-3 bg-background p-5">
+        <div className="h-6 w-32 rounded-md bg-muted" />
+        <div className="h-40 rounded-lg border border-border bg-card" />
+        <div className="h-6 w-24 rounded-md bg-muted" />
+      </div>
       <MorphRail
         items={[
           {
