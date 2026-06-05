@@ -52,6 +52,9 @@ import AiToolDefault from "./ai-tool/default";
 import AiToolbarDefault from "./ai-toolbar/default";
 import AiWebPreviewDefault from "./ai-web-preview/default";
 import AlbumCoverDefault from "./album-cover/default";
+import AlbumCoverPlaying from "./album-cover/playing";
+import AlbumCoverShapes from "./album-cover/shapes";
+import AlbumCoverSizes from "./album-cover/sizes";
 import AlertDefault from "./alert/default";
 import AlertNoIcon from "./alert/no-icon";
 import AlertVariants from "./alert/variants";
@@ -306,6 +309,9 @@ import MetricStatLoading from "./metric-stat/loading";
 import MetricStatNoDelta from "./metric-stat/no-delta";
 import MetricStatWithIcon from "./metric-stat/with-icon";
 import MoneyInputDefault from "./money-input/default";
+import MoneyInputCurrencies from "./money-input/currencies";
+import MoneyInputSizes from "./money-input/sizes";
+import MoneyInputStates from "./money-input/states";
 import MorphBarDefault from "./morph-bar/default";
 import MorphDockDefault from "./morph-dock/default";
 import MorphDockAppBar from "./morph-dock/app-bar";
@@ -665,6 +671,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "album-cover": [
     { name: "Default", file: "album-cover/default.tsx", Component: AlbumCoverDefault },
+    { name: "Playing", file: "album-cover/playing.tsx", Component: AlbumCoverPlaying },
+    { name: "Shapes", file: "album-cover/shapes.tsx", Component: AlbumCoverShapes },
+    { name: "Sizes", file: "album-cover/sizes.tsx", Component: AlbumCoverSizes },
   ],
   "alert": [
     { name: "Default", file: "alert/default.tsx", Component: AlertDefault },
@@ -1045,6 +1054,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "money-input": [
     { name: "Default", file: "money-input/default.tsx", Component: MoneyInputDefault },
+    { name: "Currencies", file: "money-input/currencies.tsx", Component: MoneyInputCurrencies },
+    { name: "Sizes", file: "money-input/sizes.tsx", Component: MoneyInputSizes },
+    { name: "States", file: "money-input/states.tsx", Component: MoneyInputStates },
   ],
   "morph-bar": [
     { name: "Default", file: "morph-bar/default.tsx", Component: MorphBarDefault },
