@@ -20,7 +20,7 @@
 //   ENFORCE 1. Filenames     — every registry/**/*.{ts,tsx} is kebab-case.
 //   ENFORCE 2. Import paths   — no relative parent (`../`) imports; consumer `@/` only.
 //   ENFORCE 3. No default     — components use named exports, never `export default`.
-//   RATCHET 4. data-slot      — every ui / component root carries a `data-slot`.
+//   ENFORCE 4. data-slot      — every ui / component root carries a `data-slot`.
 //
 // Usage: node scripts/check-conventions.mjs
 //        node scripts/check-conventions.mjs --strict   (treat ratchets as enforce too)
@@ -111,7 +111,7 @@ if (defaulted.length) {
   })
 }
 
-// ---- RATCHET 4. data-slot presence -----------------------------------------
+// ---- ENFORCE 4. data-slot presence -----------------------------------------
 // Every rendered part carries data-slot so consumers can target it without
 // reaching into class internals (the styling-handle contract from the DNA).
 const undatedSlot = renderedFiles.filter((rel) => {
@@ -119,7 +119,7 @@ const undatedSlot = renderedFiles.filter((rel) => {
   return !readFileSync(abs, "utf8").includes("data-slot")
 })
 if (undatedSlot.length) {
-  ratchet.push({
+  enforce.push({
     title: "Components missing a `data-slot` attribute",
     items: undatedSlot,
     hint: "Add data-slot to the rendered root (and notable parts) so consumers can target them.",

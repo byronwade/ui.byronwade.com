@@ -17,7 +17,10 @@ export function PageHeader({
 }) {
   if (align === "center") {
     return (
-      <div className={cn("flex flex-col items-center gap-4 text-center", className)}>
+      <div
+        data-slot="page-header"
+        className={cn("flex flex-col items-center gap-4 text-center", className)}
+      >
         <div className="space-y-1.5">
           <h1 className="text-2xl font-medium tracking-tight sm:text-3xl">
             {title}
@@ -37,6 +40,7 @@ export function PageHeader({
 
   return (
     <div
+      data-slot="page-header"
       className={cn(
         "flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between",
         className,

@@ -22,6 +22,7 @@ export function ActivityGrid({
   ]
   return (
     <div
+      data-slot="activity-grid"
       className={cn("grid w-fit gap-1", className)}
       style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
     >

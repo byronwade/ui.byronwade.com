@@ -15,6 +15,7 @@ export function SegmentedControl<T extends string>({
 }) {
   return (
     <div
+      data-slot="segmented-control"
       role="group"
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full border border-border bg-muted/60 p-0.5",

@@ -21,6 +21,7 @@ export function GradientAvatar({
   const g = gradientFor(seed)
   return (
     <span
+      data-slot="gradient-avatar"
       aria-hidden
       className={cn(
         "inline-block shrink-0 rounded-full",
