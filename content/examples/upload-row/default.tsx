@@ -26,11 +26,7 @@ export default function Example() {
         statusLabel="Processing HD…"
         onCancel={() => {}}
       />
-      <UploadRow
-        filename="thumbnail-card.png"
-        sizeLabel="2 MB"
-        status="done"
-      />
+      <UploadRow filename="thumbnail-card.png" sizeLabel="2 MB" status="done" />
       <UploadRow
         filename="corrupted-export.mp4"
         sizeLabel="512 MB"

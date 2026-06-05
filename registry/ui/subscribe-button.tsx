@@ -53,8 +53,7 @@ function SubscribeButton({
 
   const isSubscribed =
     subscribed !== undefined ? subscribed : internalSubscribed
-  const level =
-    notification !== undefined ? notification : internalNotification
+  const level = notification !== undefined ? notification : internalNotification
 
   function setSubscribed(next: boolean) {
     if (subscribed === undefined) setInternalSubscribed(next)
@@ -68,8 +67,14 @@ function SubscribeButton({
 
   if (!isSubscribed) {
     return (
-      <span data-slot="subscribe-button" className={cn("inline-flex", className)}>
-        <Button data-slot="subscribe-button-subscribe" onClick={() => setSubscribed(true)}>
+      <span
+        data-slot="subscribe-button"
+        className={cn("inline-flex", className)}
+      >
+        <Button
+          data-slot="subscribe-button-subscribe"
+          onClick={() => setSubscribed(true)}
+        >
           {label}
         </Button>
       </span>
