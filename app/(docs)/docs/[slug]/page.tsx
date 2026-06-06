@@ -14,14 +14,7 @@ import {
 } from "@/app/(docs)/_components/variant-browser"
 import { InstallCommand } from "@/app/(docs)/_components/install-command"
 import { DocsDemoSection, DocsIntro } from "@/app/(docs)/_components/docs-prose"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { ComponentReferenceSections } from "@/app/(docs)/_components/component-reference-sections"
 
 export function generateStaticParams() {
   // Bespoke static routes take precedence; exclude them from this template.
@@ -144,7 +137,7 @@ export default async function ComponentPage({
         <DocsDemoSection
           label={
             <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Variants
+              Feature showcase
             </h2>
           }
         >
@@ -155,7 +148,7 @@ export default async function ComponentPage({
           <DocsDemoSection
             label={
               <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                {rendered.length > 1 ? "Examples" : "Example"}
+                Feature showcase
               </h2>
             }
           >
@@ -180,47 +173,7 @@ export default async function ComponentPage({
         </section>
       )}
 
-      {doc.props && doc.props.length > 0 && (
-        <section className="space-y-3">
-          <Label>Props</Label>
-          <div className="overflow-hidden rounded-xl edge">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-muted/40 hover:bg-muted/40">
-                  <TableHead className="pl-4 text-muted-foreground">
-                    Prop
-                  </TableHead>
-                  <TableHead className="text-muted-foreground">Type</TableHead>
-                  <TableHead className="text-muted-foreground">
-                    Default
-                  </TableHead>
-                  <TableHead className="pr-4 text-muted-foreground">
-                    Description
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {doc.props.map((p) => (
-                  <TableRow key={p.name}>
-                    <TableCell className="pl-4 font-mono text-xs">
-                      {p.name}
-                    </TableCell>
-                    <TableCell className="font-mono text-xs text-muted-foreground">
-                      {p.type}
-                    </TableCell>
-                    <TableCell className="font-mono text-xs text-muted-foreground">
-                      {p.default ?? "-"}
-                    </TableCell>
-                    <TableCell className="pr-4 whitespace-normal text-muted-foreground">
-                      {p.description}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </section>
-      )}
+      <ComponentReferenceSections doc={doc} />
 
       {/* ── Footer nav ── */}
       <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">

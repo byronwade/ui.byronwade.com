@@ -13,6 +13,7 @@
 ### Task 1: Metadata Helpers
 
 **Files:**
+
 - Modify: `content/components.ts`
 - Test: `tests/content/component-docs-reference.test.ts`
 
@@ -29,6 +30,7 @@
 ### Task 2: Component Page Sections
 
 **Files:**
+
 - Modify: `app/(docs)/docs/[slug]/page.tsx`
 - Test: `tests/app/component-docs-reference.test.tsx`
 
@@ -43,6 +45,7 @@
 ### Task 3: Representative Metadata Batch
 
 **Files:**
+
 - Modify: `content/components.ts`
 
 - [ ] Populate reference metadata for `button`, `input`, `dialog`, `table`, and `morph-dock`.
@@ -53,6 +56,7 @@
 ### Task 4: Verification
 
 **Files:**
+
 - No new files.
 
 - [ ] Run `npm run test:run -- tests/content/component-docs-reference.test.ts tests/app/component-docs-reference.test.tsx tests/app/variant-browser.test.tsx`.
