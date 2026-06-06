@@ -6,6 +6,7 @@
 
 import * as React from "react";
 import { render, screen, act } from "@testing-library/react";
+import { renderToString } from "react-dom/server";
 import { axe } from "vitest-axe";
 
 import {
@@ -135,6 +136,17 @@ describe("RelativeTime — uncontrolled (ticks)", () => {
     unmount();
     expect(clear).toHaveBeenCalled();
     clear.mockRestore();
+  });
+
+  it("renders a stable placeholder on the server for live clocks", () => {
+    const html = renderToString(
+      <RelativeTime>
+        <RelativeTimeZone zone="UTC">
+          <RelativeTimeZoneDisplay />
+        </RelativeTimeZone>
+      </RelativeTime>,
+    );
+    expect(html).toContain("--:--:--");
   });
 });
 

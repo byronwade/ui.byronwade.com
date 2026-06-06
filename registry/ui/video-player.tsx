@@ -48,6 +48,7 @@ import {
   MediaSettingsMenuItem,
 } from "media-chrome/react/menu"
 import { cva, type VariantProps } from "class-variance-authority"
+import { RectangleHorizontal, SkipForward } from "lucide-react"
 import * as React from "react"
 import type { ComponentProps, CSSProperties } from "react"
 
@@ -107,7 +108,7 @@ const videoPlayerVariants = cva(
           "mx-auto w-full max-w-4xl rounded-xl border border-border bg-background shadow-lg [&_media-control-bar]:px-2 [&_media-control-bar]:py-1",
         poster: "rounded-lg border border-border shadow-sm",
         youtube:
-          "rounded-xl border border-border bg-black/95 shadow-lg [&_video]:object-contain",
+          "rounded-xl bg-background [&_video]:bg-background [&_video]:object-contain [&_[data-slot$=-button]]:rounded-full [&_[data-slot$=-button]]:p-2 [&_[data-slot$=-button]]:transition-colors [&_[data-slot$=-button]]:hover:bg-foreground/10 [&_[data-slot=video-player-volume-range]]:max-w-24 [&_[data-slot=video-player-time-range]]:px-0 [&_[data-slot=video-player-time-range]]:py-1.5",
       },
     },
     defaultVariants: {
@@ -163,7 +164,7 @@ const controlBarVariants = cva(
         theater: "gap-1 px-1",
         poster: "",
         youtube:
-          "gap-0.5 bg-gradient-to-t from-background/90 to-transparent px-1",
+          "gap-1 bg-gradient-to-t from-background via-background/90 to-transparent px-2 pb-1.5 pt-8",
       },
     },
     defaultVariants: { variant: "default" },
@@ -417,6 +418,52 @@ export const VideoPlayerSpacer = ({
     className={cn("flex-1", className)}
     {...props}
   />
+)
+
+export type VideoPlayerNextButtonProps = ComponentProps<"button">
+
+/** Skip to the next item — YouTube-style control-bar affordance. */
+export const VideoPlayerNextButton = ({
+  className,
+  ...props
+}: VideoPlayerNextButtonProps) => (
+  <button
+    type="button"
+    data-slot="video-player-next-button"
+    aria-label="Next"
+    className={cn(
+      "inline-flex items-center justify-center text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring",
+      className,
+    )}
+    {...props}
+  >
+    <SkipForward className="size-5" aria-hidden />
+  </button>
+)
+
+export type VideoPlayerTheaterButtonProps = ComponentProps<"button"> & {
+  pressed?: boolean
+}
+
+/** Toggle theater width — pairs with a narrowed stage wrapper. */
+export const VideoPlayerTheaterButton = ({
+  className,
+  pressed = false,
+  ...props
+}: VideoPlayerTheaterButtonProps) => (
+  <button
+    type="button"
+    data-slot="video-player-theater-button"
+    aria-label={pressed ? "Exit theater mode" : "Theater mode"}
+    aria-pressed={pressed}
+    className={cn(
+      "inline-flex items-center justify-center text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring",
+      className,
+    )}
+    {...props}
+  >
+    <RectangleHorizontal className="size-5" aria-hidden />
+  </button>
 )
 
 export type VideoPlayerPreviewThumbnailProps = ComponentProps<
@@ -1003,6 +1050,12 @@ export type MediaPlayerProps = Omit<VideoPlayerProps, "children"> & {
   crossOrigin?: ComponentProps<"video">["crossOrigin"]
   /** Fires when the media ends. */
   onEnded?: () => void
+  /** Skip-to-next handler — renders a Next control in the chrome when set. */
+  onNext?: () => void
+  /** Controlled theater width on the stage wrapper. */
+  theater?: boolean
+  defaultTheater?: boolean
+  onTheaterChange?: (next: boolean) => void
 }
 
 const getStorage = (): Storage | null => {
@@ -1038,6 +1091,10 @@ export const MediaPlayer = ({
   preload = "metadata",
   crossOrigin,
   onEnded,
+  onNext,
+  theater,
+  defaultTheater = false,
+  onTheaterChange,
   className,
   ...props
 }: MediaPlayerProps) => {
@@ -1046,6 +1103,15 @@ export const MediaPlayer = ({
   const [ripple, setRipple] = React.useState<"left" | "right" | null>(null)
   const rippleTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
   const clickTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isTheaterControlled = theater !== undefined
+  const [theaterInternal, setTheaterInternal] = React.useState(defaultTheater)
+  const theaterOn = isTheaterControlled ? theater! : theaterInternal
+
+  function toggleTheater() {
+    const next = !theaterOn
+    if (!isTheaterControlled) setTheaterInternal(next)
+    onTheaterChange?.(next)
+  }
 
   // Object URLs must be created on the client only — a server-rendered blob URL
   // never matches the client's, causing a hydration mismatch. So this stays null
@@ -1180,7 +1246,15 @@ export const MediaPlayer = ({
   }
 
   return (
-    <div data-slot="video-player-stage" className={cn("relative", className)}>
+    <div
+      data-slot="video-player-stage"
+      data-theater={theaterOn || undefined}
+      className={cn(
+        "relative transition-[max-width] duration-300",
+        theaterOn && "mx-auto max-w-5xl",
+        className,
+      )}
+    >
       {/* Ambient sits beside the player, not inside its clipped frame, so the
           blurred glow can spill past the edges onto the page (YouTube ambient). */}
       {ambient ? <VideoPlayerAmbient src={src} /> : null}
@@ -1290,43 +1364,46 @@ export const MediaPlayer = ({
         ) : null}
 
         <div
-          data-slot="video-player-scrubber"
-          className="absolute inset-x-0 bottom-12 z-10 px-1"
+          data-slot="video-player-chrome"
+          className="absolute inset-x-0 bottom-0 z-10 opacity-0 transition-opacity group-hover/video-player:opacity-100 group-focus-within/video-player:opacity-100"
         >
-          {heatmap && heatmap.length > 0 ? (
-            <VideoPlayerHeatmap
-              values={heatmap}
-              className="opacity-0 transition-opacity group-hover/video-player:opacity-100"
-            />
-          ) : null}
-          <VideoPlayerTimeRange className="relative">
-            <VideoPlayerPreviewThumbnail slot="preview" />
-            <VideoPlayerPreviewChapterDisplay slot="preview" />
-            <VideoPlayerPreviewTimeDisplay slot="preview" />
-            {chapters && chapters.length > 0 ? (
-              <VideoPlayerChapterMarkers
-                chapters={chapters}
-                duration={duration}
+          <div data-slot="video-player-scrubber" className="px-3 pb-1">
+            {heatmap && heatmap.length > 0 ? (
+              <VideoPlayerHeatmap
+                values={heatmap}
+                className="mb-1 opacity-0 transition-opacity group-hover/video-player:opacity-100"
               />
             ) : null}
-          </VideoPlayerTimeRange>
-        </div>
+            <VideoPlayerTimeRange className="relative">
+              <VideoPlayerPreviewThumbnail slot="preview" />
+              <VideoPlayerPreviewChapterDisplay slot="preview" />
+              <VideoPlayerPreviewTimeDisplay slot="preview" />
+              {chapters && chapters.length > 0 ? (
+                <VideoPlayerChapterMarkers
+                  chapters={chapters}
+                  duration={duration}
+                />
+              ) : null}
+            </VideoPlayerTimeRange>
+          </div>
 
-        <VideoPlayerControlBar className="absolute inset-x-0 bottom-0 z-10">
-          <VideoPlayerPlayButton />
-          <VideoPlayerSeekBackwardButton />
-          <VideoPlayerSeekForwardButton />
-          <VideoPlayerMuteButton />
-          <VideoPlayerVolumeRange />
-          <VideoPlayerTimeDisplay />
-          <span className="px-1 text-sm text-muted-foreground">/</span>
-          <VideoPlayerDurationDisplay />
-          <VideoPlayerSpacer />
-          <VideoPlayerCaptionsButton />
-          <VideoPlayerSettingsMenuButton />
-          <VideoPlayerPipButton />
-          <VideoPlayerFullscreenButton />
-        </VideoPlayerControlBar>
+          <VideoPlayerControlBar>
+            <VideoPlayerPlayButton />
+            {onNext ? <VideoPlayerNextButton onClick={onNext} /> : null}
+            <VideoPlayerMuteButton />
+            <VideoPlayerVolumeRange />
+            <VideoPlayerTimeDisplay showDuration />
+            <VideoPlayerSpacer />
+            <VideoPlayerCaptionsButton />
+            <VideoPlayerSettingsMenuButton />
+            <VideoPlayerPipButton />
+            <VideoPlayerTheaterButton
+              pressed={theaterOn}
+              onClick={toggleTheater}
+            />
+            <VideoPlayerFullscreenButton />
+          </VideoPlayerControlBar>
+        </div>
 
         <VideoPlayerSettingsMenu hidden anchor="auto">
           <VideoPlayerSettingsMenuItem>

@@ -4,7 +4,7 @@ import * as React from "react"
 import { flushSync } from "react-dom"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
+import { useTheme } from "@wrksz/themes/client"
 import {
   Box,
   CornerDownLeft,

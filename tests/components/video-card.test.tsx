@@ -141,47 +141,130 @@ describe("VideoCard – thumbnail forwarding", () => {
   })
 })
 
-describe("VideoCard – clickable surface", () => {
-  it("renders the surface as a link when href is provided", () => {
-    render(<VideoCard {...base} href="/watch/abc" />)
-    const link = screen.getByRole("link")
-    expect(link).toHaveAttribute("href", "/watch/abc")
+describe("VideoCard – versatile API", () => {
+  it("renders horizontal, compact, and featured variants with state attributes", () => {
+    const { container, rerender } = render(
+      <VideoCard
+        {...base}
+        variant="horizontal"
+        size="sm"
+        density="compact"
+        selected
+      />,
+    )
+    const root = container.querySelector("[data-slot='video-card']")
+    expect(root).toHaveAttribute("data-variant", "horizontal")
+    expect(root).toHaveAttribute("data-size", "sm")
+    expect(root).toHaveAttribute("data-density", "compact")
+    expect(root).toHaveAttribute("data-selected", "true")
+
+    rerender(<VideoCard {...base} variant="compact" />)
+    expect(root).toHaveAttribute("data-variant", "compact")
+
+    rerender(<VideoCard {...base} variant="featured" size="lg" />)
+    expect(root).toHaveAttribute("data-variant", "featured")
+    expect(root).toHaveAttribute("data-size", "lg")
   })
 
-  it("prefers href over onClick (link, not button)", () => {
+  it("maps large cards to the default avatar size", () => {
+    const { container } = render(<VideoCard {...base} size="lg" />)
+    expect(container.querySelector("[data-slot='avatar']")).toHaveAttribute(
+      "data-size",
+      "default",
+    )
+  })
+
+  it("renders overlay content, badges, description, custom stats, and actions", () => {
+    const { container } = render(
+      <VideoCard
+        {...base}
+        variant="overlay"
+        description="A practical walkthrough of primitives and composites."
+        badges={<span>Premiere</span>}
+        stats={<span>Watching now</span>}
+        actions={<button type="button">Save</button>}
+      />,
+    )
+
+    expect(container.querySelector("[data-slot='video-card-badges']")).toHaveTextContent(
+      "Premiere",
+    )
+    expect(
+      container.querySelector("[data-slot='video-card-description']"),
+    ).toHaveTextContent("A practical walkthrough")
+    expect(container.querySelector("[data-slot='video-card-meta']")).toHaveTextContent(
+      "Watching now",
+    )
+    expect(container.querySelector("[data-slot='video-card-actions']")).toHaveTextContent(
+      "Save",
+    )
+  })
+
+  it("forwards thumbnailRatio to the thumbnail AspectRatio wrapper", () => {
+    const { container } = render(
+      <VideoCard {...base} thumbnailRatio={1} thumbnailSrc="/square.jpg" />,
+    )
+    const aspect = container.querySelector("[data-slot='aspect-ratio']")
+    expect(aspect).toHaveStyle({ "--ratio": "1" })
+  })
+
+  it("suppresses disabled card interactions", () => {
+    const onClick = vi.fn()
+    const { container } = render(
+      <VideoCard {...base} disabled onClick={onClick} />,
+    )
+    const root = container.querySelector("[data-slot='video-card']")
+    expect(root).toHaveAttribute("data-disabled", "true")
+    expect(screen.queryByRole("button")).not.toBeInTheDocument()
+    fireEvent.click(screen.getByText(base.title))
+    expect(onClick).not.toHaveBeenCalled()
+  })
+})
+
+describe("VideoCard – clickable surface", () => {
+  it("renders thumbnail and title as links when href is provided", () => {
+    render(<VideoCard {...base} href="/watch/abc" />)
+    const links = screen.getAllByRole("link")
+    expect(links.length).toBeGreaterThanOrEqual(2)
+    for (const link of links) {
+      expect(link).toHaveAttribute("href", "/watch/abc")
+    }
+  })
+
+  it("prefers href over onClick (links, not button surfaces)", () => {
     const onClick = vi.fn()
     render(<VideoCard {...base} href="/watch/abc" onClick={onClick} />)
-    expect(screen.getByRole("link")).toBeInTheDocument()
+    expect(screen.getAllByRole("link").length).toBeGreaterThanOrEqual(2)
     expect(screen.queryByRole("button")).not.toBeInTheDocument()
   })
 
-  it("renders a button surface and fires onClick when clicked", () => {
+  it("renders button surfaces and fires onClick when the title is clicked", () => {
     const onClick = vi.fn()
     render(<VideoCard {...base} onClick={onClick} />)
-    const root = screen.getByRole("button")
-    expect(root).toHaveAttribute("tabindex", "0")
-    fireEvent.click(root)
+    const surfaces = screen.getAllByRole("button")
+    expect(surfaces.length).toBeGreaterThanOrEqual(2)
+    fireEvent.click(screen.getByText(base.title))
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
-  it("fires onClick on Enter", () => {
+  it("fires onClick on Enter from a button surface", () => {
     const onClick = vi.fn()
     render(<VideoCard {...base} onClick={onClick} />)
-    fireEvent.keyDown(screen.getByRole("button"), { key: "Enter" })
+    fireEvent.keyDown(screen.getAllByRole("button")[0], { key: "Enter" })
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
-  it("fires onClick on Space", () => {
+  it("fires onClick on Space from a button surface", () => {
     const onClick = vi.fn()
     render(<VideoCard {...base} onClick={onClick} />)
-    fireEvent.keyDown(screen.getByRole("button"), { key: " " })
+    fireEvent.keyDown(screen.getAllByRole("button")[0], { key: " " })
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
   it("does not fire onClick on a non-activating key", () => {
     const onClick = vi.fn()
     render(<VideoCard {...base} onClick={onClick} />)
-    fireEvent.keyDown(screen.getByRole("button"), { key: "Escape" })
+    fireEvent.keyDown(screen.getAllByRole("button")[0], { key: "Escape" })
     expect(onClick).not.toHaveBeenCalled()
   })
 

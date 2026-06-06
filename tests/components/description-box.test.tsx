@@ -19,7 +19,7 @@ describe("DescriptionBox – smoke", () => {
       <DescriptionBox>A short description.</DescriptionBox>,
     )
     expect(root(container)).toBeInTheDocument()
-    expect(root(container)).toHaveClass("bg-secondary")
+    expect(root(container)).toHaveClass("bg-secondary/80")
   })
 
   it("renders the body content", () => {
@@ -195,6 +195,29 @@ describe("DescriptionBox – controlled", () => {
     // Parent owns the value, so the view stays collapsed until it updates.
     expect(toggle()).toHaveTextContent("...more")
     expect(body(container).style.webkitLineClamp).toBe("3")
+  })
+})
+
+describe("DescriptionBox – tags", () => {
+  it("renders hashtag chips when tags are provided", () => {
+    const { container } = render(
+      <DescriptionBox tags={["design-system", "tokens"]}>
+        Body copy.
+      </DescriptionBox>,
+    )
+    const tags = container.querySelectorAll("[data-slot='description-box-tag']")
+    expect(tags).toHaveLength(2)
+    expect(tags[0]).toHaveTextContent("#design-system")
+    expect(tags[1]).toHaveTextContent("#tokens")
+  })
+
+  it("omits the tags row when tags is absent", () => {
+    const { container } = render(
+      <DescriptionBox>Body copy.</DescriptionBox>,
+    )
+    expect(
+      container.querySelector("[data-slot='description-box-tags']"),
+    ).toBeNull()
   })
 })
 

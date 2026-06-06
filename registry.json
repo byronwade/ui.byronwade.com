@@ -21,6 +21,48 @@
       ]
     },
     {
+      "name": "controllable-state",
+      "type": "registry:lib",
+      "title": "Controllable state hook",
+      "description": "useControllableState — controlled/uncontrolled value helper for boolean, open, and selection props.",
+      "files": [
+        {
+          "path": "registry/lib/controllable-state.ts",
+          "type": "registry:lib",
+          "target": "lib/controllable-state.ts"
+        }
+      ]
+    },
+    {
+      "name": "overflow-menu-item",
+      "type": "registry:lib",
+      "title": "Overflow menu item type",
+      "description": "Shared OverflowMenuItem shape for video-card, up-next-item, and studio-video-row overflow menus.",
+      "files": [
+        {
+          "path": "registry/lib/overflow-menu-item.ts",
+          "type": "registry:lib",
+          "target": "lib/overflow-menu-item.ts"
+        }
+      ]
+    },
+    {
+      "name": "toggle-state",
+      "type": "registry:lib",
+      "title": "Toggle state hook",
+      "description": "ToggleState type and useToggleState — grouped controllable boolean for engagement and media controls.",
+      "registryDependencies": [
+        "@byronwade/controllable-state"
+      ],
+      "files": [
+        {
+          "path": "registry/lib/toggle-state.ts",
+          "type": "registry:lib",
+          "target": "lib/toggle-state.ts"
+        }
+      ]
+    },
+    {
       "name": "foundation",
       "type": "registry:base",
       "extends": "none",
@@ -451,6 +493,7 @@
       "description": "Atomic status indicator dot with tone + optional pulse.",
       "registryDependencies": [
         "@byronwade/foundation",
+        "@byronwade/skeleton",
         "@byronwade/utils"
       ],
       "files": [
@@ -1157,7 +1200,7 @@
       "description": "Sonner — design-system component.",
       "dependencies": [
         "lucide-react",
-        "next-themes",
+        "@wrksz/themes",
         "sonner"
       ],
       "registryDependencies": [
@@ -1994,7 +2037,7 @@
       "dependencies": [
         "motion",
         "dotted-map",
-        "next-themes"
+        "@wrksz/themes"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
@@ -2289,6 +2332,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
+        "@byronwade/controllable-state",
         "@byronwade/foundation",
         "@byronwade/utils"
       ],
@@ -3364,6 +3408,25 @@
       ]
     },
     {
+      "name": "chart-theme",
+      "type": "registry:lib",
+      "title": "Chart theme bridge",
+      "description": "Maps byronwade/ui foundation CSS tokens to TradingView Lightweight Charts options and converts market candle data to LW series payloads.",
+      "dependencies": [
+        "lightweight-charts"
+      ],
+      "registryDependencies": [
+        "@byronwade/market"
+      ],
+      "files": [
+        {
+          "path": "registry/lib/chart-theme.ts",
+          "type": "registry:lib",
+          "target": "lib/chart-theme.ts"
+        }
+      ]
+    },
+    {
       "name": "sparkline",
       "type": "registry:ui",
       "title": "Sparkline",
@@ -3417,6 +3480,28 @@
           "path": "registry/ui/candlestick-chart.tsx",
           "type": "registry:ui",
           "target": "components/ui/candlestick-chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "lightweight-chart",
+      "type": "registry:ui",
+      "title": "Lightweight chart",
+      "description": "Pro financial chart primitive powered by TradingView Lightweight Charts — token-mapped candlestick, line, and area series with optional volume histogram, crosshair, pan/zoom, and `fill` mode for terminal layouts. Theme colors resolve from foundation CSS variables at runtime.",
+      "dependencies": [
+        "lightweight-charts"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/market",
+        "@byronwade/chart-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/lightweight-chart.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/lightweight-chart.tsx"
         }
       ]
     },
@@ -3541,11 +3626,12 @@
       "name": "chart-panel",
       "type": "registry:component",
       "title": "Chart panel",
-      "description": "Chart panel composite — chart-toolbar atop a candlestick chart (or sparkline fallback for line/area modes) with controlled/uncontrolled interval.",
+      "description": "Chart panel composite — chart-toolbar atop an SVG candlestick/sparkline chart (default) or `engine=\"pro\"` lightweight-chart with controlled/uncontrolled interval and chart type.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/chart-toolbar",
         "@byronwade/candlestick-chart",
+        "@byronwade/lightweight-chart",
         "@byronwade/sparkline",
         "@byronwade/market",
         "@byronwade/utils"
@@ -3583,7 +3669,7 @@
       "name": "market-depth",
       "type": "registry:component",
       "title": "Market depth",
-      "description": "Market depth panel — stacks depth-chart over order-book (or shows either view alone) with shared book data and price-select passthrough.",
+      "description": "Market depth panel — stacks or splits depth-chart and order-book with panel/terminal variants, compact density, header metrics, empty/footer slots, chart sizing, book layout, and price-select passthrough.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/depth-chart",
@@ -3776,7 +3862,7 @@
       "name": "market-news",
       "type": "registry:component",
       "title": "Market news",
-      "description": "News feed rows — source avatar, headline, relative-time, sentiment badge, and related-symbol price-change chips.",
+      "description": "News feed rows — source avatar, headline, relative-time, sentiment badge, related-symbol price-change chips, header/action/footer slots, list/grid layouts, terminal variant, filtering, loading, empty, selected, and disabled states.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/avatar",
@@ -4664,6 +4750,40 @@
       ]
     },
     {
+      "name": "watch-layout",
+      "type": "registry:component",
+      "title": "Watch layout",
+      "description": "YouTube watch-page scaffold: primary column (player, title, meta, description, comments) plus an optional xl sidebar rail for chip filters and up-next lists.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/watch-layout.tsx",
+          "type": "registry:component",
+          "target": "components/watch-layout.tsx"
+        }
+      ]
+    },
+    {
+      "name": "watch-meta-bar",
+      "type": "registry:component",
+      "title": "Watch meta bar",
+      "description": "Watch-page meta row pairing channel identity (left) with engagement actions (right) — the strip under the title on YouTube.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/watch-meta-bar.tsx",
+          "type": "registry:component",
+          "target": "components/watch-meta-bar.tsx"
+        }
+      ]
+    },
+    {
       "name": "comment",
       "type": "registry:component",
       "title": "Comment",
@@ -4811,6 +4931,27 @@
           "path": "registry/components/studio-video-row.tsx",
           "type": "registry:component",
           "target": "components/studio-video-row.tsx"
+        }
+      ]
+    },
+    {
+      "name": "studio-video-table",
+      "type": "registry:component",
+      "title": "Studio video table",
+      "description": "YouTube Studio content-table shell: select-all header with sortable date/views/comments/likes columns wrapping `studio-video-row` children.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/checkbox",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/studio-video-table.tsx",
+          "type": "registry:component",
+          "target": "components/studio-video-table.tsx"
         }
       ]
     },
@@ -5086,6 +5227,9 @@
       "description": "The entire byronwade/ui catalog in one install. Run `init` against foundation first, then add this to pull every component (dependencies resolve automatically).",
       "registryDependencies": [
         "@byronwade/utils",
+        "@byronwade/controllable-state",
+        "@byronwade/overflow-menu-item",
+        "@byronwade/toggle-state",
         "@byronwade/status-dot",
         "@byronwade/activity-ring",
         "@byronwade/identity",
@@ -5231,9 +5375,11 @@
         "@byronwade/ai-web-preview",
         "@byronwade/video-player-utils",
         "@byronwade/market",
+        "@byronwade/chart-theme",
         "@byronwade/sparkline",
         "@byronwade/price-change",
         "@byronwade/candlestick-chart",
+        "@byronwade/lightweight-chart",
         "@byronwade/depth-chart",
         "@byronwade/order-book",
         "@byronwade/heatmap-grid",
@@ -5294,6 +5440,8 @@
         "@byronwade/channel-byline",
         "@byronwade/engagement-bar",
         "@byronwade/description-box",
+        "@byronwade/watch-layout",
+        "@byronwade/watch-meta-bar",
         "@byronwade/comment",
         "@byronwade/comment-composer",
         "@byronwade/shorts-player",
@@ -5301,6 +5449,7 @@
         "@byronwade/chapter-list",
         "@byronwade/playback-menu",
         "@byronwade/studio-video-row",
+        "@byronwade/studio-video-table",
         "@byronwade/upload-row",
         "@byronwade/comment-moderation-row",
         "@byronwade/use-mobile",

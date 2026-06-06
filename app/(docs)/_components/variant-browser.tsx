@@ -3,6 +3,8 @@
 import * as React from "react"
 import { Search } from "lucide-react"
 
+import type { ComponentDoc, Variant } from "@/content/components"
+import type { DemoSurface } from "@/content/demo-contexts"
 import { cn } from "@/lib/utils"
 import { ExampleTabs } from "@/app/(docs)/_components/example-tabs"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
@@ -19,7 +21,7 @@ export type VariantView = {
   name: string
   tags: string[]
   install: string
-  preview: React.ReactNode
+  variant: Variant
   code: string
 }
 
@@ -42,7 +44,25 @@ function uniqueSorted(values: string[]) {
   return [...new Set(values)].sort((a, b) => a.localeCompare(b))
 }
 
-export function VariantBrowser({ variants }: { variants: VariantView[] }) {
+type VariantBrowserProps = {
+  slug: string
+  defaultSurface: DemoSurface
+  demoContext?: ComponentDoc["demoContext"]
+  allVariants: Variant[]
+  codeByExample: Record<string, string>
+  docExamples: string[]
+  variants: VariantView[]
+}
+
+export function VariantBrowser({
+  slug,
+  defaultSurface,
+  demoContext,
+  allVariants,
+  codeByExample,
+  docExamples,
+  variants,
+}: VariantBrowserProps) {
   const [query, setQuery] = React.useState("")
   const [tags, setTags] = React.useState<string[]>([])
 
@@ -139,7 +159,19 @@ export function VariantBrowser({ variants }: { variants: VariantView[] }) {
                   ))}
                 </div>
               </div>
-              <ExampleTabs preview={v.preview} code={v.code} />
+              <ExampleTabs
+                preview={null}
+                code={v.code}
+                demo={{
+                  slug,
+                  defaultSurface,
+                  demoContext,
+                  activeVariant: v.variant,
+                  allVariants,
+                  codeByExample,
+                  docExamples,
+                }}
+              />
               <CodeBlock lang="bash" code={v.install} />
             </section>
           ))}

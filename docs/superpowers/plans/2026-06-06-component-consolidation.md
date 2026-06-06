@@ -55,6 +55,7 @@
 ## Task 1: Baseline And Worktree Safety
 
 **Files:**
+
 - Read only: all touched files listed above.
 
 - [ ] **Step 1: Detect isolation and dirty state**
@@ -96,6 +97,7 @@ Expected: PASS, or record pre-existing failures before implementation.
 ## Task 2: Metric Primitive
 
 **Files:**
+
 - Create: `registry/ui/metric.tsx`
 - Create: `tests/components/metric.test.tsx`
 - Create: `content/examples/metric/default.tsx`
@@ -121,8 +123,12 @@ describe("Metric", () => {
     const { container } = render(<Metric label="Revenue" value="$42K" />)
 
     expect(container.querySelector("[data-slot='metric']")).toBeInTheDocument()
-    expect(container.querySelector("[data-slot='metric-label']")).toHaveTextContent("Revenue")
-    expect(container.querySelector("[data-slot='metric-value']")).toHaveTextContent("$42K")
+    expect(
+      container.querySelector("[data-slot='metric-label']"),
+    ).toHaveTextContent("Revenue")
+    expect(
+      container.querySelector("[data-slot='metric-value']"),
+    ).toHaveTextContent("$42K")
   })
 
   it("renders the card variant with hint, icon, and delta", () => {
@@ -137,8 +143,13 @@ describe("Metric", () => {
       />,
     )
 
-    expect(container.querySelector("[data-slot='metric']")).toHaveAttribute("data-variant", "card")
-    expect(container.querySelector("[data-slot='metric']")).toHaveClass("bg-card")
+    expect(container.querySelector("[data-slot='metric']")).toHaveAttribute(
+      "data-variant",
+      "card",
+    )
+    expect(container.querySelector("[data-slot='metric']")).toHaveClass(
+      "bg-card",
+    )
     expect(screen.getByText("last 30 days")).toBeInTheDocument()
     expect(screen.getByText("+14.3%")).toBeInTheDocument()
     expect(container.querySelector("svg")).toBeInTheDocument()
@@ -148,18 +159,28 @@ describe("Metric", () => {
     const { container, rerender } = render(
       <DeltaPill delta={{ value: "+1%", direction: "up" }} />,
     )
-    expect(container.querySelector("[data-slot='metric-delta']")).toHaveClass("text-success")
+    expect(container.querySelector("[data-slot='metric-delta']")).toHaveClass(
+      "text-success",
+    )
 
     rerender(<DeltaPill delta={{ value: "-1%", direction: "down" }} />)
-    expect(container.querySelector("[data-slot='metric-delta']")).toHaveClass("text-destructive")
+    expect(container.querySelector("[data-slot='metric-delta']")).toHaveClass(
+      "text-destructive",
+    )
 
     rerender(<DeltaPill delta={{ value: "0%", direction: "flat" }} />)
-    expect(container.querySelector("[data-slot='metric-delta']")).toHaveClass("text-muted-foreground")
+    expect(container.querySelector("[data-slot='metric-delta']")).toHaveClass(
+      "text-muted-foreground",
+    )
   })
 
   it("has no axe violations", async () => {
     const { container } = render(
-      <Metric label="Latency" value="124ms" delta={{ value: "-8ms", direction: "down" }} />,
+      <Metric
+        label="Latency"
+        value="124ms"
+        delta={{ value: "-8ms", direction: "down" }}
+      />,
     )
 
     expect(await axe(container)).toHaveNoViolations()
@@ -209,7 +230,12 @@ function DeltaPill({ delta, className }: { delta: Delta; className?: string }) {
       : delta.direction === "down"
         ? "bg-destructive/10 text-destructive"
         : "bg-muted text-muted-foreground"
-  const Icon = delta.direction === "up" ? ArrowUp : delta.direction === "down" ? ArrowDown : null
+  const Icon =
+    delta.direction === "up"
+      ? ArrowUp
+      : delta.direction === "down"
+        ? ArrowDown
+        : null
 
   return (
     <span
@@ -318,9 +344,24 @@ import { Metric } from "@/components/ui/metric"
 export default function MetricExample() {
   return (
     <div className="grid gap-4 sm:grid-cols-3">
-      <Metric label="Revenue" value="$48.2K" delta={{ value: "+12%", direction: "up" }} />
-      <Metric variant="card" label="Sessions" value="9,210" icon={TrendingUp} hint="last 30 days" />
-      <Metric variant="compact" label="Latency" value="124ms" delta={{ value: "-8ms", direction: "down" }} />
+      <Metric
+        label="Revenue"
+        value="$48.2K"
+        delta={{ value: "+12%", direction: "up" }}
+      />
+      <Metric
+        variant="card"
+        label="Sessions"
+        value="9,210"
+        icon={TrendingUp}
+        hint="last 30 days"
+      />
+      <Metric
+        variant="compact"
+        label="Latency"
+        value="124ms"
+        delta={{ value: "-8ms", direction: "down" }}
+      />
     </div>
   )
 }
@@ -333,6 +374,7 @@ Update `registry.json` with a `registry:ui` item for `metric` that depends on `@
 ## Task 3: Entity Row Primitive
 
 **Files:**
+
 - Create: `registry/ui/entity-row.tsx`
 - Create: `tests/components/entity-row.test.tsx`
 - Create: `content/examples/entity-row/default.tsx`
@@ -366,8 +408,12 @@ describe("EntityRow", () => {
       />,
     )
 
-    expect(container.querySelector("[data-slot='entity-row']")).toBeInTheDocument()
-    expect(container.querySelector("[data-slot='entity-row-leading']")).toHaveTextContent("R")
+    expect(
+      container.querySelector("[data-slot='entity-row']"),
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector("[data-slot='entity-row-leading']"),
+    ).toHaveTextContent("R")
     expect(screen.getByText("Result title")).toBeInTheDocument()
     expect(screen.getByText("Result description")).toBeInTheDocument()
     expect(screen.getByText("2m ago")).toBeInTheDocument()
@@ -386,7 +432,9 @@ describe("EntityRow", () => {
   })
 
   it("has no axe violations", async () => {
-    const { container } = render(<EntityRow title="Accessible row" description="Body" />)
+    const { container } = render(
+      <EntityRow title="Accessible row" description="Body" />,
+    )
     expect(await axe(container)).toHaveNoViolations()
   })
 })
@@ -440,6 +488,7 @@ Expected: PASS, or record if a listed test file does not exist yet and add one b
 ## Task 4: Media Item Primitive
 
 **Files:**
+
 - Create: `registry/ui/media-item.tsx`
 - Create: `tests/components/media-item.test.tsx`
 - Create: `content/examples/media-item/default.tsx`
@@ -474,19 +523,31 @@ describe("MediaItem", () => {
       />,
     )
 
-    expect(container.querySelector("[data-slot='media-item']")).toBeInTheDocument()
-    expect(container.querySelector("[data-slot='media-item-media']")).toBeInTheDocument()
+    expect(
+      container.querySelector("[data-slot='media-item']"),
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector("[data-slot='media-item-media']"),
+    ).toBeInTheDocument()
     expect(screen.getByText("Clip title")).toBeInTheDocument()
     expect(screen.getByText("Channel")).toBeInTheDocument()
     expect(screen.getByText("2.2M views")).toBeInTheDocument()
   })
 
   it("supports horizontal and compact variants", () => {
-    const { container, rerender } = render(<MediaItem variant="horizontal" title="A" />)
-    expect(container.querySelector("[data-slot='media-item']")).toHaveAttribute("data-variant", "horizontal")
+    const { container, rerender } = render(
+      <MediaItem variant="horizontal" title="A" />,
+    )
+    expect(container.querySelector("[data-slot='media-item']")).toHaveAttribute(
+      "data-variant",
+      "horizontal",
+    )
 
     rerender(<MediaItem variant="compact" title="A" />)
-    expect(container.querySelector("[data-slot='media-item']")).toHaveAttribute("data-variant", "compact")
+    expect(container.querySelector("[data-slot='media-item']")).toHaveAttribute(
+      "data-variant",
+      "compact",
+    )
   })
 
   it("supports activation", async () => {
@@ -499,7 +560,9 @@ describe("MediaItem", () => {
   })
 
   it("has no axe violations", async () => {
-    const { container } = render(<MediaItem title="Accessible media" byline="Creator" />)
+    const { container } = render(
+      <MediaItem title="Accessible media" byline="Creator" />,
+    )
     expect(await axe(container)).toHaveNoViolations()
   })
 })
@@ -565,6 +628,7 @@ Expected: existing public behavior and data slots remain intact. Keep adapter-le
 ## Task 5: Attachment Item Primitive
 
 **Files:**
+
 - Create: `registry/ui/attachment-item.tsx`
 - Create: `tests/components/attachment-item.test.tsx`
 - Create: `content/examples/attachment-item/default.tsx`
@@ -595,14 +659,24 @@ describe("AttachmentItem", () => {
       />,
     )
 
-    expect(container.querySelector("[data-slot='attachment-item']")).toBeInTheDocument()
+    expect(
+      container.querySelector("[data-slot='attachment-item']"),
+    ).toBeInTheDocument()
     expect(screen.getByText("report.pdf")).toBeInTheDocument()
     expect(screen.getByText("2.4 MB")).toBeInTheDocument()
-    expect(container.querySelector("[data-slot='attachment-item-progress-fill']")).toHaveStyle({ width: "42%" })
+    expect(
+      container.querySelector("[data-slot='attachment-item-progress-fill']"),
+    ).toHaveStyle({ width: "42%" })
   })
 
   it("supports image previews", () => {
-    render(<AttachmentItem name="image.png" previewSrc="/image.png" previewAlt="Preview" />)
+    render(
+      <AttachmentItem
+        name="image.png"
+        previewSrc="/image.png"
+        previewAlt="Preview"
+      />,
+    )
     expect(screen.getByAltText("Preview")).toHaveAttribute("src", "/image.png")
   })
 
@@ -652,6 +726,7 @@ Expected: PASS, or add missing focused tests before adapter changes.
 ## Task 6: Trading Parts
 
 **Files:**
+
 - Create: `registry/components/trading-parts.tsx`
 - Create: `tests/components/trading-parts.test.tsx`
 - Create: `content/examples/trading-parts/default.tsx`
@@ -707,6 +782,7 @@ Expected: PASS, or add missing focused tests before changing a component.
 ## Task 7: Status, Badge, Morph, Header, Timeline Cleanup
 
 **Files:**
+
 - Modify only files where duplication is local and tests exist or are added first.
 
 - [ ] **Step 1: Status hierarchy cleanup**
@@ -747,6 +823,7 @@ Inspect duplication. If no repeated behavior can be removed without API churn, l
 ## Task 8: Registry, Examples, Formatting, And Validation
 
 **Files:**
+
 - Modify: `registry.json`
 - Modify: `registry/rules/byronwade-ui.mdc`
 - Create/modify: `content/examples/*/default.tsx`

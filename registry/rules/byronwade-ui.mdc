@@ -26,7 +26,7 @@ Before writing any markup, check whether a component already exists. Reach for t
   `context-menu`, `sidebar`, `command`, `navigation-menu`, `glimpse`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `kbd`, `separator`,
-  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `pagination`, `carousel`, `resizable`, `candlestick-chart` (token-themed SVG OHLC chart — success/destructive candles, optional volume band, grid, crosshair; geometry from the `market` lib), `depth-chart` (token-themed SVG market-depth chart — cumulative success bid depth mirrored against destructive ask depth about a dashed midline; geometry from the `market` lib), `order-book` (DOM ladder — bid/ask rows with proportional depth bars, spread row, split or vertical layout, optional row price select), `heatmap-grid` (performance grid — cell area by weight, tone by change magnitude via success/destructive opacity or `--chart-1…5`), `volume-profile` (session volume histogram — horizontal bars from `volumeProfileGeometry` in the `market` lib, optional POC line on `--chart-1` / `--brand`), `volume-footprint` (order-flow footprint — bid/ask volume bars mirrored about a midline via `footprintGeometry`), `file-tree` (minimal + panel variants, multi-select), `kanban` (drag-drop board), `gantt` (timeline chart — auto-centers on today; `GanttControls` for timescale/zoom, density + read-only variants, status-tinted bars, `GanttMilestone`)
+  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `pagination`, `carousel`, `resizable`, `candlestick-chart` (token-themed SVG OHLC chart — success/destructive candles, optional volume band, grid, crosshair; geometry from the `market` lib), `lightweight-chart` (pro financial chart on TradingView Lightweight Charts — token-mapped candlestick/line/area + optional volume histogram, crosshair, pan/zoom, `fill` mode; theme via `chart-theme` lib), `depth-chart` (token-themed SVG market-depth chart — cumulative success bid depth mirrored against destructive ask depth about a dashed midline; geometry from the `market` lib), `order-book` (DOM ladder — bid/ask rows with proportional depth bars, spread row, split or vertical layout, optional row price select), `heatmap-grid` (performance grid — cell area by weight, tone by change magnitude via success/destructive opacity or `--chart-1…5`), `volume-profile` (session volume histogram — horizontal bars from `volumeProfileGeometry` in the `market` lib, optional POC line on `--chart-1` / `--brand`), `volume-footprint` (order-flow footprint — bid/ask volume bars mirrored about a midline via `footprintGeometry`), `file-tree` (minimal + panel variants, multi-select), `kanban` (drag-drop board), `gantt` (timeline chart — auto-centers on today; `GanttControls` for timescale/zoom, density + read-only variants, status-tinted bars, `GanttMilestone`)
 - **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
   `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `sparkline` (compact line/area trend chart, auto up/down tone), `price-change` (signed price/percent change — runtime success/destructive/muted tone + trend caret, text or tinted chip), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR), `credit-card` (flippable card), `image-crop` (crop a file to PNG)
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
@@ -47,7 +47,7 @@ Before writing any markup, check whether a component already exists. Reach for t
 - **Market / TradingView** — `ticker-tape` (scrolling market ticker marquee on `ticker`),
   `quote-header` (symbol header — mono price, `price-change`, optional `sparkline`, `metric-stat` stats),
   `chart-toolbar` (interval + chart-type controls on `segmented-control`/`toggle-group`),
-  `chart-panel` (`chart-toolbar` + `candlestick-chart` / sparkline fallback),
+  `chart-panel` (`chart-toolbar` + SVG `candlestick-chart` / sparkline, or `engine="pro"` + `lightweight-chart`),
   `watchlist` (table of quotes with `price-change` + `sparkline`), `market-depth`
   (`depth-chart` + `order-book`, shared book data), `order-entry` (buy/sell ticket on
   `tabs` + `money-input`), `position-card` / `positions-table` (open positions with
@@ -115,9 +115,13 @@ Before writing any markup, check whether a component already exists. Reach for t
   author/caption/sound overlay), `mini-player` (corner PiP "continue watching" card: poster +
   play/pause overlay, progress, close + expand), `chapter-list` (video chapter rows with mono
   timestamps + active-chapter highlight derived from the playhead), `playback-menu` (player
-  settings dropdown; setting rows open single-select option submenus). Studio & creator:
-  `studio-video-row` (Studio content-table row: checkbox + thumbnail/title + visibility tone +
-  date + mono metric cells + overflow menu), `upload-row` (upload/processing row: preview,
+  settings dropdown; setting rows open single-select option submenus). Watch page:
+  `watch-layout` (two-column watch scaffold: player + title + meta + description + comments
+  main column, xl sidebar for filters/up-next), `watch-meta-bar` (channel identity left +
+  engagement pills right under the title). Studio & creator:
+  `studio-video-table` (Studio content-table shell: select-all + sortable metric column header
+  wrapping `studio-video-row` children), `studio-video-row` (Studio content-table row: checkbox +
+  thumbnail/title + visibility tone + date + mono metric cells + overflow menu), `upload-row` (upload/processing row: preview,
   filename, progress, status badge + cancel/retry), `comment-moderation-row` (held-for-review
   comment row: approve/remove/heart/reply actions + status tag + optional video context)
 - **AI elements** — chat / agent UI adapted from Vercel AI Elements (`components/ai-elements/*`):

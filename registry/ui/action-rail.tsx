@@ -15,10 +15,16 @@ const railVariants = cva("flex", {
       sm: "gap-3",
       md: "gap-4",
     },
+    variant: {
+      default: "",
+      overlay:
+        "[&_[data-slot=action-rail-count]]:text-background/80 [&_[data-slot=action-rail-chip]]:bg-background/20 [&_[data-slot=action-rail-chip]]:text-background [&_[data-slot=action-rail-chip]]:backdrop-blur-sm [&_[data-slot=action-rail-chip]]:hover:bg-background/30 [&_[data-slot=action-rail-action][data-active=true]_[data-slot=action-rail-chip]]:bg-background [&_[data-slot=action-rail-action][data-active=true]_[data-slot=action-rail-chip]]:text-foreground",
+    },
   },
   defaultVariants: {
     orientation: "vertical",
     size: "md",
+    variant: "default",
   },
 })
 
@@ -72,6 +78,7 @@ function ActionRail({
   actions,
   orientation = "vertical",
   size = "md",
+  variant = "default",
   className,
   ...props
 }: ActionRailProps) {
@@ -80,7 +87,8 @@ function ActionRail({
       data-slot="action-rail"
       role="group"
       data-orientation={orientation}
-      className={cn(railVariants({ orientation, size }), className)}
+      data-variant={variant}
+      className={cn(railVariants({ orientation, size, variant }), className)}
       {...props}
     >
       {actions.map((action) => {

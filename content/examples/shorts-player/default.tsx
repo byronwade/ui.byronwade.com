@@ -4,6 +4,9 @@ import * as React from "react"
 
 import { ShortsPlayer } from "@/components/shorts-player"
 
+const SRC =
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+
 export default function Example() {
   const [liked, setLiked] = React.useState(false)
   const [following, setFollowing] = React.useState(false)
@@ -11,7 +14,9 @@ export default function Example() {
   return (
     <div className="flex justify-center">
       <ShortsPlayer
+        src={SRC}
         posterSrc="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=720&h=1280&fit=crop"
+        progress={34}
         author={{
           name: "Coastline Studio",
           handle: "@coastline",
@@ -21,7 +26,7 @@ export default function Example() {
         }}
         following={following}
         onFollowingChange={setFollowing}
-        caption="Golden hour over the cliffs, turn the sound on for the full vibe."
+        caption="Golden hour over the cliffs — tap the speaker to unmute."
         sound="original sound · Coastline Studio"
         liked={liked}
         onLikedChange={setLiked}

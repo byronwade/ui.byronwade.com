@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
+import { useTheme } from "@wrksz/themes/client"
 import { ArrowUpRight, GitFork, LayoutGrid, Moon, Sun, X } from "lucide-react"
 
 import { cn } from "@/lib/utils"

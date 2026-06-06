@@ -25,6 +25,8 @@ interface ChapterListProps {
    */
   currentTime?: number
   showThumbnails?: boolean
+  /** Collapse to this many rows with a Show all / Show less toggle. */
+  maxVisible?: number
   className?: string
 }
 
@@ -56,12 +58,14 @@ function ChapterList({
   onSelect,
   currentTime,
   showThumbnails = true,
+  maxVisible,
   className,
 }: ChapterListProps) {
   const isControlled = activeIndex !== undefined
   const [internalIndex, setInternalIndex] = React.useState(
     defaultActiveIndex ?? -1,
   )
+  const [expanded, setExpanded] = React.useState(false)
 
   let active: number
   if (isControlled) {
@@ -77,9 +81,22 @@ function ChapterList({
     if (!isControlled) setInternalIndex(index)
   }
 
+  const collapsible =
+    maxVisible !== undefined && chapters.length > maxVisible && !expanded
+  const visibleChapters = collapsible
+    ? chapters.slice(0, maxVisible)
+    : chapters
+
   return (
     <div data-slot="chapter-list" className={cn("flex flex-col", className)}>
-      {chapters.map((chapter, index) => {
+      <div
+        data-slot="chapter-list-scroll"
+        className={cn(
+          "flex flex-col",
+          maxVisible !== undefined && expanded && "max-h-80 overflow-y-auto scrollbar-thin",
+        )}
+      >
+        {visibleChapters.map((chapter, index) => {
         const isActive = index === active
         const next = chapters[index + 1]
         const impliedDuration =
@@ -140,6 +157,18 @@ function ChapterList({
           </button>
         )
       })}
+      </div>
+
+      {maxVisible !== undefined && chapters.length > maxVisible ? (
+        <button
+          type="button"
+          data-slot="chapter-list-toggle"
+          onClick={() => setExpanded((prev) => !prev)}
+          className="mt-1 self-start rounded-md px-2 py-1 text-sm font-medium text-brand outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          {expanded ? "Show less" : `Show all (${chapters.length})`}
+        </button>
+      ) : null}
     </div>
   )
 }

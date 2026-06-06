@@ -3,6 +3,7 @@
 import * as React from "react"
 import { MoreVertical } from "lucide-react"
 
+import type { OverflowMenuItem } from "@/lib/overflow-menu-item"
 import { cn } from "@/lib/utils"
 import { Thumbnail } from "@/components/ui/thumbnail"
 import { VerifiedBadge } from "@/components/ui/verified-badge"
@@ -13,18 +14,15 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu"
 
-type UpNextItemMenuItem = {
-  key: string
-  label: string
-  icon?: React.ReactNode
-  onClick?: () => void
-}
+type UpNextItemMenuItem = OverflowMenuItem
 
 interface UpNextItemProps {
   title: string
   href?: string
   onClick?: () => void
   thumbnailSrc?: string
+  /** Muted loop preview played on hover/focus (YouTube-style). */
+  previewSrc?: string
   duration?: string
   progress?: number
   live?: boolean
@@ -32,6 +30,8 @@ interface UpNextItemProps {
   verified?: boolean
   views?: number
   timestamp?: string
+  /** Highlights the row as the currently playing video. */
+  active?: boolean
   menuItems?: UpNextItemMenuItem[]
   className?: string
 }
@@ -41,6 +41,7 @@ function UpNextItem({
   href,
   onClick,
   thumbnailSrc,
+  previewSrc,
   duration,
   progress,
   live = false,
@@ -48,9 +49,13 @@ function UpNextItem({
   verified = false,
   views,
   timestamp,
+  active = false,
   menuItems,
   className,
 }: UpNextItemProps) {
+  const [previewing, setPreviewing] = React.useState(false)
+  const previewVideoRef = React.useRef<HTMLVideoElement>(null)
+
   const viewsLabel = React.useMemo(() => {
     if (views === undefined) return undefined
     const compact = new Intl.NumberFormat("en-US", {
@@ -60,9 +65,6 @@ function UpNextItem({
     return `${compact} views`
   }, [views])
 
-  // Only the thumbnail + text surface is interactive; the overflow menu is a
-  // sibling at the root so its trigger never nests inside the anchor/button —
-  // keeping the markup valid and axe-clean.
   const button = href === undefined && onClick !== undefined
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
@@ -72,27 +74,86 @@ function UpNextItem({
     }
   }
 
-  const surfaceClass =
-    "flex min-w-0 flex-1 gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring"
+  function startPreview() {
+    if (!previewSrc) return
+    setPreviewing(true)
+    const video = previewVideoRef.current
+    if (video) {
+      const playResult = video.play()
+      if (playResult && typeof playResult.catch === "function") {
+        void playResult.catch(() => {})
+      }
+    }
+  }
+
+  function stopPreview() {
+    setPreviewing(false)
+    previewVideoRef.current?.pause()
+  }
+
+  const surfaceClass = cn(
+    "group/up-next flex min-w-0 flex-1 gap-3 rounded-lg outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+    active
+      ? "border-l-2 border-brand bg-accent/60 pl-2"
+      : "hover:bg-accent/40",
+  )
+
+  const media = (
+    <div
+      data-slot="up-next-item-media-wrap"
+      className="relative w-40 shrink-0"
+      onMouseEnter={startPreview}
+      onMouseLeave={stopPreview}
+      onFocus={startPreview}
+      onBlur={stopPreview}
+    >
+      {previewSrc && previewing ? (
+        <video
+          ref={previewVideoRef}
+          data-slot="up-next-item-preview"
+          src={previewSrc}
+          className="aspect-video size-full rounded-lg object-cover"
+          muted
+          loop
+          playsInline
+          aria-hidden
+        />
+      ) : (
+        <Thumbnail
+          data-slot="up-next-item-media"
+          src={thumbnailSrc}
+          alt={title}
+          duration={duration}
+          progress={progress}
+          live={live}
+          hoverPlay={Boolean(thumbnailSrc)}
+        />
+      )}
+
+      {active ? (
+        <span
+          data-slot="up-next-item-now-playing"
+          className="absolute bottom-1 left-1 z-10 rounded-sm bg-brand px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-brand-foreground uppercase"
+        >
+          Now playing
+        </span>
+      ) : null}
+    </div>
+  )
 
   const inner = (
     <>
-      <Thumbnail
-        data-slot="up-next-item-media"
-        src={thumbnailSrc}
-        alt={title}
-        duration={duration}
-        progress={progress}
-        live={live}
-        className="w-40 shrink-0"
-      />
+      {media}
       <div
         data-slot="up-next-item-body"
         className="flex min-w-0 flex-1 flex-col gap-1"
       >
         <span
           data-slot="up-next-item-title"
-          className="line-clamp-2 text-sm font-medium leading-snug text-foreground"
+          className={cn(
+            "line-clamp-2 text-sm font-medium leading-snug",
+            active ? "text-brand" : "text-foreground group-hover/up-next:text-brand",
+          )}
         >
           {title}
         </span>
@@ -126,10 +187,11 @@ function UpNextItem({
   return (
     <div
       data-slot="up-next-item"
+      data-active={active || undefined}
       className={cn("flex items-start gap-2", className)}
     >
       {href !== undefined ? (
-        <a href={href} className={cn(surfaceClass, "hover:bg-accent")}>
+        <a href={href} className={surfaceClass}>
           {inner}
         </a>
       ) : button ? (
@@ -138,10 +200,7 @@ function UpNextItem({
           tabIndex={0}
           onClick={onClick}
           onKeyDown={handleKeyDown}
-          className={cn(
-            surfaceClass,
-            "cursor-pointer text-left hover:bg-accent",
-          )}
+          className={cn(surfaceClass, "cursor-pointer text-left")}
         >
           {inner}
         </div>

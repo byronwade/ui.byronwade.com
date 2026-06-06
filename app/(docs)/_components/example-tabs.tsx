@@ -1,18 +1,38 @@
 "use client"
 
 import { useState } from "react"
+
+import type { ComponentDoc, Variant } from "@/content/components"
+import type { DemoSurface } from "@/content/demo-contexts"
 import { SegmentedControl } from "@/components/ui/segmented-control"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { DocsDemoPreview } from "@/app/(docs)/_components/docs-demo-preview"
+
+type DemoProps = {
+  slug: string
+  defaultSurface: DemoSurface
+  demoContext?: ComponentDoc["demoContext"]
+  activeVariant: Variant
+  allVariants: Variant[]
+  codeByExample: Record<string, string>
+  docExamples: string[]
+}
 
 export function ExampleTabs({
   title,
   preview,
   code,
+  demo,
 }: {
   title?: string
   preview: React.ReactNode
   code: string
+  demo?: DemoProps
 }) {
+  if (demo) {
+    return <DocsDemoPreview title={title} code={code} {...demo} />
+  }
+
   const [view, setView] = useState<"preview" | "code">("preview")
   return (
     <div className="space-y-3">

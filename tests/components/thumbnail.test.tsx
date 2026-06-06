@@ -117,6 +117,23 @@ describe("Thumbnail", () => {
     expect(root(container)).toHaveClass("custom")
   })
 
+  it("lazy-loads images by default", () => {
+    render(<Thumbnail src={SRC} alt="Clip" />)
+    expect(screen.getByAltText("Clip")).toHaveAttribute("loading", "lazy")
+  })
+
+  it("renders a hover play overlay when hoverPlay is true", () => {
+    const { container } = render(
+      <Thumbnail src={SRC} alt="Clip" hoverPlay />,
+    )
+    expect(slot(container, "thumbnail-hover-play")).toBeInTheDocument()
+  })
+
+  it("omits the hover play overlay by default", () => {
+    const { container } = render(<Thumbnail src={SRC} alt="Clip" />)
+    expect(slot(container, "thumbnail-hover-play")).toBeNull()
+  })
+
   it("has no axe violations with an image", async () => {
     const { container } = render(
       <Thumbnail src={SRC} alt="Clip" duration="12:34" progress={42} />,

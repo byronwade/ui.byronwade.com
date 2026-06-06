@@ -23,29 +23,8 @@ import {
   useState,
 } from "react"
 
+import { useControllableState } from "@/lib/controllable-state"
 import { cn } from "@/lib/utils"
-
-function useControllableState<T>({
-  prop,
-  defaultProp,
-  onChange,
-}: {
-  prop?: T
-  defaultProp: T
-  onChange?: (value: T) => void
-}) {
-  const [uncontrolled, setUncontrolled] = useState<T>(defaultProp)
-  const isControlled = prop !== undefined
-  const value = isControlled ? (prop as T) : uncontrolled
-  const setValue = useCallback(
-    (next: T) => {
-      if (!isControlled) setUncontrolled(next)
-      onChange?.(next)
-    },
-    [isControlled, onChange],
-  )
-  return [value, setValue] as const
-}
 
 const clamp = (n: number, min: number, max: number) =>
   Math.min(max, Math.max(min, n))
@@ -192,10 +171,6 @@ export const RatingButton = ({
 export type RatingProps = {
   defaultValue?: number
   value?: number
-  onChange?: (
-    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
-    value: number,
-  ) => void
   onValueChange?: (value: number) => void
   readOnly?: boolean
   /** Allow half-star (0.5-step) display and interactive selection. */
@@ -210,7 +185,6 @@ export const Rating = ({
   value: controlledValue,
   onValueChange: controlledOnValueChange,
   defaultValue = 0,
-  onChange,
   readOnly = false,
   allowHalf = false,
   name,
@@ -235,10 +209,9 @@ export const Rating = ({
       newValue: number,
     ) => {
       if (readOnly) return
-      onChange?.(event, newValue)
       onValueChange(newValue)
     },
-    [readOnly, onChange, onValueChange],
+    [readOnly, onValueChange],
   )
 
   // Shared arrow-key math for both the radio and slider keyboard models.

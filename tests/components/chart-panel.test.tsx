@@ -4,6 +4,32 @@ import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 import { axe } from "vitest-axe"
 
+const mocks = vi.hoisted(() => {
+  const setData = vi.fn()
+  const applyOptions = vi.fn()
+  const fitContent = vi.fn()
+  const remove = vi.fn()
+  const addSeries = vi.fn(() => ({ setData, applyOptions }))
+  const createChart = vi.fn(() => ({
+    addSeries,
+    applyOptions,
+    remove,
+    priceScale: vi.fn(() => ({ applyOptions: vi.fn() })),
+    timeScale: vi.fn(() => ({ fitContent })),
+  }))
+  return { createChart }
+})
+
+vi.mock("lightweight-charts", () => ({
+  createChart: mocks.createChart,
+  CandlestickSeries: "CandlestickSeries",
+  LineSeries: "LineSeries",
+  AreaSeries: "AreaSeries",
+  HistogramSeries: "HistogramSeries",
+  ColorType: { Solid: "solid" },
+  CrosshairMode: { Normal: 0 },
+}))
+
 import { ChartPanel } from "@/components/chart-panel"
 import { makeCandles } from "@/lib/market"
 
@@ -65,6 +91,22 @@ describe("ChartPanel", () => {
       container.querySelector('[data-slot="candlestick-chart"]'),
     ).toBeNull()
     expect(container.querySelector('[data-slot="sparkline"]')).not.toBeNull()
+  })
+
+  it("renders the pro chart when engine is pro", () => {
+    const { container } = render(
+      <ChartPanel
+        symbol="AAPL"
+        engine="pro"
+        data={makeCandles(12, { seed: 2 })}
+      />,
+    )
+    expect(
+      container.querySelector('[data-slot="lightweight-chart"]'),
+    ).not.toBeNull()
+    expect(
+      container.querySelector('[data-slot="candlestick-chart"]'),
+    ).toBeNull()
   })
 
   it("has no accessibility violations", async () => {

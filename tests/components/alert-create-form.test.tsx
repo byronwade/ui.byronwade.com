@@ -37,6 +37,21 @@ describe("AlertCreateForm", () => {
     expect(screen.getByRole("button", { name: "Below" })).toHaveAttribute("data-active", "true")
   })
 
+  it("supports controlled open state", async () => {
+    const user = userEvent.setup()
+    const onOpenChange = vi.fn()
+    const { rerender } = render(
+      <AlertCreateForm open={false} onOpenChange={onOpenChange} symbol="AAPL" />,
+    )
+    expect(screen.queryByRole("dialog")).toBeNull()
+    await user.click(screen.getByRole("button", { name: "Create alert" }))
+    expect(onOpenChange).toHaveBeenCalledWith(true)
+    rerender(
+      <AlertCreateForm open onOpenChange={onOpenChange} symbol="AAPL" />,
+    )
+    expect(screen.getByRole("dialog")).toBeInTheDocument()
+  })
+
   it("has no accessibility violations when closed", async () => {
     const { container } = render(<AlertCreateForm symbol="NVDA" defaultTarget={900} />)
     expect(await axe(container)).toHaveNoViolations()

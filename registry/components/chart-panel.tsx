@@ -5,9 +5,12 @@ import { useState } from "react"
 
 import { ChartToolbar, type ChartType } from "@/components/chart-toolbar"
 import { CandlestickChart } from "@/components/ui/candlestick-chart"
+import { LightweightChart } from "@/components/ui/lightweight-chart"
 import { Sparkline } from "@/components/ui/sparkline"
 import { makeCandles, makeQuote, makeSeries, type Candle, type Quote } from "@/lib/market"
 import { cn } from "@/lib/utils"
+
+type ChartEngine = "svg" | "pro"
 
 type ChartPanelProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
   symbol: string
@@ -17,6 +20,12 @@ type ChartPanelProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
   onIntervalChange?: (interval: string) => void
   chartType?: ChartType
   onChartTypeChange?: (type: ChartType) => void
+  /** SVG (default) or TradingView Lightweight Charts. */
+  engine?: ChartEngine
+  /** Pointer crosshair with OHLC readout on the SVG candlestick chart. */
+  interactive?: boolean
+  /** Chart fills the panel body (uses ResizeObserver). */
+  fill?: boolean
 }
 
 function ChartPanel({
@@ -27,6 +36,9 @@ function ChartPanel({
   onIntervalChange,
   chartType: chartTypeProp,
   onChartTypeChange,
+  engine = "svg",
+  interactive = false,
+  fill = false,
   className,
   ...props
 }: ChartPanelProps) {
@@ -52,7 +64,11 @@ function ChartPanel({
   return (
     <div
       data-slot="chart-panel"
-      className={cn("flex w-full flex-col gap-3", className)}
+      className={cn(
+        "flex w-full flex-col gap-3",
+        interactive && "min-h-0 flex-1",
+        className,
+      )}
       {...props}
     >
       <ChartToolbar
@@ -62,16 +78,37 @@ function ChartPanel({
         chartType={chartType}
         onChartTypeChange={handleChartTypeChange}
       />
-      <div data-slot="chart-panel-body" className="w-full min-w-0">
-        {chartType === "candles" ? (
-          <CandlestickChart data={data} className="w-full" />
+      <div
+        data-slot="chart-panel-body"
+        className={cn(
+          "w-full min-w-0",
+          (interactive || fill) && "min-h-[280px] flex-1",
+          fill && "min-h-0",
+        )}
+      >
+        {engine === "pro" ? (
+          <LightweightChart
+            data={data}
+            chartType={chartType}
+            showVolume={chartType === "candles"}
+            fill={fill}
+            aria-label={`${symbol || quote.symbol} ${chartType} chart`}
+          />
+        ) : chartType === "candles" ? (
+          <CandlestickChart
+            data={data}
+            interactive={interactive}
+            fill={fill}
+            className={fill ? undefined : "aspect-[12/7] h-auto w-full"}
+          />
         ) : (
           <Sparkline
             data={sparkSeries}
             variant={chartType === "area" ? "area" : "line"}
+            fill={fill}
             width={480}
             height={280}
-            className="w-full max-w-full"
+            className={fill ? undefined : "aspect-[12/7] h-auto w-full max-w-full"}
             aria-label={`${symbol || quote.symbol} ${chartType} chart`}
           />
         )}
@@ -81,4 +118,4 @@ function ChartPanel({
 }
 
 export { ChartPanel }
-export type { ChartPanelProps }
+export type { ChartPanelProps, ChartEngine }

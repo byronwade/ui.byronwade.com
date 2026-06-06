@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, EB_Garamond } from "next/font/google"
+import { ThemeProvider } from "@wrksz/themes/next"
 import "./globals.css"
-import { ThemeProvider } from "@/app/_components/theme-provider"
 import { AppChrome } from "@/app/_components/chrome/app-chrome"
 import { Toaster } from "@/components/ui/sonner"
 
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "A personal design system, token-driven components with one swappable green accent.",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

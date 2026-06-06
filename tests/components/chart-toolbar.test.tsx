@@ -90,6 +90,21 @@ describe("ChartToolbar", () => {
     expect(screen.getByRole("button", { name: "1H" })).toBeInTheDocument()
   })
 
+  it("renders compact density with symbolAddon and actions", () => {
+    render(
+      <ChartToolbar
+        symbol="AAPL"
+        interval="1D"
+        density="compact"
+        symbolAddon={<span data-testid="addon">+</span>}
+        actions={<button type="button">Trade</button>}
+      />,
+    )
+    expect(screen.getByTestId("addon")).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Trade" })).toBeInTheDocument()
+    expect(screen.getByRole("toolbar", { name: "Chart type" })).toBeInTheDocument()
+  })
+
   it("has no accessibility violations", async () => {
     const { container } = render(
       <ChartToolbar symbol="MSFT" interval="1D" onIntervalChange={() => {}} />,

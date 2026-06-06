@@ -24,12 +24,12 @@ export default defineConfig({
           sequence: { concurrent: false },
         }
       : {}),
-    // Claude Code creates throwaway git worktrees of OTHER branches under
-    // `.claude/worktrees/**` (1000s of foreign test files). Without this the
+    // Coding tools create throwaway git worktrees of OTHER branches under
+    // `.claude/worktrees/**` and `.worktrees/**`. Without this the
     // main suite globs and runs them, so its pass/fail depends on unrelated
     // branches' WIP — an intermittent, confusing "flake". Scope discovery to
     // this checkout only.
-    exclude: [...configDefaults.exclude, "**/.claude/**"],
+    exclude: [...configDefaults.exclude, "**/.claude/**", "**/.worktrees/**"],
     coverage: {
       provider: "v8",
       reportsDirectory: "./.vitest-coverage",

@@ -78,6 +78,26 @@ describe("ShortsPlayer – media", () => {
     ).toBeNull()
   })
 
+  it("renders a looping video when src is provided", () => {
+    const { container } = render(
+      <ShortsPlayer author={author} src="/clip.mp4" posterSrc="/poster.jpg" />,
+    )
+    const video = container.querySelector(
+      "[data-slot='shorts-player-video']",
+    ) as HTMLVideoElement
+    expect(video).toBeInTheDocument()
+    expect(video.getAttribute("src")).toBe("/clip.mp4")
+    expect(video).toHaveProperty("loop", true)
+    expect(video).toHaveProperty("muted", true)
+  })
+
+  it("renders a mute toggle when src is provided", () => {
+    render(<ShortsPlayer author={author} src="/clip.mp4" />)
+    expect(
+      screen.getByRole("button", { name: "Unmute" }),
+    ).toBeInTheDocument()
+  })
+
   it("renders the poster image when posterSrc is provided and no children", () => {
     const { container } = render(
       <ShortsPlayer author={author} posterSrc="/poster.jpg" />,
@@ -95,6 +115,107 @@ describe("ShortsPlayer – media", () => {
     expect(
       container.querySelector("[data-slot='shorts-player-placeholder']"),
     ).toBeInTheDocument()
+  })
+})
+
+describe("ShortsPlayer – versatile API", () => {
+  it("renders variant, rail, density, and caption mode attributes", () => {
+    const { container, rerender } = render(
+      <ShortsPlayer
+        author={author}
+        variant="preview"
+        rail="left"
+        density="compact"
+        captionMode="expanded"
+        caption="Expanded caption"
+      />,
+    )
+    const root = container.querySelector("[data-slot='shorts-player']")
+    expect(root).toHaveAttribute("data-variant", "preview")
+    expect(root).toHaveAttribute("data-rail", "left")
+    expect(root).toHaveAttribute("data-density", "compact")
+    expect(root).toHaveAttribute("data-caption-mode", "expanded")
+    expect(
+      container.querySelector("[data-slot='shorts-player-rail']"),
+    ).toHaveClass("left-2")
+    expect(
+      container.querySelector("[data-slot='shorts-player-caption']"),
+    ).not.toHaveClass("line-clamp-2")
+
+    rerender(
+      <ShortsPlayer
+        author={author}
+        variant="immersive"
+        rail="hidden"
+        captionMode="hidden"
+        caption="Hidden caption"
+      />,
+    )
+    expect(root).toHaveAttribute("data-variant", "immersive")
+    expect(root).toHaveAttribute("data-rail", "hidden")
+    expect(
+      container.querySelector("[data-slot='shorts-player-rail']"),
+    ).toBeNull()
+    expect(
+      container.querySelector("[data-slot='shorts-player-caption']"),
+    ).toBeNull()
+  })
+
+  it("renders status, custom author action, top actions, and custom overlay", () => {
+    const { container } = render(
+      <ShortsPlayer
+        author={author}
+        status={<span>Sponsored</span>}
+        authorAction={<button type="button">Subscribe</button>}
+        topActions={<button type="button">Settings</button>}
+        overlay={<div>Custom lower third</div>}
+      />,
+    )
+    expect(
+      container.querySelector("[data-slot='shorts-player-status']"),
+    ).toHaveTextContent("Sponsored")
+    expect(
+      container.querySelector("[data-slot='shorts-player-author-action']"),
+    ).toHaveTextContent("Subscribe")
+    expect(
+      container.querySelector("[data-slot='shorts-player-top-actions']"),
+    ).toHaveTextContent("Settings")
+    expect(
+      container.querySelector("[data-slot='shorts-player-custom-overlay']"),
+    ).toHaveTextContent("Custom lower third")
+    expect(
+      screen.queryByRole("button", { name: "Follow" }),
+    ).not.toBeInTheDocument()
+  })
+
+  it("renders fallback when no media source exists", () => {
+    const { container } = render(
+      <ShortsPlayer author={author} fallback={<div>No preview</div>} />,
+    )
+    expect(
+      container.querySelector("[data-slot='shorts-player-fallback']"),
+    ).toHaveTextContent("No preview")
+    expect(
+      container.querySelector("[data-slot='shorts-player-placeholder']"),
+    ).toBeNull()
+  })
+
+  it("calls onVideoClick when the tap target toggles playback", async () => {
+    const onVideoClick = vi.fn()
+    const onPlayingChange = vi.fn()
+    const user = userEvent.setup()
+    render(
+      <ShortsPlayer
+        author={author}
+        src="/clip.mp4"
+        defaultPlaying
+        onVideoClick={onVideoClick}
+        onPlayingChange={onPlayingChange}
+      />,
+    )
+    await user.click(screen.getByRole("button", { name: "Pause" }))
+    expect(onVideoClick).toHaveBeenCalledTimes(1)
+    expect(onPlayingChange).toHaveBeenCalledWith(false)
   })
 })
 
@@ -241,6 +362,59 @@ describe("ShortsPlayer – caption & sound", () => {
   })
 })
 
+// ─── Progress & mute ──────────────────────────────────────────────────────────
+
+describe("ShortsPlayer – progress & mute", () => {
+  it("renders a top progress bar when progress is set", () => {
+    const { container } = render(
+      <ShortsPlayer author={author} progress={55} />,
+    )
+    const fill = container.querySelector(
+      "[data-slot='shorts-player-progress-fill']",
+    ) as HTMLElement
+    expect(fill).toBeInTheDocument()
+    expect(fill).toHaveStyle({ width: "55%" })
+  })
+
+  it("toggles mute and fires onMutedChange (uncontrolled)", async () => {
+    const onMutedChange = vi.fn()
+    const user = userEvent.setup()
+    render(
+      <ShortsPlayer
+        author={author}
+        src="/clip.mp4"
+        onMutedChange={onMutedChange}
+      />,
+    )
+    await user.click(screen.getByRole("button", { name: "Unmute" }))
+    expect(onMutedChange).toHaveBeenCalledWith(false)
+    expect(
+      screen.getByRole("button", { name: "Mute" }),
+    ).toBeInTheDocument()
+  })
+
+  it("uses the overlay ActionRail variant", () => {
+    const { container } = render(<ShortsPlayer author={author} />)
+    const rail = container.querySelector("[data-slot='shorts-player-rail']")
+    expect(rail).toHaveAttribute("data-variant", "overlay")
+  })
+
+  it("renders a tap target to toggle play when src is set", async () => {
+    const onPlayingChange = vi.fn()
+    const user = userEvent.setup()
+    render(
+      <ShortsPlayer
+        author={author}
+        src="/clip.mp4"
+        defaultPlaying
+        onPlayingChange={onPlayingChange}
+      />,
+    )
+    await user.click(screen.getByRole("button", { name: "Pause" }))
+    expect(onPlayingChange).toHaveBeenCalledWith(false)
+  })
+})
+
 // ─── Engagement rail ──────────────────────────────────────────────────────────
 
 describe("ShortsPlayer – engagement rail", () => {
@@ -293,6 +467,35 @@ describe("ShortsPlayer – engagement rail", () => {
 })
 
 // ─── Like / dislike ───────────────────────────────────────────────────────────
+
+describe("ShortsPlayer – grouped ToggleState API", () => {
+  it("toggles play via grouped play prop", async () => {
+    const onValueChange = vi.fn()
+    const user = userEvent.setup()
+    render(
+      <ShortsPlayer
+        author={author}
+        src="/clip.mp4"
+        play={{ defaultValue: true, onValueChange }}
+      />,
+    )
+    await user.click(screen.getByRole("button", { name: "Pause" }))
+    expect(onValueChange).toHaveBeenCalledWith(false)
+  })
+
+  it("toggles like via grouped like prop", async () => {
+    const onValueChange = vi.fn()
+    const user = userEvent.setup()
+    render(
+      <ShortsPlayer
+        author={author}
+        like={{ defaultValue: false, onValueChange }}
+      />,
+    )
+    await user.click(screen.getByRole("button", { name: "Like" }))
+    expect(onValueChange).toHaveBeenCalledWith(true)
+  })
+})
 
 describe("ShortsPlayer – like/dislike", () => {
   it("toggles like and fires onLikedChange (uncontrolled)", async () => {

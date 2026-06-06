@@ -40,7 +40,10 @@ const watchlistVariants = cva("w-full", {
 
 type WatchlistColumn = "price" | "change" | "spark" | "volume"
 
-type WatchlistProps = Omit<ComponentPropsWithoutRef<"div">, "children"> &
+type WatchlistProps = Omit<
+  ComponentPropsWithoutRef<"div">,
+  "children" | "onSelect"
+> &
   VariantProps<typeof watchlistVariants> & {
     items?: Quote[]
     columns?: WatchlistColumn[]

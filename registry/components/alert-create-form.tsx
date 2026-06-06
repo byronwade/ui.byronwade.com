@@ -3,6 +3,8 @@
 import type { ComponentPropsWithoutRef, FormEvent } from "react"
 import { useState } from "react"
 
+import { useControllableState } from "@/lib/controllable-state"
+
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -33,6 +35,8 @@ type AlertCreateFormProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & 
   open?: boolean
   onOpenChange?: (open: boolean) => void
   onSubmit?: (alert: AlertCreatePayload) => void
+  /** When false, omit the default trigger (use with an external open control). */
+  showTrigger?: boolean
 }
 
 function AlertCreateForm({
@@ -41,16 +45,18 @@ function AlertCreateForm({
   open: openProp,
   onOpenChange,
   onSubmit,
+  showTrigger = true,
   className,
   ...props
 }: AlertCreateFormProps) {
-  const [internalOpen, setInternalOpen] = useState(false)
+  const [open, setOpen] = useControllableState({
+    prop: openProp,
+    defaultProp: false,
+    onChange: onOpenChange,
+  })
   const [condition, setCondition] = useState<Alert["condition"]>("above")
   const [target, setTarget] = useState<number | null>(defaultTarget)
   const [notify, setNotify] = useState(true)
-
-  const open = openProp ?? internalOpen
-  const setOpen = onOpenChange ?? setInternalOpen
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
@@ -66,7 +72,11 @@ function AlertCreateForm({
   return (
     <div data-slot="alert-create-form" className={cn(className)} {...props}>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger render={<Button variant="outline" />}>Create alert</DialogTrigger>
+        {showTrigger ? (
+          <DialogTrigger render={<Button variant="outline" />}>
+            Create alert
+          </DialogTrigger>
+        ) : null}
         <DialogContent showCloseButton className="sm:max-w-md">
           <form onSubmit={handleSubmit}>
             <DialogHeader>

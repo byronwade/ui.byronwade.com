@@ -2,6 +2,7 @@
 
 import * as React from "react"
 
+import { useControllableState } from "@/lib/controllable-state"
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,7 @@ interface CommentComposerProps
   onCancel?: () => void
   open?: boolean
   defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
   submitLabel?: string
   cancelLabel?: string
 }
@@ -45,8 +47,9 @@ function CommentComposer({
   onValueChange,
   onSubmit,
   onCancel,
-  open,
+  open: openProp,
   defaultOpen = false,
+  onOpenChange,
   submitLabel = "Comment",
   cancelLabel = "Cancel",
   className,
@@ -57,10 +60,14 @@ function CommentComposer({
   const currentValue = isControlled ? value : internalValue
 
   const [focused, setFocused] = React.useState(false)
-  const [internalOpen, setInternalOpen] = React.useState(defaultOpen)
+  const [open, setOpen] = useControllableState({
+    prop: openProp,
+    defaultProp: defaultOpen,
+    onChange: onOpenChange,
+  })
 
   const hasValue = currentValue.trim().length > 0
-  const resolvedOpen = focused || hasValue || open === true || internalOpen
+  const resolvedOpen = openProp !== undefined ? open : open || focused || hasValue
 
   function setValue(next: string) {
     if (!isControlled) setInternalValue(next)
@@ -76,7 +83,12 @@ function CommentComposer({
     onCancel?.()
     if (!isControlled) setInternalValue("")
     setFocused(false)
-    setInternalOpen(false)
+    setOpen(false)
+  }
+
+  function handleFocus() {
+    setFocused(true)
+    if (openProp === undefined) setOpen(true)
   }
 
   return (
@@ -98,7 +110,7 @@ function CommentComposer({
           placeholder={placeholder}
           value={currentValue}
           onChange={(event) => setValue(event.target.value)}
-          onFocus={() => setFocused(true)}
+          onFocus={handleFocus}
           className={cn(
             "field-sizing-content min-h-9 w-full resize-none border-0 border-b border-border bg-transparent py-1.5 text-sm text-foreground transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-foreground",
           )}

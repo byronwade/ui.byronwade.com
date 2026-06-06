@@ -83,6 +83,15 @@ describe("CandlestickChart", () => {
     ).not.toBeNull();
   });
 
+  it("renders an interactive readout wrapper when interactive is true", () => {
+    const { container } = render(
+      <CandlestickChart data={twoCandles} interactive aria-label="AAPL" />,
+    );
+    expect(
+      container.querySelector('[data-slot="candlestick-chart-root"]'),
+    ).not.toBeNull();
+  });
+
   it("renders the svg without crashing for empty data", () => {
     const { container } = render(<CandlestickChart data={[]} />);
     const svg = container.querySelector('[data-slot="candlestick-chart"]');

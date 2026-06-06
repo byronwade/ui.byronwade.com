@@ -148,6 +148,15 @@ describe("ChannelHeader", () => {
     expect(onSubscribedChange).toHaveBeenCalledWith(true)
   })
 
+  it("renders the SubscribeButton in the subscribed state via controlled subscribed", async () => {
+    render(<ChannelHeader name="A" subscribed />)
+    await waitFor(() =>
+      expect(
+        screen.getByRole("button", { name: /Subscribed/i }),
+      ).toBeInTheDocument(),
+    )
+  })
+
   it("renders the SubscribeButton in the subscribed state via defaultSubscribed", async () => {
     render(<ChannelHeader name="A" defaultSubscribed />)
     await waitFor(() =>

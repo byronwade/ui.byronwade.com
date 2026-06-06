@@ -162,6 +162,28 @@ describe("EngagementBar – like/dislike uncontrolled", () => {
 
 // ─── Like / dislike – controlled ──────────────────────────────────────────────
 
+describe("EngagementBar – grouped ToggleState API", () => {
+  it("toggles like via grouped like prop", async () => {
+    const user = userEvent.setup()
+    const onValueChange = vi.fn()
+    render(
+      <EngagementBar
+        like={{ defaultValue: false, onValueChange }}
+      />,
+    )
+    await user.click(screen.getByRole("button", { name: "Like" }))
+    expect(onValueChange).toHaveBeenCalledWith(true)
+  })
+
+  it("respects grouped like.value when controlled", () => {
+    render(<EngagementBar like={{ value: true }} />)
+    expect(screen.getByRole("button", { name: "Like" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    )
+  })
+})
+
 describe("EngagementBar – like/dislike controlled", () => {
   it("respects a controlled liked value", () => {
     render(<EngagementBar liked onLikedChange={() => {}} />)
@@ -428,6 +450,44 @@ describe("EngagementBar – overflow menu", () => {
 })
 
 // ─── Accessibility ────────────────────────────────────────────────────────────
+
+describe("EngagementBar – clip & remix", () => {
+  it("renders Clip and Remix pills when handlers are provided", () => {
+    const { container } = render(
+      <EngagementBar onClip={() => {}} onRemix={() => {}} />,
+    )
+    expect(
+      container.querySelector("[data-slot='engagement-bar-clip']"),
+    ).toHaveTextContent("Clip")
+    expect(
+      container.querySelector("[data-slot='engagement-bar-remix']"),
+    ).toHaveTextContent("Remix")
+  })
+
+  it("omits Clip and Remix when handlers are absent", () => {
+    const { container } = render(<EngagementBar />)
+    expect(
+      container.querySelector("[data-slot='engagement-bar-clip']"),
+    ).toBeNull()
+    expect(
+      container.querySelector("[data-slot='engagement-bar-remix']"),
+    ).toBeNull()
+  })
+
+  it("fires onClip when the Clip pill is clicked", () => {
+    const onClip = vi.fn()
+    render(<EngagementBar onClip={onClip} />)
+    fireEvent.click(screen.getByRole("button", { name: "Clip" }))
+    expect(onClip).toHaveBeenCalledTimes(1)
+  })
+
+  it("fires onRemix when the Remix pill is clicked", () => {
+    const onRemix = vi.fn()
+    render(<EngagementBar onRemix={onRemix} />)
+    fireEvent.click(screen.getByRole("button", { name: "Remix" }))
+    expect(onRemix).toHaveBeenCalledTimes(1)
+  })
+})
 
 describe("EngagementBar – accessibility", () => {
   it("has no axe violations in the full configuration", async () => {

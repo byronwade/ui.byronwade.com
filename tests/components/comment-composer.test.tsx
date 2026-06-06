@@ -65,6 +65,13 @@ describe("CommentComposer – action row visibility", () => {
     ).toBeNull()
   })
 
+  it("fires onOpenChange when focused in uncontrolled mode", () => {
+    const onOpenChange = vi.fn()
+    render(<CommentComposer onOpenChange={onOpenChange} />)
+    fireEvent.focus(getInput())
+    expect(onOpenChange).toHaveBeenCalledWith(true)
+  })
+
   it("shows the action row on focus", () => {
     const { container } = render(<CommentComposer />)
     fireEvent.focus(getInput())

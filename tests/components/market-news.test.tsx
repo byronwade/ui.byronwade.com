@@ -68,6 +68,64 @@ describe("MarketNews", () => {
     expect(onSelect).toHaveBeenCalledWith("n1")
   })
 
+  it("renders header, description, actions, and footer slots", () => {
+    render(
+      <MarketNews
+        items={items}
+        title="Market headlines"
+        description="Curated for the active watchlist"
+        actions={<button type="button">Refresh</button>}
+        footer={<span>Updated live</span>}
+      />,
+    )
+
+    expect(screen.getByText("Market headlines")).toBeInTheDocument()
+    expect(screen.getByText("Curated for the active watchlist")).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Refresh" })).toBeInTheDocument()
+    expect(screen.getByText("Updated live")).toBeInTheDocument()
+  })
+
+  it("filters by sentiment and limits rendered items", () => {
+    render(<MarketNews items={items} sentiment="positive" limit={1} />)
+    expect(screen.getByText("Markets rally on strong jobs data")).toBeInTheDocument()
+    expect(screen.queryByText("Tech shares retreat after guidance")).not.toBeInTheDocument()
+  })
+
+  it("supports layout, variant, density, selected, and disabled states", async () => {
+    const user = userEvent.setup()
+    const onSelect = vi.fn()
+    const { container } = render(
+      <MarketNews
+        items={items}
+        variant="terminal"
+        layout="grid"
+        density="compact"
+        selectedId="n1"
+        disabled
+        onSelect={onSelect}
+      />,
+    )
+
+    const root = container.querySelector('[data-slot="market-news"]')
+    const firstItem = container.querySelector('[data-news-id="n1"]')
+
+    expect(root).toHaveAttribute("data-variant", "terminal")
+    expect(root).toHaveAttribute("data-layout", "grid")
+    expect(root).toHaveAttribute("data-density", "compact")
+    expect(firstItem).toHaveAttribute("data-selected", "true")
+
+    await user.click(screen.getByText("Markets rally on strong jobs data"))
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
+  it("renders loading and empty states", () => {
+    const { rerender } = render(<MarketNews loading loadingItems={3} />)
+    expect(screen.getAllByTestId("market-news-skeleton")).toHaveLength(3)
+
+    rerender(<MarketNews items={[]} empty="No headlines matched" />)
+    expect(screen.getByText("No headlines matched")).toBeInTheDocument()
+  })
+
   it("has no accessibility violations", async () => {
     const { container } = render(<MarketNews items={items} />)
     expect(await axe(container)).toHaveNoViolations()

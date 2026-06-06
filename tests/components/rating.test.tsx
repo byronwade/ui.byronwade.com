@@ -87,12 +87,12 @@ describe("Rating — interaction", () => {
     expect(onValueChange).toHaveBeenCalledWith(3);
   });
 
-  it("fires the (event, value) onChange too", async () => {
+  it("fires onValueChange when a star is selected", async () => {
     const user = userEvent.setup();
-    const onChange = vi.fn();
-    render(<Stars defaultValue={0} onChange={onChange} />);
+    const onValueChange = vi.fn();
+    render(<Stars defaultValue={0} onValueChange={onValueChange} />);
     await user.click(screen.getAllByRole("radio")[0]);
-    expect(onChange).toHaveBeenCalledWith(expect.anything(), 1);
+    expect(onValueChange).toHaveBeenCalledWith(1);
   });
 
   it("supports arrow-key navigation", () => {

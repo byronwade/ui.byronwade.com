@@ -19,6 +19,8 @@ interface DescriptionBoxProps
   onExpandedChange?: (next: boolean) => void
   moreLabel?: React.ReactNode
   lessLabel?: React.ReactNode
+  /** Optional topic/hashtag chips rendered below the header. */
+  tags?: string[]
   children: React.ReactNode
 }
 
@@ -31,6 +33,7 @@ function DescriptionBox({
   onExpandedChange,
   moreLabel = "...more",
   lessLabel = "Show less",
+  tags,
   className,
   children,
   ...props
@@ -60,7 +63,7 @@ function DescriptionBox({
       data-slot="description-box"
       data-expanded={isExpanded}
       className={cn(
-        "rounded-xl bg-secondary p-3 text-sm text-foreground transition-colors hover:bg-secondary/80",
+        "rounded-xl bg-secondary/80 p-3 text-sm text-foreground transition-colors hover:bg-secondary",
         className,
       )}
       {...props}
@@ -75,6 +78,23 @@ function DescriptionBox({
           ) : null}
           {viewsLabel && timestamp ? <span aria-hidden>·</span> : null}
           {timestamp ? <span>{timestamp}</span> : null}
+        </div>
+      ) : null}
+
+      {tags && tags.length > 0 ? (
+        <div
+          data-slot="description-box-tags"
+          className={cn("flex flex-wrap gap-2", hasHeader ? "mt-2" : undefined)}
+        >
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              data-slot="description-box-tag"
+              className="rounded-full bg-background/60 px-2.5 py-0.5 text-xs font-medium text-foreground"
+            >
+              #{tag.replace(/^#/, "")}
+            </span>
+          ))}
         </div>
       ) : null}
 

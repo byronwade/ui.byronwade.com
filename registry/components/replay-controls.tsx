@@ -2,6 +2,8 @@
 
 import type { ComponentPropsWithoutRef } from "react"
 import { useState } from "react"
+
+import { useControllableState } from "@/lib/controllable-state"
 import { Pause, Play, SkipBack, SkipForward } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -20,19 +22,28 @@ const SPEED_OPTIONS: { label: string; value: ReplaySpeed }[] = [
 
 type ReplayControlsProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
   playing?: boolean
+  defaultPlaying?: boolean
+  onPlayingChange?: (playing: boolean) => void
   position?: number
   duration?: number
   speed?: ReplaySpeed
+  /** @deprecated Prefer onPlayingChange */
   onPlay?: () => void
+  /** @deprecated Prefer onPlayingChange */
   onPause?: () => void
   onSeek?: (position: number) => void
   onSpeedChange?: (speed: ReplaySpeed) => void
   onStepBack?: () => void
   onStepForward?: () => void
+  /** Card layout for panels; bar layout for terminal footers. */
+  variant?: "card" | "bar"
+  showSlider?: boolean
 }
 
 function ReplayControls({
   playing: playingProp,
+  defaultPlaying = false,
+  onPlayingChange,
   position: positionProp,
   duration = 100,
   speed: speedProp,
@@ -42,25 +53,27 @@ function ReplayControls({
   onSpeedChange,
   onStepBack,
   onStepForward,
+  variant = "card",
+  showSlider = variant === "card",
   className,
   ...props
 }: ReplayControlsProps) {
-  const [internalPlaying, setInternalPlaying] = useState(false)
+  const [playing, setPlaying] = useControllableState({
+    prop: playingProp,
+    defaultProp: defaultPlaying,
+    onChange: onPlayingChange,
+  })
   const [internalPosition, setInternalPosition] = useState(0)
   const [internalSpeed, setInternalSpeed] = useState<ReplaySpeed>("1x")
 
-  const playing = playingProp ?? internalPlaying
   const position = positionProp ?? internalPosition
   const speed = speedProp ?? internalSpeed
 
   const togglePlay = () => {
-    if (playing) {
-      onPause?.()
-      if (playingProp === undefined) setInternalPlaying(false)
-    } else {
-      onPlay?.()
-      if (playingProp === undefined) setInternalPlaying(true)
-    }
+    const next = !playing
+    setPlaying(next)
+    if (next) onPlay?.()
+    else onPause?.()
   }
 
   const handleSeek = (values: number | readonly number[]) => {
@@ -74,66 +87,88 @@ function ReplayControls({
     if (speedProp === undefined) setInternalSpeed(next)
   }
 
+  const bar = variant === "bar"
+
   return (
     <div
       data-slot="replay-controls"
+      data-variant={variant}
       className={cn(
-        "flex flex-col gap-3 rounded-xl border border-border bg-card px-4 py-3",
+        bar
+          ? "flex items-center gap-1"
+          : "flex flex-col gap-3 rounded-xl border border-border bg-card px-4 py-3",
         className,
       )}
       {...props}
     >
       <div
         data-slot="replay-controls-transport"
-        className="flex items-center justify-center gap-2"
+        className={cn(
+          "flex items-center",
+          bar ? "gap-0.5" : "justify-center gap-2",
+        )}
       >
         <Button
           type="button"
           variant="ghost"
           size="icon-sm"
+          className={cn(bar && "size-6")}
           aria-label="Step back one bar"
           onClick={onStepBack}
         >
-          <SkipBack className="size-4" />
+          <SkipBack className={cn(bar ? "size-3" : "size-4")} />
         </Button>
         <Button
           type="button"
-          variant="outline"
-          size="icon"
+          variant={bar ? "ghost" : "outline"}
+          size={bar ? "icon-sm" : "icon"}
+          className={cn(bar && "size-6")}
           aria-label={playing ? "Pause replay" : "Play replay"}
           onClick={togglePlay}
         >
-          {playing ? <Pause className="size-4" /> : <Play className="size-4" />}
+          {playing ? (
+            <Pause className={cn(bar ? "size-3" : "size-4")} />
+          ) : (
+            <Play className={cn(bar ? "size-3" : "size-4")} />
+          )}
         </Button>
         <Button
           type="button"
           variant="ghost"
           size="icon-sm"
+          className={cn(bar && "size-6")}
           aria-label="Step forward one bar"
           onClick={onStepForward}
         >
-          <SkipForward className="size-4" />
+          <SkipForward className={cn(bar ? "size-3" : "size-4")} />
         </Button>
       </div>
-      <Slider
-        aria-label="Replay position"
-        min={0}
-        max={duration}
-        value={[position]}
-        onValueChange={handleSeek}
-      />
+      {showSlider ? (
+        <Slider
+          aria-label="Replay position"
+          min={0}
+          max={duration}
+          value={[position]}
+          onValueChange={handleSeek}
+        />
+      ) : null}
       <div
         data-slot="replay-controls-meta"
-        className="flex items-center justify-between gap-3"
+        className={cn(
+          "flex items-center gap-3",
+          bar ? "gap-1.5" : "justify-between",
+        )}
       >
         <span className="font-mono text-xs tabular-nums text-muted-foreground">
-          {Math.round(position)} / {duration}
+          {Math.round(position)}/{duration}
         </span>
-        <SegmentedControl
-          options={SPEED_OPTIONS}
-          value={speed}
-          onValueChange={handleSpeed}
-        />
+        {!bar ? (
+          <SegmentedControl
+            options={SPEED_OPTIONS}
+            value={speed}
+            onValueChange={handleSpeed}
+          />
+        ) : null}
       </div>
     </div>
   )

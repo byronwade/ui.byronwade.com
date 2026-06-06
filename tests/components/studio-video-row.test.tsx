@@ -304,6 +304,26 @@ describe("StudioVideoRow – row interaction", () => {
   })
 })
 
+describe("StudioVideoRow – highlighted", () => {
+  it("applies accent background when highlighted", () => {
+    const { container } = render(
+      <StudioVideoRow title="My video" visibility="public" highlighted />,
+    )
+    expect(
+      container.querySelector("[data-slot='studio-video-row']"),
+    ).toHaveClass("bg-accent/50")
+  })
+
+  it("omits highlight styling by default", () => {
+    const { container } = render(
+      <StudioVideoRow title="My video" visibility="public" />,
+    )
+    expect(
+      container.querySelector("[data-slot='studio-video-row']"),
+    ).not.toHaveClass("bg-accent/50")
+  })
+})
+
 describe("StudioVideoRow – accessibility", () => {
   it("has no axe violations across visibility states", async () => {
     const all: VideoVisibility[] = [

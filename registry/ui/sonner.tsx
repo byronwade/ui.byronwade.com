@@ -1,6 +1,6 @@
 "use client"
 
-import { useTheme } from "next-themes"
+import { useTheme } from "@wrksz/themes/client"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
 import {
   CircleCheckIcon,
@@ -11,7 +11,8 @@ import {
 } from "lucide-react"
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme()
+  const { resolvedTheme, theme } = useTheme()
+  const sonnerTheme = resolvedTheme ?? theme ?? "light"
 
   return (
     // data-slot is declarative here: sonner's ToasterProps doesn't extend
@@ -19,7 +20,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
     // root. Kept for source-level consistency with the rest of the system.
     <Sonner
       data-slot="sonner"
-      theme={theme as ToasterProps["theme"]}
+      theme={sonnerTheme as ToasterProps["theme"]}
       className="toaster group"
       icons={{
         success: <CircleCheckIcon className="size-4" />,

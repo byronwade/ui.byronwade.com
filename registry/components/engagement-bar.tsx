@@ -8,9 +8,12 @@ import {
   Bookmark,
   BookmarkCheck,
   MoreHorizontal,
+  Scissors,
+  Sparkles,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useToggleState, type ToggleState } from "@/lib/toggle-state"
 import { Separator } from "@/components/ui/separator"
 import {
   DropdownMenu,
@@ -27,18 +30,37 @@ type EngagementAction = {
 }
 
 interface EngagementBarProps {
+  /** Grouped like toggle — preferred over flat liked/defaultLiked/onLikedChange. */
+  like?: ToggleState
+  /** Grouped dislike toggle — preferred over flat disliked props. */
+  dislike?: ToggleState
+  /** Grouped save toggle — preferred over flat saved props. */
+  save?: ToggleState
+  /** @deprecated Use `like.value` */
   liked?: boolean
+  /** @deprecated Use `like.defaultValue` */
   defaultLiked?: boolean
+  /** @deprecated Use `like.onValueChange` */
   onLikedChange?: (next: boolean) => void
+  /** @deprecated Use `dislike.value` */
   disliked?: boolean
+  /** @deprecated Use `dislike.defaultValue` */
   defaultDisliked?: boolean
+  /** @deprecated Use `dislike.onValueChange` */
   onDislikedChange?: (next: boolean) => void
   likeCount?: number
   onShare?: () => void
   shareLabel?: string
+  /** @deprecated Use `save.value` */
   saved?: boolean
+  /** @deprecated Use `save.defaultValue` */
   defaultSaved?: boolean
+  /** @deprecated Use `save.onValueChange` */
   onSavedChange?: (next: boolean) => void
+  onClip?: () => void
+  clipLabel?: string
+  onRemix?: () => void
+  remixLabel?: string
   actions?: EngagementAction[]
   menuItems?: EngagementAction[]
   className?: string
@@ -48,6 +70,9 @@ const pillClass =
   "inline-flex h-9 items-center gap-2 rounded-full bg-secondary px-4 text-sm font-medium text-secondary-foreground transition-colors outline-none hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-ring"
 
 function EngagementBar({
+  like,
+  dislike,
+  save,
   liked,
   defaultLiked = false,
   onLikedChange,
@@ -60,47 +85,44 @@ function EngagementBar({
   saved,
   defaultSaved = false,
   onSavedChange,
+  onClip,
+  clipLabel = "Clip",
+  onRemix,
+  remixLabel = "Remix",
   actions,
   menuItems,
   className,
 }: EngagementBarProps) {
-  const isLikedControlled = liked !== undefined
-  const isDislikedControlled = disliked !== undefined
-  const isSavedControlled = saved !== undefined
-
-  const [likedInternal, setLikedInternal] = React.useState(defaultLiked)
-  const [dislikedInternal, setDislikedInternal] = React.useState(defaultDisliked)
-  const [savedInternal, setSavedInternal] = React.useState(defaultSaved)
-
-  const likedOn = isLikedControlled ? liked! : likedInternal
-  const dislikedOn = isDislikedControlled ? disliked! : dislikedInternal
-  const savedOn = isSavedControlled ? saved! : savedInternal
+  const [likedOn, setLikedOn] = useToggleState(like, {
+    value: liked,
+    defaultValue: defaultLiked,
+    onValueChange: onLikedChange,
+  })
+  const [dislikedOn, setDislikedOn] = useToggleState(dislike, {
+    value: disliked,
+    defaultValue: defaultDisliked,
+    onValueChange: onDislikedChange,
+  })
+  const [savedOn, setSavedOn] = useToggleState(save, {
+    value: saved,
+    defaultValue: defaultSaved,
+    onValueChange: onSavedChange,
+  })
 
   function handleLike() {
     const next = !likedOn
-    if (!isLikedControlled) setLikedInternal(next)
-    onLikedChange?.(next)
-    // Liking is mutually exclusive with disliking — clear the other half.
-    if (next && dislikedOn) {
-      if (!isDislikedControlled) setDislikedInternal(false)
-      onDislikedChange?.(false)
-    }
+    setLikedOn(next)
+    if (next && dislikedOn) setDislikedOn(false)
   }
 
   function handleDislike() {
     const next = !dislikedOn
-    if (!isDislikedControlled) setDislikedInternal(next)
-    onDislikedChange?.(next)
-    if (next && likedOn) {
-      if (!isLikedControlled) setLikedInternal(false)
-      onLikedChange?.(false)
-    }
+    setDislikedOn(next)
+    if (next && likedOn) setLikedOn(false)
   }
 
   function handleSave() {
-    const next = !savedOn
-    if (!isSavedControlled) setSavedInternal(next)
-    onSavedChange?.(next)
+    setSavedOn(!savedOn)
   }
 
   const compactLikeCount =
@@ -181,6 +203,30 @@ function EngagementBar({
         )}
         {savedOn ? "Saved" : "Save"}
       </button>
+
+      {onClip ? (
+        <button
+          type="button"
+          data-slot="engagement-bar-clip"
+          onClick={onClip}
+          className={pillClass}
+        >
+          <Scissors className="size-4" aria-hidden />
+          {clipLabel}
+        </button>
+      ) : null}
+
+      {onRemix ? (
+        <button
+          type="button"
+          data-slot="engagement-bar-remix"
+          onClick={onRemix}
+          className={pillClass}
+        >
+          <Sparkles className="size-4" aria-hidden />
+          {remixLabel}
+        </button>
+      ) : null}
 
       {actions?.map((action) => (
         <button

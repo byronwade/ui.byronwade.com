@@ -20,6 +20,7 @@ type ChannelHeaderProps = Omit<React.ComponentProps<"div">, "onJoin"> & {
   description?: string
   avatarSrc?: string
   bannerSrc?: string
+  subscribed?: boolean
   defaultSubscribed?: boolean
   onSubscribedChange?: (next: boolean) => void
   joinLabel?: string
@@ -38,6 +39,7 @@ function ChannelHeader({
   description,
   avatarSrc,
   bannerSrc,
+  subscribed,
   defaultSubscribed,
   onSubscribedChange,
   joinLabel = "Join",
@@ -126,6 +128,7 @@ function ChannelHeader({
             className="mt-1 flex flex-wrap items-center gap-2"
           >
             <SubscribeButton
+              subscribed={subscribed}
               defaultSubscribed={defaultSubscribed}
               onSubscribedChange={onSubscribedChange}
             />

@@ -270,7 +270,25 @@ describe("ActionRail — size", () => {
 });
 
 // ---------------------------------------------------------------------------
-// 7. className merge + pass-through
+// 7. Variant
+// ---------------------------------------------------------------------------
+
+describe("ActionRail — variant", () => {
+  it("defaults to the default variant", () => {
+    render(<ActionRail actions={baseActions()} />);
+    expect(screen.getByRole("group")).toHaveAttribute("data-variant", "default");
+  });
+
+  it("applies the overlay variant for Shorts-style rails", () => {
+    render(<ActionRail actions={baseActions()} variant="overlay" />);
+    const root = screen.getByRole("group");
+    expect(root).toHaveAttribute("data-variant", "overlay");
+    expect(root.className).toContain("[&_[data-slot=action-rail-count]]:text-background/80");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 8. className merge + pass-through
 // ---------------------------------------------------------------------------
 
 describe("ActionRail — className and pass-through", () => {
@@ -289,7 +307,7 @@ describe("ActionRail — className and pass-through", () => {
 });
 
 // ---------------------------------------------------------------------------
-// 8. Accessibility (axe)
+// 9. Accessibility (axe)
 // ---------------------------------------------------------------------------
 
 describe("ActionRail — accessibility (axe)", () => {

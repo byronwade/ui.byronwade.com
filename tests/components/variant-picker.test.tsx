@@ -59,6 +59,22 @@ describe("VariantPicker – smoke", () => {
 })
 
 describe("VariantPicker – selection", () => {
+  it("selecting a value fires onValueChange with the merged record", async () => {
+    const user = userEvent.setup()
+    const onValueChange = vi.fn()
+    render(
+      <VariantPicker
+        options={options}
+        defaultValue={{ Color: "Sand" }}
+        onValueChange={onValueChange}
+      />,
+    )
+    await user.click(
+      within(groupFor("Size")).getByRole("button", { name: "M" }),
+    )
+    expect(onValueChange).toHaveBeenCalledWith({ Color: "Sand", Size: "M" })
+  })
+
   it("selecting a value fires onChange with the merged record", async () => {
     const user = userEvent.setup()
     const onChange = vi.fn()

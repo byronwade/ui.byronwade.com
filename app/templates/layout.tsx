@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { TemplatesShell } from "./templates-shell"
+
 export const metadata: Metadata = {
   title: "Templates, byronwade/ui",
   description:
@@ -14,9 +16,5 @@ export default function TemplatesLayout({
   // Shares the global floating chrome (launcher + breadcrumb + nav dock) from the
   // root layout, same shell as /layouts. `pt-16` clears the centered top dock; the
   // inspector gets a full-height flex shell so its preview iframe can fill the view.
-  return (
-    <div className="flex h-dvh flex-col bg-background text-foreground">
-      <main className="min-h-0 flex-1 overflow-auto pt-16">{children}</main>
-    </div>
-  )
+  return <TemplatesShell>{children}</TemplatesShell>
 }

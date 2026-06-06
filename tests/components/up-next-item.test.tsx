@@ -304,3 +304,76 @@ describe("UpNextItem – accessibility", () => {
     expect(await axe(container)).toHaveNoViolations()
   })
 })
+
+describe("UpNextItem – preview & active", () => {
+  it("starts and stops the preview video on hover", () => {
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockResolvedValue(undefined)
+    const pause = vi
+      .spyOn(HTMLMediaElement.prototype, "pause")
+      .mockImplementation(() => {})
+    const { container } = render(
+      <UpNextItem {...base} previewSrc="/preview.mp4" thumbnailSrc="/t.jpg" />,
+    )
+    const media = container.querySelector(
+      "[data-slot='up-next-item-media-wrap']",
+    )
+    expect(media).toBeInTheDocument()
+
+    fireEvent.mouseEnter(media!)
+    const preview = container.querySelector(
+      "[data-slot='up-next-item-preview']",
+    )
+    expect(preview).toBeInTheDocument()
+    fireEvent.focus(media!)
+    expect(play).toHaveBeenCalledTimes(1)
+
+    fireEvent.mouseLeave(media!)
+    expect(pause).toHaveBeenCalledTimes(1)
+
+    play.mockRestore()
+    pause.mockRestore()
+  })
+
+  it("swallows rejected preview playback attempts", () => {
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockReturnValue({
+        catch: (callback: () => void) => {
+          callback()
+        },
+      } as unknown as Promise<void>)
+    const { container } = render(<UpNextItem {...base} previewSrc="/preview.mp4" />)
+    const media = container.querySelector(
+      "[data-slot='up-next-item-media-wrap']",
+    )
+
+    fireEvent.mouseEnter(media!)
+    fireEvent.focus(media!)
+
+    expect(play).toHaveBeenCalledTimes(1)
+    play.mockRestore()
+  })
+
+  it("shows the Now playing badge when active", () => {
+    const { container } = render(<UpNextItem {...base} active />)
+    expect(
+      container.querySelector("[data-slot='up-next-item-now-playing']"),
+    ).toHaveTextContent("Now playing")
+  })
+
+  it("sets data-active on the root when active", () => {
+    const { container } = render(<UpNextItem {...base} active />)
+    expect(
+      container.querySelector("[data-slot='up-next-item']"),
+    ).toHaveAttribute("data-active", "true")
+  })
+
+  it("tints the title with text-brand when active", () => {
+    const { container } = render(<UpNextItem {...base} active />)
+    expect(
+      container.querySelector("[data-slot='up-next-item-title']"),
+    ).toHaveClass("text-brand")
+  })
+})

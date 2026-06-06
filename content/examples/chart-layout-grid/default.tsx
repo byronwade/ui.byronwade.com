@@ -3,7 +3,7 @@ import { ChartLayoutGrid } from "@/components/chart-layout-grid"
 
 export default function Example() {
   return (
-    <div className="w-full max-w-5xl p-4">
+    <div className="w-full overflow-hidden rounded-xl border border-border bg-background p-3">
       <ChartLayoutGrid layout="1x2">
         <ChartPanel symbol="AAPL" />
         <ChartPanel symbol="MSFT" />

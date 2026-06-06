@@ -168,6 +168,21 @@ describe("ChapterList", () => {
     )
   })
 
+  it("collapses to maxVisible rows with a Show all toggle", async () => {
+    const { container } = render(
+      <ChapterList chapters={chapters} maxVisible={2} />,
+    )
+    expect(items(container)).toHaveLength(2)
+    expect(
+      screen.getByRole("button", { name: "Show all (4)" }),
+    ).toBeInTheDocument()
+    await userEvent.click(screen.getByRole("button", { name: "Show all (4)" }))
+    expect(items(container)).toHaveLength(4)
+    expect(
+      screen.getByRole("button", { name: "Show less" }),
+    ).toBeInTheDocument()
+  })
+
   it("has no axe violations", async () => {
     const { container } = render(
       <ChapterList chapters={chapters} defaultActiveIndex={1} />,

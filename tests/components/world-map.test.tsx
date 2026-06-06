@@ -4,7 +4,7 @@
  * Renders a dotted base-map <img> (generated from dotted-map, colored from the
  * --muted-foreground token resolved at runtime) plus an overlay <svg> with one
  * animated arc per dot and pulsing endpoint circles colored from `lineColor`
- * (defaults to var(--brand)). motion + next-themes run in jsdom.
+ * (defaults to var(--brand)). motion + @wrksz/themes run in jsdom.
  */
 
 import * as React from "react";
@@ -12,6 +12,10 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { axe } from "vitest-axe";
 
 import { WorldMap } from "@/components/ui/world-map";
+
+vi.mock("@wrksz/themes/client", () => ({
+  useTheme: () => ({ theme: "light", resolvedTheme: "light" }),
+}));
 
 const DOTS = [
   {

@@ -108,6 +108,155 @@ describe("MiniPlayer – poster forwarding", () => {
   })
 })
 
+describe("MiniPlayer – inline video", () => {
+  it("renders a video element when src is set and playing", () => {
+    const { container } = render(
+      <MiniPlayer {...base} src="/clip.mp4" defaultPlaying />,
+    )
+    expect(
+      container.querySelector("[data-slot='mini-player-video']"),
+    ).toBeInTheDocument()
+  })
+
+  it("swallows rejected inline video playback attempts", () => {
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockReturnValue({
+        catch: (callback: () => void) => {
+          callback()
+        },
+      } as unknown as Promise<void>)
+
+    render(<MiniPlayer {...base} src="/clip.mp4" defaultPlaying />)
+
+    expect(play).toHaveBeenCalledTimes(1)
+    play.mockRestore()
+  })
+
+  it("shows the thumbnail poster when paused even with src", () => {
+    const { container } = render(
+      <MiniPlayer {...base} src="/clip.mp4" posterSrc="/poster.jpg" />,
+    )
+    expect(
+      container.querySelector("[data-slot='mini-player-video']"),
+    ).toBeNull()
+    expect(
+      container.querySelector("[data-slot='thumbnail-image']"),
+    ).toBeInTheDocument()
+  })
+})
+
+describe("MiniPlayer – versatile API", () => {
+  it("renders variant, size, and state attributes", () => {
+    const { container, rerender } = render(
+      <MiniPlayer {...base} variant="dock" size="sm" state="collapsed" />,
+    )
+    const root = container.querySelector("[data-slot='mini-player']")
+    expect(root).toHaveAttribute("data-variant", "dock")
+    expect(root).toHaveAttribute("data-size", "sm")
+    expect(root).toHaveAttribute("data-state", "collapsed")
+
+    rerender(<MiniPlayer {...base} variant="inline" size="lg" state="expanded" />)
+    expect(root).toHaveAttribute("data-variant", "inline")
+    expect(root).toHaveAttribute("data-size", "lg")
+    expect(root).toHaveAttribute("data-state", "expanded")
+  })
+
+  it("renders queue label, metadata, and actions outside collapsed state", () => {
+    const { container } = render(
+      <MiniPlayer
+        {...base}
+        queueLabel="Up next"
+        metadata="Channel · 42% watched"
+        actions={<button type="button">Queue</button>}
+      />,
+    )
+    expect(
+      container.querySelector("[data-slot='mini-player-queue-label']"),
+    ).toHaveTextContent("Up next")
+    expect(
+      container.querySelector("[data-slot='mini-player-metadata']"),
+    ).toHaveTextContent("Channel")
+    expect(
+      container.querySelector("[data-slot='mini-player-actions']"),
+    ).toHaveTextContent("Queue")
+  })
+
+  it("hides secondary content in collapsed state", () => {
+    const { container } = render(
+      <MiniPlayer
+        {...base}
+        state="collapsed"
+        queueLabel="Up next"
+        metadata="Channel"
+        actions={<button type="button">Queue</button>}
+      />,
+    )
+    expect(
+      container.querySelector("[data-slot='mini-player-queue-label']"),
+    ).toBeNull()
+    expect(
+      container.querySelector("[data-slot='mini-player-metadata']"),
+    ).toBeNull()
+    expect(
+      container.querySelector("[data-slot='mini-player-actions']"),
+    ).toBeNull()
+  })
+
+  it("uses playbackLabel in the accessible play and pause labels", () => {
+    const { rerender } = render(
+      <MiniPlayer {...base} playbackLabel="lesson preview" />,
+    )
+    expect(
+      screen.getByRole("button", { name: "Play lesson preview" }),
+    ).toBeInTheDocument()
+
+    rerender(
+      <MiniPlayer {...base} playbackLabel="lesson preview" playing />,
+    )
+    expect(
+      screen.getByRole("button", { name: "Pause lesson preview" }),
+    ).toBeInTheDocument()
+  })
+
+  it("can show a disabled close affordance only when showClose is true", () => {
+    const { rerender } = render(
+      <MiniPlayer {...base} showClose onClose={undefined} />,
+    )
+    expect(screen.getByRole("button", { name: "Close" })).toBeDisabled()
+
+    rerender(<MiniPlayer {...base} showClose={false} />)
+    expect(
+      screen.queryByRole("button", { name: "Close" }),
+    ).not.toBeInTheDocument()
+  })
+
+  it("suppresses playback, close, and expand callbacks while disabled", () => {
+    const onPlayingChange = vi.fn()
+    const onClose = vi.fn()
+    const onExpand = vi.fn()
+    const { container } = render(
+      <MiniPlayer
+        {...base}
+        disabled
+        onPlayingChange={onPlayingChange}
+        onClose={onClose}
+        onExpand={onExpand}
+      />,
+    )
+    expect(container.querySelector("[data-slot='mini-player']")).toHaveAttribute(
+      "data-disabled",
+      "true",
+    )
+    fireEvent.click(screen.getByRole("button", { name: "Play" }))
+    fireEvent.click(screen.getByRole("button", { name: "Close" }))
+    fireEvent.click(screen.getByRole("button", { name: "Expand" }))
+    expect(onPlayingChange).not.toHaveBeenCalled()
+    expect(onClose).not.toHaveBeenCalled()
+    expect(onExpand).not.toHaveBeenCalled()
+  })
+})
+
 describe("MiniPlayer – play overlay", () => {
   it("renders a Play control by default (uncontrolled)", () => {
     render(<MiniPlayer {...base} />)

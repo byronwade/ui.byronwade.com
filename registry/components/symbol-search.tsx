@@ -24,7 +24,10 @@ type SymbolGroup = {
   symbols: Quote[]
 }
 
-type SymbolSearchProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
+type SymbolSearchProps = Omit<
+  ComponentPropsWithoutRef<"div">,
+  "children" | "onSelect"
+> & {
   symbols?: Quote[]
   groups?: SymbolGroup[]
   placeholder?: string

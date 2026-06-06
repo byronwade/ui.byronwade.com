@@ -51,6 +51,13 @@ describe("SymbolSearch", () => {
     expect(screen.getAllByText("TSLA").length).toBeGreaterThan(0)
   })
 
+  it("builds default groups from symbols when groups are omitted", () => {
+    render(<SymbolSearch symbols={symbols} />)
+    expect(screen.getByText("Stocks")).toBeInTheDocument()
+    expect(screen.queryByText("Crypto")).not.toBeInTheDocument()
+    expect(screen.queryByText("Forex")).not.toBeInTheDocument()
+  })
+
   it("filters results when typing in the search input", async () => {
     const user = userEvent.setup()
     render(

@@ -14,6 +14,8 @@ export type ArchetypeSlug =
   | "conversation"
   | "canvas"
   | "studio"
+  | "trading-desk"
+  | "service-map"
 
 export interface ArchetypeMeta {
   slug: ArchetypeSlug
@@ -174,6 +176,52 @@ export const archetypes: ArchetypeMeta[] = [
       "ScrollArea",
       "Separator",
       "InputGroup",
+    ],
+  },
+  {
+    slug: "trading-desk",
+    name: "Trading desk",
+    tagline:
+      "A TradingView-style terminal — top toolbar, drawing rail, full-bleed interactive chart, and collapsible side panels.",
+    centerpiece: "The chart",
+    category: "Application",
+    uses: [
+      "Sidebar",
+      "ChartToolbar",
+      "LightweightChart",
+      "CompareSymbols",
+      "AlertCreateForm",
+      "OrderEntry",
+      "DrawingToolbar",
+      "IndicatorLegend",
+      "MarketDepth",
+      "TimeAndSales",
+      "Watchlist",
+      "SessionStatsBar",
+      "ReplayControls",
+      "Sparkline",
+      "SymbolSearch",
+    ],
+  },
+  {
+    slug: "service-map",
+    name: "Service map",
+    tagline:
+      "A Maple-style observability console — animated dependency graph, platform adapters, and resizable service detail panels.",
+    centerpiece: "The service map",
+    category: "Dashboard",
+    uses: [
+      "Sidebar",
+      "SegmentedControl",
+      "Resizable",
+      "Tabs",
+      "Chart",
+      "Badge",
+      "Button",
+      "ScrollArea",
+      "Select",
+      "Popover",
+      "Tooltip",
     ],
   },
 ]

@@ -16,6 +16,8 @@ type ThumbnailProps = React.ComponentProps<"div"> & {
   live?: boolean
   /** Aspect ratio passed to AspectRatio. Default 16/9. */
   ratio?: number
+  /** Show a play glyph overlay on group hover (YouTube-style preview hint). */
+  hoverPlay?: boolean
 }
 
 function Thumbnail({
@@ -25,6 +27,7 @@ function Thumbnail({
   progress,
   live = false,
   ratio = 16 / 9,
+  hoverPlay = false,
   className,
   ...props
 }: ThumbnailProps) {
@@ -32,7 +35,7 @@ function Thumbnail({
     <div
       data-slot="thumbnail"
       className={cn(
-        "relative isolate overflow-hidden rounded-lg bg-muted",
+        "group/thumbnail relative isolate overflow-hidden rounded-lg bg-muted",
         className,
       )}
       {...props}
@@ -43,8 +46,10 @@ function Thumbnail({
           <img
             src={src}
             alt={alt}
+            loading="lazy"
+            decoding="async"
             data-slot="thumbnail-image"
-            className="size-full object-cover"
+            className="size-full object-cover transition-transform duration-300 group-hover/thumbnail:scale-105"
           />
         ) : (
           <div
@@ -61,6 +66,18 @@ function Thumbnail({
           </div>
         )}
       </AspectRatio>
+
+      {hoverPlay && src ? (
+        <div
+          aria-hidden
+          data-slot="thumbnail-hover-play"
+          className="pointer-events-none absolute inset-0 grid place-items-center bg-foreground/0 opacity-0 transition-opacity duration-200 group-hover/thumbnail:bg-foreground/10 group-hover/thumbnail:opacity-100"
+        >
+          <span className="grid size-12 place-items-center rounded-full bg-background/80 text-foreground shadow-sm backdrop-blur-sm">
+            <Play className="size-5 fill-current" />
+          </span>
+        </div>
+      ) : null}
 
       {live ? (
         <span

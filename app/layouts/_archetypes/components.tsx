@@ -14,6 +14,8 @@ import { BoardArchetype } from "./board"
 import { ConversationArchetype } from "./conversation"
 import { CanvasArchetype } from "./canvas"
 import { StudioArchetype } from "./studio"
+import { TradingDeskArchetype } from "./trading-desk"
+import { ServiceMapArchetype } from "./service-map"
 
 export const archetypeComponents: Record<ArchetypeSlug, ComponentType> = {
   cockpit: CockpitArchetype,
@@ -26,4 +28,6 @@ export const archetypeComponents: Record<ArchetypeSlug, ComponentType> = {
   conversation: ConversationArchetype,
   canvas: CanvasArchetype,
   studio: StudioArchetype,
+  "trading-desk": TradingDeskArchetype,
+  "service-map": ServiceMapArchetype,
 }

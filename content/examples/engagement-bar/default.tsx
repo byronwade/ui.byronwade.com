@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Scissors, Flag, ListPlus } from "lucide-react"
+import { Flag, ListPlus } from "lucide-react"
 
 import { EngagementBar } from "@/components/engagement-bar"
 
@@ -11,7 +11,7 @@ export default function Example() {
   const [saved, setSaved] = React.useState(false)
 
   return (
-    <div className="w-[640px]">
+    <div className="w-[720px]">
       <EngagementBar
         liked={liked}
         onLikedChange={setLiked}
@@ -21,9 +21,8 @@ export default function Example() {
         onShare={() => {}}
         saved={saved}
         onSavedChange={setSaved}
-        actions={[
-          { key: "clip", label: "Clip", icon: <Scissors className="size-4" /> },
-        ]}
+        onClip={() => {}}
+        onRemix={() => {}}
         menuItems={[
           {
             key: "playlist",

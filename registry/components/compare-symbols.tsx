@@ -13,9 +13,14 @@ const DEFAULT_SYMBOLS = makeQuotes(3, { seed: 14 })
 
 type CompareSymbol = Pick<Quote, "symbol" | "change" | "changePercent">
 
-type CompareSymbolsProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
+type CompareSymbolsProps = Omit<
+  ComponentPropsWithoutRef<"div">,
+  "children" | "onSelect"
+> & {
   symbols?: CompareSymbol[]
   max?: number
+  activeSymbol?: string
+  onSelect?: (symbol: string) => void
   onRemove?: (symbol: string) => void
   onAdd?: () => void
 }
@@ -23,6 +28,8 @@ type CompareSymbolsProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
 function CompareSymbols({
   symbols = DEFAULT_SYMBOLS,
   max = 5,
+  activeSymbol,
+  onSelect,
   onRemove,
   onAdd,
   className,
@@ -45,36 +52,60 @@ function CompareSymbols({
       >
         Compare
       </span>
-      {symbols.map((item) => (
-        <Badge
-          key={item.symbol}
-          data-slot="compare-symbols-chip"
-          data-symbol={item.symbol}
-          variant="outline"
-          className="gap-2 py-1 pl-2 pr-1 font-mono"
-        >
-          <span>{item.symbol}</span>
-          <PriceChange
-            value={item.change}
-            percent={item.changePercent}
-            size="sm"
-            format="percent"
-            showIcon={false}
-          />
-          {onRemove ? (
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon-sm"
-              className="size-5"
-              aria-label={`Remove ${item.symbol} from compare`}
-              onClick={() => onRemove(item.symbol)}
-            >
-              <X className="size-3.5" />
-            </Button>
-          ) : null}
-        </Badge>
-      ))}
+      {symbols.map((item) => {
+        const selected = activeSymbol === item.symbol
+        return (
+          <Badge
+            key={item.symbol}
+            data-slot="compare-symbols-chip"
+            data-symbol={item.symbol}
+            data-active={selected ? "true" : "false"}
+            variant="outline"
+            className={cn(
+              "gap-2 py-1 pl-2 pr-1 font-mono",
+              onSelect && "cursor-pointer transition-colors hover:bg-muted/60",
+              selected && "border-brand/60 bg-brand/10",
+            )}
+            onClick={onSelect ? () => onSelect(item.symbol) : undefined}
+            onKeyDown={
+              onSelect
+                ? (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault()
+                      onSelect(item.symbol)
+                    }
+                  }
+                : undefined
+            }
+            role={onSelect ? "button" : undefined}
+            tabIndex={onSelect ? 0 : undefined}
+          >
+            <span>{item.symbol}</span>
+            <PriceChange
+              value={item.change}
+              percent={item.changePercent}
+              size="sm"
+              format="percent"
+              showIcon={false}
+            />
+            {onRemove ? (
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon-sm"
+                className="size-5"
+                aria-label={`Remove ${item.symbol} from compare`}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  onRemove(item.symbol)
+                }}
+              >
+                <X className="size-3.5" />
+              </Button>
+            ) : null}
+          </Badge>
+        )
+      })}
       {canAdd ? (
         <Button
           type="button"

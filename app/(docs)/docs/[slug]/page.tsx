@@ -1,10 +1,11 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
+import { Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
-import { bySlug, components } from "@/content/components"
+import { bySlug, components, getVariants } from "@/content/components"
 import { getSurface, surfaceLabel } from "@/content/catalog-surfaces"
 import { examples } from "@/content/examples/registry"
 import { ExampleTabs } from "@/app/(docs)/_components/example-tabs"
@@ -47,41 +48,50 @@ export default async function ComponentPage({
   if (!doc) notFound()
 
   const demos = examples[slug] ?? []
-  const rendered = demos.map((d) => ({
-    name: d.name,
-    Component: d.Component,
-    code: readFileSync(
+  const codeByExample: Record<string, string> = {}
+  for (const d of demos) {
+    const base = d.file
+      .split("/")
+      .pop()!
+      .replace(/\.tsx$/, "")
+    codeByExample[base] = readFileSync(
       join(process.cwd(), "content/examples", d.file),
       "utf8",
-    ).trimEnd(),
-  }))
+    ).trimEnd()
+  }
 
-  const byBase = new Map(
-    demos.map((d) => [
-      d.file
-        .split("/")
-        .pop()!
-        .replace(/\.tsx$/, ""),
-      d,
-    ]),
-  )
-  const variantViews: VariantView[] = (doc.variants ?? []).map((v) => {
-    const demo = byBase.get(v.example)
-    const Comp = demo?.Component
+  const rendered = demos.map((d) => {
+    const base = d.file
+      .split("/")
+      .pop()!
+      .replace(/\.tsx$/, "")
     return {
-      id: v.id,
-      name: v.name,
-      tags: v.tags,
-      install: v.install ?? `npx shadcn@latest add @byronwade/${doc.slug}`,
-      preview: Comp ? <Comp /> : null,
-      code: demo
-        ? readFileSync(
-            join(process.cwd(), "content/examples", demo.file),
-            "utf8",
-          ).trimEnd()
-        : "",
+      name: d.name,
+      base,
+      Component: d.Component,
+      code: codeByExample[base],
     }
   })
+
+  const allVariants = getVariants(doc)
+  const defaultSurface = doc.demoContext?.defaultSurface ?? getSurface(doc)
+  const demoProps = {
+    slug: doc.slug,
+    defaultSurface,
+    demoContext: doc.demoContext,
+    allVariants,
+    codeByExample,
+    docExamples: doc.examples,
+  }
+
+  const variantViews: VariantView[] = (doc.variants ?? []).map((v) => ({
+    id: v.id,
+    name: v.name,
+    tags: v.tags,
+    install: v.install ?? `npx shadcn@latest add @byronwade/${doc.slug}`,
+    variant: v,
+    code: codeByExample[v.example] ?? "",
+  }))
 
   const surface = getSurface(doc)
   const deps = [...(doc.registryDeps ?? []), ...(doc.npmDeps ?? [])]
@@ -141,7 +151,13 @@ export default async function ComponentPage({
             </h2>
           }
         >
-          <VariantBrowser variants={variantViews} />
+          <Suspense
+            fallback={
+              <div className="h-48 animate-pulse rounded-xl bg-muted/60" />
+            }
+          >
+            <VariantBrowser variants={variantViews} {...demoProps} />
+          </Suspense>
         </DocsDemoSection>
       ) : (
         rendered.length > 0 && (
@@ -153,14 +169,31 @@ export default async function ComponentPage({
             }
           >
             <div className="space-y-8">
-              {rendered.map(({ name, Component, code }) => (
-                <ExampleTabs
-                  key={name}
-                  title={name}
-                  preview={<Component />}
-                  code={code}
-                />
-              ))}
+              {rendered.map(({ name, base, Component, code }) => {
+                const activeVariant = allVariants.find(
+                  (v) => v.example === base,
+                ) ?? {
+                  id: base,
+                  name,
+                  tags: [],
+                  example: base,
+                }
+                return (
+                  <Suspense
+                    key={name}
+                    fallback={
+                      <div className="h-48 animate-pulse rounded-xl bg-muted/60" />
+                    }
+                  >
+                    <ExampleTabs
+                      title={name}
+                      preview={<Component />}
+                      code={code}
+                      demo={{ ...demoProps, activeVariant }}
+                    />
+                  </Suspense>
+                )
+              })}
             </div>
           </DocsDemoSection>
         )

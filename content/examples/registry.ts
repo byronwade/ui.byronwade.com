@@ -131,6 +131,8 @@ import CalendarAppointment from "./calendar/appointment";
 import CalendarPricing from "./calendar/pricing";
 import CalendarRangePresets from "./calendar/range-presets";
 import CandlestickChartDefault from "./candlestick-chart/default";
+import CandlestickChartFill from "./candlestick-chart/fill";
+import CandlestickChartInteractive from "./candlestick-chart/interactive";
 import CardDefault from "./card/default";
 import CardContentOnly from "./card/content-only";
 import CardFrameEmpty from "./card/frame-empty";
@@ -164,9 +166,14 @@ import ChartStackedBar from "./chart/stacked-bar";
 import ChartThemeColors from "./chart/theme-colors";
 import ChartTooltipVariants from "./chart/tooltip-variants";
 import ChartLayoutGridDefault from "./chart-layout-grid/default";
+import ChartLayoutGridPro from "./chart-layout-grid/pro";
 import ChartLayoutGridTradingDesk from "./chart-layout-grid/trading-desk";
+import ChartLayoutGridTwoByTwo from "./chart-layout-grid/two-by-two";
 import ChartPanelDefault from "./chart-panel/default";
+import ChartPanelInteractive from "./chart-panel/interactive";
+import ChartPanelPro from "./chart-panel/pro";
 import ChartToolbarDefault from "./chart-toolbar/default";
+import ChartToolbarCompact from "./chart-toolbar/compact";
 import CheckboxDefault from "./checkbox/default";
 import CheckboxCheckboxGroup from "./checkbox/checkbox-group";
 import CheckboxDisabled from "./checkbox/disabled";
@@ -332,11 +339,17 @@ import LabelFormLayout from "./label/form-layout";
 import LabelRequired from "./label/required";
 import LabelWithCheckbox from "./label/with-checkbox";
 import LabelWithIcon from "./label/with-icon";
+import LightweightChartDefault from "./lightweight-chart/default";
+import LightweightChartArea from "./lightweight-chart/area";
+import LightweightChartFill from "./lightweight-chart/fill";
+import LightweightChartLine from "./lightweight-chart/line";
 import LiveBadgeDefault from "./live-badge/default";
 import LyricsDefault from "./lyrics/default";
 import MarketDepthDefault from "./market-depth/default";
+import MarketDepthSplitPanel from "./market-depth/split-panel";
 import MarketMoversDefault from "./market-movers/default";
 import MarketNewsDefault from "./market-news/default";
+import MarketNewsTerminal from "./market-news/terminal";
 import MarketingLayoutDefault from "./marketing-layout/default";
 import MessageComposerDefault from "./message-composer/default";
 import MessageThreadDefault from "./message-thread/default";
@@ -348,6 +361,8 @@ import MetricStatLoading from "./metric-stat/loading";
 import MetricStatNoDelta from "./metric-stat/no-delta";
 import MetricStatWithIcon from "./metric-stat/with-icon";
 import MiniPlayerDefault from "./mini-player/default";
+import MiniPlayerDock from "./mini-player/dock";
+import MiniPlayerExpanded from "./mini-player/expanded";
 import MoneyInputDefault from "./money-input/default";
 import MoneyInputCurrencies from "./money-input/currencies";
 import MoneyInputSizes from "./money-input/sizes";
@@ -444,6 +459,7 @@ import RelativeTimeDefault from "./relative-time/default";
 import RelativeTimeSizes from "./relative-time/sizes";
 import RelativeTimeWorldClock from "./relative-time/world-clock";
 import ReplayControlsDefault from "./replay-controls/default";
+import ReplayControlsBar from "./replay-controls/bar";
 import ResizableDefault from "./resizable/default";
 import ResourceListDefault from "./resource-list/default";
 import ResourceListEmpty from "./resource-list/empty";
@@ -493,8 +509,11 @@ import SheetScrollable from "./sheet/scrollable";
 import SheetSides from "./sheet/sides";
 import SheetWithForm from "./sheet/with-form";
 import ShortsPlayerDefault from "./shorts-player/default";
+import ShortsPlayerImmersive from "./shorts-player/immersive";
+import ShortsPlayerPreview from "./shorts-player/preview";
 import SidebarDefault from "./sidebar/default";
 import SidebarMenuButtons from "./sidebar/menu-buttons";
+import SidebarTradingDesk from "./sidebar/trading-desk";
 import SidebarVariants from "./sidebar/variants";
 import SkeletonDefault from "./skeleton/default";
 import SkeletonCard from "./skeleton/card";
@@ -541,6 +560,7 @@ import StatusPillPulse from "./status-pill/pulse";
 import StatusPillTableRows from "./status-pill/table-rows";
 import StatusPillTones from "./status-pill/tones";
 import StudioVideoRowDefault from "./studio-video-row/default";
+import StudioVideoTableDefault from "./studio-video-table/default";
 import SubscribeButtonDefault from "./subscribe-button/default";
 import SwitchDefault from "./switch/default";
 import SwitchControlled from "./switch/controlled";
@@ -622,14 +642,21 @@ import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
 import VerifiedBadgeDefault from "./verified-badge/default";
 import VideoCardDefault from "./video-card/default";
+import VideoCardFeatured from "./video-card/featured";
+import VideoCardHorizontal from "./video-card/horizontal";
+import VideoCardOverlay from "./video-card/overlay";
 import VideoPlayerDefault from "./video-player/default";
 import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
 import VideoPlayerYoutube from "./video-player/youtube";
 import VideoShelfDefault from "./video-shelf/default";
+import VideoShelfGrid from "./video-shelf/grid";
+import VideoShelfRail from "./video-shelf/rail";
 import VideoShelfWatchPage from "./video-shelf/watch-page";
 import VolumeFootprintDefault from "./volume-footprint/default";
 import VolumeProfileDefault from "./volume-profile/default";
+import WatchLayoutDefault from "./watch-layout/default";
+import WatchMetaBarDefault from "./watch-meta-bar/default";
 import WatchlistDefault from "./watchlist/default";
 import WorldMapDefault from "./world-map/default";
 
@@ -876,6 +903,8 @@ export const examples: Record<string, Example[]> = {
   ],
   "candlestick-chart": [
     { name: "Default", file: "candlestick-chart/default.tsx", Component: CandlestickChartDefault },
+    { name: "Fill", file: "candlestick-chart/fill.tsx", Component: CandlestickChartFill },
+    { name: "Interactive", file: "candlestick-chart/interactive.tsx", Component: CandlestickChartInteractive },
   ],
   "card": [
     { name: "Default", file: "card/default.tsx", Component: CardDefault },
@@ -925,13 +954,18 @@ export const examples: Record<string, Example[]> = {
   ],
   "chart-layout-grid": [
     { name: "Default", file: "chart-layout-grid/default.tsx", Component: ChartLayoutGridDefault },
+    { name: "Pro", file: "chart-layout-grid/pro.tsx", Component: ChartLayoutGridPro },
     { name: "Trading Desk", file: "chart-layout-grid/trading-desk.tsx", Component: ChartLayoutGridTradingDesk },
+    { name: "Two By Two", file: "chart-layout-grid/two-by-two.tsx", Component: ChartLayoutGridTwoByTwo },
   ],
   "chart-panel": [
     { name: "Default", file: "chart-panel/default.tsx", Component: ChartPanelDefault },
+    { name: "Interactive", file: "chart-panel/interactive.tsx", Component: ChartPanelInteractive },
+    { name: "Pro", file: "chart-panel/pro.tsx", Component: ChartPanelPro },
   ],
   "chart-toolbar": [
     { name: "Default", file: "chart-toolbar/default.tsx", Component: ChartToolbarDefault },
+    { name: "Compact", file: "chart-toolbar/compact.tsx", Component: ChartToolbarCompact },
   ],
   "checkbox": [
     { name: "Default", file: "checkbox/default.tsx", Component: CheckboxDefault },
@@ -1210,6 +1244,12 @@ export const examples: Record<string, Example[]> = {
     { name: "With Checkbox", file: "label/with-checkbox.tsx", Component: LabelWithCheckbox },
     { name: "With Icon", file: "label/with-icon.tsx", Component: LabelWithIcon },
   ],
+  "lightweight-chart": [
+    { name: "Default", file: "lightweight-chart/default.tsx", Component: LightweightChartDefault },
+    { name: "Area", file: "lightweight-chart/area.tsx", Component: LightweightChartArea },
+    { name: "Fill", file: "lightweight-chart/fill.tsx", Component: LightweightChartFill },
+    { name: "Line", file: "lightweight-chart/line.tsx", Component: LightweightChartLine },
+  ],
   "live-badge": [
     { name: "Default", file: "live-badge/default.tsx", Component: LiveBadgeDefault },
   ],
@@ -1218,12 +1258,14 @@ export const examples: Record<string, Example[]> = {
   ],
   "market-depth": [
     { name: "Default", file: "market-depth/default.tsx", Component: MarketDepthDefault },
+    { name: "Split Panel", file: "market-depth/split-panel.tsx", Component: MarketDepthSplitPanel },
   ],
   "market-movers": [
     { name: "Default", file: "market-movers/default.tsx", Component: MarketMoversDefault },
   ],
   "market-news": [
     { name: "Default", file: "market-news/default.tsx", Component: MarketNewsDefault },
+    { name: "Terminal", file: "market-news/terminal.tsx", Component: MarketNewsTerminal },
   ],
   "marketing-layout": [
     { name: "Default", file: "marketing-layout/default.tsx", Component: MarketingLayoutDefault },
@@ -1245,6 +1287,8 @@ export const examples: Record<string, Example[]> = {
   ],
   "mini-player": [
     { name: "Default", file: "mini-player/default.tsx", Component: MiniPlayerDefault },
+    { name: "Dock", file: "mini-player/dock.tsx", Component: MiniPlayerDock },
+    { name: "Expanded", file: "mini-player/expanded.tsx", Component: MiniPlayerExpanded },
   ],
   "money-input": [
     { name: "Default", file: "money-input/default.tsx", Component: MoneyInputDefault },
@@ -1415,6 +1459,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "replay-controls": [
     { name: "Default", file: "replay-controls/default.tsx", Component: ReplayControlsDefault },
+    { name: "Bar", file: "replay-controls/bar.tsx", Component: ReplayControlsBar },
   ],
   "resizable": [
     { name: "Default", file: "resizable/default.tsx", Component: ResizableDefault },
@@ -1490,10 +1535,13 @@ export const examples: Record<string, Example[]> = {
   ],
   "shorts-player": [
     { name: "Default", file: "shorts-player/default.tsx", Component: ShortsPlayerDefault },
+    { name: "Immersive", file: "shorts-player/immersive.tsx", Component: ShortsPlayerImmersive },
+    { name: "Preview", file: "shorts-player/preview.tsx", Component: ShortsPlayerPreview },
   ],
   "sidebar": [
     { name: "Default", file: "sidebar/default.tsx", Component: SidebarDefault },
     { name: "Menu Buttons", file: "sidebar/menu-buttons.tsx", Component: SidebarMenuButtons },
+    { name: "Trading Desk", file: "sidebar/trading-desk.tsx", Component: SidebarTradingDesk },
     { name: "Variants", file: "sidebar/variants.tsx", Component: SidebarVariants },
   ],
   "skeleton": [
@@ -1560,6 +1608,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "studio-video-row": [
     { name: "Default", file: "studio-video-row/default.tsx", Component: StudioVideoRowDefault },
+  ],
+  "studio-video-table": [
+    { name: "Default", file: "studio-video-table/default.tsx", Component: StudioVideoTableDefault },
   ],
   "subscribe-button": [
     { name: "Default", file: "subscribe-button/default.tsx", Component: SubscribeButtonDefault },
@@ -1689,6 +1740,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "video-card": [
     { name: "Default", file: "video-card/default.tsx", Component: VideoCardDefault },
+    { name: "Featured", file: "video-card/featured.tsx", Component: VideoCardFeatured },
+    { name: "Horizontal", file: "video-card/horizontal.tsx", Component: VideoCardHorizontal },
+    { name: "Overlay", file: "video-card/overlay.tsx", Component: VideoCardOverlay },
   ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },
@@ -1698,6 +1752,8 @@ export const examples: Record<string, Example[]> = {
   ],
   "video-shelf": [
     { name: "Default", file: "video-shelf/default.tsx", Component: VideoShelfDefault },
+    { name: "Grid", file: "video-shelf/grid.tsx", Component: VideoShelfGrid },
+    { name: "Rail", file: "video-shelf/rail.tsx", Component: VideoShelfRail },
     { name: "Watch Page", file: "video-shelf/watch-page.tsx", Component: VideoShelfWatchPage },
   ],
   "volume-footprint": [
@@ -1705,6 +1761,12 @@ export const examples: Record<string, Example[]> = {
   ],
   "volume-profile": [
     { name: "Default", file: "volume-profile/default.tsx", Component: VolumeProfileDefault },
+  ],
+  "watch-layout": [
+    { name: "Default", file: "watch-layout/default.tsx", Component: WatchLayoutDefault },
+  ],
+  "watch-meta-bar": [
+    { name: "Default", file: "watch-meta-bar/default.tsx", Component: WatchMetaBarDefault },
   ],
   "watchlist": [
     { name: "Default", file: "watchlist/default.tsx", Component: WatchlistDefault },

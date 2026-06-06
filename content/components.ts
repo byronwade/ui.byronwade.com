@@ -81,6 +81,11 @@ export type ComponentDoc = {
   tags?: string[]
   /** Authored variants. Absent ⇒ getVariants() synthesizes a single default. */
   variants?: Variant[]
+  demoContext?: {
+    skipSurfaceWrapper?: boolean
+    defaultSurface?: "app" | "marketing"
+    hidden?: boolean
+  }
 }
 
 export const components: ComponentDoc[] = [
@@ -91,6 +96,7 @@ export const components: ComponentDoc[] = [
     description:
       "Complete token base, neutrals + brand-derived accent, status/dock/chart/sidebar tokens, radius scale. Install via `shadcn init`.",
     examples: ["tokens"],
+    demoContext: { hidden: true },
   },
   {
     slug: "utils",
@@ -99,6 +105,7 @@ export const components: ComponentDoc[] = [
     description: "clsx + tailwind-merge class combiner.",
     npmDeps: ["clsx", "tailwind-merge"],
     examples: [],
+    demoContext: { hidden: true },
   },
   {
     slug: "identity",
@@ -107,6 +114,7 @@ export const components: ComponentDoc[] = [
     description:
       "Deterministic animal-name + OKLCH gradient from a seed string.",
     examples: ["names"],
+    demoContext: { hidden: true },
   },
   {
     slug: "status-dot",
@@ -373,6 +381,7 @@ export const components: ComponentDoc[] = [
       "with-custom-classname",
       "with-metrics-header",
     ],
+    demoContext: { skipSurfaceWrapper: true },
   },
   {
     slug: "metric-stat",
@@ -1715,7 +1724,7 @@ export const components: ComponentDoc[] = [
     name: "Sonner",
     category: "Feedback",
     description:
-      "A themed toast notification provider that wraps the Sonner Toaster with next-themes integration and custom Lucide icons for success, info, warning, error, and loading states.",
+      "A themed toast notification provider that wraps the Sonner Toaster with @wrksz/themes integration and custom Lucide icons for success, info, warning, error, and loading states.",
     props: [
       {
         name: "...props",
@@ -2399,6 +2408,7 @@ export const components: ComponentDoc[] = [
       },
     ],
     examples: ["default", "trading-desk"],
+    demoContext: { skipSurfaceWrapper: true },
   },
   {
     slug: "marketing-layout",
@@ -2421,6 +2431,7 @@ export const components: ComponentDoc[] = [
       },
     ],
     examples: ["default"],
+    demoContext: { skipSurfaceWrapper: true },
   },
   {
     slug: "event-timeline",
@@ -3077,7 +3088,8 @@ export const components: ComponentDoc[] = [
       "@byronwade/skeleton",
       "@byronwade/tooltip",
     ],
-    examples: ["default", "variants", "menu-buttons"],
+    examples: ["default", "variants", "menu-buttons", "trading-desk"],
+    demoContext: { skipSurfaceWrapper: true },
     props: [
       {
         name: "variant",
@@ -3264,7 +3276,7 @@ export const components: ComponentDoc[] = [
     category: "UI",
     description:
       "Dotted SVG world map with animated great-circle connection arcs. Arcs + points derive from --brand; dotted base resolves from --muted-foreground. Adapted from Aceternity UI.",
-    npmDeps: ["motion", "dotted-map", "next-themes"],
+    npmDeps: ["motion", "dotted-map", "@wrksz/themes"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -4486,9 +4498,32 @@ export const components: ComponentDoc[] = [
   {
     slug: "thumbnail",
     name: "Thumbnail",
-    category: "Video",
+    category: "UI",
     description:
       "Video thumbnail tile with optional duration pill, watched-progress bar, and live chip.",
+    tags: ["youtube", "video", "tier:simple"],
+    props: [
+      {
+        name: "src",
+        type: "string",
+        description: "Thumbnail image URL.",
+      },
+      {
+        name: "duration",
+        type: "string",
+        description: "Optional duration pill label (e.g. 12:34).",
+      },
+      {
+        name: "progress",
+        type: "number",
+        description: "Watched progress 0–100 for the bottom bar.",
+      },
+      {
+        name: "live",
+        type: "boolean",
+        description: "Show the LIVE chip overlay.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/aspect-ratio",
@@ -4503,6 +4538,21 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "Inline verified check shown next to channel or author names, with default check-seal and artist music-seal variants.",
+    tags: ["youtube", "video", "tier:simple"],
+    props: [
+      {
+        name: "variant",
+        type: '"default" | "artist"',
+        default: "default",
+        description: "Check-seal vs music-artist seal.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md"',
+        default: "sm",
+        description: "Icon size.",
+      },
+    ],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     npmDeps: ["lucide-react"],
     examples: ["default"],
@@ -4513,6 +4563,20 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "A YouTube-style LIVE indicator pill with an optional pulsing dot and compact-formatted concurrent-viewer count.",
+    tags: ["youtube", "video", "tier:simple"],
+    props: [
+      {
+        name: "viewers",
+        type: "number",
+        description: "Concurrent viewers; compact-formatted when set.",
+      },
+      {
+        name: "pulse",
+        type: "boolean",
+        default: "true",
+        description: "Animate the live dot.",
+      },
+    ],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -4522,6 +4586,24 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "YouTube-style subscribe control with a two-state toggle and a notification-level dropdown menu.",
+    tags: ["youtube", "video", "tier:simple"],
+    props: [
+      {
+        name: "subscribed",
+        type: "boolean",
+        description: "Controlled subscribed state.",
+      },
+      {
+        name: "defaultSubscribed",
+        type: "boolean",
+        description: "Initial subscribed state when uncontrolled.",
+      },
+      {
+        name: "onSubscribedChange",
+        type: "(next: boolean) => void",
+        description: "Fired when subscribe state toggles.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/button",
@@ -4534,9 +4616,27 @@ export const components: ComponentDoc[] = [
   {
     slug: "chip-bar",
     name: "Chip bar",
-    category: "Video",
+    category: "UI",
     description:
       "YouTube-style single-select horizontal filter chip bar with edge fade and scroll affordance.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "options",
+        type: "string[]",
+        description: "Filter chip labels.",
+      },
+      {
+        name: "value",
+        type: "string",
+        description: "Controlled selected chip.",
+      },
+      {
+        name: "onValueChange",
+        type: "(value: string) => void",
+        description: "Fired when selection changes.",
+      },
+    ],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     npmDeps: ["lucide-react"],
     examples: ["default"],
@@ -4547,6 +4647,20 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "Vertical or horizontal stack of icon and compact-count action buttons, a YouTube Shorts-style like/comment/share rail.",
+    tags: ["youtube", "video", "tier:simple"],
+    props: [
+      {
+        name: "actions",
+        type: "ActionRailItem[]",
+        description: "Icon buttons with optional counts.",
+      },
+      {
+        name: "variant",
+        type: '"default" | "overlay"',
+        default: "default",
+        description: "Surface style for Shorts overlay vs inline.",
+      },
+    ],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -4555,7 +4669,74 @@ export const components: ComponentDoc[] = [
     name: "Video card",
     category: "Video",
     description:
-      "YouTube-style vertical video tile composing a thumbnail, channel byline, compact view/timestamp meta, and an overflow menu.",
+      "Versatile YouTube-style video item with vertical, compact, horizontal, overlay, and featured variants, composing a thumbnail, channel byline, custom badges/stats/actions, description, and overflow menu.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "variant",
+        type: '"default" | "compact" | "horizontal" | "overlay" | "featured"',
+        default: "default",
+        description:
+          "Switches between feed tile, compact tile, row, overlay, and featured treatments.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        default: "md",
+        description: "Controls title and avatar scale.",
+      },
+      {
+        name: "density",
+        type: '"comfortable" | "compact"',
+        default: "comfortable",
+        description: "Tightens spacing for dense surfaces.",
+      },
+      {
+        name: "title",
+        type: "string",
+        description: "Video title.",
+      },
+      {
+        name: "channelName",
+        type: "string",
+        description: "Channel display name.",
+      },
+      {
+        name: "thumbnailSrc",
+        type: "string",
+        description: "Poster image URL.",
+      },
+      {
+        name: "views",
+        type: "number",
+        description: "View count for meta line.",
+      },
+      {
+        name: "description",
+        type: "ReactNode",
+        description: "Optional search/featured-card supporting copy.",
+      },
+      {
+        name: "badges",
+        type: "ReactNode",
+        description: "Optional label row above the title.",
+      },
+      {
+        name: "stats",
+        type: "ReactNode",
+        description: "Custom meta line replacing views/timestamp.",
+      },
+      {
+        name: "actions",
+        type: "ReactNode",
+        description: "Inline action slot beside the body.",
+      },
+      {
+        name: "menuItems",
+        type: "OverflowMenuItem[]",
+        description: "Overflow ⋮ menu entries.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/thumbnail",
@@ -4565,17 +4746,72 @@ export const components: ComponentDoc[] = [
       "@byronwade/utils",
     ],
     npmDeps: ["lucide-react"],
-    examples: ["default"],
+    examples: ["default", "horizontal", "overlay", "featured"],
   },
   {
     slug: "video-shelf",
     name: "Video shelf",
     category: "Video",
     description:
-      "Titled, horizontally-scrolling content row with edge-fade, chevron controls, and an optional action, the YouTube home/category shelf.",
-    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+      "Versatile video content section with carousel, grid, rail, and stack layouts plus optional header copy, empty/loading states, item sizing, and scroll controls.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "variant",
+        type: '"carousel" | "grid" | "rail" | "stack"',
+        default: "carousel",
+        description: "Controls the shelf layout.",
+      },
+      {
+        name: "density",
+        type: '"comfortable" | "compact"',
+        default: "comfortable",
+        description: "Controls header and item spacing.",
+      },
+      {
+        name: "controls",
+        type: '"hover" | "always" | "none"',
+        default: "hover",
+        description: "Controls horizontal scroll-button visibility.",
+      },
+      {
+        name: "title",
+        type: "ReactNode",
+        description: "Optional shelf heading.",
+      },
+      {
+        name: "description",
+        type: "ReactNode",
+        description: "Optional copy under the title.",
+      },
+      {
+        name: "action",
+        type: "ReactNode",
+        description: "Trailing header action.",
+      },
+      {
+        name: "empty",
+        type: "ReactNode",
+        description: "State rendered when no children are provided.",
+      },
+      {
+        name: "loading",
+        type: "boolean",
+        description: "Render skeleton placeholders instead of children.",
+      },
+      {
+        name: "children",
+        type: "ReactNode",
+        description: "Shelf items.",
+      },
+    ],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/skeleton",
+      "@byronwade/utils",
+    ],
     npmDeps: ["lucide-react"],
-    examples: ["default", "watch-page"],
+    examples: ["default", "grid", "rail", "watch-page"],
   },
   {
     slug: "channel-header",
@@ -4583,6 +4819,24 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "YouTube-style channel page header with banner, avatar, verified handle and counts, subscribe/join actions, and section tabs.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "name",
+        type: "string",
+        description: "Channel display name.",
+      },
+      {
+        name: "subscribed",
+        type: "boolean",
+        description: "Controlled subscribe state for SubscribeButton.",
+      },
+      {
+        name: "tabs",
+        type: "{ value: string; label: string }[]",
+        description: "Optional section tabs under the header.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/avatar",
@@ -4600,6 +4854,24 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "Compact horizontal video row for watch-page up-next lists and search results, composing a thumbnail with title, channel, view/timestamp meta, and an overflow menu.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "title",
+        type: "string",
+        description: "Video title.",
+      },
+      {
+        name: "channelName",
+        type: "string",
+        description: "Channel name.",
+      },
+      {
+        name: "thumbnailSrc",
+        type: "string",
+        description: "Poster URL.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/thumbnail",
@@ -4616,6 +4888,24 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "Watch-page channel identity row: avatar, name with verified badge and subscriber count, plus a SubscribeButton and optional action slot.",
+    tags: ["youtube", "video", "tier:simple"],
+    props: [
+      {
+        name: "name",
+        type: "string",
+        description: "Channel name.",
+      },
+      {
+        name: "subscriberCount",
+        type: "number",
+        description: "Compact subscriber count.",
+      },
+      {
+        name: "verified",
+        type: "boolean",
+        description: "Show verified badge.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/avatar",
@@ -4626,11 +4916,57 @@ export const components: ComponentDoc[] = [
     examples: ["default"],
   },
   {
+    slug: "watch-meta-bar",
+    name: "Watch meta bar",
+    category: "Video",
+    description:
+      "Watch-page meta row pairing channel identity (left) with engagement actions (right) — the strip under the title on YouTube.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "channel",
+        type: "ReactNode",
+        description: "Left cluster — typically ChannelByline.",
+      },
+      {
+        name: "engagement",
+        type: "ReactNode",
+        description: "Right cluster — typically EngagementBar.",
+      },
+    ],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
     slug: "engagement-bar",
     name: "Engagement bar",
     category: "Video",
     description:
       "YouTube-style watch-page action row: connected like/dislike segmented pill, plus share, save, custom action, and overflow-menu pills.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "like",
+        type: "ToggleState",
+        description:
+          "Grouped like toggle `{ value, defaultValue, onValueChange }`.",
+      },
+      {
+        name: "dislike",
+        type: "ToggleState",
+        description: "Grouped dislike toggle.",
+      },
+      {
+        name: "save",
+        type: "ToggleState",
+        description: "Grouped save/watch-later toggle.",
+      },
+      {
+        name: "likeCount",
+        type: "number",
+        description: "Compact like count beside thumbs-up.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/separator",
@@ -4646,6 +4982,24 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       'YouTube watch-page description panel with a views/date header and collapsible body text that expands via "...more" / "Show less".',
+    tags: ["youtube", "video", "tier:simple"],
+    props: [
+      {
+        name: "views",
+        type: "number",
+        description: "View count in the header.",
+      },
+      {
+        name: "publishedAt",
+        type: "string",
+        description: "Relative or absolute date.",
+      },
+      {
+        name: "children",
+        type: "ReactNode",
+        description: "Description body (collapsible).",
+      },
+    ],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -4655,6 +5009,29 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "A YouTube-style threaded comment with author, like/dislike, reply, pinned/creator-heart tags, and a replies disclosure.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "author",
+        type: "string",
+        description: "Commenter display name.",
+      },
+      {
+        name: "body",
+        type: "string",
+        description: "Comment text.",
+      },
+      {
+        name: "likes",
+        type: "number",
+        description: "Like count.",
+      },
+      {
+        name: "pinned",
+        type: "boolean",
+        description: "Show pinned badge.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/avatar",
@@ -4670,6 +5047,29 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "YouTube-style comment composer: an avatar plus an underline text input that reveals Cancel/Comment actions on focus or input.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "value",
+        type: "string",
+        description: "Controlled comment text.",
+      },
+      {
+        name: "onValueChange",
+        type: "(value: string) => void",
+        description: "Fired as the user types.",
+      },
+      {
+        name: "open",
+        type: "boolean",
+        description: "Controlled expanded state (action row visible).",
+      },
+      {
+        name: "onOpenChange",
+        type: "(open: boolean) => void",
+        description: "Fired when expanded state changes.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/avatar",
@@ -4683,7 +5083,70 @@ export const components: ComponentDoc[] = [
     name: "Shorts player",
     category: "Video",
     description:
-      "A YouTube Shorts-style vertical 9:16 player with a right-side engagement rail and a bottom-left author, caption, and sound overlay.",
+      "Versatile YouTube Shorts-style 9:16 player with preview and immersive variants, configurable engagement rail placement, caption modes, status/top-action slots, and replaceable author/overlay content.",
+    tags: ["youtube", "video", "tier:advanced"],
+    props: [
+      {
+        name: "variant",
+        type: '"default" | "preview" | "immersive"',
+        default: "default",
+        description: "Controls the frame treatment.",
+      },
+      {
+        name: "rail",
+        type: '"right" | "left" | "hidden"',
+        default: "right",
+        description: "Places or hides the engagement rail.",
+      },
+      {
+        name: "density",
+        type: '"comfortable" | "compact"',
+        default: "comfortable",
+        description: "Tunes overlay spacing and caption scale.",
+      },
+      {
+        name: "captionMode",
+        type: '"clamped" | "expanded" | "hidden"',
+        default: "clamped",
+        description: "Controls caption visibility and line clamp.",
+      },
+      {
+        name: "author",
+        type: "ShortsAuthor",
+        description: "Required author identity.",
+      },
+      {
+        name: "src",
+        type: "string",
+        description: "Video source URL.",
+      },
+      {
+        name: "like",
+        type: "ToggleState",
+        description: "Grouped like toggle for the action rail.",
+      },
+      {
+        name: "play",
+        type: "ToggleState",
+        description: "Grouped play/pause for built-in video.",
+      },
+      {
+        name: "caption",
+        type: "ReactNode",
+        description: "Bottom caption overlay.",
+      },
+      {
+        name: "authorAction",
+        type: "ReactNode",
+        description:
+          "Custom author action replacing the built-in follow button.",
+      },
+      {
+        name: "topActions",
+        type: "ReactNode",
+        description: "Custom controls near the top edge.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/action-rail",
@@ -4693,14 +5156,65 @@ export const components: ComponentDoc[] = [
       "@byronwade/utils",
     ],
     npmDeps: ["lucide-react"],
-    examples: ["default"],
+    examples: ["default", "preview", "immersive"],
   },
   {
     slug: "mini-player",
     name: "Mini player",
     category: "Video",
     description:
-      "Picture-in-picture mini player card with a play/pause poster overlay, progress, and close/expand controls.",
+      "Picture-in-picture mini player with floating, inline, and dock variants, collapsed/expanded states, queue metadata, action slots, progress, and close/expand controls.",
+    tags: ["youtube", "video", "tier:simple"],
+    props: [
+      {
+        name: "variant",
+        type: '"floating" | "inline" | "dock"',
+        default: "floating",
+        description: "Controls the mini-player layout.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        default: "md",
+        description: "Controls player scale.",
+      },
+      {
+        name: "state",
+        type: '"default" | "collapsed" | "expanded"',
+        default: "default",
+        description: "Controls how much secondary content is shown.",
+      },
+      {
+        name: "title",
+        type: "string",
+        description: "Now-playing title.",
+      },
+      {
+        name: "playing",
+        type: "boolean",
+        description: "Controlled play state.",
+      },
+      {
+        name: "queueLabel",
+        type: "ReactNode",
+        description: "Optional playlist or queue context.",
+      },
+      {
+        name: "metadata",
+        type: "ReactNode",
+        description: "Optional channel, episode, or watch-progress details.",
+      },
+      {
+        name: "actions",
+        type: "ReactNode",
+        description: "Secondary control slot.",
+      },
+      {
+        name: "onPlayingChange",
+        type: "(playing: boolean) => void",
+        description: "Fired when play toggles.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/thumbnail",
@@ -4708,7 +5222,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/utils",
     ],
     npmDeps: ["lucide-react"],
-    examples: ["default"],
+    examples: ["default", "dock", "expanded"],
   },
   {
     slug: "chapter-list",
@@ -4716,6 +5230,19 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "A YouTube-style chapter list with timestamps, thumbnails, and an active chapter derived from the playhead.",
+    tags: ["youtube", "video", "tier:advanced"],
+    props: [
+      {
+        name: "chapters",
+        type: "Chapter[]",
+        description: "Timestamped chapter entries.",
+      },
+      {
+        name: "currentTime",
+        type: "number",
+        description: "Playhead seconds for active chapter.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/thumbnail",
@@ -4729,6 +5256,14 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "YouTube-style player settings menu: gear-triggered dropdown of setting groups (quality, speed, subtitles), each opening a single-select radio submenu.",
+    tags: ["youtube", "video", "tier:intermediate"],
+    props: [
+      {
+        name: "groups",
+        type: "PlaybackMenuGroup[]",
+        description: "Quality, speed, subtitles setting groups.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/dropdown-menu",
@@ -4743,6 +5278,24 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "A YouTube Studio content-table row composing a selection checkbox, thumbnail, title/description, visibility status, date, and compact mono view/comment/like metrics with an overflow menu.",
+    tags: ["youtube", "video", "tier:advanced"],
+    props: [
+      {
+        name: "title",
+        type: "string",
+        description: "Video title.",
+      },
+      {
+        name: "visibility",
+        type: '"public" | "unlisted" | "private" | "draft" | "scheduled"',
+        description: "Studio visibility status.",
+      },
+      {
+        name: "selected",
+        type: "boolean",
+        description: "Controlled row selection checkbox.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/thumbnail",
@@ -4761,6 +5314,24 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "YouTube Studio-style upload/processing row: preview, filename, progress bar, status badge, and a cancel/retry action.",
+    tags: ["youtube", "video", "tier:advanced"],
+    props: [
+      {
+        name: "filename",
+        type: "string",
+        description: "Upload file name.",
+      },
+      {
+        name: "progress",
+        type: "number",
+        description: "Processing progress 0–100.",
+      },
+      {
+        name: "status",
+        type: "string",
+        description: "Upload/processing status label.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/progress",
@@ -4779,6 +5350,24 @@ export const components: ComponentDoc[] = [
     category: "Video",
     description:
       "A YouTube Studio comment-moderation row with approve/remove/heart/reply actions, a status tag, and optional video context.",
+    tags: ["youtube", "video", "tier:advanced"],
+    props: [
+      {
+        name: "author",
+        type: "string",
+        description: "Commenter name.",
+      },
+      {
+        name: "body",
+        type: "string",
+        description: "Comment text.",
+      },
+      {
+        name: "status",
+        type: "string",
+        description: "Moderation status tag.",
+      },
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/avatar",
@@ -4827,8 +5416,20 @@ export const components: ComponentDoc[] = [
     description:
       "Token-themed OHLC candlestick chart rendered in-house as SVG: bullish candles success-toned, bearish destructive-toned, an optional bottom volume band, a background grid, and an optional crosshair. All geometry is computed by the pure `market` lib from numeric props, so it renders deterministically.",
     registryDeps: ["@byronwade/market"],
-    examples: ["default"],
+    examples: ["default", "interactive", "fill"],
     tags: ["tradingview", "market"],
+  },
+  {
+    slug: "lightweight-chart",
+    name: "Lightweight chart",
+    category: "Market",
+    description:
+      "Pro financial chart on TradingView Lightweight Charts — token-mapped candlestick, line, and area series with optional volume histogram, crosshair, pan/zoom, and fill mode for terminal layouts.",
+    npmDeps: ["lightweight-charts"],
+    registryDeps: ["@byronwade/market", "@byronwade/chart-theme"],
+    examples: ["default", "line", "area", "fill"],
+    demoContext: { skipSurfaceWrapper: true },
+    tags: ["tradingview", "market", "chart"],
   },
   {
     slug: "depth-chart",
@@ -4897,7 +5498,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/segmented-control",
       "@byronwade/toggle-group",
     ],
-    examples: ["default"],
+    examples: ["default", "compact"],
     tags: ["tradingview", "market"],
   },
   {
@@ -4905,14 +5506,16 @@ export const components: ComponentDoc[] = [
     name: "Chart panel",
     category: "Market",
     description:
-      "Chart panel composite, chart-toolbar atop a candlestick chart (or sparkline fallback for line/area modes) with controlled/uncontrolled interval.",
+      'Chart panel composite — chart-toolbar atop SVG candlestick/sparkline (default) or engine="pro" lightweight-chart with controlled/uncontrolled interval and chart type.',
     registryDeps: [
       "@byronwade/chart-toolbar",
       "@byronwade/candlestick-chart",
+      "@byronwade/lightweight-chart",
       "@byronwade/sparkline",
       "@byronwade/market",
     ],
-    examples: ["default"],
+    examples: ["default", "pro", "interactive"],
+    demoContext: { skipSurfaceWrapper: true },
     tags: ["tradingview", "market"],
   },
   {
@@ -4935,13 +5538,13 @@ export const components: ComponentDoc[] = [
     name: "Market depth",
     category: "Market",
     description:
-      "Market depth panel, stacks depth-chart over order-book (or shows either view alone) with shared book data and price-select passthrough.",
+      "Market depth panel, stacks or splits depth-chart and order-book with panel/terminal variants, compact density, header metrics, empty/footer slots, chart sizing, book layout, and price-select passthrough.",
     registryDeps: [
       "@byronwade/depth-chart",
       "@byronwade/order-book",
       "@byronwade/market",
     ],
-    examples: ["default"],
+    examples: ["default", "split-panel"],
     tags: ["tradingview", "market"],
   },
   {
@@ -5074,7 +5677,7 @@ export const components: ComponentDoc[] = [
     name: "Market news",
     category: "Market",
     description:
-      "News feed rows, source avatar, headline, relative-time, sentiment badge, and related-symbol price-change chips.",
+      "News feed rows with source avatar, headline, relative-time, sentiment badge, related-symbol price-change chips, header/action/footer slots, list/grid layouts, terminal variant, filtering, loading, empty, selected, and disabled states.",
     registryDeps: [
       "@byronwade/avatar",
       "@byronwade/badge",
@@ -5082,7 +5685,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/price-change",
       "@byronwade/market",
     ],
-    examples: ["default"],
+    examples: ["default", "terminal"],
     tags: ["tradingview", "market"],
   },
   {
@@ -5159,7 +5762,8 @@ export const components: ComponentDoc[] = [
     description:
       "Multi-chart layout shell, 1×2 or 2×2 grid of bordered panel slots for composing multiple `chart-panel` instances.",
     registryDeps: ["@byronwade/chart-panel"],
-    examples: ["default", "trading-desk"],
+    examples: ["default", "pro", "two-by-two", "trading-desk"],
+    demoContext: { skipSurfaceWrapper: true },
     tags: ["tradingview", "market"],
   },
   {
@@ -5270,7 +5874,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/slider",
     ],
     npmDeps: ["lucide-react"],
-    examples: ["default"],
+    examples: ["default", "bar"],
     tags: ["tradingview", "market"],
   },
   {

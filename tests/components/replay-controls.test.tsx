@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 import { axe } from "vitest-axe"
@@ -11,6 +11,18 @@ describe("ReplayControls", () => {
     expect(screen.getByRole("button", { name: /play replay/i })).toBeInTheDocument()
     expect(screen.getByRole("button", { name: /step back/i })).toBeInTheDocument()
     expect(screen.getByRole("button", { name: /step forward/i })).toBeInTheDocument()
+  })
+
+  it("calls onPlayingChange when toggling", async () => {
+    const user = userEvent.setup()
+    const onPlayingChange = vi.fn()
+    render(
+      <ReplayControls defaultPlaying={false} onPlayingChange={onPlayingChange} />,
+    )
+    await user.click(screen.getByRole("button", { name: /play replay/i }))
+    expect(onPlayingChange).toHaveBeenCalledWith(true)
+    await user.click(screen.getByRole("button", { name: /pause replay/i }))
+    expect(onPlayingChange).toHaveBeenCalledWith(false)
   })
 
   it("calls onPlay and onPause when toggling", async () => {
@@ -33,6 +45,15 @@ describe("ReplayControls", () => {
     render(<ReplayControls speed="1x" onSpeedChange={onSpeedChange} />)
     await user.click(screen.getByRole("button", { name: "2×" }))
     expect(onSpeedChange).toHaveBeenCalledWith("2x")
+  })
+
+  it("calls onSeek when the slider value changes", () => {
+    const onSeek = vi.fn()
+    render(<ReplayControls duration={100} onSeek={onSeek} />)
+    fireEvent.change(screen.getByRole("slider", { name: /replay position/i }), {
+      target: { value: "40" },
+    })
+    expect(onSeek).toHaveBeenCalledWith(40)
   })
 
   it("calls step callbacks", async () => {
@@ -58,6 +79,20 @@ describe("ReplayControls", () => {
       "aria-pressed",
       "true",
     )
+  })
+
+  it("renders bar variant inline without slider", () => {
+    const { container } = render(
+      <ReplayControls variant="bar" showSlider={false} position={12} duration={71} />,
+    )
+    expect(container.querySelector('[data-slot="replay-controls"]')).toHaveAttribute(
+      "data-variant",
+      "bar",
+    )
+    expect(
+      screen.queryByRole("slider", { name: /replay position/i }),
+    ).not.toBeInTheDocument()
+    expect(screen.getByText("12/71")).toBeInTheDocument()
   })
 
   it("has no accessibility violations", async () => {

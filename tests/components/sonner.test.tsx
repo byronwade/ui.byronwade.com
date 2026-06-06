@@ -2,7 +2,7 @@
  * Exhaustive tests for the Toaster component in @/components/ui/sonner.
  *
  * The component is a thin wrapper around the `sonner` library that:
- *   - wires up `next-themes` for automatic light/dark switching
+ *   - wires up `@wrksz/themes` for automatic light/dark switching
  *   - injects custom Lucide icons (success/info/warning/error/loading)
  *   - sets CSS-variable style overrides for our design-system tokens
  *   - forces `cn-toast` onto every `toastOptions.classNames.toast`
@@ -63,9 +63,9 @@ import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from "vite
 import { axe } from "vitest-axe";
 import { toast } from "sonner";
 
-// ── Mock next-themes ──────────────────────────────────────────────────────────
-vi.mock("next-themes", () => ({
-  useTheme: () => ({ theme: "light" }),
+// ── Mock @wrksz/themes ────────────────────────────────────────────────────────
+vi.mock("@wrksz/themes/client", () => ({
+  useTheme: () => ({ theme: "light", resolvedTheme: "light" }),
 }));
 
 // ── Mock window.matchMedia (needed for sonner theme="system") ─────────────────

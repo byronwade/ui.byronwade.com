@@ -11,7 +11,7 @@
 import { useEffect, useRef, useState } from "react"
 import { motion } from "motion/react"
 import DottedMap from "dotted-map"
-import { useTheme } from "next-themes"
+import { useTheme } from "@wrksz/themes/client"
 
 import { cn } from "@/lib/utils"
 
@@ -50,7 +50,8 @@ export function WorldMap({
   className,
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null)
-  const { theme } = useTheme()
+  const { resolvedTheme, theme } = useTheme()
+  const activeTheme = resolvedTheme ?? theme
   const [svgMap, setSvgMap] = useState("")
 
   // Resolve the dotted base-map color from the design tokens so it re-skins with
@@ -60,7 +61,7 @@ export function WorldMap({
     const dotColor =
       root.getPropertyValue("--muted-foreground").trim() || "currentColor"
     setSvgMap(baseMapSvg(dotColor))
-  }, [theme])
+  }, [activeTheme])
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360)

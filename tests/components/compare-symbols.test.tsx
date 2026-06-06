@@ -1,5 +1,5 @@
 import * as React from "react"
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 import { axe } from "vitest-axe"
@@ -28,6 +28,44 @@ describe("CompareSymbols", () => {
   it("shows add button when onAdd is provided and under max", () => {
     render(<CompareSymbols symbols={symbols} max={5} onAdd={vi.fn()} />)
     expect(screen.getByRole("button", { name: /add symbol/i })).toBeInTheDocument()
+  })
+
+  it("calls onSelect when a chip is clicked", async () => {
+    const user = userEvent.setup()
+    const onSelect = vi.fn()
+    render(
+      <CompareSymbols symbols={symbols} activeSymbol="AAPL" onSelect={onSelect} />,
+    )
+    await user.click(screen.getByRole("button", { name: /MSFT/i }))
+    expect(onSelect).toHaveBeenCalledWith("MSFT")
+  })
+
+  it("calls onSelect from keyboard activation", () => {
+    const onSelect = vi.fn()
+    render(<CompareSymbols symbols={symbols} onSelect={onSelect} />)
+    const aapl = screen.getByRole("button", { name: /AAPL/i })
+    fireEvent.keyDown(aapl, { key: "Enter" })
+    fireEvent.keyDown(aapl, { key: " " })
+    expect(onSelect).toHaveBeenNthCalledWith(1, "AAPL")
+    expect(onSelect).toHaveBeenNthCalledWith(2, "AAPL")
+  })
+
+  it("does not select the chip when removing a symbol", async () => {
+    const user = userEvent.setup()
+    const onRemove = vi.fn()
+    const onSelect = vi.fn()
+    render(
+      <CompareSymbols
+        symbols={symbols}
+        onRemove={onRemove}
+        onSelect={onSelect}
+      />,
+    )
+    await user.click(
+      screen.getByRole("button", { name: "Remove AAPL from compare" }),
+    )
+    expect(onRemove).toHaveBeenCalledWith("AAPL")
+    expect(onSelect).not.toHaveBeenCalled()
   })
 
   it("hides add button when at max symbols", () => {

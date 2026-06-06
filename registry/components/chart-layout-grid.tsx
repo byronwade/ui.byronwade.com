@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-const chartLayoutGridVariants = cva("grid w-full gap-3", {
+const chartLayoutGridVariants = cva("grid w-full gap-2", {
   variants: {
     layout: {
       "1x2": "grid-cols-1 md:grid-cols-2",
@@ -42,7 +42,7 @@ function ChartLayoutGrid({
           key={index}
           data-slot="chart-layout-grid-panel"
           data-panel-index={index}
-          className="min-w-0 rounded-xl border border-border bg-card p-2"
+          className="flex min-h-72 min-w-0 flex-col overflow-hidden rounded-lg border border-border/70 bg-card/80 p-3"
         >
           {panel}
         </div>

@@ -686,4 +686,36 @@ describe("MediaPlayer preset", () => {
     )
     expect(await axe(container)).toHaveNoViolations()
   }, 20000)
+
+  it("wraps scrubber + controls in a chrome layer", () => {
+    const { container } = render(<MediaPlayer src="/v.mp4" />)
+    expect(
+      container.querySelector('[data-slot="video-player-chrome"]'),
+    ).not.toBeNull()
+    expect(
+      container.querySelector('[data-slot="video-player-scrubber"]'),
+    ).not.toBeNull()
+  })
+
+  it("renders Next and Theater controls when handlers are provided", () => {
+    const { container } = render(
+      <MediaPlayer src="/v.mp4" onNext={() => {}} defaultTheater />,
+    )
+    expect(
+      container.querySelector('[data-slot="video-player-next-button"]'),
+    ).not.toBeNull()
+    expect(
+      container.querySelector('[data-slot="video-player-theater-button"]'),
+    ).toHaveAttribute("aria-pressed", "true")
+    expect(
+      container.querySelector('[data-slot="video-player-stage"]'),
+    ).toHaveAttribute("data-theater", "true")
+  })
+
+  it("omits the Next control when onNext is absent", () => {
+    const { container } = render(<MediaPlayer src="/v.mp4" />)
+    expect(
+      container.querySelector('[data-slot="video-player-next-button"]'),
+    ).toBeNull()
+  })
 })

@@ -19,6 +19,8 @@ interface VariantPickerProps extends Omit<
   options: VariantOption[]
   value?: Record<string, string>
   defaultValue?: Record<string, string>
+  onValueChange?: (next: Record<string, string>) => void
+  /** @deprecated Prefer onValueChange */
   onChange?: (next: Record<string, string>) => void
 }
 
@@ -26,6 +28,7 @@ function VariantPicker({
   options,
   value,
   defaultValue,
+  onValueChange,
   onChange,
   className,
   ...props
@@ -43,6 +46,7 @@ function VariantPicker({
     if (next.length === 0) return
     const merged = { ...selection, [name]: next[0] }
     if (!isControlled) setInternal(merged)
+    onValueChange?.(merged)
     onChange?.(merged)
   }
 

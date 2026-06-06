@@ -1,3 +1,5 @@
+"use client"
+
 import { MediaPlayer } from "@/components/ui/video-player"
 
 const SRC =
@@ -5,13 +7,13 @@ const SRC =
 
 export default function Example() {
   return (
-    <div className="w-full max-w-2xl p-6">
+    <div className="w-full max-w-4xl p-6">
       <MediaPlayer
         src={SRC}
         poster="https://placehold.co/1280x720/png"
-        title="Big Buck Bunny"
         ambient
         resumeKey="bbb-demo"
+        onNext={() => {}}
         chapters={[
           { startTime: 0, title: "Intro" },
           { startTime: 4, title: "The meadow" },

@@ -1,6 +1,7 @@
 "use client"
 
-import type { ComponentPropsWithoutRef } from "react"
+import type { ComponentPropsWithoutRef, ReactNode } from "react"
+import { useMemo } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -25,39 +26,165 @@ const sentimentTone: Record<
   neutral: "bg-muted text-muted-foreground",
 }
 
-const marketNewsVariants = cva("w-full max-w-2xl rounded-xl border border-border bg-card", {
+const marketNewsVariants = cva("w-full max-w-2xl overflow-hidden border border-border", {
   variants: {
+    variant: {
+      default: "rounded-xl bg-card",
+      feed: "rounded-lg bg-background",
+      terminal: "rounded-lg bg-background font-mono",
+    },
+    layout: {
+      list: "",
+      grid: "",
+    },
+    density: {
+      compact: "",
+      comfortable: "",
+    },
     compact: {
       true: "[&_[data-slot=news-item]]:py-2 [&_[data-slot=news-item]]:gap-2",
       false: "",
     },
   },
   defaultVariants: {
+    variant: "default",
+    layout: "list",
+    density: "comfortable",
     compact: false,
+  },
+})
+
+const newsListVariants = cva("", {
+  variants: {
+    layout: {
+      list: "divide-y divide-border",
+      grid: "grid gap-2 p-2 sm:grid-cols-2",
+    },
+  },
+  defaultVariants: {
+    layout: "list",
   },
 })
 
 type MarketNewsProps = Omit<ComponentPropsWithoutRef<"div">, "children"> &
   VariantProps<typeof marketNewsVariants> & {
     items?: NewsItem[]
+    title?: ReactNode
+    description?: ReactNode
+    actions?: ReactNode
+    footer?: ReactNode
+    empty?: ReactNode
+    loading?: boolean
+    loadingItems?: number
+    limit?: number
+    sentiment?: NewsItem["sentiment"] | "all"
+    source?: string
+    selectedId?: string
+    disabled?: boolean
+    showSource?: boolean
+    showSentiment?: boolean
+    showSymbols?: boolean
     onSelect?: (id: string) => void
   }
 
 function MarketNews({
   items = DEFAULT_ITEMS,
+  title,
+  description,
+  actions,
+  footer,
+  empty = "No market headlines matched.",
+  loading = false,
+  loadingItems = 4,
+  limit,
+  sentiment = "all",
+  source,
+  selectedId,
+  disabled = false,
+  showSource = true,
+  showSentiment = true,
+  showSymbols = true,
   onSelect,
+  variant = "default",
+  layout = "list",
+  density = "comfortable",
   compact = false,
   className,
   ...props
 }: MarketNewsProps) {
+  const visibleItems = useMemo(() => {
+    const filtered = items.filter((item) => {
+      if (sentiment !== "all" && item.sentiment !== sentiment) return false
+      if (source && item.source !== source) return false
+      return true
+    })
+
+    return typeof limit === "number" ? filtered.slice(0, limit) : filtered
+  }, [items, limit, sentiment, source])
+
+  const itemPadding =
+    density === "compact" || compact
+      ? "gap-2 px-3 py-2"
+      : "gap-3 px-4 py-3"
+
   return (
     <div
       data-slot="market-news"
-      className={cn(marketNewsVariants({ compact }), className)}
+      data-variant={variant}
+      data-layout={layout}
+      data-density={density}
+      data-disabled={disabled || undefined}
+      className={cn(
+        marketNewsVariants({ variant, layout, density, compact }),
+        className,
+      )}
       {...props}
     >
-      <ul className="divide-y divide-border">
-        {items.map((item) => {
+      {title || description || actions ? (
+        <div
+          data-slot="market-news-header"
+          className="flex items-start justify-between gap-3 border-b border-border px-4 py-3"
+        >
+          <div className="min-w-0">
+            {title ? (
+              <h3 className="text-sm font-medium tracking-normal">{title}</h3>
+            ) : null}
+            {description ? (
+              <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+            ) : null}
+          </div>
+          {actions ? <div className="shrink-0">{actions}</div> : null}
+        </div>
+      ) : null}
+
+      {loading ? (
+        <div data-slot="market-news-loading" className="space-y-0 divide-y divide-border">
+          {Array.from({ length: loadingItems }, (_, index) => (
+            <div
+              key={index}
+              data-testid="market-news-skeleton"
+              data-slot="market-news-skeleton"
+              className={cn("flex items-start", itemPadding)}
+            >
+              <div className="size-8 shrink-0 rounded-full bg-muted" />
+              <div className="min-w-0 flex-1 space-y-2">
+                <div className="h-3 w-28 rounded-sm bg-muted" />
+                <div className="h-4 w-full rounded-sm bg-muted" />
+                <div className="h-3 w-36 rounded-sm bg-muted" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : visibleItems.length === 0 ? (
+        <div
+          data-slot="market-news-empty"
+          className="px-4 py-8 text-center text-sm text-muted-foreground"
+        >
+          {empty}
+        </div>
+      ) : (
+        <ul className={cn(newsListVariants({ layout }))}>
+          {visibleItems.map((item) => {
           const symbol = item.symbols?.[0]
           const quote = symbol ? makeQuote({ seed: symbol.length * 17 }) : null
           return (
@@ -66,8 +193,19 @@ function MarketNews({
                 type="button"
                 data-slot="news-item"
                 data-news-id={item.id}
-                className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors outline-none hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50"
-                onClick={() => onSelect?.(item.id)}
+                data-selected={selectedId === item.id || undefined}
+                disabled={disabled}
+                className={cn(
+                  "flex w-full items-start text-left transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-60",
+                  itemPadding,
+                  layout === "grid" ? "rounded-md border border-border" : "",
+                  selectedId === item.id
+                    ? "bg-brand/10 ring-1 ring-brand/30"
+                    : "hover:bg-muted/40",
+                )}
+                onClick={() => {
+                  if (!disabled) onSelect?.(item.id)
+                }}
               >
                 <Avatar className="size-8 border border-border">
                   <AvatarFallback className="text-xs font-medium">
@@ -76,13 +214,17 @@ function MarketNews({
                 </Avatar>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs text-muted-foreground">{item.source}</span>
+                    {showSource ? (
+                      <span className="text-xs text-muted-foreground">
+                        {item.source}
+                      </span>
+                    ) : null}
                     <RelativeTime time={new Date(item.time)} className="inline-grid">
                       <RelativeTimeZone zone="UTC">
                         <RelativeTimeZoneDisplay className="font-mono text-[11px] text-muted-foreground" />
                       </RelativeTimeZone>
                     </RelativeTime>
-                    {item.sentiment ? (
+                    {showSentiment && item.sentiment ? (
                       <Badge
                         variant="outline"
                         className={sentimentTone[item.sentiment]}
@@ -92,7 +234,7 @@ function MarketNews({
                     ) : null}
                   </div>
                   <p className="mt-1 text-sm leading-snug">{item.headline}</p>
-                  {symbol && quote ? (
+                  {showSymbols && symbol && quote ? (
                     <div className="mt-2 flex items-center gap-2">
                       <Badge variant="outline">{symbol}</Badge>
                       <PriceChange
@@ -106,8 +248,18 @@ function MarketNews({
               </button>
             </li>
           )
-        })}
-      </ul>
+          })}
+        </ul>
+      )}
+
+      {footer ? (
+        <div
+          data-slot="market-news-footer"
+          className="border-t border-border px-4 py-3 text-xs text-muted-foreground"
+        >
+          {footer}
+        </div>
+      ) : null}
     </div>
   )
 }

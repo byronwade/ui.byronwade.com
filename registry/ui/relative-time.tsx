@@ -76,6 +76,7 @@ const zoneRowSize: Record<RelativeTimeSize, string> = {
 
 type RelativeTimeContextType = {
   time: Date
+  ready: boolean
   dateFormatOptions?: Intl.DateTimeFormatOptions
   timeFormatOptions?: Intl.DateTimeFormatOptions
   size: RelativeTimeSize
@@ -83,6 +84,7 @@ type RelativeTimeContextType = {
 
 const RelativeTimeContext = createContext<RelativeTimeContextType>({
   time: new Date(0),
+  ready: false,
   dateFormatOptions: { dateStyle: "long" },
   timeFormatOptions: { hour: "2-digit", minute: "2-digit" },
   size: "default",
@@ -107,21 +109,27 @@ export const RelativeTime = ({
   className,
   ...props
 }: RelativeTimeProps) => {
+  const isControlled = controlledTime !== undefined
+  const hasDefault = defaultTime !== undefined
+  const [ready, setReady] = useState(isControlled || hasDefault)
   const [time, setTime] = useControllableState<Date>({
-    defaultProp: defaultTime ?? new Date(),
+    defaultProp: defaultTime ?? new Date(0),
     prop: controlledTime,
     onChange: onTimeChange,
   })
 
   useEffect(() => {
-    if (controlledTime) return
-    const interval = setInterval(() => setTime(new Date()), 1000)
+    if (isControlled) return
+    setReady(true)
+    const tick = () => setTime(new Date())
+    if (!hasDefault) tick()
+    const interval = setInterval(tick, 1000)
     return () => clearInterval(interval)
-  }, [setTime, controlledTime])
+  }, [setTime, isControlled, hasDefault])
 
   return (
     <RelativeTimeContext.Provider
-      value={{ time, dateFormatOptions, timeFormatOptions, size }}
+      value={{ time, ready, dateFormatOptions, timeFormatOptions, size }}
     >
       <div
         data-slot="relative-time"
@@ -165,7 +173,7 @@ export const RelativeTimeZoneDisplay = ({
   className,
   ...props
 }: RelativeTimeZoneDisplayProps) => {
-  const { time, timeFormatOptions } = useContext(RelativeTimeContext)
+  const { time, timeFormatOptions, ready } = useContext(RelativeTimeContext)
   const { zone } = useContext(RelativeTimeZoneContext)
   return (
     <div
@@ -173,7 +181,7 @@ export const RelativeTimeZoneDisplay = ({
       className={cn("pl-8 text-muted-foreground tabular-nums", className)}
       {...props}
     >
-      {formatTime(time, zone, timeFormatOptions)}
+      {ready ? formatTime(time, zone, timeFormatOptions) : "--:--:--"}
     </div>
   )
 }
@@ -184,11 +192,11 @@ export const RelativeTimeZoneDate = ({
   className,
   ...props
 }: RelativeTimeZoneDateProps) => {
-  const { time, dateFormatOptions } = useContext(RelativeTimeContext)
+  const { time, dateFormatOptions, ready } = useContext(RelativeTimeContext)
   const { zone } = useContext(RelativeTimeZoneContext)
   return (
     <div data-slot="relative-time-zone-date" className={className} {...props}>
-      {formatDate(time, zone, dateFormatOptions)}
+      {ready ? formatDate(time, zone, dateFormatOptions) : "--"}
     </div>
   )
 }
