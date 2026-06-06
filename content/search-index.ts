@@ -84,7 +84,8 @@ const pageEntries: SearchEntry[] = [
     label: "Application catalog",
     href: "/catalog?surface=app",
     meta: "Catalog",
-    keywords: "application app dashboard forms components catalog filter surface",
+    keywords:
+      "application app dashboard forms components catalog filter surface",
   },
   {
     kind: "Section",

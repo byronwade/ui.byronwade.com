@@ -49,9 +49,9 @@ export default async function CatalogPage({
           One registry, two surfaces.
         </h1>
         <DocsIntro>
-          Application UI and marketing/editorial share foundation tokens — filter
-          by surface, search by name or tag, and open any component for variants
-          and install.
+          Application UI and marketing/editorial share foundation tokens —
+          filter by surface, search by name or tag, and open any component for
+          variants and install.
         </DocsIntro>
       </header>
       <div className="mt-10">

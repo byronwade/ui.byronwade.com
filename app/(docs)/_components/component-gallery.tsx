@@ -138,8 +138,7 @@ export function ComponentGallery({
   )
 
   const filtered = React.useMemo(
-    () =>
-      filterCatalog(items, { query, groups, tags, surface, sort }),
+    () => filterCatalog(items, { query, groups, tags, surface, sort }),
     [items, query, groups, tags, surface, sort],
   )
 
@@ -152,7 +151,10 @@ export function ComponentGallery({
     )
 
   const hasFilters =
-    groups.length > 0 || tags.length > 0 || query.trim() !== "" || surface !== "all"
+    groups.length > 0 ||
+    tags.length > 0 ||
+    query.trim() !== "" ||
+    surface !== "all"
   const clearAll = () => {
     setGroups([])
     setTags([])
@@ -163,7 +165,10 @@ export function ComponentGallery({
   return (
     <div>
       <div className="mb-5">
-        <SurfaceFilterControl value={surface} onValueChange={setSurfaceFilter} />
+        <SurfaceFilterControl
+          value={surface}
+          onValueChange={setSurfaceFilter}
+        />
       </div>
 
       <div className="relative mb-4">

@@ -88,7 +88,9 @@ function collectLinks(): (NavLink & { group: string; surface?: string })[] {
 
   for (const surface of catalogSurfaces) {
     for (const cat of categoriesForSurface(surface.id)) {
-      for (const doc of byCategory(cat).filter((c) => getSurface(c) === surface.id)) {
+      for (const doc of byCategory(cat).filter(
+        (c) => getSurface(c) === surface.id,
+      )) {
         links.push({
           href: `/docs/${doc.slug}`,
           label: doc.name,
@@ -149,9 +151,7 @@ function CategoryCollapsible({
     <Collapsible open={open} onOpenChange={setOpen} className="group/cat">
       <SidebarMenuItem>
         <CollapsibleTrigger
-          render={
-            <SidebarMenuButton render={<button type="button" />} />
-          }
+          render={<SidebarMenuButton render={<button type="button" />} />}
         >
           <ChevronRight className="transition-transform group-data-[open]/cat:rotate-90" />
           <span>{label}</span>

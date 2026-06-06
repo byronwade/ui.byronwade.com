@@ -1,10 +1,21 @@
 import * as React from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { describe, it, expect } from "vitest"
+import { describe, it, expect, vi, beforeEach } from "vitest"
 import { axe } from "vitest-axe"
 import { ComponentGallery } from "@/app/(docs)/_components/component-gallery"
 import type { CatalogItem } from "@/content/catalog"
+
+const replace = vi.fn()
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ replace }),
+  useSearchParams: () => new URLSearchParams(),
+}))
+
+beforeEach(() => {
+  replace.mockClear()
+})
 
 const items: CatalogItem[] = [
   {
