@@ -16,6 +16,51 @@ import {
   TickerPriceChange,
 } from "@/components/ui/ticker";
 
+describe("Ticker — variant (style)", () => {
+  const ticker = () => screen.getByRole("button");
+
+  it("is bare by default (no container chrome)", () => {
+    render(
+      <Ticker>
+        <TickerSymbol symbol="aa" />
+      </Ticker>,
+    );
+    expect(ticker()).not.toHaveClass("bg-muted");
+    expect(ticker()).not.toHaveClass("border");
+  });
+
+  it("applies the soft variant", () => {
+    render(
+      <Ticker variant="soft">
+        <TickerSymbol symbol="aa" />
+      </Ticker>,
+    );
+    expect(ticker()).toHaveClass("bg-muted");
+    expect(ticker()).toHaveClass("rounded-full");
+  });
+
+  it("applies the outline variant", () => {
+    render(
+      <Ticker variant="outline">
+        <TickerSymbol symbol="aa" />
+      </Ticker>,
+    );
+    expect(ticker()).toHaveClass("border");
+    expect(ticker()).toHaveClass("rounded-full");
+  });
+
+  it("applies the card variant", () => {
+    render(
+      <Ticker variant="card">
+        <TickerSymbol symbol="aa" />
+      </Ticker>,
+    );
+    expect(ticker()).toHaveClass("bg-card");
+    expect(ticker()).toHaveClass("rounded-lg");
+    expect(ticker()).toHaveClass("shadow-sm");
+  });
+});
+
 describe("Ticker", () => {
   it("renders a button row with the symbol uppercased", () => {
     render(

@@ -1963,6 +1963,50 @@ export const components: ComponentDoc[] = [
     ],
   },
   {
+    slug: "app-shell",
+    name: "App Shell",
+    category: "Patterns",
+    description:
+      "A single variant-driven application layout primitive — one `variant` prop swaps between ten full page scaffolds, each composed from the app-shell header / nav / sidebar / panel / toolbar / aside / footer / content slots.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    props: [
+      {
+        name: "variant",
+        type: '"dashboard" | "sidebar" | "stacked" | "three-column" | "master-detail" | "docs" | "editor" | "holy-grail" | "focused" | "command-center"',
+        default: '"dashboard"',
+        description: "Which full-page application layout scaffold to render.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Extra Tailwind classes merged onto the root element.",
+      },
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "marketing-layout",
+    name: "Marketing Layout",
+    category: "Patterns",
+    description:
+      "A variant-driven marketing-page layout primitive — one `variant` prop swaps between ten full marketing scaffolds (landing, pricing, article, bento, gallery, split-hero, feature-rows, centered, coming-soon, docs-marketing) built from the marketing nav / hero / sections / media / sidebar / toc / footer slots.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    props: [
+      {
+        name: "variant",
+        type: '"landing" | "pricing" | "article" | "bento" | "gallery" | "split-hero" | "feature-rows" | "centered" | "coming-soon" | "docs-marketing"',
+        default: '"landing"',
+        description: "Which full marketing-page layout scaffold to render.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Extra Tailwind classes merged onto the root element.",
+      },
+    ],
+    examples: ["default"],
+  },
+  {
     slug: "event-timeline",
     name: "Event Timeline",
     category: "House components",

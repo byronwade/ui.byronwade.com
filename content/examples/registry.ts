@@ -561,6 +561,9 @@ import ThumbnailDefault from "./thumbnail/default";
 import TickerDefault from "./ticker/default";
 import TickerSizes from "./ticker/sizes";
 import TickerTapeDefault from "./ticker-tape/default";
+import TickerStacked from "./ticker/stacked";
+import TickerVariants from "./ticker/variants";
+import TickerWatchlist from "./ticker/watchlist";
 import TimelineRailDefault from "./timeline-rail/default";
 import TimelineRailCustomTerminal from "./timeline-rail/custom-terminal";
 import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
@@ -1542,6 +1545,9 @@ export const examples: Record<string, Example[]> = {
   "ticker": [
     { name: "Default", file: "ticker/default.tsx", Component: TickerDefault },
     { name: "Sizes", file: "ticker/sizes.tsx", Component: TickerSizes },
+    { name: "Stacked", file: "ticker/stacked.tsx", Component: TickerStacked },
+    { name: "Variants", file: "ticker/variants.tsx", Component: TickerVariants },
+    { name: "Watchlist", file: "ticker/watchlist.tsx", Component: TickerWatchlist },
   ],
   "ticker-tape": [
     { name: "Default", file: "ticker-tape/default.tsx", Component: TickerTapeDefault },
@@ -1586,6 +1592,7 @@ export const examples: Record<string, Example[]> = {
   ],
   "upload-row": [
     { name: "Default", file: "upload-row/default.tsx", Component: UploadRowDefault },
+  ],
   "time-and-sales": [
     { name: "Default", file: "time-and-sales/default.tsx", Component: TimeAndSalesDefault },
   ],
