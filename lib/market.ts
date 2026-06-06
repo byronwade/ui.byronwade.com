@@ -136,6 +136,34 @@ type SymbolStats = {
   statistics: SymbolStatRow[]
 }
 
+type FootprintRow = {
+  price: number
+  bidVolume: number
+  askVolume: number
+}
+
+type FootprintBar = {
+  price: number
+  bidVolume: number
+  askVolume: number
+  y: number
+  height: number
+  bidWidth: number
+  askWidth: number
+}
+
+type OptionsChainRow = {
+  strike: number
+  callBid: number
+  callAsk: number
+  callLast: number
+  callChange: number
+  putBid: number
+  putAsk: number
+  putLast: number
+  putChange: number
+}
+
 type CandleGeometry = {
   x: number
   openY: number
@@ -374,6 +402,28 @@ const volumeProfilePocIndex = (bars: VolumeProfileBar[]): number => {
   return best
 }
 
+/** Map footprint rows to bid/ask bar geometry mirrored about a vertical midline. */
+const footprintGeometry = (
+  rows: FootprintRow[],
+  opts: { width: number; height: number },
+): FootprintBar[] => {
+  if (rows.length === 0) return []
+  const sorted = [...rows].sort((a, b) => b.price - a.price)
+  const maxBid = Math.max(...sorted.map((row) => row.bidVolume), 1)
+  const maxAsk = Math.max(...sorted.map((row) => row.askVolume), 1)
+  const half = opts.width / 2
+  const barHeight = opts.height / sorted.length
+  return sorted.map((row, index) => ({
+    price: row.price,
+    bidVolume: row.bidVolume,
+    askVolume: row.askVolume,
+    y: index * barHeight,
+    height: barHeight,
+    bidWidth: (row.bidVolume / maxBid) * half,
+    askWidth: (row.askVolume / maxAsk) * half,
+  }))
+}
+
 /** Map a signed change to a Tailwind text-token class fragment (success / destructive / muted). */
 const toneForChange = (value: number): string => {
   if (value > 0) return "text-success"
@@ -609,6 +659,51 @@ const makeSymbolStats = (opts: SeedOpts = {}): SymbolStats => {
   }
 }
 
+/** Generate deterministic footprint rows (bid/ask volume per price level). */
+const makeFootprintRows = (
+  count: number,
+  opts: SeedOpts & { mid?: number; tick?: number } = {},
+): FootprintRow[] => {
+  const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
+  const mid = opts.mid ?? 100
+  const tick = opts.tick ?? 0.5
+  const start = mid - ((count - 1) / 2) * tick
+  return Array.from({ length: count }, (_, index) => ({
+    price: start + index * tick,
+    bidVolume: Math.round(10 + rand() * 990),
+    askVolume: Math.round(10 + rand() * 990),
+  }))
+}
+
+/** Generate deterministic options chain rows around a spot price. */
+const makeOptionsChainRows = (
+  count: number,
+  opts: SeedOpts & { spot?: number; step?: number } = {},
+): OptionsChainRow[] => {
+  const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
+  const spot = opts.spot ?? 100
+  const step = opts.step ?? 5
+  const half = Math.floor(count / 2)
+  return Array.from({ length: count }, (_, index) => {
+    const strike = spot + (index - half) * step
+    const callLast = Math.max(0.05, spot - strike + rand() * 8)
+    const putLast = Math.max(0.05, strike - spot + rand() * 8)
+    const callChange = (rand() - 0.5) * 12
+    const putChange = (rand() - 0.5) * 12
+    return {
+      strike,
+      callBid: Math.max(0.01, callLast - rand() * 0.4),
+      callAsk: callLast + rand() * 0.4,
+      callLast,
+      callChange,
+      putBid: Math.max(0.01, putLast - rand() * 0.4),
+      putAsk: putLast + rand() * 0.4,
+      putLast,
+      putChange,
+    }
+  })
+}
+
 const makeMoverRows = (count: number, opts: SeedOpts = {}): MoverRow[] => {
   const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
   return Array.from({ length: count }, (_, index) => {
@@ -691,10 +786,28 @@ const makeAlerts = (count: number, opts: SeedOpts = {}): Alert[] => {
   })
 }
 
-const makeQuotes = (count: number, opts: SeedOpts = {}): Quote[] =>
-  Array.from({ length: count }, (_, index) =>
-    makeQuote({ seed: (opts.seed ?? DEFAULT_SEED) + index + 1 }),
-  )
+const makeQuotes = (count: number, opts: SeedOpts = {}): Quote[] => {
+  const baseSeed = opts.seed ?? DEFAULT_SEED
+  const quotes: Quote[] = []
+  const used = new Set<string>()
+  let attempt = 1
+  const maxAttempts = Math.max(count * SYMBOLS.length, count + SYMBOLS.length)
+
+  while (quotes.length < count && attempt <= maxAttempts) {
+    const quote = makeQuote({ seed: baseSeed + attempt })
+    attempt += 1
+    if (used.has(quote.symbol)) continue
+    used.add(quote.symbol)
+    quotes.push(quote)
+  }
+
+  while (quotes.length < count) {
+    quotes.push(makeQuote({ seed: baseSeed + attempt }))
+    attempt += 1
+  }
+
+  return quotes
+}
 
 const makeMarketMovers = (
   count: number,
@@ -732,6 +845,7 @@ export {
   cumulativeDepthPath,
   volumeProfileGeometry,
   volumeProfilePocIndex,
+  footprintGeometry,
   toneForChange,
   makeCandles,
   makeQuote,
@@ -744,6 +858,8 @@ export {
   makeTrades,
   makeTimeAndSalesRows,
   makeSymbolStats,
+  makeFootprintRows,
+  makeOptionsChainRows,
   makeMoverRows,
   makeScreenerRows,
   makeMarketEvents,
@@ -763,6 +879,9 @@ export type {
   VolumeProfileBar,
   SymbolStatRow,
   SymbolStats,
+  FootprintRow,
+  FootprintBar,
+  OptionsChainRow,
   MarketEvent,
   NewsItem,
   Alert,

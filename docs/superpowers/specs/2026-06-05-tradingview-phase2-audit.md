@@ -81,7 +81,7 @@ Extend `market.ts` with `makeTimeAndSalesRows`, `volumeProfileGeometry`, `makeSy
 **Batch B (4 items):** `chart-layout-grid`, `indicator-legend`, `drawing-toolbar`, `compare-symbols` — **shipped** on `feat/tradingview-phase2-batch-a`.  
 Mostly composition; minimal new lib surface.
 
-**Batch C (optional):** `volume-footprint`, `options-chain`, `alert-create-form`  
+**Batch C (optional):** `volume-footprint`, `options-chain`, `alert-create-form` — **shipped** on `feat/tradingview-phase2-batch-c`.  
 Ship only if Phase 2A/B review asks for depth.
 
 ## Docs catalog

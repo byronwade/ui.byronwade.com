@@ -4613,6 +4613,50 @@ export const components: ComponentDoc[] = [
     examples: ["default"],
     tags: ["tradingview", "market"],
   },
+  {
+    slug: "volume-footprint",
+    name: "Volume footprint",
+    category: "Market",
+    description:
+      "Order-flow footprint chart rendered in-house as SVG — bid (success) and ask (destructive) volume bars mirrored about a dashed midline via `footprintGeometry` in the `market` lib.",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "options-chain",
+    name: "Options chain",
+    category: "Market",
+    description:
+      "Options chain table with calls/puts tabs, strike column, mono bid/ask/last columns, price-change percent, and optional strike select callback.",
+    registryDeps: [
+      "@byronwade/table",
+      "@byronwade/tabs",
+      "@byronwade/price-change",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "alert-create-form",
+    name: "Alert create form",
+    category: "Market",
+    description:
+      "Create price alert dialog — symbol field, above/below segmented control, money-input target, notify switch, and submit callback extending the price-alert pattern.",
+    registryDeps: [
+      "@byronwade/button",
+      "@byronwade/dialog",
+      "@byronwade/input",
+      "@byronwade/label",
+      "@byronwade/money-input",
+      "@byronwade/segmented-control",
+      "@byronwade/switch",
+      "@byronwade/market",
+    ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
 ]
 export const categories = [
   "Foundation",

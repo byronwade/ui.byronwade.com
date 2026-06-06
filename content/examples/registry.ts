@@ -62,6 +62,7 @@ import AlertVariants from "./alert/variants";
 import AlertWithAction from "./alert/with-action";
 import AlertWithIcon from "./alert/with-icon";
 import AlertWithLink from "./alert/with-link";
+import AlertCreateFormDefault from "./alert-create-form/default";
 import AndroidDefault from "./android/default";
 import AppShellDefault from "./app-shell/default";
 import AppleCardsCarouselDefault from "./apple-cards-carousel/default";
@@ -377,6 +378,7 @@ import NowPlayingBarDefault from "./now-playing-bar/default";
 import NumberFieldDefault from "./number-field/default";
 import NumberFieldSizes from "./number-field/sizes";
 import OrderBookDefault from "./order-book/default";
+import OptionsChainDefault from "./options-chain/default";
 import OrderEntryDefault from "./order-entry/default";
 import OrderSummaryDefault from "./order-summary/default";
 import PageHeaderDefault from "./page-header/default";
@@ -603,6 +605,7 @@ import VerificationProgressWithCounts from "./verification-progress/with-counts"
 import VerifiedBadgeDefault from "./verified-badge/default";
 import VideoCardDefault from "./video-card/default";
 import VolumeProfileDefault from "./volume-profile/default";
+import VolumeFootprintDefault from "./volume-footprint/default";
 import VideoPlayerDefault from "./video-player/default";
 import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
@@ -749,6 +752,13 @@ export const examples: Record<string, Example[]> = {
     { name: "With Action", file: "alert/with-action.tsx", Component: AlertWithAction },
     { name: "With Icon", file: "alert/with-icon.tsx", Component: AlertWithIcon },
     { name: "With Link", file: "alert/with-link.tsx", Component: AlertWithLink },
+  ],
+  "alert-create-form": [
+    {
+      name: "Default",
+      file: "alert-create-form/default.tsx",
+      Component: AlertCreateFormDefault,
+    },
   ],
   "android": [
     { name: "Default", file: "android/default.tsx", Component: AndroidDefault },
@@ -1264,6 +1274,9 @@ export const examples: Record<string, Example[]> = {
   "order-entry": [
     { name: "Default", file: "order-entry/default.tsx", Component: OrderEntryDefault },
   ],
+  "options-chain": [
+    { name: "Default", file: "options-chain/default.tsx", Component: OptionsChainDefault },
+  ],
   "order-summary": [
     { name: "Default", file: "order-summary/default.tsx", Component: OrderSummaryDefault },
   ],
@@ -1618,6 +1631,13 @@ export const examples: Record<string, Example[]> = {
   ],
   "volume-profile": [
     { name: "Default", file: "volume-profile/default.tsx", Component: VolumeProfileDefault },
+  ],
+  "volume-footprint": [
+    {
+      name: "Default",
+      file: "volume-footprint/default.tsx",
+      Component: VolumeFootprintDefault,
+    },
   ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },

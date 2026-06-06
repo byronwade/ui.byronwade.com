@@ -1,3 +1,5 @@
+"use client"
+
 import { CompareSymbols } from "@/components/compare-symbols"
 
 export default function Example() {

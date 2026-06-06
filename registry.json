@@ -3125,7 +3125,7 @@
       "name": "market",
       "type": "registry:lib",
       "title": "Market utils",
-      "description": "Pure, DOM-free market helpers for the TradingView-style set: chart geometry (candles, depth, volume profile, polyline/area paths), price/percent/volume/time formatting, change tones, and deterministic seeded mock generators (candles, quotes, order books, time-and-sales rows, symbol stats, series).",
+      "description": "Pure, DOM-free market helpers for the TradingView-style set: chart geometry (candles, depth, volume profile, footprint, polyline/area paths), price/percent/volume/time formatting, change tones, and deterministic seeded mock generators (candles, quotes, order books, time-and-sales rows, symbol stats, footprint rows, options chain rows, series).",
       "files": [
         {
           "path": "registry/lib/market.ts",
@@ -3753,6 +3753,70 @@
           "path": "registry/components/compare-symbols.tsx",
           "type": "registry:component",
           "target": "components/compare-symbols.tsx"
+        }
+      ]
+    },
+    {
+      "name": "volume-footprint",
+      "type": "registry:ui",
+      "title": "Volume footprint",
+      "description": "Order-flow footprint chart — bid (success) and ask (destructive) volume bars mirrored about a dashed midline; geometry from `footprintGeometry` in the `market` lib.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/market"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/volume-footprint.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/volume-footprint.tsx"
+        }
+      ]
+    },
+    {
+      "name": "options-chain",
+      "type": "registry:component",
+      "title": "Options chain",
+      "description": "Options chain table — calls/puts tabs, strike column, mono bid/ask/last, price-change percent, optional strike select.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/table",
+        "@byronwade/tabs",
+        "@byronwade/price-change",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/options-chain.tsx",
+          "type": "registry:component",
+          "target": "components/options-chain.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert-create-form",
+      "type": "registry:component",
+      "title": "Alert create form",
+      "description": "Create price alert dialog — symbol, above/below condition, money-input target, notify switch, and submit callback.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/button",
+        "@byronwade/dialog",
+        "@byronwade/input",
+        "@byronwade/label",
+        "@byronwade/money-input",
+        "@byronwade/segmented-control",
+        "@byronwade/switch",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/alert-create-form.tsx",
+          "type": "registry:component",
+          "target": "components/alert-create-form.tsx"
         }
       ]
     },
@@ -4694,6 +4758,9 @@
         "@byronwade/indicator-legend",
         "@byronwade/drawing-toolbar",
         "@byronwade/compare-symbols",
+        "@byronwade/volume-footprint",
+        "@byronwade/options-chain",
+        "@byronwade/alert-create-form",
         "@byronwade/money-input",
         "@byronwade/bulk-action-bar",
         "@byronwade/order-summary",

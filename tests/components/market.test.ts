@@ -19,6 +19,7 @@ import {
   toneForChange,
   makeCandles,
   makeQuote,
+  makeQuotes,
   makeOrderBook,
   makeHeatmapCells,
   makeSeries,
@@ -27,6 +28,9 @@ import {
   formatTradeTime,
   makeTimeAndSalesRows,
   makeSymbolStats,
+  footprintGeometry,
+  makeFootprintRows,
+  makeOptionsChainRows,
 } from "@/lib/market"
 
 describe("linearScale", () => {
@@ -205,6 +209,18 @@ describe("makeQuote", () => {
   })
 })
 
+describe("makeQuotes", () => {
+  it("is deterministic for the same seed", () => {
+    expect(makeQuotes(3, { seed: 14 })).toEqual(makeQuotes(3, { seed: 14 }))
+  })
+
+  it("returns unique symbols when count fits the symbol pool", () => {
+    const quotes = makeQuotes(3, { seed: 14 })
+    const symbols = quotes.map((q) => q.symbol)
+    expect(new Set(symbols).size).toBe(symbols.length)
+  })
+})
+
 describe("makeOrderBook", () => {
   it("is deterministic for the same seed", () => {
     expect(makeOrderBook({ seed: 1 })).toEqual(makeOrderBook({ seed: 1 }))
@@ -326,5 +342,45 @@ describe("makeSymbolStats", () => {
     expect(stats.statistics.length).toBeGreaterThan(0)
     expect(typeof stats.exchange).toBe("string")
     expect(typeof stats.quote.symbol).toBe("string")
+  })
+})
+
+describe("footprintGeometry", () => {
+  it("returns bid and ask widths within half the canvas", () => {
+    const bars = footprintGeometry(makeFootprintRows(6, { seed: 1 }), {
+      width: 120,
+      height: 180,
+    })
+    expect(bars).toHaveLength(6)
+    for (const bar of bars) {
+      expect(bar.bidWidth).toBeGreaterThanOrEqual(0)
+      expect(bar.askWidth).toBeGreaterThanOrEqual(0)
+      expect(bar.bidWidth).toBeLessThanOrEqual(60)
+      expect(bar.askWidth).toBeLessThanOrEqual(60)
+    }
+  })
+})
+
+describe("makeFootprintRows", () => {
+  it("is deterministic for the same seed", () => {
+    expect(makeFootprintRows(8, { seed: 3 })).toEqual(makeFootprintRows(8, { seed: 3 }))
+  })
+})
+
+describe("makeOptionsChainRows", () => {
+  it("is deterministic for the same seed", () => {
+    expect(makeOptionsChainRows(7, { seed: 4, spot: 100 })).toEqual(
+      makeOptionsChainRows(7, { seed: 4, spot: 100 }),
+    )
+  })
+
+  it("returns strikes with call and put quotes", () => {
+    const rows = makeOptionsChainRows(5, { seed: 4, spot: 100 })
+    expect(rows).toHaveLength(5)
+    for (const row of rows) {
+      expect(typeof row.strike).toBe("number")
+      expect(typeof row.callLast).toBe("number")
+      expect(typeof row.putLast).toBe("number")
+    }
   })
 })
