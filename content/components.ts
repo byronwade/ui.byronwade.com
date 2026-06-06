@@ -4,6 +4,34 @@ export type PropRow = {
   default?: string
   description: string
 }
+export type FeatureRow = {
+  title: string
+  description?: string
+}
+export type ExportRow = {
+  name: string
+  type: "component" | "type" | "function" | "constant"
+  description: string
+}
+export type SlotRow = {
+  name: string
+  element?: string
+  description: string
+}
+export type CssVarRow = {
+  name: string
+  default?: string
+  description: string
+}
+export type SourceRow = {
+  label: string
+  path: string
+}
+export type RelatedComponent = {
+  slug: string
+  name: string
+  href: string
+}
 export type Variant = {
   /** Stable, unique within a type; kebab-case. Becomes the #anchor + search id. */
   id: string
@@ -42,6 +70,12 @@ export type ComponentDoc = {
   npmDeps?: string[]
   registryDeps?: string[]
   props?: PropRow[]
+  features?: FeatureRow[]
+  exports?: ExportRow[]
+  slots?: SlotRow[]
+  cssVars?: CssVarRow[]
+  source?: SourceRow[]
+  related?: string[]
   examples: string[]
   /** Type-level facet tags (drive catalog filters + AI match). */
   tags?: string[]
@@ -417,6 +451,72 @@ export const components: ComponentDoc[] = [
           "Disables pointer events and reduces opacity via the disabled: utilities.",
       },
     ],
+    features: [
+      {
+        title: "CVA-powered variants and sizes",
+        description:
+          "Covers emphasis, destructive, link, compact, large, and icon-only button shapes.",
+      },
+      {
+        title: "Polymorphic render target",
+        description:
+          "Can render as links or custom elements while preserving Base UI button semantics.",
+      },
+      {
+        title: "Built-in status affordances",
+        description:
+          "Supports loading and error states through data attributes and internal status rendering.",
+      },
+    ],
+    exports: [
+      {
+        name: "Button",
+        type: "component",
+        description: "Polymorphic Base UI button primitive.",
+      },
+      {
+        name: "buttonVariants",
+        type: "constant",
+        description: "CVA variant helper for button styles.",
+      },
+      {
+        name: "ButtonProps",
+        type: "type",
+        description: "Public props for the Button component.",
+      },
+      {
+        name: "ButtonStatus",
+        type: "type",
+        description: "Status values used for loading and error affordances.",
+      },
+    ],
+    slots: [
+      {
+        name: "button",
+        element: "button",
+        description: "Root interactive element or custom render target.",
+      },
+      {
+        name: "button-spinner",
+        element: "span",
+        description: "Loading indicator slot rendered inside the button.",
+      },
+    ],
+    source: [
+      {
+        label: "Component",
+        path: "registry/ui/button.tsx",
+      },
+      {
+        label: "Default example",
+        path: "content/examples/button/default.tsx",
+      },
+      {
+        label: "Variants example",
+        path: "content/examples/button/variants.tsx",
+      },
+    ],
+    related: ["button-group", "toggle", "tooltip"],
     examples: [
       "default",
       "count",
@@ -844,6 +944,52 @@ export const components: ComponentDoc[] = [
           "Change event handler called when the input value changes.",
       },
     ],
+    features: [
+      {
+        title: "Native input API",
+        description:
+          "Forwards standard input attributes while keeping registry styling consistent.",
+      },
+      {
+        title: "Validation-aware styling",
+        description:
+          "Uses aria-invalid to switch border and focus treatment to destructive tokens.",
+      },
+      {
+        title: "Form composition examples",
+        description:
+          "Documents labels, icons, adornments, file uploads, and adjacent actions.",
+      },
+    ],
+    exports: [
+      {
+        name: "Input",
+        type: "component",
+        description: "Styled Base UI input primitive.",
+      },
+    ],
+    slots: [
+      {
+        name: "input",
+        element: "input",
+        description: "Root input element.",
+      },
+    ],
+    source: [
+      {
+        label: "Component",
+        path: "registry/ui/input.tsx",
+      },
+      {
+        label: "Default example",
+        path: "content/examples/input/default.tsx",
+      },
+      {
+        label: "Error example",
+        path: "content/examples/input/error.tsx",
+      },
+    ],
+    related: ["label", "textarea", "button"],
     examples: [
       "default",
       "disabled",
@@ -1329,6 +1475,86 @@ export const components: ComponentDoc[] = [
           "Whether the dialog blocks interaction with the rest of the page.",
       },
     ],
+    features: [
+      {
+        title: "Compound overlay parts",
+        description:
+          "Ships root, trigger, portal, overlay, content, title, description, footer, and close parts.",
+      },
+      {
+        title: "Controlled or uncontrolled",
+        description:
+          "Supports open/defaultOpen with onOpenChange for app-managed dialog state.",
+      },
+      {
+        title: "Accessible modal behavior",
+        description:
+          "Builds on Base UI Dialog for focus handling and dialog semantics.",
+      },
+    ],
+    exports: [
+      {
+        name: "Dialog",
+        type: "component",
+        description: "Root Base UI dialog primitive.",
+      },
+      {
+        name: "DialogTrigger",
+        type: "component",
+        description: "Element that opens the dialog.",
+      },
+      {
+        name: "DialogContent",
+        type: "component",
+        description: "Positioned dialog surface with optional close button.",
+      },
+      {
+        name: "DialogTitle",
+        type: "component",
+        description: "Accessible dialog title.",
+      },
+    ],
+    slots: [
+      {
+        name: "dialog",
+        description: "Root dialog state provider.",
+      },
+      {
+        name: "dialog-trigger",
+        description: "Trigger element.",
+      },
+      {
+        name: "dialog-overlay",
+        description: "Backdrop layer.",
+      },
+      {
+        name: "dialog-content",
+        description: "Dialog panel.",
+      },
+      {
+        name: "dialog-title",
+        description: "Title text.",
+      },
+      {
+        name: "dialog-description",
+        description: "Description text.",
+      },
+    ],
+    source: [
+      {
+        label: "Component",
+        path: "registry/ui/dialog.tsx",
+      },
+      {
+        label: "Default example",
+        path: "content/examples/dialog/default.tsx",
+      },
+      {
+        label: "Form example",
+        path: "content/examples/dialog/with-form.tsx",
+      },
+    ],
+    related: ["button", "sheet", "alert"],
     examples: [
       "default",
       "destructive",
@@ -1734,6 +1960,91 @@ export const components: ComponentDoc[] = [
           "Table content, typically TableHeader, TableBody, and TableFooter compound parts.",
       },
     ],
+    features: [
+      {
+        title: "Compound HTML table parts",
+        description:
+          "Provides container, table, header, body, footer, row, head, cell, and caption parts.",
+      },
+      {
+        title: "Scrollable by default",
+        description:
+          "Wraps table content in an overflow container for narrow layouts.",
+      },
+      {
+        title: "Data-state styling hooks",
+        description:
+          "Rows support selected-state styling for tables with selection.",
+      },
+    ],
+    exports: [
+      {
+        name: "Table",
+        type: "component",
+        description: "Scrollable table root and native table element.",
+      },
+      {
+        name: "TableHeader",
+        type: "component",
+        description: "Table header group.",
+      },
+      {
+        name: "TableBody",
+        type: "component",
+        description: "Table body group.",
+      },
+      {
+        name: "TableRow",
+        type: "component",
+        description: "Table row element.",
+      },
+      {
+        name: "TableCell",
+        type: "component",
+        description: "Body cell element.",
+      },
+    ],
+    slots: [
+      {
+        name: "table-container",
+        description: "Scrollable wrapper.",
+      },
+      {
+        name: "table",
+        element: "table",
+        description: "Native table element.",
+      },
+      {
+        name: "table-header",
+        element: "thead",
+        description: "Header group.",
+      },
+      {
+        name: "table-row",
+        element: "tr",
+        description: "Row.",
+      },
+      {
+        name: "table-cell",
+        element: "td",
+        description: "Body cell.",
+      },
+    ],
+    source: [
+      {
+        label: "Component",
+        path: "registry/ui/table.tsx",
+      },
+      {
+        label: "Default example",
+        path: "content/examples/table/default.tsx",
+      },
+      {
+        label: "Selectable rows example",
+        path: "content/examples/table/selectable-rows.tsx",
+      },
+    ],
+    related: ["index-table", "badge", "checkbox"],
     examples: [
       "default",
       "empty-state",
@@ -2365,6 +2676,92 @@ export const components: ComponentDoc[] = [
           "Drop the resting pill background/shadow, items float free until a panel blooms (the panel keeps its surface).",
       },
     ],
+    features: [
+      {
+        title: "Config-driven navigation",
+        description:
+          "Items, pinned items, tools, breadcrumbs, badges, and actions are all driven from typed config.",
+      },
+      {
+        title: "Morphing panel surface",
+        description:
+          "Uses useChromeMorph to bloom the dock into a consumer-provided panel with controlled state support.",
+      },
+      {
+        title: "Advanced chrome states",
+        description:
+          "Supports status overlays, save actions, draggable panels, resizable panels, placements, and tones.",
+      },
+    ],
+    exports: [
+      {
+        name: "MorphDock",
+        type: "component",
+        description: "Morphing navigation dock and panel component.",
+      },
+      {
+        name: "MorphDockItem",
+        type: "type",
+        description: "Configuration object for a primary dock item.",
+      },
+      {
+        name: "MorphDockAction",
+        type: "type",
+        description: "Configuration object for action/tool items.",
+      },
+      {
+        name: "MorphDockProps",
+        type: "type",
+        description: "Public props for the MorphDock component.",
+      },
+    ],
+    slots: [
+      {
+        name: "morph-dock-breadcrumb",
+        description: "Breadcrumb trail rendered before the dock nav.",
+      },
+      {
+        name: "morph-dock-tools",
+        description: "Trailing tool zone inside the dock pill.",
+      },
+      {
+        name: "morph-dock-seam",
+        description: "Visual separator between item or tool groups.",
+      },
+    ],
+    cssVars: [
+      {
+        name: "--dock",
+        description: "Dock surface token used by the resting pill.",
+      },
+      {
+        name: "--dock-tool",
+        description: "Tool-zone surface token.",
+      },
+      {
+        name: "--dock-active",
+        description: "Active dock item token.",
+      },
+    ],
+    source: [
+      {
+        label: "Component",
+        path: "registry/ui/morph-dock.tsx",
+      },
+      {
+        label: "Default example",
+        path: "content/examples/morph-dock/default.tsx",
+      },
+      {
+        label: "Draggable example",
+        path: "content/examples/morph-dock/draggable.tsx",
+      },
+      {
+        label: "Resizable example",
+        path: "content/examples/morph-dock/resizable.tsx",
+      },
+    ],
+    related: ["floating-dock", "use-chrome-morph", "button"],
     examples: [
       "default",
       "app-bar",
@@ -4927,3 +5324,83 @@ export const getVariants = (doc: ComponentDoc): Variant[] =>
           example: "default",
         },
       ]
+
+const titleCase = (value: string) =>
+  value
+    .split("-")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ")
+
+const sentenceList = (values: string[]) => `${values.join(", ")}.`
+
+const sourceRoot = (doc: ComponentDoc) =>
+  doc.category === "Composites" ||
+  doc.category === "Patterns" ||
+  doc.category === "House components" ||
+  doc.category === "Morph" ||
+  doc.category === "Media" ||
+  doc.category === "Video" ||
+  doc.category === "Commerce" ||
+  doc.category === "AI" ||
+  doc.category === "Market"
+    ? "registry/components"
+    : "registry/ui"
+
+export const getComponentFeatures = (doc: ComponentDoc): FeatureRow[] => {
+  if (doc.features && doc.features.length > 0) return doc.features
+
+  const features: FeatureRow[] = []
+  if (doc.variants && doc.variants.length > 0) {
+    features.push({
+      title: `${doc.variants.length} documented variants`,
+      description: sentenceList(doc.variants.map((variant) => variant.name)),
+    })
+  }
+  if (doc.examples.length > 0) {
+    features.push({
+      title: `${doc.examples.length} ${
+        doc.examples.length === 1 ? "example" : "examples"
+      }`,
+      description: sentenceList(doc.examples.map(titleCase)),
+    })
+  }
+  if (doc.tags && doc.tags.length > 0) {
+    features.push({
+      title: `Tagged for ${doc.tags.join(", ")}`,
+    })
+  }
+
+  return features
+}
+
+export const getComponentSourceRows = (doc: ComponentDoc): SourceRow[] => {
+  if (doc.source && doc.source.length > 0) return doc.source
+
+  return [
+    {
+      label: "Component",
+      path: `${sourceRoot(doc)}/${doc.slug}.tsx`,
+    },
+    ...doc.examples.map((example) => ({
+      label: `${titleCase(example)} example`,
+      path: `content/examples/${doc.slug}/${example}.tsx`,
+    })),
+  ]
+}
+
+export const resolveRelatedComponents = (
+  doc: ComponentDoc,
+): RelatedComponent[] =>
+  (doc.related ?? []).flatMap((slug) => {
+    const related = bySlug(slug)
+    return related
+      ? [
+          {
+            slug: related.slug,
+            name: related.name,
+            href: `/docs/${related.slug}`,
+          },
+        ]
+      : []
+  })

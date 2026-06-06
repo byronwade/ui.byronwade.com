@@ -38,11 +38,11 @@ marketing embeds, compact dashboards, and floating playback.
 
 Add variants:
 
-| Prop      | Values                                             | Purpose                                      |
-| --------- | -------------------------------------------------- | -------------------------------------------- |
+| Prop      | Values                                                    | Purpose                                                                                  |
+| --------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `variant` | `default`, `compact`, `horizontal`, `overlay`, `featured` | Switch between feed tile, sidebar/search row, media overlay, and large feature treatment |
-| `size`    | `sm`, `md`, `lg`                                  | Control thumbnail scale, title size, and metadata density |
-| `density` | `comfortable`, `compact`                          | Tighten vertical rhythm without changing component semantics |
+| `size`    | `sm`, `md`, `lg`                                          | Control thumbnail scale, title size, and metadata density                                |
+| `density` | `comfortable`, `compact`                                  | Tighten vertical rhythm without changing component semantics                             |
 
 Add API surface:
 
@@ -68,11 +68,11 @@ Behavior:
 
 Add variants:
 
-| Prop      | Values                                | Purpose                                      |
-| --------- | ------------------------------------- | -------------------------------------------- |
-| `variant` | `carousel`, `grid`, `rail`, `stack`   | Horizontal shelf, responsive grid, compact rail, or vertical group |
-| `density` | `comfortable`, `compact`             | Control header and item spacing              |
-| `controls` | `hover`, `always`, `none`           | Configure scroll-button visibility           |
+| Prop       | Values                              | Purpose                                                            |
+| ---------- | ----------------------------------- | ------------------------------------------------------------------ |
+| `variant`  | `carousel`, `grid`, `rail`, `stack` | Horizontal shelf, responsive grid, compact rail, or vertical group |
+| `density`  | `comfortable`, `compact`            | Control header and item spacing                                    |
+| `controls` | `hover`, `always`, `none`           | Configure scroll-button visibility                                 |
 
 Add API surface:
 
@@ -97,11 +97,11 @@ Behavior:
 
 Add variants:
 
-| Prop      | Values                                | Purpose                                      |
-| --------- | ------------------------------------- | -------------------------------------------- |
-| `variant` | `floating`, `inline`, `dock`          | Corner card, inline media row/card, compact dock |
-| `size`    | `sm`, `md`, `lg`                     | Control media and body scale                 |
-| `state`   | `default`, `collapsed`, `expanded`   | Let consumers present docked vs expanded player UI |
+| Prop      | Values                             | Purpose                                            |
+| --------- | ---------------------------------- | -------------------------------------------------- |
+| `variant` | `floating`, `inline`, `dock`       | Corner card, inline media row/card, compact dock   |
+| `size`    | `sm`, `md`, `lg`                   | Control media and body scale                       |
+| `state`   | `default`, `collapsed`, `expanded` | Let consumers present docked vs expanded player UI |
 
 Add API surface:
 
@@ -127,12 +127,12 @@ core shape.
 
 Add variants:
 
-| Prop        | Values                             | Purpose                                      |
-| ----------- | ---------------------------------- | -------------------------------------------- |
-| `variant`   | `default`, `preview`, `immersive`  | Full player, small preview, or edge-to-edge presentation |
-| `rail`      | `right`, `left`, `hidden`          | Place or hide engagement actions             |
-| `density`   | `comfortable`, `compact`          | Tune overlay text and spacing                |
-| `captionMode` | `clamped`, `expanded`, `hidden` | Control caption presentation                 |
+| Prop          | Values                            | Purpose                                                  |
+| ------------- | --------------------------------- | -------------------------------------------------------- |
+| `variant`     | `default`, `preview`, `immersive` | Full player, small preview, or edge-to-edge presentation |
+| `rail`        | `right`, `left`, `hidden`         | Place or hide engagement actions                         |
+| `density`     | `comfortable`, `compact`          | Tune overlay text and spacing                            |
+| `captionMode` | `clamped`, `expanded`, `hidden`   | Control caption presentation                             |
 
 Add API surface:
 
