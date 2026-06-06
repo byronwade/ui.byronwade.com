@@ -118,14 +118,14 @@ function NavDockItem({
 /**
  * Floating navigation dock that **morphs into search**. Collapsed, it's the
  * primary nav pill (destinations · search · GitHub · theme). Triggering search
- * (the ⌕ button or ⌘K) blooms the very same `--dock`-toned capsule — in place,
- * centered, growing down — into a Spotlight panel: a query field over live,
+ * (the ⌕ button or ⌘K) blooms the very same `--dock`-toned capsule, in place,
+ * centered, growing down, into a Spotlight panel: a query field over live,
  * keyboard-navigable results. Closing morphs it back.
  *
  * Technique is ported verbatim from SignalRoute's launcher: a fixed SLOT reserves
  * the collapsed footprint while an absolutely-positioned, `overflow-hidden`
  * container animates its inline width/height/border-radius (explicit cubic-bezier,
- * not a Tailwind class — `transition-[width,height]` silently drops height) as the
+ * not a Tailwind class, `transition-[width,height]` silently drops height) as the
  * compact view cross-fades out and the panel cross-fades in. A reflow seeds the
  * "from" box; a ResizeObserver follows the panel's live height as results filter;
  * `prefers-reduced-motion` collapses it to an instant swap.
@@ -223,7 +223,7 @@ export function NavDock() {
             },
           )
         })
-        // The transition was interrupted by a newer toggle — expected, not an error.
+        // The transition was interrupted by a newer toggle, expected, not an error.
         .catch(() => {})
       Promise.resolve(transition.finished)
         .catch(() => {})
@@ -234,7 +234,7 @@ export function NavDock() {
     [resolvedTheme, setTheme],
   )
 
-  /* — slot sizing: keep the reserved footprint synced to the compact pill — */
+  /*, slot sizing: keep the reserved footprint synced to the compact pill, */
   const [slot, setSlot] = React.useState<{ w: number; h: number }>({
     w: 0,
     h: 40,
@@ -244,7 +244,7 @@ export function NavDock() {
     const morph = morphRef.current
     if (!compact || !morph) return
     const sync = () => {
-      if (morph.style.width) return // morphed open — leave the slot alone
+      if (morph.style.width) return // morphed open, leave the slot alone
       setSlot({ w: morph.offsetWidth, h: morph.offsetHeight })
     }
     sync()
@@ -253,7 +253,7 @@ export function NavDock() {
     return () => ro.disconnect()
   }, [])
 
-  /* — the morph: animate the shared capsule between pill and panel — */
+  /*, the morph: animate the shared capsule between pill and panel, */
   useIsoLayoutEffect(() => {
     const morph = morphRef.current
     const compact = compactRef.current
@@ -321,7 +321,7 @@ export function NavDock() {
     }
   }, [open])
 
-  /* — follow the panel's live height as results filter while open — */
+  /*, follow the panel's live height as results filter while open, */
   useIsoLayoutEffect(() => {
     const morph = morphRef.current
     const panel = panelRef.current
@@ -336,9 +336,9 @@ export function NavDock() {
   }, [open])
 
   // Clamp the active index to the current results during render, so a shrinking
-  // result set never points past the end — no effect, no cascading setState.
+  // result set never points past the end, no effect, no cascading setState.
   const safeActive = Math.min(active, Math.max(0, flat.length - 1))
-  /* — keep the active result scrolled into view — */
+  /*, keep the active result scrolled into view, */
   React.useEffect(() => {
     if (!open) return
     listRef.current
@@ -346,7 +346,7 @@ export function NavDock() {
       ?.scrollIntoView({ block: "nearest" })
   }, [safeActive, open])
 
-  /* — global ⌘K toggle + legacy open event — */
+  /*, global ⌘K toggle + legacy open event, */
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -363,7 +363,7 @@ export function NavDock() {
     }
   }, [])
 
-  /* — Esc + click-away close — */
+  /*, Esc + click-away close, */
   React.useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
@@ -433,13 +433,13 @@ export function NavDock() {
   return (
     <TooltipProvider delay={350}>
       <div className="pointer-events-none fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 sm:bottom-auto sm:top-3 print:hidden">
-        {/* SLOT — reserves the collapsed pill's footprint so nothing reflows. */}
+        {/* SLOT, reserves the collapsed pill's footprint so nothing reflows. */}
         <div
           ref={rootRef}
           style={{ width: slot.w || undefined, height: slot.h }}
           className="pointer-events-none relative"
         >
-          {/* MORPH CAPSULE — centered; blooms down on sm+, up on phones. */}
+          {/* MORPH CAPSULE, centered; blooms down on sm+, up on phones. */}
           <div
             ref={morphRef}
             className={cn(
@@ -447,7 +447,7 @@ export function NavDock() {
               open ? "rounded-2xl" : "rounded-3xl",
             )}
           >
-            {/* COMPACT — the nav. */}
+            {/* COMPACT, the nav. */}
             <div
               ref={compactRef}
               className={cn(
@@ -527,7 +527,7 @@ export function NavDock() {
               </Tooltip>
             </div>
 
-            {/* SEARCH PANEL — the morph target. */}
+            {/* SEARCH PANEL, the morph target. */}
             <div
               ref={panelRef}
               id={panelId}

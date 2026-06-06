@@ -12,7 +12,7 @@ const GITHUB_URL = "https://github.com/byronwade/ui"
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 
-/** Every product under the byronwade umbrella — the launcher is the cross-app switcher. */
+/** Every product under the byronwade umbrella, the launcher is the cross-app switcher. */
 const PRODUCTS: {
   name: string
   desc: string
@@ -60,12 +60,12 @@ const PRODUCTS: {
 ]
 
 /**
- * Top-left launcher — a slim, HORIZONTAL identity pill (the inverse-material twin
+ * Top-left launcher, a slim, HORIZONTAL identity pill (the inverse-material twin
  * of the floating dock), ported from SignalRoute's `AppLauncher`. Collapsed it's a
  * dark `--dock`-toned pill (the byronwade mark + an app-switcher grid). The pill
  * **morphs in place** into a browse panel: every component category jumps to its
  * first page, with the theme toggle + GitHub link in the footer. Verification,
- * org/product switching, and the comm blooms from the source app are dropped — a
+ * org/product switching, and the comm blooms from the source app are dropped, a
  * docs site has no account to manage.
  */
 export function AppLauncher() {
@@ -93,7 +93,7 @@ export function AppLauncher() {
     const morph = morphRef.current
     if (!compact || !morph) return
     const sync = () => {
-      if (morph.style.width) return // morphed open — leave the slot alone
+      if (morph.style.width) return // morphed open, leave the slot alone
       setSlot({ w: morph.offsetWidth, h: morph.offsetHeight })
     }
     sync()
@@ -103,7 +103,7 @@ export function AppLauncher() {
   }, [])
 
   // Width + height + radius morph between the compact pill and the open panel,
-  // cross-fading the contents — the signature SignalRoute launcher choreography.
+  // cross-fading the contents, the signature SignalRoute launcher choreography.
   useIsoLayoutEffect(() => {
     const morph = morphRef.current
     const compact = compactRef.current
@@ -211,7 +211,7 @@ export function AppLauncher() {
           open ? "rounded-2xl" : "rounded-3xl",
         )}
       >
-        {/* COMPACT — the collapsed (natural) size. */}
+        {/* COMPACT, the collapsed (natural) size. */}
         <div
           ref={compactRef}
           className={cn(
@@ -221,7 +221,7 @@ export function AppLauncher() {
         >
           <Link
             href="/"
-            aria-label="byronwade/ui — home"
+            aria-label="byronwade/ui, home"
             className="flex size-8 items-center justify-center rounded-full transition-colors hover:bg-dock-active"
           >
             <span className="grid size-6 place-items-center rounded-md bg-dock-active-foreground">
@@ -269,7 +269,7 @@ export function AppLauncher() {
           </div>
 
           <div className="flex flex-col gap-0.5 px-2 pb-2">
-            {/* Current product — the site you're on. */}
+            {/* Current product, the site you're on. */}
             <Link
               href="/"
               onClick={() => setOpen(false)}

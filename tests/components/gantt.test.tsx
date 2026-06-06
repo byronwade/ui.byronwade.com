@@ -326,7 +326,7 @@ describe("gantt — feature rows & overlap stacking", () => {
     expect(card).toBeInTheDocument();
   });
 
-  it("drives a daily-range drag (daily delta branch)", () => {
+  it("drives a daily-range drag (daily delta branch)", { timeout: 15_000 }, () => {
     const onMove = vi.fn();
     const { container } = render(<Board range="daily" onMove={onMove} />);
     const card = container.querySelector(

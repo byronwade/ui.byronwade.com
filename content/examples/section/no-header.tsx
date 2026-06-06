@@ -5,7 +5,7 @@ import { Switch } from "@/components/ui/switch"
 export default function Example() {
   return (
     <div className="max-w-2xl mx-auto p-8 space-y-8">
-      {/* Section with no title or action — just a bordered card body */}
+      {/* Section with no title or action, just a bordered card body */}
       <Section>
         <SettingsList>
           <SettingRow

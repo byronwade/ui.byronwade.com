@@ -16,7 +16,7 @@ export default function Example() {
             description="Receives all events from your live environment."
             control={<Badge variant="success">Active</Badge>}
           >
-            {/* Inline code block as a child — rendered below description */}
+            {/* Inline code block as a child, rendered below description */}
             <code className="mt-1 block rounded-md border bg-muted px-2.5 py-1.5 font-mono text-xs text-muted-foreground">
               https://api.example.com/webhooks/prod
             </code>

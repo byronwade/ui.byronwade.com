@@ -40,7 +40,7 @@ export default function Example() {
           readOnly
         />
         <p className="text-xs text-muted-foreground">
-          Read-only — copy and store this token securely.
+          Read-only, copy and store this token securely.
         </p>
       </div>
     </div>

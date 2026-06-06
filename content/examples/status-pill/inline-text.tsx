@@ -17,8 +17,8 @@ export default function Example() {
 
       <p className="text-sm text-muted-foreground leading-relaxed">
         Your last deployment ended with a{" "}
-        <StatusPill tone="danger">failure</StatusPill> — check the build logs
-        for details.
+        <StatusPill tone="danger">failure</StatusPill>, check the build logs for
+        details.
       </p>
 
       <p className="text-sm text-muted-foreground leading-relaxed">
@@ -29,7 +29,7 @@ export default function Example() {
 
       <p className="text-sm text-muted-foreground leading-relaxed">
         API response times are <StatusPill tone="warning">degraded</StatusPill>{" "}
-        — P99 latency has exceeded the 500 ms threshold.
+        , P99 latency has exceeded the 500 ms threshold.
       </p>
     </div>
   )

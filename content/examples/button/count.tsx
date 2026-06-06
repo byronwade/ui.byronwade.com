@@ -2,7 +2,7 @@ import { ThumbsUp, Star, GitFork } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 /**
- * Outline button with a trailing count, divided by a hairline — adapted to our
+ * Outline button with a trailing count, divided by a hairline, adapted to our
  * tokens (border via `bg-border`, count in `text-muted-foreground`). `pe-0`
  * drops the right padding so the count segment sits flush inside the pill.
  */

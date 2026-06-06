@@ -208,7 +208,7 @@ function MarketingLayout({
             </Hero>
           )}
           {children && (
-            <Sections className="mx-auto w-full max-w-2xl space-y-6 px-6 py-12">
+            <Sections className="reading-prose mx-auto px-6 py-12 text-foreground">
               {children}
             </Sections>
           )}
@@ -228,7 +228,7 @@ function MarketingLayout({
           )}
           <main
             data-slot="marketing-content"
-            className="mx-auto w-full max-w-3xl flex-1 px-6 py-12"
+            className="reading-ui mx-auto flex-1 px-6 py-12 text-foreground"
           >
             {hero && <div className="mb-10">{hero}</div>}
             <Sections className="space-y-8">{children}</Sections>

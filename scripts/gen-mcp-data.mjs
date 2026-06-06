@@ -5,6 +5,11 @@ import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..")
+
+function utilityBase(sel) {
+  return sel.replace(/^\./, "").trim().split(/\s+/)[0]
+}
+
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"))
 const foundation = registry.items.find((i) => i.name === "foundation")
 
@@ -58,7 +63,8 @@ const utilities = [
   ...Object.keys(foundation.css?.["@layer utilities"] ?? {}),
   ...Object.keys(foundation.css ?? {}).filter((k) => k.startsWith(".")),
 ]
-  .map((s) => s.replace(/^\./, ""))
+  .map(utilityBase)
+  .filter(Boolean)
   .sort()
 
 const rule = readFileSync(join(root, "registry/rules/byronwade-ui.mdc"), "utf8")

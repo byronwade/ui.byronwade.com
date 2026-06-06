@@ -5,7 +5,7 @@ import { Pencil } from "lucide-react"
 import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
- * A breadcrumb dock — the leading region is a crumb trail (last crumb is the
+ * A breadcrumb dock, the leading region is a crumb trail (last crumb is the
  * current page) with a trailing tool action, instead of icon tabs.
  */
 export default function Example() {

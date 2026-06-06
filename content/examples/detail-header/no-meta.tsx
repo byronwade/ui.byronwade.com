@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
 /**
- * Title-only header — no meta grid. Useful for pages where context is
+ * Title-only header, no meta grid. Useful for pages where context is
  * already provided by a parent layout (e.g. a settings panel or modal title).
  */
 export default function Example() {

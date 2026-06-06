@@ -3,16 +3,20 @@ import Link from "next/link"
 import { ArrowRight, Check, X } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import {
+  ThemingPlayground,
+  type BrandPreset,
+} from "@/app/(docs)/_components/theming-playground"
 
 export const metadata: Metadata = {
-  title: "Theming — byronwade/ui",
+  title: "Theming, byronwade/ui",
   description:
-    "Re-skin the entire byronwade/ui system, light and dark, by overriding a single CSS variable.",
+    "Re-skin the entire byronwade/ui system in real time with the live color picker, then paste the generated --brand CSS into your project.",
 }
 
 /* ---------------------------------------------------------------------------
    Theming = one knob, many skins. The hero gallery renders the SAME dashboard
-   card in N accents — each card just scopes --brand inline; because custom
+   card in N accents, each card just scopes --brand inline; because custom
    properties resolve at use-site, the button, ring, chart, and success re-skin
    with zero JS. Then: the override, the anatomy of --brand, presets, the
    cascade, fixed exceptions, and do/don't.
@@ -20,66 +24,44 @@ export const metadata: Metadata = {
 
 const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
-const SKINS: { name: string; hue: number }[] = [
-  { name: "green", hue: 148 },
-  { name: "teal", hue: 182 },
-  { name: "sky", hue: 235 },
-  { name: "indigo", hue: 270 },
-  { name: "violet", hue: 300 },
-  { name: "magenta", hue: 330 },
-  { name: "red", hue: 25 },
-  { name: "amber", hue: 70 },
+const PRESETS: BrandPreset[] = [
+  {
+    name: "Forest",
+    light: "oklch(0.60 0.17 148)",
+    dark: "oklch(0.68 0.17 148)",
+    hex: "#28BD6E",
+  },
+  {
+    name: "Ocean",
+    light: "oklch(0.60 0.15 235)",
+    dark: "oklch(0.70 0.15 235)",
+    hex: "#2835BD",
+  },
+  {
+    name: "Iris",
+    light: "oklch(0.58 0.19 290)",
+    dark: "oklch(0.68 0.19 290)",
+    hex: "#A428BD",
+  },
+  {
+    name: "Ember",
+    light: "oklch(0.62 0.20 35)",
+    dark: "oklch(0.72 0.20 35)",
+    hex: "#BD7F28",
+  },
+  {
+    name: "Gold",
+    light: "oklch(0.72 0.16 75)",
+    dark: "oklch(0.78 0.16 75)",
+    hex: "#98BD28",
+  },
+  {
+    name: "Rose",
+    light: "oklch(0.62 0.20 10)",
+    dark: "oklch(0.72 0.20 10)",
+    hex: "#BD4128",
+  },
 ]
-
-const PRESETS: { name: string; value: string; hue: number }[] = [
-  { name: "Forest", value: "oklch(0.60 0.17 148)", hue: 148 },
-  { name: "Ocean", value: "oklch(0.60 0.15 235)", hue: 235 },
-  { name: "Iris", value: "oklch(0.58 0.19 290)", hue: 290 },
-  { name: "Ember", value: "oklch(0.62 0.20 35)", hue: 35 },
-  { name: "Gold", value: "oklch(0.72 0.16 75)", hue: 75 },
-  { name: "Rose", value: "oklch(0.62 0.20 010)", hue: 10 },
-]
-
-const BARS = [38, 62, 48, 80, 56, 92]
-
-/* A recognizable dashboard card, re-skinned by the scoped --brand. */
-function Skin({ hue }: { hue: number }) {
-  const scope = { "--brand": `oklch(0.62 0.18 ${hue})` } as React.CSSProperties
-  return (
-    <div style={scope} className="space-y-3 rounded-2xl edge bg-card p-4">
-      <div className="flex items-center justify-between">
-        <span className="text-xs font-medium text-foreground">Revenue</span>
-        <span className="inline-flex items-center gap-1 text-[11px] text-success">
-          <span className="size-1.5 rounded-full bg-success" />
-          +12%
-        </span>
-      </div>
-      <p className="font-mono text-xl tabular-nums leading-none text-foreground">
-        $48.2k
-      </p>
-      <div className="flex h-9 items-end gap-1">
-        {BARS.map((h, i) => (
-          <span
-            key={i}
-            className="flex-1 rounded-sm bg-chart-1"
-            style={{ height: `${h}%` }}
-          />
-        ))}
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="inline-flex items-center rounded-full bg-brand px-2.5 py-1 text-[11px] font-medium text-brand-foreground">
-          View
-        </span>
-        <span className="flex-1 rounded-md bg-background px-2 py-1 text-[11px] text-muted-foreground ring-2 ring-ring">
-          filter
-        </span>
-      </div>
-      <p className="border-t border-border pt-2 font-mono text-[10px] text-muted-foreground">
-        oklch(0.62 0.18 {hue})
-      </p>
-    </div>
-  )
-}
 
 export default function ThemingPage() {
   return (
@@ -98,28 +80,15 @@ export default function ThemingPage() {
             <span className="text-brand">everything.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            The accent isn&apos;t scattered through components — it&apos;s
+            The accent isn&apos;t scattered through components, it&apos;s
             derived from a single token,{" "}
             <span className="text-foreground">--brand</span>. Override it once
             and rings, charts, success, buttons, and active states all follow,
-            light and dark. Below is the{" "}
-            <span className="text-foreground">same card</span>, eight accents
-            apart — each just one line of CSS.
+            light and dark. Use the picker below to re-skin this entire site in
+            real time, then paste the generated CSS into your project.
           </p>
 
-          <div className="mt-10 flex items-baseline justify-between gap-4">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-              the same card · 8 values of --brand
-            </p>
-            <p className="hidden font-mono text-[11px] text-muted-foreground sm:block">
-              ↓ one knob
-            </p>
-          </div>
-          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {SKINS.map((s) => (
-              <Skin key={s.name} hue={s.hue} />
-            ))}
-          </div>
+          <ThemingPlayground presets={PRESETS} />
         </div>
       </section>
 
@@ -133,7 +102,7 @@ export default function ThemingPage() {
             <h2 className="mt-3 text-3xl font-normal tracking-tight text-foreground text-balance sm:text-4xl">
               Two lines in globals.css.
             </h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground text-pretty">
+            <p className="reading-ui mt-4 text-foreground text-pretty">
               No component edits, no theme fork. Pick a slightly lighter, more
               chromatic value for dark so the accent keeps its punch against the
               warm dark surface.
@@ -153,11 +122,11 @@ export default function ThemingPage() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Anatomy of the token
           </p>
-          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <p className="reading-ui mt-3 text-foreground text-pretty">
             <code className="font-mono text-[13px] text-foreground">
               oklch(L C H)
             </code>{" "}
-            — perceptual <span className="text-foreground">lightness</span>,{" "}
+            , perceptual <span className="text-foreground">lightness</span>,{" "}
             <span className="text-foreground">chroma</span>, and{" "}
             <span className="text-foreground">hue</span>. Each axis moves
             independently, so tuning an accent is predictable.
@@ -216,7 +185,7 @@ export default function ThemingPage() {
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           Ready-to-paste accents
         </p>
-        <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+        <p className="reading-ui mt-3 text-foreground text-pretty">
           Drop any of these into{" "}
           <code className="font-mono text-[13px] text-foreground">--brand</code>
           . Each is tuned to sit right on the warm canvas.
@@ -229,12 +198,12 @@ export default function ThemingPage() {
             >
               <span
                 className="size-12 shrink-0 rounded-xl edge"
-                style={{ background: `oklch(0.62 0.18 ${p.hue})` }}
+                style={{ background: p.light }}
               />
               <div className="min-w-0">
                 <p className="text-sm font-medium text-foreground">{p.name}</p>
                 <p className="truncate font-mono text-[11px] text-muted-foreground">
-                  {p.value}
+                  {p.light}
                 </p>
               </div>
             </div>
@@ -254,7 +223,7 @@ export default function ThemingPage() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             The cascade
           </p>
-          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <p className="reading-ui mt-3 text-foreground text-pretty">
             These tokens all resolve to{" "}
             <span className="text-foreground">--brand</span>. Change the one and
             the family moves together.
@@ -318,7 +287,7 @@ export default function ThemingPage() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Fixed exceptions
           </p>
-          <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <p className="reading-ui mt-3 text-foreground text-pretty">
             Two palettes carry meaning, so they{" "}
             <span className="text-foreground">don&apos;t</span> follow --brand.
           </p>
@@ -373,7 +342,7 @@ export default function ThemingPage() {
               },
               {
                 ok: true,
-                t: "Tone with opacity — bg-brand/10 — for soft chips and rings.",
+                t: "Tone with opacity, bg-brand/10, for soft chips and rings.",
               },
               {
                 ok: false,

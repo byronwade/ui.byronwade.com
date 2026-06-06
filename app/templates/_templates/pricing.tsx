@@ -1,9 +1,9 @@
 "use client"
 
-// Pricing template — a three-tier marketing pricing page.
+// Pricing template, a three-tier marketing pricing page.
 // uses: Card, Badge, Button, SegmentedControl, Table, Separator
 //
-// Design: a calm marketing page with one signature moment — the featured "Pro"
+// Design: a calm marketing page with one signature moment, the featured "Pro"
 // plan lifts out of the row on a brand-tinted card with a glow, while the billing
 // toggle re-prices every tier live. A full comparison table and an FAQ carry the
 // detail a real buyer needs before converting. Pure tokens; re-skins from --brand.
@@ -95,11 +95,11 @@ const matrix: { feature: string; values: (string | boolean)[] }[] = [
 const faqs = [
   {
     q: "Can I change plans later?",
-    a: "Yes — upgrade or downgrade at any time. Changes are prorated to the day, so you only pay for what you use.",
+    a: "Yes, upgrade or downgrade at any time. Changes are prorated to the day, so you only pay for what you use.",
   },
   {
     q: "What happens when my trial ends?",
-    a: "Your workspace stays on the free Starter plan. Nothing is deleted — upgrade whenever you're ready.",
+    a: "Your workspace stays on the free Starter plan. Nothing is deleted, upgrade whenever you're ready.",
   },
   {
     q: "Do you offer discounts?",
@@ -142,7 +142,7 @@ export function PricingTemplate() {
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
             Start free, then pick a plan when you&apos;re ready to ship. Every
-            tier includes the full component library — you only pay for scale.
+            tier includes the full component library, you only pay for scale.
           </p>
 
           <div className="mt-7 flex items-center justify-center gap-3">

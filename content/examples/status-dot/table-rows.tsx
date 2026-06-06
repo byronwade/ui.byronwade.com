@@ -34,7 +34,7 @@ const jobs = [
     name: "Cache warm",
     tone: "neutral" as StatusTone,
     status: "Queued",
-    duration: "—",
+    duration: "-",
   },
 ]
 

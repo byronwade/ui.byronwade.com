@@ -65,10 +65,29 @@ Every `registry:ui` / `registry:component`:
 3. Accepts `className` and merges it via **`cn()`** from `@/lib/utils` (passthrough, never clobber).
 4. Uses **tokens only** for color, **editorial typography** (no `font-bold` on display/section), and
    keeps accessibility + dark mode coming for free from tokens. (Full rules in `AGENTS.md`.)
-5. Ships with a **test** (every variant/state/interaction + `axe`) and an **example**.
+5. **Long-form copy** uses `reading-ui` (docs) or `reading-prose` (essays) — never full-bleed
+   `text-sm` for paragraphs users read. Body copy uses `text-foreground`; `reading-muted` for
+   secondary lines inside a lane. See `AGENTS.md` and `/docs/readability`.
+6. **Catalog surfaces** — Application UI vs marketing/editorial share one foundation; see
+   `content/catalog-surfaces.ts`. Do not split into separate registry packages.
+7. Ships with a **test** (every variant/state/interaction + `axe`) and an **example**.
 
 When in doubt, copy the shape of `registry/ui/button.tsx` (primitive) or
 `registry/components/status-pill.tsx` (composite).
+
+## Readability (long-form copy)
+
+byronwade/ui splits **UI chrome** from **reading surfaces**. This is enforced in the shipped AI rule
+and foundation utilities — not optional polish.
+
+| Lane  | Utility                             | When                                             |
+| ----- | ----------------------------------- | ------------------------------------------------ |
+| UI    | `font-sans` + `text-sm`/`text-base` | Dashboards, forms, tables, nav                   |
+| Docs  | `reading-ui`                        | Guides, help, release notes (65ch, 16px, 1.6 lh) |
+| Essay | `reading-prose`                     | Articles, manifestos (65ch, 18px serif, 1.7 lh)  |
+
+Cap measure at **80ch** (WCAG); target **65ch**. Left-align body; no Bionic Reading or e-ink
+simulation. Prose guide: `app/(docs)/docs/readability/page.tsx` (published at `/docs/readability`).
 
 ## Enforcement
 

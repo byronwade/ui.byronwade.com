@@ -31,7 +31,7 @@ export default function Example() {
               : "Processing"}
         </ProgressLabel>
         <ProgressValue>
-          {(formatted) => (isIndeterminate ? "—" : formatted)}
+          {(formatted) => (isIndeterminate ? "-" : formatted)}
         </ProgressValue>
       </Progress>
 

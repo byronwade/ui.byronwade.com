@@ -15,7 +15,7 @@ const events: TimelineEvent[] = [
   },
   {
     title: "Health check failed",
-    description: "Service did not respond within 30 s — retrying.",
+    description: "Service did not respond within 30 s, retrying.",
     timestamp: "2026-05-31T09:17:45Z",
     tone: "warning",
   },

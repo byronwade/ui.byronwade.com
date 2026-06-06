@@ -8,7 +8,7 @@ export default function Example() {
   return (
     <div className="w-[360px]">
       <VideoCard
-        title="Building a design system from scratch — tokens, primitives, and composites"
+        title="Building a design system from scratch, tokens, primitives, and composites"
         href="#"
         thumbnailSrc="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=720&q=80"
         duration="14:08"

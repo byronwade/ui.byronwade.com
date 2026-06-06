@@ -43,7 +43,7 @@ export default function Example() {
         className="font-mono text-xs field-sizing-fixed"
       />
       <p className="text-xs text-muted-foreground">
-        Read-only — select and copy the text above.
+        Read-only, select and copy the text above.
       </p>
     </div>
   )

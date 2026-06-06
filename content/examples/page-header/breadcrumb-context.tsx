@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 
 /**
  * Demonstrates PageHeader used inside a page layout with surrounding
- * context — a breadcrumb line above and a divider below — to show how it
+ * context, a breadcrumb line above and a divider below, to show how it
  * composes with real page scaffolding.
  */
 export default function Example() {

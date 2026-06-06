@@ -1,0 +1,100 @@
+/**
+ * Tests for useIsMobile (@/lib/use-mobile) — 768px viewport breakpoint hook.
+ */
+
+import { renderHook, act, waitFor } from "@testing-library/react"
+import { afterEach, beforeEach, describe, it, expect, vi } from "vitest"
+
+import { useIsMobile } from "@/lib/use-mobile"
+
+type MatchMediaListener = (event: MediaQueryListEvent) => void
+
+function createMatchMediaMock(initialMatches: boolean) {
+  let matches = initialMatches
+  let listener: MatchMediaListener | null = null
+
+  const mql = {
+    get matches() {
+      return matches
+    },
+    media: "(max-width: 767px)",
+    onchange: null,
+    addEventListener: vi.fn((_event: string, cb: MatchMediaListener) => {
+      listener = cb
+    }),
+    removeEventListener: vi.fn((_event: string, cb: MatchMediaListener) => {
+      if (listener === cb) listener = null
+    }),
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  }
+
+  return {
+    mql,
+    setMatches(next: boolean) {
+      matches = next
+      listener?.({ matches: next } as MediaQueryListEvent)
+    },
+  }
+}
+
+describe("useIsMobile", () => {
+  let matchMediaMock: ReturnType<typeof createMatchMediaMock>
+
+  beforeEach(() => {
+    matchMediaMock = createMatchMediaMock(false)
+    vi.stubGlobal("matchMedia", vi.fn().mockReturnValue(matchMediaMock.mql))
+    Object.defineProperty(window, "innerWidth", {
+      configurable: true,
+      writable: true,
+      value: 1024,
+    })
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it("returns false for desktop-width viewports", async () => {
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: 1024 })
+    const { result } = renderHook(() => useIsMobile())
+    await waitFor(() => {
+      expect(result.current).toBe(false)
+    })
+  })
+
+  it("returns true for mobile-width viewports", async () => {
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: 500 })
+    const { result } = renderHook(() => useIsMobile())
+    await waitFor(() => {
+      expect(result.current).toBe(true)
+    })
+  })
+
+  it("updates when matchMedia change fires", async () => {
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: 1024 })
+    const { result } = renderHook(() => useIsMobile())
+    await waitFor(() => {
+      expect(result.current).toBe(false)
+    })
+
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: 500 })
+    act(() => {
+      matchMediaMock.setMatches(true)
+    })
+
+    await waitFor(() => {
+      expect(result.current).toBe(true)
+    })
+  })
+
+  it("registers and cleans up a matchMedia listener", async () => {
+    const { unmount } = renderHook(() => useIsMobile())
+    await waitFor(() => {
+      expect(matchMediaMock.mql.addEventListener).toHaveBeenCalled()
+    })
+    unmount()
+    expect(matchMediaMock.mql.removeEventListener).toHaveBeenCalled()
+  })
+})

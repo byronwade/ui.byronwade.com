@@ -6,15 +6,15 @@ import { CodeBlock } from "@/app/(docs)/_components/code-block"
 import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
-  title: "Foundation — byronwade/ui",
+  title: "Foundation, byronwade/ui",
   description:
-    "The complete token base — surfaces, brand & status, charts, agent-activity pastels, the radius scale, the hairline depth model, and house utilities.",
+    "The complete token base, surfaces, brand & status, charts, agent-activity pastels, the radius scale, the hairline depth model, and house utilities.",
 }
 
 /* ---------------------------------------------------------------------------
    Foundation = the tokens. Distinct signature: the hero is a wall of the
    palette itself. Everything renders with real utilities, so the page IS the
-   foundation — change a token and this page changes with it.
+   foundation, change a token and this page changes with it.
 --------------------------------------------------------------------------- */
 
 const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
@@ -54,7 +54,7 @@ const RADII = [
 export default function FoundationPage() {
   return (
     <article className="max-w-none">
-      {/* ============================ HERO — swatch wall ================ */}
+      {/* ============================ HERO, swatch wall ================ */}
       <section className={`${BLEED} border-b border-border`}>
         <div className="flex items-baseline justify-between gap-4 pb-6 pt-10">
           <h1 className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
@@ -71,7 +71,7 @@ export default function FoundationPage() {
             </p>
             <p className="mt-3 max-w-md font-mono text-[13px] leading-relaxed text-muted-foreground">
               Warm paper neutrals, one brand accent, fixed data hues. It owns
-              your :root — install with init.
+              your :root, install with init.
             </p>
           </div>
           {WALL.map((s) => (
@@ -93,7 +93,7 @@ export default function FoundationPage() {
             code={`npx shadcn@latest init ${REGISTRY_URL}/r/foundation.json`}
           />
           <p className="font-mono text-[11px] text-muted-foreground md:text-right">
-            the base owns :root — install once
+            the base owns :root, install once
           </p>
         </div>
       </section>
@@ -128,7 +128,7 @@ export default function FoundationPage() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Depth is a hairline
           </p>
-          <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <p className="reading-ui mt-3 text-foreground text-pretty">
             No drop shadows. A single inset{" "}
             <span className="text-foreground">edge</span> catches light so a
             surface sits into its background.
@@ -137,7 +137,7 @@ export default function FoundationPage() {
             <div className="rounded-2xl edge bg-card p-5">
               <p className="font-mono text-[11px] text-brand">edge</p>
               <p className="mt-2 text-xs text-muted-foreground">
-                hairline — the house model
+                hairline, the house model
               </p>
             </div>
             <div className="rounded-2xl bg-card p-5">
@@ -155,8 +155,8 @@ export default function FoundationPage() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             House utilities
           </p>
-          <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            Texture and treatments the foundation ships — reuse instead of
+          <p className="reading-ui mt-3 text-foreground text-pretty">
+            Texture and treatments the foundation ships, reuse instead of
             re-rolling.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-4">
@@ -180,6 +180,22 @@ export default function FoundationPage() {
               </div>
               <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">
                 text-gradient-brand
+              </p>
+            </div>
+            <div className="overflow-hidden rounded-2xl edge bg-background">
+              <div className="reading-ui p-4 text-foreground">
+                <p>reading-ui · 65ch docs lane</p>
+              </div>
+              <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">
+                reading-ui
+              </p>
+            </div>
+            <div className="overflow-hidden rounded-2xl edge bg-background">
+              <div className="reading-prose p-4 text-foreground">
+                <p>reading-prose · 65ch essay lane</p>
+              </div>
+              <p className="px-3 py-2 font-mono text-[10px] text-muted-foreground">
+                reading-prose
               </p>
             </div>
             <div className="overflow-hidden rounded-2xl edge bg-background">
@@ -209,8 +225,15 @@ export default function FoundationPage() {
               <p className="font-serif text-2xl text-foreground">font-serif</p>
             </div>
             <Link
-              href="/docs/typography"
+              href="/docs/readability"
               className="mt-5 inline-flex items-center gap-1.5 text-sm text-brand underline-offset-4 hover:underline"
+            >
+              Why we chose this
+              <ArrowRight className="size-3.5" />
+            </Link>
+            <Link
+              href="/docs/typography"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
             >
               The type system
               <ArrowRight className="size-3.5" />
@@ -220,7 +243,7 @@ export default function FoundationPage() {
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
               One knob re-skins it
             </p>
-            <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">
+            <p className="reading-ui mt-3 text-foreground text-pretty">
               Override <span className="text-foreground">--brand</span> and
               rings, charts, success, and active states all follow.
             </p>

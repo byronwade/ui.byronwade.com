@@ -13,7 +13,7 @@ const rows = [
   { symbol: "TSLA", price: 412.5, change: 3.07 },
 ]
 
-// A watchlist grid — card-variant tickers laid out two-up, each row justified
+// A watchlist grid, card-variant tickers laid out two-up, each row justified
 // so the symbol sits left and the price/change sit right.
 export default function Example() {
   return (

@@ -5,7 +5,7 @@
 //
 // Templates differ from layout archetypes: archetypes are abstract *structural*
 // patterns ("the table", "the rail"), templates are complete, content-filled
-// *starter screens* you can ship — a real product page with real copy and data.
+// *starter screens* you can ship, a real product page with real copy and data.
 
 export type TemplateSlug = "pricing" | "dashboard" | "settings"
 
@@ -14,9 +14,9 @@ export interface TemplateMeta {
   name: string
   /** One-line description shown on the gallery card and inspector. */
   tagline: string
-  /** What kind of screen this is — the gallery's category facet + card tag. */
+  /** What kind of screen this is, the gallery's category facet + card tag. */
   category: string
-  /** Display price — these are paid, full templates. */
+  /** Display price, these are paid, full templates. */
   price: string
   /** Registry items composed by this template (promotion-ready manifest). */
   uses: string[]
@@ -36,7 +36,7 @@ export const templates: TemplateMeta[] = [
     slug: "dashboard",
     name: "Dashboard",
     tagline:
-      "A complete analytics overview shell — sidebar, top bar, KPI row, a hero chart, and a recent-activity table.",
+      "A complete analytics overview shell, sidebar, top bar, KPI row, a hero chart, and a recent-activity table.",
     category: "Dashboard",
     price: "$59",
     uses: [

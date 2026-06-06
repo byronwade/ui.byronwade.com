@@ -14,7 +14,7 @@ export default function Example() {
     <div className="max-w-sm p-6">
       <h2 className="mb-4 text-sm font-semibold">Single Event</h2>
       <p className="mb-4 text-xs text-muted-foreground">
-        A list with one item — no connector line is rendered below the last dot.
+        A list with one item, no connector line is rendered below the last dot.
       </p>
       <EventTimeline events={events} />
     </div>

@@ -2,7 +2,7 @@ import { MetaGrid } from "@/components/detail-header"
 import { Badge } from "@/components/ui/badge"
 
 /**
- * MetaGrid used independently — outside of DetailHeader — for embedding a
+ * MetaGrid used independently, outside of DetailHeader, for embedding a
  * label/value grid inside a card, panel, or secondary section without a
  * title row.
  */

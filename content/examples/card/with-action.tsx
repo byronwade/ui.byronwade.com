@@ -37,7 +37,7 @@ export default function Example() {
         </CardFooter>
       </Card>
 
-      {/* CardAction: icon-only button — spans both title and description rows */}
+      {/* CardAction: icon-only button, spans both title and description rows */}
       <Card className="w-72">
         <CardHeader>
           <CardTitle>Active Users</CardTitle>

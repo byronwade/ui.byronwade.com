@@ -29,8 +29,8 @@ export function ExampleTabs({
       </div>
       {view === "preview" ? (
         // flex + justify-center centers fixed-size demos (single button, etc.)
-        // while full-width demos (w-full / full-bleed) still fill — no collapse.
-        <div className="flex min-h-56 items-center justify-center rounded-xl edge p-8">
+        // while full-width demos (w-full / full-bleed) still fill, no collapse.
+        <div className="flex min-h-56 w-full items-stretch justify-center rounded-xl edge p-8">
           {preview}
         </div>
       ) : (

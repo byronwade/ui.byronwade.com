@@ -16,7 +16,7 @@ export default function Example() {
         <EmptyState
           icon={AlertCircle}
           title="Something went wrong"
-          description="We couldn't load your data. This might be a temporary issue — please try again."
+          description="We couldn't load your data. This might be a temporary issue, please try again."
           action={
             <Button size="sm" variant="destructive" onClick={handleRetry}>
               Try again

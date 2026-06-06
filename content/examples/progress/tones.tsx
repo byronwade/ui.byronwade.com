@@ -16,7 +16,7 @@ const rows: {
   { tone: "destructive", label: "Over limit", value: 96 },
 ]
 
-// The indicator color is token-driven via `tone` — green/amber/red track
+// The indicator color is token-driven via `tone`, green/amber/red track
 // state without leaving the design system.
 export default function Example() {
   return (

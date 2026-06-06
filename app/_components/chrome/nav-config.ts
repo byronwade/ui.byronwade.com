@@ -8,7 +8,7 @@ import {
 } from "lucide-react"
 
 /**
- * Primary destinations surfaced in the floating nav dock — the docs-site analogue
+ * Primary destinations surfaced in the floating nav dock, the docs-site analogue
  * of SignalRoute's per-product `nav-config`. Kept deliberately small: the dock is
  * the always-visible primary nav, while the full component catalog is reached via
  * the launcher's browse panel, the breadcrumb, and the ⌘K command palette.

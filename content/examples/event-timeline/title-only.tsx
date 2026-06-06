@@ -13,7 +13,7 @@ export default function Example() {
     <div className="max-w-sm p-6">
       <h2 className="mb-4 text-sm font-semibold">Title Only</h2>
       <p className="mb-4 text-xs text-muted-foreground">
-        Events without description or timestamp — minimal footprint.
+        Events without description or timestamp, minimal footprint.
       </p>
       <EventTimeline events={events} />
     </div>

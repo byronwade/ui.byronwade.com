@@ -55,7 +55,7 @@ const topics = [
   },
 ]
 
-/** A help center blooming from the dock — the SignalRoute help panel design. */
+/** A help center blooming from the dock, the SignalRoute help panel design. */
 export default function Example() {
   const [open, setOpen] = React.useState(false)
   return (

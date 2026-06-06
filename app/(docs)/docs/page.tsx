@@ -2,37 +2,37 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
-import { categories, byCategory, components } from "@/content/components"
+import { byCategory, components } from "@/content/components"
+import {
+  bySurface,
+  catalogSurfaces,
+  categoriesForSurface,
+  getSurface,
+} from "@/content/catalog-surfaces"
 import { archetypes } from "@/app/layouts/_archetypes"
 import { Button } from "@/components/ui/button"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { DocsIntro, DocsProse } from "@/app/(docs)/_components/docs-prose"
 
 export const metadata: Metadata = {
-  title: "Introduction — byronwade/ui",
+  title: "Introduction, byronwade/ui",
   description:
-    "What byronwade/ui is, why it exists, and every token-driven component in the registry — primitives, composites, and layout patterns.",
+    "What byronwade/ui is, why it exists, and every token-driven component in the registry, primitives, composites, and layout patterns.",
 }
-
-/* ---------------------------------------------------------------------------
-   Introduction = the cover + the index. Distinct signature: an asymmetric
-   masthead with the component count as a giant graphic numeral, and the
-   catalog rendered as an editorial index (not card grids). #catalog preserved.
---------------------------------------------------------------------------- */
 
 const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const PRINCIPLES = [
   "One warm accent; the rest is calm ink and warm gray.",
-  "Depth from a single hairline edge — no shadows, no borders.",
-  "Every page earns one signature — never a repeated card grid.",
-  "Pure tokens — override --brand and the whole system re-skins.",
+  "Depth from a single hairline edge, no shadows, no borders.",
+  "Every page earns one signature, never a repeated card grid.",
+  "Pure tokens, override --brand and the whole system re-skins.",
 ]
 
 export default function ComponentsIndexPage() {
   return (
     <article className="max-w-none">
-      {/* ============================ MASTHEAD ========================= */}
-      <section className="grid gap-8 py-12 lg:grid-cols-[1fr_auto] lg:items-end lg:py-16">
+      <section className="grid gap-8 py-6 lg:grid-cols-[1fr_auto] lg:items-end lg:py-8">
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Introduction
@@ -41,20 +41,15 @@ export default function ComponentsIndexPage() {
             A master design system,{" "}
             <span className="text-muted-foreground">entirely yours.</span>
           </h1>
-          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <DocsIntro className="mt-5">
             <span className="text-foreground">byronwade/ui</span> is a calm,
             content-first library published as a namespaced{" "}
-            <a
-              href="https://ui.shadcn.com"
-              target="_blank"
-              rel="noreferrer"
-              className="text-brand underline-offset-4 hover:underline"
-            >
+            <a href="https://ui.shadcn.com" target="_blank" rel="noreferrer">
               shadcn
             </a>{" "}
             registry. Token-driven primitives, composites, and full-page layouts
             — install with the shadcn CLI and you own the copied code.
-          </p>
+          </DocsIntro>
         </div>
 
         <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both shrink-0 text-left lg:text-right duration-700 [animation-delay:150ms]">
@@ -67,7 +62,6 @@ export default function ComponentsIndexPage() {
         </div>
       </section>
 
-      {/* ============================ META + INSTALL =================== */}
       <section className={`${BLEED} border-y border-border bg-card`}>
         <div className="grid gap-6 py-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-wide text-muted-foreground">
@@ -89,26 +83,28 @@ export default function ComponentsIndexPage() {
         </div>
       </section>
 
-      {/* ============================ PRINCIPLES (inline) ============== */}
       <section className="py-12">
-        <ol className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
-          {PRINCIPLES.map((p, i) => (
-            <li key={p} className="flex gap-3 text-[15px] leading-relaxed">
-              <span className="font-mono text-sm text-brand">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="text-muted-foreground text-pretty">{p}</span>
-            </li>
-          ))}
-        </ol>
+        <DocsProse>
+          <p className="reading-muted font-mono text-xs uppercase tracking-[0.2em]">
+            Two surfaces · one foundation
+          </p>
+          <p>
+            Application UI and marketing/editorial share the same tokens and
+            accent — they diverge in typography lane and layout density. Browse
+            the catalog in either mode; install only what your product needs.
+          </p>
+          <ol>
+            {PRINCIPLES.map((p) => (
+              <li key={p}>{p}</li>
+            ))}
+          </ol>
+        </DocsProse>
       </section>
 
-      {/* ============================ INSTALL ONE-LINER =============== */}
-      <section className="pb-12">
+      <section className="pb-12 reading-ui">
         <CodeBlock lang="bash" code="npx shadcn@latest add @byronwade/all" />
       </section>
 
-      {/* ============================ CATALOG INDEX =================== */}
       <section id="catalog" className="scroll-mt-24">
         <div className="flex items-baseline justify-between gap-4 border-b border-foreground/20 pb-3">
           <h2 className="text-[clamp(1.75rem,5vw,2.75rem)] font-normal tracking-tight text-foreground">
@@ -119,42 +115,55 @@ export default function ComponentsIndexPage() {
           </span>
         </div>
 
-        <div>
-          {categories.map((cat) => {
-            const items = byCategory(cat)
-            if (items.length === 0) return null
-            return (
-              <div
-                key={cat}
-                className="grid gap-x-8 gap-y-3 border-b border-border py-6 sm:grid-cols-[10rem_1fr]"
-              >
-                <div className="flex items-baseline gap-2">
-                  <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    {cat}
-                  </h3>
-                  <span className="font-mono text-[11px] tabular-nums text-muted-foreground/60">
-                    {items.length}
-                  </span>
+        {catalogSurfaces.map((surface) => (
+          <div key={surface.id} className="border-b border-border py-10">
+            <div className="reading-ui mb-8">
+              <h3 className="text-[clamp(1.25rem,3vw,1.75rem)] font-normal tracking-tight text-foreground">
+                {surface.label}
+              </h3>
+              <p className="reading-muted mt-2">{surface.description}</p>
+              <p className="mt-2 font-mono text-[11px] tabular-nums text-muted-foreground">
+                {bySurface(surface.id).length} components
+              </p>
+            </div>
+
+            {categoriesForSurface(surface.id).map((cat) => {
+              const items = byCategory(cat).filter(
+                (c) => getSurface(c) === surface.id,
+              )
+              if (items.length === 0) return null
+              return (
+                <div
+                  key={`${surface.id}-${cat}`}
+                  className="grid gap-x-8 gap-y-3 border-t border-border py-6 sm:grid-cols-[10rem_1fr]"
+                >
+                  <div className="flex items-baseline gap-2">
+                    <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                      {cat}
+                    </h4>
+                    <span className="font-mono text-[11px] tabular-nums text-muted-foreground/60">
+                      {items.length}
+                    </span>
+                  </div>
+                  <ul className="flex flex-wrap gap-x-5 gap-y-2.5">
+                    {items.map((c) => (
+                      <li key={c.slug}>
+                        <Link
+                          href={`/docs/${c.slug}`}
+                          className="text-base text-foreground underline-offset-4 transition-colors hover:text-brand hover:underline"
+                        >
+                          {c.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="flex flex-wrap gap-x-5 gap-y-2.5">
-                  {items.map((c) => (
-                    <li key={c.slug}>
-                      <Link
-                        href={`/docs/${c.slug}`}
-                        className="text-[15px] text-foreground underline-offset-4 transition-colors hover:text-brand hover:underline"
-                      >
-                        {c.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
-          })}
-        </div>
+              )
+            })}
+          </div>
+        ))}
       </section>
 
-      {/* ============================ NAV ============================== */}
       <div className="flex flex-wrap gap-x-6 gap-y-3 pt-10 text-sm">
         <Link
           href="/docs/philosophy"
@@ -164,10 +173,16 @@ export default function ComponentsIndexPage() {
           <ArrowRight className="size-3.5" />
         </Link>
         <Link
-          href="/docs/installation"
+          href="/docs/readability"
           className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
         >
-          Installation
+          Readability lanes
+        </Link>
+        <Link
+          href="/docs/surfaces"
+          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+        >
+          Surfaces
         </Link>
       </div>
     </article>

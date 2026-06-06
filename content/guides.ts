@@ -4,7 +4,7 @@
  * alongside the component catalog (installation, theming, AI rules).
  *
  * Because these slugs are static segments, Next.js resolves them ahead of the
- * /docs/[slug] dynamic route — and none collides with a component slug.
+ * /docs/[slug] dynamic route, and none collides with a component slug.
  */
 
 /** Deployed registry base URL (the Vercel deployment or your custom domain). */
@@ -36,7 +36,7 @@ export const guides: Guide[] = [
     label: "Philosophy",
     title: "Philosophy",
     description:
-      "The whole idea, start to finish — calm, warm, token-driven, and entirely yours.",
+      "The whole idea, start to finish, calm, warm, token-driven, and entirely yours.",
   },
   {
     slug: "installation",
@@ -44,7 +44,7 @@ export const guides: Guide[] = [
     label: "Installation",
     title: "Installation",
     description:
-      "Every way in — the easiest being the shadcn registry, which wires everything up once.",
+      "Every way in, the easiest being the shadcn registry, which wires everything up once.",
   },
   {
     slug: "foundation",
@@ -52,7 +52,7 @@ export const guides: Guide[] = [
     label: "Foundation",
     title: "Foundation",
     description:
-      "The complete token base — surfaces, brand, charts, the radius scale, and the hairline depth model.",
+      "The complete token base, surfaces, brand, charts, the radius scale, and the hairline depth model.",
   },
   {
     slug: "theming",
@@ -60,7 +60,7 @@ export const guides: Guide[] = [
     label: "Theming",
     title: "Theming",
     description:
-      "Re-skin the entire system — light and dark — from a single CSS variable.",
+      "Re-skin the entire system, light and dark, from a single CSS variable.",
   },
   {
     slug: "typography",
@@ -68,7 +68,23 @@ export const guides: Guide[] = [
     label: "Typography",
     title: "Typography",
     description:
-      "The type system — three families, one scale, and the editorial restraint that makes it read clean.",
+      "The type system, three families, one scale, and the editorial restraint that makes it read clean.",
+  },
+  {
+    slug: "readability",
+    href: "/docs/readability",
+    label: "Readability",
+    title: "Readability",
+    description:
+      "Why byronwade/ui encodes evidence-based web reading — two lanes, 65ch measure, reading-ui and reading-prose in foundation.",
+  },
+  {
+    slug: "surfaces",
+    href: "/docs/surfaces",
+    label: "Surfaces",
+    title: "Application vs marketing",
+    description:
+      "One foundation, two composition modes — how the catalog splits application UI from marketing and editorial without forking the registry.",
   },
   {
     slug: "ai",

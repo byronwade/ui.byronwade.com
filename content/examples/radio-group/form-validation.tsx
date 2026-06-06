@@ -20,7 +20,7 @@ export default function Example() {
     e.preventDefault()
     setSubmitted(true)
     if (contact) {
-      // success — reset for demo
+      // success, reset for demo
       setContact("")
       setSubmitted(false)
       alert(`Preference saved: ${contact}`)

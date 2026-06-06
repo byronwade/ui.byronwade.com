@@ -62,8 +62,8 @@ export default function Example() {
       <h2 className="mb-4 text-sm font-semibold">Rich JSX Content</h2>
       <p className="mb-4 text-xs text-muted-foreground">
         <code>title</code> and <code>description</code> accept{" "}
-        <code>React.ReactNode</code> — inline code, links, and formatted text
-        all work.
+        <code>React.ReactNode</code>, inline code, links, and formatted text all
+        work.
       </p>
       <EventTimeline events={events} />
     </div>

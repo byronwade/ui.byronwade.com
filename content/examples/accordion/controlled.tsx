@@ -17,7 +17,7 @@ const ITEMS = [
   {
     value: "step-2",
     label: "Step 2: Verify your email",
-    body: "Click the link we sent to your email. The link expires after 24 hours — request a new one if needed.",
+    body: "Click the link we sent to your email. The link expires after 24 hours, request a new one if needed.",
   },
   {
     value: "step-3",

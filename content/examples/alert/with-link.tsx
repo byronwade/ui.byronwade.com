@@ -4,7 +4,7 @@ import { BookOpenIcon, ExternalLinkIcon, InfoIcon } from "lucide-react"
 export default function Example() {
   return (
     <div className="flex flex-col gap-4 p-6 max-w-lg">
-      {/* Inline link in description — styled automatically by the component */}
+      {/* Inline link in description, styled automatically by the component */}
       <Alert>
         <InfoIcon />
         <AlertTitle>Cookie preferences updated</AlertTitle>

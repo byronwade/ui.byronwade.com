@@ -7,13 +7,13 @@ import { cn } from "@/lib/utils"
 import { Calendar } from "@/components/ui/calendar"
 
 /**
- * Pricing calendar with custom day buttons — adapted from coss `p-calendar-24`.
+ * Pricing calendar with custom day buttons, adapted from coss `p-calendar-24`.
  * Each day shows a price; below-threshold prices read in `text-success`. Prices
  * are deterministic mock data derived from the date (no random → SSR-safe).
  */
 const GOOD_PRICE = 100
 
-/** Stable pseudo price (80–200) from a date — same on server and client. */
+/** Stable pseudo price (80–200) from a date, same on server and client. */
 function priceFor(date: Date): number {
   const seed =
     date.getFullYear() * 372 + (date.getMonth() + 1) * 31 + date.getDate()

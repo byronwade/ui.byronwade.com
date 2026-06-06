@@ -1,9 +1,9 @@
 "use client"
 
-// Hero-chart archetype — a telemetry dashboard fronted by one big chart.
+// Hero-chart archetype, a telemetry dashboard fronted by one big chart.
 // uses: Chart, MetricStat, SegmentedControl, Badge, Table, Sparkline
 //
-// Design: the chart is the unmistakable hero — a brand-lit, gradient-filled area with
+// Design: the chart is the unmistakable hero, a brand-lit, gradient-filled area with
 // a range switcher and an oversized headline figure. A tiled KPI strip (each with its
 // own sparkline) and a breakdown/products bento carry the supporting detail.
 import * as React from "react"

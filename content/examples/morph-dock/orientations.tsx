@@ -27,7 +27,7 @@ const items = [
 
 /**
  * `placement` sets the bloom direction. Here the dock sits low and blooms
- * UPWARD — the hook is position-agnostic, so the same morph works in any
+ * UPWARD, the hook is position-agnostic, so the same morph works in any
  * orientation (top / bottom / left / right).
  */
 export default function Example() {

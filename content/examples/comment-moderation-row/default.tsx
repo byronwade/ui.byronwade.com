@@ -31,7 +31,7 @@ export default function Example() {
         author="Jules"
         authorAvatarSrc={AVATAR_2}
         timestamp="1 day ago"
-        text="Loved this — would buy the merch immediately, link please?"
+        text="Loved this, would buy the merch immediately, link please?"
         likeCount={86}
         status="approved"
         defaultHearted

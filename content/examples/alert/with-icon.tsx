@@ -41,7 +41,7 @@ export default function Example() {
         <KeyRoundIcon />
         <AlertTitle>API key generated</AlertTitle>
         <AlertDescription>
-          Copy and store your key now — it won&apos;t be shown again.
+          Copy and store your key now, it won&apos;t be shown again.
         </AlertDescription>
       </Alert>
 

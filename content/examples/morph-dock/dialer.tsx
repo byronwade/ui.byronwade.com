@@ -26,7 +26,7 @@ const items = [
   },
 ]
 
-// The dial pad layout from SignalRoute — digits with their letter sub-labels.
+// The dial pad layout from SignalRoute, digits with their letter sub-labels.
 const KEYS: { d: string; sub?: string }[] = [
   { d: "1" },
   { d: "2", sub: "ABC" },
@@ -43,7 +43,7 @@ const KEYS: { d: string; sub?: string }[] = [
 ]
 
 /**
- * A detachable dial pad — the SignalRoute dialer design (round keys with letter
+ * A detachable dial pad, the SignalRoute dialer design (round keys with letter
  * sub-labels, a caret display) blooming out of the dock as a draggable window.
  */
 export default function Example() {

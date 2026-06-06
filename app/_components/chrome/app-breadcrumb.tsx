@@ -21,11 +21,11 @@ const NAV_RESERVE = 360
 const GAP = 12
 
 /**
- * The breadcrumb — a matched-sibling overlay in the top-left header group, sharing
+ * The breadcrumb, a matched-sibling overlay in the top-left header group, sharing
  * the corner-pill material with the launcher (40px, dark `--dock`, `rounded-3xl`).
  * Ported from SignalRoute's `AppBreadcrumb`, minus the dock-band coordinator: the
  * collapse budget is computed from STABLE inputs only (viewport width, its pinned
- * left edge, the nav reserve). Renders the full trail responsively — collapsing to
+ * left edge, the nav reserve). Renders the full trail responsively, collapsing to
  * `root / … / current` on desktop and `‹ Current` on mobile.
  */
 export function AppBreadcrumb() {
@@ -72,7 +72,7 @@ export function AppBreadcrumb() {
       aria-label="Breadcrumb"
       className="pointer-events-auto relative z-0 flex h-[40px] items-center overflow-hidden rounded-3xl bg-dock px-4 text-[13px] shadow-float"
     >
-      {/* DESKTOP — full trail, collapsing to root / … / current. */}
+      {/* DESKTOP, full trail, collapsing to root / … / current. */}
       <ol
         ref={rootRef}
         style={
@@ -127,7 +127,7 @@ export function AppBreadcrumb() {
         )}
       </ol>
 
-      {/* MOBILE — current only, with a back-chevron to the parent level. */}
+      {/* MOBILE, current only, with a back-chevron to the parent level. */}
       <ol className="flex min-w-0 items-center gap-1 sm:hidden">
         {parent && (
           <li className="flex shrink-0 items-center">
@@ -147,7 +147,7 @@ export function AppBreadcrumb() {
         </li>
       </ol>
 
-      {/* Hidden measuring twin — always the full desktop row. */}
+      {/* Hidden measuring twin, always the full desktop row. */}
       <ol
         ref={twinRef}
         aria-hidden

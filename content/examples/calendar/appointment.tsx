@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 
 /**
- * Appointment picker — calendar + time slots. Adapted from coss `p-calendar-19`
+ * Appointment picker, calendar + time slots. Adapted from coss `p-calendar-19`
  * to our components (slots are Buttons: selected = default/ink, free = outline,
  * taken = disabled).
  */

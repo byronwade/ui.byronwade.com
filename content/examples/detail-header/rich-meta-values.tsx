@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
 /**
- * Shows that meta `value` accepts any ReactNode — inline badges,
+ * Shows that meta `value` accepts any ReactNode, inline badges,
  * colored text, links, or compound elements.
  */
 export default function Example() {

@@ -5,7 +5,7 @@ import { Loader } from "@/components/ai-elements/loader"
 export default function Example() {
   return (
     <div className="flex min-h-[160px] items-center justify-center gap-8 bg-background p-8">
-      {/* Default — inherits muted-foreground */}
+      {/* Default, inherits muted-foreground */}
       <Loader />
 
       {/* Larger, tinted with the brand accent via a text token */}

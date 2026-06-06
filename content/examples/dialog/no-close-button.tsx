@@ -21,7 +21,7 @@ export default function Example() {
         Open required dialog
       </Button>
 
-      {/* disablePointerDismissal — user must choose an action to close */}
+      {/* disablePointerDismissal, user must choose an action to close */}
       <Dialog open={open} onOpenChange={setOpen} disablePointerDismissal={true}>
         <DialogContent showCloseButton={false}>
           <DialogHeader>

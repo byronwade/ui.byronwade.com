@@ -3,17 +3,24 @@ import {
   getVariants,
   type ComponentDoc,
 } from "@/content/components"
+import {
+  getSurface,
+  type CatalogSurface,
+  type SurfaceFilter,
+} from "@/content/catalog-surfaces"
 
 export type CatalogItem = {
   slug: string
   name: string
-  /** Primary group — the component's `category`. */
+  /** Primary group, the component's `category`. */
   group: string
+  /** Application UI vs marketing/editorial. */
+  surface: CatalogSurface
   description: string
   /** Clean type-level facet tags (`doc.tags`). */
   tags: string[]
   /**
-   * Number of variants/specimens shown on the component's page — the count of
+   * Number of variants/specimens shown on the component's page, the count of
    * authored variants when present, otherwise the real number of example demos
    * (passed in via `exampleCounts`), so the catalog reflects what actually
    * exists rather than a synthetic "1".
@@ -38,6 +45,7 @@ const toItem = (
     slug: doc.slug,
     name: doc.name,
     group: doc.category,
+    surface: getSurface(doc),
     description: doc.description,
     tags,
     variantCount: authored > 0 ? authored : (exampleCounts[doc.slug] ?? 0),
@@ -47,6 +55,7 @@ const toItem = (
       doc.name,
       doc.slug.replace(/-/g, " "),
       doc.category,
+      getSurface(doc),
       doc.description,
       ...tags,
       ...variantTokens,
@@ -72,6 +81,7 @@ export type CatalogFilter = {
   query: string
   groups: string[]
   tags: string[]
+  surface: SurfaceFilter
   sort: "featured" | "az"
 }
 
@@ -84,7 +94,8 @@ export function filterCatalog(
     (i) =>
       (q === "" || i.search.includes(q)) &&
       (f.groups.length === 0 || f.groups.includes(i.group)) &&
-      (f.tags.length === 0 || f.tags.some((t) => i.tags.includes(t))),
+      (f.tags.length === 0 || f.tags.some((t) => i.tags.includes(t))) &&
+      (f.surface === "all" || i.surface === f.surface),
   )
   return f.sort === "az"
     ? [...r].sort((a, b) => a.name.localeCompare(b.name))

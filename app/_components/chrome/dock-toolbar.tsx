@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { bySlug } from "@/content/components"
 
 /**
- * The contextual toolbar, pinned top-right (the inverse corner of the launcher) —
+ * The contextual toolbar, pinned top-right (the inverse corner of the launcher),
  * the docs-site analogue of SignalRoute's `DockToolbar`. SignalRoute carries the
  * page's permanent + contextual actions here; a docs site has exactly one useful
  * page action: copy the component's install command. When there's nothing to show
@@ -24,7 +24,7 @@ export function DockToolbar() {
   }, [pathname])
 
   const doc = slug ? bySlug(slug) : null
-  // Foundation installs via `shadcn init`, not `add` — no command to copy.
+  // Foundation installs via `shadcn init`, not `add`, no command to copy.
   const showInstall = !!doc && doc.slug !== "foundation"
 
   React.useEffect(() => {
@@ -41,7 +41,7 @@ export function DockToolbar() {
       await navigator.clipboard.writeText(command)
       setCopied(true)
     } catch {
-      /* clipboard unavailable — no-op */
+      /* clipboard unavailable, no-op */
     }
   }
 

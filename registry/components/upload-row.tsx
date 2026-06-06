@@ -17,7 +17,7 @@ type BadgeVariant = "secondary" | "warning" | "success" | "destructive"
 // Each status owns its consumer-specific tone words because StatusDot, Badge,
 // and Progress use *different* vocabularies (e.g. StatusDot says `danger` where
 // Badge/Progress say `destructive`). Mapping them per-row keeps every value
-// valid against its target component's union — and resolves every tone to a
+// valid against its target component's union, and resolves every tone to a
 // semantic token so the row re-skins with `--brand`/`--success`/etc.
 const statusConfig: Record<
   UploadStatus,
@@ -104,7 +104,7 @@ function UploadRow({
 
   // `done` always reads 100; `error` clamps to a defined floor; the active
   // transfers reflect the live `progress`. `null` is Base UI's indeterminate
-  // sentinel — the bar animates with no `aria-valuenow`, which is what we want
+  // sentinel, the bar animates with no `aria-valuenow`, which is what we want
   // when an in-flight row has no numeric progress yet (e.g. `queued`).
   const percent: number | null =
     status === "done"
@@ -115,7 +115,7 @@ function UploadRow({
           ? null
           : clampPercent(progress)
 
-  // Mono percent text only belongs to an in-progress *upload* — `processing`
+  // Mono percent text only belongs to an in-progress *upload*, `processing`
   // shows the bar but no countable percent, `done`/`error` have their own state.
   const showPercent = status === "uploading" && percent !== null
 
@@ -165,7 +165,7 @@ function UploadRow({
           data-slot="upload-row-progress"
           value={percent}
           tone={config.bar}
-          aria-label={`${filename} — ${label}`}
+          aria-label={`${filename}, ${label}`}
         />
       </div>
 

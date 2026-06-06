@@ -53,13 +53,13 @@ export default function Example() {
 
           <ConfirmationAccepted>
             <p className="text-sm text-success">
-              Approved — deployment started.
+              Approved, deployment started.
             </p>
           </ConfirmationAccepted>
 
           <ConfirmationRejected>
             <p className="text-sm text-destructive">
-              Rejected — no changes were made.
+              Rejected, no changes were made.
             </p>
           </ConfirmationRejected>
         </Confirmation>

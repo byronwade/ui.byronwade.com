@@ -24,7 +24,7 @@ const events: TimelineEvent[] = [
   },
   {
     title: "Cache miss on node_modules",
-    description: "Cold install took 42 s — consider pinning a lock file.",
+    description: "Cold install took 42 s, consider pinning a lock file.",
     timestamp: "2026-05-31T14:20:12Z",
     tone: "warning",
   },

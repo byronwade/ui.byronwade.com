@@ -14,7 +14,7 @@ export default function Example() {
       <div className="flex items-center gap-3">
         <Switch disabled size="sm" />
         <span className="text-sm text-muted-foreground">
-          Small — disabled (off)
+          Small, disabled (off)
         </span>
       </div>
     </div>

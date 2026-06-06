@@ -134,7 +134,7 @@ function Section({ label, notes }: { label: string; notes: Note[] }) {
 }
 
 /**
- * A notifications center blooming from the dock — the SignalRoute notifications
+ * A notifications center blooming from the dock, the SignalRoute notifications
  * panel: a title + mark-all-read header, grouped scrollable rows, a footer link,
  * and a corner resize grip (drag it to set the body height).
  */

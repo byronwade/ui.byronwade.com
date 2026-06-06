@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 /**
- * Nested inset drawers on the right edge — view a record, then open a second
+ * Nested inset drawers on the right edge, view a record, then open a second
  * inset drawer to edit it. (Adapted from coss p-drawer-8.)
  */
 export default function Example() {

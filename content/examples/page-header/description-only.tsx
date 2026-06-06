@@ -3,10 +3,10 @@ import { PageHeader } from "@/components/page-header"
 export default function Example() {
   return (
     <div className="p-8 space-y-12">
-      {/* Title only — no description */}
+      {/* Title only, no description */}
       <PageHeader title="Dashboard" />
 
-      {/* Title + description — no actions */}
+      {/* Title + description, no actions */}
       <PageHeader
         title="Analytics"
         description="Track engagement metrics and audience trends over time."

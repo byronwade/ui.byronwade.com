@@ -1,6 +1,6 @@
 "use client"
 
-// Board archetype — a horizontally-scrolling Kanban with WIP columns.
+// Board archetype, a horizontally-scrolling Kanban with WIP columns.
 // uses: Badge, GradientAvatar, StatusDot, Button, InputGroup, FilterPill, ScrollArea
 import * as React from "react"
 import {

@@ -1,15 +1,21 @@
 "use client"
 
-// Shared Mobbin-style gallery shell — used by both /templates and /layouts.
+// Shared Mobbin-style gallery shell, used by both /templates and /layouts.
 // A minimal filter bar (Category + Component facets, live client-side filtering,
 // removable active pills, count + sort) over a generous preview-first card grid.
 // Pure tokens; the per-item "logo" is a seeded GradientAvatar so every card has a
 // unique mark without bespoke art.
 import * as React from "react"
 import Link from "next/link"
+import { useRouter, useSearchParams } from "next/navigation"
 import { ArrowRight, X } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import {
+  surfaceShortLabel,
+  type CatalogSurface,
+  type SurfaceFilter,
+} from "@/content/catalog-surfaces"
+import { SurfaceFilterControl } from "@/app/(docs)/_components/surface-filter"
 import { GradientAvatar } from "@/components/ui/gradient-avatar"
 import { FilterPill } from "@/components/ui/filter-pill"
 import {
@@ -26,6 +32,8 @@ export type GalleryItem = {
   name: string
   /** Coarse grouping; powers the Category facet + the card's tag. */
   category: string
+  /** Application vs marketing when the gallery spans both surfaces. */
+  surface?: CatalogSurface
   /** Registry items composed; powers the Component facet. */
   uses: string[]
   /** Detail / inspector route. */
@@ -68,25 +76,58 @@ function ActivePill({
 export function Gallery({
   items,
   noun,
+  initialSurface = "all",
+  syncSurfaceQuery = false,
 }: {
   items: GalleryItem[]
   noun: string
+  initialSurface?: SurfaceFilter
+  /** When true, writes ?surface= to the URL (templates/layouts galleries). */
+  syncSurfaceQuery?: boolean
 }) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const hasSurfaceFacet = items.some((i) => i.surface != null)
   const [categories, setCategories] = React.useState<string[]>([])
   const [comps, setComps] = React.useState<string[]>([])
+  const [surface, setSurface] = React.useState<SurfaceFilter>(initialSurface)
   const [sort, setSort] = React.useState<Sort>("featured")
 
+  React.useEffect(() => {
+    setSurface(initialSurface)
+  }, [initialSurface])
+
+  const setSurfaceFilter = (next: SurfaceFilter) => {
+    setSurface(next)
+    if (!syncSurfaceQuery) return
+    const params = new URLSearchParams(searchParams.toString())
+    if (next === "all") params.delete("surface")
+    else params.set("surface", next)
+    const qs = params.toString()
+    const base = window.location.pathname
+    router.replace(qs ? `${base}?${qs}` : base, { scroll: false })
+  }
+
+  const scopedItems = React.useMemo(() => {
+    if (!hasSurfaceFacet || surface === "all") return items
+    return items.filter((i) => i.surface === surface)
+  }, [hasSurfaceFacet, items, surface])
+
   const allCategories = React.useMemo(
-    () => uniqueSorted(items.map((i) => i.category)),
-    [items],
+    () => uniqueSorted(scopedItems.map((i) => i.category)),
+    [scopedItems],
   )
   const allComponents = React.useMemo(
-    () => uniqueSorted(items.flatMap((i) => i.uses)),
-    [items],
+    () => uniqueSorted(scopedItems.flatMap((i) => i.uses)),
+    [scopedItems],
   )
 
   const filtered = React.useMemo(() => {
-    const r = items.filter(
+    const base =
+      hasSurfaceFacet && surface !== "all"
+        ? items.filter((i) => i.surface === surface)
+        : items
+    const r = base.filter(
       (i) =>
         (categories.length === 0 || categories.includes(i.category)) &&
         (comps.length === 0 || comps.some((c) => i.uses.includes(c))),
@@ -94,7 +135,7 @@ export function Gallery({
     return sort === "az"
       ? [...r].sort((a, b) => a.name.localeCompare(b.name))
       : r
-  }, [items, categories, comps, sort])
+  }, [items, categories, comps, sort, hasSurfaceFacet, surface])
 
   const toggle = (
     set: React.Dispatch<React.SetStateAction<string[]>>,
@@ -104,14 +145,35 @@ export function Gallery({
       prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v],
     )
 
-  const hasFilters = categories.length > 0 || comps.length > 0
+  const hasFilters =
+    categories.length > 0 || comps.length > 0 || surface !== "all"
   const clearAll = () => {
     setCategories([])
     setComps([])
+    if (hasSurfaceFacet) setSurfaceFilter("all")
   }
+
+  const surfaceCountsForGallery = React.useMemo(() => {
+    if (!hasSurfaceFacet) return undefined
+    return {
+      all: items.length,
+      app: items.filter((i) => i.surface === "app").length,
+      marketing: items.filter((i) => i.surface === "marketing").length,
+    } as Partial<Record<SurfaceFilter, number>>
+  }, [hasSurfaceFacet, items])
 
   return (
     <div>
+      {hasSurfaceFacet ? (
+        <div className="mb-5">
+          <SurfaceFilterControl
+            value={surface}
+            onValueChange={setSurfaceFilter}
+            counts={surfaceCountsForGallery}
+          />
+        </div>
+      ) : null}
+
       {/* ── Filter bar ──────────────────────────────────────────────── */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-5">
         <div className="flex flex-wrap items-center gap-2">
@@ -238,7 +300,7 @@ export function Gallery({
                     {item.price}
                   </span>
                 )}
-                {/* Reveal-on-hover affordance — ours, not Mobbin's static thumbnail. */}
+                {/* Reveal-on-hover affordance, ours, not Mobbin's static thumbnail. */}
                 <span className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex translate-y-1 items-center gap-1 rounded-full bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground opacity-0 shadow-card backdrop-blur transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                   Inspect
                   <ArrowRight className="size-3" />
@@ -256,7 +318,9 @@ export function Gallery({
                   </span>
                 </div>
                 <span className="shrink-0 rounded-full edge px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
-                  {item.category}
+                  {item.surface
+                    ? surfaceShortLabel(item.surface)
+                    : item.category}
                 </span>
               </div>
             </Link>

@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 import { components } from "@/content/components"
+import { catalogSurfaces, surfaceCounts } from "@/content/catalog-surfaces"
 import { archetypes } from "@/app/layouts/_archetypes"
 
 const GITHUB_URL = "https://github.com/byronwade/ui"
@@ -23,9 +24,9 @@ const stats = [
 ]
 
 const designRulePoints = [
-  "Use installed @byronwade/ui components — add missing ones with shadcn, don't rebuild from scratch.",
-  "Style with semantic tokens only (bg-brand, text-muted-foreground) — never hardcode hex or Tailwind colors.",
-  "Re-skin through --brand only — rings, charts, and success states follow automatically.",
+  "Use installed @byronwade/ui components, add missing ones with shadcn, don't rebuild from scratch.",
+  "Style with semantic tokens only (bg-brand, text-muted-foreground), never hardcode hex or Tailwind colors.",
+  "Re-skin through --brand only, rings, charts, and success states follow automatically.",
 ]
 
 const pillars = [
@@ -42,14 +43,14 @@ const pillars = [
   {
     icon: LayoutTemplate,
     title: "Whole pages, not just parts",
-    body: "Ships opinionated, full-page layout archetypes — each built around one signature centerpiece.",
+    body: "Ships opinionated, full-page layout archetypes, each built around one signature centerpiece.",
   },
 ]
 
 export default function HomePage() {
   return (
     <main className="relative min-h-dvh overflow-x-clip bg-background text-foreground">
-      {/* Calm atmosphere — faint dotted grid + a single warm-green glow. */}
+      {/* Calm atmosphere, faint dotted grid + a single warm-green glow. */}
       <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.35]" />
       <div className="glow-brand pointer-events-none fixed inset-x-0 top-0 -z-10 h-[60vh] opacity-70" />
 
@@ -69,10 +70,10 @@ export default function HomePage() {
           </span>
         </h1>
 
-        <p className="animate-in fade-in slide-in-from-bottom-3 fill-mode-both mx-auto mt-7 max-w-xl text-[15px] leading-relaxed text-muted-foreground text-pretty duration-700 [animation-delay:240ms] sm:text-base">
+        <p className="reading-ui animate-in fade-in slide-in-from-bottom-3 fill-mode-both mx-auto mt-7 text-foreground text-pretty duration-700 [animation-delay:240ms]">
           A calm, content-first component library published as a namespaced{" "}
           <span className="text-foreground">shadcn registry</span>. Token-driven
-          primitives, composites, and full-page layouts — all built around a
+          primitives, composites, and full-page layouts, all built around a
           single warm accent you re-skin from one CSS variable. Install with the
           shadcn CLI and you own the code.
         </p>
@@ -120,6 +121,39 @@ export default function HomePage() {
         </dl>
       </section>
 
+      {/* ============================================== SURFACE SPLIT ===== */}
+      <section className="mx-auto max-w-5xl px-6 py-8">
+        <p className="text-center font-mono text-xs uppercase tracking-[0.2em] text-brand">
+          Two surfaces · one foundation
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {catalogSurfaces.map((surface) => (
+            <Link
+              key={surface.id}
+              href={surface.href}
+              className="group rounded-2xl edge bg-card p-6 text-left transition-all hover:-translate-y-0.5 hover:border-brand/30"
+            >
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand">
+                {surface.shortLabel}
+              </p>
+              <h2 className="mt-3 text-xl font-normal tracking-tight text-foreground">
+                {surface.label}
+              </h2>
+              <p className="reading-ui mt-3 text-foreground text-pretty">
+                {surface.description}
+              </p>
+              <p className="mt-4 font-mono text-xs text-muted-foreground">
+                {surface.id === "app"
+                  ? surfaceCounts().app
+                  : surfaceCounts().marketing}{" "}
+                components · Browse{" "}
+                <span className="text-brand group-hover:underline">→</span>
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* =================================================== PILLARS ===== */}
       <section className="mx-auto max-w-5xl px-6 py-16">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
@@ -163,7 +197,7 @@ export default function HomePage() {
                 .cursor/rules/byronwade-ui.mdc
               </code>{" "}
               (or paste it into Claude, Copilot, Codex, Windsurf…). After that
-              your agent knows the system&apos;s laws on every edit — which
+              your agent knows the system&apos;s laws on every edit, which
               components to reach for, which tokens to use, and how re-skinning
               works.
             </p>
@@ -208,21 +242,28 @@ export default function HomePage() {
           {components.length} components.{" "}
           <span className="text-gradient-brand">One install.</span>
         </h2>
-        <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          Browse the catalog, the layout archetypes, and the foundation — then
-          make it yours from a single variable.
+        <p className="reading-ui mx-auto mt-5 text-foreground text-pretty">
+          Browse by surface — application UI or marketing — then make it yours
+          from a single variable.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Button size="lg" render={<Link href="/docs" />}>
-            Browse the catalog
+          <Button size="lg" render={<Link href="/catalog?surface=app" />}>
+            Application UI
             <ArrowRight />
           </Button>
           <Button
             size="lg"
             variant="outline"
-            render={<Link href="/docs/foundation" />}
+            render={<Link href="/catalog?surface=marketing" />}
           >
-            See the foundation
+            Marketing
+          </Button>
+          <Button
+            size="lg"
+            variant="ghost"
+            render={<Link href="/docs/surfaces" />}
+          >
+            How surfaces work
           </Button>
         </div>
       </section>

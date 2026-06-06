@@ -15,7 +15,7 @@ const FAQS = [
   {
     question: "Can I change my plan later?",
     answer:
-      "Yes — upgrade, downgrade, or switch billing cycles at any time from your settings.",
+      "Yes, upgrade, downgrade, or switch billing cycles at any time from your settings.",
   },
   {
     question: "How do I cancel my subscription?",

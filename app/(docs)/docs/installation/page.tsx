@@ -3,12 +3,13 @@ import Link from "next/link"
 import { ArrowRight, TriangleAlert } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { DocsIntro } from "@/app/(docs)/_components/docs-prose"
 import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
-  title: "Installation — byronwade/ui",
+  title: "Installation, byronwade/ui",
   description:
-    "Every way to install byronwade/ui — the easiest being the namespaced shadcn registry.",
+    "Every way to install byronwade/ui, the easiest being the namespaced shadcn registry.",
 }
 
 /* ---------------------------------------------------------------------------
@@ -61,10 +62,10 @@ const STEPS: {
 }`,
   },
   {
-    title: "Add the catalog — or just what you need",
+    title: "Add the catalog, or just what you need",
     body: (
       <>
-        Everything at once, or only the pieces you want — transitive deps come
+        Everything at once, or only the pieces you want, transitive deps come
         along (activity-ring pulls{" "}
         <code className="font-mono text-[13px]">status-dot</code> + utils).
       </>
@@ -80,7 +81,7 @@ npx shadcn@latest add @byronwade/sheet @byronwade/command @byronwade/morph-dock`
 export default function InstallationPage() {
   return (
     <article className="max-w-none">
-      {/* ============================ HERO — terminal =================== */}
+      {/* ============================ HERO, terminal =================== */}
       <section className="grid items-center gap-10 py-12 lg:grid-cols-[5fr_7fr] lg:py-16">
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
@@ -89,10 +90,10 @@ export default function InstallationPage() {
           <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">
             Two commands to a wired system.
           </h1>
-          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <DocsIntro>
             shadcn CLI · Next.js + Tailwind v4. The code is copied into your
-            repo — no runtime dependency, fully yours.
-          </p>
+            repo, no runtime dependency, fully yours.
+          </DocsIntro>
         </div>
 
         <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both overflow-hidden rounded-2xl edge bg-card font-mono text-[13px] duration-700 [animation-delay:150ms]">
@@ -112,7 +113,7 @@ export default function InstallationPage() {
               </span>
               {"\n"}
               <span className="text-success">
-                ✓ foundation installed — :root tokens ready
+                ✓ foundation installed, :root tokens ready
               </span>
               {"\n\n"}
               <span className="text-brand">$</span>{" "}
@@ -121,7 +122,7 @@ export default function InstallationPage() {
               </span>
               {"\n"}
               <span className="text-success">
-                ✓ added the full catalog — deps resolved
+                ✓ added the full catalog, deps resolved
               </span>
             </code>
           </pre>
@@ -167,7 +168,7 @@ export default function InstallationPage() {
             Add a component
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
-            One command per component — each page has a copy button. Or point at
+            One command per component, each page has a copy button. Or point at
             a built URL with no namespace.
           </p>
           <div className="mt-5 space-y-3">
@@ -192,7 +193,7 @@ export default function InstallationPage() {
               <span className="font-medium text-foreground">
                 Don&apos;t run init on an existing theme
               </span>{" "}
-              — it overwrites{" "}
+              , it overwrites{" "}
               <code className="font-mono text-[13px]">globals.css</code>. Merge
               the foundation{" "}
               <code className="font-mono text-[13px]">cssVars</code> by hand,

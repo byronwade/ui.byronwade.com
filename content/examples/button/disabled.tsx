@@ -40,7 +40,7 @@ export default function Example() {
         <code className="text-xs bg-muted px-1 py-0.5 rounded">
           pointer-events-none
         </code>{" "}
-        and reduced opacity — they cannot be focused or triggered.
+        and reduced opacity, they cannot be focused or triggered.
       </p>
     </div>
   )

@@ -34,6 +34,7 @@ export type ComponentDoc = {
     | "House components"
     | "Morph"
     | "Media"
+    | "Video"
     | "Commerce"
     | "AI"
     | "Market"
@@ -54,7 +55,7 @@ export const components: ComponentDoc[] = [
     name: "Foundation",
     category: "Foundation",
     description:
-      "Complete token base — neutrals + brand-derived accent, status/dock/chart/sidebar tokens, radius scale. Install via `shadcn init`.",
+      "Complete token base, neutrals + brand-derived accent, status/dock/chart/sidebar tokens, radius scale. Install via `shadcn init`.",
     examples: ["tokens"],
   },
   {
@@ -562,7 +563,7 @@ export const components: ComponentDoc[] = [
     name: "Calendar",
     category: "Forms",
     description:
-      "Date picker built on react-day-picker, dressed in byronwade/ui tokens — selection follows --brand, the range bar uses bg-accent, and nav + day cells reuse buttonVariants. Supports single, multiple, and range modes.",
+      "Date picker built on react-day-picker, dressed in byronwade/ui tokens, selection follows --brand, the range bar uses bg-accent, and nav + day cells reuse buttonVariants. Supports single, multiple, and range modes.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -570,6 +571,62 @@ export const components: ComponentDoc[] = [
     ],
     npmDeps: ["react-day-picker", "date-fns", "lucide-react"],
     examples: ["default", "range-presets", "appointment", "pricing"],
+  },
+  {
+    slug: "date-picker",
+    name: "Date picker",
+    category: "Forms",
+    description:
+      "Single-date picker with an outline trigger that opens a popover calendar, controlled or uncontrolled, formatted with date-fns.",
+    npmDeps: ["date-fns", "lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/button",
+      "@byronwade/calendar",
+      "@byronwade/popover",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "field",
+    name: "Field",
+    category: "Forms",
+    description:
+      "Form field layout primitives, FieldGroup, Field, label, description, error, fieldset/legend, and responsive horizontal orientation.",
+    npmDeps: ["class-variance-authority"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/label",
+      "@byronwade/separator",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "input-otp",
+    name: "Input OTP",
+    category: "Forms",
+    description:
+      "One-time-password input with grouped slots, caret blink, separator, and aria-invalid styling.",
+    npmDeps: ["input-otp", "lucide-react"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "combobox",
+    name: "Combobox",
+    category: "Forms",
+    description:
+      "Filterable autocomplete on Base UI Combobox, input-group trigger, popup list, empty state, optional multi-select chips.",
+    npmDeps: ["@base-ui/react", "lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/button",
+      "@byronwade/input-group",
+    ],
+    examples: ["default"],
   },
   {
     slug: "kbd",
@@ -594,7 +651,7 @@ export const components: ComponentDoc[] = [
     name: "Button group",
     category: "Primitives",
     description:
-      "Joins related buttons into one segmented control with shared, overlapped edges — horizontal or vertical.",
+      "Joins related buttons into one segmented control with shared, overlapped edges, horizontal or vertical.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default", "vertical"],
   },
@@ -603,7 +660,7 @@ export const components: ComponentDoc[] = [
     name: "Native select",
     category: "Forms",
     description:
-      "A styled native <select> with an inline chevron and the standard input edge + focus ring — token-driven, no icon dependency.",
+      "A styled native <select> with an inline chevron and the standard input edge + focus ring, token-driven, no icon dependency.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -625,7 +682,7 @@ export const components: ComponentDoc[] = [
         name: "render",
         type: 'useRender.RenderProp<"span">',
         description:
-          "Base UI render prop for polymorphic rendering — override the default span element.",
+          "Base UI render prop for polymorphic rendering, override the default span element.",
       },
       {
         name: "className",
@@ -666,7 +723,7 @@ export const components: ComponentDoc[] = [
         name: "children",
         type: "React.ReactNode",
         description:
-          "Slot content — typically CardHeader, CardContent, CardFooter, and related sub-components.",
+          "Slot content, typically CardHeader, CardContent, CardFooter, and related sub-components.",
       },
     ],
     examples: [
@@ -682,6 +739,20 @@ export const components: ComponentDoc[] = [
       "with-action",
       "with-image",
     ],
+  },
+  {
+    slug: "carousel",
+    name: "Carousel",
+    category: "Data display",
+    description:
+      "Embla-powered carousel with keyboard navigation, previous/next controls, and horizontal or vertical orientation.",
+    npmDeps: ["embla-carousel-react", "lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/button",
+    ],
+    examples: ["default"],
   },
   {
     slug: "status-pill",
@@ -1219,6 +1290,16 @@ export const components: ComponentDoc[] = [
     ],
   },
   {
+    slug: "context-menu",
+    name: "Context menu",
+    category: "Overlays",
+    description:
+      "Right-click menu on Base UI ContextMenu, items, checkbox/radio groups, submenus, shortcuts, destructive variant.",
+    npmDeps: ["@base-ui/react", "lucide-react"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
     slug: "dialog",
     name: "Dialog",
     category: "Overlays",
@@ -1321,7 +1402,7 @@ export const components: ComponentDoc[] = [
         type: '"default" | "success" | "warning" | "destructive"',
         default: '"default"',
         description:
-          "Intent tone of the alert — colors the title, icon, and description via semantic tokens (text on the card surface).",
+          "Intent tone of the alert, colors the title, icon, and description via semantic tokens (text on the card surface).",
       },
       {
         name: "className",
@@ -1356,7 +1437,7 @@ export const components: ComponentDoc[] = [
         type: '"default" | "brand" | "success" | "warning" | "destructive"',
         default: '"default"',
         description:
-          "Colors the indicator bar via semantic tokens — e.g. success for complete, warning/destructive for at-risk.",
+          "Colors the indicator bar via semantic tokens, e.g. success for complete, warning/destructive for at-risk.",
       },
       {
         name: "className",
@@ -1650,7 +1731,7 @@ export const components: ComponentDoc[] = [
         name: "children",
         type: "React.ReactNode",
         description:
-          "Table content — typically TableHeader, TableBody, and TableFooter compound parts.",
+          "Table content, typically TableHeader, TableBody, and TableFooter compound parts.",
       },
     ],
     examples: [
@@ -1662,6 +1743,30 @@ export const components: ComponentDoc[] = [
       "with-actions",
       "with-status-badges",
     ],
+  },
+  {
+    slug: "pagination",
+    name: "Pagination",
+    category: "Data display",
+    description:
+      "Accessible pagination nav with previous/next links, page links, and ellipsis.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/button",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "resizable",
+    name: "Resizable",
+    category: "Data display",
+    description:
+      "Drag-to-resize panel groups with horizontal/vertical orientation and optional handle, react-resizable-panels.",
+    npmDeps: ["react-resizable-panels"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
   },
   {
     slug: "page-header",
@@ -1967,7 +2072,7 @@ export const components: ComponentDoc[] = [
     name: "App Shell",
     category: "Patterns",
     description:
-      "A single variant-driven application layout primitive — one `variant` prop swaps between ten full page scaffolds, each composed from the app-shell header / nav / sidebar / panel / toolbar / aside / footer / content slots.",
+      "A single variant-driven application layout primitive, one `variant` prop swaps between ten full page scaffolds, each composed from the app-shell header / nav / sidebar / panel / toolbar / aside / footer / content slots.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     props: [
       {
@@ -1982,14 +2087,14 @@ export const components: ComponentDoc[] = [
         description: "Extra Tailwind classes merged onto the root element.",
       },
     ],
-    examples: ["default"],
+    examples: ["default", "trading-desk"],
   },
   {
     slug: "marketing-layout",
     name: "Marketing Layout",
     category: "Patterns",
     description:
-      "A variant-driven marketing-page layout primitive — one `variant` prop swaps between ten full marketing scaffolds (landing, pricing, article, bento, gallery, split-hero, feature-rows, centered, coming-soon, docs-marketing) built from the marketing nav / hero / sections / media / sidebar / toc / footer slots.",
+      "A variant-driven marketing-page layout primitive, one `variant` prop swaps between ten full marketing scaffolds (landing, pricing, article, bento, gallery, split-hero, feature-rows, centered, coming-soon, docs-marketing) built from the marketing nav / hero / sections / media / sidebar / toc / footer slots.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     props: [
       {
@@ -2040,7 +2145,7 @@ export const components: ComponentDoc[] = [
     name: "useChromeMorph",
     category: "Morph",
     description:
-      "The shared morph hook for floating chrome — a toolbar pill, launcher, or nav dock. It animates a container's width/height/border-radius between its collapsed box and an open panel on a tuned curve, cross-fading rest↔panel, then shrinks cleanly back. Position-agnostic and reduced-motion aware.",
+      "The shared morph hook for floating chrome, a toolbar pill, launcher, or nav dock. It animates a container's width/height/border-radius between its collapsed box and an open panel on a tuned curve, cross-fading rest↔panel, then shrinks cleanly back. Position-agnostic and reduced-motion aware.",
     props: [
       {
         name: "morphRef",
@@ -2084,7 +2189,7 @@ export const components: ComponentDoc[] = [
         name: "collapsedFrom",
         type: "() => { w: number; h: number } | null",
         description:
-          "Override the collapsed start/end box — e.g. bloom out of a sibling pill.",
+          "Override the collapsed start/end box, e.g. bloom out of a sibling pill.",
       },
       {
         name: "durationMs",
@@ -2106,7 +2211,7 @@ export const components: ComponentDoc[] = [
     name: "MorphDock",
     category: "Morph",
     description:
-      "A config-driven morphing navigation dock. The item row morphs compact ↔ full, and the whole pill blooms in place into a consumer-provided panel via useChromeMorph — items, badges, core/pinned flags, a trailing cluster, and a contextual action. Pure --dock tokens, reduced-motion + Esc + click-away.",
+      "A config-driven morphing navigation dock. The item row morphs compact ↔ full, and the whole pill blooms in place into a consumer-provided panel via useChromeMorph, items, badges, core/pinned flags, a trailing cluster, and a contextual action. Pure --dock tokens, reduced-motion + Esc + click-away.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/foundation",
@@ -2136,13 +2241,13 @@ export const components: ComponentDoc[] = [
         name: "action",
         type: "{ label; icon; onSelect? }",
         description:
-          "Contextual action pill — blooms the panel when children are present, else runs onSelect.",
+          "Contextual action pill, blooms the panel when children are present, else runs onSelect.",
       },
       {
         name: "tools",
         type: "MorphDockAction[]",
         description:
-          "Trailing two-tone tool zone (bg-dock-tool) — a combined nav + toolbar pill. Actions: id, label, icon, onSelect?/href?, primary (brand fill), group (seam between groups).",
+          "Trailing two-tone tool zone (bg-dock-tool), a combined nav + toolbar pill. Actions: id, label, icon, onSelect?/href?, primary (brand fill), group (seam between groups).",
       },
       {
         name: "breadcrumb",
@@ -2160,7 +2265,7 @@ export const components: ComponentDoc[] = [
         name: "onStatusDismiss",
         type: "() => void",
         description:
-          "Called when the status is dismissed — auto for success/info, or via its close button.",
+          "Called when the status is dismissed, auto for success/info, or via its close button.",
       },
       {
         name: "statusDismissMs",
@@ -2236,7 +2341,7 @@ export const components: ComponentDoc[] = [
         type: '"start" | "center" | "end"',
         default: '"start"',
         description:
-          'Where along the dock the panel grows from — a centered dock blooms symmetrically with "center".',
+          'Where along the dock the panel grows from, a centered dock blooms symmetrically with "center".',
       },
       {
         name: "draggable",
@@ -2257,7 +2362,7 @@ export const components: ComponentDoc[] = [
         type: "boolean",
         default: "false",
         description:
-          "Drop the resting pill background/shadow — items float free until a panel blooms (the panel keeps its surface).",
+          "Drop the resting pill background/shadow, items float free until a panel blooms (the panel keeps its surface).",
       },
     ],
     examples: [
@@ -2558,6 +2663,55 @@ export const components: ComponentDoc[] = [
     ],
   },
   {
+    slug: "sidebar",
+    name: "Sidebar",
+    category: "Overlays",
+    description:
+      "Collapsible application sidebar with provider, mobile sheet fallback, icon/offcanvas modes, menu groups, and ⌘/Ctrl+B shortcut.",
+    npmDeps: ["@base-ui/react", "class-variance-authority", "lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/use-mobile",
+      "@byronwade/button",
+      "@byronwade/input",
+      "@byronwade/separator",
+      "@byronwade/sheet",
+      "@byronwade/skeleton",
+      "@byronwade/tooltip",
+    ],
+    examples: ["default", "variants", "menu-buttons"],
+    props: [
+      {
+        name: "variant",
+        type: '"sidebar" | "floating" | "inset"',
+        default: '"sidebar"',
+        description:
+          "Sidebar chrome: flush edge, floating card, or inset with padded main.",
+      },
+      {
+        name: "collapsible",
+        type: '"offcanvas" | "icon" | "none"',
+        default: '"offcanvas"',
+        description:
+          "Collapse behavior: slide off-screen, shrink to icons, or stay fixed width.",
+      },
+      {
+        name: "side",
+        type: '"left" | "right"',
+        default: '"left"',
+        description: "Which edge the sidebar anchors to.",
+      },
+      {
+        name: "contained",
+        type: "boolean",
+        default: "false",
+        description:
+          "SidebarProvider: pin layout to the provider box instead of the viewport (docs previews, panels).",
+      },
+    ],
+  },
+  {
     slug: "command",
     name: "Command",
     category: "Overlays",
@@ -2685,7 +2839,7 @@ export const components: ComponentDoc[] = [
     name: "Safari",
     category: "UI",
     description:
-      "Safari browser device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "Safari browser device mockup frame (SVG) wrapping a screenshot, image, or video, token-driven chrome, automatic dark mode. Adapted from MagicUI.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -2694,7 +2848,7 @@ export const components: ComponentDoc[] = [
     name: "iPhone",
     category: "UI",
     description:
-      "iPhone device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "iPhone device mockup frame (SVG) wrapping a screenshot, image, or video, token-driven chrome, automatic dark mode. Adapted from MagicUI.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -2703,7 +2857,7 @@ export const components: ComponentDoc[] = [
     name: "Android",
     category: "UI",
     description:
-      "Android phone device mockup frame (SVG) wrapping a screenshot, image, or video — token-driven chrome, automatic dark mode. Adapted from MagicUI.",
+      "Android phone device mockup frame (SVG) wrapping a screenshot, image, or video, token-driven chrome, automatic dark mode. Adapted from MagicUI.",
     registryDeps: ["@byronwade/foundation"],
     examples: ["default"],
   },
@@ -2741,7 +2895,7 @@ export const components: ComponentDoc[] = [
     name: "Backlight",
     category: "UI",
     description:
-      "Wraps a child in a saturated, blurred glow of its own pixels via an SVG filter — an RGB backlight that inherits the child’s token colors. Adapted from MagicUI.",
+      "Wraps a child in a saturated, blurred glow of its own pixels via an SVG filter, an RGB backlight that inherits the child’s token colors. Adapted from MagicUI.",
     registryDeps: ["@byronwade/utils"],
     examples: ["default", "with-video"],
   },
@@ -2768,6 +2922,14 @@ export const components: ComponentDoc[] = [
     examples: ["default"],
   },
   {
+    slug: "use-mobile",
+    name: "useIsMobile",
+    category: "Libraries",
+    description:
+      "Hook that tracks viewport width against a 768px breakpoint for responsive sidebar and layout patterns.",
+    examples: [],
+  },
+  {
     slug: "pixelated-canvas",
     name: "Pixelated canvas",
     category: "UI",
@@ -2781,7 +2943,7 @@ export const components: ComponentDoc[] = [
     name: "Slider",
     category: "Forms",
     description:
-      "Single or range slider built on Base UI — one thumb per value, token track/indicator, keyboard + a11y.",
+      "Single or range slider built on Base UI, one thumb per value, token track/indicator, keyboard + a11y.",
     npmDeps: ["@base-ui/react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
@@ -2791,7 +2953,7 @@ export const components: ComponentDoc[] = [
     name: "Number field",
     category: "Forms",
     description:
-      "Numeric input with increment/decrement, clamping, scrub, and formatting — built on Base UI. Token surfaces, lucide steppers.",
+      "Numeric input with increment/decrement, clamping, scrub, and formatting, built on Base UI. Token surfaces, lucide steppers.",
     npmDeps: ["@base-ui/react", "lucide-react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
@@ -2816,7 +2978,7 @@ export const components: ComponentDoc[] = [
     name: "File tree",
     category: "Data display",
     description:
-      "Collapsible file/folder tree with selection, sorting, and expand-all, plus a panel variant (chevron disclosure, guide lines, count badges) and multi-select with cascading checkboxes — rebuilt on Base UI. Base from MagicUI; panel/multi-select inspired by Untitled UI.",
+      "Collapsible file/folder tree with selection, sorting, and expand-all, plus a panel variant (chevron disclosure, guide lines, count badges) and multi-select with cascading checkboxes, rebuilt on Base UI. Base from MagicUI; panel/multi-select inspired by Untitled UI.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/foundation",
@@ -3088,7 +3250,7 @@ export const components: ComponentDoc[] = [
     name: "Message",
     category: "AI",
     description:
-      "Chat message primitives for AI conversations — bubbles, actions, branch navigation, attachments, and a streaming markdown response.",
+      "Chat message primitives for AI conversations, bubbles, actions, branch navigation, attachments, and a streaming markdown response.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3259,7 +3421,7 @@ export const components: ComponentDoc[] = [
     name: "Cursor",
     category: "UI",
     description:
-      "Live collaboration cursor — pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
+      "Live collaboration cursor, pointer + name/message body, tinted via currentColor. Adapted from kibo-ui.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -3297,7 +3459,7 @@ export const components: ComponentDoc[] = [
     name: "Ticker",
     category: "UI",
     description:
-      "Stock/crypto ticker — icon, symbol, formatted price, up/down change. Adapted from kibo-ui.",
+      "Stock/crypto ticker, icon, symbol, formatted price, up/down change. Adapted from kibo-ui.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3310,7 +3472,7 @@ export const components: ComponentDoc[] = [
     name: "Relative time",
     category: "UI",
     description:
-      "Multi-timezone live clock — per-zone time/date with mono labels, ticking each second. Adapted from kibo-ui.",
+      "Multi-timezone live clock, per-zone time/date with mono labels, ticking each second. Adapted from kibo-ui.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -3359,7 +3521,7 @@ export const components: ComponentDoc[] = [
     name: "Color picker",
     category: "Forms",
     description:
-      "HSL color picker — 2D field + hue/alpha sliders, eyedropper, hex/rgb/css/hsl output. Adapted from kibo-ui.",
+      "HSL color picker, 2D field + hue/alpha sliders, eyedropper, hex/rgb/css/hsl output. Adapted from kibo-ui.",
     npmDeps: ["color", "@base-ui/react"],
     registryDeps: [
       "@byronwade/foundation",
@@ -3405,7 +3567,7 @@ export const components: ComponentDoc[] = [
     name: "Gantt",
     category: "Data display",
     description:
-      "Draggable timeline / roadmap chart — sidebar, multi-range header, status-tinted feature bars, milestone diamonds, today line. Auto-centers on today; a GanttControls toolbar drives timescale + zoom, with density and read-only presentation variants. Adapted from kibo-ui.",
+      "Draggable timeline / roadmap chart, sidebar, multi-range header, status-tinted feature bars, milestone diamonds, today line. Auto-centers on today; a GanttControls toolbar drives timescale + zoom, with density and read-only presentation variants. Adapted from kibo-ui.",
     npmDeps: [
       "@dnd-kit/core",
       "@dnd-kit/modifiers",
@@ -3428,7 +3590,7 @@ export const components: ComponentDoc[] = [
     name: "Editor",
     category: "Forms",
     description:
-      "Tiptap rich-text editor — bubble toolbar, slash menu, tables, task lists, code blocks. Adapted from kibo-ui.",
+      "Tiptap rich-text editor, bubble toolbar, slash menu, tables, task lists, code blocks. Adapted from kibo-ui.",
     npmDeps: ["@tiptap/react", "@tiptap/starter-kit", "lowlight", "tippy.js"],
     registryDeps: [
       "@byronwade/foundation",
@@ -3447,7 +3609,7 @@ export const components: ComponentDoc[] = [
     name: "Morph Surface",
     category: "Morph",
     description:
-      "Agnostic morph primitive — open-state orchestration (refs, cross-fade, Esc/outside-close, box sizing) with no visual style. Navigation styles compose it.",
+      "Agnostic morph primitive, open-state orchestration (refs, cross-fade, Esc/outside-close, box sizing) with no visual style. Navigation styles compose it.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3542,13 +3704,45 @@ export const components: ComponentDoc[] = [
     name: "Conversation list",
     category: "Composites",
     description:
-      "Messaging conversation list — live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
+      "Messaging conversation list, live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
       "@byronwade/comms-store",
       "@byronwade/gradient-avatar",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "message-thread",
+    name: "Message thread",
+    category: "Composites",
+    description:
+      "Messaging thread pane, contact header, scrollable in/out bubbles with delivery ticks, reaction chips, and an empty state when no conversation is selected. Reads/acts through comms-store.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/comms-store",
+      "@byronwade/gradient-avatar",
+      "@byronwade/empty-state",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "message-composer",
+    name: "Message composer",
+    category: "Composites",
+    description:
+      "Messaging composer, auto-growing textarea, Enter to send, Shift+Enter newline, attachment affordance, and optional template/schedule callbacks. Calls send on comms-store.",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/comms-store",
+      "@byronwade/button",
+      "@byronwade/textarea",
     ],
     examples: ["default"],
   },
@@ -3677,7 +3871,7 @@ export const components: ComponentDoc[] = [
     name: "Bulk action bar",
     category: "Commerce",
     description:
-      "Selection action bar for tables and resource lists — a selected-count label, promoted and grouped actions, and a clear-selection control. Renders nothing when nothing is selected.",
+      "Selection action bar for tables and resource lists, a selected-count label, promoted and grouped actions, and a clear-selection control. Renders nothing when nothing is selected.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/foundation",
@@ -3708,7 +3902,7 @@ export const components: ComponentDoc[] = [
     name: "Product card",
     category: "Commerce",
     description:
-      "Products-index product tile — image, title, status badge with status dot, price with optional compare-at, and inventory state.",
+      "Products-index product tile, image, title, status badge with status dot, price with optional compare-at, and inventory state.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/aspect-ratio",
@@ -3724,7 +3918,7 @@ export const components: ComponentDoc[] = [
     name: "Variant picker",
     category: "Commerce",
     description:
-      "Product option/variant selector — one labelled toggle-group row per option with unavailable values disabled.",
+      "Product option/variant selector, one labelled toggle-group row per option with unavailable values disabled.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/label",
@@ -3738,7 +3932,7 @@ export const components: ComponentDoc[] = [
     name: "Inventory bar",
     category: "Commerce",
     description:
-      "Stock-level indicator composing the progress primitive — a count plus a tonal bar for in-stock, low-stock, and out-of-stock states.",
+      "Stock-level indicator composing the progress primitive, a count plus a tonal bar for in-stock, low-stock, and out-of-stock states.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/progress",
@@ -3751,7 +3945,7 @@ export const components: ComponentDoc[] = [
     name: "Customer card",
     category: "Commerce",
     description:
-      "Customer summary card — avatar, name and email, orders and lifetime-spend stats, and a default address.",
+      "Customer summary card, avatar, name and email, orders and lifetime-spend stats, and a default address.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/foundation",
@@ -3767,7 +3961,7 @@ export const components: ComponentDoc[] = [
     name: "Fulfillment tracker",
     category: "Commerce",
     description:
-      "Order status header — payment and fulfillment status pills plus an optional fulfillment step rail. Models Shopify's dual payment/fulfillment status.",
+      "Order status header, payment and fulfillment status pills plus an optional fulfillment step rail. Models Shopify's dual payment/fulfillment status.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/status-pill",
@@ -3808,7 +4002,7 @@ export const components: ComponentDoc[] = [
     name: "Resource list",
     category: "Data display",
     description:
-      "List-view of selectable rich rows (ResourceList + ResourceItem) — media, title, metadata, badges, hover actions, bulk selection. The list counterpart of index-table.",
+      "List-view of selectable rich rows (ResourceList + ResourceItem), media, title, metadata, badges, hover actions, bulk selection. The list counterpart of index-table.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/badge",
@@ -3848,7 +4042,7 @@ export const components: ComponentDoc[] = [
     name: "Tag input",
     category: "Forms",
     description:
-      "Tags field — type to add chips (Enter/comma), remove with × or Backspace, optional autocomplete suggestions, sizes, and error state.",
+      "Tags field, type to add chips (Enter/comma), remove with × or Backspace, optional autocomplete suggestions, sizes, and error state.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/foundation",
@@ -3891,7 +4085,7 @@ export const components: ComponentDoc[] = [
     ],
     examples: ["default", "dismissible", "inline", "tones", "with-actions"],
   },
-  // Video / YouTube — YouTube-modeled video UI
+  // Video / YouTube, YouTube-modeled video UI
   {
     slug: "thumbnail",
     name: "Thumbnail",
@@ -3955,7 +4149,7 @@ export const components: ComponentDoc[] = [
     name: "Action rail",
     category: "Video",
     description:
-      "Vertical or horizontal stack of icon and compact-count action buttons — a YouTube Shorts-style like/comment/share rail.",
+      "Vertical or horizontal stack of icon and compact-count action buttons, a YouTube Shorts-style like/comment/share rail.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -3981,10 +4175,10 @@ export const components: ComponentDoc[] = [
     name: "Video shelf",
     category: "Video",
     description:
-      "Titled, horizontally-scrolling content row with edge-fade, chevron controls, and an optional action — the YouTube home/category shelf.",
+      "Titled, horizontally-scrolling content row with edge-fade, chevron controls, and an optional action, the YouTube home/category shelf.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     npmDeps: ["lucide-react"],
-    examples: ["default"],
+    examples: ["default", "watch-page"],
   },
   {
     slug: "channel-header",
@@ -4264,7 +4458,7 @@ export const components: ComponentDoc[] = [
     name: "Heatmap grid",
     category: "Market",
     description:
-      "Performance heatmap grid with cell area sized by weight and color toned by change magnitude — either success/destructive opacity buckets or the `--chart-1…5` ramp. Seeded defaults from the `market` lib; optional cell selection callback.",
+      "Performance heatmap grid with cell area sized by weight and color toned by change magnitude, either success/destructive opacity buckets or the `--chart-1…5` ramp. Seeded defaults from the `market` lib; optional cell selection callback.",
     registryDeps: ["@byronwade/market"],
     examples: ["default"],
     tags: ["tradingview", "market"],
@@ -4274,7 +4468,7 @@ export const components: ComponentDoc[] = [
     name: "Ticker tape",
     category: "Market",
     description:
-      "Horizontally scrolling market ticker marquee — composes the ticker primitive into a seamless loop with speed and pause controls.",
+      "Horizontally scrolling market ticker marquee, composes the ticker primitive into a seamless loop with speed and pause controls.",
     registryDeps: ["@byronwade/ticker", "@byronwade/market"],
     examples: ["default"],
     tags: ["tradingview", "market"],
@@ -4284,7 +4478,7 @@ export const components: ComponentDoc[] = [
     name: "Quote header",
     category: "Market",
     description:
-      "Symbol quote header — large mono price, price-change chip, optional sparkline, and metric-stat row for open/high/low/volume/mkt cap.",
+      "Symbol quote header, large mono price, price-change chip, optional sparkline, and metric-stat row for open/high/low/volume/mkt cap.",
     registryDeps: [
       "@byronwade/metric-stat",
       "@byronwade/price-change",
@@ -4299,7 +4493,7 @@ export const components: ComponentDoc[] = [
     name: "Chart toolbar",
     category: "Market",
     description:
-      "Trading chart toolbar — symbol button, interval segmented-control, chart-type toggle group, and indicators action.",
+      "Trading chart toolbar, symbol button, interval segmented-control, chart-type toggle group, and indicators action.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/button",
@@ -4314,7 +4508,7 @@ export const components: ComponentDoc[] = [
     name: "Chart panel",
     category: "Market",
     description:
-      "Chart panel composite — chart-toolbar atop a candlestick chart (or sparkline fallback for line/area modes) with controlled/uncontrolled interval.",
+      "Chart panel composite, chart-toolbar atop a candlestick chart (or sparkline fallback for line/area modes) with controlled/uncontrolled interval.",
     registryDeps: [
       "@byronwade/chart-toolbar",
       "@byronwade/candlestick-chart",
@@ -4329,7 +4523,7 @@ export const components: ComponentDoc[] = [
     name: "Watchlist",
     category: "Market",
     description:
-      "Market watchlist table — symbol rows with last price, price-change, sparkline, and volume columns; optional row selection.",
+      "Market watchlist table, symbol rows with last price, price-change, sparkline, and volume columns; optional row selection.",
     registryDeps: [
       "@byronwade/table",
       "@byronwade/price-change",
@@ -4344,7 +4538,7 @@ export const components: ComponentDoc[] = [
     name: "Market depth",
     category: "Market",
     description:
-      "Market depth panel — stacks depth-chart over order-book (or shows either view alone) with shared book data and price-select passthrough.",
+      "Market depth panel, stacks depth-chart over order-book (or shows either view alone) with shared book data and price-select passthrough.",
     registryDeps: [
       "@byronwade/depth-chart",
       "@byronwade/order-book",
@@ -4358,7 +4552,7 @@ export const components: ComponentDoc[] = [
     name: "Order entry",
     category: "Market",
     description:
-      "Buy/sell order ticket — side tabs, order-type segmented control, qty input, money price field, computed total, and submit action.",
+      "Buy/sell order ticket, side tabs, order-type segmented control, qty input, money price field, computed total, and submit action.",
     registryDeps: [
       "@byronwade/tabs",
       "@byronwade/segmented-control",
@@ -4376,7 +4570,7 @@ export const components: ComponentDoc[] = [
     name: "Position card",
     category: "Market",
     description:
-      "Open position card — symbol, side badge, size/entry/mark, unrealized P&L via price-change, optional close action.",
+      "Open position card, symbol, side badge, size/entry/mark, unrealized P&L via price-change, optional close action.",
     registryDeps: [
       "@byronwade/price-change",
       "@byronwade/badge",
@@ -4391,7 +4585,7 @@ export const components: ComponentDoc[] = [
     name: "Positions table",
     category: "Market",
     description:
-      "Open positions table — side badges, mono numerals, P&L via price-change, optional footer aggregate and close/select callbacks.",
+      "Open positions table, side badges, mono numerals, P&L via price-change, optional footer aggregate and close/select callbacks.",
     registryDeps: [
       "@byronwade/table",
       "@byronwade/price-change",
@@ -4407,7 +4601,7 @@ export const components: ComponentDoc[] = [
     name: "Portfolio summary",
     category: "Market",
     description:
-      "Portfolio overview — total value stat card, day change via price-change, equity sparkline, and token-tinted allocation bars.",
+      "Portfolio overview, total value stat card, day change via price-change, equity sparkline, and token-tinted allocation bars.",
     registryDeps: [
       "@byronwade/metric-stat",
       "@byronwade/stat-card",
@@ -4423,7 +4617,7 @@ export const components: ComponentDoc[] = [
     name: "Trade history",
     category: "Market",
     description:
-      "Trade fills table — relative-time stamp, symbol, buy/sell badge, price, size, computed value, optional row select.",
+      "Trade fills table, relative-time stamp, symbol, buy/sell badge, price, size, computed value, optional row select.",
     registryDeps: [
       "@byronwade/table",
       "@byronwade/badge",
@@ -4438,7 +4632,7 @@ export const components: ComponentDoc[] = [
     name: "Market movers",
     category: "Market",
     description:
-      "Gainers, losers, and most-active tabs — each row shows last price, price-change, and sparkline with optional symbol select.",
+      "Gainers, losers, and most-active tabs, each row shows last price, price-change, and sparkline with optional symbol select.",
     registryDeps: [
       "@byronwade/tabs",
       "@byronwade/price-change",
@@ -4453,7 +4647,7 @@ export const components: ComponentDoc[] = [
     name: "Screener table",
     category: "Market",
     description:
-      "Market screener — index-filters views plus sortable index-table columns for price, change, volume, market cap, and sparkline.",
+      "Market screener, index-filters views plus sortable index-table columns for price, change, volume, market cap, and sparkline.",
     registryDeps: [
       "@byronwade/index-filters",
       "@byronwade/index-table",
@@ -4469,7 +4663,7 @@ export const components: ComponentDoc[] = [
     name: "Economic calendar",
     category: "Market",
     description:
-      "Macro event calendar grouped by day — time, country, impact badge, and actual/forecast/prior mono readings.",
+      "Macro event calendar grouped by day, time, country, impact badge, and actual/forecast/prior mono readings.",
     registryDeps: [
       "@byronwade/badge",
       "@byronwade/relative-time",
@@ -4483,7 +4677,7 @@ export const components: ComponentDoc[] = [
     name: "Market news",
     category: "Market",
     description:
-      "News feed rows — source avatar, headline, relative-time, sentiment badge, and related-symbol price-change chips.",
+      "News feed rows, source avatar, headline, relative-time, sentiment badge, and related-symbol price-change chips.",
     registryDeps: [
       "@byronwade/avatar",
       "@byronwade/badge",
@@ -4499,7 +4693,7 @@ export const components: ComponentDoc[] = [
     name: "Price alert",
     category: "Market",
     description:
-      "Price alert list — condition text, active/triggered status dot, enable switch, and optional delete action.",
+      "Price alert list, condition text, active/triggered status dot, enable switch, and optional delete action.",
     registryDeps: [
       "@byronwade/switch",
       "@byronwade/badge",
@@ -4515,7 +4709,7 @@ export const components: ComponentDoc[] = [
     name: "Symbol search",
     category: "Market",
     description:
-      "Symbol command palette — grouped search results with price-change, keyboard hints, and cmdk filtering.",
+      "Symbol command palette, grouped search results with price-change, keyboard hints, and cmdk filtering.",
     npmDeps: ["cmdk"],
     registryDeps: [
       "@byronwade/command",
@@ -4531,7 +4725,7 @@ export const components: ComponentDoc[] = [
     name: "Volume profile",
     category: "Market",
     description:
-      "Session volume profile rendered in-house as SVG — horizontal histogram bars bucketed from candle OHLCV via `volumeProfileGeometry` in the `market` lib, with an optional point-of-control line.",
+      "Session volume profile rendered in-house as SVG, horizontal histogram bars bucketed from candle OHLCV via `volumeProfileGeometry` in the `market` lib, with an optional point-of-control line.",
     registryDeps: ["@byronwade/market"],
     examples: ["default"],
     tags: ["tradingview", "market"],
@@ -4541,7 +4735,7 @@ export const components: ComponentDoc[] = [
     name: "Time and sales",
     category: "Market",
     description:
-      "Compact time-and-sales tape — mono time, buy/sell-toned price, and size rows. Optional relative-time stamps, density variant, maxRows cap, and row select callback.",
+      "Compact time-and-sales tape, mono time, buy/sell-toned price, and size rows. Optional relative-time stamps, density variant, maxRows cap, and row select callback.",
     registryDeps: ["@byronwade/relative-time", "@byronwade/market"],
     examples: ["default"],
     tags: ["tradingview", "market"],
@@ -4551,7 +4745,7 @@ export const components: ComponentDoc[] = [
     name: "Symbol details",
     category: "Market",
     description:
-      "Symbol fundamentals panel — quote-header, exchange/sector/industry meta, and tabbed overview, financials, and statistics grids built from `metric-stat` and seeded `makeSymbolStats` defaults.",
+      "Symbol fundamentals panel, quote-header, exchange/sector/industry meta, and tabbed overview, financials, and statistics grids built from `metric-stat` and seeded `makeSymbolStats` defaults.",
     registryDeps: [
       "@byronwade/metric-stat",
       "@byronwade/quote-header",
@@ -4566,9 +4760,9 @@ export const components: ComponentDoc[] = [
     name: "Chart layout grid",
     category: "Market",
     description:
-      "Multi-chart layout shell — 1×2 or 2×2 grid of bordered panel slots for composing multiple `chart-panel` instances.",
+      "Multi-chart layout shell, 1×2 or 2×2 grid of bordered panel slots for composing multiple `chart-panel` instances.",
     registryDeps: ["@byronwade/chart-panel"],
-    examples: ["default"],
+    examples: ["default", "trading-desk"],
     tags: ["tradingview", "market"],
   },
   {
@@ -4576,7 +4770,7 @@ export const components: ComponentDoc[] = [
     name: "Indicator legend",
     category: "Market",
     description:
-      "Active chart indicators list — tone swatch, visibility switch, hidden badge, and optional remove callback.",
+      "Active chart indicators list, tone swatch, visibility switch, hidden badge, and optional remove callback.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/badge",
@@ -4591,7 +4785,7 @@ export const components: ComponentDoc[] = [
     name: "Drawing toolbar",
     category: "Market",
     description:
-      "Chart drawing tool rail — vertical or horizontal toggle group with tooltip-labeled cursor, trendline, fib, text, and shape tools (presentation only).",
+      "Chart drawing tool rail, vertical or horizontal toggle group with tooltip-labeled cursor, trendline, fib, text, and shape tools (presentation only).",
     npmDeps: ["lucide-react"],
     registryDeps: ["@byronwade/toggle-group", "@byronwade/tooltip"],
     examples: ["default"],
@@ -4602,7 +4796,7 @@ export const components: ComponentDoc[] = [
     name: "Compare symbols",
     category: "Market",
     description:
-      "Compare overlay header — symbol chips with `price-change` percent, optional add/remove actions, and a max symbol cap.",
+      "Compare overlay header, symbol chips with `price-change` percent, optional add/remove actions, and a max symbol cap.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/badge",
@@ -4618,7 +4812,7 @@ export const components: ComponentDoc[] = [
     name: "Volume footprint",
     category: "Market",
     description:
-      "Order-flow footprint chart rendered in-house as SVG — bid (success) and ask (destructive) volume bars mirrored about a dashed midline via `footprintGeometry` in the `market` lib.",
+      "Order-flow footprint chart rendered in-house as SVG, bid (success) and ask (destructive) volume bars mirrored about a dashed midline via `footprintGeometry` in the `market` lib.",
     registryDeps: ["@byronwade/market"],
     examples: ["default"],
     tags: ["tradingview", "market"],
@@ -4643,7 +4837,7 @@ export const components: ComponentDoc[] = [
     name: "Alert create form",
     category: "Market",
     description:
-      "Create price alert dialog — symbol field, above/below segmented control, money-input target, notify switch, and submit callback extending the price-alert pattern.",
+      "Create price alert dialog, symbol field, above/below segmented control, money-input target, notify switch, and submit callback extending the price-alert pattern.",
     registryDeps: [
       "@byronwade/button",
       "@byronwade/dialog",
@@ -4654,6 +4848,41 @@ export const components: ComponentDoc[] = [
       "@byronwade/switch",
       "@byronwade/market",
     ],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "session-stats-bar",
+    name: "Session stats bar",
+    category: "Market",
+    description:
+      "Compact OHLCV status row for the active or hovered candle — mono labels with success/destructive close tone.",
+    registryDeps: ["@byronwade/market"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "replay-controls",
+    name: "Replay controls",
+    category: "Market",
+    description:
+      "Bar replay transport — play/pause, step, scrub slider, and speed segmented control with callbacks only.",
+    registryDeps: [
+      "@byronwade/button",
+      "@byronwade/segmented-control",
+      "@byronwade/slider",
+    ],
+    npmDeps: ["lucide-react"],
+    examples: ["default"],
+    tags: ["tradingview", "market"],
+  },
+  {
+    slug: "sector-rotation",
+    name: "Sector rotation",
+    category: "Market",
+    description:
+      "Sector performance donut — change-toned SVG arcs with legend and hover focus via `sectorRotationArcs` in the `market` lib.",
+    registryDeps: ["@byronwade/market"],
     examples: ["default"],
     tags: ["tradingview", "market"],
   },

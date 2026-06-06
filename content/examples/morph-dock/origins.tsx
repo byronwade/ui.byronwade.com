@@ -69,7 +69,7 @@ function Row({ origin, align }: { origin: MorphDockOrigin; align: string }) {
 }
 
 /**
- * The panel grows from wherever the dock sits — `origin` pins the bloom to the
+ * The panel grows from wherever the dock sits, `origin` pins the bloom to the
  * dock's start, center, or end so a centered dock expands symmetrically.
  */
 export default function Example() {

@@ -9,7 +9,7 @@ export default function Example() {
       <Toaster position="bottom-right" richColors />
 
       <p className="text-sm text-muted-foreground mb-1">
-        Rich colors — each variant gets a distinct background.
+        Rich colors, each variant gets a distinct background.
       </p>
 
       <button

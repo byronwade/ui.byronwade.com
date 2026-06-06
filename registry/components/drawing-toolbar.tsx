@@ -81,7 +81,7 @@ function DrawingToolbar({
           variant="outline"
           size="sm"
           spacing={0}
-          orientation={orientation}
+          orientation={orientation ?? undefined}
           value={[activeTool]}
           onValueChange={(values) => {
             const next = values[0]

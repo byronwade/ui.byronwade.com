@@ -10,7 +10,7 @@ import {
 export default function Example() {
   return (
     <div className="flex flex-wrap gap-6 p-8 bg-background items-start justify-center">
-      {/* Image at the top — auto rounded top corners */}
+      {/* Image at the top, auto rounded top corners */}
       <Card className="w-72 overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop"

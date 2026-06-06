@@ -40,8 +40,8 @@ type Panel = "search" | "notif" | "profile"
 /**
  * A full-width app bar where the pills bloom DIFFERENT panels: the launcher morphs
  * into an app switcher (from the left), and the right toolbar's Search / bell /
- * avatar each bloom their own panel — results, a notifications list, an account
- * menu — from the right edge. The centered nav stays put.
+ * avatar each bloom their own panel, results, a notifications list, an account
+ * menu, from the right edge. The centered nav stays put.
  */
 export default function Example() {
   const [launcher, setLauncher] = React.useState(false)

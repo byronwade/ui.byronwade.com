@@ -19,7 +19,7 @@ export default function Example() {
   const logs = [
     {
       level: "log" as const,
-      message: "App mounted — hydration complete",
+      message: "App mounted, hydration complete",
       timestamp: new Date("2026-06-03T10:24:01"),
     },
     {

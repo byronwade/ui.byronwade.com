@@ -6,13 +6,15 @@ import {
   Palette,
   SlidersHorizontal,
   Accessibility,
+  BookOpen,
 } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { DocsIntro } from "@/app/(docs)/_components/docs-prose"
 import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
-  title: "AI rules — byronwade/ui",
+  title: "AI rules, byronwade/ui",
   description:
     "Install one design-system rule so your AI agent keeps building with byronwade/ui components and tokens.",
 }
@@ -27,19 +29,22 @@ const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const RULE_LINES = [
   "---",
-  "description: byronwade/ui — how agents build UI",
+  "description: byronwade/ui, how agents build UI",
   "alwaysApply: true",
   "---",
   "",
   "# Compose from the system. Never hardcode color.",
   "",
   "- Reach for @byronwade/ui components; add missing",
-  "  ones with shadcn — don't rebuild from scratch.",
+  "  ones with shadcn, don't rebuild from scratch.",
   "- Tokens only: bg-brand, text-muted-foreground.",
   "  Never hex, rgb, or Tailwind palette colors.",
-  "- Re-skin through --brand alone — rings, charts,",
+  "- Re-skin through --brand alone, rings, charts,",
   "  and success states follow automatically.",
   "- Depth is the `edge` hairline. No drop shadows.",
+  "- Long-form copy: reading-ui (docs) or",
+  "  reading-prose (essays). UI chrome stays",
+  "  font-sans + text-sm. Cap measure at 65ch.",
 ]
 
 const ENFORCES = [
@@ -51,7 +56,7 @@ const ENFORCES = [
   {
     icon: Palette,
     title: "Tokens, not hex",
-    body: "Semantic tokens only — never raw colors.",
+    body: "Semantic tokens only, never raw colors.",
   },
   {
     icon: SlidersHorizontal,
@@ -62,6 +67,11 @@ const ENFORCES = [
     icon: Accessibility,
     title: "A11y + dark free",
     body: "Labels, focus, keyboard; dark from tokens.",
+  },
+  {
+    icon: BookOpen,
+    title: "Readability lanes",
+    body: "reading-ui / reading-prose for copy; text-sm for UI.",
   },
 ]
 
@@ -80,7 +90,7 @@ const TOOLS: { name: string; path: string; note?: string }[] = [
 export default function AiPage() {
   return (
     <article className="max-w-none">
-      {/* ============================ HERO — the rule file ============== */}
+      {/* ============================ HERO, the rule file ============== */}
       <section className="grid items-center gap-10 py-12 lg:grid-cols-[5fr_7fr] lg:py-16">
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
@@ -89,11 +99,11 @@ export default function AiPage() {
           <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">
             Teach your agent the system once.
           </h1>
-          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <DocsIntro className="max-w-md">
             One installable rule keeps Cursor, Claude, Copilot, Windsurf and
-            Codex building on-system — no re-explaining on every edit.
-          </p>
-          <div className="mt-6">
+            Codex building on-system, no re-explaining on every edit.
+          </DocsIntro>
+          <div className="mt-6 reading-ui">
             <CodeBlock
               lang="bash"
               code={`npx shadcn@latest add @byronwade/design-rules`}
@@ -130,7 +140,7 @@ export default function AiPage() {
           <p className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-brand">
             What the rule enforces
           </p>
-          <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
             {ENFORCES.map(({ icon: Icon, title, body }) => (
               <div key={title}>
                 <span className="inline-flex size-9 items-center justify-center rounded-xl bg-brand/10 text-brand">
@@ -190,6 +200,12 @@ export default function AiPage() {
         >
           Browse all components
           <ArrowRight className="size-3.5" />
+        </Link>
+        <Link
+          href="/docs/readability"
+          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+        >
+          Readability rationale
         </Link>
         <Link
           href="/docs/theming"

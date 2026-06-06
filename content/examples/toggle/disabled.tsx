@@ -14,8 +14,8 @@ export default function Example() {
       </div>
 
       <p className="text-muted-foreground text-sm">
-        Disabled toggles can&apos;t be focused or pressed — the second one
-        starts in its pressed state.
+        Disabled toggles can&apos;t be focused or pressed, the second one starts
+        in its pressed state.
       </p>
     </div>
   )

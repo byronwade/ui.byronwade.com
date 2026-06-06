@@ -22,7 +22,7 @@ export default function Example() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <p className="text-xs font-medium">Gradient ramp — 26 cells</p>
+        <p className="text-xs font-medium">Gradient ramp, 26 cells</p>
         <ActivityGrid data={gradientRow} columns={26} />
       </div>
 
@@ -35,9 +35,7 @@ export default function Example() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <p className="text-xs font-medium">
-          Sparse activity — most cells empty
-        </p>
+        <p className="text-xs font-medium">Sparse activity, most cells empty</p>
         <ActivityGrid
           data={Array.from({ length: 26 * 7 }, (_, i) =>
             i % 19 === 0 ? 5 : 0,

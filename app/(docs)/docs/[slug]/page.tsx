@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { bySlug, components } from "@/content/components"
+import { getSurface, surfaceLabel } from "@/content/catalog-surfaces"
 import { examples } from "@/content/examples/registry"
 import { ExampleTabs } from "@/app/(docs)/_components/example-tabs"
 import {
@@ -12,6 +13,7 @@ import {
   type VariantView,
 } from "@/app/(docs)/_components/variant-browser"
 import { InstallCommand } from "@/app/(docs)/_components/install-command"
+import { DocsDemoSection, DocsIntro } from "@/app/(docs)/_components/docs-prose"
 import {
   Table,
   TableBody,
@@ -22,14 +24,18 @@ import {
 } from "@/components/ui/table"
 
 export function generateStaticParams() {
-  // `foundation` has a bespoke static route (./foundation/page.tsx) that takes
-  // precedence; exclude it here so it isn't also prerendered by this template.
+  // Bespoke static routes take precedence; exclude them from this template.
   return components
-    .filter((c) => c.slug !== "foundation")
+    .filter(
+      (c) =>
+        c.slug !== "foundation" &&
+        c.slug !== "readability" &&
+        c.slug !== "surfaces",
+    )
     .map((c) => ({ slug: c.slug }))
 }
 
-/* Shared section label — the mono eyebrow used across the docs specimen pages. */
+/* Shared section label, the mono eyebrow used across the docs specimen pages. */
 function Label({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -84,28 +90,26 @@ export default async function ComponentPage({
     }
   })
 
+  const surface = getSurface(doc)
   const deps = [...(doc.registryDeps ?? []), ...(doc.npmDeps ?? [])]
 
   return (
     <article className="mx-auto max-w-4xl space-y-12">
-      {/* ── Header — matches the specimen pages: mono eyebrow + regular name ── */}
       <header>
         <Link
-          href="/docs#catalog"
+          href={`/catalog?surface=${surface}`}
           className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="size-3" />
-          Catalog
+          {surfaceLabel(surface)}
         </Link>
         <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-brand">
-          {doc.category}
+          {doc.category} · {surfaceLabel(surface)}
         </p>
         <h1 className="mt-3 text-[clamp(2rem,5vw,3rem)] font-normal tracking-tight text-foreground text-balance">
           {doc.name}
         </h1>
-        <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          {doc.description}
-        </p>
+        <DocsIntro>{doc.description}</DocsIntro>
         {deps.length > 0 ? (
           <div className="mt-5 flex flex-wrap gap-2">
             {deps.map((d) => (
@@ -129,7 +133,7 @@ export default async function ComponentPage({
             >
               Vercel AI Elements
             </a>{" "}
-            — the original components, repurposed onto the byronwade/ui design
+            , the original components, repurposed onto the byronwade/ui design
             system (semantic tokens, dark mode, small subtle refinements). ©
             Vercel.
           </p>
@@ -137,14 +141,24 @@ export default async function ComponentPage({
       </header>
 
       {variantViews.length > 0 ? (
-        <section className="space-y-6">
-          <Label>Variants</Label>
+        <DocsDemoSection
+          label={
+            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Variants
+            </h2>
+          }
+        >
           <VariantBrowser variants={variantViews} />
-        </section>
+        </DocsDemoSection>
       ) : (
         rendered.length > 0 && (
-          <section className="space-y-6">
-            <Label>{rendered.length > 1 ? "Examples" : "Example"}</Label>
+          <DocsDemoSection
+            label={
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                {rendered.length > 1 ? "Examples" : "Example"}
+              </h2>
+            }
+          >
             <div className="space-y-8">
               {rendered.map(({ name, Component, code }) => (
                 <ExampleTabs
@@ -155,7 +169,7 @@ export default async function ComponentPage({
                 />
               ))}
             </div>
-          </section>
+          </DocsDemoSection>
         )
       )}
 
@@ -195,7 +209,7 @@ export default async function ComponentPage({
                       {p.type}
                     </TableCell>
                     <TableCell className="font-mono text-xs text-muted-foreground">
-                      {p.default ?? "—"}
+                      {p.default ?? "-"}
                     </TableCell>
                     <TableCell className="pr-4 whitespace-normal text-muted-foreground">
                       {p.description}

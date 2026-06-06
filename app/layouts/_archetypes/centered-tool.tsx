@@ -1,4 +1,4 @@
-// Centered-tool archetype — a single focal task on a calm backdrop.
+// Centered-tool archetype, a single focal task on a calm backdrop.
 // uses: CenteredFocal, InputGroup, Button, GradientAvatar, Separator
 //
 // Design: the renowned split sign-in. A brand-lit story panel (gradient wash, grid
@@ -47,14 +47,14 @@ export function CenteredToolArchetype() {
             Run operations with total clarity.
           </h2>
           <p className="mt-4 text-base text-muted-foreground">
-            Incidents, deploys, and live health — one calm surface for the whole
+            Incidents, deploys, and live health, one calm surface for the whole
             team, from first alert to all-clear.
           </p>
 
           <figure className="mt-10 rounded-2xl bg-card/70 p-5 shadow-float backdrop-blur">
             <blockquote className="text-sm leading-relaxed">
               “We replaced three dashboards with Console. On-call finally feels
-              calm — everything we need is one glance away.”
+              calm, everything we need is one glance away.”
             </blockquote>
             <figcaption className="mt-4 flex items-center gap-3">
               <GradientAvatar seed="ana reyes" size="md" />
@@ -88,7 +88,7 @@ export function CenteredToolArchetype() {
             Sign in to Console
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Welcome back — enter your work email to continue.
+            Welcome back, enter your work email to continue.
           </p>
         </div>
 

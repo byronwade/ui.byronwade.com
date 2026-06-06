@@ -21,12 +21,12 @@ Before writing any markup, check whether a component already exists. Reach for t
 
 - **Forms** — `button`, `button-group`, `input`, `textarea`, `label`, `select`, `native-select`,
   `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, `calendar`,
-  `slider`, `number-field`, `rating`, `color-picker`, `editor`
+  `date-picker`, `combobox`, `field`, `input-otp`, `slider`, `number-field`, `rating`, `color-picker`, `editor`
 - **Overlays** — `dialog`, `sheet`, `popover`, `tooltip`, `hover-card`, `dropdown-menu`,
-  `command`, `navigation-menu`, `glimpse`
+  `context-menu`, `sidebar`, `command`, `navigation-menu`, `glimpse`
 - **Feedback** — `alert`, `progress`, `skeleton`, `spinner`, `sonner` (toasts)
 - **Data display** — `card`, `table`, `tabs`, `accordion`, `avatar`, `badge`, `kbd`, `separator`,
-  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`, `candlestick-chart` (token-themed SVG OHLC chart — success/destructive candles, optional volume band, grid, crosshair; geometry from the `market` lib), `depth-chart` (token-themed SVG market-depth chart — cumulative success bid depth mirrored against destructive ask depth about a dashed midline; geometry from the `market` lib), `order-book` (DOM ladder — bid/ask rows with proportional depth bars, spread row, split or vertical layout, optional row price select), `heatmap-grid` (performance grid — cell area by weight, tone by change magnitude via success/destructive opacity or `--chart-1…5`), `volume-profile` (session volume histogram — horizontal bars from `volumeProfileGeometry` in the `market` lib, optional POC line on `--chart-1` / `--brand`), `volume-footprint` (order-flow footprint — bid/ask volume bars mirrored about a midline via `footprintGeometry`), `file-tree` (minimal + panel variants, multi-select), `kanban` (drag-drop board), `gantt` (timeline chart — auto-centers on today; `GanttControls` for timescale/zoom, density + read-only variants, status-tinted bars, `GanttMilestone`)
+  `breadcrumb`, `aspect-ratio`, `scroll-area`, `collapsible`, `pagination`, `carousel`, `resizable`, `candlestick-chart` (token-themed SVG OHLC chart — success/destructive candles, optional volume band, grid, crosshair; geometry from the `market` lib), `depth-chart` (token-themed SVG market-depth chart — cumulative success bid depth mirrored against destructive ask depth about a dashed midline; geometry from the `market` lib), `order-book` (DOM ladder — bid/ask rows with proportional depth bars, spread row, split or vertical layout, optional row price select), `heatmap-grid` (performance grid — cell area by weight, tone by change magnitude via success/destructive opacity or `--chart-1…5`), `volume-profile` (session volume histogram — horizontal bars from `volumeProfileGeometry` in the `market` lib, optional POC line on `--chart-1` / `--brand`), `volume-footprint` (order-flow footprint — bid/ask volume bars mirrored about a midline via `footprintGeometry`), `file-tree` (minimal + panel variants, multi-select), `kanban` (drag-drop board), `gantt` (timeline chart — auto-centers on today; `GanttControls` for timescale/zoom, density + read-only variants, status-tinted bars, `GanttMilestone`)
 - **House UI** — `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`,
   `segmented-control`, `pill` (status/metric pill), `cursor` (live collaboration cursor), `ticker` (price ticker), `sparkline` (compact line/area trend chart, auto up/down tone), `price-change` (signed price/percent change — runtime success/destructive/muted tone + trend caret, text or tinted chip), `relative-time` (multi-timezone clock), `qr-code` (token-colored QR), `credit-card` (flippable card), `image-crop` (crop a file to PNG)
 - **Morph (morphing chrome)** — `use-chrome-morph` (the size + cross-fade hook), `morph-dock`
@@ -40,6 +40,7 @@ Before writing any markup, check whether a component already exists. Reach for t
 - **Composites / patterns** — `page-header`, `detail-header`, `section`, `metric-stat`,
   `stat-card`, `status-pill`, `empty-state`, `event-timeline`, `verification-progress`,
   `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`, `conversation-list`,
+  `message-thread`, `message-composer`,
   `price-range-filter` (histogram + range slider + number inputs),
   `command-result` (compact rich result row for a command palette: media + title +
   description + meta + action, dropped inside a `command` item)
@@ -54,7 +55,7 @@ Before writing any markup, check whether a component already exists. Reach for t
   `sparkline` + allocation bars), `trade-history` (fills table with `relative-time`),
   `market-movers` (gainers/losers/active tabs), `screener-table` (`index-filters` + `index-table`),
   `economic-calendar` (macro events by day), `market-news` (headline feed with sentiment + symbol chips),
-  `price-alert` (alert list with `switch` + `status-dot`), `symbol-search` (`command` palette with `price-change`), `time-and-sales` (compact trade tape — mono time/price/size rows, buy/sell price tones, optional `relative-time`), `symbol-details` (`quote-header` + `tabs` + `metric-stat` fundamentals grid), `chart-layout-grid` (1×2 / 2×2 multi-chart grid of `chart-panel` slots), `indicator-legend` (active indicators list with swatch + visibility switch + optional remove), `drawing-toolbar` (left/right tool rail on `toggle-group` + `tooltip` — presentation-only drawing modes), `compare-symbols` (overlay compare chips with `price-change` + add/remove), `options-chain` (calls/puts tabs + strike table with `price-change`), `alert-create-form` (`dialog` + `money-input` alert creation)
+  `price-alert` (alert list with `switch` + `status-dot`), `symbol-search` (`command` palette with `price-change`), `time-and-sales` (compact trade tape — mono time/price/size rows, buy/sell price tones, optional `relative-time`), `symbol-details` (`quote-header` + `tabs` + `metric-stat` fundamentals grid), `chart-layout-grid` (1×2 / 2×2 multi-chart grid of `chart-panel` slots), `indicator-legend` (active indicators list with swatch + visibility switch + optional remove), `drawing-toolbar` (left/right tool rail on `toggle-group` + `tooltip` — presentation-only drawing modes), `compare-symbols` (overlay compare chips with `price-change` + add/remove), `volume-footprint` (bid/ask footprint SVG via `footprintGeometry`), `options-chain` (calls/puts tabs + strike table with `price-change`), `alert-create-form` (`dialog` + `money-input` alert creation), `session-stats-bar` (mono OHLCV row for hovered/last candle), `replay-controls` (bar replay transport — play/pause/scrub/speed callbacks), `sector-rotation` (sector performance donut via `sectorRotationArcs`)
 - **Page layouts** — variant-driven, slot-based page scaffolds: `app-shell` (application
   shells — `dashboard`, `sidebar`, `stacked`, `three-column`, `master-detail`, `docs`,
   `editor`, `holy-grail`, `focused`, `command-center`) and `marketing-layout` (marketing /
@@ -215,13 +216,60 @@ tracking + the typeface**, not through heavy weight or color. Base styles alread
   timestamps, durations, counts, IDs, keyboard hints (`kbd`), and small technical labels. This is
   what gives the UI its crisp, "engineered" texture. Body copy and headings stay `font-sans`.
 - **Serif for editorial moments only.** `font-serif` (backed by the `--font-serif` token) is for
-  long-form prose, pull quotes, and blockquotes — not UI chrome. Reach for it sparingly to add warmth
-  to reading surfaces.
+  long-form prose, pull quotes, and blockquotes — not UI chrome. Reach for it via `reading-prose` on
+  essay and article surfaces.
+
+### Readability — two lanes (evidence-backed)
+
+Web reading on emissive screens follows different rules than print or e-ink. byronwade/ui encodes
+peer-reviewed parameters in foundation utilities — not as optional polish, but as the house standard
+for anything meant to be *read*.
+
+- **UI lane** — `font-sans`, `text-sm`/`text-base`, tight tracking (`-0.006em` on body). Dashboards,
+  forms, nav, tables. Never below 16px for copy users must read in flow.
+- **Docs lane** — `reading-ui`: 65ch measure, 16px sans, 1.6 line height, 1.5em paragraph gap,
+  neutral letter-spacing. Guides, release notes, in-app help.
+- **Essay lane** — `reading-prose`: 65ch measure, 18px serif, 1.7 line height, same paragraph gap.
+  Articles, manifestos, marketing essays.
+- **Measure cap** — `reading-measure` alone when you need the width without typography. Never exceed
+  **80ch** (WCAG 1.4.8). Target **65ch** (Dyson & Haselgrove, 55 CPL optimal zone).
+- **Left-align body** — no justified paragraphs. Token contrast only (`foreground` on `background`).
+- **No hacks** — no Bionic Reading, no e-ink sepia simulation, no bold-first-word gimmicks (no
+  evidence base).
+
+**Agent routing (copy meant to be read):**
+
+| You are building… | Use |
+| --- | --- |
+| Dashboard, form, table, nav | UI lane — `font-sans`, `text-sm`/`text-base` |
+| Guide, help, release notes | `reading-ui` + `text-foreground` |
+| Essay, article, long marketing copy | `reading-prose` + `text-foreground` |
+| Need width cap only | `reading-measure` |
+| Article page layout | `marketing-layout variant="article"` (sections are `reading-prose`) |
+| Docs marketing layout | `marketing-layout variant="docs-marketing"` (main is `reading-ui`) |
+
+Never stack negative body tracking on reading utilities — foundation resets `letter-spacing: 0` there.
+
+- **`reading-lead`** — optional opener paragraph inside a reading lane (1.125rem sans / 1.25rem prose).
+- **`reading-muted`** — secondary copy inside a reading lane; higher contrast than `text-muted-foreground`.
+- **`reading-demo-break`** — full-width band above demos/previews; separates 65ch prose from wide specimens.
+
+### Two surfaces, one foundation
+
+Application UI and marketing/editorial share tokens and `--brand` — they diverge in typography lane and layout density. Do **not** split the registry into two packages; route by surface instead.
+
+| Surface | Typography | Layout | Example components |
+| --- | --- | --- | --- |
+| **Application UI** | UI lane — `font-sans`, `text-sm`/`text-base` | Shells, tables, forms, dense dashboards | `app-shell`, `sidebar`, `table`, `morph-dock` |
+| **Marketing & editorial** | Essay lane — `reading-prose` for copy; heroes full-bleed | `marketing-layout`, media shelves, commerce | `hero-section`, `marketing-layout`, `video-shelf` |
+
+Media, Video, and Commerce categories are marketing surface. `hero-section`, `marketing-layout`, and `description-box` are marketing even when filed under Composites/Patterns.
 
 ### House utilities (already defined by `foundation`)
 
 `bg-grid`, `bg-grid-lines`, `glow-brand`, `text-gradient`, `text-gradient-brand`, `mask-fade-x`,
-`full-bleed`, `edge`, `scrollbar-thin`. Prefer these over
+`full-bleed`, `edge`, `scrollbar-thin`, `reading-measure`, `reading-ui`, `reading-prose`,
+`reading-lead`, `reading-muted`, `reading-demo-break`. Prefer these over
 re-implementing gradients, grids, or shadows by hand.
 
 A few utilities hold a deliberate **fixed-color exception** that tokens can't express — the raw value
@@ -291,5 +339,7 @@ a general accent — they carry meaning.
 3. Is radius from the scale, and did I use `cn()` + a `className` passthrough? 
 4. Did I leave foundation tokens alone and only consider `--brand` for theming? 
 5. Are focus states, labels, and keyboard behavior intact?
+6. Is long-form copy on `reading-ui` or `reading-prose` (not full-bleed `text-sm` sans)?
+7. Is reading measure ≤ 80ch (target 65ch via the reading utilities)?
 
 If any answer is "no", fix it before moving on.

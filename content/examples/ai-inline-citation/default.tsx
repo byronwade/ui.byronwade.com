@@ -20,7 +20,7 @@ import {
 const sources = [
   {
     url: "https://platform.openai.com/docs/models",
-    title: "Model overview — OpenAI Platform",
+    title: "Model overview, OpenAI Platform",
     description:
       "A reference of the available models, their context windows, and recommended use cases for production workloads.",
     quote:
@@ -28,7 +28,7 @@ const sources = [
   },
   {
     url: "https://www.anthropic.com/research",
-    title: "Research — Anthropic",
+    title: "Research, Anthropic",
     description:
       "Publications on interpretability, alignment, and the behavior of large language models under real-world load.",
     quote:

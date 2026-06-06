@@ -5,7 +5,7 @@ import { Check, Download, Home, Share2 } from "lucide-react"
 import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
- * A tool zone with a brand `primary` action and grouped secondaries — a seam is
+ * A tool zone with a brand `primary` action and grouped secondaries, a seam is
  * drawn automatically between actions whose `group` differs.
  */
 export default function Example() {

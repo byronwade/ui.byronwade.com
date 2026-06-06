@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 
 /**
- * Range calendar with date presets — adapted from coss `p-calendar-21` to our
+ * Range calendar with date presets, adapted from coss `p-calendar-21` to our
  * tokens + components. Presets are ghost Buttons; the range selection follows
  * `--brand` via the calendar.
  */

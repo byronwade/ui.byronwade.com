@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button"
 
 /**
- * Nested bottom drawers with a grab bar — a multi-step flow where each
+ * Nested bottom drawers with a grab bar, a multi-step flow where each
  * "Continue" opens the next drawer. (Adapted from coss p-drawer-7.)
  */
 export default function Example() {

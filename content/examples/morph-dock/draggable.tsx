@@ -26,7 +26,7 @@ const items = [
 ]
 
 /**
- * `draggable` detaches the open panel — grab the header to drag it free, then
+ * `draggable` detaches the open panel, grab the header to drag it free, then
  * close (Esc, click-away, or the ✕) flies it home. The header carries the drag
  * handle, the title, and the close button; `onSave` would add a Save button.
  */

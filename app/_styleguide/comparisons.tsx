@@ -59,7 +59,7 @@ import { StatusPill } from "@/components/status-pill"
  * variables; each system sets those variables (plus a few tone rules) on its
  * own theme class (`.vercel-scope`, `.linear-scope`, `.zero-scope`,
  * `.shopify-scope`, `.stripe-scope`, `.github-scope`). No `:root` writes, no
- * Tailwind-layer edits — nothing leaks into our global theme. The
+ * Tailwind-layer edits, nothing leaks into our global theme. The
  * right column wears exactly one theme; the left column is always our real
  * components, unchanged.
  * ─────────────────────────────────────────────────────────────────────────── */
@@ -98,7 +98,7 @@ const SYSTEMS: Record<
     border: "#eaeaea",
     dark: false,
     tagline:
-      "Monochrome and sharp — a flat black primary, hairline borders, one blue. 6px radius, no chrome.",
+      "Monochrome and sharp, a flat black primary, hairline borders, one blue. 6px radius, no chrome.",
   },
   linear: {
     label: "Linear",
@@ -109,7 +109,7 @@ const SYSTEMS: Record<
     border: "#23242a",
     dark: true,
     tagline:
-      "Dark-first and refined — an indigo accent spent on the primary, soft depth, 8px radius.",
+      "Dark-first and refined, an indigo accent spent on the primary, soft depth, 8px radius.",
   },
   zero: {
     label: "0.email",
@@ -120,7 +120,7 @@ const SYSTEMS: Record<
     border: "rgba(255,255,255,0.1)",
     dark: true,
     tagline:
-      "A dark, dense inbox — blue accent, tight rows, built for keyboard speed over calm.",
+      "A dark, dense inbox, blue accent, tight rows, built for keyboard speed over calm.",
   },
   shopify: {
     label: "Shopify",
@@ -131,7 +131,7 @@ const SYSTEMS: Record<
     border: "#e3e3e3",
     dark: false,
     tagline:
-      "Tonal role colors, layered button shadows, a denser 8/12px grid — more structure, more chrome.",
+      "Tonal role colors, layered button shadows, a denser 8/12px grid, more structure, more chrome.",
   },
   stripe: {
     label: "Stripe",
@@ -142,7 +142,7 @@ const SYSTEMS: Record<
     border: "#e3e8ee",
     dark: false,
     tagline:
-      "Refined and trustworthy — an indigo accent, soft layered shadows, a light blue canvas, gentle radii.",
+      "Refined and trustworthy, an indigo accent, soft layered shadows, a light blue canvas, gentle radii.",
   },
   github: {
     label: "GitHub",
@@ -153,7 +153,7 @@ const SYSTEMS: Record<
     border: "#d0d7de",
     dark: false,
     tagline:
-      "Utilitarian Primer — green buttons, a blue interactive accent, an orange tab underline, flat bordered surfaces.",
+      "Utilitarian Primer, green buttons, a blue interactive accent, an orange tab underline, flat bordered surfaces.",
   },
   atlassian: {
     label: "Atlassian",
@@ -164,7 +164,7 @@ const SYSTEMS: Record<
     border: "#dfe1e6",
     dark: false,
     tagline:
-      "Enterprise-plain ADS — a blue primary, tiny uppercase Lozenges, hard 3px corners, flat elevation.",
+      "Enterprise-plain ADS, a blue primary, tiny uppercase Lozenges, hard 3px corners, flat elevation.",
   },
   radix: {
     label: "Radix",
@@ -175,7 +175,7 @@ const SYSTEMS: Record<
     border: "#e4e4e7",
     dark: false,
     tagline:
-      "The shadcn baseline — a neutral near-black primary at 6px, variant-based badges, no accent hue. The closest to ours.",
+      "The shadcn baseline, a neutral near-black primary at 6px, variant-based badges, no accent hue. The closest to ours.",
   },
   mailchimp: {
     label: "Mailchimp",
@@ -186,7 +186,7 @@ const SYSTEMS: Record<
     border: "#e0ddd5",
     dark: false,
     tagline:
-      "Bold and warm — the signature yellow button with black text, a teal interactive accent, rounded tonal tags.",
+      "Bold and warm, the signature yellow button with black text, a teal interactive accent, rounded tonal tags.",
   },
   apple: {
     label: "Apple",
@@ -197,7 +197,7 @@ const SYSTEMS: Record<
     border: "#d2d2d7",
     dark: false,
     tagline:
-      "Apple HIG — the iOS system blue, soft 10–14px radii, vibrant tonal pills, a green toggle, SF-set.",
+      "Apple HIG, the iOS system blue, soft 10–14px radii, vibrant tonal pills, a green toggle, SF-set.",
   },
 }
 
@@ -218,7 +218,7 @@ const CSS = `
 .cmp-scope * { box-sizing: border-box; }
 .cmp-scope { line-height: 1.4; -webkit-font-smoothing: antialiased; }
 
-/* Shared layout — themed only through CSS variables set per scope. */
+/* Shared layout, themed only through CSS variables set per scope. */
 .cmp-scope .c-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   min-height: 32px; padding: 6px 12px; font-size: 13px; font-weight: 500;
@@ -311,7 +311,7 @@ const CSS = `
 }
 .cmp-scope .c-tabs__panel { padding-top: 12px; font-size: 13px; color: var(--c-sub); }
 
-/* ── Vercel (Geist) — inherits the app's Geist; monochrome + blue ──────── */
+/* ── Vercel (Geist), inherits the app's Geist; monochrome + blue ──────── */
 .vercel-scope {
   --c-sub: #666; --c-border: #eaeaea; --c-border-strong: #eaeaea; --c-surface: #fff;
   --c-radius: 6px; --c-radius-lg: 8px; --c-badge-radius: 6px; --c-tab-radius: 0; --c-check-radius: 4px; --c-avatar-radius: 9999px;
@@ -334,7 +334,7 @@ const CSS = `
 .vercel-scope .c-banner--critical { background: #fff5f5; border-color: #ffd1d1; }
 .vercel-scope .c-banner--critical .c-banner__icon { color: #e5484d; }
 
-/* ── Linear — dark, indigo ─────────────────────────────────────────────── */
+/* ── Linear, dark, indigo ─────────────────────────────────────────────── */
 .linear-scope {
   --c-sub: #8a8f98; --c-border: #23242a; --c-border-strong: #3a3b42; --c-surface: #191a20;
   --c-radius: 8px; --c-radius-lg: 10px; --c-badge-radius: 9999px; --c-tab-radius: 0; --c-check-radius: 4px; --c-avatar-radius: 9999px;
@@ -355,7 +355,7 @@ const CSS = `
 .linear-scope .c-banner--critical { background: rgba(235,87,87,0.12); border-color: rgba(235,87,87,0.3); }
 .linear-scope .c-banner--critical .c-banner__icon { color: #f08c8c; }
 
-/* ── Zero / 0.email — dark, blue, dense ────────────────────────────────── */
+/* ── Zero / 0.email, dark, blue, dense ────────────────────────────────── */
 .zero-scope {
   --c-sub: #a1a1a1; --c-border: rgba(255,255,255,0.1); --c-border-strong: rgba(255,255,255,0.16); --c-surface: #141414;
   --c-radius: 8px; --c-radius-lg: 8px; --c-badge-radius: 9999px; --c-tab-radius: 6px; --c-check-radius: 4px; --c-avatar-radius: 9999px;
@@ -378,7 +378,7 @@ const CSS = `
 .zero-scope .c-banner--critical { background: rgba(244,63,94,0.12); border-color: rgba(244,63,94,0.3); }
 .zero-scope .c-banner--critical .c-banner__icon { color: #fb7185; }
 
-/* ── Shopify Polaris — tonal, layered, denser ──────────────────────────── */
+/* ── Shopify Polaris, tonal, layered, denser ──────────────────────────── */
 .shopify-scope {
   --c-sub: #616161; --c-border: #e3e3e3; --c-border-strong: #b5b5b5; --c-surface: #fff;
   --c-radius: 8px; --c-radius-lg: 12px; --c-badge-radius: 8px; --c-tab-radius: 8px; --c-check-radius: 4px; --c-avatar-radius: 8px;
@@ -400,7 +400,7 @@ const CSS = `
 .shopify-scope .c-banner--critical { background: #fff0f0; border-color: #ffc2bd; }
 .shopify-scope .c-banner--critical .c-banner__icon { color: #c91111; }
 
-/* ── Stripe — refined, indigo, soft shadows ────────────────────────────── */
+/* ── Stripe, refined, indigo, soft shadows ────────────────────────────── */
 .stripe-scope {
   --c-sub: #697386; --c-border: #e3e8ee; --c-border-strong: #d5dbe1; --c-surface: #fff;
   --c-radius: 6px; --c-radius-lg: 8px; --c-badge-radius: 9999px; --c-tab-radius: 6px; --c-check-radius: 4px; --c-avatar-radius: 9999px;
@@ -422,7 +422,7 @@ const CSS = `
 .stripe-scope .c-banner--critical { background: #fff0f3; border-color: #f7c0cf; }
 .stripe-scope .c-banner--critical .c-banner__icon { color: #df1b41; }
 
-/* ── GitHub Primer — utilitarian, green + blue, orange tab underline ────── */
+/* ── GitHub Primer, utilitarian, green + blue, orange tab underline ────── */
 .github-scope {
   --c-sub: #656d76; --c-border: #d0d7de; --c-border-strong: #d0d7de; --c-surface: #fff;
   --c-radius: 6px; --c-radius-lg: 6px; --c-badge-radius: 9999px; --c-tab-radius: 6px; --c-check-radius: 4px; --c-avatar-radius: 6px;
@@ -443,7 +443,7 @@ const CSS = `
 .github-scope .c-banner--critical { background: #ffebe9; border-color: #ff8182; }
 .github-scope .c-banner--critical .c-banner__icon { color: #cf222e; }
 
-/* ── Atlassian — enterprise blue, hard 3px corners, uppercase lozenges ──── */
+/* ── Atlassian, enterprise blue, hard 3px corners, uppercase lozenges ──── */
 .atlassian-scope {
   --c-sub: #44546f; --c-border: #dfe1e6; --c-border-strong: #b3b9c4; --c-surface: #fff;
   --c-radius: 3px; --c-radius-lg: 3px; --c-badge-radius: 3px; --c-tab-radius: 0; --c-check-radius: 3px; --c-avatar-radius: 9999px;
@@ -467,7 +467,7 @@ const CSS = `
 .atlassian-scope .c-banner--critical { background: #ffeceb; border-color: #fd9891; }
 .atlassian-scope .c-banner--critical .c-banner__icon { color: #ca3521; }
 
-/* ── Radix / shadcn — the neutral baseline (closest to ours) ────────────── */
+/* ── Radix / shadcn, the neutral baseline (closest to ours) ────────────── */
 .radix-scope {
   --c-sub: #71717a; --c-border: #e4e4e7; --c-border-strong: #e4e4e7; --c-surface: #fff;
   --c-radius: 6px; --c-radius-lg: 8px; --c-badge-radius: 6px; --c-tab-radius: 6px; --c-check-radius: 4px; --c-avatar-radius: 9999px;
@@ -491,7 +491,7 @@ const CSS = `
 .radix-scope .c-banner--critical { background: #fff; border-color: #ef4444; }
 .radix-scope .c-banner--critical .c-banner__icon { color: #ef4444; }
 
-/* ── Mailchimp — bold yellow + black, warm canvas, teal accent ─────────── */
+/* ── Mailchimp, bold yellow + black, warm canvas, teal accent ─────────── */
 .mailchimp-scope {
   --c-sub: #6c6c6c; --c-border: #e0ddd5; --c-border-strong: #241c15; --c-surface: #fff;
   --c-radius: 4px; --c-radius-lg: 8px; --c-badge-radius: 9999px; --c-tab-radius: 0; --c-check-radius: 4px; --c-avatar-radius: 9999px;
@@ -515,7 +515,7 @@ const CSS = `
 .mailchimp-scope .c-banner--critical { background: #fdeae5; border-color: #f3b6a6; }
 .mailchimp-scope .c-banner--critical .c-banner__icon { color: #d3320d; }
 
-/* ── Apple HIG — iOS blue, soft radii, vibrant pills, green toggle ──────── */
+/* ── Apple HIG, iOS blue, soft radii, vibrant pills, green toggle ──────── */
 .apple-scope {
   --c-sub: #6e6e73; --c-border: #d2d2d7; --c-border-strong: #d2d2d7; --c-surface: #fff;
   --c-radius: 10px; --c-radius-lg: 14px; --c-badge-radius: 9999px; --c-tab-radius: 7px; --c-check-radius: 6px; --c-avatar-radius: 9999px;
@@ -902,49 +902,49 @@ const OURS_NOTE =
 const NOTES: Record<string, Record<string, string>> = {
   Button: {
     vercel:
-      "Vercel squares to 6px and stays monochrome — a flat black primary, a hairline secondary, no accent on the button.",
+      "Vercel squares to 6px and stays monochrome, a flat black primary, a hairline secondary, no accent on the button.",
     linear:
       "Linear rounds to 8px and spends its indigo accent on the primary itself, where we stay neutral.",
     zero: "0.email puts a blue primary on a dark surface, tuned for an inbox rather than a calm dashboard.",
     shopify:
-      "Polaris uses 8px with a layered button shadow and a filled critical-red role — more chrome, fuller palette.",
+      "Polaris uses 8px with a layered button shadow and a filled critical-red role, more chrome, fuller palette.",
     stripe:
-      "Stripe gives the indigo primary a soft layered shadow and gentle radius — refined depth where we stay flat.",
+      "Stripe gives the indigo primary a soft layered shadow and gentle radius, refined depth where we stay flat.",
     github:
-      "GitHub pairs a green primary with a grey bordered secondary at 6px — utilitarian, never a pill.",
+      "GitHub pairs a green primary with a grey bordered secondary at 6px, utilitarian, never a pill.",
   },
   Status: {
     vercel:
-      "Vercel's badges are small, squared, and uppercase — tonal text on a faint fill, no leading dot.",
+      "Vercel's badges are small, squared, and uppercase, tonal text on a faint fill, no leading dot.",
     linear:
-      "Linear tints a translucent pill in the status hue with matching text — subtle on dark.",
+      "Linear tints a translucent pill in the status hue with matching text, subtle on dark.",
     zero: "0.email leans on the colored dot too, but as a dense, unread-style signal on a dark row.",
     shopify:
       "Polaris fills the whole badge with a tonal background per role, fusing color and text.",
     stripe:
-      "Stripe uses soft tonal pills — green, indigo, red fills, fully rounded, no dot.",
+      "Stripe uses soft tonal pills, green, indigo, red fills, fully rounded, no dot.",
     github:
       "GitHub's Primer Labels are fully-rounded tints (green, blue, red) carrying state as fill.",
   },
   Card: {
     vercel:
-      "Vercel keeps the card flat — 8px, a single #eaeaea border, no shadow. Structure from the line.",
+      "Vercel keeps the card flat, 8px, a single #eaeaea border, no shadow. Structure from the line.",
     linear:
-      "Linear floats a dark surface with a soft shadow at 10px — depth is part of the language.",
-    zero: "0.email tightens a dark panel — denser padding at 8px, built to stack many at once.",
+      "Linear floats a dark surface with a soft shadow at 10px, depth is part of the language.",
+    zero: "0.email tightens a dark panel, denser padding at 8px, built to stack many at once.",
     shopify:
       "Polaris uses 12px, a denser 16px rhythm, and a soft drop shadow to lift the surface.",
     stripe:
       "Stripe floats a white card on its blue canvas with the signature layered Stripe shadow.",
     github:
-      "GitHub keeps a flat #d0d7de-bordered box on a grey canvas — no elevation, all line.",
+      "GitHub keeps a flat #d0d7de-bordered box on a grey canvas, no elevation, all line.",
   },
   "Text field": {
     vercel:
-      "Vercel's input is a crisp 6px box with a hairline border that darkens to black on focus — no ring.",
+      "Vercel's input is a crisp 6px box with a hairline border that darkens to black on focus, no ring.",
     linear:
       "Linear sinks the field into the dark surface with a faint border and an indigo focus ring.",
-    zero: "0.email's field is a dark, compact box with a blue focus — at home in a command-driven inbox.",
+    zero: "0.email's field is a dark, compact box with a blue focus, at home in a command-driven inbox.",
     shopify:
       "Polaris boxes the input at 8px with a stronger #8a8a8a border and a 2px blue focus ring.",
     stripe:
@@ -954,7 +954,7 @@ const NOTES: Record<string, Record<string, string>> = {
   },
   Select: {
     vercel:
-      "Vercel's trigger is a monochrome 6px box with a quiet chevron — it matches the input exactly.",
+      "Vercel's trigger is a monochrome 6px box with a quiet chevron, it matches the input exactly.",
     linear:
       "Linear's trigger sinks into the dark surface, chevron in subdued grey.",
     zero: "0.email's trigger is a compact dark box, blue on focus, dense like the inbox.",
@@ -962,33 +962,31 @@ const NOTES: Record<string, Record<string, string>> = {
     stripe:
       "Stripe's trigger is soft-bordered at gentle radius, indigo on focus.",
     github:
-      "GitHub's trigger is a #d0d7de box at 6px — Primer's standard control.",
+      "GitHub's trigger is a #d0d7de box at 6px, Primer's standard control.",
   },
   Checkbox: {
-    vercel:
-      "Vercel's box fills solid black when checked — monochrome, no blue.",
+    vercel: "Vercel's box fills solid black when checked, monochrome, no blue.",
     linear: "Linear fills the box indigo when checked, on the dark surface.",
-    zero: "0.email fills the box blue when checked — the inbox accent.",
+    zero: "0.email fills the box blue when checked, the inbox accent.",
     shopify:
-      "Polaris fills the box near-black (#303030) — its interactive ink, not the brand green.",
+      "Polaris fills the box near-black (#303030), its interactive ink, not the brand green.",
     stripe:
-      "Stripe fills the box indigo with a soft check — refined and rounded.",
+      "Stripe fills the box indigo with a soft check, refined and rounded.",
     github:
-      "GitHub fills the box Primer blue (#0969da) — the interactive accent, distinct from its green buttons.",
+      "GitHub fills the box Primer blue (#0969da), the interactive accent, distinct from its green buttons.",
   },
   Switch: {
-    vercel:
-      "Vercel's track flips to solid black when on — a monochrome toggle.",
+    vercel: "Vercel's track flips to solid black when on, a monochrome toggle.",
     linear: "Linear's track turns indigo when on, sitting on dark.",
     zero: "0.email's track turns blue when on, dense like the inbox.",
-    shopify: "Polaris's track turns near-black when on — its interactive ink.",
+    shopify: "Polaris's track turns near-black when on, its interactive ink.",
     stripe: "Stripe's track turns indigo with a soft thumb shadow.",
     github:
-      "GitHub's track turns blue (#0969da) when on — the interactive accent.",
+      "GitHub's track turns blue (#0969da) when on, the interactive accent.",
   },
   Progress: {
     vercel:
-      "Vercel draws a thin black bar on a grey track — monochrome throughout.",
+      "Vercel draws a thin black bar on a grey track, monochrome throughout.",
     linear: "Linear draws an indigo bar on a dark track.",
     zero: "0.email draws a blue bar on a dark track.",
     shopify: "Polaris draws a near-black bar on a light track.",
@@ -1000,40 +998,40 @@ const NOTES: Record<string, Record<string, string>> = {
     linear: "Linear's avatar is a circle on dark with a subdued fill.",
     zero: "0.email's avatar is a dense, dark circle.",
     shopify:
-      "Polaris uses a rounded-square (squircle) avatar — its identity shape.",
+      "Polaris uses a rounded-square (squircle) avatar, its identity shape.",
     stripe: "Stripe's avatar is a circle with a soft indigo-tinted fill.",
     github:
-      "GitHub uses a rounded-square avatar at 6px — Primer's identity shape.",
+      "GitHub uses a rounded-square avatar at 6px, Primer's identity shape.",
   },
   Banner: {
     vercel:
-      "Vercel keeps callouts light — a faint tinted surface and a single accent icon.",
+      "Vercel keeps callouts light, a faint tinted surface and a single accent icon.",
     linear:
       "Linear renders the banner on dark with a low-opacity tonal fill and a glowing accent icon.",
     zero: "0.email's banners are dark and tonal, color carrying the urgency against near-black.",
     shopify:
       "Polaris paints the whole surface in the tone's color, so the banner announces itself.",
     stripe:
-      "Stripe shows a soft tinted banner with an indigo or red icon — quietly refined.",
+      "Stripe shows a soft tinted banner with an indigo or red icon, quietly refined.",
     github:
       "GitHub's Primer flash is a bordered tonal strip with a blue or red icon.",
   },
   Table: {
     vercel:
-      "Vercel's table is clean and monochrome — a #fafafa header, hairline rows, plain.",
+      "Vercel's table is clean and monochrome, a #fafafa header, hairline rows, plain.",
     linear:
-      "Linear's grid is dark and quiet — subdued header, faint dividers, light values.",
-    zero: "0.email packs the rows tightest on dark — an inbox density.",
+      "Linear's grid is dark and quiet, subdued header, faint dividers, light values.",
+    zero: "0.email packs the rows tightest on dark, an inbox density.",
     shopify:
-      "Polaris rules every edge with a subdued small-caps header — instrument density.",
+      "Polaris rules every edge with a subdued small-caps header, instrument density.",
     stripe:
-      "Stripe's table is airy and bordered on white — refined and legible.",
+      "Stripe's table is airy and bordered on white, refined and legible.",
     github:
-      "GitHub rules the table with #d0d7de and a grey header row — Primer's data grid.",
+      "GitHub rules the table with #d0d7de and a grey header row, Primer's data grid.",
   },
   Tabs: {
     vercel:
-      "Vercel uses underline tabs — a black bottom-rule under the selected label, no track.",
+      "Vercel uses underline tabs, a black bottom-rule under the selected label, no track.",
     linear:
       "Linear marks the selection with an indigo underline on dark, text brightening to full white.",
     zero: "0.email selects with a blue-tinted fill, echoing the highlighted row in its inbox.",
@@ -1049,30 +1047,30 @@ const NOTES: Record<string, Record<string, string>> = {
 const NOTES2: Record<string, Record<string, string>> = {
   Button: {
     atlassian:
-      "Atlassian squares hard to a 3px radius — a blue primary, a borderless grey secondary, enterprise-plain.",
+      "Atlassian squares hard to a 3px radius, a blue primary, a borderless grey secondary, enterprise-plain.",
     radix:
-      "shadcn's baseline — a near-black primary at 6px, no accent hue, variant-based not pill. Ours adds the pill and the green.",
+      "shadcn's baseline, a near-black primary at 6px, no accent hue, variant-based not pill. Ours adds the pill and the green.",
     mailchimp:
       "Mailchimp shouts in its signature yellow with black text, and a bold dark-bordered secondary.",
     apple:
-      "Apple uses the iOS system blue at a soft 10px radius — friendly, rounded, SF-set.",
+      "Apple uses the iOS system blue at a soft 10px radius, friendly, rounded, SF-set.",
   },
   Status: {
     atlassian:
       "Atlassian's Lozenges are tiny uppercase tonal tags at a 3px radius.",
     radix:
-      "shadcn has no status scale — it reuses default / secondary / destructive / outline variants instead of tones.",
+      "shadcn has no status scale, it reuses default / secondary / destructive / outline variants instead of tones.",
     mailchimp: "Mailchimp's tags are bold rounded pills in warm tonal colors.",
     apple:
-      "Apple uses vibrant iOS tinted pills — system green, orange, red, blue.",
+      "Apple uses vibrant iOS tinted pills, system green, orange, red, blue.",
   },
   Card: {
     atlassian: "Atlassian boxes a flat 3px card with a faint elevation shadow.",
     radix:
-      "shadcn's card is a neutral bordered surface at 8px with a barely-there shadow — close to ours, minus the pill language.",
+      "shadcn's card is a neutral bordered surface at 8px with a barely-there shadow, close to ours, minus the pill language.",
     mailchimp: "Mailchimp warms the card on a cream canvas with a soft border.",
     apple:
-      "Apple rounds the card to ~14px on its signature grey — soft and friendly.",
+      "Apple rounds the card to ~14px on its signature grey, soft and friendly.",
   },
   "Text field": {
     atlassian:
@@ -1083,24 +1081,24 @@ const NOTES2: Record<string, Record<string, string>> = {
   },
   Select: {
     atlassian: "Atlassian's trigger is a square 3px box with a grey border.",
-    radix: "shadcn's trigger is a neutral 6px box — it matches its input.",
+    radix: "shadcn's trigger is a neutral 6px box, it matches its input.",
     mailchimp: "Mailchimp's trigger is warm-bordered with a teal focus.",
     apple: "Apple's trigger is a soft rounded box, iOS-blue on focus.",
   },
   Checkbox: {
     atlassian: "Atlassian fills the box blue (#0c66e4) at a tight 3px radius.",
     radix:
-      "shadcn fills the box near-black — its monochrome primary, no accent hue.",
+      "shadcn fills the box near-black, its monochrome primary, no accent hue.",
     mailchimp:
-      "Mailchimp fills the box teal (#007c89) — its interactive accent, not the yellow.",
+      "Mailchimp fills the box teal (#007c89), its interactive accent, not the yellow.",
     apple: "Apple fills the box iOS blue with a rounded check.",
   },
   Switch: {
     atlassian: "Atlassian's track turns blue when on.",
-    radix: "shadcn's track turns near-black when on — monochrome.",
+    radix: "shadcn's track turns near-black when on, monochrome.",
     mailchimp: "Mailchimp's track turns teal when on.",
     apple:
-      "Apple's track turns iOS green (#34c759) when on — the signature toggle.",
+      "Apple's track turns iOS green (#34c759) when on, the signature toggle.",
   },
   Progress: {
     atlassian: "Atlassian draws a blue bar on a grey track.",
@@ -1117,7 +1115,7 @@ const NOTES2: Record<string, Record<string, string>> = {
   Banner: {
     atlassian: "Atlassian's section message is a tonal 3px strip with an icon.",
     radix:
-      "shadcn's alert is a neutral bordered box — restrained, no tonal wash.",
+      "shadcn's alert is a neutral bordered box, restrained, no tonal wash.",
     mailchimp: "Mailchimp's banner is warm and tonal with a bold icon.",
     apple: "Apple's notice is a soft tinted card with an iOS-colored icon.",
   },
@@ -1131,10 +1129,10 @@ const NOTES2: Record<string, Record<string, string>> = {
   Tabs: {
     atlassian: "Atlassian underlines the active tab in blue.",
     radix:
-      "shadcn uses a muted segmented track with the active tab as a white card at 6px — like ours, minus the full pill.",
+      "shadcn uses a muted segmented track with the active tab as a white card at 6px, like ours, minus the full pill.",
     mailchimp: "Mailchimp underlines the active tab in its dark ink.",
     apple:
-      "Apple uses an iOS segmented control — a grey track with a white selected pill.",
+      "Apple uses an iOS segmented control, a grey track with a white selected pill.",
   },
 }
 
@@ -1210,7 +1208,7 @@ export function VsComparison() {
             <span className="font-medium">{meta.label}</span>
           </span>
           <span className="text-muted-foreground">· {meta.typeface}</span>
-          <span className="text-muted-foreground">— {meta.tagline}</span>
+          <span className="text-muted-foreground">, {meta.tagline}</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-xs text-muted-foreground">Theme</span>

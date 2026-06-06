@@ -1,6 +1,6 @@
 import { MarketingLayout } from "@/components/marketing-layout"
 
-/** Neutral skeleton block — stands in for a real component in the slot. */
+/** Neutral skeleton block, stands in for a real component in the slot. */
 function Box({ className }: { className?: string }) {
   return <div className={`rounded-md bg-muted ${className ?? ""}`} />
 }

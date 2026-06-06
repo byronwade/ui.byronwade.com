@@ -1,9 +1,9 @@
 "use client"
 
-// Dashboard template — a complete analytics app shell.
+// Dashboard template, a complete analytics app shell.
 // uses: Chart, MetricStat, Card, Table, Badge, StatusDot, GradientAvatar, Button
 //
-// Design: unlike the centered hero-chart report, this is a real product *shell* —
+// Design: unlike the centered hero-chart report, this is a real product *shell*,
 // a persistent sidebar and top bar frame a scrolling workspace: a KPI strip, one
 // brand-lit hero chart, and a recent-orders table beside a live activity feed. All
 // surfaces are tokens, so overriding --brand re-skins the entire console.

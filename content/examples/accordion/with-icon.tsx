@@ -39,7 +39,7 @@ export default function Example() {
           </AccordionTrigger>
           <AccordionContent>
             <p>
-              Choose how and when you receive alerts — via email, SMS, or in-app
+              Choose how and when you receive alerts, via email, SMS, or in-app
               banners. Snooze all notifications for a set duration.
             </p>
           </AccordionContent>

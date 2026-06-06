@@ -1,4 +1,4 @@
-// Gauge archetype — a health page built around one ring gauge.
+// Gauge archetype, a health page built around one ring gauge.
 // uses: Gauge, MetricStat, ActivityGrid, EventTimeline, StatusPill, StatusDot, Sparkline
 //
 // Design: a "control tower" status page. One oversized, glowing ring anchors the

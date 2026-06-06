@@ -1,9 +1,9 @@
 "use client"
 
-// Rich-inventory archetype — a directory led by a dense, filterable table.
+// Rich-inventory archetype, a directory led by a dense, filterable table.
 // uses: Table, SegmentedControl, FilterPill, StatusPill, StatusDot, GradientAvatar, InputGroup, Button, Sparkline
 //
-// Design: a full-height "data surface" in the Linear/Bloomberg lineage — a saved-views
+// Design: a full-height "data surface" in the Linear/Bloomberg lineage, a saved-views
 // rail on the left, a tiled summary strip, and a dense table where every row carries an
 // inline 7-day load sparkline and a usage bar. The grid is edge-to-edge with 1px seams;
 // only the rail and toolbar float above it.

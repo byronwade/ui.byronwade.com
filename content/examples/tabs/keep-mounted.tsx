@@ -10,7 +10,7 @@ export default function Example() {
     <div className="flex items-center justify-center p-8">
       <div className="w-full max-w-md space-y-2">
         <p className="text-xs text-muted-foreground">
-          Switch tabs and come back — the input value is preserved because{" "}
+          Switch tabs and come back, the input value is preserved because{" "}
           <code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">
             keepMounted
           </code>{" "}
@@ -24,7 +24,7 @@ export default function Example() {
             <TabsTrigger value={2}>History</TabsTrigger>
           </TabsList>
 
-          {/* keepMounted — DOM node stays mounted while hidden */}
+          {/* keepMounted, DOM node stays mounted while hidden */}
           <TabsContent
             value={0}
             keepMounted

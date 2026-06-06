@@ -1,6 +1,6 @@
 "use client"
 
-// Canvas archetype — a full-bleed spatial map with floating glass overlays.
+// Canvas archetype, a full-bleed spatial map with floating glass overlays.
 // uses: InputGroup, Button, StatusPill, StatusDot, GradientAvatar, FilterPill, Separator
 import * as React from "react"
 import {

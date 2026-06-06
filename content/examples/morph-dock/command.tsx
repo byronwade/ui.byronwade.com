@@ -19,7 +19,7 @@ const actions = [
   { icon: Settings, label: "Open settings" },
 ]
 
-/** The panel can be any content — here a command list blooms out of the dock. */
+/** The panel can be any content, here a command list blooms out of the dock. */
 export default function Example() {
   const [open, setOpen] = React.useState(false)
   return (

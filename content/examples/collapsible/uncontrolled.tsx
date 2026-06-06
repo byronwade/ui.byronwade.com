@@ -16,7 +16,7 @@ export default function Example() {
         <ChevronDownIcon className="size-4 transition-transform group-aria-expanded/button:rotate-180" />
       </CollapsibleTrigger>
       <CollapsibleContent className="rounded-lg border px-4 py-3 text-sm text-muted-foreground">
-        Unlimited projects, priority support, and advanced analytics — managed
+        Unlimited projects, priority support, and advanced analytics, managed
         entirely by the component&apos;s own state.
       </CollapsibleContent>
     </Collapsible>

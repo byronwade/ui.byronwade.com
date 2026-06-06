@@ -167,7 +167,7 @@ export default function StyleguidePage() {
             </h1>
             <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
               The tokens, primitives, and layout archetypes that compose every
-              surface — a calm, content-first aesthetic built around one
+              surface, a calm, content-first aesthetic built around one
               warm-green accent.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
@@ -191,14 +191,14 @@ export default function StyleguidePage() {
               <Section
                 id="philosophy"
                 title="Philosophy"
-                description="Why every surface looks the way it does — the thinking the rest of this page applies."
+                description="Why every surface looks the way it does, the thinking the rest of this page applies."
               >
                 <Specimen name="Calm over chrome" plain>
                   <div className="space-y-4">
                     <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
                       The product should feel quiet. One warm-green accent does
                       all the emphasizing; everything else is near-black ink on
-                      white with gray for the muted. Whitespace is a material —
+                      white with gray for the muted. Whitespace is a material,
                       pages are centered and given room to breathe. We reach for
                       a hairline{" "}
                       <code className="font-mono text-[12px] text-foreground">
@@ -225,7 +225,7 @@ export default function StyleguidePage() {
                 </Specimen>
 
                 <Specimen
-                  name="No generic grids — one signature hero per page"
+                  name="No generic grids, one signature hero per page"
                   plain
                 >
                   <div className="space-y-4">
@@ -233,7 +233,7 @@ export default function StyleguidePage() {
                       Consistency comes from shared materials and constant
                       chrome, never from a repeated page template. The thing to
                       avoid is the uniform multi-column card grid. Every page
-                      earns a distinctive centerpiece — pick{" "}
+                      earns a distinctive centerpiece, pick{" "}
                       <span className="text-foreground">
                         one signature hero
                       </span>{" "}
@@ -274,15 +274,15 @@ export default function StyleguidePage() {
                 <Specimen name="Constant chrome, bespoke body" plain>
                   <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
                     The shell never moves. A light top bar (brand mark + org
-                    switcher, user avatar) and a dark floating dock — the
-                    primary nav — are identical on every surface; only the body
-                    changes. That fixed frame is what lets each page be a
-                    bespoke composition without the product feeling disjointed.
-                    There is exactly one deliberate exception to the
-                    calm-and-light rules: a{" "}
+                    switcher, user avatar) and a dark floating dock, the primary
+                    nav, are identical on every surface; only the body changes.
+                    That fixed frame is what lets each page be a bespoke
+                    composition without the product feeling disjointed. There is
+                    exactly one deliberate exception to the calm-and-light
+                    rules: a{" "}
                     <span className="text-foreground">dark, dense surface</span>{" "}
                     (e.g. an inbox/cockpit), a two-pane layout that trades the
-                    airy spacing for speed — still on our single green accent.
+                    airy spacing for speed, still on our single green accent.
                   </p>
                 </Specimen>
               </Section>
@@ -293,7 +293,7 @@ export default function StyleguidePage() {
               <Section
                 id="principles"
                 title="Principles"
-                description="The rules behind every surface — read these before composing anything new."
+                description="The rules behind every surface, read these before composing anything new."
               >
                 <Specimen name="Single-accent rule" plain>
                   <div className="space-y-4">
@@ -302,7 +302,7 @@ export default function StyleguidePage() {
                       <code className="font-mono text-[12px] text-foreground">
                         --brand
                       </code>
-                      ) carries all emphasis — links, primary actions, the lone
+                      ) carries all emphasis, links, primary actions, the lone
                       chart series. Chart series beyond the first step down a
                       grayscale ramp (
                       <code className="font-mono text-[12px] text-foreground">
@@ -461,7 +461,7 @@ export default function StyleguidePage() {
               <Section
                 id="foundations"
                 title="Foundations"
-                description="Color, radius, elevation, and type — the raw material everything is built from."
+                description="Color, radius, elevation, and type, the raw material everything is built from."
               >
                 <Specimen name="Color" from="app/globals.css" plain>
                   <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6">
@@ -610,14 +610,14 @@ export default function StyleguidePage() {
                       Section heading · xl semibold
                     </p>
                     <p className="text-sm">
-                      Body copy · sm — calm, readable, generous line height for
+                      Body copy · sm, calm, readable, generous line height for
                       long-form settings and descriptions.
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      Muted · sm — captions, hints, and secondary metadata.
+                      Muted · sm, captions, hints, and secondary metadata.
                     </p>
                     <p className="font-mono text-xs text-muted-foreground">
-                      Mono · 12px — values, IDs, and code (e.g. usr_8f2a91c4).
+                      Mono · 12px, values, IDs, and code (e.g. usr_8f2a91c4).
                     </p>
                   </div>
                 </Specimen>
@@ -668,12 +668,9 @@ export default function StyleguidePage() {
               <Section
                 id="primitives"
                 title="Primitives"
-                description="The base controls — every one a pill, token-driven, light & dark safe."
+                description="The base controls, every one a pill, token-driven, light & dark safe."
               >
-                <Specimen
-                  name="Button — variants"
-                  from="@/components/ui/button"
-                >
+                <Specimen name="Button, variants" from="@/components/ui/button">
                   <div className="flex flex-wrap items-center gap-2">
                     <Button>Default</Button>
                     <Button variant="outline">Outline</Button>
@@ -684,7 +681,7 @@ export default function StyleguidePage() {
                   </div>
                 </Specimen>
 
-                <Specimen name="Button — sizes" from="@/components/ui/button">
+                <Specimen name="Button, sizes" from="@/components/ui/button">
                   <div className="flex flex-wrap items-center gap-2">
                     <Button size="xs">Extra small</Button>
                     <Button size="sm">Small</Button>
@@ -772,7 +769,7 @@ export default function StyleguidePage() {
               <Section
                 id="forms"
                 title="Forms"
-                description="Inputs and controls — labeled fields, token-driven, light & dark safe."
+                description="Inputs and controls, labeled fields, token-driven, light & dark safe."
               >
                 <Specimen name="Input" from="@/components/ui/input">
                   <div className="max-w-sm space-y-1.5">
@@ -870,7 +867,7 @@ export default function StyleguidePage() {
               <Section
                 id="overlays"
                 title="Overlays"
-                description="Floating surfaces — triggers open content via the render prop. Dark over light by design."
+                description="Floating surfaces, triggers open content via the render prop. Dark over light by design."
               >
                 <Specimen name="Tooltip" from="@/components/ui/tooltip">
                   <TooltipDemo />
@@ -917,7 +914,7 @@ export default function StyleguidePage() {
               <Section
                 id="feedback"
                 title="Feedback"
-                description="Status, progress, and loading — how a surface tells you what's happening."
+                description="Status, progress, and loading, how a surface tells you what's happening."
               >
                 <Specimen name="Alert" from="@/components/ui/alert">
                   <div className="space-y-3">
@@ -965,7 +962,7 @@ export default function StyleguidePage() {
               <Section
                 id="data"
                 title="Data display"
-                description="Reading surfaces — how records, structure, and identity are presented."
+                description="Reading surfaces, how records, structure, and identity are presented."
               >
                 <Specimen name="Tabs" from="@/components/ui/tabs">
                   <Tabs defaultValue="overview">
@@ -1148,7 +1145,7 @@ export default function StyleguidePage() {
               <Section
                 id="patterns"
                 title="Patterns"
-                description="Composed pieces — the recurring building blocks of a page."
+                description="Composed pieces, the recurring building blocks of a page."
               >
                 <Specimen
                   name="PageHeader"
@@ -1268,7 +1265,7 @@ export default function StyleguidePage() {
               <Section
                 id="charts"
                 title="Charts"
-                description="One green series, soft gradient fade, faint gridlines, endpoint labels only — never a rainbow."
+                description="One green series, soft gradient fade, faint gridlines, endpoint labels only, never a rainbow."
               >
                 <Specimen name="Area chart" from="@/components/ui/chart" plain>
                   <div className="edge rounded-xl bg-background p-6">
@@ -1289,7 +1286,7 @@ export default function StyleguidePage() {
               <Section
                 id="house"
                 title="House components"
-                description="Composed dashboard pieces — detail headers, settings panels, and event timelines."
+                description="Composed dashboard pieces, detail headers, settings panels, and event timelines."
               >
                 <Specimen
                   name="DetailHeader"
@@ -1424,7 +1421,7 @@ export default function StyleguidePage() {
               <Section
                 id="layouts"
                 title="Layout archetypes"
-                description="Composition shells — every page picks one signature hero, never a generic card grid."
+                description="Composition shells, every page picks one signature hero, never a generic card grid."
                 count={3}
               >
                 <Link
@@ -1437,7 +1434,7 @@ export default function StyleguidePage() {
                     </p>
                     <p className="text-sm text-muted-foreground">
                       Open the gallery to inspect each at any viewport, in
-                      either theme — and re-skin them live.
+                      either theme, and re-skin them live.
                     </p>
                   </div>
                   <span className={buttonVariants({ size: "sm" })}>
@@ -1560,7 +1557,7 @@ export default function StyleguidePage() {
               <Section
                 id="comparison"
                 title="Side by side"
-                description="The same twelve components — ours on the left, a design system you know on the right. Toggle between Vercel, Linear, 0.email, Shopify, Stripe, GitHub, Atlassian, Radix, Mailchimp, and Apple — and flip our side light or dark."
+                description="The same twelve components, ours on the left, a design system you know on the right. Toggle between Vercel, Linear, 0.email, Shopify, Stripe, GitHub, Atlassian, Radix, Mailchimp, and Apple, and flip our side light or dark."
                 count={12}
               >
                 <VsComparison />

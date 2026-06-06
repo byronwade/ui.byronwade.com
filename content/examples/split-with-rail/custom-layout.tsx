@@ -16,7 +16,7 @@ const steps: TimelineEvent[] = [
   },
   {
     title: "Team invited",
-    description: "Sent 3 invitations — 2 accepted.",
+    description: "Sent 3 invitations, 2 accepted.",
     timestamp: "Step 3 of 5",
     tone: "success",
   },

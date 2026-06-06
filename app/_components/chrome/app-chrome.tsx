@@ -10,7 +10,7 @@ import { NavDock } from "./nav-dock"
 /**
  * The global floating shell, ported from SignalRoute's app shell. The top-left
  * **header group** pins to the window corner and holds two matched-sibling
- * overlays — the identity launcher and the breadcrumb pill. The contextual
+ * overlays, the identity launcher and the breadcrumb pill. The contextual
  * toolbar pins top-right; the primary nav dock floats centered (top on sm+,
  * bottom on phones). `pointer-events-none` on the group keeps the gap from
  * blocking content; each pill re-enables its own events.
@@ -18,7 +18,7 @@ import { NavDock } from "./nav-dock"
 export function AppChrome() {
   const pathname = usePathname()
   // Embedded archetype previews (`/preview/<slug>`) render inside iframes and
-  // are meant to be pure, chrome-free surfaces — never overlay the shell there.
+  // are meant to be pure, chrome-free surfaces, never overlay the shell there.
   if (pathname?.startsWith("/preview")) return null
 
   return (

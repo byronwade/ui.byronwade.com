@@ -4,7 +4,7 @@ export default function Example() {
   return (
     <div className="flex items-center justify-center p-16">
       {/* The glow is a saturated, blurred copy of the child's own pixels, so a
-          multi-hue gradient throws a full-spectrum RGB halo — like an ambient
+          multi-hue gradient throws a full-spectrum RGB halo, like an ambient
           album backlight. */}
       <Backlight blur={24}>
         <div className="relative size-60 overflow-hidden rounded-3xl bg-gradient-to-br from-chart-1 via-chart-4 to-chart-2">

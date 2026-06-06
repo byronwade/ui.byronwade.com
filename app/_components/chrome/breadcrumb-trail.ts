@@ -35,7 +35,7 @@ export function resolveTrail(pathname: string): Crumb[] {
     return dedupe(trail)
   }
 
-  // Generic fallback — build a crumb per path segment.
+  // Generic fallback, build a crumb per path segment.
   const trail: Crumb[] = [root]
   let acc = ""
   for (const seg of parts) {

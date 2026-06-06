@@ -18,7 +18,7 @@ export default function Example() {
         <Card className="w-72">
           <CardHeader>
             <CardTitle>Project Alpha</CardTitle>
-            <CardDescription>Active — 3 contributors</CardDescription>
+            <CardDescription>Active, 3 contributors</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
@@ -42,12 +42,12 @@ export default function Example() {
         <Card size="sm" className="w-72">
           <CardHeader>
             <CardTitle>Project Alpha</CardTitle>
-            <CardDescription>Active — 3 contributors</CardDescription>
+            <CardDescription>Active, 3 contributors</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              A compact card with reduced padding and tighter spacing — ideal
-              for dense list-style layouts.
+              A compact card with reduced padding and tighter spacing, ideal for
+              dense list-style layouts.
             </p>
           </CardContent>
           <CardFooter>

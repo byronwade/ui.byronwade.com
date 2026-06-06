@@ -16,7 +16,7 @@ export default function Example() {
           Auto-resizing textarea
         </label>
         <p className="text-xs text-muted-foreground">
-          Grows as you type — no scrollbar until the row limit is reached.
+          Grows as you type, no scrollbar until the row limit is reached.
         </p>
         <Textarea
           id="auto"

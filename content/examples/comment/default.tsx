@@ -15,7 +15,7 @@ export default function Example() {
         authorAvatarSrc={AVATAR}
         verified
         timestamp="2 days ago"
-        text="This is the cleanest explanation of the camera pipeline I've seen — bookmarking for later."
+        text="This is the cleanest explanation of the camera pipeline I've seen, bookmarking for later."
         likeCount={12400}
         pinned
         hearted
@@ -36,7 +36,7 @@ export default function Example() {
         <Comment
           author="Sam Rivera"
           timestamp="20 hours ago"
-          text="Second this — would love a follow-up on low-light handling."
+          text="Second this, would love a follow-up on low-light handling."
           likeCount={14}
           onReply={() => {}}
         />

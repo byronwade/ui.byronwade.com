@@ -158,7 +158,7 @@ export const NAV: {
     id: "primitives",
     label: "Primitives",
     items: [
-      { id: slugify("Button — variants"), label: "Button" },
+      { id: slugify("Button, variants"), label: "Button" },
       { id: slugify("Badge"), label: "Badge" },
       { id: slugify("FilterPill"), label: "FilterPill" },
       { id: slugify("SegmentedControl"), label: "SegmentedControl" },
@@ -269,7 +269,7 @@ export const NAV: {
   },
 ]
 
-/** Sticky in-page nav — one entry per component, calm/airy style. */
+/** Sticky in-page nav, one entry per component, calm/airy style. */
 export function SideNav() {
   const [active, setActive] = React.useState<string>(SECTIONS[0].id)
   const navRef = React.useRef<HTMLElement>(null)
@@ -363,7 +363,7 @@ export function SideNav() {
           const isHeaderOnly = section.items.length === 0
           return (
             <li key={section.id} className={i === 0 ? "" : "mt-6"}>
-              {/* Section header — always a clickable link */}
+              {/* Section header, always a clickable link */}
               <a
                 href={`#${section.id}`}
                 data-nav-id={section.id}
@@ -380,7 +380,7 @@ export function SideNav() {
               >
                 {section.label}
               </a>
-              {/* Component items — one per component, no truncation */}
+              {/* Component items, one per component, no truncation */}
               {section.items.length > 0 && (
                 <ul className="space-y-0.5">
                   {section.items.map((item) => (
@@ -458,7 +458,7 @@ export function Specimen({
 }: {
   name: string
   from?: string
-  /** Drop the framed surface — for components that are already self-contained (cards, headers). */
+  /** Drop the framed surface, for components that are already self-contained (cards, headers). */
   plain?: boolean
   children: React.ReactNode
 }) {
@@ -737,7 +737,7 @@ const areaConfig = {
   value: { label: "Sessions", color: "var(--chart-1)" },
 } satisfies ChartConfig
 
-// 24 hourly points — a calm, single-series curve.
+// 24 hourly points, a calm, single-series curve.
 const areaData = Array.from({ length: 24 }, (_, i) => {
   const wave = Math.sin((i / 23) * Math.PI * 1.6) * 18 + 26
   const drift = (i * 13) % 9

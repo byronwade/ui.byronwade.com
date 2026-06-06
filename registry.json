@@ -245,6 +245,189 @@
           ".edge": {
             "box-shadow": "inset 0 0 0 1px var(--edge)"
           },
+          ".reading-measure": {
+            "max-width": "65ch"
+          },
+          ".reading-ui": {
+            "max-width": "65ch",
+            "font-size": "1rem",
+            "line-height": "1.6",
+            "letter-spacing": "0",
+            "text-align": "left",
+            "text-wrap": "pretty"
+          },
+          ".reading-ui p + p": {
+            "margin-top": "1.5em"
+          },
+          ".reading-ui h2": {
+            "margin-top": "2em",
+            "margin-bottom": "0.75em",
+            "font-size": "1.5rem",
+            "font-weight": "400",
+            "letter-spacing": "-0.02em",
+            "line-height": "1.25"
+          },
+          ".reading-ui h3": {
+            "margin-top": "1.75em",
+            "margin-bottom": "0.5em",
+            "font-size": "1.25rem",
+            "font-weight": "400",
+            "letter-spacing": "-0.02em",
+            "line-height": "1.3"
+          },
+          ".reading-ui h4": {
+            "margin-top": "1.5em",
+            "margin-bottom": "0.5em",
+            "font-size": "1.0625rem",
+            "font-weight": "500",
+            "letter-spacing": "-0.01em",
+            "line-height": "1.35"
+          },
+          ".reading-ui ul": {
+            "margin-top": "1em",
+            "margin-bottom": "1em",
+            "padding-left": "1.25em",
+            "list-style-type": "disc"
+          },
+          ".reading-ui ol": {
+            "margin-top": "1em",
+            "margin-bottom": "1em",
+            "padding-left": "1.25em",
+            "list-style-type": "decimal"
+          },
+          ".reading-ui li + li": {
+            "margin-top": "0.35em"
+          },
+          ".reading-ui a": {
+            "color": "var(--brand)",
+            "text-decoration": "underline",
+            "text-underline-offset": "0.2em"
+          },
+          ".reading-ui blockquote": {
+            "margin-top": "1.5em",
+            "margin-bottom": "1.5em",
+            "padding-left": "1em",
+            "border-left": "2px solid var(--border)",
+            "color": "color-mix(in oklch, var(--foreground) 85%, transparent)"
+          },
+          ".reading-ui code:not(pre code)": {
+            "font-family": "var(--font-mono)",
+            "font-size": "0.875em",
+            "border-radius": "var(--radius-sm)",
+            "background": "var(--muted)",
+            "padding": "0.125em 0.35em"
+          },
+          ".reading-ui pre": {
+            "margin-top": "1.5em",
+            "margin-bottom": "1.5em",
+            "overflow-x": "auto",
+            "border-radius": "var(--radius-lg)",
+            "background": "var(--card)",
+            "padding": "1rem",
+            "font-family": "var(--font-mono)",
+            "font-size": "0.875rem",
+            "line-height": "1.6"
+          },
+          ".reading-prose": {
+            "max-width": "65ch",
+            "font-family": "var(--font-serif)",
+            "font-size": "1.125rem",
+            "line-height": "1.7",
+            "letter-spacing": "0",
+            "text-align": "left",
+            "text-wrap": "pretty"
+          },
+          ".reading-prose p + p": {
+            "margin-top": "1.5em"
+          },
+          ".reading-prose h2": {
+            "margin-top": "2em",
+            "margin-bottom": "0.75em",
+            "font-size": "1.625rem",
+            "font-weight": "400",
+            "letter-spacing": "-0.02em",
+            "line-height": "1.25"
+          },
+          ".reading-prose h3": {
+            "margin-top": "1.75em",
+            "margin-bottom": "0.5em",
+            "font-size": "1.375rem",
+            "font-weight": "400",
+            "letter-spacing": "-0.02em",
+            "line-height": "1.3"
+          },
+          ".reading-prose h4": {
+            "margin-top": "1.5em",
+            "margin-bottom": "0.5em",
+            "font-size": "1.125rem",
+            "font-weight": "500",
+            "letter-spacing": "-0.01em",
+            "line-height": "1.35"
+          },
+          ".reading-prose ul": {
+            "margin-top": "1em",
+            "margin-bottom": "1em",
+            "padding-left": "1.25em",
+            "list-style-type": "disc"
+          },
+          ".reading-prose ol": {
+            "margin-top": "1em",
+            "margin-bottom": "1em",
+            "padding-left": "1.25em",
+            "list-style-type": "decimal"
+          },
+          ".reading-prose li + li": {
+            "margin-top": "0.35em"
+          },
+          ".reading-prose a": {
+            "color": "var(--brand)",
+            "text-decoration": "underline",
+            "text-underline-offset": "0.2em"
+          },
+          ".reading-prose blockquote": {
+            "margin-top": "1.5em",
+            "margin-bottom": "1.5em",
+            "padding-left": "1em",
+            "border-left": "2px solid var(--border)",
+            "color": "color-mix(in oklch, var(--foreground) 85%, transparent)"
+          },
+          ".reading-prose code:not(pre code)": {
+            "font-family": "var(--font-mono)",
+            "font-size": "0.85em",
+            "border-radius": "var(--radius-sm)",
+            "background": "var(--muted)",
+            "padding": "0.125em 0.35em"
+          },
+          ".reading-prose pre": {
+            "margin-top": "1.5em",
+            "margin-bottom": "1.5em",
+            "overflow-x": "auto",
+            "border-radius": "var(--radius-lg)",
+            "background": "var(--card)",
+            "padding": "1rem",
+            "font-family": "var(--font-mono)",
+            "font-size": "0.8125rem",
+            "line-height": "1.6"
+          },
+          ".reading-lead": {
+            "font-size": "1.125rem",
+            "line-height": "1.65",
+            "letter-spacing": "0"
+          },
+          ".reading-prose .reading-lead": {
+            "font-size": "1.25rem",
+            "line-height": "1.65"
+          },
+          ".reading-muted": {
+            "color": "color-mix(in oklch, var(--foreground) 72%, transparent)"
+          },
+          ".reading-demo-break": {
+            "margin-top": "3rem",
+            "padding-top": "3rem",
+            "border-top": "1px solid var(--border)",
+            "width": "100%",
+            "max-width": "none"
+          },
           ".color-picker-hue": {
             "background-image": "linear-gradient(90deg, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000)"
           },
@@ -1303,6 +1486,52 @@
           "path": "registry/components/conversation-list.tsx",
           "type": "registry:component",
           "target": "components/conversation-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "message-thread",
+      "type": "registry:component",
+      "title": "Message thread",
+      "description": "Messaging thread pane — contact header, scrollable in/out bubbles with delivery ticks, reaction chips, and an empty state when no conversation is selected. Reads/acts through comms-store.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/comms-store",
+        "@byronwade/gradient-avatar",
+        "@byronwade/empty-state"
+      ],
+      "files": [
+        {
+          "path": "registry/components/message-thread.tsx",
+          "type": "registry:component",
+          "target": "components/message-thread.tsx"
+        }
+      ]
+    },
+    {
+      "name": "message-composer",
+      "type": "registry:component",
+      "title": "Message composer",
+      "description": "Messaging composer — auto-growing textarea, Enter to send, Shift+Enter newline, attachment affordance, and optional template/schedule callbacks. Calls send on comms-store.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/comms-store",
+        "@byronwade/button",
+        "@byronwade/textarea"
+      ],
+      "files": [
+        {
+          "path": "registry/components/message-composer.tsx",
+          "type": "registry:component",
+          "target": "components/message-composer.tsx"
         }
       ]
     },
@@ -3821,6 +4050,62 @@
       ]
     },
     {
+      "name": "session-stats-bar",
+      "type": "registry:component",
+      "title": "Session stats bar",
+      "description": "Compact OHLCV status row for the active or hovered candle — mono labels with success/destructive close tone.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/session-stats-bar.tsx",
+          "type": "registry:component",
+          "target": "components/session-stats-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "replay-controls",
+      "type": "registry:component",
+      "title": "Replay controls",
+      "description": "Bar replay transport — play/pause, step, scrub slider, and speed segmented control with callbacks only.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/button",
+        "@byronwade/segmented-control",
+        "@byronwade/slider",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/replay-controls.tsx",
+          "type": "registry:component",
+          "target": "components/replay-controls.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sector-rotation",
+      "type": "registry:ui",
+      "title": "Sector rotation",
+      "description": "Sector performance donut — change-toned SVG arcs with legend and hover focus, geometry from `sectorRotationArcs` in the `market` lib.",
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/market",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/sector-rotation.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sector-rotation.tsx"
+        }
+      ]
+    },
+    {
       "name": "money-input",
       "type": "registry:ui",
       "title": "Money input",
@@ -4579,6 +4864,222 @@
       ]
     },
     {
+      "name": "use-mobile",
+      "type": "registry:lib",
+      "title": "useIsMobile",
+      "description": "Hook that tracks viewport width against a 768px breakpoint for responsive sidebar and layout patterns. Adapted from shadcn/ui.",
+      "files": [
+        {
+          "path": "registry/lib/use-mobile.ts",
+          "type": "registry:lib",
+          "target": "lib/use-mobile.ts"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Accessible pagination nav with previous/next links, page links, and ellipsis — composes button variants for consistent focus rings. Adapted from shadcn/ui.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pagination.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Filterable autocomplete built on Base UI Combobox — input-group trigger, popup list with groups, empty state, and optional multi-select chips. Adapted from shadcn/ui.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/input-group"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/combobox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/combobox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context menu",
+      "description": "Right-click menu built on Base UI ContextMenu — items, checkbox/radio groups, submenus, shortcuts, and destructive variant. Adapted from shadcn/ui.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/context-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Drag-to-resize panel groups with horizontal/vertical orientation and an optional visible handle — built on react-resizable-panels. Adapted from shadcn/ui.",
+      "dependencies": [
+        "react-resizable-panels"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/resizable.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/resizable.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Form field layout primitives — FieldGroup, Field, label, description, error, fieldset/legend, and responsive horizontal orientation via container queries. Adapted from shadcn/ui.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/label",
+        "@byronwade/separator"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "One-time-password input with grouped slots, caret blink, separator, and aria-invalid styling — built on input-otp. Adapted from shadcn/ui.",
+      "dependencies": [
+        "input-otp",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-otp.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Embla-powered carousel with keyboard navigation, previous/next controls, and horizontal or vertical orientation. Adapted from shadcn/ui.",
+      "dependencies": [
+        "embla-carousel-react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date picker",
+      "description": "Single-date picker — outline trigger opens a popover calendar; controlled or uncontrolled value with date-fns formatting.",
+      "dependencies": [
+        "date-fns",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/button",
+        "@byronwade/calendar",
+        "@byronwade/popover"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/date-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Collapsible application sidebar with provider context, mobile sheet fallback, icon/offcanvas modes, menu groups, and keyboard shortcut (⌘/Ctrl+B). Adapted from shadcn/ui.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils",
+        "@byronwade/use-mobile",
+        "@byronwade/button",
+        "@byronwade/input",
+        "@byronwade/separator",
+        "@byronwade/sheet",
+        "@byronwade/skeleton",
+        "@byronwade/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sidebar.tsx"
+        }
+      ]
+    },
+    {
       "name": "all",
       "type": "registry:block",
       "title": "All components",
@@ -4640,6 +5141,8 @@
         "@byronwade/use-chrome-morph",
         "@byronwade/comms-store",
         "@byronwade/conversation-list",
+        "@byronwade/message-thread",
+        "@byronwade/message-composer",
         "@byronwade/morph-dock",
         "@byronwade/morph-surface",
         "@byronwade/morph-bar",
@@ -4761,6 +5264,9 @@
         "@byronwade/volume-footprint",
         "@byronwade/options-chain",
         "@byronwade/alert-create-form",
+        "@byronwade/session-stats-bar",
+        "@byronwade/replay-controls",
+        "@byronwade/sector-rotation",
         "@byronwade/money-input",
         "@byronwade/bulk-action-bar",
         "@byronwade/order-summary",
@@ -4796,7 +5302,17 @@
         "@byronwade/playback-menu",
         "@byronwade/studio-video-row",
         "@byronwade/upload-row",
-        "@byronwade/comment-moderation-row"
+        "@byronwade/comment-moderation-row",
+        "@byronwade/use-mobile",
+        "@byronwade/pagination",
+        "@byronwade/combobox",
+        "@byronwade/context-menu",
+        "@byronwade/resizable",
+        "@byronwade/field",
+        "@byronwade/input-otp",
+        "@byronwade/carousel",
+        "@byronwade/date-picker",
+        "@byronwade/sidebar"
       ]
     }
   ]

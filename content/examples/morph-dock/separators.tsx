@@ -5,7 +5,7 @@ import { BarChart3, Home, Inbox, Settings, Users } from "lucide-react"
 import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
- * Grouped nav items — a thin seam (`bg-dock-muted`) is drawn automatically
+ * Grouped nav items, a thin seam (`bg-dock-muted`) is drawn automatically
  * between adjacent items whose `group` differs.
  */
 export default function Example() {

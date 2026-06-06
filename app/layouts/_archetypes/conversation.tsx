@@ -1,6 +1,6 @@
 "use client"
 
-// Conversation archetype — a focused assistant thread with a docked composer.
+// Conversation archetype, a focused assistant thread with a docked composer.
 // uses: GradientAvatar, Badge, Button, InputGroup, FilterPill, ScrollArea, Separator
 import * as React from "react"
 import {
@@ -58,7 +58,7 @@ const turns: Turn[] = [
             Affected path is limited to{" "}
             <span className="text-foreground">checkout-api</span>.
           </li>
-          <li>No data loss — payments are deferred, not dropped.</li>
+          <li>No data loss, payments are deferred, not dropped.</li>
         </ul>
       </>
     ),

@@ -4,13 +4,13 @@ import { ShieldCheck } from "lucide-react"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 
 export const metadata: Metadata = {
-  title: "Lint — byronwade/ui",
+  title: "Lint, byronwade/ui",
   description:
     "Keep consumer code on-system with the @byronwade/eslint-plugin-ui ESLint plugin and the byronwade-lint CLI.",
 }
 
 /* ---------------------------------------------------------------------------
-   Docs page: on-system lint — ESLint plugin + CLI
+   Docs page: on-system lint, ESLint plugin + CLI
    Mirrors the installation page shell: Eyebrow, BLEED, CodeBlock, token classes.
    Headings: font-normal or font-medium (never font-semibold / font-bold).
 --------------------------------------------------------------------------- */
@@ -49,7 +49,7 @@ const DETECTORS: { label: string; description: string }[] = [
   {
     label: "Bold weight on headings",
     description:
-      "font-semibold and font-bold on h1–h6 elements (or heading-role components) are flagged — the editorial-typography DNA requires font-medium or font-normal.",
+      "font-semibold and font-bold on h1–h6 elements (or heading-role components) are flagged, the editorial-typography DNA requires font-medium or font-normal.",
   },
 ]
 
@@ -73,8 +73,8 @@ export default function LintPage() {
           </h1>
           <p className="mt-8 max-w-xl animate-in fade-in fill-mode-both font-mono text-sm leading-relaxed text-muted-foreground [animation-delay:240ms] duration-700">
             The on-system lint enforces tokens, primitives, and house utilities
-            in consumer codebases — the same engine that grades the design
-            system itself. One plugin, one CLI, zero raw colors.
+            in consumer codebases, the same engine that grades the design system
+            itself. One plugin, one CLI, zero raw colors.
           </p>
         </div>
       </section>
@@ -82,8 +82,8 @@ export default function LintPage() {
       {/* ============================================ ESLINT PLUGIN ===== */}
       <section className="py-16">
         <div className="mx-auto max-w-5xl">
-          <Eyebrow>01 — ESLint plugin</Eyebrow>
-          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <Eyebrow>01, ESLint plugin</Eyebrow>
+          <p className="reading-ui mt-3 text-foreground text-pretty">
             <code className="font-mono text-[13px] text-foreground">
               @byronwade/eslint-plugin-ui
             </code>{" "}
@@ -169,12 +169,12 @@ export default [ byronwadeUi.configs.recommended ];`}
       {/* ================================================== CLI ===== */}
       <section className={`${BLEED} border-y border-border bg-card`}>
         <div className="mx-auto max-w-5xl py-16">
-          <Eyebrow>02 — CLI</Eyebrow>
-          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <Eyebrow>02, CLI</Eyebrow>
+          <p className="reading-ui mt-3 text-foreground text-pretty">
             <code className="font-mono text-[13px] text-foreground">
               byronwade-lint
             </code>{" "}
-            runs the same detectors outside of ESLint — useful in CI, pre-commit
+            runs the same detectors outside of ESLint, useful in CI, pre-commit
             hooks, and editors that don&apos;t speak ESLint flat config yet. The{" "}
             <code className="font-mono text-[13px] text-foreground">--fix</code>{" "}
             flag auto-applies safe codemods where a unique nearest token can be
@@ -207,8 +207,8 @@ export default [ byronwadeUi.configs.recommended ];`}
       {/* ========================================== WHAT IT CATCHES ===== */}
       <section className="py-16">
         <div className="mx-auto max-w-5xl">
-          <Eyebrow>03 — What it catches</Eyebrow>
-          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <Eyebrow>03, What it catches</Eyebrow>
+          <p className="reading-ui mt-3 text-foreground text-pretty">
             Five detectors cover the most common ways consumer code drifts
             off-system. Each maps a violation to a specific token or utility so
             the fix is always clear.

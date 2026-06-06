@@ -21,7 +21,7 @@ export default function Example() {
         }}
         following={following}
         onFollowingChange={setFollowing}
-        caption="Golden hour over the cliffs — turn the sound on for the full vibe."
+        caption="Golden hour over the cliffs, turn the sound on for the full vibe."
         sound="original sound · Coastline Studio"
         liked={liked}
         onLikedChange={setLiked}

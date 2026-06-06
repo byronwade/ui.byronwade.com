@@ -50,7 +50,7 @@ const services: {
     region: "eu-central-1",
     tone: "neutral",
     label: "Unknown",
-    uptime: "—",
+    uptime: "-",
   },
 ]
 

@@ -8,13 +8,13 @@ export default function Example() {
       </p>
 
       <div className="flex items-center gap-4">
-        {/* Broken image URL — fallback with initials */}
+        {/* Broken image URL, fallback with initials */}
         <Avatar>
           <AvatarImage src="/this-image-does-not-exist.jpg" alt="Alex Reed" />
           <AvatarFallback>AR</AvatarFallback>
         </Avatar>
 
-        {/* No image at all — fallback only */}
+        {/* No image at all, fallback only */}
         <Avatar>
           <AvatarFallback>MJ</AvatarFallback>
         </Avatar>

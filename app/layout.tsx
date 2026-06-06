@@ -15,16 +15,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
-// Editorial serif — backs the `font-serif` token for quotes / long-form moments.
+// Editorial serif, backs the `font-serif` token for quotes / long-form moments.
 const ebGaramond = EB_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
 })
 
 export const metadata: Metadata = {
-  title: "byronwade/ui — Design system",
+  title: "byronwade/ui, Design system",
   description:
-    "A personal design system — token-driven components with one swappable green accent.",
+    "A personal design system, token-driven components with one swappable green accent.",
 }
 
 export default function RootLayout({

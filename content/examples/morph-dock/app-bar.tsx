@@ -14,7 +14,7 @@ import {
 import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
- * A full app bar built from several MorphDock pills inline — exactly how the docs
+ * A full app bar built from several MorphDock pills inline, exactly how the docs
  * shell composes its chrome: a launcher, a breadcrumb, the centered main nav, then
  * a toolbar pushed to the far right. Each pill is its own capsule; the row wires
  * them together.
@@ -23,7 +23,7 @@ export default function Example() {
   return (
     <div className="flex min-h-40 w-full items-start p-8">
       <div className="flex w-full items-center gap-2">
-        {/* Launcher — a single identity/menu pill */}
+        {/* Launcher, a single identity/menu pill */}
         <MorphDock
           navLabel="Launcher"
           expandable={false}
@@ -38,7 +38,7 @@ export default function Example() {
           ]}
         />
 
-        {/* Breadcrumb — where you are */}
+        {/* Breadcrumb, where you are */}
         <MorphDock
           navLabel="Path"
           items={[]}
@@ -48,7 +48,7 @@ export default function Example() {
           ]}
         />
 
-        {/* Main nav — the primary destinations */}
+        {/* Main nav, the primary destinations */}
         <MorphDock
           navLabel="Primary"
           expandable={false}
@@ -85,7 +85,7 @@ export default function Example() {
           ]}
         />
 
-        {/* Toolbar — pinned to the rear right */}
+        {/* Toolbar, pinned to the rear right */}
         <div className="ml-auto">
           <MorphDock
             navLabel="Tools"

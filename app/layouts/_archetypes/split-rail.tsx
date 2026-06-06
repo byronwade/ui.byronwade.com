@@ -1,11 +1,11 @@
 "use client"
 
-// Split + rail archetype — settings with a sticky nav rail and explain-everything rows.
+// Split + rail archetype, settings with a sticky nav rail and explain-everything rows.
 // uses: Section, SettingRow, SettingsList, Switch, Select, Input, SplitWithRail, GradientAvatar, Button
 //
 // Design: a full-height settings *application*, not a centered document. A grouped icon
 // rail with an account header sits beside a scrolling pane of explain-everything rows;
-// editing anything reveals a sticky, glassy "unsaved changes" save bar — the premium
+// editing anything reveals a sticky, glassy "unsaved changes" save bar, the premium
 // detail real settings surfaces (Linear, Vercel) ship and generic ones omit.
 import * as React from "react"
 import {

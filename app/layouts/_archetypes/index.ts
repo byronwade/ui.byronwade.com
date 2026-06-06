@@ -33,7 +33,7 @@ export const archetypes: ArchetypeMeta[] = [
     slug: "cockpit",
     name: "Cockpit",
     tagline:
-      "A dense two-pane operations console — a scannable list rail beside a deep detail pane.",
+      "A dense two-pane operations console, a scannable list rail beside a deep detail pane.",
     centerpiece: "Information density",
     category: "Application",
     uses: [
@@ -51,7 +51,7 @@ export const archetypes: ArchetypeMeta[] = [
     slug: "centered-tool",
     name: "Centered tool",
     tagline:
-      "A single focal task floated on a calm backdrop — sign-in, launcher, or confirmation.",
+      "A single focal task floated on a calm backdrop, sign-in, launcher, or confirmation.",
     centerpiece: "One decision",
     category: "Auth",
     uses: ["CenteredFocal", "InputGroup", "Button", "Separator"],

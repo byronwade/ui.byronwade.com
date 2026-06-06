@@ -23,7 +23,7 @@ const data = [
   { time: "23:00", value: 290 },
 ]
 
-/** HeroSection wrapping a real full-bleed area chart — the hero-chart archetype. */
+/** HeroSection wrapping a real full-bleed area chart, the hero-chart archetype. */
 export default function Example() {
   return (
     <div className="overflow-x-clip w-full">

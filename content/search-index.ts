@@ -8,6 +8,7 @@
  */
 
 import { components } from "@/content/components"
+import { getSurface } from "@/content/catalog-surfaces"
 import { archetypes } from "@/app/layouts/_archetypes"
 import { templates } from "@/app/templates/_templates"
 
@@ -56,11 +57,42 @@ const pageEntries: SearchEntry[] = [
   },
   {
     kind: "Section",
+    label: "Surfaces",
+    href: "/docs/surfaces",
+    meta: "Guide",
+    keywords:
+      "surfaces application marketing editorial catalog split app shell hero layout",
+  },
+  {
+    kind: "Section",
+    label: "Readability",
+    href: "/docs/readability",
+    meta: "Guide",
+    keywords:
+      "readability reading measure line length line height WCAG research consortium prose 65ch font size contrast web typography",
+  },
+  {
+    kind: "Section",
     label: "AI rules",
     href: "/docs/ai",
     meta: "Guide",
     keywords:
       "ai rules cursor claude copilot windsurf codex agent on-system design rules",
+  },
+  {
+    kind: "Section",
+    label: "Application catalog",
+    href: "/catalog?surface=app",
+    meta: "Catalog",
+    keywords: "application app dashboard forms components catalog filter surface",
+  },
+  {
+    kind: "Section",
+    label: "Marketing catalog",
+    href: "/catalog?surface=marketing",
+    meta: "Catalog",
+    keywords:
+      "marketing editorial media video commerce landing hero catalog filter surface",
   },
   {
     kind: "Section",
@@ -173,18 +205,17 @@ const componentEntries: SearchEntry[] = components.map((c) => ({
   kind: "Component",
   label: c.name,
   href: `/docs/${c.slug}`,
-  meta: c.category,
-  // Slug words + category + description give cmdk plenty to fuzzy-match on.
+  meta: `${c.category} · ${getSurface(c) === "marketing" ? "Marketing" : "Application"}`,
   keywords:
-    `${c.slug.replace(/-/g, " ")} ${c.category} ${c.description}`.toLowerCase(),
+    `${c.slug.replace(/-/g, " ")} ${c.category} ${getSurface(c)} ${c.description}`.toLowerCase(),
 }))
 
-/* ── Variants (authored only — derived from the canonical manifest) ─── */
+/* ── Variants (authored only, derived from the canonical manifest) ─── */
 
 const variantEntries: SearchEntry[] = components.flatMap((c) =>
   (c.variants ?? []).map((v) => ({
     kind: "Component" as const,
-    label: `${c.name} — ${v.name}`,
+    label: `${c.name}, ${v.name}`,
     href: `/docs/${c.slug}#${v.id}`,
     meta: "Variant",
     keywords:

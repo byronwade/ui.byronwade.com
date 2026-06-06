@@ -38,7 +38,7 @@ export default function Example() {
         <span className="text-muted-foreground text-sm">
           {hasError
             ? "Click to clear the error."
-            : "No error — click to restore."}
+            : "No error, click to restore."}
         </span>
       </div>
 
@@ -48,7 +48,7 @@ export default function Example() {
           aria-invalid
         </code>{" "}
         to surface a destructive border + ring. This is distinct from the{" "}
-        <em>destructive</em> variant — use it to signal a validation or
+        <em>destructive</em> variant, use it to signal a validation or
         submission error on a button in a form.
       </p>
     </div>

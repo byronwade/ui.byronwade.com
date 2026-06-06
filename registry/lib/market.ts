@@ -164,6 +164,22 @@ type OptionsChainRow = {
   putChange: number
 }
 
+type SectorSegment = {
+  label: string
+  change: number
+  weight: number
+}
+
+type SectorArc = {
+  label: string
+  change: number
+  weight: number
+  share: number
+  dashVisible: number
+  dashOffset: number
+  toneClass: string
+}
+
 type CandleGeometry = {
   x: number
   openY: number
@@ -675,6 +691,61 @@ const makeFootprintRows = (
   }))
 }
 
+const SECTOR_LABELS = [
+  "Technology",
+  "Financials",
+  "Healthcare",
+  "Energy",
+  "Consumer",
+  "Industrials",
+  "Materials",
+  "Utilities",
+] as const
+
+/** Generate deterministic sector rotation segments for donut charts. */
+const makeSectorSegments = (
+  count = 6,
+  opts: SeedOpts = {},
+): SectorSegment[] => {
+  const rand = mulberry32(opts.seed ?? DEFAULT_SEED)
+  const n = Math.min(count, SECTOR_LABELS.length)
+  return SECTOR_LABELS.slice(0, n).map((label) => ({
+    label,
+    change: (rand() - 0.45) * 6,
+    weight: 0.8 + rand() * 2.2,
+  }))
+}
+
+/** Map sector segments to SVG arc dash geometry for a donut ring. */
+const sectorRotationArcs = (
+  segments: SectorSegment[],
+  opts: { circumference: number; gap?: number },
+): SectorArc[] => {
+  const total = segments.reduce((sum, seg) => sum + seg.weight, 0)
+  const gap = opts.gap ?? 6
+  let cursor = 0
+  return segments.map((seg) => {
+    const share = total > 0 ? seg.weight / total : 0
+    const len = opts.circumference * share
+    const dashVisible = Math.max(len - gap, 0)
+    const dashOffset = -(opts.circumference * cursor + gap / 2)
+    cursor += share
+    const toneClass =
+      seg.change > 0
+        ? "stroke-success"
+        : seg.change < 0
+          ? "stroke-destructive"
+          : "stroke-muted-foreground"
+    return {
+      ...seg,
+      share,
+      dashVisible,
+      dashOffset,
+      toneClass,
+    }
+  })
+}
+
 /** Generate deterministic options chain rows around a spot price. */
 const makeOptionsChainRows = (
   count: number,
@@ -859,6 +930,8 @@ export {
   makeTimeAndSalesRows,
   makeSymbolStats,
   makeFootprintRows,
+  makeSectorSegments,
+  sectorRotationArcs,
   makeOptionsChainRows,
   makeMoverRows,
   makeScreenerRows,
@@ -882,6 +955,8 @@ export type {
   FootprintRow,
   FootprintBar,
   OptionsChainRow,
+  SectorSegment,
+  SectorArc,
   MarketEvent,
   NewsItem,
   Alert,

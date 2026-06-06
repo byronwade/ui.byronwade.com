@@ -6,7 +6,7 @@ import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
  * Combined nav + toolbar in one pill. The `tools` zone paints a lighter
- * `bg-dock-tool` shelf beside the `bg-dock` nav — the two-tone "split color".
+ * `bg-dock-tool` shelf beside the `bg-dock` nav, the two-tone "split color".
  */
 export default function Example() {
   return (

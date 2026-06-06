@@ -17,7 +17,7 @@ export default function Example() {
         <ProgressValue>{(formatted) => formatted}</ProgressValue>
       </Progress>
 
-      {/* Custom min/max range — bytes transferred */}
+      {/* Custom min/max range, bytes transferred */}
       <Progress value={340} min={0} max={512}>
         <ProgressLabel>Data transferred</ProgressLabel>
         <ProgressValue>

@@ -6,12 +6,24 @@ import {
 import react from "@vitejs/plugin-react"
 import path from "path"
 
+const coverageRun =
+  process.env.COVERAGE === "1" ||
+  process.argv.some((arg) => arg.includes("coverage"))
+
 export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
     globals: true,
     setupFiles: ["./tests/setup.ts"],
+    ...(coverageRun
+      ? {
+          pool: "forks",
+          maxWorkers: 1,
+          fileParallelism: false,
+          sequence: { concurrent: false },
+        }
+      : {}),
     // Claude Code creates throwaway git worktrees of OTHER branches under
     // `.claude/worktrees/**` (1000s of foreign test files). Without this the
     // main suite globs and runs them, so its pass/fail depends on unrelated
@@ -20,6 +32,8 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, "**/.claude/**"],
     coverage: {
       provider: "v8",
+      reportsDirectory: "./.vitest-coverage",
+      cleanOnRerun: true,
       // The gate covers design-system component source only. `include` is matched
       // loosely (any path containing "components"), so anchor it away from app
       // routes like `app/(docs)/_components/*` and `app/preview/components/*`,

@@ -79,7 +79,7 @@ export default function Example() {
     <div className="p-8 max-w-3xl mx-auto" onClick={() => setOpenMenu(null)}>
       <Table>
         <TableCaption>
-          Team members — click the menu to take action.
+          Team members, click the menu to take action.
         </TableCaption>
         <TableHeader>
           <TableRow>

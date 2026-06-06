@@ -1,6 +1,6 @@
 import { HeroSection } from "@/components/hero-section"
 
-/** HeroSection with a title on the left and a right-aligned action link — the standard
+/** HeroSection with a title on the left and a right-aligned action link, the standard
  *  "section heading + navigation shortcut" pattern. */
 export default function Example() {
   return (

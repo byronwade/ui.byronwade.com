@@ -1,6 +1,6 @@
 import { HeroSection } from "@/components/hero-section"
 
-/** HeroSection with no header — children fill the full-bleed zone directly. */
+/** HeroSection with no header, children fill the full-bleed zone directly. */
 export default function Example() {
   return (
     <div className="overflow-x-clip w-full">

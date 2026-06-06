@@ -65,6 +65,7 @@ import AlertWithLink from "./alert/with-link";
 import AlertCreateFormDefault from "./alert-create-form/default";
 import AndroidDefault from "./android/default";
 import AppShellDefault from "./app-shell/default";
+import AppShellTradingDesk from "./app-shell/trading-desk";
 import AppleCardsCarouselDefault from "./apple-cards-carousel/default";
 import ArtistHeaderDefault from "./artist-header/default";
 import AspectRatioDefault from "./aspect-ratio/default";
@@ -141,6 +142,7 @@ import CardLoginForm from "./card/login-form";
 import CardSizes from "./card/sizes";
 import CardWithAction from "./card/with-action";
 import CardWithImage from "./card/with-image";
+import CarouselDefault from "./carousel/default";
 import CenteredFocalDefault from "./centered-focal/default";
 import CenteredFocalCustomClassname from "./centered-focal/custom-classname";
 import CenteredFocalLoadingState from "./centered-focal/loading-state";
@@ -161,8 +163,9 @@ import ChartRadialBar from "./chart/radial-bar";
 import ChartStackedBar from "./chart/stacked-bar";
 import ChartThemeColors from "./chart/theme-colors";
 import ChartTooltipVariants from "./chart/tooltip-variants";
-import ChartPanelDefault from "./chart-panel/default";
 import ChartLayoutGridDefault from "./chart-layout-grid/default";
+import ChartLayoutGridTradingDesk from "./chart-layout-grid/trading-desk";
+import ChartPanelDefault from "./chart-panel/default";
 import ChartToolbarDefault from "./chart-toolbar/default";
 import CheckboxDefault from "./checkbox/default";
 import CheckboxCheckboxGroup from "./checkbox/checkbox-group";
@@ -179,7 +182,7 @@ import CollapsibleWithRichContent from "./collapsible/with-rich-content";
 import ColorPickerDefault from "./color-picker/default";
 import ColorPickerInline from "./color-picker/inline";
 import ColorPickerSizes from "./color-picker/sizes";
-import CompareSymbolsDefault from "./compare-symbols/default";
+import ComboboxDefault from "./combobox/default";
 import CommandDefault from "./command/default";
 import CommandActions from "./command/actions";
 import CommandCards from "./command/cards";
@@ -193,14 +196,17 @@ import CommandResultDefault from "./command-result/default";
 import CommentDefault from "./comment/default";
 import CommentComposerDefault from "./comment-composer/default";
 import CommentModerationRowDefault from "./comment-moderation-row/default";
+import CompareSymbolsDefault from "./compare-symbols/default";
+import ContextMenuDefault from "./context-menu/default";
 import ConversationListDefault from "./conversation-list/default";
 import CreditCardDefault from "./credit-card/default";
 import CreditCardTones from "./credit-card/tones";
 import CursorDefault from "./cursor/default";
 import CursorTones from "./cursor/tones";
 import CustomerCardDefault from "./customer-card/default";
-import DescriptionBoxDefault from "./description-box/default";
+import DatePickerDefault from "./date-picker/default";
 import DepthChartDefault from "./depth-chart/default";
+import DescriptionBoxDefault from "./description-box/default";
 import DetailHeaderDefault from "./detail-header/default";
 import DetailHeaderCustomTitleNode from "./detail-header/custom-title-node";
 import DetailHeaderManyActions from "./detail-header/many-actions";
@@ -247,6 +253,7 @@ import EventTimelineSingleEvent from "./event-timeline/single-event";
 import EventTimelineTimestamps from "./event-timeline/timestamps";
 import EventTimelineTitleOnly from "./event-timeline/title-only";
 import EventTimelineTones from "./event-timeline/tones";
+import FieldDefault from "./field/default";
 import FileTreeDefault from "./file-tree/default";
 import FileTreeMultiSelect from "./file-tree/multi-select";
 import FileTreePanel from "./file-tree/panel";
@@ -285,7 +292,6 @@ import HoverCardRichContent from "./hover-card/rich-content";
 import HoverCardWithDelay from "./hover-card/with-delay";
 import IdentityNames from "./identity/names";
 import ImageCropDefault from "./image-crop/default";
-import IndicatorLegendDefault from "./indicator-legend/default";
 import IndexFiltersDefault from "./index-filters/default";
 import IndexFiltersNoTabs from "./index-filters/no-tabs";
 import IndexFiltersSearchOnly from "./index-filters/search-only";
@@ -296,6 +302,7 @@ import IndexTableEmpty from "./index-table/empty";
 import IndexTableLoading from "./index-table/loading";
 import IndexTableSelection from "./index-table/selection";
 import IndexTableWithPagination from "./index-table/with-pagination";
+import IndicatorLegendDefault from "./indicator-legend/default";
 import InputDefault from "./input/default";
 import InputDisabled from "./input/disabled";
 import InputError from "./input/error";
@@ -311,6 +318,7 @@ import InputGroupValidation from "./input-group/validation";
 import InputGroupWithButton from "./input-group/with-button";
 import InputGroupWithKbd from "./input-group/with-kbd";
 import InputGroupWithText from "./input-group/with-text";
+import InputOtpDefault from "./input-otp/default";
 import InventoryBarDefault from "./inventory-bar/default";
 import IphoneDefault from "./iphone/default";
 import KanbanDefault from "./kanban/default";
@@ -330,6 +338,8 @@ import MarketDepthDefault from "./market-depth/default";
 import MarketMoversDefault from "./market-movers/default";
 import MarketNewsDefault from "./market-news/default";
 import MarketingLayoutDefault from "./marketing-layout/default";
+import MessageComposerDefault from "./message-composer/default";
+import MessageThreadDefault from "./message-thread/default";
 import MetricStatDefault from "./metric-stat/default";
 import MetricStatCustomValue from "./metric-stat/custom-value";
 import MetricStatDeltaDirections from "./metric-stat/delta-directions";
@@ -377,8 +387,8 @@ import NavigationMenuWithIcons from "./navigation-menu/with-icons";
 import NowPlayingBarDefault from "./now-playing-bar/default";
 import NumberFieldDefault from "./number-field/default";
 import NumberFieldSizes from "./number-field/sizes";
-import OrderBookDefault from "./order-book/default";
 import OptionsChainDefault from "./options-chain/default";
+import OrderBookDefault from "./order-book/default";
 import OrderEntryDefault from "./order-entry/default";
 import OrderSummaryDefault from "./order-summary/default";
 import PageHeaderDefault from "./page-header/default";
@@ -387,6 +397,7 @@ import PageHeaderBreadcrumbContext from "./page-header/breadcrumb-context";
 import PageHeaderDescriptionOnly from "./page-header/description-only";
 import PageHeaderWithActions from "./page-header/with-actions";
 import PageHeaderWithBadge from "./page-header/with-badge";
+import PaginationDefault from "./pagination/default";
 import PillDefault from "./pill/default";
 import PillSizes from "./pill/sizes";
 import PixelatedCanvasDefault from "./pixelated-canvas/default";
@@ -432,6 +443,8 @@ import RatingWithForm from "./rating/with-form";
 import RelativeTimeDefault from "./relative-time/default";
 import RelativeTimeSizes from "./relative-time/sizes";
 import RelativeTimeWorldClock from "./relative-time/world-clock";
+import ReplayControlsDefault from "./replay-controls/default";
+import ResizableDefault from "./resizable/default";
 import ResourceListDefault from "./resource-list/default";
 import ResourceListEmpty from "./resource-list/empty";
 import ResourceListLoading from "./resource-list/loading";
@@ -451,6 +464,7 @@ import SectionNoHeader from "./section/no-header";
 import SectionSettingRowControls from "./section/setting-row-controls";
 import SectionStackedSections from "./section/stacked-sections";
 import SectionWithAction from "./section/with-action";
+import SectorRotationDefault from "./sector-rotation/default";
 import SegmentedControlDefault from "./segmented-control/default";
 import SegmentedControlControlledDisplay from "./segmented-control/controlled-display";
 import SegmentedControlDisabled from "./segmented-control/disabled";
@@ -470,6 +484,7 @@ import SeparatorInCard from "./separator/in-card";
 import SeparatorInNav from "./separator/in-nav";
 import SeparatorVertical from "./separator/vertical";
 import SeparatorWithLabel from "./separator/with-label";
+import SessionStatsBarDefault from "./session-stats-bar/default";
 import SheetDefault from "./sheet/default";
 import SheetInsetNested from "./sheet/inset-nested";
 import SheetNestedSteps from "./sheet/nested-steps";
@@ -478,6 +493,9 @@ import SheetScrollable from "./sheet/scrollable";
 import SheetSides from "./sheet/sides";
 import SheetWithForm from "./sheet/with-form";
 import ShortsPlayerDefault from "./shorts-player/default";
+import SidebarDefault from "./sidebar/default";
+import SidebarMenuButtons from "./sidebar/menu-buttons";
+import SidebarVariants from "./sidebar/variants";
 import SkeletonDefault from "./skeleton/default";
 import SkeletonCard from "./skeleton/card";
 import SkeletonList from "./skeleton/list";
@@ -530,8 +548,8 @@ import SwitchDisabled from "./switch/disabled";
 import SwitchInvalid from "./switch/invalid";
 import SwitchSizes from "./switch/sizes";
 import SwitchWithLabel from "./switch/with-label";
-import SymbolSearchDefault from "./symbol-search/default";
 import SymbolDetailsDefault from "./symbol-details/default";
+import SymbolSearchDefault from "./symbol-search/default";
 import TableDefault from "./table/default";
 import TableEmptyState from "./table/empty-state";
 import TableLoadingSkeleton from "./table/loading-skeleton";
@@ -562,10 +580,11 @@ import TextareaWithLabelAndHint from "./textarea/with-label-and-hint";
 import ThumbnailDefault from "./thumbnail/default";
 import TickerDefault from "./ticker/default";
 import TickerSizes from "./ticker/sizes";
-import TickerTapeDefault from "./ticker-tape/default";
 import TickerStacked from "./ticker/stacked";
 import TickerVariants from "./ticker/variants";
 import TickerWatchlist from "./ticker/watchlist";
+import TickerTapeDefault from "./ticker-tape/default";
+import TimeAndSalesDefault from "./time-and-sales/default";
 import TimelineRailDefault from "./timeline-rail/default";
 import TimelineRailCustomTerminal from "./timeline-rail/custom-terminal";
 import TimelineRailMixedGlyphs from "./timeline-rail/mixed-glyphs";
@@ -591,10 +610,9 @@ import TooltipSides from "./tooltip/sides";
 import TooltipWithDelay from "./tooltip/with-delay";
 import TooltipWithIcon from "./tooltip/with-icon";
 import TrackListDefault from "./track-list/default";
+import TradeHistoryDefault from "./trade-history/default";
 import UpNextItemDefault from "./up-next-item/default";
 import UploadRowDefault from "./upload-row/default";
-import TimeAndSalesDefault from "./time-and-sales/default";
-import TradeHistoryDefault from "./trade-history/default";
 import VariantPickerDefault from "./variant-picker/default";
 import VerificationProgressDefault from "./verification-progress/default";
 import VerificationProgressAllTones from "./verification-progress/all-tones";
@@ -604,13 +622,14 @@ import VerificationProgressTwoSteps from "./verification-progress/two-steps";
 import VerificationProgressWithCounts from "./verification-progress/with-counts";
 import VerifiedBadgeDefault from "./verified-badge/default";
 import VideoCardDefault from "./video-card/default";
-import VolumeProfileDefault from "./volume-profile/default";
-import VolumeFootprintDefault from "./volume-footprint/default";
 import VideoPlayerDefault from "./video-player/default";
 import VideoPlayerComposable from "./video-player/composable";
 import VideoPlayerVariants from "./video-player/variants";
 import VideoPlayerYoutube from "./video-player/youtube";
 import VideoShelfDefault from "./video-shelf/default";
+import VideoShelfWatchPage from "./video-shelf/watch-page";
+import VolumeFootprintDefault from "./volume-footprint/default";
+import VolumeProfileDefault from "./volume-profile/default";
 import WatchlistDefault from "./watchlist/default";
 import WorldMapDefault from "./world-map/default";
 
@@ -754,17 +773,14 @@ export const examples: Record<string, Example[]> = {
     { name: "With Link", file: "alert/with-link.tsx", Component: AlertWithLink },
   ],
   "alert-create-form": [
-    {
-      name: "Default",
-      file: "alert-create-form/default.tsx",
-      Component: AlertCreateFormDefault,
-    },
+    { name: "Default", file: "alert-create-form/default.tsx", Component: AlertCreateFormDefault },
   ],
   "android": [
     { name: "Default", file: "android/default.tsx", Component: AndroidDefault },
   ],
   "app-shell": [
     { name: "Default", file: "app-shell/default.tsx", Component: AppShellDefault },
+    { name: "Trading Desk", file: "app-shell/trading-desk.tsx", Component: AppShellTradingDesk },
   ],
   "apple-cards-carousel": [
     { name: "Default", file: "apple-cards-carousel/default.tsx", Component: AppleCardsCarouselDefault },
@@ -874,6 +890,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Action", file: "card/with-action.tsx", Component: CardWithAction },
     { name: "With Image", file: "card/with-image.tsx", Component: CardWithImage },
   ],
+  "carousel": [
+    { name: "Default", file: "carousel/default.tsx", Component: CarouselDefault },
+  ],
   "centered-focal": [
     { name: "Default", file: "centered-focal/default.tsx", Component: CenteredFocalDefault },
     { name: "Custom Classname", file: "centered-focal/custom-classname.tsx", Component: CenteredFocalCustomClassname },
@@ -904,11 +923,12 @@ export const examples: Record<string, Example[]> = {
     { name: "Theme Colors", file: "chart/theme-colors.tsx", Component: ChartThemeColors },
     { name: "Tooltip Variants", file: "chart/tooltip-variants.tsx", Component: ChartTooltipVariants },
   ],
-  "chart-panel": [
-    { name: "Default", file: "chart-panel/default.tsx", Component: ChartPanelDefault },
-  ],
   "chart-layout-grid": [
     { name: "Default", file: "chart-layout-grid/default.tsx", Component: ChartLayoutGridDefault },
+    { name: "Trading Desk", file: "chart-layout-grid/trading-desk.tsx", Component: ChartLayoutGridTradingDesk },
+  ],
+  "chart-panel": [
+    { name: "Default", file: "chart-panel/default.tsx", Component: ChartPanelDefault },
   ],
   "chart-toolbar": [
     { name: "Default", file: "chart-toolbar/default.tsx", Component: ChartToolbarDefault },
@@ -936,8 +956,8 @@ export const examples: Record<string, Example[]> = {
     { name: "Inline", file: "color-picker/inline.tsx", Component: ColorPickerInline },
     { name: "Sizes", file: "color-picker/sizes.tsx", Component: ColorPickerSizes },
   ],
-  "compare-symbols": [
-    { name: "Default", file: "compare-symbols/default.tsx", Component: CompareSymbolsDefault },
+  "combobox": [
+    { name: "Default", file: "combobox/default.tsx", Component: ComboboxDefault },
   ],
   "command": [
     { name: "Default", file: "command/default.tsx", Component: CommandDefault },
@@ -962,6 +982,12 @@ export const examples: Record<string, Example[]> = {
   "comment-moderation-row": [
     { name: "Default", file: "comment-moderation-row/default.tsx", Component: CommentModerationRowDefault },
   ],
+  "compare-symbols": [
+    { name: "Default", file: "compare-symbols/default.tsx", Component: CompareSymbolsDefault },
+  ],
+  "context-menu": [
+    { name: "Default", file: "context-menu/default.tsx", Component: ContextMenuDefault },
+  ],
   "conversation-list": [
     { name: "Default", file: "conversation-list/default.tsx", Component: ConversationListDefault },
   ],
@@ -976,11 +1002,14 @@ export const examples: Record<string, Example[]> = {
   "customer-card": [
     { name: "Default", file: "customer-card/default.tsx", Component: CustomerCardDefault },
   ],
-  "description-box": [
-    { name: "Default", file: "description-box/default.tsx", Component: DescriptionBoxDefault },
+  "date-picker": [
+    { name: "Default", file: "date-picker/default.tsx", Component: DatePickerDefault },
   ],
   "depth-chart": [
     { name: "Default", file: "depth-chart/default.tsx", Component: DepthChartDefault },
+  ],
+  "description-box": [
+    { name: "Default", file: "description-box/default.tsx", Component: DescriptionBoxDefault },
   ],
   "detail-header": [
     { name: "Default", file: "detail-header/default.tsx", Component: DetailHeaderDefault },
@@ -1050,6 +1079,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Title Only", file: "event-timeline/title-only.tsx", Component: EventTimelineTitleOnly },
     { name: "Tones", file: "event-timeline/tones.tsx", Component: EventTimelineTones },
   ],
+  "field": [
+    { name: "Default", file: "field/default.tsx", Component: FieldDefault },
+  ],
   "file-tree": [
     { name: "Default", file: "file-tree/default.tsx", Component: FileTreeDefault },
     { name: "Multi Select", file: "file-tree/multi-select.tsx", Component: FileTreeMultiSelect },
@@ -1114,9 +1146,6 @@ export const examples: Record<string, Example[]> = {
   "image-crop": [
     { name: "Default", file: "image-crop/default.tsx", Component: ImageCropDefault },
   ],
-  "indicator-legend": [
-    { name: "Default", file: "indicator-legend/default.tsx", Component: IndicatorLegendDefault },
-  ],
   "index-filters": [
     { name: "Default", file: "index-filters/default.tsx", Component: IndexFiltersDefault },
     { name: "No Tabs", file: "index-filters/no-tabs.tsx", Component: IndexFiltersNoTabs },
@@ -1130,6 +1159,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Loading", file: "index-table/loading.tsx", Component: IndexTableLoading },
     { name: "Selection", file: "index-table/selection.tsx", Component: IndexTableSelection },
     { name: "With Pagination", file: "index-table/with-pagination.tsx", Component: IndexTableWithPagination },
+  ],
+  "indicator-legend": [
+    { name: "Default", file: "indicator-legend/default.tsx", Component: IndicatorLegendDefault },
   ],
   "input": [
     { name: "Default", file: "input/default.tsx", Component: InputDefault },
@@ -1149,6 +1181,9 @@ export const examples: Record<string, Example[]> = {
     { name: "With Button", file: "input-group/with-button.tsx", Component: InputGroupWithButton },
     { name: "With Kbd", file: "input-group/with-kbd.tsx", Component: InputGroupWithKbd },
     { name: "With Text", file: "input-group/with-text.tsx", Component: InputGroupWithText },
+  ],
+  "input-otp": [
+    { name: "Default", file: "input-otp/default.tsx", Component: InputOtpDefault },
   ],
   "inventory-bar": [
     { name: "Default", file: "inventory-bar/default.tsx", Component: InventoryBarDefault },
@@ -1192,6 +1227,12 @@ export const examples: Record<string, Example[]> = {
   ],
   "marketing-layout": [
     { name: "Default", file: "marketing-layout/default.tsx", Component: MarketingLayoutDefault },
+  ],
+  "message-composer": [
+    { name: "Default", file: "message-composer/default.tsx", Component: MessageComposerDefault },
+  ],
+  "message-thread": [
+    { name: "Default", file: "message-thread/default.tsx", Component: MessageThreadDefault },
   ],
   "metric-stat": [
     { name: "Default", file: "metric-stat/default.tsx", Component: MetricStatDefault },
@@ -1268,14 +1309,14 @@ export const examples: Record<string, Example[]> = {
     { name: "Default", file: "number-field/default.tsx", Component: NumberFieldDefault },
     { name: "Sizes", file: "number-field/sizes.tsx", Component: NumberFieldSizes },
   ],
+  "options-chain": [
+    { name: "Default", file: "options-chain/default.tsx", Component: OptionsChainDefault },
+  ],
   "order-book": [
     { name: "Default", file: "order-book/default.tsx", Component: OrderBookDefault },
   ],
   "order-entry": [
     { name: "Default", file: "order-entry/default.tsx", Component: OrderEntryDefault },
-  ],
-  "options-chain": [
-    { name: "Default", file: "options-chain/default.tsx", Component: OptionsChainDefault },
   ],
   "order-summary": [
     { name: "Default", file: "order-summary/default.tsx", Component: OrderSummaryDefault },
@@ -1287,6 +1328,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Description Only", file: "page-header/description-only.tsx", Component: PageHeaderDescriptionOnly },
     { name: "With Actions", file: "page-header/with-actions.tsx", Component: PageHeaderWithActions },
     { name: "With Badge", file: "page-header/with-badge.tsx", Component: PageHeaderWithBadge },
+  ],
+  "pagination": [
+    { name: "Default", file: "pagination/default.tsx", Component: PaginationDefault },
   ],
   "pill": [
     { name: "Default", file: "pill/default.tsx", Component: PillDefault },
@@ -1369,6 +1413,12 @@ export const examples: Record<string, Example[]> = {
     { name: "Sizes", file: "relative-time/sizes.tsx", Component: RelativeTimeSizes },
     { name: "World Clock", file: "relative-time/world-clock.tsx", Component: RelativeTimeWorldClock },
   ],
+  "replay-controls": [
+    { name: "Default", file: "replay-controls/default.tsx", Component: ReplayControlsDefault },
+  ],
+  "resizable": [
+    { name: "Default", file: "resizable/default.tsx", Component: ResizableDefault },
+  ],
   "resource-list": [
     { name: "Default", file: "resource-list/default.tsx", Component: ResourceListDefault },
     { name: "Empty", file: "resource-list/empty.tsx", Component: ResourceListEmpty },
@@ -1398,6 +1448,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Stacked Sections", file: "section/stacked-sections.tsx", Component: SectionStackedSections },
     { name: "With Action", file: "section/with-action.tsx", Component: SectionWithAction },
   ],
+  "sector-rotation": [
+    { name: "Default", file: "sector-rotation/default.tsx", Component: SectorRotationDefault },
+  ],
   "segmented-control": [
     { name: "Default", file: "segmented-control/default.tsx", Component: SegmentedControlDefault },
     { name: "Controlled Display", file: "segmented-control/controlled-display.tsx", Component: SegmentedControlControlledDisplay },
@@ -1423,6 +1476,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Vertical", file: "separator/vertical.tsx", Component: SeparatorVertical },
     { name: "With Label", file: "separator/with-label.tsx", Component: SeparatorWithLabel },
   ],
+  "session-stats-bar": [
+    { name: "Default", file: "session-stats-bar/default.tsx", Component: SessionStatsBarDefault },
+  ],
   "sheet": [
     { name: "Default", file: "sheet/default.tsx", Component: SheetDefault },
     { name: "Inset Nested", file: "sheet/inset-nested.tsx", Component: SheetInsetNested },
@@ -1434,6 +1490,11 @@ export const examples: Record<string, Example[]> = {
   ],
   "shorts-player": [
     { name: "Default", file: "shorts-player/default.tsx", Component: ShortsPlayerDefault },
+  ],
+  "sidebar": [
+    { name: "Default", file: "sidebar/default.tsx", Component: SidebarDefault },
+    { name: "Menu Buttons", file: "sidebar/menu-buttons.tsx", Component: SidebarMenuButtons },
+    { name: "Variants", file: "sidebar/variants.tsx", Component: SidebarVariants },
   ],
   "skeleton": [
     { name: "Default", file: "skeleton/default.tsx", Component: SkeletonDefault },
@@ -1511,11 +1572,11 @@ export const examples: Record<string, Example[]> = {
     { name: "Sizes", file: "switch/sizes.tsx", Component: SwitchSizes },
     { name: "With Label", file: "switch/with-label.tsx", Component: SwitchWithLabel },
   ],
-  "symbol-search": [
-    { name: "Default", file: "symbol-search/default.tsx", Component: SymbolSearchDefault },
-  ],
   "symbol-details": [
     { name: "Default", file: "symbol-details/default.tsx", Component: SymbolDetailsDefault },
+  ],
+  "symbol-search": [
+    { name: "Default", file: "symbol-search/default.tsx", Component: SymbolSearchDefault },
   ],
   "table": [
     { name: "Default", file: "table/default.tsx", Component: TableDefault },
@@ -1565,6 +1626,9 @@ export const examples: Record<string, Example[]> = {
   "ticker-tape": [
     { name: "Default", file: "ticker-tape/default.tsx", Component: TickerTapeDefault },
   ],
+  "time-and-sales": [
+    { name: "Default", file: "time-and-sales/default.tsx", Component: TimeAndSalesDefault },
+  ],
   "timeline-rail": [
     { name: "Default", file: "timeline-rail/default.tsx", Component: TimelineRailDefault },
     { name: "Custom Terminal", file: "timeline-rail/custom-terminal.tsx", Component: TimelineRailCustomTerminal },
@@ -1600,17 +1664,14 @@ export const examples: Record<string, Example[]> = {
   "track-list": [
     { name: "Default", file: "track-list/default.tsx", Component: TrackListDefault },
   ],
+  "trade-history": [
+    { name: "Default", file: "trade-history/default.tsx", Component: TradeHistoryDefault },
+  ],
   "up-next-item": [
     { name: "Default", file: "up-next-item/default.tsx", Component: UpNextItemDefault },
   ],
   "upload-row": [
     { name: "Default", file: "upload-row/default.tsx", Component: UploadRowDefault },
-  ],
-  "time-and-sales": [
-    { name: "Default", file: "time-and-sales/default.tsx", Component: TimeAndSalesDefault },
-  ],
-  "trade-history": [
-    { name: "Default", file: "trade-history/default.tsx", Component: TradeHistoryDefault },
   ],
   "variant-picker": [
     { name: "Default", file: "variant-picker/default.tsx", Component: VariantPickerDefault },
@@ -1629,16 +1690,6 @@ export const examples: Record<string, Example[]> = {
   "video-card": [
     { name: "Default", file: "video-card/default.tsx", Component: VideoCardDefault },
   ],
-  "volume-profile": [
-    { name: "Default", file: "volume-profile/default.tsx", Component: VolumeProfileDefault },
-  ],
-  "volume-footprint": [
-    {
-      name: "Default",
-      file: "volume-footprint/default.tsx",
-      Component: VolumeFootprintDefault,
-    },
-  ],
   "video-player": [
     { name: "Default", file: "video-player/default.tsx", Component: VideoPlayerDefault },
     { name: "Composable", file: "video-player/composable.tsx", Component: VideoPlayerComposable },
@@ -1647,6 +1698,13 @@ export const examples: Record<string, Example[]> = {
   ],
   "video-shelf": [
     { name: "Default", file: "video-shelf/default.tsx", Component: VideoShelfDefault },
+    { name: "Watch Page", file: "video-shelf/watch-page.tsx", Component: VideoShelfWatchPage },
+  ],
+  "volume-footprint": [
+    { name: "Default", file: "volume-footprint/default.tsx", Component: VolumeFootprintDefault },
+  ],
+  "volume-profile": [
+    { name: "Default", file: "volume-profile/default.tsx", Component: VolumeProfileDefault },
   ],
   "watchlist": [
     { name: "Default", file: "watchlist/default.tsx", Component: WatchlistDefault },

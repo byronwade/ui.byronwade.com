@@ -1,7 +1,7 @@
-// Settings template — a personal account settings page.
+// Settings template, a personal account settings page.
 // uses: Section, SettingRow, SettingsList, Switch, Select, Input, Label, GradientAvatar, Button, Badge
 //
-// Design: a calm settings *document* (not the split-rail admin console) — a sticky
+// Design: a calm settings *document* (not the split-rail admin console), a sticky
 // in-page table of contents on the left, explain-everything rows on the right, and a
 // fenced destructive "danger zone" at the end. Every control is a registry primitive,
 // every surface a token, so the whole page re-skins from --brand.

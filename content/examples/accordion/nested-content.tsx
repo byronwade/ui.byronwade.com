@@ -60,7 +60,7 @@ export default function Example() {
             <p>
               <strong>Can I start before the kick-off meeting?</strong>
               <br />
-              Yes — review the brief and flag questions in the shared doc ahead
+              Yes, review the brief and flag questions in the shared doc ahead
               of time.
             </p>
             <p>

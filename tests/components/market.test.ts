@@ -31,6 +31,8 @@ import {
   footprintGeometry,
   makeFootprintRows,
   makeOptionsChainRows,
+  makeSectorSegments,
+  sectorRotationArcs,
 } from "@/lib/market"
 
 describe("linearScale", () => {
@@ -364,6 +366,25 @@ describe("footprintGeometry", () => {
 describe("makeFootprintRows", () => {
   it("is deterministic for the same seed", () => {
     expect(makeFootprintRows(8, { seed: 3 })).toEqual(makeFootprintRows(8, { seed: 3 }))
+  })
+})
+
+describe("makeSectorSegments", () => {
+  it("is deterministic for the same seed", () => {
+    expect(makeSectorSegments(6, { seed: 5 })).toEqual(makeSectorSegments(6, { seed: 5 }))
+  })
+})
+
+describe("sectorRotationArcs", () => {
+  it("returns arc geometry that sums to the ring", () => {
+    const segments = makeSectorSegments(4, { seed: 2 })
+    const circumference = 100
+    const arcs = sectorRotationArcs(segments, { circumference, gap: 4 })
+    expect(arcs).toHaveLength(4)
+    for (const arc of arcs) {
+      expect(arc.dashVisible).toBeGreaterThanOrEqual(0)
+      expect(arc.toneClass).toMatch(/stroke-/)
+    }
   })
 })
 

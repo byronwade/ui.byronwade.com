@@ -1,6 +1,6 @@
 import { HeroSection } from "@/components/hero-section"
 
-/** HeroSection using the `className` prop to override spacing and add a bottom border — shows
+/** HeroSection using the `className` prop to override spacing and add a bottom border, shows
  *  how to compose the root section element with utility classes. */
 export default function Example() {
   return (
@@ -14,7 +14,7 @@ export default function Example() {
         }
       >
         <div className="h-36 rounded-xl border border-dashed border-border bg-muted/30 flex items-center justify-center text-sm text-muted-foreground">
-          Full-bleed zone — spacing controlled by className prop
+          Full-bleed zone, spacing controlled by className prop
         </div>
       </HeroSection>
     </div>

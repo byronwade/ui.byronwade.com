@@ -5,19 +5,19 @@ export default function Example() {
     <div className="flex flex-col gap-4 p-4">
       <div className="flex items-center gap-3">
         <StatusDot tone="success" size="lg" pulse />
-        <span className="text-sm">Live — active connection</span>
+        <span className="text-sm">Live, active connection</span>
       </div>
       <div className="flex items-center gap-3">
         <StatusDot tone="danger" size="lg" pulse />
-        <span className="text-sm">Alert — requires attention</span>
+        <span className="text-sm">Alert, requires attention</span>
       </div>
       <div className="flex items-center gap-3">
         <StatusDot tone="warning" size="lg" pulse />
-        <span className="text-sm">Processing — in progress</span>
+        <span className="text-sm">Processing, in progress</span>
       </div>
       <div className="flex items-center gap-3">
         <StatusDot tone="info" size="lg" pulse />
-        <span className="text-sm">Syncing — fetching data</span>
+        <span className="text-sm">Syncing, fetching data</span>
       </div>
     </div>
   )

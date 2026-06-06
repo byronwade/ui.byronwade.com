@@ -1,6 +1,6 @@
 "use client"
 
-// Studio archetype — a now-playing media surface built around one big artwork.
+// Studio archetype, a now-playing media surface built around one big artwork.
 // uses: Button, Badge, StatusPill, GradientAvatar, ScrollArea, Separator, InputGroup
 import * as React from "react"
 import {

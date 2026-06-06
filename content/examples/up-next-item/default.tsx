@@ -8,7 +8,7 @@ export default function Example() {
   return (
     <div className="w-[400px] flex flex-col gap-2">
       <UpNextItem
-        title="The state of CSS in 2026 — what changed and what's next"
+        title="The state of CSS in 2026, what changed and what's next"
         href="#"
         thumbnailSrc="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=480&q=80"
         live
@@ -18,7 +18,7 @@ export default function Example() {
         timestamp="streaming now"
       />
       <UpNextItem
-        title="Building a design system from scratch — tokens, primitives, and composites"
+        title="Building a design system from scratch, tokens, primitives, and composites"
         href="#"
         thumbnailSrc="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=480&q=80"
         duration="14:08"

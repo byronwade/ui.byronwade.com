@@ -1,19 +1,20 @@
 import type { Metadata } from "next"
 import { readdirSync } from "node:fs"
 import { join } from "node:path"
+import { Suspense } from "react"
 
 import { components } from "@/content/components"
 import { catalogItems } from "@/content/catalog"
+import { parseSurfaceParam } from "@/content/catalog-surfaces"
 import { ComponentGallery } from "@/app/(docs)/_components/component-gallery"
+import { DocsIntro } from "@/app/(docs)/_components/docs-prose"
 
 export const metadata: Metadata = {
-  title: "Catalog — byronwade/ui",
+  title: "Catalog, byronwade/ui",
   description:
-    "Every component in the registry — search by name, variant, or tag, filter by group, and open any one for its variants and install.",
+    "Every component in the registry — filter by application UI or marketing & editorial, search by name, variant, or tag.",
 }
 
-/** Real example-demo count per component (server-side fs read) so the catalog
- *  reflects what actually exists rather than a synthetic "1 variant". */
 function exampleCounts(): Record<string, number> {
   const dir = join(process.cwd(), "content/examples")
   const counts: Record<string, number> = {}
@@ -29,8 +30,15 @@ function exampleCounts(): Record<string, number> {
   return counts
 }
 
-export default function CatalogPage() {
+export default async function CatalogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ surface?: string }>
+}) {
+  const { surface: surfaceParam } = await searchParams
+  const initialSurface = parseSurfaceParam(surfaceParam)
   const items = catalogItems(exampleCounts())
+
   return (
     <div className="mx-auto w-full max-w-[110rem] px-6 pb-24 pt-24 sm:px-8 sm:pt-28 lg:px-12">
       <header className="max-w-2xl">
@@ -38,15 +46,18 @@ export default function CatalogPage() {
           Catalog
         </p>
         <h1 className="mt-3 text-[clamp(2rem,5vw,3.25rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">
-          Every component, one grid.
+          One registry, two surfaces.
         </h1>
-        <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          The whole registry — search by name, variant, or tag, filter by group,
-          and open any component for its variants and install command.
-        </p>
+        <DocsIntro>
+          Application UI and marketing/editorial share foundation tokens — filter
+          by surface, search by name or tag, and open any component for variants
+          and install.
+        </DocsIntro>
       </header>
       <div className="mt-10">
-        <ComponentGallery items={items} />
+        <Suspense fallback={null}>
+          <ComponentGallery items={items} initialSurface={initialSurface} />
+        </Suspense>
       </div>
     </div>
   )

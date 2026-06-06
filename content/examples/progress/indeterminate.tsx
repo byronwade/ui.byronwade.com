@@ -29,7 +29,7 @@ export default function Example() {
 
       <p className="text-xs text-muted-foreground">
         <code className="font-mono">value=&#123;null&#125;</code> puts the bar
-        in indeterminate state — useful when task duration is unknown.
+        in indeterminate state, useful when task duration is unknown.
       </p>
     </div>
   )

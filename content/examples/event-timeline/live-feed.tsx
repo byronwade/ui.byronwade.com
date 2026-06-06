@@ -6,7 +6,7 @@ import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
 const pool: TimelineEvent[] = [
   {
     title: "Request received",
-    description: "POST /api/process — 1.2 KB payload",
+    description: "POST /api/process, 1.2 KB payload",
     tone: "neutral",
   },
   {
@@ -26,7 +26,7 @@ const pool: TimelineEvent[] = [
   },
   {
     title: "Processing",
-    description: "Step 1/3 — parsing input data",
+    description: "Step 1/3, parsing input data",
     tone: "info",
   },
   {
@@ -41,7 +41,7 @@ const pool: TimelineEvent[] = [
   },
   {
     title: "Webhook dispatched",
-    description: "Callback URL notified — 200 OK",
+    description: "Callback URL notified, 200 OK",
     tone: "success",
   },
 ]
@@ -82,7 +82,7 @@ export default function Example() {
         </button>
       </div>
       <p className="mb-4 text-xs text-muted-foreground">
-        New events prepend to the top — most recent first.
+        New events prepend to the top, most recent first.
       </p>
       <EventTimeline events={events} />
     </div>

@@ -1,15 +1,16 @@
 import type { Metadata } from "next"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { DocsIntro, DocsProse } from "@/app/(docs)/_components/docs-prose"
 
 export const metadata: Metadata = {
-  title: "MCP — byronwade/ui",
+  title: "MCP, byronwade/ui",
   description:
     "The byronwade/ui MCP server gives an AI agent live access to components, tokens, the design rule, and a real-time on-system check.",
 }
 
 /* ---------------------------------------------------------------------------
-   MCP docs — a single-page reference for the @byronwade/mcp server.
+   MCP docs, a single-page reference for the @byronwade/mcp server.
    Shell mirrors installation/page.tsx: token-only classes, font-medium
    headings, font-mono labels, CodeBlock for all code.
 --------------------------------------------------------------------------- */
@@ -67,15 +68,15 @@ export default function McpPage() {
             Tooling · MCP Server
           </p>
           <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">
-            MCP — byronwade/ui
+            MCP, byronwade/ui
           </h1>
-          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
+          <DocsIntro>
             The <code className="font-mono text-[13px]">@byronwade/mcp</code>{" "}
             server gives an AI agent live access to every component, the full
-            token set, the design rule, and a real-time on-system check — so the
+            token set, the design rule, and a real-time on-system check, so the
             agent authors code that is always on-system, without needing a copy
             of the registry embedded in its context.
-          </p>
+          </DocsIntro>
         </div>
       </section>
 
@@ -90,7 +91,7 @@ export default function McpPage() {
           </h2>
           <p className="mb-6 max-w-xl text-sm leading-relaxed text-muted-foreground text-pretty">
             Drop this config into your MCP host (Cursor, Windsurf, Claude
-            Desktop, or any MCP-compatible client). No global install needed —{" "}
+            Desktop, or any MCP-compatible client). No global install needed,{" "}
             <code className="font-mono text-[13px]">npx</code> pulls the package
             on first use.
           </p>
@@ -108,7 +109,7 @@ export default function McpPage() {
         </h2>
         <p className="mb-8 max-w-xl text-sm leading-relaxed text-muted-foreground text-pretty">
           Every tool is read-only. The server never writes to the
-          consumer&apos;s project — it only surfaces information the agent needs
+          consumer&apos;s project, it only surfaces information the agent needs
           to stay on-system.
         </p>
         <ul className="space-y-4">

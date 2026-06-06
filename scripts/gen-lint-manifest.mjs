@@ -5,6 +5,11 @@ import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..")
+
+function utilityBase(sel) {
+  return sel.replace(/^\./, "").trim().split(/\s+/)[0]
+}
+
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"))
 const foundation = registry.items.find((i) => i.name === "foundation")
 
@@ -49,7 +54,7 @@ for (const name of colorTokens) {
 const utilities = [
   ...Object.keys(foundation.css?.["@layer utilities"] ?? {}),
   ...Object.keys(foundation.css ?? {}).filter((k) => k.startsWith(".")),
-].map((sel) => sel.replace(/^\./, ""))
+].map(utilityBase)
 
 const componentTypes = new Set(["registry:ui", "registry:component"])
 const components = registry.items

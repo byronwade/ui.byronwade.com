@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 /**
  * The `title` prop accepts any ReactNode. This example shows compound title
- * markup — an icon + text combo — demonstrating that the h1 wraps arbitrary
+ * markup, an icon + text combo, demonstrating that the h1 wraps arbitrary
  * children without breaking alignment.
  */
 export default function Example() {

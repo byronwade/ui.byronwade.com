@@ -1,7 +1,7 @@
 import { Clock, Globe, Hash } from "lucide-react"
 import { StatCard } from "@/components/stat-card"
 
-/** Cards that display a value and hint without any delta indicator — useful for absolute metrics. */
+/** Cards that display a value and hint without any delta indicator, useful for absolute metrics. */
 export default function Example() {
   return (
     <div className="grid grid-cols-3 gap-4 p-8 max-w-2xl">

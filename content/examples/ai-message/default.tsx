@@ -24,8 +24,8 @@ export default function Example() {
         <MessageContent>
           <MessageResponse>
             {[
-              "Override a single variable. The entire accent — rings, the primary",
-              "chart line, active states, and success — follows `--brand`:",
+              "Override a single variable. The entire accent, rings, the primary",
+              "chart line, active states, and success, follows `--brand`:",
               "",
               "```css",
               ":root { --brand: oklch(0.55 0.20 25); }",

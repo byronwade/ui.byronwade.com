@@ -49,7 +49,7 @@ export default function Example() {
             </StatusPill>
           </div>
           <p className="mt-1 text-xs text-muted-foreground">
-            Last heartbeat 2 seconds ago — processing batch 47 of 120.
+            Last heartbeat 2 seconds ago, processing batch 47 of 120.
           </p>
         </div>
       </div>

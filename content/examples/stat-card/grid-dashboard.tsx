@@ -3,7 +3,7 @@ import { StatCard } from "@/components/stat-card"
 
 /**
  * A realistic four-card dashboard grid showing how StatCards compose
- * together as a summary row — the most common real-world usage.
+ * together as a summary row, the most common real-world usage.
  */
 export default function Example() {
   return (

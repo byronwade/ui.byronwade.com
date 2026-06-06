@@ -40,7 +40,7 @@ const products = [
   { name: "Operator", desc: "AI receptionist", mark: "O" },
 ]
 
-/** A product switcher blooming from the dock — the SignalRoute launcher design. */
+/** A product switcher blooming from the dock, the SignalRoute launcher design. */
 export default function Example() {
   const [open, setOpen] = React.useState(false)
   return (

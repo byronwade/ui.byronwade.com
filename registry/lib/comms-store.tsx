@@ -3,7 +3,7 @@
 import * as React from "react"
 
 /**
- * In-memory messaging backend for the Messages Cockpit layout — seeded mock data
+ * In-memory messaging backend for the Messages Cockpit layout, seeded mock data
  * + React reducer with simulated commit latency and an opt-in fake realtime feed.
  * This is the swappable boundary: pass `source` to replace the seed, or implement
  * the same actions/realtime against a real API behind `MessagesProvider`.
@@ -47,7 +47,7 @@ export interface CommsSource {
   messages: Record<string, Message[]>
 }
 
-/** Deterministic seed — fixed timestamps so renders/tests are stable. */
+/** Deterministic seed, fixed timestamps so renders/tests are stable. */
 const BASE = 1_700_000_000_000
 const min = (n: number) => n * 60_000
 
@@ -90,7 +90,7 @@ function seedSource(): CommsSource {
       id: "v1",
       contact: SEED_CONTACTS[0],
       number: "Main line",
-      lastMessage: "Sounds good — talk then.",
+      lastMessage: "Sounds good, talk then.",
       unread: 2,
       flags: ["pinned"],
       updatedAt: BASE - min(2),
@@ -149,8 +149,8 @@ function seedSource(): CommsSource {
   const messages: Record<string, Message[]> = {
     v1: [
       mk("v1", 0, "in", "Hey! Are we still on for Thursday?"),
-      mk("v1", 1, "out", "Yes — 2pm works."),
-      mk("v1", 2, "in", "Sounds good — talk then."),
+      mk("v1", 1, "out", "Yes, 2pm works."),
+      mk("v1", 2, "in", "Sounds good, talk then."),
     ],
     v2: [
       mk("v2", 0, "out", "Here's the updated quote."),

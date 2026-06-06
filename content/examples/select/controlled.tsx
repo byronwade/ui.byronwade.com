@@ -35,20 +35,20 @@ export default function Example() {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Americas</SelectLabel>
-              <SelectItem value="usd">USD — US Dollar</SelectItem>
-              <SelectItem value="cad">CAD — Canadian Dollar</SelectItem>
+              <SelectItem value="usd">USD, US Dollar</SelectItem>
+              <SelectItem value="cad">CAD, Canadian Dollar</SelectItem>
             </SelectGroup>
             <SelectSeparator />
             <SelectGroup>
               <SelectLabel>Europe</SelectLabel>
-              <SelectItem value="eur">EUR — Euro</SelectItem>
-              <SelectItem value="gbp">GBP — British Pound</SelectItem>
+              <SelectItem value="eur">EUR, Euro</SelectItem>
+              <SelectItem value="gbp">GBP, British Pound</SelectItem>
             </SelectGroup>
             <SelectSeparator />
             <SelectGroup>
               <SelectLabel>Asia-Pacific</SelectLabel>
-              <SelectItem value="jpy">JPY — Japanese Yen</SelectItem>
-              <SelectItem value="aud">AUD — Australian Dollar</SelectItem>
+              <SelectItem value="jpy">JPY, Japanese Yen</SelectItem>
+              <SelectItem value="aud">AUD, Australian Dollar</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

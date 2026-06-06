@@ -6,7 +6,7 @@ import { Loader } from "@/components/ai-elements/loader"
 export default function Example() {
   return (
     <div className="flex min-h-[200px] flex-col items-center justify-center gap-6 bg-background p-8">
-      {/* Default — muted-foreground sweep, as a status line */}
+      {/* Default, muted-foreground sweep, as a status line */}
       <span className="inline-flex items-center gap-2">
         <Loader size={16} />
         <Shimmer>Generating response…</Shimmer>

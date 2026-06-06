@@ -18,14 +18,14 @@ const tasks = [
     icon: AlertCircle,
     color: "text-destructive",
     label: "Run integration tests",
-    meta: "Blocked — waiting on staging",
+    meta: "Blocked, waiting on staging",
   },
 ]
 
 export default function Example() {
   return (
     <div className="flex flex-wrap gap-6 p-8 bg-background items-start justify-center">
-      {/* Content-only: no header, no footer — just a clean container */}
+      {/* Content-only: no header, no footer, just a clean container */}
       <Card className="w-72">
         <CardContent>
           <p className="text-sm font-medium text-foreground mb-3">

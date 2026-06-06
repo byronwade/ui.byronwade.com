@@ -51,7 +51,7 @@ export default function Example() {
           />
           <SettingRow
             title="Passkey login"
-            description="Sign in with a device passkey — no password required."
+            description="Sign in with a device passkey, no password required."
             control={<Switch defaultChecked />}
           />
           <SettingRow

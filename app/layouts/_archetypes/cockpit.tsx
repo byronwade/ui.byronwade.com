@@ -1,12 +1,12 @@
 "use client"
 
-// Cockpit archetype — a dense operations console.
+// Cockpit archetype, a dense operations console.
 // uses: ScrollArea, Tabs, StatusDot, GradientAvatar, Badge, Separator, InputGroup, EventTimeline, Sparkline
 //
 // Design: a tri-pane command center in the Linear issue-view lineage. A slim icon rail,
 // a severity-coded incident list, and a detail pane that pairs tabbed content with a
 // structured properties rail (status, priority, assignee, blast-radius sparkline).
-// Density lives in behavior — keyboard hints, hover/active states, monospaced IDs.
+// Density lives in behavior, keyboard hints, hover/active states, monospaced IDs.
 import * as React from "react"
 import {
   Activity,

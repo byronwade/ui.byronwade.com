@@ -28,6 +28,11 @@ import { fileURLToPath } from "node:url"
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, "..")
 
+/** First class only — `.reading-prose p + p` documents as `reading-prose`. */
+function utilityBase(sel) {
+  return sel.replace(/^\./, "").trim().split(/\s+/)[0]
+}
+
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"))
 const rule = readFileSync(join(root, "registry/rules/byronwade-ui.mdc"), "utf8")
 
@@ -123,9 +128,7 @@ const utilityKeys = [
   ...Object.keys(foundation?.css?.["@layer utilities"] ?? {}),
   ...Object.keys(foundation?.css ?? {}).filter((k) => k.startsWith(".")),
 ]
-const houseUtilities = [...new Set(utilityKeys)].map((sel) =>
-  sel.replace(/^\./, ""),
-)
+const houseUtilities = [...new Set(utilityKeys.map(utilityBase))]
 const undocumentedUtilities = houseUtilities.filter(
   (u) => !rule.includes("`" + u + "`"),
 )

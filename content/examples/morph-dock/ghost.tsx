@@ -6,7 +6,7 @@ import { BarChart3, Home, Inbox, Search, Settings } from "lucide-react"
 import { MorphDock } from "@/components/ui/morph-dock"
 
 /**
- * A "ghost" dock — `bare` drops the resting pill background and shadow, so the
+ * A "ghost" dock, `bare` drops the resting pill background and shadow, so the
  * items float free until a panel blooms. The bloomed panel still brings its own
  * surface, so the morph reads as a panel materialising out of thin air.
  */
@@ -69,7 +69,7 @@ export default function Example() {
             className="h-9 w-full rounded-lg bg-muted px-3 text-sm text-foreground outline-none placeholder:text-muted-foreground"
           />
           <p className="mt-2 px-1 text-[11px] text-muted-foreground">
-            No pill at rest — the panel brings its own surface.
+            No pill at rest, the panel brings its own surface.
           </p>
         </div>
       </MorphDock>

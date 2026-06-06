@@ -47,7 +47,8 @@ One component family per file. Composites compose primitives — never bespoke o
 
 Build on `@base-ui/react`; variants in a `cva()` block; **`data-slot`** on every rendered part;
 accept `className` and merge via **`cn()`** from `@/lib/utils`; tokens only for color; editorial
-typography (no `font-bold` on display/section). Ship a test (variants/states + `axe`) and an example.
+typography (no `font-bold` on display/section). Long-form copy uses **`reading-ui`** or
+**`reading-prose`** — not full-bleed `text-sm`. Ship a test (variants/states + `axe`) and an example.
 
 Copy `registry/ui/button.tsx` (primitive) or `registry/components/status-pill.tsx` (composite).
 

@@ -11,25 +11,25 @@ const delays = [
     label: "Instant",
     delay: 0,
     closeDelay: 0,
-    description: "No delay — opens immediately on hover.",
+    description: "No delay, opens immediately on hover.",
   },
   {
     label: "Short (300ms)",
     delay: 300,
     closeDelay: 200,
-    description: "Opens after 300ms — feels snappy.",
+    description: "Opens after 300ms, feels snappy.",
   },
   {
     label: "Default (600ms)",
     delay: 600,
     closeDelay: 300,
-    description: "Default 600ms delay — comfortable for reading.",
+    description: "Default 600ms delay, comfortable for reading.",
   },
   {
     label: "Long (1000ms)",
     delay: 1000,
     closeDelay: 500,
-    description: "Longer delay — prevents accidental triggers.",
+    description: "Longer delay, prevents accidental triggers.",
   },
 ]
 

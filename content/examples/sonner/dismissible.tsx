@@ -14,7 +14,7 @@ export default function Example() {
       <button
         className="rounded px-4 py-2 bg-primary text-primary-foreground"
         onClick={() =>
-          toast("Sticky notification — click × to close.", {
+          toast("Sticky notification, click × to close.", {
             duration: Infinity,
             dismissible: true,
           })

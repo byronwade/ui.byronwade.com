@@ -31,7 +31,7 @@ export default function Example() {
               },
               {
                 glyph: <GitMerge className="size-4" />,
-                title: "Merge blocked — review required",
+                title: "Merge blocked, review required",
                 meta: "0:53",
               },
             ],

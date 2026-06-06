@@ -4,7 +4,7 @@ import { examples } from "@/content/examples/registry";
 // Component previews for the catalog gallery cards (scaled inside a lazy iframe).
 // Mirrors app/preview/[slug] (archetypes/templates) but renders a component's
 // DEFAULT example, centered in a fixed-aspect canvas. flex + justify-center
-// centers fixed-size demos while full-bleed demos (w-full) still fill — and the
+// centers fixed-size demos while full-bleed demos (w-full) still fill, and the
 // card scales this whole canvas to fit, so nothing is top-anchored.
 export const dynamicParams = false;
 

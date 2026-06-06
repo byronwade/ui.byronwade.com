@@ -30,7 +30,7 @@ export default function Example() {
           variant="outline"
           onClickAsync={fail}
           loadingText="Submitting…"
-          errorText="Failed — retry"
+          errorText="Failed, retry"
         >
           Submit
         </Button>

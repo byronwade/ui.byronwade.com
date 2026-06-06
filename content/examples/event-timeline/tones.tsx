@@ -13,7 +13,7 @@ const events: TimelineEvent[] = [
   },
   {
     title: "Warning tone",
-    description: "Approaching rate limit — 80 % used.",
+    description: "Approaching rate limit, 80 % used.",
     tone: "warning",
   },
   {
@@ -23,7 +23,7 @@ const events: TimelineEvent[] = [
   },
   {
     title: "Neutral tone",
-    description: "No tone specified — default appearance.",
+    description: "No tone specified, default appearance.",
   },
 ]
 

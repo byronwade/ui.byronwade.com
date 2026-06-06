@@ -34,7 +34,24 @@ agent following that rule would produce identical-looking code.** That means:
 - **Editorial typography.** Hierarchy comes from size + tight tracking + the typeface, not weight:
   display/section headings stay `font-normal`/`font-medium`, never `font-bold`. Use `font-mono` for
   data (stats, timestamps, counts, IDs, `kbd`), and `font-serif` (`--font-serif`) only for long-form
-  prose / pull quotes.
+  prose / pull quotes — via `reading-prose` on essay surfaces, `reading-ui` on docs.
+- **Readability lanes (evidence-backed).** Web reading on emissive screens is not e-ink. The system
+  splits **UI chrome** from **reading surfaces** — never one type treatment for both.
+
+  | Surface                        | Treatment                                                     |
+  | ------------------------------ | ------------------------------------------------------------- |
+  | Dashboards, forms, nav, tables | `font-sans`, `text-sm`/`text-base`, body tight tracking       |
+  | Docs, help, release notes      | `reading-ui` — 65ch, 16px sans, 1.6 lh, `letter-spacing: 0`   |
+  | Essays, articles, manifestos   | `reading-prose` — 65ch, 18px serif, 1.7 lh, 1.5em `p + p` gap |
+  | Width only                     | `reading-measure` (65ch cap; never exceed **80ch**)           |
+  | Lead paragraph                 | `reading-lead` inside a reading lane                          |
+  | Secondary copy in prose        | `reading-muted` (not `text-muted-foreground` on body)         |
+  | Demo band below prose          | `reading-demo-break` or `DocsDemoSection`                     |
+
+  Left-align body copy. Token contrast only. No Bionic Reading, no e-ink sepia simulation, no
+  full-bleed `text-sm` for paragraphs users read. `marketing-layout` `article` and `docs-marketing`
+  variants bake in `reading-prose` / `reading-ui`. Full rationale: `/docs/readability`.
+
 - **Base UI + CVA + `data-slot`.** Primitives build on `@base-ui/react`. Variants/sizes live in a
   `cva(...)` block (see `registry/ui/button.tsx`), each part carries a `data-slot` attribute, and the
   radius scale (`rounded-sm`…`rounded-4xl`, all from `--radius`) is used instead of pixel radii.
@@ -46,8 +63,11 @@ agent following that rule would produce identical-looking code.** That means:
   `focus-visible:ring-ring`. Dark mode must come for free from tokens — never branch on a hardcoded
   color.
 - **House utilities** (`bg-grid`, `glow-brand`, `text-gradient(-brand)`, `mask-fade-x`, `full-bleed`,
-  `edge`, `scrollbar-thin`) live in `foundation`; reuse them instead of
-  re-implementing gradients/grids/shadows.
+  `edge`, `scrollbar-thin`, `reading-measure`, `reading-ui`, `reading-prose`, `reading-lead`,
+  `reading-muted`, `reading-demo-break`) live in `foundation`; reuse them instead of re-implementing
+  gradients/grids/shadows or one-off measure rules.
+- **Two surfaces** — Application UI vs marketing/editorial share one foundation; route by surface
+  (`content/catalog-surfaces.ts`), don't split registry packages.
 
 > If you add a new token, utility, or convention that consumers should follow, update
 > `registry/rules/byronwade-ui.mdc` in the same change so the shipped AI rule stays in sync.
@@ -58,6 +78,9 @@ agent following that rule would produce identical-looking code.** That means:
 - **Imports** — Registry files use consumer paths: `@/components/ui/…`, `@/components/…` (composites), `@/lib/…`.
 - **Primitives** — UI components are built on `@base-ui/react` with CVA variants, `data-slot` attributes, and Tailwind v4 utilities from the foundation theme.
 - **Composites** — Layout and pattern components live in `registry/components/` and compose UI primitives.
+- **Readability** — Long-form copy uses `reading-ui` or `reading-prose` (65ch, evidence-backed). UI
+  chrome stays `font-sans` + compact sizes. See `app/(docs)/docs/readability/page.tsx` and the
+  **Readability — two lanes** section in the shipped AI rule.
 - **Shipped AI rule** — `registry/rules/byronwade-ui.mdc` is published as the `design-rules` item (`@byronwade/design-rules`). It is the consumer-facing version of the Design DNA above; keep the two aligned.
 
 ## Code conventions

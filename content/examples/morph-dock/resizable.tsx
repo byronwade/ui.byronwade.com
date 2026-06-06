@@ -26,7 +26,7 @@ const items = [
 ]
 
 /**
- * `resizable` adds a corner grip — drag it to resize the panel; the morph box
+ * `resizable` adds a corner grip, drag it to resize the panel; the morph box
  * follows live. Combined with `draggable` it's a full detachable window.
  */
 export default function Example() {

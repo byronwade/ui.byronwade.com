@@ -29,7 +29,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params
   const meta = getPreviewMeta(slug)
-  return { title: meta ? `${meta.name} — preview` : "Preview" }
+  return { title: meta ? `${meta.name}, preview` : "Preview" }
 }
 
 /** Restrict re-skin overrides to a safe color/length subset (defence in depth;
