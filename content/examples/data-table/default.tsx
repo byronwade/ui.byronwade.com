@@ -11,6 +11,10 @@ import {
   type DataTableColumn,
   type DataTableSort,
 } from "@/components/data-table"
+import {
+  DemoEmptyState,
+  DemoErrorState,
+} from "@/app/(docs)/_components/demo-state-bits"
 
 type Product = {
   id: string
@@ -199,14 +203,7 @@ export default function Example() {
   if (state === "error") {
     return (
       <div className="rounded-xl bg-muted/40 p-1">
-        <div className="rounded-lg bg-destructive/5 p-10 text-center ring-1 ring-destructive/30">
-          <span className="mb-2 inline-flex rounded-md bg-destructive/10 px-2 py-1 text-xs font-medium text-destructive">
-            Error
-          </span>
-          <p className="text-sm text-muted-foreground">
-            Couldn&apos;t load products. Retry in a moment.
-          </p>
-        </div>
+        <DemoErrorState>Couldn&apos;t load products. Retry in a moment.</DemoErrorState>
       </div>
     )
   }
@@ -300,9 +297,9 @@ export default function Example() {
         rows={tableRows}
         loading={isLoading}
         emptyState={
-          <div className="py-10 text-center text-sm text-muted-foreground">
+          <DemoEmptyState className="border-0">
             No products match these filters yet.
-          </div>
+          </DemoEmptyState>
         }
         views={[{ id: "all", label: "All" }]}
         view={view}

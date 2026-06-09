@@ -21,4 +21,13 @@ describe("native demo-state exemplars", () => {
     expect(source).toContain('state === "empty"')
     expect(source).toContain('state === "error"')
   })
+
+  it("exemplars use the shared empty/error state helpers", () => {
+    const table = read("content/examples/data-table/default.tsx")
+    const feed = read("content/examples/event-timeline/default.tsx")
+    expect(table).toContain("DemoEmptyState")
+    expect(table).toContain("DemoErrorState")
+    expect(feed).toContain("DemoEmptyState")
+    expect(feed).toContain("DemoErrorState")
+  })
 })

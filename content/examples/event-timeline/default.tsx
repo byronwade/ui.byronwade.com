@@ -3,6 +3,10 @@
 import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useDemoState } from "@/lib/demo-viewport"
+import {
+  DemoEmptyState,
+  DemoErrorState,
+} from "@/app/(docs)/_components/demo-state-bits"
 
 const events: TimelineEvent[] = [
   {
@@ -50,18 +54,9 @@ export default function Example() {
           ))}
         </div>
       ) : state === "empty" ? (
-        <div className="rounded-lg border border-border/70 py-10 text-center text-sm text-muted-foreground">
-          No deployment events yet.
-        </div>
+        <DemoEmptyState>No deployment events yet.</DemoEmptyState>
       ) : state === "error" ? (
-        <div className="rounded-lg bg-destructive/5 py-10 text-center ring-1 ring-destructive/30">
-          <span className="mb-2 inline-flex rounded-md bg-destructive/10 px-2 py-1 text-xs font-medium text-destructive">
-            Error
-          </span>
-          <p className="text-sm text-muted-foreground">
-            Couldn&apos;t load the event feed.
-          </p>
-        </div>
+        <DemoErrorState>Couldn&apos;t load the event feed.</DemoErrorState>
       ) : (
         <EventTimeline events={events} />
       )}
