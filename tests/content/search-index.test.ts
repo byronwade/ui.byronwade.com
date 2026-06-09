@@ -35,7 +35,9 @@ describe("search index — variants", () => {
       // The component must exist and must have an authored variants array containing "default"
       expect(doc, `no component found for slug "${slug}"`).toBeTruthy()
       const authoredVariants = doc!.variants ?? []
-      const hasAuthoredDefault = authoredVariants.some((v) => v.id === "default")
+      const hasAuthoredDefault = authoredVariants.some(
+        (v) => v.id === "default",
+      )
       expect(
         hasAuthoredDefault,
         `search entry ${entry.href} appears to be synthetic — "${slug}" has no authored variant with id "default"`,
