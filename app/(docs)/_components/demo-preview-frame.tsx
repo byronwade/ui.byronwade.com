@@ -157,14 +157,14 @@ const STATE_OPTIONS: {
   },
 ]
 
-const GROUP_TOOLTIPS = {
+const GROUP_TOOLTIPS: Record<string, string> = {
   View: "Switch between preview and code.",
   Device: "Preview the example at different viewport widths.",
   Density: "Adjust the example density.",
   Frame: "Toggle the example frame treatment.",
   Depth: "Toggle the example depth treatment.",
   State: "Toggle the example state treatment.",
-} satisfies Record<string, string>
+}
 
 export function readInitialDemoContext(
   searchParams: Pick<URLSearchParams, "get">,
