@@ -19,6 +19,8 @@
     "validate": "node scripts/check-registry.mjs && node scripts/check-examples.mjs && node scripts/check-rule.mjs && node scripts/check-conventions.mjs && node scripts/check-docs-nav.mjs && npm run check:format && npm run check:tests && node scripts/check-lint-manifest.mjs && node scripts/check-mcp-data.mjs && node scripts/check-llms-txt.mjs && npm run build:lint && npm run test:packages && npm run lint:on-system",
     "predev": "node scripts/sync-registry.mjs",
     "dev": "next dev",
+    "clean": "rm -rf .next .vitest-coverage .turbo",
+    "dev:clean": "npm run clean && npm run dev",
     "registry:build": "shadcn build",
     "gen:examples": "node scripts/gen-examples-registry.mjs",
     "prebuild": "node scripts/gen-lint-manifest.mjs && node --import tsx scripts/gen-mcp-data.mjs && node --import tsx scripts/gen-llms-txt.mjs && node scripts/gen-all-item.mjs && shadcn build && node scripts/sync-registry.mjs",

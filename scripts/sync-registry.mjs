@@ -1,11 +1,23 @@
 // Reads registry.json: copies each item's files to its `target` inside the app,
 // and generates app/foundation.generated.css from the foundation item's cssVars.
 // Source of truth is registry/ ; the synced files are generated (git-ignored).
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from "node:fs"
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs"
 import { dirname, join } from "node:path"
 
 const root = process.cwd()
 const reg = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"))
+
+// Write only when content actually differs. Rewriting an identical file still
+// bumps its mtime, which makes Turbopack treat it as changed and re-process it
+// on every `npm run dev` — that churn accumulates and bloats `.next/dev`
+// (seen at 9.3 GB → OOM crash). Skipping unchanged writes keeps the dev cache
+// stable across launches. See docs/superpowers memory on the dev-server cache.
+function writeIfChanged(dest, content) {
+  if (existsSync(dest) && readFileSync(dest, "utf8") === content) return false
+  mkdirSync(dirname(dest), { recursive: true })
+  writeFileSync(dest, content)
+  return true
+}
 
 // Only sync files that belong in the app tree (components/*, lib/*). Items like
 // `registry:file` (e.g. the design-rules Cursor rule) ship to a consumer project
@@ -13,14 +25,15 @@ const reg = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"))
 const isAppTarget = (target) =>
   target.startsWith("components/") || target.startsWith("lib/")
 
-let copied = 0
+let written = 0
+let skipped = 0
 for (const item of reg.items) {
   for (const f of item.files ?? []) {
     if (!isAppTarget(f.target)) continue
     const dest = join(root, f.target)
-    mkdirSync(dirname(dest), { recursive: true })
-    copyFileSync(join(root, f.path), dest)
-    copied++
+    const src = readFileSync(join(root, f.path), "utf8")
+    if (writeIfChanged(dest, src)) written++
+    else skipped++
   }
 }
 
@@ -51,8 +64,12 @@ if (foundation.css) {
   css += "\n" + emitCss(foundation.css)
 }
 
-writeFileSync(join(root, "app/foundation.generated.css"), css)
+const cssChanged = writeIfChanged(
+  join(root, "app/foundation.generated.css"),
+  css,
+)
 
 console.log(
-  `sync-registry: copied ${copied} files + app/foundation.generated.css`,
+  `sync-registry: ${written} written, ${skipped} unchanged` +
+    `${cssChanged ? " + foundation.css" : ""}`,
 )
