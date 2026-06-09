@@ -1021,6 +1021,26 @@
       ]
     },
     {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Structured empty-state composite — centered header (media/title/description) and a CTA content slot, with default and muted-chip icon media variants.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/empty.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/empty.tsx"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
@@ -5422,6 +5442,7 @@
         "@byronwade/native-select",
         "@byronwade/badge",
         "@byronwade/card",
+        "@byronwade/empty",
         "@byronwade/input",
         "@byronwade/textarea",
         "@byronwade/label",

@@ -249,6 +249,7 @@ import DropdownMenuWithShortcuts from "./dropdown-menu/with-shortcuts";
 import DropdownMenuWithSubmenu from "./dropdown-menu/with-submenu";
 import EconomicCalendarDefault from "./economic-calendar/default";
 import EditorDefault from "./editor/default";
+import EmptyDefault from "./empty/default";
 import EmptyStateDefault from "./empty-state/default";
 import EmptyStateCompact from "./empty-state/compact";
 import EmptyStateErrorState from "./empty-state/error-state";
@@ -1114,6 +1115,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "editor": [
     { name: "Default", file: "editor/default.tsx", Component: EditorDefault },
+  ],
+  "empty": [
+    { name: "Default", file: "empty/default.tsx", Component: EmptyDefault },
   ],
   "empty-state": [
     { name: "Default", file: "empty-state/default.tsx", Component: EmptyStateDefault },
