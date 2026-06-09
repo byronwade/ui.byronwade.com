@@ -119,20 +119,20 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           <button
             type="button"
             aria-label="Previous cards"
-            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-muted disabled:opacity-50"
+            className="relative z-40 flex size-9 items-center justify-center rounded-full bg-muted edge text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
             onClick={scrollLeft}
             disabled={!canScrollLeft}
           >
-            <ArrowLeft className="h-6 w-6 text-muted-foreground" />
+            <ArrowLeft className="size-4" />
           </button>
           <button
             type="button"
             aria-label="Next cards"
-            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-muted disabled:opacity-50"
+            className="relative z-40 flex size-9 items-center justify-center rounded-full bg-muted edge text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
             onClick={scrollRight}
             disabled={!canScrollRight}
           >
-            <ArrowRight className="h-6 w-6 text-muted-foreground" />
+            <ArrowRight className="size-4" />
           </button>
         </div>
       </div>
@@ -197,19 +197,19 @@ export const Card = ({
               exit={{ opacity: 0 }}
               ref={containerRef}
               layoutId={layout ? `card-${card.title}` : undefined}
-              className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-card p-4 font-sans md:p-10"
+              className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-card edge p-4 md:p-10"
             >
               <button
                 type="button"
                 aria-label="Close"
-                className="sticky top-4 right-0 ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-foreground"
+                className="sticky top-4 right-0 ml-auto flex size-8 items-center justify-center rounded-full bg-foreground text-background outline-none transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-ring/50"
                 onClick={handleClose}
               >
-                <X className="h-6 w-6 text-background" />
+                <X className="size-4" />
               </button>
               <motion.p
                 layoutId={layout ? `category-${card.title}` : undefined}
-                className="text-base font-medium text-foreground"
+                className="text-sm font-medium text-muted-foreground"
               >
                 {card.category}
               </motion.p>
@@ -228,19 +228,19 @@ export const Card = ({
         type="button"
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
-        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-muted md:h-[40rem] md:w-96"
+        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-muted outline-none transition focus-visible:ring-3 focus-visible:ring-ring/50 md:h-[40rem] md:w-96"
       >
         <div className="scrim-top pointer-events-none absolute inset-x-0 top-0 z-30 h-full" />
         <div className="relative z-40 p-8">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
-            className="text-left font-sans text-sm font-medium text-background md:text-base"
+            className="text-left text-sm font-medium text-background md:text-base"
           >
             {card.category}
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
-            className="mt-2 max-w-xs text-left font-sans text-xl font-medium tracking-tight text-balance text-background md:text-3xl"
+            className="mt-2 max-w-xs text-left text-xl font-medium tracking-tight text-balance text-background md:text-3xl"
           >
             {card.title}
           </motion.p>
