@@ -7,7 +7,7 @@
  */
 
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { axe } from "vitest-axe";
 
 import { CandlestickChart } from "@/components/ui/candlestick-chart";
@@ -141,5 +141,127 @@ describe("CandlestickChart", () => {
       <CandlestickChart data={twoCandles} aria-label="Candlestick chart" />,
     );
     expect(await axe(container)).toHaveNoViolations();
+  });
+});
+
+describe("CandlestickChart — interactivity", () => {
+  function stubSvgRect(svg: Element) {
+    vi.spyOn(svg, "getBoundingClientRect").mockReturnValue({
+      x: 0,
+      y: 0,
+      left: 0,
+      top: 0,
+      right: 480,
+      bottom: 280,
+      width: 480,
+      height: 280,
+      toJSON: () => ({}),
+    } as DOMRect);
+  }
+
+  it("reports the candle under the pointer when interactive", () => {
+    const onCandleHover = vi.fn();
+    const { container } = render(
+      <CandlestickChart
+        data={twoCandles}
+        interactive
+        onCandleHover={onCandleHover}
+      />,
+    );
+    const svg = container.querySelector("svg")!;
+    stubSvgRect(svg);
+    fireEvent.pointerMove(svg, { clientX: 10 });
+    const [candleArg, indexArg] = onCandleHover.mock.calls.at(-1)!;
+    expect(indexArg).toBe(0);
+    expect(candleArg).toEqual(twoCandles[0]);
+  });
+
+  it("resolves a later candle from a rightward pointer position", () => {
+    const onCandleHover = vi.fn();
+    const { container } = render(
+      <CandlestickChart
+        data={twoCandles}
+        interactive
+        onCandleHover={onCandleHover}
+      />,
+    );
+    const svg = container.querySelector("svg")!;
+    stubSvgRect(svg);
+    fireEvent.pointerMove(svg, { clientX: 470 });
+    const [candleArg, indexArg] = onCandleHover.mock.calls.at(-1)!;
+    expect(indexArg).toBe(1);
+    expect(candleArg).toEqual(twoCandles[1]);
+  });
+
+  it("clears the hovered candle on pointer leave", () => {
+    const onCandleHover = vi.fn();
+    const { container } = render(
+      <CandlestickChart
+        data={twoCandles}
+        interactive
+        onCandleHover={onCandleHover}
+      />,
+    );
+    const svg = container.querySelector("svg")!;
+    stubSvgRect(svg);
+    fireEvent.pointerMove(svg, { clientX: 10 });
+    fireEvent.pointerLeave(svg);
+    expect(onCandleHover).toHaveBeenLastCalledWith(null, null);
+  });
+
+  it("ignores pointer events when not interactive", () => {
+    const onCandleHover = vi.fn();
+    const { container } = render(
+      <CandlestickChart data={twoCandles} onCandleHover={onCandleHover} />,
+    );
+    const svg = container.querySelector("svg")!;
+    stubSvgRect(svg);
+    fireEvent.pointerMove(svg, { clientX: 10 });
+    fireEvent.pointerLeave(svg);
+    expect(onCandleHover).not.toHaveBeenCalled();
+  });
+
+  it("reports no candle when interacting over empty data", () => {
+    const onCandleHover = vi.fn();
+    const { container } = render(
+      <CandlestickChart data={[]} interactive onCandleHover={onCandleHover} />,
+    );
+    const svg = container.querySelector("svg")!;
+    stubSvgRect(svg);
+    fireEvent.pointerMove(svg, { clientX: 10 });
+    expect(onCandleHover).toHaveBeenLastCalledWith(null, null);
+  });
+
+  it("measures its container via ResizeObserver when fill is set", () => {
+    const observe = vi.fn();
+    const disconnect = vi.fn();
+    class ResizeObserverMock {
+      constructor(public cb: () => void) {}
+      observe = observe;
+      disconnect = disconnect;
+    }
+    vi.stubGlobal("ResizeObserver", ResizeObserverMock);
+    const rectSpy = vi
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockReturnValue({
+        x: 0,
+        y: 0,
+        left: 0,
+        top: 0,
+        right: 600,
+        bottom: 320,
+        width: 600,
+        height: 320,
+        toJSON: () => ({}),
+      } as DOMRect);
+
+    const { container } = render(<CandlestickChart data={twoCandles} fill />);
+    expect(
+      container.querySelector('[data-slot="candlestick-chart"]'),
+    ).not.toBeNull();
+    expect(observe).toHaveBeenCalled();
+
+    rectSpy.mockRestore();
+    vi.unstubAllGlobals();
   });
 });

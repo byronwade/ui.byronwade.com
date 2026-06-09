@@ -5,7 +5,7 @@
  */
 
 import * as React from "react"
-import { render, screen } from "@testing-library/react"
+import { render, screen, waitFor } from "@testing-library/react"
 import { axe } from "vitest-axe"
 import { beforeEach, describe, expect, it, vi } from "vitest"
 
@@ -189,5 +189,68 @@ describe("LightweightChart", () => {
       <LightweightChart data={twoCandles} aria-label="Market chart" />,
     )
     expect(await axe(container)).toHaveNoViolations()
+  })
+
+  it("re-applies theme options when the document theme class changes", async () => {
+    render(<LightweightChart data={twoCandles} />)
+    applyOptions.mockClear()
+    document.documentElement.classList.add("dark")
+    await waitFor(() => expect(applyOptions).toHaveBeenCalled())
+    document.documentElement.classList.remove("dark")
+  })
+
+  it("observes the container with ResizeObserver when fill cannot size on mount", () => {
+    // Force a zero-size box so mountChart bails and the fill ResizeObserver
+    // fallback path runs.
+    ;(
+      HTMLElement.prototype.getBoundingClientRect as ReturnType<typeof vi.fn>
+    ).mockReturnValue({
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      toJSON: () => ({}),
+    } as DOMRect)
+
+    let resizeCb: (() => void) | undefined
+    const observe = vi.fn()
+    const disconnect = vi.fn()
+    class ResizeObserverMock {
+      constructor(cb: () => void) {
+        resizeCb = cb
+      }
+      observe = observe
+      disconnect = disconnect
+    }
+    vi.stubGlobal("ResizeObserver", ResizeObserverMock)
+
+    render(<LightweightChart data={twoCandles} fill />)
+    expect(createChart).not.toHaveBeenCalled()
+    expect(observe).toHaveBeenCalled()
+
+    // Now give the box a size and fire the observer: mountChart succeeds and
+    // the observer disconnects itself.
+    ;(
+      HTMLElement.prototype.getBoundingClientRect as ReturnType<typeof vi.fn>
+    ).mockReturnValue({
+      x: 0,
+      y: 0,
+      width: 600,
+      height: 320,
+      top: 0,
+      left: 0,
+      right: 600,
+      bottom: 320,
+      toJSON: () => ({}),
+    } as DOMRect)
+    resizeCb?.()
+    expect(createChart).toHaveBeenCalled()
+    expect(disconnect).toHaveBeenCalled()
+
+    vi.unstubAllGlobals()
   })
 })
