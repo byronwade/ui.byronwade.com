@@ -1,10 +1,11 @@
 "use client"
 
+import * as React from "react"
 import { useMemo } from "react"
+import { Field as FieldPrimitive } from "@base-ui/react/field"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
@@ -52,7 +53,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const fieldVariants = cva(
-  "group/field flex w-full gap-2 data-[invalid=true]:text-destructive",
+  "group/field flex w-full gap-2 data-invalid:text-destructive",
   {
     variants: {
       orientation: {
@@ -73,10 +74,10 @@ function Field({
   className,
   orientation = "vertical",
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
+}: Omit<React.ComponentProps<typeof FieldPrimitive.Root>, "className"> &
+  VariantProps<typeof fieldVariants> & { className?: string }) {
   return (
-    <div
-      role="group"
+    <FieldPrimitive.Root
       data-slot="field"
       data-orientation={orientation}
       className={cn(fieldVariants({ orientation }), className)}
@@ -101,12 +102,14 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
 function FieldLabel({
   className,
   ...props
-}: React.ComponentProps<typeof Label>) {
+}: Omit<React.ComponentProps<typeof FieldPrimitive.Label>, "className"> & {
+  className?: string
+}) {
   return (
-    <Label
+    <FieldPrimitive.Label
       data-slot="field-label"
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
+        "group/field-label peer/field-label flex w-fit gap-2 text-sm leading-snug font-medium select-none group-data-disabled/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         className,
       )}
@@ -120,7 +123,7 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="field-label"
       className={cn(
-        "flex w-fit items-center gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50",
+        "flex w-fit items-center gap-2 text-sm font-medium group-data-disabled/field:opacity-50",
         className,
       )}
       {...props}
@@ -128,9 +131,17 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
+function FieldDescription({
+  className,
+  ...props
+}: Omit<
+  React.ComponentProps<typeof FieldPrimitive.Description>,
+  "className"
+> & {
+  className?: string
+}) {
   return (
-    <p
+    <FieldPrimitive.Description
       data-slot="field-description"
       className={cn(
         "text-left text-sm leading-normal font-normal text-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
@@ -178,7 +189,12 @@ function FieldError({
   children,
   errors,
   ...props
-}: React.ComponentProps<"div"> & {
+}: Omit<
+  React.ComponentProps<typeof FieldPrimitive.Error>,
+  "className" | "match" | "children"
+> & {
+  className?: string
+  children?: React.ReactNode
   errors?: Array<{ message?: string } | undefined>
 }) {
   const content = useMemo(() => {
@@ -213,14 +229,15 @@ function FieldError({
   }
 
   return (
-    <div
+    <FieldPrimitive.Error
+      match
       role="alert"
       data-slot="field-error"
       className={cn("text-sm font-normal text-destructive", className)}
       {...props}
     >
       {content}
-    </div>
+    </FieldPrimitive.Error>
   )
 }
 

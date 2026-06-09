@@ -160,9 +160,75 @@ describe("Field — extended parts", () => {
   })
 })
 
+/**
+ * Auto-wiring: a Field that does NOT manually set htmlFor/id. Base UI's Field
+ * primitive associates the label with the control and chains description + error
+ * into the control's aria-describedby automatically.
+ */
+function AutoWiredField({
+  invalid,
+  error,
+}: {
+  invalid?: boolean
+  error?: React.ComponentProps<typeof FieldError>["errors"]
+}) {
+  return (
+    <FieldGroup>
+      <Field invalid={invalid}>
+        <FieldLabel>Username</FieldLabel>
+        <Input type="text" />
+        <FieldDescription>Pick something memorable.</FieldDescription>
+        <FieldError errors={error} />
+      </Field>
+    </FieldGroup>
+  )
+}
+
+describe("Field — auto-wiring (Base UI)", () => {
+  it("associates the label with the control without manual htmlFor/id", () => {
+    render(<AutoWiredField />)
+    const control = screen.getByLabelText("Username")
+    expect(control).toBe(screen.getByRole("textbox"))
+  })
+
+  it("chains the description into the control's aria-describedby", () => {
+    const { container } = render(<AutoWiredField />)
+    const control = screen.getByRole("textbox")
+    const description = container.querySelector(
+      '[data-slot="field-description"]',
+    )
+    expect(description?.id).toBeTruthy()
+    expect(control.getAttribute("aria-describedby")).toContain(description!.id)
+  })
+
+  it("marks the control invalid and chains the error into aria-describedby", () => {
+    const { container } = render(
+      <AutoWiredField invalid error={[{ message: "Username is taken" }]} />,
+    )
+    const control = screen.getByRole("textbox")
+    const fieldError = container.querySelector('[data-slot="field-error"]')
+    expect(control).toHaveAttribute("aria-invalid", "true")
+    expect(fieldError?.id).toBeTruthy()
+    expect(control.getAttribute("aria-describedby")).toContain(fieldError!.id)
+  })
+
+  it("drives the field's data-invalid state for styling", () => {
+    const { container } = render(<AutoWiredField invalid />)
+    const field = container.querySelector('[data-slot="field"]')
+    expect(field).toHaveAttribute("data-invalid")
+  })
+})
+
 describe("Field — accessibility", () => {
   it("has no axe violations", async () => {
     const { container } = render(<EmailField />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+
+  it("has no axe violations in the invalid state", async () => {
+    const { container } = render(
+      <AutoWiredField invalid error={[{ message: "Username is taken" }]} />,
+    )
     expect(await axe(container)).toHaveNoViolations()
   })
 })
