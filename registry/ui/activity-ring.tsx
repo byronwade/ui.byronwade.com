@@ -58,6 +58,13 @@ export type RingSegment = {
   href?: string
 }
 
+/**
+ * Object state expressed *inside* the ring — no companion text needed.
+ * `loading` shows a skeleton, `error` shows a destructive ring with "N/A",
+ * and `default`/`success`/`empty` render the data you pass (empty = zeroed).
+ */
+export type RingState = "default" | "loading" | "empty" | "success" | "error"
+
 type ScoreProps = {
   /** Single value for the score ring (0–`max`). */
   value: number
@@ -69,6 +76,8 @@ type ScoreProps = {
   label?: string
   size?: number
   thickness?: number
+  /** Object state rendered inside the ring (see `RingState`). */
+  state?: RingState
   className?: string
   "aria-label"?: string
 }
@@ -87,6 +96,8 @@ type SegmentsProps = {
   verdict?: boolean
   /** Optional description line shown below the ring. */
   caption?: string
+  /** Object state rendered inside the ring (see `RingState`). */
+  state?: RingState
   className?: string
 }
 
@@ -116,20 +127,44 @@ function ScoreRing({
   label,
   size = 160,
   thickness = 10,
+  state = "default",
   className,
   "aria-label": ariaLabel,
 }: ScoreProps) {
+  // Loading — a pulsing skeleton disc at the ring's exact footprint.
+  if (state === "loading") {
+    return (
+      <div
+        data-slot="activity-ring"
+        data-state="loading"
+        role="img"
+        aria-busy
+        aria-label={ariaLabel ?? "Loading"}
+        className={cn("relative inline-grid place-items-center", className)}
+        style={{ width: size, height: size }}
+      >
+        <div className="size-full animate-pulse rounded-full bg-muted" />
+      </div>
+    )
+  }
+
+  // Error — a destructive ring with "N/A" instead of a number.
+  const isError = state === "error"
   const pct = Math.max(0, Math.min(100, (value / max) * 100))
-  const t = tone ?? scoreTone(pct)
+  const t = isError ? "danger" : (tone ?? scoreTone(pct))
   const r = (size - thickness) / 2
   const c = 2 * Math.PI * r
-  const offset = c - (pct / 100) * c
+  const offset = isError ? 0 : c - (pct / 100) * c
   return (
     <div
       data-slot="activity-ring"
+      data-state={state}
       role="img"
       aria-label={
-        ariaLabel ?? `${Math.round(value)}${label ? ` ${label}` : ""}`
+        ariaLabel ??
+        (isError
+          ? `No data${label ? ` ${label}` : ""}`
+          : `${Math.round(value)}${label ? ` ${label}` : ""}`)
       }
       className={cn("relative inline-grid place-items-center", className)}
       style={{ width: size, height: size }}
@@ -163,8 +198,13 @@ function ScoreRing({
         className="absolute inset-0 grid place-items-center text-center"
       >
         <div>
-          <div className="text-3xl font-mono font-medium tracking-tight tabular-nums">
-            {Math.round(value)}
+          <div
+            className={cn(
+              "text-3xl font-mono font-medium tracking-tight tabular-nums",
+              isError && "text-destructive",
+            )}
+          >
+            {isError ? "N/A" : Math.round(value)}
           </div>
           {label && (
             <div className="text-xs text-muted-foreground">{label}</div>
@@ -198,9 +238,11 @@ function SegmentedRing({
   onSegmentClick,
   verdict = false,
   caption,
+  state = "default",
   className,
 }: SegmentsProps) {
   const reduced = usePrefersReducedMotion()
+  const isError = state === "error"
 
   const [hovered, setHovered] = React.useState<number | null>(null)
   const [pinned, setPinned] = React.useState<number | null>(null)
@@ -291,9 +333,59 @@ function SegmentedRing({
       dominant.share >= 0.6 ? `Mostly ${dominant.seg.label}` : "Balanced"
   }
 
+  // Loading — a pulsing skeleton disc at the ring's footprint, with the summary
+  // and legend rendered invisibly so the box matches the loaded state exactly
+  // (no content shift when the data arrives).
+  if (state === "loading") {
+    return (
+      <div
+        data-slot="activity-ring"
+        data-state="loading"
+        aria-busy
+        className={cn(
+          "flex flex-col items-center gap-4 text-center",
+          className,
+        )}
+      >
+        <div
+          className="animate-pulse rounded-full bg-muted"
+          style={{ width: size, height: size }}
+        />
+        {(verdict || caption) && (
+          <div
+            data-slot="activity-ring-summary"
+            className="invisible space-y-1"
+          >
+            {verdict && (
+              <p className="text-lg font-semibold tracking-tight">—</p>
+            )}
+            {caption && (
+              <p className="max-w-[16rem] text-sm text-muted-foreground">—</p>
+            )}
+          </div>
+        )}
+        <div
+          data-slot="activity-ring-legend"
+          className="invisible flex flex-wrap items-center justify-center gap-4"
+        >
+          {segments.map((s, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-1.5 rounded-full px-2 py-1 text-xs"
+            >
+              <StatusDot tone="neutral" size="md" />
+              {s.label}
+            </span>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div
       data-slot="activity-ring"
+      data-state={state}
       className={cn("flex flex-col items-center gap-4 text-center", className)}
     >
       <div className="relative" style={{ width: size, height: size }}>
@@ -321,9 +413,10 @@ function SegmentedRing({
             r={radius}
             fill="none"
             strokeWidth={thickness}
-            className="stroke-muted"
+            className={isError ? "stroke-destructive/40" : "stroke-muted"}
           />
           {total > 0 &&
+            !isError &&
             arcs.map((a) => (
               <circle
                 key={a.i}
@@ -345,15 +438,23 @@ function SegmentedRing({
           data-slot="activity-ring-center"
           className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"
         >
-          <span className="text-3xl font-mono font-medium tabular-nums tracking-tight">
-            {formatValue(centre.value)}
+          <span
+            className={cn(
+              "text-3xl font-mono font-medium tabular-nums tracking-tight",
+              isError && "text-destructive",
+            )}
+          >
+            {isError ? "N/A" : formatValue(centre.value)}
           </span>
           <span className="text-xs text-muted-foreground">{centre.label}</span>
         </div>
       </div>
 
       {(verdict || caption) && (
-        <div data-slot="activity-ring-summary" className="space-y-1">
+        <div
+          data-slot="activity-ring-summary"
+          className={cn("space-y-1", isError && "invisible")}
+        >
           {verdict && (
             <p
               data-slot="activity-ring-verdict"
@@ -372,7 +473,10 @@ function SegmentedRing({
 
       <div
         data-slot="activity-ring-legend"
-        className="flex flex-wrap items-center justify-center gap-4"
+        className={cn(
+          "flex flex-wrap items-center justify-center gap-4",
+          isError && "invisible",
+        )}
       >
         {resolved.map((r) => (
           <LegendChip
@@ -381,7 +485,7 @@ function SegmentedRing({
             label={r.seg.label}
             active={active === r.i}
             pinned={pinned === r.i}
-            disabled={total === 0}
+            disabled={total === 0 || isError}
             onEnter={() => setHovered(r.i)}
             onLeave={() => setHovered(null)}
             onClick={() => togglePin(r.i)}

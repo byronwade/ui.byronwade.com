@@ -654,3 +654,64 @@ describe("ActivityRing – score mode", () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 });
+
+// ---------------------------------------------------------------------------
+// state prop — loading / empty / success / error, expressed inside the ring
+// ---------------------------------------------------------------------------
+describe("ActivityRing – state prop", () => {
+  it("segmented loading renders a skeleton ring and marks the ring busy", () => {
+    const { container } = render(
+      <ActivityRing state="loading" segments={[{ value: 1, label: "A" }]} />,
+    );
+    const root = container.querySelector('[data-slot="activity-ring"]');
+    expect(root).toHaveAttribute("aria-busy", "true");
+    expect(container.querySelector(".animate-pulse")).not.toBeNull();
+    expect(
+      container.querySelectorAll('[data-slot="activity-ring-segment"]'),
+    ).toHaveLength(0);
+  });
+
+  it("score loading renders a skeleton instead of the value", () => {
+    const { container } = render(<ActivityRing state="loading" value={78} />);
+    expect(container.querySelector(".animate-pulse")).not.toBeNull();
+    expect(screen.queryByText("78")).toBeNull();
+  });
+
+  it("segmented error shows N/A in the centre with a destructive ring", () => {
+    const { container } = render(
+      <ActivityRing
+        state="error"
+        segments={[{ value: 820, label: "Delivered" }]}
+        centerLabel="messages"
+      />,
+    );
+    expect(screen.getByText("N/A")).toBeInTheDocument();
+    const track = container.querySelector('[data-slot="activity-ring-track"]');
+    expect(track?.getAttribute("class")).toMatch(/stroke-destructive/);
+    expect(
+      container.querySelectorAll('[data-slot="activity-ring-segment"]'),
+    ).toHaveLength(0);
+  });
+
+  it("score error shows N/A in a destructive ring", () => {
+    const { container } = render(
+      <ActivityRing state="error" value={78} label="Performance" />,
+    );
+    expect(screen.getByText("N/A")).toBeInTheDocument();
+    expect(
+      container.querySelector('[class*="stroke-destructive"]'),
+    ).not.toBeNull();
+  });
+
+  it("success state renders the value normally (no special chrome)", () => {
+    render(<ActivityRing state="success" value={92} label="Performance" />);
+    expect(screen.getByText("92")).toBeInTheDocument();
+  });
+
+  it("has no axe violations in the error state", async () => {
+    const { container } = render(
+      <ActivityRing state="error" value={78} label="Performance" />,
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+});

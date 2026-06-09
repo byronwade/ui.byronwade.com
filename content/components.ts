@@ -180,6 +180,13 @@ export const components: ComponentDoc[] = [
         description: "Score mode: a single value (0–max) rendered as one arc.",
       },
       {
+        name: "state",
+        type: '"default" | "loading" | "empty" | "success" | "error"',
+        default: '"default"',
+        description:
+          "Object state shown inside the ring — loading renders a skeleton, error a destructive ring with “N/A”; empty/success/default render the data you pass. No companion text; shift-free across states.",
+      },
+      {
         name: "max",
         type: "number",
         default: "100",
