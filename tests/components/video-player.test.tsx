@@ -10,6 +10,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { axe } from "vitest-axe";
 
 import {
+  MediaPlayer,
   VideoPlayer,
   VideoPlayerContent,
   VideoPlayerControlBar,
@@ -264,5 +265,26 @@ describe("VideoPlayer — a11y", () => {
       </VideoPlayer>,
     );
     expect(await axe(container)).toHaveNoViolations();
+  });
+});
+
+describe("MediaPlayer — theater toggle", () => {
+  it("flips uncontrolled theater state and notifies onTheaterChange", () => {
+    const onTheaterChange = vi.fn();
+    render(
+      <MediaPlayer
+        src="/video.mp4"
+        title="Clip"
+        onTheaterChange={onTheaterChange}
+      />,
+    );
+    const theaterButton = screen.getByRole("button", { name: "Theater mode" });
+    fireEvent.click(theaterButton);
+    // toggleTheater() ran the uncontrolled branch (setTheaterInternal) and fired
+    // the callback with the next value.
+    expect(onTheaterChange).toHaveBeenCalledWith(true);
+    expect(
+      screen.getByRole("button", { name: "Exit theater mode" }),
+    ).toBeInTheDocument();
   });
 });

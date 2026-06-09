@@ -42,6 +42,22 @@ describe("ScreenerTable", () => {
     expect(screen.queryByText("TSLA")).not.toBeInTheDocument()
   })
 
+  it("narrows rows when the Losers filter is selected", async () => {
+    const user = userEvent.setup()
+    render(<ScreenerTable rows={rows} />)
+    await user.click(screen.getByRole("tab", { name: "Losers" }))
+    expect(screen.getByText("TSLA")).toBeInTheDocument()
+    expect(screen.queryByText("AAPL")).not.toBeInTheDocument()
+  })
+
+  it("calls onViewChange when a filter view is selected", async () => {
+    const user = userEvent.setup()
+    const onViewChange = vi.fn()
+    render(<ScreenerTable rows={rows} onViewChange={onViewChange} />)
+    await user.click(screen.getByRole("tab", { name: "Losers" }))
+    expect(onViewChange).toHaveBeenCalledWith("losers")
+  })
+
   it("calls onSortChange when a sortable header is clicked", async () => {
     const user = userEvent.setup()
     const onSortChange = vi.fn()

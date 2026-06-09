@@ -946,6 +946,23 @@ describe("PromptInputSpeechButton", () => {
     // @ts-expect-error — cleanup
     delete window.SpeechRecognition;
   });
+
+  it("toggleListening no-ops when recognition is unavailable", async () => {
+    // jsdom has no SpeechRecognition, so `recognition` stays null. The button
+    // is normally disabled in that state; overriding `disabled` lets the click
+    // through to exercise toggleListening's `if (!recognition) return` guard.
+    const user = userEvent.setup();
+    render(
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputSpeechButton disabled={false} />
+      </PromptInput>
+    );
+    const btn = screen.getByRole("button");
+    expect(btn).not.toBeDisabled();
+    // No recognition instance exists, so clicking is a safe no-op (no throw).
+    await user.click(btn);
+    expect(btn).toHaveAttribute("aria-pressed", "false");
+  });
 });
 
 // ---------------------------------------------------------------------------

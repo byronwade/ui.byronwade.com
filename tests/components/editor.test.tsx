@@ -1454,3 +1454,100 @@ describe("Editor — EditorNodeText over an ordered list", () => {
     ).not.toBeNull();
   });
 });
+
+// ---------------------------------------------------------------------------
+// EditorTableRowMenu — selectionUpdate position handler
+// ---------------------------------------------------------------------------
+
+describe("Editor — EditorTableRowMenu selection positioning", () => {
+  // Captures the live editor so the test can emit "selectionUpdate" directly,
+  // driving the row-menu's position handler past its early-returns into the
+  // table-row geometry path.
+  function CaptureEditor({
+    onReady,
+  }: {
+    onReady: (editor: NonNullable<ReturnType<typeof useCurrentEditor>["editor"]>) => void;
+  }) {
+    const { editor } = useCurrentEditor();
+    React.useEffect(() => {
+      if (editor) onReady(editor);
+    }, [editor, onReady]);
+    return null;
+  }
+
+  function renderRowMenu() {
+    let captured: NonNullable<
+      ReturnType<typeof useCurrentEditor>["editor"]
+    > | null = null;
+    const result = render(
+      <EditorProvider content={`<p>row menu</p>`}>
+        <CaptureEditor onReady={(e) => (captured = e)} />
+        <EditorTableRowMenu>
+          <EditorTableRowBefore />
+        </EditorTableRowMenu>
+      </EditorProvider>
+    );
+    return { ...result, getEditor: () => captured };
+  }
+
+  it("ignores selection updates with no active range", async () => {
+    const { container, getEditor } = renderRowMenu();
+    await findProse(container);
+    const editor = getEditor();
+    expect(editor).not.toBeNull();
+
+    const getSelectionSpy = vi
+      .spyOn(window, "getSelection")
+      .mockReturnValue(null as unknown as Selection);
+    React.act(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (editor as any).emit("selectionUpdate", { editor });
+    });
+    getSelectionSpy.mockRestore();
+
+    // No range -> the handler returns early, so the trigger stays hidden
+    // (left/top remain 0).
+    const trigger = container.querySelector(
+      "[data-slot='editor-table-row-menu']"
+    ) as HTMLElement;
+    expect(trigger).toHaveClass("hidden");
+  });
+
+  it("positions the row menu from the selected table row's rect", async () => {
+    const { container, getEditor } = renderRowMenu();
+    await findProse(container);
+    const editor = getEditor();
+    expect(editor).not.toBeNull();
+
+    // Build a detached table-row DOM so closest("tr") resolves; the beforeAll
+    // getBoundingClientRect stub gives top:0 / height:24 -> setTop(12).
+    const table = document.createElement("table");
+    const tbody = document.createElement("tbody");
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+    table.appendChild(tbody);
+
+    const fakeSelection = {
+      rangeCount: 1,
+      getRangeAt: () => ({ startContainer: td }),
+    } as unknown as Selection;
+    const getSelectionSpy = vi
+      .spyOn(window, "getSelection")
+      .mockReturnValue(fakeSelection);
+    React.act(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (editor as any).emit("selectionUpdate", { editor });
+    });
+    getSelectionSpy.mockRestore();
+
+    // top became 12 (truthy) -> the trigger is no longer hidden and carries the
+    // computed offset.
+    const trigger = container.querySelector(
+      "[data-slot='editor-table-row-menu']"
+    ) as HTMLElement;
+    expect(trigger).not.toHaveClass("hidden");
+    expect(trigger.style.top).toBe("12px");
+  });
+});

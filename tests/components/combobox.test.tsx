@@ -13,6 +13,7 @@ import {
   ComboboxChip,
   ComboboxChips,
   ComboboxChipsInput,
+  ComboboxCollection,
   ComboboxContent,
   ComboboxEmpty,
   ComboboxGroup,
@@ -142,6 +143,33 @@ describe("Combobox — variants", () => {
     expect(await screen.findByText("Frameworks")).toBeInTheDocument()
     expect(document.querySelector('[data-slot="combobox-group"]')).not.toBeNull()
     expect(document.querySelector('[data-slot="combobox-label"]')).not.toBeNull()
+  })
+
+  it("renders items through a ComboboxCollection inside a group", async () => {
+    const user = userEvent.setup()
+    render(
+      <Combobox items={frameworks}>
+        <ComboboxInput placeholder="Collection" aria-label="Collection" />
+        <ComboboxContent>
+          <ComboboxList>
+            <ComboboxGroup>
+              <ComboboxLabel>Frameworks</ComboboxLabel>
+              <ComboboxCollection>
+                {(item: (typeof frameworks)[number]) => (
+                  <ComboboxItem key={item.value} value={item}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
+              </ComboboxCollection>
+            </ComboboxGroup>
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>,
+    )
+    await user.click(screen.getByPlaceholderText("Collection"))
+    expect(await screen.findByText("Next.js")).toBeInTheDocument()
+    expect(screen.getByText("Remix")).toBeInTheDocument()
+    expect(screen.getByText("Astro")).toBeInTheDocument()
   })
 
   it("renders clear affordance when enabled", () => {

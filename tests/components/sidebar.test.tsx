@@ -396,4 +396,61 @@ describe("Sidebar", () => {
       document.querySelector('[data-slot="sidebar-container"]'),
     ).toHaveClass("absolute")
   })
+
+  it("throws when useSidebar is used outside a provider", () => {
+    function Orphan() {
+      useSidebar()
+      return null
+    }
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {})
+    expect(() => render(<Orphan />)).toThrow(
+      "useSidebar must be used within a SidebarProvider.",
+    )
+    spy.mockRestore()
+  })
+
+  it("forwards open state to a controlled onOpenChange handler", async () => {
+    const user = userEvent.setup()
+    const onOpenChange = vi.fn()
+    render(
+      <SidebarProvider defaultOpen onOpenChange={onOpenChange}>
+        <SidebarTrigger />
+        <SidebarStateProbe />
+      </SidebarProvider>,
+    )
+    await user.click(screen.getByRole("button"))
+    expect(onOpenChange).toHaveBeenCalledWith(false)
+  })
+
+  it("renders the sidebar inside a Sheet on mobile viewports", async () => {
+    const user = userEvent.setup()
+    const original = window.innerWidth
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: 480,
+    })
+    render(
+      <SidebarProvider>
+        <SidebarTrigger />
+        <Sidebar>
+          <SidebarContent>
+            <span>Mobile nav</span>
+          </SidebarContent>
+        </Sidebar>
+      </SidebarProvider>,
+    )
+    // On a mobile viewport the sidebar takes the Sheet branch; opening it via the
+    // trigger portals the SheetContent carrying data-mobile="true".
+    await user.click(screen.getByRole("button"))
+    const mobileSidebar = await screen.findByText("Mobile nav")
+    expect(
+      mobileSidebar.closest('[data-mobile="true"]'),
+    ).not.toBeNull()
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: original,
+    })
+  })
 })

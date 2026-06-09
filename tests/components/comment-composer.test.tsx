@@ -53,6 +53,17 @@ describe("CommentComposer – smoke", () => {
     render(<CommentComposer currentUserName="Madonna" />)
     expect(screen.getByText("M")).toBeInTheDocument()
   })
+
+  it("renders a '?' fallback for a whitespace-only name", () => {
+    // name is truthy but trims to nothing → parts.length === 0 branch.
+    render(<CommentComposer currentUserName="   " />)
+    expect(screen.getByText("?")).toBeInTheDocument()
+  })
+
+  it("derives initials from a name with extra internal whitespace", () => {
+    render(<CommentComposer currentUserName="  Jane   Doe  " />)
+    expect(screen.getByText("JD")).toBeInTheDocument()
+  })
 })
 
 // ─── Action row visibility ──────────────────────────────────────────────────────
@@ -75,6 +86,20 @@ describe("CommentComposer – action row visibility", () => {
   it("shows the action row on focus", () => {
     const { container } = render(<CommentComposer />)
     fireEvent.focus(getInput())
+    expect(
+      container.querySelector('[data-slot="comment-composer-actions"]'),
+    ).toBeInTheDocument()
+  })
+
+  it("does not call onOpenChange on focus when open is controlled", () => {
+    // openProp is defined → handleFocus skips the setOpen(true) branch (line 91 false-path).
+    const onOpenChange = vi.fn()
+    const { container } = render(
+      <CommentComposer open onOpenChange={onOpenChange} />,
+    )
+    fireEvent.focus(getInput())
+    expect(onOpenChange).not.toHaveBeenCalled()
+    // Row stays visible because open is forced true.
     expect(
       container.querySelector('[data-slot="comment-composer-actions"]'),
     ).toBeInTheDocument()

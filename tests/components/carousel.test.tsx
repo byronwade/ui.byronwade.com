@@ -4,7 +4,7 @@
  */
 
 import * as React from "react"
-import { render, screen } from "@testing-library/react"
+import { render, screen, fireEvent } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, it, expect, vi } from "vitest"
 import { axe } from "vitest-axe"
@@ -33,6 +33,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  useCarousel,
 } from "@/components/ui/carousel"
 
 function BasicCarousel({ count = 3 }: { count?: number }) {
@@ -101,6 +102,55 @@ describe("Carousel — interaction", () => {
     region.focus()
     await user.keyboard("{ArrowLeft}")
     expect(region).toBeInTheDocument()
+  })
+
+  it("scrolls to the previous slide on ArrowLeft keydown", () => {
+    emblaMocks.scrollPrev.mockClear()
+    render(<BasicCarousel />)
+    fireEvent.keyDown(screen.getByRole("region"), { key: "ArrowLeft" })
+    expect(emblaMocks.scrollPrev).toHaveBeenCalled()
+  })
+
+  it("scrolls to the next slide on ArrowRight keydown", () => {
+    emblaMocks.scrollNext.mockClear()
+    render(<BasicCarousel />)
+    fireEvent.keyDown(screen.getByRole("region"), { key: "ArrowRight" })
+    expect(emblaMocks.scrollNext).toHaveBeenCalled()
+  })
+
+  it("ignores unrelated keys without scrolling", () => {
+    emblaMocks.scrollPrev.mockClear()
+    emblaMocks.scrollNext.mockClear()
+    render(<BasicCarousel />)
+    fireEvent.keyDown(screen.getByRole("region"), { key: "Enter" })
+    expect(emblaMocks.scrollPrev).not.toHaveBeenCalled()
+    expect(emblaMocks.scrollNext).not.toHaveBeenCalled()
+  })
+})
+
+describe("Carousel — api", () => {
+  it("passes the embla api to setApi when provided", () => {
+    const setApi = vi.fn()
+    render(
+      <Carousel setApi={setApi}>
+        <CarouselContent>
+          <CarouselItem>Slide</CarouselItem>
+        </CarouselContent>
+      </Carousel>,
+    )
+    expect(setApi).toHaveBeenCalledWith(emblaMocks.api)
+  })
+
+  it("throws when useCarousel is used outside a Carousel provider", () => {
+    function Orphan() {
+      useCarousel()
+      return null
+    }
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {})
+    expect(() => render(<Orphan />)).toThrow(
+      "useCarousel must be used within a <Carousel />",
+    )
+    spy.mockRestore()
   })
 })
 

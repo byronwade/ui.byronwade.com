@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { describe, it, expect, vi } from "vitest"
+import { describe, it, expect, vi, afterEach } from "vitest"
 import { axe } from "vitest-axe"
 import { Bookmark } from "lucide-react"
 import { ShortsPlayer } from "@/components/shorts-player"
@@ -672,6 +672,84 @@ describe("ShortsPlayer – comment/share/more", () => {
     await user.click(screen.getByRole("button", { name: "Share" }))
     await user.click(screen.getByRole("button", { name: "More" }))
     expect(screen.getByRole("button", { name: "More" })).toBeInTheDocument()
+  })
+})
+
+// ─── Video element play/pause effect ──────────────────────────────────────────
+
+describe("ShortsPlayer – video play/pause effect", () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it("calls video.play() when mounted in the playing state with a src", () => {
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockResolvedValue(undefined)
+    const pause = vi
+      .spyOn(HTMLMediaElement.prototype, "pause")
+      .mockImplementation(() => {})
+    render(<ShortsPlayer author={author} src="/clip.mp4" defaultPlaying />)
+    expect(play).toHaveBeenCalled()
+    expect(pause).not.toHaveBeenCalled()
+  })
+
+  it("calls video.pause() when mounted paused, then plays on toggle", async () => {
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockResolvedValue(undefined)
+    const pause = vi
+      .spyOn(HTMLMediaElement.prototype, "pause")
+      .mockImplementation(() => {})
+    const user = userEvent.setup()
+    render(
+      <ShortsPlayer author={author} src="/clip.mp4" defaultPlaying={false} />,
+    )
+    expect(pause).toHaveBeenCalled()
+    await user.click(screen.getByRole("button", { name: "Play" }))
+    expect(play).toHaveBeenCalled()
+  })
+
+  it("swallows a rejected play() promise (autoplay block) without throwing", async () => {
+    // play() returns a rejecting promise → the effect's .catch(() => {})
+    // handler (line 194) must absorb it so no unhandled rejection escapes.
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockReturnValue(Promise.reject(new Error("NotAllowedError")))
+    vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {})
+    expect(() =>
+      render(<ShortsPlayer author={author} src="/clip.mp4" defaultPlaying />),
+    ).not.toThrow()
+    expect(play).toHaveBeenCalled()
+    // Let the rejected microtask settle; the .catch handler keeps it from
+    // surfacing as an unhandled rejection.
+    await Promise.resolve()
+    await Promise.resolve()
+  })
+
+  it("tolerates a play() that returns undefined (no thenable)", () => {
+    // Some environments return undefined from play(); the effect guards the
+    // .catch lookup, so this must not throw.
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockReturnValue(undefined as unknown as Promise<void>)
+    vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {})
+    expect(() =>
+      render(<ShortsPlayer author={author} src="/clip.mp4" defaultPlaying />),
+    ).not.toThrow()
+    expect(play).toHaveBeenCalled()
+  })
+
+  it("does not call play/pause when there is no src", () => {
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockResolvedValue(undefined)
+    const pause = vi
+      .spyOn(HTMLMediaElement.prototype, "pause")
+      .mockImplementation(() => {})
+    render(<ShortsPlayer author={author} />)
+    expect(play).not.toHaveBeenCalled()
+    expect(pause).not.toHaveBeenCalled()
   })
 })
 
