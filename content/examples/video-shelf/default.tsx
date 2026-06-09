@@ -2,6 +2,11 @@
 
 import { VideoShelf } from "@/components/video-shelf"
 import { VideoCard } from "@/components/video-card"
+import {
+  DemoEmptyState,
+  DemoErrorState,
+} from "@/app/(docs)/_components/demo-state-bits"
+import { useDemoState } from "@/lib/demo-viewport"
 
 const TITLES = [
   "Designing a token-only design system from scratch",
@@ -13,10 +18,25 @@ const TITLES = [
 ]
 
 export default function Example() {
+  const state = useDemoState() ?? "default"
+  const isLoading = state === "loading"
+  const isEmpty = state === "empty"
+  const isError = state === "error"
+
+  if (isError) {
+    return (
+      <div className="w-[760px]">
+        <DemoErrorState>Couldn&apos;t load shelf</DemoErrorState>
+      </div>
+    )
+  }
+
   return (
     <div className="w-[760px]">
       <VideoShelf
         title="Recommended"
+        loading={isLoading}
+        empty={<DemoEmptyState>No videos to show yet.</DemoEmptyState>}
         action={
           <a
             href="#"
@@ -26,19 +46,21 @@ export default function Example() {
           </a>
         }
       >
-        {TITLES.map((title, i) => (
-          <VideoCard
-            key={title}
-            title={title}
-            thumbnailSrc={`https://picsum.photos/seed/video-shelf-${i}/640/360`}
-            duration="12:04"
-            views={120000 * (i + 1)}
-            timestamp={`${i + 1} weeks ago`}
-            channelName="byronwade/ui"
-            verified
-            className="w-[300px]"
-          />
-        ))}
+        {isEmpty
+          ? null
+          : TITLES.map((title, i) => (
+              <VideoCard
+                key={title}
+                title={title}
+                thumbnailSrc={`https://picsum.photos/seed/video-shelf-${i}/640/360`}
+                duration="12:04"
+                views={120000 * (i + 1)}
+                timestamp={`${i + 1} weeks ago`}
+                channelName="byronwade/ui"
+                verified
+                className="w-[300px]"
+              />
+            ))}
       </VideoShelf>
     </div>
   )
