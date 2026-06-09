@@ -187,7 +187,7 @@ function TagInput({
                   event.stopPropagation()
                   removeTag(tag)
                 }}
-                className="inline-flex size-3.5 items-center justify-center rounded-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none"
+                className="inline-flex size-3.5 items-center justify-center rounded-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none"
               >
                 <XIcon className="size-3" />
               </button>

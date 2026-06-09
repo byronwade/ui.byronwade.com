@@ -290,6 +290,12 @@ describe("TagInput — states", () => {
     expect(field()).toHaveAttribute("aria-invalid", "true");
   });
 
+  it("uses the system focus ring (ring-3) on the remove button", () => {
+    render(<TagInput defaultValue={["react"]} />);
+    const remove = screen.getByRole("button", { name: "Remove react" });
+    expect(remove.className).toContain("focus-visible:ring-3");
+  });
+
   it("renders hidden inputs for form submission when name is set", () => {
     const { container } = render(
       <TagInput name="tags" defaultValue={["react", "vue"]} />,

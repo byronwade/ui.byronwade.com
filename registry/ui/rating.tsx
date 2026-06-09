@@ -150,7 +150,7 @@ export const RatingButton = ({
       aria-checked={value === index + 1}
       aria-label={`${index + 1} star${index === 0 ? "" : "s"}`}
       className={cn(
-        "rounded-full p-0.5 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "rounded-full p-0.5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
         readOnly && "cursor-default",
         className,
       )}

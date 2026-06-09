@@ -108,6 +108,29 @@ describe("Sidebar", () => {
     expect(document.querySelector('[data-slot="sidebar"]')).toBeInTheDocument()
   })
 
+  it("lets a menu icon's explicit size win via the auto-size escape hatch", () => {
+    render(
+      <SidebarProvider>
+        <Sidebar>
+          <SidebarContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <HomeIcon />
+                  Home
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarContent>
+        </Sidebar>
+      </SidebarProvider>,
+    )
+    const button = document.querySelector(
+      '[data-slot="sidebar-menu-button"]',
+    ) as HTMLElement
+    expect(button.className).toContain("[&_svg:not([class*='size-'])]:size-4")
+  })
+
   it("toggles collapsed state from the trigger", async () => {
     const user = userEvent.setup()
     render(

@@ -60,6 +60,14 @@ describe("Rating — render", () => {
     expect(screen.getAllByRole("radio")).toHaveLength(5);
   });
 
+  it("uses the system focus ring (ring-3 ring-ring/50, no offset)", () => {
+    render(<Stars defaultValue={0} />);
+    const star = screen.getAllByRole("radio")[0];
+    expect(star.className).toContain("focus-visible:ring-3");
+    expect(star.className).toContain("focus-visible:ring-ring/50");
+    expect(star.className).not.toContain("ring-offset-2");
+  });
+
   it("fills the stars up to the value", () => {
     const { container } = render(<Stars value={3} readOnly />);
     expect(fullyFilled(container)).toBe(3);
