@@ -36,7 +36,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Skeleton } from "@/components/ui/skeleton"
 import { DemoViewportProvider } from "@/lib/demo-viewport"
 import { cn } from "@/lib/utils"
 
@@ -214,76 +213,6 @@ type DemoPreviewFrameProps = {
   children: (ctx: DemoContext) => React.ReactNode
   code?: (ctx: DemoContext) => React.ReactNode
   disabledControls?: (ctx: DemoContext) => DemoToolbarDisabledControls
-  stateFallback?: (ctx: DemoContext) => boolean
-}
-
-function DemoStateFallback({
-  state,
-  density,
-  children,
-}: {
-  state: DemoState
-  density: DemoDensity
-  children: React.ReactNode
-}) {
-  if (state === "default") return children
-
-  if (state === "loading") {
-    return (
-      <div
-        data-slot="demo-state-fallback"
-        data-state={state}
-        aria-busy="true"
-        className={cn(
-          "w-full max-w-md rounded-xl bg-card p-4 text-card-foreground ring-1 ring-border/70",
-          density === "compact" && "space-y-2 p-3",
-          density === "default" && "space-y-3",
-          density === "comfortable" && "space-y-4 p-5",
-        )}
-      >
-        <div className="flex items-center justify-between gap-4">
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-3 w-44" />
-          </div>
-          <Skeleton className="h-7 w-16 rounded-md" />
-        </div>
-        <div className="space-y-2">
-          <Skeleton className="h-20 w-full rounded-lg" />
-          <div className="grid grid-cols-3 gap-2">
-            <Skeleton className="h-8 rounded-md" />
-            <Skeleton className="h-8 rounded-md" />
-            <Skeleton className="h-8 rounded-md" />
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div
-      data-slot="demo-state-fallback"
-      data-state={state}
-      className={cn(
-        "rounded-xl p-3",
-        state === "success" && "bg-success/5 ring-1 ring-success/30",
-        state === "error" && "bg-destructive/5 ring-1 ring-destructive/30",
-      )}
-    >
-      <div className="mb-2 flex justify-end">
-        <span
-          className={cn(
-            "rounded-md px-2 py-1 text-xs font-medium",
-            state === "success" && "bg-success/10 text-success",
-            state === "error" && "bg-destructive/10 text-destructive",
-          )}
-        >
-          {state === "success" ? "Success" : "Error"}
-        </span>
-      </div>
-      {children}
-    </div>
-  )
 }
 
 function DemoPreviewContent({
@@ -293,7 +222,6 @@ function DemoPreviewContent({
   frame,
   depth,
   state,
-  fallbackState,
   skipSurfaceWrapper,
   children,
 }: {
@@ -303,7 +231,6 @@ function DemoPreviewContent({
   frame: DemoFrame
   depth: DemoDepth
   state: DemoState
-  fallbackState?: boolean
   skipSurfaceWrapper?: boolean
   children: (ctx: DemoContext) => React.ReactNode
 }) {
@@ -328,13 +255,7 @@ function DemoPreviewContent({
         depth={ctx.depth}
         state={ctx.state}
       >
-        {fallbackState ? (
-          <DemoStateFallback state={state} density={density}>
-            {children(ctx)}
-          </DemoStateFallback>
-        ) : (
-          children(ctx)
-        )}
+        {children(ctx)}
       </DemoViewportProvider>
     </div>
   )
@@ -466,7 +387,6 @@ export function DemoPreviewFrame({
   hidden,
   code,
   disabledControls,
-  stateFallback,
   children,
 }: DemoPreviewFrameProps) {
   const searchParams = useSearchParams()
@@ -502,7 +422,6 @@ export function DemoPreviewFrame({
     [ctx],
   )
   const disabled = disabledControls?.(ctx) ?? {}
-  const fallbackState = stateFallback?.(ctx) ?? false
 
   if (hidden) {
     const defaultCtx: DemoContext = {
@@ -674,7 +593,6 @@ export function DemoPreviewFrame({
               frame={ctx.frame}
               depth={ctx.depth}
               state={ctx.state}
-              fallbackState={fallbackState}
             >
               {children}
             </DemoPreviewContent>
