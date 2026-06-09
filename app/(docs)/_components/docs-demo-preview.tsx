@@ -1,8 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useState } from "react"
-import { useSearchParams } from "next/navigation"
 
 import { examples } from "@/content/examples/registry"
 import type { ComponentDoc, Variant } from "@/content/components"
@@ -13,9 +11,8 @@ import {
 } from "@/content/demo-contexts"
 import {
   DemoPreviewFrame,
-  readInitialDemoContext,
+  type DemoToolbarDisabledControls,
 } from "@/app/(docs)/_components/demo-preview-frame"
-import { SegmentedControl } from "@/components/ui/segmented-control"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 
 function findExampleComponent(slug: string, exampleBase: string) {
@@ -28,6 +25,16 @@ function findExampleComponent(slug: string, exampleBase: string) {
     return base === exampleBase
   })
   return demo?.Component ?? null
+}
+
+export function getDisabledDemoControlsForSource(
+  source: string,
+): DemoToolbarDisabledControls {
+  return {
+    frame: !source.includes("useDemoFrame"),
+    depth: !source.includes("useDemoDepth"),
+    state: !source.includes("useDemoState"),
+  }
 }
 
 type Props = {
@@ -53,9 +60,6 @@ export function DocsDemoPreview({
   codeByExample,
   code: fallbackCode,
 }: Props) {
-  const [view, setView] = useState<"preview" | "code">("preview")
-  const searchParams = useSearchParams()
-
   const doc = React.useMemo(
     () =>
       ({
@@ -68,49 +72,47 @@ export function DocsDemoPreview({
     [slug, docExamples],
   )
 
-  const ctx = React.useMemo(
-    () => readInitialDemoContext(searchParams, defaultSurface),
-    [searchParams, defaultSurface],
-  )
-
-  const resolvedCode = React.useMemo(() => {
-    const { example } = resolveDemoExample(doc, activeVariant, ctx, allVariants)
-    return codeByExample[example] ?? fallbackCode ?? ""
-  }, [doc, activeVariant, ctx, allVariants, codeByExample, fallbackCode])
-
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        {title ? <span className="text-sm font-medium">{title}</span> : null}
-        <SegmentedControl
-          options={[
-            { label: "Preview", value: "preview" as const },
-            { label: "Code", value: "code" as const },
-          ]}
-          value={view}
-          onValueChange={setView}
-        />
-      </div>
-      {view === "preview" ? (
-        <DemoPreviewFrame
-          defaultSurface={defaultSurface}
-          skipSurfaceWrapper={demoContext?.skipSurfaceWrapper}
-          hidden={demoContext?.hidden}
-        >
-          {(frameCtx: DemoContext) => {
-            const { example } = resolveDemoExample(
-              doc,
-              activeVariant,
-              frameCtx,
-              allVariants,
-            )
-            const Component = findExampleComponent(slug, example)
-            return Component ? <Component /> : null
-          }}
-        </DemoPreviewFrame>
-      ) : (
-        <CodeBlock code={resolvedCode} />
-      )}
+      {title ? <span className="text-sm font-medium">{title}</span> : null}
+      <DemoPreviewFrame
+        defaultSurface={defaultSurface}
+        skipSurfaceWrapper={demoContext?.skipSurfaceWrapper}
+        hidden={demoContext?.hidden}
+        disabledControls={(frameCtx) => {
+          const { example } = resolveDemoExample(
+            doc,
+            activeVariant,
+            frameCtx,
+            allVariants,
+          )
+          return getDisabledDemoControlsForSource(
+            codeByExample[example] ?? fallbackCode ?? "",
+          )
+        }}
+        code={(frameCtx) => {
+          const { example } = resolveDemoExample(
+            doc,
+            activeVariant,
+            frameCtx,
+            allVariants,
+          )
+          return (
+            <CodeBlock code={codeByExample[example] ?? fallbackCode ?? ""} />
+          )
+        }}
+      >
+        {(frameCtx: DemoContext) => {
+          const { example } = resolveDemoExample(
+            doc,
+            activeVariant,
+            frameCtx,
+            allVariants,
+          )
+          const Component = findExampleComponent(slug, example)
+          return Component ? <Component /> : null
+        }}
+      </DemoPreviewFrame>
     </div>
   )
 }
