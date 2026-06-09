@@ -469,11 +469,11 @@ describe("ConfirmationAction", () => {
     );
   });
 
-  it("uses the small button size (h-7)", () => {
+  it("uses the small button size (h-8)", () => {
     renderAction();
     expect(
       screen.getByRole("button", { name: "Approve" }).className
-    ).toContain("h-7");
+    ).toContain("h-8");
   });
 
   it("fires onClick when clicked", async () => {

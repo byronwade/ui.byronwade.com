@@ -272,8 +272,8 @@ describe("WebPreviewNavigationButton", () => {
     const btn = container.querySelector(
       "[data-slot='web-preview-navigation-button']"
     ) as HTMLElement;
-    // icon-sm => size-7
-    expect(btn.className).toContain("size-7");
+    // icon-sm => size-8
+    expect(btn.className).toContain("size-8");
     expect(btn.className).toContain("text-muted-foreground");
   });
 

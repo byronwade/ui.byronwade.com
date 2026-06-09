@@ -257,7 +257,7 @@ describe("Suggestion — size prop", () => {
     const btn = container.querySelector(
       "[data-slot='suggestion']"
     ) as HTMLElement;
-    expect(btn.className).toContain("h-7");
+    expect(btn.className).toContain("h-8");
   });
 
   it("renders the default size", () => {

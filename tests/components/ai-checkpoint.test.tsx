@@ -234,10 +234,10 @@ describe("CheckpointTrigger — without tooltip", () => {
     expect(btn.className).toContain("hover:bg-muted");
   });
 
-  it("defaults to size='sm' (h-7 base class)", () => {
+  it("defaults to size='sm' (h-8 base class)", () => {
     render(<CheckpointTrigger>Restore</CheckpointTrigger>);
     const btn = screen.getByRole("button", { name: "Restore" });
-    expect(btn.className).toContain("h-7");
+    expect(btn.className).toContain("h-8");
   });
 
   it("forwards a custom className onto the button", () => {
