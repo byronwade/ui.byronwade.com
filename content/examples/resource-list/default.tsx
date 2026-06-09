@@ -6,6 +6,11 @@ import {
   type ResourceBadge,
 } from "@/components/resource-list"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { useDemoState } from "@/lib/demo-viewport"
+import {
+  DemoEmptyState,
+  DemoErrorState,
+} from "@/app/(docs)/_components/demo-state-bits"
 
 type Customer = {
   id: string
@@ -40,26 +45,49 @@ const customers: Customer[] = [
 ]
 
 export default function Example() {
+  const state = useDemoState() ?? "default"
+  const isLoading = state === "loading"
+  const isEmpty = state === "empty"
+  const isError = state === "error"
+
+  if (isError) {
+    return (
+      <div className="mx-auto w-full max-w-md">
+        <DemoErrorState>
+          Couldn't load customers. Please try again.
+        </DemoErrorState>
+      </div>
+    )
+  }
+
   return (
     <ResourceList
       className="mx-auto w-full max-w-md"
-      totalCount={customers.length}
+      totalCount={isLoading || isEmpty ? 0 : customers.length}
+      loading={isLoading}
+      emptyState={
+        <DemoEmptyState>
+          No customers yet. Add your first customer to get started.
+        </DemoEmptyState>
+      }
     >
-      {customers.map((customer) => (
-        <ResourceItem
-          key={customer.id}
-          id={customer.id}
-          media={
-            <Avatar>
-              <AvatarFallback>{customer.initials}</AvatarFallback>
-            </Avatar>
-          }
-          title={customer.title}
-          subtitle={customer.subtitle}
-          badges={customer.badges}
-          onClick={() => {}}
-        />
-      ))}
+      {!isLoading && !isEmpty
+        ? customers.map((customer) => (
+            <ResourceItem
+              key={customer.id}
+              id={customer.id}
+              media={
+                <Avatar>
+                  <AvatarFallback>{customer.initials}</AvatarFallback>
+                </Avatar>
+              }
+              title={customer.title}
+              subtitle={customer.subtitle}
+              badges={customer.badges}
+              onClick={() => {}}
+            />
+          ))
+        : null}
     </ResourceList>
   )
 }
