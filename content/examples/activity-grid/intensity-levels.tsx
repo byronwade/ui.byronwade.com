@@ -1,4 +1,7 @@
+"use client"
+
 import { ActivityGrid } from "@/components/ui/activity-grid"
+import { useDemoDensity } from "@/lib/demo-viewport"
 
 // Explicit data showing all 5 intensity buckets (0 = empty, 1–4 = brand at increasing opacity)
 // The component buckets relative to the max value in the data array.
@@ -11,6 +14,8 @@ const gradientRow = Array.from({ length: 26 }, (_, i) =>
 )
 
 export default function Example() {
+  const density = useDemoDensity() ?? "default"
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1.5">
@@ -18,12 +23,12 @@ export default function Example() {
         <p className="text-xs text-muted-foreground">
           Empty → faint → medium → strong → full brand
         </p>
-        <ActivityGrid data={levelDemo} columns={5} />
+        <ActivityGrid data={levelDemo} columns={5} size={density} />
       </div>
 
       <div className="flex flex-col gap-1.5">
         <p className="text-xs font-medium">Gradient ramp, 26 cells</p>
-        <ActivityGrid data={gradientRow} columns={26} />
+        <ActivityGrid data={gradientRow} columns={26} size={density} />
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -31,6 +36,7 @@ export default function Example() {
         <ActivityGrid
           data={Array.from({ length: 26 * 7 }, () => 10)}
           columns={26}
+          size={density}
         />
       </div>
 
@@ -41,6 +47,7 @@ export default function Example() {
             i % 19 === 0 ? 5 : 0,
           )}
           columns={26}
+          size={density}
         />
       </div>
     </div>
