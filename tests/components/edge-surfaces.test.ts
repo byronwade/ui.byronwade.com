@@ -15,6 +15,19 @@ const polarisElevationShadows = {
   "shadow-500": "0px 12px 20px -8px rgba(26, 26, 26, 0.24)",
   "shadow-600": "0px 20px 20px -8px rgba(26, 26, 26, 0.28)",
 }
+// Dark mode runs its own darker, higher-opacity elevation ramp: the light
+// rgba(26, 26, 26, …) shadows are nearly invisible on a dark background, so the
+// depth levels would not read as distinct. Pure-black at rising opacity keeps
+// none/soft/raised separable in dark mode.
+const darkElevationShadows = {
+  "shadow-0": "none",
+  "shadow-100": "0px 1px 0px 0px rgba(0, 0, 0, 0.32)",
+  "shadow-200": "0px 3px 1px -1px rgba(0, 0, 0, 0.36)",
+  "shadow-300": "0px 4px 6px -2px rgba(0, 0, 0, 0.55)",
+  "shadow-400": "0px 8px 16px -4px rgba(0, 0, 0, 0.6)",
+  "shadow-500": "0px 12px 20px -8px rgba(0, 0, 0, 0.65)",
+  "shadow-600": "0px 20px 20px -8px rgba(0, 0, 0, 0.7)",
+}
 const lightBevel =
   "1px 0px 0px 0px rgba(0, 0, 0, 0.13) inset, -1px 0px 0px 0px rgba(0, 0, 0, 0.13) inset, 0px -1px 0px 0px rgba(0, 0, 0, 0.17) inset, 0px 1px 0px 0px rgba(204, 204, 204, 0.5) inset"
 const darkBevel =
@@ -62,7 +75,7 @@ describe("edge surface defaults", () => {
       ...insetShadows,
     })
     expect(foundation.cssVars.dark).toMatchObject({
-      ...polarisElevationShadows,
+      ...darkElevationShadows,
       ...insetShadows,
       "shadow-bevel-100": darkBevel,
     })
