@@ -1,4 +1,8 @@
+"use client"
+
 import { EventTimeline, type TimelineEvent } from "@/components/event-timeline"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useDemoState } from "@/lib/demo-viewport"
 
 const events: TimelineEvent[] = [
   {
@@ -28,10 +32,39 @@ const events: TimelineEvent[] = [
 ]
 
 export default function Example() {
+  const state = useDemoState() ?? "default"
+
   return (
     <div className="max-w-md p-6">
       <h2 className="mb-4 text-sm font-semibold">Deployment Events</h2>
-      <EventTimeline events={events} />
+      {state === "loading" ? (
+        <div className="space-y-4" aria-busy="true">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="flex gap-3">
+              <Skeleton className="size-2.5 shrink-0 rounded-full" />
+              <div className="flex-1 space-y-2">
+                <Skeleton className="h-4 w-40" />
+                <Skeleton className="h-3 w-56" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : state === "empty" ? (
+        <div className="rounded-lg border border-border/70 py-10 text-center text-sm text-muted-foreground">
+          No deployment events yet.
+        </div>
+      ) : state === "error" ? (
+        <div className="rounded-lg bg-destructive/5 py-10 text-center ring-1 ring-destructive/30">
+          <span className="mb-2 inline-flex rounded-md bg-destructive/10 px-2 py-1 text-xs font-medium text-destructive">
+            Error
+          </span>
+          <p className="text-sm text-muted-foreground">
+            Couldn&apos;t load the event feed.
+          </p>
+        </div>
+      ) : (
+        <EventTimeline events={events} />
+      )}
     </div>
   )
 }

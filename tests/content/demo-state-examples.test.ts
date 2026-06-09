@@ -12,4 +12,13 @@ describe("native demo-state exemplars", () => {
     expect(source).toContain('state === "empty"')
     expect(source).toContain('state === "error"')
   })
+
+  it("event-timeline default example drives states from useDemoState", () => {
+    const source = read("content/examples/event-timeline/default.tsx")
+    expect(source).toContain('"use client"')
+    expect(source).toContain("useDemoState")
+    expect(source).toContain('state === "loading"')
+    expect(source).toContain('state === "empty"')
+    expect(source).toContain('state === "error"')
+  })
 })
