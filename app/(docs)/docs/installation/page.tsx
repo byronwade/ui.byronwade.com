@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, TriangleAlert } from "lucide-react"
+import { TriangleAlert } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
-import { DocsIntro } from "@/app/(docs)/_components/docs-prose"
+import { BLEED, DocsIntro } from "@/app/(docs)/_components/docs-prose"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
 import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
@@ -17,8 +18,6 @@ export const metadata: Metadata = {
    connected vertical step rail (not the shared clamp-split hero). All real
    commands stay in copyable CodeBlocks; @byronwade/* refs are real items.
 --------------------------------------------------------------------------- */
-
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 function Dot() {
   return <span className="size-2.5 rounded-full bg-border" />
@@ -34,10 +33,17 @@ const STEPS: {
     title: "Initialize against the foundation base",
     body: (
       <>
-        The foundation owns your{" "}
-        <code className="font-mono text-[13px]">:root</code> tokens and Tailwind
-        theme. Run <code className="font-mono text-[13px]">init</code> on a
-        fresh Next.js app (created with{" "}
+        The{" "}
+        <Link
+          href="/docs/foundation"
+          className="text-brand underline-offset-4 hover:underline"
+        >
+          foundation
+        </Link>{" "}
+        owns your <code className="font-mono text-[13px]">:root</code> tokens
+        and Tailwind theme. Run{" "}
+        <code className="font-mono text-[13px]">init</code> on a fresh Next.js
+        app (created with{" "}
         <code className="font-mono text-[13px]">--tailwind</code>).
       </>
     ),
@@ -87,12 +93,19 @@ export default function InstallationPage() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Foundation · Installation
           </p>
-          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">
+          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
             Two commands to a wired system.
           </h1>
           <DocsIntro>
             shadcn CLI · Next.js + Tailwind v4. The code is copied into your
-            repo, no runtime dependency, fully yours.
+            repo, no runtime dependency,{" "}
+            <Link
+              href="/docs/philosophy"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              fully yours
+            </Link>
+            .
           </DocsIntro>
         </div>
 
@@ -169,7 +182,14 @@ export default function InstallationPage() {
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
             One command per component, each page has a copy button. Or point at
-            a built URL with no namespace.
+            a built URL with no namespace, and{" "}
+            <Link
+              href="/docs/ai"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              keep your AI agent on-system
+            </Link>{" "}
+            as it adds them.
           </p>
           <div className="mt-5 space-y-3">
             <CodeBlock
@@ -201,7 +221,12 @@ export default function InstallationPage() {
               <code className="font-mono text-[13px]">
                 --ring/--chart-1/--success
               </code>{" "}
-              deriving from{" "}
+              <Link
+                href="/docs/theming"
+                className="text-brand underline-offset-4 hover:underline"
+              >
+                deriving from
+              </Link>{" "}
               <code className="font-mono text-[13px]">var(--brand)</code>, then
               add components.
             </p>
@@ -215,22 +240,7 @@ export default function InstallationPage() {
         </div>
       </section>
 
-      {/* ============================ NAV ============================== */}
-      <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">
-        <Link
-          href="/docs/foundation"
-          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
-        >
-          Next: Foundation
-          <ArrowRight className="size-3.5" />
-        </Link>
-        <Link
-          href="/docs/ai"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Keep your AI on-system
-        </Link>
-      </div>
+      <GuidePager current="/docs/installation" />
     </article>
   )
 }

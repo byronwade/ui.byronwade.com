@@ -7,7 +7,7 @@ function Box({ className }: { className?: string }) {
 
 export default function Example() {
   return (
-    <div className="h-[560px] overflow-hidden rounded-xl border border-border">
+    <div className="h-[560px] overflow-hidden rounded-xl edge">
       <AppShell
         variant="dashboard"
         header={

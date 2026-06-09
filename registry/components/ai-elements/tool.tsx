@@ -25,6 +25,7 @@ export type ToolProps = ComponentProps<typeof Collapsible>;
 export const Tool = ({ className, ...props }: ToolProps) => (
   <Collapsible
     data-slot="tool"
+    data-provenance="tool"
     className={cn(
       "not-prose mb-4 w-full overflow-hidden rounded-lg bg-card text-card-foreground edge",
       className
@@ -103,6 +104,12 @@ export const ToolHeader = ({
   >
     <div className="flex items-center gap-2" data-slot="tool-header-meta">
       <WrenchIcon className="size-4 text-muted-foreground" />
+      <span
+        className="font-medium font-mono text-muted-foreground text-xs uppercase tracking-wide"
+        data-slot="tool-provenance"
+      >
+        Tool
+      </span>
       <span className="font-medium text-sm" data-slot="tool-header-title">
         {title ?? type.split("-").slice(1).join("-")}
       </span>

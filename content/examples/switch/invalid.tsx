@@ -11,7 +11,7 @@ export default function Example() {
 
   return (
     <div className="flex flex-col gap-4 p-6 max-w-sm mx-auto">
-      <div className="rounded-lg border p-4 space-y-3">
+      <div className="rounded-lg edge p-4 space-y-3">
         <p className="text-sm font-medium">Terms of Service</p>
         <p className="text-xs text-muted-foreground">
           You must accept the terms before continuing.

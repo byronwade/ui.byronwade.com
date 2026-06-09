@@ -21,7 +21,7 @@ export default function Example() {
         playing
         onPlay={() => {}}
       />
-      <AlbumCover src={COVER} alt="Daily Drive" size="lg" rounded="lg" shadow />
+      <AlbumCover src={COVER} alt="Daily Drive" size="lg" rounded="lg" />
       <AlbumCover src={COVER} alt="Focus" size="lg" rounded="full" />
     </div>
   )

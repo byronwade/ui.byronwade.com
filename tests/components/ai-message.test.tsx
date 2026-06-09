@@ -39,6 +39,7 @@ import {
   MessageResponse,
   MessageAttachment,
   MessageAttachments,
+  MessageProvenance,
   MessageToolbar,
   messageVariants,
 } from "@/components/ai-elements/message";
@@ -71,6 +72,21 @@ describe("Message — root", () => {
   it("reflects from='assistant' via data-from", () => {
     const { container } = render(<Message from="assistant" />);
     expect(container.firstChild).toHaveAttribute("data-from", "assistant");
+  });
+
+  it("defaults provenance to the message author", () => {
+    const { container } = render(<Message from="assistant" />);
+    expect(container.firstChild).toHaveAttribute(
+      "data-provenance",
+      "assistant"
+    );
+  });
+
+  it("allows provenance to describe embedded app output", () => {
+    const { container } = render(
+      <Message from="assistant" provenance="app" />
+    );
+    expect(container.firstChild).toHaveAttribute("data-provenance", "app");
   });
 
   it("from='user' applies is-user class", () => {
@@ -205,6 +221,29 @@ describe("MessageContent", () => {
     expect(
       within(msg).getByText("Hi").closest("[data-slot='message-content']")
     ).toBeInTheDocument();
+  });
+});
+
+describe("MessageProvenance", () => {
+  it("renders a provenance label", () => {
+    const { container } = render(
+      <MessageProvenance>Assistant</MessageProvenance>
+    );
+    expect(container.firstChild).toHaveAttribute(
+      "data-slot",
+      "message-provenance"
+    );
+    expect(screen.getByText("Assistant")).toBeInTheDocument();
+  });
+
+  it("uses mono uppercase styling for provenance metadata", () => {
+    const { container } = render(<MessageProvenance>Tool</MessageProvenance>);
+    const label = container.querySelector(
+      "[data-slot='message-provenance']"
+    ) as HTMLElement;
+    expect(label.className).toContain("font-mono");
+    expect(label.className).toContain("uppercase");
+    expect(label.className).toContain("tracking-wide");
   });
 });
 

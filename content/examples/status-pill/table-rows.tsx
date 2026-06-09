@@ -56,7 +56,7 @@ const services: {
 
 export default function Example() {
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-border p-0">
+    <div className="w-full overflow-hidden rounded-2xl edge p-0">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-border bg-muted/30">

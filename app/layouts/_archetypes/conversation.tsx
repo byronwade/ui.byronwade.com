@@ -103,7 +103,7 @@ export function ConversationArchetype() {
     <div className="grid h-dvh grid-cols-1 bg-background text-foreground md:grid-cols-[260px_minmax(0,1fr)]">
       <aside className="hidden min-h-0 flex-col border-r border-border md:flex">
         <div className="flex h-14 items-center justify-between px-4">
-          <div className="flex items-center gap-2 font-semibold tracking-tight">
+          <div className="flex items-center gap-2 font-medium tracking-tight">
             <Sparkles className="size-4 text-brand" />
             Copilot
           </div>
@@ -145,7 +145,7 @@ export function ConversationArchetype() {
       <div className="flex min-h-0 flex-col">
         <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border px-4 sm:px-6">
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold tracking-tight">
+            <p className="truncate text-sm font-medium tracking-tight">
               Refactor billing webhook
             </p>
             <p className="hidden truncate text-xs text-muted-foreground sm:block">
@@ -173,13 +173,13 @@ export function ConversationArchetype() {
                 <button
                   key={s}
                   type="button"
-                  className="inline-flex h-7 items-center rounded-full bg-background px-3 text-xs font-medium shadow-card transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                  className="edge inline-flex h-7 items-center rounded-full bg-background px-3 text-xs font-medium transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                 >
                   {s}
                 </button>
               ))}
             </div>
-            <div className="flex items-end gap-2 rounded-2xl bg-card p-2 shadow-card focus-within:ring-3 focus-within:ring-ring/40">
+            <div className="edge flex items-end gap-2 rounded-2xl bg-card p-2 focus-within:ring-3 focus-within:ring-ring/40">
               <Button variant="ghost" size="icon-sm" aria-label="Attach">
                 <Paperclip />
               </Button>
@@ -227,7 +227,7 @@ function Message({ turn }: { turn: Turn }) {
             {turn.sources.map((s) => (
               <span
                 key={s.label}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted/40 px-2 py-1 text-xs"
+                className="inline-flex items-center gap-1.5 rounded-lg edge bg-muted/40 px-2 py-1 text-xs"
               >
                 <span className="font-mono">{s.label}</span>
                 <span className="text-muted-foreground">{s.meta}</span>

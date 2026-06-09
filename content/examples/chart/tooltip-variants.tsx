@@ -30,7 +30,7 @@ export default function Example() {
   return (
     <div className="flex flex-col gap-6 w-full max-w-xl">
       {/* Dot indicator (default) */}
-      <div className="p-6 rounded-2xl border bg-card">
+      <div className="p-6 rounded-2xl edge bg-card">
         <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
           Dot indicator
         </h2>
@@ -68,7 +68,7 @@ export default function Example() {
       </div>
 
       {/* Line indicator */}
-      <div className="p-6 rounded-2xl border bg-card">
+      <div className="p-6 rounded-2xl edge bg-card">
         <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
           Line indicator
         </h2>
@@ -106,7 +106,7 @@ export default function Example() {
       </div>
 
       {/* Dashed indicator */}
-      <div className="p-6 rounded-2xl border bg-card">
+      <div className="p-6 rounded-2xl edge bg-card">
         <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
           Dashed indicator
         </h2>

@@ -207,7 +207,7 @@ export function AppLauncher() {
       <div
         ref={morphRef}
         className={cn(
-          "pointer-events-auto absolute top-0 left-0 inline-flex transform-gpu overflow-hidden bg-dock text-dock-foreground shadow-float [will-change:width,height]",
+          "pointer-events-auto absolute top-0 left-0 inline-flex transform-gpu overflow-hidden bg-dock text-dock-foreground edge [will-change:width,height]",
           open ? "rounded-2xl" : "rounded-3xl",
         )}
       >
@@ -255,7 +255,7 @@ export function AppLauncher() {
           )}
         >
           <div className="flex items-center justify-between p-3.5 pb-2">
-            <span className="text-[10px] font-semibold tracking-wider text-dock-foreground/70 uppercase">
+            <span className="text-[10px] font-medium tracking-wider text-dock-foreground/70 uppercase">
               Switch product
             </span>
             <button
@@ -279,7 +279,7 @@ export function AppLauncher() {
                 <span className="size-2 rounded-full bg-brand" />
               </span>
               <div className="min-w-0 leading-tight">
-                <div className="truncate text-[13px] font-semibold text-dock-active-foreground">
+                <div className="truncate text-[13px] font-medium text-dock-active-foreground">
                   byronwade<span className="text-dock-foreground">/ui</span>
                 </div>
                 <div className="truncate text-[11px] text-dock-foreground">
@@ -301,16 +301,16 @@ export function AppLauncher() {
               >
                 <span
                   className={cn(
-                    "grid size-9 shrink-0 place-items-center rounded-lg text-[13px] font-bold",
+                    "grid size-9 shrink-0 place-items-center rounded-lg text-[13px] font-medium",
                     p.main
                       ? "bg-gradient-to-br from-brand to-brand/70 text-brand-foreground"
-                      : "bg-white/10 text-dock-active-foreground",
+                      : "bg-dock-muted text-dock-active-foreground",
                   )}
                 >
                   {p.mark}
                 </span>
                 <div className="min-w-0 leading-tight">
-                  <div className="truncate text-[13px] font-semibold text-dock-active-foreground">
+                  <div className="truncate text-[13px] font-medium text-dock-active-foreground">
                     {p.name}
                   </div>
                   <div className="truncate text-[11px] text-dock-foreground">
@@ -322,12 +322,12 @@ export function AppLauncher() {
             ))}
           </div>
 
-          <div className="flex items-center gap-2 border-t border-white/5 bg-black/25 p-3">
+          <div className="flex items-center gap-2 border-t border-dock-muted bg-dock-background/80 p-3">
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noreferrer"
-              className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl bg-dock-active text-[13px] font-semibold text-dock-active-foreground transition-colors hover:bg-white/15"
+              className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl bg-dock-active text-[13px] font-medium text-dock-active-foreground transition-colors hover:bg-dock-muted"
             >
               <GitFork className="size-4" /> GitHub
             </a>

@@ -9,7 +9,7 @@ export default function Example() {
   return (
     <div className="flex flex-col gap-6 p-6 max-w-sm mx-auto">
       <div
-        className={`rounded-lg border p-4 transition-colors ${
+        className={`rounded-lg edge p-4 transition-colors ${
           maintenance
             ? "border-warning/30 bg-warning/10"
             : "border-border bg-card"
@@ -36,7 +36,7 @@ export default function Example() {
       </div>
       <div className="flex gap-2">
         <button
-          className="flex-1 rounded-full border text-sm px-4 py-2 hover:bg-muted transition-colors"
+          className="flex-1 rounded-full edge text-sm px-4 py-2 hover:bg-muted transition-colors"
           onClick={() => setMaintenance(false)}
         >
           Turn off

@@ -32,6 +32,43 @@ describe("TagInput — render", () => {
     expect(screen.getByText("vue")).toBeInTheDocument();
   });
 
+  it("uses a visible input fill on the field surface", () => {
+    const { container } = render(<TagInput defaultValue={["react"]} />);
+    const fieldSurface = container.querySelector(
+      '[data-slot="tag-input-field"]',
+    );
+    expect(fieldSurface).toHaveClass("bg-input/30");
+    expect(fieldSurface).not.toHaveClass("bg-transparent");
+  });
+
+  it("marks tags with neutral tone by default", () => {
+    const { container } = render(<TagInput defaultValue={["react"]} />);
+    expect(container.querySelector('[data-slot="tag-input-tag"]')).toHaveAttribute(
+      "data-tone",
+      "neutral",
+    );
+  });
+
+  it("maps record tag tones to semantic badge variants", () => {
+    const { container } = render(
+      <TagInput
+        defaultValue={["Qualified", "Blocked", "New"]}
+        tagTones={{
+          Qualified: "success",
+          Blocked: "destructive",
+          New: "brand",
+        }}
+      />,
+    );
+    const tags = container.querySelectorAll('[data-slot="tag-input-tag"]');
+    expect(tags[0]).toHaveAttribute("data-tone", "success");
+    expect(tags[0]).toHaveClass("bg-success/10", "text-success");
+    expect(tags[1]).toHaveAttribute("data-tone", "destructive");
+    expect(tags[1]).toHaveClass("bg-destructive/10", "text-destructive");
+    expect(tags[2]).toHaveAttribute("data-tone", "brand");
+    expect(tags[2]).toHaveClass("bg-primary", "text-primary-foreground");
+  });
+
   it("shows the placeholder", () => {
     render(<TagInput placeholder="Add a tag…" />);
     expect(field()).toHaveAttribute("placeholder", "Add a tag…");

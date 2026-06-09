@@ -9,7 +9,7 @@ export default function Example() {
     <div className="p-6">
       <SplitWithRail
         summary={
-          <div className="space-y-5 rounded-2xl border border-border bg-card p-6">
+          <div className="space-y-5 rounded-2xl edge bg-card p-6">
             <div className="flex items-center gap-3">
               <span className="grid size-10 shrink-0 place-items-center rounded-full bg-muted text-lg font-semibold">
                 A
@@ -33,11 +33,11 @@ export default function Example() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-1">
-              <div className="rounded-xl border border-border p-3 text-center">
+              <div className="rounded-xl edge p-3 text-center">
                 <p className="text-2xl font-semibold tabular-nums">12</p>
                 <p className="text-xs text-muted-foreground">Sessions</p>
               </div>
-              <div className="rounded-xl border border-border p-3 text-center">
+              <div className="rounded-xl edge p-3 text-center">
                 <p className="text-2xl font-semibold tabular-nums">47m</p>
                 <p className="text-xs text-muted-foreground">Total time</p>
               </div>
@@ -47,7 +47,7 @@ export default function Example() {
               <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                 Details
               </p>
-              <div className="divide-y divide-border rounded-xl border border-border">
+              <div className="divide-y divide-border rounded-xl edge">
                 {[
                   { label: "Country", value: "United States" },
                   { label: "Browser", value: "Chrome 124" },

@@ -13,7 +13,7 @@ export default function Example() {
   return (
     <div className="flex items-center justify-center min-h-[200px]">
       <Popover>
-        <PopoverTrigger className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors">
+        <PopoverTrigger className="inline-flex items-center gap-1.5 rounded-full edge bg-background px-3 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors">
           Open Popover
         </PopoverTrigger>
         <PopoverContent side="bottom" align="center">

@@ -50,7 +50,7 @@ export default function Example() {
       </p>
       {articles.map((article) => (
         <HoverCard key={article.id}>
-          <HoverCardTrigger className="w-full rounded-lg border border-border bg-background px-4 py-3 text-left text-sm font-medium transition-colors hover:bg-muted cursor-pointer block">
+          <HoverCardTrigger className="w-full rounded-lg edge bg-background px-4 py-3 text-left text-sm font-medium transition-colors hover:bg-muted cursor-pointer block">
             <span className="line-clamp-1">{article.title}</span>
             <span className="mt-0.5 block text-xs text-muted-foreground">
               {article.author} &middot; {article.readTime}

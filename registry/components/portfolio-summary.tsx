@@ -50,7 +50,7 @@ function PortfolioSummary({
             <PriceChange value={dayChange} percent={dayChangePercent} size="sm" />
           }
         />
-        <div className="rounded-2xl border border-border bg-card p-4 edge">
+        <div className="rounded-2xl edge bg-card p-4 edge">
           <span className="text-sm text-muted-foreground">Equity curve</span>
           <Sparkline
             data={spark}

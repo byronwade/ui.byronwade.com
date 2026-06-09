@@ -14,7 +14,7 @@ export default function Example() {
   return (
     <ColorPicker
       defaultValue="#1d4ed8"
-      className="max-w-sm rounded-lg border border-border bg-card p-4"
+      className="max-w-sm rounded-lg edge bg-card p-4"
     >
       <ColorPickerSelection className="aspect-[4/3] w-full" />
       <div className="flex items-center gap-4">

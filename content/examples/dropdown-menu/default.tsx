@@ -14,7 +14,7 @@ export default function Example() {
   return (
     <div className="flex items-center justify-center p-16">
       <DropdownMenu>
-        <DropdownMenuTrigger className="rounded-md border px-4 py-2 text-sm">
+        <DropdownMenuTrigger className="rounded-md edge px-4 py-2 text-sm">
           Options
         </DropdownMenuTrigger>
         <DropdownMenuContent>

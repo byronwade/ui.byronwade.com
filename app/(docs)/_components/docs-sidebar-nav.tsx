@@ -13,7 +13,9 @@ import {
   LayoutGrid,
   Megaphone,
   Palette,
-  Search,
+  PanelLeft,
+  Plug,
+  ShieldCheck,
   Sparkles,
   Terminal,
   Type,
@@ -22,35 +24,40 @@ import {
 import type { LucideIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { byCategory } from "@/content/components"
 import { guides } from "@/content/guides"
 import {
   catalogSurfaces,
   categoriesForSurface,
-  getSurface,
 } from "@/content/catalog-surfaces"
+import {
+  buildCategoryNav,
+  isDocsNavFamily,
+  type DocsNavEntry,
+  type DocsNavLeaf,
+} from "@/content/docs-nav"
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import {
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarInput,
-  SidebarMenu,
-  SidebarMenuBadge,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-  SidebarSeparator,
-} from "@/components/ui/sidebar"
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+/* ── dock-toned vocabulary (matches the floating header chrome) ─────── */
+
+const IDLE =
+  "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground"
+const ACTIVE = "bg-dock-active text-dock-active-foreground"
+const RING = "outline-none focus-visible:ring-2 focus-visible:ring-ring"
+const LABEL =
+  "px-3 pt-3 pb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-dock-foreground/45"
+/** The shared morph easing, ported from the header dock + launcher. */
+const MORPH = "transition-[width] duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
+const FADE = "transition-opacity duration-150"
+const EXPANDED_W = "w-64"
 
 const GUIDE_ICONS: Record<string, LucideIcon> = {
   "": BookOpen,
@@ -62,6 +69,8 @@ const GUIDE_ICONS: Record<string, LucideIcon> = {
   readability: Glasses,
   surfaces: LayoutGrid,
   ai: Bot,
+  lint: ShieldCheck,
+  mcp: Plug,
 }
 
 const SURFACE_ICONS = {
@@ -69,302 +78,487 @@ const SURFACE_ICONS = {
   marketing: Megaphone,
 } as const
 
-type NavLink = { href: string; label: string }
+/** Guide pages organized into fixed, non-collapsible sidebar groups. */
+const GUIDE_GROUPS: { label: string; slugs: string[] }[] = [
+  { label: "Get Started", slugs: ["", "philosophy", "installation"] },
+  {
+    label: "Foundation",
+    slugs: ["foundation", "theming", "typography", "readability", "surfaces"],
+  },
+  { label: "Tooling", slugs: ["ai", "lint", "mcp"] },
+]
 
-function useNavSearch() {
-  const [query, setQuery] = React.useState("")
-  const normalized = query.trim().toLowerCase()
-  return { query, setQuery, normalized, searching: normalized.length > 0 }
+/* ── shared rows ───────────────────────────────────────────────────── */
+
+function NavRow({
+  href,
+  icon: Icon,
+  label,
+  active,
+  onNavigate,
+}: {
+  href: string
+  icon?: LucideIcon
+  label: string
+  active: boolean
+  onNavigate?: () => void
+}) {
+  return (
+    <Link
+      href={href}
+      aria-current={active ? "page" : undefined}
+      onClick={onNavigate}
+      className={cn(
+        "flex h-8 items-center gap-2.5 rounded-lg px-2.5 text-[13px] transition-colors",
+        active ? ACTIVE : IDLE,
+        RING,
+      )}
+    >
+      {Icon ? <Icon className="size-4 shrink-0" strokeWidth={2} /> : null}
+      <span className="truncate">{label}</span>
+    </Link>
+  )
 }
 
-function collectLinks(): (NavLink & { group: string; surface?: string })[] {
-  const links: (NavLink & { group: string; surface?: string })[] = guides.map(
-    (g) => ({
-      href: g.href,
-      label: g.label,
-      group: "Get Started",
-    }),
+function Badge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="ml-auto rounded-full bg-dock-muted px-1.5 font-mono text-[10px] text-dock-foreground/55 tabular-nums">
+      {children}
+    </span>
   )
+}
 
-  for (const surface of catalogSurfaces) {
-    for (const cat of categoriesForSurface(surface.id)) {
-      for (const doc of byCategory(cat).filter(
-        (c) => getSurface(c) === surface.id,
-      )) {
-        links.push({
-          href: `/docs/${doc.slug}`,
-          label: doc.name,
-          group: `${surface.shortLabel} · ${cat}`,
-          surface: surface.id,
-        })
-      }
-    }
+function NavLeaf({
+  item,
+  pathname,
+  onNavigate,
+}: {
+  item: DocsNavLeaf
+  pathname: string
+  onNavigate?: () => void
+}) {
+  const active = pathname === item.href
+  return (
+    <Link
+      href={item.href}
+      aria-current={active ? "page" : undefined}
+      onClick={onNavigate}
+      className={cn(
+        "flex h-8 items-center rounded-md px-2.5 text-[13px] transition-colors",
+        active ? ACTIVE : IDLE,
+        RING,
+      )}
+    >
+      <span className="truncate">{item.label}</span>
+    </Link>
+  )
+}
+
+function FamilyCollapsible({
+  entry,
+  pathname,
+  onNavigate,
+}: {
+  entry: Extract<DocsNavEntry, { kind: "family" }>
+  pathname: string
+  onNavigate?: () => void
+}) {
+  const activeInFamily = entry.children.some((child) => pathname === child.href)
+  const [open, setOpen] = React.useState(activeInFamily)
+
+  const [wasActive, setWasActive] = React.useState(activeInFamily)
+  if (activeInFamily !== wasActive) {
+    setWasActive(activeInFamily)
+    if (activeInFamily) setOpen(true)
   }
 
-  return links
-}
-
-const ALL_LINKS = collectLinks()
-
-function GuideMenu({ pathname }: { pathname: string }) {
   return (
-    <SidebarMenu>
-      {guides.map((guide) => {
-        const Icon = GUIDE_ICONS[guide.slug] ?? BookOpen
-        const active = pathname === guide.href
-        return (
-          <SidebarMenuItem key={guide.href}>
-            <SidebarMenuButton
-              isActive={active}
-              tooltip={guide.label}
-              render={<Link href={guide.href} />}
-            >
-              <Icon />
-              <span>{guide.label}</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        )
-      })}
-    </SidebarMenu>
+    <Collapsible open={open} onOpenChange={setOpen} className="group/family">
+      <CollapsibleTrigger
+        className={cn(
+          "flex h-8 w-full items-center gap-1.5 rounded-md px-2.5 text-[13px]",
+          IDLE,
+          RING,
+        )}
+      >
+        <ChevronRight className="size-3.5 shrink-0 transition-transform group-data-[open]/family:rotate-90" />
+        <span className="truncate">{entry.label}</span>
+        <Badge>{entry.children.length}</Badge>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="ml-3.5 flex flex-col gap-0.5 border-l border-dock-muted pl-2.5 py-0.5">
+          {entry.children.map((child) => (
+            <NavLeaf
+              key={child.href}
+              item={child}
+              pathname={pathname}
+              onNavigate={onNavigate}
+            />
+          ))}
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
   )
 }
 
 function CategoryCollapsible({
   label,
-  items,
+  entries,
   pathname,
   defaultOpen,
+  onNavigate,
 }: {
   label: string
-  items: NavLink[]
+  entries: DocsNavEntry[]
   pathname: string
   defaultOpen: boolean
+  onNavigate?: () => void
 }) {
-  const activeInCategory = items.some((item) => pathname === item.href)
+  const leafHrefs = entries.flatMap((entry) =>
+    entry.kind === "family"
+      ? entry.children.map((child) => child.href)
+      : [entry.href],
+  )
+  const activeInCategory = leafHrefs.some((href) => pathname === href)
   const [open, setOpen] = React.useState(defaultOpen || activeInCategory)
 
-  React.useEffect(() => {
+  const [wasActive, setWasActive] = React.useState(activeInCategory)
+  if (activeInCategory !== wasActive) {
+    setWasActive(activeInCategory)
     if (activeInCategory) setOpen(true)
-  }, [activeInCategory])
+  }
 
   return (
     <Collapsible open={open} onOpenChange={setOpen} className="group/cat">
-      <SidebarMenuItem>
-        <CollapsibleTrigger
-          render={<SidebarMenuButton render={<button type="button" />} />}
-        >
-          <ChevronRight className="transition-transform group-data-[open]/cat:rotate-90" />
-          <span>{label}</span>
-          <SidebarMenuBadge>{items.length}</SidebarMenuBadge>
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <SidebarMenuSub>
-            {items.map((item) => (
-              <SidebarMenuSubItem key={item.href}>
-                <SidebarMenuSubButton
-                  isActive={pathname === item.href}
-                  render={<Link href={item.href} />}
-                >
-                  {item.label}
-                </SidebarMenuSubButton>
-              </SidebarMenuSubItem>
-            ))}
-          </SidebarMenuSub>
-        </CollapsibleContent>
-      </SidebarMenuItem>
+      <CollapsibleTrigger
+        className={cn(
+          "flex h-8 w-full items-center gap-1.5 rounded-lg px-2.5 text-[13px]",
+          IDLE,
+          RING,
+        )}
+      >
+        <ChevronRight className="size-3.5 shrink-0 transition-transform group-data-[open]/cat:rotate-90" />
+        <span className="truncate">{label}</span>
+        <Badge>{leafHrefs.length}</Badge>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="mt-0.5 ml-3.5 flex flex-col gap-0.5 border-l border-dock-muted pl-2.5">
+          {entries.map((entry) =>
+            isDocsNavFamily(entry) ? (
+              <FamilyCollapsible
+                key={entry.slug}
+                entry={entry}
+                pathname={pathname}
+                onNavigate={onNavigate}
+              />
+            ) : (
+              <NavLeaf
+                key={entry.href}
+                item={entry}
+                pathname={pathname}
+                onNavigate={onNavigate}
+              />
+            ),
+          )}
+        </div>
+      </CollapsibleContent>
     </Collapsible>
   )
 }
 
-function SurfaceSection({
-  surface,
-  pathname,
-  searching,
-}: {
-  surface: (typeof catalogSurfaces)[number]
-  pathname: string
-  searching: boolean
-}) {
-  const Icon = SURFACE_ICONS[surface.id]
+/* ── the bloomed tree (full nav) ───────────────────────────────────── */
 
+function Tree({
+  pathname,
+  onNavigate,
+}: {
+  pathname: string
+  onNavigate?: () => void
+}) {
   return (
-    <SidebarGroup className="py-0">
-      <SidebarGroupLabel className="font-mono text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/60">
-        {surface.label}
-      </SidebarGroupLabel>
-      <SidebarGroupContent>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              tooltip={`Browse ${surface.shortLabel}`}
-              render={<Link href={surface.href} />}
-            >
-              <Icon />
-              <span>Browse {surface.shortLabel.toLowerCase()}</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          {!searching
-            ? categoriesForSurface(surface.id).map((cat) => {
-                const items = byCategory(cat)
-                  .filter((c) => getSurface(c) === surface.id)
-                  .map((c) => ({
-                    href: `/docs/${c.slug}`,
-                    label: c.name,
-                  }))
-                if (items.length === 0) return null
+    <div className="flex h-full flex-col">
+      <div className="scrollbar-thin flex-1 overflow-y-auto px-2 py-2">
+        {GUIDE_GROUPS.map((group) => (
+          <div key={group.label} className="mb-1">
+            <div className={LABEL}>{group.label}</div>
+            <div className="flex flex-col gap-0.5">
+              {group.slugs.map((slug) => {
+                const guide = guides.find((g) => g.slug === slug)
+                if (!guide) return null
                 return (
-                  <CategoryCollapsible
-                    key={`${surface.id}-${cat}`}
-                    label={cat}
-                    items={items}
-                    pathname={pathname}
-                    defaultOpen={surface.id === "app" && cat === "UI"}
+                  <NavRow
+                    key={guide.href}
+                    href={guide.href}
+                    icon={GUIDE_ICONS[slug] ?? BookOpen}
+                    label={guide.label}
+                    active={pathname === guide.href}
+                    onNavigate={onNavigate}
                   />
                 )
-              })
-            : null}
-        </SidebarMenu>
-      </SidebarGroupContent>
-    </SidebarGroup>
-  )
-}
+              })}
+            </div>
+          </div>
+        ))}
 
-function SearchResults({
-  query,
-  pathname,
-  onClear,
-}: {
-  query: string
-  pathname: string
-  onClear: () => void
-}) {
-  const results = ALL_LINKS.filter(
-    (link) =>
-      link.label.toLowerCase().includes(query) ||
-      link.group.toLowerCase().includes(query) ||
-      link.href.toLowerCase().includes(query),
-  )
+        <div className="mx-2 my-2 h-px bg-dock-muted" />
 
-  return (
-    <SidebarGroup className="py-0">
-      <div className="flex items-center justify-between px-2 pb-1">
-        <SidebarGroupLabel className="h-auto p-0 font-mono text-[10px] uppercase tracking-[0.18em]">
-          Results · {results.length}
-        </SidebarGroupLabel>
-        <button
-          type="button"
-          onClick={onClear}
-          className="rounded-md p-1 text-sidebar-foreground/60 outline-none hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 focus-visible:ring-sidebar-ring"
-          aria-label="Clear search"
-        >
-          <X className="size-3.5" />
-        </button>
+        {catalogSurfaces.map((surface) => {
+          const Icon = SURFACE_ICONS[surface.id]
+          return (
+            <div key={surface.id}>
+              <div className={LABEL}>{surface.label}</div>
+              <div className="flex flex-col gap-0.5">
+                <NavRow
+                  href={surface.href}
+                  icon={Icon}
+                  label={`Browse ${surface.shortLabel.toLowerCase()}`}
+                  active={false}
+                  onNavigate={onNavigate}
+                />
+                {categoriesForSurface(surface.id).map((cat) => {
+                  const entries = buildCategoryNav(cat, surface.id)
+                  if (entries.length === 0) return null
+                  return (
+                    <CategoryCollapsible
+                      key={`${surface.id}-${cat}`}
+                      label={cat}
+                      entries={entries}
+                      pathname={pathname}
+                      defaultOpen={surface.id === "app" && cat === "UI"}
+                      onNavigate={onNavigate}
+                    />
+                  )
+                })}
+              </div>
+            </div>
+          )
+        })}
       </div>
-      <SidebarGroupContent>
-        <SidebarMenu>
-          {results.length === 0 ? (
-            <p className="px-2 py-3 text-xs text-sidebar-foreground/60">
-              No matches for &ldquo;{query}&rdquo;
-            </p>
-          ) : (
-            results.map((item) => (
-              <SidebarMenuItem key={item.href}>
-                <SidebarMenuButton
-                  isActive={pathname === item.href}
-                  size="sm"
-                  render={<Link href={item.href} />}
-                >
-                  <span className="truncate">{item.label}</span>
-                  <span className="ml-auto truncate font-mono text-[10px] text-sidebar-foreground/50">
-                    {item.group}
-                  </span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))
-          )}
-        </SidebarMenu>
-      </SidebarGroupContent>
-    </SidebarGroup>
+    </div>
   )
 }
 
-export function DocsSidebarNav() {
+/* ── the resting icon rail ─────────────────────────────────────────── */
+
+type RailDest = { href: string; icon: LucideIcon; label: string }
+
+function railDestinations(): RailDest[] {
+  return [
+    ...guides.map((g) => ({
+      href: g.href,
+      icon: GUIDE_ICONS[g.slug] ?? BookOpen,
+      label: g.label,
+    })),
+    ...catalogSurfaces.map((s) => ({
+      href: s.href,
+      icon: SURFACE_ICONS[s.id],
+      label: `Browse ${s.shortLabel.toLowerCase()}`,
+    })),
+  ]
+}
+
+function RailIcon({ dest, active }: { dest: RailDest; active: boolean }) {
+  const Icon = dest.icon
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Link
+            href={dest.href}
+            aria-label={dest.label}
+            aria-current={active ? "page" : undefined}
+            className={cn(
+              "grid size-9 shrink-0 place-items-center rounded-xl transition-colors",
+              active ? ACTIVE : IDLE,
+              RING,
+            )}
+          />
+        }
+      >
+        <Icon className="size-4" strokeWidth={2} />
+      </TooltipTrigger>
+      <TooltipContent side="right" sideOffset={10}>
+        {dest.label}
+      </TooltipContent>
+    </Tooltip>
+  )
+}
+
+function Rail({
+  pathname,
+  onExpand,
+}: {
+  pathname: string
+  onExpand: () => void
+}) {
+  return (
+    <div className="flex h-full w-14 flex-col items-center gap-1 p-2">
+      {/* Toggle pinned to the TOP — mirrors the collapse button's position so
+          nothing jumps vertically when the rail morphs into the tree. */}
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <button
+              type="button"
+              onClick={onExpand}
+              aria-label="Expand sidebar"
+              className={cn(
+                "grid size-9 shrink-0 place-items-center rounded-xl",
+                IDLE,
+                RING,
+              )}
+            />
+          }
+        >
+          <PanelLeft className="size-4" strokeWidth={2} />
+        </TooltipTrigger>
+        <TooltipContent side="right" sideOffset={10}>
+          Expand sidebar
+        </TooltipContent>
+      </Tooltip>
+
+      <div className="my-1 h-px w-6 bg-dock-muted" />
+
+      <div className="scrollbar-none flex flex-1 flex-col items-center gap-1 overflow-y-auto">
+        {railDestinations().map((dest) => (
+          <RailIcon
+            key={dest.href}
+            dest={dest}
+            active={pathname === dest.href}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ── the dock-toned vessel that morphs rail ↔ tree ─────────────────── */
+
+const VESSEL =
+  "relative overflow-hidden rounded-3xl bg-dock text-dock-foreground edge"
+
+export function DocsSidebar() {
   const pathname = usePathname()
-  const { query, setQuery, normalized, searching } = useNavSearch()
+  const [collapsed, setCollapsed] = React.useState(false)
+  const [mobileOpen, setMobileOpen] = React.useState(false)
+
+  // Close the mobile sheet whenever the route changes.
+  const [lastPath, setLastPath] = React.useState(pathname)
+  if (pathname !== lastPath) {
+    setLastPath(pathname)
+    if (mobileOpen) setMobileOpen(false)
+  }
+
+  // The header chrome's hamburger lives outside this tree; it opens the sheet
+  // via this event (decoupled, like the ⌘K search launcher).
+  React.useEffect(() => {
+    const onOpen = () => setMobileOpen(true)
+    window.addEventListener("open-docs-nav", onOpen)
+    return () => window.removeEventListener("open-docs-nav", onOpen)
+  }, [])
 
   return (
     <>
-      <SidebarHeader className="gap-2 border-b border-border bg-background p-2">
-        <p className="px-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-          Documentation
-        </p>
-        <div className="relative px-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground/50" />
-          <SidebarInput
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search docs…"
-            aria-label="Search documentation"
+      {/* DESKTOP — sticky, dock-toned rail that morphs its width. */}
+      <aside className="group sticky top-16 z-20 hidden h-[calc(100dvh-5rem)] shrink-0 self-start py-2 pl-3 md:block">
+        <div className="relative h-full">
+          <div
             className={cn(
-              "h-8 border-border bg-background pl-8 shadow-none",
-              searching && "ring-1 ring-brand/30",
+              VESSEL,
+              "h-full",
+              collapsed ? "w-14" : EXPANDED_W,
+              MORPH,
             )}
-          />
-        </div>
-      </SidebarHeader>
-
-      <SidebarContent className="scrollbar-thin gap-0 bg-background py-2">
-        {searching ? (
-          <SearchResults
-            query={normalized}
-            pathname={pathname}
-            onClear={() => setQuery("")}
-          />
-        ) : (
-          <>
-            <SidebarGroup className="py-0">
-              <SidebarGroupLabel className="font-mono text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/60">
-                Get Started
-              </SidebarGroupLabel>
-              <SidebarGroupContent>
-                <GuideMenu pathname={pathname} />
-              </SidebarGroupContent>
-            </SidebarGroup>
-
-            <SidebarSeparator className="my-2" />
-
-            {catalogSurfaces.map((surface) => (
-              <SurfaceSection
-                key={surface.id}
-                surface={surface}
-                pathname={pathname}
-                searching={searching}
-              />
-            ))}
-          </>
-        )}
-      </SidebarContent>
-
-      <SidebarFooter className="border-t border-border bg-background p-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              size="sm"
-              render={<Link href="/docs/surfaces" />}
-              isActive={pathname === "/docs/surfaces"}
+          >
+            {/* Tree (in flow → owns height); cross-fades with the rail. */}
+            <div
+              className={cn(
+                "h-full",
+                EXPANDED_W,
+                FADE,
+                collapsed && "pointer-events-none opacity-0",
+              )}
             >
-              <LayoutGrid />
-              <span>Surfaces guide</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="sm" render={<Link href="/catalog" />}>
-              <LayoutDashboard />
-              <span>Full catalog</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
+              <Tree pathname={pathname} />
+            </div>
+
+            {/* Rail (absolute overlay); cross-fades with the tree. */}
+            <div
+              className={cn(
+                "absolute inset-0",
+                FADE,
+                collapsed ? "opacity-100" : "pointer-events-none opacity-0",
+              )}
+            >
+              <Rail pathname={pathname} onExpand={() => setCollapsed(false)} />
+            </div>
+          </div>
+
+          {/* Collapse handle — a dock-toned button straddling the rail's outer
+              right edge near the top, revealed on sidebar hover (expanded only). */}
+          {collapsed ? null : (
+            <div className="absolute top-3 right-0 z-10 translate-x-[calc(100%+0.625rem)] rounded-full bg-dock p-[3px] opacity-0 edge transition-opacity duration-150 group-hover:opacity-100 focus-within:opacity-100">
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <button
+                      type="button"
+                      onClick={() => setCollapsed(true)}
+                      aria-label="Collapse sidebar"
+                      className={cn(
+                        "flex size-8 items-center justify-center rounded-full transition-colors",
+                        IDLE,
+                        RING,
+                      )}
+                    />
+                  }
+                >
+                  <PanelLeft className="size-4" strokeWidth={2} />
+                </TooltipTrigger>
+                <TooltipContent side="right" sideOffset={8}>
+                  Collapse sidebar
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          )}
+        </div>
+      </aside>
+
+      {/* MOBILE — the tree as a left sheet, opened from the header hamburger. */}
+      {mobileOpen ? (
+        <div className="fixed inset-0 z-50 md:hidden">
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setMobileOpen(false)}
+            className="absolute inset-0 bg-foreground/50"
+          />
+          <div className="absolute inset-y-3 left-3 w-72">
+            <div className={cn(VESSEL, "h-full w-full")}>
+              <div className="flex items-center justify-end p-2">
+                <button
+                  type="button"
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Close menu"
+                  className={cn(
+                    "grid size-8 place-items-center rounded-lg",
+                    IDLE,
+                    RING,
+                  )}
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+              <div className="h-[calc(100%-3rem)]">
+                <Tree
+                  pathname={pathname}
+                  onNavigate={() => setMobileOpen(false)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   )
 }

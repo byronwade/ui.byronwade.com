@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, Check } from "lucide-react"
+import { Check } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { BLEED } from "@/app/(docs)/_components/docs-prose"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
 
 export const metadata: Metadata = {
   title: "Typography, byronwade/ui",
@@ -14,8 +16,6 @@ export const metadata: Metadata = {
    Typography = a type-forward specimen. Distinct signature: the hero is three
    oversized glyphs (the three families), not a headline. Token-driven throughout.
 --------------------------------------------------------------------------- */
-
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const SCALE: { cls: string; size: string; use: string }[] = [
   {
@@ -229,7 +229,7 @@ export default function TypographyPage() {
     <article className="max-w-none">
       {/* ============================ HERO, three giant glyphs ========== */}
       <section className={`${BLEED} border-b border-border`}>
-        <div className="flex items-baseline justify-between gap-4 pt-10">
+        <div className="flex items-baseline justify-between gap-4 pt-12 lg:pt-16">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Foundation · Type
           </p>
@@ -257,19 +257,27 @@ export default function TypographyPage() {
 
       {/* ============================ INTRO ============================= */}
       <section className="py-12">
-        <p className="max-w-3xl text-[clamp(1.5rem,4vw,2.25rem)] font-normal leading-snug tracking-tight text-foreground text-balance">
+        <h1 className="max-w-3xl text-[clamp(1.5rem,4vw,2.25rem)] font-normal leading-snug tracking-tight text-foreground text-balance">
           Sans for interface, serif for reading, mono for data. Hierarchy comes
           from{" "}
           <span className="text-muted-foreground">
             size, tracking, and the typeface
           </span>
           , never weight or color.
-        </p>
+        </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground text-pretty">
           Most design systems shout with bold headings and colored type. This
           one whispers: a regular-weight headline with tight tracking reads as
-          confident and editorial. The accent color belongs on surfaces and
-          states, not on the letters themselves. Long-form copy uses{" "}
+          confident and editorial — the same{" "}
+          <Link
+            href="/docs/philosophy"
+            className="text-brand underline-offset-4 hover:underline"
+          >
+            editorial restraint
+          </Link>{" "}
+          the rest of the system is built on. The accent color belongs on
+          surfaces and states, not on the letters themselves. Long-form copy
+          uses{" "}
           <Link
             href="/docs/readability"
             className="text-brand underline-offset-4 hover:underline"
@@ -320,7 +328,7 @@ export default function TypographyPage() {
         <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-brand">
           The scale, a waterfall
         </p>
-        <div className="divide-y divide-border overflow-hidden rounded-2xl edge">
+        <div className="divide-y divide-edge overflow-hidden rounded-2xl edge">
           {SCALE.map((w) => (
             <div
               key={w.size}
@@ -446,9 +454,15 @@ export default function TypographyPage() {
           Rhythm is baked into foundation.
         </h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground text-pretty">
-          You rarely need to set letter-spacing by hand. Foundation applies body
-          tracking and heading tightness globally. Reach for utility classes
-          only when you are designing a signature moment.
+          You rarely need to set letter-spacing by hand. The{" "}
+          <Link
+            href="/docs/foundation"
+            className="text-brand underline-offset-4 hover:underline"
+          >
+            foundation tokens
+          </Link>{" "}
+          apply body tracking and heading tightness globally. Reach for utility
+          classes only when you are designing a signature moment.
         </p>
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {TRACKING.map((t) => (
@@ -677,34 +691,7 @@ export default function RootLayout({ children }) {
         </div>
       </section>
 
-      {/* ============================ NAV ============================== */}
-      <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">
-        <Link
-          href="/docs/readability"
-          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
-        >
-          Next: Readability
-          <ArrowRight className="size-3.5" />
-        </Link>
-        <Link
-          href="/docs/foundation"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Foundation tokens
-        </Link>
-        <Link
-          href="/docs/lint"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          On-system lint
-        </Link>
-        <Link
-          href="/docs/philosophy"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Philosophy
-        </Link>
-      </div>
+      <GuidePager current="/docs/typography" />
     </article>
   )
 }

@@ -45,7 +45,7 @@ export default function Example() {
 
   return (
     <div className="flex min-h-0 items-end justify-center bg-background p-8">
-      <div className="w-full max-w-xl">
+      <div className="w-full max-w-2xl">
         <PromptInput accept="image/*" multiple onSubmit={handleSubmit}>
           <PromptInputBody>
             <PromptInputAttachments>
@@ -64,6 +64,7 @@ export default function Example() {
               <PromptInputButton
                 variant={search ? "default" : "ghost"}
                 onClick={() => setSearch((v) => !v)}
+                data-tone={search ? "success" : "neutral"}
               >
                 <GlobeIcon className="size-4" />
                 <span>Search</span>

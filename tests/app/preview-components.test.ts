@@ -5,6 +5,7 @@ describe("/preview/components/[slug] generateStaticParams", () => {
   it("includes every catalog component slug", async () => {
     const params = await generateStaticParams()
     expect(params).toContainEqual({ slug: "button" })
+    expect(params).toContainEqual({ slug: "data-table" })
     expect(params.length).toBeGreaterThan(100)
   })
 })

@@ -185,7 +185,7 @@ function ServiceWorkloadRow({ workload }: { workload: ServiceWorkload }) {
   return (
     <div
       data-slot="service-map-workload-row"
-      className="space-y-2.5 rounded-md border bg-card p-3"
+      className="space-y-2.5 rounded-md edge bg-card p-3"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
@@ -509,7 +509,7 @@ function DependencyList({
             <div
               key={item.id}
               className={cn(
-                "flex items-center justify-between rounded-md border px-2.5 py-2 text-xs",
+                "flex items-center justify-between rounded-md edge px-2.5 py-2 text-xs",
                 isError
                   ? "border-destructive/12 bg-destructive/5"
                   : "border-border bg-card",
@@ -709,7 +709,7 @@ export function DatabaseDetailPanel({
                 {summary.topQueries.map((query) => (
                   <div
                     key={query.queryKey}
-                    className="rounded-md border border-border bg-card px-2.5 py-2"
+                    className="rounded-md edge bg-card px-2.5 py-2"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <p className="min-w-0 flex-1 truncate font-mono text-[11px] font-medium text-foreground">

@@ -35,7 +35,7 @@ type ViewTransitionLike = {
 }
 
 const ITEM =
-  "relative flex size-8 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white/30"
+  "relative flex size-8 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
 const ITEM_IDLE =
   "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground"
 const ITEM_ACTIVE = "bg-dock-active text-dock-active-foreground"
@@ -99,7 +99,7 @@ function NavDockItem({
             aria-label={item.label}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "relative flex h-8 items-center gap-1.5 rounded-full px-2.5 text-[13px] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white/30 sm:px-3",
+              "relative flex h-8 items-center gap-1.5 rounded-full px-2.5 text-[13px] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring sm:px-3",
               active ? ITEM_ACTIVE : ITEM_IDLE,
             )}
           />
@@ -443,7 +443,7 @@ export function NavDock() {
           <div
             ref={morphRef}
             className={cn(
-              "pointer-events-auto absolute bottom-0 left-1/2 -translate-x-1/2 transform-gpu overflow-hidden bg-dock text-dock-foreground shadow-float [will-change:width,height] sm:top-0 sm:bottom-auto",
+              "pointer-events-auto absolute bottom-0 left-1/2 -translate-x-1/2 transform-gpu overflow-hidden bg-dock text-dock-foreground edge [will-change:width,height] sm:top-0 sm:bottom-auto",
               open ? "rounded-2xl" : "rounded-3xl",
             )}
           >
@@ -466,7 +466,7 @@ export function NavDock() {
               </nav>
 
               <span
-                className="mx-1.5 h-5 w-px shrink-0 self-center bg-white/10"
+                className="mx-1.5 h-5 w-px shrink-0 self-center bg-dock-muted"
                 aria-hidden
               />
 
@@ -554,7 +554,7 @@ export function NavDock() {
                   aria-label="Search"
                   className="h-6 flex-1 bg-transparent text-sm text-dock-active-foreground placeholder:text-dock-foreground/60 outline-none"
                 />
-                <kbd className="rounded border border-white/10 bg-white/5 px-1.5 py-0.5 font-mono text-[10px] text-dock-foreground/70">
+                <kbd className="rounded border border-dock-muted bg-white/5 px-1.5 py-0.5 font-mono text-[10px] text-dock-foreground/70">
                   esc
                 </kbd>
               </div>
@@ -593,15 +593,15 @@ export function NavDock() {
               </div>
 
               {/* Footer hints */}
-              <div className="flex items-center gap-3 border-t border-white/5 bg-black/20 px-3.5 py-2 text-[11px] text-dock-foreground/70">
+              <div className="flex items-center gap-3 border-t border-dock-muted bg-dock-background/80 px-3.5 py-2 text-[11px] text-dock-foreground/70">
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded border border-white/10 bg-white/5 px-1 font-mono">
+                  <kbd className="rounded border border-dock-muted bg-dock-muted px-1 font-mono">
                     ↑↓
                   </kbd>
                   navigate
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="flex items-center rounded border border-white/10 bg-white/5 px-1 font-mono">
+                  <kbd className="flex items-center rounded border border-dock-muted bg-dock-muted px-1 font-mono">
                     <CornerDownLeft className="size-3" />
                   </kbd>
                   open

@@ -6,7 +6,7 @@ const SYMBOLS = ["AAPL", "MSFT", "NVDA", "TSLA"] as const
 
 export default function Example() {
   return (
-    <div className="h-[min(640px,80vh)] w-full overflow-hidden rounded-xl border border-border bg-background p-2">
+    <div className="h-[min(640px,80vh)] w-full overflow-hidden rounded-xl edge bg-background p-2">
       <ChartLayoutGrid layout="2x2" className="h-full">
         {SYMBOLS.map((symbol, index) => (
           <ChartPanel

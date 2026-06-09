@@ -41,7 +41,7 @@ export default function Example() {
             {faq.question}
             <ChevronDownIcon className="size-4 transition-transform group-aria-expanded/button:rotate-180" />
           </CollapsibleTrigger>
-          <CollapsibleContent className="rounded-lg border px-4 py-3 text-sm text-muted-foreground">
+          <CollapsibleContent className="rounded-lg edge px-4 py-3 text-sm text-muted-foreground">
             {faq.answer}
           </CollapsibleContent>
         </Collapsible>

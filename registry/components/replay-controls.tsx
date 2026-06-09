@@ -96,7 +96,7 @@ function ReplayControls({
       className={cn(
         bar
           ? "flex items-center gap-1"
-          : "flex flex-col gap-3 rounded-xl border border-border bg-card px-4 py-3",
+          : "flex flex-col gap-3 rounded-xl edge bg-card px-4 py-3",
         className,
       )}
       {...props}

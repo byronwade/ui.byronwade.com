@@ -15,7 +15,7 @@ export default function Example() {
           id="username"
           type="text"
           placeholder="janedoe"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 
@@ -28,7 +28,7 @@ export default function Example() {
           id="email-icon"
           type="email"
           placeholder="jane@example.com"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 
@@ -41,7 +41,7 @@ export default function Example() {
           id="password"
           type="password"
           placeholder="••••••••"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 
@@ -54,7 +54,7 @@ export default function Example() {
           id="search"
           type="search"
           placeholder="Find something…"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
     </div>

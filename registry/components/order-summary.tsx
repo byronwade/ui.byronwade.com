@@ -70,7 +70,7 @@ function OrderSummary({
     <div
       data-slot="order-summary"
       className={cn(
-        "flex flex-col gap-4 rounded-lg border border-border bg-card p-4",
+        "flex flex-col gap-4 rounded-lg edge bg-card p-4",
         className,
       )}
       {...props}
@@ -102,7 +102,7 @@ function OrderSummary({
                 <div
                   data-slot="order-item-thumb"
                   aria-hidden
-                  className="grid size-10 shrink-0 place-items-center rounded-md border border-border bg-muted text-xs text-muted-foreground"
+                  className="grid size-10 shrink-0 place-items-center rounded-md edge bg-muted text-xs text-muted-foreground"
                 >
                   {item.title.slice(0, 2)}
                 </div>

@@ -167,7 +167,7 @@ function OrderBook({
       data-layout={layout}
       className={cn(
         orderBookVariants({ layout }),
-        "overflow-hidden rounded-md border border-border bg-card",
+        "overflow-hidden rounded-md edge bg-card",
         className,
       )}
       {...props}

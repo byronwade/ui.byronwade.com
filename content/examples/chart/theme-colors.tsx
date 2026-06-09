@@ -19,43 +19,39 @@ const data = [
   { month: "Jun", a: 72, b: 55, c: 38 },
 ]
 
-// Using the `theme` key instead of a flat `color` for light/dark theme awareness
+// Use chart tokens from the foundation theme so consumers can re-skin charts.
 const chartConfig: ChartConfig = {
   a: {
     label: "Series A",
     theme: {
-      light: "#16a34a",
-      dark: "#4ade80",
+      light: "var(--chart-1)",
+      dark: "var(--chart-1)",
     },
   },
   b: {
     label: "Series B",
     theme: {
-      light: "#0284c7",
-      dark: "#38bdf8",
+      light: "var(--chart-2)",
+      dark: "var(--chart-2)",
     },
   },
   c: {
     label: "Series C",
     theme: {
-      light: "#dc2626",
-      dark: "#f87171",
+      light: "var(--chart-3)",
+      dark: "var(--chart-3)",
     },
   },
 }
 
 export default function Example() {
   return (
-    <div className="p-6 rounded-2xl border bg-card w-full max-w-xl">
+    <div className="p-6 rounded-2xl edge bg-card w-full max-w-xl">
       <h2 className="text-sm font-medium mb-1 text-foreground">
-        Theme-aware Colors
+        Token-aware chart colors
       </h2>
       <p className="text-xs text-muted-foreground mb-4">
-        Using the{" "}
-        <code className="font-mono text-[10px] bg-muted px-1 py-0.5 rounded">
-          theme
-        </code>{" "}
-        key for separate light/dark color values
+        Series colors resolve through the shared chart token ramp.
       </p>
       <ChartContainer config={chartConfig} className="h-56 w-full">
         <LineChart

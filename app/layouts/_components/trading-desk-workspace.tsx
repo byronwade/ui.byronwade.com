@@ -356,15 +356,13 @@ function TradingDeskWorkspace({
       data-slot="trading-desk"
       className={cn(
         "flex min-h-0 flex-col overflow-hidden bg-background text-foreground",
-        fullPage
-          ? "h-dvh"
-          : "h-[min(720px,85vh)] w-full rounded-xl border border-border",
+        fullPage ? "h-dvh" : "h-[min(720px,85vh)] w-full rounded-xl edge",
         className,
       )}
     >
       <header
         data-slot="trading-desk-header"
-        className="shrink-0 border-b border-border bg-card/90 shadow-sm"
+        className="shrink-0 border-b border-border bg-card/90 edge"
       >
         <ChartToolbar
           data-slot="trading-desk-topbar"
@@ -539,7 +537,7 @@ function TradingDeskWorkspace({
               data-slot="trading-desk-chart-status"
               className="absolute left-2 right-2 top-2 z-10 flex flex-wrap items-start justify-between gap-2 text-[11px] text-muted-foreground"
             >
-              <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-border bg-card/90 px-2 py-1 shadow-sm backdrop-blur-sm">
+              <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1 rounded-md edge bg-card/90 px-2 py-1 edge backdrop-blur-sm">
                 {lastCandle ? (
                   <SessionStatsBar
                     candle={lastCandle}
@@ -570,7 +568,7 @@ function TradingDeskWorkspace({
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 rounded-md border border-border bg-card/90 p-1 shadow-sm backdrop-blur-sm">
+              <div className="flex items-center gap-2 rounded-md edge bg-card/90 p-1 edge backdrop-blur-sm">
                 <SegmentedControl
                   value={currency}
                   onValueChange={setCurrency}
@@ -590,7 +588,7 @@ function TradingDeskWorkspace({
 
             <div
               data-slot="trading-desk-oco"
-              className="absolute left-2 top-36 z-10 flex flex-col overflow-hidden rounded-md border border-border bg-card/95 font-mono text-xs shadow-sm backdrop-blur-sm sm:top-14"
+              className="absolute left-2 top-36 z-10 flex flex-col overflow-hidden rounded-md edge bg-card/95 font-mono text-xs edge backdrop-blur-sm sm:top-14"
             >
               <Button
                 type="button"
@@ -629,7 +627,7 @@ function TradingDeskWorkspace({
                 )
               }
               onAdd={() => setSymbolOpen(true)}
-              className="absolute bottom-2 left-2 z-10 hidden max-w-[34rem] gap-1 rounded-md border-border bg-card/90 px-2 py-1 shadow-sm backdrop-blur-sm xl:flex [&_[data-slot=compare-symbols-add]]:h-6 [&_[data-slot=compare-symbols-add]]:px-2 [&_[data-slot=compare-symbols-add]]:text-[11px] [&_[data-slot=compare-symbols-chip]]:py-0.5 [&_[data-slot=compare-symbols-label]]:text-[11px]"
+              className="absolute bottom-2 left-2 z-10 hidden max-w-[34rem] gap-1 rounded-md border-border bg-card/90 px-2 py-1 edge backdrop-blur-sm xl:flex [&_[data-slot=compare-symbols-add]]:h-6 [&_[data-slot=compare-symbols-add]]:px-2 [&_[data-slot=compare-symbols-add]]:text-[11px] [&_[data-slot=compare-symbols-chip]]:py-0.5 [&_[data-slot=compare-symbols-label]]:text-[11px]"
             />
 
             <div className="absolute inset-0 flex min-h-0 flex-col">
@@ -752,7 +750,7 @@ function TradingDeskWorkspace({
             className="border-sidebar-border"
           >
             <div className="flex h-full min-h-0 flex-row-reverse">
-              <SidebarFooter className="w-11 shrink-0 border-l border-sidebar-border p-1">
+              <SidebarFooter className="w-11 shrink-0 border-l border-sidebar-edge p-1">
                 <SidebarMenu className="items-center gap-0.5">
                   {RIGHT_PANELS.map(({ id, label, icon: Icon }) => (
                     <SidebarMenuItem key={id}>
@@ -778,7 +776,7 @@ function TradingDeskWorkspace({
                   data-panel={rightPanel}
                   className="flex min-w-0 flex-1 flex-col overflow-hidden"
                 >
-                  <SidebarHeader className="border-b border-sidebar-border px-3 py-2">
+                  <SidebarHeader className="border-b border-sidebar-edge px-3 py-2">
                     <div className="flex items-center justify-between gap-2">
                       <div className="min-w-0">
                         <p className="truncate text-xs font-medium capitalize text-sidebar-foreground">

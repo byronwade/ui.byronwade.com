@@ -7,6 +7,7 @@ import {
   MessageAction,
   MessageActions,
   MessageContent,
+  MessageProvenance,
   MessageResponse,
   MessageToolbar,
 } from "@/components/ai-elements/message"
@@ -22,6 +23,7 @@ export default function Example() {
 
       <Message from="assistant">
         <MessageContent>
+          <MessageProvenance>Assistant</MessageProvenance>
           <MessageResponse>
             {[
               "Override a single variable. The entire accent, rings, the primary",

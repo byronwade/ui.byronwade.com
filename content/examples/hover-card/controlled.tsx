@@ -14,7 +14,7 @@ export default function Example() {
     <div className="flex flex-col items-center gap-6 p-16">
       {/* Controlled hover card */}
       <HoverCard open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
-        <HoverCardTrigger className="rounded-md border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted cursor-pointer">
+        <HoverCardTrigger className="rounded-md edge px-4 py-2 text-sm font-medium transition-colors hover:bg-muted cursor-pointer">
           Hover or control me
         </HoverCardTrigger>
         <HoverCardContent>
@@ -34,13 +34,13 @@ export default function Example() {
       <div className="flex items-center gap-2">
         <button
           onClick={() => setOpen(true)}
-          className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
+          className="rounded-full edge px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
         >
           Open
         </button>
         <button
           onClick={() => setOpen(false)}
-          className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
+          className="rounded-full edge px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
         >
           Close
         </button>

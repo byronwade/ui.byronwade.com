@@ -3,6 +3,8 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { BLEED } from "@/app/(docs)/_components/docs-prose"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
 import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
@@ -16,8 +18,6 @@ export const metadata: Metadata = {
    palette itself. Everything renders with real utilities, so the page IS the
    foundation, change a token and this page changes with it.
 --------------------------------------------------------------------------- */
-
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const WALL: { box: string; token: string }[] = [
   { box: "bg-background", token: "background" },
@@ -56,22 +56,30 @@ export default function FoundationPage() {
     <article className="max-w-none">
       {/* ============================ HERO, swatch wall ================ */}
       <section className={`${BLEED} border-b border-border`}>
-        <div className="flex items-baseline justify-between gap-4 pb-6 pt-10">
-          <h1 className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+        <div className="flex items-baseline justify-between gap-4 pt-12 pb-6 lg:pt-16">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Foundation
-          </h1>
+          </p>
           <p className="font-mono text-[11px] text-muted-foreground">
             {WALL.length}+ tokens · :root
           </p>
         </div>
         <div className="grid grid-cols-3 gap-2 pb-10 sm:grid-cols-5 lg:grid-cols-7">
           <div className="col-span-3 flex flex-col justify-center sm:col-span-2 lg:col-span-3">
-            <p className="text-[clamp(2rem,6vw,4rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
+            <h1 className="text-[clamp(2rem,6vw,4rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
               The palette, <span className="text-brand">in full.</span>
-            </p>
+            </h1>
             <p className="mt-3 max-w-md font-mono text-[13px] leading-relaxed text-muted-foreground">
-              Warm paper neutrals, one brand accent, fixed data hues. It owns
-              your :root, install with init.
+              Warm paper neutrals, one brand accent, fixed data hues. One base
+              for both{" "}
+              <Link
+                href="/docs/surfaces"
+                className="text-brand underline-offset-4 hover:underline"
+              >
+                surfaces
+              </Link>{" "}
+              — application UI and marketing. It owns your :root, install with
+              init.
             </p>
           </div>
           {WALL.map((s) => (
@@ -224,6 +232,23 @@ export default function FoundationPage() {
               <p className="font-mono text-2xl text-foreground">font-mono</p>
               <p className="font-serif text-2xl text-foreground">font-serif</p>
             </div>
+            <p className="reading-ui mt-3 text-foreground text-pretty">
+              Three families carry the whole{" "}
+              <Link
+                href="/docs/typography"
+                className="text-brand underline-offset-4 hover:underline"
+              >
+                type scale
+              </Link>
+              , and long-form copy routes through the{" "}
+              <Link
+                href="/docs/readability"
+                className="text-brand underline-offset-4 hover:underline"
+              >
+                reading lanes
+              </Link>{" "}
+              (reading-ui and reading-prose).
+            </p>
             <Link
               href="/docs/readability"
               className="mt-5 inline-flex items-center gap-1.5 text-sm text-brand underline-offset-4 hover:underline"
@@ -245,7 +270,14 @@ export default function FoundationPage() {
             </p>
             <p className="reading-ui mt-3 text-foreground text-pretty">
               Override <span className="text-foreground">--brand</span> and
-              rings, charts, success, and active states all follow.
+              rings, charts, success, and active states all follow —{" "}
+              <Link
+                href="/docs/theming"
+                className="text-brand underline-offset-4 hover:underline"
+              >
+                theming
+              </Link>{" "}
+              re-skins the whole system from this one variable.
             </p>
             <div className="mt-5">
               <CodeBlock
@@ -258,22 +290,7 @@ export default function FoundationPage() {
         </div>
       </section>
 
-      {/* ============================ NAV ============================== */}
-      <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">
-        <Link
-          href="/docs/theming"
-          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
-        >
-          Next: Theming
-          <ArrowRight className="size-3.5" />
-        </Link>
-        <Link
-          href="/docs"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Back to the catalog
-        </Link>
-      </div>
+      <GuidePager current="/docs/foundation" />
     </article>
   )
 }

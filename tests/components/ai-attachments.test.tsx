@@ -284,12 +284,12 @@ describe("Attachment — item", () => {
     expect(item.className).toContain("size-24");
   });
 
-  it("inline variant item uses border-border (token, not raw color)", () => {
+  it("inline variant item uses the edge hairline (token, not raw color)", () => {
     const { container } = renderItem(docFile, "inline");
     const item = container.querySelector(
       "[data-slot='attachment']"
     ) as HTMLElement;
-    expect(item.className).toContain("border-border");
+    expect(item.className).toContain("edge");
   });
 
   it("forwards custom className", () => {

@@ -24,7 +24,7 @@ export default function Example() {
         Subscription summary
         <ChevronDownIcon className="size-4 transition-transform group-aria-expanded/button:rotate-180" />
       </CollapsibleTrigger>
-      <CollapsibleContent className="space-y-3 rounded-lg border p-3 text-sm">
+      <CollapsibleContent className="space-y-3 rounded-lg edge p-3 text-sm">
         <dl className="divide-y divide-border">
           {DETAILS.map((row) => (
             <div

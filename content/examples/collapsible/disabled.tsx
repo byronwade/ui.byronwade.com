@@ -20,7 +20,7 @@ export default function Example() {
         Workspace policy
         <LockIcon className="size-4" />
       </CollapsibleTrigger>
-      <CollapsibleContent className="rounded-lg border px-4 py-3 text-sm text-muted-foreground">
+      <CollapsibleContent className="rounded-lg edge px-4 py-3 text-sm text-muted-foreground">
         This section is managed by your administrator and can&apos;t be toggled.
       </CollapsibleContent>
     </Collapsible>

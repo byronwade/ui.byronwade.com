@@ -1,11 +1,32 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import { Menu } from "lucide-react"
 
 import { AppLauncher } from "./app-launcher"
 import { AppBreadcrumb } from "./app-breadcrumb"
 import { DockToolbar } from "./dock-toolbar"
 import { NavDock } from "./nav-dock"
+
+/**
+ * Mobile-only docs-nav trigger. Pinned furthest left in the header group, it
+ * blooms the docs sidebar sheet by dispatching the event `DocsSidebar` listens
+ * for — the same decoupled pattern the ⌘K launcher uses for search.
+ */
+function DocsMenuButton() {
+  return (
+    <div className="pointer-events-auto rounded-3xl bg-dock p-[3px] edge md:hidden">
+      <button
+        type="button"
+        aria-label="Open documentation menu"
+        onClick={() => window.dispatchEvent(new Event("open-docs-nav"))}
+        className="flex size-8 items-center justify-center rounded-full text-dock-foreground transition-colors hover:bg-dock-active hover:text-dock-active-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+      >
+        <Menu className="size-4" strokeWidth={2} />
+      </button>
+    </div>
+  )
+}
 
 /**
  * The global floating shell, ported from SignalRoute's app shell. The top-left
@@ -21,11 +42,17 @@ export function AppChrome() {
   // are meant to be pure, chrome-free surfaces, never overlay the shell there.
   if (pathname?.startsWith("/preview")) return null
 
+  const isDocs = pathname?.startsWith("/docs")
+
   return (
     <>
       <div className="pointer-events-none fixed top-3 left-3 z-50 flex items-start gap-2 print:hidden">
+        {isDocs ? <DocsMenuButton /> : null}
         <AppLauncher />
-        <AppBreadcrumb />
+        {/* Breadcrumb is desktop-only — hidden on phones to declutter the corner. */}
+        <div className="hidden sm:contents">
+          <AppBreadcrumb />
+        </div>
       </div>
       <DockToolbar />
       <NavDock />

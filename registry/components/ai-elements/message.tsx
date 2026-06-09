@@ -37,14 +37,37 @@ const messageVariants = cva(
 
 export type MessageProps = HTMLAttributes<HTMLDivElement> & {
   from: UIMessage["role"];
+  provenance?: UIMessage["role"] | "app" | "source" | "action";
 };
 
-export const Message = ({ className, from, ...props }: MessageProps) => (
+export const Message = ({
+  className,
+  from,
+  provenance,
+  ...props
+}: MessageProps) => (
   <div
     data-slot="message"
     data-from={from}
+    data-provenance={provenance ?? from}
     className={cn(
       messageVariants({ from: from === "user" ? "user" : "assistant" }),
+      className
+    )}
+    {...props}
+  />
+);
+
+export type MessageProvenanceProps = HTMLAttributes<HTMLSpanElement>;
+
+export const MessageProvenance = ({
+  className,
+  ...props
+}: MessageProvenanceProps) => (
+  <span
+    data-slot="message-provenance"
+    className={cn(
+      "w-fit font-medium font-mono text-muted-foreground text-xs uppercase tracking-wide",
       className
     )}
     {...props}

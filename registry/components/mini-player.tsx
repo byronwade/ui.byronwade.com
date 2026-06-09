@@ -9,7 +9,7 @@ import { Thumbnail } from "@/components/ui/thumbnail"
 import { Button } from "@/components/ui/button"
 
 const miniPlayerVariants = cva(
-  "edge overflow-hidden bg-card text-foreground shadow-lg",
+  "edge overflow-hidden bg-card text-foreground edge",
   {
     variants: {
       variant: {

@@ -36,6 +36,9 @@ jobs:
       - name: MCP data sync
         run: node scripts/check-mcp-data.mjs
 
+      - name: Build workspace packages
+        run: npm run build --workspace @byronwade/on-system-core && npm run build --workspace @byronwade/lint
+
       - name: Test lint packages
         run: npm run test:packages
 

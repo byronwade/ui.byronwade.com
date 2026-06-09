@@ -41,7 +41,7 @@ export default function Example() {
         <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
           Inside a card header
         </p>
-        <div className="rounded-2xl border border-border p-4 max-w-sm">
+        <div className="rounded-2xl edge p-4 max-w-sm">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold">Background Worker</span>
             <StatusPill tone="success" pulse>

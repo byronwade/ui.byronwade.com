@@ -12,7 +12,7 @@ export default function Example() {
           id="active-field"
           type="text"
           defaultValue="Editable value"
-          className="peer rounded-md border px-3 py-2 text-sm"
+          className="peer rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 
@@ -23,7 +23,7 @@ export default function Example() {
           type="text"
           defaultValue="Cannot edit this"
           disabled
-          className="peer rounded-md border px-3 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          className="peer rounded-md edge px-3 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
         />
       </div>
 
@@ -35,7 +35,7 @@ export default function Example() {
             id="group-disabled"
             type="text"
             defaultValue="Whole group is off"
-            className="rounded-md border px-3 py-2 text-sm opacity-50 cursor-not-allowed"
+            className="rounded-md edge px-3 py-2 text-sm opacity-50 cursor-not-allowed"
           />
         </div>
       </fieldset>
@@ -47,7 +47,7 @@ export default function Example() {
           type="text"
           defaultValue="You can read but not change this"
           readOnly
-          className="rounded-md border px-3 py-2 text-sm bg-muted/40 cursor-default"
+          className="rounded-md edge px-3 py-2 text-sm bg-muted/40 cursor-default"
         />
       </div>
     </div>

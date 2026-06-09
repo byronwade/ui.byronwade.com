@@ -74,3 +74,6 @@ public/llms.txt
 
 # Concurrent-session worktrees (other Claude sessions)
 .claude/worktrees/
+
+# Visual brainstorming companion
+.superpowers/

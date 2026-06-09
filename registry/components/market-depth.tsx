@@ -19,8 +19,8 @@ const marketDepthVariants = cva("flex w-full flex-col", {
   variants: {
     variant: {
       default: "gap-3",
-      panel: "overflow-hidden rounded-xl border border-border bg-card",
-      terminal: "overflow-hidden rounded-lg border border-border bg-background font-mono",
+      panel: "overflow-hidden rounded-xl edge bg-card",
+      terminal: "overflow-hidden rounded-lg edge bg-background font-mono",
     },
     view: {
       both: "",

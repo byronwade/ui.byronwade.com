@@ -7,7 +7,7 @@ const footerItems = ["Help", "Sign out"]
 
 export default function Example() {
   return (
-    <div className="w-56 rounded-xl border bg-card p-2 shadow-sm">
+    <div className="w-56 rounded-xl edge bg-card p-2 edge">
       {/* Main navigation group */}
       <div className="space-y-0.5">
         {navItems.map((item) => (

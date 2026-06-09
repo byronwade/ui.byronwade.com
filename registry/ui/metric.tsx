@@ -114,7 +114,7 @@ function Metric({
         <span
           data-slot="metric-value"
           className={cn(
-            "font-semibold tracking-tight tabular-nums",
+            "font-mono font-medium tracking-tight tabular-nums",
             isCompact ? "text-lg" : "text-2xl",
           )}
         >

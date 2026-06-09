@@ -30,6 +30,7 @@
 ## Task 1: Add `empty` to the state model
 
 **Files:**
+
 - Modify: `content/demo-contexts.ts:8`, `content/demo-contexts.ts:60-64`
 - Modify: `registry/lib/demo-viewport.ts:10`
 - Modify: `app/(docs)/_components/demo-preview-frame.tsx` (imports ~4-19, `STATE_OPTIONS` ~121-151, URL validation ~192-197)
@@ -38,16 +39,16 @@
 - [ ] **Step 1: Write the failing test** — add to the `parseDemoContextParams` describe block in `tests/content/demo-contexts.test.ts`:
 
 ```ts
-  it("parses the empty state param", () => {
-    expect(parseDemoContextParams({ state: "empty" })).toEqual({
-      surface: "app",
-      viewport: "desktop",
-      density: "default",
-      frame: "default",
-      depth: "none",
-      state: "empty",
-    })
+it("parses the empty state param", () => {
+  expect(parseDemoContextParams({ state: "empty" })).toEqual({
+    surface: "app",
+    viewport: "desktop",
+    density: "default",
+    frame: "default",
+    depth: "none",
+    state: "empty",
   })
+})
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -89,13 +90,13 @@ export function parseDemoState(value: unknown): DemoState {
 In `app/(docs)/_components/demo-preview-frame.tsx`, replace the inline `state` block (~192-197):
 
 ```ts
-  const state =
-    stateParam === "loading" ||
-    stateParam === "empty" ||
-    stateParam === "success" ||
-    stateParam === "error"
-      ? stateParam
-      : "default"
+const state =
+  stateParam === "loading" ||
+  stateParam === "empty" ||
+  stateParam === "success" ||
+  stateParam === "error"
+    ? stateParam
+    : "default"
 ```
 
 - [ ] **Step 5: Add the `empty` toolbar option with the Inbox icon**
@@ -168,6 +169,7 @@ git add content/demo-contexts.ts registry/lib/demo-viewport.ts lib/demo-viewport
   public/r/demo-viewport.json
 git commit -m "feat(demo): add empty state to the demo state model and toolbar"
 ```
+
 (`public/r/demo-viewport.json` only if `npm run sync`/`registry:build` regenerated it; check `git status` first and include it only if present.)
 
 ---
@@ -175,22 +177,23 @@ git commit -m "feat(demo): add empty state to the demo state model and toolbar"
 ## Task 2: Make the STATE control opt-in
 
 **Files:**
+
 - Modify: `app/(docs)/_components/docs-demo-preview.tsx:30-37` (`getDisabledDemoControlsForSource`), `:92-101` (`stateFallback` wiring)
 - Test: `tests/app/docs-demo-preview.test.ts`
 
 - [ ] **Step 1: Update the failing test** — in `tests/app/docs-demo-preview.test.ts`, change the first case's expectation so a source without `useDemoState` now **disables** state:
 
 ```ts
-  it("disables the state control when an example does not consume it", () => {
-    expect(
-      getDisabledDemoControlsForSource(`
+it("disables the state control when an example does not consume it", () => {
+  expect(
+    getDisabledDemoControlsForSource(`
         import { ActivityGrid } from "@/components/ui/activity-grid"
         export default function Example() {
           return <ActivityGrid data={[1]} />
         }
       `),
-    ).toEqual({ frame: true, depth: true, state: true })
-  })
+  ).toEqual({ frame: true, depth: true, state: true })
+})
 ```
 
 (The second test — all three hooks present → all `false` — stays as-is and now also asserts the state-enables-on-opt-in behavior.)
@@ -237,6 +240,7 @@ git commit -m "feat(demo): show the STATE control only when an example opts in"
 ## Task 3: Delete the generic `DemoStateFallback`
 
 **Files:**
+
 - Modify: `app/(docs)/_components/demo-preview-frame.tsx` — remove `DemoStateFallback` (~212-279), the `stateFallback` prop on `DemoPreviewFrameProps` (~209), the `fallbackState` prop threaded into `DemoPreviewContent` (~288, ~298, ~323-329), and any now-unused `Skeleton` import if nothing else uses it (grep first).
 - Test: `tests/app/demo-preview-frame.test.tsx`
 
@@ -253,22 +257,24 @@ Expected: After deleting the two tests, the remaining suite still references no 
 - [ ] **Step 3: Remove the fallback from the component**
 
 In `app/(docs)/_components/demo-preview-frame.tsx`:
+
 - Delete the `DemoStateFallback` function (~212-279).
 - Remove `stateFallback?: (ctx: DemoContext) => boolean` from `DemoPreviewFrameProps` (~209).
 - In `DemoPreviewContent`, remove the `fallbackState` prop from the param type and replace the render branch (~323-329) with the direct children call:
 
 ```tsx
-      <DemoViewportProvider
-        surface={surface}
-        viewport={viewport}
-        density={ctx.density}
-        frame={ctx.frame}
-        depth={ctx.depth}
-        state={ctx.state}
-      >
-        {children(ctx)}
-      </DemoViewportProvider>
+<DemoViewportProvider
+  surface={surface}
+  viewport={viewport}
+  density={ctx.density}
+  frame={ctx.frame}
+  depth={ctx.depth}
+  state={ctx.state}
+>
+  {children(ctx)}
+</DemoViewportProvider>
 ```
+
 - Remove the `stateFallback` prop wherever `DemoPreviewFrame` forwards it to `DemoPreviewContent`, and the `fallbackState={…}` argument.
 - Run `grep -n "Skeleton" app/\(docs\)/_components/demo-preview-frame.tsx`; if no remaining uses, remove the `import { Skeleton } …` line.
 
@@ -289,6 +295,7 @@ git commit -m "refactor(demo): delete the generic DemoStateFallback wrapper"
 ## Task 4: Migrate the table exemplar (data-table)
 
 **Files:**
+
 - Modify: `content/examples/data-table/default.tsx`
 - Test: `tests/content/demo-state-examples.test.ts` (new)
 
@@ -301,8 +308,7 @@ import { describe, expect, it } from "vitest"
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
 
-const read = (rel: string) =>
-  readFileSync(join(process.cwd(), rel), "utf8")
+const read = (rel: string) => readFileSync(join(process.cwd(), rel), "utf8")
 
 describe("native demo-state exemplars", () => {
   it("data-table default example drives all five states from useDemoState", () => {
@@ -331,15 +337,15 @@ import { useDemoState } from "@/lib/demo-viewport"
 Inside `export default function Example()`, after the existing hooks, read the state:
 
 ```tsx
-  const demoState = useDemoState() ?? "default"
+const demoState = useDemoState() ?? "default"
 ```
 
 Compute the rows/loading the table receives based on state (place just before the `return`):
 
 ```tsx
-  const isLoading = demoState === "loading"
-  const isEmpty = demoState === "empty"
-  const tableRows = isEmpty ? [] : pageRows
+const isLoading = demoState === "loading"
+const isEmpty = demoState === "empty"
+const tableRows = isEmpty ? [] : pageRows
 ```
 
 Replace the table's `rows={pageRows}` with `rows={tableRows}`, add `loading={isLoading}`, and add an `emptyState` prop:
@@ -405,6 +411,7 @@ git commit -m "feat(demo): drive data-table example states from useDemoState"
 ## Task 5: Migrate the feed exemplar (event-timeline)
 
 **Files:**
+
 - Modify: `content/examples/event-timeline/default.tsx`
 - Test: `tests/content/demo-state-examples.test.ts` (extend)
 
@@ -413,14 +420,14 @@ State mapping for a feed: `loading` → skeleton rows; `empty` → empty block; 
 - [ ] **Step 1: Extend the failing test** — add to `tests/content/demo-state-examples.test.ts` inside the same describe:
 
 ```ts
-  it("event-timeline default example drives states from useDemoState", () => {
-    const source = read("content/examples/event-timeline/default.tsx")
-    expect(source).toContain('"use client"')
-    expect(source).toContain("useDemoState")
-    expect(source).toContain('state === "loading"')
-    expect(source).toContain('state === "empty"')
-    expect(source).toContain('state === "error"')
-  })
+it("event-timeline default example drives states from useDemoState", () => {
+  const source = read("content/examples/event-timeline/default.tsx")
+  expect(source).toContain('"use client"')
+  expect(source).toContain("useDemoState")
+  expect(source).toContain('state === "loading"')
+  expect(source).toContain('state === "empty"')
+  expect(source).toContain('state === "error"')
+})
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -499,6 +506,7 @@ git commit -m "feat(demo): drive event-timeline example states from useDemoState
 ## Task 6: Extract shared low-level state helpers
 
 **Files:**
+
 - Create: `app/(docs)/_components/demo-state-bits.tsx`
 - Modify: `content/examples/data-table/default.tsx`, `content/examples/event-timeline/default.tsx`
 - Test: `tests/content/demo-state-examples.test.ts` (extend)
@@ -510,14 +518,14 @@ The two migrations both render an **empty block** and an **error block** with th
 - [ ] **Step 1: Write the failing test** — add to `tests/content/demo-state-examples.test.ts`:
 
 ```ts
-  it("exemplars use the shared empty/error state helpers", () => {
-    const table = read("content/examples/data-table/default.tsx")
-    const feed = read("content/examples/event-timeline/default.tsx")
-    expect(table).toContain("DemoEmptyState")
-    expect(table).toContain("DemoErrorState")
-    expect(feed).toContain("DemoEmptyState")
-    expect(feed).toContain("DemoErrorState")
-  })
+it("exemplars use the shared empty/error state helpers", () => {
+  const table = read("content/examples/data-table/default.tsx")
+  const feed = read("content/examples/event-timeline/default.tsx")
+  expect(table).toContain("DemoEmptyState")
+  expect(table).toContain("DemoErrorState")
+  expect(feed).toContain("DemoEmptyState")
+  expect(feed).toContain("DemoErrorState")
+})
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -590,6 +598,7 @@ import {
   DemoErrorState,
 } from "@/app/(docs)/_components/demo-state-bits"
 ```
+
 ```tsx
       ) : state === "empty" ? (
         <DemoEmptyState>No deployment events yet.</DemoEmptyState>
@@ -601,14 +610,17 @@ import {
 In `data-table/default.tsx`, import the same and replace the `error` branch body and the `emptyState` prop:
 
 ```tsx
-  if (demoState === "error") {
-    return (
-      <div className="rounded-xl bg-muted/40 p-1">
-        <DemoErrorState>Couldn’t load products. Retry in a moment.</DemoErrorState>
-      </div>
-    )
-  }
+if (demoState === "error") {
+  return (
+    <div className="rounded-xl bg-muted/40 p-1">
+      <DemoErrorState>
+        Couldn’t load products. Retry in a moment.
+      </DemoErrorState>
+    </div>
+  )
+}
 ```
+
 ```tsx
         emptyState={
           <DemoEmptyState className="border-0">

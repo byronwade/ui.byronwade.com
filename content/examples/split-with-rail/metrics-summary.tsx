@@ -10,7 +10,7 @@ export default function Example() {
     <div className="p-6">
       <SplitWithRail
         summary={
-          <div className="space-y-6 rounded-2xl border border-border bg-card p-6">
+          <div className="space-y-6 rounded-2xl edge bg-card p-6">
             <div>
               <p className="text-xs text-muted-foreground uppercase tracking-wide">
                 Service health
@@ -49,7 +49,7 @@ export default function Example() {
               />
             </div>
 
-            <div className="flex items-center gap-2 rounded-xl border border-border px-3 py-2">
+            <div className="flex items-center gap-2 rounded-xl edge px-3 py-2">
               <StatusDot tone="success" size="sm" pulse />
               <span className="text-sm text-muted-foreground">
                 All systems operational

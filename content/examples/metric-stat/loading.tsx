@@ -44,7 +44,7 @@ export default function Example() {
       </div>
       <button
         onClick={() => setLoaded((v) => !v)}
-        className="inline-flex w-fit items-center gap-2 rounded-full border px-4 py-1.5 text-sm text-muted-foreground hover:bg-muted"
+        className="inline-flex w-fit items-center gap-2 rounded-full edge px-4 py-1.5 text-sm text-muted-foreground hover:bg-muted"
       >
         {loaded ? (
           "Reset"

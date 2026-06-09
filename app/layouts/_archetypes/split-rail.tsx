@@ -446,7 +446,7 @@ export function SplitRailArchetype() {
         <div
           aria-hidden={!dirty}
           className={cn(
-            "pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-border bg-card/85 px-6 py-3 shadow-float backdrop-blur transition-all duration-300",
+            "pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-border bg-card/85 px-6 py-3 edge backdrop-blur transition-all duration-300",
             dirty ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
           )}
         >

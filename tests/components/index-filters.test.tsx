@@ -66,22 +66,22 @@ describe("IndexFilters – view tabs", () => {
   it("renders a tab per view", () => {
     render(<IndexFilters views={VIEWS} view="all" onViewChange={vi.fn()} />)
     for (const v of VIEWS) {
-      expect(screen.getByRole("button", { name: v.label })).toBeInTheDocument()
+      expect(screen.getByRole("tab", { name: v.label })).toBeInTheDocument()
     }
   })
 
-  it("marks the active view as pressed", () => {
+  it("marks the active view as selected", () => {
     render(<IndexFilters views={VIEWS} view="draft" onViewChange={vi.fn()} />)
-    expect(screen.getByRole("button", { name: "Draft" })).toHaveAttribute(
-      "aria-pressed",
+    expect(screen.getByRole("tab", { name: "Draft" })).toHaveAttribute(
+      "aria-selected",
       "true",
     )
   })
 
   it("falls back to the first view when `view` is omitted", () => {
     render(<IndexFilters views={VIEWS} onViewChange={vi.fn()} />)
-    expect(screen.getByRole("button", { name: "All" })).toHaveAttribute(
-      "aria-pressed",
+    expect(screen.getByRole("tab", { name: "All" })).toHaveAttribute(
+      "aria-selected",
       "true",
     )
   })
@@ -90,15 +90,15 @@ describe("IndexFilters – view tabs", () => {
     const user = userEvent.setup()
     const onViewChange = vi.fn()
     render(<IndexFilters views={VIEWS} view="all" onViewChange={onViewChange} />)
-    await user.click(screen.getByRole("button", { name: "Active" }))
+    await user.click(screen.getByRole("tab", { name: "Active" }))
     expect(onViewChange).toHaveBeenCalledWith("active")
   })
 
   it("does not throw when onViewChange is omitted", async () => {
     const user = userEvent.setup()
     render(<IndexFilters views={VIEWS} view="all" />)
-    await user.click(screen.getByRole("button", { name: "Active" }))
-    expect(screen.getByRole("button", { name: "Active" })).toBeInTheDocument()
+    await user.click(screen.getByRole("tab", { name: "Active" }))
+    expect(screen.getByRole("tab", { name: "Active" })).toBeInTheDocument()
   })
 
   it("renders no tabs container when views is omitted", () => {
@@ -122,7 +122,9 @@ describe("IndexFilters – view tabs", () => {
 describe("IndexFilters – search", () => {
   it("renders the search input when onQueryChange is provided", () => {
     render(<IndexFilters query="" onQueryChange={vi.fn()} />)
-    expect(screen.getByRole("searchbox", { name: "Search" })).toBeInTheDocument()
+    expect(
+      screen.getByRole("searchbox", { name: "Search and filter" }),
+    ).toBeInTheDocument()
   })
 
   it("uses a custom searchPlaceholder as the accessible label", () => {

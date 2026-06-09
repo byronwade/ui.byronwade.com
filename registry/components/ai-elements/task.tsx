@@ -11,7 +11,7 @@ import { ChevronDownIcon, SearchIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 
 const taskItemFileVariants = cva(
-  "inline-flex items-center gap-1 rounded-md border border-border px-1.5 py-0.5 text-xs",
+  "inline-flex items-center gap-1 rounded-md edge px-1.5 py-0.5 text-xs",
   {
     variants: {
       variant: {

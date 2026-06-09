@@ -11,6 +11,7 @@ import {
 } from "@/content/catalog-surfaces"
 import { byCategory } from "@/content/components"
 import { DocsIntro, DocsProse } from "@/app/(docs)/_components/docs-prose"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
@@ -43,13 +44,20 @@ export default function SurfacesPage() {
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           Foundation · Surfaces
         </p>
-        <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">
+        <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
           One system. Two surfaces.
         </h1>
         <DocsIntro>
           Dashboards and landing pages look nothing alike — but they should not
           require two design systems. byronwade/ui routes composition by surface
-          while sharing every token and install path.
+          while sharing every{" "}
+          <Link
+            href="/docs/foundation"
+            className="text-brand underline-offset-4 hover:underline"
+          >
+            shared token
+          </Link>{" "}
+          and install path.
         </DocsIntro>
       </section>
 
@@ -60,9 +68,21 @@ export default function SurfacesPage() {
           </p>
           <p>
             Keep a single <code>@byronwade/foundation</code> and one{" "}
-            <code>--brand</code> knob. Split navigation, typography lane, and
-            layout primitive — not packages. Install what you need; ignore the
-            rest.
+            <Link
+              href="/docs/theming"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              <code>--brand</code>
+            </Link>{" "}
+            knob. Split navigation,{" "}
+            <Link
+              href="/docs/readability"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              typography lane
+            </Link>
+            , and layout primitive — not packages. Install what you need; ignore
+            the rest.
           </p>
           <ul>
             <li>
@@ -167,6 +187,8 @@ export default function SurfacesPage() {
           Readability lanes
         </Button>
       </section>
+
+      <GuidePager current="/docs/surfaces" />
     </article>
   )
 }

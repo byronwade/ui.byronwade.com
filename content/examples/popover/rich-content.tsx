@@ -60,7 +60,7 @@ export default function Example() {
     <div className="flex flex-wrap items-center justify-center gap-3 p-8">
       {MEMBERS.map((member) => (
         <Popover key={member.id}>
-          <PopoverTrigger className="flex items-center gap-2 rounded-full border border-border bg-background px-2.5 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors">
+          <PopoverTrigger className="flex items-center gap-2 rounded-full edge bg-background px-2.5 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors">
             <Avatar initials={member.initials} color={member.color} />
             <span>{member.name}</span>
           </PopoverTrigger>
@@ -97,7 +97,7 @@ export default function Example() {
             {/* Follow action */}
             <button
               onClick={() => toggle(member.id)}
-              className={`mt-2 w-full rounded-full border py-1 text-sm font-medium transition-colors ${
+              className={`mt-2 w-full rounded-full edge py-1 text-sm font-medium transition-colors ${
                 following.has(member.id)
                   ? "border-border bg-muted text-foreground hover:bg-muted/70"
                   : "border-primary bg-primary text-primary-foreground hover:bg-primary/80"

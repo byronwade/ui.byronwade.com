@@ -30,7 +30,7 @@ function useControllableState<T>({
 }
 
 const tagInputVariants = cva(
-  "flex w-full flex-wrap items-center gap-1 rounded-lg border border-input bg-transparent transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 dark:bg-input/30",
+  "flex w-full flex-wrap items-center gap-1 rounded-lg border border-input bg-input/30 transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 dark:bg-input/30",
   {
     variants: {
       size: {
@@ -50,11 +50,30 @@ const tagInputVariants = cva(
   },
 )
 
+type TagInputTagTone =
+  | "neutral"
+  | "brand"
+  | "success"
+  | "warning"
+  | "destructive"
+
+const tagToneVariants: Record<
+  TagInputTagTone,
+  React.ComponentProps<typeof Badge>["variant"]
+> = {
+  neutral: "secondary",
+  brand: "default",
+  success: "success",
+  warning: "warning",
+  destructive: "destructive",
+}
+
 type TagInputProps = {
   value?: string[]
   defaultValue?: string[]
   onChange?: (value: string[]) => void
   suggestions?: string[]
+  tagTones?: Record<string, TagInputTagTone>
   maxTags?: number
   disabled?: boolean
   error?: boolean
@@ -69,6 +88,7 @@ function TagInput({
   defaultValue,
   onChange,
   suggestions = [],
+  tagTones = {},
   maxTags,
   size = "default",
   disabled = false,
@@ -146,29 +166,34 @@ function TagInput({
         className={cn(tagInputVariants({ size, error }), className)}
         onClick={() => inputRef.current?.focus()}
       >
-        {tags.map((tag) => (
-          <Badge
-            key={tag}
-            data-slot="tag-input-tag"
-            variant="secondary"
-            className="gap-1 pr-1"
-          >
-            {tag}
-            <button
-              type="button"
-              data-slot="tag-input-remove"
-              aria-label={`Remove ${tag}`}
-              disabled={disabled}
-              onClick={(event) => {
-                event.stopPropagation()
-                removeTag(tag)
-              }}
-              className="inline-flex size-3.5 items-center justify-center rounded-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none"
+        {tags.map((tag) => {
+          const tone = tagTones[tag] ?? "neutral"
+
+          return (
+            <Badge
+              key={tag}
+              data-slot="tag-input-tag"
+              data-tone={tone}
+              variant={tagToneVariants[tone]}
+              className="gap-1 pr-1"
             >
-              <XIcon className="size-3" />
-            </button>
-          </Badge>
-        ))}
+              {tag}
+              <button
+                type="button"
+                data-slot="tag-input-remove"
+                aria-label={`Remove ${tag}`}
+                disabled={disabled}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  removeTag(tag)
+                }}
+                className="inline-flex size-3.5 items-center justify-center rounded-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none"
+              >
+                <XIcon className="size-3" />
+              </button>
+            </Badge>
+          )
+        })}
         <input
           ref={inputRef}
           id={id}
@@ -225,4 +250,4 @@ function TagInput({
 }
 
 export { TagInput, tagInputVariants }
-export type { TagInputProps }
+export type { TagInputProps, TagInputTagTone }

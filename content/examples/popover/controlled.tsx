@@ -29,14 +29,14 @@ export default function Example() {
         <button
           onClick={() => setOpen(true)}
           disabled={open}
-          className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center rounded-full edge bg-background px-3 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Open externally
         </button>
         <button
           onClick={() => setOpen(false)}
           disabled={!open}
-          className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center rounded-full edge bg-background px-3 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Close externally
         </button>
@@ -44,7 +44,7 @@ export default function Example() {
 
       {/* The popover itself */}
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors">
+        <PopoverTrigger className="inline-flex items-center rounded-full edge bg-background px-3 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors">
           Toggle via trigger
         </PopoverTrigger>
         <PopoverContent side="bottom" align="center">
@@ -60,7 +60,7 @@ export default function Example() {
           </PopoverHeader>
           <button
             onClick={() => setOpen(false)}
-            className="mt-1 inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-sm font-medium hover:bg-muted transition-colors"
+            className="mt-1 inline-flex items-center rounded-full edge bg-background px-3 py-1 text-sm font-medium hover:bg-muted transition-colors"
           >
             Close from inside
           </button>

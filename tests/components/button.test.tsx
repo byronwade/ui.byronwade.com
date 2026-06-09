@@ -44,11 +44,11 @@ const ALL_SIZES = [
 const SIZE_CLASS_FRAGMENT: Record<(typeof ALL_SIZES)[number], string> = {
   default: "h-8",
   xs: "h-6",
-  sm: "h-7",
+  sm: "h-8",
   lg: "h-9",
   icon: "size-8",
   "icon-xs": "size-6",
-  "icon-sm": "size-7",
+  "icon-sm": "size-8",
   "icon-lg": "size-9",
 };
 
@@ -245,18 +245,19 @@ describe("Button – size prop", () => {
     expect(screen.getByRole("button").className).toContain("px-2.5");
   });
 
-  it("each size produces a different dimension class", () => {
+  it("small interactive sizes keep a 32px touch target floor", () => {
     const dimensionClasses = ALL_SIZES.map((size) => {
-      const { container } = render(
+      render(
         <Button size={size} aria-label={`${size}`}>
           {size.startsWith("icon") ? <Plus /> : size}
-        </Button>
+        </Button>,
       );
       return SIZE_CLASS_FRAGMENT[size];
     });
-    // All expected size classes are distinct strings
-    const unique = new Set(dimensionClasses);
-    expect(unique.size).toBe(ALL_SIZES.length);
+    expect(dimensionClasses).toContain("h-8");
+    expect(dimensionClasses).toContain("size-8");
+    expect(SIZE_CLASS_FRAGMENT.sm).toBe("h-8");
+    expect(SIZE_CLASS_FRAGMENT["icon-sm"]).toBe("size-8");
   });
 });
 
@@ -691,7 +692,7 @@ describe("Button – re-render behavior", () => {
 
   it("updates size on re-render", () => {
     const { rerender } = render(<Button size="sm">Btn</Button>);
-    expect(screen.getByRole("button").className).toContain("h-7");
+    expect(screen.getByRole("button").className).toContain("h-8");
     rerender(<Button size="lg">Btn</Button>);
     expect(screen.getByRole("button").className).toContain("h-9");
   });
@@ -773,7 +774,7 @@ describe("Button – variant × size combinations", () => {
     );
     const btn = screen.getByRole("button");
     expect(btn.className).toContain("border-border");
-    expect(btn.className).toContain("h-7");
+    expect(btn.className).toContain("h-8");
   });
 
   it("variant='destructive' size='lg' → both classes present", () => {

@@ -14,7 +14,7 @@ const tape = makeQuotes(8, { seed: 3 })
 
 export default function Example() {
   return (
-    <div className="h-[640px] overflow-hidden rounded-xl border border-border">
+    <div className="h-[640px] overflow-hidden rounded-xl edge">
       <AppShell
         variant="three-column"
         header={<TickerTape items={tape} speed="default" />}

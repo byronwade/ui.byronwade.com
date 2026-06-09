@@ -126,9 +126,9 @@ describe("Controls — base classes", () => {
     expect(getPanel(container).className).toContain("bg-card");
   });
 
-  it("has border-border token", () => {
+  it("has edge hairline token", () => {
     const { container } = renderControls();
-    expect(getPanel(container).className).toContain("border-border");
+    expect(getPanel(container).className).toContain("edge");
   });
 
   it("has rounded-md radius from the scale", () => {

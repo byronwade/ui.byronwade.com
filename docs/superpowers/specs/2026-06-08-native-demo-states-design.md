@@ -112,7 +112,7 @@ The exact per-component assignment is produced in Phase 1 and reviewed before mi
 - Extract the first shared low-level helpers from those migrations.
 - Fix any demo-state tests broken by the fallback deletion.
 
-**Rollout caveat (accepted):** Phase 1 alone temporarily *removes* the STATE control from
+**Rollout caveat (accepted):** Phase 1 alone temporarily _removes_ the STATE control from
 everything except `activity-grid` (nothing else has opted in yet). Coverage dips before it
 climbs. The user approved this.
 

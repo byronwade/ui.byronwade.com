@@ -353,10 +353,10 @@ describe("TaskItemFile — variants", () => {
     );
   });
 
-  it("has border-border and rounded-md base classes", () => {
+  it("has edge and rounded-md base classes", () => {
     const { container } = render(<TaskItemFile>f</TaskItemFile>);
     const cls = (container.firstChild as HTMLElement).className;
-    expect(cls).toContain("border-border");
+    expect(cls).toContain("edge");
     expect(cls).toContain("rounded-md");
   });
 

@@ -123,7 +123,7 @@ export function CanvasArchetype() {
           >
             <span
               className={cn(
-                "relative grid place-items-center rounded-full border shadow-float transition-all",
+                "relative grid place-items-center rounded-full edge transition-all",
                 isActive
                   ? "size-9 border-brand bg-brand text-brand-foreground"
                   : "size-7 border-border bg-card text-foreground group-hover:-translate-y-0.5",
@@ -131,9 +131,9 @@ export function CanvasArchetype() {
             >
               <MapPin className={isActive ? "size-4.5" : "size-3.5"} />
             </span>
-            <span className="mx-auto block size-1.5 -translate-y-1 rotate-45 bg-card shadow-float" />
+            <span className="mx-auto block size-1.5 -translate-y-1 rotate-45 bg-card edge" />
             {isActive && (
-              <span className="absolute left-1/2 top-[-2.1rem] -translate-x-1/2 whitespace-nowrap rounded-full bg-card px-2.5 py-1 text-xs font-medium shadow-float">
+              <span className="absolute left-1/2 top-[-2.1rem] -translate-x-1/2 whitespace-nowrap rounded-full bg-card px-2.5 py-1 text-xs font-medium edge">
                 {p.name}
               </span>
             )}
@@ -143,7 +143,7 @@ export function CanvasArchetype() {
 
       {/* ── Top search bar (floating glass) ───────────────────────── */}
       <div className="absolute inset-x-3 top-3 z-10 flex items-center gap-2 sm:inset-x-4 sm:top-4">
-        <div className="flex flex-1 items-center gap-2 rounded-full bg-card/80 p-1.5 pl-2 shadow-float backdrop-blur">
+        <div className="flex flex-1 items-center gap-2 rounded-full bg-card/80 p-1.5 pl-2 edge backdrop-blur">
           <InputGroup className="flex-1 border-0 bg-transparent shadow-none">
             <InputGroupAddon>
               <Search />
@@ -163,7 +163,7 @@ export function CanvasArchetype() {
             </button>
             <button
               type="button"
-              className="inline-flex h-8 items-center rounded-full border border-border bg-background px-3 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="inline-flex h-8 items-center rounded-full edge bg-background px-3 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               Top rated
             </button>
@@ -173,9 +173,9 @@ export function CanvasArchetype() {
       </div>
 
       {/* ── Results panel (floating, left) ────────────────────────── */}
-      <aside className="absolute left-3 top-20 z-10 hidden w-80 flex-col overflow-hidden rounded-2xl bg-card/85 shadow-float backdrop-blur lg:flex sm:left-4">
+      <aside className="absolute left-3 top-20 z-10 hidden w-80 flex-col overflow-hidden rounded-2xl bg-card/85 edge backdrop-blur lg:flex sm:left-4">
         <div className="flex items-center justify-between px-4 py-3">
-          <p className="text-sm font-semibold tracking-tight">
+          <p className="text-sm font-medium tracking-tight">
             {places.length} places nearby
           </p>
           <span className="text-xs text-muted-foreground">
@@ -214,12 +214,12 @@ export function CanvasArchetype() {
 
       {/* ── Selected detail card (floating, bottom) ───────────────── */}
       <div className="absolute inset-x-3 bottom-3 z-10 sm:inset-x-auto sm:bottom-4 sm:left-4 sm:w-80 lg:left-[21rem]">
-        <div className="overflow-hidden rounded-2xl bg-card/90 shadow-float backdrop-blur">
+        <div className="overflow-hidden rounded-2xl bg-card/90 edge backdrop-blur">
           <div className="h-20 bg-gradient-to-br from-brand/25 to-success/20" />
           <div className="space-y-3 p-4">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
-                <h2 className="truncate text-base font-semibold tracking-tight">
+                <h2 className="truncate text-base font-medium tracking-tight">
                   {active.name}
                 </h2>
                 <p className="text-xs text-muted-foreground">
@@ -260,7 +260,7 @@ export function CanvasArchetype() {
 
       {/* ── Map controls (floating, bottom-right) ─────────────────── */}
       <div className="absolute bottom-4 right-3 z-10 flex flex-col gap-2 sm:right-4">
-        <div className="flex flex-col overflow-hidden rounded-full bg-card/85 shadow-float backdrop-blur">
+        <div className="flex flex-col overflow-hidden rounded-full bg-card/85 edge backdrop-blur">
           <button
             type="button"
             aria-label="Zoom in"
@@ -280,7 +280,7 @@ export function CanvasArchetype() {
         <button
           type="button"
           aria-label="Recenter"
-          className="grid size-9 place-items-center rounded-full bg-card/85 text-brand shadow-float backdrop-blur transition-colors hover:bg-muted"
+          className="grid size-9 place-items-center rounded-full bg-card/85 text-brand edge backdrop-blur transition-colors hover:bg-muted"
         >
           <Locate className="size-4" />
         </button>

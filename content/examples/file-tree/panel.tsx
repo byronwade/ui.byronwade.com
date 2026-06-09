@@ -35,7 +35,7 @@ const ELEMENTS: TreeViewElement[] = [
 
 export default function Example() {
   return (
-    <div className="h-72 w-full max-w-xs rounded-lg border border-border p-2">
+    <div className="h-72 w-full max-w-xs rounded-lg edge p-2">
       <Tree
         elements={ELEMENTS}
         variant="panel"

@@ -73,7 +73,7 @@ function Thumbnail({
           data-slot="thumbnail-hover-play"
           className="pointer-events-none absolute inset-0 grid place-items-center bg-foreground/0 opacity-0 transition-opacity duration-200 group-hover/thumbnail:bg-foreground/10 group-hover/thumbnail:opacity-100"
         >
-          <span className="grid size-12 place-items-center rounded-full bg-background/80 text-foreground shadow-sm backdrop-blur-sm">
+          <span className="grid size-12 place-items-center rounded-full bg-background/80 text-foreground edge backdrop-blur-sm">
             <Play className="size-5 fill-current" />
           </span>
         </div>

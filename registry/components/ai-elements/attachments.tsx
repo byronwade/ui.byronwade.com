@@ -199,12 +199,12 @@ const attachmentVariants = cva("group/attachment relative", {
       grid: "size-24 overflow-hidden rounded-lg",
       inline: cn(
         "flex h-8 cursor-pointer select-none items-center gap-1.5",
-        "rounded-md border border-border px-1.5",
+        "rounded-md edge px-1.5",
         "text-sm font-medium transition-all",
         "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50"
       ),
       list: cn(
-        "flex w-full items-center gap-3 rounded-lg border border-border p-3",
+        "flex w-full items-center gap-3 rounded-lg edge p-3",
         "hover:bg-accent/50"
       ),
     },

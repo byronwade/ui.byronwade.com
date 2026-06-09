@@ -4,9 +4,9 @@
  * Reworked to the byronwade/ui design system: lucide icons (no @tabler), no
  * next/image dependency, semantic token surfaces (bg-card / bg-muted /
  * text-foreground / text-muted-foreground / bg-foreground), aria-labels on the
- * icon-only controls, and data-slot hooks. The modal scrim uses the house
- * bg-black/N + backdrop-blur pattern (see dialog); photo cards keep their
- * black→transparent gradient + white text for legibility over imagery.
+ * icon-only controls, and data-slot hooks. The modal scrim uses semantic
+ * foreground opacity with backdrop blur; photo cards keep token text over the
+ * image scrim for legibility.
  */
 "use client"
 
@@ -189,7 +189,7 @@ export const Card = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 h-full w-full bg-black/80 backdrop-blur-lg"
+              className="fixed inset-0 h-full w-full bg-foreground/80 backdrop-blur-lg"
             />
             <motion.div
               initial={{ opacity: 0 }}
@@ -234,13 +234,13 @@ export const Card = ({
         <div className="relative z-40 p-8">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
-            className="text-left font-sans text-sm font-medium text-white md:text-base"
+            className="text-left font-sans text-sm font-medium text-background md:text-base"
           >
             {card.category}
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
-            className="mt-2 max-w-xs text-left font-sans text-xl font-medium tracking-tight text-balance text-white md:text-3xl"
+            className="mt-2 max-w-xs text-left font-sans text-xl font-medium tracking-tight text-balance text-background md:text-3xl"
           >
             {card.title}
           </motion.p>

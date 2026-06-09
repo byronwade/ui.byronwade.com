@@ -1,7 +1,7 @@
 import * as React from "react"
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
-import { render, screen } from "@testing-library/react"
+import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, it, expect, vi, beforeEach } from "vitest"
 import { axe } from "vitest-axe"
@@ -91,7 +91,7 @@ describe("filterVariants", () => {
 })
 
 describe("VariantBrowser", () => {
-  it("renders an anchored block per variant with name, tags, and install", () => {
+  it("renders an anchored block per variant with name, tags, and install", async () => {
     const { container } = render(<VariantBrowser {...browserProps} />)
     expect(container.querySelector("#solid")).not.toBeNull()
     expect(container.querySelector("#ghost")).not.toBeNull()
@@ -99,9 +99,12 @@ describe("VariantBrowser", () => {
       screen.getByRole("button", { name: "Save changes" }),
     ).toBeInTheDocument()
     expect(screen.getByText("variant:ghost")).toBeInTheDocument()
-    expect(
-      screen.getAllByText(/add @byronwade\/button/).length,
-    ).toBeGreaterThanOrEqual(3)
+    await waitFor(() => {
+      expect(
+        document.body.textContent?.match(/add @byronwade\/button/g)?.length ??
+          0,
+      ).toBeGreaterThanOrEqual(3)
+    })
   })
 
   it("free-text search filters the rendered blocks", async () => {

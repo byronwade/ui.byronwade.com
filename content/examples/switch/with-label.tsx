@@ -30,7 +30,7 @@ export default function Example() {
   )
 
   return (
-    <div className="flex flex-col divide-y rounded-lg border p-0 overflow-hidden max-w-sm mx-auto">
+    <div className="flex flex-col divide-y rounded-lg edge p-0 overflow-hidden max-w-sm mx-auto">
       {settings.map((setting) => (
         <label
           key={setting.id}

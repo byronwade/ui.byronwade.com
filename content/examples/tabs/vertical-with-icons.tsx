@@ -26,28 +26,28 @@ export default function Example() {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value={0} className="rounded-xl border p-5">
+        <TabsContent value={0} className="rounded-xl edge p-5">
           <h3 className="text-sm font-semibold">Account</h3>
           <p className="mt-1 text-sm text-muted-foreground">
             Update your username, email, and profile photo.
           </p>
         </TabsContent>
 
-        <TabsContent value={1} className="rounded-xl border p-5">
+        <TabsContent value={1} className="rounded-xl edge p-5">
           <h3 className="text-sm font-semibold">Privacy</h3>
           <p className="mt-1 text-sm text-muted-foreground">
             Control who can see your activity and data.
           </p>
         </TabsContent>
 
-        <TabsContent value={2} className="rounded-xl border p-5">
+        <TabsContent value={2} className="rounded-xl edge p-5">
           <h3 className="text-sm font-semibold">Notifications</h3>
           <p className="mt-1 text-sm text-muted-foreground">
             Choose which events trigger email or push alerts.
           </p>
         </TabsContent>
 
-        <TabsContent value={3} className="rounded-xl border p-5">
+        <TabsContent value={3} className="rounded-xl edge p-5">
           <h3 className="text-sm font-semibold">Billing</h3>
           <p className="mt-1 text-sm text-muted-foreground">
             Manage your subscription, invoices, and payment methods.

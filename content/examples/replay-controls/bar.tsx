@@ -9,7 +9,7 @@ export default function Example() {
   const [position, setPosition] = useState(48)
 
   return (
-    <div className="flex h-10 w-full max-w-xl items-center rounded-lg border border-border bg-card/80 px-3">
+    <div className="flex h-10 w-full max-w-xl items-center rounded-lg edge bg-card/80 px-3">
       <ReplayControls
         variant="bar"
         showSlider={false}

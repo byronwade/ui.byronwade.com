@@ -125,7 +125,7 @@ export function GaugeArchetype() {
       <div className="relative mx-auto max-w-6xl px-6 py-14">
         {/* ── Hero ─────────────────────────────────────────────────── */}
         <header className="flex flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground backdrop-blur">
+          <span className="inline-flex items-center gap-2 rounded-full edge bg-card/60 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground backdrop-blur">
             <span className="relative flex size-1.5">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success/70" />
               <span className="relative inline-flex size-1.5 rounded-full bg-success" />
@@ -146,7 +146,7 @@ export function GaugeArchetype() {
             />
           </div>
 
-          <h1 className="text-gradient mt-8 text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="text-gradient mt-8 text-3xl tracking-tight sm:text-4xl">
             All systems operational
           </h1>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">
@@ -160,7 +160,7 @@ export function GaugeArchetype() {
         </header>
 
         {/* ── Region strip (control tower) ─────────────────────────── */}
-        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl bg-border shadow-card sm:grid-cols-2 lg:grid-cols-5">
+        <div className="edge mt-12 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-5">
           {regions.map((r) => (
             <div key={r.code} className="flex flex-col gap-2 bg-card p-4">
               <div className="flex items-center justify-between">
@@ -184,7 +184,7 @@ export function GaugeArchetype() {
         </div>
 
         {/* ── KPI bento ────────────────────────────────────────────── */}
-        <div className="mt-px grid gap-px overflow-hidden rounded-2xl bg-border shadow-card sm:grid-cols-2 lg:grid-cols-4">
+        <div className="edge mt-px grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-4">
           {kpis.map((k) => (
             <div key={k.label} className="flex flex-col gap-3 bg-card p-5">
               <MetricStat
@@ -203,9 +203,9 @@ export function GaugeArchetype() {
 
         {/* ── Activity + timeline ──────────────────────────────────── */}
         <div className="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-          <section className="rounded-2xl bg-card p-5 shadow-card">
+          <section className="edge overflow-hidden rounded-2xl bg-card p-5">
             <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-sm font-semibold tracking-tight">
+              <h2 className="text-sm font-medium tracking-tight">
                 Incident-free days
               </h2>
               <span className="font-mono text-xs text-muted-foreground">
@@ -224,7 +224,7 @@ export function GaugeArchetype() {
             </div>
           </section>
 
-          <section className="rounded-2xl bg-card p-5 shadow-card">
+          <section className="rounded-2xl bg-card p-5 edge">
             <h2 className="mb-5 text-sm font-semibold tracking-tight">
               Recent events
             </h2>

@@ -11,7 +11,7 @@ export default function Example() {
           id="full-name"
           type="text"
           placeholder="Jane Smith"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 
@@ -21,7 +21,7 @@ export default function Example() {
           id="email"
           type="email"
           placeholder="jane@example.com"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 
@@ -31,7 +31,7 @@ export default function Example() {
           id="bio"
           placeholder="Tell us a little about yourself…"
           rows={3}
-          className="rounded-md border px-3 py-2 text-sm resize-none"
+          className="rounded-md edge px-3 py-2 text-sm resize-none"
         />
       </div>
     </div>

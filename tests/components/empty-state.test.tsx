@@ -116,13 +116,13 @@ describe("EmptyState – icon prop", () => {
     expect(iconWrapper).toBeNull();
   });
 
-  it("icon wrapper has rounded-2xl border and bg-muted/40 classes", () => {
+  it("icon wrapper has rounded-2xl edge and bg-muted/40 classes", () => {
     const { container } = render(
       <EmptyState icon={Inbox} title="Inbox empty" />
     );
     const iconWrapper = container.querySelector(".size-11");
     expect(iconWrapper!.className).toContain("rounded-2xl");
-    expect(iconWrapper!.className).toContain("border");
+    expect(iconWrapper!.className).toContain("edge");
     expect(iconWrapper!.className).toContain("bg-muted/40");
   });
 

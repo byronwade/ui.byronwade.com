@@ -146,7 +146,7 @@ export function HeroChartArchetype() {
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
               Overview
             </p>
-            <h1 className="mt-1 flex items-center gap-2 text-2xl font-semibold tracking-tight">
+            <h1 className="mt-1 flex items-center gap-2 text-2xl font-medium tracking-tight">
               Revenue &amp; engagement
               <Badge variant="success">Live</Badge>
             </h1>
@@ -162,7 +162,7 @@ export function HeroChartArchetype() {
         </header>
 
         {/* ── Hero chart ───────────────────────────────────────────── */}
-        <section className="relative mt-6 overflow-hidden rounded-2xl bg-card p-6 shadow-card">
+        <section className="edge relative mt-6 overflow-hidden rounded-2xl bg-card p-6">
           <div
             aria-hidden
             className="glow-brand pointer-events-none absolute inset-x-0 -top-10 h-48 opacity-70"
@@ -173,7 +173,7 @@ export function HeroChartArchetype() {
                 Monthly recurring revenue
               </p>
               <div className="mt-1 flex items-end gap-3">
-                <span className="text-gradient-brand text-5xl font-semibold tracking-tight tabular-nums">
+                <span className="text-gradient-brand text-5xl tracking-tight tabular-nums">
                   $101k
                 </span>
                 <span className="mb-1.5 inline-flex items-center rounded-full bg-success/10 px-2 py-0.5 text-sm font-medium text-success tabular-nums">
@@ -190,8 +190,7 @@ export function HeroChartArchetype() {
                 <span className="size-2 rounded-full bg-brand" /> Revenue
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="size-2 rounded-full bg-[var(--chart-3)]" />{" "}
-                Active users
+                <span className="size-2 rounded-full bg-chart-3" /> Active users
               </span>
             </div>
           </div>
@@ -260,7 +259,7 @@ export function HeroChartArchetype() {
         </section>
 
         {/* ── KPI strip ────────────────────────────────────────────── */}
-        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl bg-border shadow-card sm:grid-cols-2 lg:grid-cols-4">
+        <div className="edge mt-6 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-4">
           {kpis.map((k) => (
             <div key={k.label} className="flex flex-col gap-3 bg-card p-5">
               <MetricStat
@@ -276,8 +275,8 @@ export function HeroChartArchetype() {
 
         {/* ── Breakdown + products bento ───────────────────────────── */}
         <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.4fr]">
-          <section className="rounded-2xl bg-card p-5 shadow-card">
-            <h2 className="text-sm font-semibold tracking-tight">
+          <section className="edge overflow-hidden rounded-2xl bg-card p-5">
+            <h2 className="text-sm font-medium tracking-tight">
               Revenue by source
             </h2>
             <div className="mt-5 space-y-4">
@@ -300,8 +299,8 @@ export function HeroChartArchetype() {
             </div>
           </section>
 
-          <section className="overflow-hidden rounded-2xl bg-card shadow-card">
-            <div className="border-b border-border px-5 py-3 text-sm font-semibold tracking-tight">
+          <section className="edge overflow-hidden rounded-2xl bg-card">
+            <div className="border-b border-border px-5 py-3 text-sm font-medium tracking-tight">
               Top products
             </div>
             <Table>

@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator"
 
 export default function Example() {
   return (
-    <div className="w-80 rounded-xl border bg-card p-5 shadow-sm">
+    <div className="w-80 rounded-xl edge bg-card p-5 edge">
       <div className="space-y-1">
         <h3 className="text-sm font-semibold">Account Summary</h3>
         <p className="text-xs text-muted-foreground">

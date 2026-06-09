@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { ActivityGrid } from "@/components/ui/activity-grid"
+import { useDemoDensity } from "@/lib/demo-viewport"
 
 type Period = "week" | "month" | "quarter" | "year"
 
@@ -17,11 +18,18 @@ const PERIODS: {
   { label: "1Y", value: "year", columns: 52, weeks: 52 },
 ]
 
+function seededValue(index: number, salt: number) {
+  const value = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453
+  return value - Math.floor(value)
+}
+
 function generateData(weeks: number) {
   return Array.from({ length: weeks * 7 }, (_, i) => {
     const row = i % 7
     if (row === 0 || row === 6) return 0
-    return Math.random() > 0.3 ? Math.round(Math.random() * 10) : 0
+    return seededValue(i, weeks) > 0.3
+      ? Math.round(seededValue(i, weeks + 1) * 10)
+      : 0
   })
 }
 
@@ -35,6 +43,7 @@ const datasets: Record<Period, number[]> = {
 
 export default function Example() {
   const [period, setPeriod] = useState<Period>("quarter")
+  const density = useDemoDensity() ?? "default"
   const current = PERIODS.find((p) => p.value === period)!
 
   return (
@@ -47,7 +56,7 @@ export default function Example() {
             className={[
               "rounded-full px-3 py-1 text-xs font-medium transition-colors",
               period === p.value
-                ? "bg-background text-foreground shadow-sm"
+                ? "bg-background text-foreground edge"
                 : "text-muted-foreground hover:text-foreground",
             ].join(" ")}
           >
@@ -59,6 +68,7 @@ export default function Example() {
       <ActivityGrid
         data={datasets[period]}
         columns={current.columns}
+        size={density}
         className="transition-all duration-200"
       />
     </div>

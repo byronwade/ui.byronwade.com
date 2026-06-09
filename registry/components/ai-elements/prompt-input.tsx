@@ -34,6 +34,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  useDemoDensity,
+  useDemoFrame,
+  useDemoDepth,
+} from "@/lib/demo-viewport";
 import { cn } from "@/lib/utils";
 import type { ChatStatus, FileUIPart } from "ai";
 import {
@@ -69,6 +74,36 @@ import {
   useRef,
   useState,
 } from "react";
+
+type PromptInputProvenanceValue =
+  | "user"
+  | "assistant"
+  | "system"
+  | "tool"
+  | "app"
+  | "source"
+  | "action"
+  | "model";
+
+type PromptInputDensity = "compact" | "default" | "comfortable";
+type PromptInputFrame = "default" | "inset";
+type PromptInputDepth = "none" | "soft" | "raised";
+
+type PromptInputLayoutContextValue = {
+  density: PromptInputDensity;
+  frame: PromptInputFrame;
+  depth: PromptInputDepth;
+};
+
+const PromptInputLayoutContext =
+  createContext<PromptInputLayoutContextValue | null>(null);
+
+const usePromptInputLayout = () =>
+  useContext(PromptInputLayoutContext) ?? {
+    density: "default",
+    frame: "default",
+    depth: "none",
+  };
 
 // ============================================================================
 // Provider Context & Types
@@ -303,7 +338,7 @@ export function PromptInputAttachment({
           <div
             data-slot="prompt-input-attachment"
             className={cn(
-              "group relative flex h-8 cursor-pointer items-center gap-1.5 rounded-md border border-border px-1.5 text-sm font-medium transition-colors select-none hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+              "group relative flex h-8 cursor-pointer items-center gap-1.5 rounded-md edge px-1.5 text-sm font-medium transition-colors select-none hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
               className
             )}
             key={data.id}
@@ -447,6 +482,10 @@ export type PromptInputProps = Omit<
 > & {
   accept?: string; // e.g., "image/*" or leave undefined for any
   multiple?: boolean;
+  provenance?: PromptInputProvenanceValue;
+  density?: PromptInputDensity;
+  frame?: PromptInputFrame;
+  depth?: PromptInputDepth;
   // When true, accepts drops anywhere on document. Default false (opt-in).
   globalDrop?: boolean;
   // Render a hidden input with given name and keep it in sync for native form posts. Default false.
@@ -468,6 +507,10 @@ export const PromptInput = ({
   className,
   accept,
   multiple,
+  provenance = "user",
+  density: densityProp,
+  frame: frameProp,
+  depth: depthProp,
   globalDrop,
   syncHiddenInput,
   maxFiles,
@@ -480,6 +523,16 @@ export const PromptInput = ({
   // Try to use a provider controller if present
   const controller = useOptionalPromptInputController();
   const usingProvider = !!controller;
+  const demoDensity = useDemoDensity();
+  const demoFrame = useDemoFrame();
+  const demoDepth = useDemoDepth();
+  const density = densityProp ?? demoDensity ?? "default";
+  const frame = frameProp ?? demoFrame ?? "default";
+  const depth = depthProp ?? demoDepth ?? "none";
+  const layout = useMemo<PromptInputLayoutContextValue>(
+    () => ({ density, frame, depth }),
+    [density, frame, depth]
+  );
 
   // Refs
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -805,12 +858,31 @@ export const PromptInput = ({
       />
       <form
         data-slot="prompt-input"
+        data-provenance={provenance}
+        data-density={density}
+        data-frame={frame}
+        data-depth={depth}
         className={cn("w-full", className)}
         onSubmit={handleSubmit}
         ref={formRef}
         {...props}
       >
-        <InputGroup className="overflow-hidden">{children}</InputGroup>
+        <InputGroup
+          className={cn(
+            "overflow-hidden transition-[border-radius,box-shadow,background-color]",
+            density === "compact" && "rounded-xl",
+            density === "default" && "rounded-2xl",
+            density === "comfortable" && "rounded-2xl",
+            frame === "inset" && "bg-card ring-1 ring-border/60",
+            depth === "none" && "shadow-none",
+            depth === "soft" && "depth-soft",
+            depth === "raised" && "depth-raised"
+          )}
+        >
+          <PromptInputLayoutContext.Provider value={layout}>
+            {children}
+          </PromptInputLayoutContext.Provider>
+        </InputGroup>
       </form>
     </>
   );
@@ -849,6 +921,7 @@ export const PromptInputTextarea = ({
 }: PromptInputTextareaProps) => {
   const controller = useOptionalPromptInputController();
   const attachments = usePromptInputAttachments();
+  const { density } = usePromptInputLayout();
   const [isComposing, setIsComposing] = useState(false);
 
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
@@ -926,7 +999,13 @@ export const PromptInputTextarea = ({
   return (
     <InputGroupTextarea
       data-slot="prompt-input-textarea"
-      className={cn("field-sizing-content max-h-48 min-h-16", className)}
+      className={cn(
+        "field-sizing-content",
+        density === "compact" && "max-h-36 min-h-10 py-2",
+        density === "default" && "max-h-48 min-h-16 py-2.5",
+        density === "comfortable" && "max-h-56 min-h-20 py-3",
+        className
+      )}
       name="message"
       onCompositionEnd={() => setIsComposing(false)}
       onCompositionStart={() => setIsComposing(true)}
@@ -947,14 +1026,24 @@ export type PromptInputHeaderProps = Omit<
 export const PromptInputHeader = ({
   className,
   ...props
-}: PromptInputHeaderProps) => (
-  <InputGroupAddon
-    data-slot="prompt-input-header"
-    align="block-end"
-    className={cn("order-first flex-wrap gap-1", className)}
-    {...props}
-  />
-);
+}: PromptInputHeaderProps) => {
+  const { density } = usePromptInputLayout();
+
+  return (
+    <InputGroupAddon
+      data-slot="prompt-input-header"
+      align="block-end"
+      className={cn(
+        "order-first flex-wrap gap-1 border-b border-border/50",
+        density === "compact" && "px-2 py-1",
+        density === "default" && "px-2.5 py-1.5",
+        density === "comfortable" && "px-3 py-2",
+        className
+      )}
+      {...props}
+    />
+  );
+};
 
 export type PromptInputFooterProps = Omit<
   ComponentProps<typeof InputGroupAddon>,
@@ -964,27 +1053,45 @@ export type PromptInputFooterProps = Omit<
 export const PromptInputFooter = ({
   className,
   ...props
-}: PromptInputFooterProps) => (
-  <InputGroupAddon
-    data-slot="prompt-input-footer"
-    align="block-end"
-    className={cn("justify-between gap-1", className)}
-    {...props}
-  />
-);
+}: PromptInputFooterProps) => {
+  const { density } = usePromptInputLayout();
+
+  return (
+    <InputGroupAddon
+      data-slot="prompt-input-footer"
+      align="block-end"
+      className={cn(
+        "justify-between border-t border-border/50",
+        density === "compact" && "gap-1 px-2 py-1",
+        density === "default" && "gap-1.5 px-2.5 py-1.5",
+        density === "comfortable" && "gap-2 px-3 py-2",
+        className
+      )}
+      {...props}
+    />
+  );
+};
 
 export type PromptInputToolsProps = HTMLAttributes<HTMLDivElement>;
 
 export const PromptInputTools = ({
   className,
   ...props
-}: PromptInputToolsProps) => (
-  <div
-    data-slot="prompt-input-tools"
-    className={cn("flex items-center gap-1", className)}
-    {...props}
-  />
-);
+}: PromptInputToolsProps) => {
+  const { density } = usePromptInputLayout();
+
+  return (
+    <div
+      data-slot="prompt-input-tools"
+      className={cn(
+        "flex items-center",
+        density === "compact" ? "gap-0.5" : "gap-1",
+        className
+      )}
+      {...props}
+    />
+  );
+};
 
 export type PromptInputButtonProps = ComponentProps<typeof InputGroupButton>;
 
@@ -994,8 +1101,16 @@ export const PromptInputButton = ({
   size,
   ...props
 }: PromptInputButtonProps) => {
+  const { density } = usePromptInputLayout();
   const newSize =
-    size ?? (Children.count(props.children) > 1 ? "sm" : "icon-sm");
+    size ??
+    (Children.count(props.children) > 1
+      ? density === "compact"
+        ? "xs"
+        : "sm"
+      : density === "compact"
+        ? "icon-xs"
+        : "icon-sm");
 
   return (
     <InputGroupButton
@@ -1281,18 +1396,25 @@ export type PromptInputSelectTriggerProps = ComponentProps<
 
 export const PromptInputSelectTrigger = ({
   className,
+  size,
   ...props
-}: PromptInputSelectTriggerProps) => (
-  <SelectTrigger
-    data-slot="prompt-input-select-trigger"
-    className={cn(
-      "border-none bg-transparent font-medium text-muted-foreground shadow-none transition-colors",
-      "hover:bg-accent hover:text-foreground aria-expanded:bg-accent aria-expanded:text-foreground",
-      className
-    )}
-    {...props}
-  />
-);
+}: PromptInputSelectTriggerProps) => {
+  const { density } = usePromptInputLayout();
+
+  return (
+    <SelectTrigger
+      data-slot="prompt-input-select-trigger"
+      data-provenance="model"
+      size={size ?? (density === "compact" ? "sm" : "default")}
+      className={cn(
+        "border-none bg-input/30 font-medium text-muted-foreground shadow-none transition-colors",
+        "hover:bg-accent hover:text-foreground aria-expanded:bg-accent aria-expanded:text-foreground",
+        className
+      )}
+      {...props}
+    />
+  );
+};
 
 export type PromptInputSelectContentProps = ComponentProps<
   typeof SelectContent

@@ -77,6 +77,11 @@ describe("ai-sources — data-slot attributes", () => {
     expect(container.firstChild).toHaveAttribute("data-slot", "sources");
   });
 
+  it("Sources root marks source provenance", () => {
+    const { container } = render(<Sources />);
+    expect(container.firstChild).toHaveAttribute("data-provenance", "source");
+  });
+
   it("SourcesTrigger has data-slot='sources-trigger'", () => {
     const { container } = renderSources();
     expect(
@@ -94,6 +99,14 @@ describe("ai-sources — data-slot attributes", () => {
   it("Source has data-slot='source'", () => {
     const { container } = renderSources();
     expect(container.querySelector("[data-slot='source']")).toBeInTheDocument();
+  });
+
+  it("Source link marks source-item provenance", () => {
+    const { container } = renderSources();
+    expect(container.querySelector("[data-slot='source']")).toHaveAttribute(
+      "data-provenance",
+      "source-item"
+    );
   });
 });
 

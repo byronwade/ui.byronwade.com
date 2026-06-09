@@ -21,7 +21,7 @@ export type NodeProps = ComponentProps<typeof Card> & {
 };
 
 const handleClassName =
-  "size-3 rounded-full border border-border bg-background ring-ring focus-visible:ring-2 focus-visible:outline-none";
+  "size-3 rounded-full edge bg-background ring-ring focus-visible:ring-2 focus-visible:outline-none";
 
 export const Node = ({ handles, className, ...props }: NodeProps) => (
   <Card

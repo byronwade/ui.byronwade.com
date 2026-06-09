@@ -47,14 +47,14 @@ export function DockToolbar() {
 
   return (
     <div className="pointer-events-none fixed top-3 right-3 z-50 print:hidden">
-      <div className="pointer-events-auto inline-flex transform-gpu items-center rounded-3xl bg-dock p-[3px] text-dock-foreground shadow-float">
+      <div className="pointer-events-auto inline-flex transform-gpu items-center rounded-3xl bg-dock p-[3px] text-dock-foreground edge">
         <button
           type="button"
           onClick={copy}
           aria-label={`Copy install command for ${doc.name}`}
           className={cn(
             "flex h-8 items-center gap-2 rounded-full px-3 text-[13px] font-medium",
-            "transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
+            "transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             copied
               ? "bg-dock-active text-dock-active-foreground"
               : "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground",

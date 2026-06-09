@@ -21,7 +21,7 @@ export default function Example() {
 
   return (
     <div className="w-full max-w-3xl p-4">
-      <NowPlayingBar className="rounded-xl border">
+      <NowPlayingBar className="rounded-xl edge">
         <NowPlayingBarTrack
           src={COVER}
           title="Lost in the Echo"

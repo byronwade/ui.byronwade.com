@@ -136,7 +136,7 @@ function OptionsChain({
   return (
     <div
       data-slot="options-chain"
-      className={cn("w-full rounded-xl border border-border bg-card", className)}
+      className={cn("w-full rounded-xl edge bg-card", className)}
       {...props}
     >
       <div

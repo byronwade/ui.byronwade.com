@@ -4,7 +4,7 @@ import { makeCandles } from "@/lib/market"
 export default function Example() {
   return (
     <div className="flex justify-center p-8">
-      <div className="h-[360px] w-full max-w-3xl overflow-hidden rounded-lg border border-border bg-card">
+      <div className="h-[360px] w-full max-w-3xl overflow-hidden rounded-lg edge bg-card">
         <LightweightChart
           data={makeCandles(72, { seed: 7 })}
           chartType="candles"

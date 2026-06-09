@@ -47,7 +47,7 @@ export default function Example() {
       </button>
 
       <button
-        className="rounded px-4 py-2 border border-border text-foreground"
+        className="rounded px-4 py-2 edge text-foreground"
         onClick={() => {
           if (toastIdRef.current !== null) {
             toast.success("Job completed!", { id: toastIdRef.current })
@@ -59,7 +59,7 @@ export default function Example() {
       </button>
 
       <button
-        className="rounded px-4 py-2 border border-border text-foreground"
+        className="rounded px-4 py-2 edge text-foreground"
         onClick={() => toast.dismiss()}
       >
         Dismiss all

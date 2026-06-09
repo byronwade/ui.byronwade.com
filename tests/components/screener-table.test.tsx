@@ -37,7 +37,7 @@ describe("ScreenerTable", () => {
   it("narrows rows when the Gainers filter is selected", async () => {
     const user = userEvent.setup()
     render(<ScreenerTable rows={rows} />)
-    await user.click(screen.getByRole("button", { name: "Gainers" }))
+    await user.click(screen.getByRole("tab", { name: "Gainers" }))
     expect(screen.getByText("AAPL")).toBeInTheDocument()
     expect(screen.queryByText("TSLA")).not.toBeInTheDocument()
   })

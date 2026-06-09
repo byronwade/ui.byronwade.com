@@ -26,8 +26,8 @@ const DEFAULT_LOCALE = "en-US"
 const tickerVariant: Record<TickerVariant, string> = {
   bare: "",
   soft: "rounded-full bg-muted px-3 py-1.5",
-  outline: "rounded-full border border-border px-3 py-1.5",
-  card: "rounded-lg border border-border bg-card px-3 py-2 shadow-sm",
+  outline: "rounded-full edge px-3 py-1.5",
+  card: "rounded-lg edge bg-card px-3 py-2",
 }
 
 // Icon diameter + label text scale together; `default` matches the original.
@@ -129,7 +129,7 @@ export const TickerIcon = memo(
         <div
           data-slot="ticker-icon"
           className={cn(
-            "overflow-hidden rounded-full border border-border bg-muted",
+            "overflow-hidden rounded-full edge bg-muted",
             tickerIconSize[size],
             className,
           )}
@@ -141,11 +141,7 @@ export const TickerIcon = memo(
     return (
       <Avatar
         data-slot="ticker-icon"
-        className={cn(
-          "border border-border bg-muted",
-          tickerIconSize[size],
-          className,
-        )}
+        className={cn("edge bg-muted", tickerIconSize[size], className)}
       >
         <AvatarImage src={src} {...props} />
         <AvatarFallback className="text-sm font-medium text-muted-foreground">

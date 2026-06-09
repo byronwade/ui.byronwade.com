@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
+import type { ReactNode } from "react"
 import Link from "next/link"
 import {
-  ArrowRight,
   Blocks,
   Palette,
   SlidersHorizontal,
@@ -10,7 +10,8 @@ import {
 } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
-import { DocsIntro } from "@/app/(docs)/_components/docs-prose"
+import { BLEED, DocsIntro } from "@/app/(docs)/_components/docs-prose"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
 import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
@@ -24,8 +25,6 @@ export const metadata: Metadata = {
    rule rendered as a code editor (filename tab + line numbers). @byronwade/
    design-rules is a real registry item.
 --------------------------------------------------------------------------- */
-
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const RULE_LINES = [
   "---",
@@ -47,7 +46,11 @@ const RULE_LINES = [
   "  font-sans + text-sm. Cap measure at 65ch.",
 ]
 
-const ENFORCES = [
+const ENFORCES: {
+  icon: typeof Blocks
+  title: string
+  body: ReactNode
+}[] = [
   {
     icon: Blocks,
     title: "Compose, don't reinvent",
@@ -61,7 +64,18 @@ const ENFORCES = [
   {
     icon: SlidersHorizontal,
     title: "Re-skin via --brand",
-    body: "One variable drives the accent.",
+    body: (
+      <>
+        One variable drives the{" "}
+        <Link
+          href="/docs/theming"
+          className="text-brand underline-offset-4 hover:underline"
+        >
+          brand
+        </Link>{" "}
+        accent.
+      </>
+    ),
   },
   {
     icon: Accessibility,
@@ -71,7 +85,17 @@ const ENFORCES = [
   {
     icon: BookOpen,
     title: "Readability lanes",
-    body: "reading-ui / reading-prose for copy; text-sm for UI.",
+    body: (
+      <>
+        <Link
+          href="/docs/readability"
+          className="text-brand underline-offset-4 hover:underline"
+        >
+          reading-ui / reading-prose
+        </Link>{" "}
+        for copy; text-sm for UI.
+      </>
+    ),
   },
 ]
 
@@ -96,14 +120,28 @@ export default function AiPage() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Foundation · AI rules
           </p>
-          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.0] tracking-tight text-foreground text-balance">
+          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
             Teach your agent the system once.
           </h1>
           <DocsIntro className="max-w-md">
-            One installable rule keeps Cursor, Claude, Copilot, Windsurf and
-            Codex building on-system, no re-explaining on every edit.
+            One{" "}
+            <Link
+              href="/docs/installation"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              installable
+            </Link>{" "}
+            rule keeps Cursor, Claude, Copilot, Windsurf and Codex building on
+            the same{" "}
+            <Link
+              href="/docs/foundation"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              tokens
+            </Link>
+            , no re-explaining on every edit.
           </DocsIntro>
-          <div className="mt-6 reading-ui">
+          <div className="mt-6">
             <CodeBlock
               lang="bash"
               code={`npx shadcn@latest add @byronwade/design-rules`}
@@ -111,26 +149,12 @@ export default function AiPage() {
           </div>
         </div>
 
-        {/* editor window */}
-        <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both overflow-hidden rounded-2xl edge bg-card duration-700 [animation-delay:150ms]">
-          <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
-            <span className="size-2.5 rounded-full bg-border" />
-            <span className="size-2.5 rounded-full bg-border" />
-            <span className="size-2.5 rounded-full bg-border" />
-            <span className="ml-2 rounded-md bg-muted px-2 py-0.5 font-mono text-[11px] text-foreground">
-              byronwade-ui.mdc
-            </span>
-          </div>
-          <div className="grid grid-cols-[auto_1fr]">
-            <div className="select-none border-r border-border px-3 py-4 text-right font-mono text-[12px] leading-relaxed text-muted-foreground/50">
-              {RULE_LINES.map((_, i) => (
-                <div key={i}>{i + 1}</div>
-              ))}
-            </div>
-            <pre className="overflow-x-auto px-4 py-4 font-mono text-[12px] leading-relaxed text-foreground scrollbar-thin">
-              <code>{RULE_LINES.join("\n")}</code>
-            </pre>
-          </div>
+        {/* The rule file itself, in the same CodeBlock every other page uses. */}
+        <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700 [animation-delay:150ms]">
+          <p className="mb-2 font-mono text-[11px] tracking-wide text-muted-foreground uppercase">
+            byronwade-ui.mdc
+          </p>
+          <CodeBlock lang="markdown" code={RULE_LINES.join("\n")} />
         </div>
       </section>
 
@@ -168,7 +192,7 @@ export default function AiPage() {
             raw: {REGISTRY_URL}/r/design-rules.json
           </p>
         </div>
-        <div className="mt-6 divide-y divide-border overflow-hidden rounded-2xl edge">
+        <div className="mt-6 divide-y divide-edge overflow-hidden rounded-2xl edge">
           {TOOLS.map((t) => (
             <div
               key={t.name}
@@ -193,27 +217,7 @@ export default function AiPage() {
       </section>
 
       {/* ============================ NAV ============================== */}
-      <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">
-        <Link
-          href="/docs"
-          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
-        >
-          Browse all components
-          <ArrowRight className="size-3.5" />
-        </Link>
-        <Link
-          href="/docs/readability"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Readability rationale
-        </Link>
-        <Link
-          href="/docs/theming"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Back to Theming
-        </Link>
-      </div>
+      <GuidePager current="/docs/ai" />
     </article>
   )
 }

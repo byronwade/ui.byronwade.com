@@ -222,7 +222,7 @@ export function CockpitArchetype() {
       {/* ── Incident list ────────────────────────────────────────── */}
       <div className="hidden w-80 shrink-0 flex-col border-r border-border md:flex">
         <div className="flex h-12 items-center justify-between gap-2 border-b border-border px-4">
-          <span className="flex items-center gap-2 text-sm font-semibold tracking-tight">
+          <span className="flex items-center gap-2 text-sm font-medium tracking-tight">
             <Inbox className="size-4 text-brand" />
             Incidents
           </span>
@@ -289,11 +289,11 @@ export function CockpitArchetype() {
           <div className="flex items-center gap-2">
             <button
               type="button"
-              className="hidden items-center gap-2 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 lg:flex"
+              className="hidden items-center gap-2 rounded-lg edge bg-card px-2.5 py-1.5 text-xs text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 lg:flex"
             >
               <Search className="size-3.5" />
               Search
-              <kbd className="rounded border border-border bg-muted px-1 font-mono text-[10px]">
+              <kbd className="rounded edge bg-muted px-1 font-mono text-[10px]">
                 ⌘K
               </kbd>
             </button>
@@ -317,7 +317,7 @@ export function CockpitArchetype() {
                   {active.from} · {active.time} ago
                 </span>
               </div>
-              <h1 className="mt-2 text-xl font-semibold tracking-tight">
+              <h1 className="mt-2 text-xl font-medium tracking-tight">
                 {active.subject}
               </h1>
 
@@ -440,7 +440,7 @@ export function CockpitArchetype() {
                 {active.affected.map((s) => (
                   <span
                     key={s}
-                    className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                    className="rounded-md edge bg-background px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
                   >
                     {s}
                   </span>

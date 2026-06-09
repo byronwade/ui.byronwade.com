@@ -165,7 +165,7 @@ describe("CreditCard — flip", () => {
     expect(flipper.className).toContain("group-hover/credit-card:-rotate-y-180");
     fireEvent.click(flipper);
     // Click does nothing on hover devices — no tap rotate class.
-    expect(flipper.className).not.toContain("-rotate-y-180 shadow-lg");
+    expect(flipper.className).not.toContain("-rotate-y-180 edge");
   });
 
   it("non-hover devices toggle the flip on tap", () => {

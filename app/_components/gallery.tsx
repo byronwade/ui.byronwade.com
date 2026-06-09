@@ -8,7 +8,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { ArrowRight, X } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 import {
   surfaceShortLabel,
@@ -16,6 +16,7 @@ import {
   type SurfaceFilter,
 } from "@/content/catalog-surfaces"
 import { SurfaceFilterControl } from "@/app/(docs)/_components/surface-filter"
+import { ActivePill } from "@/app/_components/gallery-parts"
 import { GradientAvatar } from "@/components/ui/gradient-avatar"
 import { FilterPill } from "@/components/ui/filter-pill"
 import {
@@ -50,29 +51,6 @@ function uniqueSorted(values: string[]) {
   return [...new Set(values)].sort((a, b) => a.localeCompare(b))
 }
 
-/** A removable active-filter chip (Mobbin's "Hero ✕"). */
-function ActivePill({
-  label,
-  onRemove,
-}: {
-  label: string
-  onRemove: () => void
-}) {
-  return (
-    <span className="inline-flex h-8 items-center gap-1 rounded-full edge bg-muted pl-3 pr-1.5 text-sm font-medium">
-      {label}
-      <button
-        type="button"
-        onClick={onRemove}
-        aria-label={`Remove ${label} filter`}
-        className="grid size-5 place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-background hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
-      >
-        <X className="size-3.5" />
-      </button>
-    </span>
-  )
-}
-
 export function Gallery({
   items,
   noun,
@@ -93,9 +71,13 @@ export function Gallery({
   const [surface, setSurface] = React.useState<SurfaceFilter>(initialSurface)
   const [sort, setSort] = React.useState<Sort>("featured")
 
-  React.useEffect(() => {
+  // Sync the URL-derived prop into state during render (no effect), so a deep
+  // link / back-forward nav that changes ?surface= updates the filter.
+  const [prevSurface, setPrevSurface] = React.useState(initialSurface)
+  if (initialSurface !== prevSurface) {
+    setPrevSurface(initialSurface)
     setSurface(initialSurface)
-  }, [initialSurface])
+  }
 
   const setSurfaceFilter = (next: SurfaceFilter) => {
     setSurface(next)
@@ -279,14 +261,14 @@ export function Gallery({
           </button>
         </div>
       ) : (
-        <div className="mt-8 grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-x-6 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((item) => (
             <Link
               key={item.slug}
               href={item.href}
               className="group flex flex-col gap-3 rounded-2xl outline-none"
             >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border bg-background transition-all group-hover:-translate-y-0.5 group-hover:shadow-card group-focus-visible:ring-3 group-focus-visible:ring-ring/50">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-xl edge bg-background transition-all group-hover:-translate-y-0.5 group-focus-visible:ring-3 group-focus-visible:ring-ring/50">
                 <iframe
                   src={item.previewSrc}
                   title={`${item.name} preview`}
@@ -296,12 +278,12 @@ export function Gallery({
                   className="pointer-events-none absolute left-0 top-0 h-[320%] w-[320%] origin-top-left scale-[0.3125] border-0"
                 />
                 {item.price && (
-                  <span className="absolute right-2.5 top-2.5 rounded-full bg-background/90 px-2 py-0.5 text-[11px] font-medium text-foreground shadow-card backdrop-blur">
+                  <span className="absolute right-2.5 top-2.5 rounded-full edge bg-background/90 px-2 py-0.5 text-[11px] font-medium text-foreground backdrop-blur">
                     {item.price}
                   </span>
                 )}
                 {/* Reveal-on-hover affordance, ours, not Mobbin's static thumbnail. */}
-                <span className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex translate-y-1 items-center gap-1 rounded-full bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground opacity-0 shadow-card backdrop-blur transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex translate-y-1 items-center gap-1 rounded-full edge bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground opacity-0 backdrop-blur transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                   Inspect
                   <ArrowRight className="size-3" />
                 </span>

@@ -30,21 +30,21 @@ export default function Example() {
             ))}
           </TabsList>
 
-          <TabsContent value={0} className="rounded-xl border p-4">
+          <TabsContent value={0} className="rounded-xl edge p-4">
             <p className="text-sm font-medium">Step 1, Fill in your details</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Enter the required information to proceed.
             </p>
           </TabsContent>
 
-          <TabsContent value={1} className="rounded-xl border p-4">
+          <TabsContent value={1} className="rounded-xl edge p-4">
             <p className="text-sm font-medium">Step 2, Review your input</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Make sure everything looks correct before confirming.
             </p>
           </TabsContent>
 
-          <TabsContent value={2} className="rounded-xl border p-4">
+          <TabsContent value={2} className="rounded-xl edge p-4">
             <p className="text-sm font-medium">Step 3, Confirm &amp; submit</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Click Confirm to finalise your submission.
@@ -56,7 +56,7 @@ export default function Example() {
           <button
             onClick={() => setActiveTab((v) => Math.max(0, v - 1))}
             disabled={isFirst}
-            className="rounded-full border px-4 py-1.5 text-sm font-medium transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-40"
+            className="rounded-full edge px-4 py-1.5 text-sm font-medium transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-40"
           >
             Back
           </button>

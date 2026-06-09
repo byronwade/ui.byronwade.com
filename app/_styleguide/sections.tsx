@@ -149,7 +149,7 @@ export const NAV: {
     items: [
       { id: slugify("Color"), label: "Color" },
       { id: slugify("Radius"), label: "Radius" },
-      { id: slugify("Elevation"), label: "Elevation" },
+      { id: slugify("Depth"), label: "Depth" },
       { id: slugify("Typography"), label: "Typography" },
       { id: slugify("Utilities"), label: "Utilities" },
     ],
@@ -431,7 +431,7 @@ export function Section({
     <section id={id} className="scroll-mt-24">
       <div className="flex items-end justify-between gap-4 border-b border-border pb-4">
         <div>
-          <h2 className="font-heading text-xl font-semibold tracking-tight">
+          <h2 className="font-heading text-xl font-medium tracking-tight">
             {title}
           </h2>
           {description && (
@@ -510,9 +510,7 @@ export function Swatch({
 }) {
   return (
     <div className="space-y-1.5">
-      <div
-        className={cn("h-14 w-full rounded-xl border border-border", className)}
-      />
+      <div className={cn("h-14 w-full rounded-xl edge", className)} />
       <p className="font-mono text-[11px] text-foreground">{name}</p>
       {role && (
         <p className="text-[11px] leading-tight text-muted-foreground">
@@ -887,7 +885,7 @@ export function SheetDemo() {
 export function CommandDemo() {
   return (
     <div
-      className="overflow-hidden rounded-xl shadow-float"
+      className="overflow-hidden rounded-xl edge"
       style={{ maxWidth: "22rem" }}
     >
       <Command>

@@ -19,6 +19,7 @@ export type SourcesProps = ComponentProps<typeof Collapsible> &
 export const Sources = ({ className, ...props }: SourcesProps) => (
   <Collapsible
     className={cn(sourcesVariants(), className)}
+    data-provenance="source"
     data-slot="sources"
     {...props}
   />
@@ -89,6 +90,7 @@ export const Source = ({
 }: SourceProps) => (
   <a
     className={cn(sourceVariants(), className)}
+    data-provenance="source-item"
     data-slot="source"
     href={href}
     rel="noreferrer"

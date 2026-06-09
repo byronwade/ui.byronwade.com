@@ -144,7 +144,7 @@ describe("VideoPlayer — variants", () => {
     const { container } = render(<FullPlayer />);
     const root = container.querySelector('[data-slot="video-player"]');
     expect(root).toHaveAttribute("data-variant", "default");
-    expect(root).toHaveClass("border", "rounded-lg");
+    expect(root).toHaveClass("edge", "rounded-lg");
   });
 
   it.each([

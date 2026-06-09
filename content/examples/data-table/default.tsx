@@ -203,7 +203,9 @@ export default function Example() {
   if (state === "error") {
     return (
       <div className="rounded-xl bg-muted/40 p-1">
-        <DemoErrorState>Couldn&apos;t load products. Retry in a moment.</DemoErrorState>
+        <DemoErrorState>
+          Couldn&apos;t load products. Retry in a moment.
+        </DemoErrorState>
       </div>
     )
   }

@@ -47,7 +47,7 @@ function EconomicCalendar({
   return (
     <div
       data-slot="economic-calendar"
-      className={cn("w-full max-w-2xl rounded-xl border border-border bg-card", className)}
+      className={cn("w-full max-w-2xl rounded-xl edge bg-card", className)}
       {...props}
     >
       {grouped.map(([day, dayEvents]) => (

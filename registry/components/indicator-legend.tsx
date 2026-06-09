@@ -47,7 +47,7 @@ function IndicatorLegend({
     <div
       data-slot="indicator-legend"
       className={cn(
-        "w-full max-w-sm rounded-xl border border-border bg-card",
+        "w-full max-w-sm rounded-xl edge bg-card",
         className,
       )}
       {...props}

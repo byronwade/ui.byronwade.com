@@ -124,7 +124,7 @@ const activityData = Array.from({ length: 78 }, (_, i) => (i * 7) % 5)
 
 function HeroPill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-0.5 text-xs text-muted-foreground">
+    <span className="inline-flex items-center gap-1.5 rounded-full edge px-2.5 py-0.5 text-xs text-muted-foreground">
       {children}
     </span>
   )
@@ -155,20 +155,20 @@ export default function StyleguidePage() {
       <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.35]" />
 
       {/* Top clearance for the centered floating nav dock (mounted globally). */}
-      <div className="mx-auto max-w-6xl px-6 pt-14 sm:pt-20">
+      <div className="mx-auto max-w-6xl px-6 pt-16">
         {/* Hero */}
         <Reveal delay={0}>
           <header className="py-16 text-center">
-            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
               byronwade/ui
             </p>
-            <h1 className="mt-3 font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h1 className="mt-3 text-[clamp(2rem,5vw,3.25rem)] font-normal tracking-tight text-balance text-foreground">
               Design system
             </h1>
             <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
               The tokens, primitives, and layout archetypes that compose every
-              surface, a calm, content-first aesthetic built around one
-              warm-green accent.
+              surface, a calm, content-first aesthetic built around one brand
+              accent.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
               <HeroPill>Calm &amp; content-first</HeroPill>
@@ -196,17 +196,17 @@ export default function StyleguidePage() {
                 <Specimen name="Calm over chrome" plain>
                   <div className="space-y-4">
                     <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                      The product should feel quiet. One warm-green accent does
-                      all the emphasizing; everything else is near-black ink on
-                      white with gray for the muted. Whitespace is a material,
-                      pages are centered and given room to breathe. We reach for
-                      a hairline{" "}
+                      The product should feel quiet. One brand accent does all
+                      the emphasizing; everything else comes from semantic
+                      foreground, background, and muted tokens. Whitespace is a
+                      material, pages are centered and given room to breathe. We
+                      reach for the inset{" "}
                       <code className="font-mono text-[12px] text-foreground">
-                        --border
+                        edge
                       </code>{" "}
-                      before a shadow, and when a shadow appears it&apos;s soft
-                      enough to almost miss. Restraint is the point: when only
-                      one thing is colored, that one thing means something.
+                      hairline instead of a drop shadow or hard outline.
+                      Restraint is the point: when only one thing is colored,
+                      that one thing means something.
                     </p>
                     <div className="flex items-center gap-2">
                       <span className="flex items-center gap-1.5">
@@ -262,7 +262,7 @@ export default function StyleguidePage() {
                         <Link
                           key={a.label}
                           href={a.href}
-                          className="inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs text-muted-foreground transition-colors hover:border-brand/40 hover:bg-brand/5 hover:text-foreground"
+                          className="inline-flex items-center rounded-full edge px-2.5 py-0.5 text-xs text-muted-foreground transition-colors hover:border-brand/40 hover:bg-brand/5 hover:text-foreground"
                         >
                           {a.label}
                         </Link>
@@ -417,9 +417,7 @@ export default function StyleguidePage() {
                             key={r}
                             className="flex flex-col items-center gap-2"
                           >
-                            <div
-                              className={`size-12 border border-border bg-muted ${r}`}
-                            />
+                            <div className={`size-12 edge bg-muted ${r}`} />
                             <span className="font-mono text-[11px] text-muted-foreground">
                               {r}
                             </span>
@@ -565,9 +563,7 @@ export default function StyleguidePage() {
                       "rounded-4xl",
                     ].map((r) => (
                       <div key={r} className="flex flex-col items-center gap-2">
-                        <div
-                          className={`size-14 border border-border bg-muted ${r}`}
-                        />
+                        <div className={`size-14 edge bg-muted ${r}`} />
                         <span className="font-mono text-[11px] text-muted-foreground">
                           {r}
                         </span>
@@ -576,13 +572,16 @@ export default function StyleguidePage() {
                   </div>
                 </Specimen>
 
-                <Specimen name="Elevation" from=".shadow-*">
+                <Specimen name="Depth" from=".edge">
                   <div className="flex flex-wrap gap-8">
                     {[
-                      ["shadow-card", "cards"],
-                      ["shadow-float", "dock · popovers"],
-                    ].map(([s, role]) => (
-                      <div key={s} className="flex flex-col items-center gap-2">
+                      ["card-edge", "edge", "cards"],
+                      ["overlay-edge", "edge", "dock · popovers"],
+                    ].map(([key, s, role]) => (
+                      <div
+                        key={key}
+                        className="flex flex-col items-center gap-2"
+                      >
                         <div className={`size-16 rounded-2xl bg-card ${s}`} />
                         <div className="text-center">
                           <p className="font-mono text-[11px] text-foreground">
@@ -624,8 +623,8 @@ export default function StyleguidePage() {
 
                 <Specimen name="Utilities" from="app/globals.css" plain>
                   <div className="space-y-6">
-                    <h3 className="text-gradient-brand font-heading text-3xl font-semibold tracking-tight">
-                      Built on one warm-green accent
+                    <h3 className="text-gradient-brand font-heading text-3xl font-medium tracking-tight">
+                      Built on one brand accent
                     </h3>
                     <div className="grid gap-4 sm:grid-cols-3">
                       <div className="space-y-1.5">
@@ -647,7 +646,7 @@ export default function StyleguidePage() {
                           {Array.from({ length: 8 }, (_, i) => (
                             <span
                               key={i}
-                              className="inline-flex shrink-0 items-center rounded-full border border-border px-2.5 py-0.5 text-xs text-muted-foreground"
+                              className="inline-flex shrink-0 items-center rounded-full edge px-2.5 py-0.5 text-xs text-muted-foreground"
                             >
                               usr_{(2040 + i).toString(16)}
                             </span>
@@ -1125,11 +1124,11 @@ export default function StyleguidePage() {
 
                 <Specimen name="Collapsible" from="@/components/ui/collapsible">
                   <Collapsible className="max-w-xs">
-                    <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg border border-border px-4 py-2.5 text-sm font-medium hover:bg-muted transition-colors">
+                    <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg edge px-4 py-2.5 text-sm font-medium hover:bg-muted transition-colors">
                       Advanced settings
                       <Plus className="size-4 text-muted-foreground" />
                     </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-1 rounded-lg border border-border px-4 py-3">
+                    <CollapsibleContent className="mt-1 rounded-lg edge px-4 py-3">
                       <p className="text-sm text-muted-foreground">
                         Debug mode, verbose logging, and rate limit overrides
                         live here.
@@ -1474,7 +1473,7 @@ export default function StyleguidePage() {
                 >
                   <div className="edge overflow-hidden rounded-xl bg-background">
                     <CenteredFocal className="min-h-[20rem]">
-                      <h3 className="text-base font-semibold">
+                      <h3 className="text-base font-medium">
                         Waiting for events
                       </h3>
                       <p className="mt-1 text-sm text-muted-foreground">
@@ -1499,7 +1498,7 @@ export default function StyleguidePage() {
                         <div className="flex items-center gap-3">
                           <GradientAvatar seed="abc" size="xl" />
                           <div>
-                            <p className="font-semibold">{animalName("abc")}</p>
+                            <p className="font-medium">{animalName("abc")}</p>
                             <p className="font-mono text-sm text-muted-foreground">
                               usr_8f2a91c4
                             </p>

@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function Example() {
   return (
-    <div className="w-72 rounded-xl border bg-card p-4 shadow-sm flex flex-col gap-4">
+    <div className="w-72 rounded-xl edge bg-card p-4 edge flex flex-col gap-4">
       {/* Image placeholder */}
       <Skeleton className="h-40 w-full rounded-lg" />
 

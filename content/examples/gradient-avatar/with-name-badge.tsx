@@ -13,7 +13,7 @@ export default function Example() {
         {seeds.map((seed) => (
           <div
             key={seed}
-            className="flex items-center gap-2 rounded-full border bg-muted/40 px-3 py-1.5"
+            className="flex items-center gap-2 rounded-full edge bg-muted/40 px-3 py-1.5"
           >
             <GradientAvatar seed={seed} size="sm" />
             <span className="text-sm font-medium">{animalName(seed)}</span>

@@ -611,7 +611,81 @@ The same **desaturated-pastel** sensibility seen in the marketing site's agent-t
 
 ---
 
-## 13. Sources & confidence
+## 13. Accessibility, implementation, and governance
+
+Cursor's public marketing surface is not a design-system documentation site, so accessibility and
+governance must be inferred from the rendered product/marketing patterns rather than a published
+component contract. The live site still reveals several durable rules:
+
+| Area                    | Observed / inferred rule                                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Contrast**            | Warm paper and olive-black ink produce high-contrast reading surfaces without pure black.                       |
+| **Focus / interaction** | Primary actions are visually obvious because the orange accent is scarce; hover/focus must preserve that value. |
+| **Motion**              | Gentle spring/ease motion should explain state, not become decorative noise.                                    |
+| **Prose**               | Editorial serif/sans pairings work because measure and hierarchy are controlled.                                |
+| **Code/editor UI**      | Mono and syntax colors must preserve legibility over the near-black editor chrome.                              |
+| **Agent surfaces**      | Activity colors encode behavior; they should not be repurposed as generic tags.                                 |
+
+Implementation-wise, Cursor's marketing surface is built like a modern tokenized Next.js app: custom
+fonts, Tailwind v4 variables, resolved CSS custom properties, and a light-only brand surface. The
+product/editor side inherits VS Code's extension/theme substrate, so the brand system splits into
+two implementation layers:
+
+1. **Marketing / brand web:** custom tokens, warm neutrals, CursorGothic, Berkeley Mono, EB Garamond.
+2. **Editor / app:** VS Code-compatible theme surfaces, dark Anysphere chrome, syntax tokens, inline
+   agent affordances.
+
+This split is important for governance. A Cursor-like system should not force the cream marketing
+palette into the editor, and should not let the dark editor chrome erase the brand's warm editorial
+voice.
+
+---
+
+## 14. AI and agent layer
+
+Cursor's most distinctive product interaction is the autonomy ladder:
+
+| Mode      | Surface                                     | Design implication                                                       |
+| --------- | ------------------------------------------- | ------------------------------------------------------------------------ |
+| **Tab**   | Inline completion / ghost text              | Low-friction, almost invisible; typography and contrast must be subtle.  |
+| **Cmd+K** | Inline command box on selected code/context | Local, targeted, text-first, keyboard-native.                            |
+| **Agent** | Side panel / task manager / autonomous flow | Higher-chrome workflow with status, steps, files, reads, edits, results. |
+
+The marketing site's agent activity palette maps cleanly to this layer:
+
+- Thinking
+- Searching
+- Reading
+- Editing
+
+That palette is semantically meaningful. The design decision mirrors a deeper product principle:
+users need to understand what the agent is doing, not just that "AI is working." Cursor's AI UI
+should therefore favor activity timelines, file references, diffs, progress, and reversibility over
+generic sparkle treatments.
+
+---
+
+## 15. Comparison to byronwade/ui
+
+Cursor is one of the closest external references to byronwade/ui's editorial ambitions, but the two
+systems diverge in accent strategy and implementation:
+
+| Dimension        | Cursor                                                                  | byronwade/ui                                                                             |
+| ---------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Surface mood** | Warm editorial paper, light brand site; dark editor product.            | Warm paper neutrals across one foundation with first-class light/dark tokens.            |
+| **Accent**       | Fixed hot orange (`#f54e00`) with high scarcity.                        | One re-skinnable `--brand`; rings, chart-1, success, and active states derive from it.   |
+| **Typography**   | Custom CursorGothic + Berkeley Mono + EB Garamond.                      | Editorial typography rules: sans for UI, mono for data, serif only for prose/quotes.     |
+| **Depth**        | Mostly flat / shadowless marketing surfaces.                            | Explicit `edge` inset hairline for surfaces; no drop-shadow-led depth.                   |
+| **AI color**     | Agent activity pastels map to thinking/search/read/edit.                | Fixed `--activity-*` pastels carry the same semantic idea for agent composites.          |
+| **Governance**   | Brand/product implementation split; public component rules not exposed. | Shipped AI rule, registry conventions, Base UI + CVA + `data-slot`, mandatory token use. |
+
+What byronwade/ui should borrow: Cursor's restraint, warm editorial tone, and semantic agent
+activity mapping. What it should not borrow directly: fixed orange as a hardcoded accent or a split
+where marketing and product have unrelated foundations.
+
+---
+
+## 16. Sources & confidence
 
 This document combines **primary live inspection** of `cursor.com` (the strongest evidence — actual
 computed CSS variables and element styles, captured June 2026) with a **multi-source, adversarially

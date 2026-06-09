@@ -10,7 +10,7 @@ export default function Example() {
   const [replay, setReplay] = useState(false)
 
   return (
-    <div className="w-full overflow-hidden rounded-xl border border-border bg-background">
+    <div className="w-full overflow-hidden rounded-xl edge bg-background">
       <ChartToolbar
         symbol="AAPL"
         interval="1D"

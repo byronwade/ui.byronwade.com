@@ -35,7 +35,7 @@ export function CenteredToolArchetype() {
           className="glow-brand absolute inset-x-0 -top-24 h-96 opacity-80"
         />
 
-        <div className="relative flex items-center gap-2 font-semibold tracking-tight">
+        <div className="relative flex items-center gap-2 font-medium tracking-tight">
           <span className="grid size-7 place-items-center rounded-lg bg-brand text-brand-foreground">
             <Command className="size-4" />
           </span>
@@ -43,7 +43,7 @@ export function CenteredToolArchetype() {
         </div>
 
         <div className="relative max-w-md">
-          <h2 className="text-gradient-brand text-4xl font-semibold leading-[1.1] tracking-tight">
+          <h2 className="text-gradient-brand text-4xl leading-[1.1] tracking-tight">
             Run operations with total clarity.
           </h2>
           <p className="mt-4 text-base text-muted-foreground">
@@ -51,7 +51,7 @@ export function CenteredToolArchetype() {
             team, from first alert to all-clear.
           </p>
 
-          <figure className="mt-10 rounded-2xl bg-card/70 p-5 shadow-float backdrop-blur">
+          <figure className="mt-10 rounded-2xl bg-card/70 p-5 edge backdrop-blur">
             <blockquote className="text-sm leading-relaxed">
               “We replaced three dashboards with Console. On-call finally feels
               calm, everything we need is one glance away.”
@@ -84,7 +84,7 @@ export function CenteredToolArchetype() {
           <div className="grid size-11 place-items-center rounded-xl bg-brand/10 text-brand">
             <Command className="size-5" />
           </div>
-          <h1 className="mt-4 text-lg font-semibold tracking-tight">
+          <h1 className="mt-4 text-lg font-medium tracking-tight">
             Sign in to Console
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">

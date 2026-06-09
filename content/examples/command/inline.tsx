@@ -11,7 +11,7 @@ import {
 
 export default function Example() {
   return (
-    <div className="w-80 rounded-xl border">
+    <div className="w-80 rounded-xl edge">
       <Command>
         <CommandInput placeholder="Search actions…" />
         <CommandList>

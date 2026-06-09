@@ -8,7 +8,7 @@ export default function Example() {
 
   return (
     <div className="flex flex-col gap-6 p-6">
-      <div className="flex items-center justify-between rounded-lg border p-4">
+      <div className="flex items-center justify-between rounded-lg edge p-4">
         <div className="space-y-0.5">
           <p className="text-sm font-medium">Notifications</p>
           <p className="text-xs text-muted-foreground">

@@ -341,7 +341,7 @@ describe("ContextContent — popup", () => {
     ) as HTMLElement;
     expect(popup).not.toBeNull();
     expect(popup.className).toContain("min-w-60");
-    expect(popup.className).toContain("divide-border");
+    expect(popup.className).toContain("divide-edge");
     expect(popup.className).toContain("overflow-hidden");
   });
 

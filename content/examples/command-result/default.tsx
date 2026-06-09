@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge"
 
 export default function Example() {
   return (
-    <div className="w-96 rounded-xl border">
+    <div className="w-96 rounded-xl edge">
       <Command>
         <CommandInput placeholder="Search files…" />
         <CommandList>

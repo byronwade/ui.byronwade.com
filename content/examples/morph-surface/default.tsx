@@ -13,7 +13,7 @@ export default function Example() {
         placement="top"
         grow="height"
         navLabel="Demo"
-        className="rounded-xl edge bg-card shadow-float"
+        className="rounded-xl edge bg-card"
         collapsed={
           <button
             type="button"

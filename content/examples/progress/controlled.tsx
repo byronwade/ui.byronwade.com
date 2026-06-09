@@ -37,33 +37,33 @@ export default function Example() {
 
       <div className="flex flex-wrap gap-2">
         <button
-          className="rounded-full border px-3 py-1 text-sm hover:bg-muted transition-colors"
+          className="rounded-full edge px-3 py-1 text-sm hover:bg-muted transition-colors"
           onClick={() => setValue(0)}
         >
           Reset
         </button>
         <button
-          className="rounded-full border px-3 py-1 text-sm hover:bg-muted transition-colors"
+          className="rounded-full edge px-3 py-1 text-sm hover:bg-muted transition-colors"
           onClick={() => step(-10)}
           disabled={isIndeterminate || value === 0}
         >
           −10
         </button>
         <button
-          className="rounded-full border px-3 py-1 text-sm hover:bg-muted transition-colors"
+          className="rounded-full edge px-3 py-1 text-sm hover:bg-muted transition-colors"
           onClick={() => step(10)}
           disabled={isComplete}
         >
           +10
         </button>
         <button
-          className="rounded-full border px-3 py-1 text-sm hover:bg-muted transition-colors"
+          className="rounded-full edge px-3 py-1 text-sm hover:bg-muted transition-colors"
           onClick={() => setValue(100)}
         >
           Complete
         </button>
         <button
-          className="rounded-full border px-3 py-1 text-sm hover:bg-muted transition-colors"
+          className="rounded-full edge px-3 py-1 text-sm hover:bg-muted transition-colors"
           onClick={() => setValue(null)}
         >
           Indeterminate

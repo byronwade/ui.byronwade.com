@@ -98,12 +98,12 @@ describe("MetricStat", () => {
       expect(labelEl).toHaveClass("text-muted-foreground");
     });
 
-    it("renders the value as large bold text", () => {
+    it("renders the value as large medium-weight text", () => {
       const { container } = render(<MetricStat label="Revenue" value="$48,295" />);
       const valueEl = screen.getByText("$48,295");
       expect(valueEl.tagName.toLowerCase()).toBe("span");
       expect(valueEl).toHaveClass("text-2xl");
-      expect(valueEl).toHaveClass("font-semibold");
+      expect(valueEl).toHaveClass("font-medium");
       expect(valueEl).toHaveClass("tracking-tight");
       expect(valueEl).toHaveClass("tabular-nums");
     });
@@ -115,6 +115,11 @@ describe("MetricStat", () => {
       expect(root).toHaveClass("flex");
       expect(root).toHaveClass("flex-col");
       expect(root).toHaveClass("gap-1");
+    });
+
+    it("root element preserves the metric-stat data-slot", () => {
+      const { container } = render(<MetricStat label="Revenue" value="$100" />);
+      expect(container.firstChild).toHaveAttribute("data-slot", "metric-stat");
     });
   });
 

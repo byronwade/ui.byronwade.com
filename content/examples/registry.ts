@@ -14,6 +14,7 @@ import ActivityGridEmpty from "./activity-grid/empty";
 import ActivityGridInCard from "./activity-grid/in-card";
 import ActivityGridIntensityLevels from "./activity-grid/intensity-levels";
 import ActivityGridInteractive from "./activity-grid/interactive";
+import ActivityGridShapeAndDensity from "./activity-grid/shape-and-density";
 import ActivityRingDefault from "./activity-ring/default";
 import ActivityRingScore from "./activity-ring/score";
 import ActivityRingScoreTones from "./activity-ring/score-tones";
@@ -211,6 +212,10 @@ import CreditCardTones from "./credit-card/tones";
 import CursorDefault from "./cursor/default";
 import CursorTones from "./cursor/tones";
 import CustomerCardDefault from "./customer-card/default";
+import DataTableDefault from "./data-table/default";
+import DataTableCondensed from "./data-table/condensed";
+import DataTableEmpty from "./data-table/empty";
+import DataTableLoading from "./data-table/loading";
 import DatePickerDefault from "./date-picker/default";
 import DepthChartDefault from "./depth-chart/default";
 import DescriptionBoxDefault from "./description-box/default";
@@ -252,6 +257,7 @@ import EmptyStateNoIcon from "./empty-state/no-icon";
 import EmptyStateSearchNoResults from "./empty-state/search-no-results";
 import EmptyStateWithMultipleActions from "./empty-state/with-multiple-actions";
 import EngagementBarDefault from "./engagement-bar/default";
+import EntityRowDefault from "./entity-row/default";
 import EqualizerBarsDefault from "./equalizer-bars/default";
 import EventTimelineDefault from "./event-timeline/default";
 import EventTimelineLiveFeed from "./event-timeline/live-feed";
@@ -353,6 +359,7 @@ import MarketNewsTerminal from "./market-news/terminal";
 import MarketingLayoutDefault from "./marketing-layout/default";
 import MessageComposerDefault from "./message-composer/default";
 import MessageThreadDefault from "./message-thread/default";
+import MetricDefault from "./metric/default";
 import MetricStatDefault from "./metric-stat/default";
 import MetricStatCustomValue from "./metric-stat/custom-value";
 import MetricStatDeltaDirections from "./metric-stat/delta-directions";
@@ -462,7 +469,12 @@ import ReplayControlsDefault from "./replay-controls/default";
 import ReplayControlsBar from "./replay-controls/bar";
 import ResizableDefault from "./resizable/default";
 import ResourceListDefault from "./resource-list/default";
+import ResourceListComfortable from "./resource-list/comfortable";
+import ResourceListComfortableInset from "./resource-list/comfortable-inset";
+import ResourceListCompact from "./resource-list/compact";
+import ResourceListCompactInset from "./resource-list/compact-inset";
 import ResourceListEmpty from "./resource-list/empty";
+import ResourceListInset from "./resource-list/inset";
 import ResourceListLoading from "./resource-list/loading";
 import ResourceListNoMedia from "./resource-list/no-media";
 import ResourceListSelectable from "./resource-list/selectable";
@@ -571,11 +583,18 @@ import SwitchWithLabel from "./switch/with-label";
 import SymbolDetailsDefault from "./symbol-details/default";
 import SymbolSearchDefault from "./symbol-search/default";
 import TableDefault from "./table/default";
+import TableAdminIndex from "./table/admin-index";
+import TableCondensed from "./table/condensed";
+import TableDataTableEmpty from "./table/data-table-empty";
+import TableDataTableLoading from "./table/data-table-loading";
 import TableEmptyState from "./table/empty-state";
 import TableLoadingSkeleton from "./table/loading-skeleton";
 import TableSelectableRows from "./table/selectable-rows";
+import TableSelection from "./table/selection";
 import TableSortableColumns from "./table/sortable-columns";
+import TableStickyHeader from "./table/sticky-header";
 import TableWithActions from "./table/with-actions";
+import TableWithPagination from "./table/with-pagination";
 import TableWithStatusBadges from "./table/with-status-badges";
 import TabsDefault from "./tabs/default";
 import TabsControlled from "./tabs/controlled";
@@ -682,6 +701,7 @@ export const examples: Record<string, Example[]> = {
     { name: "In Card", file: "activity-grid/in-card.tsx", Component: ActivityGridInCard },
     { name: "Intensity Levels", file: "activity-grid/intensity-levels.tsx", Component: ActivityGridIntensityLevels },
     { name: "Interactive", file: "activity-grid/interactive.tsx", Component: ActivityGridInteractive },
+    { name: "Shape And Density", file: "activity-grid/shape-and-density.tsx", Component: ActivityGridShapeAndDensity },
   ],
   "activity-ring": [
     { name: "Default", file: "activity-ring/default.tsx", Component: ActivityRingDefault },
@@ -1036,6 +1056,12 @@ export const examples: Record<string, Example[]> = {
   "customer-card": [
     { name: "Default", file: "customer-card/default.tsx", Component: CustomerCardDefault },
   ],
+  "data-table": [
+    { name: "Default", file: "data-table/default.tsx", Component: DataTableDefault },
+    { name: "Condensed", file: "data-table/condensed.tsx", Component: DataTableCondensed },
+    { name: "Empty", file: "data-table/empty.tsx", Component: DataTableEmpty },
+    { name: "Loading", file: "data-table/loading.tsx", Component: DataTableLoading },
+  ],
   "date-picker": [
     { name: "Default", file: "date-picker/default.tsx", Component: DatePickerDefault },
   ],
@@ -1100,6 +1126,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "engagement-bar": [
     { name: "Default", file: "engagement-bar/default.tsx", Component: EngagementBarDefault },
+  ],
+  "entity-row": [
+    { name: "Default", file: "entity-row/default.tsx", Component: EntityRowDefault },
   ],
   "equalizer-bars": [
     { name: "Default", file: "equalizer-bars/default.tsx", Component: EqualizerBarsDefault },
@@ -1275,6 +1304,9 @@ export const examples: Record<string, Example[]> = {
   ],
   "message-thread": [
     { name: "Default", file: "message-thread/default.tsx", Component: MessageThreadDefault },
+  ],
+  "metric": [
+    { name: "Default", file: "metric/default.tsx", Component: MetricDefault },
   ],
   "metric-stat": [
     { name: "Default", file: "metric-stat/default.tsx", Component: MetricStatDefault },
@@ -1466,7 +1498,12 @@ export const examples: Record<string, Example[]> = {
   ],
   "resource-list": [
     { name: "Default", file: "resource-list/default.tsx", Component: ResourceListDefault },
+    { name: "Comfortable", file: "resource-list/comfortable.tsx", Component: ResourceListComfortable },
+    { name: "Comfortable Inset", file: "resource-list/comfortable-inset.tsx", Component: ResourceListComfortableInset },
+    { name: "Compact", file: "resource-list/compact.tsx", Component: ResourceListCompact },
+    { name: "Compact Inset", file: "resource-list/compact-inset.tsx", Component: ResourceListCompactInset },
     { name: "Empty", file: "resource-list/empty.tsx", Component: ResourceListEmpty },
+    { name: "Inset", file: "resource-list/inset.tsx", Component: ResourceListInset },
     { name: "Loading", file: "resource-list/loading.tsx", Component: ResourceListLoading },
     { name: "No Media", file: "resource-list/no-media.tsx", Component: ResourceListNoMedia },
     { name: "Selectable", file: "resource-list/selectable.tsx", Component: ResourceListSelectable },
@@ -1631,11 +1668,18 @@ export const examples: Record<string, Example[]> = {
   ],
   "table": [
     { name: "Default", file: "table/default.tsx", Component: TableDefault },
+    { name: "Admin Index", file: "table/admin-index.tsx", Component: TableAdminIndex },
+    { name: "Condensed", file: "table/condensed.tsx", Component: TableCondensed },
+    { name: "Data Table Empty", file: "table/data-table-empty.tsx", Component: TableDataTableEmpty },
+    { name: "Data Table Loading", file: "table/data-table-loading.tsx", Component: TableDataTableLoading },
     { name: "Empty State", file: "table/empty-state.tsx", Component: TableEmptyState },
     { name: "Loading Skeleton", file: "table/loading-skeleton.tsx", Component: TableLoadingSkeleton },
     { name: "Selectable Rows", file: "table/selectable-rows.tsx", Component: TableSelectableRows },
+    { name: "Selection", file: "table/selection.tsx", Component: TableSelection },
     { name: "Sortable Columns", file: "table/sortable-columns.tsx", Component: TableSortableColumns },
+    { name: "Sticky Header", file: "table/sticky-header.tsx", Component: TableStickyHeader },
     { name: "With Actions", file: "table/with-actions.tsx", Component: TableWithActions },
+    { name: "With Pagination", file: "table/with-pagination.tsx", Component: TableWithPagination },
     { name: "With Status Badges", file: "table/with-status-badges.tsx", Component: TableWithStatusBadges },
   ],
   "tabs": [

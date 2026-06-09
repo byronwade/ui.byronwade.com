@@ -40,7 +40,7 @@ export default function Example() {
           <label
             key={plan.value}
             htmlFor={`plan-${plan.value}`}
-            className="flex cursor-pointer items-start gap-3 rounded-lg border p-4 hover:bg-muted/40 transition-colors has-[[data-checked]]:border-primary has-[[data-checked]]:bg-primary/5"
+            className="flex cursor-pointer items-start gap-3 rounded-lg edge p-4 hover:bg-muted/40 transition-colors has-[[data-checked]]:border-primary has-[[data-checked]]:bg-primary/5"
           >
             <RadioGroupItem
               value={plan.value}

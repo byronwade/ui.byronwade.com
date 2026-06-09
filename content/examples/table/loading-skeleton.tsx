@@ -85,7 +85,7 @@ export default function Example() {
         <button
           onClick={reload}
           disabled={loading}
-          className="px-3 py-1.5 rounded-md border text-sm hover:bg-muted transition-colors disabled:opacity-50"
+          className="px-3 py-1.5 rounded-md edge text-sm hover:bg-muted transition-colors disabled:opacity-50"
         >
           Reload
         </button>

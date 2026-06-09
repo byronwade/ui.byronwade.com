@@ -14,7 +14,7 @@
  * Test strategy:
  *   - Render without crashing (all sub-components)
  *   - data-slot attributes on every part
- *   - Class names on every part (rounded-lg, bg-popover, shadow-md, flex-col, etc.)
+ *   - Class names on every part (rounded-lg, bg-popover, edge, flex-col, etc.)
  *   - Interaction: click trigger → popup opens (portal, findByRole("dialog"))
  *   - Interaction: Escape key closes popup
  *   - Interaction: click outside closes popup

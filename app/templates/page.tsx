@@ -13,19 +13,18 @@ export default async function TemplatesPage() {
       <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.32]" />
       <div className="glow-brand pointer-events-none fixed inset-x-0 top-0 -z-10 h-[70vh] opacity-70" />
 
-      <section className="mx-auto flex h-dvh w-full max-w-6xl flex-col justify-center px-6 pb-20 pt-16 sm:pb-16 sm:pt-28">
+      <section className="mx-auto flex h-dvh w-full max-w-6xl flex-col justify-center px-6 pb-20 pt-16 sm:pb-16">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end lg:gap-12">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 rounded-full edge bg-card/70 px-3 py-1.5 font-mono text-[11px] uppercase text-muted-foreground backdrop-blur">
-              <span className="size-1.5 rounded-full bg-brand" />
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
               byronwade/ui templates
-            </div>
+            </p>
 
             <h1
               aria-label="Templates coming soon"
               className="mt-5 max-w-3xl text-[clamp(2.65rem,9vw,8rem)] font-normal leading-[0.88] text-balance sm:mt-6"
             >
-              Templates
+              Templates{" "}
               <span className="block text-gradient-brand">coming soon.</span>
             </h1>
 

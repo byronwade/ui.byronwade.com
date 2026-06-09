@@ -56,7 +56,7 @@ function SessionStatsBar({
     <div
       data-slot="session-stats-bar"
       className={cn(
-        "flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg border border-border bg-muted/30 px-3 py-2 font-mono text-sm",
+        "flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg edge bg-muted/30 px-3 py-2 font-mono text-sm",
         className,
       )}
       {...props}

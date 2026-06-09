@@ -35,14 +35,14 @@ export default function Example() {
     <div className="flex w-full max-w-sm flex-col items-center gap-3 p-6">
       {file ? (
         <ImageCrop aspect={1} file={file} onCrop={setCropped}>
-          <ImageCropContent className="rounded-lg border border-border" />
+          <ImageCropContent className="rounded-lg edge" />
           <div className="flex gap-2">
             <ImageCropApply />
             <ImageCropReset />
           </div>
         </ImageCrop>
       ) : (
-        <div className="aspect-square w-full animate-pulse rounded-lg border border-border bg-muted" />
+        <div className="aspect-square w-full animate-pulse rounded-lg edge bg-muted" />
       )}
     </div>
   )

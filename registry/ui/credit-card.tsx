@@ -95,8 +95,8 @@ export const CreditCardFlipper = ({
         className={cn(
           "h-full w-full rounded-lg transition duration-700 ease-in-out transform-3d @xs:rounded-2xl",
           supportsHover &&
-            "group-hover/credit-card:-rotate-y-180 group-hover/credit-card:shadow-lg",
-          !supportsHover && isFlipped && "-rotate-y-180 shadow-lg",
+            "group-hover/credit-card:-rotate-y-180 group-hover/credit-card:edge",
+          !supportsHover && isFlipped && "-rotate-y-180 edge",
           className,
         )}
         onClick={() => !supportsHover && setIsFlipped((p) => !p)}
@@ -158,7 +158,8 @@ export const CreditCardChip = ({
       />
       <path
         d="M108 71.5H83.65L70.53 60.87A21.41 21.41 0 0 1 56 67.47V90h41a11 11 0 0 0 11-11v-7.5ZM76.48 47a21.38 21.38 0 0 1-4.63 12.36l12.5 10.14H108V47H76.48ZM2 69.5h24.14l12.02-10.12A21.38 21.38 0 0 1 33.52 47H2v22.5Zm53-43c-5.85 0-11.1 2.57-14.68 6.66A19.4 19.4 0 0 0 35.5 46a19.4 19.4 0 0 0 4.82 12.84A19.43 19.43 0 0 0 55 65.5c5.85 0 11.1-2.57 14.68-6.66A19.4 19.4 0 0 0 74.5 46a19.4 19.4 0 0 0-4.82-12.84A19.43 19.43 0 0 0 55 26.5Zm16.85 6.14A21.38 21.38 0 0 1 76.48 45H108V22.5H84.35l-12.5 10.14ZM2 45h31.52a21.38 21.38 0 0 1 4.64-12.38L26.14 22.5H2V45Zm0 34a11 11 0 0 0 11 11h41V67.47a21.41 21.41 0 0 1-14.52-6.59L27.14 71.26l-.27.24H2V79Zm106-66A11 11 0 0 0 97 2H56v22.52c5.7.27 10.83 2.74 14.53 6.61L83.65 20.5H108V13ZM2 20.5h24.87l.27.24 12.34 10.38A21.41 21.41 0 0 1 54 24.52V2H13A11 11 0 0 0 2 13v7.5ZM110 79a13 13 0 0 1-13 13H13A13 13 0 0 1 0 79V13A13 13 0 0 1 13 0h84a13 13 0 0 1 13 13v66Z"
-        fill="#000"
+        fill="currentColor"
+        opacity="0.45"
       />
       <defs>
         <linearGradient
@@ -169,8 +170,8 @@ export const CreditCardChip = ({
           y1="46"
           y2="78.12"
         >
-          <stop stopColor="#EDE5A6" />
-          <stop offset="1" stopColor="#CFA255" />
+          <stop stopColor="var(--muted)" />
+          <stop offset="1" stopColor="var(--foreground)" stopOpacity="0.42" />
         </linearGradient>
       </defs>
     </svg>

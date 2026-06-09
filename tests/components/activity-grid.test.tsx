@@ -282,6 +282,32 @@ describe("ActivityGrid — cell shape classes", () => {
       expect(cell.className).toContain("rounded-full")
     );
   });
+
+  it("supports compact, default, and comfortable cell sizes", () => {
+    const { container, rerender } = render(
+      <ActivityGrid data={[1]} size="compact" />
+    );
+    expect(getCells(container)[0].className).toContain("size-2");
+
+    rerender(<ActivityGrid data={[1]} size="default" />);
+    expect(getCells(container)[0].className).toContain("size-2.5");
+
+    rerender(<ActivityGrid data={[1]} size="comfortable" />);
+    expect(getCells(container)[0].className).toContain("size-3");
+  });
+
+  it("supports circle, rounded, and square cell shapes", () => {
+    const { container, rerender } = render(
+      <ActivityGrid data={[1]} shape="circle" />
+    );
+    expect(getCells(container)[0].className).toContain("rounded-full");
+
+    rerender(<ActivityGrid data={[1]} shape="rounded" />);
+    expect(getCells(container)[0].className).toContain("rounded-sm");
+
+    rerender(<ActivityGrid data={[1]} shape="square" />);
+    expect(getCells(container)[0].className).toContain("rounded-none");
+  });
 });
 
 // ---------------------------------------------------------------------------

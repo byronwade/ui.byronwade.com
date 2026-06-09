@@ -9,6 +9,7 @@ import { ResourceList, ResourceItem } from "@/components/resource-list"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { EmptyState } from "@/components/empty-state"
+import { DemoViewportProvider } from "@/lib/demo-viewport"
 
 function Media({ initials }: { initials: string }) {
   return (
@@ -82,6 +83,156 @@ describe("ResourceList – default render", () => {
     expect(
       container.querySelector("[data-slot='resource-list']"),
     ).toHaveClass("custom-class")
+  })
+
+  it("applies density and frame as structural row/layout changes", () => {
+    const { container } = render(
+      <ResourceList density="compact" frame="inset">
+        <ResourceItem
+          id="a"
+          media={<Media initials="AC" />}
+          title="Ariana"
+          subtitle="ariana@example.com"
+          badges={[{ label: "VIP" }]}
+          actions={<Button aria-label="Open">Open</Button>}
+        />
+      </ResourceList>,
+    )
+    const root = container.querySelector("[data-slot='resource-list']")
+    const header = container.querySelector("[data-slot='resource-list-header']")
+    const items = container.querySelector("[data-slot='resource-list-items']")
+    const row = container.querySelector("[data-slot='resource-item']")
+    const media = container.querySelector("[data-slot='resource-item-media']")
+    const titleLine = container.querySelector(
+      "[data-slot='resource-item-title-line']",
+    )
+    const subtitle = container.querySelector(
+      "[data-slot='resource-item-subtitle']",
+    )
+    const actions = container.querySelector("[data-slot='resource-item-actions']")
+
+    expect(root).toHaveAttribute("data-density", "compact")
+    expect(root).toHaveAttribute("data-frame", "inset")
+    expect(root).toHaveClass("edge")
+    expect(root).toHaveClass("ring-1", "ring-border/70", "p-1.5")
+    expect(header).toHaveClass("px-2", "py-1.5")
+    expect(items).toHaveClass("gap-0.5", "rounded-lg", "bg-card")
+    expect(row).toHaveClass("min-h-9", "px-2", "py-1.5")
+    expect(media).toHaveClass("size-7")
+    expect(titleLine).toHaveClass("gap-1.5")
+    expect(subtitle).toHaveClass("mt-0")
+    expect(actions).toHaveClass("scale-95")
+  })
+
+  it("uses comfortable density for larger row rhythm and media scale", () => {
+    const { container } = render(
+      <ResourceList density="comfortable">
+        <ResourceItem
+          id="a"
+          media={<Media initials="AC" />}
+          title="Ariana"
+          subtitle="ariana@example.com"
+        />
+      </ResourceList>,
+    )
+    expect(container.querySelector("[data-slot='resource-item']")).toHaveClass(
+      "min-h-14",
+      "px-3.5",
+      "py-3",
+    )
+    expect(
+      container.querySelector("[data-slot='resource-item-media']"),
+    ).toHaveClass("size-10")
+    expect(
+      container.querySelector("[data-slot='resource-item-subtitle']"),
+    ).toHaveClass("mt-1")
+  })
+
+  it("inherits demo toolbar density and frame when props are omitted", () => {
+    const { container } = render(
+      <DemoViewportProvider
+        surface="app"
+        viewport="desktop"
+        density="compact"
+        frame="inset"
+        depth="soft"
+      >
+        <ResourceList>
+          <ResourceItem
+            id="a"
+            media={<Media initials="AC" />}
+            title="Ariana"
+            subtitle="ariana@example.com"
+          />
+        </ResourceList>
+      </DemoViewportProvider>,
+    )
+
+    expect(container.querySelector("[data-slot='resource-list']")).toHaveAttribute(
+      "data-density",
+      "compact",
+    )
+    expect(container.querySelector("[data-slot='resource-list']")).toHaveAttribute(
+      "data-frame",
+      "inset",
+    )
+    expect(container.querySelector("[data-slot='resource-item']")).toHaveClass(
+      "min-h-9",
+      "px-2",
+      "py-1.5",
+      "rounded-md",
+    )
+    expect(
+      container.querySelector("[data-slot='resource-item-media']"),
+    ).toHaveClass("size-7")
+    expect(
+      container.querySelector("[data-slot='resource-list-items']"),
+    ).toHaveClass("gap-0.5", "bg-card")
+    expect(container.querySelector("[data-slot='resource-list']")).toHaveClass(
+      "edge",
+      "depth-soft",
+    )
+  })
+
+  it("lets explicit density, frame, and depth props override demo toolbar context", () => {
+    const { container } = render(
+      <DemoViewportProvider
+        surface="app"
+        viewport="desktop"
+        density="compact"
+        frame="inset"
+        depth="raised"
+      >
+        <ResourceList density="comfortable" frame="default" depth="none">
+          <ResourceItem
+            id="a"
+            media={<Media initials="AC" />}
+            title="Ariana"
+            subtitle="ariana@example.com"
+          />
+        </ResourceList>
+      </DemoViewportProvider>,
+    )
+
+    expect(container.querySelector("[data-slot='resource-list']")).toHaveAttribute(
+      "data-density",
+      "comfortable",
+    )
+    expect(container.querySelector("[data-slot='resource-list']")).toHaveAttribute(
+      "data-frame",
+      "default",
+    )
+    expect(container.querySelector("[data-slot='resource-item']")).toHaveClass(
+      "min-h-14",
+      "px-3.5",
+      "py-3",
+    )
+    expect(
+      container.querySelector("[data-slot='resource-list-items']"),
+    ).not.toHaveClass("bg-card")
+    expect(container.querySelector("[data-slot='resource-list']")).toHaveClass(
+      "shadow-none",
+    )
   })
 })
 

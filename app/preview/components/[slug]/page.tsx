@@ -9,7 +9,9 @@ import { examples } from "@/content/examples/registry";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return components.map((c) => ({ slug: c.slug }));
+  return Array.from(
+    new Set([...components.map((c) => c.slug), ...Object.keys(examples)])
+  ).map((slug) => ({ slug }));
 }
 
 export default async function ComponentPreview({

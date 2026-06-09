@@ -366,7 +366,7 @@ function ShortsPlayer({
 
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent"
+        className="scrim-bottom pointer-events-none absolute inset-x-0 bottom-0 h-2/5"
       />
 
       {rail !== "hidden" ? (

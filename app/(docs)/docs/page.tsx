@@ -12,15 +12,18 @@ import {
 import { archetypes } from "@/app/layouts/_archetypes"
 import { Button } from "@/components/ui/button"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
-import { DocsIntro, DocsProse } from "@/app/(docs)/_components/docs-prose"
+import {
+  BLEED,
+  DocsIntro,
+  DocsProse,
+} from "@/app/(docs)/_components/docs-prose"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
 
 export const metadata: Metadata = {
   title: "Introduction, byronwade/ui",
   description:
     "What byronwade/ui is, why it exists, and every token-driven component in the registry, primitives, composites, and layout patterns.",
 }
-
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const PRINCIPLES = [
   "One warm accent; the rest is calm ink and warm gray.",
@@ -32,12 +35,12 @@ const PRINCIPLES = [
 export default function ComponentsIndexPage() {
   return (
     <article className="max-w-none">
-      <section className="grid gap-8 py-6 lg:grid-cols-[1fr_auto] lg:items-end lg:py-8">
+      <section className="grid gap-8 py-12 lg:grid-cols-[1fr_auto] lg:items-end lg:py-16">
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Introduction
           </p>
-          <h1 className="mt-4 text-[clamp(2.5rem,7vw,5rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
+          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
             A master design system,{" "}
             <span className="text-muted-foreground">entirely yours.</span>
           </h1>
@@ -101,7 +104,7 @@ export default function ComponentsIndexPage() {
         </DocsProse>
       </section>
 
-      <section className="pb-12 reading-ui">
+      <section className="pb-12">
         <CodeBlock lang="bash" code="npx shadcn@latest add @byronwade/all" />
       </section>
 
@@ -164,27 +167,7 @@ export default function ComponentsIndexPage() {
         ))}
       </section>
 
-      <div className="flex flex-wrap gap-x-6 gap-y-3 pt-10 text-sm">
-        <Link
-          href="/docs/philosophy"
-          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
-        >
-          Next: Philosophy
-          <ArrowRight className="size-3.5" />
-        </Link>
-        <Link
-          href="/docs/readability"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Readability lanes
-        </Link>
-        <Link
-          href="/docs/surfaces"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Surfaces
-        </Link>
-      </div>
+      <GuidePager current="/docs" />
     </article>
   )
 }

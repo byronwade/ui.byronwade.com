@@ -248,7 +248,7 @@ describe("Queue — base classes", () => {
     const { container } = render(<Queue />);
     const cls = (container.firstChild as HTMLElement).className;
     expect(cls).toContain("bg-background");
-    expect(cls).toContain("border-border");
+    expect(cls).toContain("edge");
   });
 
   it("uses radius-scale rounding (rounded-xl)", () => {

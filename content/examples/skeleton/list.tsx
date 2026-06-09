@@ -18,7 +18,7 @@ function SkeletonRow() {
 
 export default function Example() {
   return (
-    <div className="w-80 rounded-xl border bg-card p-4 shadow-sm">
+    <div className="w-80 rounded-xl edge bg-card p-4 edge">
       <div className="mb-4 flex items-center justify-between">
         <Skeleton className="h-5 w-28" />
         <Skeleton className="h-4 w-16" />

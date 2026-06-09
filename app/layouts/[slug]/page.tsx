@@ -34,7 +34,7 @@ export default function FramePage({
     return (
       <div className="grid h-full place-items-center p-10 text-center">
         <div>
-          <p className="text-lg font-semibold tracking-tight">Unknown layout</p>
+          <p className="text-lg font-medium tracking-tight">Unknown layout</p>
           <p className="mt-1 text-sm text-muted-foreground">
             “{slug}” is not a known archetype.
           </p>
@@ -63,7 +63,7 @@ export default function FramePage({
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3 sm:px-6">
         <div className="min-w-0">
-          <p className="truncate text-sm font-semibold tracking-tight">
+          <p className="truncate text-sm font-medium tracking-tight">
             {meta.name}
           </p>
           <p className="hidden truncate text-xs text-muted-foreground sm:block">
@@ -96,7 +96,7 @@ export default function FramePage({
 
       <div className="min-h-0 flex-1 overflow-auto bg-muted/30 p-4 sm:p-6">
         <div
-          className="mx-auto h-full overflow-hidden rounded-xl bg-background shadow-card transition-[max-width] duration-300"
+          className="mx-auto h-full overflow-hidden rounded-xl bg-background edge transition-[max-width] duration-300"
           style={{ maxWidth: width ? `${width}px` : "100%" }}
         >
           <iframe

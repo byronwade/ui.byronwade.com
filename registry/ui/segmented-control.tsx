@@ -18,7 +18,7 @@ export function SegmentedControl<T extends string>({
       data-slot="segmented-control"
       role="group"
       className={cn(
-        "inline-flex items-center gap-0.5 rounded-full border border-border bg-muted/60 p-0.5",
+        "inline-flex max-w-full flex-wrap items-center gap-0.5 rounded-full edge bg-muted/60 p-0.5",
         className,
       )}
     >
@@ -30,7 +30,7 @@ export function SegmentedControl<T extends string>({
           data-active={o.value === value}
           onClick={() => onValueChange(o.value)}
           className={cn(
-            "rounded-full px-3 py-1 text-sm font-medium text-muted-foreground transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+            "rounded-full px-3 py-1 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
             "data-[active=true]:bg-card data-[active=true]:text-foreground data-[active=true]:edge",
           )}
         >

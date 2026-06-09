@@ -22,7 +22,7 @@ export default function Example() {
           className={`size-4 transition-transform ${open ? "rotate-180" : ""}`}
         />
       </CollapsibleTrigger>
-      <CollapsibleContent className="rounded-lg border px-4 py-3 text-sm text-muted-foreground">
+      <CollapsibleContent className="rounded-lg edge px-4 py-3 text-sm text-muted-foreground">
         Invoices are sent on the first of each month. Update your card in
         Settings.
       </CollapsibleContent>

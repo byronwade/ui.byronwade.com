@@ -75,6 +75,26 @@ Every `registry:ui` / `registry:component`:
 When in doubt, copy the shape of `registry/ui/button.tsx` (primitive) or
 `registry/components/status-pill.tsx` (composite).
 
+## Research-backed design decisions
+
+The research files in `design-research/` inform how new components should behave:
+
+- **Semantic color expansion** — default to `--brand`, status, chart, and activity tokens. Add a fixed
+  color family only for documented domain meaning, state, or data class.
+- **Density routing** — dense operational surfaces use compact spacing, stable row heights, mono
+  metadata, and token separators; editorial/marketing surfaces use reading lanes and larger rhythm.
+- **Object-bound AI** — AI components attach to conversations, files, tasks, sources, tool calls,
+  verification steps, or proposed changes, with visible state and review affordances.
+- **Conversation provenance** — AI messages, sources, tools, embedded apps, and proposed actions expose
+  `data-provenance`; show compact mono provenance labels when authorship or grounding could be unclear.
+- **Record data coloring** — Twenty-style record UI keeps chrome neutral and colors the data object
+  itself: tags, status, source, priority, and owner metadata. Use semantic badge/tag tones before
+  adding any broader fixed palette.
+- **Mono is data** — reserve `font-mono` for metrics, IDs, paths, filenames, model/tool names,
+  parameters, logs, timestamps, and keyboard hints. Body copy and labels stay sans.
+- **Depth is `edge`** — framed surfaces use the inset `edge` hairline with rounded clipping, not drop
+  shadows or outline borders.
+
 ## Readability (long-form copy)
 
 byronwade/ui splits **UI chrome** from **reading surfaces**. This is enforced in the shipped AI rule

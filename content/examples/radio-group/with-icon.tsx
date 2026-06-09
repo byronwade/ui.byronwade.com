@@ -26,7 +26,7 @@ export default function Example() {
           <label
             key={value}
             htmlFor={`dev-${value}`}
-            className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border px-5 py-4 hover:bg-muted/40 transition-colors has-[[data-checked]]:border-primary has-[[data-checked]]:bg-primary/5"
+            className="flex cursor-pointer flex-col items-center gap-2 rounded-lg edge px-5 py-4 hover:bg-muted/40 transition-colors has-[[data-checked]]:border-primary has-[[data-checked]]:bg-primary/5"
           >
             <RadioGroupItem
               value={value}

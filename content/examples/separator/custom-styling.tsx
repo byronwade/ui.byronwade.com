@@ -26,8 +26,8 @@ export default function Example() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-xs text-muted-foreground">Dashed via gradient</p>
-        <Separator className="bg-transparent bg-[repeating-linear-gradient(90deg,hsl(var(--border))_0,hsl(var(--border))_6px,transparent_6px,transparent_12px)]" />
+        <p className="text-xs text-muted-foreground">Soft muted divider</p>
+        <Separator className="bg-muted" />
       </div>
 
       <div className="space-y-2">

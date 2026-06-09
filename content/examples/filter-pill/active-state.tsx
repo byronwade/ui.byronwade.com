@@ -44,7 +44,7 @@ export default function Example() {
           <button
             type="button"
             onClick={() => setSelected("All")}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background text-muted-foreground shadow-card transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full edge bg-background text-muted-foreground edge transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
             aria-label="Clear filter"
           >
             <X className="size-3.5" />

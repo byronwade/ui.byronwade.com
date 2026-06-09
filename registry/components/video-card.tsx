@@ -272,7 +272,7 @@ function VideoCard({
       {variant === "overlay" ? (
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent"
+          className="scrim-bottom pointer-events-none absolute inset-x-0 bottom-0 h-3/5"
         />
       ) : null}
 

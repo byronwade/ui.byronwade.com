@@ -114,6 +114,11 @@ describe("Tool — data-slot attributes", () => {
     expect(container.firstChild).toHaveAttribute("data-slot", "tool");
   });
 
+  it("Tool root marks tool-call provenance", () => {
+    const { container } = render(<Tool />);
+    expect(container.firstChild).toHaveAttribute("data-provenance", "tool");
+  });
+
   it("ToolHeader has data-slot='tool-header'", () => {
     render(
       <Tool>
@@ -142,6 +147,9 @@ describe("Tool — data-slot attributes", () => {
     ).toBeInTheDocument();
     expect(
       document.querySelector("[data-slot='tool-status-badge']")
+    ).toBeInTheDocument();
+    expect(
+      document.querySelector("[data-slot='tool-provenance']")
     ).toBeInTheDocument();
   });
 

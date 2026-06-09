@@ -41,7 +41,7 @@ export default function Example() {
       <SplitWithRail
         className="lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]"
         summary={
-          <div className="space-y-5 rounded-2xl border border-border bg-card p-8">
+          <div className="space-y-5 rounded-2xl edge bg-card p-8">
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Onboarding
@@ -64,7 +64,7 @@ export default function Example() {
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <button className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:bg-muted transition-colors">
+              <button className="rounded-full edge px-4 py-2 text-sm font-medium hover:bg-muted transition-colors">
                 Skip for now
               </button>
               <button className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 transition-opacity">
@@ -74,7 +74,7 @@ export default function Example() {
           </div>
         }
         rail={
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl edge bg-card p-6">
             <p className="mb-4 text-sm font-semibold">Setup checklist</p>
             <EventTimeline events={steps} />
           </div>

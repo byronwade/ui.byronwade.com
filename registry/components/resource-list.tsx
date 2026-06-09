@@ -3,8 +3,14 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import {
+  useDemoDensity,
+  useDemoFrame,
+  useDemoDepth,
+} from "@/lib/demo-viewport"
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
+import { EntityRow } from "@/components/ui/entity-row"
 import { BulkActionBar, type BulkAction } from "@/components/ui/bulk-action-bar"
 
 type ResourceBadge = {
@@ -14,12 +20,18 @@ type ResourceBadge = {
 
 type ResourceSelectionContextValue = {
   selectable: boolean
+  density: ResourceListDensity
+  frame: ResourceListFrame
   isSelected: (id: string) => boolean
   toggle: (id: string, next: boolean) => void
 }
 
 const ResourceSelectionContext =
   React.createContext<ResourceSelectionContextValue | null>(null)
+
+type ResourceListDensity = "compact" | "default" | "comfortable"
+type ResourceListFrame = "default" | "inset"
+type ResourceListDepth = "none" | "soft" | "raised"
 
 type ResourceItemProps = {
   id: string
@@ -54,6 +66,8 @@ function ResourceItem({
   className,
 }: ResourceItemProps) {
   const list = React.useContext(ResourceSelectionContext)
+  const density = list?.density ?? "default"
+  const frame = list?.frame ?? "default"
 
   // Explicit item props win; otherwise the row inherits the list's selection.
   const isSelectable = selectable ?? list?.selectable ?? false
@@ -95,79 +109,117 @@ function ResourceItem({
     )
   ) : null
 
+  const leading =
+    isSelectable || media != null ? (
+      <>
+        {isSelectable ? (
+          <span data-slot="resource-item-selection" className="relative z-10">
+            <Checkbox
+              data-slot="resource-item-checkbox"
+              aria-label={`Select ${label}`}
+              checked={isSelected}
+              onCheckedChange={(next) => setSelected(next)}
+            />
+          </span>
+        ) : null}
+
+        {media != null ? (
+          <span
+            data-slot="resource-item-media"
+            className={cn(
+              "relative z-10 flex shrink-0 items-center justify-center overflow-hidden rounded-md [&>*]:size-full",
+              density === "compact" && "size-7",
+              density === "default" && "size-8",
+              density === "comfortable" && "size-10",
+            )}
+          >
+            {media}
+          </span>
+        ) : null}
+      </>
+    ) : undefined
+
   return (
-    <div
+    <EntityRow
       data-slot="resource-item"
       data-selected={isSelected || undefined}
+      variant={density === "compact" ? "compact" : "default"}
       className={cn(
-        "group/item relative flex items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors",
+        "group/item",
+        density === "compact" && "min-h-9 px-2 py-1.5",
+        density === "default" && "min-h-11",
+        density === "comfortable" && "min-h-14 px-3.5 py-3",
+        frame === "inset" && "rounded-md",
         interactive && "hover:bg-muted/50",
         isSelected && "bg-brand/5",
         className,
       )}
-    >
-      {overlay}
-
-      {isSelectable ? (
-        <span data-slot="resource-item-selection" className="relative z-10">
-          <Checkbox
-            data-slot="resource-item-checkbox"
-            aria-label={`Select ${label}`}
-            checked={isSelected}
-            onCheckedChange={(next) => setSelected(next)}
-          />
-        </span>
-      ) : null}
-
-      {media != null ? (
-        <span data-slot="resource-item-media" className="relative z-10 shrink-0">
-          {media}
-        </span>
-      ) : null}
-
-      <span
-        data-slot="resource-item-content"
-        className="pointer-events-none relative z-10 min-w-0 flex-1"
-      >
-        <span className="flex items-center gap-2">
+      leading={leading}
+      title={
+        <span
+          data-slot="resource-item-content"
+          className="pointer-events-none relative z-10 min-w-0 flex-1"
+        >
           <span
-            data-slot="resource-item-title"
-            className="truncate text-sm font-medium"
+            data-slot="resource-item-title-line"
+            className={cn(
+              "flex items-center",
+              density === "compact" ? "gap-1.5" : "gap-2",
+            )}
           >
-            {title}
-          </span>
-          {badges?.length ? (
             <span
-              data-slot="resource-item-badges"
-              className="flex shrink-0 items-center gap-1"
+              data-slot="resource-item-title"
+              className={cn(
+                "truncate font-medium",
+                density === "compact" ? "text-[13px]" : "text-sm",
+              )}
             >
-              {badges.map((badge, i) => (
-                <Badge key={i} variant={badge.variant}>
-                  {badge.label}
-                </Badge>
-              ))}
+              {title}
+            </span>
+            {badges?.length ? (
+              <span
+                data-slot="resource-item-badges"
+                className="flex shrink-0 items-center gap-1"
+              >
+                {badges.map((badge, i) => (
+                  <Badge key={i} variant={badge.variant}>
+                    {badge.label}
+                  </Badge>
+                ))}
+              </span>
+            ) : null}
+          </span>
+          {subtitle != null ? (
+            <span
+              data-slot="resource-item-subtitle"
+              className={cn(
+                "block truncate text-xs text-muted-foreground",
+                density === "compact" && "mt-0",
+                density === "default" && "mt-0.5",
+                density === "comfortable" && "mt-1",
+              )}
+            >
+              {subtitle}
             </span>
           ) : null}
         </span>
-        {subtitle != null ? (
+      }
+      actions={
+        actions != null ? (
           <span
-            data-slot="resource-item-subtitle"
-            className="mt-0.5 block truncate text-xs text-muted-foreground"
+            data-slot="resource-item-actions"
+            className={cn(
+              "relative z-10 shrink-0 opacity-0 transition-opacity group-focus-within/item:opacity-100 group-hover/item:opacity-100",
+              density === "compact" && "scale-95",
+            )}
           >
-            {subtitle}
+            {actions}
           </span>
-        ) : null}
-      </span>
-
-      {actions != null ? (
-        <span
-          data-slot="resource-item-actions"
-          className="relative z-10 shrink-0 opacity-0 transition-opacity group-focus-within/item:opacity-100 group-hover/item:opacity-100"
-        >
-          {actions}
-        </span>
-      ) : null}
-    </div>
+        ) : undefined
+      }
+    >
+      {overlay}
+    </EntityRow>
   )
 }
 
@@ -198,6 +250,9 @@ type ResourceListProps = {
   header?: React.ReactNode
   children: React.ReactNode
   className?: string
+  density?: ResourceListDensity
+  frame?: ResourceListFrame
+  depth?: ResourceListDepth
 }
 
 function ResourceList({
@@ -211,7 +266,16 @@ function ResourceList({
   header,
   children,
   className,
+  density: densityProp,
+  frame: frameProp,
+  depth: depthProp,
 }: ResourceListProps) {
+  const demoDensity = useDemoDensity()
+  const demoFrame = useDemoFrame()
+  const demoDepth = useDemoDepth()
+  const density = densityProp ?? demoDensity ?? "default"
+  const frame = frameProp ?? demoFrame ?? "default"
+  const depth = depthProp ?? demoDepth ?? "none"
   const selected = selectedIds ?? []
   const items = React.Children.toArray(children)
   const count = totalCount ?? items.length
@@ -244,8 +308,8 @@ function ResourceList({
   )
 
   const selectionValue = React.useMemo<ResourceSelectionContextValue>(
-    () => ({ selectable, isSelected, toggle }),
-    [selectable, isSelected, toggle],
+    () => ({ selectable, density, frame, isSelected, toggle }),
+    [selectable, density, frame, isSelected, toggle],
   )
 
   function handleSelectAll(next: boolean) {
@@ -259,8 +323,17 @@ function ResourceList({
     <ResourceSelectionContext.Provider value={selectionValue}>
       <div
         data-slot="resource-list"
+        data-density={density}
+        data-frame={frame}
+        data-depth={depth}
         className={cn(
-          "flex flex-col rounded-lg border border-border bg-card text-card-foreground",
+          "flex flex-col text-card-foreground",
+          frame === "inset"
+            ? "rounded-xl edge bg-muted/20 p-1.5 ring-1 ring-border/70"
+            : "rounded-lg edge bg-card",
+          depth === "none" && "shadow-none",
+          depth === "soft" && "depth-soft",
+          depth === "raised" && "depth-raised",
           className,
         )}
       >
@@ -276,7 +349,11 @@ function ResourceList({
         ) : (
           <div
             data-slot="resource-list-header"
-            className="flex items-center gap-3 border-b border-border px-3 py-2"
+            className={cn(
+              "flex items-center border-b border-border",
+              density === "compact" ? "gap-2 px-2 py-1.5" : "gap-3 px-3 py-2",
+              density === "comfortable" && "px-3.5 py-2.5",
+            )}
           >
             {selectable ? (
               <Checkbox
@@ -304,7 +381,15 @@ function ResourceList({
           </div>
         )}
 
-        <div data-slot="resource-list-items" className="flex flex-col p-1">
+        <div
+          data-slot="resource-list-items"
+          className={cn(
+            "flex flex-col",
+            frame === "inset"
+              ? "gap-0.5 rounded-lg bg-card p-1 ring-1 ring-border/50"
+              : "p-1",
+          )}
+        >
           {loading ? (
             <>
               <ResourceItemSkeleton />

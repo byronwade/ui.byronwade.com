@@ -18,7 +18,7 @@ export default function Example() {
           type="text"
           required
           placeholder="Jane Smith"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 
@@ -34,7 +34,7 @@ export default function Example() {
           type="email"
           required
           placeholder="jane@example.com"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 
@@ -50,7 +50,7 @@ export default function Example() {
           id="opt-website"
           type="url"
           placeholder="https://example.com"
-          className="rounded-md border px-3 py-2 text-sm"
+          className="rounded-md edge px-3 py-2 text-sm"
         />
       </div>
 

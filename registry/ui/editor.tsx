@@ -483,7 +483,7 @@ const EditorSlashMenu = ({ items, editor, range }: EditorSlashMenuProps) => (
           key={item.title}
           onSelect={() => item.command({ editor, range })}
         >
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-secondary">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-md edge bg-secondary">
             <item.icon className="text-muted-foreground" size={16} />
           </div>
           <div className="flex flex-col">
@@ -587,7 +587,7 @@ export const EditorProvider = ({
         // chart ramp (--chart-1…5) is a deliberate fixed palette for data, and
         // syntax highlighting is exactly that — categorical, meaning-bearing color.
         class: cn(
-          "rounded-md border border-border p-4 text-sm",
+          "rounded-md edge p-4 text-sm",
           "bg-card text-card-foreground",
           "[&_.hljs-doctag]:text-destructive [&_.hljs-keyword]:text-destructive [&_.hljs-meta_.hljs-keyword]:text-destructive [&_.hljs-template-tag]:text-destructive [&_.hljs-template-variable]:text-destructive [&_.hljs-type]:text-destructive [&_.hljs-variable.language_]:text-destructive",
           "[&_.hljs-title.class_.inherited__]:text-chart-4 [&_.hljs-title.class_]:text-chart-4 [&_.hljs-title.function_]:text-chart-4 [&_.hljs-title]:text-chart-4",
@@ -690,21 +690,21 @@ export const EditorProvider = ({
     TableRow.configure({
       HTMLAttributes: {
         class: cn(
-          "relative box-border min-w-[1em] border border-border p-1 text-start align-top",
+          "relative box-border min-w-[1em] edge p-1 text-start align-top",
         ),
       },
     }),
     TableCell.configure({
       HTMLAttributes: {
         class: cn(
-          "relative box-border min-w-[1em] border border-border p-1 text-start align-top",
+          "relative box-border min-w-[1em] edge p-1 text-start align-top",
         ),
       },
     }),
     TableHeader.configure({
       HTMLAttributes: {
         class: cn(
-          "relative box-border min-w-[1em] border border-border bg-secondary p-1 text-start align-top font-medium text-muted-foreground",
+          "relative box-border min-w-[1em] edge bg-secondary p-1 text-start align-top font-medium text-muted-foreground",
         ),
       },
     }),
@@ -780,7 +780,7 @@ export const EditorBubbleMenu = ({
   return (
     <BubbleMenu
       className={cn(
-        "flex rounded-xl border border-border bg-background p-0.5 edge",
+        "flex rounded-xl edge bg-background p-0.5 edge",
         "[&>*:first-child]:rounded-l-lg",
         "[&>*:last-child]:rounded-r-lg",
         className,
@@ -1501,7 +1501,7 @@ export const EditorTableGlobalMenu = ({
   return (
     <div
       className={cn(
-        "absolute flex -translate-x-1/2 translate-y-1/2 items-center rounded-full border border-border bg-background edge",
+        "absolute flex -translate-x-1/2 translate-y-1/2 items-center rounded-full edge bg-background",
         {
           hidden: !(left || top),
         },
@@ -1566,7 +1566,7 @@ export const EditorTableColumnMenu = ({
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cn(
-          "absolute flex h-4 w-7 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md border border-border bg-background edge",
+          "absolute flex h-4 w-7 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md edge bg-background",
           {
             hidden: !(left || top),
           },
@@ -1633,7 +1633,7 @@ export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cn(
-          "absolute flex h-7 w-4 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md border border-border bg-background edge",
+          "absolute flex h-7 w-4 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md edge bg-background",
           {
             hidden: !(left || top),
           },
@@ -2001,7 +2001,7 @@ export const EditorCharacterCount = {
     return (
       <div
         className={cn(
-          "absolute right-4 bottom-4 rounded-md border border-border bg-background p-2 font-mono text-sm text-muted-foreground edge",
+          "absolute right-4 bottom-4 rounded-md edge bg-background p-2 font-mono text-sm text-muted-foreground edge",
           className,
         )}
         data-slot="editor-character-count"
@@ -2022,7 +2022,7 @@ export const EditorCharacterCount = {
     return (
       <div
         className={cn(
-          "absolute right-4 bottom-4 rounded-md border border-border bg-background p-2 font-mono text-sm text-muted-foreground edge",
+          "absolute right-4 bottom-4 rounded-md edge bg-background p-2 font-mono text-sm text-muted-foreground edge",
           className,
         )}
         data-slot="editor-word-count"

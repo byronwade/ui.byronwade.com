@@ -815,7 +815,7 @@ export const GanttCreateMarkerTrigger: FC<GanttCreateMarkerTriggerProps> = ({
         >
           <PlusIcon className="size-3 text-muted-foreground" />
         </button>
-        <div className="whitespace-nowrap rounded-full border border-border/50 bg-background/90 px-2 py-1 font-mono text-xs text-foreground backdrop-blur-lg">
+        <div className="whitespace-nowrap rounded-full edge bg-background/90 px-2 py-1 font-mono text-xs text-foreground backdrop-blur-lg">
           {formatDate(date, "MMM dd, yyyy")}
         </div>
       </div>
@@ -867,7 +867,7 @@ export const GanttFeatureDragHelper: FC<GanttFeatureDragHelperProps> = ({
       {date && (
         <div
           className={cn(
-            "-translate-x-1/2 absolute top-10 hidden whitespace-nowrap rounded-lg border border-border/50 bg-background/90 px-2 py-1 font-mono text-xs text-foreground backdrop-blur-lg group-hover:block",
+            "-translate-x-1/2 absolute top-10 hidden whitespace-nowrap rounded-lg edge bg-background/90 px-2 py-1 font-mono text-xs text-foreground backdrop-blur-lg group-hover:block",
             isPressed && "block",
           )}
         >
@@ -1706,7 +1706,7 @@ export const GanttControls: FC<GanttControlsProps> = ({
             type="button"
             data-active={range === value}
             onClick={() => setRange?.(value)}
-            className="rounded-sm px-2 py-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground data-[active=true]:bg-background data-[active=true]:text-foreground data-[active=true]:shadow-sm"
+            className="rounded-sm px-2 py-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground data-[active=true]:bg-background data-[active=true]:text-foreground data-[active=true]:edge"
           >
             {GANTT_RANGE_LABELS[value]}
           </button>

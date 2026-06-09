@@ -32,7 +32,7 @@ export default function Example() {
   return (
     <CenteredFocal backdrop={<GridBackdrop />}>
       <div className="flex flex-col items-center gap-4">
-        <div className="flex size-12 items-center justify-center rounded-full border border-border bg-card shadow-sm">
+        <div className="flex size-12 items-center justify-center rounded-full edge bg-card">
           <svg
             width="22"
             height="22"

@@ -388,5 +388,4 @@ describe("DemoPreviewFrame", () => {
     expect(card).not.toHaveClass("shadow-sm")
     expect(card).not.toHaveClass("shadow-md")
   })
-
 })

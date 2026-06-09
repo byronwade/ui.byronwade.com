@@ -18,7 +18,7 @@ import {
 
 export default function Example() {
   return (
-    <div className="h-[min(28rem,70vh)] w-full min-w-0 overflow-hidden rounded-xl border border-border bg-background">
+    <div className="h-[min(28rem,70vh)] w-full min-w-0 overflow-hidden rounded-xl edge bg-background">
       <SidebarProvider contained className="h-full">
         <Sidebar collapsible="icon">
           <SidebarContent>

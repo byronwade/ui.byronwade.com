@@ -29,7 +29,12 @@ export default defineConfig({
     // main suite globs and runs them, so its pass/fail depends on unrelated
     // branches' WIP — an intermittent, confusing "flake". Scope discovery to
     // this checkout only.
-    exclude: [...configDefaults.exclude, "**/.claude/**", "**/.worktrees/**"],
+    exclude: [
+      ...configDefaults.exclude,
+      "**/.claude/**",
+      "**/.worktrees/**",
+      "packages/**",
+    ],
     coverage: {
       provider: "v8",
       reportsDirectory: "./.vitest-coverage",

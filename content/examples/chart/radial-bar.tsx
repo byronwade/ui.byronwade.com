@@ -31,7 +31,7 @@ const chartConfig: ChartConfig = {
 
 export default function Example() {
   return (
-    <div className="p-6 rounded-2xl border bg-card w-full max-w-sm">
+    <div className="p-6 rounded-2xl edge bg-card w-full max-w-sm">
       <h2 className="text-sm font-medium mb-1 text-foreground">
         Resource Utilization
       </h2>

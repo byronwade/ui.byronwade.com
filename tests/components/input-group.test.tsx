@@ -35,6 +35,17 @@ describe("InputGroup – smoke", () => {
     expect(root).toHaveClass("custom-root");
     expect(root).toHaveClass("relative");
   });
+
+  it("uses a visible input fill on the group surface", () => {
+    const { container } = render(
+      <InputGroup>
+        <InputGroupInput aria-label="Search" />
+      </InputGroup>
+    );
+    const root = container.querySelector("[data-slot='input-group']");
+    expect(root).toHaveClass("bg-input/30");
+    expect(root).not.toHaveClass("bg-transparent");
+  });
 });
 
 describe("InputGroup – control", () => {

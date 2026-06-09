@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, Check, X } from "lucide-react"
+import { Check, X } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
 import {
   ThemingPlayground,
   type BrandPreset,
@@ -71,18 +72,24 @@ export default function ThemingPage() {
         className={`relative ${BLEED} overflow-hidden border-b border-border`}
       >
         <div className="glow-brand pointer-events-none absolute inset-x-0 -top-24 h-56 opacity-60" />
-        <div className="relative py-12 sm:py-16">
+        <div className="relative py-12 lg:py-16">
           <p className="animate-in fade-in slide-in-from-bottom-3 font-mono text-xs uppercase tracking-[0.2em] text-brand duration-700">
             Foundation · Theming
           </p>
-          <h1 className="mt-5 max-w-3xl text-[clamp(2.5rem,7vw,5rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
+          <h1 className="mt-4 max-w-3xl text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
             One variable re-skins{" "}
             <span className="text-brand">everything.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
             The accent isn&apos;t scattered through components, it&apos;s
-            derived from a single token,{" "}
-            <span className="text-foreground">--brand</span>. Override it once
+            derived from a{" "}
+            <Link
+              href="/docs/foundation"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              single token
+            </Link>
+            , <span className="text-foreground">--brand</span>. Override it once
             and rings, charts, success, buttons, and active states all follow,
             light and dark. Use the picker below to re-skin this entire site in
             real time, then paste the generated CSS into your project.
@@ -224,9 +231,15 @@ export default function ThemingPage() {
             The cascade
           </p>
           <p className="reading-ui mt-3 text-foreground text-pretty">
-            These tokens all resolve to{" "}
-            <span className="text-foreground">--brand</span>. Change the one and
-            the family moves together.
+            These{" "}
+            <Link
+              href="/docs/foundation"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              tokens
+            </Link>{" "}
+            all resolve to <span className="text-foreground">--brand</span>.
+            Change the one and the family moves together.
           </p>
           <div className="mt-8 grid gap-px overflow-hidden rounded-2xl edge bg-border sm:grid-cols-2">
             {[
@@ -377,22 +390,7 @@ export default function ThemingPage() {
         </div>
       </section>
 
-      {/* ============================ NAV ============================== */}
-      <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">
-        <Link
-          href="/docs/typography"
-          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
-        >
-          Next: Typography
-          <ArrowRight className="size-3.5" />
-        </Link>
-        <Link
-          href="/docs/foundation"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          See the foundation
-        </Link>
-      </div>
+      <GuidePager current="/docs/theming" />
     </article>
   )
 }

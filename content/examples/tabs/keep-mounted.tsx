@@ -28,7 +28,7 @@ export default function Example() {
           <TabsContent
             value={0}
             keepMounted
-            className="rounded-xl border p-4 space-y-2"
+            className="rounded-xl edge p-4 space-y-2"
           >
             <label className="text-sm font-medium" htmlFor="editor-input">
               Draft content
@@ -43,14 +43,14 @@ export default function Example() {
             />
           </TabsContent>
 
-          <TabsContent value={1} keepMounted className="rounded-xl border p-4">
+          <TabsContent value={1} keepMounted className="rounded-xl edge p-4">
             <p className="text-sm font-medium">Preview</p>
             <p className="mt-2 text-sm text-muted-foreground whitespace-pre-wrap">
               {inputValue || "Nothing to preview yet."}
             </p>
           </TabsContent>
 
-          <TabsContent value={2} keepMounted className="rounded-xl border p-4">
+          <TabsContent value={2} keepMounted className="rounded-xl edge p-4">
             <p className="text-sm text-muted-foreground">
               No revision history yet.
             </p>

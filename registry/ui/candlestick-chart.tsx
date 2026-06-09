@@ -303,7 +303,7 @@ const CandlestickChart = ({
         <div
           data-slot="candlestick-chart-readout"
           className={cn(
-            "pointer-events-none absolute rounded-lg border border-border/70 bg-card/95 px-2.5 py-1.5 font-mono text-xs shadow-sm backdrop-blur-sm",
+            "pointer-events-none absolute rounded-lg edge bg-card/95 px-2.5 py-1.5 font-mono text-xs edge backdrop-blur-sm",
             fill ? "right-2 top-2" : "left-2 top-2",
           )}
         >

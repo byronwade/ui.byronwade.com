@@ -84,7 +84,7 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
     <div
       data-slot="kanban-board"
       className={cn(
-        "flex size-full min-h-40 flex-col divide-y divide-border overflow-hidden rounded-xl border border-border bg-secondary text-xs shadow-sm ring-2 transition-all",
+        "flex size-full min-h-40 flex-col divide-y divide-edge overflow-hidden rounded-xl edge bg-secondary text-xs edge ring-2 transition-all",
         isOver ? "ring-ring" : "ring-transparent",
         className,
       )}
@@ -129,7 +129,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
         <Card
           data-slot="kanban-card"
           className={cn(
-            "cursor-grab gap-4 rounded-md p-3 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            "cursor-grab gap-4 rounded-md p-3 edge focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             isDragging && "pointer-events-none cursor-grabbing opacity-30",
             className,
           )}
@@ -144,7 +144,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
           <Card
             data-slot="kanban-card"
             className={cn(
-              "cursor-grab gap-4 rounded-md p-3 shadow-sm ring-2 ring-ring",
+              "cursor-grab gap-4 rounded-md p-3 edge ring-2 ring-ring",
               isDragging && "cursor-grabbing",
               className,
             )}

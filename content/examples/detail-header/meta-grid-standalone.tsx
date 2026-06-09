@@ -10,7 +10,7 @@ export default function Example() {
   return (
     <div className="max-w-4xl space-y-10 p-8">
       {/* Basic text values */}
-      <div className="rounded-2xl border p-6">
+      <div className="rounded-2xl edge p-6">
         <p className="mb-4 text-sm font-medium text-muted-foreground">
           Build details
         </p>
@@ -25,7 +25,7 @@ export default function Example() {
       </div>
 
       {/* Mixed ReactNode values */}
-      <div className="rounded-2xl border p-6">
+      <div className="rounded-2xl edge p-6">
         <p className="mb-4 text-sm font-medium text-muted-foreground">
           Deployment info
         </p>
@@ -48,7 +48,7 @@ export default function Example() {
       </div>
 
       {/* Custom column layout via className override */}
-      <div className="rounded-2xl border p-6">
+      <div className="rounded-2xl edge p-6">
         <p className="mb-4 text-sm font-medium text-muted-foreground">
           Two-column layout
         </p>

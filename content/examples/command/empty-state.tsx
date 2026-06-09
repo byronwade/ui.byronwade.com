@@ -15,7 +15,7 @@ export default function Example() {
   const [query, setQuery] = useState("flux capacitor")
 
   return (
-    <div className="w-80 rounded-xl border">
+    <div className="w-80 rounded-xl edge">
       <Command>
         <CommandInput
           placeholder="Search…"

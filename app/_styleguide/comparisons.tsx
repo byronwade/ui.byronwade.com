@@ -1240,7 +1240,7 @@ export function VsComparison() {
                 <ColHead label={meta.label} color={meta.accent} />
                 <div
                   className={cn(
-                    "cmp-scope flex min-h-[148px] items-center justify-center rounded-xl border p-6 transition-colors",
+                    "cmp-scope flex min-h-[148px] items-center justify-center rounded-xl edge p-6 transition-colors",
                     meta.scope,
                   )}
                   style={{ background: meta.well, borderColor: meta.border }}

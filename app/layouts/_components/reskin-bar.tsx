@@ -42,7 +42,7 @@ export function ReskinBar({
   const dirty = Boolean(value.brand || value.radius)
 
   return (
-    <div className="flex items-center gap-2 rounded-full bg-card px-2 py-1 shadow-card">
+    <div className="flex items-center gap-2 rounded-full bg-card px-2 py-1 edge">
       <span className="hidden pl-1 text-xs font-medium text-muted-foreground md:inline">
         Re-skin
       </span>
@@ -58,7 +58,7 @@ export function ReskinBar({
               aria-pressed={active}
               onClick={() => onChange({ ...value, brand: s.value })}
               className={cn(
-                "size-5 rounded-full border border-border outline-none transition-transform hover:scale-110 focus-visible:ring-3 focus-visible:ring-ring/50",
+                "size-5 rounded-full edge outline-none transition-transform hover:scale-110 focus-visible:ring-3 focus-visible:ring-ring/50",
                 active &&
                   "ring-2 ring-foreground ring-offset-1 ring-offset-card",
               )}

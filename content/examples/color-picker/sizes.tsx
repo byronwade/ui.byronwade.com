@@ -18,7 +18,7 @@ export default function Example() {
           key={size}
           size={size}
           defaultValue="#1d4ed8"
-          className="w-56 rounded-lg border border-border bg-card p-3"
+          className="w-56 rounded-lg edge bg-card p-3"
         >
           <ColorPickerSelection />
           <div className="flex items-center gap-3">

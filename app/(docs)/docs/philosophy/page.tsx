@@ -10,6 +10,9 @@ import {
   X,
 } from "lucide-react"
 
+import { BLEED } from "@/app/(docs)/_components/docs-prose"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
+
 export const metadata: Metadata = {
   title: "Philosophy, byronwade/ui",
   description:
@@ -22,8 +25,6 @@ export const metadata: Metadata = {
    pages. Rich, not bland, big type, the green accent, edge cards, small token
    demos woven in.
 --------------------------------------------------------------------------- */
-
-const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
 
 const TENETS: {
   n: string
@@ -227,7 +228,7 @@ const PRACTICE: { do: string; dont: string }[] = [
   },
   {
     do: "rounded-xl edge bg-card",
-    dont: "rounded-lg shadow-lg border",
+    dont: "rounded-lg edge",
   },
   {
     do: '<Button variant="outline">',
@@ -301,11 +302,11 @@ export default function PhilosophyPage() {
         className={`relative ${BLEED} overflow-hidden border-b border-border`}
       >
         <div className="glow-brand pointer-events-none absolute inset-x-0 -top-24 h-56 opacity-50" />
-        <div className="relative max-w-3xl py-16 sm:py-24">
+        <div className="relative max-w-3xl py-12 lg:py-16">
           <p className="animate-in fade-in slide-in-from-bottom-3 font-mono text-xs uppercase tracking-[0.2em] text-brand duration-700">
             Foundation · Philosophy
           </p>
-          <h1 className="mt-6 text-[clamp(2.5rem,7vw,5rem)] font-normal leading-[0.98] tracking-tight text-foreground text-balance">
+          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
             Calm software, built to last.
           </h1>
           <p className="mt-8 font-serif text-[clamp(1.25rem,2.5vw,1.75rem)] leading-[1.5] text-foreground text-pretty">
@@ -313,8 +314,14 @@ export default function PhilosophyPage() {
             spacing, and color until the product feels like a patchwork. Agents
             make that worse: they reach for hex values and one-off divs because
             nothing stops them. This system is the opposite, a single quiet,
-            content-first aesthetic you can adopt in minutes, re-skin from one
-            variable, and keep on-system by construction.
+            content-first aesthetic you can adopt in minutes,{" "}
+            <Link
+              href="/docs/theming"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              re-skin from one variable
+            </Link>
+            , and keep on-system by construction.
           </p>
         </div>
       </section>
@@ -342,8 +349,15 @@ export default function PhilosophyPage() {
               text-[#333]
             </code>{" "}
             because it worked in the last project. byronwade/ui treats that as a
-            solvable engineering problem: one aesthetic, one token base, one
-            definition of on-system, enforced everywhere code gets written.
+            solvable engineering problem: one aesthetic, one{" "}
+            <Link
+              href="/docs/foundation"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              token base
+            </Link>
+            , one definition of on-system, enforced everywhere code gets
+            written.
           </p>
         </div>
       </section>
@@ -426,8 +440,15 @@ export default function PhilosophyPage() {
         </h2>
         <p className="mt-4 max-w-2xl font-serif text-[1.0625rem] leading-relaxed text-muted-foreground text-pretty">
           A design system that only exists in Figma is already obsolete. This
-          one ships the guidance, the enforcement, and the live registry access
-          as first-class artifacts, all generated from the same{" "}
+          one ships{" "}
+          <Link
+            href="/docs/ai"
+            className="text-brand underline-offset-4 hover:underline"
+          >
+            the AI rule
+          </Link>
+          , the enforcement, and the live registry access as first-class
+          artifacts, all generated from the same{" "}
           <code className="font-mono text-[13px] text-foreground">
             registry.json
           </code>
@@ -551,10 +572,16 @@ export default function PhilosophyPage() {
             shadcn lineage, byronwade convictions.
           </h2>
           <p className="mt-4 font-serif text-[1.0625rem] leading-relaxed text-muted-foreground text-pretty">
-            The install model is the same: a namespaced registry, the shadcn
-            CLI, code copied into your project. What changes is everything
-            around it: warm editorial aesthetics, a single accent variable,
-            morphing chrome primitives, and an agent toolchain that keeps output
+            The install model is the same: a namespaced registry,{" "}
+            <Link
+              href="/docs/installation"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              the shadcn CLI
+            </Link>
+            , code copied into your project. What changes is everything around
+            it: warm editorial aesthetics, a single accent variable, morphing
+            chrome primitives, and an agent toolchain that keeps output
             reviewable. You get the ownership model everyone already trusts,
             plus a system that still looks like yours six months from now.
           </p>
@@ -569,7 +596,7 @@ export default function PhilosophyPage() {
         <h2 className="mt-3 max-w-2xl text-3xl font-normal tracking-tight text-foreground text-balance sm:text-4xl">
           The whole path, in order.
         </h2>
-        <div className="mt-8 divide-y divide-border overflow-hidden rounded-2xl edge">
+        <div className="mt-8 divide-y divide-edge overflow-hidden rounded-2xl edge">
           {JOURNEY.map((j) => (
             <Link
               key={j.href}
@@ -590,27 +617,7 @@ export default function PhilosophyPage() {
       </section>
 
       {/* ============================ NAV ============================== */}
-      <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">
-        <Link
-          href="/docs/installation"
-          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
-        >
-          Next: Installation
-          <ArrowRight className="size-3.5" />
-        </Link>
-        <Link
-          href="/docs/foundation"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Foundation tokens
-        </Link>
-        <Link
-          href="/docs"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Back to Introduction
-        </Link>
-      </div>
+      <GuidePager current="/docs/philosophy" />
     </article>
   )
 }

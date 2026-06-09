@@ -9,7 +9,7 @@ export default function Example() {
       <AlbumCover src={COVER} alt="Rounded md" size="md" rounded="md" />
       <AlbumCover src={COVER} alt="Rounded lg" size="md" rounded="lg" />
       <AlbumCover src={COVER} alt="Circular" size="md" rounded="full" />
-      <AlbumCover src={COVER} alt="Elevated" size="md" rounded="lg" shadow />
+      <AlbumCover src={COVER} alt="Soft square" size="md" rounded="lg" />
     </div>
   )
 }

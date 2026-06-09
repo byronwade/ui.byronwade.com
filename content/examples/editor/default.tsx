@@ -30,7 +30,7 @@ const content = `
 
 export default function Example() {
   return (
-    <div className="relative w-full max-w-2xl rounded-xl border border-border bg-card p-6">
+    <div className="relative w-full max-w-2xl rounded-xl edge bg-card p-6">
       <EditorProvider
         className="prose prose-sm max-w-none focus:outline-none dark:prose-invert"
         content={content}

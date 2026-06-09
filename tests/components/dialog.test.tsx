@@ -1385,13 +1385,13 @@ describe("DialogOverlay – via open dialog", () => {
     expect(overlay.className).toContain("z-50");
   });
 
-  it("overlay has base class: bg-black/10", async () => {
+  it("overlay has base class: bg-foreground/10", async () => {
     const user = userEvent.setup();
     render(<SimpleDialog />);
     await openDialog(user);
 
     const overlay = document.querySelector("[data-slot='dialog-overlay']") as HTMLElement;
-    expect(overlay.className).toContain("bg-black/10");
+    expect(overlay.className).toContain("bg-foreground/10");
   });
 
   it("overlay has inset-0 class", async () => {

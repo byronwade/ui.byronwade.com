@@ -9,6 +9,7 @@
 
 import { components } from "@/content/components"
 import { getSurface } from "@/content/catalog-surfaces"
+import { getFamilyRoot } from "@/content/docs-nav"
 import { archetypes } from "@/app/layouts/_archetypes"
 import { templates } from "@/app/templates/_templates"
 
@@ -202,14 +203,20 @@ const sectionEntries: SearchEntry[] = [
 
 /* ── Components (derived from the canonical docs manifest) ─────────── */
 
-const componentEntries: SearchEntry[] = components.map((c) => ({
-  kind: "Component",
-  label: c.name,
-  href: `/docs/${c.slug}`,
-  meta: `${c.category} · ${getSurface(c) === "marketing" ? "Marketing" : "Application"}`,
-  keywords:
-    `${c.slug.replace(/-/g, " ")} ${c.category} ${getSurface(c)} ${c.description}`.toLowerCase(),
-}))
+const componentEntries: SearchEntry[] = components.map((c) => {
+  const family = getFamilyRoot(c.slug)
+  const familyKeywords = family
+    ? `family:${family.slug.replace(/-/g, " ")} ${family.name}`
+    : ""
+  return {
+    kind: "Component",
+    label: c.name,
+    href: `/docs/${c.slug}`,
+    meta: `${c.category} · ${getSurface(c) === "marketing" ? "Marketing" : "Application"}`,
+    keywords:
+      `${c.slug.replace(/-/g, " ")} ${c.category} ${getSurface(c)} ${familyKeywords} ${c.description}`.toLowerCase(),
+  }
+})
 
 /* ── Variants (authored only, derived from the canonical manifest) ─── */
 
@@ -230,9 +237,9 @@ const layoutEntries: SearchEntry[] = [
   {
     kind: "Section",
     label: "Layouts gallery",
-    href: "/layouts",
-    meta: "Layouts",
-    keywords: "archetypes full page layouts gallery showcase",
+    href: "/catalog?type=layouts",
+    meta: "Browse",
+    keywords: "archetypes full page layouts gallery showcase browse catalog",
   },
   ...archetypes.map<SearchEntry>((a) => ({
     kind: "Section",

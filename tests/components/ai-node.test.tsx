@@ -196,7 +196,7 @@ describe("Node — handles prop combinations", () => {
     const target = container.querySelector(
       "[data-slot='node-handle-target']"
     ) as HTMLElement;
-    expect(target.className).toContain("border-border");
+    expect(target.className).toContain("edge");
     expect(target.className).toContain("bg-background");
     expect(target.className).toContain("ring-ring");
   });

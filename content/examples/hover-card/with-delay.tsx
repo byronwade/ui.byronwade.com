@@ -41,7 +41,7 @@ export default function Example() {
           <HoverCardTrigger
             delay={delay}
             closeDelay={closeDelay}
-            className="inline-flex items-center rounded-full border border-border bg-background px-4 py-1.5 text-sm font-medium transition-colors hover:bg-muted cursor-pointer"
+            className="inline-flex items-center rounded-full edge bg-background px-4 py-1.5 text-sm font-medium transition-colors hover:bg-muted cursor-pointer"
           >
             {label}
           </HoverCardTrigger>

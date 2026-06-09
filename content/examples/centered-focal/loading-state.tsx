@@ -17,7 +17,7 @@ export default function Example() {
   return (
     <CenteredFocal backdrop={<PulsingRings />}>
       <div className="flex flex-col items-center gap-3">
-        <div className="flex size-10 items-center justify-center rounded-full border border-border bg-card">
+        <div className="flex size-10 items-center justify-center rounded-full edge bg-card">
           <svg
             width="18"
             height="18"

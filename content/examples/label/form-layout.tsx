@@ -16,7 +16,7 @@ export default function Example() {
             id="stacked-name"
             type="text"
             placeholder="Jane Smith"
-            className="rounded-md border px-3 py-2 text-sm"
+            className="rounded-md edge px-3 py-2 text-sm"
           />
           <p className="text-xs text-muted-foreground">
             This is the name others will see.
@@ -28,7 +28,7 @@ export default function Example() {
             id="stacked-handle"
             type="text"
             placeholder="@janesmith"
-            className="rounded-md border px-3 py-2 text-sm"
+            className="rounded-md edge px-3 py-2 text-sm"
           />
         </div>
       </section>
@@ -46,7 +46,7 @@ export default function Example() {
             id="inline-country"
             type="text"
             placeholder="United States"
-            className="flex-1 rounded-md border px-3 py-2 text-sm"
+            className="flex-1 rounded-md edge px-3 py-2 text-sm"
           />
         </div>
         <div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ export default function Example() {
             id="inline-city"
             type="text"
             placeholder="New York"
-            className="flex-1 rounded-md border px-3 py-2 text-sm"
+            className="flex-1 rounded-md edge px-3 py-2 text-sm"
           />
         </div>
         <div className="flex items-center gap-4">
@@ -68,7 +68,7 @@ export default function Example() {
             id="inline-zip"
             type="text"
             placeholder="10001"
-            className="flex-1 rounded-md border px-3 py-2 text-sm"
+            className="flex-1 rounded-md edge px-3 py-2 text-sm"
           />
         </div>
       </section>

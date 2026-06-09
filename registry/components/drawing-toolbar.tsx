@@ -39,7 +39,7 @@ const DEFAULT_TOOLS: DrawingTool[] = [
 ]
 
 const drawingToolbarVariants = cva(
-  "inline-flex rounded-xl border border-border bg-card p-1",
+  "inline-flex rounded-xl edge bg-card p-1",
   {
     variants: {
       orientation: {

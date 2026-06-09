@@ -168,6 +168,49 @@ describe("PromptInput — renders without crashing", () => {
     ).toBe("FORM");
   });
 
+  it("root form marks user prompt provenance by default", () => {
+    const { container } = render(
+      <PromptInput onSubmit={() => {}}>
+        <PromptInputTextarea />
+      </PromptInput>
+    );
+    expect(container.querySelector("[data-slot='prompt-input']")).toHaveAttribute(
+      "data-provenance",
+      "user"
+    );
+  });
+
+  it("root form allows provenance override for embedded app composers", () => {
+    const { container } = render(
+      <PromptInput provenance="app" onSubmit={() => {}}>
+        <PromptInputTextarea />
+      </PromptInput>
+    );
+    expect(container.querySelector("[data-slot='prompt-input']")).toHaveAttribute(
+      "data-provenance",
+      "app"
+    );
+  });
+
+  it("root form exposes density, frame, and depth layout state", () => {
+    const { container } = render(
+      <PromptInput
+        density="compact"
+        frame="inset"
+        depth="soft"
+        onSubmit={() => {}}
+      >
+        <PromptInputTextarea />
+      </PromptInput>
+    );
+    const form = container.querySelector("[data-slot='prompt-input']");
+    const inputGroup = container.querySelector("[data-slot='input-group']");
+    expect(form).toHaveAttribute("data-density", "compact");
+    expect(form).toHaveAttribute("data-frame", "inset");
+    expect(form).toHaveAttribute("data-depth", "soft");
+    expect(inputGroup).toHaveClass("depth-soft");
+  });
+
   it("renders the hidden file input with an accessible label", () => {
     render(
       <PromptInput onSubmit={() => {}}>
@@ -955,6 +998,36 @@ describe("PromptInput — layout primitives", () => {
     const tools = container.querySelector("[data-slot='prompt-input-tools']");
     expect(tools).toHaveClass("flex", "items-center", "tools-x");
   });
+
+  it("PromptInputHeader and Footer compact density tighten padding", () => {
+    const { container } = render(
+      <PromptInput density="compact" onSubmit={() => {}}>
+        <PromptInputHeader>h</PromptInputHeader>
+        <PromptInputTextarea />
+        <PromptInputFooter>f</PromptInputFooter>
+      </PromptInput>
+    );
+    expect(container.querySelector("[data-slot='prompt-input-header']")).toHaveClass(
+      "px-2",
+      "py-1"
+    );
+    expect(container.querySelector("[data-slot='prompt-input-footer']")).toHaveClass(
+      "px-2",
+      "py-1"
+    );
+  });
+
+  it("PromptInputTextarea changes vertical rhythm with density", () => {
+    const { container } = render(
+      <PromptInput density="comfortable" onSubmit={() => {}}>
+        <PromptInputTextarea />
+      </PromptInput>
+    );
+    expect(container.querySelector("[data-slot='prompt-input-textarea']")).toHaveClass(
+      "min-h-20",
+      "py-3"
+    );
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -987,7 +1060,27 @@ describe("PromptInput — select", () => {
     render(<ModelSelect />);
     const trg = screen.getByRole("combobox");
     expect(trg).toHaveAttribute("data-slot", "prompt-input-select-trigger");
+    expect(trg).toHaveAttribute("data-provenance", "model");
+    expect(trg).toHaveClass("bg-input/30");
+    expect(trg).not.toHaveClass("bg-transparent");
     expect(trg).toHaveClass("trg-x");
+  });
+
+  it("uses compact select trigger sizing inside a compact composer", () => {
+    render(
+      <PromptInput density="compact" onSubmit={() => {}}>
+        <PromptInputTextarea />
+        <PromptInputSelect defaultValue="a">
+          <PromptInputSelectTrigger aria-label="Model">
+            <PromptInputSelectValue placeholder="Pick" />
+          </PromptInputSelectTrigger>
+          <PromptInputSelectContent>
+            <PromptInputSelectItem value="a">Alpha</PromptInputSelectItem>
+          </PromptInputSelectContent>
+        </PromptInputSelect>
+      </PromptInput>
+    );
+    expect(screen.getByRole("combobox")).toHaveAttribute("data-size", "sm");
   });
 
   it("shows the default value and opens to reveal items", async () => {

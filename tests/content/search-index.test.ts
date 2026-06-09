@@ -20,9 +20,26 @@ describe("search index — variants", () => {
   })
 
   it("does not emit variant entries for un-authored components", () => {
-    const synthetic = searchIndex.filter((e) =>
+    // Components whose ONLY variant is the synthetic default (no authored variants array).
+    // Search-index only emits entries from c.variants ?? [], so a #default entry is only
+    // present if the component has an authored variant with id "default". We therefore
+    // verify that every #default entry in the index corresponds to a component that
+    // explicitly authored that variant — i.e. its variants array contains { id: "default" }.
+    const defaultEntries = searchIndex.filter((e) =>
       /\/docs\/[^#]+#default$/.test(e.href),
     )
-    expect(synthetic).toHaveLength(0)
+    for (const entry of defaultEntries) {
+      // Derive slug from href: /docs/<slug>#default
+      const slug = entry.href.replace(/^\/docs\//, "").replace(/#default$/, "")
+      const doc = bySlug(slug)
+      // The component must exist and must have an authored variants array containing "default"
+      expect(doc, `no component found for slug "${slug}"`).toBeTruthy()
+      const authoredVariants = doc!.variants ?? []
+      const hasAuthoredDefault = authoredVariants.some((v) => v.id === "default")
+      expect(
+        hasAuthoredDefault,
+        `search entry ${entry.href} appears to be synthetic — "${slug}" has no authored variant with id "default"`,
+      ).toBe(true)
+    }
   })
 })

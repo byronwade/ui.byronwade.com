@@ -5,7 +5,7 @@ export default function Example() {
     <div className="p-6">
       <SplitWithRail
         summary={
-          <div className="space-y-4 rounded-2xl border border-border bg-card p-6">
+          <div className="space-y-4 rounded-2xl edge bg-card p-6">
             <div>
               <p className="text-xs text-muted-foreground uppercase tracking-wide">
                 Project
@@ -17,11 +17,11 @@ export default function Example() {
               snapshot. The right column holds a timeline, log, or event rail.
             </p>
             <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="rounded-xl border border-border p-3">
+              <div className="rounded-xl edge p-3">
                 <p className="text-xs text-muted-foreground">Environment</p>
                 <p className="mt-0.5 text-sm font-medium">Production</p>
               </div>
-              <div className="rounded-xl border border-border p-3">
+              <div className="rounded-xl edge p-3">
                 <p className="text-xs text-muted-foreground">Region</p>
                 <p className="mt-0.5 text-sm font-medium">us-east-1</p>
               </div>
@@ -29,7 +29,7 @@ export default function Example() {
           </div>
         }
         rail={
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl edge bg-card p-6">
             <p className="mb-3 text-sm font-semibold">Recent activity</p>
             <ol className="space-y-3">
               {[

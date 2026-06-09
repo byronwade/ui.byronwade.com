@@ -1,6 +1,7 @@
-import * as React from "react";
+import * as React from "react"
 
-import { cn } from "@/lib/utils";
+import { EntityRow } from "@/components/ui/entity-row"
+import { cn } from "@/lib/utils"
 
 /**
  * Compact rich result row for a command palette: leading media (avatar /
@@ -18,66 +19,73 @@ function CommandResult({
   ...props
 }: React.ComponentProps<"div"> & {
   /** Leading visual: a gradient-avatar, thumbnail, or icon. */
-  media?: React.ReactNode;
-  title: React.ReactNode;
+  media?: React.ReactNode
+  title: React.ReactNode
   /** Secondary muted line under the title. */
-  description?: React.ReactNode;
+  description?: React.ReactNode
   /** Trailing data (size, timestamp, count) — rendered in `font-mono`. */
-  meta?: React.ReactNode;
+  meta?: React.ReactNode
   /** Trailing affordance: a button, badge, or status-dot. */
-  action?: React.ReactNode;
+  action?: React.ReactNode
 }) {
   return (
-    <div
+    <EntityRow
       data-slot="command-result"
-      className={cn("flex w-full items-center gap-3", className)}
-      {...props}
-    >
-      {media != null && (
-        <span
-          data-slot="command-result-media"
-          className="flex shrink-0 items-center justify-center"
-        >
-          {media}
-        </span>
-      )}
-      <span
-        data-slot="command-result-body"
-        className="flex min-w-0 flex-col"
-      >
-        <span
-          data-slot="command-result-title"
-          className="truncate text-sm leading-tight"
-        >
-          {title}
-        </span>
-        {description != null && (
+      className={cn("gap-3 rounded-none p-0", className)}
+      leading={
+        media != null ? (
           <span
-            data-slot="command-result-description"
-            className="truncate text-xs leading-tight text-muted-foreground"
+            data-slot="command-result-media"
+            className="flex shrink-0 items-center justify-center"
           >
-            {description}
+            {media}
           </span>
-        )}
-      </span>
-      {meta != null && (
+        ) : undefined
+      }
+      title={
         <span
-          data-slot="command-result-meta"
-          className="ml-auto shrink-0 font-mono text-xs tabular-nums text-muted-foreground"
+          data-slot="command-result-body"
+          className="flex min-w-0 flex-col"
         >
-          {meta}
+          <span
+            data-slot="command-result-title"
+            className="truncate text-sm leading-tight"
+          >
+            {title}
+          </span>
+          {description != null && (
+            <span
+              data-slot="command-result-description"
+              className="truncate text-xs leading-tight text-muted-foreground"
+            >
+              {description}
+            </span>
+          )}
         </span>
-      )}
-      {action != null && (
-        <span
-          data-slot="command-result-action"
-          className={cn("shrink-0", meta == null && "ml-auto")}
-        >
-          {action}
-        </span>
-      )}
-    </div>
-  );
+      }
+      meta={
+        meta != null ? (
+          <span
+            data-slot="command-result-meta"
+            className="ml-auto font-mono text-xs tabular-nums text-muted-foreground"
+          >
+            {meta}
+          </span>
+        ) : undefined
+      }
+      actions={
+        action != null ? (
+          <span
+            data-slot="command-result-action"
+            className={cn("shrink-0", meta == null && "ml-auto")}
+          >
+            {action}
+          </span>
+        ) : undefined
+      }
+      {...props}
+    />
+  )
 }
 
-export { CommandResult };
+export { CommandResult }

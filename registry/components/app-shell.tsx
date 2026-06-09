@@ -52,7 +52,7 @@ function Header({ children, className }: { children: React.ReactNode; className?
     <header
       data-slot="app-shell-header"
       className={cn(
-        "flex h-14 shrink-0 items-center gap-3 border-b border-border bg-background px-4",
+        "flex h-14 shrink-0 items-center gap-3 bg-background px-4 edge",
         className,
       )}
     >
@@ -66,7 +66,7 @@ function Nav({ children, className }: { children: React.ReactNode; className?: s
     <nav
       data-slot="app-shell-nav"
       className={cn(
-        "flex h-11 shrink-0 items-center gap-1 border-b border-border bg-background px-4",
+        "flex h-11 shrink-0 items-center gap-1 bg-background px-4 edge",
         className,
       )}
     >
@@ -80,7 +80,7 @@ function Sidebar({ children, className }: { children: React.ReactNode; className
     <nav
       data-slot="app-shell-sidebar"
       className={cn(
-        "hidden w-60 shrink-0 overflow-auto border-r border-border bg-sidebar text-sidebar-foreground scrollbar-thin md:flex md:flex-col",
+        "hidden w-60 shrink-0 overflow-auto bg-sidebar text-sidebar-foreground edge scrollbar-thin md:flex md:flex-col",
         className,
       )}
     >
@@ -94,7 +94,7 @@ function Panel({ children, className }: { children: React.ReactNode; className?:
     <div
       data-slot="app-shell-panel"
       className={cn(
-        "hidden w-80 shrink-0 overflow-auto border-r border-border bg-background scrollbar-thin lg:flex lg:flex-col",
+        "hidden w-80 shrink-0 overflow-auto bg-background edge scrollbar-thin lg:flex lg:flex-col",
         className,
       )}
     >
@@ -108,7 +108,7 @@ function Toolbar({ children, className }: { children: React.ReactNode; className
     <div
       data-slot="app-shell-toolbar"
       className={cn(
-        "flex h-12 shrink-0 items-center gap-2 border-b border-border bg-background px-4",
+        "flex h-12 shrink-0 items-center gap-2 bg-background px-4 edge",
         className,
       )}
     >
@@ -122,7 +122,7 @@ function Aside({ children, className }: { children: React.ReactNode; className?:
     <aside
       data-slot="app-shell-aside"
       className={cn(
-        "hidden w-72 shrink-0 overflow-auto border-l border-border bg-background scrollbar-thin xl:flex xl:flex-col",
+        "hidden w-72 shrink-0 overflow-auto bg-background edge scrollbar-thin xl:flex xl:flex-col",
         className,
       )}
     >
@@ -136,7 +136,7 @@ function Footer({ children, className }: { children: React.ReactNode; className?
     <footer
       data-slot="app-shell-footer"
       className={cn(
-        "flex shrink-0 items-center gap-3 border-t border-border bg-background px-4 py-3",
+        "flex shrink-0 items-center gap-3 bg-background px-4 py-3 edge",
         className,
       )}
     >
@@ -157,8 +157,21 @@ function Content({ children, className }: { children: React.ReactNode; className
 }
 
 /** A horizontal row that owns the remaining vertical space below top bars. */
-function Row({ children }: { children: React.ReactNode }) {
-  return <div className="flex min-h-0 flex-1 overflow-hidden">{children}</div>
+function Row({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      data-slot="app-shell-row"
+      className={cn("flex min-h-0 flex-1 overflow-hidden", className)}
+    >
+      {children}
+    </div>
+  )
 }
 
 // ─── Variant compositions ──────────────────────────────────────────────────────

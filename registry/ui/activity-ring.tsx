@@ -163,7 +163,7 @@ function ScoreRing({
         className="absolute inset-0 grid place-items-center text-center"
       >
         <div>
-          <div className="text-3xl font-semibold tracking-tight tabular-nums">
+          <div className="text-3xl font-mono font-medium tracking-tight tabular-nums">
             {Math.round(value)}
           </div>
           {label && (
@@ -345,7 +345,7 @@ function SegmentedRing({
           data-slot="activity-ring-center"
           className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"
         >
-          <span className="text-3xl font-semibold tabular-nums tracking-tight">
+          <span className="text-3xl font-mono font-medium tabular-nums tracking-tight">
             {formatValue(centre.value)}
           </span>
           <span className="text-xs text-muted-foreground">{centre.label}</span>

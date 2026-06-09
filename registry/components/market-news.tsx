@@ -26,7 +26,7 @@ const sentimentTone: Record<
   neutral: "bg-muted text-muted-foreground",
 }
 
-const marketNewsVariants = cva("w-full max-w-2xl overflow-hidden border border-border", {
+const marketNewsVariants = cva("w-full max-w-2xl overflow-hidden edge", {
   variants: {
     variant: {
       default: "rounded-xl bg-card",
@@ -198,7 +198,7 @@ function MarketNews({
                 className={cn(
                   "flex w-full items-start text-left transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-60",
                   itemPadding,
-                  layout === "grid" ? "rounded-md border border-border" : "",
+                  layout === "grid" ? "rounded-md edge" : "",
                   selectedId === item.id
                     ? "bg-brand/10 ring-1 ring-brand/30"
                     : "hover:bg-muted/40",
@@ -207,7 +207,7 @@ function MarketNews({
                   if (!disabled) onSelect?.(item.id)
                 }}
               >
-                <Avatar className="size-8 border border-border">
+                <Avatar className="size-8 edge">
                   <AvatarFallback className="text-xs font-medium">
                     {item.source.slice(0, 2).toUpperCase()}
                   </AvatarFallback>

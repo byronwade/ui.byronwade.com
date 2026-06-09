@@ -34,6 +34,22 @@
       ]
     },
     {
+      "name": "demo-viewport",
+      "type": "registry:lib",
+      "title": "Demo viewport context",
+      "description": "Optional preview context for components that can inherit docs/demo viewport, density, frame, and shadow controls.",
+      "dependencies": [
+        "react"
+      ],
+      "files": [
+        {
+          "path": "registry/lib/demo-viewport.ts",
+          "type": "registry:lib",
+          "target": "lib/demo-viewport.ts"
+        }
+      ]
+    },
+    {
       "name": "overflow-menu-item",
       "type": "registry:lib",
       "title": "Overflow menu item type",
@@ -151,7 +167,19 @@
           "destructive": "oklch(0.577 0.245 27.325)",
           "border": "oklch(0.908 0.005 85)",
           "input": "oklch(0.908 0.005 85)",
-          "edge": "oklch(0 0 0 / 11%)",
+          "edge": "oklch(0 0 0 / 7%)",
+          "shadow-0": "none",
+          "shadow-100": "0px 1px 0px 0px rgba(26, 26, 26, 0.07)",
+          "shadow-200": "0px 3px 1px -1px rgba(26, 26, 26, 0.07)",
+          "shadow-300": "0px 4px 6px -2px rgba(26, 26, 26, 0.20)",
+          "shadow-400": "0px 8px 16px -4px rgba(26, 26, 26, 0.22)",
+          "shadow-500": "0px 12px 20px -8px rgba(26, 26, 26, 0.24)",
+          "shadow-600": "0px 20px 20px -8px rgba(26, 26, 26, 0.28)",
+          "shadow-bevel-100": "1px 0px 0px 0px rgba(0, 0, 0, 0.13) inset, -1px 0px 0px 0px rgba(0, 0, 0, 0.13) inset, 0px -1px 0px 0px rgba(0, 0, 0, 0.17) inset, 0px 1px 0px 0px rgba(204, 204, 204, 0.5) inset",
+          "shadow-inset-100": "0px 1px 2px 0px rgba(26, 26, 26, 0.15) inset, 0px 1px 1px 0px rgba(26, 26, 26, 0.15) inset",
+          "shadow-inset-200": "0px 2px 1px 0px rgba(26, 26, 26, 0.20) inset, 1px 0px 1px 0px rgba(26, 26, 26, 0.12) inset, -1px 0px 1px 0px rgba(26, 26, 26, 0.12) inset",
+          "depth-soft": "var(--shadow-100), var(--shadow-bevel-100)",
+          "depth-raised": "var(--shadow-300), var(--shadow-bevel-100)",
           "brand": "oklch(0.6 0.17 148)",
           "brand-foreground": "oklch(0.99 0.002 95)",
           "brand-muted": "oklch(0.96 0.03 148)",
@@ -201,9 +229,21 @@
           "accent": "oklch(0.285 0.008 70)",
           "accent-foreground": "oklch(0.95 0.004 83)",
           "destructive": "oklch(0.704 0.191 22.216)",
-          "border": "oklch(0.285 0.006 70)",
-          "input": "oklch(0.32 0.007 70)",
-          "edge": "oklch(1 0 0 / 10%)",
+          "border": "oklch(0.32 0.006 70)",
+          "input": "oklch(0.34 0.007 70)",
+          "edge": "oklch(1 0 0 / 8%)",
+          "shadow-0": "none",
+          "shadow-100": "0px 1px 0px 0px rgba(0, 0, 0, 0.32)",
+          "shadow-200": "0px 3px 1px -1px rgba(0, 0, 0, 0.36)",
+          "shadow-300": "0px 4px 6px -2px rgba(0, 0, 0, 0.55)",
+          "shadow-400": "0px 8px 16px -4px rgba(0, 0, 0, 0.6)",
+          "shadow-500": "0px 12px 20px -8px rgba(0, 0, 0, 0.65)",
+          "shadow-600": "0px 20px 20px -8px rgba(0, 0, 0, 0.7)",
+          "shadow-bevel-100": "1px 0px 0px 0px rgba(0, 0, 0, 0.32) inset, -1px 0px 0px 0px rgba(0, 0, 0, 0.32) inset, 0px -1px 0px 0px rgba(0, 0, 0, 0.48) inset, 0px 1px 0px 0px rgba(0, 0, 0, 0.24) inset",
+          "shadow-inset-100": "0px 1px 2px 0px rgba(26, 26, 26, 0.15) inset, 0px 1px 1px 0px rgba(26, 26, 26, 0.15) inset",
+          "shadow-inset-200": "0px 2px 1px 0px rgba(26, 26, 26, 0.20) inset, 1px 0px 1px 0px rgba(26, 26, 26, 0.12) inset, -1px 0px 1px 0px rgba(26, 26, 26, 0.12) inset",
+          "depth-soft": "var(--shadow-100), var(--shadow-bevel-100)",
+          "depth-raised": "var(--shadow-300), var(--shadow-bevel-100)",
           "brand": "oklch(0.7 0.17 148)",
           "brand-foreground": "oklch(0.985 0.001 95)",
           "brand-muted": "oklch(0.32 0.06 148)",
@@ -229,7 +269,7 @@
           "sidebar-primary-foreground": "oklch(0.2 0.006 70)",
           "sidebar-accent": "oklch(0.255 0.007 70)",
           "sidebar-accent-foreground": "oklch(0.95 0.004 83)",
-          "sidebar-border": "oklch(0.275 0.006 70)",
+          "sidebar-border": "oklch(0.31 0.006 70)",
           "sidebar-ring": "oklch(0.556 0.006 75)",
           "activity-thinking": "oklch(0.8 0.09 55)",
           "activity-search": "oklch(0.82 0.08 152)",
@@ -286,6 +326,39 @@
           },
           ".edge": {
             "box-shadow": "inset 0 0 0 1px var(--edge)"
+          },
+          ".depth-none": {
+            "box-shadow": "var(--shadow-0)"
+          },
+          ".depth-soft": {
+            "box-shadow": "var(--depth-soft)"
+          },
+          ".depth-raised": {
+            "box-shadow": "var(--depth-raised)"
+          },
+          ".depth-100": {
+            "box-shadow": "var(--shadow-100), var(--shadow-bevel-100)"
+          },
+          ".depth-200": {
+            "box-shadow": "var(--shadow-200), var(--shadow-bevel-100)"
+          },
+          ".depth-300": {
+            "box-shadow": "var(--shadow-300), var(--shadow-bevel-100)"
+          },
+          ".depth-400": {
+            "box-shadow": "var(--shadow-400), var(--shadow-bevel-100)"
+          },
+          ".depth-500": {
+            "box-shadow": "var(--shadow-500), var(--shadow-bevel-100)"
+          },
+          ".depth-600": {
+            "box-shadow": "var(--shadow-600), var(--shadow-bevel-100)"
+          },
+          ".depth-inset-100": {
+            "box-shadow": "var(--shadow-inset-100)"
+          },
+          ".depth-inset-200": {
+            "box-shadow": "var(--shadow-inset-200)"
           },
           ".reading-measure": {
             "max-width": "65ch"
@@ -478,6 +551,15 @@
           },
           ".scrim-top": {
             "background-image": "linear-gradient(to bottom, rgb(0 0 0 / 0.5), transparent 50%)"
+          },
+          ".scrim-bottom": {
+            "background-image": "linear-gradient(to top, color-mix(in oklch, var(--foreground) 80%, transparent), color-mix(in oklch, var(--foreground) 30%, transparent) 45%, transparent)"
+          },
+          ".scrim-top-background": {
+            "background-image": "linear-gradient(to bottom, color-mix(in oklch, var(--background) 80%, transparent), transparent)"
+          },
+          ".scrim-bottom-background": {
+            "background-image": "linear-gradient(to top, var(--background), color-mix(in oklch, var(--background) 90%, transparent) 55%, transparent)"
           }
         },
         ".scrollbar-thin": {
@@ -501,6 +583,26 @@
           "path": "registry/ui/status-dot.tsx",
           "type": "registry:ui",
           "target": "components/ui/status-dot.tsx"
+        }
+      ]
+    },
+    {
+      "name": "entity-row",
+      "type": "registry:ui",
+      "title": "Entity row",
+      "description": "Shared row primitive with leading, title, description, meta, status, actions, and accessible overlay activation.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/entity-row.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/entity-row.tsx"
         }
       ]
     },
@@ -557,7 +659,7 @@
       "name": "activity-grid",
       "type": "registry:ui",
       "title": "Activity grid",
-      "description": "GitHub-style grid of small circles, filled in brand where active.",
+      "description": "GitHub-style activity grid with density-aware cell sizing, shape variants, and brand intensity buckets.",
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils"
@@ -706,6 +808,7 @@
       ],
       "registryDependencies": [
         "@byronwade/foundation",
+        "@byronwade/metric",
         "@byronwade/utils"
       ],
       "files": [
@@ -713,6 +816,26 @@
           "path": "registry/components/metric-stat.tsx",
           "type": "registry:component",
           "target": "components/metric-stat.tsx"
+        }
+      ]
+    },
+    {
+      "name": "metric",
+      "type": "registry:ui",
+      "title": "Metric",
+      "description": "Metric — label, value, hint, icon, and delta display primitive.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/metric.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/metric.tsx"
         }
       ]
     },
@@ -1331,6 +1454,11 @@
           "path": "registry/ui/table.tsx",
           "type": "registry:ui",
           "target": "components/ui/table.tsx"
+        },
+        {
+          "path": "registry/ui/table-variants.ts",
+          "type": "registry:ui",
+          "target": "components/ui/table-variants.ts"
         }
       ]
     },
@@ -1399,7 +1527,7 @@
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/metric-stat",
+        "@byronwade/metric",
         "@byronwade/utils"
       ],
       "files": [
@@ -1895,6 +2023,7 @@
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
+        "@byronwade/entity-row",
         "@byronwade/command"
       ],
       "files": [
@@ -2677,6 +2806,7 @@
       ],
       "registryDependencies": [
         "@byronwade/foundation",
+        "@byronwade/demo-viewport",
         "@byronwade/utils",
         "@byronwade/button",
         "@byronwade/command",
@@ -3270,9 +3400,10 @@
       "name": "ai-prompt-input",
       "type": "registry:component",
       "title": "AI Prompt Input",
-      "description": "A composable AI chat prompt input with textarea, file attachments, action menu, model select, speech-to-text, and slash-command primitives built on byronwade/ui input-group, select, dropdown-menu, hover-card, and command.",
+      "description": "A composable AI chat prompt input with density-aware composer layout, textarea, file attachments, action menu, model select, speech-to-text, and slash-command primitives built on byronwade/ui input-group, select, dropdown-menu, hover-card, and command.",
       "registryDependencies": [
         "@byronwade/foundation",
+        "@byronwade/demo-viewport",
         "@byronwade/utils",
         "@byronwade/button",
         "@byronwade/command",
@@ -3891,6 +4022,7 @@
         "@byronwade/badge",
         "@byronwade/status-dot",
         "@byronwade/button",
+        "@byronwade/entity-row",
         "@byronwade/market",
         "@byronwade/utils"
       ],
@@ -4363,6 +4495,7 @@
       ],
       "registryDependencies": [
         "@byronwade/foundation",
+        "@byronwade/demo-viewport",
         "@byronwade/table",
         "@byronwade/checkbox",
         "@byronwade/bulk-action-bar",
@@ -4380,6 +4513,35 @@
       ]
     },
     {
+      "name": "data-table",
+      "type": "registry:component",
+      "title": "Data table",
+      "description": "Shopify-grade admin table shell with index filters, bulk selection, sortable columns, and pagination.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@byronwade/foundation",
+        "@byronwade/demo-viewport",
+        "@byronwade/table",
+        "@byronwade/checkbox",
+        "@byronwade/bulk-action-bar",
+        "@byronwade/skeleton",
+        "@byronwade/button",
+        "@byronwade/empty-state",
+        "@byronwade/index-filters",
+        "@byronwade/segmented-control",
+        "@byronwade/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/components/data-table.tsx",
+          "type": "registry:component",
+          "target": "components/data-table.tsx"
+        }
+      ]
+    },
+    {
       "name": "resource-list",
       "type": "registry:component",
       "title": "Resource list",
@@ -4389,6 +4551,8 @@
         "@byronwade/badge",
         "@byronwade/bulk-action-bar",
         "@byronwade/checkbox",
+        "@byronwade/demo-viewport",
+        "@byronwade/entity-row",
         "@byronwade/utils"
       ],
       "files": [
@@ -5009,6 +5173,9 @@
       "type": "registry:lib",
       "title": "useIsMobile",
       "description": "Hook that tracks viewport width against a 768px breakpoint for responsive sidebar and layout patterns. Adapted from shadcn/ui.",
+      "registryDependencies": [
+        "@byronwade/demo-viewport"
+      ],
       "files": [
         {
           "path": "registry/lib/use-mobile.ts",
@@ -5228,9 +5395,11 @@
       "registryDependencies": [
         "@byronwade/utils",
         "@byronwade/controllable-state",
+        "@byronwade/demo-viewport",
         "@byronwade/overflow-menu-item",
         "@byronwade/toggle-state",
         "@byronwade/status-dot",
+        "@byronwade/entity-row",
         "@byronwade/activity-ring",
         "@byronwade/identity",
         "@byronwade/gradient-avatar",
@@ -5243,6 +5412,7 @@
         "@byronwade/marketing-layout",
         "@byronwade/hero-section",
         "@byronwade/metric-stat",
+        "@byronwade/metric",
         "@byronwade/centered-focal",
         "@byronwade/button",
         "@byronwade/calendar",
@@ -5422,6 +5592,7 @@
         "@byronwade/customer-card",
         "@byronwade/fulfillment-tracker",
         "@byronwade/index-table",
+        "@byronwade/data-table",
         "@byronwade/resource-list",
         "@byronwade/index-filters",
         "@byronwade/tag-input",

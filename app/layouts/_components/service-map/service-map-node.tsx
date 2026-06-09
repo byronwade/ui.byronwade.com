@@ -152,7 +152,7 @@ function DatabaseNode({ data }: { data: ServiceNodeData }) {
       <Handles />
       <div
         data-slot="service-map-db-node"
-        className="flex w-[220px] cursor-pointer overflow-hidden rounded-r-lg border bg-card transition-[border-color,box-shadow] duration-150"
+        className="flex w-[220px] cursor-pointer overflow-hidden rounded-r-lg edge bg-card transition-[border-color,box-shadow] duration-150"
         style={{
           backgroundImage: `linear-gradient(${withAlpha(color, 0.12)}, ${withAlpha(color, 0.12)})`,
           borderColor: selected ? color : withAlpha(color, 0.4),
@@ -234,7 +234,7 @@ function ServiceNode({ data }: { data: ServiceNodeData }) {
       <div
         data-slot="service-map-node"
         className={cn(
-          "flex w-[220px] cursor-pointer overflow-hidden rounded-r-lg border bg-card transition-[border-color,box-shadow] duration-150",
+          "flex w-[220px] cursor-pointer overflow-hidden rounded-r-lg edge bg-card transition-[border-color,box-shadow] duration-150",
           selected
             ? getSelectedBorderClass(errorRate)
             : "border-border hover:border-border",

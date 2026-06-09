@@ -11,7 +11,7 @@ const services = [
 
 export default function Example() {
   return (
-    <div className="w-full max-w-sm rounded-2xl border p-4">
+    <div className="w-full max-w-sm rounded-2xl edge p-4">
       <p className="mb-3 text-sm font-medium">Service Status</p>
       <ul className="flex flex-col gap-2">
         {services.map((s) => (

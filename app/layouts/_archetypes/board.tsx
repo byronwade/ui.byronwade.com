@@ -190,9 +190,9 @@ export function BoardArchetype() {
       <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border px-4">
         <button
           type="button"
-          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold tracking-tight transition-colors hover:bg-muted"
+          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-medium tracking-tight transition-colors hover:bg-muted"
         >
-          <span className="grid size-5 place-items-center rounded-md bg-brand/15 text-[10px] font-bold text-brand">
+          <span className="grid size-5 place-items-center rounded-md bg-brand/15 text-[10px] font-medium text-brand">
             A
           </span>
           Atlas redesign
@@ -228,7 +228,7 @@ export function BoardArchetype() {
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-2.5">
         <div className="flex items-center gap-2">
-          <h1 className="text-sm font-semibold tracking-tight">Sprint 24</h1>
+          <h1 className="text-sm font-medium tracking-tight">Sprint 24</h1>
           <Badge variant="secondary">10 issues</Badge>
         </div>
         <div className="flex items-center gap-2">
@@ -247,7 +247,7 @@ export function BoardArchetype() {
               <div className="mb-2 flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                   <StatusDot tone={col.tone} />
-                  <span className="text-sm font-semibold tracking-tight">
+                  <span className="text-sm font-medium tracking-tight">
                     {col.name}
                   </span>
                   <span className="text-xs font-medium text-muted-foreground">
@@ -268,7 +268,7 @@ export function BoardArchetype() {
                 {col.cards.map((card) => (
                   <article
                     key={card.id}
-                    className="group cursor-grab space-y-2.5 rounded-xl bg-card p-3 shadow-card transition-shadow hover:shadow-md active:cursor-grabbing"
+                    className="edge group cursor-grab space-y-2.5 overflow-hidden rounded-xl bg-card p-3 active:cursor-grabbing"
                   >
                     <div className="flex flex-wrap items-center gap-1.5">
                       {card.labels.map((l) => (

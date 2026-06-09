@@ -94,6 +94,22 @@ export const guides: Guide[] = [
     description:
       "Install one rule so Cursor, Claude, Copilot, and others keep building with these components and tokens.",
   },
+  {
+    slug: "lint",
+    href: "/docs/lint",
+    label: "Lint",
+    title: "On-system lint",
+    description:
+      "Catch off-system code automatically — the ESLint plugin and byronwade-lint CLI flag raw color, off-token spacing, hand-rolled gradients, and bold headings.",
+  },
+  {
+    slug: "mcp",
+    href: "/docs/mcp",
+    label: "MCP server",
+    title: "MCP server",
+    description:
+      "Give an AI agent live access to every component, the full token set, and the design rule — plus a real-time on-system check — over MCP.",
+  },
 ]
 
 /** Guides that are real sub-pages (everything except the Introduction index). */

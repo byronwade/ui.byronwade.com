@@ -26,7 +26,7 @@ export default function Example() {
         <div className="flex flex-wrap items-center gap-3">
           {sides.map((side) => (
             <Popover key={side}>
-              <PopoverTrigger className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors capitalize">
+              <PopoverTrigger className="inline-flex items-center rounded-full edge bg-background px-3 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors capitalize">
                 {side}
               </PopoverTrigger>
               <PopoverContent side={side} align="center">
@@ -50,7 +50,7 @@ export default function Example() {
         <div className="flex flex-wrap items-center gap-3">
           {aligns.map((align) => (
             <Popover key={align}>
-              <PopoverTrigger className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors capitalize">
+              <PopoverTrigger className="inline-flex items-center rounded-full edge bg-background px-3 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors capitalize">
                 align=&ldquo;{align}&rdquo;
               </PopoverTrigger>
               <PopoverContent side="bottom" align={align}>
@@ -74,7 +74,7 @@ export default function Example() {
         <div className="flex flex-wrap items-center gap-3">
           {[0, 8, 16, 24].map((offset) => (
             <Popover key={offset}>
-              <PopoverTrigger className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors">
+              <PopoverTrigger className="inline-flex items-center rounded-full edge bg-background px-3 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors">
                 offset={offset}
               </PopoverTrigger>
               <PopoverContent side="bottom" align="center" sideOffset={offset}>

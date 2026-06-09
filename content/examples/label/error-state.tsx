@@ -32,7 +32,7 @@ export default function Example() {
           placeholder="jane@example.com"
           aria-invalid={emailError}
           aria-describedby={emailError ? "email-error" : undefined}
-          className={`rounded-md border px-3 py-2 text-sm ${
+          className={`rounded-md edge px-3 py-2 text-sm ${
             emailError ? "border-destructive focus:outline-destructive" : ""
           }`}
         />
@@ -58,7 +58,7 @@ export default function Example() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           aria-invalid={usernameError}
-          className={`rounded-md border px-3 py-2 text-sm ${
+          className={`rounded-md edge px-3 py-2 text-sm ${
             usernameError ? "border-destructive" : ""
           }`}
         />
@@ -83,7 +83,7 @@ export default function Example() {
           type="url"
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
-          className={`rounded-md border px-3 py-2 text-sm ${
+          className={`rounded-md edge px-3 py-2 text-sm ${
             websiteValid ? "border-success" : ""
           }`}
         />

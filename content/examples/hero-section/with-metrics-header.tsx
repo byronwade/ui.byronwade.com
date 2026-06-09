@@ -41,7 +41,7 @@ export default function Example() {
           </>
         }
       >
-        <div className="h-48 rounded-xl border border-border bg-gradient-to-b from-success/10 to-transparent flex items-end justify-center pb-6 text-sm text-muted-foreground">
+        <div className="h-48 rounded-xl edge bg-gradient-to-b from-success/10 to-transparent flex items-end justify-center pb-6 text-sm text-muted-foreground">
           Full-bleed area chart
         </div>
       </HeroSection>

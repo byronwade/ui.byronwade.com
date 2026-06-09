@@ -70,7 +70,7 @@ export function AppBreadcrumb() {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="pointer-events-auto relative z-0 flex h-[40px] items-center overflow-hidden rounded-3xl bg-dock px-4 text-[13px] shadow-float"
+      className="pointer-events-auto relative z-0 flex h-[40px] items-center overflow-hidden rounded-3xl bg-dock px-4 text-[13px] edge"
     >
       {/* DESKTOP, full trail, collapsing to root / … / current. */}
       <ol
@@ -91,7 +91,7 @@ export function AppBreadcrumb() {
                     <button
                       type="button"
                       aria-label="Show hidden breadcrumb levels"
-                      className="flex size-6 items-center justify-center rounded-md text-dock-foreground outline-none transition-colors hover:bg-dock-active hover:text-dock-active-foreground focus-visible:ring-2 focus-visible:ring-white/30"
+                      className="flex size-6 items-center justify-center rounded-md text-dock-foreground outline-none transition-colors hover:bg-dock-active hover:text-dock-active-foreground focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <MoreHorizontal className="size-4" />
                     </button>
@@ -100,7 +100,7 @@ export function AppBreadcrumb() {
                 <PopoverContent
                   align="start"
                   sideOffset={8}
-                  className="flex w-auto min-w-44 flex-col gap-0.5 rounded-xl bg-dock p-1.5 text-dock-foreground shadow-float ring-0"
+                  className="flex w-auto min-w-44 flex-col gap-0.5 rounded-xl bg-dock p-1.5 text-dock-foreground edge ring-0"
                 >
                   {middle.map((c) => (
                     <Link
@@ -141,7 +141,7 @@ export function AppBreadcrumb() {
           </li>
         )}
         <li className="min-w-0">
-          <span className="truncate font-semibold text-dock-active-foreground">
+          <span className="truncate font-medium text-dock-active-foreground">
             {last.label}
           </span>
         </li>
@@ -159,7 +159,7 @@ export function AppBreadcrumb() {
             <span
               className={cn(
                 "shrink-0",
-                i === crumbs.length - 1 ? "font-semibold" : "",
+                i === crumbs.length - 1 ? "font-medium" : "",
               )}
             >
               {c.label}
@@ -178,9 +178,9 @@ function CrumbLink({ crumb, current }: { crumb: Crumb; current?: boolean }) {
         href={crumb.href}
         aria-current={current ? "page" : undefined}
         className={cn(
-          "truncate rounded-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white/30",
+          "truncate rounded-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
           current
-            ? "font-semibold text-dock-active-foreground"
+            ? "font-medium text-dock-active-foreground"
             : "text-dock-foreground hover:text-dock-active-foreground",
         )}
       >

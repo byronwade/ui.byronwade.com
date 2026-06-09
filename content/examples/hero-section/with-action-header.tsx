@@ -23,7 +23,7 @@ export default function Example() {
           </>
         }
       >
-        <div className="h-40 rounded-xl border border-border bg-card flex items-center justify-center text-sm text-muted-foreground">
+        <div className="h-40 rounded-xl edge bg-card flex items-center justify-center text-sm text-muted-foreground">
           Full-bleed activity chart
         </div>
       </HeroSection>

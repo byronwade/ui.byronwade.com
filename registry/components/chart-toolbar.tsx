@@ -54,7 +54,7 @@ function ChartToolbar({
         "flex flex-wrap items-center gap-2",
         compact
           ? "h-9 shrink-0 gap-0.5 rounded-none border-0 border-b border-border bg-card/80 px-1 py-0"
-          : "rounded-lg border border-border bg-card px-2 py-1.5",
+          : "rounded-lg edge bg-card px-2 py-1.5",
         className,
       )}
       {...props}

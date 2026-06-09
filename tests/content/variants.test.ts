@@ -40,4 +40,29 @@ describe("getVariants", () => {
         expect(variant.id).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/)
     }
   })
+
+  it("does not author toolbar-controlled density or frame variants", () => {
+    for (const component of components) {
+      for (const variant of component.variants ?? []) {
+        for (const tag of variant.tags) {
+          expect(tag, `${component.slug}/${variant.id}`).not.toMatch(
+            /^(density|frame):/,
+          )
+        }
+      }
+    }
+  })
+
+  it("keeps resource list variants focused on feature states", () => {
+    const resourceList = components.find(
+      (component) => component.slug === "resource-list",
+    )!
+    expect(resourceList.variants?.map((variant) => variant.id)).toEqual([
+      "default",
+      "selectable",
+      "with-actions",
+      "empty",
+      "loading",
+    ])
+  })
 })

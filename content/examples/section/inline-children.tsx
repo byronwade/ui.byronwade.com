@@ -17,7 +17,7 @@ export default function Example() {
             control={<Badge variant="success">Active</Badge>}
           >
             {/* Inline code block as a child, rendered below description */}
-            <code className="mt-1 block rounded-md border bg-muted px-2.5 py-1.5 font-mono text-xs text-muted-foreground">
+            <code className="mt-1 block rounded-md edge bg-muted px-2.5 py-1.5 font-mono text-xs text-muted-foreground">
               https://api.example.com/webhooks/prod
             </code>
           </SettingRow>
@@ -27,7 +27,7 @@ export default function Example() {
             description="Receives only test-mode events. Safe to point at an internal service."
             control={<Badge variant="outline">Paused</Badge>}
           >
-            <code className="mt-1 block rounded-md border bg-muted px-2.5 py-1.5 font-mono text-xs text-muted-foreground">
+            <code className="mt-1 block rounded-md edge bg-muted px-2.5 py-1.5 font-mono text-xs text-muted-foreground">
               https://staging.example.com/webhooks
             </code>
           </SettingRow>

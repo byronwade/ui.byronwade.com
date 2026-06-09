@@ -145,7 +145,7 @@ describe("AudioPlayer — variants", () => {
     const { container } = render(<FullPlayer />)
     const el = root(container)
     expect(el).toHaveAttribute("data-variant", "default")
-    expect(el).toHaveClass("border", "rounded-lg")
+    expect(el).toHaveClass("edge", "rounded-lg")
   })
 
   it.each([

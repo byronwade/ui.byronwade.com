@@ -208,7 +208,7 @@ export const QueueItemFile = ({
   <span
     data-slot="queue-item-file"
     className={cn(
-      "flex items-center gap-1 rounded-sm border bg-muted px-2 py-1 text-xs",
+      "flex items-center gap-1 rounded-sm edge bg-muted px-2 py-1 text-xs",
       className
     )}
     {...props}
@@ -326,7 +326,7 @@ export const Queue = ({ className, ...props }: QueueProps) => (
   <div
     data-slot="queue"
     className={cn(
-      "flex flex-col gap-2 rounded-xl border border-border bg-background px-3 pt-2 pb-2 shadow-xs",
+      "flex flex-col gap-2 rounded-xl edge bg-background px-3 pt-2 pb-2 ",
       className
     )}
     {...props}

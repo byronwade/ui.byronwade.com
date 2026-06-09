@@ -62,7 +62,7 @@ export default function Example() {
   }, [])
 
   return (
-    <div className="w-80 rounded-xl border bg-card p-5 shadow-sm">
+    <div className="w-80 rounded-xl edge bg-card p-5 edge">
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm font-medium text-foreground">
           Featured Article

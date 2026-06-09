@@ -82,9 +82,9 @@ describe("AlbumCover", () => {
     expect(root(container)).toHaveClass(cls)
   })
 
-  it("applies the shadow class when shadow is set", () => {
+  it("applies the edge class when shadow is set", () => {
     const { container } = render(<AlbumCover src={SRC} alt="X" shadow />)
-    expect(root(container)).toHaveClass("shadow-md")
+    expect(root(container)).toHaveClass("edge")
   })
 
   it("merges a custom className", () => {

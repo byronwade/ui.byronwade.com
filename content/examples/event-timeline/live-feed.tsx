@@ -76,7 +76,7 @@ export default function Example() {
         <h2 className="text-sm font-semibold">Live Event Feed</h2>
         <button
           onClick={reset}
-          className="rounded-full border px-3 py-1 text-xs text-muted-foreground hover:text-foreground"
+          className="rounded-full edge px-3 py-1 text-xs text-muted-foreground hover:text-foreground"
         >
           Replay
         </button>

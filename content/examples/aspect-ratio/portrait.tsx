@@ -5,7 +5,7 @@ export default function Example() {
     <div className="w-48">
       <AspectRatio
         ratio={3 / 4}
-        className="overflow-hidden rounded-xl border bg-muted"
+        className="overflow-hidden rounded-xl edge bg-muted"
       >
         <div className="flex size-full items-center justify-center text-sm text-muted-foreground">
           3:4

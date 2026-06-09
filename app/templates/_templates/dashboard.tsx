@@ -213,7 +213,7 @@ export function DashboardTemplate() {
         {/* Scrolling content */}
         <div className="min-h-0 flex-1 overflow-y-auto p-4 sm:p-6">
           {/* KPI strip */}
-          <div className="grid gap-px overflow-hidden rounded-2xl bg-border shadow-card sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px overflow-hidden rounded-2xl bg-edge sm:grid-cols-2 lg:grid-cols-4">
             {kpis.map((k) => (
               <div key={k.label} className="bg-card p-5">
                 <MetricStat
@@ -227,7 +227,7 @@ export function DashboardTemplate() {
           </div>
 
           {/* Hero chart */}
-          <section className="relative mt-6 overflow-hidden rounded-2xl bg-card p-6 shadow-card">
+          <section className="relative mt-6 overflow-hidden rounded-2xl bg-card p-6 edge">
             <div
               aria-hidden
               className="glow-brand pointer-events-none absolute inset-x-0 -top-10 h-40 opacity-60"
@@ -246,8 +246,7 @@ export function DashboardTemplate() {
                   <span className="size-2 rounded-full bg-brand" /> Revenue
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="size-2 rounded-full bg-[var(--chart-3)]" />{" "}
-                  Orders
+                  <span className="size-2 rounded-full bg-chart-3" /> Orders
                 </span>
               </div>
             </div>
@@ -316,7 +315,7 @@ export function DashboardTemplate() {
 
           {/* Orders + activity */}
           <div className="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-            <section className="overflow-hidden rounded-2xl bg-card shadow-card">
+            <section className="overflow-hidden rounded-2xl bg-card edge">
               <div className="flex items-center justify-between border-b border-border px-5 py-3">
                 <h2 className="text-sm font-semibold tracking-tight">
                   Recent orders
@@ -360,7 +359,7 @@ export function DashboardTemplate() {
               </Table>
             </section>
 
-            <section className="rounded-2xl bg-card p-5 shadow-card">
+            <section className="rounded-2xl bg-card p-5 edge">
               <h2 className="text-sm font-semibold tracking-tight">Activity</h2>
               <ol className="mt-4 space-y-4">
                 {activity.map((a, i) => (

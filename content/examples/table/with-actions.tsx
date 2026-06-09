@@ -117,7 +117,7 @@ export default function Example() {
 
                 {openMenu === m.id && (
                   <div
-                    className="absolute right-0 top-8 z-10 w-36 rounded-lg border bg-popover p-1 shadow-md text-popover-foreground"
+                    className="absolute right-0 top-8 z-10 w-36 rounded-lg edge bg-popover p-1 edge text-popover-foreground"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <button className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-sm hover:bg-muted">

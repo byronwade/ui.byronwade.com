@@ -188,6 +188,29 @@ describe("Combobox — variants", () => {
     expect(screen.getByLabelText("Add framework")).toBeInTheDocument()
   })
 
+  it("uses a visible input fill on the chips surface", () => {
+    const { container } = render(
+      <Combobox items={frameworks} multiple>
+        <ComboboxChips>
+          <ComboboxChip value={frameworks[0]}>Next.js</ComboboxChip>
+          <ComboboxChipsInput aria-label="Add framework" />
+        </ComboboxChips>
+        <ComboboxContent>
+          <ComboboxList>
+            {(item) => (
+              <ComboboxItem key={item.value} value={item}>
+                {item.label}
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>,
+    )
+    const chips = container.querySelector('[data-slot="combobox-chips"]')
+    expect(chips).toHaveClass("bg-input/30")
+    expect(chips).not.toHaveClass("bg-transparent")
+  })
+
   it("renders value, separator, and anchor helpers", async () => {
     const user = userEvent.setup()
 

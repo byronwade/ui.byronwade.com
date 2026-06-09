@@ -175,7 +175,7 @@ function RoutePlaceholder({
 }) {
   return (
     <div className="flex h-full flex-col items-center justify-center gap-3 p-10 text-center">
-      <div className="grid size-12 place-items-center rounded-xl border border-border bg-muted/40">
+      <div className="grid size-12 place-items-center rounded-xl edge bg-muted/40">
         <Activity className="size-5 text-muted-foreground" />
       </div>
       <div className="max-w-md space-y-1">
@@ -226,10 +226,10 @@ function ConnectorsView() {
             <article
               key={adapter.id}
               data-slot="service-map-adapter-card"
-              className="flex flex-col rounded-xl border border-border bg-card p-4"
+              className="flex flex-col rounded-xl edge bg-card p-4"
             >
               <div className="flex items-start gap-3">
-                <div className="grid size-9 shrink-0 place-items-center rounded-lg border border-border bg-muted/40">
+                <div className="grid size-9 shrink-0 place-items-center rounded-lg edge bg-muted/40">
                   <adapter.icon className="size-4 text-brand" />
                 </div>
                 <div className="min-w-0 flex-1">
@@ -290,10 +290,7 @@ function HomeOverview({
             tone: "text-foreground",
           },
         ].map((stat) => (
-          <div
-            key={stat.label}
-            className="rounded-xl border border-border bg-card px-4 py-3"
-          >
+          <div key={stat.label} className="rounded-xl edge bg-card px-4 py-3">
             <p className="text-xs text-muted-foreground">{stat.label}</p>
             <p
               className={cn("mt-1 font-mono text-2xl tabular-nums", stat.tone)}
@@ -304,7 +301,7 @@ function HomeOverview({
         ))}
       </div>
 
-      <div className="rounded-xl border border-border bg-card p-5">
+      <div className="rounded-xl edge bg-card p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-medium text-foreground">
@@ -332,7 +329,7 @@ function HomeOverview({
             {ADAPTERS.slice(0, 4).map((adapter) => (
               <div
                 key={adapter.id}
-                className="rounded-lg border border-border bg-muted/20 px-4 py-3"
+                className="rounded-lg edge bg-muted/20 px-4 py-3"
               >
                 <p className="text-sm font-medium text-foreground">
                   {adapter.name}
@@ -349,7 +346,7 @@ function HomeOverview({
             {ADAPTERS.slice(4).map((adapter) => (
               <div
                 key={adapter.id}
-                className="rounded-lg border border-border bg-muted/20 px-4 py-3"
+                className="rounded-lg edge bg-muted/20 px-4 py-3"
               >
                 <p className="text-sm font-medium text-foreground">
                   {adapter.name}
@@ -527,7 +524,7 @@ export function ServiceMapWorkspace({
             ))}
           </SidebarContent>
           <SidebarFooter className="border-t border-border p-3">
-            <div className="rounded-lg border border-border bg-muted/30 px-3 py-2 group-data-[collapsible=icon]:hidden">
+            <div className="rounded-lg edge bg-muted/30 px-3 py-2 group-data-[collapsible=icon]:hidden">
               <p className="text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
                 Ingest status
               </p>

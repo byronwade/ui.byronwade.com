@@ -15,7 +15,7 @@ export default function Example() {
     <div className="flex flex-wrap items-center justify-center gap-4 p-16">
       {sides.map((side) => (
         <HoverCard key={side}>
-          <HoverCardTrigger className="inline-flex items-center rounded-full border border-border bg-background px-4 py-1.5 text-sm font-medium capitalize transition-colors hover:bg-muted cursor-pointer">
+          <HoverCardTrigger className="inline-flex items-center rounded-full edge bg-background px-4 py-1.5 text-sm font-medium capitalize transition-colors hover:bg-muted cursor-pointer">
             {side}
           </HoverCardTrigger>
           <HoverCardContent side={side} align="center">

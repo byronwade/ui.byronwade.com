@@ -10,7 +10,7 @@ export default function Example() {
           </span>
         }
       >
-        <div className="rounded-xl border border-border bg-card p-10 text-center text-muted-foreground">
+        <div className="rounded-xl edge bg-card p-10 text-center text-muted-foreground">
           Full-bleed hero content
         </div>
       </HeroSection>

@@ -26,6 +26,13 @@ describe("NativeSelect", () => {
     expect(container.querySelector("[data-slot='native-select']")).toBeInTheDocument();
   });
 
+  it("uses a visible input fill in light mode", () => {
+    render(<NativeSelect aria-label="fruit">{options()}</NativeSelect>);
+    const select = screen.getByRole("combobox", { name: "fruit" });
+    expect(select).toHaveClass("bg-input/30");
+    expect(select).not.toHaveClass("bg-transparent");
+  });
+
   it("fires onChange when an option is chosen", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();

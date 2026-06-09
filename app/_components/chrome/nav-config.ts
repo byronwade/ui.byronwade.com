@@ -2,7 +2,6 @@ import {
   Home,
   BookOpen,
   Component,
-  LayoutTemplate,
   AppWindow,
   type LucideIcon,
 } from "lucide-react"
@@ -37,17 +36,13 @@ export const navItems: DocsNavItem[] = [
     match: (p) => p === "/docs" || p.startsWith("/docs/"),
   },
   {
-    // The faceted, searchable component catalog grid.
-    label: "Catalog",
+    // The merged Browse grid — components AND full-page layouts in one faceted,
+    // searchable page. Layouts are reached via its Type filter (the old /layouts
+    // index redirects in); the /layouts/<slug> inspector routes count as Browse.
+    label: "Browse",
     href: "/catalog",
     icon: Component,
-    match: (p) => p.startsWith("/catalog"),
-  },
-  {
-    label: "Layouts",
-    href: "/layouts",
-    icon: LayoutTemplate,
-    match: (p) => p.startsWith("/layouts"),
+    match: (p) => p.startsWith("/catalog") || p.startsWith("/layouts"),
   },
   {
     label: "Templates",

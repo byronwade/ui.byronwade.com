@@ -40,7 +40,7 @@ const jobs = [
 
 export default function Example() {
   return (
-    <div className="w-full max-w-lg overflow-hidden rounded-2xl border">
+    <div className="w-full max-w-lg overflow-hidden rounded-2xl edge">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b bg-muted/40">

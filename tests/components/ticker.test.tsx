@@ -45,7 +45,7 @@ describe("Ticker — variant (style)", () => {
         <TickerSymbol symbol="aa" />
       </Ticker>,
     );
-    expect(ticker()).toHaveClass("border");
+    expect(ticker()).toHaveClass("edge");
     expect(ticker()).toHaveClass("rounded-full");
   });
 
@@ -57,7 +57,7 @@ describe("Ticker — variant (style)", () => {
     );
     expect(ticker()).toHaveClass("bg-card");
     expect(ticker()).toHaveClass("rounded-lg");
-    expect(ticker()).toHaveClass("shadow-sm");
+    expect(ticker()).toHaveClass("edge");
   });
 });
 

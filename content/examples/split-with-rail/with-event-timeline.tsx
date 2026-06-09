@@ -41,7 +41,7 @@ export default function Example() {
     <div className="p-6">
       <SplitWithRail
         summary={
-          <div className="space-y-5 rounded-2xl border border-border bg-card p-6">
+          <div className="space-y-5 rounded-2xl edge bg-card p-6">
             <div>
               <p className="text-xs text-muted-foreground uppercase tracking-wide">
                 Deployment
@@ -60,7 +60,7 @@ export default function Example() {
               </Badge>
             </div>
 
-            <div className="divide-y divide-border rounded-xl border border-border">
+            <div className="divide-y divide-border rounded-xl edge">
               {[
                 { label: "Triggered by", value: "carol@example.com" },
                 { label: "Branch", value: "main" },
@@ -80,7 +80,7 @@ export default function Example() {
           </div>
         }
         rail={
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl edge bg-card p-6">
             <p className="mb-4 text-sm font-semibold">Pipeline events</p>
             <EventTimeline events={events} />
           </div>

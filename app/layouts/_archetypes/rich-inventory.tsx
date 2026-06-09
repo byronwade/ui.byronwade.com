@@ -197,7 +197,7 @@ export function RichInventoryArchetype() {
     <div className="flex h-dvh bg-background text-foreground">
       {/* ── Views rail ───────────────────────────────────────────── */}
       <aside className="hidden w-60 shrink-0 flex-col border-r border-border bg-card/40 lg:flex">
-        <div className="flex h-14 items-center gap-2 border-b border-border px-4 font-semibold tracking-tight">
+        <div className="flex h-14 items-center gap-2 border-b border-border px-4 font-medium tracking-tight">
           <span className="grid size-6 place-items-center rounded-md bg-brand text-brand-foreground text-xs">
             A
           </span>
@@ -258,7 +258,7 @@ export function RichInventoryArchetype() {
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border px-5">
           <div>
-            <h1 className="text-base font-semibold tracking-tight">
+            <h1 className="text-base font-medium tracking-tight">
               Deployments
             </h1>
             <p className="hidden text-xs text-muted-foreground sm:block">
@@ -310,7 +310,7 @@ export function RichInventoryArchetype() {
           {summary.map((s) => (
             <div key={s.label} className="bg-background px-5 py-3">
               <div className="text-xs text-muted-foreground">{s.label}</div>
-              <div className={cn("text-lg font-semibold tabular-nums", s.tone)}>
+              <div className={cn("text-lg tabular-nums", s.tone)}>
                 {s.value}
               </div>
             </div>

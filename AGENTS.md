@@ -30,10 +30,13 @@ agent following that rule would produce identical-looking code.** That means:
   exceptions** stand apart on purpose and do _not_ follow `--brand`: the `--chart-2…5` ramp and the
   **agent-activity** pastels (`--activity-thinking/search/read/edit`) — a semantic palette encoding
   what an AI agent is doing, for agent composites. Use via `bg-activity-*`; they carry meaning, so
-  don't repurpose them as a general accent.
+  don't repurpose them as a general accent. Add a new fixed color family only when it encodes domain
+  meaning, state, or data class that `--brand`, status tokens, chart tokens, or activity tokens cannot
+  express; document the allowed use cases here and in `registry/rules/byronwade-ui.mdc`.
 - **Editorial typography.** Hierarchy comes from size + tight tracking + the typeface, not weight:
   display/section headings stay `font-normal`/`font-medium`, never `font-bold`. Use `font-mono` for
-  data (stats, timestamps, counts, IDs, `kbd`), and `font-serif` (`--font-serif`) only for long-form
+  data (stats, prices, timestamps, durations, counts, IDs, hashes, slugs, filenames, `kbd`, model/tool
+  names, JSON/code-like parameters, agent logs), and `font-serif` (`--font-serif`) only for long-form
   prose / pull quotes — via `reading-prose` on essay surfaces, `reading-ui` on docs.
 - **Readability lanes (evidence-backed).** Web reading on emissive screens is not e-ink. The system
   splits **UI chrome** from **reading surfaces** — never one type treatment for both.
@@ -63,11 +66,32 @@ agent following that rule would produce identical-looking code.** That means:
   `focus-visible:ring-ring`. Dark mode must come for free from tokens — never branch on a hardcoded
   color.
 - **House utilities** (`bg-grid`, `glow-brand`, `text-gradient(-brand)`, `mask-fade-x`, `full-bleed`,
-  `edge`, `scrollbar-thin`, `reading-measure`, `reading-ui`, `reading-prose`, `reading-lead`,
-  `reading-muted`, `reading-demo-break`) live in `foundation`; reuse them instead of re-implementing
-  gradients/grids/shadows or one-off measure rules.
+  `edge`, `depth-none`, `depth-soft`, `depth-raised`, `depth-100`…`depth-600`, `depth-inset-100`,
+  `depth-inset-200`, `scrollbar-thin`, `reading-measure`, `reading-ui`, `reading-prose`,
+  `reading-lead`, `reading-muted`, `reading-demo-break`) live in `foundation`; reuse them instead of
+  re-implementing gradients/grids/shadows or one-off measure rules.
+- **Depth follows Shopify Polaris, but defaults to none.** Surfaces use rounded corners +
+  `overflow-hidden` + the inset `edge` hairline by default. When explicit depth is needed, use only
+  the Polaris-compatible depth utilities (`depth-soft` = `shadow-100` + bevel, `depth-raised` =
+  `shadow-300` + bevel; deeper overlays can use `depth-400` or `depth-600`). Dark mode keeps the
+  Polaris elevation scale but uses a darker bevel so shadows do not read as white glow. Never use
+  Tailwind `shadow-*` utilities or custom box-shadows in components.
 - **Two surfaces** — Application UI vs marketing/editorial share one foundation; route by surface
   (`content/catalog-surfaces.ts`), don't split registry packages.
+- **Density routes by task.** Dense operational UI (tables, dashboards, admin indexes, command
+  palettes, kanban/gantt, file trees) uses compact spacing, stable row heights, and mono metadata.
+  Product/editorial surfaces get more breathing room through the reading lanes and marketing layout
+  primitives.
+- **Object-bound AI.** AI components must attach to a product object or action — conversation, task,
+  source, file, issue, verification step, tool call, or model event — and show state/source/review
+  affordances. OpenAI-style conversational surfaces expose provenance (`user`, `assistant`, `tool`,
+  `source`, `app`, `action`) through `data-provenance` and visible mono metadata where helpful. Use
+  `bg-activity-*` only to encode what the agent is doing, not as decoration.
+- **Comparison-informed components.** Tables/indexes inherit Shopify/Linear density; command palettes
+  inherit Vercel/Linear keyboard-first scanning; kanban/gantt inherit Linear/Atlassian planning
+  clarity; record/tag inputs inherit Twenty's neutral chrome and semantic data coloring; file-tree/editor
+  surfaces inherit Vercel/Cursor object framing; AI timelines and verification components inherit
+  Cursor/Linear object-bound state.
 
 > If you add a new token, utility, or convention that consumers should follow, update
 > `registry/rules/byronwade-ui.mdc` in the same change so the shipped AI rule stays in sync.

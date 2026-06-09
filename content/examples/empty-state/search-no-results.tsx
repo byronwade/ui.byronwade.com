@@ -43,7 +43,7 @@ export default function Example() {
             }
           />
         ) : (
-          <ul className="rounded-2xl border divide-y text-sm">
+          <ul className="rounded-2xl edge divide-y text-sm">
             {results.map((item) => (
               <li key={item} className="px-4 py-3 text-foreground">
                 {item}

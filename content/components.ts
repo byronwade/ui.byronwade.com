@@ -86,6 +86,11 @@ export type ComponentDoc = {
     defaultSurface?: "app" | "marketing"
     hidden?: boolean
   }
+  /** Docs sidebar family grouping — `parent` is the family root slug. */
+  nav?: {
+    parent?: string
+    order?: number
+  }
 }
 
 export const components: ComponentDoc[] = [
@@ -277,7 +282,7 @@ export const components: ComponentDoc[] = [
     name: "Activity grid",
     category: "UI",
     description:
-      "GitHub-style grid of small circles, filled in brand where active.",
+      "GitHub-style activity grid with density-aware cell sizing, circle/rounded/square shapes, and brand intensity buckets.",
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     props: [
       {
@@ -291,6 +296,19 @@ export const components: ComponentDoc[] = [
         default: "26",
         description: "Columns in the grid.",
       },
+      {
+        name: "size",
+        type: '"compact" | "default" | "comfortable"',
+        default: '"default"',
+        description: "Cell size; maps cleanly to docs density controls.",
+      },
+      {
+        name: "shape",
+        type: '"circle" | "rounded" | "square"',
+        default: '"circle"',
+        description:
+          "Cell shape for contribution maps, operational heatmaps, or dense telemetry.",
+      },
     ],
     examples: [
       "default",
@@ -299,6 +317,7 @@ export const components: ComponentDoc[] = [
       "in-card",
       "intensity-levels",
       "interactive",
+      "shape-and-density",
     ],
   },
   {
@@ -1953,14 +1972,44 @@ export const components: ComponentDoc[] = [
     slug: "table",
     name: "Table",
     category: "Data display",
+    nav: { order: 0 },
+    demoContext: { skipSurfaceWrapper: true },
     description:
-      "A styled, accessible HTML table compound component with scrollable container, header, body, footer, rows, cells, and caption parts.",
+      "Table system: a styled, accessible HTML table primitive with scrollable container, density and layout variants, plus the DataTable admin shell (index filters, bulk selection, sortable columns, pagination).",
+    npmDeps: ["lucide-react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/table",
+      "@byronwade/checkbox",
+      "@byronwade/bulk-action-bar",
+      "@byronwade/skeleton",
+      "@byronwade/button",
+      "@byronwade/empty-state",
+      "@byronwade/index-filters",
+      "@byronwade/segmented-control",
+      "@byronwade/data-table",
+    ],
     props: [
       {
         name: "className",
         type: "string",
         description:
           "Additional CSS classes merged onto the root table element.",
+      },
+      {
+        name: "density",
+        type: '"comfortable" | "condensed" | "spacious"',
+        default: '"comfortable"',
+        description:
+          "Row and header padding scale — comfortable (default), condensed, or spacious.",
+      },
+      {
+        name: "layout",
+        type: '"default" | "sticky-header" | "card"',
+        default: '"default"',
+        description:
+          "Container chrome — plain scroll, sticky header, or card-wrapped table.",
       },
       {
         name: "children",
@@ -1976,9 +2025,19 @@ export const components: ComponentDoc[] = [
           "Provides container, table, header, body, footer, row, head, cell, and caption parts.",
       },
       {
-        title: "Scrollable by default",
+        title: "Density and layout variants",
         description:
-          "Wraps table content in an overflow container for narrow layouts.",
+          "Comfortable, condensed, and spacious density; default, sticky-header, and card layouts.",
+      },
+      {
+        title: "DataTable admin shell",
+        description:
+          "Install @byronwade/data-table for Shopify-grade index filters, bulk bar, selection, and pagination.",
+      },
+      {
+        title: "Inset admin framing",
+        description:
+          "DataTable supports an `inset` frame for Shopify-style admin panels while the table primitive keeps density and layout variants separate.",
       },
       {
         title: "Data-state styling hooks",
@@ -2012,6 +2071,17 @@ export const components: ComponentDoc[] = [
         type: "component",
         description: "Body cell element.",
       },
+      {
+        name: "DataTable",
+        type: "component",
+        description:
+          "Admin index shell composing index-filters, selectable table, bulk bar, and pagination.",
+      },
+      {
+        name: "tableHeadVariants",
+        type: "constant",
+        description: "CVA variant map for header cell density.",
+      },
     ],
     slots: [
       {
@@ -2038,24 +2108,87 @@ export const components: ComponentDoc[] = [
         element: "td",
         description: "Body cell.",
       },
+      {
+        name: "data-table",
+        description: "DataTable admin shell root (non-embedded).",
+      },
+      {
+        name: "index-table",
+        description: "Embedded table slot used by DataTable embedded mode.",
+      },
     ],
     source: [
       {
-        label: "Component",
+        label: "Table primitive",
         path: "registry/ui/table.tsx",
+      },
+      {
+        label: "DataTable composite",
+        path: "registry/components/data-table.tsx",
       },
       {
         label: "Default example",
         path: "content/examples/table/default.tsx",
       },
       {
-        label: "Selectable rows example",
-        path: "content/examples/table/selectable-rows.tsx",
+        label: "Admin data table example",
+        path: "content/examples/table/admin-index.tsx",
       },
     ],
-    related: ["index-table", "badge", "checkbox"],
+    related: [
+      "index-table",
+      "index-filters",
+      "bulk-action-bar",
+      "badge",
+      "checkbox",
+    ],
+    tags: [
+      "data-table",
+      "index-table",
+      "admin",
+      "shopify",
+      "filters",
+      "pagination",
+      "selection",
+    ],
+    variants: [
+      {
+        id: "primitive",
+        name: "Primitive",
+        tags: ["meta:overview", "layer:primitive"],
+        example: "default",
+      },
+      {
+        id: "admin-index",
+        name: "Admin data table",
+        tags: ["layer:composite", "pattern:admin-index"],
+        example: "admin-index",
+        install: "@byronwade/data-table",
+      },
+      {
+        id: "selection",
+        name: "Row selection",
+        tags: ["feature:selection", "layer:composite"],
+        example: "selection",
+        install: "@byronwade/index-table",
+      },
+      {
+        id: "with-pagination",
+        name: "With pagination",
+        tags: ["feature:pagination", "layer:composite"],
+        example: "with-pagination",
+        install: "@byronwade/index-table",
+      },
+    ],
     examples: [
       "default",
+      "admin-index",
+      "selection",
+      "with-pagination",
+      "data-table-loading",
+      "data-table-empty",
+      "condensed",
+      "sticky-header",
       "empty-state",
       "loading-skeleton",
       "selectable-rows",
@@ -3659,7 +3792,7 @@ export const components: ComponentDoc[] = [
     name: "Message",
     category: "AI",
     description:
-      "Chat message primitives for AI conversations, bubbles, actions, branch navigation, attachments, and a streaming markdown response.",
+      "Chat message primitives for AI conversations, provenance labels, bubbles, actions, branch navigation, attachments, and a streaming markdown response.",
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3759,9 +3892,10 @@ export const components: ComponentDoc[] = [
     name: "Prompt Input",
     category: "AI",
     description:
-      "A composable AI chat prompt input with textarea, file attachments, action menu, model select, speech-to-text, and slash-command primitives built on byronwade/ui input-group, select, dropdown-menu, hover-card, and command.",
+      "A composable AI chat prompt input with density-aware composer layout, textarea, file attachments, action menu, model select, speech-to-text, and slash-command primitives built on byronwade/ui input-group, select, dropdown-menu, hover-card, and command.",
     registryDeps: [
       "@byronwade/foundation",
+      "@byronwade/demo-viewport",
       "@byronwade/utils",
       "@byronwade/button",
       "@byronwade/command",
@@ -4384,6 +4518,7 @@ export const components: ComponentDoc[] = [
     slug: "index-table",
     name: "Index table",
     category: "Data display",
+    nav: { parent: "table", order: 1 },
     description:
       "Sortable, row-selectable data table with an integrated bulk-action bar, sticky header, loading and empty states, and pagination. The signature Shopify-admin index.",
     npmDeps: ["lucide-react"],
@@ -4410,6 +4545,7 @@ export const components: ComponentDoc[] = [
     slug: "resource-list",
     name: "Resource list",
     category: "Data display",
+    nav: { parent: "table", order: 2 },
     description:
       "List-view of selectable rich rows (ResourceList + ResourceItem), media, title, metadata, badges, hover actions, bulk selection. The list counterpart of index-table.",
     registryDeps: [
@@ -4417,10 +4553,84 @@ export const components: ComponentDoc[] = [
       "@byronwade/badge",
       "@byronwade/bulk-action-bar",
       "@byronwade/checkbox",
+      "@byronwade/demo-viewport",
+      "@byronwade/entity-row",
       "@byronwade/utils",
+    ],
+    props: [
+      {
+        name: "density",
+        type: '"compact" | "default" | "comfortable"',
+        default: '"default"',
+        description:
+          "Row density for scan-heavy lists. Compact tightens rows; comfortable adds breathing room.",
+      },
+      {
+        name: "frame",
+        type: '"default" | "inset"',
+        default: '"default"',
+        description:
+          "Surface treatment. Use `inset` for Shopify-style admin panels set into a muted frame.",
+      },
+      {
+        name: "selectable",
+        type: "boolean",
+        default: "false",
+        description:
+          "Enables list-level selection and select-all behavior for child ResourceItem rows.",
+      },
+    ],
+    features: [
+      {
+        title: "Density and inset framing",
+        description:
+          "Compact/default/comfortable rows pair with a default or inset frame for admin indexes.",
+      },
+      {
+        title: "Selectable rich rows",
+        description:
+          "ResourceItem rows support media, title, subtitle, badges, hover actions, and bulk selection.",
+      },
+    ],
+    variants: [
+      {
+        id: "default",
+        name: "Default",
+        tags: ["meta:overview", "pattern:admin-index"],
+        example: "default",
+      },
+      {
+        id: "selectable",
+        name: "Selectable",
+        tags: ["feature:selection", "pattern:admin-index"],
+        example: "selectable",
+      },
+      {
+        id: "with-actions",
+        name: "With actions",
+        tags: ["feature:actions", "pattern:admin-index"],
+        example: "with-actions",
+      },
+      {
+        id: "empty",
+        name: "Empty state",
+        tags: ["state:empty", "pattern:admin-index"],
+        example: "empty",
+      },
+      {
+        id: "loading",
+        name: "Loading state",
+        tags: ["state:loading", "pattern:admin-index"],
+        example: "loading",
+      },
     ],
     examples: [
       "default",
+      "compact",
+      "inset",
+      "compact-inset",
+      "comfortable",
+      "comfortable-inset",
       "empty",
       "loading",
       "no-media",
@@ -4451,7 +4661,7 @@ export const components: ComponentDoc[] = [
     name: "Tag input",
     category: "Forms",
     description:
-      "Tags field, type to add chips (Enter/comma), remove with × or Backspace, optional autocomplete suggestions, sizes, and error state.",
+      "Tags field, type to add chips (Enter/comma), remove with × or Backspace, optional autocomplete suggestions, semantic tag tones, sizes, and error state.",
     npmDeps: ["lucide-react"],
     registryDeps: [
       "@byronwade/foundation",

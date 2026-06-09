@@ -21,7 +21,7 @@
  *   …and any other React.ComponentProps<"input"> prop
  *
  * Base class tokens (always present):
- *   h-8 w-full min-w-0 rounded-lg border border-input bg-transparent
+ *   h-8 w-full min-w-0 rounded-lg border border-input bg-input/30
  *   px-2.5 py-1 text-base transition-colors outline-none
  *
  * State classes:
@@ -142,9 +142,10 @@ describe("Input — base class tokens", () => {
     expect(getInput(container).className).toContain("border-input");
   });
 
-  it("has bg-transparent class", () => {
+  it("has visible input fill in light mode", () => {
     const { container } = render(<Input />);
-    expect(getInput(container).className).toContain("bg-transparent");
+    expect(getInput(container)).toHaveClass("bg-input/30");
+    expect(getInput(container)).not.toHaveClass("bg-transparent");
   });
 
   it("has px-2.5 class", () => {

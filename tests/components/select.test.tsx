@@ -181,6 +181,13 @@ describe("SelectTrigger — structure and classes", () => {
     expect(screen.getByRole("combobox")).toHaveClass("border");
   });
 
+  it("uses a visible input fill in light mode", () => {
+    render(<BasicSelect />);
+    const trigger = screen.getByRole("combobox");
+    expect(trigger).toHaveClass("bg-input/30");
+    expect(trigger).not.toHaveClass("bg-transparent");
+  });
+
   it("has base class: text-sm", () => {
     render(<BasicSelect />);
     expect(screen.getByRole("combobox")).toHaveClass("text-sm");

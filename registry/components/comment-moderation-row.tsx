@@ -82,7 +82,7 @@ function CommentModerationRow({
     <div
       data-slot="comment-moderation-row"
       className={cn(
-        "flex gap-3 rounded-lg border border-border p-3",
+        "flex gap-3 rounded-lg edge p-3",
         className,
       )}
       {...props}

@@ -6,7 +6,7 @@ export default function Example() {
 
   return (
     <div className="flex justify-center p-8">
-      <div className="w-[480px] rounded-lg border border-border bg-card p-4">
+      <div className="w-[480px] rounded-lg edge bg-card p-4">
         <DepthChart
           bids={bids}
           asks={asks}

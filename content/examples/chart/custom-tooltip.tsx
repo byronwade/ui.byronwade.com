@@ -31,7 +31,7 @@ const chartConfig: ChartConfig = {
 function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (!active || !payload?.length) return null
   return (
-    <div className="rounded-xl border bg-background shadow-xl px-3 py-2 text-xs min-w-36">
+    <div className="rounded-xl edge bg-background px-3 py-2 text-xs min-w-36">
       <p className="font-medium text-foreground mb-1.5">{label}</p>
       {payload.map((item, i) => (
         <div key={i} className="flex items-center justify-between gap-4">
@@ -55,7 +55,7 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 
 export default function Example() {
   return (
-    <div className="p-6 rounded-2xl border bg-card w-full max-w-xl">
+    <div className="p-6 rounded-2xl edge bg-card w-full max-w-xl">
       <h2 className="text-sm font-medium mb-1 text-foreground">
         Site Analytics
       </h2>

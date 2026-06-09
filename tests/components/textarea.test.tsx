@@ -102,9 +102,10 @@ describe("base CSS classes", () => {
     expect(screen.getByRole("textbox")).toHaveClass("border-input");
   });
 
-  it("has class bg-transparent", () => {
+  it("has visible input fill in light mode", () => {
     render(<Textarea />);
-    expect(screen.getByRole("textbox")).toHaveClass("bg-transparent");
+    expect(screen.getByRole("textbox")).toHaveClass("bg-input/30");
+    expect(screen.getByRole("textbox")).not.toHaveClass("bg-transparent");
   });
 
   it("has class min-h-16", () => {

@@ -50,20 +50,19 @@ const pillars = [
 export default function HomePage() {
   return (
     <main className="relative min-h-dvh overflow-x-clip bg-background text-foreground">
-      {/* Calm atmosphere, faint dotted grid + a single warm-green glow. */}
+      {/* Calm atmosphere, faint dotted grid + a single brand glow. */}
       <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.35]" />
       <div className="glow-brand pointer-events-none fixed inset-x-0 top-0 -z-10 h-[60vh] opacity-70" />
 
       {/* ====================================================== HERO ===== */}
       <section className="mx-auto flex min-h-dvh max-w-4xl flex-col items-center justify-center px-6 pb-20 pt-28 text-center sm:pt-32">
-        <span className="animate-in fade-in slide-in-from-bottom-2 inline-flex items-center gap-2 rounded-full edge bg-card/60 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground backdrop-blur duration-700">
-          <span className="size-1.5 rounded-full bg-brand" />
+        <p className="animate-in fade-in slide-in-from-bottom-2 font-mono text-xs uppercase tracking-[0.2em] text-brand duration-700">
           byronwade/ui · design system
-        </span>
+        </p>
 
         <h1 className="mt-7 text-[clamp(2.75rem,9vw,7rem)] font-normal leading-[0.95] tracking-tight text-balance">
           <span className="block animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700 [animation-delay:80ms]">
-            One design system
+            One design system{" "}
           </span>
           <span className="block animate-in fade-in slide-in-from-bottom-4 fill-mode-both text-gradient-brand duration-700 [animation-delay:160ms]">
             for every surface.

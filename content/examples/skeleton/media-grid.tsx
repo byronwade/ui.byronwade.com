@@ -14,7 +14,7 @@ export default function Example() {
         {Array.from({ length: 4 }).map((_, i) => (
           <div
             key={i}
-            className="flex flex-col gap-2 rounded-lg border bg-card p-2 shadow-sm"
+            className="flex flex-col gap-2 rounded-lg edge bg-card p-2 edge"
           >
             {/* Thumbnail */}
             <Skeleton className="h-28 w-full rounded-md" />

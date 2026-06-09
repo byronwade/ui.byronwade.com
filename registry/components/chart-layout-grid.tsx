@@ -42,7 +42,7 @@ function ChartLayoutGrid({
           key={index}
           data-slot="chart-layout-grid-panel"
           data-panel-index={index}
-          className="flex min-h-72 min-w-0 flex-col overflow-hidden rounded-lg border border-border/70 bg-card/80 p-3"
+          className="flex min-h-72 min-w-0 flex-col overflow-hidden rounded-lg edge bg-card/80 p-3"
         >
           {panel}
         </div>

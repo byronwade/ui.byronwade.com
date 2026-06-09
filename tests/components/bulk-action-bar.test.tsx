@@ -67,6 +67,19 @@ describe("BulkActionBar – default render", () => {
     expect(root).toHaveClass("bg-card")
   })
 
+  it("applies dark index styling when variant is index", () => {
+    const { container } = render(
+      <BulkActionBar
+        selectedCount={2}
+        actions={baseActions}
+        variant="index"
+      />,
+    )
+    const root = container.querySelector("[data-slot='bulk-action-bar']")
+    expect(root).toHaveClass("bg-foreground")
+    expect(root).toHaveClass("text-background")
+  })
+
   it("renders every action label", () => {
     render(<BulkActionBar selectedCount={3} actions={baseActions} />)
     expect(screen.getByText("Add tags")).toBeInTheDocument()

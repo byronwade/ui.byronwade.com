@@ -26,6 +26,11 @@ describe("StatCard", () => {
       expect(root.tagName.toLowerCase()).toBe("div");
     });
 
+    it("root element preserves the stat-card data-slot", () => {
+      const { container } = render(<StatCard label="Revenue" value="$1,000" />);
+      expect(container.firstChild).toHaveAttribute("data-slot", "stat-card");
+    });
+
     it("returns non-null output (container is non-empty)", () => {
       const { container } = render(<StatCard label="Uptime" value="99.99%" />);
       expect(container.firstChild).not.toBeNull();
@@ -148,9 +153,9 @@ describe("StatCard", () => {
       expect(valueSpan).toHaveClass("text-2xl");
     });
 
-    it("value span has font-semibold class", () => {
+    it("value span has font-medium class", () => {
       render(<StatCard label="Revenue" value="$1,000" />);
-      expect(screen.getByText("$1,000")).toHaveClass("font-semibold");
+      expect(screen.getByText("$1,000")).toHaveClass("font-medium");
     });
 
     it("value span has tracking-tight class", () => {

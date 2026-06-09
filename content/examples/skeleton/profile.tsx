@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function Example() {
   return (
-    <div className="w-80 rounded-xl border bg-card p-6 shadow-sm flex flex-col items-center gap-4">
+    <div className="w-80 rounded-xl edge bg-card p-6 edge flex flex-col items-center gap-4">
       {/* Avatar */}
       <Skeleton className="h-20 w-20 rounded-full" />
 

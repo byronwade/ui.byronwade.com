@@ -41,7 +41,7 @@ export default function Example() {
         />
       </div>
 
-      <ul className="divide-y divide-border rounded-xl border border-border bg-card">
+      <ul className="divide-y divide-border rounded-xl edge bg-card">
         {sorted.map((item) => (
           <li
             key={item.name}

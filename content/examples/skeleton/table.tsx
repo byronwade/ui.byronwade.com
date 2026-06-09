@@ -5,7 +5,7 @@ export default function Example() {
   const cols = [180, 120, 90, 100]
 
   return (
-    <div className="w-full max-w-xl rounded-xl border bg-card shadow-sm overflow-hidden">
+    <div className="w-full max-w-xl rounded-xl edge bg-card overflow-hidden">
       {/* Table header */}
       <div className="flex items-center gap-4 px-4 py-3 border-b bg-muted/40">
         {cols.map((w, i) => (

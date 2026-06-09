@@ -18,7 +18,7 @@
  *            + all div HTML props / className
  *     data-slot="hover-card-content"
  *     Classes: z-50 w-64 rounded-lg bg-popover p-2.5 text-sm text-popover-foreground
- *              shadow-md ring-1 ring-foreground/10 outline-hidden duration-100
+ *              edge ring-1 ring-foreground/10 outline-hidden duration-100
  *              + side/alignment animation data-attributes
  *
  * Trigger opens on pointer-enter (hover) with a default 600ms delay.

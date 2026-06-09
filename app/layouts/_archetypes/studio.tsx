@@ -90,7 +90,7 @@ export function StudioArchetype() {
   return (
     <div className="flex h-dvh flex-col bg-background text-foreground">
       <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border px-4 sm:px-6">
-        <div className="flex items-center gap-2 font-semibold tracking-tight">
+        <div className="flex items-center gap-2 font-medium tracking-tight">
           <span className="grid size-6 place-items-center rounded-md bg-brand text-brand-foreground">
             <ListMusic className="size-3.5" />
           </span>
@@ -112,7 +112,7 @@ export function StudioArchetype() {
         <section className="flex min-h-0 flex-col items-center justify-center gap-6 overflow-hidden px-6 py-8">
           <div className="relative">
             <div
-              className="size-56 rounded-3xl shadow-float sm:size-64"
+              className="size-56 rounded-3xl edge sm:size-64"
               style={{
                 backgroundImage:
                   "radial-gradient(circle at 28% 24%, var(--brand), color-mix(in oklch, var(--brand), #000 55%))",
@@ -131,7 +131,7 @@ export function StudioArchetype() {
           <div className="w-full max-w-md space-y-4 text-center">
             <div className="space-y-1">
               <div className="flex items-center justify-center gap-2">
-                <h1 className="text-2xl font-semibold tracking-tight">
+                <h1 className="text-2xl font-medium tracking-tight">
                   {now.title}
                 </h1>
                 <StatusPill tone="info">Lossless</StatusPill>
@@ -143,7 +143,7 @@ export function StudioArchetype() {
 
             {/* waveform progress */}
             <div className="space-y-1.5">
-              <div className="flex h-14 items-center gap-[2px]">
+              <div className="flex h-14 items-center gap-0.5">
                 {wave.map((amp, i) => {
                   const played = i / wave.length < PROGRESS
                   return (
@@ -198,7 +198,7 @@ export function StudioArchetype() {
         {/* ── Queue rail ──────────────────────────────────────────── */}
         <aside className="hidden min-h-0 flex-col border-l border-border lg:flex">
           <div className="flex items-center justify-between px-4 py-3.5">
-            <p className="text-sm font-semibold tracking-tight">Up next</p>
+            <p className="text-sm font-medium tracking-tight">Up next</p>
             <Badge variant="secondary">{queue.length} tracks</Badge>
           </div>
           <Separator />

@@ -3,7 +3,7 @@ import { makeCandles } from "@/lib/market"
 
 export default function Example() {
   return (
-    <div className="h-[min(480px,70vh)] w-full overflow-hidden rounded-xl border border-border bg-background">
+    <div className="h-[min(480px,70vh)] w-full overflow-hidden rounded-xl edge bg-background">
       <LightweightChart
         data={makeCandles(96, { seed: 3 })}
         chartType="candles"

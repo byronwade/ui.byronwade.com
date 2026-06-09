@@ -65,7 +65,7 @@ describe("Glimpse", () => {
     await screen.findByText("Title text");
     const img = baseElement.querySelector('[data-slot="glimpse-image"]');
     expect(img).toHaveAttribute("alt", "");
-    expect(img).toHaveClass("border-border");
+    expect(img).toHaveClass("edge");
   });
 
   it("standalone parts merge classNames", () => {

@@ -10,7 +10,7 @@ import {
 
 export default function Example() {
   return (
-    <div className="grid grid-cols-2 gap-6 rounded-2xl border bg-card p-6 sm:grid-cols-3">
+    <div className="grid grid-cols-2 gap-6 rounded-2xl edge bg-card p-6 sm:grid-cols-3">
       <MetricStat
         icon={DollarSign}
         label="MRR"

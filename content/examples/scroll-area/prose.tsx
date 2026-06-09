@@ -2,7 +2,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function Example() {
   return (
-    <ScrollArea className="h-56 w-80 rounded-xl border">
+    <ScrollArea className="h-56 w-80 rounded-xl edge">
       <div className="reading-prose p-4 text-foreground">
         <p>
           The scroll area keeps long-form content within a fixed footprint so a

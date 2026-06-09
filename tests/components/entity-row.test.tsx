@@ -57,7 +57,7 @@ describe("EntityRow", () => {
     expect(root).toHaveClass("custom-row", "rounded-md", "px-3", "py-2.5")
 
     rerender(<EntityRow title="Card" variant="card" />)
-    expect(root).toHaveClass("rounded-lg", "border", "bg-card")
+    expect(root).toHaveClass("rounded-lg", "edge", "bg-card")
 
     rerender(<EntityRow title="Compact" variant="compact" />)
     expect(root).toHaveClass("gap-2", "px-2", "py-1.5")

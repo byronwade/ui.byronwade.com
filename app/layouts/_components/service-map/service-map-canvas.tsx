@@ -479,7 +479,7 @@ function ServiceMapCanvasInner({
       className="relative flex h-full flex-col"
     >
       <div className="relative min-h-0 flex-1">
-        <div className="absolute top-2 left-2 z-50 flex items-center gap-2 rounded-md border border-border bg-card/90 px-2 py-1 backdrop-blur-sm">
+        <div className="absolute top-2 left-2 z-50 flex items-center gap-2 rounded-md edge bg-card/90 px-2 py-1 backdrop-blur-sm">
           <span className="text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
             Color by
           </span>
@@ -502,7 +502,7 @@ function ServiceMapCanvasInner({
         </div>
 
         <div className="absolute top-2 right-2 z-50 flex max-w-[min(100%-1rem,720px)] flex-wrap items-center justify-end gap-2">
-          <div className="flex items-center gap-1 rounded-md border border-border bg-card/90 px-2 py-1 backdrop-blur-sm">
+          <div className="flex items-center gap-1 rounded-md edge bg-card/90 px-2 py-1 backdrop-blur-sm">
             <Crosshair className="size-3.5 text-muted-foreground" />
             <Select
               value={focusService}
@@ -613,7 +613,7 @@ function ServiceMapCanvasInner({
         {selectedServiceId && (
           <div
             data-slot="service-map-detail-overlay"
-            className="absolute inset-y-0 right-0 z-30 flex w-[min(100%,360px)] flex-col border-l border-border bg-background shadow-card sm:w-[min(38%,400px)]"
+            className="absolute inset-y-0 right-0 z-30 flex w-[min(100%,360px)] flex-col border-l border-border bg-background edge sm:w-[min(38%,400px)]"
           >
             {selectedServiceId.startsWith(DB_NODE_PREFIX) ? (
               <DatabaseDetailPanel

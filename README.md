@@ -130,6 +130,20 @@ contents) into your agent's instructions file:
 The rule's content lives in this repo at `registry/rules/byronwade-ui.mdc` and is served at
 `<REGISTRY_URL>/r/design-rules.json`. Re-run the command after big upgrades to pull the latest rule.
 
+## Design research principles
+
+The system is benchmarked against Cursor, Shopify, Atlassian, Fluent 2, Vercel, Linear, and Twenty.
+The research lives in [`design-research/`](./design-research/), with the cross-system comparison in
+[`design-research/COMPARATIVE-ANALYSIS.md`](./design-research/COMPARATIVE-ANALYSIS.md).
+
+- One re-skinnable accent drives the system; fixed palettes are allowed only for documented semantic
+  meaning like chart series or agent activity.
+- Dense app surfaces optimize for scanning, stable rows, object state, and mono metadata; editorial
+  surfaces use the reading lanes.
+- AI UI is object-bound: every agent action should connect to a file, task, source, tool call,
+  verification step, or proposed change.
+- Depth comes from the inset `edge` hairline, not shadows or outlined card stacks.
+
 ## Re-skinning the brand
 
 The whole system follows one variable. In your project's `globals.css`, override `--brand` (and its dark

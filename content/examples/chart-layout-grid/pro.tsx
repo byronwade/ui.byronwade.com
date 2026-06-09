@@ -4,7 +4,7 @@ import { makeCandles } from "@/lib/market"
 
 export default function Example() {
   return (
-    <div className="h-[min(560px,75vh)] w-full overflow-hidden rounded-xl border border-border bg-background p-2">
+    <div className="h-[min(560px,75vh)] w-full overflow-hidden rounded-xl edge bg-background p-2">
       <ChartLayoutGrid layout="1x2" className="h-full">
         <ChartPanel
           symbol="AAPL"

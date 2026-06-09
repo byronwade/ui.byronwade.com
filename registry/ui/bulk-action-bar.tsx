@@ -10,9 +10,14 @@ import { ButtonGroup } from "@/components/ui/button-group"
 import { Checkbox } from "@/components/ui/checkbox"
 
 const bulkActionBarVariants = cva(
-  "flex items-center gap-3 rounded-lg border border-border bg-card px-3 py-2 text-card-foreground shadow-sm",
+  "flex items-center gap-2 rounded-lg edge px-3 py-2 edge",
   {
     variants: {
+      variant: {
+        default: "border-border bg-card text-card-foreground",
+        index:
+          "h-8 min-h-8 border-0 bg-foreground px-2.5 py-0 text-[13px] text-background shadow-none [&_[data-slot=bulk-action-bar-label]]:text-xs [&_[data-slot=bulk-action-bar-label]]:text-background/70 [&_[data-slot=bulk-action-bar-action]]:h-7 [&_[data-slot=bulk-action-bar-action]]:px-2.5 [&_[data-slot=bulk-action-bar-action]]:text-xs [&_[data-slot=bulk-action-bar-action][data-tone=default]]:border-background/25 [&_[data-slot=bulk-action-bar-action][data-tone=default]]:bg-transparent [&_[data-slot=bulk-action-bar-action][data-tone=default]]:text-background [&_[data-slot=bulk-action-bar-action][data-tone=default]]:hover:bg-background/10 [&_[data-slot=bulk-action-bar-clear]]:size-7 [&_[data-slot=bulk-action-bar-clear]]:text-background/70 [&_[data-slot=bulk-action-bar-clear]]:hover:bg-background/10 [&_[data-slot=bulk-action-bar-clear]]:hover:text-background",
+      },
       sticky: { true: "sticky z-10", false: "" },
       position: { top: "", bottom: "" },
     },
@@ -20,7 +25,7 @@ const bulkActionBarVariants = cva(
       { sticky: true, position: "top", className: "top-0" },
       { sticky: true, position: "bottom", className: "bottom-0" },
     ],
-    defaultVariants: { sticky: false, position: "top" },
+    defaultVariants: { variant: "default", sticky: false, position: "top" },
   },
 )
 
@@ -42,6 +47,7 @@ type BulkActionBarProps = {
   selectAllChecked?: boolean
   onSelectAllChange?: (checked: boolean) => void
   label?: (count: number) => React.ReactNode
+  variant?: "default" | "index"
   sticky?: boolean
   position?: "top" | "bottom"
   className?: string
@@ -92,6 +98,7 @@ function BulkActionBar({
   selectAllChecked,
   onSelectAllChange,
   label,
+  variant = "default",
   sticky = false,
   position = "top",
   className,
@@ -111,7 +118,10 @@ function BulkActionBar({
   return (
     <div
       data-slot="bulk-action-bar"
-      className={cn(bulkActionBarVariants({ sticky, position }), className)}
+      className={cn(
+        bulkActionBarVariants({ variant, sticky, position }),
+        className,
+      )}
     >
       <div
         data-slot="bulk-action-bar-summary"

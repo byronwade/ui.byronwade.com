@@ -102,11 +102,11 @@ const videoPlayerVariants = cva(
   {
     variants: {
       variant: {
-        default: "rounded-lg border border-border shadow-sm",
-        minimal: "rounded-md border border-border/60",
+        default: "rounded-lg edge",
+        minimal: "rounded-md edge",
         theater:
-          "mx-auto w-full max-w-4xl rounded-xl border border-border bg-background shadow-lg [&_media-control-bar]:px-2 [&_media-control-bar]:py-1",
-        poster: "rounded-lg border border-border shadow-sm",
+          "mx-auto w-full max-w-4xl rounded-xl edge bg-background [&_media-control-bar]:px-2 [&_media-control-bar]:py-1",
+        poster: "rounded-lg edge",
         youtube:
           "rounded-xl bg-background [&_video]:bg-background [&_video]:object-contain [&_[data-slot$=-button]]:rounded-full [&_[data-slot$=-button]]:p-2 [&_[data-slot$=-button]]:transition-colors [&_[data-slot$=-button]]:hover:bg-foreground/10 [&_[data-slot=video-player-volume-range]]:max-w-24 [&_[data-slot=video-player-time-range]]:px-0 [&_[data-slot=video-player-time-range]]:py-1.5",
       },
@@ -163,8 +163,7 @@ const controlBarVariants = cva(
         minimal: "gap-1 bg-transparent backdrop-blur-none",
         theater: "gap-1 px-1",
         poster: "",
-        youtube:
-          "gap-1 bg-gradient-to-t from-background via-background/90 to-transparent px-2 pb-1.5 pt-8",
+        youtube: "scrim-bottom-background gap-1 px-2 pb-1.5 pt-8",
       },
     },
     defaultVariants: { variant: "default" },
@@ -476,10 +475,7 @@ export const VideoPlayerPreviewThumbnail = ({
 }: VideoPlayerPreviewThumbnailProps) => (
   <MediaPreviewThumbnail
     data-slot="video-player-preview-thumbnail"
-    className={cn(
-      "overflow-hidden rounded-sm border border-border shadow-md",
-      className,
-    )}
+    className={cn("overflow-hidden rounded-sm edge", className)}
     {...props}
   />
 )
@@ -527,7 +523,7 @@ export const VideoPlayerSettingsMenu = ({
   <MediaSettingsMenu
     data-slot="video-player-settings-menu"
     className={cn(
-      "rounded-md border border-border bg-popover text-popover-foreground shadow-md",
+      "rounded-md edge bg-popover text-popover-foreground edge",
       className,
     )}
     {...props}
@@ -731,7 +727,7 @@ export const VideoPlayerPoster = ({
         <span
           aria-hidden
           data-slot="video-player-poster-button"
-          className="flex size-16 items-center justify-center rounded-full bg-brand text-primary-foreground shadow-lg transition-transform group-hover/video-player:scale-105"
+          className="flex size-16 items-center justify-center rounded-full bg-brand text-primary-foreground edge transition-transform group-hover/video-player:scale-105"
         >
           <svg
             viewBox="0 0 24 24"
@@ -948,7 +944,7 @@ export const VideoPlayerEndScreen = ({
   }, [ended, remaining, next, countdownSeconds])
 
   const cardClassName =
-    "flex w-full max-w-sm items-center gap-3 rounded-lg border border-border bg-card p-3 text-left transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+    "flex w-full max-w-sm items-center gap-3 rounded-lg edge bg-card p-3 text-left transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
   const cardBody = next ? (
     <>
       {next.thumbnail ? (
@@ -1301,7 +1297,7 @@ export const MediaPlayer = ({
         {title ? (
           <div
             data-slot="video-player-title"
-            className="pointer-events-none absolute inset-x-0 top-0 z-10 bg-gradient-to-b from-background/80 to-transparent p-4 opacity-0 transition-opacity group-hover/video-player:opacity-100"
+            className="scrim-top-background pointer-events-none absolute inset-x-0 top-0 z-10 p-4 opacity-0 transition-opacity group-hover/video-player:opacity-100"
           >
             <span className="text-sm font-medium text-foreground">{title}</span>
           </div>

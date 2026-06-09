@@ -24,6 +24,9 @@ jobs:
       - name: Generate lint manifest
         run: npm run gen:lint-manifest
 
+      - name: Build workspace packages
+        run: npm run build --workspace @byronwade/on-system-core && npm run build --workspace @byronwade/lint
+
       - name: Check test coverage gate
         run: npm run check:tests
 

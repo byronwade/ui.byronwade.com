@@ -57,9 +57,10 @@ describe("NumberField — render", () => {
 
   it("uses token surfaces on the group", () => {
     const { container } = render(<Stepper defaultValue={5} />);
-    expect(
-      container.querySelector('[data-slot="number-field-group"]'),
-    ).toHaveClass("border-input");
+    const group = container.querySelector('[data-slot="number-field-group"]');
+    expect(group).toHaveClass("border-input");
+    expect(group).toHaveClass("bg-input/30");
+    expect(group).not.toHaveClass("bg-transparent");
   });
 });
 

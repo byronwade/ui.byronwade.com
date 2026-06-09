@@ -7,7 +7,7 @@ const items = Array.from({ length: 6 }, (_, index) =>
 
 export default function Example() {
   return (
-    <div className="w-full max-w-3xl rounded-xl border border-border bg-card p-4">
+    <div className="w-full max-w-3xl rounded-xl edge bg-card p-4">
       <Watchlist items={items} selectedSymbol={items[0].symbol} />
     </div>
   )

@@ -3,7 +3,7 @@ import { makeCandles } from "@/lib/market"
 
 export default function Example() {
   return (
-    <div className="h-[360px] w-full overflow-hidden rounded-xl border border-border bg-background">
+    <div className="h-[360px] w-full overflow-hidden rounded-xl edge bg-background">
       <CandlestickChart
         data={makeCandles(72, { seed: 7 })}
         interactive

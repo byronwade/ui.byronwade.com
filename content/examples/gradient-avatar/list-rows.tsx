@@ -35,7 +35,7 @@ const members = [
 
 export default function Example() {
   return (
-    <div className="w-full max-w-md rounded-2xl border bg-card p-4">
+    <div className="w-full max-w-md rounded-2xl edge bg-card p-4">
       <p className="mb-3 text-sm font-semibold">Team Members</p>
       <ul className="space-y-1">
         {members.map((m) => (

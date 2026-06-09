@@ -36,7 +36,7 @@ export default function Example() {
   return (
     <div className="flex flex-col items-center gap-6 p-8">
       <Popover open={open} onOpenChange={handleOpenChange}>
-        <PopoverTrigger className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-muted transition-colors">
+        <PopoverTrigger className="inline-flex items-center gap-1.5 rounded-full edge bg-background px-3 py-1.5 text-sm font-medium edge hover:bg-muted transition-colors">
           Edit profile
         </PopoverTrigger>
         <PopoverContent side="bottom" align="center" className="w-80">
@@ -61,7 +61,7 @@ export default function Example() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Ada Lovelace"
-                className="rounded-md border border-border bg-background px-2.5 py-1.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
+                className="rounded-md edge bg-background px-2.5 py-1.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
               />
             </div>
 
@@ -78,7 +78,7 @@ export default function Example() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="ada@example.com"
-                className="rounded-md border border-border bg-background px-2.5 py-1.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
+                className="rounded-md edge bg-background px-2.5 py-1.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
               />
             </div>
 
@@ -86,7 +86,7 @@ export default function Example() {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-sm font-medium hover:bg-muted transition-colors"
+                className="inline-flex items-center rounded-full edge bg-background px-3 py-1 text-sm font-medium hover:bg-muted transition-colors"
               >
                 Cancel
               </button>

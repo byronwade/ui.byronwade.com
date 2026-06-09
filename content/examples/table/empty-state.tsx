@@ -44,7 +44,7 @@ export default function Example() {
       <div className="flex items-center gap-3">
         <button
           onClick={() => setShowEmpty((v) => !v)}
-          className="px-3 py-1.5 rounded-md border text-sm hover:bg-muted transition-colors"
+          className="px-3 py-1.5 rounded-md edge text-sm hover:bg-muted transition-colors"
         >
           {showEmpty ? "Show data" : "Clear to empty state"}
         </button>

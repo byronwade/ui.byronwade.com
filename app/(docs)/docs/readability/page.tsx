@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
+import { GuidePager } from "@/app/(docs)/_components/guide-pager"
 import { DocsIntro } from "@/app/(docs)/_components/docs-prose"
 import {
   ReadabilityPlayground,
@@ -29,19 +29,25 @@ export default function ReadabilityPage() {
         className={`relative ${BLEED} overflow-hidden border-b border-border`}
       >
         <div className="glow-brand pointer-events-none absolute inset-x-0 -top-24 h-56 opacity-40" />
-        <div className="relative py-12 sm:py-16">
+        <div className="relative py-12 lg:py-16">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Foundation · Readability
           </p>
-          <h1 className="mt-5 max-w-3xl text-[clamp(2.5rem,7vw,5rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
+          <h1 className="mt-4 max-w-3xl text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
             We chose calm <span className="text-brand">and</span> readable.
           </h1>
           <DocsIntro className="mt-6">
             Most design systems optimize for dashboards — then leave long-form
             copy to guesswork. byronwade/ui bakes peer-reviewed web reading
-            parameters into foundation so articles, docs, and UI chrome each get
-            the lane they deserve. This page is the reasoning, not a literature
-            review.
+            parameters into{" "}
+            <Link
+              href="/docs/foundation"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              foundation
+            </Link>{" "}
+            so articles, docs, and UI chrome each get the lane they deserve.
+            This page is the reasoning, not a literature review.
           </DocsIntro>
         </div>
       </section>
@@ -66,9 +72,15 @@ export default function ReadabilityPage() {
             <span className="font-mono text-[0.9em] text-brand">
               reading-prose
             </span>{" "}
-            — and wired them into the AI rule, marketing layouts, and this
-            documentation. The accent stays on surfaces; the science stays on
-            copy.
+            — and wired them into the{" "}
+            <Link
+              href="/docs/ai"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              AI rule
+            </Link>
+            , marketing layouts, and this documentation. The accent stays on
+            surfaces; the science stays on copy.
           </p>
         </div>
       </section>
@@ -131,8 +143,15 @@ export default function ReadabilityPage() {
           </h2>
           <p className="reading-ui mt-4 text-foreground text-pretty">
             One paragraph rendered three ways — UI density, docs sans, essay
-            serif. Only the reading lanes get measure caps and paragraph
-            spacing. This is the system working as designed.
+            serif. The lanes draw on the same{" "}
+            <Link
+              href="/docs/typography"
+              className="text-brand underline-offset-4 hover:underline"
+            >
+              type families
+            </Link>
+            , but only the reading lanes get measure caps and paragraph spacing.
+            This is the system working as designed.
           </p>
           <ReadabilityShowcase />
         </div>
@@ -148,7 +167,15 @@ export default function ReadabilityPage() {
         </h2>
         <p className="reading-ui mt-4 text-foreground text-pretty">
           Drag past 80ch to feel WCAG friction. Pull below 45ch to feel rhythm
-          break. Defaults match foundation — you should rarely need to override.
+          break. Defaults match foundation, and the same caps route correctly
+          across{" "}
+          <Link
+            href="/docs/surfaces"
+            className="text-brand underline-offset-4 hover:underline"
+          >
+            application and marketing surfaces
+          </Link>{" "}
+          — you should rarely need to override.
         </p>
         <ReadabilityPlayground />
       </section>
@@ -250,27 +277,7 @@ export default function ReadabilityPage() {
       </section>
 
       {/* ============================ NAV ============================== */}
-      <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-8 text-sm">
-        <Link
-          href="/docs/ai"
-          className="inline-flex items-center gap-1.5 text-brand underline-offset-4 hover:underline"
-        >
-          Next: AI rules
-          <ArrowRight className="size-3.5" />
-        </Link>
-        <Link
-          href="/docs/typography"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Typography
-        </Link>
-        <Link
-          href="/docs/foundation"
-          className="inline-flex items-center gap-1.5 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Foundation tokens
-        </Link>
-      </div>
+      <GuidePager current="/docs/readability" />
     </article>
   )
 }

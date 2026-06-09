@@ -2,6 +2,9 @@ import type { ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
 
+/** Full-bleed gutter — breaks a section out of the docs column to the layout edge. */
+export const BLEED = "-mx-6 px-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
+
 type DocsProseProps = {
   children: ReactNode
   className?: string
