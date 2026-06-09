@@ -2235,10 +2235,10 @@
       ]
     },
     {
-      "name": "apple-cards-carousel",
+      "name": "showcase-carousel",
       "type": "registry:ui",
-      "title": "Apple cards carousel",
-      "description": "Horizontal card carousel where cards expand into a full modal. Token surfaces, lucide controls, no next/image. Adapted from Aceternity UI.",
+      "title": "Showcase carousel",
+      "description": "Horizontal carousel of cover cards that expand into a detail modal. Token surfaces with the edge hairline + depth, mono metadata eyebrows over editorial titles, lucide controls, focus-visible rings. Adapted from Aceternity UI.",
       "dependencies": [
         "motion",
         "lucide-react"
@@ -2250,9 +2250,9 @@
       ],
       "files": [
         {
-          "path": "registry/ui/apple-cards-carousel.tsx",
+          "path": "registry/ui/showcase-carousel.tsx",
           "type": "registry:ui",
-          "target": "components/ui/apple-cards-carousel.tsx"
+          "target": "components/ui/showcase-carousel.tsx"
         }
       ]
     },
@@ -5504,7 +5504,7 @@
         "@byronwade/world-map",
         "@byronwade/floating-dock",
         "@byronwade/use-outside-click",
-        "@byronwade/apple-cards-carousel",
+        "@byronwade/showcase-carousel",
         "@byronwade/pixelated-canvas",
         "@byronwade/slider",
         "@byronwade/number-field",

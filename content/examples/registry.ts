@@ -67,7 +67,6 @@ import AlertCreateFormDefault from "./alert-create-form/default";
 import AndroidDefault from "./android/default";
 import AppShellDefault from "./app-shell/default";
 import AppShellTradingDesk from "./app-shell/trading-desk";
-import AppleCardsCarouselDefault from "./apple-cards-carousel/default";
 import ArtistHeaderDefault from "./artist-header/default";
 import AspectRatioDefault from "./aspect-ratio/default";
 import AspectRatioCinematic from "./aspect-ratio/cinematic";
@@ -524,6 +523,7 @@ import SheetWithForm from "./sheet/with-form";
 import ShortsPlayerDefault from "./shorts-player/default";
 import ShortsPlayerImmersive from "./shorts-player/immersive";
 import ShortsPlayerPreview from "./shorts-player/preview";
+import ShowcaseCarouselDefault from "./showcase-carousel/default";
 import SidebarDefault from "./sidebar/default";
 import SidebarMenuButtons from "./sidebar/menu-buttons";
 import SidebarTradingDesk from "./sidebar/trading-desk";
@@ -829,9 +829,6 @@ export const examples: Record<string, Example[]> = {
   "app-shell": [
     { name: "Default", file: "app-shell/default.tsx", Component: AppShellDefault },
     { name: "Trading Desk", file: "app-shell/trading-desk.tsx", Component: AppShellTradingDesk },
-  ],
-  "apple-cards-carousel": [
-    { name: "Default", file: "apple-cards-carousel/default.tsx", Component: AppleCardsCarouselDefault },
   ],
   "artist-header": [
     { name: "Default", file: "artist-header/default.tsx", Component: ArtistHeaderDefault },
@@ -1578,6 +1575,9 @@ export const examples: Record<string, Example[]> = {
     { name: "Default", file: "shorts-player/default.tsx", Component: ShortsPlayerDefault },
     { name: "Immersive", file: "shorts-player/immersive.tsx", Component: ShortsPlayerImmersive },
     { name: "Preview", file: "shorts-player/preview.tsx", Component: ShortsPlayerPreview },
+  ],
+  "showcase-carousel": [
+    { name: "Default", file: "showcase-carousel/default.tsx", Component: ShowcaseCarouselDefault },
   ],
   "sidebar": [
     { name: "Default", file: "sidebar/default.tsx", Component: SidebarDefault },

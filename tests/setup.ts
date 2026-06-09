@@ -5,7 +5,7 @@ import { afterAll, expect } from "vitest"
 expect.extend(axeMatchers)
 
 // NOTE: ResizeObserver is intentionally NOT polyfilled globally — recharts
-// (chart.test.tsx) and the apple-cards-carousel measure scrollability
+// (chart.test.tsx) and the showcase-carousel measure scrollability
 // differently when one is present, so individual tests install a no-op locally.
 //
 // This runs once per test FILE (setup files register file-scoped hooks). Tests

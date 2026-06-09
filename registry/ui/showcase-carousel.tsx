@@ -1,12 +1,10 @@
 /**
- * Adapted for byronwade/ui from Aceternity UI.
- * Original code, concept, and design © Aceternity UI — https://ui.aceternity.com
- * Reworked to the byronwade/ui design system: lucide icons (no @tabler), no
- * next/image dependency, semantic token surfaces (bg-card / bg-muted /
- * text-foreground / text-muted-foreground / bg-foreground), aria-labels on the
- * icon-only controls, and data-slot hooks. The modal scrim uses semantic
- * foreground opacity with backdrop blur; photo cards keep token text over the
- * image scrim for legibility.
+ * Showcase carousel — a horizontal scroll of cover cards that expand into a
+ * detail modal. Adapted for byronwade/ui from Aceternity UI (original concept &
+ * design © Aceternity UI — https://ui.aceternity.com), reskinned to the
+ * byronwade/ui design system: token surfaces with the `edge` hairline + depth,
+ * the radius scale, mono metadata eyebrows over editorial titles, lucide icons,
+ * data-slot hooks, and focus-visible rings on every control.
  */
 "use client"
 
@@ -18,19 +16,19 @@ import { AnimatePresence, motion } from "motion/react"
 import { cn } from "@/lib/utils"
 import { useOutsideClick } from "@/lib/use-outside-click"
 
-interface CarouselProps {
+interface ShowcaseCarouselProps {
   items: React.ReactElement[]
   initialScroll?: number
 }
 
-type Card = {
+type ShowcaseCardData = {
   src: string
   title: string
   category: string
   content: React.ReactNode
 }
 
-export const CarouselContext = createContext<{
+export const ShowcaseCarouselContext = createContext<{
   onCardClose: (index: number) => void
   currentIndex: number
 }>({
@@ -38,7 +36,10 @@ export const CarouselContext = createContext<{
   currentIndex: 0,
 })
 
-export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
+export const ShowcaseCarousel = ({
+  items,
+  initialScroll = 0,
+}: ShowcaseCarouselProps) => {
   const carouselRef = React.useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = React.useState(false)
   const [canScrollRight, setCanScrollRight] = React.useState(true)
@@ -69,8 +70,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
   const handleCardClose = (index: number) => {
     if (carouselRef.current) {
-      const cardWidth = isMobile() ? 230 : 384 // (md:w-96)
-      const gap = isMobile() ? 4 : 8
+      const cardWidth = isMobile() ? 224 : 384 // w-56 / md:w-96
+      const gap = 16 // gap-4
       const scrollPosition = (cardWidth + gap) * (index + 1)
       carouselRef.current.scrollTo({ left: scrollPosition, behavior: "smooth" })
       setCurrentIndex(index)
@@ -82,12 +83,15 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   }
 
   return (
-    <CarouselContext.Provider
+    <ShowcaseCarouselContext.Provider
       value={{ onCardClose: handleCardClose, currentIndex }}
     >
-      <div data-slot="carousel" className="relative w-full min-w-0 max-w-full">
+      <div
+        data-slot="showcase-carousel"
+        className="relative w-full max-w-full min-w-0"
+      >
         <div
-          className="flex w-full min-w-0 overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] md:py-20"
+          className="flex w-full min-w-0 overflow-x-scroll scroll-smooth py-8 overscroll-x-auto [scrollbar-width:none] md:py-12"
           ref={carouselRef}
           onScroll={checkScrollability}
         >
@@ -97,27 +101,28 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           <div className="flex flex-row justify-start gap-4 pl-4">
             {items.map((item, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{
                   opacity: 1,
                   y: 0,
                   transition: {
-                    duration: 0.5,
-                    delay: 0.2 * index,
+                    duration: 0.4,
+                    delay: 0.12 * index,
                     ease: "easeOut",
                   },
                 }}
                 key={"card" + index}
-                className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
+                className="rounded-2xl last:pr-[5%] md:last:pr-[33%]"
               >
                 {item}
               </motion.div>
             ))}
           </div>
         </div>
-        <div className="mr-10 flex justify-end gap-2">
+        <div className="mr-4 flex justify-end gap-2">
           <button
             type="button"
+            data-slot="showcase-carousel-prev"
             aria-label="Previous cards"
             className="relative z-40 flex size-9 items-center justify-center rounded-full bg-muted edge text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
             onClick={scrollLeft}
@@ -127,6 +132,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           </button>
           <button
             type="button"
+            data-slot="showcase-carousel-next"
             aria-label="Next cards"
             className="relative z-40 flex size-9 items-center justify-center rounded-full bg-muted edge text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
             onClick={scrollRight}
@@ -136,22 +142,22 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           </button>
         </div>
       </div>
-    </CarouselContext.Provider>
+    </ShowcaseCarouselContext.Provider>
   )
 }
 
-export const Card = ({
+export const ShowcaseCard = ({
   card,
   index,
   layout = false,
 }: {
-  card: Card
+  card: ShowcaseCardData
   index: number
   layout?: boolean
 }) => {
   const [open, setOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const { onCardClose } = useContext(CarouselContext)
+  const { onCardClose } = useContext(ShowcaseCarouselContext)
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -189,7 +195,7 @@ export const Card = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 h-full w-full bg-foreground/80 backdrop-blur-lg"
+              className="fixed inset-0 h-full w-full bg-foreground/70 backdrop-blur-sm"
             />
             <motion.div
               initial={{ opacity: 0 }}
@@ -197,29 +203,31 @@ export const Card = ({
               exit={{ opacity: 0 }}
               ref={containerRef}
               layoutId={layout ? `card-${card.title}` : undefined}
-              className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-card edge p-4 md:p-10"
+              data-slot="showcase-card-detail"
+              className="relative z-[60] mx-auto my-10 h-fit max-w-3xl rounded-2xl bg-card p-6 depth-400 md:p-10"
             >
               <button
                 type="button"
+                data-slot="showcase-card-close"
                 aria-label="Close"
-                className="sticky top-4 right-0 ml-auto flex size-8 items-center justify-center rounded-full bg-foreground text-background outline-none transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="sticky top-0 right-0 ml-auto flex size-8 items-center justify-center rounded-full bg-foreground text-background outline-none transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-ring/50"
                 onClick={handleClose}
               >
                 <X className="size-4" />
               </button>
               <motion.p
                 layoutId={layout ? `category-${card.title}` : undefined}
-                className="text-sm font-medium text-muted-foreground"
+                className="font-mono text-xs tracking-wide text-muted-foreground uppercase"
               >
                 {card.category}
               </motion.p>
               <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
-                className="mt-4 text-2xl font-medium tracking-tight text-foreground md:text-5xl"
+                className="mt-2 text-2xl font-medium tracking-tight text-foreground md:text-4xl"
               >
                 {card.title}
               </motion.p>
-              <div className="py-10">{card.content}</div>
+              <div className="py-8">{card.content}</div>
             </motion.div>
           </div>
         )}
@@ -228,24 +236,25 @@ export const Card = ({
         type="button"
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
-        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-muted outline-none transition focus-visible:ring-3 focus-visible:ring-ring/50 md:h-[40rem] md:w-96"
+        data-slot="showcase-card"
+        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-2xl bg-muted outline-none transition hover:depth-soft focus-visible:ring-3 focus-visible:ring-ring/50 md:h-[30rem] md:w-96"
       >
         <div className="scrim-top pointer-events-none absolute inset-x-0 top-0 z-30 h-full" />
-        <div className="relative z-40 p-8">
+        <div className="relative z-40 p-6">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
-            className="text-left text-sm font-medium text-background md:text-base"
+            className="text-left font-mono text-xs tracking-wide text-background/90 uppercase"
           >
             {card.category}
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
-            className="mt-2 max-w-xs text-left text-xl font-medium tracking-tight text-balance text-background md:text-3xl"
+            className="mt-2 max-w-xs text-left text-lg font-medium tracking-tight text-balance text-background md:text-2xl"
           >
             {card.title}
           </motion.p>
         </div>
-        <BlurImage
+        <ShowcaseCardImage
           src={card.src}
           alt={card.title}
           className="absolute inset-0 z-10 object-cover"
@@ -255,7 +264,7 @@ export const Card = ({
   )
 }
 
-export const BlurImage = ({
+export const ShowcaseCardImage = ({
   src,
   className,
   alt,
@@ -265,7 +274,7 @@ export const BlurImage = ({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      data-slot="carousel-card-image"
+      data-slot="showcase-card-image"
       className={cn(
         "h-full w-full transition duration-300",
         isLoading ? "blur-sm" : "blur-0",

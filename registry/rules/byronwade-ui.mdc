@@ -79,8 +79,8 @@ Before writing any markup, check whether a component already exists. Reach for t
   `android` (drop a screenshot or `videoSrc` in to show a product in context)
 - **Marketing / motion** — `world-map` (dotted map with animated connection arcs),
   `floating-dock` (magnify-on-hover dock), `kinetic-text` (per-letter hover typography),
-  `backlight` (saturated RGB glow behind a child), `apple-cards-carousel` (cards that
-  expand into a modal), `pixelated-canvas` (image as an interactive dot grid),
+  `backlight` (saturated RGB glow behind a child), `showcase-carousel` (cover cards that
+  expand into a detail modal), `pixelated-canvas` (image as an interactive dot grid),
   `video-player` (YouTube-grade media-chrome player: composable parts + settings/quality/captions
   menus, scrub previews, chapters, heatmap, ambient, end-screen, and a `MediaPlayer` preset)
 - **Music / media** — Spotify-style music UI: `equalizer-bars` (animated now-playing bars),

@@ -3449,11 +3449,11 @@ export const components: ComponentDoc[] = [
     examples: ["default", "with-video"],
   },
   {
-    slug: "apple-cards-carousel",
-    name: "Apple cards carousel",
+    slug: "showcase-carousel",
+    name: "Showcase carousel",
     category: "UI",
     description:
-      "Horizontal card carousel where cards expand into a full modal. Token surfaces, lucide controls, no next/image. Adapted from Aceternity UI.",
+      "Horizontal carousel of cover cards that expand into a detail modal — token surfaces with the edge hairline + depth, mono metadata eyebrows over editorial titles, lucide controls, focus-visible rings. Adapted from Aceternity UI.",
     npmDeps: ["motion", "lucide-react"],
     registryDeps: [
       "@byronwade/foundation",

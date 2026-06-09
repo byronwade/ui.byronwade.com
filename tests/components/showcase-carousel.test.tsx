@@ -1,9 +1,9 @@
 /**
- * Tests for <Carousel /> + <Card /> (components/ui/apple-cards-carousel.tsx)
+ * Tests for <ShowcaseCarousel /> + <ShowcaseCard /> (components/ui/showcase-carousel.tsx)
  *
- * Horizontal carousel of cards; each card opens into a modal. jsdom has no
- * scrollBy/scrollTo and zero layout metrics, so we stub those. motion runs in
- * jsdom; we assert structure/state/a11y, never the spring visuals.
+ * Horizontal carousel of cover cards; each card opens into a detail modal. jsdom
+ * has no scrollBy/scrollTo and zero layout metrics, so we stub those. motion runs
+ * in jsdom; we assert structure/state/a11y, never the spring visuals.
  */
 
 import * as React from "react";
@@ -12,10 +12,10 @@ import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
 
 import {
-  Carousel,
-  Card,
-  BlurImage,
-} from "@/components/ui/apple-cards-carousel";
+  ShowcaseCarousel,
+  ShowcaseCard,
+  ShowcaseCardImage,
+} from "@/components/ui/showcase-carousel";
 
 const CARDS = [
   {
@@ -32,11 +32,11 @@ const CARDS = [
   },
 ];
 
-function renderCarousel() {
+function renderShowcase() {
   return render(
-    <Carousel
+    <ShowcaseCarousel
       items={CARDS.map((card, index) => (
-        <Card key={card.title} card={card} index={index} />
+        <ShowcaseCard key={card.title} card={card} index={index} />
       ))}
     />,
   );
@@ -76,47 +76,49 @@ afterEach(() => {
     Object.defineProperty(HTMLElement.prototype, "clientWidth", origClientWidth);
 });
 
-describe("Carousel — render", () => {
+describe("ShowcaseCarousel — render", () => {
   it("renders the carousel container", () => {
-    const { container } = renderCarousel();
-    expect(container.querySelector('[data-slot="carousel"]')).not.toBeNull();
+    const { container } = renderShowcase();
+    expect(
+      container.querySelector('[data-slot="showcase-carousel"]'),
+    ).not.toBeNull();
   });
 
   it("renders a button per card (card triggers) plus the two nav arrows", () => {
-    renderCarousel();
+    renderShowcase();
     // Card triggers expose their title as accessible text.
     expect(screen.getByText("First card")).toBeInTheDocument();
     expect(screen.getByText("Second card")).toBeInTheDocument();
   });
 
   it("renders labelled prev/next controls", () => {
-    renderCarousel();
+    renderShowcase();
     expect(screen.getByRole("button", { name: "Previous cards" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next cards" })).toBeInTheDocument();
   });
 
   it("disables Previous initially and enables Next", () => {
-    renderCarousel();
+    renderShowcase();
     expect(screen.getByRole("button", { name: "Previous cards" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Next cards" })).not.toBeDisabled();
   });
 
   it("uses token surfaces (bg-muted controls)", () => {
-    renderCarousel();
+    renderShowcase();
     expect(screen.getByRole("button", { name: "Next cards" })).toHaveClass("bg-muted");
   });
 });
 
-describe("Carousel — scroll controls", () => {
+describe("ShowcaseCarousel — scroll controls", () => {
   it("calls scrollBy when Next is clicked", async () => {
     const user = userEvent.setup();
-    renderCarousel();
+    renderShowcase();
     await user.click(screen.getByRole("button", { name: "Next cards" }));
     expect(Element.prototype.scrollBy).toHaveBeenCalled();
   });
 
   it("recomputes scrollability on scroll", () => {
-    const { container } = renderCarousel();
+    const { container } = renderShowcase();
     const scroller = container.querySelector(
       ".overflow-x-scroll",
     ) as HTMLElement;
@@ -126,10 +128,10 @@ describe("Carousel — scroll controls", () => {
   });
 });
 
-describe("Card — modal open/close", () => {
+describe("ShowcaseCard — modal open/close", () => {
   it("opens the modal with category, title and content on click", async () => {
     const user = userEvent.setup();
-    renderCarousel();
+    renderShowcase();
     await user.click(screen.getByText("First card"));
     expect(await screen.findByText("First body")).toBeInTheDocument();
     // Category appears both on the card and in the modal.
@@ -138,7 +140,7 @@ describe("Card — modal open/close", () => {
 
   it("closes the modal via the Close button", async () => {
     const user = userEvent.setup();
-    renderCarousel();
+    renderShowcase();
     await user.click(screen.getByText("First card"));
     const close = await screen.findByRole("button", { name: "Close" });
     await user.click(close);
@@ -149,7 +151,7 @@ describe("Card — modal open/close", () => {
 
   it("closes the modal on an outside click", async () => {
     const user = userEvent.setup();
-    renderCarousel();
+    renderShowcase();
     await user.click(screen.getByText("First card"));
     expect(await screen.findByText("First body")).toBeInTheDocument();
     // Pointer down outside the modal panel triggers useOutsideClick → close.
@@ -161,7 +163,7 @@ describe("Card — modal open/close", () => {
 
   it("closes the modal on Escape", async () => {
     const user = userEvent.setup();
-    renderCarousel();
+    renderShowcase();
     await user.click(screen.getByText("First card"));
     expect(await screen.findByText("First body")).toBeInTheDocument();
     await user.keyboard("{Escape}");
@@ -172,7 +174,7 @@ describe("Card — modal open/close", () => {
 
   it("ignores non-Escape keys while the modal is open", async () => {
     const user = userEvent.setup();
-    renderCarousel();
+    renderShowcase();
     await user.click(screen.getByText("First card"));
     expect(await screen.findByText("First body")).toBeInTheDocument();
     // A non-Escape key exercises the keydown handler's false branch — it must
@@ -184,7 +186,7 @@ describe("Card — modal open/close", () => {
 
   it("locks body scroll while open and restores it on close", async () => {
     const user = userEvent.setup();
-    renderCarousel();
+    renderShowcase();
     await user.click(screen.getByText("First card"));
     await screen.findByText("First body");
     expect(document.body.style.overflow).toBe("hidden");
@@ -193,9 +195,9 @@ describe("Card — modal open/close", () => {
   });
 });
 
-describe("BlurImage", () => {
+describe("ShowcaseCardImage", () => {
   it("starts blurred and unblurs on load", () => {
-    const { container } = render(<BlurImage src="/x.png" alt="x" />);
+    const { container } = render(<ShowcaseCardImage src="/x.png" alt="x" />);
     const img = container.querySelector("img")!;
     expect(img).toHaveClass("blur-sm");
     fireEvent.load(img);
@@ -203,19 +205,19 @@ describe("BlurImage", () => {
   });
 
   it("falls back to a generic alt when none is given", () => {
-    const { container } = render(<BlurImage src="/x.png" />);
+    const { container } = render(<ShowcaseCardImage src="/x.png" />);
     expect(container.querySelector("img")).toHaveAttribute("alt", "Background");
   });
 });
 
-describe("Carousel — layout, initialScroll, mobile & Previous", () => {
+describe("ShowcaseCarousel — layout, initialScroll, mobile & Previous", () => {
   it("renders shared-layout cards and opens them (layout prop)", async () => {
     const user = userEvent.setup();
     render(
-      <Carousel
+      <ShowcaseCarousel
         initialScroll={50}
         items={CARDS.map((card, index) => (
-          <Card key={card.title} card={card} index={index} layout />
+          <ShowcaseCard key={card.title} card={card} index={index} layout />
         ))}
       />,
     );
@@ -229,9 +231,9 @@ describe("Carousel — layout, initialScroll, mobile & Previous", () => {
     Object.defineProperty(window, "innerWidth", { configurable: true, value: 500 });
     try {
       render(
-        <Carousel
+        <ShowcaseCarousel
           items={CARDS.map((card, index) => (
-            <Card key={card.title} card={card} index={index} />
+            <ShowcaseCard key={card.title} card={card} index={index} />
           ))}
         />,
       );
@@ -262,7 +264,7 @@ describe("Carousel — layout, initialScroll, mobile & Previous", () => {
       set: () => {},
     });
     try {
-      const { container } = renderCarousel();
+      const { container } = renderShowcase();
       fireEvent.scroll(container.querySelector(".overflow-x-scroll")!);
       const prev = screen.getByRole("button", { name: "Previous cards" });
       await waitFor(() => expect(prev).not.toBeDisabled());
@@ -275,10 +277,10 @@ describe("Carousel — layout, initialScroll, mobile & Previous", () => {
   });
 });
 
-describe("Card — standalone (default context)", () => {
-  it("opens and closes a Card rendered without a Carousel provider", async () => {
+describe("ShowcaseCard — standalone (default context)", () => {
+  it("opens and closes a card rendered without a ShowcaseCarousel provider", async () => {
     const user = userEvent.setup();
-    render(<Card card={CARDS[0]} index={0} />);
+    render(<ShowcaseCard card={CARDS[0]} index={0} />);
     await user.click(screen.getByText("First card"));
     expect(await screen.findByText("First body")).toBeInTheDocument();
     // Close path exercises the default no-op onCardClose from the context.
@@ -289,9 +291,9 @@ describe("Card — standalone (default context)", () => {
   });
 });
 
-describe("Carousel — accessibility", () => {
+describe("ShowcaseCarousel — accessibility", () => {
   it("has no axe violations (closed)", async () => {
-    const { container } = renderCarousel();
+    const { container } = renderShowcase();
     expect(await axe(container)).toHaveNoViolations();
   });
 });

@@ -1,4 +1,7 @@
-import { Carousel, Card } from "@/components/ui/apple-cards-carousel"
+import {
+  ShowcaseCarousel,
+  ShowcaseCard,
+} from "@/components/ui/showcase-carousel"
 
 const DATA = [
   {
@@ -31,9 +34,9 @@ const DATA = [
 
 export default function Example() {
   return (
-    <Carousel
+    <ShowcaseCarousel
       items={DATA.map((card, index) => (
-        <Card key={card.title} card={card} index={index} />
+        <ShowcaseCard key={card.title} card={card} index={index} />
       ))}
     />
   )
