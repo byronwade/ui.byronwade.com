@@ -25,6 +25,7 @@ const weeklyData = Array.from({ length: 26 * 7 }, (_, i) => {
   return Math.round(seededValue(i, 6) * 6 * recencyBoost)
 })
 
+const emptyData = Array.from({ length: 26 * 7 }, () => 0)
 const totalActive = weeklyData.filter((n) => n > 0).length
 const totalCount = weeklyData.reduce((a, b) => a + b, 0)
 const skeletonCells = Array.from({ length: 26 * 7 }, (_, i) => i)
@@ -62,14 +63,30 @@ export default function Example() {
   const depth = useDemoDepth() ?? "none"
   const state = useDemoState() ?? "default"
   const isLoading = state === "loading"
-  const stateLabel =
-    state === "success"
-      ? "Synced"
-      : state === "error"
-        ? "Sync failed"
-        : state === "loading"
-          ? "Loading"
-          : "Live"
+  const isEmpty = state === "empty"
+  const isError = state === "error"
+
+  const stateLabel = {
+    default: "Live",
+    loading: "Loading",
+    empty: "No activity",
+    success: "Synced",
+    error: "Sync failed",
+  }[state]
+
+  const countLabel = isLoading
+    ? "--"
+    : isEmpty || isError
+      ? "0"
+      : totalCount.toLocaleString()
+
+  const footerLabel = isError
+    ? "Unable to load activity"
+    : isLoading
+      ? "Loading active days"
+      : isEmpty
+        ? "No active days yet"
+        : `${totalActive} active days`
 
   return (
     <div
@@ -80,7 +97,7 @@ export default function Example() {
         frame === "default" && "p-5",
         frame === "inset" && "bg-muted/30 p-2",
         state === "success" && "ring-success/30",
-        state === "error" && "ring-destructive/30",
+        isError && "ring-destructive/30",
         depth === "none" && "shadow-none",
         depth === "soft" && "depth-soft",
         depth === "raised" && "depth-raised",
@@ -94,7 +111,7 @@ export default function Example() {
       >
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold">Contributions</p>
+            <p className="text-sm font-medium">Contributions</p>
             <p className="text-xs text-muted-foreground">Last 6 months</p>
           </div>
           <div className="flex items-center gap-3">
@@ -102,15 +119,17 @@ export default function Example() {
               className={cn(
                 "rounded-md px-2 py-1 text-xs font-medium",
                 state === "success" && "bg-success/10 text-success",
-                state === "error" && "bg-destructive/10 text-destructive",
-                state === "loading" && "bg-muted text-muted-foreground",
-                state === "default" && "bg-muted text-muted-foreground",
+                isError && "bg-destructive/10 text-destructive",
+                (state === "loading" ||
+                  state === "empty" ||
+                  state === "default") &&
+                  "bg-muted text-muted-foreground",
               )}
             >
               {stateLabel}
             </span>
             <span className="text-2xl font-medium tabular-nums">
-              {isLoading ? "--" : totalCount.toLocaleString()}
+              {countLabel}
             </span>
           </div>
         </div>
@@ -118,7 +137,12 @@ export default function Example() {
         {isLoading ? (
           <ActivityGridSkeleton density={density} />
         ) : (
-          <ActivityGrid data={weeklyData} columns={26} size={density} />
+          <ActivityGrid
+            data={isEmpty || isError ? emptyData : weeklyData}
+            columns={26}
+            size={density}
+            className={cn(isError && "opacity-60")}
+          />
         )}
 
         <div className="mt-3 flex items-center justify-between">
@@ -126,14 +150,10 @@ export default function Example() {
             className={cn(
               "text-xs text-muted-foreground",
               state === "success" && "text-success",
-              state === "error" && "text-destructive",
+              isError && "text-destructive",
             )}
           >
-            {state === "error"
-              ? "Unable to load activity"
-              : isLoading
-                ? "Loading active days"
-                : `${totalActive} active days`}
+            {footerLabel}
           </p>
           <div className="flex items-center gap-1.5">
             <span className="text-xs text-muted-foreground">Less</span>

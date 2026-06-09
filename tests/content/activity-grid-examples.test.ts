@@ -57,11 +57,24 @@ describe("activity-grid examples", () => {
     expect(source).toContain('state === "success"')
     expect(source).toContain('state === "error"')
     expect(source).toContain('state === "loading"')
+    expect(source).toContain('state === "empty"')
     expect(source).toContain("aria-busy")
     expect(source).toContain(
       'import { Skeleton } from "@/components/ui/skeleton"',
     )
     expect(source).toContain("<Skeleton")
     expect(source).not.toContain("animate-pulse")
+  })
+
+  it("makes the default example state-aware so the landing preview responds to the state toolbar", () => {
+    const source = readFileSync(
+      "content/examples/activity-grid/default.tsx",
+      "utf8",
+    )
+
+    expect(source).toContain("useDemoState")
+    expect(source).toContain('state === "loading"')
+    expect(source).toContain('state === "empty"')
+    expect(source).toContain('state === "error"')
   })
 })
