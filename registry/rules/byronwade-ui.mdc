@@ -283,7 +283,7 @@ Media, Video, and Commerce categories are marketing surface. `hero-section`, `ma
 ### House utilities (already defined by `foundation`)
 
 `bg-grid`, `bg-grid-lines`, `glow-brand`, `text-gradient`, `text-gradient-brand`, `mask-fade-x`,
-`full-bleed`, `edge`, `depth-none`, `depth-soft`, `depth-raised`, `depth-100`, `depth-200`, `depth-300`,
+`mask-fade-l`, `mask-fade-r`, `full-bleed`, `edge`, `depth-none`, `depth-soft`, `depth-raised`, `depth-100`, `depth-200`, `depth-300`,
 `depth-400`, `depth-500`, `depth-600`, `depth-inset-100`, `depth-inset-200`, `scrollbar-thin`, `reading-measure`, `reading-ui`, `reading-prose`,
 `reading-lead`, `reading-muted`, `reading-demo-break`. Prefer these over
 re-implementing gradients, grids, or shadows by hand.

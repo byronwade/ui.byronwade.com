@@ -319,6 +319,12 @@
           ".mask-fade-x": {
             "mask-image": "linear-gradient(to right, transparent, black 8%, black 92%, transparent)"
           },
+          ".mask-fade-l": {
+            "mask-image": "linear-gradient(to right, transparent, black 8%)"
+          },
+          ".mask-fade-r": {
+            "mask-image": "linear-gradient(to right, black 92%, transparent)"
+          },
           ".full-bleed": {
             "width": "100vw",
             "margin-left": "calc(50% - 50vw)",

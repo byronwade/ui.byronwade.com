@@ -32,6 +32,19 @@ function ChipBar({
   const selected = isControlled ? value : internal
 
   const scroller = React.useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = React.useState(false)
+  const [canScrollRight, setCanScrollRight] = React.useState(false)
+
+  const updateScrollability = React.useCallback(() => {
+    const el = scroller.current
+    if (!el) return
+    setCanScrollLeft(el.scrollLeft > 1)
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1)
+  }, [])
+
+  React.useEffect(() => {
+    updateScrollability()
+  }, [updateScrollability])
 
   function select(next: string) {
     if (!isControlled) setInternal(next)
@@ -53,27 +66,32 @@ function ChipBar({
     select(normalized[next].value)
   }
 
+  // Fade only the side(s) that can actually scroll, so the first/last chip is
+  // never faded or crowded when you're already at that end.
+  const maskClass =
+    canScrollLeft && canScrollRight
+      ? "mask-fade-x"
+      : canScrollLeft
+        ? "mask-fade-l"
+        : canScrollRight
+          ? "mask-fade-r"
+          : ""
+
   return (
     <div
       data-slot="chip-bar"
       className={cn("relative flex items-center", className)}
     >
-      <button
-        type="button"
-        data-slot="chip-bar-scroll-left"
-        aria-label="Scroll left"
-        onClick={() => scroll("left")}
-        className="absolute left-0 z-10 grid size-8 place-items-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
-      >
-        <ChevronLeft className="size-4" aria-hidden />
-      </button>
-
       <div
         ref={scroller}
         data-slot="chip-bar-scroller"
         role="tablist"
         aria-orientation="horizontal"
-        className="mask-fade-x scrollbar-thin flex flex-1 gap-2 overflow-x-auto px-8"
+        onScroll={updateScrollability}
+        className={cn(
+          "scrollbar-thin flex flex-1 gap-2 overflow-x-auto px-1",
+          maskClass,
+        )}
       >
         {normalized.map((item, index) => {
           const active = item.value === selected
@@ -100,12 +118,32 @@ function ChipBar({
         })}
       </div>
 
+      {/* Clean chevrons that float in the masked edge (no disc over the chips).
+          Each hides — and stops capturing clicks — when that end is reached. */}
+      <button
+        type="button"
+        data-slot="chip-bar-scroll-left"
+        aria-label="Scroll left"
+        tabIndex={canScrollLeft ? 0 : -1}
+        onClick={() => scroll("left")}
+        className={cn(
+          "absolute left-0 z-10 grid size-8 place-items-center rounded-full text-foreground outline-none transition hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50",
+          canScrollLeft ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
+      >
+        <ChevronLeft className="size-4" aria-hidden />
+      </button>
+
       <button
         type="button"
         data-slot="chip-bar-scroll-right"
         aria-label="Scroll right"
+        tabIndex={canScrollRight ? 0 : -1}
         onClick={() => scroll("right")}
-        className="absolute right-0 z-10 grid size-8 place-items-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
+        className={cn(
+          "absolute right-0 z-10 grid size-8 place-items-center rounded-full text-foreground outline-none transition hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50",
+          canScrollRight ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
       >
         <ChevronRight className="size-4" aria-hidden />
       </button>
