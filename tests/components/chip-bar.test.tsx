@@ -360,6 +360,56 @@ describe("keyboard selection", () => {
   });
 });
 
+// ─── 6b. Keyboard accessibility (roving tabindex + focus + scroll-into-view) ──
+describe("keyboard accessibility", () => {
+  it("uses roving tabindex — only the selected chip is tabbable", () => {
+    render(<ChipBar items={OBJECT_ITEMS} defaultValue="all" />);
+    expect(screen.getByRole("tab", { name: "All" })).toHaveAttribute(
+      "tabindex",
+      "0"
+    );
+    expect(screen.getByRole("tab", { name: "Music" })).toHaveAttribute(
+      "tabindex",
+      "-1"
+    );
+  });
+
+  it("makes the first chip tabbable when nothing is selected", () => {
+    render(<ChipBar items={OBJECT_ITEMS} />);
+    expect(screen.getByRole("tab", { name: "All" })).toHaveAttribute(
+      "tabindex",
+      "0"
+    );
+    expect(screen.getByRole("tab", { name: "Music" })).toHaveAttribute(
+      "tabindex",
+      "-1"
+    );
+  });
+
+  it("ArrowRight moves focus to the next chip, not just selection", async () => {
+    const user = userEvent.setup();
+    render(<ChipBar items={OBJECT_ITEMS} defaultValue="all" />);
+    screen.getByRole("tab", { name: "All" }).focus();
+    await user.keyboard("{ArrowRight}");
+    expect(screen.getByRole("tab", { name: "Music" })).toHaveFocus();
+  });
+
+  it("scrolls the newly focused chip into view", async () => {
+    const user = userEvent.setup();
+    const spy = vi.fn();
+    const orig = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = spy;
+    try {
+      render(<ChipBar items={OBJECT_ITEMS} defaultValue="all" />);
+      screen.getByRole("tab", { name: "All" }).focus();
+      await user.keyboard("{ArrowRight}");
+      expect(spy).toHaveBeenCalled();
+    } finally {
+      Element.prototype.scrollIntoView = orig;
+    }
+  });
+});
+
 // ─── 7. Scroll chevrons ─────────────────────────────────────────────────────
 describe("scroll chevrons", () => {
   it("clicking the right chevron scrolls without throwing", async () => {
