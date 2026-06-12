@@ -10,6 +10,7 @@ import {
   Cube,
   GitFork,
   Hash,
+  Heart,
   MagnifyingGlass,
   Moon,
   Sun,
@@ -25,7 +26,8 @@ import { cn } from "@/lib/utils"
 import { searchIndex, type SearchEntry } from "@/content/search-index"
 import { isActive, navItems, type DocsNavItem } from "./nav-config"
 
-const GITHUB_URL = "https://github.com/byronwade/ui"
+const GITHUB_URL = "https://github.com/byronwade/ui.byronwade.com"
+const SPONSOR_URL = "https://github.com/sponsors/byronwade"
 
 // Minimal shape of the object returned by document.startViewTransition().
 type ViewTransitionLike = {
@@ -45,6 +47,10 @@ const useIsoLayoutEffect =
 
 const EASE = "cubic-bezier(.22,1,.36,1)"
 const MORPH = `width 240ms ${EASE}, height 240ms ${EASE}, border-radius 240ms ${EASE}`
+
+// The capsule morphs into one of two panels — the ⌘K search spotlight, or the
+// donation ask (the heart). `null` is the collapsed nav pill.
+type Mode = "search" | "donate" | null
 
 /* ── search data ─────────────────────────────────────────────────── */
 
@@ -135,9 +141,10 @@ export function NavDock() {
   const router = useRouter()
   const { resolvedTheme, setTheme } = useTheme()
 
-  const [open, setOpen] = React.useState(false)
+  const [mode, setMode] = React.useState<Mode>(null)
   const [query, setQuery] = React.useState("")
   const [active, setActive] = React.useState(0)
+  const open = mode !== null
 
   const rootRef = React.useRef<HTMLDivElement>(null)
   const morphRef = React.useRef<HTMLDivElement>(null)
@@ -161,7 +168,7 @@ export function NavDock() {
   )
 
   const close = React.useCallback(() => {
-    setOpen(false)
+    setMode(null)
     setQuery("")
     setActive(0)
   }, [])
@@ -297,7 +304,7 @@ export function NavDock() {
         morph.style.width = `${ew}px`
         morph.style.height = `${eh}px`
       }
-      inputRef.current?.focus({ preventScroll: true })
+      if (mode === "search") inputRef.current?.focus({ preventScroll: true })
     } else if (collapsedRef.current && morph.style.width) {
       const { w: cw, h: ch } = collapsedRef.current
       panel.style.transitionDelay = "0ms"
@@ -319,7 +326,7 @@ export function NavDock() {
       morph.addEventListener("transitionend", onEnd)
       return () => morph.removeEventListener("transitionend", onEnd)
     }
-  }, [open])
+  }, [open, mode])
 
   /*, follow the panel's live height as results filter while open, */
   useIsoLayoutEffect(() => {
@@ -351,10 +358,10 @@ export function NavDock() {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault()
-        setOpen((p) => !p)
+        setMode((m) => (m === "search" ? null : "search"))
       }
     }
-    const onOpen = () => setOpen(true)
+    const onOpen = () => setMode("search")
     window.addEventListener("keydown", onKey)
     window.addEventListener("open-command-palette", onOpen)
     return () => {
@@ -429,6 +436,10 @@ export function NavDock() {
   )
 
   let cursor = 0
+  const panelWidth =
+    mode === "donate"
+      ? "w-[min(22rem,calc(100vw-2rem))]"
+      : "w-[min(34rem,calc(100vw-2rem))]"
 
   return (
     <TooltipProvider delay={350}>
@@ -475,7 +486,7 @@ export function NavDock() {
                   render={
                     <button
                       type="button"
-                      onClick={() => setOpen(true)}
+                      onClick={() => setMode("search")}
                       aria-label="Search (⌘K)"
                       className={cn(ITEM, ITEM_IDLE)}
                     />
@@ -528,91 +539,158 @@ export function NavDock() {
                 </TooltipTrigger>
                 <TooltipContent sideOffset={10}>Toggle theme</TooltipContent>
               </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <button
+                      type="button"
+                      onClick={() => setMode("donate")}
+                      aria-label="Support open source"
+                      className={cn(ITEM, ITEM_IDLE)}
+                    />
+                  }
+                >
+                  <Heart
+                    className="size-4 shrink-0 fill-pink-500 text-pink-500"
+                    weight="fill"
+                  />
+                </TooltipTrigger>
+                <TooltipContent sideOffset={10}>
+                  Support open source
+                </TooltipContent>
+              </Tooltip>
             </div>
 
-            {/* SEARCH PANEL, the morph target. */}
+            {/* PANEL, the morph target (search spotlight or donation ask). */}
             <div
               ref={panelRef}
               id={panelId}
               role="dialog"
-              aria-label="Search"
+              aria-label={mode === "donate" ? "Support open source" : "Search"}
               aria-hidden={!open}
               className={cn(
-                "absolute bottom-0 left-1/2 w-[min(34rem,calc(100vw-2rem))] -translate-x-1/2 opacity-0 transition-opacity duration-150 outline-none sm:top-0 sm:bottom-auto",
+                "absolute bottom-0 left-1/2 -translate-x-1/2 opacity-0 transition-opacity duration-150 outline-none sm:top-0 sm:bottom-auto",
+                panelWidth,
                 open ? "pointer-events-auto" : "pointer-events-none",
               )}
             >
-              {/* Query field */}
-              <div className="flex items-center gap-2.5 px-3.5 py-3">
-                <MagnifyingGlass className="size-4 shrink-0 text-dock-foreground/70" />
-                <input
-                  ref={inputRef}
-                  value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value)
-                    setActive(0)
-                  }}
-                  onKeyDown={onInputKey}
-                  placeholder="Search components, sections, templates…"
-                  aria-label="Search"
-                  className="h-6 flex-1 bg-transparent text-sm text-dock-active-foreground placeholder:text-dock-foreground/60 outline-none"
-                />
-                <kbd className="rounded border border-dock-muted bg-white/5 px-1.5 py-0.5 font-mono text-[10px] text-dock-foreground/70">
-                  esc
-                </kbd>
-              </div>
-
-              <div className="h-px bg-white/5" aria-hidden />
-
-              {/* Results */}
-              <div
-                ref={listRef}
-                className="max-h-80 overflow-y-auto scrollbar-thin p-1.5"
-              >
-                {flat.length === 0 ? (
-                  <div className="px-2.5 py-8 text-center text-[13px] text-dock-foreground/70">
-                    No results for “{query}”.
+              {mode === "donate" ? (
+                <div className="flex flex-col gap-3 p-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-pink-500/15">
+                      <Heart className="size-4 text-pink-500" weight="fill" />
+                    </span>
+                    <div className="leading-tight">
+                      <div className="text-[13px] font-semibold text-dock-active-foreground">
+                        Support my open source
+                      </div>
+                      <div className="text-[11px] text-dock-foreground">
+                        Pretty please 💖
+                      </div>
+                    </div>
                   </div>
-                ) : (
-                  <>
-                    {sections.length > 0 && (
-                      <div className="mb-1">
-                        <div className="px-2.5 pb-1 pt-1.5 text-[10px] font-semibold tracking-wider text-dock-foreground/50 uppercase">
-                          Pages &amp; sections
-                        </div>
-                        {sections.map((e) => Row(e, cursor++))}
-                      </div>
-                    )}
-                    {components.length > 0 && (
-                      <div>
-                        <div className="px-2.5 pb-1 pt-1.5 text-[10px] font-semibold tracking-wider text-dock-foreground/50 uppercase">
-                          Components
-                        </div>
-                        {components.map((e) => Row(e, cursor++))}
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
+                  <p className="text-[13px] leading-relaxed text-dock-foreground">
+                    Donations keep my open-source projects free and maintained.
+                    And every month I give{" "}
+                    <span className="font-semibold text-dock-active-foreground">
+                      20%
+                    </span>{" "}
+                    of what I receive to a non-profit of my choice — so a little
+                    goes a long way.
+                  </p>
+                  <a
+                    href={SPONSOR_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex h-9 items-center justify-center gap-2 rounded-xl bg-pink-500 text-[13px] font-semibold text-white transition-colors hover:bg-pink-500/90"
+                  >
+                    <Heart className="size-4" weight="fill" />
+                    Donate via GitHub Sponsors
+                  </a>
+                  <button
+                    type="button"
+                    onClick={close}
+                    className="text-[11px] text-dock-foreground transition-colors hover:text-dock-active-foreground"
+                  >
+                    Maybe later
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {/* Query field */}
+                  <div className="flex items-center gap-2.5 px-3.5 py-3">
+                    <MagnifyingGlass className="size-4 shrink-0 text-dock-foreground/70" />
+                    <input
+                      ref={inputRef}
+                      value={query}
+                      onChange={(e) => {
+                        setQuery(e.target.value)
+                        setActive(0)
+                      }}
+                      onKeyDown={onInputKey}
+                      placeholder="Search components, sections, templates…"
+                      aria-label="Search"
+                      className="h-6 flex-1 bg-transparent text-sm text-dock-active-foreground placeholder:text-dock-foreground/60 outline-none"
+                    />
+                    <kbd className="rounded border border-dock-muted bg-white/5 px-1.5 py-0.5 font-mono text-[10px] text-dock-foreground/70">
+                      esc
+                    </kbd>
+                  </div>
 
-              {/* Footer hints */}
-              <div className="flex items-center gap-3 border-t border-dock-muted bg-dock-background/80 px-3.5 py-2 text-[11px] text-dock-foreground/70">
-                <span className="flex items-center gap-1">
-                  <kbd className="rounded border border-dock-muted bg-dock-muted px-1 font-mono">
-                    ↑↓
-                  </kbd>
-                  navigate
-                </span>
-                <span className="flex items-center gap-1">
-                  <kbd className="flex items-center rounded border border-dock-muted bg-dock-muted px-1 font-mono">
-                    <ArrowElbowDownLeft className="size-3" />
-                  </kbd>
-                  open
-                </span>
-                <span className="ml-auto tabular-nums">
-                  {flat.length} results
-                </span>
-              </div>
+                  <div className="h-px bg-white/5" aria-hidden />
+
+                  {/* Results */}
+                  <div
+                    ref={listRef}
+                    className="max-h-80 overflow-y-auto scrollbar-thin p-1.5"
+                  >
+                    {flat.length === 0 ? (
+                      <div className="px-2.5 py-8 text-center text-[13px] text-dock-foreground/70">
+                        No results for “{query}”.
+                      </div>
+                    ) : (
+                      <>
+                        {sections.length > 0 && (
+                          <div className="mb-1">
+                            <div className="px-2.5 pb-1 pt-1.5 text-[10px] font-semibold tracking-wider text-dock-foreground/50 uppercase">
+                              Pages &amp; sections
+                            </div>
+                            {sections.map((e) => Row(e, cursor++))}
+                          </div>
+                        )}
+                        {components.length > 0 && (
+                          <div>
+                            <div className="px-2.5 pb-1 pt-1.5 text-[10px] font-semibold tracking-wider text-dock-foreground/50 uppercase">
+                              Components
+                            </div>
+                            {components.map((e) => Row(e, cursor++))}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+
+                  {/* Footer hints */}
+                  <div className="flex items-center gap-3 border-t border-dock-muted bg-dock-background/80 px-3.5 py-2 text-[11px] text-dock-foreground/70">
+                    <span className="flex items-center gap-1">
+                      <kbd className="rounded border border-dock-muted bg-dock-muted px-1 font-mono">
+                        ↑↓
+                      </kbd>
+                      navigate
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <kbd className="flex items-center rounded border border-dock-muted bg-dock-muted px-1 font-mono">
+                        <ArrowElbowDownLeft className="size-3" />
+                      </kbd>
+                      open
+                    </span>
+                    <span className="ml-auto tabular-nums">
+                      {flat.length} results
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

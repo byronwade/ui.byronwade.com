@@ -15,7 +15,7 @@ import { components } from "@/content/components"
 import { catalogSurfaces, surfaceCounts } from "@/content/catalog-surfaces"
 import { archetypes } from "@/app/layouts/_archetypes"
 
-const GITHUB_URL = "https://github.com/byronwade/ui"
+const GITHUB_URL = "https://github.com/byronwade/ui.byronwade.com"
 
 const stats = [
   { value: components.length, label: "components" },

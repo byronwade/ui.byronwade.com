@@ -7,7 +7,7 @@ import { ArrowUpRight, GitFork, GridFour, Moon, Sun, X } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 
-const GITHUB_URL = "https://github.com/byronwade/ui"
+const GITHUB_URL = "https://github.com/byronwade/ui.byronwade.com"
 
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
