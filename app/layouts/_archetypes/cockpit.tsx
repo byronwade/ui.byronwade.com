@@ -9,15 +9,15 @@
 // Density lives in behavior, keyboard hints, hover/active states, monospaced IDs.
 import * as React from "react"
 import {
-  Activity,
   Archive,
-  Boxes,
   Check,
-  Inbox,
-  Search,
-  Settings,
+  Gear,
+  MagnifyingGlass,
+  Pulse,
   Siren,
-} from "lucide-react"
+  Stack,
+  Tray,
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -177,10 +177,10 @@ const threads: Thread[] = [
 ]
 
 const railNav = [
-  { icon: Inbox, label: "Inbox", active: true },
+  { icon: Tray, label: "Inbox", active: true },
   { icon: Siren, label: "Alerts", active: false },
-  { icon: Boxes, label: "Services", active: false },
-  { icon: Activity, label: "Metrics", active: false },
+  { icon: Stack, label: "Services", active: false },
+  { icon: Pulse, label: "Metrics", active: false },
 ]
 
 export function CockpitArchetype() {
@@ -214,7 +214,7 @@ export function CockpitArchetype() {
           </button>
         ))}
         <span className="mt-auto grid size-9 place-items-center rounded-lg text-muted-foreground">
-          <Settings className="size-4.5" />
+          <Gear className="size-4.5" />
         </span>
         <GradientAvatar seed="byron" size="sm" className="mt-1" />
       </nav>
@@ -223,7 +223,7 @@ export function CockpitArchetype() {
       <div className="hidden w-80 shrink-0 flex-col border-r border-border md:flex">
         <div className="flex h-12 items-center justify-between gap-2 border-b border-border px-4">
           <span className="flex items-center gap-2 text-sm font-medium tracking-tight">
-            <Inbox className="size-4 text-brand" />
+            <Tray className="size-4 text-brand" />
             Incidents
           </span>
           <span className="font-mono text-xs text-muted-foreground">
@@ -291,7 +291,7 @@ export function CockpitArchetype() {
               type="button"
               className="hidden items-center gap-2 rounded-lg edge bg-card px-2.5 py-1.5 text-xs text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 lg:flex"
             >
-              <Search className="size-3.5" />
+              <MagnifyingGlass className="size-3.5" />
               Search
               <kbd className="rounded edge bg-muted px-1 font-mono text-[10px]">
                 ⌘K

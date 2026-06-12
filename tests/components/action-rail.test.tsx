@@ -17,7 +17,7 @@ import * as React from "react";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
-import { ThumbsUp, ThumbsDown, MessageCircle, Share2, MoreVertical } from "lucide-react";
+import { ChatCircle, DotsThreeVertical, ShareNetwork, ThumbsDown, ThumbsUp } from "@/lib/icons"
 import { ActionRail, type ActionRailItem } from "@/components/ui/action-rail";
 
 const compact = (n: number) =>
@@ -27,9 +27,9 @@ function baseActions(overrides: Partial<ActionRailItem>[] = []): ActionRailItem[
   const defaults: ActionRailItem[] = [
     { key: "like", icon: <ThumbsUp />, label: "Like", count: 128400, active: true },
     { key: "dislike", icon: <ThumbsDown />, label: "Dislike", count: 412 },
-    { key: "comments", icon: <MessageCircle />, label: "Comments", count: 2300 },
-    { key: "share", icon: <Share2 />, label: "Share" },
-    { key: "more", icon: <MoreVertical />, label: "More actions" },
+    { key: "comments", icon: <ChatCircle />, label: "Comments", count: 2300 },
+    { key: "share", icon: <ShareNetwork />, label: "Share" },
+    { key: "more", icon: <DotsThreeVertical />, label: "More actions" },
   ];
   return defaults.map((a, i) => ({ ...a, ...overrides[i] }));
 }

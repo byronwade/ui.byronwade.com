@@ -21,6 +21,22 @@
       ]
     },
     {
+      "name": "icons",
+      "type": "registry:lib",
+      "title": "Phosphor icons (duotone)",
+      "description": "The system's single icon voice — Phosphor, duotone by default. Built on Phosphor's SSR-safe icons and re-exported through one duotone() wrapper that owns the default weight (override per call with weight). Import names match Phosphor's catalog.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "registry/lib/icons.tsx",
+          "type": "registry:lib",
+          "target": "lib/icons.tsx"
+        }
+      ]
+    },
+    {
       "name": "controllable-state",
       "type": "registry:lib",
       "title": "Controllable state hook",
@@ -683,12 +699,10 @@
       "type": "registry:ui",
       "title": "Filter pill",
       "description": "Pill-with-chevron filter/range selector control.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -720,13 +734,11 @@
       "type": "registry:component",
       "title": "Timeline rail",
       "description": "Vertical event/timeline rail with connectors and terminal marker.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/status-dot"
+        "@byronwade/status-dot",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -809,13 +821,11 @@
       "type": "registry:component",
       "title": "Metric stat",
       "description": "Label + large value + delta badge metric row.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/metric",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -830,12 +840,10 @@
       "type": "registry:ui",
       "title": "Metric",
       "description": "Metric — label, value, hint, icon, and delta display primitive.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -895,13 +903,13 @@
       "description": "Date picker built on react-day-picker, dressed in byronwade/ui tokens — selection follows --brand, the range bar uses bg-accent, and nav + day cells reuse buttonVariants.",
       "dependencies": [
         "react-day-picker",
-        "date-fns",
-        "lucide-react"
+        "date-fns"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/button"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1106,12 +1114,12 @@
       "title": "Select",
       "description": "Select — design-system component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1127,12 +1135,12 @@
       "title": "Checkbox",
       "description": "Checkbox — design-system component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1228,12 +1236,12 @@
       "title": "Dropdown Menu",
       "description": "Dropdown Menu — design-system component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1249,13 +1257,13 @@
       "title": "Dialog",
       "description": "Dialog — design-system component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/button",
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1348,12 +1356,12 @@
       "title": "Sonner",
       "description": "Sonner — design-system component.",
       "dependencies": [
-        "lucide-react",
         "@wrksz/themes",
         "sonner"
       ],
       "registryDependencies": [
-        "@byronwade/foundation"
+        "@byronwade/foundation",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1390,12 +1398,12 @@
       "title": "Accordion",
       "description": "Accordion — design-system component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1451,12 +1459,12 @@
       "title": "Breadcrumb",
       "description": "Breadcrumb — design-system component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1548,13 +1556,11 @@
       "type": "registry:component",
       "title": "Stat Card",
       "description": "Stat Card — design-system component.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/metric",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1569,12 +1575,10 @@
       "type": "registry:component",
       "title": "Empty State",
       "description": "Empty State — design-system component.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1669,14 +1673,12 @@
       "type": "registry:component",
       "title": "Conversation list",
       "description": "Messaging conversation list — live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/comms-store",
-        "@byronwade/gradient-avatar"
+        "@byronwade/gradient-avatar",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1691,15 +1693,13 @@
       "type": "registry:component",
       "title": "Message thread",
       "description": "Messaging thread pane — contact header, scrollable in/out bubbles with delivery ticks, reaction chips, and an empty state when no conversation is selected. Reads/acts through comms-store.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/comms-store",
         "@byronwade/gradient-avatar",
-        "@byronwade/empty-state"
+        "@byronwade/empty-state",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1714,15 +1714,13 @@
       "type": "registry:component",
       "title": "Message composer",
       "description": "Messaging composer — auto-growing textarea, Enter to send, Shift+Enter newline, attachment affordance, and optional template/schedule callbacks. Calls send on comms-store.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/comms-store",
         "@byronwade/button",
-        "@byronwade/textarea"
+        "@byronwade/textarea",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1737,13 +1735,11 @@
       "type": "registry:ui",
       "title": "Morph dock",
       "description": "Config-driven morphing navigation dock built on the useChromeMorph hook — compact/expand items that bloom in place into a consumer panel.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/use-chrome-morph"
+        "@byronwade/use-chrome-morph",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1776,13 +1772,11 @@
       "type": "registry:ui",
       "title": "Morph Bar",
       "description": "Full-width top navigation bar that blooms a panel down via the morph technique.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/morph-surface"
+        "@byronwade/morph-surface",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1797,13 +1791,11 @@
       "type": "registry:ui",
       "title": "Morph Sidebar",
       "description": "Left icon rail that morphs wider into a labeled sidebar via the morph technique.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/morph-surface"
+        "@byronwade/morph-surface",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1818,13 +1810,11 @@
       "type": "registry:ui",
       "title": "Morph Tabs",
       "description": "Bottom tab bar that blooms a sheet up via the morph technique.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/morph-surface"
+        "@byronwade/morph-surface",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -1857,13 +1847,11 @@
       "type": "registry:ui",
       "title": "Morph Rail",
       "description": "Right icon rail that blooms a wide labeled panel to the side via the morph technique.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/morph-surface"
+        "@byronwade/morph-surface",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2002,13 +1990,13 @@
       "title": "Sheet",
       "description": "Slide-over panel dialog anchored to any screen edge.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/button"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2024,14 +2012,14 @@
       "title": "Command",
       "description": "Command palette built on cmdk with dialog and input-group integration.",
       "dependencies": [
-        "cmdk",
-        "lucide-react"
+        "cmdk"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/dialog",
-        "@byronwade/input-group"
+        "@byronwade/input-group",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2067,12 +2055,12 @@
       "description": "Accessible site navigation with animated dropdown panels.",
       "dependencies": [
         "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2087,12 +2075,10 @@
       "type": "registry:component",
       "title": "Verification Progress",
       "description": "Multi-step verification status tracker with tone-colored steps, optional counts, and connecting rails.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2212,12 +2198,12 @@
       "title": "Floating dock",
       "description": "macOS-style magnify-on-hover dock (desktop) + collapsible mobile dock, token surfaces and lucide icons. Adapted from Aceternity UI.",
       "dependencies": [
-        "motion",
-        "lucide-react"
+        "motion"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2246,13 +2232,13 @@
       "title": "Showcase carousel",
       "description": "Horizontal carousel of cover cards that expand into a detail modal. Token surfaces with the edge hairline + depth, mono metadata eyebrows over editorial titles, lucide controls, focus-visible rings. Adapted from Aceternity UI.",
       "dependencies": [
-        "motion",
-        "lucide-react"
+        "motion"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/use-outside-click"
+        "@byronwade/use-outside-click",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2305,12 +2291,12 @@
       "title": "Number field",
       "description": "Numeric input with increment/decrement, clamping, scrub, and formatting — built on Base UI. Token surfaces, lucide steppers.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2345,9 +2331,6 @@
       "type": "registry:ui",
       "title": "File tree",
       "description": "Collapsible file/folder tree with selection, sorting, and expand-all, plus a `panel` variant (chevron disclosure, guide lines, count badges) and `multi`-select with cascading checkboxes — rebuilt on Base UI (collapsible). Base adapted from MagicUI; panel/multi-select an original implementation inspired by Untitled UI.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
@@ -2355,7 +2338,8 @@
         "@byronwade/badge",
         "@byronwade/checkbox",
         "@byronwade/scroll-area",
-        "@byronwade/collapsible"
+        "@byronwade/collapsible",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2387,15 +2371,13 @@
       "type": "registry:ui",
       "title": "Pill",
       "description": "Rounded pill with avatar/status/indicator/delta parts; tones map to success/destructive/warning/brand tokens. Adapted from kibo-ui.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/avatar",
         "@byronwade/badge",
-        "@byronwade/button"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2483,13 +2465,11 @@
       "type": "registry:ui",
       "title": "Rating",
       "description": "Interactive star rating (keyboard + hover) plus a read-only RatingBadge (score + star). Tone follows --brand. Adapted from kibo-ui (+ Untitled UI-style badge).",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/controllable-state",
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2524,12 +2504,12 @@
       "title": "Image crop",
       "description": "Crop a File to a PNG (react-image-crop + canvas); apply/reset controls, token crop chrome. Adapted from kibo-ui.",
       "dependencies": [
-        "lucide-react",
         "react-image-crop"
       ],
       "registryDependencies": [
         "@byronwade/utils",
-        "@byronwade/button"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2553,7 +2533,8 @@
         "@byronwade/utils",
         "@byronwade/button",
         "@byronwade/input",
-        "@byronwade/select"
+        "@byronwade/select",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2574,7 +2555,8 @@
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/video-player-utils"
+        "@byronwade/video-player-utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2788,14 +2770,14 @@
         "@uidotdev/usehooks",
         "date-fns",
         "jotai",
-        "lodash.throttle",
-        "lucide-react"
+        "lodash.throttle"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/button",
-        "@byronwade/card"
+        "@byronwade/card",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2827,8 +2809,7 @@
         "@tiptap/extension-typography",
         "fuse.js",
         "lowlight",
-        "tippy.js",
-        "lucide-react"
+        "tippy.js"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
@@ -2839,7 +2820,8 @@
         "@byronwade/dropdown-menu",
         "@byronwade/popover",
         "@byronwade/separator",
-        "@byronwade/tooltip"
+        "@byronwade/tooltip",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2860,6 +2842,9 @@
           "type": "registry:file",
           "target": ".cursor/rules/byronwade-ui.mdc"
         }
+      ],
+      "registryDependencies": [
+        "@byronwade/icons"
       ]
     },
     {
@@ -2948,10 +2933,8 @@
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/button",
-        "@byronwade/dropdown-menu"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/dropdown-menu",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -2970,10 +2953,8 @@
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/badge",
-        "@byronwade/hover-card"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/hover-card",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3015,11 +2996,11 @@
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/button"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "dependencies": [
-        "shiki",
-        "lucide-react"
+        "shiki"
       ],
       "files": [
         {
@@ -3037,10 +3018,8 @@
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/collapsible"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/collapsible",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3058,10 +3037,8 @@
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/collapsible"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/collapsible",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3123,10 +3100,8 @@
         "@byronwade/utils",
         "@byronwade/button",
         "@byronwade/separator",
-        "@byronwade/tooltip"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/tooltip",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3147,10 +3122,8 @@
         "@byronwade/button",
         "@byronwade/card",
         "@byronwade/collapsible",
-        "@byronwade/ai-shimmer"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/ai-shimmer",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3170,10 +3143,8 @@
         "@byronwade/utils",
         "@byronwade/collapsible",
         "@byronwade/scroll-area",
-        "@byronwade/button"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3191,10 +3162,10 @@
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/button"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "dependencies": [
-        "lucide-react",
         "use-stick-to-bottom"
       ],
       "files": [
@@ -3214,11 +3185,11 @@
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/collapsible",
-        "@byronwade/ai-shimmer"
+        "@byronwade/ai-shimmer",
+        "@byronwade/icons"
       ],
       "dependencies": [
-        "streamdown",
-        "lucide-react"
+        "streamdown"
       ],
       "files": [
         {
@@ -3238,11 +3209,11 @@
         "@byronwade/utils",
         "@byronwade/badge",
         "@byronwade/collapsible",
-        "@byronwade/ai-code-block"
+        "@byronwade/ai-code-block",
+        "@byronwade/icons"
       ],
       "dependencies": [
-        "ai",
-        "lucide-react"
+        "ai"
       ],
       "files": [
         {
@@ -3262,12 +3233,12 @@
         "@byronwade/utils",
         "@byronwade/button",
         "@byronwade/button-group",
-        "@byronwade/tooltip"
+        "@byronwade/tooltip",
+        "@byronwade/icons"
       ],
       "dependencies": [
         "ai",
-        "streamdown",
-        "lucide-react"
+        "streamdown"
       ],
       "files": [
         {
@@ -3286,10 +3257,8 @@
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/badge",
-        "@byronwade/collapsible"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/collapsible",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3308,10 +3277,8 @@
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/button",
-        "@byronwade/tooltip"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/tooltip",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3436,11 +3403,11 @@
         "@byronwade/dropdown-menu",
         "@byronwade/hover-card",
         "@byronwade/input-group",
-        "@byronwade/select"
+        "@byronwade/select",
+        "@byronwade/icons"
       ],
       "dependencies": [
         "ai",
-        "lucide-react",
         "nanoid"
       ],
       "files": [
@@ -3480,11 +3447,11 @@
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/button",
-        "@byronwade/hover-card"
+        "@byronwade/hover-card",
+        "@byronwade/icons"
       ],
       "dependencies": [
-        "ai",
-        "lucide-react"
+        "ai"
       ],
       "files": [
         {
@@ -3525,10 +3492,8 @@
         "@byronwade/button",
         "@byronwade/collapsible",
         "@byronwade/input",
-        "@byronwade/tooltip"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/tooltip",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3606,13 +3571,11 @@
       "type": "registry:ui",
       "title": "Price change",
       "description": "Signed price/percent change with a runtime-derived tone (success/destructive/muted from sign + neutralThreshold) and trend caret. `format` absolute/percent/both, `size` sm/default/lg, and a `chip` variant for a tinted pill. Reused across the TradingView-style set.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/market"
+        "@byronwade/market",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -3761,15 +3724,13 @@
       "type": "registry:component",
       "title": "Chart toolbar",
       "description": "Trading chart toolbar — symbol button, interval segmented-control, chart-type toggle group, and indicators action.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/button",
         "@byronwade/segmented-control",
         "@byronwade/toggle-group",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4170,10 +4131,8 @@
         "@byronwade/badge",
         "@byronwade/button",
         "@byronwade/switch",
-        "@byronwade/utils"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4188,14 +4147,12 @@
       "type": "registry:component",
       "title": "Drawing toolbar",
       "description": "Chart drawing tool rail — vertical or horizontal toggle group with tooltip-labeled trendline, fib, text, and shape tools.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/toggle-group",
         "@byronwade/tooltip",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4216,10 +4173,8 @@
         "@byronwade/button",
         "@byronwade/price-change",
         "@byronwade/market",
-        "@byronwade/utils"
-      ],
-      "dependencies": [
-        "lucide-react"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4321,7 +4276,8 @@
         "@byronwade/button",
         "@byronwade/segmented-control",
         "@byronwade/slider",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4372,15 +4328,13 @@
       "type": "registry:ui",
       "title": "Bulk action bar",
       "description": "Selection action bar for tables and resource lists — a selected-count label, promoted and grouped actions, and a clear-selection control. Renders nothing when nothing is selected.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/button",
         "@byronwade/button-group",
         "@byronwade/checkbox",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4473,15 +4427,13 @@
       "type": "registry:component",
       "title": "Customer card",
       "description": "Customer summary card — avatar, name and email, orders and lifetime-spend stats, and a default address.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/avatar",
         "@byronwade/card",
         "@byronwade/metric-stat",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4516,9 +4468,6 @@
       "type": "registry:component",
       "title": "Index table",
       "description": "Sortable, row-selectable data table with an integrated bulk-action bar, sticky header, loading and empty states, and pagination. The signature Shopify-admin index.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/demo-viewport",
@@ -4528,7 +4477,8 @@
         "@byronwade/skeleton",
         "@byronwade/button",
         "@byronwade/empty-state",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4543,9 +4493,6 @@
       "type": "registry:component",
       "title": "Data table",
       "description": "Shopify-grade admin table shell with index filters, bulk selection, sortable columns, and pagination.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/demo-viewport",
@@ -4557,7 +4504,8 @@
         "@byronwade/empty-state",
         "@byronwade/index-filters",
         "@byronwade/segmented-control",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4594,9 +4542,6 @@
       "type": "registry:component",
       "title": "Index filters",
       "description": "Filter bar for an index: saved-view tabs, search, sort dropdown, and removable applied-filter pills. Pairs with index-table / resource-list.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/segmented-control",
@@ -4604,7 +4549,8 @@
         "@byronwade/filter-pill",
         "@byronwade/dropdown-menu",
         "@byronwade/button",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4619,13 +4565,11 @@
       "type": "registry:ui",
       "title": "Tag input",
       "description": "Tags field — type to add chips (Enter/comma), remove with × or Backspace, optional autocomplete suggestions, sizes, and error state.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/badge",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4658,13 +4602,11 @@
       "type": "registry:component",
       "title": "Banner",
       "description": "Prominent inline status message with tone (info/success/warning/critical), title, body, actions, and dismiss. Distinct from the compact alert.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/button",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4679,13 +4621,11 @@
       "type": "registry:ui",
       "title": "Thumbnail",
       "description": "Video thumbnail tile with optional duration pill, watched-progress bar, and live chip.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/aspect-ratio",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4700,12 +4640,10 @@
       "type": "registry:ui",
       "title": "Verified badge",
       "description": "Inline verified check shown next to channel or author names, with default check-seal and artist music-seal variants.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4737,14 +4675,12 @@
       "type": "registry:ui",
       "title": "Subscribe button",
       "description": "YouTube-style subscribe control with a two-state toggle and a notification-level dropdown menu.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/button",
         "@byronwade/dropdown-menu",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4759,12 +4695,10 @@
       "type": "registry:ui",
       "title": "Chip bar",
       "description": "YouTube-style single-select horizontal filter chip bar with edge fade and scroll affordance.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4796,16 +4730,14 @@
       "type": "registry:component",
       "title": "Video card",
       "description": "YouTube-style vertical video tile composing a thumbnail, channel byline, compact view/timestamp meta, and an overflow menu.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/thumbnail",
         "@byronwade/verified-badge",
         "@byronwade/avatar",
         "@byronwade/dropdown-menu",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4820,12 +4752,10 @@
       "type": "registry:component",
       "title": "Video shelf",
       "description": "Titled, horizontally-scrolling content row with edge-fade, chevron controls, and an optional action — the YouTube home/category shelf.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4862,15 +4792,13 @@
       "type": "registry:component",
       "title": "Up next item",
       "description": "Compact horizontal video row for watch-page up-next lists and search results, composing a thumbnail with title, channel, view/timestamp meta, and an overflow menu.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/thumbnail",
         "@byronwade/verified-badge",
         "@byronwade/dropdown-menu",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4905,14 +4833,12 @@
       "type": "registry:component",
       "title": "Engagement bar",
       "description": "YouTube-style watch-page action row: connected like/dislike segmented pill, plus share, save, custom action, and overflow-menu pills.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/separator",
         "@byronwade/dropdown-menu",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -4978,14 +4904,12 @@
       "type": "registry:component",
       "title": "Comment",
       "description": "A YouTube-style threaded comment with author, like/dislike, reply, pinned/creator-heart tags, and a replies disclosure.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/avatar",
         "@byronwade/verified-badge",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5019,16 +4943,14 @@
       "type": "registry:component",
       "title": "Shorts player",
       "description": "A YouTube Shorts-style vertical 9:16 player with a right-side engagement rail and a bottom-left author, caption, and sound overlay.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/action-rail",
         "@byronwade/avatar",
         "@byronwade/verified-badge",
         "@byronwade/button",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5043,14 +4965,12 @@
       "type": "registry:component",
       "title": "Mini player",
       "description": "Picture-in-picture mini player card with a play/pause poster overlay, progress, and close/expand controls.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/thumbnail",
         "@byronwade/button",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5083,13 +5003,11 @@
       "type": "registry:component",
       "title": "Playback menu",
       "description": "YouTube-style player settings menu: gear-triggered dropdown of setting groups (quality, speed, subtitles), each opening a single-select radio submenu.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/dropdown-menu",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5104,9 +5022,6 @@
       "type": "registry:component",
       "title": "Studio video row",
       "description": "A YouTube Studio content-table row composing a selection checkbox, thumbnail, title/description, visibility status, date, and compact mono view/comment/like metrics with an overflow menu.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/thumbnail",
@@ -5114,7 +5029,8 @@
         "@byronwade/status-dot",
         "@byronwade/badge",
         "@byronwade/dropdown-menu",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5129,13 +5045,11 @@
       "type": "registry:component",
       "title": "Studio video table",
       "description": "YouTube Studio content-table shell: select-all header with sortable date/views/comments/likes columns wrapping `studio-video-row` children.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/checkbox",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5150,9 +5064,6 @@
       "type": "registry:component",
       "title": "Upload row",
       "description": "YouTube Studio-style upload/processing row: preview, filename, progress bar, status badge, and a cancel/retry action.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/progress",
@@ -5160,7 +5071,8 @@
         "@byronwade/status-dot",
         "@byronwade/badge",
         "@byronwade/button",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5175,16 +5087,14 @@
       "type": "registry:component",
       "title": "Comment moderation row",
       "description": "A YouTube Studio comment-moderation row with approve/remove/heart/reply actions, a status tag, and optional video context.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/avatar",
         "@byronwade/button",
         "@byronwade/badge",
         "@byronwade/verified-badge",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5215,13 +5125,11 @@
       "type": "registry:ui",
       "title": "Pagination",
       "description": "Accessible pagination nav with previous/next links, page links, and ellipsis — composes button variants for consistent focus rings. Adapted from shadcn/ui.",
-      "dependencies": [
-        "lucide-react"
-      ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/button"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5237,14 +5145,14 @@
       "title": "Combobox",
       "description": "Filterable autocomplete built on Base UI Combobox — input-group trigger, popup list with groups, empty state, and optional multi-select chips. Adapted from shadcn/ui.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/button",
-        "@byronwade/input-group"
+        "@byronwade/input-group",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5260,12 +5168,12 @@
       "title": "Context menu",
       "description": "Right-click menu built on Base UI ContextMenu — items, checkbox/radio groups, submenus, shortcuts, and destructive variant. Adapted from shadcn/ui.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5323,12 +5231,12 @@
       "title": "Input OTP",
       "description": "One-time-password input with grouped slots, caret blink, separator, and aria-invalid styling — built on input-otp. Adapted from shadcn/ui.",
       "dependencies": [
-        "input-otp",
-        "lucide-react"
+        "input-otp"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
-        "@byronwade/utils"
+        "@byronwade/utils",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5344,13 +5252,13 @@
       "title": "Carousel",
       "description": "Embla-powered carousel with keyboard navigation, previous/next controls, and horizontal or vertical orientation. Adapted from shadcn/ui.",
       "dependencies": [
-        "embla-carousel-react",
-        "lucide-react"
+        "embla-carousel-react"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
-        "@byronwade/button"
+        "@byronwade/button",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5366,15 +5274,15 @@
       "title": "Date picker",
       "description": "Single-date picker — outline trigger opens a popover calendar; controlled or uncontrolled value with date-fns formatting.",
       "dependencies": [
-        "date-fns",
-        "lucide-react"
+        "date-fns"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
         "@byronwade/utils",
         "@byronwade/button",
         "@byronwade/calendar",
-        "@byronwade/popover"
+        "@byronwade/popover",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5391,8 +5299,7 @@
       "description": "Collapsible application sidebar with provider context, mobile sheet fallback, icon/offcanvas modes, menu groups, and keyboard shortcut (⌘/Ctrl+B). Adapted from shadcn/ui.",
       "dependencies": [
         "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@byronwade/foundation",
@@ -5403,7 +5310,8 @@
         "@byronwade/separator",
         "@byronwade/sheet",
         "@byronwade/skeleton",
-        "@byronwade/tooltip"
+        "@byronwade/tooltip",
+        "@byronwade/icons"
       ],
       "files": [
         {
@@ -5420,6 +5328,7 @@
       "description": "The entire byronwade/ui catalog in one install. Run `init` against foundation first, then add this to pull every component (dependencies resolve automatically).",
       "registryDependencies": [
         "@byronwade/utils",
+        "@byronwade/icons",
         "@byronwade/controllable-state",
         "@byronwade/demo-viewport",
         "@byronwade/overflow-menu-item",

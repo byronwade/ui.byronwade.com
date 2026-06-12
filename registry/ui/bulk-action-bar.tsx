@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { cva } from "class-variance-authority"
-import { XIcon } from "lucide-react"
+import { X } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -169,7 +169,7 @@ function BulkActionBar({
             aria-label="Clear selection"
             onClick={onClearSelection}
           >
-            <XIcon />
+            <X />
           </Button>
         ) : null}
       </div>

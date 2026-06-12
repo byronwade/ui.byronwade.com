@@ -3,15 +3,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { axe } from "vitest-axe";
-import {
-  FolderOpen,
-  Inbox,
-  AlertCircle,
-  Search,
-  PlusCircle,
-  Star,
-  FileText,
-} from "lucide-react";
+import { FileText, FolderOpen, MagnifyingGlass, PlusCircle, Star, Tray, WarningCircle } from "@/lib/icons"
 import { EmptyState } from "@/components/empty-state";
 
 // ─── Smoke ────────────────────────────────────────────────────────────────────
@@ -118,7 +110,7 @@ describe("EmptyState – icon prop", () => {
 
   it("icon wrapper has rounded-2xl edge and bg-muted/40 classes", () => {
     const { container } = render(
-      <EmptyState icon={Inbox} title="Inbox empty" />
+      <EmptyState icon={Tray} title="Inbox empty" />
     );
     const iconWrapper = container.querySelector(".size-11");
     expect(iconWrapper!.className).toContain("rounded-2xl");
@@ -128,7 +120,7 @@ describe("EmptyState – icon prop", () => {
 
   it("icon wrapper has mb-4 margin class", () => {
     const { container } = render(
-      <EmptyState icon={Search} title="No results" />
+      <EmptyState icon={MagnifyingGlass} title="No results" />
     );
     const iconWrapper = container.querySelector(".size-11");
     expect(iconWrapper!.className).toContain("mb-4");
@@ -145,7 +137,7 @@ describe("EmptyState – icon prop", () => {
 
   it("icon SVG has size-5 and text-muted-foreground classes", () => {
     const { container } = render(
-      <EmptyState icon={AlertCircle} title="Error" />
+      <EmptyState icon={WarningCircle} title="Error" />
     );
     const iconWrapper = container.querySelector(".size-11");
     const svg = iconWrapper!.querySelector("svg");
@@ -157,7 +149,7 @@ describe("EmptyState – icon prop", () => {
 
   it("renders different icons correctly (Inbox)", () => {
     const { container } = render(
-      <EmptyState icon={Inbox} title="Empty inbox" />
+      <EmptyState icon={Tray} title="Empty inbox" />
     );
     const svg = container.querySelector("svg");
     expect(svg).toBeInTheDocument();
@@ -369,7 +361,7 @@ describe("EmptyState – interactions", () => {
     const handleRetry = vi.fn();
     render(
       <EmptyState
-        icon={AlertCircle}
+        icon={WarningCircle}
         title="Something went wrong"
         action={<button onClick={handleRetry}>Try again</button>}
       />
@@ -398,7 +390,7 @@ describe("EmptyState – interactions", () => {
           />
           {results.length === 0 ? (
             <EmptyState
-              icon={Search}
+              icon={MagnifyingGlass}
               title={`No results for "${query}"`}
               action={
                 <button onClick={() => setQuery("")}>Clear search</button>
@@ -558,7 +550,7 @@ describe("EmptyState – prop combinations", () => {
 
   it("renders icon + title only (compact — no description, no action)", () => {
     const { container } = render(
-      <EmptyState icon={Inbox} title="Inbox is empty" />
+      <EmptyState icon={Tray} title="Inbox is empty" />
     );
     const iconWrapper = container.querySelector(".size-11");
     expect(iconWrapper).toBeInTheDocument();
@@ -573,7 +565,7 @@ describe("EmptyState – prop combinations", () => {
   it("error-state pattern: icon + title + description + destructive action + border className", () => {
     const { container } = render(
       <EmptyState
-        icon={AlertCircle}
+        icon={WarningCircle}
         title="Something went wrong"
         description="We couldn't load your data."
         action={<button>Try again</button>}
@@ -671,7 +663,7 @@ describe("EmptyState – accessibility", () => {
   it("passes axe for error-state pattern", async () => {
     const { container } = render(
       <EmptyState
-        icon={AlertCircle}
+        icon={WarningCircle}
         title="Something went wrong"
         description="We couldn't load your data. Please try again."
         action={<button>Try again</button>}
@@ -683,7 +675,7 @@ describe("EmptyState – accessibility", () => {
 
   it("passes axe for compact/no-description pattern", async () => {
     const { container } = render(
-      <EmptyState icon={Inbox} title="Inbox is empty" className="py-8" />
+      <EmptyState icon={Tray} title="Inbox is empty" className="py-8" />
     );
     expect(await axe(container)).toHaveNoViolations();
   });

@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
-import { Download, Plus, Settings } from "lucide-react"
+import { DownloadSimple, Gear, Plus } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -11,7 +11,7 @@ export default function Example() {
         description="View summaries and export your data."
       >
         <Button size="sm">
-          <Download />
+          <DownloadSimple />
           Export
         </Button>
       </PageHeader>
@@ -22,7 +22,7 @@ export default function Example() {
         description="Manage roles and access for your organization."
       >
         <Button size="sm" variant="outline">
-          <Settings />
+          <Gear />
           Manage Roles
         </Button>
         <Button size="sm">
@@ -37,7 +37,7 @@ export default function Example() {
         description="Connect your tools and external services."
       >
         <Button size="icon" variant="outline" aria-label="Open settings">
-          <Settings />
+          <Gear />
         </Button>
         <Button size="sm">
           <Plus />

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Plus, Search, X } from "lucide-react"
+import { MagnifyingGlass, Plus, X } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -117,7 +117,7 @@ function IndexFilters({
                 data-slot="index-filters-search"
                 className="relative flex min-w-0 flex-1 items-center"
               >
-                <Search
+                <MagnifyingGlass
                   aria-hidden
                   className="pointer-events-none absolute left-3 size-4 text-muted-foreground"
                 />

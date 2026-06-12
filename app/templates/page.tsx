@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Boxes, Clock3 } from "lucide-react"
+import { ArrowRight, Clock, Stack } from "@/lib/icons"
 
 const launchNotes = [
   "Template gallery is being rebuilt",
@@ -46,7 +46,7 @@ export default async function TemplatesPage() {
                 href="/catalog"
                 className="inline-flex h-10 items-center justify-center gap-2 rounded-full edge bg-background px-4 text-sm font-medium text-foreground transition-all hover:bg-muted focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                <Boxes className="size-4" aria-hidden="true" />
+                <Stack className="size-4" aria-hidden="true" />
                 Browse components
               </Link>
             </div>
@@ -58,7 +58,7 @@ export default async function TemplatesPage() {
           >
             <div className="flex items-center gap-3">
               <span className="flex size-9 items-center justify-center rounded-full bg-brand/10 text-brand sm:size-10">
-                <Clock3 className="size-5" aria-hidden="true" />
+                <Clock className="size-5" aria-hidden="true" />
               </span>
               <div>
                 <p className="font-mono text-[11px] uppercase text-muted-foreground">

@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronLeft, MoreHorizontal } from "lucide-react"
+import { CaretLeft, DotsThree } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {
@@ -93,7 +93,7 @@ export function AppBreadcrumb() {
                       aria-label="Show hidden breadcrumb levels"
                       className="flex size-6 items-center justify-center rounded-md text-dock-foreground outline-none transition-colors hover:bg-dock-active hover:text-dock-active-foreground focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      <MoreHorizontal className="size-4" />
+                      <DotsThree className="size-4" />
                     </button>
                   }
                 />
@@ -136,7 +136,7 @@ export function AppBreadcrumb() {
               aria-label={`Back to ${parent.label}`}
               className="-ml-1 flex size-6 items-center justify-center rounded-md text-dock-foreground transition-colors hover:bg-dock-active hover:text-dock-active-foreground"
             >
-              <ChevronLeft className="size-4" strokeWidth={2.5} />
+              <CaretLeft className="size-4" strokeWidth={2.5} />
             </Link>
           </li>
         )}

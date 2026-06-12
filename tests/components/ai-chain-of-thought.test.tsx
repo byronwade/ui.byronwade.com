@@ -20,7 +20,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { axe } from "vitest-axe";
-import { SearchIcon } from "lucide-react";
+import { MagnifyingGlass } from "@/lib/icons"
 import {
   ChainOfThought,
   ChainOfThoughtHeader,
@@ -43,7 +43,7 @@ function renderFull(props?: React.ComponentProps<typeof ChainOfThought>) {
         <ChainOfThoughtHeader>My reasoning</ChainOfThoughtHeader>
         <ChainOfThoughtContent>
           <ChainOfThoughtStep
-            icon={SearchIcon}
+            icon={MagnifyingGlass}
             label="Searching the web"
             status="complete"
           >
@@ -366,17 +366,17 @@ describe("ChainOfThoughtStep — content", () => {
   it("renders a custom icon when supplied", () => {
     const { container } = render(
       <ChainOfThought>
-        <ChainOfThoughtStep icon={SearchIcon} label="Search" />
+        <ChainOfThoughtStep icon={MagnifyingGlass} label="Search" />
       </ChainOfThought>
     );
     const icon = container.querySelector(
       "[data-slot='chain-of-thought-step-icon']"
     ) as SVGElement;
     expect(icon).toBeInTheDocument();
-    expect(icon.classList.contains("lucide-search")).toBe(true);
+    expect(icon.tagName.toLowerCase()).toBe("svg");
   });
 
-  it("renders the default Dot icon when no icon prop is given", () => {
+  it("renders the default Circle icon when no icon prop is given", () => {
     const { container } = render(
       <ChainOfThought>
         <ChainOfThoughtStep label="Default icon" />
@@ -385,7 +385,8 @@ describe("ChainOfThoughtStep — content", () => {
     const icon = container.querySelector(
       "[data-slot='chain-of-thought-step-icon']"
     ) as SVGElement;
-    expect(icon.classList.contains("lucide-dot")).toBe(true);
+    expect(icon).toBeInTheDocument();
+    expect(icon.tagName.toLowerCase()).toBe("svg");
   });
 
   it("renders nested children", () => {

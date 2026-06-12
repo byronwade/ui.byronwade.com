@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { BrainIcon, ChevronDownIcon } from "lucide-react";
+import { Brain, CaretDown } from "@/lib/icons"
 import type { ComponentProps, ReactNode } from "react";
 import {
   createContext,
@@ -233,9 +233,9 @@ export const ReasoningTrigger = memo(
       >
         {children ?? (
           <>
-            <BrainIcon className="size-4" data-slot="reasoning-trigger-icon" />
+            <Brain className="size-4" data-slot="reasoning-trigger-icon" />
             {getThinkingMessage(isStreaming, duration)}
-            <ChevronDownIcon
+            <CaretDown
               className="size-4 transition-transform group-data-[panel-open]:rotate-180"
               data-slot="reasoning-trigger-chevron"
             />

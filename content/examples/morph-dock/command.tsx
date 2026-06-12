@@ -2,21 +2,21 @@
 
 import * as React from "react"
 import {
-  BarChart3,
+  ChartBar,
   Command,
-  Home,
-  Inbox,
+  Gear,
+  House,
+  MagnifyingGlass,
   Plus,
-  Search,
-  Settings,
-} from "lucide-react"
+  Tray,
+} from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
 const actions = [
   { icon: Plus, label: "New file" },
-  { icon: Search, label: "Search everything" },
-  { icon: Settings, label: "Open settings" },
+  { icon: MagnifyingGlass, label: "Search everything" },
+  { icon: Gear, label: "Open settings" },
 ]
 
 /** The panel can be any content, here a command list blooms out of the dock. */
@@ -34,23 +34,23 @@ export default function Example() {
           {
             id: "home",
             label: "Home",
-            icon: Home,
+            icon: House,
             href: "#",
             active: true,
             core: true,
           },
-          { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
+          { id: "inbox", label: "Inbox", icon: Tray, href: "#", core: true },
           {
             id: "reports",
             label: "Reports",
-            icon: BarChart3,
+            icon: ChartBar,
             href: "#",
             core: true,
           },
           {
             id: "settings",
             label: "Settings",
-            icon: Settings,
+            icon: Gear,
             href: "#",
             pinned: true,
           },

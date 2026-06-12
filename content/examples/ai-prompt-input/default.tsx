@@ -21,7 +21,7 @@ import {
   PromptInputTextarea,
   PromptInputTools,
 } from "@/components/ai-elements/prompt-input"
-import { GlobeIcon } from "lucide-react"
+import { Globe } from "@/lib/icons"
 import { useState } from "react"
 
 const models = [
@@ -66,7 +66,7 @@ export default function Example() {
                 onClick={() => setSearch((v) => !v)}
                 data-tone={search ? "success" : "neutral"}
               >
-                <GlobeIcon className="size-4" />
+                <Globe className="size-4" />
                 <span>Search</span>
               </PromptInputButton>
               <PromptInputSelect

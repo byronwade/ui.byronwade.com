@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { BarChart3, Delete, Home, Inbox, Phone, Settings } from "lucide-react"
+import { Backspace, ChartBar, Gear, House, Phone, Tray } from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -9,18 +9,18 @@ const items = [
   {
     id: "home",
     label: "Home",
-    icon: Home,
+    icon: House,
     href: "#",
     active: true,
     core: true,
   },
   { id: "calls", label: "Calls", icon: Phone, href: "#", core: true },
-  { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
-  { id: "reports", label: "Reports", icon: BarChart3, href: "#" },
+  { id: "inbox", label: "Inbox", icon: Tray, href: "#", core: true },
+  { id: "reports", label: "Reports", icon: ChartBar, href: "#" },
   {
     id: "settings",
     label: "Settings",
-    icon: Settings,
+    icon: Gear,
     href: "#",
     pinned: true,
   },
@@ -83,7 +83,7 @@ export default function Example() {
                 onClick={() => setValue((v) => v.slice(0, -1))}
                 className="shrink-0 text-dock-foreground/60 hover:text-dock-foreground"
               >
-                <Delete className="size-5" />
+                <Backspace className="size-5" />
               </button>
             ) : null}
           </div>

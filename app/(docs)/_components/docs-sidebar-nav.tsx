@@ -5,23 +5,24 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   BookOpen,
-  Bot,
-  ChevronRight,
-  Glasses,
-  Layers,
-  LayoutDashboard,
-  LayoutGrid,
+  CaretRight,
+  Eyeglasses,
+  GridFour,
+  Heart,
   Megaphone,
   Palette,
-  PanelLeft,
   Plug,
+  Robot,
   ShieldCheck,
-  Sparkles,
+  Sidebar,
+  Sparkle,
+  SquaresFour,
+  Stack,
   Terminal,
-  Type,
+  TextT,
   X,
-} from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+  type Icon,
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { guides } from "@/content/guides"
@@ -59,22 +60,23 @@ const MORPH = "transition-[width] duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
 const FADE = "transition-opacity duration-150"
 const EXPANDED_W = "w-64"
 
-const GUIDE_ICONS: Record<string, LucideIcon> = {
+const GUIDE_ICONS: Record<string, Icon> = {
   "": BookOpen,
-  philosophy: Sparkles,
+  philosophy: Sparkle,
   installation: Terminal,
-  foundation: Layers,
+  foundation: Stack,
   theming: Palette,
-  typography: Type,
-  readability: Glasses,
-  surfaces: LayoutGrid,
-  ai: Bot,
+  typography: TextT,
+  readability: Eyeglasses,
+  icons: Heart,
+  surfaces: GridFour,
+  ai: Robot,
   lint: ShieldCheck,
   mcp: Plug,
 }
 
 const SURFACE_ICONS = {
-  app: LayoutDashboard,
+  app: SquaresFour,
   marketing: Megaphone,
 } as const
 
@@ -83,7 +85,14 @@ const GUIDE_GROUPS: { label: string; slugs: string[] }[] = [
   { label: "Get Started", slugs: ["", "philosophy", "installation"] },
   {
     label: "Foundation",
-    slugs: ["foundation", "theming", "typography", "readability", "surfaces"],
+    slugs: [
+      "foundation",
+      "theming",
+      "typography",
+      "readability",
+      "icons",
+      "surfaces",
+    ],
   },
   { label: "Tooling", slugs: ["ai", "lint", "mcp"] },
 ]
@@ -98,7 +107,7 @@ function NavRow({
   onNavigate,
 }: {
   href: string
-  icon?: LucideIcon
+  icon?: Icon
   label: string
   active: boolean
   onNavigate?: () => void
@@ -181,7 +190,7 @@ function FamilyCollapsible({
           RING,
         )}
       >
-        <ChevronRight className="size-3.5 shrink-0 transition-transform group-data-[open]/family:rotate-90" />
+        <CaretRight className="size-3.5 shrink-0 transition-transform group-data-[open]/family:rotate-90" />
         <span className="truncate">{entry.label}</span>
         <Badge>{entry.children.length}</Badge>
       </CollapsibleTrigger>
@@ -237,7 +246,7 @@ function CategoryCollapsible({
           RING,
         )}
       >
-        <ChevronRight className="size-3.5 shrink-0 transition-transform group-data-[open]/cat:rotate-90" />
+        <CaretRight className="size-3.5 shrink-0 transition-transform group-data-[open]/cat:rotate-90" />
         <span className="truncate">{label}</span>
         <Badge>{leafHrefs.length}</Badge>
       </CollapsibleTrigger>
@@ -340,7 +349,7 @@ function Tree({
 
 /* ── the resting icon rail ─────────────────────────────────────────── */
 
-type RailDest = { href: string; icon: LucideIcon; label: string }
+type RailDest = { href: string; icon: Icon; label: string }
 
 function railDestinations(): RailDest[] {
   return [
@@ -410,7 +419,7 @@ function Rail({
             />
           }
         >
-          <PanelLeft className="size-4" strokeWidth={2} />
+          <Sidebar className="size-4" strokeWidth={2} />
         </TooltipTrigger>
         <TooltipContent side="right" sideOffset={10}>
           Expand sidebar
@@ -513,7 +522,7 @@ export function DocsSidebar() {
                     />
                   }
                 >
-                  <PanelLeft className="size-4" strokeWidth={2} />
+                  <Sidebar className="size-4" strokeWidth={2} />
                 </TooltipTrigger>
                 <TooltipContent side="right" sideOffset={8}>
                   Collapse sidebar

@@ -15,7 +15,7 @@ import {
   DemoErrorState,
 } from "@/app/(docs)/_components/demo-state-bits"
 import { useDemoState } from "@/lib/demo-viewport"
-import { FileSearchIcon, GlobeIcon, ListChecksIcon } from "lucide-react"
+import { FileMagnifyingGlass, Globe, ListChecks } from "@/lib/icons"
 
 function ChainOfThoughtSkeleton() {
   return (
@@ -83,7 +83,7 @@ export default function Example() {
               ) : (
                 <>
                   <ChainOfThoughtStep
-                    icon={GlobeIcon}
+                    icon={Globe}
                     label="Searching the web for recent results"
                     status="complete"
                   >
@@ -102,7 +102,7 @@ export default function Example() {
 
                   <ChainOfThoughtStep
                     description="Cross-referencing three primary sources for accuracy."
-                    icon={FileSearchIcon}
+                    icon={FileMagnifyingGlass}
                     label="Reading documentation"
                     status={isSuccess ? "complete" : "active"}
                   >
@@ -114,7 +114,7 @@ export default function Example() {
                   </ChainOfThoughtStep>
 
                   <ChainOfThoughtStep
-                    icon={ListChecksIcon}
+                    icon={ListChecks}
                     label="Drafting the answer"
                     status={isSuccess ? "complete" : "pending"}
                   />

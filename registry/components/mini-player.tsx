@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Maximize2, Pause, Play, X } from "lucide-react"
+import { ArrowsOut, Pause, Play, X } from "@/lib/icons"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -305,7 +305,7 @@ function MiniPlayer({
             disabled={disabled}
             render={<a href={href} />}
           >
-            <Maximize2 />
+            <ArrowsOut />
           </Button>
         ) : (
           <Button
@@ -316,7 +316,7 @@ function MiniPlayer({
             onClick={handleExpand}
             disabled={disabled}
           >
-            <Maximize2 />
+            <ArrowsOut />
           </Button>
         )}
       </div>

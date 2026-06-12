@@ -1,7 +1,7 @@
 "use client"
 
 import Color from "color"
-import { RotateCcw } from "lucide-react"
+import { ArrowCounterClockwise } from "@/lib/icons"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTheme } from "@wrksz/themes/client"
 
@@ -197,7 +197,7 @@ export function ThemingPlayground({ presets }: { presets: BrandPreset[] }) {
           onClick={handleReset}
           className="gap-1.5"
         >
-          <RotateCcw className="size-3.5" />
+          <ArrowCounterClockwise className="size-3.5" />
           Reset
         </Button>
       </div>

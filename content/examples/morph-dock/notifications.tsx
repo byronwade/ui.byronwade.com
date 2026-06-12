@@ -2,17 +2,17 @@
 
 import * as React from "react"
 import {
-  BarChart3,
   Bell,
-  CheckCheck,
-  Home,
-  Inbox,
-  MessageSquare,
-  PhoneMissed,
-  Settings,
+  ChartBar,
+  Chat,
+  Checks,
+  Gear,
+  House,
+  PhoneX,
   ShieldCheck,
+  Tray,
   X,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { MorphDock } from "@/components/ui/morph-dock"
@@ -21,17 +21,17 @@ const items = [
   {
     id: "home",
     label: "Home",
-    icon: Home,
+    icon: House,
     href: "#",
     active: true,
     core: true,
   },
-  { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
-  { id: "reports", label: "Reports", icon: BarChart3, href: "#" },
+  { id: "inbox", label: "Inbox", icon: Tray, href: "#", core: true },
+  { id: "reports", label: "Reports", icon: ChartBar, href: "#" },
   {
     id: "settings",
     label: "Settings",
-    icon: Settings,
+    icon: Gear,
     href: "#",
     pinned: true,
   },
@@ -50,7 +50,7 @@ type Note = {
 const TODAY: Note[] = [
   {
     id: 1,
-    icon: MessageSquare,
+    icon: Chat,
     tone: "text-brand",
     title: "New message from Mira",
     body: "Can you review the latest flow?",
@@ -59,7 +59,7 @@ const TODAY: Note[] = [
   },
   {
     id: 2,
-    icon: PhoneMissed,
+    icon: PhoneX,
     tone: "text-destructive",
     title: "Missed call",
     body: "+1 (415) 555-0136",
@@ -78,7 +78,7 @@ const TODAY: Note[] = [
 const EARLIER: Note[] = [
   {
     id: 4,
-    icon: BarChart3,
+    icon: ChartBar,
     tone: "text-brand",
     title: "Weekly report is ready",
     body: "Calls up 12% over last week",
@@ -162,7 +162,7 @@ export default function Example() {
                 type="button"
                 className="flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-semibold text-dock-foreground transition-colors hover:text-dock-active-foreground"
               >
-                <CheckCheck className="size-3.5" />
+                <Checks className="size-3.5" />
                 Mark all read
               </button>
               <button

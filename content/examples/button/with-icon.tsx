@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
+  ArrowsClockwise,
   Check,
-  Download,
+  DownloadSimple,
+  MagnifyingGlass,
   Plus,
-  RefreshCw,
-  Search,
-  Upload,
-} from "lucide-react"
+  UploadSimple,
+} from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -19,15 +19,15 @@ export default function Example() {
           New item
         </Button>
         <Button variant="outline">
-          <Search data-icon="inline-start" />
+          <MagnifyingGlass data-icon="inline-start" />
           Search
         </Button>
         <Button variant="secondary">
-          <Download data-icon="inline-start" />
+          <DownloadSimple data-icon="inline-start" />
           Download
         </Button>
         <Button variant="ghost">
-          <RefreshCw data-icon="inline-start" />
+          <ArrowsClockwise data-icon="inline-start" />
           Refresh
         </Button>
       </div>
@@ -40,7 +40,7 @@ export default function Example() {
         </Button>
         <Button variant="outline">
           Upload file
-          <Upload data-icon="inline-end" />
+          <UploadSimple data-icon="inline-end" />
         </Button>
         <Button variant="secondary">
           Confirm
@@ -54,13 +54,13 @@ export default function Example() {
           <Plus />
         </Button>
         <Button size="icon" variant="outline" aria-label="Download">
-          <Download />
+          <DownloadSimple />
         </Button>
         <Button size="icon" variant="ghost" aria-label="Search">
-          <Search />
+          <MagnifyingGlass />
         </Button>
         <Button size="icon" variant="destructive" aria-label="Refresh">
-          <RefreshCw />
+          <ArrowsClockwise />
         </Button>
       </div>
     </div>

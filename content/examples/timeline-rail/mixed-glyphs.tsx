@@ -1,5 +1,5 @@
 import { TimelineRail } from "@/components/timeline-rail"
-import { GitCommit, GitMerge, AlertTriangle, CheckCircle2 } from "lucide-react"
+import { CheckCircle, GitCommit, GitMerge, Warning } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -15,17 +15,17 @@ export default function Example() {
                 meta: "0:00",
               },
               {
-                glyph: <CheckCircle2 className="size-4 text-success" />,
+                glyph: <CheckCircle className="size-4 text-success" />,
                 title: "Lint passed",
                 meta: "0:14",
               },
               {
-                glyph: <CheckCircle2 className="size-4 text-success" />,
+                glyph: <CheckCircle className="size-4 text-success" />,
                 title: "Unit tests passed (138/138)",
                 meta: "0:52",
               },
               {
-                glyph: <AlertTriangle className="size-4 text-warning" />,
+                glyph: <Warning className="size-4 text-warning" />,
                 title: "Coverage dropped below threshold",
                 meta: "0:53",
               },

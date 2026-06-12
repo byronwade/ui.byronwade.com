@@ -1,15 +1,14 @@
 "use client"
 
 import {
-  Boxes,
-  Home,
-  LayoutGrid,
-  LayoutTemplate,
-  PanelsTopLeft,
-  Search,
-  SunMedium,
+  GridFour,
+  House,
+  Layout,
+  MagnifyingGlass,
+  Stack,
+  Sun,
   Terminal,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -31,7 +30,7 @@ export default function Example() {
             {
               id: "menu",
               label: "Menu",
-              icon: LayoutGrid,
+              icon: GridFour,
               core: true,
               onSelect: () => {},
             },
@@ -56,7 +55,7 @@ export default function Example() {
             {
               id: "home",
               label: "Home",
-              icon: Home,
+              icon: House,
               href: "#",
               active: true,
               core: true,
@@ -64,21 +63,21 @@ export default function Example() {
             {
               id: "components",
               label: "Components",
-              icon: Boxes,
+              icon: Stack,
               href: "#",
               core: true,
             },
             {
               id: "layouts",
               label: "Layouts",
-              icon: PanelsTopLeft,
+              icon: Layout,
               href: "#",
               core: true,
             },
             {
               id: "templates",
               label: "Templates",
-              icon: LayoutTemplate,
+              icon: Layout,
               href: "#",
               core: true,
             },
@@ -94,14 +93,14 @@ export default function Example() {
               {
                 id: "search",
                 label: "Search",
-                icon: Search,
+                icon: MagnifyingGlass,
                 core: true,
                 onSelect: () => {},
               },
               {
                 id: "theme",
                 label: "Theme",
-                icon: SunMedium,
+                icon: Sun,
                 core: true,
                 onSelect: () => {},
               },

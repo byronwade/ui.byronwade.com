@@ -1,6 +1,6 @@
 "use client"
 
-import { Moon, Sun } from "lucide-react"
+import { Moon, Sun } from "@/lib/icons"
 import { useTheme } from "@wrksz/themes/client"
 
 export function ThemeToggle() {

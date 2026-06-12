@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle2, Clock, AlertCircle } from "lucide-react"
+import { CheckCircle, Clock, WarningCircle } from "@/lib/icons"
 
 const tasks = [
   {
-    icon: CheckCircle2,
+    icon: CheckCircle,
     color: "text-success",
     label: "Database migration",
     meta: "Completed 9:14 AM",
@@ -15,7 +15,7 @@ const tasks = [
     meta: "In progress · ~4 min left",
   },
   {
-    icon: AlertCircle,
+    icon: WarningCircle,
     color: "text-destructive",
     label: "Run integration tests",
     meta: "Blocked, waiting on staging",

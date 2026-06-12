@@ -1,6 +1,6 @@
 "use client"
 
-import { SkipForward } from "lucide-react"
+import { SkipForward } from "@/lib/icons"
 
 import { Button } from "@/components/ui/button"
 import { MiniPlayer } from "@/components/mini-player"

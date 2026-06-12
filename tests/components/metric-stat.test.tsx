@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { expect, describe, it } from "vitest";
 import { axe } from "vitest-axe";
-import { Activity, Users, ShoppingCart, TrendingUp, Star, Database, Clock, Globe } from "lucide-react";
+import { Clock, Database, Globe, Pulse, ShoppingCart, Star, TrendUp, Users } from "@/lib/icons"
 import { MetricStat, DeltaPill, type Delta } from "@/components/metric-stat";
 
 // ---------------------------------------------------------------------------
@@ -221,7 +221,7 @@ describe("MetricStat", () => {
 
     it("icon has size-3.5 class for correct sizing", () => {
       const { container } = render(
-        <MetricStat icon={TrendingUp} label="Growth" value="18.6%" />
+        <MetricStat icon={TrendUp} label="Growth" value="18.6%" />
       );
       // The icon SVG should be within the label span
       const labelSpan = screen.getByText("Growth").closest("span");
@@ -246,7 +246,7 @@ describe("MetricStat", () => {
     });
 
     it("works with Activity icon (from custom-value example)", () => {
-      render(<MetricStat icon={Activity} label="P95 Latency" value="142ms" />);
+      render(<MetricStat icon={Pulse} label="P95 Latency" value="142ms" />);
       expect(screen.getByText("P95 Latency")).toBeInTheDocument();
     });
   });
@@ -294,7 +294,7 @@ describe("MetricStat", () => {
     it("renders a multi-unit display as value (number + unit span)", () => {
       render(
         <MetricStat
-          icon={Activity}
+          icon={Pulse}
           label="P95 Latency"
           value={
             <span>

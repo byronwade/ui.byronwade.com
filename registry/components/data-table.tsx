@@ -1,14 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ChevronUp,
-  Inbox,
-  Rows3,
-} from "lucide-react"
+import { CaretDown, CaretLeft, CaretRight, CaretUp, Rows, Tray } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {
@@ -310,7 +303,7 @@ function DataTable<Row>({
               setDensity(density === "condensed" ? "comfortable" : "condensed")
             }
           >
-            <Rows3 />
+            <Rows />
           </Button>
         ) : null}
         {filterActions}
@@ -391,13 +384,13 @@ function DataTable<Row>({
                         {column.header}
                         {isActive ? (
                           sort?.direction === "asc" ? (
-                            <ChevronUp
+                            <CaretUp
                               data-slot={`${rootSlot}-sort-asc`}
                               aria-hidden
                               className="size-3.5"
                             />
                           ) : (
-                            <ChevronDown
+                            <CaretDown
                               data-slot={`${rootSlot}-sort-desc`}
                               aria-hidden
                               className="size-3.5"
@@ -465,7 +458,7 @@ function DataTable<Row>({
                 <TableCell colSpan={colCount} className="p-0">
                   {emptyState ?? (
                     <EmptyState
-                      icon={Inbox}
+                      icon={Tray}
                       title="Nothing here yet"
                       description="Rows will appear here once there is data to show."
                       className="border-0"
@@ -671,7 +664,7 @@ function PaginationFooterShell({
           aria-label="Previous page"
           onClick={() => onPrev?.()}
         >
-          <ChevronLeft />
+          <CaretLeft />
         </Button>
         <Button
           data-slot={`${rootSlot}-next`}
@@ -681,7 +674,7 @@ function PaginationFooterShell({
           aria-label="Next page"
           onClick={() => onNext?.()}
         >
-          <ChevronRight />
+          <CaretRight />
         </Button>
       </div>
       <span

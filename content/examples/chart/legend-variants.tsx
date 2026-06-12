@@ -9,7 +9,7 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts"
-import { CircleDot, TrendingUp } from "lucide-react"
+import { Circle, TrendUp } from "@/lib/icons"
 
 const data = [
   { q: "Q1", alpha: 42, beta: 31 },
@@ -22,12 +22,12 @@ const chartConfigWithIcons: ChartConfig = {
   alpha: {
     label: "Alpha",
     color: "var(--chart-1)",
-    icon: TrendingUp,
+    icon: TrendUp,
   },
   beta: {
     label: "Beta",
     color: "var(--chart-2)",
-    icon: CircleDot,
+    icon: Circle,
   },
 }
 

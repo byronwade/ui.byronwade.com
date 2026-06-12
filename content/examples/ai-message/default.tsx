@@ -1,6 +1,6 @@
 "use client"
 
-import { CopyIcon, RefreshCwIcon, ThumbsUpIcon } from "lucide-react"
+import { ArrowsClockwise, Copy, ThumbsUp } from "@/lib/icons"
 
 import {
   DemoEmptyState,
@@ -67,13 +67,13 @@ function MessagePair() {
           <MessageToolbar>
             <MessageActions>
               <MessageAction label="Copy" tooltip="Copy">
-                <CopyIcon className="size-4" />
+                <Copy className="size-4" />
               </MessageAction>
               <MessageAction label="Regenerate" tooltip="Regenerate">
-                <RefreshCwIcon className="size-4" />
+                <ArrowsClockwise className="size-4" />
               </MessageAction>
               <MessageAction label="Good response" tooltip="Good response">
-                <ThumbsUpIcon className="size-4" />
+                <ThumbsUp className="size-4" />
               </MessageAction>
             </MessageActions>
           </MessageToolbar>

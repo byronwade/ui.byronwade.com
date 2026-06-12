@@ -7,7 +7,7 @@
 // a range switcher and an oversized headline figure. A tiled KPI strip (each with its
 // own sparkline) and a breakdown/products bento carry the supporting detail.
 import * as React from "react"
-import { Activity, CreditCard, Users, Zap } from "lucide-react"
+import { CreditCard, Lightning, Pulse, Users } from "@/lib/icons"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 
 import { cn } from "@/lib/utils"
@@ -72,7 +72,7 @@ const kpis = [
   {
     label: "Conversion",
     value: "4.8%",
-    icon: Activity,
+    icon: Pulse,
     dir: "up" as const,
     delta: "0.3%",
     data: [3.9, 4.0, 4.1, 4.0, 4.3, 4.4, 4.5, 4.4, 4.6, 4.7, 4.7, 4.8],
@@ -81,7 +81,7 @@ const kpis = [
   {
     label: "Churn",
     value: "1.9%",
-    icon: Zap,
+    icon: Lightning,
     dir: "down" as const,
     delta: "0.2%",
     data: [2.6, 2.5, 2.5, 2.3, 2.4, 2.2, 2.2, 2.1, 2.1, 2.0, 2.0, 1.9],

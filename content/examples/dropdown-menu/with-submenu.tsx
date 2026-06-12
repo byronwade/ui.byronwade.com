@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight, Globe, Moon, Sun } from "lucide-react"
+import { CaretRight, Globe, Moon, Sun } from "@/lib/icons"
 
 import {
   DropdownMenu,

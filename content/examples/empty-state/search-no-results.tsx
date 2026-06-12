@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search } from "lucide-react"
+import { MagnifyingGlass } from "@/lib/icons"
 import { EmptyState } from "@/components/empty-state"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -33,7 +33,7 @@ export default function Example() {
         />
         {results.length === 0 ? (
           <EmptyState
-            icon={Search}
+            icon={MagnifyingGlass}
             title={`No results for "${query}"`}
             description="Try adjusting your search or check for typos."
             action={

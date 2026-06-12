@@ -1,4 +1,4 @@
-import { ShieldAlertIcon } from "lucide-react"
+import { ShieldWarning } from "@/lib/icons"
 import {
   Card,
   CardHeader,
@@ -46,7 +46,7 @@ export default function Example() {
         </CardPanel>
         <CardFooter className="border-t">
           <div className="flex gap-1.5 text-xs text-muted-foreground">
-            <ShieldAlertIcon className="size-3 h-lh shrink-0" />
+            <ShieldWarning className="size-3 h-lh shrink-0" />
             <p>The information you enter is encrypted and stored securely.</p>
           </div>
         </CardFooter>

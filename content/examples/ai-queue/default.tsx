@@ -22,7 +22,7 @@ import {
   DemoEmptyState,
   DemoErrorState,
 } from "@/app/(docs)/_components/demo-state-bits"
-import { ListTodoIcon, PencilIcon, TrashIcon } from "lucide-react"
+import { ListChecks, PencilSimple, Trash } from "@/lib/icons"
 
 const todos = [
   {
@@ -131,7 +131,7 @@ export default function Example() {
               <QueueSectionLabel
                 count={items.length}
                 label="queued tasks"
-                icon={<ListTodoIcon className="size-4" />}
+                icon={<ListChecks className="size-4" />}
               />
             )}
           </QueueSectionTrigger>
@@ -151,10 +151,10 @@ export default function Example() {
                         </QueueItemContent>
                         <QueueItemActions>
                           <QueueItemAction aria-label="Edit task">
-                            <PencilIcon className="size-3.5" />
+                            <PencilSimple className="size-3.5" />
                           </QueueItemAction>
                           <QueueItemAction aria-label="Remove task">
-                            <TrashIcon className="size-3.5" />
+                            <Trash className="size-3.5" />
                           </QueueItemAction>
                         </QueueItemActions>
                       </div>

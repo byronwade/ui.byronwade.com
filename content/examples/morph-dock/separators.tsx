@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChart3, Home, Inbox, Settings, Users } from "lucide-react"
+import { ChartBar, Gear, House, Tray, Users } from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -17,7 +17,7 @@ export default function Example() {
           {
             id: "home",
             label: "Home",
-            icon: Home,
+            icon: House,
             href: "#",
             active: true,
             core: true,
@@ -26,7 +26,7 @@ export default function Example() {
           {
             id: "inbox",
             label: "Inbox",
-            icon: Inbox,
+            icon: Tray,
             href: "#",
             core: true,
             group: "main",
@@ -35,7 +35,7 @@ export default function Example() {
           {
             id: "reports",
             label: "Reports",
-            icon: BarChart3,
+            icon: ChartBar,
             href: "#",
             core: true,
             group: "work",
@@ -51,7 +51,7 @@ export default function Example() {
           {
             id: "settings",
             label: "Settings",
-            icon: Settings,
+            icon: Gear,
             href: "#",
             core: true,
             group: "account",

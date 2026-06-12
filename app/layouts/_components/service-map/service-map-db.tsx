@@ -1,17 +1,17 @@
 import {
   Database,
   Flame,
-  Layers,
-  Search,
-  Send,
-  type LucideIcon,
-} from "lucide-react"
+  MagnifyingGlass,
+  PaperPlaneTilt,
+  Stack,
+  type Icon,
+} from "@/lib/icons"
 
 export type DbCategory = "database" | "cache" | "queue" | "search"
 
 export interface DbDescriptor {
   category: DbCategory
-  Icon: LucideIcon
+  Icon: Icon
   label: string
   color: string
   branded: boolean
@@ -24,11 +24,11 @@ const CATEGORY_COLOR: Record<DbCategory, string> = {
   search: "var(--chart-3)",
 }
 
-const CATEGORY_ICON: Record<DbCategory, LucideIcon> = {
+const CATEGORY_ICON: Record<DbCategory, Icon> = {
   database: Database,
   cache: Flame,
-  queue: Send,
-  search: Search,
+  queue: PaperPlaneTilt,
+  search: MagnifyingGlass,
 }
 
 const CATEGORY_FALLBACK_LABEL: Record<DbCategory, string> = {
@@ -81,7 +81,7 @@ export function getDbDescriptor(system: string | undefined): DbDescriptor {
     case "clickhouse":
       return {
         category: "database",
-        Icon: Layers,
+        Icon: Stack,
         label: "ClickHouse",
         color: "var(--chart-5)",
         branded: true,
@@ -106,7 +106,7 @@ export function getDbDescriptor(system: string | undefined): DbDescriptor {
     case "opensearch":
       return {
         category: "search",
-        Icon: Search,
+        Icon: MagnifyingGlass,
         label: s === "opensearch" ? "OpenSearch" : "Elasticsearch",
         color: "var(--chart-3)",
         branded: true,
@@ -114,7 +114,7 @@ export function getDbDescriptor(system: string | undefined): DbDescriptor {
     case "kafka":
       return {
         category: "queue",
-        Icon: Send,
+        Icon: PaperPlaneTilt,
         label: "Kafka",
         color: "var(--chart-4)",
         branded: true,

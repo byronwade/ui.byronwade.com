@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { axe } from "vitest-axe";
-import { Home, Search, Bell } from "lucide-react";
+import { Bell, House, MagnifyingGlass } from "@/lib/icons"
 import { MorphTabs } from "@/components/ui/morph-tabs";
 
 beforeEach(() => {
@@ -12,8 +12,8 @@ beforeEach(() => {
 });
 
 const items = [
-  { id: "home", label: "Home", icon: Home, active: true },
-  { id: "search", label: "Search", icon: Search },
+  { id: "home", label: "Home", icon: House, active: true },
+  { id: "search", label: "Search", icon: MagnifyingGlass },
   { id: "alerts", label: "Alerts", icon: Bell },
 ];
 
@@ -38,7 +38,7 @@ describe("MorphTabs", () => {
   it("fires onSelect when a tab is chosen", async () => {
     const user = userEvent.setup();
     const onSelect = vi.fn();
-    render(<MorphTabs items={[{ id: "home", label: "Home", icon: Home, onSelect }]} sheet={<div />} />);
+    render(<MorphTabs items={[{ id: "home", label: "Home", icon: House, onSelect }]} sheet={<div />} />);
     await user.click(screen.getByRole("button", { name: "Home" }));
     expect(onSelect).toHaveBeenCalledTimes(1);
   });

@@ -2,7 +2,7 @@ import { SplitWithRail } from "@/components/split-with-rail"
 import { TimelineRail } from "@/components/timeline-rail"
 import { Badge } from "@/components/ui/badge"
 import { StatusDot } from "@/components/ui/status-dot"
-import { GitBranch, Globe, MousePointer } from "lucide-react"
+import { Cursor, GitBranch, Globe } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -78,7 +78,7 @@ export default function Example() {
                     meta: "2m ago",
                   },
                   {
-                    glyph: <MousePointer className="size-3.5" />,
+                    glyph: <Cursor className="size-3.5" />,
                     title: "Clicked 'Start trial'",
                     meta: "3m ago",
                   },

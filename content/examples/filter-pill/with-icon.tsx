@@ -1,17 +1,17 @@
 import { FilterPill } from "@/components/ui/filter-pill"
 import {
-  CalendarDays,
-  Tag,
+  CalendarDots,
   MapPin,
-  Users,
   SlidersHorizontal,
-} from "lucide-react"
+  Tag,
+  Users,
+} from "@/lib/icons"
 
 export default function Example() {
   return (
     <div className="flex flex-wrap items-center gap-2 p-6">
       <FilterPill
-        icon={<CalendarDays className="size-3.5 text-muted-foreground" />}
+        icon={<CalendarDots className="size-3.5 text-muted-foreground" />}
       >
         Date range
       </FilterPill>

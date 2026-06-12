@@ -1,6 +1,6 @@
 "use client"
 
-import { Pencil, Trash2 } from "lucide-react"
+import { PencilSimple, Trash } from "@/lib/icons"
 
 import { ResourceList, ResourceItem } from "@/components/resource-list"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -45,10 +45,10 @@ export default function Example() {
           actions={
             <div className="flex items-center gap-1">
               <Button variant="ghost" size="icon-sm" aria-label="Edit">
-                <Pencil />
+                <PencilSimple />
               </Button>
               <Button variant="ghost" size="icon-sm" aria-label="Delete">
-                <Trash2 />
+                <Trash />
               </Button>
             </div>
           }

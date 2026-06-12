@@ -1,4 +1,4 @@
-import { BadgeCheck, Music } from "lucide-react"
+import { MusicNote, SealCheck } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 
@@ -10,9 +10,9 @@ const sizes: Record<VerifiedBadgeSize, string> = {
   md: "size-4",
 }
 
-const icons: Record<VerifiedBadgeVariant, typeof BadgeCheck> = {
-  default: BadgeCheck,
-  artist: Music,
+const icons: Record<VerifiedBadgeVariant, typeof SealCheck> = {
+  default: SealCheck,
+  artist: MusicNote,
 }
 
 type VerifiedBadgeProps = {
@@ -34,6 +34,7 @@ function VerifiedBadge({
   return (
     <span
       data-slot="verified-badge"
+      data-variant={variant}
       role="img"
       aria-label={title}
       className={cn(

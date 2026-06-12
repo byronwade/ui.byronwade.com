@@ -1,6 +1,6 @@
 "use client"
 
-import { TrendingDown, TrendingUp, Users } from "lucide-react"
+import { TrendDown, TrendUp, Users } from "@/lib/icons"
 
 import { StatCard } from "@/components/stat-card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -109,7 +109,7 @@ export default function Example() {
         label="Churn Rate"
         value={churnValue}
         delta={churnDelta}
-        icon={TrendingDown}
+        icon={TrendDown}
         hint={churnHint}
         className={cn(
           isSuccess && "ring-success/30",

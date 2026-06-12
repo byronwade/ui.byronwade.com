@@ -7,7 +7,7 @@
  * carries a `data-slot`.
  */
 import { cva, type VariantProps } from "class-variance-authority"
-import { ChevronDownIcon, ChevronUpIcon, MinusIcon } from "lucide-react"
+import { CaretDown, CaretUp, Minus } from "@/lib/icons"
 import type { ComponentProps, ReactNode } from "react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -145,7 +145,7 @@ export type PillDeltaProps = {
 export const PillDelta = ({ className, delta }: PillDeltaProps) => {
   if (!delta) {
     return (
-      <MinusIcon
+      <Minus
         data-slot="pill-delta"
         className={cn("size-3 text-muted-foreground", className)}
       />
@@ -153,14 +153,14 @@ export const PillDelta = ({ className, delta }: PillDeltaProps) => {
   }
   if (delta > 0) {
     return (
-      <ChevronUpIcon
+      <CaretUp
         data-slot="pill-delta"
         className={cn("size-3 text-success", className)}
       />
     )
   }
   return (
-    <ChevronDownIcon
+    <CaretDown
       data-slot="pill-delta"
       className={cn("size-3 text-destructive", className)}
     />
@@ -168,7 +168,7 @@ export const PillDelta = ({ className, delta }: PillDeltaProps) => {
 }
 
 export type PillIconProps = {
-  icon: typeof ChevronUpIcon
+  icon: typeof CaretUp
   className?: string
 }
 

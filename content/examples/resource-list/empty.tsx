@@ -1,6 +1,6 @@
 "use client"
 
-import { Users } from "lucide-react"
+import { Users } from "@/lib/icons"
 
 import { ResourceList } from "@/components/resource-list"
 import { EmptyState } from "@/components/empty-state"

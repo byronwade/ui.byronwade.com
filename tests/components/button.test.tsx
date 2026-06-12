@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { axe } from "vitest-axe";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Plus, Download, Trash2, Loader2, ArrowRight } from "lucide-react";
+import { ArrowRight, CircleNotch, DownloadSimple, Plus, Trash } from "@/lib/icons"
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -306,7 +306,7 @@ describe("Button – disabled state", () => {
   it("icon button renders as disabled correctly", () => {
     render(
       <Button size="icon" aria-label="Download" disabled>
-        <Download />
+        <DownloadSimple />
       </Button>
     );
     expect(screen.getByRole("button", { name: "Download" })).toBeDisabled();
@@ -375,7 +375,7 @@ describe("Button – icon button patterns", () => {
   it("icon size button with aria-label is accessible by name", () => {
     render(
       <Button size="icon" aria-label="Download">
-        <Download />
+        <DownloadSimple />
       </Button>
     );
     expect(screen.getByRole("button", { name: "Download" })).toBeInTheDocument();
@@ -542,7 +542,7 @@ describe("Button – loading state pattern", () => {
   it("loading button with disabled and spinner text is disabled", () => {
     render(
       <Button disabled>
-        <Loader2 className="animate-spin" />
+        <CircleNotch className="animate-spin" />
         Processing
       </Button>
     );
@@ -552,7 +552,7 @@ describe("Button – loading state pattern", () => {
   it("loading button shows spinner svg and text", () => {
     render(
       <Button disabled>
-        <Loader2 className="animate-spin" data-testid="spinner" />
+        <CircleNotch className="animate-spin" data-testid="spinner" />
         Loading
       </Button>
     );
@@ -563,7 +563,7 @@ describe("Button – loading state pattern", () => {
   it("loading variant outline button is disabled", () => {
     render(
       <Button variant="outline" disabled>
-        <Loader2 className="animate-spin" />
+        <CircleNotch className="animate-spin" />
         Uploading…
       </Button>
     );
@@ -573,7 +573,7 @@ describe("Button – loading state pattern", () => {
   it("loading icon-only button is disabled", () => {
     render(
       <Button size="icon" variant="outline" aria-label="Loading" disabled>
-        <Loader2 className="animate-spin" />
+        <CircleNotch className="animate-spin" />
       </Button>
     );
     expect(screen.getByRole("button", { name: "Loading" })).toBeDisabled();
@@ -583,7 +583,7 @@ describe("Button – loading state pattern", () => {
     const handler = vi.fn();
     render(
       <Button disabled onClick={handler}>
-        <Loader2 className="animate-spin" />
+        <CircleNotch className="animate-spin" />
         Saving…
       </Button>
     );
@@ -855,7 +855,7 @@ describe("Button – accessibility (axe)", () => {
   it("icon-only button with aria-label has no axe violations", async () => {
     const { container } = render(
       <Button size="icon" aria-label="Download file">
-        <Download />
+        <DownloadSimple />
       </Button>
     );
     const results = await axe(container);
@@ -937,7 +937,7 @@ describe("Button – accessibility (axe)", () => {
   it("destructive variant with icon has no axe violations", async () => {
     const { container } = render(
       <Button variant="destructive">
-        <Trash2 />
+        <Trash />
         Delete item
       </Button>
     );

@@ -3,7 +3,7 @@ import { MetricStat } from "@/components/metric-stat"
 import { ActivityRing } from "@/components/ui/activity-ring"
 import { TimelineRail } from "@/components/timeline-rail"
 import { StatusDot } from "@/components/ui/status-dot"
-import { Activity, Clock, Users, Zap } from "lucide-react"
+import { Clock, Lightning, Pulse, Users } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -27,7 +27,7 @@ export default function Example() {
                 label="Requests / min"
                 value="4.2k"
                 delta={{ value: "+12%", direction: "up" }}
-                icon={Activity}
+                icon={Pulse}
               />
               <MetricStat
                 label="Avg latency"
@@ -45,7 +45,7 @@ export default function Example() {
                 label="Error rate"
                 value="0.3%"
                 delta={{ value: "+0.1%", direction: "down" }}
-                icon={Zap}
+                icon={Lightning}
               />
             </div>
 

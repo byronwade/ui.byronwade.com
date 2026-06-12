@@ -1,4 +1,4 @@
-import { FileTextIcon, ImageIcon, FolderIcon } from "lucide-react"
+import { FileText, Folder, Image } from "@/lib/icons"
 import { CommandResult } from "@/components/command-result"
 import {
   Command,
@@ -20,7 +20,7 @@ export default function Example() {
               <CommandResult
                 media={
                   <span className="flex size-8 items-center justify-center rounded-md bg-muted text-muted-foreground">
-                    <FileTextIcon className="size-4" />
+                    <FileText className="size-4" />
                   </span>
                 }
                 title="proposal.md"
@@ -32,7 +32,7 @@ export default function Example() {
               <CommandResult
                 media={
                   <span className="flex size-8 items-center justify-center rounded-md bg-muted text-muted-foreground">
-                    <ImageIcon className="size-4" />
+                    <Image className="size-4" />
                   </span>
                 }
                 title="hero-banner.png"
@@ -44,7 +44,7 @@ export default function Example() {
               <CommandResult
                 media={
                   <span className="flex size-8 items-center justify-center rounded-md bg-muted text-muted-foreground">
-                    <FolderIcon className="size-4" />
+                    <Folder className="size-4" />
                   </span>
                 }
                 title="Components"

@@ -7,7 +7,7 @@ import {
   EmptyContent,
 } from "@/components/ui/empty"
 import { Button } from "@/components/ui/button"
-import { FolderPlus } from "lucide-react"
+import { FolderPlus } from "@/lib/icons"
 
 export default function Example() {
   return (

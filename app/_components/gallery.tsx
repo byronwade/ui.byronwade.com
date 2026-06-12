@@ -8,7 +8,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from "@/lib/icons"
 
 import {
   surfaceShortLabel,

@@ -3,7 +3,7 @@
 import type { ComponentProps } from "react";
 import { useCallback } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ArrowDownIcon } from "lucide-react";
+import { ArrowDown } from "@/lib/icons"
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 
 import { Button } from "@/components/ui/button";
@@ -121,7 +121,7 @@ export const ConversationScrollButton = ({
         variant="outline"
         {...props}
       >
-        <ArrowDownIcon className="size-4" />
+        <ArrowDown className="size-4" />
       </Button>
     )
   );

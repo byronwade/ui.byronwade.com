@@ -33,13 +33,17 @@ component. If no scope is given, audit the working-tree diff (`git diff` + `git 
    exists, and hand-rolled gradients/grids/glows where a house utility exists (`bg-grid`,
    `glow-brand`, `text-gradient`, `mask-fade-x`, `edge`, `scrollbar-thin`, …).
 4. **`cn()` + `className` passthrough** — component accepts `className` and merges via `cn()`.
+5. **Icons** — flag any import from `lucide-react`, `@phosphor-icons/react`, `react-icons`, or another
+   icon package, and any hand-rolled icon `<svg>`: icons must come from `@/lib/icons` (Phosphor,
+   duotone default). Flag a redundant `weight="duotone"`, a raw `color`/`size` prop where a token
+   class / size scale belongs, and icon-typed props not using `Icon`/`IconProps` from `@/lib/icons`.
 
-**House conventions** 5. **Structure** — kebab-case filename; UI primitive in `registry/ui/`, composite in
-`registry/components/`, helper in `registry/lib/`; consumer `@/` imports only (no `../`). 6. **Exports** — named, at the file bottom; no `export default`. 7. **Formatting** — no semicolons (Prettier `semi: false`). (Don't nitpick spacing Prettier owns;
-just flag the semicolon style if it slipped.) 8. **Comments** — minimal / self-documenting. Flag noisy header boilerplate or comments that
+**House conventions** 6. **Structure** — kebab-case filename; UI primitive in `registry/ui/`, composite in
+`registry/components/`, helper in `registry/lib/`; consumer `@/` imports only (no `../`). 7. **Exports** — named, at the file bottom; no `export default`. 8. **Formatting** — no semicolons (Prettier `semi: false`). (Don't nitpick spacing Prettier owns;
+just flag the semicolon style if it slipped.) 9. **Comments** — minimal / self-documenting. Flag noisy header boilerplate or comments that
 restate the code; flag genuinely non-obvious logic that has _no_ comment.
 
-**Accessibility** 9. Labels, `aria-*`, keyboard behavior, and `focus-visible:ring-ring` preserved; dark mode comes
+**Accessibility** 10. Labels, `aria-*`, keyboard behavior, and `focus-visible:ring-ring` preserved; dark mode comes
 from tokens (no branching on a hardcoded color).
 
 ## How to be efficient

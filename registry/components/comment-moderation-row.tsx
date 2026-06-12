@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, Heart, Reply, Trash2 } from "lucide-react"
+import { ArrowBendUpLeft, Check, Heart, Trash } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -171,7 +171,7 @@ function CommentModerationRow({
               aria-label="Remove"
               onClick={onRemove}
             >
-              <Trash2 aria-hidden />
+              <Trash aria-hidden />
             </Button>
             <Button
               variant="ghost"
@@ -192,7 +192,7 @@ function CommentModerationRow({
               aria-label="Reply"
               onClick={onReply}
             >
-              <Reply aria-hidden />
+              <ArrowBendUpLeft aria-hidden />
             </Button>
           </div>
         ) : null}

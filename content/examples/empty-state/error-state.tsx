@@ -1,6 +1,6 @@
 "use client"
 
-import { AlertCircle } from "lucide-react"
+import { WarningCircle } from "@/lib/icons"
 import { EmptyState } from "@/components/empty-state"
 import { Button } from "@/components/ui/button"
 
@@ -14,7 +14,7 @@ export default function Example() {
     <div className="flex items-center justify-center min-h-0 bg-background p-8">
       <div className="w-full max-w-md">
         <EmptyState
-          icon={AlertCircle}
+          icon={WarningCircle}
           title="Something went wrong"
           description="We couldn't load your data. This might be a temporary issue, please try again."
           action={

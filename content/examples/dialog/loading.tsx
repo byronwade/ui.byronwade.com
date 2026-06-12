@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Loader2Icon } from "lucide-react"
+import { CircleNotch } from "@/lib/icons"
 import {
   Dialog,
   DialogTrigger,
@@ -59,7 +59,7 @@ export default function Example() {
             <Button onClick={handlePublish} disabled={loading}>
               {loading ? (
                 <>
-                  <Loader2Icon className="animate-spin" />
+                  <CircleNotch className="animate-spin" />
                   Publishing…
                 </>
               ) : (

@@ -8,7 +8,7 @@ import * as React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
-import { HeartIcon } from "lucide-react";
+import { Heart } from "@/lib/icons"
 
 import {
   Rating,
@@ -380,10 +380,12 @@ describe("Rating — customization", () => {
   it("renders a custom icon", () => {
     const { container } = render(
       <Rating value={1} readOnly>
-        <RatingButton icon={<HeartIcon />} />
+        <RatingButton icon={<Heart data-testid="custom-heart" />} />
       </Rating>,
     );
-    expect(container.querySelector("svg.lucide-heart")).not.toBeNull();
+    expect(
+      container.querySelector('svg[data-testid="custom-heart"]'),
+    ).not.toBeNull();
   });
 });
 

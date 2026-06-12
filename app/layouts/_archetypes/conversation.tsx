@@ -9,9 +9,9 @@ import {
   Copy,
   Paperclip,
   Plus,
-  Sparkles,
+  Sparkle,
   ThumbsUp,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -104,7 +104,7 @@ export function ConversationArchetype() {
       <aside className="hidden min-h-0 flex-col border-r border-border md:flex">
         <div className="flex h-14 items-center justify-between px-4">
           <div className="flex items-center gap-2 font-medium tracking-tight">
-            <Sparkles className="size-4 text-brand" />
+            <Sparkle className="size-4 text-brand" />
             Copilot
           </div>
           <Button variant="outline" size="icon-sm" aria-label="New chat">
@@ -153,7 +153,7 @@ export function ConversationArchetype() {
             </p>
           </div>
           <Badge variant="secondary">
-            <Sparkles data-icon="inline-start" className="text-brand" />
+            <Sparkle data-icon="inline-start" className="text-brand" />
             gpt-5
           </Badge>
         </header>
@@ -217,7 +217,7 @@ function Message({ turn }: { turn: Turn }) {
   return (
     <div className="flex gap-3">
       <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-brand/15 text-brand">
-        <Sparkles className="size-4" />
+        <Sparkle className="size-4" />
       </span>
       <div className="min-w-0 flex-1 space-y-3">
         <div className="space-y-2 text-sm leading-relaxed">{turn.content}</div>

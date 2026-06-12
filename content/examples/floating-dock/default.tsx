@@ -1,19 +1,23 @@
 import { FloatingDock } from "@/components/ui/floating-dock"
-import { Home, Inbox, BarChart3, Settings, Search } from "lucide-react"
+import { ChartBar, Gear, House, MagnifyingGlass, Tray } from "@/lib/icons"
 
 export default function Example() {
   const items = [
-    { title: "Home", icon: <Home className="h-full w-full" />, href: "#" },
-    { title: "Inbox", icon: <Inbox className="h-full w-full" />, href: "#" },
+    { title: "Home", icon: <House className="h-full w-full" />, href: "#" },
+    { title: "Inbox", icon: <Tray className="h-full w-full" />, href: "#" },
     {
       title: "Analytics",
-      icon: <BarChart3 className="h-full w-full" />,
+      icon: <ChartBar className="h-full w-full" />,
       href: "#",
     },
-    { title: "Search", icon: <Search className="h-full w-full" />, href: "#" },
+    {
+      title: "Search",
+      icon: <MagnifyingGlass className="h-full w-full" />,
+      href: "#",
+    },
     {
       title: "Settings",
-      icon: <Settings className="h-full w-full" />,
+      icon: <Gear className="h-full w-full" />,
       href: "#",
     },
   ]

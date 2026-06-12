@@ -7,12 +7,7 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import {
-  BrainIcon,
-  ChevronDownIcon,
-  DotIcon,
-  type LucideIcon,
-} from "lucide-react";
+import { Brain, CaretDown, Circle, type Icon } from "@/lib/icons"
 import type { ComponentProps, ReactNode } from "react";
 import {
   createContext,
@@ -158,14 +153,14 @@ export const ChainOfThoughtHeader = memo(
         type="button"
         {...props}
       >
-        <BrainIcon
+        <Brain
           className="size-4"
           data-slot="chain-of-thought-header-icon"
         />
         <span className="flex-1 text-left">
           {children ?? "Chain of Thought"}
         </span>
-        <ChevronDownIcon
+        <CaretDown
           className="size-4 transition-transform group-data-[panel-open]:rotate-180"
           data-slot="chain-of-thought-header-chevron"
         />
@@ -192,7 +187,7 @@ const chainOfThoughtStepVariants = cva(
 
 export type ChainOfThoughtStepProps = ComponentProps<"div"> &
   VariantProps<typeof chainOfThoughtStepVariants> & {
-    icon?: LucideIcon;
+    icon?: Icon;
     label: ReactNode;
     description?: ReactNode;
   };
@@ -200,7 +195,7 @@ export type ChainOfThoughtStepProps = ComponentProps<"div"> &
 export const ChainOfThoughtStep = memo(
   ({
     className,
-    icon: Icon = DotIcon,
+    icon: Icon = Circle,
     label,
     description,
     status = "complete",

@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Download, Home, Share2 } from "lucide-react"
+import { Check, DownloadSimple, House, ShareNetwork } from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -17,7 +17,7 @@ export default function Example() {
           {
             id: "home",
             label: "Home",
-            icon: Home,
+            icon: House,
             href: "#",
             active: true,
             core: true,
@@ -35,14 +35,14 @@ export default function Example() {
           {
             id: "share",
             label: "Share",
-            icon: Share2,
+            icon: ShareNetwork,
             group: "secondary",
             onSelect: () => {},
           },
           {
             id: "export",
             label: "Export",
-            icon: Download,
+            icon: DownloadSimple,
             group: "secondary",
             onSelect: () => {},
           },

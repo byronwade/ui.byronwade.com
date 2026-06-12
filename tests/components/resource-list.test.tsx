@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, it, expect, vi } from "vitest"
 import { axe } from "vitest-axe"
-import { Tag, Trash2 } from "lucide-react"
+import { Tag, Trash } from "@/lib/icons"
 
 import { ResourceList, ResourceItem } from "@/components/resource-list"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -358,7 +358,7 @@ describe("ResourceList – shortcut actions", () => {
           onClick={onRow}
           actions={
             <Button aria-label="Delete" onClick={onDelete}>
-              <Trash2 />
+              <Trash />
             </Button>
           }
         />
@@ -575,7 +575,7 @@ describe("ResourceList – bulk actions", () => {
     {
       id: "delete",
       label: "Delete",
-      icon: Trash2,
+      icon: Trash,
       tone: "destructive" as const,
     },
   ]
@@ -749,7 +749,7 @@ describe("ResourceList – accessibility", () => {
           onClick={() => {}}
           actions={
             <Button aria-label="Delete">
-              <Trash2 />
+              <Trash />
             </Button>
           }
         />

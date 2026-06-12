@@ -1,16 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  ThumbsUp,
-  ThumbsDown,
-  Share2,
-  Bookmark,
-  BookmarkCheck,
-  MoreHorizontal,
-  Scissors,
-  Sparkles,
-} from "lucide-react"
+import { Bookmark, DotsThree, Scissors, ShareNetwork, Sparkle, ThumbsDown, ThumbsUp } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { useToggleState, type ToggleState } from "@/lib/toggle-state"
@@ -185,7 +176,7 @@ function EngagementBar({
         onClick={onShare}
         className={pillClass}
       >
-        <Share2 className="size-4" aria-hidden />
+        <ShareNetwork className="size-4" aria-hidden />
         {shareLabel}
       </button>
 
@@ -197,7 +188,7 @@ function EngagementBar({
         className={cn(pillClass, savedOn && "text-brand")}
       >
         {savedOn ? (
-          <BookmarkCheck className="size-4" aria-hidden />
+          <Bookmark className="size-4" aria-hidden />
         ) : (
           <Bookmark className="size-4" aria-hidden />
         )}
@@ -223,7 +214,7 @@ function EngagementBar({
           onClick={onRemix}
           className={pillClass}
         >
-          <Sparkles className="size-4" aria-hidden />
+          <Sparkle className="size-4" aria-hidden />
           {remixLabel}
         </button>
       ) : null}
@@ -248,7 +239,7 @@ function EngagementBar({
             aria-label="More actions"
             className={cn(pillClass, "px-0 w-9 justify-center")}
           >
-            <MoreHorizontal className="size-4" aria-hidden />
+            <DotsThree className="size-4" aria-hidden />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {menuItems.map((item) => (

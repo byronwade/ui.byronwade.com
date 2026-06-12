@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react"
+import { ArrowDown, ArrowUp, ArrowsDownUp } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -46,7 +46,7 @@ function SortIcon({
   active: boolean
   direction: StudioSortDirection
 }) {
-  if (!active) return <ArrowUpDown className="size-3.5 opacity-50" aria-hidden />
+  if (!active) return <ArrowsDownUp className="size-3.5 opacity-50" aria-hidden />
   return direction === "asc" ? (
     <ArrowUp className="size-3.5" aria-hidden />
   ) : (

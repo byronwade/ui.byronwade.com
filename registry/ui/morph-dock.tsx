@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, ChevronRight, ChevronsLeftRight, Info, X } from "lucide-react"
+import { ArrowsHorizontal, CaretRight, Check, Info, X } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { useChromeMorph } from "@/lib/use-chrome-morph"
@@ -707,7 +707,7 @@ export function MorphDock({
               return (
                 <React.Fragment key={`${c.label}-${i}`}>
                   {i > 0 ? (
-                    <ChevronRight
+                    <CaretRight
                       aria-hidden
                       className={cn("size-3.5 shrink-0", t.crumb)}
                     />
@@ -754,7 +754,7 @@ export function MorphDock({
               }}
               className={cn(PILL, t.ring, expanded ? t.active : t.idle)}
             >
-              <ChevronsLeftRight className="size-4 shrink-0" />
+              <ArrowsHorizontal className="size-4 shrink-0" />
               <span className="sr-only">
                 {expanded ? "Show fewer" : "Show all"}
               </span>

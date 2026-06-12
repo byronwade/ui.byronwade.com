@@ -1,19 +1,19 @@
 import {
-  AlignCenterIcon,
-  AlignLeftIcon,
-  AlignRightIcon,
-  BoldIcon,
   Check,
-  CheckCircle2,
-  FileTextIcon,
-  Inbox,
-  ItalicIcon,
+  CheckCircle,
+  FileText,
+  Gear,
+  MagnifyingGlass,
   Plus,
-  SearchIcon,
-  Settings,
-  UnderlineIcon,
+  TextAlignCenter,
+  TextAlignLeft,
+  TextAlignRight,
+  TextB,
+  TextItalic,
+  TextUnderline,
+  Tray,
   X,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import Link from "next/link"
 
@@ -813,17 +813,17 @@ export default function StyleguidePage() {
                 <Specimen name="Toggle" from="@/components/ui/toggle">
                   <div className="flex flex-wrap items-center gap-2">
                     <Toggle variant="outline" aria-label="Bold">
-                      <BoldIcon />
+                      <TextB />
                     </Toggle>
                     <Toggle variant="outline" aria-label="Italic">
-                      <ItalicIcon />
+                      <TextItalic />
                     </Toggle>
                     <Toggle
                       variant="outline"
                       aria-label="Underline"
                       defaultPressed
                     >
-                      <UnderlineIcon />
+                      <TextUnderline />
                     </Toggle>
                   </div>
                 </Specimen>
@@ -834,13 +834,13 @@ export default function StyleguidePage() {
                 >
                   <ToggleGroup defaultValue={["left"]} variant="outline">
                     <ToggleGroupItem value="left" aria-label="Align left">
-                      <AlignLeftIcon />
+                      <TextAlignLeft />
                     </ToggleGroupItem>
                     <ToggleGroupItem value="center" aria-label="Align center">
-                      <AlignCenterIcon />
+                      <TextAlignCenter />
                     </ToggleGroupItem>
                     <ToggleGroupItem value="right" aria-label="Align right">
-                      <AlignRightIcon />
+                      <TextAlignRight />
                     </ToggleGroupItem>
                   </ToggleGroup>
                 </Specimen>
@@ -849,7 +849,7 @@ export default function StyleguidePage() {
                   <div className="max-w-sm space-y-2">
                     <InputGroup>
                       <InputGroupAddon align="inline-start">
-                        <SearchIcon className="size-4" />
+                        <MagnifyingGlass className="size-4" />
                       </InputGroupAddon>
                       <Input
                         placeholder="Search projects…"
@@ -918,7 +918,7 @@ export default function StyleguidePage() {
                 <Specimen name="Alert" from="@/components/ui/alert">
                   <div className="space-y-3">
                     <Alert>
-                      <CheckCircle2 />
+                      <CheckCircle />
                       <AlertTitle>Changes saved</AlertTitle>
                       <AlertDescription>
                         Your workspace settings have been updated.
@@ -1112,7 +1112,7 @@ export default function StyleguidePage() {
                           key={i}
                           className="flex items-center gap-2 text-sm text-muted-foreground"
                         >
-                          <FileTextIcon className="size-4 shrink-0" />
+                          <FileText className="size-4 shrink-0" />
                           <span>
                             Document {String(i + 1).padStart(2, "0")}.pdf
                           </span>
@@ -1245,7 +1245,7 @@ export default function StyleguidePage() {
                   plain
                 >
                   <EmptyState
-                    icon={Inbox}
+                    icon={Tray}
                     title="No activity yet"
                     description="Events for this project will show up here."
                     action={
@@ -1298,7 +1298,7 @@ export default function StyleguidePage() {
                       badge={<StatusPill tone="success">Active</StatusPill>}
                       actions={
                         <Button variant="outline" size="sm">
-                          <Settings />
+                          <Gear />
                           Settings
                         </Button>
                       }

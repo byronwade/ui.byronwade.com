@@ -2,12 +2,12 @@
 
 import * as React from "react"
 import {
-  ThumbsUp,
+  ChatCircle,
+  DotsThreeVertical,
+  ShareNetwork,
   ThumbsDown,
-  MessageCircle,
-  Share2,
-  MoreVertical,
-} from "lucide-react"
+  ThumbsUp,
+} from "@/lib/icons"
 
 import { ActionRail } from "@/components/ui/action-rail"
 
@@ -34,12 +34,12 @@ export default function Example() {
           },
           {
             key: "comments",
-            icon: <MessageCircle />,
+            icon: <ChatCircle />,
             label: "Comments",
             count: 2300,
           },
-          { key: "share", icon: <Share2 />, label: "Share" },
-          { key: "more", icon: <MoreVertical />, label: "More actions" },
+          { key: "share", icon: <ShareNetwork />, label: "Share" },
+          { key: "more", icon: <DotsThreeVertical />, label: "More actions" },
         ]}
       />
     </div>

@@ -15,11 +15,11 @@ import {
 import { Skeleton } from "@/components/ui/skeleton"
 import { useDemoState } from "@/lib/demo-viewport"
 import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  RotateCwIcon,
-  ExternalLinkIcon,
-} from "lucide-react"
+  ArrowClockwise,
+  ArrowLeft,
+  ArrowRight,
+  ArrowSquareOut,
+} from "@/lib/icons"
 
 const logs = [
   {
@@ -52,20 +52,20 @@ export default function Example() {
       <WebPreview defaultUrl={previewUrl} className="h-[480px] max-w-2xl">
         <WebPreviewNavigation>
           <WebPreviewNavigationButton tooltip="Back" disabled>
-            <ArrowLeftIcon />
+            <ArrowLeft />
           </WebPreviewNavigationButton>
           <WebPreviewNavigationButton tooltip="Forward" disabled>
-            <ArrowRightIcon />
+            <ArrowRight />
           </WebPreviewNavigationButton>
           <WebPreviewNavigationButton tooltip="Reload" disabled={isLoading}>
-            <RotateCwIcon />
+            <ArrowClockwise />
           </WebPreviewNavigationButton>
           <WebPreviewUrl />
           <WebPreviewNavigationButton
             tooltip="Open in new tab"
             disabled={isEmpty || isError}
           >
-            <ExternalLinkIcon />
+            <ArrowSquareOut />
           </WebPreviewNavigationButton>
         </WebPreviewNavigation>
 

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Tag, Archive, Trash2 } from "lucide-react"
+import { Archive, Tag, Trash } from "@/lib/icons"
 
 import { BulkActionBar } from "@/components/ui/bulk-action-bar"
 
@@ -16,7 +16,7 @@ export default function Example() {
       actions={[
         { label: "Add tags", icon: Tag, promoted: true },
         { label: "Archive", icon: Archive },
-        { label: "Delete", icon: Trash2, tone: "destructive" },
+        { label: "Delete", icon: Trash, tone: "destructive" },
       ]}
     />
   )

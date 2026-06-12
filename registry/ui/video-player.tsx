@@ -48,7 +48,7 @@ import {
   MediaSettingsMenuItem,
 } from "media-chrome/react/menu"
 import { cva, type VariantProps } from "class-variance-authority"
-import { RectangleHorizontal, SkipForward } from "lucide-react"
+import { Rectangle, SkipForward } from "@/lib/icons"
 import * as React from "react"
 import type { ComponentProps, CSSProperties } from "react"
 
@@ -461,7 +461,7 @@ export const VideoPlayerTheaterButton = ({
     )}
     {...props}
   >
-    <RectangleHorizontal className="size-5" aria-hidden />
+    <Rectangle className="size-5" aria-hidden />
   </button>
 )
 

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Search } from "lucide-react"
+import { MagnifyingGlass } from "@/lib/icons"
 
 import type { ComponentDoc, Variant } from "@/content/components"
 import type { DemoSurface } from "@/content/demo-contexts"
@@ -85,7 +85,7 @@ export function VariantBrowser({
       {/* ── Filter bar ──────────────────────────────────────────────── */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="relative w-full sm:max-w-xs">
-          <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <MagnifyingGlass className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="search"
             value={query}

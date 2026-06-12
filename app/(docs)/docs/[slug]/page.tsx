@@ -3,7 +3,7 @@ import { join } from "node:path"
 import { Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "@/lib/icons"
 
 import { bySlug, components, getVariants } from "@/content/components"
 import { getSurface, surfaceLabel } from "@/content/catalog-surfaces"

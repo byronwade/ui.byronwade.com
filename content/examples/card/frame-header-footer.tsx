@@ -1,4 +1,4 @@
-import { CircleAlertIcon } from "lucide-react"
+import { WarningCircle } from "@/lib/icons"
 import {
   Card,
   CardPanel,
@@ -63,7 +63,7 @@ export default function Example() {
         </Card>
         <CardFrameFooter>
           <div className="flex gap-1.5 text-xs text-muted-foreground">
-            <CircleAlertIcon className="size-3 h-lh shrink-0" />
+            <WarningCircle className="size-3 h-lh shrink-0" />
             <p>This will take a few seconds to complete.</p>
           </div>
         </CardFrameFooter>

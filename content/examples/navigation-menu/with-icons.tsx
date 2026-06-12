@@ -1,4 +1,4 @@
-import { BookOpen, LifeBuoy, Newspaper, Rocket } from "lucide-react"
+import { BookOpen, Lifebuoy, Newspaper, Rocket } from "@/lib/icons"
 
 import {
   NavigationMenu,
@@ -37,7 +37,7 @@ export default function Example() {
               </li>
               <li>
                 <NavigationMenuLink href="#">
-                  <LifeBuoy />
+                  <Lifebuoy />
                   Support
                 </NavigationMenuLink>
               </li>

@@ -1,4 +1,4 @@
-import { Activity, Clock, Users } from "lucide-react"
+import { Clock, Pulse, Users } from "@/lib/icons"
 
 import { Metric } from "@/components/ui/metric"
 
@@ -13,7 +13,7 @@ export default function Example() {
       />
       <Metric
         variant="card"
-        icon={Activity}
+        icon={Pulse}
         label="Requests"
         value="2.4M"
         hint="rolling 30 days"

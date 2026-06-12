@@ -26,7 +26,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { CalendarDays, Tag } from "lucide-react";
+import { CalendarDots, Tag } from "@/lib/icons"
 
 // ---------------------------------------------------------------------------
 // 1. Renders without crashing — default usage
@@ -154,9 +154,9 @@ describe("FilterPill — icon prop", () => {
     expect(btn.querySelectorAll("svg")).toHaveLength(1);
   });
 
-  it("renders with a Lucide icon component as icon prop", () => {
+  it("renders with a Phosphor icon component as icon prop", () => {
     const { container } = render(
-      <FilterPill icon={<CalendarDays className="size-3.5 text-muted-foreground" data-testid="cal-icon" />}>
+      <FilterPill icon={<CalendarDots className="size-3.5 text-muted-foreground" data-testid="cal-icon" />}>
         Date range
       </FilterPill>
     );
@@ -232,7 +232,7 @@ describe("FilterPill — disabled state", () => {
 
   it("disabled with icon still renders correctly", () => {
     render(
-      <FilterPill disabled icon={<CalendarDays data-testid="icon" />}>
+      <FilterPill disabled icon={<CalendarDots data-testid="icon" />}>
         Date range
       </FilterPill>
     );
@@ -558,7 +558,7 @@ describe("FilterPill — DropdownMenu trigger integration", () => {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <FilterPill icon={<CalendarDays data-testid="cal-icon" />}>
+            <FilterPill icon={<CalendarDots data-testid="cal-icon" />}>
               {value}
             </FilterPill>
           }
@@ -698,7 +698,7 @@ describe("FilterPill — accessibility (axe)", () => {
 
   it("has no axe violations (with icon and label)", async () => {
     const { container } = render(
-      <FilterPill icon={<CalendarDays />}>Date range</FilterPill>
+      <FilterPill icon={<CalendarDots />}>Date range</FilterPill>
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();

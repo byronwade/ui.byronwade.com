@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { axe } from "vitest-axe";
-import { BoldIcon } from "lucide-react";
+import { TextB } from "@/lib/icons"
 import { Toggle, toggleVariants } from "@/components/ui/toggle";
 
 describe("Toggle – rendering", () => {
@@ -28,7 +28,7 @@ describe("Toggle – rendering", () => {
   it("renders an icon child", () => {
     render(
       <Toggle aria-label="Bold">
-        <BoldIcon data-testid="icon" />
+        <TextB data-testid="icon" />
       </Toggle>
     );
     expect(screen.getByTestId("icon")).toBeInTheDocument();

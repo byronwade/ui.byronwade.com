@@ -10,7 +10,7 @@
  */
 "use client"
 
-import { type LucideProps, StarIcon } from "lucide-react"
+import { Star, type IconProps } from "@/lib/icons"
 import type { KeyboardEvent, MouseEvent, ReactElement, ReactNode } from "react"
 import {
   Children,
@@ -54,16 +54,16 @@ const useRating = () => {
   return context
 }
 
-export type RatingButtonProps = LucideProps & {
+export type RatingButtonProps = IconProps & {
   index?: number
-  icon?: ReactElement<LucideProps>
+  icon?: ReactElement<IconProps>
 }
 
 export const RatingButton = ({
   index: providedIndex,
   size = 20,
   className,
-  icon = <StarIcon />,
+  icon = <Star />,
 }: RatingButtonProps) => {
   const {
     value,
@@ -349,7 +349,7 @@ export const RatingBadge = ({
       className,
     )}
   >
-    <StarIcon aria-hidden="true" className="size-3 fill-current text-brand" />
+    <Star aria-hidden="true" className="size-3 fill-current text-brand" />
     <span>{value.toFixed(1)}</span>
     {max ? <span className="text-muted-foreground">/ {max}</span> : null}
     {count !== undefined ? (

@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "lucide-react"
+import { CaretDown } from "@/lib/icons"
 import {
   Collapsible,
   CollapsibleContent,
@@ -13,7 +13,7 @@ export default function Example() {
         render={<Button variant="outline" className="w-full justify-between" />}
       >
         What&apos;s included
-        <ChevronDownIcon className="size-4 transition-transform group-aria-expanded/button:rotate-180" />
+        <CaretDown className="size-4 transition-transform group-aria-expanded/button:rotate-180" />
       </CollapsibleTrigger>
       <CollapsibleContent className="rounded-lg edge px-4 py-3 text-sm text-muted-foreground">
         Unlimited projects, priority support, and advanced analytics, managed

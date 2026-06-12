@@ -1,7 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { AlertCircle, Inbox } from "lucide-react"
+import { Tray, WarningCircle } from "@/lib/icons"
 
 import { ChipBar } from "@/components/ui/chip-bar"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -42,7 +42,7 @@ export default function Example() {
     inner = (
       <div role="status" className="flex h-8 items-center px-1">
         <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-secondary px-3 text-sm text-muted-foreground">
-          <Inbox className="size-3.5" aria-hidden />
+          <Tray className="size-3.5" aria-hidden />
           No categories
         </span>
       </div>
@@ -51,7 +51,7 @@ export default function Example() {
     inner = (
       <div role="alert" className="flex h-8 items-center px-1">
         <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-destructive/10 px-3 text-sm text-destructive">
-          <AlertCircle className="size-3.5" aria-hidden />
+          <WarningCircle className="size-3.5" aria-hidden />
           Couldn’t load categories
         </span>
       </div>

@@ -2,22 +2,22 @@
 
 import * as React from "react"
 import {
-  Code2,
   CheckCircle,
-  CircleOff,
+  CircleNotch,
   Cloud,
+  Code,
+  DeviceMobile,
+  DeviceTablet,
   Eye,
-  Inbox,
-  Layers,
-  LoaderCircle,
   Monitor,
-  PanelTop,
-  Smartphone,
+  ProhibitInset,
   Square,
-  Tablet,
+  SquareHalf,
+  Stack,
+  Tray,
   XCircle,
-  type LucideIcon,
-} from "lucide-react"
+  type Icon,
+} from "@/lib/icons"
 import { useSearchParams } from "next/navigation"
 
 import {
@@ -49,17 +49,17 @@ export type DemoToolbarDisabledControls = {
 const VIEW_OPTIONS: {
   label: string
   value: DemoView
-  icon: LucideIcon
+  icon: Icon
   tooltip: string
 }[] = [
   { label: "Preview", value: "preview", icon: Eye, tooltip: "Show preview" },
-  { label: "Code", value: "code", icon: Code2, tooltip: "Show code" },
+  { label: "Code", value: "code", icon: Code, tooltip: "Show code" },
 ]
 
 const VIEWPORT_OPTIONS: {
   label: string
   value: DemoViewport
-  icon: LucideIcon
+  icon: Icon
   tooltip: string
 }[] = [
   {
@@ -71,13 +71,13 @@ const VIEWPORT_OPTIONS: {
   {
     label: "Tablet",
     value: "tablet",
-    icon: Tablet,
+    icon: DeviceTablet,
     tooltip: "Tablet viewport",
   },
   {
     label: "Mobile",
     value: "mobile",
-    icon: Smartphone,
+    icon: DeviceMobile,
     tooltip: "Mobile viewport",
   },
 ]
@@ -95,25 +95,30 @@ const DENSITY_OPTIONS: {
 const FRAME_OPTIONS: {
   label: string
   value: DemoFrame
-  icon: LucideIcon
+  icon: Icon
   tooltip: string
 }[] = [
   { label: "Flat", value: "default", icon: Square, tooltip: "Flat frame" },
-  { label: "Inset", value: "inset", icon: PanelTop, tooltip: "Inset frame" },
+  { label: "Inset", value: "inset", icon: SquareHalf, tooltip: "Inset frame" },
 ]
 
 const DEPTH_OPTIONS: {
   label: string
   value: DemoDepth
-  icon: LucideIcon
+  icon: Icon
   tooltip: string
 }[] = [
-  { label: "No edge", value: "none", icon: CircleOff, tooltip: "Flat plane" },
+  {
+    label: "No edge",
+    value: "none",
+    icon: ProhibitInset,
+    tooltip: "Flat plane",
+  },
   { label: "Soft edge", value: "soft", icon: Cloud, tooltip: "Soft edge" },
   {
     label: "Raised edge",
     value: "raised",
-    icon: Layers,
+    icon: Stack,
     tooltip: "Raised edge",
   },
 ]
@@ -121,25 +126,25 @@ const DEPTH_OPTIONS: {
 const STATE_OPTIONS: {
   label: string
   value: DemoState
-  icon: LucideIcon
+  icon: Icon
   tooltip: string
 }[] = [
   {
     label: "Default state",
     value: "default",
-    icon: CircleOff,
+    icon: ProhibitInset,
     tooltip: "Default state",
   },
   {
     label: "Loading",
     value: "loading",
-    icon: LoaderCircle,
+    icon: CircleNotch,
     tooltip: "Loading state",
   },
   {
     label: "Empty",
     value: "empty",
-    icon: Inbox,
+    icon: Tray,
     tooltip: "Empty state",
   },
   {

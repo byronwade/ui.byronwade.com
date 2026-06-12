@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ChevronDown, Heart, Pin, ThumbsDown, ThumbsUp } from "lucide-react"
+import { CaretDown, Heart, PushPin, ThumbsDown, ThumbsUp } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -106,7 +106,7 @@ function Comment({
             data-slot="comment-pinned"
             className="inline-flex w-fit items-center gap-1 text-xs text-muted-foreground"
           >
-            <Pin className="size-3" aria-hidden />
+            <PushPin className="size-3" aria-hidden />
             Pinned
           </span>
         ) : null}
@@ -195,7 +195,7 @@ function Comment({
               onClick={() => setRepliesOpen((open) => !open)}
               className="inline-flex w-fit items-center gap-1.5 rounded-full px-2 py-1 text-xs font-medium text-brand transition-colors hover:bg-brand/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
             >
-              <ChevronDown
+              <CaretDown
                 className={cn(
                   "size-4 transition-transform",
                   repliesOpen && "rotate-180",

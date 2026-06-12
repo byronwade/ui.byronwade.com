@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { CheckCircle2, Clock, Loader2, TriangleAlert } from "lucide-react"
+import { CheckCircle, CircleNotch, Clock, Warning } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -41,28 +41,28 @@ const statusConfig: Record<
     dot: "warning",
     badge: "warning",
     bar: "warning",
-    Icon: Loader2,
+    Icon: CircleNotch,
   },
   processing: {
     label: "Processing",
     dot: "warning",
     badge: "warning",
     bar: "warning",
-    Icon: Loader2,
+    Icon: CircleNotch,
   },
   done: {
     label: "Done",
     dot: "success",
     badge: "success",
     bar: "success",
-    Icon: CheckCircle2,
+    Icon: CheckCircle,
   },
   error: {
     label: "Error",
     dot: "danger",
     badge: "destructive",
     bar: "destructive",
-    Icon: TriangleAlert,
+    Icon: Warning,
   },
 }
 

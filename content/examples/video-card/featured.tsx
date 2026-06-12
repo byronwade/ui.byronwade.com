@@ -1,6 +1,6 @@
 "use client"
 
-import { Share2 } from "lucide-react"
+import { ShareNetwork } from "@/lib/icons"
 
 import { Button } from "@/components/ui/button"
 import { VideoCard } from "@/components/video-card"
@@ -23,7 +23,7 @@ export default function Example() {
         description="A long-form session covering thumbnails, watch pages, Shorts, mini players, and reusable media layouts."
         actions={
           <Button variant="outline" size="sm">
-            <Share2 />
+            <ShareNetwork />
             Share
           </Button>
         }

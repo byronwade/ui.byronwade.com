@@ -6,7 +6,7 @@ import {
   AlertDescription,
   AlertAction,
 } from "@/components/ui/alert"
-import { InfoIcon, TriangleAlertIcon, XCircleIcon } from "lucide-react"
+import { Info, Warning, XCircle } from "@/lib/icons"
 import { useState } from "react"
 
 export default function Example() {
@@ -19,7 +19,7 @@ export default function Example() {
     <div className="flex flex-col gap-4 p-6 max-w-lg">
       {!isDismissed("info") && (
         <Alert>
-          <InfoIcon />
+          <Info />
           <AlertTitle>Read-only mode</AlertTitle>
           <AlertDescription>
             You are viewing a shared snapshot. Changes won&apos;t be saved.
@@ -37,7 +37,7 @@ export default function Example() {
 
       {!isDismissed("warning") && (
         <Alert variant="warning">
-          <TriangleAlertIcon />
+          <Warning />
           <AlertTitle>Unsaved changes</AlertTitle>
           <AlertDescription>
             You have uncommitted edits. Save before leaving this page.
@@ -55,7 +55,7 @@ export default function Example() {
 
       {!isDismissed("error") && (
         <Alert variant="destructive">
-          <XCircleIcon />
+          <XCircle />
           <AlertTitle>Export failed</AlertTitle>
           <AlertDescription>
             The file could not be generated. Try again or contact support.

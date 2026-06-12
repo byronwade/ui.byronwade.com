@@ -9,15 +9,7 @@ import {
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { FileUIPart, SourceDocumentUIPart } from "ai";
-import {
-  FileTextIcon,
-  GlobeIcon,
-  ImageIcon,
-  Music2Icon,
-  PaperclipIcon,
-  VideoIcon,
-  XIcon,
-} from "lucide-react";
+import { FileText, Globe, Image, MusicNotes, Paperclip, VideoCamera, X } from "@/lib/icons"
 import type { ComponentProps, HTMLAttributes, ReactNode } from "react";
 import { createContext, useCallback, useContext, useMemo } from "react";
 
@@ -39,13 +31,13 @@ export type AttachmentMediaCategory =
 
 export type AttachmentVariant = "grid" | "inline" | "list";
 
-const mediaCategoryIcons: Record<AttachmentMediaCategory, typeof ImageIcon> = {
-  audio: Music2Icon,
-  document: FileTextIcon,
-  image: ImageIcon,
-  source: GlobeIcon,
-  unknown: PaperclipIcon,
-  video: VideoIcon,
+const mediaCategoryIcons: Record<AttachmentMediaCategory, typeof Image> = {
+  audio: MusicNotes,
+  document: FileText,
+  image: Image,
+  source: Globe,
+  unknown: Paperclip,
+  video: VideoCamera,
 };
 
 // ============================================================================
@@ -281,7 +273,7 @@ export const AttachmentPreview = ({
 
   const iconSize = variant === "inline" ? "size-3" : "size-4";
 
-  const renderIcon = (Icon: typeof ImageIcon) => (
+  const renderIcon = (Icon: typeof Image) => (
     <Icon className={cn(iconSize, "text-muted-foreground")} />
   );
 
@@ -410,7 +402,7 @@ export const AttachmentRemove = ({
       variant="ghost"
       {...props}
     >
-      {children ?? <XIcon />}
+      {children ?? <X />}
       <span className="sr-only">{label}</span>
     </Button>
   );

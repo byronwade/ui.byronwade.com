@@ -6,7 +6,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { SlashIcon } from "lucide-react"
+import { LineSegment } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -18,13 +18,13 @@ export default function Example() {
             <BreadcrumbLink href="/">Home</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
-            <SlashIcon />
+            <LineSegment />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
             <BreadcrumbLink href="#">Blog</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
-            <SlashIcon />
+            <LineSegment />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
             <BreadcrumbPage>My First Post</BreadcrumbPage>

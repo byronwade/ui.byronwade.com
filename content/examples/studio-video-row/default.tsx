@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Copy, Pencil, Trash2 } from "lucide-react"
+import { Copy, PencilSimple, Trash } from "@/lib/icons"
 
 import { StudioVideoRow } from "@/components/studio-video-row"
 import { StudioVideoTable } from "@/components/studio-video-table"
@@ -43,9 +43,9 @@ function StudioVideoRowSkeleton() {
 }
 
 const menuItems = [
-  { key: "edit", label: "Edit", icon: <Pencil className="size-4" /> },
+  { key: "edit", label: "Edit", icon: <PencilSimple className="size-4" /> },
   { key: "duplicate", label: "Duplicate", icon: <Copy className="size-4" /> },
-  { key: "delete", label: "Delete", icon: <Trash2 className="size-4" /> },
+  { key: "delete", label: "Delete", icon: <Trash className="size-4" /> },
 ]
 
 export default function Example() {

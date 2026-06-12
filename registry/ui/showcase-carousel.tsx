@@ -3,14 +3,14 @@
  * detail modal. Adapted for byronwade/ui from Aceternity UI (original concept &
  * design © Aceternity UI — https://ui.aceternity.com), reskinned to the
  * byronwade/ui design system: token surfaces with the `edge` hairline + depth,
- * the radius scale, mono metadata eyebrows over editorial titles, lucide icons,
+ * the radius scale, mono metadata eyebrows over editorial titles, Phosphor icons,
  * data-slot hooks, and focus-visible rings on every control.
  */
 "use client"
 
 import * as React from "react"
 import { useEffect, useRef, useState, createContext, useContext } from "react"
-import { ArrowLeft, ArrowRight, X } from "lucide-react"
+import { ArrowLeft, ArrowRight, X } from "@/lib/icons"
 import { AnimatePresence, motion } from "motion/react"
 
 import { cn } from "@/lib/utils"

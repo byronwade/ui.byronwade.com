@@ -55,6 +55,16 @@ agent following that rule would produce identical-looking code.** That means:
   full-bleed `text-sm` for paragraphs users read. `marketing-layout` `article` and `docs-marketing`
   variants bake in `reading-prose` / `reading-ui`. Full rationale: `/docs/readability`.
 
+- **Icons are Phosphor, duotone by default, from one barrel.** Every icon resolves to
+  `@/lib/icons` — never import `lucide-react`, `@phosphor-icons/react`, `react-icons`, or any other
+  icon package directly, and never hand-roll an icon `<svg>`. The barrel re-exports Phosphor under its
+  exact catalog names (`CaretDown`, `MagnifyingGlass`, `Gear`, `Trash`, `DotsThree`, `House`,
+  `Envelope`, `Warning`, …) wrapped so the **duotone** weight is the default — it owns the icon weight
+  the way `--brand` owns the accent. Pass `weight="bold" | "fill" | "regular" | "thin" | "light"` at a
+  call site only when a state needs it; don't set `weight="duotone"` (it's already the default). Color
+  comes from tokens via `currentColor` (`text-brand`, `text-muted-foreground`), size from the scale
+  (`size-4`, `size-5`). Type icon props with `Icon`/`IconProps` from `@/lib/icons`. Full reference:
+  `/docs/icons`.
 - **Base UI + CVA + `data-slot`.** Primitives build on `@base-ui/react`. Variants/sizes live in a
   `cva(...)` block (see `registry/ui/button.tsx`), each part carries a `data-slot` attribute, and the
   radius scale (`rounded-sm`…`rounded-4xl`, all from `--radius`) is used instead of pixel radii.

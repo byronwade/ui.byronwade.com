@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Bell, Pause, Play, Plus } from "lucide-react"
+import { Bell, Pause, Play, Plus } from "@/lib/icons"
 
 import { ChartToolbar } from "@/components/chart-toolbar"
 import { Button } from "@/components/ui/button"

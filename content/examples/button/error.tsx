@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { AlertCircle, RefreshCw } from "lucide-react"
+import { ArrowsClockwise, WarningCircle } from "@/lib/icons"
 
 export default function Example() {
   const [hasError, setHasError] = useState(true)
@@ -12,15 +12,15 @@ export default function Example() {
       {/* aria-invalid triggers destructive ring styling */}
       <div className="flex flex-wrap items-center gap-3">
         <Button aria-invalid="true">
-          <AlertCircle />
+          <WarningCircle />
           Invalid action
         </Button>
         <Button variant="outline" aria-invalid="true">
-          <AlertCircle />
+          <WarningCircle />
           Invalid outline
         </Button>
         <Button variant="secondary" aria-invalid="true">
-          <AlertCircle />
+          <WarningCircle />
           Invalid secondary
         </Button>
       </div>
@@ -32,7 +32,7 @@ export default function Example() {
           aria-invalid={hasError || undefined}
           onClick={() => setHasError((v) => !v)}
         >
-          <RefreshCw />
+          <ArrowsClockwise />
           {hasError ? "Retry (error state)" : "Retry"}
         </Button>
         <span className="text-muted-foreground text-sm">

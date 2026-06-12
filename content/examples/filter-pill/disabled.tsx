@@ -1,5 +1,5 @@
 import { FilterPill } from "@/components/ui/filter-pill"
-import { CalendarDays } from "lucide-react"
+import { CalendarDots } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -11,7 +11,7 @@ export default function Example() {
         <div className="flex flex-wrap gap-2">
           <FilterPill>Status</FilterPill>
           <FilterPill
-            icon={<CalendarDays className="size-3.5 text-muted-foreground" />}
+            icon={<CalendarDots className="size-3.5 text-muted-foreground" />}
           >
             Date range
           </FilterPill>
@@ -28,7 +28,7 @@ export default function Example() {
           <FilterPill
             disabled
             className="cursor-not-allowed opacity-50"
-            icon={<CalendarDays className="size-3.5 text-muted-foreground" />}
+            icon={<CalendarDots className="size-3.5 text-muted-foreground" />}
           >
             Date range
           </FilterPill>

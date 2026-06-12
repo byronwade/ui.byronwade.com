@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, Inbox, BarChart3, Settings } from "lucide-react"
+import { ChartBar, Gear, House, Tray } from "@/lib/icons"
 import { MorphSidebar } from "@/components/ui/morph-sidebar"
 
 export default function Example() {
@@ -12,10 +12,10 @@ export default function Example() {
       <MorphSidebar
         brand="UI"
         items={[
-          { id: "home", label: "Home", icon: Home, active: true },
-          { id: "inbox", label: "Inbox", icon: Inbox },
-          { id: "reports", label: "Reports", icon: BarChart3 },
-          { id: "settings", label: "Settings", icon: Settings },
+          { id: "home", label: "Home", icon: House, active: true },
+          { id: "inbox", label: "Inbox", icon: Tray },
+          { id: "reports", label: "Reports", icon: ChartBar },
+          { id: "settings", label: "Settings", icon: Gear },
         ]}
       />
       <div className="min-w-0 flex-1 space-y-3 overflow-auto p-5">

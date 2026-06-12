@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { RotateCcwIcon } from "lucide-react"
+import { ArrowCounterClockwise } from "@/lib/icons"
 
 import {
   Checkpoint,
@@ -25,7 +25,7 @@ export default function Example() {
             tooltip="Restore conversation to this checkpoint"
             onClick={() => setRestoredAt(new Date().toLocaleTimeString())}
           >
-            <RotateCcwIcon className="size-3.5" />
+            <ArrowCounterClockwise className="size-3.5" />
             <span className="font-mono text-xs">Checkpoint #3</span>
           </CheckpointTrigger>
         </Checkpoint>

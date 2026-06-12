@@ -1,6 +1,6 @@
 "use client"
 
-import { Keyboard, MousePointer } from "lucide-react"
+import { Cursor, Keyboard } from "@/lib/icons"
 
 import {
   Tooltip,
@@ -47,11 +47,11 @@ export default function Example() {
         {/* Tooltip with icon inside content */}
         <Tooltip>
           <TooltipTrigger render={<Button variant="outline" />}>
-            <MousePointer className="mr-1.5 size-4" />
+            <Cursor className="mr-1.5 size-4" />
             Interactive
           </TooltipTrigger>
           <TooltipContent className="flex items-center gap-1.5">
-            <MousePointer className="size-3.5 shrink-0" />
+            <Cursor className="size-3.5 shrink-0" />
             Click to open the context menu
           </TooltipContent>
         </Tooltip>

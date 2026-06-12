@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
-import { CalendarDays, Tag } from "lucide-react"
+import { CalendarDots, Tag } from "@/lib/icons"
 
 const DATE_OPTIONS = [
   "Today",
@@ -38,7 +38,7 @@ export default function Example() {
         <DropdownMenuTrigger
           render={
             <FilterPill
-              icon={<CalendarDays className="size-3.5 text-muted-foreground" />}
+              icon={<CalendarDots className="size-3.5 text-muted-foreground" />}
             >
               {dateRange}
             </FilterPill>

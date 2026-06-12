@@ -9,7 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronDownIcon, PaperclipIcon } from "lucide-react";
+import { CaretDown, Paperclip } from "@/lib/icons"
 import type { ComponentProps } from "react";
 
 export type QueueMessagePart = {
@@ -213,7 +213,7 @@ export const QueueItemFile = ({
     )}
     {...props}
   >
-    <PaperclipIcon className="size-3" data-slot="queue-item-file-icon" />
+    <Paperclip className="size-3" data-slot="queue-item-file-icon" />
     <span className="max-w-24 truncate">{children}</span>
   </span>
 );
@@ -293,7 +293,7 @@ export const QueueSectionLabel = ({
     className={cn("flex items-center gap-2", className)}
     {...props}
   >
-    <ChevronDownIcon
+    <CaretDown
       className="size-4 -rotate-90 transition-transform group-data-[panel-open]:rotate-0"
       data-slot="queue-section-label-chevron"
     />

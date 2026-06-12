@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Loader2, Send, Upload } from "lucide-react"
+import { CircleNotch, PaperPlaneTilt, UploadSimple } from "@/lib/icons"
 
 export default function Example() {
   const [saving, setSaving] = useState(false)
@@ -25,12 +25,12 @@ export default function Example() {
         <Button onClick={handleSave} disabled={saving}>
           {saving ? (
             <>
-              <Loader2 className="animate-spin" />
+              <CircleNotch className="animate-spin" />
               Saving…
             </>
           ) : (
             <>
-              <Send />
+              <PaperPlaneTilt />
               Save
             </>
           )}
@@ -39,12 +39,12 @@ export default function Example() {
         <Button variant="outline" onClick={handleUpload} disabled={uploading}>
           {uploading ? (
             <>
-              <Loader2 className="animate-spin" />
+              <CircleNotch className="animate-spin" />
               Uploading…
             </>
           ) : (
             <>
-              <Upload />
+              <UploadSimple />
               Upload file
             </>
           )}
@@ -54,15 +54,15 @@ export default function Example() {
       {/* Always-loading states (for static demo) */}
       <div className="flex flex-wrap items-center gap-3">
         <Button disabled>
-          <Loader2 className="animate-spin" />
+          <CircleNotch className="animate-spin" />
           Processing
         </Button>
         <Button variant="secondary" disabled>
-          <Loader2 className="animate-spin" />
+          <CircleNotch className="animate-spin" />
           Loading
         </Button>
         <Button size="icon" variant="outline" aria-label="Loading" disabled>
-          <Loader2 className="animate-spin" />
+          <CircleNotch className="animate-spin" />
         </Button>
       </div>
 

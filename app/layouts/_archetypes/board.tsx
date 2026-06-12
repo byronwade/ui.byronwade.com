@@ -4,13 +4,13 @@
 // uses: Badge, GradientAvatar, StatusDot, Button, InputGroup, FilterPill, ScrollArea
 import * as React from "react"
 import {
-  ChevronDown,
-  Filter,
-  MessageSquare,
+  CaretDown,
+  Chat,
+  Funnel,
+  MagnifyingGlass,
   Paperclip,
   Plus,
-  Search,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -196,13 +196,13 @@ export function BoardArchetype() {
             A
           </span>
           Atlas redesign
-          <ChevronDown className="size-4 text-muted-foreground" />
+          <CaretDown className="size-4 text-muted-foreground" />
         </button>
 
         <div className="hidden w-full max-w-xs sm:block">
           <InputGroup>
             <InputGroupAddon>
-              <Search />
+              <MagnifyingGlass />
             </InputGroupAddon>
             <InputGroupInput placeholder="Search issues…" />
           </InputGroup>
@@ -232,7 +232,7 @@ export function BoardArchetype() {
           <Badge variant="secondary">10 issues</Badge>
         </div>
         <div className="flex items-center gap-2">
-          <FilterPill icon={<Filter className="size-3.5" />}>
+          <FilterPill icon={<Funnel className="size-3.5" />}>
             Assignee
           </FilterPill>
           <FilterPill>Label</FilterPill>
@@ -299,7 +299,7 @@ export function BoardArchetype() {
                       <div className="flex items-center gap-2.5 text-muted-foreground">
                         {card.comments > 0 && (
                           <span className="flex items-center gap-1 text-[11px]">
-                            <MessageSquare className="size-3.5" />
+                            <Chat className="size-3.5" />
                             {card.comments}
                           </span>
                         )}

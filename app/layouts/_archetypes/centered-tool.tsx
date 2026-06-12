@@ -5,7 +5,7 @@
 // lines, glow, a gradient wordmark, and a floating glass testimonial) frames the one
 // decision; the focal form floats on a calm right column with designed states. The
 // brand panel collapses on mobile so the single task always leads.
-import { ArrowRight, Command, KeyRound, Lock, Mail } from "lucide-react"
+import { ArrowRight, Command, Envelope, Key, Lock } from "@/lib/icons"
 
 import { CenteredFocal } from "@/components/centered-focal"
 import { Button } from "@/components/ui/button"
@@ -95,7 +95,7 @@ export function CenteredToolArchetype() {
         <div className="mt-6 space-y-3 text-left">
           <InputGroup>
             <InputGroupAddon>
-              <Mail />
+              <Envelope />
             </InputGroupAddon>
             <InputGroupInput type="email" placeholder="you@company.com" />
           </InputGroup>
@@ -117,7 +117,7 @@ export function CenteredToolArchetype() {
             Continue with SSO
           </Button>
           <Button variant="outline" className="w-full">
-            <KeyRound data-icon="inline-start" />
+            <Key data-icon="inline-start" />
             Continue with a passkey
           </Button>
         </div>

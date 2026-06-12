@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
-import { ArrowRight, Box, Network, X } from "lucide-react"
+import { ArrowRight, Cube, Graph, X } from "@/lib/icons"
 import { Bar, BarChart, CartesianGrid, Line, XAxis, YAxis } from "recharts"
 
 import { cn } from "@/lib/utils"
@@ -190,7 +190,7 @@ function ServiceWorkloadRow({ workload }: { workload: ServiceWorkload }) {
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5 text-[10px] tracking-wide text-muted-foreground uppercase">
-            <Box size={11} />
+            <Cube size={11} />
             <span>{workload.workloadKind}</span>
           </div>
           <p className="mt-0.5 truncate text-xs font-medium text-foreground">
@@ -238,7 +238,7 @@ function ServiceInfraEmptyState() {
   return (
     <div className="space-y-3 rounded-md border border-dashed bg-muted/20 p-4">
       <div className="flex items-center gap-2">
-        <Box size={14} className="text-muted-foreground/50" />
+        <Cube size={14} className="text-muted-foreground/50" />
         <p className="text-xs font-medium text-foreground">
           No Kubernetes workloads found
         </p>
@@ -339,12 +339,12 @@ export function ServiceDetailPanel({
       <Tabs defaultValue="service" className="flex min-h-0 flex-1 flex-col">
         <TabsList className="shrink-0 px-4 pt-2">
           <TabsTrigger value="service">
-            <Network size={12} />
+            <Graph size={12} />
             Service
           </TabsTrigger>
           {showInfraTab && (
             <TabsTrigger value="infrastructure">
-              <Box size={12} />
+              <Cube size={12} />
               Infrastructure
               {serviceWorkloads.length > 0 && (
                 <span className="ml-1 font-mono text-[9px] text-muted-foreground/70 tabular-nums">

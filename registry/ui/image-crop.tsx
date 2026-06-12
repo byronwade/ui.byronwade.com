@@ -8,7 +8,7 @@
  */
 "use client"
 
-import { CropIcon, RotateCcwIcon } from "lucide-react"
+import { ArrowCounterClockwise, Crop } from "@/lib/icons"
 import {
   cloneElement,
   type ComponentProps,
@@ -320,7 +320,7 @@ export const ImageCropApply = ({
     asChild,
     children,
     handleClick,
-    <CropIcon className="size-4" />,
+    <Crop className="size-4" />,
     "image-crop-apply",
     "Apply crop",
     props,
@@ -346,7 +346,7 @@ export const ImageCropReset = ({
     asChild,
     children,
     handleClick,
-    <RotateCcwIcon className="size-4" />,
+    <ArrowCounterClockwise className="size-4" />,
     "image-crop-reset",
     "Reset crop",
     props,

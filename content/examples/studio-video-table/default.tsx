@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Copy, Pencil, Trash2 } from "lucide-react"
+import { Copy, PencilSimple, Trash } from "@/lib/icons"
 
 import { StudioVideoRow } from "@/components/studio-video-row"
 import {
@@ -26,7 +26,11 @@ export default function Example() {
           comments={842}
           likes={9600}
           menuItems={[
-            { key: "edit", label: "Edit", icon: <Pencil className="size-4" /> },
+            {
+              key: "edit",
+              label: "Edit",
+              icon: <PencilSimple className="size-4" />,
+            },
             {
               key: "duplicate",
               label: "Duplicate",
@@ -35,7 +39,7 @@ export default function Example() {
             {
               key: "delete",
               label: "Delete",
-              icon: <Trash2 className="size-4" />,
+              icon: <Trash className="size-4" />,
             },
           ]}
         />

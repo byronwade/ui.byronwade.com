@@ -1,14 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { Monitor, Smartphone, Tablet } from "lucide-react"
+import { DeviceMobile, DeviceTablet, Monitor } from "@/lib/icons"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 
 const devices = [
   { value: "desktop", label: "Desktop", icon: Monitor },
-  { value: "tablet", label: "Tablet", icon: Tablet },
-  { value: "mobile", label: "Mobile", icon: Smartphone },
+  { value: "tablet", label: "Tablet", icon: DeviceTablet },
+  { value: "mobile", label: "Mobile", icon: DeviceMobile },
 ]
 
 export default function Example() {

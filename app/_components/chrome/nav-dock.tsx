@@ -6,14 +6,14 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useTheme } from "@wrksz/themes/client"
 import {
-  Box,
-  CornerDownLeft,
+  ArrowElbowDownLeft,
+  Cube,
   GitFork,
   Hash,
+  MagnifyingGlass,
   Moon,
-  Search,
   Sun,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import {
   Tooltip,
@@ -417,7 +417,7 @@ export function NavDock() {
       {entry.kind === "Section" ? (
         <Hash className="size-4 shrink-0 opacity-70" />
       ) : (
-        <Box className="size-4 shrink-0 opacity-70" />
+        <Cube className="size-4 shrink-0 opacity-70" />
       )}
       <span className="flex-1 truncate">{entry.label}</span>
       {entry.meta && (
@@ -481,7 +481,10 @@ export function NavDock() {
                     />
                   }
                 >
-                  <Search className="size-4 shrink-0" strokeWidth={2} />
+                  <MagnifyingGlass
+                    className="size-4 shrink-0"
+                    strokeWidth={2}
+                  />
                 </TooltipTrigger>
                 <TooltipContent sideOffset={10}>Search · ⌘K</TooltipContent>
               </Tooltip>
@@ -541,7 +544,7 @@ export function NavDock() {
             >
               {/* Query field */}
               <div className="flex items-center gap-2.5 px-3.5 py-3">
-                <Search className="size-4 shrink-0 text-dock-foreground/70" />
+                <MagnifyingGlass className="size-4 shrink-0 text-dock-foreground/70" />
                 <input
                   ref={inputRef}
                   value={query}
@@ -602,7 +605,7 @@ export function NavDock() {
                 </span>
                 <span className="flex items-center gap-1">
                   <kbd className="flex items-center rounded border border-dock-muted bg-dock-muted px-1 font-mono">
-                    <CornerDownLeft className="size-3" />
+                    <ArrowElbowDownLeft className="size-3" />
                   </kbd>
                   open
                 </span>

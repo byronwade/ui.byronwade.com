@@ -162,7 +162,7 @@ describe("CheckpointIcon — default icon", () => {
     expect(svg.getAttribute("class")).toContain("size-4");
   });
 
-  it("default icon forwards lucide props (e.g. strokeWidth)", () => {
+  it("default icon forwards svg props (e.g. strokeWidth)", () => {
     const { container } = render(<CheckpointIcon strokeWidth={3} />);
     const svg = container.querySelector("svg") as SVGElement;
     expect(svg.getAttribute("stroke-width")).toBe("3");

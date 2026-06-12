@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, Inbox, MessageSquare, Phone, Plus } from "lucide-react"
+import { Chat, House, Phone, Plus, Tray } from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -17,7 +17,7 @@ export default function Example() {
           {
             id: "home",
             label: "Home",
-            icon: Home,
+            icon: House,
             href: "#",
             active: true,
             core: true,
@@ -25,7 +25,7 @@ export default function Example() {
           {
             id: "inbox",
             label: "Inbox",
-            icon: Inbox,
+            icon: Tray,
             href: "#",
             core: true,
             badge: 2,
@@ -36,7 +36,7 @@ export default function Example() {
           {
             id: "text",
             label: "Text",
-            icon: MessageSquare,
+            icon: Chat,
             onSelect: () => {},
           },
           {

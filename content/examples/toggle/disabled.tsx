@@ -1,4 +1,4 @@
-import { BoldIcon, ItalicIcon } from "lucide-react"
+import { TextB, TextItalic } from "@/lib/icons"
 import { Toggle } from "@/components/ui/toggle"
 
 export default function Example() {
@@ -6,10 +6,10 @@ export default function Example() {
     <div className="flex flex-col items-center gap-6 p-8">
       <div className="flex items-center gap-3">
         <Toggle aria-label="Bold" variant="outline" disabled>
-          <BoldIcon />
+          <TextB />
         </Toggle>
         <Toggle aria-label="Italic" variant="outline" defaultPressed disabled>
-          <ItalicIcon />
+          <TextItalic />
         </Toggle>
       </div>
 

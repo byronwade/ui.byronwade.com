@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Inbox } from "lucide-react"
+import { Tray } from "@/lib/icons"
 
 const allItems = [
   {
@@ -79,7 +79,7 @@ export default function Example() {
             <TableRow>
               <TableCell colSpan={5} className="h-40 text-center">
                 <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                  <Inbox className="h-8 w-8 opacity-40" />
+                  <Tray className="h-8 w-8 opacity-40" />
                   <p className="text-sm font-medium">No tasks found</p>
                   <p className="text-xs">Create a task to get started.</p>
                 </div>

@@ -2,13 +2,13 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import {
   ArrowRight,
-  Blocks,
-  Bot,
-  Layers,
+  Robot,
   ShieldCheck,
-  Sparkles,
+  Sparkle,
+  Stack,
+  StackSimple,
   X,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { BLEED } from "@/app/(docs)/_components/docs-prose"
 import { GuidePager } from "@/app/(docs)/_components/guide-pager"
@@ -198,7 +198,7 @@ const AGENT_LOOP: {
   href: string
 }[] = [
   {
-    icon: Bot,
+    icon: Robot,
     title: "Design rules",
     body: "An installable rule file teaches your agent the component catalog, token vocabulary, and editorial constraints before it writes a line.",
     href: "/docs/ai",
@@ -210,7 +210,7 @@ const AGENT_LOOP: {
     href: "/docs/lint",
   },
   {
-    icon: Sparkles,
+    icon: Sparkle,
     title: "MCP server",
     body: "Agents query the live registry, fetch source, and self-check generations before they land in your repo.",
     href: "/docs/mcp",
@@ -507,7 +507,7 @@ export default function PhilosophyPage() {
           </div>
           <div className="rounded-2xl edge bg-background p-6">
             <div className="flex items-center gap-3">
-              <Layers className="size-5 text-brand" />
+              <Stack className="size-5 text-brand" />
               <p className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
                 morph-dock · collapsed → open
               </p>
@@ -567,7 +567,7 @@ export default function PhilosophyPage() {
       {/* ============================ LINEAGE ========================= */}
       <section className={`${BLEED} border-y border-border bg-card py-16`}>
         <div className="mx-auto max-w-3xl text-center">
-          <Blocks className="mx-auto size-6 text-brand" />
+          <StackSimple className="mx-auto size-6 text-brand" />
           <h2 className="mt-4 text-2xl font-normal tracking-tight text-foreground text-balance sm:text-3xl">
             shadcn lineage, byronwade convictions.
           </h2>

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { BarChart3, Home, Inbox, Search, Settings } from "lucide-react"
+import { ChartBar, Gear, House, MagnifyingGlass, Tray } from "@/lib/icons"
 
 import type { MorphDockOrigin } from "@/components/ui/morph-dock"
 import { MorphDock } from "@/components/ui/morph-dock"
@@ -10,17 +10,17 @@ const items = [
   {
     id: "home",
     label: "Home",
-    icon: Home,
+    icon: House,
     href: "#",
     active: true,
     core: true,
   },
-  { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
-  { id: "reports", label: "Reports", icon: BarChart3, href: "#" },
+  { id: "inbox", label: "Inbox", icon: Tray, href: "#", core: true },
+  { id: "reports", label: "Reports", icon: ChartBar, href: "#" },
   {
     id: "settings",
     label: "Settings",
-    icon: Settings,
+    icon: Gear,
     href: "#",
     pinned: true,
   },
@@ -52,7 +52,7 @@ function Row({ origin, align }: { origin: MorphDockOrigin; align: string }) {
         open={open}
         onOpenChange={setOpen}
         origin={origin}
-        action={{ label: "Search", icon: Search }}
+        action={{ label: "Search", icon: MagnifyingGlass }}
         panelWidth={300}
         items={items}
       >

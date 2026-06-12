@@ -8,28 +8,28 @@ import {
   type CSSProperties,
 } from "react"
 import {
-  Activity,
-  BarChart3,
+  ArrowsOut,
   Bell,
   Camera,
+  ChartBar,
   Crosshair,
   Eye,
-  Expand,
-  LayoutList,
+  FloppyDisk,
+  GearSix,
   Lock,
   Magnet,
   Minus as MinusIcon,
   Pause,
-  PenLine as PenLineIcon,
+  PencilSimpleLine as PenLineIcon,
   Play,
   Plus,
+  Pulse,
+  Rows,
   Ruler,
-  Save,
-  Settings2,
   Square as SquareIcon,
-  Type as TypeIcon,
-  Trash2,
-} from "lucide-react"
+  TextT as TypeIcon,
+  Trash,
+} from "@/lib/icons"
 
 import { AlertCreateForm } from "@/components/alert-create-form"
 import { ChartToolbar, type ChartType } from "@/components/chart-toolbar"
@@ -133,16 +133,16 @@ const TRADING_DRAWING_TOOLS: DrawingTool[] = [
   { id: "trendline", label: "Trend line", icon: Ruler },
   { id: "hline", label: "Horizontal line", icon: MinusIcon },
   { id: "rectangle", label: "Rectangle", icon: SquareIcon },
-  { id: "fib", label: "Fibonacci", icon: BarChart3 },
+  { id: "fib", label: "Fibonacci", icon: ChartBar },
   { id: "text", label: "Text note", icon: TypeIcon },
   { id: "brush", label: "Brush", icon: PenLineIcon },
 ]
 
 const RIGHT_PANELS = [
-  { id: "watchlist" as const, label: "Watchlist", icon: LayoutList },
-  { id: "depth" as const, label: "Depth", icon: BarChart3 },
-  { id: "tape" as const, label: "Time & sales", icon: Activity },
-  { id: "indicators" as const, label: "Indicators", icon: Settings2 },
+  { id: "watchlist" as const, label: "Watchlist", icon: Rows },
+  { id: "depth" as const, label: "Depth", icon: ChartBar },
+  { id: "tape" as const, label: "Time & sales", icon: Pulse },
+  { id: "indicators" as const, label: "Indicators", icon: GearSix },
 ] as const
 
 const RANGE_BAR_COUNTS: Record<string, number> = {
@@ -425,7 +425,7 @@ function TradingDeskWorkspace({
                 aria-label="Save chart layout"
                 onClick={() => setPublished((current) => !current)}
               >
-                <Save className="size-3.5" />
+                <FloppyDisk className="size-3.5" />
               </Button>
               <Button
                 type="button"
@@ -445,7 +445,7 @@ function TradingDeskWorkspace({
                 aria-label="Expand chart"
                 onClick={() => setRightPanel(null)}
               >
-                <Expand className="size-3.5" />
+                <ArrowsOut className="size-3.5" />
               </Button>
               <span className="flex-1" />
               <Badge variant="secondary" className="font-mono text-[10px]">
@@ -526,7 +526,7 @@ function TradingDeskWorkspace({
               className="size-8 rounded-sm text-muted-foreground hover:text-destructive"
               aria-label="Clear drawings"
             >
-              <Trash2 className="size-4" />
+              <Trash className="size-4" />
             </Button>
           </div>
         </aside>

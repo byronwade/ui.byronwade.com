@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { usePathname } from "next/navigation"
-import { Check, Terminal } from "lucide-react"
+import { Check, Terminal } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { bySlug } from "@/content/components"

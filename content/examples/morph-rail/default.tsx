@@ -1,6 +1,6 @@
 "use client"
 
-import { Files, Search, GitBranch, Bug } from "lucide-react"
+import { Bug, Files, GitBranch, MagnifyingGlass } from "@/lib/icons"
 import { MorphRail } from "@/components/ui/morph-rail"
 
 export default function Example() {
@@ -31,7 +31,7 @@ export default function Example() {
           {
             id: "search",
             label: "Search",
-            icon: Search,
+            icon: MagnifyingGlass,
             panel: (
               <p className="text-[13px] text-muted-foreground">
                 Search results…

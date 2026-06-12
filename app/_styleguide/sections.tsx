@@ -3,14 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { toast } from "sonner"
-import {
-  Bell,
-  FileTextIcon,
-  MenuIcon,
-  Settings,
-  Trash2,
-  XIcon,
-} from "lucide-react"
+import { Bell, FileText, Gear, List, Trash, X } from "@/lib/icons"
 import { bySlug } from "@/content/components"
 import {
   Area,
@@ -636,7 +629,7 @@ export function DropdownMenuDemo() {
       <DropdownMenuContent>
         <DropdownMenuLabel>This project</DropdownMenuLabel>
         <DropdownMenuItem>
-          <Settings />
+          <Gear />
           Settings
         </DropdownMenuItem>
         <DropdownMenuItem>
@@ -645,7 +638,7 @@ export function DropdownMenuDemo() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
-          <Trash2 />
+          <Trash />
           Delete project
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -860,7 +853,7 @@ export function SheetDemo() {
       <SheetTrigger
         render={
           <Button variant="outline">
-            <MenuIcon className="mr-2 size-4" />
+            <List className="mr-2 size-4" />
             Open sheet
           </Button>
         }
@@ -894,7 +887,7 @@ export function CommandDemo() {
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Actions">
             <CommandItem>
-              <Settings className="size-4" />
+              <Gear className="size-4" />
               Project settings
             </CommandItem>
             <CommandItem>
@@ -902,7 +895,7 @@ export function CommandDemo() {
               Notifications
             </CommandItem>
             <CommandItem>
-              <FileTextIcon className="size-4" />
+              <FileText className="size-4" />
               Documentation
             </CommandItem>
           </CommandGroup>

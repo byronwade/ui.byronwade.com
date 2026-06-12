@@ -1,10 +1,4 @@
-import {
-  Home,
-  BookOpen,
-  Component,
-  AppWindow,
-  type LucideIcon,
-} from "lucide-react"
+import { AppWindow, BookOpen, House, PuzzlePiece, type Icon } from "@/lib/icons"
 
 /**
  * Primary destinations surfaced in the floating nav dock, the docs-site analogue
@@ -15,7 +9,7 @@ import {
 export interface DocsNavItem {
   label: string
   href: string
-  icon: LucideIcon
+  icon: Icon
   /** Custom active matcher; defaults to exact / prefix match on `href`. */
   match?: (pathname: string) => boolean
 }
@@ -24,7 +18,7 @@ export const navItems: DocsNavItem[] = [
   {
     label: "Home",
     href: "/",
-    icon: Home,
+    icon: House,
     match: (p) => p === "/",
   },
   {
@@ -41,7 +35,7 @@ export const navItems: DocsNavItem[] = [
     // index redirects in); the /layouts/<slug> inspector routes count as Browse.
     label: "Browse",
     href: "/catalog",
-    icon: Component,
+    icon: PuzzlePiece,
     match: (p) => p.startsWith("/catalog") || p.startsWith("/layouts"),
   },
   {

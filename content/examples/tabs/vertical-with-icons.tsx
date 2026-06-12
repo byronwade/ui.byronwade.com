@@ -1,6 +1,6 @@
 "use client"
 
-import { Bell, CreditCard, Lock, UserCircle } from "lucide-react"
+import { Bell, CreditCard, Lock, UserCircle } from "@/lib/icons"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Example() {

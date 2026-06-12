@@ -3,7 +3,7 @@
 import * as React from "react"
 import { use } from "react"
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { getArchetype } from "@/app/layouts/_archetypes"

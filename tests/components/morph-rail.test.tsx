@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { axe } from "vitest-axe";
-import { Files, Search, GitBranch } from "lucide-react";
+import { Files, GitBranch, MagnifyingGlass } from "@/lib/icons"
 import { MorphRail } from "@/components/ui/morph-rail";
 
 beforeEach(() => {
@@ -13,7 +13,7 @@ beforeEach(() => {
 
 const items = [
   { id: "files", label: "Files", icon: Files, panel: <div>files panel</div> },
-  { id: "search", label: "Search", icon: Search, panel: <div>search panel</div> },
+  { id: "search", label: "Search", icon: MagnifyingGlass, panel: <div>search panel</div> },
   { id: "git", label: "Source Control", icon: GitBranch, panel: <div>git panel</div> },
 ];
 

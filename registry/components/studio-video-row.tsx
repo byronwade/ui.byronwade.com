@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Clock, FileText, Globe, Link2, Lock, MoreVertical } from "lucide-react"
+import { Clock, DotsThreeVertical, FileText, Globe, LinkSimple, Lock } from "@/lib/icons"
 
 import type { OverflowMenuItem } from "@/lib/overflow-menu-item"
 import { cn } from "@/lib/utils"
@@ -76,7 +76,7 @@ const visibilityMap: Record<
     tone: "neutral",
     variant: "secondary",
     label: "Unlisted",
-    icon: <Link2 aria-hidden className="size-3.5" />,
+    icon: <LinkSimple aria-hidden className="size-3.5" />,
   },
   private: {
     tone: "neutral",
@@ -259,7 +259,7 @@ function StudioVideoRow({
               aria-label={`More options for ${title}`}
               className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <MoreVertical className="size-4" />
+              <DotsThreeVertical className="size-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {menuItems.map((item) => (

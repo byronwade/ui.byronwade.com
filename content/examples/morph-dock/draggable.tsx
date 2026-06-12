@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { BarChart3, Home, Inbox, Settings, StickyNote } from "lucide-react"
+import { ChartBar, Gear, House, Note, Tray } from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -9,17 +9,17 @@ const items = [
   {
     id: "home",
     label: "Home",
-    icon: Home,
+    icon: House,
     href: "#",
     active: true,
     core: true,
   },
-  { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true },
-  { id: "reports", label: "Reports", icon: BarChart3, href: "#", core: true },
+  { id: "inbox", label: "Inbox", icon: Tray, href: "#", core: true },
+  { id: "reports", label: "Reports", icon: ChartBar, href: "#", core: true },
   {
     id: "settings",
     label: "Settings",
-    icon: Settings,
+    icon: Gear,
     href: "#",
     pinned: true,
   },
@@ -39,7 +39,7 @@ export default function Example() {
         open={open}
         onOpenChange={setOpen}
         origin="center"
-        action={{ label: "Notes", icon: StickyNote }}
+        action={{ label: "Notes", icon: Note }}
         panelTitle="Scratch pad"
         onSave={() => setOpen(false)}
         panelWidth={280}

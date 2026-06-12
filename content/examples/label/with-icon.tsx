@@ -1,7 +1,7 @@
 "use client"
 
 import { Label } from "@/components/ui/label"
-import { Mail, Lock, User, Search } from "lucide-react"
+import { Envelope, Lock, MagnifyingGlass, User } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -21,7 +21,7 @@ export default function Example() {
 
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="email-icon">
-          <Mail className="size-3.5" />
+          <Envelope className="size-3.5" />
           Email
         </Label>
         <input
@@ -47,7 +47,7 @@ export default function Example() {
 
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="search">
-          <Search className="size-3.5" />
+          <MagnifyingGlass className="size-3.5" />
           Search
         </Label>
         <input

@@ -193,7 +193,7 @@ describe("ReasoningTrigger — default content", () => {
 
   it("chevron rotates via group-data-[panel-open] (no hardcoded color)", () => {
     renderReasoning();
-    // lucide renders an <svg>; SVGElement.className is an SVGAnimatedString,
+    // the icon renders an <svg>; SVGElement.className is an SVGAnimatedString,
     // so read the raw class attribute.
     const chevron = document.querySelector(
       "[data-slot='reasoning-trigger-chevron']"

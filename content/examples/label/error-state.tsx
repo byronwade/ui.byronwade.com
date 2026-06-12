@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Label } from "@/components/ui/label"
-import { AlertCircle, CheckCircle2 } from "lucide-react"
+import { CheckCircle, WarningCircle } from "@/lib/icons"
 
 export default function Example() {
   const [email, setEmail] = useState("")
@@ -21,7 +21,7 @@ export default function Example() {
           htmlFor="err-email"
           className={emailError ? "text-destructive" : ""}
         >
-          {emailError && <AlertCircle className="size-3.5" />}
+          {emailError && <WarningCircle className="size-3.5" />}
           Email address
         </Label>
         <input
@@ -49,7 +49,7 @@ export default function Example() {
           htmlFor="err-username"
           className={usernameError ? "text-destructive" : ""}
         >
-          {usernameError && <AlertCircle className="size-3.5" />}
+          {usernameError && <WarningCircle className="size-3.5" />}
           Username
         </Label>
         <input
@@ -75,7 +75,7 @@ export default function Example() {
           htmlFor="ok-website"
           className={websiteValid ? "text-success" : ""}
         >
-          {websiteValid && <CheckCircle2 className="size-3.5" />}
+          {websiteValid && <CheckCircle className="size-3.5" />}
           Website
         </Label>
         <input

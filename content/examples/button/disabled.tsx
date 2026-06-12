@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Save, Trash2 } from "lucide-react"
+import { FloppyDisk, Trash } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -17,7 +17,7 @@ export default function Example() {
           Ghost
         </Button>
         <Button variant="destructive" disabled>
-          <Trash2 />
+          <Trash />
           Destructive
         </Button>
         <Button variant="link" disabled>
@@ -28,10 +28,10 @@ export default function Example() {
       {/* Disabled icon buttons */}
       <div className="flex flex-wrap items-center gap-3">
         <Button size="icon" aria-label="Save" disabled>
-          <Save />
+          <FloppyDisk />
         </Button>
         <Button size="icon" variant="outline" aria-label="Delete" disabled>
-          <Trash2 />
+          <Trash />
         </Button>
       </div>
 

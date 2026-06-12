@@ -1,5 +1,5 @@
 import { MetricStat } from "@/components/metric-stat"
-import { Activity } from "lucide-react"
+import { Pulse } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -22,7 +22,7 @@ export default function Example() {
 
       {/* React node as value: multi-unit display */}
       <MetricStat
-        icon={Activity}
+        icon={Pulse}
         label="P95 Latency"
         value={
           <span>

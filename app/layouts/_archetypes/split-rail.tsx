@@ -10,12 +10,12 @@
 import * as React from "react"
 import {
   Bell,
-  ChevronLeft,
+  CaretLeft,
   CreditCard,
-  Settings2,
+  GearSix,
   ShieldCheck,
   Users,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Section, SettingRow, SettingsList } from "@/components/section"
@@ -38,12 +38,12 @@ type Pane = "general" | "members" | "billing" | "notifications" | "security"
 
 const nav: {
   group: string
-  items: { id: Pane; label: string; icon: typeof Settings2 }[]
+  items: { id: Pane; label: string; icon: typeof GearSix }[]
 }[] = [
   {
     group: "Workspace",
     items: [
-      { id: "general", label: "General", icon: Settings2 },
+      { id: "general", label: "General", icon: GearSix },
       { id: "members", label: "Members", icon: Users },
       { id: "billing", label: "Billing", icon: CreditCard },
     ],
@@ -127,7 +127,7 @@ export function SplitRailArchetype() {
           type="button"
           className="flex h-14 items-center gap-2 border-b border-border px-4 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
         >
-          <ChevronLeft className="size-4" />
+          <CaretLeft className="size-4" />
           Back to app
         </button>
 

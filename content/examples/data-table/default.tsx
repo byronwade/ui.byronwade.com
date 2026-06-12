@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Eye, LayoutList } from "lucide-react"
+import { Eye, Rows } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { useDemoState } from "@/lib/demo-viewport"
@@ -327,7 +327,7 @@ export default function Example() {
         }}
         filterActions={
           <Button variant="ghost" size="icon-sm" aria-label="Customize columns">
-            <LayoutList />
+            <Rows />
           </Button>
         }
         onRowClick={(row) => console.log("Open product", row.id)}

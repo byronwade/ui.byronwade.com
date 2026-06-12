@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Home, Save } from "lucide-react"
+import { FloppyDisk, House } from "@/lib/icons"
 
 import { MorphDock, type MorphDockStatus } from "@/components/ui/morph-dock"
 
@@ -38,7 +38,7 @@ function StatusDock({ base }: { base: MorphDockStatus }) {
         {
           id: "home",
           label: "Home",
-          icon: Home,
+          icon: House,
           href: "#",
           active: true,
           core: true,
@@ -48,7 +48,7 @@ function StatusDock({ base }: { base: MorphDockStatus }) {
         {
           id: "save",
           label: "Save",
-          icon: Save,
+          icon: FloppyDisk,
           primary: true,
           onSelect: () => setStatus(base),
         },

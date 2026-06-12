@@ -2,14 +2,7 @@
 
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import {
-  AlertTriangle,
-  CheckCircle,
-  Info,
-  X,
-  XCircle,
-  type LucideIcon,
-} from "lucide-react"
+import { CheckCircle, Info, Warning, X, XCircle, type Icon } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -48,10 +41,10 @@ const toneIconClass: Record<BannerTone, string> = {
   critical: "text-destructive",
 }
 
-const toneIcon: Record<BannerTone, LucideIcon> = {
+const toneIcon: Record<BannerTone, Icon> = {
   info: Info,
   success: CheckCircle,
-  warning: AlertTriangle,
+  warning: Warning,
   critical: XCircle,
 }
 

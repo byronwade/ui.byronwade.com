@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { type LucideIcon } from "lucide-react"
+import { type Icon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { MorphSurface } from "@/components/ui/morph-surface"
 
 export interface MorphRailItem {
   id: string
   label: string
-  icon: LucideIcon
+  icon: Icon
   /** Content shown when this item is active. */
   panel: React.ReactNode
 }

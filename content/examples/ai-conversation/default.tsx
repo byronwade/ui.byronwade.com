@@ -1,6 +1,6 @@
 "use client"
 
-import { MessageSquareIcon } from "lucide-react"
+import { Chat } from "@/lib/icons"
 
 import {
   Conversation,
@@ -98,7 +98,7 @@ export default function Example() {
           <ConversationContent>
             {isEmpty ? (
               <ConversationEmptyState
-                icon={<MessageSquareIcon className="size-6" />}
+                icon={<Chat className="size-6" />}
                 title="No messages yet"
                 description="Start the conversation"
               />

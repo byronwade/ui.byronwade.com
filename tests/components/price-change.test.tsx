@@ -21,7 +21,7 @@ describe("PriceChange — tone + direction", () => {
     expect(el).toHaveClass("text-success");
     expect(el).not.toHaveClass("text-destructive");
     expect(el.querySelector("svg")).not.toBeNull();
-    expect(el.querySelector(".lucide-trending-up")).not.toBeNull();
+    expect(el).toHaveAttribute("data-direction", "up");
   });
 
   it("negative value uses the destructive token and a down caret", () => {
@@ -29,7 +29,8 @@ describe("PriceChange — tone + direction", () => {
     const el = root(container);
     expect(el).toHaveClass("text-destructive");
     expect(el).not.toHaveClass("text-success");
-    expect(el.querySelector(".lucide-trending-down")).not.toBeNull();
+    expect(el.querySelector("svg")).not.toBeNull();
+    expect(el).toHaveAttribute("data-direction", "down");
   });
 
   it("zero is muted with no caret", () => {

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { HomeIcon, InboxIcon } from "lucide-react"
+import { House, Tray } from "@/lib/icons"
 import { describe, it, expect, beforeEach, vi } from "vitest"
 import { axe } from "vitest-axe"
 
@@ -80,13 +80,13 @@ describe("Sidebar", () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive>
-                      <HomeIcon />
+                      <House />
                       Home
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <InboxIcon />
+                      <Tray />
                       Inbox
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -116,7 +116,7 @@ describe("Sidebar", () => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <HomeIcon />
+                  <House />
                   Home
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -142,7 +142,7 @@ describe("Sidebar", () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <HomeIcon />
+                      <House />
                       Home
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -178,7 +178,7 @@ describe("Sidebar", () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive tooltip="Home">
-                      <HomeIcon />
+                      <House />
                       Home
                     </SidebarMenuButton>
                     <SidebarMenuBadge>3</SidebarMenuBadge>
@@ -191,7 +191,7 @@ describe("Sidebar", () => {
                     <SidebarMenuSub>
                       <SidebarMenuSubItem>
                         <SidebarMenuSubButton isActive>
-                          <InboxIcon />
+                          <Tray />
                           Nested
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
@@ -225,7 +225,7 @@ describe("Sidebar", () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <HomeIcon />
+                      <House />
                       Home
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -278,7 +278,7 @@ describe("Sidebar", () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <HomeIcon />
+                      <House />
                       Home
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -306,7 +306,7 @@ describe("Sidebar", () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <HomeIcon />
+                      <House />
                       Home
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -335,7 +335,7 @@ describe("Sidebar", () => {
                   <SidebarMenu>
                     <SidebarMenuItem>
                       <SidebarMenuButton>
-                        <HomeIcon />
+                        <House />
                         Home
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -375,7 +375,7 @@ describe("Sidebar", () => {
                   <SidebarMenu>
                     <SidebarMenuItem>
                       <SidebarMenuButton>
-                        <HomeIcon />
+                        <House />
                         Home
                       </SidebarMenuButton>
                     </SidebarMenuItem>

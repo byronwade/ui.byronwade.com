@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ArrowDown, ArrowUp, type LucideIcon } from "lucide-react"
+import { ArrowDown, ArrowUp, type Icon } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 
@@ -12,7 +12,7 @@ type MetricProps = {
   label: React.ReactNode
   value: React.ReactNode
   delta?: Delta
-  icon?: LucideIcon
+  icon?: Icon
   hint?: React.ReactNode
   variant?: MetricVariant
   className?: string

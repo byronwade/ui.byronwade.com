@@ -2,16 +2,7 @@
 
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import {
-  Heart,
-  ThumbsDown,
-  MessageCircle,
-  Share2,
-  MoreVertical,
-  Music,
-  Volume2,
-  VolumeX,
-} from "lucide-react"
+import { ChatCircle, DotsThreeVertical, Heart, MusicNote, ShareNetwork, SpeakerHigh, SpeakerX, ThumbsDown } from "@/lib/icons"
 
 import { useToggleState, type ToggleState } from "@/lib/toggle-state"
 import { cn } from "@/lib/utils"
@@ -241,21 +232,21 @@ function ShortsPlayer({
     },
     {
       key: "comment",
-      icon: <MessageCircle aria-hidden />,
+      icon: <ChatCircle aria-hidden />,
       label: "Comment",
       count: commentCount,
       onClick: onComment,
     },
     {
       key: "share",
-      icon: <Share2 aria-hidden />,
+      icon: <ShareNetwork aria-hidden />,
       label: "Share",
       count: shareCount,
       onClick: onShare,
     },
     {
       key: "more",
-      icon: <MoreVertical aria-hidden />,
+      icon: <DotsThreeVertical aria-hidden />,
       label: "More",
       onClick: onMore,
     },
@@ -291,7 +282,7 @@ function ShortsPlayer({
         data-slot="shorts-player-placeholder"
         className="flex size-full items-center justify-center text-muted-foreground"
       >
-        <Music className="size-8" aria-hidden />
+        <MusicNote className="size-8" aria-hidden />
       </div>
     ))
 
@@ -351,7 +342,7 @@ function ShortsPlayer({
           onClick={handleMuteToggle}
           className="absolute top-3 right-3 z-20 rounded-full bg-background/20 text-background backdrop-blur-sm hover:bg-background/30 hover:text-background"
         >
-          {mutedOn ? <VolumeX /> : <Volume2 />}
+          {mutedOn ? <SpeakerX /> : <SpeakerHigh />}
         </Button>
       ) : null}
 
@@ -468,7 +459,7 @@ function ShortsPlayer({
             data-slot="shorts-player-sound"
             className="flex items-center gap-1.5 text-xs opacity-90"
           >
-            <Music className="size-3.5 shrink-0" aria-hidden />
+            <MusicNote className="size-3.5 shrink-0" aria-hidden />
             <span className="truncate">{sound}</span>
           </span>
         ) : null}

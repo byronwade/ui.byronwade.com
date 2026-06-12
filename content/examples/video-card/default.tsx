@@ -1,6 +1,6 @@
 "use client"
 
-import { Flag, ListPlus } from "lucide-react"
+import { Flag, ListPlus } from "@/lib/icons"
 
 import { VideoCard } from "@/components/video-card"
 import { Skeleton } from "@/components/ui/skeleton"

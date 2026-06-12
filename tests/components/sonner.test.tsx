@@ -3,7 +3,7 @@
  *
  * The component is a thin wrapper around the `sonner` library that:
  *   - wires up `@wrksz/themes` for automatic light/dark switching
- *   - injects custom Lucide icons (success/info/warning/error/loading)
+ *   - injects custom Phosphor icons (success/info/warning/error/loading)
  *   - sets CSS-variable style overrides for our design-system tokens
  *   - forces `cn-toast` onto every `toastOptions.classNames.toast`
  *   - forwards all ToasterProps to the underlying Sonner <Toaster>
@@ -29,7 +29,7 @@
  * 3.  Position props — all 6 positions → data-x-position / data-y-position
  * 4.  className forwarding — class appears on <ol>
  * 5.  CSS-variable style overrides baked into our wrapper
- * 6.  Custom icons — the wrapper ships five custom Lucide icons
+ * 6.  Custom icons — the wrapper ships five custom Phosphor icons
  * 7.  toastOptions.classNames.toast = "cn-toast" always applied
  * 8.  toast() — default/message toast renders, title visible
  * 9.  toast.success() — type=success, title text visible

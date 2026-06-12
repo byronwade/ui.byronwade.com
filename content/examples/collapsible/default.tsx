@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDownIcon } from "lucide-react"
+import { CaretDown } from "@/lib/icons"
 import {
   Collapsible,
   CollapsibleContent,
@@ -18,7 +18,7 @@ export default function Example() {
         render={<Button variant="outline" className="w-full justify-between" />}
       >
         Billing details
-        <ChevronDownIcon
+        <CaretDown
           className={`size-4 transition-transform ${open ? "rotate-180" : ""}`}
         />
       </CollapsibleTrigger>

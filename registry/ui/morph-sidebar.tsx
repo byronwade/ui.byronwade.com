@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { PanelLeft, type LucideIcon } from "lucide-react"
+import { Sidebar, type Icon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { MorphSurface } from "@/components/ui/morph-surface"
 
 export interface MorphSidebarItem {
   id: string
   label: string
-  icon: LucideIcon
+  icon: Icon
   href?: string
   onSelect?: () => void
   active?: boolean
@@ -44,7 +44,7 @@ export function MorphSidebar({
       onClick={() => setOpen((v) => !v)}
       className="grid size-9 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
     >
-      <PanelLeft className="size-4" />
+      <Sidebar className="size-4" />
     </button>
   )
 

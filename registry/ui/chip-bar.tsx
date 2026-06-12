@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { CaretLeft, CaretRight } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 
@@ -146,7 +146,7 @@ function ChipBar({
           canScrollLeft ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
-        <ChevronLeft className="size-4" aria-hidden />
+        <CaretLeft className="size-4" aria-hidden />
       </button>
 
       <button
@@ -160,7 +160,7 @@ function ChipBar({
           canScrollRight ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
-        <ChevronRight className="size-4" aria-hidden />
+        <CaretRight className="size-4" aria-hidden />
       </button>
     </div>
   )

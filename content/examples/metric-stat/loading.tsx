@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { MetricStat } from "@/components/metric-stat"
-import { Loader2 } from "lucide-react"
+import { CircleNotch } from "@/lib/icons"
 
 function SkeletonValue() {
   return (
@@ -50,7 +50,7 @@ export default function Example() {
           "Reset"
         ) : (
           <>
-            <Loader2 className="size-3.5 animate-spin" /> Simulate load
+            <CircleNotch className="size-3.5 animate-spin" /> Simulate load
           </>
         )}
       </button>

@@ -2,23 +2,23 @@
 
 import { useMemo, useState } from "react"
 import {
-  Activity,
-  AlertTriangle,
-  BarChart3,
-  Box,
-  Cable,
-  ChevronRight,
+  CaretRight,
+  ChartBar,
   Cloud,
+  Cube,
   FileText,
+  GearSix,
   Globe,
-  LayoutDashboard,
-  Network,
+  Graph,
+  HardDrives,
+  Lightning,
+  Plugs,
+  Pulse,
   Radio,
-  Server,
-  Settings2,
   Shield,
-  Zap,
-} from "lucide-react"
+  SquaresFour,
+  Warning,
+} from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import {
   createServiceMapDemoGraph,
@@ -61,22 +61,22 @@ const TIME_PRESETS = ["15m", "1h", "6h", "12h", "24h", "7d"] as const
 const NAV_ITEMS: Array<{
   id: ObservabilityRoute
   label: string
-  icon: typeof Network
+  icon: typeof Graph
   section?: string
 }> = [
-  { id: "home", label: "Home", icon: LayoutDashboard, section: "Overview" },
+  { id: "home", label: "Home", icon: SquaresFour, section: "Overview" },
   {
     id: "service-map",
     label: "Service map",
-    icon: Network,
+    icon: Graph,
     section: "Observe",
   },
-  { id: "traces", label: "Traces", icon: Activity, section: "Observe" },
+  { id: "traces", label: "Traces", icon: Pulse, section: "Observe" },
   { id: "logs", label: "Logs", icon: FileText, section: "Observe" },
-  { id: "metrics", label: "Metrics", icon: BarChart3, section: "Observe" },
-  { id: "infra", label: "Infrastructure", icon: Box, section: "Observe" },
-  { id: "connectors", label: "Connectors", icon: Cable, section: "Ingest" },
-  { id: "alerts", label: "Alerts", icon: AlertTriangle, section: "Respond" },
+  { id: "metrics", label: "Metrics", icon: ChartBar, section: "Observe" },
+  { id: "infra", label: "Infrastructure", icon: Cube, section: "Observe" },
+  { id: "connectors", label: "Connectors", icon: Plugs, section: "Ingest" },
+  { id: "alerts", label: "Alerts", icon: Warning, section: "Respond" },
 ]
 
 const ADAPTERS = [
@@ -96,7 +96,7 @@ const ADAPTERS = [
     id: "effect-sdk",
     name: "@maple-dev/effect-sdk",
     kind: "Server",
-    icon: Server,
+    icon: HardDrives,
     description:
       "Effect-native tracing layer for Node, Bun, and server runtimes.",
     snippet: `const TracerLive = Maple.layer({ serviceName: "my-app" })
@@ -127,7 +127,7 @@ ctx.waitUntil(telemetry.flush(env))`,
     id: "prometheus",
     name: "Prometheus scrape targets",
     kind: "Connector",
-    icon: Activity,
+    icon: Pulse,
     description:
       "Managed scrape jobs discovered by the OTel collector via HTTP SD.",
     snippet: `scrape_interval: 30s
@@ -147,7 +147,7 @@ Authorization: Bearer maple_sk_...`,
     id: "k8s",
     name: "maple-k8s-infra Helm chart",
     kind: "Infrastructure",
-    icon: Box,
+    icon: Cube,
     description:
       "OpenTelemetry Operator injection + k8sattributes for pod badges and infra tab.",
     snippet: `helm upgrade --install maple-k8s-infra \\
@@ -157,7 +157,7 @@ Authorization: Bearer maple_sk_...`,
     id: "collector",
     name: "mapleexporter (OTel Collector)",
     kind: "Collector",
-    icon: Zap,
+    icon: Lightning,
     description: "Custom ClickHouse exporter for self-hosted Maple warehouses.",
     snippet: `exporters:
   maple:
@@ -176,7 +176,7 @@ function RoutePlaceholder({
   return (
     <div className="flex h-full flex-col items-center justify-center gap-3 p-10 text-center">
       <div className="grid size-12 place-items-center rounded-xl edge bg-muted/40">
-        <Activity className="size-5 text-muted-foreground" />
+        <Pulse className="size-5 text-muted-foreground" />
       </div>
       <div className="max-w-md space-y-1">
         <p className="text-sm font-medium text-foreground">{title}</p>
@@ -314,7 +314,7 @@ function HomeOverview({
           </div>
           <Button size="sm" onClick={onOpenMap}>
             Open service map
-            <ChevronRight data-icon="inline-end" />
+            <CaretRight data-icon="inline-end" />
           </Button>
         </div>
       </div>
@@ -392,7 +392,7 @@ export function ServiceMapWorkspace({
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <span>Maple</span>
-            <ChevronRight className="size-3" />
+            <CaretRight className="size-3" />
             <span className="text-foreground">{routeMeta?.label}</span>
           </div>
           <h1 className="mt-0.5 truncate text-sm font-semibold tracking-tight text-foreground sm:text-base">
@@ -414,7 +414,7 @@ export function ServiceMapWorkspace({
             }))}
           />
           <Button variant="outline" size="sm">
-            <Settings2 data-icon="inline-start" />
+            <GearSix data-icon="inline-start" />
             Settings
           </Button>
         </div>
@@ -488,7 +488,7 @@ export function ServiceMapWorkspace({
           <SidebarHeader className="border-b border-border px-3 py-3">
             <div className="flex items-center gap-2 px-1">
               <div className="grid size-8 place-items-center rounded-lg bg-brand text-brand-foreground">
-                <Network className="size-4" />
+                <Graph className="size-4" />
               </div>
               <div className="min-w-0 group-data-[collapsible=icon]:hidden">
                 <p className="truncate text-sm font-semibold tracking-tight">

@@ -79,6 +79,14 @@ export const guides: Guide[] = [
       "Why byronwade/ui encodes evidence-based web reading — two lanes, 65ch measure, reading-ui and reading-prose in foundation.",
   },
   {
+    slug: "icons",
+    href: "/docs/icons",
+    label: "Icons",
+    title: "Icons",
+    description:
+      "One icon voice — Phosphor, duotone by default, imported from a single @/lib/icons barrel that owns the weight the way --brand owns the accent.",
+  },
+  {
     slug: "surfaces",
     href: "/docs/surfaces",
     label: "Surfaces",
