@@ -11,11 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import {
-  ChevronDownIcon,
-  ExternalLinkIcon,
-  MessageCircleIcon,
-} from "lucide-react";
+import { ArrowSquareOut, CaretDown, ChatCircle } from "@/lib/icons"
 import { type ComponentProps, createContext, useContext } from "react";
 
 const providers = {
@@ -131,7 +127,7 @@ const providers = {
       `https://t3.chat/new?${new URLSearchParams({
         q,
       })}`,
-    icon: <MessageCircleIcon />,
+    icon: <ChatCircle />,
   },
   v0: {
     title: "Open in v0",
@@ -236,7 +232,7 @@ export const OpenInTrigger = ({ children, ...props }: OpenInTriggerProps) => (
       children ? undefined : (
         <Button type="button" variant="outline">
           Open in chat
-          <ChevronDownIcon className="size-4" />
+          <CaretDown className="size-4" />
         </Button>
       )
     }
@@ -284,7 +280,7 @@ const OpenInProviderItem = ({
       <span className="flex-1" data-slot="open-in-item-title">
         {title}
       </span>
-      <ExternalLinkIcon
+      <ArrowSquareOut
         className="size-4 shrink-0 text-muted-foreground"
         data-slot="open-in-item-external"
       />

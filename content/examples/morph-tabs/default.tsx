@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, Search, Bell, User } from "lucide-react"
+import { Bell, House, MagnifyingGlass, User } from "@/lib/icons"
 import { MorphTabs } from "@/components/ui/morph-tabs"
 
 export default function Example() {
@@ -15,8 +15,8 @@ export default function Example() {
       <div className="absolute inset-x-0 bottom-0">
         <MorphTabs
           items={[
-            { id: "home", label: "Home", icon: Home, active: true },
-            { id: "search", label: "Search", icon: Search },
+            { id: "home", label: "Home", icon: House, active: true },
+            { id: "search", label: "Search", icon: MagnifyingGlass },
             { id: "alerts", label: "Alerts", icon: Bell },
             { id: "you", label: "You", icon: User },
           ]}

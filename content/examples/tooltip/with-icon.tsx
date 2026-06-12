@@ -1,6 +1,6 @@
 "use client"
 
-import { Info, AlertTriangle, HelpCircle, Star } from "lucide-react"
+import { Info, Question, Star, Warning } from "@/lib/icons"
 
 import {
   Tooltip,
@@ -24,7 +24,7 @@ export default function Example() {
 
         <Tooltip>
           <TooltipTrigger render={<Button variant="ghost" size="icon" />}>
-            <AlertTriangle className="size-4 text-warning" />
+            <Warning className="size-4 text-warning" />
             <span className="sr-only">Warning</span>
           </TooltipTrigger>
           <TooltipContent>
@@ -34,7 +34,7 @@ export default function Example() {
 
         <Tooltip>
           <TooltipTrigger render={<Button variant="ghost" size="icon" />}>
-            <HelpCircle className="size-4" />
+            <Question className="size-4" />
             <span className="sr-only">Help</span>
           </TooltipTrigger>
           <TooltipContent>Need help? Visit our documentation</TooltipContent>

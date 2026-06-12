@@ -41,6 +41,11 @@ dependencies }` following a sibling item's exact shape. Never touch the auto-gen
   opacity (`bg-brand/10`), never a new color. Accent must resolve to `--brand`.
 - **Editorial type.** Hierarchy from size + tracking, never `font-bold` on display/section headings.
   `font-mono` for data (stats, counts, IDs, timestamps, kbd).
+- **Icons from `@/lib/icons` only.** Phosphor, duotone default — import by Phosphor catalog name
+  (`CaretDown`, `MagnifyingGlass`, `Gear`, `Trash`, …). Never import `lucide-react`,
+  `@phosphor-icons/react`, or another icon package, and never hand-roll an icon `<svg>`. Don't set
+  `weight="duotone"` (it's the default); override only for a state. Color via tokens/`currentColor`,
+  size via the scale (`size-4`). Type icon props with `Icon`/`IconProps` from `@/lib/icons`.
 - **Base UI + CVA + `data-slot`.** Build on `@base-ui/react`. Every rendered part carries `data-slot`.
 - **`cn()` + `className` passthrough.** Always accept and merge `className` via `cn()` from `@/lib/utils`.
 - **Imports** use consumer paths only: `@/components/ui/…`, `@/components/…`, `@/lib/…`. Never `../`.

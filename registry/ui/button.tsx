@@ -14,7 +14,7 @@ type ButtonClickEvent = Parameters<
   NonNullable<ButtonPrimitive.Props["onClick"]>
 >[0]
 
-/* Dependency-free state icons — button stays self-contained (no lucide import). */
+/* Dependency-free state icons — button stays self-contained (no Phosphor import). */
 function StatusSpinner() {
   return (
     <span

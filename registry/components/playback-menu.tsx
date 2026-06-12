@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Settings } from "lucide-react"
+import { Gear } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {
@@ -69,7 +69,7 @@ function PlaybackMenu({
               )
         }
       >
-        {trigger ? undefined : <Settings className="size-5" />}
+        {trigger ? undefined : <Gear className="size-5" />}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent

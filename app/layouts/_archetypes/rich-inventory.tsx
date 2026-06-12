@@ -8,7 +8,12 @@
 // inline 7-day load sparkline and a usage bar. The grid is edge-to-edge with 1px seams;
 // only the rail and toolbar float above it.
 import * as React from "react"
-import { Download, Plus, Search, SlidersHorizontal } from "lucide-react"
+import {
+  DownloadSimple,
+  MagnifyingGlass,
+  Plus,
+  SlidersHorizontal,
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {
@@ -267,7 +272,7 @@ export function RichInventoryArchetype() {
           </div>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm">
-              <Download data-icon="inline-start" />
+              <DownloadSimple data-icon="inline-start" />
               <span className="hidden sm:inline">Export</span>
             </Button>
             <Button size="sm">
@@ -281,7 +286,7 @@ export function RichInventoryArchetype() {
           <div className="w-full max-w-xs">
             <InputGroup>
               <InputGroupAddon>
-                <Search />
+                <MagnifyingGlass />
               </InputGroupAddon>
               <InputGroupInput
                 value={query}

@@ -1,6 +1,6 @@
 "use client"
 
-import { Archive, Download, Lock, Share2, Trash2 } from "lucide-react"
+import { Archive, DownloadSimple, Lock, ShareNetwork, Trash } from "@/lib/icons"
 
 import {
   DropdownMenu,
@@ -24,7 +24,7 @@ export default function Example() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Download />
+              <DownloadSimple />
               Download
             </DropdownMenuItem>
             <DropdownMenuItem>
@@ -33,7 +33,7 @@ export default function Example() {
             </DropdownMenuItem>
             {/* Disabled: user lacks permission */}
             <DropdownMenuItem disabled>
-              <Share2 />
+              <ShareNetwork />
               Share
             </DropdownMenuItem>
             {/* Disabled: feature locked */}
@@ -45,7 +45,7 @@ export default function Example() {
           <DropdownMenuSeparator />
           {/* Disabled: cannot delete published items */}
           <DropdownMenuItem variant="destructive" disabled>
-            <Trash2 />
+            <Trash />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

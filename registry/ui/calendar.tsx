@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { CaretLeft, CaretRight } from "@/lib/icons"
 import { DayPicker, getDefaultClassNames } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
@@ -95,7 +95,7 @@ function Calendar({
           className: chevronClassName,
           ...chevronProps
         }) => {
-          const Icon = orientation === "left" ? ChevronLeft : ChevronRight
+          const Icon = orientation === "left" ? CaretLeft : CaretRight
           return (
             <Icon
               className={cn("size-4", chevronClassName)}

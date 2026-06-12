@@ -1,6 +1,6 @@
 "use client"
 
-import { HomeIcon, InboxIcon, SettingsIcon } from "lucide-react"
+import { Gear, House, Tray } from "@/lib/icons"
 
 import {
   Sidebar,
@@ -26,13 +26,13 @@ export default function Example() {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive>
-                      <HomeIcon />
+                      <House />
                       Default
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton variant="outline">
-                      <InboxIcon />
+                      <Tray />
                       Outline
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -46,19 +46,19 @@ export default function Example() {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton size="sm">
-                      <SettingsIcon />
+                      <Gear />
                       Small
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton size="default">
-                      <SettingsIcon />
+                      <Gear />
                       Default
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton size="lg">
-                      <SettingsIcon />
+                      <Gear />
                       Large
                     </SidebarMenuButton>
                   </SidebarMenuItem>

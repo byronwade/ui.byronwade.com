@@ -6,14 +6,14 @@ import * as React from "react"
 import {
   Bookmark,
   Clock,
-  Locate,
+  Crosshair,
+  MagnifyingGlass,
   MapPin,
   Minus,
-  Navigation,
+  NavigationArrow,
   Plus,
-  Search,
   Star,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -146,7 +146,7 @@ export function CanvasArchetype() {
         <div className="flex flex-1 items-center gap-2 rounded-full bg-card/80 p-1.5 pl-2 edge backdrop-blur">
           <InputGroup className="flex-1 border-0 bg-transparent shadow-none">
             <InputGroupAddon>
-              <Search />
+              <MagnifyingGlass />
             </InputGroupAddon>
             <InputGroupInput
               placeholder="Search this area…"
@@ -246,7 +246,7 @@ export function CanvasArchetype() {
             </div>
             <div className="flex gap-2">
               <Button size="sm" className="flex-1">
-                <Navigation data-icon="inline-start" />
+                <NavigationArrow data-icon="inline-start" />
                 Directions
               </Button>
               <Button size="sm" variant="outline">
@@ -282,7 +282,7 @@ export function CanvasArchetype() {
           aria-label="Recenter"
           className="grid size-9 place-items-center rounded-full bg-card/85 text-brand edge backdrop-blur transition-colors hover:bg-muted"
         >
-          <Locate className="size-4" />
+          <Crosshair className="size-4" />
         </button>
       </div>
     </div>

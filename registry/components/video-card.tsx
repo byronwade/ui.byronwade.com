@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { MoreVertical } from "lucide-react"
+import { DotsThreeVertical } from "@/lib/icons"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -356,7 +356,7 @@ function VideoCard({
               aria-label="More options"
               className="inline-flex size-8 shrink-0 items-center justify-center self-start rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <MoreVertical className="size-4" />
+              <DotsThreeVertical className="size-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {menuItems.map((item) => (

@@ -1,7 +1,7 @@
-import { BarChart2, ShoppingCart, Star, TrendingUp } from "lucide-react"
+import { ChartBar, ShoppingCart, Star, TrendUp } from "@/lib/icons"
 import { StatCard } from "@/components/stat-card"
 
-/** Each card uses a different Lucide icon to show how the icon slot is rendered. */
+/** Each card uses a different Phosphor icon to show how the icon slot is rendered. */
 export default function Example() {
   return (
     <div className="grid grid-cols-2 gap-4 p-8 max-w-xl">
@@ -9,7 +9,7 @@ export default function Example() {
         label="Page Views"
         value="1.24M"
         delta={{ value: "+18.2%", direction: "up" }}
-        icon={BarChart2}
+        icon={ChartBar}
         hint="last 7 days"
       />
       <StatCard
@@ -30,7 +30,7 @@ export default function Example() {
         label="Growth Rate"
         value="22.8%"
         delta={{ value: "+3.5%", direction: "up" }}
-        icon={TrendingUp}
+        icon={TrendUp}
         hint="month-over-month"
       />
     </div>

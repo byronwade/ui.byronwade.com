@@ -1,6 +1,6 @@
 "use client"
 
-import { Volume2 } from "lucide-react"
+import { SpeakerHigh } from "@/lib/icons"
 
 import { Button } from "@/components/ui/button"
 import { ShortsPlayer } from "@/components/shorts-player"
@@ -18,7 +18,7 @@ export default function Example() {
         captionMode="expanded"
         topActions={
           <Button variant="ghost" size="icon-sm" aria-label="Audio">
-            <Volume2 />
+            <SpeakerHigh />
           </Button>
         }
       />

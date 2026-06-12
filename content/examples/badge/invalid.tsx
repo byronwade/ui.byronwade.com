@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge"
-import { AlertCircle } from "lucide-react"
+import { WarningCircle } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -11,7 +11,7 @@ export default function Example() {
         </p>
         <div className="flex flex-wrap gap-2">
           <Badge aria-invalid>
-            <AlertCircle data-icon="inline-start" />
+            <WarningCircle data-icon="inline-start" />
             Required field missing
           </Badge>
           <Badge variant="outline" aria-invalid>

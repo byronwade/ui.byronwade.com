@@ -8,7 +8,7 @@
 // toggle re-prices every tier live. A full comparison table and an FAQ carry the
 // detail a real buyer needs before converting. Pure tokens; re-skins from --brand.
 import * as React from "react"
-import { ArrowRight, Check, Minus } from "lucide-react"
+import { ArrowRight, Check, Minus } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {

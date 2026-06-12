@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu"
-import { CalendarDays, Users, Tag, RotateCcw } from "lucide-react"
+import { ArrowCounterClockwise, CalendarDots, Tag, Users } from "@/lib/icons"
 
 const STATUSES = ["Any status", "Active", "Draft", "Archived", "Paused"]
 const ASSIGNEES = [
@@ -86,7 +86,7 @@ export default function Example() {
             render={
               <FilterPill
                 icon={
-                  <CalendarDays className="size-3.5 text-muted-foreground" />
+                  <CalendarDots className="size-3.5 text-muted-foreground" />
                 }
               >
                 {range}
@@ -114,7 +114,7 @@ export default function Example() {
             }}
             className="inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
           >
-            <RotateCcw className="size-3.5" />
+            <ArrowCounterClockwise className="size-3.5" />
             Reset
           </button>
         )}

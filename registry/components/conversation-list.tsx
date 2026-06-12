@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Archive, Check, Mail, Pin, Search, Trash2, X } from "lucide-react";
+import { Archive, Check, Envelope, MagnifyingGlass, PushPin, Trash, X } from "@/lib/icons"
 
 import { cn } from "@/lib/utils";
 import { GradientAvatar } from "@/components/ui/gradient-avatar";
@@ -98,7 +98,7 @@ function ConversationRow({
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5">
-          {pinned ? <Pin className="size-3 shrink-0 text-muted-foreground" /> : null}
+          {pinned ? <PushPin className="size-3 shrink-0 text-muted-foreground" /> : null}
           <span className={cn("truncate text-[13px]", unread ? "font-semibold text-foreground" : "text-foreground")}>
             {c.contact.name}
           </span>
@@ -113,16 +113,16 @@ function ConversationRow({
       {/* hover action pill */}
       <div className="absolute right-2 top-1.5 hidden items-center gap-0.5 rounded-full bg-card px-1 py-0.5 edge group-hover/row:flex">
         <RowAction label={pinned ? "Unpin" : "Pin"} onClick={() => toggleFlag(c.id, "pinned")}>
-          <Pin className={cn("size-3.5", pinned && "fill-current")} />
+          <PushPin className={cn("size-3.5", pinned && "fill-current")} />
         </RowAction>
         <RowAction label={unread ? "Mark read" : "Mark unread"} onClick={() => (unread ? markRead(c.id) : markUnread(c.id))}>
-          <Mail className="size-3.5" />
+          <Envelope className="size-3.5" />
         </RowAction>
         <RowAction label="Archive" onClick={() => archive(c.id)}>
           <Archive className="size-3.5" />
         </RowAction>
         <RowAction label="Delete" onClick={() => remove(c.id)}>
-          <Trash2 className="size-3.5" />
+          <Trash className="size-3.5" />
         </RowAction>
       </div>
     </div>
@@ -209,7 +209,7 @@ export function ConversationList({ onSelect, className }: { onSelect?: (id: stri
     <div data-slot="conversation-list" className={cn("flex h-full min-h-0 flex-col gap-2 p-2", className)}>
       {/* search */}
       <label className="flex h-9 items-center gap-2 rounded-xl bg-muted px-3 text-[13px] text-muted-foreground edge">
-        <Search className="size-4 shrink-0" />
+        <MagnifyingGlass className="size-4 shrink-0" />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -243,10 +243,10 @@ export function ConversationList({ onSelect, className }: { onSelect?: (id: stri
         <div data-slot="bulk-bar" className="flex items-center gap-1 rounded-xl bg-accent px-2 py-1.5 text-[12px]">
           <span className="font-medium">{selected.size} selected</span>
           <div className="ml-auto flex items-center gap-0.5">
-            <BulkBtn label="Mark read" onClick={() => runBulk("read")}><Mail className="size-3.5" /></BulkBtn>
-            <BulkBtn label="Pin" onClick={() => runBulk("star")}><Pin className="size-3.5" /></BulkBtn>
+            <BulkBtn label="Mark read" onClick={() => runBulk("read")}><Envelope className="size-3.5" /></BulkBtn>
+            <BulkBtn label="Pin" onClick={() => runBulk("star")}><PushPin className="size-3.5" /></BulkBtn>
             <BulkBtn label="Archive" onClick={() => runBulk("archive")}><Archive className="size-3.5" /></BulkBtn>
-            <BulkBtn label="Delete" onClick={() => runBulk("delete")}><Trash2 className="size-3.5" /></BulkBtn>
+            <BulkBtn label="Delete" onClick={() => runBulk("delete")}><Trash className="size-3.5" /></BulkBtn>
             <BulkBtn label="Clear selection" onClick={clearSelection}><X className="size-3.5" /></BulkBtn>
           </div>
         </div>

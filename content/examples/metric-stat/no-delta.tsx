@@ -1,5 +1,5 @@
 import { MetricStat } from "@/components/metric-stat"
-import { Database, Clock, Globe } from "lucide-react"
+import { Clock, Database, Globe } from "@/lib/icons"
 
 export default function Example() {
   return (

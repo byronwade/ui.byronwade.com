@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { MoreVertical } from "lucide-react"
+import { DotsThreeVertical } from "@/lib/icons"
 
 import type { OverflowMenuItem } from "@/lib/overflow-menu-item"
 import { cn } from "@/lib/utils"
@@ -215,7 +215,7 @@ function UpNextItem({
             aria-label="More options"
             className="inline-flex size-6 shrink-0 items-center justify-center self-start rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <MoreVertical className="size-4" />
+            <DotsThreeVertical className="size-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {menuItems.map((item) => (

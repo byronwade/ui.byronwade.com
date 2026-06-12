@@ -1,6 +1,6 @@
 "use client"
 
-import { Clock, Flag, ListPlus } from "lucide-react"
+import { Clock, Flag, ListPlus } from "@/lib/icons"
 
 import {
   DemoEmptyState,

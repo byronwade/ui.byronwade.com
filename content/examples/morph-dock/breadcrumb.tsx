@@ -1,6 +1,6 @@
 "use client"
 
-import { Pencil } from "lucide-react"
+import { PencilSimple } from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -23,7 +23,7 @@ export default function Example() {
           {
             id: "edit",
             label: "Edit",
-            icon: Pencil,
+            icon: PencilSimple,
             primary: true,
             onSelect: () => {},
           },

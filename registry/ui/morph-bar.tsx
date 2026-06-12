@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Menu } from "lucide-react"
+import { List } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { MorphSurface } from "@/components/ui/morph-surface"
 
@@ -80,7 +80,7 @@ export function MorphBar({
           onClick={() => setOpen((v) => !v)}
           className="grid size-8 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
         >
-          <Menu className="size-4" />
+          <List className="size-4" />
         </button>
       </div>
     </div>

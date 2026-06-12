@@ -74,6 +74,14 @@ const pageEntries: SearchEntry[] = [
   },
   {
     kind: "Section",
+    label: "Icons",
+    href: "/docs/icons",
+    meta: "Guide",
+    keywords:
+      "icons phosphor duotone weight thin light regular bold fill icon library glyph svg currentColor brand accent @/lib/icons gallery",
+  },
+  {
+    kind: "Section",
     label: "AI rules",
     href: "/docs/ai",
     meta: "Guide",

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { LucideIcon } from "lucide-react"
+import { type Icon } from "@/lib/icons"
 
 import { Metric, type Delta } from "@/components/ui/metric"
 
@@ -15,7 +15,7 @@ function StatCard({
   value: ReactNode
   hint?: ReactNode
   delta?: Delta
-  icon?: LucideIcon
+  icon?: Icon
   className?: string
 }) {
   return (

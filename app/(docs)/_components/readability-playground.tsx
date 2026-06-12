@@ -1,6 +1,6 @@
 "use client"
 
-import { RotateCcw } from "lucide-react"
+import { ArrowCounterClockwise } from "@/lib/icons"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -93,7 +93,7 @@ export function ReadabilityPlayground() {
           onClick={handleReset}
           className="gap-1.5"
         >
-          <RotateCcw className="size-3.5" />
+          <ArrowCounterClockwise className="size-3.5" />
           Reset
         </Button>
       </div>

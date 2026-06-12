@@ -1,6 +1,6 @@
 "use client"
 
-import { PackageIcon } from "lucide-react"
+import { Package } from "@/lib/icons"
 import {
   Command,
   CommandEmpty,
@@ -19,7 +19,7 @@ const packages = [
     cta: "Install",
   },
   { name: "cmdk", description: "Command menu for React", cta: "Install" },
-  { name: "lucide-react", description: "Icon library", cta: "Add" },
+  { name: "@phosphor-icons/react", description: "Icon library", cta: "Add" },
 ]
 
 export default function Example() {
@@ -35,7 +35,7 @@ export default function Example() {
                 <CommandResult
                   media={
                     <span className="flex size-9 items-center justify-center rounded-md bg-muted text-muted-foreground">
-                      <PackageIcon className="size-4" />
+                      <Package className="size-4" />
                     </span>
                   }
                   title={p.name}

@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { ArrowRight, Search } from "lucide-react"
+import { ArrowRight, MagnifyingGlass } from "@/lib/icons"
 
 import type { BrowseItem, BrowseTypeFilter } from "@/content/browse"
 import { type SurfaceFilter } from "@/content/catalog-surfaces"
@@ -275,7 +275,7 @@ export function BrowseGallery({
       </div>
 
       <div className="relative mt-4 mb-4">
-        <Search
+        <MagnifyingGlass
           className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
           aria-hidden
         />

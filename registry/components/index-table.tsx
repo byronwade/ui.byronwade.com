@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { cva } from "class-variance-authority"
-import { ChevronDown, ChevronUp, Inbox } from "lucide-react"
+import { CaretDown, CaretUp, Tray } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {
@@ -199,9 +199,9 @@ function IndexTable<Row>({
                       {column.header}
                       {isActive ? (
                         sort?.direction === "asc" ? (
-                          <ChevronUp data-slot="index-table-sort-asc" aria-hidden />
+                          <CaretUp data-slot="index-table-sort-asc" aria-hidden />
                         ) : (
-                          <ChevronDown data-slot="index-table-sort-desc" aria-hidden />
+                          <CaretDown data-slot="index-table-sort-desc" aria-hidden />
                         )
                       ) : null}
                     </Button>
@@ -235,7 +235,7 @@ function IndexTable<Row>({
               <TableCell colSpan={colCount} className="p-0">
                 {emptyState ?? (
                   <EmptyState
-                    icon={Inbox}
+                    icon={Tray}
                     title="Nothing here yet"
                     description="Rows will appear here once there is data to show."
                     className="border-0"

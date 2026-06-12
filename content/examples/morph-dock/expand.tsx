@@ -1,14 +1,14 @@
 "use client"
 
 import {
-  BarChart3,
+  ChartBar,
   CreditCard,
   FileText,
-  Home,
-  Inbox,
-  Settings,
+  Gear,
+  House,
+  Tray,
   Users,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -30,7 +30,7 @@ export default function Example() {
           {
             id: "home",
             label: "Home",
-            icon: Home,
+            icon: House,
             href: "#",
             active: true,
             core: true,
@@ -38,19 +38,19 @@ export default function Example() {
           {
             id: "inbox",
             label: "Inbox",
-            icon: Inbox,
+            icon: Tray,
             href: "#",
             core: true,
             badge: 3,
           },
-          { id: "reports", label: "Reports", icon: BarChart3, href: "#" },
+          { id: "reports", label: "Reports", icon: ChartBar, href: "#" },
           { id: "team", label: "Team", icon: Users, href: "#" },
           { id: "docs", label: "Docs", icon: FileText, href: "#" },
           { id: "billing", label: "Billing", icon: CreditCard, href: "#" },
           {
             id: "settings",
             label: "Settings",
-            icon: Settings,
+            icon: Gear,
             href: "#",
             pinned: true,
           },

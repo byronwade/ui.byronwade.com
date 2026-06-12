@@ -1,6 +1,6 @@
 "use client"
 
-import { CheckIcon, CopyIcon, DownloadIcon } from "lucide-react"
+import { Check, Copy, DownloadSimple } from "@/lib/icons"
 
 import {
   Artifact,
@@ -97,16 +97,16 @@ export default function Example() {
               <span className="font-mono">42 lines</span> · TypeScript
               {isSuccess && (
                 <span className="ml-2 inline-flex items-center gap-1 rounded-md bg-success/10 px-1.5 py-0.5 text-xs font-medium text-success">
-                  <CheckIcon className="size-3" />
+                  <Check className="size-3" />
                   Generated
                 </span>
               )}
             </ArtifactDescription>
           </div>
           <ArtifactActions>
-            <ArtifactAction icon={CopyIcon} label="Copy" tooltip="Copy" />
+            <ArtifactAction icon={Copy} label="Copy" tooltip="Copy" />
             <ArtifactAction
-              icon={DownloadIcon}
+              icon={DownloadSimple}
               label="Download"
               tooltip="Download"
             />

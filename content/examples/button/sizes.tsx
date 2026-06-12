@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Settings } from "lucide-react"
+import { Gear } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -15,16 +15,16 @@ export default function Example() {
       {/* Icon button sizes */}
       <div className="flex flex-wrap items-end gap-3">
         <Button size="icon-xs" aria-label="Settings extra small">
-          <Settings />
+          <Gear />
         </Button>
         <Button size="icon-sm" aria-label="Settings small">
-          <Settings />
+          <Gear />
         </Button>
         <Button size="icon" aria-label="Settings default">
-          <Settings />
+          <Gear />
         </Button>
         <Button size="icon-lg" aria-label="Settings large">
-          <Settings />
+          <Gear />
         </Button>
       </div>
     </div>

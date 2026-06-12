@@ -1,14 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  Check,
-  CheckCheck,
-  Clock,
-  MessageSquare,
-  Plus,
-  X,
-} from "lucide-react"
+import { Chat, Check, Checks, Clock, Plus, X } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { EmptyState } from "@/components/empty-state"
@@ -34,10 +27,10 @@ function StatusTick({ status }: { status: MessageStatus }) {
     return <Check className="size-3 opacity-70" aria-label="Sent" />
   }
   if (status === "delivered") {
-    return <CheckCheck className="size-3 opacity-70" aria-label="Delivered" />
+    return <Checks className="size-3 opacity-70" aria-label="Delivered" />
   }
   if (status === "read") {
-    return <CheckCheck className="size-3 text-brand" aria-label="Read" />
+    return <Checks className="size-3 text-brand" aria-label="Read" />
   }
   return <X className="size-3 text-destructive" aria-label="Failed to send" />
 }
@@ -183,7 +176,7 @@ export function MessageThread({
         )}
       >
         <EmptyState
-          icon={MessageSquare}
+          icon={Chat}
           title="No conversation selected"
           description="Choose a thread from the list to read and reply."
         />

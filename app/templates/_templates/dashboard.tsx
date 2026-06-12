@@ -11,15 +11,15 @@ import * as React from "react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 import {
   Bell,
+  ChartLine,
   CreditCard,
-  Home,
-  LineChart,
+  Gear,
+  House,
+  MagnifyingGlass,
   Plus,
-  Search,
-  Settings,
   ShoppingCart,
   Users,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {
@@ -43,11 +43,11 @@ import {
 } from "@/components/ui/table"
 
 const nav = [
-  { label: "Overview", icon: Home, active: true },
+  { label: "Overview", icon: House, active: true },
   { label: "Customers", icon: Users, active: false },
   { label: "Revenue", icon: CreditCard, active: false },
-  { label: "Reports", icon: LineChart, active: false },
-  { label: "Settings", icon: Settings, active: false },
+  { label: "Reports", icon: ChartLine, active: false },
+  { label: "Settings", icon: Gear, active: false },
 ]
 
 const kpis = [
@@ -73,7 +73,7 @@ const kpis = [
     label: "Refund rate",
     value: "1.4%",
     delta: { value: "0.3%", direction: "down" as const },
-    icon: LineChart,
+    icon: ChartLine,
   },
 ]
 
@@ -197,7 +197,7 @@ export function DashboardTemplate() {
           </div>
           <div className="flex items-center gap-2">
             <div className="edge hidden items-center gap-2 rounded-lg bg-card px-3 py-1.5 text-sm text-muted-foreground sm:flex">
-              <Search className="size-4" />
+              <MagnifyingGlass className="size-4" />
               <span>Search…</span>
             </div>
             <Button variant="outline" size="icon-sm" aria-label="Notifications">

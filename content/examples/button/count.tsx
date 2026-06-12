@@ -1,4 +1,4 @@
-import { ThumbsUp, Star, GitFork } from "lucide-react"
+import { GitFork, Star, ThumbsUp } from "@/lib/icons"
 import { Button } from "@/components/ui/button"
 
 /**

@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Download, Trash2 } from "lucide-react"
+import { DownloadSimple, Trash } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -11,12 +11,12 @@ export default function Example() {
       <Button variant="secondary">Export</Button>
       <Button variant="ghost">Learn more</Button>
       <Button variant="destructive">
-        <Trash2 />
+        <Trash />
         Delete
       </Button>
       <Button variant="link">View docs</Button>
       <Button size="icon" aria-label="Download">
-        <Download />
+        <DownloadSimple />
       </Button>
       <Button size="sm" variant="outline" onClick={() => alert("Clicked!")}>
         Small

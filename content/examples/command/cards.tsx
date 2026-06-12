@@ -1,11 +1,6 @@
 "use client"
 
-import {
-  CreditCardIcon,
-  UsersIcon,
-  KeyRoundIcon,
-  type LucideIcon,
-} from "lucide-react"
+import { CreditCard, Key, Users, type Icon } from "@/lib/icons"
 import {
   Command,
   CommandEmpty,
@@ -17,7 +12,7 @@ import {
 import { CommandResult } from "@/components/command-result"
 import { Badge } from "@/components/ui/badge"
 
-function Tile({ icon: Icon }: { icon: LucideIcon }) {
+function Tile({ icon: Icon }: { icon: Icon }) {
   return (
     <span className="flex size-9 items-center justify-center rounded-md bg-brand/10 text-brand">
       <Icon className="size-4" />
@@ -29,19 +24,19 @@ const settings = [
   {
     title: "Billing",
     description: "Manage your plan and invoices",
-    icon: CreditCardIcon,
+    icon: CreditCard,
     badge: "Pro",
   },
   {
     title: "Members",
     description: "Invite teammates and set roles",
-    icon: UsersIcon,
+    icon: Users,
     badge: null,
   },
   {
     title: "API keys",
     description: "Create and rotate access tokens",
-    icon: KeyRoundIcon,
+    icon: Key,
     badge: null,
   },
 ]

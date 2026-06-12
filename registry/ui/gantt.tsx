@@ -29,7 +29,7 @@ import {
 } from "date-fns"
 import { atom, useAtom } from "jotai"
 import throttle from "lodash.throttle"
-import { MinusIcon, PlusIcon, TrashIcon } from "lucide-react"
+import { Minus, Plus, Trash } from "@/lib/icons"
 import type {
   CSSProperties,
   FC,
@@ -692,7 +692,7 @@ export const GanttAddFeatureHelper: FC<GanttAddFeatureHelperProps> = ({
         onClick={handleClick}
         type="button"
       >
-        <PlusIcon className="pointer-events-none size-4 select-none text-muted-foreground" />
+        <Plus className="pointer-events-none size-4 select-none text-muted-foreground" />
       </button>
     </div>
   )
@@ -813,7 +813,7 @@ export const GanttCreateMarkerTrigger: FC<GanttCreateMarkerTriggerProps> = ({
           onClick={handleClick}
           type="button"
         >
-          <PlusIcon className="size-3 text-muted-foreground" />
+          <Plus className="size-3 text-muted-foreground" />
         </button>
         <div className="whitespace-nowrap rounded-full edge bg-background/90 px-2 py-1 font-mono text-xs text-foreground backdrop-blur-lg">
           {formatDate(date, "MMM dd, yyyy")}
@@ -1266,7 +1266,7 @@ export const GanttMarker: FC<
               className="flex items-center gap-2"
               onClick={handleRemove}
             >
-              <TrashIcon className="size-4" />
+              <Trash className="size-4" />
               Remove marker
             </ContextMenuItem>
           ) : null}
@@ -1722,7 +1722,7 @@ export const GanttControls: FC<GanttControlsProps> = ({
           disabled={zoom <= 50}
           onClick={() => setZoom?.(Math.max(50, zoom - zoomStep))}
         >
-          <MinusIcon className="size-3.5" />
+          <Minus className="size-3.5" />
         </Button>
         <span className="w-11 text-center font-mono text-xs text-muted-foreground tabular-nums">
           {zoom}%
@@ -1736,7 +1736,7 @@ export const GanttControls: FC<GanttControlsProps> = ({
           disabled={zoom >= 200}
           onClick={() => setZoom?.(Math.min(200, zoom + zoomStep))}
         >
-          <PlusIcon className="size-3.5" />
+          <Plus className="size-3.5" />
         </Button>
       </div>
     </div>

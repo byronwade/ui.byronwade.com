@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2Icon, AlertTriangleIcon, InfoIcon } from "lucide-react"
+import { CheckCircle, Info, Warning } from "@/lib/icons"
 import {
   Dialog,
   DialogContent,
@@ -25,7 +25,7 @@ const variants: Record<
   }
 > = {
   success: {
-    icon: CheckCircle2Icon,
+    icon: CheckCircle,
     iconClass: "text-success",
     title: "Changes saved",
     description:
@@ -33,7 +33,7 @@ const variants: Record<
     label: "Success",
   },
   warning: {
-    icon: AlertTriangleIcon,
+    icon: Warning,
     iconClass: "text-warning",
     title: "Unsaved changes",
     description:
@@ -41,7 +41,7 @@ const variants: Record<
     label: "Warning",
   },
   info: {
-    icon: InfoIcon,
+    icon: Info,
     iconClass: "text-brand",
     title: "New feature available",
     description:

@@ -5,7 +5,7 @@
 // hero on a gridded, brand-lit backdrop; a multi-region strip and a tiled bento of
 // KPI sparklines, activity, and a timeline carry the density below. Rounded/elevated
 // surfaces are reserved for the floating hero card; data tiles sit on 1px seams.
-import { Activity, Cpu, Timer, Zap } from "lucide-react"
+import { Cpu, Lightning, Pulse, Timer } from "@/lib/icons"
 
 import { ActivityRing } from "@/components/ui/activity-ring"
 import { ActivityGrid } from "@/components/ui/activity-grid"
@@ -28,7 +28,7 @@ const kpis = [
     label: "Uptime",
     value: "99.98%",
     hint: "30-day",
-    icon: Activity,
+    icon: Pulse,
     data: series.uptime,
     dir: "up" as const,
     delta: "0.02%",
@@ -48,7 +48,7 @@ const kpis = [
     label: "Error rate",
     value: "0.04%",
     hint: "last hour",
-    icon: Zap,
+    icon: Lightning,
     data: series.errors,
     dir: "down" as const,
     delta: "0.01%",

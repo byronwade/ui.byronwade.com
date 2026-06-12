@@ -1,4 +1,4 @@
-import { MailIcon, SendIcon } from "lucide-react"
+import { Envelope, PaperPlaneTilt } from "@/lib/icons"
 import {
   InputGroup,
   InputGroupAddon,
@@ -10,12 +10,12 @@ export default function Example() {
   return (
     <InputGroup className="max-w-sm">
       <InputGroupAddon>
-        <MailIcon className="size-4 opacity-50" />
+        <Envelope className="size-4 opacity-50" />
       </InputGroupAddon>
       <InputGroupInput type="email" placeholder="you@example.com" />
       <InputGroupAddon align="inline-end">
         <InputGroupButton size="icon-xs" aria-label="Send invite">
-          <SendIcon />
+          <PaperPlaneTilt />
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>

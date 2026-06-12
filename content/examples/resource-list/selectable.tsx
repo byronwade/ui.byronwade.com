@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Archive, Tag, Trash2 } from "lucide-react"
+import { Archive, Tag, Trash } from "@/lib/icons"
 
 import { ResourceList, ResourceItem } from "@/components/resource-list"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -45,7 +45,7 @@ export default function Example() {
       bulkActions={[
         { id: "tag", label: "Add tags", icon: Tag, promoted: true },
         { id: "archive", label: "Archive", icon: Archive },
-        { id: "delete", label: "Delete", icon: Trash2, tone: "destructive" },
+        { id: "delete", label: "Delete", icon: Trash, tone: "destructive" },
       ]}
     >
       {customers.map((customer) => (

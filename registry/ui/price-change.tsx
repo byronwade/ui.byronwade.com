@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { TrendingDown, TrendingUp } from "lucide-react"
+import { TrendDown, TrendUp } from "@/lib/icons"
 
 import { formatPercent, formatPrice } from "@/lib/market"
 import { cn } from "@/lib/utils"
@@ -94,7 +94,7 @@ function PriceChange({
         : `${absoluteText} (${percentText})`
 
   const tone = toneClass[direction]
-  const Icon = direction === "up" ? TrendingUp : TrendingDown
+  const Icon = direction === "up" ? TrendUp : TrendDown
 
   return (
     <span

@@ -1,5 +1,5 @@
 import { MetricStat } from "@/components/metric-stat"
-import { Users, ShoppingCart, TrendingUp, Star } from "lucide-react"
+import { ShoppingCart, Star, TrendUp, Users } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -17,7 +17,7 @@ export default function Example() {
         delta={{ value: "-1.8%", direction: "down" }}
       />
       <MetricStat
-        icon={TrendingUp}
+        icon={TrendUp}
         label="Growth"
         value="18.6%"
         delta={{ value: "+2.1%", direction: "up" }}

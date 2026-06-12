@@ -1,6 +1,6 @@
 "use client"
 
-import { RotateCcw } from "lucide-react"
+import { ArrowCounterClockwise } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { SegmentedControl } from "@/components/ui/segmented-control"
@@ -82,7 +82,7 @@ export function ReskinBar({
           title="Reset"
           className="grid size-6 place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
         >
-          <RotateCcw className="size-3.5" />
+          <ArrowCounterClockwise className="size-3.5" />
         </button>
       )}
     </div>

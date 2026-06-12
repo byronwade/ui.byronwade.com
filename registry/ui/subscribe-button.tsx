@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Bell, BellOff, BellRing, ChevronDown } from "lucide-react"
+import { Bell, BellRinging, BellSlash, CaretDown } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -17,8 +17,8 @@ type NotificationLevel = "all" | "personalized" | "none"
 
 const notificationIcon = {
   all: Bell,
-  personalized: BellRing,
-  none: BellOff,
+  personalized: BellRinging,
+  none: BellSlash,
 } as const
 
 type SubscribeButtonProps = {
@@ -91,7 +91,7 @@ function SubscribeButton({
             <Button variant="secondary" data-slot="subscribe-button-manage">
               <LevelIcon />
               {subscribedLabel}
-              <ChevronDown className="text-muted-foreground" />
+              <CaretDown className="text-muted-foreground" />
             </Button>
           }
         />
@@ -107,14 +107,14 @@ function SubscribeButton({
             data-slot="subscribe-button-level-personalized"
             onClick={() => setNotification("personalized")}
           >
-            <BellRing />
+            <BellRinging />
             Personalized
           </DropdownMenuItem>
           <DropdownMenuItem
             data-slot="subscribe-button-level-none"
             onClick={() => setNotification("none")}
           >
-            <BellOff />
+            <BellSlash />
             None
           </DropdownMenuItem>
           <DropdownMenuSeparator />

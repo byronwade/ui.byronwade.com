@@ -1,12 +1,6 @@
 "use client"
 
-import {
-  CalendarIcon,
-  CreditCardIcon,
-  SettingsIcon,
-  SmileIcon,
-  UserIcon,
-} from "lucide-react"
+import { Calendar, CreditCard, Gear, Smiley, User } from "@/lib/icons"
 import {
   Command,
   CommandEmpty,
@@ -26,27 +20,27 @@ export default function Example() {
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
             <CommandItem>
-              <CalendarIcon />
+              <Calendar />
               Calendar
             </CommandItem>
             <CommandItem>
-              <SmileIcon />
+              <Smiley />
               Search emoji
             </CommandItem>
           </CommandGroup>
           <CommandGroup heading="Settings">
             <CommandItem>
-              <UserIcon />
+              <User />
               Profile
               <CommandShortcut>⌘P</CommandShortcut>
             </CommandItem>
             <CommandItem>
-              <CreditCardIcon />
+              <CreditCard />
               Billing
               <CommandShortcut>⌘B</CommandShortcut>
             </CommandItem>
             <CommandItem>
-              <SettingsIcon />
+              <Gear />
               Settings
             </CommandItem>
           </CommandGroup>

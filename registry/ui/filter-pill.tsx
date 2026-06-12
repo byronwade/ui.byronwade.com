@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ChevronsUpDown } from "lucide-react"
+import { CaretUpDown } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 /** Pill+chevron filter/range trigger (AGENTS.md Controls). Pass as `render` to a Select/Menu trigger,
@@ -21,7 +21,7 @@ export const FilterPill = React.forwardRef<
     >
       {icon}
       {children}
-      <ChevronsUpDown className="size-3.5 text-muted-foreground" />
+      <CaretUpDown className="size-3.5 text-muted-foreground" />
     </button>
   )
 })

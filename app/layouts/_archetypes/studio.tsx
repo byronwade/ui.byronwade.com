@@ -5,16 +5,16 @@
 import * as React from "react"
 import {
   Heart,
-  ListMusic,
+  MagnifyingGlass,
   Pause,
   Play,
+  Playlist,
   Repeat,
-  Search,
   Shuffle,
   SkipBack,
   SkipForward,
-  Volume2,
-} from "lucide-react"
+  SpeakerHigh,
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -92,14 +92,14 @@ export function StudioArchetype() {
       <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border px-4 sm:px-6">
         <div className="flex items-center gap-2 font-medium tracking-tight">
           <span className="grid size-6 place-items-center rounded-md bg-brand text-brand-foreground">
-            <ListMusic className="size-3.5" />
+            <Playlist className="size-3.5" />
           </span>
           Resonate
         </div>
         <div className="hidden w-full max-w-sm sm:block">
           <InputGroup>
             <InputGroupAddon>
-              <Search />
+              <MagnifyingGlass />
             </InputGroupAddon>
             <InputGroupInput placeholder="Search songs, artists, albums…" />
           </InputGroup>
@@ -287,7 +287,7 @@ export function StudioArchetype() {
         </div>
 
         <div className="hidden flex-1 items-center justify-end gap-2 sm:flex">
-          <Volume2 className="size-4 text-muted-foreground" />
+          <SpeakerHigh className="size-4 text-muted-foreground" />
           <div className="h-1 w-24 overflow-hidden rounded-full bg-muted">
             <div className="h-full w-2/3 rounded-full bg-foreground/60" />
           </div>

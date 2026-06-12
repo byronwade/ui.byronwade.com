@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { Menu } from "lucide-react"
+import { List } from "@/lib/icons"
 
 import { AppLauncher } from "./app-launcher"
 import { AppBreadcrumb } from "./app-breadcrumb"
@@ -22,7 +22,7 @@ function DocsMenuButton() {
         onClick={() => window.dispatchEvent(new Event("open-docs-nav"))}
         className="flex size-8 items-center justify-center rounded-full text-dock-foreground transition-colors hover:bg-dock-active hover:text-dock-active-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
       >
-        <Menu className="size-4" strokeWidth={2} />
+        <List className="size-4" strokeWidth={2} />
       </button>
     </div>
   )

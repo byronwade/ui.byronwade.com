@@ -1,4 +1,4 @@
-import { Clock, Globe, Hash } from "lucide-react"
+import { Clock, Globe, Hash } from "@/lib/icons"
 import { StatCard } from "@/components/stat-card"
 
 /** Cards that display a value and hint without any delta indicator, useful for absolute metrics. */

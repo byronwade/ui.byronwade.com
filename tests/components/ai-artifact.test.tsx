@@ -24,7 +24,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { axe } from "vitest-axe";
-import { CopyIcon } from "lucide-react";
+import { Copy } from "@/lib/icons"
 
 import {
   Artifact,
@@ -50,7 +50,7 @@ function renderFullArtifact() {
           <ArtifactDescription>24 lines</ArtifactDescription>
         </div>
         <ArtifactActions>
-          <ArtifactAction icon={CopyIcon} label="Copy" tooltip="Copy" />
+          <ArtifactAction icon={Copy} label="Copy" tooltip="Copy" />
           <ArtifactClose />
         </ArtifactActions>
       </ArtifactHeader>
@@ -403,13 +403,13 @@ describe("ArtifactAction — without tooltip", () => {
 
   it("renders the icon (not children) when an icon is provided", () => {
     const { container } = render(
-      <ArtifactAction icon={CopyIcon} label="Copy" />
+      <ArtifactAction icon={Copy} label="Copy" />
     );
     expect(container.querySelector("svg")).toBeInTheDocument();
   });
 
   it("exposes the label via sr-only text", () => {
-    render(<ArtifactAction icon={CopyIcon} label="Copy code" />);
+    render(<ArtifactAction icon={Copy} label="Copy code" />);
     expect(
       screen.getByRole("button", { name: "Copy code" })
     ).toBeInTheDocument();
@@ -417,7 +417,7 @@ describe("ArtifactAction — without tooltip", () => {
 
   it("falls back to tooltip text for sr-only when no label and no tooltip wrapper", () => {
     // label is undefined; tooltip is undefined -> sr-only is empty, button still renders
-    const { container } = render(<ArtifactAction icon={CopyIcon} />);
+    const { container } = render(<ArtifactAction icon={Copy} />);
     expect(
       container.querySelector("[data-slot='artifact-action']")
     ).toBeInTheDocument();
@@ -440,7 +440,7 @@ describe("ArtifactAction — without tooltip", () => {
 
   it("accepts size and variant overrides", () => {
     render(
-      <ArtifactAction icon={CopyIcon} label="A" size="icon" variant="outline" />
+      <ArtifactAction icon={Copy} label="A" size="icon" variant="outline" />
     );
     expect(screen.getByRole("button", { name: "A" })).toBeInTheDocument();
   });
@@ -448,7 +448,7 @@ describe("ArtifactAction — without tooltip", () => {
   it("fires onClick when clicked", async () => {
     const user = userEvent.setup();
     const onClick = vi.fn();
-    render(<ArtifactAction icon={CopyIcon} label="Copy" onClick={onClick} />);
+    render(<ArtifactAction icon={Copy} label="Copy" onClick={onClick} />);
     await user.click(screen.getByRole("button", { name: "Copy" }));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
@@ -469,7 +469,7 @@ describe("ArtifactAction — without tooltip", () => {
 describe("ArtifactAction — with tooltip", () => {
   it("still renders the action button when tooltip is set", () => {
     const { container } = render(
-      <ArtifactAction icon={CopyIcon} label="Copy" tooltip="Copy to clipboard" />
+      <ArtifactAction icon={Copy} label="Copy" tooltip="Copy to clipboard" />
     );
     expect(
       container.querySelector("[data-slot='artifact-action']")
@@ -478,7 +478,7 @@ describe("ArtifactAction — with tooltip", () => {
 
   it("renders sr-only label text (label takes precedence over tooltip)", () => {
     render(
-      <ArtifactAction icon={CopyIcon} label="Copy file" tooltip="Tooltip text" />
+      <ArtifactAction icon={Copy} label="Copy file" tooltip="Tooltip text" />
     );
     expect(
       screen.getByRole("button", { name: "Copy file" })
@@ -486,14 +486,14 @@ describe("ArtifactAction — with tooltip", () => {
   });
 
   it("uses tooltip text as sr-only label when no explicit label", () => {
-    render(<ArtifactAction icon={CopyIcon} tooltip="Copy" />);
+    render(<ArtifactAction icon={Copy} tooltip="Copy" />);
     expect(screen.getByRole("button", { name: "Copy" })).toBeInTheDocument();
   });
 
   it("shows tooltip content on focus", async () => {
     const user = userEvent.setup();
     render(
-      <ArtifactAction icon={CopyIcon} label="Copy" tooltip="Copy snippet" />
+      <ArtifactAction icon={Copy} label="Copy" tooltip="Copy snippet" />
     );
     await user.tab();
     await waitFor(() => {
@@ -510,7 +510,7 @@ describe("ArtifactAction — with tooltip", () => {
     const onClick = vi.fn();
     render(
       <ArtifactAction
-        icon={CopyIcon}
+        icon={Copy}
         label="Copy"
         tooltip="Copy"
         onClick={onClick}
@@ -719,7 +719,7 @@ describe("Artifact — accessibility (axe)", () => {
               <ArtifactDescription>42 lines · TypeScript</ArtifactDescription>
             </div>
             <ArtifactActions>
-              <ArtifactAction icon={CopyIcon} label="Copy" tooltip="Copy" />
+              <ArtifactAction icon={Copy} label="Copy" tooltip="Copy" />
               <ArtifactClose />
             </ArtifactActions>
           </ArtifactHeader>

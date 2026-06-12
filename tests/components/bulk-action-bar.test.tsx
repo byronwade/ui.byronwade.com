@@ -3,7 +3,7 @@ import { render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, it, expect, vi } from "vitest"
 import { axe } from "vitest-axe"
-import { Tag } from "lucide-react"
+import { Tag } from "@/lib/icons"
 import { BulkActionBar, type BulkAction } from "@/components/ui/bulk-action-bar"
 
 const baseActions: BulkAction[] = [

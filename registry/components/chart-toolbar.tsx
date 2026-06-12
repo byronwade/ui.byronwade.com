@@ -1,7 +1,7 @@
 "use client"
 
 import type { ComponentPropsWithoutRef, ReactNode } from "react"
-import { BarChart3, CandlestickChart, LineChart, Settings2 } from "lucide-react"
+import { ChartBar, ChartLine, GearSix } from "@/lib/icons"
 
 import { Button } from "@/components/ui/button"
 import { SegmentedControl } from "@/components/ui/segmented-control"
@@ -99,21 +99,21 @@ function ChartToolbar({
           aria-label="Candlestick chart"
           className={cn(compact && "size-7 px-1.5")}
         >
-          <CandlestickChart className={cn(compact ? "size-3.5" : "size-4")} />
+          <ChartBar className={cn(compact ? "size-3.5" : "size-4")} />
         </ToggleGroupItem>
         <ToggleGroupItem
           value="line"
           aria-label="Line chart"
           className={cn(compact && "size-7 px-1.5")}
         >
-          <LineChart className={cn(compact ? "size-3.5" : "size-4")} />
+          <ChartLine className={cn(compact ? "size-3.5" : "size-4")} />
         </ToggleGroupItem>
         <ToggleGroupItem
           value="area"
           aria-label="Area chart"
           className={cn(compact && "size-7 px-1.5")}
         >
-          <BarChart3 className={cn(compact ? "size-3.5" : "size-4")} />
+          <ChartBar className={cn(compact ? "size-3.5" : "size-4")} />
         </ToggleGroupItem>
       </ToggleGroup>
       {onIndicatorsClick ? (
@@ -126,7 +126,7 @@ function ChartToolbar({
           className={cn(compact && "h-7 gap-1.5 px-2 text-xs")}
           onClick={onIndicatorsClick}
         >
-          <Settings2 className={cn(compact ? "size-3.5" : "size-4")} />
+          <GearSix className={cn(compact ? "size-3.5" : "size-4")} />
           Indicators
         </Button>
       ) : null}

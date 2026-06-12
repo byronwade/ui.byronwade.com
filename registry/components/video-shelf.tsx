@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { CaretLeft, CaretRight } from "@/lib/icons"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -256,7 +256,7 @@ function VideoShelf({
               canScrollLeft && "opacity-100",
             )}
           >
-            <ChevronLeft className="size-5" aria-hidden />
+            <CaretLeft className="size-5" aria-hidden />
           </button>
         ) : null}
 
@@ -301,7 +301,7 @@ function VideoShelf({
               canScrollRight && "opacity-100",
             )}
           >
-            <ChevronRight className="size-5" aria-hidden />
+            <CaretRight className="size-5" aria-hidden />
           </button>
         ) : null}
       </div>

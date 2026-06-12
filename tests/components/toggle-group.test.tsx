@@ -3,14 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { axe } from "vitest-axe";
-import {
-  AlignCenterIcon,
-  AlignLeftIcon,
-  AlignRightIcon,
-  BoldIcon,
-  ItalicIcon,
-  UnderlineIcon,
-} from "lucide-react";
+import { TextAlignCenter, TextAlignLeft, TextAlignRight, TextB, TextItalic, TextUnderline } from "@/lib/icons"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 const root = (container: HTMLElement) =>
@@ -20,13 +13,13 @@ function AlignGroup(props: React.ComponentProps<typeof ToggleGroup>) {
   return (
     <ToggleGroup defaultValue={["left"]} {...props}>
       <ToggleGroupItem value="left" aria-label="Align left">
-        <AlignLeftIcon />
+        <TextAlignLeft />
       </ToggleGroupItem>
       <ToggleGroupItem value="center" aria-label="Align center">
-        <AlignCenterIcon />
+        <TextAlignCenter />
       </ToggleGroupItem>
       <ToggleGroupItem value="right" aria-label="Align right">
-        <AlignRightIcon />
+        <TextAlignRight />
       </ToggleGroupItem>
     </ToggleGroup>
   );
@@ -36,13 +29,13 @@ function FormatGroup(props: React.ComponentProps<typeof ToggleGroup>) {
   return (
     <ToggleGroup multiple defaultValue={["bold"]} {...props}>
       <ToggleGroupItem value="bold" aria-label="Bold">
-        <BoldIcon />
+        <TextB />
       </ToggleGroupItem>
       <ToggleGroupItem value="italic" aria-label="Italic">
-        <ItalicIcon />
+        <TextItalic />
       </ToggleGroupItem>
       <ToggleGroupItem value="underline" aria-label="Underline">
-        <UnderlineIcon />
+        <TextUnderline />
       </ToggleGroupItem>
     </ToggleGroup>
   );

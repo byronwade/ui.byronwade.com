@@ -1,4 +1,4 @@
-import { CircleAlertIcon } from "lucide-react"
+import { WarningCircle } from "@/lib/icons"
 import {
   InputGroup,
   InputGroupAddon,
@@ -10,7 +10,7 @@ export default function Example() {
     <div className="grid max-w-sm gap-1.5">
       <InputGroup>
         <InputGroupAddon>
-          <CircleAlertIcon className="size-4 text-destructive" />
+          <WarningCircle className="size-4 text-destructive" />
         </InputGroupAddon>
         <InputGroupInput
           aria-label="Email"

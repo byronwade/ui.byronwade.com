@@ -1,4 +1,4 @@
-import { PlusCircle } from "lucide-react"
+import { PlusCircle } from "@/lib/icons"
 import { EmptyState } from "@/components/empty-state"
 import { Button } from "@/components/ui/button"
 

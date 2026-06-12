@@ -2,16 +2,7 @@
 
 import type { ComponentPropsWithoutRef } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import {
-  Circle,
-  Minus,
-  MoveHorizontal,
-  PenLine,
-  Slash,
-  Square,
-  Type,
-  type LucideIcon,
-} from "lucide-react"
+import { ArrowsHorizontal, Circle, LineSegment, Minus, PencilSimpleLine, Square, TextT, type Icon } from "@/lib/icons"
 
 import {
   Tooltip,
@@ -25,17 +16,17 @@ import { cn } from "@/lib/utils"
 type DrawingTool = {
   id: string
   label: string
-  icon: LucideIcon
+  icon: Icon
 }
 
 const DEFAULT_TOOLS: DrawingTool[] = [
-  { id: "cursor", label: "Cursor", icon: MoveHorizontal },
-  { id: "trendline", label: "Trend line", icon: Slash },
+  { id: "cursor", label: "Cursor", icon: ArrowsHorizontal },
+  { id: "trendline", label: "Trend line", icon: LineSegment },
   { id: "hline", label: "Horizontal line", icon: Minus },
   { id: "rectangle", label: "Rectangle", icon: Square },
   { id: "fib", label: "Fibonacci", icon: Circle },
-  { id: "text", label: "Text", icon: Type },
-  { id: "brush", label: "Brush", icon: PenLine },
+  { id: "text", label: "Text", icon: TextT },
+  { id: "brush", label: "Brush", icon: PencilSimpleLine },
 ]
 
 const drawingToolbarVariants = cva(

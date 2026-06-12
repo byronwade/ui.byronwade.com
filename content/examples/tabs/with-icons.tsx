@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChart2, Bell, Settings, User } from "lucide-react"
+import { Bell, ChartBar, Gear, User } from "@/lib/icons"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Example() {
@@ -13,7 +13,7 @@ export default function Example() {
             Profile
           </TabsTrigger>
           <TabsTrigger value={1}>
-            <BarChart2 />
+            <ChartBar />
             Stats
           </TabsTrigger>
           <TabsTrigger value={2}>
@@ -21,7 +21,7 @@ export default function Example() {
             Alerts
           </TabsTrigger>
           <TabsTrigger value={3}>
-            <Settings />
+            <Gear />
             Settings
           </TabsTrigger>
         </TabsList>

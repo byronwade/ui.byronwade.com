@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { TriangleAlert } from "lucide-react"
+import { Warning } from "@/lib/icons"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 import { BLEED, DocsIntro } from "@/app/(docs)/_components/docs-prose"
@@ -208,7 +208,7 @@ export default function InstallationPage() {
             Manual setup
           </p>
           <div className="mt-3 flex items-start gap-3 rounded-2xl edge bg-destructive/10 p-4">
-            <TriangleAlert className="mt-0.5 size-5 shrink-0 text-destructive" />
+            <Warning className="mt-0.5 size-5 shrink-0 text-destructive" />
             <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
               <span className="font-medium text-foreground">
                 Don&apos;t run init on an existing theme

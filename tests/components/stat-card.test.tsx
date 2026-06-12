@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { expect, describe, it } from "vitest";
 import { axe } from "vitest-axe";
-import { Users, Activity, Clock, Globe, Hash, BarChart2, ShoppingCart, Star, TrendingUp, Database, Server, Zap } from "lucide-react";
+import { ChartBar, Clock, Database, Globe, HardDrives, Hash, Lightning, Pulse, ShoppingCart, Star, TrendUp, Users } from "@/lib/icons"
 import { StatCard } from "@/components/stat-card";
 import { DeltaPill, type Delta } from "@/components/metric-stat";
 
@@ -493,7 +493,7 @@ describe("StatCard", () => {
 
     it("icon has size-4 class", () => {
       const { container } = render(
-        <StatCard label="Page Views" value="1.24M" icon={BarChart2} />
+        <StatCard label="Page Views" value="1.24M" icon={ChartBar} />
       );
       const svg = container.querySelector("svg");
       expect(svg).toHaveClass("size-4");
@@ -501,7 +501,7 @@ describe("StatCard", () => {
 
     it("icon has text-muted-foreground class", () => {
       const { container } = render(
-        <StatCard label="Page Views" value="1.24M" icon={BarChart2} />
+        <StatCard label="Page Views" value="1.24M" icon={ChartBar} />
       );
       const svg = container.querySelector("svg");
       expect(svg).toHaveClass("text-muted-foreground");
@@ -509,7 +509,7 @@ describe("StatCard", () => {
 
     it("renders Activity icon", () => {
       const { container } = render(
-        <StatCard label="Requests/s" value="2,104" icon={Activity} />
+        <StatCard label="Requests/s" value="2,104" icon={Pulse} />
       );
       expect(container.querySelector("svg")).toBeInTheDocument();
     });
@@ -551,7 +551,7 @@ describe("StatCard", () => {
 
     it("renders TrendingUp icon", () => {
       const { container } = render(
-        <StatCard label="Growth Rate" value="22.8%" icon={TrendingUp} />
+        <StatCard label="Growth Rate" value="22.8%" icon={TrendUp} />
       );
       expect(container.querySelector("svg")).toBeInTheDocument();
     });
@@ -565,14 +565,14 @@ describe("StatCard", () => {
 
     it("renders Server icon", () => {
       const { container } = render(
-        <StatCard label="Servers" value="24/24" icon={Server} />
+        <StatCard label="Servers" value="24/24" icon={HardDrives} />
       );
       expect(container.querySelector("svg")).toBeInTheDocument();
     });
 
     it("renders Zap icon", () => {
       const { container } = render(
-        <StatCard label="Error Rate" value="0.04%" icon={Zap} />
+        <StatCard label="Error Rate" value="0.04%" icon={Lightning} />
       );
       expect(container.querySelector("svg")).toBeInTheDocument();
     });
@@ -790,7 +790,7 @@ describe("StatCard", () => {
           label="Page Views"
           value="1.24M"
           delta={{ value: "+18.2%", direction: "up" }}
-          icon={BarChart2}
+          icon={ChartBar}
           hint="last 7 days"
         />
       );
@@ -811,8 +811,8 @@ describe("StatCard", () => {
       render(
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <StatCard label="Active Users" value="8,340" delta={{ value: "+5.2%", direction: "up" }} icon={Users} hint="last 24 h" />
-          <StatCard label="Requests / s" value="2,104" delta={{ value: "+1.8%", direction: "up" }} icon={Activity} hint="p95 latency 42 ms" />
-          <StatCard label="Error Rate" value="0.04%" delta={{ value: "+0.01%", direction: "down" }} icon={Zap} hint="last 1 h window" />
+          <StatCard label="Requests / s" value="2,104" delta={{ value: "+1.8%", direction: "up" }} icon={Pulse} hint="p95 latency 42 ms" />
+          <StatCard label="Error Rate" value="0.04%" delta={{ value: "+0.01%", direction: "down" }} icon={Lightning} hint="last 1 h window" />
           <StatCard label="DB Queries" value="182K" delta={{ value: "-3.4%", direction: "down" }} icon={Database} hint="cache hit 94%" />
         </div>
       );
@@ -823,7 +823,7 @@ describe("StatCard", () => {
     });
 
     it("renders a servers-online card without delta", () => {
-      render(<StatCard label="Servers Online" value="24 / 24" icon={Server} hint="all regions healthy" />);
+      render(<StatCard label="Servers Online" value="24 / 24" icon={HardDrives} hint="all regions healthy" />);
       expect(screen.getByText("Servers Online")).toBeInTheDocument();
       expect(screen.getByText("24 / 24")).toBeInTheDocument();
       expect(screen.getByText("all regions healthy")).toBeInTheDocument();
@@ -842,10 +842,10 @@ describe("StatCard", () => {
       render(
         <div>
           <StatCard label="Active Users" value="8,340" delta={{ value: "+5.2%", direction: "up" }} icon={Users} hint="last 24 h" />
-          <StatCard label="Requests / s" value="2,104" delta={{ value: "+1.8%", direction: "up" }} icon={Activity} hint="p95 latency 42 ms" />
-          <StatCard label="Error Rate" value="0.04%" delta={{ value: "+0.01%", direction: "down" }} icon={Zap} hint="last 1 h window" />
+          <StatCard label="Requests / s" value="2,104" delta={{ value: "+1.8%", direction: "up" }} icon={Pulse} hint="p95 latency 42 ms" />
+          <StatCard label="Error Rate" value="0.04%" delta={{ value: "+0.01%", direction: "down" }} icon={Lightning} hint="last 1 h window" />
           <StatCard label="DB Queries" value="182K" delta={{ value: "-3.4%", direction: "down" }} icon={Database} hint="cache hit 94%" />
-          <StatCard label="Servers Online" value="24 / 24" icon={Server} hint="all regions healthy" />
+          <StatCard label="Servers Online" value="24 / 24" icon={HardDrives} hint="all regions healthy" />
           <StatCard label="Uptime" value="99.99%" delta={{ value: "0.0%", direction: "flat" }} hint="rolling 30 days" />
         </div>
       );
@@ -1107,7 +1107,7 @@ describe("StatCard", () => {
           label="Page Views"
           value="1.24M"
           delta={{ value: "+18.2%", direction: "up" }}
-          icon={BarChart2}
+          icon={ChartBar}
           hint="last 7 days"
           className="w-full"
         />

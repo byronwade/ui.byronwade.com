@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { axe } from "vitest-axe";
-import { SearchIcon } from "lucide-react";
+import { MagnifyingGlass } from "@/lib/icons"
 import {
   InputGroup,
   InputGroupAddon,
@@ -107,7 +107,7 @@ describe("InputGroup – addon", () => {
     const { container } = render(
       <InputGroup>
         <InputGroupAddon>
-          <SearchIcon aria-hidden />
+          <MagnifyingGlass aria-hidden />
         </InputGroupAddon>
         <InputGroupInput aria-label="field" />
       </InputGroup>
@@ -122,7 +122,7 @@ describe("InputGroup – addon", () => {
     render(
       <InputGroup>
         <InputGroupAddon data-testid="addon">
-          <SearchIcon aria-hidden />
+          <MagnifyingGlass aria-hidden />
         </InputGroupAddon>
         <InputGroupInput aria-label="Search" />
       </InputGroup>
@@ -204,7 +204,7 @@ describe("InputGroup – accessibility", () => {
     const { container } = render(
       <InputGroup>
         <InputGroupAddon>
-          <SearchIcon aria-hidden />
+          <MagnifyingGlass aria-hidden />
         </InputGroupAddon>
         <InputGroupInput aria-label="Search projects" />
       </InputGroup>

@@ -7,7 +7,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card"
-import { Users, ShoppingCart, Package, ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Package, ShoppingCart, Users } from "@/lib/icons"
 
 const metrics = [
   {

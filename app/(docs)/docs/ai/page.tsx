@@ -2,12 +2,12 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 import Link from "next/link"
 import {
-  Blocks,
+  BookOpen,
   Palette,
   SlidersHorizontal,
-  Accessibility,
-  BookOpen,
-} from "lucide-react"
+  StackSimple,
+  Wheelchair,
+} from "@/lib/icons"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 import { BLEED, DocsIntro } from "@/app/(docs)/_components/docs-prose"
@@ -47,12 +47,12 @@ const RULE_LINES = [
 ]
 
 const ENFORCES: {
-  icon: typeof Blocks
+  icon: typeof StackSimple
   title: string
   body: ReactNode
 }[] = [
   {
-    icon: Blocks,
+    icon: StackSimple,
     title: "Compose, don't reinvent",
     body: "Existing component before a bespoke div.",
   },
@@ -78,7 +78,7 @@ const ENFORCES: {
     ),
   },
   {
-    icon: Accessibility,
+    icon: Wheelchair,
     title: "A11y + dark free",
     body: "Labels, focus, keyboard; dark from tokens.",
   },

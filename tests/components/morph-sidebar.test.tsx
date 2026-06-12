@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { axe } from "vitest-axe";
-import { Home, Inbox, Settings } from "lucide-react";
+import { Gear, House, Tray } from "@/lib/icons"
 import { MorphSidebar } from "@/components/ui/morph-sidebar";
 
 beforeEach(() => {
@@ -12,9 +12,9 @@ beforeEach(() => {
 });
 
 const items = [
-  { id: "home", label: "Home", icon: Home, active: true },
-  { id: "inbox", label: "Inbox", icon: Inbox },
-  { id: "settings", label: "Settings", icon: Settings },
+  { id: "home", label: "Home", icon: House, active: true },
+  { id: "inbox", label: "Inbox", icon: Tray },
+  { id: "settings", label: "Settings", icon: Gear },
 ];
 
 describe("MorphSidebar", () => {
@@ -38,7 +38,7 @@ describe("MorphSidebar", () => {
   it("fires onSelect when an item is chosen", async () => {
     const user = userEvent.setup();
     const onSelect = vi.fn();
-    render(<MorphSidebar items={[{ id: "home", label: "Home", icon: Home, onSelect }]} />);
+    render(<MorphSidebar items={[{ id: "home", label: "Home", icon: House, onSelect }]} />);
     await user.click(screen.getByRole("link", { name: "Home" }));
     expect(onSelect).toHaveBeenCalledTimes(1);
   });

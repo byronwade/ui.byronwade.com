@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { Eye, EyeSlash } from "@/lib/icons"
 import { Toggle } from "@/components/ui/toggle"
 
 export default function Example() {
@@ -15,7 +15,7 @@ export default function Example() {
         pressed={pressed}
         onPressedChange={setPressed}
       >
-        {pressed ? <EyeIcon /> : <EyeOffIcon />}
+        {pressed ? <Eye /> : <EyeSlash />}
         {pressed ? "Visible" : "Hidden"}
       </Toggle>
 

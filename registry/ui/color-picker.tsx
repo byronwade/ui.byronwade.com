@@ -6,7 +6,7 @@
 "use client"
 
 import Color from "color"
-import { PipetteIcon } from "lucide-react"
+import { Eyedropper } from "@/lib/icons"
 import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 import {
   type ComponentProps,
@@ -419,7 +419,7 @@ export const ColorPickerEyeDropper = ({
       variant="outline"
       {...props}
     >
-      <PipetteIcon size={16} />
+      <Eyedropper size={16} />
     </Button>
   )
 }

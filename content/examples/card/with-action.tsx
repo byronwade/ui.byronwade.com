@@ -7,7 +7,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card"
-import { MoreHorizontal, TrendingUp, TrendingDown } from "lucide-react"
+import { DotsThree, TrendDown, TrendUp } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -26,7 +26,7 @@ export default function Example() {
         <CardContent>
           <p className="text-3xl font-semibold">$18,240</p>
           <span className="inline-flex items-center gap-1 mt-1 text-xs text-success font-medium">
-            <TrendingUp className="w-3 h-3" />
+            <TrendUp className="w-3 h-3" />
             +8.4%
           </span>
         </CardContent>
@@ -47,14 +47,14 @@ export default function Example() {
               className="flex items-center justify-center w-7 h-7 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
               aria-label="More options"
             >
-              <MoreHorizontal className="w-4 h-4" />
+              <DotsThree className="w-4 h-4" />
             </button>
           </CardAction>
         </CardHeader>
         <CardContent>
           <p className="text-3xl font-semibold">1,042</p>
           <span className="inline-flex items-center gap-1 mt-1 text-xs text-destructive font-medium">
-            <TrendingDown className="w-3 h-3" />
+            <TrendDown className="w-3 h-3" />
             -2.1%
           </span>
         </CardContent>

@@ -1,18 +1,18 @@
 import { MetricStat } from "@/components/metric-stat"
 import {
-  BarChart2,
-  Users,
-  DollarSign,
-  Percent,
+  ArrowsClockwise,
+  ChartBar,
+  CurrencyDollar,
   Package,
-  RefreshCw,
-} from "lucide-react"
+  Percent,
+  Users,
+} from "@/lib/icons"
 
 export default function Example() {
   return (
     <div className="grid grid-cols-2 gap-6 rounded-2xl edge bg-card p-6 sm:grid-cols-3">
       <MetricStat
-        icon={DollarSign}
+        icon={CurrencyDollar}
         label="MRR"
         value="$21,450"
         delta={{ value: "+9.1%", direction: "up" }}
@@ -30,7 +30,7 @@ export default function Example() {
         delta={{ value: "+0.5%", direction: "up" }}
       />
       <MetricStat
-        icon={BarChart2}
+        icon={ChartBar}
         label="Page Views"
         value="104K"
         delta={{ value: "-2.3%", direction: "down" }}
@@ -42,7 +42,7 @@ export default function Example() {
         delta={{ value: "0.0%", direction: "flat" }}
       />
       <MetricStat
-        icon={RefreshCw}
+        icon={ArrowsClockwise}
         label="Renewal Rate"
         value="91%"
         delta={{ value: "+1.2%", direction: "up" }}

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Upload, X, FileText } from "lucide-react"
+import { FileText, UploadSimple, X } from "@/lib/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
@@ -47,7 +47,7 @@ export default function Example() {
             </>
           ) : (
             <>
-              <Upload className="size-8 text-muted-foreground" />
+              <UploadSimple className="size-8 text-muted-foreground" />
               <span className="text-sm font-medium">Click to upload</span>
               <span className="text-xs text-muted-foreground">
                 PNG, JPG, PDF up to 10 MB

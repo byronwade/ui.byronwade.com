@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
+import { ArrowDown, ArrowUp, ArrowsDownUp } from "@/lib/icons"
 
 type Employee = {
   id: number
@@ -105,7 +105,7 @@ export default function Example() {
   function SortIcon({ col }: { col: SortKey }) {
     if (sortKey !== col)
       return (
-        <ArrowUpDown className="ml-1.5 h-3.5 w-3.5 text-muted-foreground/50 inline" />
+        <ArrowsDownUp className="ml-1.5 h-3.5 w-3.5 text-muted-foreground/50 inline" />
       )
     if (sortDir === "asc")
       return <ArrowUp className="ml-1.5 h-3.5 w-3.5 inline" />

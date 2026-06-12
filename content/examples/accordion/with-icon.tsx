@@ -4,12 +4,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion"
-import {
-  ShieldCheckIcon,
-  BellIcon,
-  CreditCardIcon,
-  UsersIcon,
-} from "lucide-react"
+import { Bell, CreditCard, ShieldCheck, Users } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -18,7 +13,7 @@ export default function Example() {
         <AccordionItem value="security">
           <AccordionTrigger>
             <span className="flex items-center gap-2">
-              <ShieldCheckIcon className="size-4 shrink-0 text-muted-foreground" />
+              <ShieldCheck className="size-4 shrink-0 text-muted-foreground" />
               Security
             </span>
           </AccordionTrigger>
@@ -33,7 +28,7 @@ export default function Example() {
         <AccordionItem value="notifications">
           <AccordionTrigger>
             <span className="flex items-center gap-2">
-              <BellIcon className="size-4 shrink-0 text-muted-foreground" />
+              <Bell className="size-4 shrink-0 text-muted-foreground" />
               Notifications
             </span>
           </AccordionTrigger>
@@ -48,7 +43,7 @@ export default function Example() {
         <AccordionItem value="billing">
           <AccordionTrigger>
             <span className="flex items-center gap-2">
-              <CreditCardIcon className="size-4 shrink-0 text-muted-foreground" />
+              <CreditCard className="size-4 shrink-0 text-muted-foreground" />
               Billing
             </span>
           </AccordionTrigger>
@@ -63,7 +58,7 @@ export default function Example() {
         <AccordionItem value="team">
           <AccordionTrigger>
             <span className="flex items-center gap-2">
-              <UsersIcon className="size-4 shrink-0 text-muted-foreground" />
+              <Users className="size-4 shrink-0 text-muted-foreground" />
               Team access
             </span>
           </AccordionTrigger>

@@ -1,12 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import {
-  HomeIcon,
-  InboxIcon,
-  SettingsIcon,
-  type LucideIcon,
-} from "lucide-react"
+import { Gear, House, Tray, type Icon } from "@/lib/icons"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -23,10 +18,10 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-const NAV_ITEMS: { icon: LucideIcon; label: string; active?: boolean }[] = [
-  { icon: HomeIcon, label: "Home", active: true },
-  { icon: InboxIcon, label: "Inbox" },
-  { icon: SettingsIcon, label: "Settings" },
+const NAV_ITEMS: { icon: Icon; label: string; active?: boolean }[] = [
+  { icon: House, label: "Home", active: true },
+  { icon: Tray, label: "Inbox" },
+  { icon: Gear, label: "Settings" },
 ]
 
 const VARIANTS = ["sidebar", "floating", "inset"] as const

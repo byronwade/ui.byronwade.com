@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Copy } from "lucide-react"
+import { Check, Copy } from "@/lib/icons"
 import { useEffect, useState } from "react"
 import { type BundledLanguage, codeToHtml } from "shiki"
 

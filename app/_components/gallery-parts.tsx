@@ -3,7 +3,7 @@
 // Shared, token-only gallery chrome reused by the catalog (browse-gallery) and
 // the templates gallery (gallery): a removable active-filter chip and the
 // app-vs-marketing surface badge. Depth is `edge`, never raised.
-import { X } from "lucide-react"
+import { X } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {

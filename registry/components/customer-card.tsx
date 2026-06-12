@@ -1,5 +1,5 @@
 import * as React from "react"
-import { MapPin } from "lucide-react"
+import { MapPin } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"

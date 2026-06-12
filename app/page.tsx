@@ -1,13 +1,13 @@
 import Link from "next/link"
 import {
   ArrowRight,
-  Bot,
   Check,
   GitFork,
-  Layers,
-  LayoutTemplate,
+  Layout,
   Palette,
-} from "lucide-react"
+  Robot,
+  Stack,
+} from "@/lib/icons"
 
 import { Button } from "@/components/ui/button"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
@@ -31,7 +31,7 @@ const designRulePoints = [
 
 const pillars = [
   {
-    icon: Layers,
+    icon: Stack,
     title: "Token-driven",
     body: "Every primitive is built on one foundation of CSS variables. No hardcoded colors, ever.",
   },
@@ -41,7 +41,7 @@ const pillars = [
     body: "Override --brand and rings, charts, active states, and status all follow in light and dark.",
   },
   {
-    icon: LayoutTemplate,
+    icon: Layout,
     title: "Whole pages, not just parts",
     body: "Ships opinionated, full-page layout archetypes, each built around one signature centerpiece.",
   },
@@ -184,7 +184,7 @@ export default function HomePage() {
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="flex size-10 shrink-0 items-center justify-center rounded-xl edge bg-background text-brand">
-                <Bot className="size-5" strokeWidth={2} />
+                <Robot className="size-5" strokeWidth={2} />
               </span>
               <h2 className="text-2xl font-normal tracking-tight text-foreground sm:text-3xl">
                 Design rules for AI

@@ -1,12 +1,12 @@
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
-import { BookOpenIcon, ExternalLinkIcon, InfoIcon } from "lucide-react"
+import { ArrowSquareOut, BookOpen, Info } from "@/lib/icons"
 
 export default function Example() {
   return (
     <div className="flex flex-col gap-4 p-6 max-w-lg">
       {/* Inline link in description, styled automatically by the component */}
       <Alert>
-        <InfoIcon />
+        <Info />
         <AlertTitle>Cookie preferences updated</AlertTitle>
         <AlertDescription>
           Your settings have been saved. Read our <a href="#">Privacy Policy</a>{" "}
@@ -16,7 +16,7 @@ export default function Example() {
 
       {/* Multiple inline links */}
       <Alert>
-        <BookOpenIcon />
+        <BookOpen />
         <AlertTitle>Setup required</AlertTitle>
         <AlertDescription>
           Before you start, review the <a href="#">quick-start guide</a> and
@@ -26,7 +26,7 @@ export default function Example() {
 
       {/* Destructive with a link */}
       <Alert variant="destructive">
-        <ExternalLinkIcon />
+        <ArrowSquareOut />
         <AlertTitle>Credentials expired</AlertTitle>
         <AlertDescription>
           Your access token has expired. <a href="#">Renew your credentials</a>{" "}

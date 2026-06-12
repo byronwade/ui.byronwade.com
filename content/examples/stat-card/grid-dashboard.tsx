@@ -1,4 +1,4 @@
-import { Activity, Database, Server, Users, Zap } from "lucide-react"
+import { Database, HardDrives, Lightning, Pulse, Users } from "@/lib/icons"
 import { StatCard } from "@/components/stat-card"
 
 /**
@@ -21,14 +21,14 @@ export default function Example() {
           label="Requests / s"
           value="2,104"
           delta={{ value: "+1.8%", direction: "up" }}
-          icon={Activity}
+          icon={Pulse}
           hint="p95 latency 42 ms"
         />
         <StatCard
           label="Error Rate"
           value="0.04%"
           delta={{ value: "+0.01%", direction: "down" }}
-          icon={Zap}
+          icon={Lightning}
           hint="last 1 h window"
         />
         <StatCard
@@ -43,7 +43,7 @@ export default function Example() {
         <StatCard
           label="Servers Online"
           value="24 / 24"
-          icon={Server}
+          icon={HardDrives}
           hint="all regions healthy"
         />
         <StatCard

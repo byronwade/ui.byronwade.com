@@ -6,7 +6,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { FolderIcon, HomeIcon, FileTextIcon } from "lucide-react"
+import { FileText, Folder, House } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -15,21 +15,21 @@ export default function Example() {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink href="/" className="flex items-center gap-1.5">
-              <HomeIcon className="size-3.5" />
+              <House className="size-3.5" />
               Home
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink href="/docs" className="flex items-center gap-1.5">
-              <FolderIcon className="size-3.5" />
+              <Folder className="size-3.5" />
               Documentation
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbPage className="flex items-center gap-1.5">
-              <FileTextIcon className="size-3.5" />
+              <FileText className="size-3.5" />
               Getting Started
             </BreadcrumbPage>
           </BreadcrumbItem>

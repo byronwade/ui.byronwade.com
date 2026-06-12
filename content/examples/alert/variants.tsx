@@ -1,16 +1,11 @@
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
-import {
-  CheckCircle2Icon,
-  InfoIcon,
-  TriangleAlertIcon,
-  XCircleIcon,
-} from "lucide-react"
+import { CheckCircle, Info, Warning, XCircle } from "@/lib/icons"
 
 export default function Example() {
   return (
     <div className="flex max-w-lg flex-col gap-4 p-6">
       <Alert variant="default">
-        <InfoIcon />
+        <Info />
         <AlertTitle>Default</AlertTitle>
         <AlertDescription>
           Neutral, informational messages on the card surface.
@@ -18,7 +13,7 @@ export default function Example() {
       </Alert>
 
       <Alert variant="success">
-        <CheckCircle2Icon />
+        <CheckCircle />
         <AlertTitle>Success</AlertTitle>
         <AlertDescription>
           Your changes have been saved successfully.
@@ -26,7 +21,7 @@ export default function Example() {
       </Alert>
 
       <Alert variant="warning">
-        <TriangleAlertIcon />
+        <Warning />
         <AlertTitle>Warning</AlertTitle>
         <AlertDescription>
           Storage is almost full. Free up space to avoid disruptions.
@@ -34,7 +29,7 @@ export default function Example() {
       </Alert>
 
       <Alert variant="destructive">
-        <XCircleIcon />
+        <XCircle />
         <AlertTitle>Destructive</AlertTitle>
         <AlertDescription>
           Something went wrong. This action cannot be undone.

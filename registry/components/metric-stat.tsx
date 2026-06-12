@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { type LucideIcon } from "lucide-react"
+import { type Icon } from "@/lib/icons"
 
 import {
   DeltaPill,
@@ -17,7 +17,7 @@ function MetricStat({
   label: string
   value: ReactNode
   delta?: Delta
-  icon?: LucideIcon
+  icon?: Icon
   className?: string
 }) {
   return (

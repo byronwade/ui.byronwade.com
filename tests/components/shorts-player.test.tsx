@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, it, expect, vi, afterEach } from "vitest"
 import { axe } from "vitest-axe"
-import { Bookmark } from "lucide-react"
+import { Bookmark } from "@/lib/icons"
 import { ShortsPlayer } from "@/components/shorts-player"
 
 const author = { name: "Coastline Studio", handle: "@coastline" }

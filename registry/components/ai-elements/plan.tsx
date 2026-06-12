@@ -16,7 +16,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
-import { ChevronsUpDownIcon } from "lucide-react";
+import { CaretUpDown } from "@/lib/icons"
 import type { ComponentProps } from "react";
 import { createContext, useContext } from "react";
 import { Shimmer } from "./shimmer";
@@ -154,7 +154,7 @@ export const PlanTrigger = ({
   >
     {children ?? (
       <>
-        <ChevronsUpDownIcon className="size-4" />
+        <CaretUpDown className="size-4" />
         <span className="sr-only">Toggle plan</span>
       </>
     )}

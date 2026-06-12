@@ -4,7 +4,7 @@ import * as React from "react"
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu"
 
 import { cn } from "@/lib/utils"
-import { ChevronRightIcon, CheckIcon } from "lucide-react"
+import { CaretRight, Check } from "@/lib/icons"
 
 function ContextMenu({ ...props }: ContextMenuPrimitive.Root.Props) {
   return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />
@@ -137,7 +137,7 @@ function ContextMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto" />
+      <CaretRight className="ml-auto" />
     </ContextMenuPrimitive.SubmenuTrigger>
   )
 }
@@ -177,7 +177,7 @@ function ContextMenuCheckboxItem({
     >
       <span className="pointer-events-none absolute right-2">
         <ContextMenuPrimitive.CheckboxItemIndicator>
-          <CheckIcon />
+          <Check />
         </ContextMenuPrimitive.CheckboxItemIndicator>
       </span>
       {children}
@@ -216,7 +216,7 @@ function ContextMenuRadioItem({
     >
       <span className="pointer-events-none absolute right-2">
         <ContextMenuPrimitive.RadioItemIndicator>
-          <CheckIcon />
+          <Check />
         </ContextMenuPrimitive.RadioItemIndicator>
       </span>
       {children}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ShieldCheck } from "lucide-react"
+import { ShieldCheck } from "@/lib/icons"
 
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 import { GuidePager } from "@/app/(docs)/_components/guide-pager"

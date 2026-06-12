@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Flag, ListPlus } from "lucide-react"
+import { Flag, ListPlus } from "@/lib/icons"
 
 import { EngagementBar } from "@/components/engagement-bar"
 

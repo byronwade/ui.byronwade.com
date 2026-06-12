@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react"
+import { DotsThree, Eye, PencilSimple, Trash } from "@/lib/icons"
 import { Badge } from "@/components/ui/badge"
 
 type Member = {
@@ -112,7 +112,7 @@ export default function Example() {
                     setOpenMenu(openMenu === m.id ? null : m.id)
                   }}
                 >
-                  <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+                  <DotsThree className="h-4 w-4 text-muted-foreground" />
                 </button>
 
                 {openMenu === m.id && (
@@ -124,13 +124,13 @@ export default function Example() {
                       <Eye className="h-3.5 w-3.5" /> View
                     </button>
                     <button className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-sm hover:bg-muted">
-                      <Pencil className="h-3.5 w-3.5" /> Edit
+                      <PencilSimple className="h-3.5 w-3.5" /> Edit
                     </button>
                     <button
                       className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-sm text-destructive hover:bg-destructive/10"
                       onClick={() => remove(m.id)}
                     >
-                      <Trash2 className="h-3.5 w-3.5" /> Remove
+                      <Trash className="h-3.5 w-3.5" /> Remove
                     </button>
                   </div>
                 )}

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { SendIcon } from "lucide-react"
+import { PaperPlaneTilt } from "@/lib/icons"
 import {
   InputGroup,
   InputGroupAddon,
@@ -32,7 +32,7 @@ export default function Example() {
           aria-label="Send message"
           className="ml-auto"
         >
-          <SendIcon />
+          <PaperPlaneTilt />
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>

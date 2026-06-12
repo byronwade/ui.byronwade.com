@@ -1,4 +1,4 @@
-import { Inbox } from "lucide-react"
+import { Tray } from "@/lib/icons"
 import { EmptyState } from "@/components/empty-state"
 
 export default function Example() {
@@ -7,7 +7,7 @@ export default function Example() {
       <div className="w-full max-w-sm">
         {/* Reduced padding via className, useful inside sidebars, panels, or cards */}
         <EmptyState
-          icon={Inbox}
+          icon={Tray}
           title="Inbox is empty"
           description="New notifications will appear here."
           className="py-8"

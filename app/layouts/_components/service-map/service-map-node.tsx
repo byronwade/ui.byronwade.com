@@ -2,7 +2,14 @@
 
 import { memo } from "react"
 import { Handle, Position } from "@xyflow/react"
-import { Box, Cloud, Globe, Server, Zap, type LucideIcon } from "lucide-react"
+import {
+  Cloud,
+  Cube,
+  Globe,
+  HardDrives,
+  Lightning,
+  type Icon,
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import {
@@ -18,20 +25,20 @@ import {
 } from "./service-map-utils"
 
 function getPlatformIcon(platform: ServicePlatform | undefined): {
-  Icon: LucideIcon
+  Icon: Icon
   label: string
 } {
   switch (platform) {
     case "kubernetes":
-      return { Icon: Box, label: "Kubernetes" }
+      return { Icon: Cube, label: "Kubernetes" }
     case "cloudflare":
       return { Icon: Cloud, label: "Cloudflare Workers" }
     case "lambda":
-      return { Icon: Zap, label: "AWS Lambda" }
+      return { Icon: Lightning, label: "AWS Lambda" }
     case "web":
       return { Icon: Globe, label: "Web (browser)" }
     default:
-      return { Icon: Server, label: "Unknown runtime" }
+      return { Icon: HardDrives, label: "Unknown runtime" }
   }
 }
 
@@ -303,7 +310,7 @@ function ServiceNode({ data }: { data: ServiceNodeData }) {
                 <Tooltip>
                   <TooltipTrigger>
                     <span className="flex items-center gap-1 font-mono text-[11px] font-medium tabular-nums text-foreground">
-                      <Box size={10} className="text-muted-foreground/70" />
+                      <Cube size={10} className="text-muted-foreground/70" />
                       {infra.podCount}
                     </span>
                   </TooltipTrigger>

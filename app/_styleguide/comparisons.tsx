@@ -2,13 +2,7 @@
 
 import * as React from "react"
 import { useTheme } from "@wrksz/themes/client"
-import {
-  Check,
-  CheckCircle2,
-  ChevronDown,
-  Info,
-  TriangleAlert,
-} from "lucide-react"
+import { CaretDown, Check, CheckCircle, Info, Warning } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { SegmentedControl } from "@/components/ui/segmented-control"
@@ -594,7 +588,7 @@ const RIGHT: Record<string, React.ReactNode> = {
       <label className="c-label">Role</label>
       <div className="c-select">
         <span>Editor</span>
-        <ChevronDown className="c-select__chev" size={16} />
+        <CaretDown className="c-select__chev" size={16} />
       </div>
     </div>
   ),
@@ -665,7 +659,7 @@ const RIGHT: Record<string, React.ReactNode> = {
         </div>
       </div>
       <div className="c-banner c-banner--critical">
-        <TriangleAlert className="c-banner__icon" size={18} />
+        <Warning className="c-banner__icon" size={18} />
         <div>
           <div className="c-banner__title">Action required</div>
           <div className="c-banner__body">
@@ -831,7 +825,7 @@ const OURS: Record<string, React.ReactNode> = {
   Banner: (
     <div className="mx-auto max-w-sm space-y-3">
       <Alert>
-        <CheckCircle2 />
+        <CheckCircle />
         <AlertTitle>Changes saved</AlertTitle>
         <AlertDescription>
           Your workspace settings have been updated.

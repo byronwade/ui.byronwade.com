@@ -226,6 +226,34 @@ tracking + the typeface**, not through heavy weight or color. Base styles alread
   long-form prose, pull quotes, and blockquotes — not UI chrome. Reach for it via `reading-prose` on
   essay and article surfaces.
 
+### Icons — Phosphor, duotone by default
+
+Icons are part of the system's voice, not a free-for-all. Every icon resolves to **one barrel** and
+renders in **duotone** unless a state needs otherwise.
+
+- **Always import from `@/lib/icons`.** Never import `lucide-react`, `@phosphor-icons/react`,
+  `react-icons`, or any other icon package directly, and never hand-roll an icon `<svg>`. The barrel
+  re-exports [Phosphor](https://phosphoricons.com) under its exact catalog names — `CaretDown`,
+  `MagnifyingGlass`, `Gear`, `Trash`, `DotsThree`, `House`, `Envelope`, `Warning`, `Check`, `X`,
+  `Heart`, `Sparkle`, and so on. (Add it with `npx shadcn@latest add @byronwade/icons`; it comes in
+  automatically with any component that uses icons.)
+- **Duotone is the default — don't restate it.** The barrel owns the weight the way `--brand` owns the
+  accent, so write `<Heart className="size-5 text-brand" />`, not `weight="duotone"`. Override only
+  when a state calls for it: `weight="bold" | "fill" | "regular" | "thin" | "light"`.
+- **Token color, scale size.** Color comes from tokens through `currentColor` (`text-brand`,
+  `text-muted-foreground`, `text-destructive`), never a raw value or the `color` prop. Size comes from
+  the scale (`size-4`, `size-5`), not the `size` prop.
+- **Type icon-shaped props** with `Icon` / `IconProps` from `@/lib/icons` (e.g.
+  `icon?: Icon`, `Record<Tone, Icon>`).
+
+```tsx
+import { Heart, MagnifyingGlass, type Icon } from "@/lib/icons"
+
+// duotone by default; tint via currentColor, size via the scale
+<Heart className="size-5 text-brand" />
+<MagnifyingGlass weight="bold" className="size-4 text-muted-foreground" />
+```
+
 ### Readability — two lanes (evidence-backed)
 
 Web reading on emissive screens follows different rules than print or e-ink. byronwade/ui encodes
@@ -430,8 +458,9 @@ Use the design research as behavior guidance, not visual cloning:
 6. Is long-form copy on `reading-ui` or `reading-prose` (not full-bleed `text-sm` sans)?
 7. Is reading measure ≤ 80ch (target 65ch via the reading utilities)?
 8. Is `font-mono` limited to real data or technical metadata?
-9. Do framed surfaces use `edge` instead of outline borders or shadows?
-10. If this is AI UI, is it attached to an object/action with clear state and review?
-11. If I introduced a color family, did it pass the semantic expansion policy?
+9. Are all icons imported from `@/lib/icons` (Phosphor, duotone default, token color, scale size) — no other icon package and no hand-rolled `<svg>`?
+10. Do framed surfaces use `edge` instead of outline borders or shadows?
+11. If this is AI UI, is it attached to an object/action with clear state and review?
+12. If I introduced a color family, did it pass the semantic expansion policy?
 
 If any answer is "no", fix it before moving on.

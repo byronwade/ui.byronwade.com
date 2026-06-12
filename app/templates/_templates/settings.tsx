@@ -5,7 +5,7 @@
 // in-page table of contents on the left, explain-everything rows on the right, and a
 // fenced destructive "danger zone" at the end. Every control is a registry primitive,
 // every surface a token, so the whole page re-skins from --brand.
-import { Bell, CreditCard, ShieldCheck, Trash2, User } from "lucide-react"
+import { Bell, CreditCard, ShieldCheck, Trash, User } from "@/lib/icons"
 
 import { Section, SettingRow, SettingsList } from "@/components/section"
 import { Switch } from "@/components/ui/switch"
@@ -27,7 +27,7 @@ const toc = [
   { id: "notifications", label: "Notifications", icon: Bell },
   { id: "security", label: "Security", icon: ShieldCheck },
   { id: "billing", label: "Billing", icon: CreditCard },
-  { id: "danger", label: "Danger zone", icon: Trash2 },
+  { id: "danger", label: "Danger zone", icon: Trash },
 ]
 
 const invoices = [
@@ -266,7 +266,7 @@ export function SettingsTemplate() {
                     </p>
                   </div>
                   <Button variant="destructive" size="sm" className="shrink-0">
-                    <Trash2 data-icon="inline-start" />
+                    <Trash data-icon="inline-start" />
                     Delete account
                   </Button>
                 </div>

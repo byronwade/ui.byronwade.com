@@ -29,7 +29,7 @@ import {
   AlertDescription,
   AlertAction,
 } from "@/components/ui/alert";
-import { InfoIcon, XCircleIcon, TriangleAlertIcon } from "lucide-react";
+import { Info, Warning, XCircle } from "@/lib/icons"
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -725,7 +725,7 @@ describe("Alert — compound composition (full)", () => {
   it("renders all four parts without crashing", () => {
     const { container } = render(
       <Alert>
-        <InfoIcon data-testid="icon" />
+        <Info data-testid="icon" />
         <AlertTitle>Title</AlertTitle>
         <AlertDescription>Description text.</AlertDescription>
         <AlertAction>
@@ -781,7 +781,7 @@ describe("Alert — compound composition (full)", () => {
   it("renders alert with icon (svg present)", () => {
     const { container } = render(
       <Alert>
-        <InfoIcon data-testid="info-icon" />
+        <Info data-testid="info-icon" />
         <AlertTitle>Info</AlertTitle>
         <AlertDescription>An informational message.</AlertDescription>
       </Alert>
@@ -792,7 +792,7 @@ describe("Alert — compound composition (full)", () => {
   it("alert root has has-[>svg]:grid-cols-[auto_1fr] class when icon present", () => {
     const { container } = render(
       <Alert>
-        <InfoIcon />
+        <Info />
         <AlertTitle>Title</AlertTitle>
       </Alert>
     );
@@ -804,7 +804,7 @@ describe("Alert — compound composition (full)", () => {
   it("AlertTitle has group-has-[>svg]/alert:col-start-2 class (for icon layout)", () => {
     const { container } = render(
       <Alert>
-        <InfoIcon />
+        <Info />
         <AlertTitle>Title</AlertTitle>
       </Alert>
     );
@@ -819,7 +819,7 @@ describe("Alert — compound composition (full)", () => {
   it("renders destructive compound alert", () => {
     render(
       <Alert variant="destructive">
-        <XCircleIcon data-testid="err-icon" />
+        <XCircle data-testid="err-icon" />
         <AlertTitle>Export failed</AlertTitle>
         <AlertDescription>
           The file could not be generated. Try again or contact support.
@@ -1074,7 +1074,7 @@ describe("Alert — example scenarios", () => {
   it("default example: icon + title + description", () => {
     render(
       <Alert>
-        <InfoIcon data-testid="info" />
+        <Info data-testid="info" />
         <AlertTitle>New update available</AlertTitle>
         <AlertDescription>
           Version 2.4.0 is ready to install. Restart the application to apply
@@ -1089,7 +1089,7 @@ describe("Alert — example scenarios", () => {
   it("variants example: default variant alert renders", () => {
     render(
       <Alert variant="default">
-        <InfoIcon />
+        <Info />
         <AlertTitle>Default</AlertTitle>
         <AlertDescription>
           This is the default alert style.
@@ -1104,7 +1104,7 @@ describe("Alert — example scenarios", () => {
   it("variants example: destructive variant alert renders", () => {
     render(
       <Alert variant="destructive">
-        <XCircleIcon />
+        <XCircle />
         <AlertTitle>Destructive</AlertTitle>
         <AlertDescription>Something went wrong.</AlertDescription>
       </Alert>
@@ -1171,7 +1171,7 @@ describe("Alert — example scenarios", () => {
           )}
           {!isDismissed("warning") && (
             <Alert>
-              <TriangleAlertIcon />
+              <Warning />
               <AlertTitle>Unsaved changes</AlertTitle>
               <AlertAction>
                 <button onClick={() => dismiss("warning")}>Save</button>
@@ -1180,7 +1180,7 @@ describe("Alert — example scenarios", () => {
           )}
           {!isDismissed("error") && (
             <Alert variant="destructive">
-              <XCircleIcon />
+              <XCircle />
               <AlertTitle>Export failed</AlertTitle>
               <AlertAction>
                 <button onClick={() => dismiss("error")}>Retry</button>
@@ -1307,7 +1307,7 @@ describe("Alert — accessibility (axe)", () => {
   it("has no axe violations — alert with SVG icon", async () => {
     const { container } = render(
       <Alert>
-        <InfoIcon aria-hidden="true" />
+        <Info aria-hidden="true" />
         <AlertTitle>Cookie preferences updated</AlertTitle>
         <AlertDescription>Your settings have been saved.</AlertDescription>
       </Alert>

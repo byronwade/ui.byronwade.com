@@ -15,11 +15,11 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import {
-  ChevronRightIcon,
-  FileIcon,
-  FolderIcon,
-  FolderOpenIcon,
-} from "lucide-react"
+  CaretRight,
+  File as FileIcon,
+  Folder as FolderIcon,
+  FolderOpen,
+} from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -488,11 +488,11 @@ const Folder = React.forwardRef<HTMLDivElement, FolderProps>(
     const leadingIcon =
       icon ??
       (isOpen
-        ? (openIcon ?? <FolderOpenIcon className="size-4" />)
+        ? (openIcon ?? <FolderOpen className="size-4" />)
         : (closeIcon ?? <FolderIcon className="size-4" />))
 
     const chevron = resolvedChevron ? (
-      <ChevronRightIcon
+      <CaretRight
         data-slot="file-tree-chevron"
         aria-hidden="true"
         className={cn(

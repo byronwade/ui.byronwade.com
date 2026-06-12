@@ -1,14 +1,14 @@
 "use client"
 
 import {
+  ArrowSquareOut,
   Copy,
-  Download,
-  Edit,
-  ExternalLink,
-  Share2,
+  DownloadSimple,
+  PencilSimple,
+  ShareNetwork,
   Star,
-  Trash2,
-} from "lucide-react"
+  Trash,
+} from "@/lib/icons"
 
 import {
   DropdownMenu,
@@ -32,7 +32,7 @@ export default function Example() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Edit />
+              <PencilSimple />
               Edit
             </DropdownMenuItem>
             <DropdownMenuItem>
@@ -47,21 +47,21 @@ export default function Example() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Download />
+              <DownloadSimple />
               Download
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Share2 />
+              <ShareNetwork />
               Share
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <ExternalLink />
+              <ArrowSquareOut />
               Open in new tab
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant="destructive">
-            <Trash2 />
+            <Trash />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

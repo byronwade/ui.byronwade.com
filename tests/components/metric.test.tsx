@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import { expect, describe, it } from "vitest"
 import { axe } from "vitest-axe"
-import { Activity } from "lucide-react"
+import { Pulse } from "@/lib/icons"
 
 import { DeltaPill, Metric } from "@/components/ui/metric"
 
@@ -33,7 +33,7 @@ describe("Metric", () => {
         label="Active users"
         value="8,340"
         hint="vs. last 30 days"
-        icon={Activity}
+        icon={Pulse}
         delta={{ value: "+5.7%", direction: "up" }}
       />,
     )
@@ -139,7 +139,7 @@ describe("Metric", () => {
         label="Conversion"
         value="3.8%"
         hint="rolling 7 day average"
-        icon={Activity}
+        icon={Pulse}
         delta={{ value: "+0.5%", direction: "up" }}
       />,
     )

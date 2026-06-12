@@ -41,16 +41,7 @@ import {
 } from "@/lib/demo-viewport";
 import { cn } from "@/lib/utils";
 import type { ChatStatus, FileUIPart } from "ai";
-import {
-  CornerDownLeftIcon,
-  ImageIcon,
-  Loader2Icon,
-  MicIcon,
-  PaperclipIcon,
-  PlusIcon,
-  SquareIcon,
-  XIcon,
-} from "lucide-react";
+import { ArrowElbowDownLeft, CircleNotch, Image, Microphone, Paperclip, Plus, Square, X } from "@/lib/icons"
 import { nanoid } from "nanoid";
 import {
   type ChangeEvent,
@@ -357,7 +348,7 @@ export function PromptInputAttachment({
                   />
                 ) : (
                   <div className="flex size-5 items-center justify-center text-muted-foreground">
-                    <PaperclipIcon className="size-3" />
+                    <Paperclip className="size-3" />
                   </div>
                 )}
               </div>
@@ -372,7 +363,7 @@ export function PromptInputAttachment({
                 type="button"
                 variant="ghost"
               >
-                <XIcon />
+                <X />
                 <span className="sr-only">Remove</span>
               </Button>
             </div>
@@ -466,7 +457,7 @@ export const PromptInputActionAddAttachments = ({
         attachments.openFileDialog();
       }}
     >
-      <ImageIcon className="mr-2 size-4" /> {label}
+      <Image className="mr-2 size-4" /> {label}
     </DropdownMenuItem>
   );
 };
@@ -1145,7 +1136,7 @@ export const PromptInputActionMenuTrigger = ({
         className={className}
         {...props}
       >
-        {children ?? <PlusIcon className="size-4" />}
+        {children ?? <Plus className="size-4" />}
       </PromptInputButton>
     }
   />
@@ -1195,14 +1186,14 @@ export const PromptInputSubmit = ({
   children,
   ...props
 }: PromptInputSubmitProps) => {
-  let Icon = <CornerDownLeftIcon className="size-4" />;
+  let Icon = <ArrowElbowDownLeft className="size-4" />;
 
   if (status === "submitted") {
-    Icon = <Loader2Icon className="size-4 animate-spin" />;
+    Icon = <CircleNotch className="size-4 animate-spin" />;
   } else if (status === "streaming") {
-    Icon = <SquareIcon className="size-4" />;
+    Icon = <Square className="size-4" />;
   } else if (status === "error") {
-    Icon = <XIcon className="size-4" />;
+    Icon = <X className="size-4" />;
   }
 
   return (
@@ -1379,7 +1370,7 @@ export const PromptInputSpeechButton = ({
       onClick={toggleListening}
       {...props}
     >
-      <MicIcon className="size-4" />
+      <Microphone className="size-4" />
     </PromptInputButton>
   );
 };

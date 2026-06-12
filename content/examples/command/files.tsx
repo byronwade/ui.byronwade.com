@@ -1,11 +1,6 @@
 "use client"
 
-import {
-  FileTextIcon,
-  ImageIcon,
-  FilmIcon,
-  type LucideIcon,
-} from "lucide-react"
+import { FileText, FilmStrip, Image, type Icon } from "@/lib/icons"
 import {
   Command,
   CommandEmpty,
@@ -16,7 +11,7 @@ import {
 } from "@/components/ui/command"
 import { CommandResult } from "@/components/command-result"
 
-function Thumb({ icon: Icon }: { icon: LucideIcon }) {
+function Thumb({ icon: Icon }: { icon: Icon }) {
   return (
     <span className="flex size-9 items-center justify-center rounded-md bg-muted text-muted-foreground">
       <Icon className="size-4" />
@@ -25,9 +20,9 @@ function Thumb({ icon: Icon }: { icon: LucideIcon }) {
 }
 
 const files = [
-  { name: "hero-banner.png", meta: "1.2 MB · 2d ago", icon: ImageIcon },
-  { name: "brand-deck.pdf", meta: "4.8 MB · 1w ago", icon: FileTextIcon },
-  { name: "launch-teaser.mp4", meta: "18 MB · 3w ago", icon: FilmIcon },
+  { name: "hero-banner.png", meta: "1.2 MB · 2d ago", icon: Image },
+  { name: "brand-deck.pdf", meta: "4.8 MB · 1w ago", icon: FileText },
+  { name: "launch-teaser.mp4", meta: "18 MB · 3w ago", icon: FilmStrip },
 ]
 
 export default function Example() {

@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { ChevronUp, type LucideIcon } from "lucide-react"
+import { CaretUp, type Icon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { MorphSurface } from "@/components/ui/morph-surface"
 
 export interface MorphTabsItem {
   id: string
   label: string
-  icon: LucideIcon
+  icon: Icon
   onSelect?: () => void
   active?: boolean
 }
@@ -64,7 +64,7 @@ export function MorphTabs({
         onClick={() => setOpen((v) => !v)}
         className="grid w-10 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
       >
-        <ChevronUp className="size-4" />
+        <CaretUp className="size-4" />
       </button>
     </div>
   )

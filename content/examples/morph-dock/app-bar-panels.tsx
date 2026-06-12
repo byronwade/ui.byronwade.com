@@ -3,18 +3,17 @@
 import * as React from "react"
 import {
   Bell,
-  Boxes,
   Check,
   Command,
-  Home,
-  LayoutGrid,
-  LayoutTemplate,
-  LogOut,
-  PanelsTopLeft,
-  Search,
-  Settings,
+  Gear,
+  GridFour,
+  House,
+  Layout,
+  MagnifyingGlass,
+  SignOut,
+  Stack,
   User,
-} from "lucide-react"
+} from "@/lib/icons"
 
 import { MorphDock } from "@/components/ui/morph-dock"
 
@@ -31,8 +30,8 @@ const NOTES: [string, string, Icon][] = [
 ]
 const ACCOUNT: [string, Icon][] = [
   ["Profile", User],
-  ["Settings", Settings],
-  ["Sign out", LogOut],
+  ["Settings", Gear],
+  ["Sign out", SignOut],
 ]
 
 type Panel = "search" | "notif" | "profile"
@@ -59,7 +58,7 @@ export default function Example() {
           onOpenChange={setLauncher}
           panelWidth={248}
           items={[]}
-          action={{ label: "Apps", icon: LayoutGrid }}
+          action={{ label: "Apps", icon: GridFour }}
         >
           <div className="p-2">
             <div className="px-2 pb-1 pt-1.5 text-[10px] font-semibold uppercase tracking-wider text-dock-foreground/50">
@@ -96,7 +95,7 @@ export default function Example() {
             {
               id: "home",
               label: "Home",
-              icon: Home,
+              icon: House,
               href: "#",
               active: true,
               core: true,
@@ -104,21 +103,21 @@ export default function Example() {
             {
               id: "components",
               label: "Components",
-              icon: Boxes,
+              icon: Stack,
               href: "#",
               core: true,
             },
             {
               id: "layouts",
               label: "Layouts",
-              icon: PanelsTopLeft,
+              icon: Layout,
               href: "#",
               core: true,
             },
             {
               id: "templates",
               label: "Templates",
-              icon: LayoutTemplate,
+              icon: Layout,
               href: "#",
               core: true,
             },
@@ -140,7 +139,7 @@ export default function Example() {
               {
                 id: "search",
                 label: "Search",
-                icon: Search,
+                icon: MagnifyingGlass,
                 core: true,
                 onSelect: () => setPanel("search"),
               },
@@ -164,7 +163,7 @@ export default function Example() {
             {panel === "search" ? (
               <div className="p-1.5">
                 <div className="flex h-9 items-center gap-2 rounded-lg bg-dock-active px-3 text-[13px] text-dock-foreground/60">
-                  <Search className="size-4 shrink-0" />
+                  <MagnifyingGlass className="size-4 shrink-0" />
                   Search components…
                 </div>
                 <div className="mt-1.5 space-y-0.5">

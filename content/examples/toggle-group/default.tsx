@@ -1,19 +1,19 @@
 "use client"
 
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react"
+import { TextAlignCenter, TextAlignLeft, TextAlignRight } from "@/lib/icons"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export default function Example() {
   return (
     <ToggleGroup defaultValue={["left"]} variant="outline">
       <ToggleGroupItem value="left" aria-label="Align left">
-        <AlignLeftIcon />
+        <TextAlignLeft />
       </ToggleGroupItem>
       <ToggleGroupItem value="center" aria-label="Align center">
-        <AlignCenterIcon />
+        <TextAlignCenter />
       </ToggleGroupItem>
       <ToggleGroupItem value="right" aria-label="Align right">
-        <AlignRightIcon />
+        <TextAlignRight />
       </ToggleGroupItem>
     </ToggleGroup>
   )

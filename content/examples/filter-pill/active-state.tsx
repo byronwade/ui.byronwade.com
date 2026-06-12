@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { FilterPill } from "@/components/ui/filter-pill"
-import { Tag, X } from "lucide-react"
+import { Tag, X } from "@/lib/icons"
 
 const OPTIONS = ["All", "Documents", "Images", "Video", "Audio", "Archives"]
 

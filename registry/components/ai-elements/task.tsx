@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronDownIcon, SearchIcon } from "lucide-react";
+import { CaretDown, MagnifyingGlass } from "@/lib/icons"
 import type { ComponentProps } from "react";
 
 const taskItemFileVariants = cva(
@@ -91,9 +91,9 @@ export const TaskTrigger = ({
   >
     {children ?? (
       <>
-        <SearchIcon className="size-4" data-slot="task-trigger-icon" />
+        <MagnifyingGlass className="size-4" data-slot="task-trigger-icon" />
         <p className="text-sm">{title}</p>
-        <ChevronDownIcon
+        <CaretDown
           className="size-4 transition-transform group-data-[panel-open]:rotate-180"
           data-slot="task-trigger-chevron"
         />

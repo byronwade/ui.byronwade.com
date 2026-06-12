@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { expect, describe, it } from "vitest";
 import { axe } from "vitest-axe";
-import { Eye, Star, GitCommit } from "lucide-react";
+import { Eye, GitCommit, Star } from "@/lib/icons"
 import { TimelineRail, type RailItem } from "@/components/timeline-rail";
 
 // ---------------------------------------------------------------------------
@@ -38,7 +38,7 @@ describe("TimelineRail — default render", () => {
 
   it("renders a <Flame /> icon in the terminal footer (svg present)", () => {
     const { container } = render(<TimelineRail groups={singleGroup(minimalItems)} />);
-    // Lucide renders an <svg> element
+    // the icon renders an <svg> element
     const svgs = container.querySelectorAll("svg");
     expect(svgs.length).toBeGreaterThanOrEqual(1);
   });

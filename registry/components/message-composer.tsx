@@ -1,12 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  CalendarClock,
-  FileText,
-  Paperclip,
-  SendHorizonal,
-} from "lucide-react"
+import { Calendar, FileText, PaperPlaneRight, Paperclip } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -89,7 +84,7 @@ export function MessageComposer({
               disabled={!conversationId}
               onClick={onSchedule}
             >
-              <CalendarClock className="size-4" />
+              <Calendar className="size-4" />
             </ComposerIconButton>
           ) : null}
         </div>
@@ -115,7 +110,7 @@ export function MessageComposer({
           disabled={!canSend}
           onClick={() => void handleSend()}
         >
-          <SendHorizonal className="size-4" />
+          <PaperPlaneRight className="size-4" />
         </Button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react"
+import { TextAlignCenter, TextAlignLeft, TextAlignRight } from "@/lib/icons"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export default function Example() {
@@ -10,13 +10,13 @@ export default function Example() {
         <p className="text-xs font-medium text-muted-foreground">Default</p>
         <ToggleGroup defaultValue={["left"]} variant="default">
           <ToggleGroupItem value="left" aria-label="Align left">
-            <AlignLeftIcon />
+            <TextAlignLeft />
           </ToggleGroupItem>
           <ToggleGroupItem value="center" aria-label="Align center">
-            <AlignCenterIcon />
+            <TextAlignCenter />
           </ToggleGroupItem>
           <ToggleGroupItem value="right" aria-label="Align right">
-            <AlignRightIcon />
+            <TextAlignRight />
           </ToggleGroupItem>
         </ToggleGroup>
       </div>
@@ -24,13 +24,13 @@ export default function Example() {
         <p className="text-xs font-medium text-muted-foreground">Outline</p>
         <ToggleGroup defaultValue={["left"]} variant="outline">
           <ToggleGroupItem value="left" aria-label="Align left">
-            <AlignLeftIcon />
+            <TextAlignLeft />
           </ToggleGroupItem>
           <ToggleGroupItem value="center" aria-label="Align center">
-            <AlignCenterIcon />
+            <TextAlignCenter />
           </ToggleGroupItem>
           <ToggleGroupItem value="right" aria-label="Align right">
-            <AlignRightIcon />
+            <TextAlignRight />
           </ToggleGroupItem>
         </ToggleGroup>
       </div>

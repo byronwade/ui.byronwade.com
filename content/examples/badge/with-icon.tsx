@@ -1,12 +1,5 @@
 import { Badge } from "@/components/ui/badge"
-import {
-  CheckCircle,
-  AlertTriangle,
-  XCircle,
-  Info,
-  Star,
-  Clock,
-} from "lucide-react"
+import { CheckCircle, Clock, Info, Star, Warning, XCircle } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -18,7 +11,7 @@ export default function Example() {
           Verified
         </Badge>
         <Badge variant="warning">
-          <AlertTriangle data-icon="inline-start" />
+          <Warning data-icon="inline-start" />
           Pending
         </Badge>
         <Badge variant="destructive">
@@ -52,7 +45,7 @@ export default function Example() {
           <XCircle />
         </Badge>
         <Badge variant="warning" className="px-1">
-          <AlertTriangle />
+          <Warning />
         </Badge>
       </div>
     </div>

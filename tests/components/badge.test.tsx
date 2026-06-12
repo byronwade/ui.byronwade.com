@@ -33,7 +33,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
 import { Badge, badgeVariants } from "@/components/ui/badge";
-import { CheckCircle, AlertTriangle, XCircle, Info, Star } from "lucide-react";
+import { CheckCircle, Info, Star, Warning, XCircle } from "@/lib/icons"
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -506,7 +506,7 @@ describe("Badge — icon slots (data-icon attribute)", () => {
   it("icon-start badge renders correct text alongside icon", () => {
     render(
       <Badge variant="warning">
-        <AlertTriangle data-icon="inline-start" />
+        <Warning data-icon="inline-start" />
         Pending
       </Badge>
     );
@@ -534,7 +534,7 @@ describe("Badge — icon slots (data-icon attribute)", () => {
   it("icon-only warning badge renders without crashing", () => {
     const { container } = render(
       <Badge variant="warning" className="px-1">
-        <AlertTriangle />
+        <Warning />
       </Badge>
     );
     expect(container.querySelector("svg")).not.toBeNull();

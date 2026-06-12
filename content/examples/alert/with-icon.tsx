@@ -1,18 +1,18 @@
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 import {
-  BellIcon,
-  CloudUploadIcon,
-  KeyRoundIcon,
-  LockIcon,
-  MailIcon,
-  ShieldCheckIcon,
-} from "lucide-react"
+  Bell,
+  Envelope,
+  Key,
+  Lock,
+  ShieldCheck,
+  UploadSimple,
+} from "@/lib/icons"
 
 export default function Example() {
   return (
     <div className="flex flex-col gap-4 p-6 max-w-lg">
       <Alert>
-        <MailIcon />
+        <Envelope />
         <AlertTitle>Verify your email</AlertTitle>
         <AlertDescription>
           We sent a confirmation link to <strong>user@example.com</strong>.
@@ -21,7 +21,7 @@ export default function Example() {
       </Alert>
 
       <Alert>
-        <BellIcon />
+        <Bell />
         <AlertTitle>Notifications paused</AlertTitle>
         <AlertDescription>
           You won&apos;t receive any alerts until you re-enable notifications in
@@ -30,7 +30,7 @@ export default function Example() {
       </Alert>
 
       <Alert>
-        <ShieldCheckIcon />
+        <ShieldCheck />
         <AlertTitle>Two-factor authentication enabled</AlertTitle>
         <AlertDescription>
           Your account is now protected by an additional verification step.
@@ -38,7 +38,7 @@ export default function Example() {
       </Alert>
 
       <Alert>
-        <KeyRoundIcon />
+        <Key />
         <AlertTitle>API key generated</AlertTitle>
         <AlertDescription>
           Copy and store your key now, it won&apos;t be shown again.
@@ -46,7 +46,7 @@ export default function Example() {
       </Alert>
 
       <Alert>
-        <CloudUploadIcon />
+        <UploadSimple />
         <AlertTitle>Backup in progress</AlertTitle>
         <AlertDescription>
           Your files are being uploaded. This may take a few minutes.
@@ -54,7 +54,7 @@ export default function Example() {
       </Alert>
 
       <Alert>
-        <LockIcon />
+        <Lock />
         <AlertTitle>Session locked</AlertTitle>
         <AlertDescription>Re-enter your password to continue.</AlertDescription>
       </Alert>

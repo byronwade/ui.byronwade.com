@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import { ChevronDownIcon } from "lucide-react";
+import { CaretDown } from "@/lib/icons"
 import type { ComponentProps, ReactNode } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -251,7 +251,7 @@ export const WebPreviewConsole = ({
         className="group flex w-full cursor-pointer items-center justify-between p-4 text-left font-medium text-foreground outline-none transition-colors hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring"
       >
         Console
-        <ChevronDownIcon
+        <CaretDown
           data-slot="web-preview-console-chevron"
           className="size-4 transition-transform duration-200 group-data-[panel-open]:rotate-180"
         />

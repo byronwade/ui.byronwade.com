@@ -11,14 +11,14 @@ import * as React from "react";
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
-import { Home, Inbox, Settings } from "lucide-react";
+import { Gear, House, Tray } from "@/lib/icons"
 
 import { FloatingDock } from "@/components/ui/floating-dock";
 
 const ITEMS = [
-  { title: "Home", icon: <Home className="h-full w-full" />, href: "/home" },
-  { title: "Inbox", icon: <Inbox className="h-full w-full" />, href: "/inbox" },
-  { title: "Settings", icon: <Settings className="h-full w-full" />, href: "/settings" },
+  { title: "Home", icon: <House className="h-full w-full" />, href: "/home" },
+  { title: "Inbox", icon: <Tray className="h-full w-full" />, href: "/inbox" },
+  { title: "Settings", icon: <Gear className="h-full w-full" />, href: "/settings" },
 ];
 
 describe("FloatingDock — default render", () => {

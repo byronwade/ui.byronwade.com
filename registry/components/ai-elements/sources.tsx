@@ -2,7 +2,7 @@
 
 import type { ComponentProps } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { BookIcon, ChevronDownIcon } from "lucide-react";
+import { Book, CaretDown } from "@/lib/icons"
 
 import {
   Collapsible,
@@ -50,7 +50,7 @@ export const SourcesTrigger = ({
         <span className="font-medium">
           Used <span className="font-mono">{count}</span> sources
         </span>
-        <ChevronDownIcon className="size-4" />
+        <CaretDown className="size-4" />
       </>
     )}
   </CollapsibleTrigger>
@@ -99,7 +99,7 @@ export const Source = ({
   >
     {children ?? (
       <>
-        <BookIcon className="size-4" />
+        <Book className="size-4" />
         <span className="block font-medium">{title}</span>
       </>
     )}

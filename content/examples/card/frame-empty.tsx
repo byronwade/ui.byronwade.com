@@ -1,4 +1,4 @@
-import { FolderIcon, PlusIcon } from "lucide-react"
+import { Folder, Plus } from "@/lib/icons"
 import {
   Card,
   CardPanel,
@@ -20,7 +20,7 @@ export default function Example() {
           <CardFrameDescription>Manage your projects</CardFrameDescription>
           <CardFrameAction>
             <Button variant="outline" size="sm">
-              <PlusIcon className="size-4" />
+              <Plus className="size-4" />
               Add
             </Button>
           </CardFrameAction>
@@ -28,7 +28,7 @@ export default function Example() {
         <Card>
           <CardPanel>
             <EmptyState
-              icon={FolderIcon}
+              icon={Folder}
               title="No projects yet"
               description="Get started by adding your first project."
               className="border-0 py-10"

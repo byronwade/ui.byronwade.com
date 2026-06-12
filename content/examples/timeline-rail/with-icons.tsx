@@ -1,5 +1,5 @@
 import { TimelineRail } from "@/components/timeline-rail"
-import { Eye, MousePointer, Star, Download, Share2 } from "lucide-react"
+import { Cursor, DownloadSimple, Eye, ShareNetwork, Star } from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -15,7 +15,7 @@ export default function Example() {
                 meta: "5m",
               },
               {
-                glyph: <MousePointer className="size-4" />,
+                glyph: <Cursor className="size-4" />,
                 title: "Button clicked",
                 meta: "3m",
               },
@@ -25,12 +25,12 @@ export default function Example() {
                 meta: "2m",
               },
               {
-                glyph: <Download className="size-4" />,
+                glyph: <DownloadSimple className="size-4" />,
                 title: "File downloaded",
                 meta: "1m",
               },
               {
-                glyph: <Share2 className="size-4" />,
+                glyph: <ShareNetwork className="size-4" />,
                 title: "Link shared",
                 meta: "30s",
               },

@@ -1,6 +1,6 @@
 "use client"
 
-import { Clock3, ListPlus } from "lucide-react"
+import { Clock, ListPlus } from "@/lib/icons"
 
 import { VideoCard } from "@/components/video-card"
 import { Badge } from "@/components/ui/badge"
@@ -31,7 +31,7 @@ export default function Example() {
           {
             key: "watch-later",
             label: "Watch later",
-            icon: <Clock3 className="size-4" />,
+            icon: <Clock className="size-4" />,
           },
         ]}
       />

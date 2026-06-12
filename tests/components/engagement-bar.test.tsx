@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, it, expect, vi } from "vitest"
 import { axe } from "vitest-axe"
-import { Scissors, Flag } from "lucide-react"
+import { Flag, Scissors } from "@/lib/icons"
 import {
   EngagementBar,
   type EngagementAction,

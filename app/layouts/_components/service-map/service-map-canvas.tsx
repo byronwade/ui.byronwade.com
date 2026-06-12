@@ -24,7 +24,7 @@ import {
 } from "@xyflow/react"
 import "@xyflow/react/dist/style.css"
 import throttle from "lodash.throttle"
-import { Crosshair, RadioTower, RotateCcw } from "lucide-react"
+import { ArrowCounterClockwise, Broadcast, Crosshair } from "@/lib/icons"
 
 import { getServiceLegendColor } from "@/lib/service-map-colors"
 import type {
@@ -551,7 +551,7 @@ function ServiceMapCanvasInner({
             className="h-8 gap-1.5 px-2 text-xs"
             onClick={() => setTrafficEnabled((current) => !current)}
           >
-            <RadioTower className="size-3.5" />
+            <Broadcast className="size-3.5" />
             {trafficEnabled ? "Traffic on" : "Traffic off"}
           </Button>
 
@@ -563,7 +563,7 @@ function ServiceMapCanvasInner({
             aria-label="Reset service map view"
             onClick={resetViewport}
           >
-            <RotateCcw className="size-3.5" />
+            <ArrowCounterClockwise className="size-3.5" />
           </Button>
         </div>
 

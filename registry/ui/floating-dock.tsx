@@ -2,7 +2,7 @@
  * Adapted for byronwade/ui from Aceternity UI.
  * Original code, concept, and design © Aceternity UI — https://ui.aceternity.com
  * Reworked to the byronwade/ui design system: semantic token surfaces
- * (bg-muted / bg-accent / bg-popover, text-muted-foreground), lucide icons
+ * (bg-muted / bg-accent / bg-popover, text-muted-foreground), Phosphor icons
  * instead of @tabler, aria-labels on the icon-only toggle, and data-slot hooks.
  * Magnify-on-hover springs preserved.
  *
@@ -12,7 +12,7 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { ChevronUp } from "lucide-react"
+import { CaretUp } from "@/lib/icons"
 import {
   AnimatePresence,
   MotionValue,
@@ -89,7 +89,7 @@ const FloatingDockMobile = ({
         onClick={() => setOpen(!open)}
         className="flex h-10 w-10 items-center justify-center rounded-full bg-muted"
       >
-        <ChevronUp className="h-5 w-5 text-muted-foreground" />
+        <CaretUp className="h-5 w-5 text-muted-foreground" />
       </button>
     </div>
   )

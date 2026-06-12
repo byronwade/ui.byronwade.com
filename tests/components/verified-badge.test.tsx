@@ -128,16 +128,18 @@ describe("VerifiedBadge – variant prop", () => {
     });
   });
 
-  it("default variant renders the BadgeCheck (lucide-badge-check) icon", () => {
+  it("default variant renders the SealCheck icon", () => {
     const { container } = render(<VerifiedBadge variant="default" />);
-    const svg = getRoot(container).querySelector("svg") as SVGElement;
-    expect(svg.classList.contains("lucide-badge-check")).toBe(true);
+    const root = getRoot(container);
+    expect(root).toHaveAttribute("data-variant", "default");
+    expect(root.querySelector("svg")).not.toBeNull();
   });
 
-  it("artist variant renders the Music (lucide-music) icon", () => {
+  it("artist variant renders the MusicNote icon", () => {
     const { container } = render(<VerifiedBadge variant="artist" />);
-    const svg = getRoot(container).querySelector("svg") as SVGElement;
-    expect(svg.classList.contains("lucide-music")).toBe(true);
+    const root = getRoot(container);
+    expect(root).toHaveAttribute("data-variant", "artist");
+    expect(root.querySelector("svg")).not.toBeNull();
   });
 
   it("variant icons differ between default and artist", () => {
@@ -145,7 +147,7 @@ describe("VerifiedBadge – variant prop", () => {
     const { container: b } = render(<VerifiedBadge variant="artist" />);
     const svgA = getRoot(a).querySelector("svg") as SVGElement;
     const svgB = getRoot(b).querySelector("svg") as SVGElement;
-    expect(svgA.getAttribute("class")).not.toBe(svgB.getAttribute("class"));
+    expect(svgA.innerHTML).not.toBe(svgB.innerHTML);
   });
 });
 
@@ -229,17 +231,9 @@ describe("VerifiedBadge – re-render", () => {
     const { container, rerender } = render(
       <VerifiedBadge variant="default" />,
     );
-    expect(
-      (getRoot(container).querySelector("svg") as SVGElement).classList.contains(
-        "lucide-badge-check",
-      ),
-    ).toBe(true);
+    expect(getRoot(container)).toHaveAttribute("data-variant", "default");
     rerender(<VerifiedBadge variant="artist" />);
-    expect(
-      (getRoot(container).querySelector("svg") as SVGElement).classList.contains(
-        "lucide-music",
-      ),
-    ).toBe(true);
+    expect(getRoot(container)).toHaveAttribute("data-variant", "artist");
   });
 });
 

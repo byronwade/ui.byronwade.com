@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { XIcon } from "lucide-react"
+import { X } from "@/lib/icons"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -189,7 +189,7 @@ function TagInput({
                 }}
                 className="inline-flex size-3.5 items-center justify-center rounded-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none"
               >
-                <XIcon className="size-3" />
+                <X className="size-3" />
               </button>
             </Badge>
           )

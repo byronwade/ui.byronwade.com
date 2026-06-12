@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef } from "react"
 import { useState } from "react"
 
 import { useControllableState } from "@/lib/controllable-state"
-import { Pause, Play, SkipBack, SkipForward } from "lucide-react"
+import { Pause, Play, SkipBack, SkipForward } from "@/lib/icons"
 
 import { Button } from "@/components/ui/button"
 import { SegmentedControl } from "@/components/ui/segmented-control"

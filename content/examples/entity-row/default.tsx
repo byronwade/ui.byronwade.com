@@ -1,6 +1,6 @@
 "use client"
 
-import { MoreHorizontalIcon } from "lucide-react"
+import { DotsThree } from "@/lib/icons"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -28,7 +28,7 @@ export default function Example() {
         }
         actions={
           <Button variant="ghost" size="icon-sm" aria-label="More actions">
-            <MoreHorizontalIcon />
+            <DotsThree />
           </Button>
         }
         onActivate={() => {}}

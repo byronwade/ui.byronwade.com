@@ -8,14 +8,7 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import type { ToolUIPart } from "ai";
-import {
-  CheckCircleIcon,
-  ChevronDownIcon,
-  CircleIcon,
-  ClockIcon,
-  WrenchIcon,
-  XCircleIcon,
-} from "lucide-react";
+import { CaretDown, CheckCircle, Circle, Clock, Wrench, XCircle } from "@/lib/icons"
 import type { ComponentProps, ReactNode } from "react";
 import { isValidElement } from "react";
 import { CodeBlock } from "./code-block";
@@ -53,13 +46,13 @@ const getStatusBadge = (status: ToolUIPart["state"]) => {
   };
 
   const icons: Record<ToolUIPart["state"], ReactNode> = {
-    "input-streaming": <CircleIcon className="size-4" />,
-    "input-available": <ClockIcon className="size-4 animate-pulse" />,
-    "approval-requested": <ClockIcon className="size-4 text-warning" />,
-    "approval-responded": <CheckCircleIcon className="size-4 text-brand" />,
-    "output-available": <CheckCircleIcon className="size-4 text-success" />,
-    "output-error": <XCircleIcon className="size-4 text-destructive" />,
-    "output-denied": <XCircleIcon className="size-4 text-warning" />,
+    "input-streaming": <Circle className="size-4" />,
+    "input-available": <Clock className="size-4 animate-pulse" />,
+    "approval-requested": <Clock className="size-4 text-warning" />,
+    "approval-responded": <CheckCircle className="size-4 text-brand" />,
+    "output-available": <CheckCircle className="size-4 text-success" />,
+    "output-error": <XCircle className="size-4 text-destructive" />,
+    "output-denied": <XCircle className="size-4 text-warning" />,
   };
 
   const variants: Record<
@@ -103,7 +96,7 @@ export const ToolHeader = ({
     {...props}
   >
     <div className="flex items-center gap-2" data-slot="tool-header-meta">
-      <WrenchIcon className="size-4 text-muted-foreground" />
+      <Wrench className="size-4 text-muted-foreground" />
       <span
         className="font-medium font-mono text-muted-foreground text-xs uppercase tracking-wide"
         data-slot="tool-provenance"
@@ -115,7 +108,7 @@ export const ToolHeader = ({
       </span>
       {getStatusBadge(state)}
     </div>
-    <ChevronDownIcon
+    <CaretDown
       className="size-4 text-muted-foreground transition-transform group-data-[panel-open]:rotate-180"
       data-slot="tool-header-chevron"
     />

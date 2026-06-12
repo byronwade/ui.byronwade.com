@@ -1,4 +1,4 @@
-import { FolderOpen } from "lucide-react"
+import { FolderOpen } from "@/lib/icons"
 import { EmptyState } from "@/components/empty-state"
 import { Button } from "@/components/ui/button"
 

@@ -12,7 +12,7 @@ import { render, screen, fireEvent, within, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { axe } from "vitest-axe";
-import { Home, Inbox, BarChart3, Settings, Search } from "lucide-react";
+import { ChartBar, Gear, House, MagnifyingGlass, Tray } from "@/lib/icons"
 
 import { MorphDock, type MorphDockItem } from "@/components/ui/morph-dock";
 
@@ -48,10 +48,10 @@ afterEach(() => {
 });
 
 const baseItems: MorphDockItem[] = [
-  { id: "home", label: "Home", icon: Home, href: "#", active: true, core: true },
-  { id: "inbox", label: "Inbox", icon: Inbox, href: "#", core: true, badge: 3 },
-  { id: "reports", label: "Reports", icon: BarChart3, href: "#" },
-  { id: "settings", label: "Settings", icon: Settings, href: "#", pinned: true },
+  { id: "home", label: "Home", icon: House, href: "#", active: true, core: true },
+  { id: "inbox", label: "Inbox", icon: Tray, href: "#", core: true, badge: 3 },
+  { id: "reports", label: "Reports", icon: ChartBar, href: "#" },
+  { id: "settings", label: "Settings", icon: Gear, href: "#", pinned: true },
 ];
 
 function renderDock(props: Partial<React.ComponentProps<typeof MorphDock>> = {}) {
@@ -76,8 +76,8 @@ describe("MorphDock", () => {
     const onSelect = vi.fn();
     renderDock({
       items: [
-        { id: "a", label: "Linked", icon: Home, href: "/x", core: true },
-        { id: "b", label: "Action", icon: Inbox, onSelect, core: true },
+        { id: "a", label: "Linked", icon: House, href: "/x", core: true },
+        { id: "b", label: "Action", icon: Tray, onSelect, core: true },
       ],
     });
     expect(screen.getByLabelText("Linked").tagName).toBe("A");
@@ -108,7 +108,7 @@ describe("MorphDock", () => {
 
   it("omits the expand toggle when nothing is collapsible", () => {
     renderDock({
-      items: [{ id: "home", label: "Home", icon: Home, href: "#", core: true }],
+      items: [{ id: "home", label: "Home", icon: House, href: "#", core: true }],
     });
     expect(screen.queryByRole("button", { name: /show/i })).not.toBeInTheDocument();
   });
@@ -121,7 +121,7 @@ describe("MorphDock", () => {
   it("blooms into the children panel when the action is clicked", async () => {
     const onOpenChange = vi.fn();
     renderDock({
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       onOpenChange,
       children: <div>Panel body</div>,
     });
@@ -138,7 +138,7 @@ describe("MorphDock", () => {
     renderDock({
       open: true,
       onOpenChange,
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       children: <div>Panel body</div>,
     });
     expect(screen.getByRole("dialog", { name: "Search" })).toHaveAttribute(
@@ -154,7 +154,7 @@ describe("MorphDock", () => {
     renderDock({
       open: true,
       onOpenChange,
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       children: <div>Panel body</div>,
     });
     await userEvent.click(document.body);
@@ -163,7 +163,7 @@ describe("MorphDock", () => {
 
   it("runs a plain action with no panel and exposes no dialog", async () => {
     const onSelect = vi.fn();
-    renderDock({ action: { label: "New", icon: Search, onSelect } });
+    renderDock({ action: { label: "New", icon: MagnifyingGlass, onSelect } });
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     const btn = screen.getByRole("button", { name: "New" });
     expect(btn).not.toHaveAttribute("aria-haspopup");
@@ -184,7 +184,7 @@ describe("MorphDock", () => {
   it("honours reduced motion without throwing", () => {
     stubMatchMedia({ reduce: true });
     expect(() =>
-      renderDock({ open: true, children: <div>Panel</div>, action: { label: "S", icon: Search } }),
+      renderDock({ open: true, children: <div>Panel</div>, action: { label: "S", icon: MagnifyingGlass } }),
     ).not.toThrow();
   });
 
@@ -194,7 +194,7 @@ describe("MorphDock", () => {
       draggable: true,
       panelTitle: "Win",
       panelHeight: 160,
-      action: { label: "Notes", icon: Search },
+      action: { label: "Notes", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     const dialog = screen.getByRole("dialog", { name: "Win" });
@@ -212,7 +212,7 @@ describe("MorphDock", () => {
       draggable: true,
       panelTitle: "Win",
       onOpenChange,
-      action: { label: "Notes", icon: Search },
+      action: { label: "Notes", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     await userEvent.click(screen.getByRole("button", { name: "Close" }));
@@ -225,7 +225,7 @@ describe("MorphDock", () => {
       open: true,
       panelTitle: "Win",
       onSave,
-      action: { label: "Notes", icon: Search },
+      action: { label: "Notes", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     await userEvent.click(screen.getByRole("button", { name: "Save" }));
@@ -237,7 +237,7 @@ describe("MorphDock", () => {
       open: true,
       resizable: true,
       panelHeight: 160,
-      action: { label: "Console", icon: Search },
+      action: { label: "Console", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     const grip = container.querySelector('[aria-label="Resize"]');
@@ -254,7 +254,7 @@ describe("MorphDock", () => {
       resizable: true,
       placement: "top",
       panelHeight: 160,
-      action: { label: "Console", icon: Search },
+      action: { label: "Console", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     // Top placement → grip pinned to the panel's TOP-right (faces the upward bloom).
@@ -271,7 +271,7 @@ describe("MorphDock", () => {
     const { container } = renderDock({
       placement: "top",
       open: true,
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     // "top" placement anchors the wrapper bottom-left so it blooms upward.
@@ -282,7 +282,7 @@ describe("MorphDock", () => {
     const { container } = renderDock({
       origin: "center",
       open: true,
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     // A centered horizontal dock pins the panel to the bar midpoint.
@@ -293,7 +293,7 @@ describe("MorphDock", () => {
     const { container } = renderDock({
       origin: "end",
       open: true,
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     // The overlay wrapper pins to the right edge of the dock.
@@ -305,7 +305,7 @@ describe("MorphDock", () => {
       placement: "right",
       origin: "center",
       open: true,
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     expect(container.querySelector(".top-1\\/2.-translate-y-1\\/2")).toBeInTheDocument();
@@ -315,9 +315,9 @@ describe("MorphDock", () => {
     render(
       <MorphDock
         items={[
-          { id: "a", label: "A", icon: Home, core: true, group: "nav" },
-          { id: "b", label: "B", icon: Inbox, core: true, group: "nav" },
-          { id: "c", label: "C", icon: Search, core: true, group: "tools" },
+          { id: "a", label: "A", icon: House, core: true, group: "nav" },
+          { id: "b", label: "B", icon: Tray, core: true, group: "nav" },
+          { id: "c", label: "C", icon: MagnifyingGlass, core: true, group: "tools" },
         ]}
       />,
     );
@@ -329,10 +329,10 @@ describe("MorphDock", () => {
     const onSelect = vi.fn();
     render(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+        items={[{ id: "h", label: "Home", icon: House, core: true }]}
         tools={[
-          { id: "save", label: "Save", icon: Settings, primary: true, onSelect, group: "a" },
-          { id: "share", label: "Share", icon: Search, group: "b" },
+          { id: "save", label: "Save", icon: Gear, primary: true, onSelect, group: "a" },
+          { id: "share", label: "Share", icon: MagnifyingGlass, group: "b" },
         ]}
       />,
     );
@@ -348,8 +348,8 @@ describe("MorphDock", () => {
   it("renders tool-zone nav entries as links", () => {
     render(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true }]}
-        tools={[{ id: "docs", label: "Docs", icon: Search, href: "/docs" }]}
+        items={[{ id: "h", label: "Home", icon: House, core: true }]}
+        tools={[{ id: "docs", label: "Docs", icon: MagnifyingGlass, href: "/docs" }]}
       />,
     );
     expect(screen.getByRole("link", { name: "Docs" })).toHaveAttribute("href", "/docs");
@@ -358,7 +358,7 @@ describe("MorphDock", () => {
   it("renders a breadcrumb trail with the last crumb as current", () => {
     render(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+        items={[{ id: "h", label: "Home", icon: House, core: true }]}
         breadcrumb={[
           { label: "Home", href: "/" },
           { label: "Reports", href: "/reports" },
@@ -373,7 +373,7 @@ describe("MorphDock", () => {
   it("blooms a status body and shows the tone title/message", () => {
     render(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+        items={[{ id: "h", label: "Home", icon: House, core: true }]}
         status={{ tone: "error", title: "Save failed", message: "Network error" }}
       />,
     );
@@ -387,7 +387,7 @@ describe("MorphDock", () => {
     const onStatusDismiss = vi.fn();
     const { rerender } = render(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+        items={[{ id: "h", label: "Home", icon: House, core: true }]}
         status={{ tone: "success", title: "Saved" }}
         statusDismissMs={1000}
         onStatusDismiss={onStatusDismiss}
@@ -401,7 +401,7 @@ describe("MorphDock", () => {
     onStatusDismiss.mockClear();
     rerender(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+        items={[{ id: "h", label: "Home", icon: House, core: true }]}
         status={{ tone: "error", title: "Nope" }}
         statusDismissMs={1000}
         onStatusDismiss={onStatusDismiss}
@@ -418,7 +418,7 @@ describe("MorphDock", () => {
     const onStatusDismiss = vi.fn();
     render(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true }]}
+        items={[{ id: "h", label: "Home", icon: House, core: true }]}
         status={{ tone: "error", title: "Nope" }}
         onStatusDismiss={onStatusDismiss}
       />,
@@ -430,12 +430,12 @@ describe("MorphDock", () => {
   it("drops the surface a beat after the panel closes", () => {
     vi.useFakeTimers();
     const { rerender } = render(
-      <MorphDock items={baseItems} open action={{ label: "Search", icon: Search }}>
+      <MorphDock items={baseItems} open action={{ label: "Search", icon: MagnifyingGlass }}>
         <div>Panel</div>
       </MorphDock>,
     );
     rerender(
-      <MorphDock items={baseItems} open={false} action={{ label: "Search", icon: Search }}>
+      <MorphDock items={baseItems} open={false} action={{ label: "Search", icon: MagnifyingGlass }}>
         <div>Panel</div>
       </MorphDock>,
     );
@@ -450,7 +450,7 @@ describe("MorphDock", () => {
     const { container } = renderDock({
       placement: "left",
       origin: "end",
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       children: <div>Panel</div>,
     });
     expect(container.querySelector(".bottom-0")).toBeInTheDocument();
@@ -461,7 +461,7 @@ describe("MorphDock", () => {
       draggable: true,
       panelTitle: "Win",
       panelHeight: 160,
-      action: { label: "Notes", icon: Search },
+      action: { label: "Notes", icon: MagnifyingGlass },
       children: <div>Body</div>,
     } as const;
     const { rerender } = render(<MorphDock items={baseItems} open {...props} />);
@@ -489,9 +489,9 @@ describe("MorphDock", () => {
   it("does not round the tool zone's trailing edge when an action follows", () => {
     render(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true }]}
-        tools={[{ id: "x", label: "Export", icon: Search }]}
-        action={{ label: "Go", icon: Search }}
+        items={[{ id: "h", label: "Home", icon: House, core: true }]}
+        tools={[{ id: "x", label: "Export", icon: MagnifyingGlass }]}
+        action={{ label: "Go", icon: MagnifyingGlass }}
       />,
     );
     expect(document.querySelector('[data-slot="morph-dock-tools"]')).toHaveClass("rounded-xl");
@@ -501,7 +501,7 @@ describe("MorphDock", () => {
     const { container } = renderDock({
       placement: "right",
       origin: "start",
-      action: { label: "Search", icon: Search },
+      action: { label: "Search", icon: MagnifyingGlass },
       children: <div>Panel</div>,
     });
     expect(container.querySelector('[role="dialog"]')).toBeInTheDocument();
@@ -511,7 +511,7 @@ describe("MorphDock", () => {
     renderDock({
       open: true,
       draggable: true,
-      action: { label: "Notes", icon: Search },
+      action: { label: "Notes", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     expect(screen.getByRole("dialog")).toBeInTheDocument();
@@ -521,7 +521,7 @@ describe("MorphDock", () => {
   it("hides the resize grip while closed", () => {
     renderDock({
       resizable: true,
-      action: { label: "Notes", icon: Search },
+      action: { label: "Notes", icon: MagnifyingGlass },
       children: <div>Body</div>,
     });
     expect(screen.getByRole("button", { name: "Resize" })).toHaveClass("opacity-0");
@@ -539,13 +539,13 @@ describe("MorphDock", () => {
 
   it("has no axe violations (closed and open)", async () => {
     const { container, rerender } = render(
-      <MorphDock items={baseItems} action={{ label: "Search", icon: Search }}>
+      <MorphDock items={baseItems} action={{ label: "Search", icon: MagnifyingGlass }}>
         <div>Panel</div>
       </MorphDock>,
     );
     expect(await axe(container)).toHaveNoViolations();
     rerender(
-      <MorphDock items={baseItems} open action={{ label: "Search", icon: Search }}>
+      <MorphDock items={baseItems} open action={{ label: "Search", icon: MagnifyingGlass }}>
         <div>Panel</div>
       </MorphDock>,
     );
@@ -555,9 +555,9 @@ describe("MorphDock", () => {
   it("has no axe violations for tools, breadcrumb, and status variants", async () => {
     const { container } = render(
       <MorphDock
-        items={[{ id: "h", label: "Home", icon: Home, core: true, group: "nav" }]}
+        items={[{ id: "h", label: "Home", icon: House, core: true, group: "nav" }]}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Now" }]}
-        tools={[{ id: "save", label: "Save", icon: Settings, primary: true, group: "a" }]}
+        tools={[{ id: "save", label: "Save", icon: Gear, primary: true, group: "a" }]}
         status={{ tone: "info", title: "Heads up", message: "Synced" }}
       />,
     );

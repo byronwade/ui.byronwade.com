@@ -1,6 +1,6 @@
 "use client";
 
-import { BookmarkIcon, type LucideProps } from "lucide-react";
+import { Bookmark, type IconProps } from "@/lib/icons"
 import type { ComponentProps, HTMLAttributes } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -33,7 +33,7 @@ export const Checkpoint = ({
   </div>
 );
 
-export type CheckpointIconProps = LucideProps;
+export type CheckpointIconProps = IconProps;
 
 export const CheckpointIcon = ({
   className,
@@ -41,7 +41,7 @@ export const CheckpointIcon = ({
   ...props
 }: CheckpointIconProps) =>
   children ?? (
-    <BookmarkIcon
+    <Bookmark
       data-slot="checkpoint-icon"
       className={cn("size-4 shrink-0", className)}
       {...props}

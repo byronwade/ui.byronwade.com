@@ -1,6 +1,6 @@
 "use client"
 
-import { ListMusic } from "lucide-react"
+import { Playlist } from "@/lib/icons"
 
 import { Button } from "@/components/ui/button"
 import { MiniPlayer } from "@/components/mini-player"
@@ -20,7 +20,7 @@ export default function Example() {
         progress={42}
         actions={
           <Button variant="outline" size="sm">
-            <ListMusic />
+            <Playlist />
             Queue
           </Button>
         }

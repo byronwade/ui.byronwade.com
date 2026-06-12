@@ -7,7 +7,7 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe } from "vitest-axe";
-import { Star } from "lucide-react";
+import { Star } from "@/lib/icons"
 
 import {
   Pill,

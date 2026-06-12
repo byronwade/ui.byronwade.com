@@ -332,7 +332,7 @@ export const components: ComponentDoc[] = [
     name: "Filter pill",
     category: "UI",
     description: "Pill-with-chevron filter / range selector control.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: [
       "default",
@@ -364,7 +364,7 @@ export const components: ComponentDoc[] = [
     category: "Composites",
     description:
       "Vertical event/timeline rail with connectors and terminal marker.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -414,7 +414,7 @@ export const components: ComponentDoc[] = [
     name: "Metric stat",
     category: "Composites",
     description: "Label + large value + delta badge metric row.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: [
       "default",
@@ -704,7 +704,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/utils",
       "@byronwade/button",
     ],
-    npmDeps: ["react-day-picker", "date-fns", "lucide-react"],
+    npmDeps: ["react-day-picker", "date-fns", "@phosphor-icons/react"],
     examples: ["default", "range-presets", "appointment", "pricing"],
   },
   {
@@ -713,7 +713,7 @@ export const components: ComponentDoc[] = [
     category: "Forms",
     description:
       "Single-date picker with an outline trigger that opens a popover calendar, controlled or uncontrolled, formatted with date-fns.",
-    npmDeps: ["date-fns", "lucide-react"],
+    npmDeps: ["date-fns", "@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -744,7 +744,7 @@ export const components: ComponentDoc[] = [
     category: "Forms",
     description:
       "One-time-password input with grouped slots, caret blink, separator, and aria-invalid styling.",
-    npmDeps: ["input-otp", "lucide-react"],
+    npmDeps: ["input-otp", "@phosphor-icons/react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -754,7 +754,7 @@ export const components: ComponentDoc[] = [
     category: "Forms",
     description:
       "Filterable autocomplete on Base UI Combobox, input-group trigger, popup list, empty state, optional multi-select chips.",
-    npmDeps: ["@base-ui/react", "lucide-react"],
+    npmDeps: ["@base-ui/react", "@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -881,7 +881,7 @@ export const components: ComponentDoc[] = [
     category: "Data display",
     description:
       "Embla-powered carousel with keyboard navigation, previous/next controls, and horizontal or vertical orientation.",
-    npmDeps: ["embla-carousel-react", "lucide-react"],
+    npmDeps: ["embla-carousel-react", "@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -1476,7 +1476,7 @@ export const components: ComponentDoc[] = [
     category: "Overlays",
     description:
       "Right-click menu on Base UI ContextMenu, items, checkbox/radio groups, submenus, shortcuts, destructive variant.",
-    npmDeps: ["@base-ui/react", "lucide-react"],
+    npmDeps: ["@base-ui/react", "@phosphor-icons/react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -1750,7 +1750,7 @@ export const components: ComponentDoc[] = [
     name: "Sonner",
     category: "Feedback",
     description:
-      "A themed toast notification provider that wraps the Sonner Toaster with @wrksz/themes integration and custom Lucide icons for success, info, warning, error, and loading states.",
+      "A themed toast notification provider that wraps the Sonner Toaster with @wrksz/themes integration and custom Phosphor icons for success, info, warning, error, and loading states.",
     props: [
       {
         name: "...props",
@@ -1983,7 +1983,7 @@ export const components: ComponentDoc[] = [
     demoContext: { skipSurfaceWrapper: true },
     description:
       "Table system: a styled, accessible HTML table primitive with scrollable container, density and layout variants, plus the DataTable admin shell (index filters, bulk selection, sortable columns, pagination).",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -2210,7 +2210,7 @@ export const components: ComponentDoc[] = [
     category: "Data display",
     description:
       "Accessible pagination nav with previous/next links, page links, and ellipsis.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -2306,10 +2306,10 @@ export const components: ComponentDoc[] = [
       },
       {
         name: "icon",
-        type: "LucideIcon",
+        type: "Icon",
         default: "undefined",
         description:
-          "Optional Lucide icon rendered in the top-right corner of the card.",
+          "Optional Phosphor icon rendered in the top-right corner of the card.",
       },
       {
         name: "className",
@@ -2342,10 +2342,10 @@ export const components: ComponentDoc[] = [
       },
       {
         name: "icon",
-        type: "LucideIcon",
+        type: "Icon",
         default: "undefined",
         description:
-          "Optional Lucide icon component rendered in a small rounded chip above the title.",
+          "Optional Phosphor icon component rendered in a small rounded chip above the title.",
       },
       {
         name: "description",
@@ -2674,7 +2674,7 @@ export const components: ComponentDoc[] = [
     category: "Morph",
     description:
       "A config-driven morphing navigation dock. The item row morphs compact ↔ full, and the whole pill blooms in place into a consumer-provided panel via useChromeMorph, items, badges, core/pinned flags, a trailing cluster, and a contextual action. Pure --dock tokens, reduced-motion + Esc + click-away.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3180,7 +3180,7 @@ export const components: ComponentDoc[] = [
     name: "Sheet",
     category: "Overlays",
     description: "Slide-over panel dialog anchored to any screen edge.",
-    npmDeps: ["@base-ui/react", "lucide-react"],
+    npmDeps: ["@base-ui/react", "@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3216,7 +3216,11 @@ export const components: ComponentDoc[] = [
     category: "Overlays",
     description:
       "Collapsible application sidebar with provider, mobile sheet fallback, icon/offcanvas modes, menu groups, and ⌘/Ctrl+B shortcut.",
-    npmDeps: ["@base-ui/react", "class-variance-authority", "lucide-react"],
+    npmDeps: [
+      "@base-ui/react",
+      "class-variance-authority",
+      "@phosphor-icons/react",
+    ],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3266,7 +3270,7 @@ export const components: ComponentDoc[] = [
     category: "Overlays",
     description:
       "Command palette built on cmdk with dialog and input-group integration.",
-    npmDeps: ["cmdk", "lucide-react"],
+    npmDeps: ["cmdk", "@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3319,7 +3323,11 @@ export const components: ComponentDoc[] = [
     name: "Navigation Menu",
     category: "Overlays",
     description: "Accessible site navigation with animated dropdown panels.",
-    npmDeps: ["@base-ui/react", "class-variance-authority", "lucide-react"],
+    npmDeps: [
+      "@base-ui/react",
+      "class-variance-authority",
+      "@phosphor-icons/react",
+    ],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     props: [
       {
@@ -3425,8 +3433,8 @@ export const components: ComponentDoc[] = [
     name: "Floating dock",
     category: "UI",
     description:
-      "macOS-style magnify-on-hover dock (desktop) + collapsible mobile dock, token surfaces and lucide icons. Adapted from Aceternity UI.",
-    npmDeps: ["motion", "lucide-react"],
+      "macOS-style magnify-on-hover dock (desktop) + collapsible mobile dock, token surfaces and Phosphor icons. Adapted from Aceternity UI.",
+    npmDeps: ["motion", "@phosphor-icons/react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -3453,8 +3461,8 @@ export const components: ComponentDoc[] = [
     name: "Showcase carousel",
     category: "UI",
     description:
-      "Horizontal carousel of cover cards that expand into a detail modal — token surfaces with the edge hairline + depth, mono metadata eyebrows over editorial titles, lucide controls, focus-visible rings. Adapted from Aceternity UI.",
-    npmDeps: ["motion", "lucide-react"],
+      "Horizontal carousel of cover cards that expand into a detail modal — token surfaces with the edge hairline + depth, mono metadata eyebrows over editorial titles, Phosphor controls, focus-visible rings. Adapted from Aceternity UI.",
+    npmDeps: ["motion", "@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3502,8 +3510,8 @@ export const components: ComponentDoc[] = [
     name: "Number field",
     category: "Forms",
     description:
-      "Numeric input with increment/decrement, clamping, scrub, and formatting, built on Base UI. Token surfaces, lucide steppers.",
-    npmDeps: ["@base-ui/react", "lucide-react"],
+      "Numeric input with increment/decrement, clamping, scrub, and formatting, built on Base UI. Token surfaces, Phosphor steppers.",
+    npmDeps: ["@base-ui/react", "@phosphor-icons/react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -3528,7 +3536,7 @@ export const components: ComponentDoc[] = [
     category: "Data display",
     description:
       "Collapsible file/folder tree with selection, sorting, and expand-all, plus a panel variant (chevron disclosure, guide lines, count badges) and multi-select with cascading checkboxes, rebuilt on Base UI. Base from MagicUI; panel/multi-select inspired by Untitled UI.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -3595,7 +3603,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/button",
       "@byronwade/dropdown-menu",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3610,7 +3618,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/badge",
       "@byronwade/hover-card",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3640,7 +3648,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/utils",
       "@byronwade/button",
     ],
-    npmDeps: ["shiki", "lucide-react"],
+    npmDeps: ["shiki", "@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3654,7 +3662,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/utils",
       "@byronwade/collapsible",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3668,7 +3676,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/utils",
       "@byronwade/collapsible",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3713,7 +3721,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/separator",
       "@byronwade/tooltip",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3730,7 +3738,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/collapsible",
       "@byronwade/ai-shimmer",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3746,7 +3754,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/scroll-area",
       "@byronwade/button",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3760,7 +3768,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/utils",
       "@byronwade/button",
     ],
-    npmDeps: ["lucide-react", "use-stick-to-bottom"],
+    npmDeps: ["@phosphor-icons/react", "use-stick-to-bottom"],
     examples: ["default"],
   },
   {
@@ -3775,7 +3783,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/collapsible",
       "@byronwade/ai-shimmer",
     ],
-    npmDeps: ["streamdown", "lucide-react"],
+    npmDeps: ["streamdown", "@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3791,7 +3799,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/collapsible",
       "@byronwade/ai-code-block",
     ],
-    npmDeps: ["ai", "lucide-react"],
+    npmDeps: ["ai", "@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3807,7 +3815,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/button-group",
       "@byronwade/tooltip",
     ],
-    npmDeps: ["ai", "streamdown", "lucide-react"],
+    npmDeps: ["ai", "streamdown", "@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3822,7 +3830,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/badge",
       "@byronwade/collapsible",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3837,7 +3845,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/button",
       "@byronwade/tooltip",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3911,7 +3919,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/input-group",
       "@byronwade/select",
     ],
-    npmDeps: ["ai", "lucide-react", "nanoid"],
+    npmDeps: ["ai", "@phosphor-icons/react", "nanoid"],
     examples: ["default"],
   },
   {
@@ -3936,7 +3944,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/button",
       "@byronwade/hover-card",
     ],
-    npmDeps: ["ai", "lucide-react"],
+    npmDeps: ["ai", "@phosphor-icons/react"],
     examples: ["default", "variants"],
   },
   {
@@ -3963,7 +3971,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/input",
       "@byronwade/tooltip",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -3981,7 +3989,7 @@ export const components: ComponentDoc[] = [
     category: "UI",
     description:
       "Rounded pill with avatar/status/indicator/delta parts; tones map to semantic tokens. Adapted from kibo-ui.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -4042,7 +4050,7 @@ export const components: ComponentDoc[] = [
     category: "Forms",
     description:
       "Interactive star rating (keyboard + hover) + a read-only RatingBadge (score + star). Adapted from kibo-ui.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
     examples: ["default"],
   },
@@ -4062,7 +4070,7 @@ export const components: ComponentDoc[] = [
     category: "UI",
     description:
       "Crop a File to a PNG (react-image-crop + canvas); apply/reset controls. Adapted from kibo-ui.",
-    npmDeps: ["lucide-react", "react-image-crop"],
+    npmDeps: ["@phosphor-icons/react", "react-image-crop"],
     registryDeps: ["@byronwade/utils", "@byronwade/button"],
     examples: ["default"],
   },
@@ -4125,7 +4133,7 @@ export const components: ComponentDoc[] = [
       "date-fns",
       "jotai",
       "lodash.throttle",
-      "lucide-react",
+      "@phosphor-icons/react",
     ],
     registryDeps: [
       "@byronwade/foundation",
@@ -4173,7 +4181,7 @@ export const components: ComponentDoc[] = [
     category: "Morph",
     description:
       "Full-width top navigation bar that blooms a panel down via the morph technique.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -4187,7 +4195,7 @@ export const components: ComponentDoc[] = [
     category: "Morph",
     description:
       "Left icon rail that morphs wider into a labeled sidebar via the morph technique.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -4201,7 +4209,7 @@ export const components: ComponentDoc[] = [
     category: "Morph",
     description:
       "Bottom tab bar that blooms a sheet up via the morph technique.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -4228,7 +4236,7 @@ export const components: ComponentDoc[] = [
     category: "Morph",
     description:
       "Right icon rail that blooms a wide labeled panel to the side via the morph technique.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -4255,7 +4263,7 @@ export const components: ComponentDoc[] = [
     category: "Composites",
     description:
       "Messaging conversation list, live search, All/Unread/Pinned filters with counts, a pinned section, bulk select + bulk actions, and rows with hover actions. Reads/acts through comms-store.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -4270,7 +4278,7 @@ export const components: ComponentDoc[] = [
     category: "Composites",
     description:
       "Messaging thread pane, contact header, scrollable in/out bubbles with delivery ticks, reaction chips, and an empty state when no conversation is selected. Reads/acts through comms-store.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -4286,7 +4294,7 @@ export const components: ComponentDoc[] = [
     category: "Composites",
     description:
       "Messaging composer, auto-growing textarea, Enter to send, Shift+Enter newline, attachment affordance, and optional template/schedule callbacks. Calls send on comms-store.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/utils",
@@ -4422,7 +4430,7 @@ export const components: ComponentDoc[] = [
     category: "Commerce",
     description:
       "Selection action bar for tables and resource lists, a selected-count label, promoted and grouped actions, and a clear-selection control. Renders nothing when nothing is selected.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/button",
@@ -4496,7 +4504,7 @@ export const components: ComponentDoc[] = [
     category: "Commerce",
     description:
       "Customer summary card, avatar, name and email, orders and lifetime-spend stats, and a default address.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/avatar",
@@ -4528,7 +4536,7 @@ export const components: ComponentDoc[] = [
     nav: { parent: "table", order: 1 },
     description:
       "Sortable, row-selectable data table with an integrated bulk-action bar, sticky header, loading and empty states, and pagination. The signature Shopify-admin index.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/table",
@@ -4651,7 +4659,7 @@ export const components: ComponentDoc[] = [
     category: "Composites",
     description:
       "Filter bar for an index: saved-view tabs, search, sort dropdown, and removable applied-filter pills. Pairs with index-table / resource-list.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/segmented-control",
@@ -4669,7 +4677,7 @@ export const components: ComponentDoc[] = [
     category: "Forms",
     description:
       "Tags field, type to add chips (Enter/comma), remove with × or Backspace, optional autocomplete suggestions, semantic tag tones, sizes, and error state.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/badge",
@@ -4703,7 +4711,7 @@ export const components: ComponentDoc[] = [
     category: "Feedback",
     description:
       "Prominent inline status message with tone (info/success/warning/critical), title, body, actions, and dismiss. Distinct from the compact alert.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/foundation",
       "@byronwade/button",
@@ -4746,7 +4754,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/aspect-ratio",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -4771,7 +4779,7 @@ export const components: ComponentDoc[] = [
       },
     ],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -4827,7 +4835,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/dropdown-menu",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -4855,7 +4863,7 @@ export const components: ComponentDoc[] = [
       },
     ],
     registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -4962,7 +4970,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/dropdown-menu",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default", "horizontal", "overlay", "featured"],
   },
   {
@@ -5027,7 +5035,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/skeleton",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default", "grid", "rail", "watch-page"],
   },
   {
@@ -5096,7 +5104,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/dropdown-menu",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -5190,7 +5198,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/dropdown-menu",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -5255,7 +5263,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/verified-badge",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -5372,7 +5380,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/button",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default", "preview", "immersive"],
   },
   {
@@ -5438,7 +5446,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/button",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default", "dock", "expanded"],
   },
   {
@@ -5486,7 +5494,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/dropdown-menu",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -5522,7 +5530,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/dropdown-menu",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -5558,7 +5566,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/button",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -5593,7 +5601,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/verified-badge",
       "@byronwade/utils",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default"],
   },
   {
@@ -5621,7 +5629,7 @@ export const components: ComponentDoc[] = [
     category: "Market",
     description:
       "Signed price/percent change with a runtime-derived tone (success/destructive/muted from sign + neutralThreshold) and trend caret. `format` absolute/percent/both, `size` sm/default/lg, and a `chip` variant for a tinted pill. Reused across the TradingView-style set.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: ["@byronwade/market"],
     examples: ["default"],
     tags: ["tradingview", "market"],
@@ -5709,7 +5717,7 @@ export const components: ComponentDoc[] = [
     category: "Market",
     description:
       "Trading chart toolbar, symbol button, interval segmented-control, chart-type toggle group, and indicators action.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/button",
       "@byronwade/segmented-control",
@@ -5989,7 +5997,7 @@ export const components: ComponentDoc[] = [
     category: "Market",
     description:
       "Active chart indicators list, tone swatch, visibility switch, hidden badge, and optional remove callback.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/badge",
       "@byronwade/button",
@@ -6004,7 +6012,7 @@ export const components: ComponentDoc[] = [
     category: "Market",
     description:
       "Chart drawing tool rail, vertical or horizontal toggle group with tooltip-labeled cursor, trendline, fib, text, and shape tools (presentation only).",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: ["@byronwade/toggle-group", "@byronwade/tooltip"],
     examples: ["default"],
     tags: ["tradingview", "market"],
@@ -6015,7 +6023,7 @@ export const components: ComponentDoc[] = [
     category: "Market",
     description:
       "Compare overlay header, symbol chips with `price-change` percent, optional add/remove actions, and a max symbol cap.",
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     registryDeps: [
       "@byronwade/badge",
       "@byronwade/button",
@@ -6090,7 +6098,7 @@ export const components: ComponentDoc[] = [
       "@byronwade/segmented-control",
       "@byronwade/slider",
     ],
-    npmDeps: ["lucide-react"],
+    npmDeps: ["@phosphor-icons/react"],
     examples: ["default", "bar"],
     tags: ["tradingview", "market"],
   },

@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "@/lib/icons"
 import {
   type ComponentProps,
   createContext,
@@ -269,7 +269,7 @@ export const InlineCitationCarouselPrev = ({
       type="button"
       {...props}
     >
-      <ArrowLeftIcon className="size-4" />
+      <ArrowLeft className="size-4" />
     </button>
   )
 }
@@ -298,7 +298,7 @@ export const InlineCitationCarouselNext = ({
       type="button"
       {...props}
     >
-      <ArrowRightIcon className="size-4" />
+      <ArrowRight className="size-4" />
     </button>
   )
 }

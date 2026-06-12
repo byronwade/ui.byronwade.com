@@ -1,6 +1,12 @@
 "use client"
 
-import { ClipboardPaste, Copy, Redo2, Scissors, Undo2 } from "lucide-react"
+import {
+  ArrowUUpLeft,
+  ArrowUUpRight,
+  Clipboard,
+  Copy,
+  Scissors,
+} from "@/lib/icons"
 
 import {
   DropdownMenu,
@@ -25,12 +31,12 @@ export default function Example() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Undo2 />
+              <ArrowUUpLeft />
               Undo
               <DropdownMenuShortcut>⌘Z</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Redo2 />
+              <ArrowUUpRight />
               Redo
               <DropdownMenuShortcut>⇧⌘Z</DropdownMenuShortcut>
             </DropdownMenuItem>
@@ -48,7 +54,7 @@ export default function Example() {
               <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <ClipboardPaste />
+              <Clipboard />
               Paste
               <DropdownMenuShortcut>⌘V</DropdownMenuShortcut>
             </DropdownMenuItem>

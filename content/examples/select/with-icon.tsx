@@ -11,17 +11,17 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import {
-  Globe2Icon,
-  MoonIcon,
-  SunIcon,
-  MonitorIcon,
-  BellIcon,
-  BellOffIcon,
-  BellRingIcon,
-  LayoutGridIcon,
-  LayoutListIcon,
-  LayoutIcon,
-} from "lucide-react"
+  Bell,
+  BellRinging,
+  BellSlash,
+  GlobeHemisphereWest,
+  GridFour,
+  Layout,
+  Monitor,
+  Moon,
+  Rows,
+  Sun,
+} from "@/lib/icons"
 
 export default function Example() {
   return (
@@ -37,15 +37,15 @@ export default function Example() {
             <SelectGroup>
               <SelectLabel>Appearance</SelectLabel>
               <SelectItem value="light">
-                <SunIcon className="size-4" />
+                <Sun className="size-4" />
                 Light
               </SelectItem>
               <SelectItem value="dark">
-                <MoonIcon className="size-4" />
+                <Moon className="size-4" />
                 Dark
               </SelectItem>
               <SelectItem value="system">
-                <MonitorIcon className="size-4" />
+                <Monitor className="size-4" />
                 System
               </SelectItem>
             </SelectGroup>
@@ -60,22 +60,22 @@ export default function Example() {
         </span>
         <Select>
           <SelectTrigger>
-            <BellIcon className="size-4 text-muted-foreground" />
+            <Bell className="size-4 text-muted-foreground" />
             <SelectValue placeholder="Notification style…" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Alerts</SelectLabel>
               <SelectItem value="all">
-                <BellRingIcon className="size-4" />
+                <BellRinging className="size-4" />
                 All notifications
               </SelectItem>
               <SelectItem value="important">
-                <BellIcon className="size-4" />
+                <Bell className="size-4" />
                 Important only
               </SelectItem>
               <SelectItem value="none">
-                <BellOffIcon className="size-4" />
+                <BellSlash className="size-4" />
                 None
               </SelectItem>
             </SelectGroup>
@@ -94,15 +94,15 @@ export default function Example() {
             <SelectGroup>
               <SelectLabel>View mode</SelectLabel>
               <SelectItem value="grid">
-                <LayoutGridIcon className="size-4" />
+                <GridFour className="size-4" />
                 Grid
               </SelectItem>
               <SelectItem value="list">
-                <LayoutListIcon className="size-4" />
+                <Rows className="size-4" />
                 List
               </SelectItem>
               <SelectItem value="compact">
-                <LayoutIcon className="size-4" />
+                <Layout className="size-4" />
                 Compact
               </SelectItem>
             </SelectGroup>

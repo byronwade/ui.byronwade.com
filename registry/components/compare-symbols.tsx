@@ -1,7 +1,7 @@
 "use client"
 
 import type { ComponentPropsWithoutRef } from "react"
-import { Plus, X } from "lucide-react"
+import { Plus, X } from "@/lib/icons"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
