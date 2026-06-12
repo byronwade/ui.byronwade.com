@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { useTheme } from "@wrksz/themes/client"
-import { ArrowUpRight, GitFork, GridFour, Moon, Sun, X } from "@/lib/icons"
+import { ArrowUpRight, GithubLogo, GridFour, Moon, Sun, X } from "@/lib/icons"
 
 import { cn } from "@/lib/utils"
 
@@ -329,7 +329,7 @@ export function AppLauncher() {
               rel="noreferrer"
               className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl bg-dock-active text-[13px] font-medium text-dock-active-foreground transition-colors hover:bg-dock-muted"
             >
-              <GitFork className="size-4" /> GitHub
+              <GithubLogo className="size-4" /> GitHub
             </a>
             <button
               type="button"

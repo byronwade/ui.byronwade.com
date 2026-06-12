@@ -243,6 +243,12 @@ renders in **duotone** unless a state needs otherwise.
 - **Token color, scale size.** Color comes from tokens through `currentColor` (`text-brand`,
   `text-muted-foreground`, `text-destructive`), never a raw value or the `color` prop. Size comes from
   the scale (`size-4`, `size-5`), not the `size` prop.
+- **Brand logos come from the same barrel.** Need a GitHub, Google, Apple, X,
+  Discord, Slack, Figma… mark? It's `GithubLogo`, `GoogleLogo`, `AppleLogo`,
+  `XLogo`, … from `@/lib/icons` — drawn in Phosphor's hand so brand marks read in
+  the system's voice. **Never** paste in a raw brand SVG or pull a one-off icon
+  package. Logos inherit the duotone default; pass `weight="fill"` when a brand
+  needs its solid mark.
 - **Type icon-shaped props** with `Icon` / `IconProps` from `@/lib/icons` (e.g.
   `icon?: Icon`, `Record<Tone, Icon>`).
 

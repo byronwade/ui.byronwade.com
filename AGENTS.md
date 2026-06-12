@@ -63,8 +63,10 @@ agent following that rule would produce identical-looking code.** That means:
   the way `--brand` owns the accent. Pass `weight="bold" | "fill" | "regular" | "thin" | "light"` at a
   call site only when a state needs it; don't set `weight="duotone"` (it's already the default). Color
   comes from tokens via `currentColor` (`text-brand`, `text-muted-foreground`), size from the scale
-  (`size-4`, `size-5`). Type icon props with `Icon`/`IconProps` from `@/lib/icons`. Full reference:
-  `/docs/icons`.
+  (`size-4`, `size-5`). Type icon props with `Icon`/`IconProps` from `@/lib/icons`. **Brand logos**
+  (GitHub, Google, Apple, X, Discord, Slack, Figma, …) also resolve from the same barrel as
+  `GithubLogo`, `GoogleLogo`, … — never paste a raw brand SVG; they inherit the duotone default and
+  take `weight="fill"` for a solid mark. Full reference: `/docs/icons`.
 - **Base UI + CVA + `data-slot`.** Primitives build on `@base-ui/react`. Variants/sizes live in a
   `cva(...)` block (see `registry/ui/button.tsx`), each part carries a `data-slot` attribute, and the
   radius scale (`rounded-sm`…`rounded-4xl`, all from `--radius`) is used instead of pixel radii.

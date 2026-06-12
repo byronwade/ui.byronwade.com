@@ -2,7 +2,7 @@ import Link from "next/link"
 import {
   ArrowRight,
   Check,
-  GitFork,
+  GithubLogo,
   Layout,
   Palette,
   Robot,
@@ -94,7 +94,7 @@ export default function HomePage() {
             variant="ghost"
             render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}
           >
-            <GitFork />
+            <GithubLogo />
             GitHub
           </Button>
         </div>

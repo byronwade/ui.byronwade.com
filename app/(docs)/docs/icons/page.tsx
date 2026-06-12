@@ -1,7 +1,21 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { Cube, Heart, Lightning, type IconWeight } from "@/lib/icons"
+import {
+  AppleLogo,
+  Cube,
+  DiscordLogo,
+  FigmaLogo,
+  GithubLogo,
+  GoogleLogo,
+  Heart,
+  Lightning,
+  SlackLogo,
+  SpotifyLogo,
+  XLogo,
+  type Icon,
+  type IconWeight,
+} from "@/lib/icons"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 import { BLEED } from "@/app/(docs)/_components/docs-prose"
 import { GuidePager } from "@/app/(docs)/_components/guide-pager"
@@ -26,6 +40,17 @@ const WEIGHTS: { weight: IconWeight; label: string }[] = [
   { weight: "bold", label: "Bold" },
   { weight: "fill", label: "Fill" },
   { weight: "duotone", label: "Duotone" },
+]
+
+const BRANDS: { Logo: Icon; label: string }[] = [
+  { Logo: GithubLogo, label: "GithubLogo" },
+  { Logo: GoogleLogo, label: "GoogleLogo" },
+  { Logo: AppleLogo, label: "AppleLogo" },
+  { Logo: XLogo, label: "XLogo" },
+  { Logo: DiscordLogo, label: "DiscordLogo" },
+  { Logo: FigmaLogo, label: "FigmaLogo" },
+  { Logo: SlackLogo, label: "SlackLogo" },
+  { Logo: SpotifyLogo, label: "SpotifyLogo" },
 ]
 
 const USAGE = `import { Heart, MagnifyingGlass } from "@/lib/icons"
@@ -144,6 +169,42 @@ export default function IconsPage() {
           </div>
           <CodeBlock code={USAGE} lang="tsx" />
         </div>
+      </section>
+
+      {/* ============================ BRANDS =========================== */}
+      <section className="border-t border-border py-12">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="font-mono text-xs tracking-[0.2em] text-brand uppercase">
+              Brand marks
+            </p>
+            <h2 className="mt-3 text-xl leading-snug font-normal tracking-tight text-foreground">
+              Logos in the same hand
+            </h2>
+          </div>
+          <p className="max-w-sm text-[13px] leading-relaxed text-muted-foreground">
+            Brand logos resolve through the same barrel, so a GitHub or Google
+            mark reads in the system&rsquo;s voice instead of a pasted-in SVG.
+            Duotone by default; reach for{" "}
+            <code className="font-mono text-[0.85em]">
+              weight=&quot;fill&quot;
+            </code>{" "}
+            when a brand needs its solid mark.
+          </p>
+        </div>
+        <ul className="grid grid-cols-4 gap-px overflow-hidden rounded-xl bg-border sm:grid-cols-8">
+          {BRANDS.map(({ Logo, label }) => (
+            <li
+              key={label}
+              className="flex aspect-square flex-col items-center justify-center gap-2 bg-card p-2 text-muted-foreground"
+            >
+              <Logo className="size-7 text-foreground" aria-hidden />
+              <span className="w-full truncate text-center font-mono text-[10px] leading-tight">
+                {label}
+              </span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* ============================ GALLERY ========================== */}

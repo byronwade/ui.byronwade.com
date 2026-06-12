@@ -8,7 +8,7 @@ import { useTheme } from "@wrksz/themes/client"
 import {
   ArrowElbowDownLeft,
   Cube,
-  GitFork,
+  GithubLogo,
   Hash,
   MagnifyingGlass,
   Moon,
@@ -501,7 +501,7 @@ export function NavDock() {
                     />
                   }
                 >
-                  <GitFork className="size-4 shrink-0" strokeWidth={2} />
+                  <GithubLogo className="size-4 shrink-0" />
                 </TooltipTrigger>
                 <TooltipContent sideOffset={10}>GitHub</TooltipContent>
               </Tooltip>
