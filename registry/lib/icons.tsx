@@ -1,5 +1,221 @@
 import { forwardRef } from "react"
-import * as Ssr from "@phosphor-icons/react/dist/ssr"
+import {
+  AppWindow as SsrAppWindow,
+  Archive as SsrArchive,
+  ArrowBendUpLeft as SsrArrowBendUpLeft,
+  ArrowClockwise as SsrArrowClockwise,
+  ArrowCounterClockwise as SsrArrowCounterClockwise,
+  ArrowDown as SsrArrowDown,
+  ArrowElbowDownLeft as SsrArrowElbowDownLeft,
+  ArrowLeft as SsrArrowLeft,
+  ArrowRight as SsrArrowRight,
+  ArrowSquareOut as SsrArrowSquareOut,
+  ArrowUUpLeft as SsrArrowUUpLeft,
+  ArrowUUpRight as SsrArrowUUpRight,
+  ArrowUp as SsrArrowUp,
+  ArrowUpRight as SsrArrowUpRight,
+  ArrowsClockwise as SsrArrowsClockwise,
+  ArrowsDownUp as SsrArrowsDownUp,
+  ArrowsHorizontal as SsrArrowsHorizontal,
+  ArrowsOut as SsrArrowsOut,
+  Backspace as SsrBackspace,
+  Bell as SsrBell,
+  BellRinging as SsrBellRinging,
+  BellSlash as SsrBellSlash,
+  Book as SsrBook,
+  BookOpen as SsrBookOpen,
+  Bookmark as SsrBookmark,
+  Brain as SsrBrain,
+  Broadcast as SsrBroadcast,
+  Bug as SsrBug,
+  Calendar as SsrCalendar,
+  CalendarDots as SsrCalendarDots,
+  Camera as SsrCamera,
+  CaretDown as SsrCaretDown,
+  CaretLeft as SsrCaretLeft,
+  CaretRight as SsrCaretRight,
+  CaretUp as SsrCaretUp,
+  CaretUpDown as SsrCaretUpDown,
+  ChartBar as SsrChartBar,
+  ChartLine as SsrChartLine,
+  Chat as SsrChat,
+  ChatCircle as SsrChatCircle,
+  Check as SsrCheck,
+  CheckCircle as SsrCheckCircle,
+  CheckSquare as SsrCheckSquare,
+  Checks as SsrChecks,
+  Circle as SsrCircle,
+  CircleNotch as SsrCircleNotch,
+  Clipboard as SsrClipboard,
+  Clock as SsrClock,
+  Cloud as SsrCloud,
+  Code as SsrCode,
+  Columns as SsrColumns,
+  Command as SsrCommand,
+  Copy as SsrCopy,
+  Cpu as SsrCpu,
+  CreditCard as SsrCreditCard,
+  Crop as SsrCrop,
+  Crosshair as SsrCrosshair,
+  Cube as SsrCube,
+  CurrencyDollar as SsrCurrencyDollar,
+  Cursor as SsrCursor,
+  Database as SsrDatabase,
+  DeviceMobile as SsrDeviceMobile,
+  DeviceTablet as SsrDeviceTablet,
+  DotsThree as SsrDotsThree,
+  DotsThreeVertical as SsrDotsThreeVertical,
+  DownloadSimple as SsrDownloadSimple,
+  Envelope as SsrEnvelope,
+  Eraser as SsrEraser,
+  Eye as SsrEye,
+  EyeSlash as SsrEyeSlash,
+  Eyedropper as SsrEyedropper,
+  Eyeglasses as SsrEyeglasses,
+  File as SsrFile,
+  FileMagnifyingGlass as SsrFileMagnifyingGlass,
+  FileText as SsrFileText,
+  Files as SsrFiles,
+  FilmStrip as SsrFilmStrip,
+  Flag as SsrFlag,
+  Flame as SsrFlame,
+  FloppyDisk as SsrFloppyDisk,
+  Folder as SsrFolder,
+  FolderOpen as SsrFolderOpen,
+  FolderPlus as SsrFolderPlus,
+  Funnel as SsrFunnel,
+  Gear as SsrGear,
+  GearSix as SsrGearSix,
+  GitBranch as SsrGitBranch,
+  GitCommit as SsrGitCommit,
+  GitFork as SsrGitFork,
+  GitMerge as SsrGitMerge,
+  Globe as SsrGlobe,
+  GlobeHemisphereWest as SsrGlobeHemisphereWest,
+  Graph as SsrGraph,
+  GridFour as SsrGridFour,
+  HardDrives as SsrHardDrives,
+  Hash as SsrHash,
+  Heart as SsrHeart,
+  House as SsrHouse,
+  Image as SsrImage,
+  Info as SsrInfo,
+  Key as SsrKey,
+  Keyboard as SsrKeyboard,
+  Layout as SsrLayout,
+  Lifebuoy as SsrLifebuoy,
+  Lightning as SsrLightning,
+  LineSegment as SsrLineSegment,
+  LinkSimple as SsrLinkSimple,
+  List as SsrList,
+  ListChecks as SsrListChecks,
+  ListNumbers as SsrListNumbers,
+  ListPlus as SsrListPlus,
+  Lock as SsrLock,
+  Magnet as SsrMagnet,
+  MagnifyingGlass as SsrMagnifyingGlass,
+  MapPin as SsrMapPin,
+  Megaphone as SsrMegaphone,
+  Microphone as SsrMicrophone,
+  Minus as SsrMinus,
+  Monitor as SsrMonitor,
+  Moon as SsrMoon,
+  MusicNote as SsrMusicNote,
+  MusicNotes as SsrMusicNotes,
+  NavigationArrow as SsrNavigationArrow,
+  Newspaper as SsrNewspaper,
+  Note as SsrNote,
+  Package as SsrPackage,
+  Palette as SsrPalette,
+  PaperPlaneRight as SsrPaperPlaneRight,
+  PaperPlaneTilt as SsrPaperPlaneTilt,
+  Paperclip as SsrPaperclip,
+  Pause as SsrPause,
+  PencilSimple as SsrPencilSimple,
+  PencilSimpleLine as SsrPencilSimpleLine,
+  Percent as SsrPercent,
+  Phone as SsrPhone,
+  PhoneX as SsrPhoneX,
+  Play as SsrPlay,
+  Playlist as SsrPlaylist,
+  Plug as SsrPlug,
+  Plugs as SsrPlugs,
+  Plus as SsrPlus,
+  PlusCircle as SsrPlusCircle,
+  ProhibitInset as SsrProhibitInset,
+  Pulse as SsrPulse,
+  PushPin as SsrPushPin,
+  PuzzlePiece as SsrPuzzlePiece,
+  Question as SsrQuestion,
+  Quotes as SsrQuotes,
+  Radio as SsrRadio,
+  Rectangle as SsrRectangle,
+  Repeat as SsrRepeat,
+  Robot as SsrRobot,
+  Rocket as SsrRocket,
+  Rows as SsrRows,
+  Ruler as SsrRuler,
+  Scissors as SsrScissors,
+  SealCheck as SsrSealCheck,
+  ShareNetwork as SsrShareNetwork,
+  Shield as SsrShield,
+  ShieldCheck as SsrShieldCheck,
+  ShieldWarning as SsrShieldWarning,
+  ShoppingCart as SsrShoppingCart,
+  Shuffle as SsrShuffle,
+  Sidebar as SsrSidebar,
+  SignOut as SsrSignOut,
+  Siren as SsrSiren,
+  SkipBack as SsrSkipBack,
+  SkipForward as SsrSkipForward,
+  SlidersHorizontal as SsrSlidersHorizontal,
+  Smiley as SsrSmiley,
+  Sparkle as SsrSparkle,
+  SpeakerHigh as SsrSpeakerHigh,
+  SpeakerX as SsrSpeakerX,
+  Square as SsrSquare,
+  SquareHalf as SsrSquareHalf,
+  SquaresFour as SsrSquaresFour,
+  Stack as SsrStack,
+  StackSimple as SsrStackSimple,
+  Star as SsrStar,
+  Sun as SsrSun,
+  Table as SsrTable,
+  Tag as SsrTag,
+  Terminal as SsrTerminal,
+  TerminalWindow as SsrTerminalWindow,
+  TextAlignCenter as SsrTextAlignCenter,
+  TextAlignLeft as SsrTextAlignLeft,
+  TextAlignRight as SsrTextAlignRight,
+  TextB as SsrTextB,
+  TextHOne as SsrTextHOne,
+  TextHThree as SsrTextHThree,
+  TextHTwo as SsrTextHTwo,
+  TextItalic as SsrTextItalic,
+  TextStrikethrough as SsrTextStrikethrough,
+  TextSubscript as SsrTextSubscript,
+  TextSuperscript as SsrTextSuperscript,
+  TextT as SsrTextT,
+  TextUnderline as SsrTextUnderline,
+  ThumbsDown as SsrThumbsDown,
+  ThumbsUp as SsrThumbsUp,
+  Timer as SsrTimer,
+  Trash as SsrTrash,
+  Tray as SsrTray,
+  TrendDown as SsrTrendDown,
+  TrendUp as SsrTrendUp,
+  UploadSimple as SsrUploadSimple,
+  User as SsrUser,
+  UserCircle as SsrUserCircle,
+  Users as SsrUsers,
+  VideoCamera as SsrVideoCamera,
+  Warning as SsrWarning,
+  WarningCircle as SsrWarningCircle,
+  Wheelchair as SsrWheelchair,
+  Wrench as SsrWrench,
+  X as SsrX,
+  XCircle as SsrXCircle,
+} from "@phosphor-icons/react/dist/ssr"
 import type { Icon, IconProps, IconWeight } from "@phosphor-icons/react"
 
 export type { Icon, IconProps, IconWeight }
@@ -12,6 +228,9 @@ export type { Icon, IconProps, IconWeight }
  * `duotone()` wrapper that owns the default weight the way `--brand` owns the
  * accent. Pass `weight="bold" | "fill" | "regular" | "thin" | "light"` at any
  * call site to override. Import names match Phosphor's catalog exactly.
+ *
+ * Icons are imported by name (never `import * as`) so bundlers tree-shake the
+ * set down to exactly what's used.
  */
 function duotone(Base: Icon, displayName: string): Icon {
   const Wrapped = forwardRef<SVGSVGElement, IconProps>(function PhosphorIcon(
@@ -24,338 +243,338 @@ function duotone(Base: Icon, displayName: string): Icon {
   return Wrapped as unknown as Icon
 }
 
-export const AppWindow = /*@__PURE__*/ duotone(Ssr.AppWindow, "AppWindow")
-export const Archive = /*@__PURE__*/ duotone(Ssr.Archive, "Archive")
+export const AppWindow = /*@__PURE__*/ duotone(SsrAppWindow, "AppWindow")
+export const Archive = /*@__PURE__*/ duotone(SsrArchive, "Archive")
 export const ArrowBendUpLeft = /*@__PURE__*/ duotone(
-  Ssr.ArrowBendUpLeft,
+  SsrArrowBendUpLeft,
   "ArrowBendUpLeft",
 )
 export const ArrowClockwise = /*@__PURE__*/ duotone(
-  Ssr.ArrowClockwise,
+  SsrArrowClockwise,
   "ArrowClockwise",
 )
 export const ArrowCounterClockwise = /*@__PURE__*/ duotone(
-  Ssr.ArrowCounterClockwise,
+  SsrArrowCounterClockwise,
   "ArrowCounterClockwise",
 )
-export const ArrowDown = /*@__PURE__*/ duotone(Ssr.ArrowDown, "ArrowDown")
+export const ArrowDown = /*@__PURE__*/ duotone(SsrArrowDown, "ArrowDown")
 export const ArrowElbowDownLeft = /*@__PURE__*/ duotone(
-  Ssr.ArrowElbowDownLeft,
+  SsrArrowElbowDownLeft,
   "ArrowElbowDownLeft",
 )
-export const ArrowLeft = /*@__PURE__*/ duotone(Ssr.ArrowLeft, "ArrowLeft")
-export const ArrowRight = /*@__PURE__*/ duotone(Ssr.ArrowRight, "ArrowRight")
+export const ArrowLeft = /*@__PURE__*/ duotone(SsrArrowLeft, "ArrowLeft")
+export const ArrowRight = /*@__PURE__*/ duotone(SsrArrowRight, "ArrowRight")
 export const ArrowSquareOut = /*@__PURE__*/ duotone(
-  Ssr.ArrowSquareOut,
+  SsrArrowSquareOut,
   "ArrowSquareOut",
 )
 export const ArrowUUpLeft = /*@__PURE__*/ duotone(
-  Ssr.ArrowUUpLeft,
+  SsrArrowUUpLeft,
   "ArrowUUpLeft",
 )
 export const ArrowUUpRight = /*@__PURE__*/ duotone(
-  Ssr.ArrowUUpRight,
+  SsrArrowUUpRight,
   "ArrowUUpRight",
 )
-export const ArrowUp = /*@__PURE__*/ duotone(Ssr.ArrowUp, "ArrowUp")
+export const ArrowUp = /*@__PURE__*/ duotone(SsrArrowUp, "ArrowUp")
 export const ArrowUpRight = /*@__PURE__*/ duotone(
-  Ssr.ArrowUpRight,
+  SsrArrowUpRight,
   "ArrowUpRight",
 )
 export const ArrowsClockwise = /*@__PURE__*/ duotone(
-  Ssr.ArrowsClockwise,
+  SsrArrowsClockwise,
   "ArrowsClockwise",
 )
 export const ArrowsDownUp = /*@__PURE__*/ duotone(
-  Ssr.ArrowsDownUp,
+  SsrArrowsDownUp,
   "ArrowsDownUp",
 )
 export const ArrowsHorizontal = /*@__PURE__*/ duotone(
-  Ssr.ArrowsHorizontal,
+  SsrArrowsHorizontal,
   "ArrowsHorizontal",
 )
-export const ArrowsOut = /*@__PURE__*/ duotone(Ssr.ArrowsOut, "ArrowsOut")
-export const Backspace = /*@__PURE__*/ duotone(Ssr.Backspace, "Backspace")
-export const Bell = /*@__PURE__*/ duotone(Ssr.Bell, "Bell")
-export const BellRinging = /*@__PURE__*/ duotone(Ssr.BellRinging, "BellRinging")
-export const BellSlash = /*@__PURE__*/ duotone(Ssr.BellSlash, "BellSlash")
-export const Book = /*@__PURE__*/ duotone(Ssr.Book, "Book")
-export const BookOpen = /*@__PURE__*/ duotone(Ssr.BookOpen, "BookOpen")
-export const Bookmark = /*@__PURE__*/ duotone(Ssr.Bookmark, "Bookmark")
-export const Brain = /*@__PURE__*/ duotone(Ssr.Brain, "Brain")
-export const Broadcast = /*@__PURE__*/ duotone(Ssr.Broadcast, "Broadcast")
-export const Bug = /*@__PURE__*/ duotone(Ssr.Bug, "Bug")
-export const Calendar = /*@__PURE__*/ duotone(Ssr.Calendar, "Calendar")
+export const ArrowsOut = /*@__PURE__*/ duotone(SsrArrowsOut, "ArrowsOut")
+export const Backspace = /*@__PURE__*/ duotone(SsrBackspace, "Backspace")
+export const Bell = /*@__PURE__*/ duotone(SsrBell, "Bell")
+export const BellRinging = /*@__PURE__*/ duotone(SsrBellRinging, "BellRinging")
+export const BellSlash = /*@__PURE__*/ duotone(SsrBellSlash, "BellSlash")
+export const Book = /*@__PURE__*/ duotone(SsrBook, "Book")
+export const BookOpen = /*@__PURE__*/ duotone(SsrBookOpen, "BookOpen")
+export const Bookmark = /*@__PURE__*/ duotone(SsrBookmark, "Bookmark")
+export const Brain = /*@__PURE__*/ duotone(SsrBrain, "Brain")
+export const Broadcast = /*@__PURE__*/ duotone(SsrBroadcast, "Broadcast")
+export const Bug = /*@__PURE__*/ duotone(SsrBug, "Bug")
+export const Calendar = /*@__PURE__*/ duotone(SsrCalendar, "Calendar")
 export const CalendarDots = /*@__PURE__*/ duotone(
-  Ssr.CalendarDots,
+  SsrCalendarDots,
   "CalendarDots",
 )
-export const Camera = /*@__PURE__*/ duotone(Ssr.Camera, "Camera")
-export const CaretDown = /*@__PURE__*/ duotone(Ssr.CaretDown, "CaretDown")
-export const CaretLeft = /*@__PURE__*/ duotone(Ssr.CaretLeft, "CaretLeft")
-export const CaretRight = /*@__PURE__*/ duotone(Ssr.CaretRight, "CaretRight")
-export const CaretUp = /*@__PURE__*/ duotone(Ssr.CaretUp, "CaretUp")
-export const CaretUpDown = /*@__PURE__*/ duotone(Ssr.CaretUpDown, "CaretUpDown")
-export const ChartBar = /*@__PURE__*/ duotone(Ssr.ChartBar, "ChartBar")
-export const ChartLine = /*@__PURE__*/ duotone(Ssr.ChartLine, "ChartLine")
-export const Chat = /*@__PURE__*/ duotone(Ssr.Chat, "Chat")
-export const ChatCircle = /*@__PURE__*/ duotone(Ssr.ChatCircle, "ChatCircle")
-export const Check = /*@__PURE__*/ duotone(Ssr.Check, "Check")
-export const CheckCircle = /*@__PURE__*/ duotone(Ssr.CheckCircle, "CheckCircle")
-export const CheckSquare = /*@__PURE__*/ duotone(Ssr.CheckSquare, "CheckSquare")
-export const Checks = /*@__PURE__*/ duotone(Ssr.Checks, "Checks")
-export const Circle = /*@__PURE__*/ duotone(Ssr.Circle, "Circle")
-export const CircleNotch = /*@__PURE__*/ duotone(Ssr.CircleNotch, "CircleNotch")
-export const Clipboard = /*@__PURE__*/ duotone(Ssr.Clipboard, "Clipboard")
-export const Clock = /*@__PURE__*/ duotone(Ssr.Clock, "Clock")
-export const Cloud = /*@__PURE__*/ duotone(Ssr.Cloud, "Cloud")
-export const Code = /*@__PURE__*/ duotone(Ssr.Code, "Code")
-export const Columns = /*@__PURE__*/ duotone(Ssr.Columns, "Columns")
-export const Command = /*@__PURE__*/ duotone(Ssr.Command, "Command")
-export const Copy = /*@__PURE__*/ duotone(Ssr.Copy, "Copy")
-export const Cpu = /*@__PURE__*/ duotone(Ssr.Cpu, "Cpu")
-export const CreditCard = /*@__PURE__*/ duotone(Ssr.CreditCard, "CreditCard")
-export const Crop = /*@__PURE__*/ duotone(Ssr.Crop, "Crop")
-export const Crosshair = /*@__PURE__*/ duotone(Ssr.Crosshair, "Crosshair")
-export const Cube = /*@__PURE__*/ duotone(Ssr.Cube, "Cube")
+export const Camera = /*@__PURE__*/ duotone(SsrCamera, "Camera")
+export const CaretDown = /*@__PURE__*/ duotone(SsrCaretDown, "CaretDown")
+export const CaretLeft = /*@__PURE__*/ duotone(SsrCaretLeft, "CaretLeft")
+export const CaretRight = /*@__PURE__*/ duotone(SsrCaretRight, "CaretRight")
+export const CaretUp = /*@__PURE__*/ duotone(SsrCaretUp, "CaretUp")
+export const CaretUpDown = /*@__PURE__*/ duotone(SsrCaretUpDown, "CaretUpDown")
+export const ChartBar = /*@__PURE__*/ duotone(SsrChartBar, "ChartBar")
+export const ChartLine = /*@__PURE__*/ duotone(SsrChartLine, "ChartLine")
+export const Chat = /*@__PURE__*/ duotone(SsrChat, "Chat")
+export const ChatCircle = /*@__PURE__*/ duotone(SsrChatCircle, "ChatCircle")
+export const Check = /*@__PURE__*/ duotone(SsrCheck, "Check")
+export const CheckCircle = /*@__PURE__*/ duotone(SsrCheckCircle, "CheckCircle")
+export const CheckSquare = /*@__PURE__*/ duotone(SsrCheckSquare, "CheckSquare")
+export const Checks = /*@__PURE__*/ duotone(SsrChecks, "Checks")
+export const Circle = /*@__PURE__*/ duotone(SsrCircle, "Circle")
+export const CircleNotch = /*@__PURE__*/ duotone(SsrCircleNotch, "CircleNotch")
+export const Clipboard = /*@__PURE__*/ duotone(SsrClipboard, "Clipboard")
+export const Clock = /*@__PURE__*/ duotone(SsrClock, "Clock")
+export const Cloud = /*@__PURE__*/ duotone(SsrCloud, "Cloud")
+export const Code = /*@__PURE__*/ duotone(SsrCode, "Code")
+export const Columns = /*@__PURE__*/ duotone(SsrColumns, "Columns")
+export const Command = /*@__PURE__*/ duotone(SsrCommand, "Command")
+export const Copy = /*@__PURE__*/ duotone(SsrCopy, "Copy")
+export const Cpu = /*@__PURE__*/ duotone(SsrCpu, "Cpu")
+export const CreditCard = /*@__PURE__*/ duotone(SsrCreditCard, "CreditCard")
+export const Crop = /*@__PURE__*/ duotone(SsrCrop, "Crop")
+export const Crosshair = /*@__PURE__*/ duotone(SsrCrosshair, "Crosshair")
+export const Cube = /*@__PURE__*/ duotone(SsrCube, "Cube")
 export const CurrencyDollar = /*@__PURE__*/ duotone(
-  Ssr.CurrencyDollar,
+  SsrCurrencyDollar,
   "CurrencyDollar",
 )
-export const Cursor = /*@__PURE__*/ duotone(Ssr.Cursor, "Cursor")
-export const Database = /*@__PURE__*/ duotone(Ssr.Database, "Database")
+export const Cursor = /*@__PURE__*/ duotone(SsrCursor, "Cursor")
+export const Database = /*@__PURE__*/ duotone(SsrDatabase, "Database")
 export const DeviceMobile = /*@__PURE__*/ duotone(
-  Ssr.DeviceMobile,
+  SsrDeviceMobile,
   "DeviceMobile",
 )
 export const DeviceTablet = /*@__PURE__*/ duotone(
-  Ssr.DeviceTablet,
+  SsrDeviceTablet,
   "DeviceTablet",
 )
-export const DotsThree = /*@__PURE__*/ duotone(Ssr.DotsThree, "DotsThree")
+export const DotsThree = /*@__PURE__*/ duotone(SsrDotsThree, "DotsThree")
 export const DotsThreeVertical = /*@__PURE__*/ duotone(
-  Ssr.DotsThreeVertical,
+  SsrDotsThreeVertical,
   "DotsThreeVertical",
 )
 export const DownloadSimple = /*@__PURE__*/ duotone(
-  Ssr.DownloadSimple,
+  SsrDownloadSimple,
   "DownloadSimple",
 )
-export const Envelope = /*@__PURE__*/ duotone(Ssr.Envelope, "Envelope")
-export const Eraser = /*@__PURE__*/ duotone(Ssr.Eraser, "Eraser")
-export const Eye = /*@__PURE__*/ duotone(Ssr.Eye, "Eye")
-export const EyeSlash = /*@__PURE__*/ duotone(Ssr.EyeSlash, "EyeSlash")
-export const Eyedropper = /*@__PURE__*/ duotone(Ssr.Eyedropper, "Eyedropper")
-export const Eyeglasses = /*@__PURE__*/ duotone(Ssr.Eyeglasses, "Eyeglasses")
-export const File = /*@__PURE__*/ duotone(Ssr.File, "File")
+export const Envelope = /*@__PURE__*/ duotone(SsrEnvelope, "Envelope")
+export const Eraser = /*@__PURE__*/ duotone(SsrEraser, "Eraser")
+export const Eye = /*@__PURE__*/ duotone(SsrEye, "Eye")
+export const EyeSlash = /*@__PURE__*/ duotone(SsrEyeSlash, "EyeSlash")
+export const Eyedropper = /*@__PURE__*/ duotone(SsrEyedropper, "Eyedropper")
+export const Eyeglasses = /*@__PURE__*/ duotone(SsrEyeglasses, "Eyeglasses")
+export const File = /*@__PURE__*/ duotone(SsrFile, "File")
 export const FileMagnifyingGlass = /*@__PURE__*/ duotone(
-  Ssr.FileMagnifyingGlass,
+  SsrFileMagnifyingGlass,
   "FileMagnifyingGlass",
 )
-export const FileText = /*@__PURE__*/ duotone(Ssr.FileText, "FileText")
-export const Files = /*@__PURE__*/ duotone(Ssr.Files, "Files")
-export const FilmStrip = /*@__PURE__*/ duotone(Ssr.FilmStrip, "FilmStrip")
-export const Flag = /*@__PURE__*/ duotone(Ssr.Flag, "Flag")
-export const Flame = /*@__PURE__*/ duotone(Ssr.Flame, "Flame")
-export const FloppyDisk = /*@__PURE__*/ duotone(Ssr.FloppyDisk, "FloppyDisk")
-export const Folder = /*@__PURE__*/ duotone(Ssr.Folder, "Folder")
-export const FolderOpen = /*@__PURE__*/ duotone(Ssr.FolderOpen, "FolderOpen")
-export const FolderPlus = /*@__PURE__*/ duotone(Ssr.FolderPlus, "FolderPlus")
-export const Funnel = /*@__PURE__*/ duotone(Ssr.Funnel, "Funnel")
-export const Gear = /*@__PURE__*/ duotone(Ssr.Gear, "Gear")
-export const GearSix = /*@__PURE__*/ duotone(Ssr.GearSix, "GearSix")
-export const GitBranch = /*@__PURE__*/ duotone(Ssr.GitBranch, "GitBranch")
-export const GitCommit = /*@__PURE__*/ duotone(Ssr.GitCommit, "GitCommit")
-export const GitFork = /*@__PURE__*/ duotone(Ssr.GitFork, "GitFork")
-export const GitMerge = /*@__PURE__*/ duotone(Ssr.GitMerge, "GitMerge")
-export const Globe = /*@__PURE__*/ duotone(Ssr.Globe, "Globe")
+export const FileText = /*@__PURE__*/ duotone(SsrFileText, "FileText")
+export const Files = /*@__PURE__*/ duotone(SsrFiles, "Files")
+export const FilmStrip = /*@__PURE__*/ duotone(SsrFilmStrip, "FilmStrip")
+export const Flag = /*@__PURE__*/ duotone(SsrFlag, "Flag")
+export const Flame = /*@__PURE__*/ duotone(SsrFlame, "Flame")
+export const FloppyDisk = /*@__PURE__*/ duotone(SsrFloppyDisk, "FloppyDisk")
+export const Folder = /*@__PURE__*/ duotone(SsrFolder, "Folder")
+export const FolderOpen = /*@__PURE__*/ duotone(SsrFolderOpen, "FolderOpen")
+export const FolderPlus = /*@__PURE__*/ duotone(SsrFolderPlus, "FolderPlus")
+export const Funnel = /*@__PURE__*/ duotone(SsrFunnel, "Funnel")
+export const Gear = /*@__PURE__*/ duotone(SsrGear, "Gear")
+export const GearSix = /*@__PURE__*/ duotone(SsrGearSix, "GearSix")
+export const GitBranch = /*@__PURE__*/ duotone(SsrGitBranch, "GitBranch")
+export const GitCommit = /*@__PURE__*/ duotone(SsrGitCommit, "GitCommit")
+export const GitFork = /*@__PURE__*/ duotone(SsrGitFork, "GitFork")
+export const GitMerge = /*@__PURE__*/ duotone(SsrGitMerge, "GitMerge")
+export const Globe = /*@__PURE__*/ duotone(SsrGlobe, "Globe")
 export const GlobeHemisphereWest = /*@__PURE__*/ duotone(
-  Ssr.GlobeHemisphereWest,
+  SsrGlobeHemisphereWest,
   "GlobeHemisphereWest",
 )
-export const Graph = /*@__PURE__*/ duotone(Ssr.Graph, "Graph")
-export const GridFour = /*@__PURE__*/ duotone(Ssr.GridFour, "GridFour")
-export const HardDrives = /*@__PURE__*/ duotone(Ssr.HardDrives, "HardDrives")
-export const Hash = /*@__PURE__*/ duotone(Ssr.Hash, "Hash")
-export const Heart = /*@__PURE__*/ duotone(Ssr.Heart, "Heart")
-export const House = /*@__PURE__*/ duotone(Ssr.House, "House")
-export const Image = /*@__PURE__*/ duotone(Ssr.Image, "Image")
-export const Info = /*@__PURE__*/ duotone(Ssr.Info, "Info")
-export const Key = /*@__PURE__*/ duotone(Ssr.Key, "Key")
-export const Keyboard = /*@__PURE__*/ duotone(Ssr.Keyboard, "Keyboard")
-export const Layout = /*@__PURE__*/ duotone(Ssr.Layout, "Layout")
-export const Lifebuoy = /*@__PURE__*/ duotone(Ssr.Lifebuoy, "Lifebuoy")
-export const Lightning = /*@__PURE__*/ duotone(Ssr.Lightning, "Lightning")
-export const LineSegment = /*@__PURE__*/ duotone(Ssr.LineSegment, "LineSegment")
-export const LinkSimple = /*@__PURE__*/ duotone(Ssr.LinkSimple, "LinkSimple")
-export const List = /*@__PURE__*/ duotone(Ssr.List, "List")
-export const ListChecks = /*@__PURE__*/ duotone(Ssr.ListChecks, "ListChecks")
-export const ListNumbers = /*@__PURE__*/ duotone(Ssr.ListNumbers, "ListNumbers")
-export const ListPlus = /*@__PURE__*/ duotone(Ssr.ListPlus, "ListPlus")
-export const Lock = /*@__PURE__*/ duotone(Ssr.Lock, "Lock")
-export const Magnet = /*@__PURE__*/ duotone(Ssr.Magnet, "Magnet")
+export const Graph = /*@__PURE__*/ duotone(SsrGraph, "Graph")
+export const GridFour = /*@__PURE__*/ duotone(SsrGridFour, "GridFour")
+export const HardDrives = /*@__PURE__*/ duotone(SsrHardDrives, "HardDrives")
+export const Hash = /*@__PURE__*/ duotone(SsrHash, "Hash")
+export const Heart = /*@__PURE__*/ duotone(SsrHeart, "Heart")
+export const House = /*@__PURE__*/ duotone(SsrHouse, "House")
+export const Image = /*@__PURE__*/ duotone(SsrImage, "Image")
+export const Info = /*@__PURE__*/ duotone(SsrInfo, "Info")
+export const Key = /*@__PURE__*/ duotone(SsrKey, "Key")
+export const Keyboard = /*@__PURE__*/ duotone(SsrKeyboard, "Keyboard")
+export const Layout = /*@__PURE__*/ duotone(SsrLayout, "Layout")
+export const Lifebuoy = /*@__PURE__*/ duotone(SsrLifebuoy, "Lifebuoy")
+export const Lightning = /*@__PURE__*/ duotone(SsrLightning, "Lightning")
+export const LineSegment = /*@__PURE__*/ duotone(SsrLineSegment, "LineSegment")
+export const LinkSimple = /*@__PURE__*/ duotone(SsrLinkSimple, "LinkSimple")
+export const List = /*@__PURE__*/ duotone(SsrList, "List")
+export const ListChecks = /*@__PURE__*/ duotone(SsrListChecks, "ListChecks")
+export const ListNumbers = /*@__PURE__*/ duotone(SsrListNumbers, "ListNumbers")
+export const ListPlus = /*@__PURE__*/ duotone(SsrListPlus, "ListPlus")
+export const Lock = /*@__PURE__*/ duotone(SsrLock, "Lock")
+export const Magnet = /*@__PURE__*/ duotone(SsrMagnet, "Magnet")
 export const MagnifyingGlass = /*@__PURE__*/ duotone(
-  Ssr.MagnifyingGlass,
+  SsrMagnifyingGlass,
   "MagnifyingGlass",
 )
-export const MapPin = /*@__PURE__*/ duotone(Ssr.MapPin, "MapPin")
-export const Megaphone = /*@__PURE__*/ duotone(Ssr.Megaphone, "Megaphone")
-export const Microphone = /*@__PURE__*/ duotone(Ssr.Microphone, "Microphone")
-export const Minus = /*@__PURE__*/ duotone(Ssr.Minus, "Minus")
-export const Monitor = /*@__PURE__*/ duotone(Ssr.Monitor, "Monitor")
-export const Moon = /*@__PURE__*/ duotone(Ssr.Moon, "Moon")
-export const MusicNote = /*@__PURE__*/ duotone(Ssr.MusicNote, "MusicNote")
-export const MusicNotes = /*@__PURE__*/ duotone(Ssr.MusicNotes, "MusicNotes")
+export const MapPin = /*@__PURE__*/ duotone(SsrMapPin, "MapPin")
+export const Megaphone = /*@__PURE__*/ duotone(SsrMegaphone, "Megaphone")
+export const Microphone = /*@__PURE__*/ duotone(SsrMicrophone, "Microphone")
+export const Minus = /*@__PURE__*/ duotone(SsrMinus, "Minus")
+export const Monitor = /*@__PURE__*/ duotone(SsrMonitor, "Monitor")
+export const Moon = /*@__PURE__*/ duotone(SsrMoon, "Moon")
+export const MusicNote = /*@__PURE__*/ duotone(SsrMusicNote, "MusicNote")
+export const MusicNotes = /*@__PURE__*/ duotone(SsrMusicNotes, "MusicNotes")
 export const NavigationArrow = /*@__PURE__*/ duotone(
-  Ssr.NavigationArrow,
+  SsrNavigationArrow,
   "NavigationArrow",
 )
-export const Newspaper = /*@__PURE__*/ duotone(Ssr.Newspaper, "Newspaper")
-export const Note = /*@__PURE__*/ duotone(Ssr.Note, "Note")
-export const Package = /*@__PURE__*/ duotone(Ssr.Package, "Package")
-export const Palette = /*@__PURE__*/ duotone(Ssr.Palette, "Palette")
+export const Newspaper = /*@__PURE__*/ duotone(SsrNewspaper, "Newspaper")
+export const Note = /*@__PURE__*/ duotone(SsrNote, "Note")
+export const Package = /*@__PURE__*/ duotone(SsrPackage, "Package")
+export const Palette = /*@__PURE__*/ duotone(SsrPalette, "Palette")
 export const PaperPlaneRight = /*@__PURE__*/ duotone(
-  Ssr.PaperPlaneRight,
+  SsrPaperPlaneRight,
   "PaperPlaneRight",
 )
 export const PaperPlaneTilt = /*@__PURE__*/ duotone(
-  Ssr.PaperPlaneTilt,
+  SsrPaperPlaneTilt,
   "PaperPlaneTilt",
 )
-export const Paperclip = /*@__PURE__*/ duotone(Ssr.Paperclip, "Paperclip")
-export const Pause = /*@__PURE__*/ duotone(Ssr.Pause, "Pause")
+export const Paperclip = /*@__PURE__*/ duotone(SsrPaperclip, "Paperclip")
+export const Pause = /*@__PURE__*/ duotone(SsrPause, "Pause")
 export const PencilSimple = /*@__PURE__*/ duotone(
-  Ssr.PencilSimple,
+  SsrPencilSimple,
   "PencilSimple",
 )
 export const PencilSimpleLine = /*@__PURE__*/ duotone(
-  Ssr.PencilSimpleLine,
+  SsrPencilSimpleLine,
   "PencilSimpleLine",
 )
-export const Percent = /*@__PURE__*/ duotone(Ssr.Percent, "Percent")
-export const Phone = /*@__PURE__*/ duotone(Ssr.Phone, "Phone")
-export const PhoneX = /*@__PURE__*/ duotone(Ssr.PhoneX, "PhoneX")
-export const Play = /*@__PURE__*/ duotone(Ssr.Play, "Play")
-export const Playlist = /*@__PURE__*/ duotone(Ssr.Playlist, "Playlist")
-export const Plug = /*@__PURE__*/ duotone(Ssr.Plug, "Plug")
-export const Plugs = /*@__PURE__*/ duotone(Ssr.Plugs, "Plugs")
-export const Plus = /*@__PURE__*/ duotone(Ssr.Plus, "Plus")
-export const PlusCircle = /*@__PURE__*/ duotone(Ssr.PlusCircle, "PlusCircle")
+export const Percent = /*@__PURE__*/ duotone(SsrPercent, "Percent")
+export const Phone = /*@__PURE__*/ duotone(SsrPhone, "Phone")
+export const PhoneX = /*@__PURE__*/ duotone(SsrPhoneX, "PhoneX")
+export const Play = /*@__PURE__*/ duotone(SsrPlay, "Play")
+export const Playlist = /*@__PURE__*/ duotone(SsrPlaylist, "Playlist")
+export const Plug = /*@__PURE__*/ duotone(SsrPlug, "Plug")
+export const Plugs = /*@__PURE__*/ duotone(SsrPlugs, "Plugs")
+export const Plus = /*@__PURE__*/ duotone(SsrPlus, "Plus")
+export const PlusCircle = /*@__PURE__*/ duotone(SsrPlusCircle, "PlusCircle")
 export const ProhibitInset = /*@__PURE__*/ duotone(
-  Ssr.ProhibitInset,
+  SsrProhibitInset,
   "ProhibitInset",
 )
-export const Pulse = /*@__PURE__*/ duotone(Ssr.Pulse, "Pulse")
-export const PushPin = /*@__PURE__*/ duotone(Ssr.PushPin, "PushPin")
-export const PuzzlePiece = /*@__PURE__*/ duotone(Ssr.PuzzlePiece, "PuzzlePiece")
-export const Question = /*@__PURE__*/ duotone(Ssr.Question, "Question")
-export const Quotes = /*@__PURE__*/ duotone(Ssr.Quotes, "Quotes")
-export const Radio = /*@__PURE__*/ duotone(Ssr.Radio, "Radio")
-export const Rectangle = /*@__PURE__*/ duotone(Ssr.Rectangle, "Rectangle")
-export const Repeat = /*@__PURE__*/ duotone(Ssr.Repeat, "Repeat")
-export const Robot = /*@__PURE__*/ duotone(Ssr.Robot, "Robot")
-export const Rocket = /*@__PURE__*/ duotone(Ssr.Rocket, "Rocket")
-export const Rows = /*@__PURE__*/ duotone(Ssr.Rows, "Rows")
-export const Ruler = /*@__PURE__*/ duotone(Ssr.Ruler, "Ruler")
-export const Scissors = /*@__PURE__*/ duotone(Ssr.Scissors, "Scissors")
-export const SealCheck = /*@__PURE__*/ duotone(Ssr.SealCheck, "SealCheck")
+export const Pulse = /*@__PURE__*/ duotone(SsrPulse, "Pulse")
+export const PushPin = /*@__PURE__*/ duotone(SsrPushPin, "PushPin")
+export const PuzzlePiece = /*@__PURE__*/ duotone(SsrPuzzlePiece, "PuzzlePiece")
+export const Question = /*@__PURE__*/ duotone(SsrQuestion, "Question")
+export const Quotes = /*@__PURE__*/ duotone(SsrQuotes, "Quotes")
+export const Radio = /*@__PURE__*/ duotone(SsrRadio, "Radio")
+export const Rectangle = /*@__PURE__*/ duotone(SsrRectangle, "Rectangle")
+export const Repeat = /*@__PURE__*/ duotone(SsrRepeat, "Repeat")
+export const Robot = /*@__PURE__*/ duotone(SsrRobot, "Robot")
+export const Rocket = /*@__PURE__*/ duotone(SsrRocket, "Rocket")
+export const Rows = /*@__PURE__*/ duotone(SsrRows, "Rows")
+export const Ruler = /*@__PURE__*/ duotone(SsrRuler, "Ruler")
+export const Scissors = /*@__PURE__*/ duotone(SsrScissors, "Scissors")
+export const SealCheck = /*@__PURE__*/ duotone(SsrSealCheck, "SealCheck")
 export const ShareNetwork = /*@__PURE__*/ duotone(
-  Ssr.ShareNetwork,
+  SsrShareNetwork,
   "ShareNetwork",
 )
-export const Shield = /*@__PURE__*/ duotone(Ssr.Shield, "Shield")
-export const ShieldCheck = /*@__PURE__*/ duotone(Ssr.ShieldCheck, "ShieldCheck")
+export const Shield = /*@__PURE__*/ duotone(SsrShield, "Shield")
+export const ShieldCheck = /*@__PURE__*/ duotone(SsrShieldCheck, "ShieldCheck")
 export const ShieldWarning = /*@__PURE__*/ duotone(
-  Ssr.ShieldWarning,
+  SsrShieldWarning,
   "ShieldWarning",
 )
 export const ShoppingCart = /*@__PURE__*/ duotone(
-  Ssr.ShoppingCart,
+  SsrShoppingCart,
   "ShoppingCart",
 )
-export const Shuffle = /*@__PURE__*/ duotone(Ssr.Shuffle, "Shuffle")
-export const Sidebar = /*@__PURE__*/ duotone(Ssr.Sidebar, "Sidebar")
-export const SignOut = /*@__PURE__*/ duotone(Ssr.SignOut, "SignOut")
-export const Siren = /*@__PURE__*/ duotone(Ssr.Siren, "Siren")
-export const SkipBack = /*@__PURE__*/ duotone(Ssr.SkipBack, "SkipBack")
-export const SkipForward = /*@__PURE__*/ duotone(Ssr.SkipForward, "SkipForward")
+export const Shuffle = /*@__PURE__*/ duotone(SsrShuffle, "Shuffle")
+export const Sidebar = /*@__PURE__*/ duotone(SsrSidebar, "Sidebar")
+export const SignOut = /*@__PURE__*/ duotone(SsrSignOut, "SignOut")
+export const Siren = /*@__PURE__*/ duotone(SsrSiren, "Siren")
+export const SkipBack = /*@__PURE__*/ duotone(SsrSkipBack, "SkipBack")
+export const SkipForward = /*@__PURE__*/ duotone(SsrSkipForward, "SkipForward")
 export const SlidersHorizontal = /*@__PURE__*/ duotone(
-  Ssr.SlidersHorizontal,
+  SsrSlidersHorizontal,
   "SlidersHorizontal",
 )
-export const Smiley = /*@__PURE__*/ duotone(Ssr.Smiley, "Smiley")
-export const Sparkle = /*@__PURE__*/ duotone(Ssr.Sparkle, "Sparkle")
-export const SpeakerHigh = /*@__PURE__*/ duotone(Ssr.SpeakerHigh, "SpeakerHigh")
-export const SpeakerX = /*@__PURE__*/ duotone(Ssr.SpeakerX, "SpeakerX")
-export const Square = /*@__PURE__*/ duotone(Ssr.Square, "Square")
-export const SquareHalf = /*@__PURE__*/ duotone(Ssr.SquareHalf, "SquareHalf")
-export const SquaresFour = /*@__PURE__*/ duotone(Ssr.SquaresFour, "SquaresFour")
-export const Stack = /*@__PURE__*/ duotone(Ssr.Stack, "Stack")
-export const StackSimple = /*@__PURE__*/ duotone(Ssr.StackSimple, "StackSimple")
-export const Star = /*@__PURE__*/ duotone(Ssr.Star, "Star")
-export const Sun = /*@__PURE__*/ duotone(Ssr.Sun, "Sun")
-export const Table = /*@__PURE__*/ duotone(Ssr.Table, "Table")
-export const Tag = /*@__PURE__*/ duotone(Ssr.Tag, "Tag")
-export const Terminal = /*@__PURE__*/ duotone(Ssr.Terminal, "Terminal")
+export const Smiley = /*@__PURE__*/ duotone(SsrSmiley, "Smiley")
+export const Sparkle = /*@__PURE__*/ duotone(SsrSparkle, "Sparkle")
+export const SpeakerHigh = /*@__PURE__*/ duotone(SsrSpeakerHigh, "SpeakerHigh")
+export const SpeakerX = /*@__PURE__*/ duotone(SsrSpeakerX, "SpeakerX")
+export const Square = /*@__PURE__*/ duotone(SsrSquare, "Square")
+export const SquareHalf = /*@__PURE__*/ duotone(SsrSquareHalf, "SquareHalf")
+export const SquaresFour = /*@__PURE__*/ duotone(SsrSquaresFour, "SquaresFour")
+export const Stack = /*@__PURE__*/ duotone(SsrStack, "Stack")
+export const StackSimple = /*@__PURE__*/ duotone(SsrStackSimple, "StackSimple")
+export const Star = /*@__PURE__*/ duotone(SsrStar, "Star")
+export const Sun = /*@__PURE__*/ duotone(SsrSun, "Sun")
+export const Table = /*@__PURE__*/ duotone(SsrTable, "Table")
+export const Tag = /*@__PURE__*/ duotone(SsrTag, "Tag")
+export const Terminal = /*@__PURE__*/ duotone(SsrTerminal, "Terminal")
 export const TerminalWindow = /*@__PURE__*/ duotone(
-  Ssr.TerminalWindow,
+  SsrTerminalWindow,
   "TerminalWindow",
 )
 export const TextAlignCenter = /*@__PURE__*/ duotone(
-  Ssr.TextAlignCenter,
+  SsrTextAlignCenter,
   "TextAlignCenter",
 )
 export const TextAlignLeft = /*@__PURE__*/ duotone(
-  Ssr.TextAlignLeft,
+  SsrTextAlignLeft,
   "TextAlignLeft",
 )
 export const TextAlignRight = /*@__PURE__*/ duotone(
-  Ssr.TextAlignRight,
+  SsrTextAlignRight,
   "TextAlignRight",
 )
-export const TextB = /*@__PURE__*/ duotone(Ssr.TextB, "TextB")
-export const TextHOne = /*@__PURE__*/ duotone(Ssr.TextHOne, "TextHOne")
-export const TextHThree = /*@__PURE__*/ duotone(Ssr.TextHThree, "TextHThree")
-export const TextHTwo = /*@__PURE__*/ duotone(Ssr.TextHTwo, "TextHTwo")
-export const TextItalic = /*@__PURE__*/ duotone(Ssr.TextItalic, "TextItalic")
+export const TextB = /*@__PURE__*/ duotone(SsrTextB, "TextB")
+export const TextHOne = /*@__PURE__*/ duotone(SsrTextHOne, "TextHOne")
+export const TextHThree = /*@__PURE__*/ duotone(SsrTextHThree, "TextHThree")
+export const TextHTwo = /*@__PURE__*/ duotone(SsrTextHTwo, "TextHTwo")
+export const TextItalic = /*@__PURE__*/ duotone(SsrTextItalic, "TextItalic")
 export const TextStrikethrough = /*@__PURE__*/ duotone(
-  Ssr.TextStrikethrough,
+  SsrTextStrikethrough,
   "TextStrikethrough",
 )
 export const TextSubscript = /*@__PURE__*/ duotone(
-  Ssr.TextSubscript,
+  SsrTextSubscript,
   "TextSubscript",
 )
 export const TextSuperscript = /*@__PURE__*/ duotone(
-  Ssr.TextSuperscript,
+  SsrTextSuperscript,
   "TextSuperscript",
 )
-export const TextT = /*@__PURE__*/ duotone(Ssr.TextT, "TextT")
+export const TextT = /*@__PURE__*/ duotone(SsrTextT, "TextT")
 export const TextUnderline = /*@__PURE__*/ duotone(
-  Ssr.TextUnderline,
+  SsrTextUnderline,
   "TextUnderline",
 )
-export const ThumbsDown = /*@__PURE__*/ duotone(Ssr.ThumbsDown, "ThumbsDown")
-export const ThumbsUp = /*@__PURE__*/ duotone(Ssr.ThumbsUp, "ThumbsUp")
-export const Timer = /*@__PURE__*/ duotone(Ssr.Timer, "Timer")
-export const Trash = /*@__PURE__*/ duotone(Ssr.Trash, "Trash")
-export const Tray = /*@__PURE__*/ duotone(Ssr.Tray, "Tray")
-export const TrendDown = /*@__PURE__*/ duotone(Ssr.TrendDown, "TrendDown")
-export const TrendUp = /*@__PURE__*/ duotone(Ssr.TrendUp, "TrendUp")
+export const ThumbsDown = /*@__PURE__*/ duotone(SsrThumbsDown, "ThumbsDown")
+export const ThumbsUp = /*@__PURE__*/ duotone(SsrThumbsUp, "ThumbsUp")
+export const Timer = /*@__PURE__*/ duotone(SsrTimer, "Timer")
+export const Trash = /*@__PURE__*/ duotone(SsrTrash, "Trash")
+export const Tray = /*@__PURE__*/ duotone(SsrTray, "Tray")
+export const TrendDown = /*@__PURE__*/ duotone(SsrTrendDown, "TrendDown")
+export const TrendUp = /*@__PURE__*/ duotone(SsrTrendUp, "TrendUp")
 export const UploadSimple = /*@__PURE__*/ duotone(
-  Ssr.UploadSimple,
+  SsrUploadSimple,
   "UploadSimple",
 )
-export const User = /*@__PURE__*/ duotone(Ssr.User, "User")
-export const UserCircle = /*@__PURE__*/ duotone(Ssr.UserCircle, "UserCircle")
-export const Users = /*@__PURE__*/ duotone(Ssr.Users, "Users")
-export const VideoCamera = /*@__PURE__*/ duotone(Ssr.VideoCamera, "VideoCamera")
-export const Warning = /*@__PURE__*/ duotone(Ssr.Warning, "Warning")
+export const User = /*@__PURE__*/ duotone(SsrUser, "User")
+export const UserCircle = /*@__PURE__*/ duotone(SsrUserCircle, "UserCircle")
+export const Users = /*@__PURE__*/ duotone(SsrUsers, "Users")
+export const VideoCamera = /*@__PURE__*/ duotone(SsrVideoCamera, "VideoCamera")
+export const Warning = /*@__PURE__*/ duotone(SsrWarning, "Warning")
 export const WarningCircle = /*@__PURE__*/ duotone(
-  Ssr.WarningCircle,
+  SsrWarningCircle,
   "WarningCircle",
 )
-export const Wheelchair = /*@__PURE__*/ duotone(Ssr.Wheelchair, "Wheelchair")
-export const Wrench = /*@__PURE__*/ duotone(Ssr.Wrench, "Wrench")
-export const X = /*@__PURE__*/ duotone(Ssr.X, "X")
-export const XCircle = /*@__PURE__*/ duotone(Ssr.XCircle, "XCircle")
+export const Wheelchair = /*@__PURE__*/ duotone(SsrWheelchair, "Wheelchair")
+export const Wrench = /*@__PURE__*/ duotone(SsrWrench, "Wrench")
+export const X = /*@__PURE__*/ duotone(SsrX, "X")
+export const XCircle = /*@__PURE__*/ duotone(SsrXCircle, "XCircle")
