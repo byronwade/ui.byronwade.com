@@ -36,16 +36,14 @@ dependencies }` following a sibling item's exact shape. Never touch the auto-gen
 
 ## Design engineer mindset (before you scaffold)
 
-- **Usefulness** — What real user/teammate problem does this component solve? Prefer composing
-  existing primitives over a new surface.
-- **Whole experience** — Ship examples and tests for every variant/state (empty, loading, error,
-  disabled), not just default render.
-- **Constraints** — Match sibling components' density, provenance, and API shape; don't invent a
-  parallel pattern when the catalog already has one.
-- **Build for everyone** — `axe` in tests; keyboard paths; labels and focus rings intact.
-- **Excellence** — Scope the first version small; push back on raw color, missing states, or bespoke
-  markup when a system component exists.
-- **Team loop** — Example + test + rule line encode the component for the next agent.
+Adapted from [Vercel's Design Engineer Principles](https://vercel.com/design/engineer) for this registry:
+
+- **Usefulness** — What real problem does this solve? Prefer composing existing primitives over a new surface.
+- **End-to-end** — Ship examples and tests for every variant/state (empty, loading, error, disabled), not just default render.
+- **Binding constraint** — Match sibling density, provenance, and API shape; don't invent a parallel pattern when the catalog already has one.
+- **Full audience** — `axe` in tests; keyboard paths; labels and focus rings intact.
+- **Craft over volume** — Scope the first version small; push back on raw color, missing states, or bespoke markup.
+- **Team floor** — Example + test + rule line encode the component for the next agent.
 
 ## Hard constraints (from the DNA — non-negotiable)
 

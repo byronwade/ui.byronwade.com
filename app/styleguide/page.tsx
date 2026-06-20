@@ -227,20 +227,20 @@ export default function StyleguidePage() {
                 <Specimen name="Design engineer principles" plain>
                   <div className="space-y-4">
                     <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                      How we work alongside the visual rules: obsess over usefulness,
-                      own the whole experience (every state and edge case), understand
-                      constraints before picking solutions, build for everyone, make it
-                      excellent at a scope we can ship well, and turn repeated feedback
-                      into defaults, tools, and systems — this registry, lint, and examples.
+                      Adapted from Vercel&apos;s Design Engineer Principles for this
+                      registry: bias toward usefulness, own outcomes end-to-end (every
+                      state and edge case), find the binding constraint before you ship,
+                      design for the full audience, ship craft not volume, and raise the
+                      team&apos;s floor through registry patterns, lint, and examples.
                     </p>
                     <ul className="grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
                       {[
-                        "Obsess over usefulness",
-                        "Own the whole experience",
-                        "Understand the constraints",
-                        "Build for everyone",
-                        "Make it excellent",
-                        "Make the team better",
+                        "Bias toward usefulness",
+                        "Own outcomes end-to-end",
+                        "Find the binding constraint",
+                        "Design for the full audience",
+                        "Ship craft, not volume",
+                        "Raise the team's floor",
                       ].map((item) => (
                         <li key={item} className="flex items-center gap-2">
                           <span className="size-1.5 shrink-0 rounded-full bg-brand" />

@@ -39,16 +39,16 @@ restate the code; flag genuinely non-obvious logic that has _no_ comment.
 **Accessibility** 9. Labels, `aria-*`, keyboard behavior, and `focus-visible:ring-ring` preserved; dark mode comes
 from tokens (no branching on a hardcoded color).
 
-**Design engineer principles** (judgment the gates cannot make)
+**Design engineer principles** (judgment the gates cannot make — adapted from Vercel, https://vercel.com/design/engineer)
 
 10. **Usefulness** — flag UI that solves no clear user problem or duplicates an existing component
     without a documented reason.
-11. **Whole experience** — flag missing empty/loading/error/disabled states when the component exposes
-    async, selection, or data-dependent behavior.
-12. **Build for everyone** — flag keyboard traps, missing labels, or interactions that require pointer
+11. **End-to-end ownership** — flag missing empty/loading/error/disabled states when the component
+    exposes async, selection, or data-dependent behavior.
+12. **Full audience** — flag keyboard traps, missing labels, or interactions that require pointer
     precision without an alternative.
-13. **Excellence** — flag scope that should be split, or clarity/craft/trust risks (misleading status,
-    unbounded patterns, performance-hostile defaults).
+13. **Craft over volume** — flag scope that should be split, or clarity/craft/trust risks (misleading
+    status, unbounded patterns, performance-hostile defaults).
 
 ## How to be efficient
 

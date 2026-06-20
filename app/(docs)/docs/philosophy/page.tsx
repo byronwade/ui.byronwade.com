@@ -28,48 +28,47 @@ export const metadata: Metadata = {
 
 const DESIGN_ENGINEER: { title: string; lines: string[] }[] = [
   {
-    title: "Obsess over usefulness",
+    title: "Bias toward usefulness",
     lines: [
-      "Solve real problems for users and teammates.",
-      "Make useful things feel effortless.",
+      "Fix problems users and teammates actually hit.",
+      "Make the useful path obvious and frictionless.",
     ],
   },
   {
-    title: "Own the whole experience",
+    title: "Own outcomes end-to-end",
     lines: [
-      "Shape the product, design the interface, ship the code.",
-      "Do whatever the outcome needs: product, design, code, docs, support.",
-      "Care about every state, edge case, word, and interaction.",
+      "Span product, interface, and implementation.",
+      "Ship docs, examples, and tests when the outcome needs them.",
+      "Sweat every state, word, edge case, and interaction.",
     ],
   },
   {
-    title: "Understand the constraints",
+    title: "Find the binding constraint",
     lines: [
-      "Know the user, product, code, business, and tradeoffs.",
-      "Find the real constraint before choosing the solution.",
+      "Read user needs, product goals, codebase, and business limits together.",
+      "Know what actually binds before you commit to an approach.",
     ],
   },
   {
-    title: "Build for everyone",
+    title: "Design for the full audience",
     lines: [
-      "Design across skill levels, abilities, and contexts.",
-      "Make complexity available, not required.",
+      "Skill levels, abilities, devices, and contexts.",
+      "Offer depth without forcing it — defaults work, power is reachable.",
     ],
   },
   {
-    title: "Make it excellent",
+    title: "Ship craft, not volume",
     lines: [
-      "Scope small enough to do it well.",
-      "Push back when clarity, craft, performance, or trust is at risk.",
-      "Leave every surface better than you found it.",
+      "Scope small enough to finish with care.",
+      "Challenge work when clarity, craft, performance, or trust slips.",
+      "Leave surfaces cleaner than you found them.",
     ],
   },
   {
-    title: "Make the team better",
+    title: "Raise the team's floor",
     lines: [
-      "Be kind, direct, and low ego.",
-      "Share work early and give specific feedback.",
-      "Turn repeated feedback into better defaults, tools, and systems.",
+      "Kind, direct, low ego — share early with specific feedback.",
+      "Encode lessons as registry patterns, lint, examples, and the shipped rule.",
     ],
   },
 ]
@@ -419,9 +418,18 @@ export default function PhilosophyPage() {
           Design engineer principles.
         </h2>
         <p className="mt-4 max-w-2xl font-serif text-[1.0625rem] leading-relaxed text-muted-foreground text-pretty">
-          Visual tenets describe what the system looks like. These describe how we
-          work: usefulness first, whole-experience ownership, and encoding lessons
-          into components, tokens, lint, and the shipped{" "}
+          Adapted from{" "}
+          <a
+            href="https://vercel.com/design/engineer"
+            className="text-brand underline-offset-4 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Vercel&apos;s Design Engineer Principles
+          </a>
+          , tailored for a registry where agents write most of the UI. Visual tenets describe what
+          the system looks like; these describe how we work — encoding lessons into components,
+          tokens, lint, and the shipped{" "}
           <Link
             href="/docs/ai"
             className="text-brand underline-offset-4 hover:underline"

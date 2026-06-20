@@ -14,24 +14,24 @@ See `README.md` for the full workflow (sync → registry:build → deploy).
 
 ## Design engineer principles — how we work
 
-These govern _why_ and _how_ we build. They complement the Design DNA below, which defines what
-on-system UI _looks like_. Agents and humans should internalize both.
+Adapted from [Vercel's Design Engineer Principles](https://vercel.com/design/engineer), tailored for
+an agent-native design-system registry. They govern _why_ and _how_ we build, complementing the
+Design DNA below (what on-system UI _looks like_). Agents and humans should internalize both.
 
-1. **Obsess over usefulness** — Solve real problems for users and teammates. Make useful things feel
-   effortless, not merely possible.
-2. **Own the whole experience** — Shape the product, design the interface, ship the code. Do whatever
-   the outcome needs: product, design, code, docs, support. Care about every state, edge case, word,
-   and interaction — not just the happy path.
-3. **Understand the constraints** — Know the user, product, code, business, and tradeoffs. Find the
-   real constraint before choosing the solution.
-4. **Build for everyone** — Design across skill levels, abilities, and contexts. Make complexity
-   available, not required (sensible defaults, progressive disclosure, full keyboard and screen-reader
-   paths).
-5. **Make it excellent** — Scope small enough to do it well. Push back when clarity, craft,
-   performance, or trust is at risk. Leave every surface better than you found it.
-6. **Make the team better** — Be kind, direct, and low ego. Share work early and give specific
-   feedback. Turn repeated feedback into better defaults, tools, and systems — this registry, the lint
-   rules, examples, and shipped AI rule are that loop in code.
+1. **Bias toward usefulness** — Fix problems users and teammates actually hit, not hypothetical
+   polish. Make the useful path obvious and frictionless.
+2. **Own outcomes end-to-end** — Span product, interface, and implementation; ship docs, examples,
+   and tests when the outcome needs them. Sweat every state, word, edge case, and interaction — empty
+   and error matter as much as default.
+3. **Find the binding constraint** — Read user needs, product goals, codebase patterns, business
+   limits, and tradeoffs together. Identify what actually limits the solution before you commit to an
+   approach.
+4. **Design for the full audience** — Skill levels, abilities, devices, and contexts — not just your
+   own workflow. Offer depth without forcing it; defaults should work, power should be reachable.
+5. **Ship craft, not volume** — Scope small enough to finish with care. Challenge work when clarity,
+   craft, performance, or trust slips; leave surfaces cleaner than you found them.
+6. **Raise the team's floor** — Kind, direct, low ego; share early with specific feedback. Encode
+   recurring lessons as registry patterns, lint rules, examples, and the shipped AI rule.
 
 ## Design DNA — the law for authoring components
 

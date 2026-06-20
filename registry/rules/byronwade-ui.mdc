@@ -17,18 +17,20 @@ system component exists, you are doing it wrong.
 
 ## Design engineer principles
 
-How we work — apply these alongside the visual rules below:
+Adapted from [Vercel's Design Engineer Principles](https://vercel.com/design/engineer) for this
+registry. Apply alongside the visual rules below:
 
-1. **Obsess over usefulness** — Solve real user/teammate problems; make useful flows effortless.
-2. **Own the whole experience** — Ship product, design, code, docs as needed. Cover every state,
-   edge case, word, and interaction (empty, loading, error, disabled — not just happy path).
-3. **Understand the constraints** — Know user, product, code, business, and tradeoffs; find the real
-   constraint before picking a solution.
-4. **Build for everyone** — Skill levels, abilities, contexts. Complexity available, not required.
-5. **Make it excellent** — Scope small enough to do it well; push back on clarity, craft,
-   performance, or trust; leave surfaces better than you found them.
-6. **Make the team better** — Kind, direct, low ego; share early, specific feedback; encode repeated
-   lessons as defaults, tools, and systems (components, tokens, lint, examples).
+1. **Bias toward usefulness** — Real user/teammate problems; obvious, frictionless flows.
+2. **Own outcomes end-to-end** — Product, interface, code, docs, examples, tests as needed. Every
+   state, word, and edge case (empty, loading, error, disabled — not just happy path).
+3. **Find the binding constraint** — User, product, codebase, business limits; commit only after you
+   know what actually binds.
+4. **Design for the full audience** — Skills, abilities, devices, contexts. Depth available, not
+   mandatory.
+5. **Ship craft, not volume** — Small enough scope to finish well; push back on clarity, craft,
+   performance, or trust; leave surfaces cleaner.
+6. **Raise the team's floor** — Kind, direct, low ego; early specific feedback → registry patterns,
+   lint, examples, shipped rule.
 
 ## 1. Use the components — don't reinvent them
 

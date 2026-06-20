@@ -132,14 +132,15 @@ The rule's content lives in this repo at `registry/rules/byronwade-ui.mdc` and i
 
 ## Design engineer principles
 
-How we work when building UI in this repo (full prose in [`AGENTS.md`](./AGENTS.md)):
+Adapted from [Vercel's Design Engineer Principles](https://vercel.com/design/engineer) for this
+registry (full prose in [`AGENTS.md`](./AGENTS.md)):
 
-- **Obsess over usefulness** — real problems, effortless flows.
-- **Own the whole experience** — product, design, code, docs; every state and edge case.
-- **Understand the constraints** — user, product, code, business; find the real limit first.
-- **Build for everyone** — complexity available, not required.
-- **Make it excellent** — small scope, push back on craft/trust, leave surfaces better.
-- **Make the team better** — share early, specific feedback → defaults, tools, systems.
+- **Bias toward usefulness** — real problems, frictionless useful paths.
+- **Own outcomes end-to-end** — product, interface, code, docs, examples; every state and edge case.
+- **Find the binding constraint** — user, product, codebase, business; know the limit before you ship.
+- **Design for the full audience** — depth available, not mandatory.
+- **Ship craft, not volume** — small scope, push back on craft/trust, leave surfaces cleaner.
+- **Raise the team's floor** — early specific feedback → registry patterns, lint, examples, rule.
 
 ## Design research principles
 

@@ -1,9 +1,9 @@
 # Design Research
 
 This folder contains external design-system teardown papers used to benchmark and sharpen
-byronwade/ui. **How we work** (usefulness, whole-experience ownership, constraints, inclusion,
-excellence, team improvement) is in [`AGENTS.md`](../AGENTS.md#design-engineer-principles--how-we-work)
-and on the [philosophy docs page](/docs/philosophy).
+byronwade/ui. **How we work** (adapted from [Vercel's Design Engineer Principles](https://vercel.com/design/engineer))
+is in [`AGENTS.md`](../AGENTS.md#design-engineer-principles--how-we-work) and on the
+[philosophy docs page](/docs/philosophy).
 
 ## Files
 
