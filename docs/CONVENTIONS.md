@@ -5,6 +5,10 @@ the _content_ DNA in [`AGENTS.md`](../AGENTS.md) (tokens, typography, Base UI + 
 rule [`registry/rules/byronwade-ui.mdc`](../registry/rules/byronwade-ui.mdc). Where AGENTS.md says
 _what a component must look like_, this says _where it lives, what it's named, and how it's shaped_.
 
+**Design engineer principles** in `AGENTS.md` govern _how we work_ (usefulness, whole-experience
+ownership, constraints, inclusion, excellence, team improvement). Conventions here encode the team
+loop: examples, tests, lint, and the shipped rule turn repeated feedback into enforceable defaults.
+
 Most of these are enforced automatically — see [Enforcement](#enforcement) at the bottom.
 
 ## File organization

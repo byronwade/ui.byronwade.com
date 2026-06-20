@@ -15,7 +15,7 @@ component. If no scope is given, audit the working-tree diff (`git diff` + `git 
 
 ## Read first
 
-- `AGENTS.md` — the Design DNA "law".
+- `AGENTS.md` — Design engineer principles + Design DNA "law".
 - `registry/rules/byronwade-ui.mdc` — the shipped consumer-facing rule.
 - `docs/CONVENTIONS.md` — house code conventions.
 
@@ -45,6 +45,17 @@ restate the code; flag genuinely non-obvious logic that has _no_ comment.
 
 **Accessibility** 10. Labels, `aria-*`, keyboard behavior, and `focus-visible:ring-ring` preserved; dark mode comes
 from tokens (no branching on a hardcoded color).
+
+**Design engineer principles** (judgment the gates cannot make)
+
+10. **Usefulness** — flag UI that solves no clear user problem or duplicates an existing component
+    without a documented reason.
+11. **Whole experience** — flag missing empty/loading/error/disabled states when the component exposes
+    async, selection, or data-dependent behavior.
+12. **Build for everyone** — flag keyboard traps, missing labels, or interactions that require pointer
+    precision without an alternative.
+13. **Excellence** — flag scope that should be split, or clarity/craft/trust risks (misleading status,
+    unbounded `.collect()`-style patterns in docs, performance-hostile defaults).
 
 ## How to be efficient
 

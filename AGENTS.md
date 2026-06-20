@@ -12,6 +12,27 @@ This repo is the **byronwade/ui design-system registry** — a standalone shadcn
 
 See `README.md` for the full workflow (sync → registry:build → deploy).
 
+## Design engineer principles — how we work
+
+These govern _why_ and _how_ we build. They complement the Design DNA below, which defines what
+on-system UI _looks like_. Agents and humans should internalize both.
+
+1. **Obsess over usefulness** — Solve real problems for users and teammates. Make useful things feel
+   effortless, not merely possible.
+2. **Own the whole experience** — Shape the product, design the interface, ship the code. Do whatever
+   the outcome needs: product, design, code, docs, support. Care about every state, edge case, word,
+   and interaction — not just the happy path.
+3. **Understand the constraints** — Know the user, product, code, business, and tradeoffs. Find the
+   real constraint before choosing the solution.
+4. **Build for everyone** — Design across skill levels, abilities, and contexts. Make complexity
+   available, not required (sensible defaults, progressive disclosure, full keyboard and screen-reader
+   paths).
+5. **Make it excellent** — Scope small enough to do it well. Push back when clarity, craft,
+   performance, or trust is at risk. Leave every surface better than you found it.
+6. **Make the team better** — Be kind, direct, and low ego. Share work early and give specific
+   feedback. Turn repeated feedback into better defaults, tools, and systems — this registry, the lint
+   rules, examples, and shipped AI rule are that loop in code.
+
 ## Design DNA — the law for authoring components
 
 This is the same standard we ship to consumers (see `registry/rules/byronwade-ui.mdc`, published as

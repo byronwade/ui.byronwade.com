@@ -15,6 +15,21 @@ non-negotiable constraints, not suggestions.
 and never style with raw values.** If you reach for a `<div>` with bespoke classes where a
 system component exists, you are doing it wrong.
 
+## Design engineer principles
+
+How we work — apply these alongside the visual rules below:
+
+1. **Obsess over usefulness** — Solve real user/teammate problems; make useful flows effortless.
+2. **Own the whole experience** — Ship product, design, code, docs as needed. Cover every state,
+   edge case, word, and interaction (empty, loading, error, disabled — not just happy path).
+3. **Understand the constraints** — Know user, product, code, business, and tradeoffs; find the real
+   constraint before picking a solution.
+4. **Build for everyone** — Skill levels, abilities, contexts. Complexity available, not required.
+5. **Make it excellent** — Scope small enough to do it well; push back on clarity, craft,
+   performance, or trust; leave surfaces better than you found them.
+6. **Make the team better** — Kind, direct, low ego; share early, specific feedback; encode repeated
+   lessons as defaults, tools, and systems (components, tokens, lint, examples).
+
 ## 1. Use the components — don't reinvent them
 
 Before writing any markup, check whether a component already exists. Reach for these first:
@@ -450,17 +465,19 @@ Use the design research as behavior guidance, not visual cloning:
 
 ## Quick self-check before you finish UI work
 
-1. Did I use an existing `@byronwade/ui` component instead of a raw element?
-2. Are all colors semantic tokens (no hex/rgb/named/arbitrary colors)?
-3. Is radius from the scale, and did I use `cn()` + a `className` passthrough?
-4. Did I leave foundation tokens alone and only consider `--brand` for theming?
-5. Are focus states, labels, and keyboard behavior intact?
-6. Is long-form copy on `reading-ui` or `reading-prose` (not full-bleed `text-sm` sans)?
-7. Is reading measure ≤ 80ch (target 65ch via the reading utilities)?
-8. Is `font-mono` limited to real data or technical metadata?
-9. Are all icons imported from `@/lib/icons` (Phosphor, duotone default, token color, scale size) — no other icon package and no hand-rolled `<svg>`?
-10. Do framed surfaces use `edge` instead of outline borders or shadows?
-11. If this is AI UI, is it attached to an object/action with clear state and review?
-12. If I introduced a color family, did it pass the semantic expansion policy?
+1. Did I solve a real user/teammate problem (not just add UI)?
+2. Did I cover every state, edge case, and interaction — not only the happy path?
+3. Did I use an existing `@byronwade/ui` component instead of a raw element?
+4. Are all colors semantic tokens (no hex/rgb/named/arbitrary colors)?
+5. Is radius from the scale, and did I use `cn()` + a `className` passthrough?
+6. Did I leave foundation tokens alone and only consider `--brand` for theming?
+7. Are focus states, labels, and keyboard behavior intact?
+8. Is long-form copy on `reading-ui` or `reading-prose` (not full-bleed `text-sm` sans)?
+9. Is reading measure ≤ 80ch (target 65ch via the reading utilities)?
+10. Is `font-mono` limited to real data or technical metadata?
+11. Are all icons imported from `@/lib/icons` (Phosphor, duotone default, token color, scale size) — no other icon package and no hand-rolled `<svg>`?
+12. Do framed surfaces use `edge` instead of outline borders or shadows?
+13. If this is AI UI, is it attached to an object/action with clear state and review?
+14. If I introduced a color family, did it pass the semantic expansion policy?
 
 If any answer is "no", fix it before moving on.

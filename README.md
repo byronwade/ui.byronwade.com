@@ -130,6 +130,17 @@ contents) into your agent's instructions file:
 The rule's content lives in this repo at `registry/rules/byronwade-ui.mdc` and is served at
 `<REGISTRY_URL>/r/design-rules.json`. Re-run the command after big upgrades to pull the latest rule.
 
+## Design engineer principles
+
+How we work when building UI in this repo (full prose in [`AGENTS.md`](./AGENTS.md)):
+
+- **Obsess over usefulness** — real problems, effortless flows.
+- **Own the whole experience** — product, design, code, docs; every state and edge case.
+- **Understand the constraints** — user, product, code, business; find the real limit first.
+- **Build for everyone** — complexity available, not required.
+- **Make it excellent** — small scope, push back on craft/trust, leave surfaces better.
+- **Make the team better** — share early, specific feedback → defaults, tools, systems.
+
 ## Design research principles
 
 The system is benchmarked against Cursor, Shopify, Atlassian, Fluent 2, Vercel, Linear, and Twenty.

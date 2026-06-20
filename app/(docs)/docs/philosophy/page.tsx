@@ -26,6 +26,54 @@ export const metadata: Metadata = {
    demos woven in.
 --------------------------------------------------------------------------- */
 
+const DESIGN_ENGINEER: { title: string; lines: string[] }[] = [
+  {
+    title: "Obsess over usefulness",
+    lines: [
+      "Solve real problems for users and teammates.",
+      "Make useful things feel effortless.",
+    ],
+  },
+  {
+    title: "Own the whole experience",
+    lines: [
+      "Shape the product, design the interface, ship the code.",
+      "Do whatever the outcome needs: product, design, code, docs, support.",
+      "Care about every state, edge case, word, and interaction.",
+    ],
+  },
+  {
+    title: "Understand the constraints",
+    lines: [
+      "Know the user, product, code, business, and tradeoffs.",
+      "Find the real constraint before choosing the solution.",
+    ],
+  },
+  {
+    title: "Build for everyone",
+    lines: [
+      "Design across skill levels, abilities, and contexts.",
+      "Make complexity available, not required.",
+    ],
+  },
+  {
+    title: "Make it excellent",
+    lines: [
+      "Scope small enough to do it well.",
+      "Push back when clarity, craft, performance, or trust is at risk.",
+      "Leave every surface better than you found it.",
+    ],
+  },
+  {
+    title: "Make the team better",
+    lines: [
+      "Be kind, direct, and low ego.",
+      "Share work early and give specific feedback.",
+      "Turn repeated feedback into better defaults, tools, and systems.",
+    ],
+  },
+]
+
 const TENETS: {
   n: string
   title: string
@@ -359,6 +407,42 @@ export default function PhilosophyPage() {
             , one definition of on-system, enforced everywhere code gets
             written.
           </p>
+        </div>
+      </section>
+
+      {/* ============================ DESIGN ENGINEER ================ */}
+      <section className={`${BLEED} border-y border-border bg-muted/30 py-16`}>
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+          How we build
+        </p>
+        <h2 className="mt-3 max-w-2xl text-3xl font-normal tracking-tight text-foreground text-balance sm:text-4xl">
+          Design engineer principles.
+        </h2>
+        <p className="mt-4 max-w-2xl font-serif text-[1.0625rem] leading-relaxed text-muted-foreground text-pretty">
+          Visual tenets describe what the system looks like. These describe how we
+          work: usefulness first, whole-experience ownership, and encoding lessons
+          into components, tokens, lint, and the shipped{" "}
+          <Link
+            href="/docs/ai"
+            className="text-brand underline-offset-4 hover:underline"
+          >
+            AI rule
+          </Link>{" "}
+          so the next screen and the next agent start from better defaults.
+        </p>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {DESIGN_ENGINEER.map((p) => (
+            <div key={p.title} className="rounded-xl edge bg-card p-5">
+              <h3 className="text-base font-medium tracking-tight text-foreground">
+                {p.title}
+              </h3>
+              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                {p.lines.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
 

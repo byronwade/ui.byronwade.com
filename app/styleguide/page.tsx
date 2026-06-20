@@ -224,6 +224,33 @@ export default function StyleguidePage() {
                   </div>
                 </Specimen>
 
+                <Specimen name="Design engineer principles" plain>
+                  <div className="space-y-4">
+                    <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                      How we work alongside the visual rules: obsess over usefulness,
+                      own the whole experience (every state and edge case), understand
+                      constraints before picking solutions, build for everyone, make it
+                      excellent at a scope we can ship well, and turn repeated feedback
+                      into defaults, tools, and systems — this registry, lint, and examples.
+                    </p>
+                    <ul className="grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
+                      {[
+                        "Obsess over usefulness",
+                        "Own the whole experience",
+                        "Understand the constraints",
+                        "Build for everyone",
+                        "Make it excellent",
+                        "Make the team better",
+                      ].map((item) => (
+                        <li key={item} className="flex items-center gap-2">
+                          <span className="size-1.5 shrink-0 rounded-full bg-brand" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Specimen>
+
                 <Specimen
                   name="No generic grids, one signature hero per page"
                   plain

@@ -9,6 +9,9 @@ These are the **structural/style** rules for editing this repo's registry source
 of the *content* Design DNA (tokens, typography, Base UI + CVA) in `AGENTS.md` and the shipped rule
 `registry/rules/byronwade-ui.mdc`. Full prose: `docs/CONVENTIONS.md`. Treat these as constraints.
 
+**Design engineer principles** (`AGENTS.md`) — usefulness, whole-experience ownership, constraints,
+inclusion, excellence, team improvement — apply alongside these conventions.
+
 ## Where things go
 
 - UI primitive → `registry/ui/<slug>.tsx`
