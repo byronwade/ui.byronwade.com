@@ -62,6 +62,7 @@ for (const key of Object.keys(theme)) {
 const utilities = [
   ...Object.keys(foundation.css?.["@layer utilities"] ?? {}),
   ...Object.keys(foundation.css ?? {}).filter((k) => k.startsWith(".")),
+  ...(foundation.documentedUtilities ?? []).map((u) => `.${u}`),
 ]
   .map(utilityBase)
   .filter(Boolean)

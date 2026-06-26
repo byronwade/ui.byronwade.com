@@ -427,9 +427,9 @@ export default function PhilosophyPage() {
           >
             Vercel&apos;s Design Engineer Principles
           </a>
-          , tailored for a registry where agents write most of the UI. Visual tenets describe what
-          the system looks like; these describe how we work — encoding lessons into components,
-          tokens, lint, and the shipped{" "}
+          , tailored for a registry where agents write most of the UI. Visual
+          tenets describe what the system looks like; these describe how we work
+          — encoding lessons into components, tokens, lint, and the shipped{" "}
           <Link
             href="/docs/ai"
             className="text-brand underline-offset-4 hover:underline"

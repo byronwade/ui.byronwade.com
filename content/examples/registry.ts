@@ -20,6 +20,8 @@ import ActivityRingScore from "./activity-ring/score";
 import ActivityRingScoreTones from "./activity-ring/score-tones";
 import ActivityRingTones from "./activity-ring/tones";
 import ActivityRingWithVerdict from "./activity-ring/with-verdict";
+import AttachmentDefault from "./attachment/default";
+import BubbleDefault from "./bubble/default";
 import AiArtifactDefault from "./ai-artifact/default";
 import AiAttachmentsDefault from "./ai-attachments/default";
 import AiAttachmentsVariants from "./ai-attachments/variants";
@@ -357,7 +359,10 @@ import MarketMoversDefault from "./market-movers/default";
 import MarketNewsDefault from "./market-news/default";
 import MarketNewsTerminal from "./market-news/terminal";
 import MarketingLayoutDefault from "./marketing-layout/default";
+import MarkerDefault from "./marker/default";
+import MessageDefault from "./message/default";
 import MessageComposerDefault from "./message-composer/default";
+import MessageScrollerDefault from "./message-scroller/default";
 import MessageThreadDefault from "./message-thread/default";
 import MetricDefault from "./metric/default";
 import MetricStatDefault from "./metric-stat/default";
@@ -1302,6 +1307,25 @@ export const examples: Record<string, Example[]> = {
   ],
   "message-composer": [
     { name: "Default", file: "message-composer/default.tsx", Component: MessageComposerDefault },
+  ],
+  "attachment": [
+    { name: "Default", file: "attachment/default.tsx", Component: AttachmentDefault },
+  ],
+  "bubble": [
+    { name: "Default", file: "bubble/default.tsx", Component: BubbleDefault },
+  ],
+  "marker": [
+    { name: "Default", file: "marker/default.tsx", Component: MarkerDefault },
+  ],
+  "message": [
+    { name: "Default", file: "message/default.tsx", Component: MessageDefault },
+  ],
+  "message-scroller": [
+    {
+      name: "Default",
+      file: "message-scroller/default.tsx",
+      Component: MessageScrollerDefault,
+    },
   ],
   "message-thread": [
     { name: "Default", file: "message-thread/default.tsx", Component: MessageThreadDefault },
