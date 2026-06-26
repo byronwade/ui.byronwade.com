@@ -127,6 +127,7 @@ if (ghosts.length) {
 const utilityKeys = [
   ...Object.keys(foundation?.css?.["@layer utilities"] ?? {}),
   ...Object.keys(foundation?.css ?? {}).filter((k) => k.startsWith(".")),
+  ...(foundation?.documentedUtilities ?? []).map((u) => `.${u}`),
 ]
 const houseUtilities = [...new Set(utilityKeys.map(utilityBase))]
 const undocumentedUtilities = houseUtilities.filter(
