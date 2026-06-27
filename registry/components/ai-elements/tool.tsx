@@ -90,7 +90,7 @@ export const ToolHeader = ({
   <CollapsibleTrigger
     data-slot="tool-header"
     className={cn(
-      "group flex w-full items-center justify-between gap-4 p-3 outline-none transition-colors hover:bg-muted/40 focus-visible:ring-2 focus-visible:ring-ring",
+      "group flex w-full items-center justify-between gap-4 p-3 outline-none transition-colors hover:bg-muted/40 focus-visible:ring-2 focus-visible:ring-ring/50",
       className
     )}
     {...props}

@@ -98,7 +98,7 @@ const mediaVariables = {
 } as CSSProperties
 
 const videoPlayerVariants = cva(
-  "group/video-player relative isolate aspect-video w-full overflow-hidden bg-card text-foreground outline-none [&_video]:h-full [&_video]:w-full [&_video]:object-cover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  "group/video-player relative isolate aspect-video w-full overflow-hidden bg-card text-foreground outline-none [&_video]:h-full [&_video]:w-full [&_video]:object-cover focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
   {
     variants: {
       variant: {
@@ -431,7 +431,7 @@ export const VideoPlayerNextButton = ({
     data-slot="video-player-next-button"
     aria-label="Next"
     className={cn(
-      "inline-flex items-center justify-center text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring",
+      "inline-flex items-center justify-center text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
       className,
     )}
     {...props}
@@ -456,7 +456,7 @@ export const VideoPlayerTheaterButton = ({
     aria-label={pressed ? "Exit theater mode" : "Theater mode"}
     aria-pressed={pressed}
     className={cn(
-      "inline-flex items-center justify-center text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring",
+      "inline-flex items-center justify-center text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
       className,
     )}
     {...props}
@@ -708,7 +708,7 @@ export const VideoPlayerPoster = ({
       data-slot="video-player-poster"
       aria-label="Play video"
       className={cn(
-        "absolute inset-0 z-10 flex items-center justify-center bg-background/40 outline-none transition-colors hover:bg-background/30 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "absolute inset-0 z-10 flex items-center justify-center bg-background/40 outline-none transition-colors hover:bg-background/30 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
       )}
       onClick={handleClick}
@@ -944,7 +944,7 @@ export const VideoPlayerEndScreen = ({
   }, [ended, remaining, next, countdownSeconds])
 
   const cardClassName =
-    "flex w-full max-w-sm items-center gap-3 rounded-lg edge bg-card p-3 text-left transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+    "flex w-full max-w-sm items-center gap-3 rounded-lg edge bg-card p-3 text-left transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
   const cardBody = next ? (
     <>
       {next.thumbnail ? (

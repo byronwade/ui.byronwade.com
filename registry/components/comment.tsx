@@ -139,7 +139,7 @@ function Comment({
             aria-label="Like"
             onClick={toggleLiked}
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+              "inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none",
               isLiked && "text-brand",
             )}
           >
@@ -169,7 +169,7 @@ function Comment({
             aria-label="Dislike"
             onClick={toggleDisliked}
             className={cn(
-              "inline-flex items-center rounded-full px-2 py-1 text-xs transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+              "inline-flex items-center rounded-full px-2 py-1 text-xs transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none",
               isDisliked && "text-foreground",
             )}
           >
@@ -180,7 +180,7 @@ function Comment({
             type="button"
             data-slot="comment-reply"
             onClick={onReply}
-            className="rounded-full px-2 py-1 text-xs font-medium text-foreground transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            className="rounded-full px-2 py-1 text-xs font-medium text-foreground transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
           >
             Reply
           </button>
@@ -193,7 +193,7 @@ function Comment({
               data-slot="comment-replies-toggle"
               aria-expanded={repliesOpen}
               onClick={() => setRepliesOpen((open) => !open)}
-              className="inline-flex w-fit items-center gap-1.5 rounded-full px-2 py-1 text-xs font-medium text-brand transition-colors hover:bg-brand/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              className="inline-flex w-fit items-center gap-1.5 rounded-full px-2 py-1 text-xs font-medium text-brand transition-colors hover:bg-brand/10 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
             >
               <CaretDown
                 className={cn(

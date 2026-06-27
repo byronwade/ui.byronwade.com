@@ -59,7 +59,7 @@ export function MorphMenubar({
             )
           }}
           className={cn(
-            "rounded px-2.5 py-1 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+            "rounded px-2.5 py-1 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
             open && active?.id === menu.id
               ? "bg-muted text-foreground"
               : "text-muted-foreground hover:bg-muted hover:text-foreground",

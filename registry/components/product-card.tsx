@@ -81,7 +81,7 @@ function ProductCard({
       onKeyDown={interactive ? handleKeyDown : undefined}
       className={cn(
         interactive &&
-          "cursor-pointer transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+          "cursor-pointer transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none",
         className,
       )}
     >

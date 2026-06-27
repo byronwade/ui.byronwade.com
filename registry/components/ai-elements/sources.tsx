@@ -26,7 +26,7 @@ export const Sources = ({ className, ...props }: SourcesProps) => (
 );
 
 const sourcesTriggerVariants = cva(
-  "flex items-center gap-2 text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring [&_svg]:transition-transform data-[panel-open]:[&_svg]:rotate-180",
+  "flex items-center gap-2 text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:transition-transform data-[panel-open]:[&_svg]:rotate-180",
 );
 
 export type SourcesTriggerProps = ComponentProps<typeof CollapsibleTrigger> &
@@ -75,7 +75,7 @@ export const SourcesContent = ({
 );
 
 const sourceVariants = cva(
-  "flex items-center gap-2 text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring",
+  "flex items-center gap-2 text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring/50",
 );
 
 export type SourceProps = ComponentProps<"a"> &

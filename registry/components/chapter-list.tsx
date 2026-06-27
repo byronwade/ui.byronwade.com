@@ -111,7 +111,7 @@ function ChapterList({
             aria-current={isActive ? "true" : undefined}
             onClick={() => handleSelect(index)}
             className={cn(
-              "group/chapter flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+              "group/chapter flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
               isActive
                 ? "bg-secondary text-foreground"
                 : "hover:bg-accent",
@@ -164,7 +164,7 @@ function ChapterList({
           type="button"
           data-slot="chapter-list-toggle"
           onClick={() => setExpanded((prev) => !prev)}
-          className="mt-1 self-start rounded-lg px-2 py-1 text-sm font-medium text-brand outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+          className="mt-1 self-start rounded-lg px-2 py-1 text-sm font-medium text-brand outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {expanded ? "Show less" : `Show all (${chapters.length})`}
         </button>

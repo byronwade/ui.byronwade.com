@@ -134,7 +134,7 @@ function SectorRotation({
               data-label={arc.label}
               className={cn(
                 "flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-sm transition-colors",
-                "hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                 active === index && "bg-muted/60",
               )}
               onMouseEnter={() => setActive(index)}

@@ -110,7 +110,7 @@ export function TrackRow({
               event.stopPropagation()
               onPlay()
             }}
-            className="flex items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <span className="font-mono tabular-nums group-hover/track-row:hidden group-focus-within/track-row:hidden">
               {index}
@@ -161,7 +161,7 @@ export function TrackRow({
               onLikeToggle()
             }}
             className={cn(
-              "outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+              "outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
               liked
                 ? "text-brand"
                 : "text-muted-foreground hover:text-foreground",

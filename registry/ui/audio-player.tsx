@@ -39,7 +39,7 @@ const mediaVariables = {
 } as CSSProperties
 
 const audioPlayerVariants = cva(
-  "group/audio-player isolate w-full text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background [&_media-controller]:w-full",
+  "group/audio-player isolate w-full text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background [&_media-controller]:w-full",
   {
     variants: {
       variant: {

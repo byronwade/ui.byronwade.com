@@ -248,7 +248,7 @@ export const WebPreviewConsole = ({
     >
       <CollapsibleTrigger
         data-slot="web-preview-console-trigger"
-        className="group flex w-full cursor-pointer items-center justify-between p-4 text-left font-medium text-foreground outline-none transition-colors hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring"
+        className="group flex w-full cursor-pointer items-center justify-between p-4 text-left font-medium text-foreground outline-none transition-colors hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring/50"
       >
         Console
         <CaretDown

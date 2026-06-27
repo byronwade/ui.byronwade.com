@@ -78,7 +78,7 @@ export function Lyrics({
                 <button
                   type="button"
                   onClick={() => onLineClick(i)}
-                  className="block w-full rounded-sm text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="block w-full rounded-sm text-left outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   {content}
                 </button>

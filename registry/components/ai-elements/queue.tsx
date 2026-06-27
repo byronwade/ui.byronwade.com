@@ -265,7 +265,7 @@ export const QueueSectionTrigger = ({
   <CollapsibleTrigger
     data-slot="queue-section-trigger"
     className={cn(
-      "group flex w-full items-center justify-between rounded-lg bg-muted/40 px-3 py-2 text-left text-sm font-medium text-muted-foreground outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring",
+      "group flex w-full items-center justify-between rounded-lg bg-muted/40 px-3 py-2 text-left text-sm font-medium text-muted-foreground outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50",
       className
     )}
     {...props}

@@ -95,7 +95,7 @@ function ResourceItem({
         data-slot="resource-item-link"
         href={href}
         aria-label={label}
-        className="absolute inset-0 rounded-lg focus-visible:ring-2 focus-visible:ring-ring outline-none"
+        className="absolute inset-0 rounded-lg focus-visible:ring-2 focus-visible:ring-ring/50 outline-none"
         onClick={activate}
       />
     ) : (
@@ -103,7 +103,7 @@ function ResourceItem({
         type="button"
         data-slot="resource-item-link"
         aria-label={label}
-        className="absolute inset-0 rounded-lg focus-visible:ring-2 focus-visible:ring-ring outline-none"
+        className="absolute inset-0 rounded-lg focus-visible:ring-2 focus-visible:ring-ring/50 outline-none"
         onClick={activate}
       />
     )

@@ -62,7 +62,7 @@ function EntityRowContent({
           type="button"
           data-slot="entity-row-activator"
           aria-label={resolvedLabel}
-          className="absolute inset-0 rounded-[inherit] outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="absolute inset-0 rounded-[inherit] outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           onClick={onActivate}
         />
       ) : null}

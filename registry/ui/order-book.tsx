@@ -87,7 +87,7 @@ function OrderBookRow({
       onClick={() => onSelectPrice?.(level.price)}
       className={cn(
         "relative grid w-full grid-cols-[1fr_auto] items-center gap-2 px-2 py-1 text-left",
-        "hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
       )}
     >
       <span

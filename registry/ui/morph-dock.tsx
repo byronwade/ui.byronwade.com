@@ -170,7 +170,7 @@ const TONES: Record<
     panel: "bg-card text-foreground edge",
     idle: "text-muted-foreground hover:bg-accent hover:text-foreground",
     active: "bg-accent text-foreground",
-    ring: "focus-visible:ring-ring",
+    ring: "focus-visible:ring-ring/50",
     action: "bg-accent text-foreground",
     title: "text-foreground",
     close: "text-muted-foreground hover:bg-accent hover:text-foreground",

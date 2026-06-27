@@ -123,7 +123,7 @@ function HeatmapGrid({
             }}
             className={cn(
               "flex min-h-14 flex-col items-center justify-center rounded-lg px-2 py-3",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
               cellToneClass(cell, scale ?? "tone"),
             )}
           >

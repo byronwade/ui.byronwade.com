@@ -92,7 +92,7 @@ export function NowPlayingBarTrack({
           aria-pressed={liked}
           onClick={onLikeToggle}
           className={cn(
-            "ml-1 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+            "ml-1 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
             liked
               ? "text-brand"
               : "text-muted-foreground hover:text-foreground",
@@ -150,7 +150,7 @@ export function NowPlayingBarControls({
   ...props
 }: NowPlayingBarControlsProps) {
   const ctrl =
-    "flex items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
+    "flex items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50"
   const tone = (on?: boolean) =>
     on ? "text-brand" : "text-muted-foreground hover:text-foreground"
   return (

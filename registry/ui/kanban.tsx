@@ -129,7 +129,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
         <Card
           data-slot="kanban-card"
           className={cn(
-            "cursor-grab gap-4 rounded-lg p-3 edge focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            "cursor-grab gap-4 rounded-lg p-3 edge focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
             isDragging && "pointer-events-none cursor-grabbing opacity-30",
             className,
           )}

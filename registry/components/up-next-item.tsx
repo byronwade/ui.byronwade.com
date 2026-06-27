@@ -92,7 +92,7 @@ function UpNextItem({
   }
 
   const surfaceClass = cn(
-    "group/up-next flex min-w-0 flex-1 gap-3 rounded-lg outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+    "group/up-next flex min-w-0 flex-1 gap-3 rounded-lg outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
     active
       ? "border-l-2 border-brand bg-accent/60 pl-2"
       : "hover:bg-accent/40",
@@ -213,7 +213,7 @@ function UpNextItem({
           <DropdownMenuTrigger
             data-slot="up-next-item-menu"
             aria-label="More options"
-            className="inline-flex size-6 shrink-0 items-center justify-center self-start rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex size-6 shrink-0 items-center justify-center self-start rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <DotsThreeVertical className="size-4" />
           </DropdownMenuTrigger>

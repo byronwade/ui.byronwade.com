@@ -141,7 +141,7 @@ export const ChainOfThoughtHeader = memo(
       <button
         aria-expanded={isOpen}
         className={cn(
-          "group flex w-full items-center gap-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
+          "group flex w-full items-center gap-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
           className
         )}
         data-panel-open={isOpen || undefined}

@@ -42,7 +42,7 @@ const actionVariants = cva(
 )
 
 const chipVariants = cva(
-  "inline-flex items-center justify-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-ring group-focus-visible:ring-2 group-focus-visible:ring-ring",
+  "inline-flex items-center justify-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 group-focus-visible:ring-2 group-focus-visible:ring-ring/50",
   {
     variants: {
       size: {

@@ -216,7 +216,7 @@ function StudioVideoRow({
             tabIndex={0}
             onClick={onClick}
             onKeyDown={handleKeyDown}
-            className="cursor-pointer rounded-lg text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="cursor-pointer rounded-lg text-left outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             {video}
           </div>
@@ -257,7 +257,7 @@ function StudioVideoRow({
           <DropdownMenu>
             <DropdownMenuTrigger
               aria-label={`More options for ${title}`}
-              className="inline-flex size-7 items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex size-7 items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               <DotsThreeVertical className="size-4" />
             </DropdownMenuTrigger>

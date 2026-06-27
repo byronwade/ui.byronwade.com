@@ -120,7 +120,7 @@ function DescriptionBox({
         data-slot="description-box-toggle"
         onClick={() => toggle(!isExpanded)}
         aria-expanded={isExpanded}
-        className="mt-1 font-medium text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="mt-1 font-medium text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
       >
         {isExpanded ? lessLabel : moreLabel}
       </button>

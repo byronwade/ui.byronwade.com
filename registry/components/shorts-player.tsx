@@ -312,7 +312,7 @@ function ShortsPlayer({
           data-slot="shorts-player-tap"
           aria-label={playingOn ? "Pause" : "Play"}
           onClick={togglePlaying}
-          className="absolute inset-0 z-[5] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+          className="absolute inset-0 z-[5] outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
         />
       ) : null}
 

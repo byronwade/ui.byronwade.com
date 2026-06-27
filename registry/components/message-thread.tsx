@@ -88,7 +88,7 @@ function MessageBubble({
               type="button"
               aria-label={`Remove reaction ${emoji}`}
               onClick={() => react(conversationId, message.id, emoji)}
-              className="rounded-full bg-accent px-1.5 py-0.5 text-[11px] outline-none transition-colors hover:bg-accent/80 focus-visible:ring-2 focus-visible:ring-ring"
+              className="rounded-full bg-accent px-1.5 py-0.5 text-[11px] outline-none transition-colors hover:bg-accent/80 focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               {emoji}
             </button>
@@ -102,7 +102,7 @@ function MessageBubble({
           aria-label="Add reaction"
           aria-expanded={pickerOpen}
           onClick={() => setPickerOpen((open) => !open)}
-          className="grid size-6 place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+          className="grid size-6 place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           <Plus className="size-3.5" />
         </button>
@@ -120,7 +120,7 @@ function MessageBubble({
                   react(conversationId, message.id, emoji)
                   setPickerOpen(false)
                 }}
-                className="grid size-7 place-items-center rounded-full text-sm outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+                className="grid size-7 place-items-center rounded-full text-sm outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 {emoji}
               </button>

@@ -192,7 +192,7 @@ function VideoCard({
   }
 
   const surfaceClass =
-    "rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    "rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
 
   const media = (
     <Thumbnail
@@ -354,7 +354,7 @@ function VideoCard({
             <DropdownMenuTrigger
               data-slot="video-card-menu"
               aria-label="More options"
-              className="inline-flex size-8 shrink-0 items-center justify-center self-start rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex size-8 shrink-0 items-center justify-center self-start rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               <DotsThreeVertical className="size-4" />
             </DropdownMenuTrigger>

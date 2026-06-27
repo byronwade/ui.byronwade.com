@@ -688,7 +688,7 @@ export const GanttAddFeatureHelper: FC<GanttAddFeatureHelperProps> = ({
     >
       <button
         aria-label="Add feature"
-        className="flex h-full w-full items-center justify-center rounded-lg border border-dashed border-border p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex h-full w-full items-center justify-center rounded-lg border border-dashed border-border p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         onClick={handleClick}
         type="button"
       >
@@ -809,7 +809,7 @@ export const GanttCreateMarkerTrigger: FC<GanttCreateMarkerTriggerProps> = ({
       >
         <button
           aria-label="Create marker"
-          className="z-50 inline-flex size-4 items-center justify-center rounded-full bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="z-50 inline-flex size-4 items-center justify-center rounded-full bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           onClick={handleClick}
           type="button"
         >

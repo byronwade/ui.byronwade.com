@@ -58,7 +58,7 @@ interface EngagementBarProps {
 }
 
 const pillClass =
-  "inline-flex h-9 items-center gap-2 rounded-full bg-secondary px-4 text-sm font-medium text-secondary-foreground transition-colors outline-none hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-ring"
+  "inline-flex h-9 items-center gap-2 rounded-full bg-secondary px-4 text-sm font-medium text-secondary-foreground transition-colors outline-none hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-ring/50"
 
 function EngagementBar({
   like,
@@ -137,7 +137,7 @@ function EngagementBar({
           aria-pressed={likedOn}
           onClick={handleLike}
           className={cn(
-            "inline-flex h-full items-center gap-2 rounded-l-full pr-3 pl-4 text-sm font-medium transition-colors outline-none hover:bg-foreground/5 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+            "inline-flex h-full items-center gap-2 rounded-l-full pr-3 pl-4 text-sm font-medium transition-colors outline-none hover:bg-foreground/5 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset",
             likedOn && "text-brand",
           )}
         >
@@ -162,7 +162,7 @@ function EngagementBar({
           aria-pressed={dislikedOn}
           onClick={handleDislike}
           className={cn(
-            "inline-flex h-full items-center rounded-r-full px-4 text-sm font-medium transition-colors outline-none hover:bg-foreground/5 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+            "inline-flex h-full items-center rounded-r-full px-4 text-sm font-medium transition-colors outline-none hover:bg-foreground/5 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset",
             dislikedOn && "text-brand",
           )}
         >

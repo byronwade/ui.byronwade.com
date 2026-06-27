@@ -124,7 +124,7 @@ function StudioVideoTable({
               aria-label={`Sort by ${column.label}`}
               onClick={() => handleSort(column.key)}
               className={cn(
-                "inline-flex shrink-0 items-center gap-1 outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
+                "inline-flex shrink-0 items-center gap-1 outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
                 column.className,
                 isActive && "text-brand",
               )}

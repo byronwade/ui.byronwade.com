@@ -107,7 +107,7 @@ export function AlbumCover({
           aria-label={`${playing ? "Pause" : "Play"} ${alt}`}
           onClick={onPlay}
           className={cn(
-            "absolute right-2 bottom-2 z-10 flex size-10 items-center justify-center rounded-full bg-brand text-primary-foreground edge outline-none transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            "absolute right-2 bottom-2 z-10 flex size-10 items-center justify-center rounded-full bg-brand text-primary-foreground edge outline-none transition-all focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             playing
               ? "opacity-100"
               : "translate-y-1 opacity-0 group-hover/album-cover:translate-y-0 group-hover/album-cover:opacity-100 group-focus-within/album-cover:translate-y-0 group-focus-within/album-cover:opacity-100",

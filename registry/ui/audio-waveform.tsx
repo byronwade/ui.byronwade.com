@@ -75,7 +75,7 @@ export function AudioWaveform({
       onClick={onSeek ? (event) => seekFromClientX(event.clientX) : undefined}
       onKeyDown={handleKeyDown}
       className={cn(
-        "flex h-12 w-full items-center gap-px outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "flex h-12 w-full items-center gap-px outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         onSeek && "cursor-pointer",
         className,
       )}
