@@ -8,7 +8,7 @@
  *            + all native span props
  *            + render prop for polymorphic rendering (Base UI pattern, NOT asChild/Radix)
  *   - Base classes: group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center
- *                   gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5
+ *                   gap-1 overflow-hidden rounded-full border border-transparent px-2 py-0.5
  *                   text-xs font-medium whitespace-nowrap transition-all
  *   - Focus ring: focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50
  *   - Invalid state: aria-invalid → border-destructive + ring-destructive/20
@@ -147,9 +147,9 @@ describe("Badge — base CSS classes", () => {
     expect((container.firstElementChild as HTMLElement).className).toContain("overflow-hidden");
   });
 
-  it("has rounded-4xl class", () => {
+  it("has rounded-full class", () => {
     const { container } = render(<Badge>Test</Badge>);
-    expect((container.firstElementChild as HTMLElement).className).toContain("rounded-4xl");
+    expect((container.firstElementChild as HTMLElement).className).toContain("rounded-full");
   });
 
   it("has border class", () => {
@@ -405,7 +405,7 @@ describe("Badge — render prop (polymorphic)", () => {
     );
     const anchor = container.querySelector("a") as HTMLElement;
     expect(anchor.className).toContain("inline-flex");
-    expect(anchor.className).toContain("rounded-4xl");
+    expect(anchor.className).toContain("rounded-full");
   });
 
   it("renders as <a> with variant='outline'", () => {

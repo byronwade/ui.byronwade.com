@@ -225,6 +225,82 @@ Tone the same token with opacity instead of new colors: `bg-brand/10`, `text-des
 Use the radius scale, never raw pixels: `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`,
 `rounded-2xl` … `rounded-4xl` (all derived from `--radius`). Pills use `rounded-full`.
 
+### The cohesion contract (standardize every component to these scales)
+
+Every component must read as one calm, warm, premium family — components should look complementary
+side by side. Hierarchy comes from a small set of shapes, surfaces, heights, and spacings applied
+consistently, **not** from one-off treatments. When you author or edit a component, map each part to
+the matching row below; do not invent a new radius, surface, height, or hover treatment.
+
+**Shape — one radius per role:**
+
+| Role                                                                           | Radius          |
+| ------------------------------------------------------------------------------ | --------------- |
+| Indicators (status dots, switch thumbs, avatars, dot/ping)                     | `rounded-full`  |
+| Buttons, badges, pills, tabs, toggles, segmented-control items, filter pills   | `rounded-full`  |
+| Inputs, selects, textareas, menu rows, command/list rows, combobox items       | `rounded-lg`    |
+| Cards, panels, popovers, dropdowns, hover-cards, tooltips, command panels      | `rounded-2xl`   |
+| Large hero / modal (dialog) / sheet / floating shells                          | `rounded-3xl`   |
+
+`rounded-md`, `rounded-sm`, and `rounded-xl` are **not** part of the standard control vocabulary —
+the only sanctioned `rounded-md` is the internal squaring of children inside a `button-group`
+(`in-data-[slot=button-group]:rounded-md`). Media/thumbnails inside a card square to the card's
+inner radius. Do not introduce other ad-hoc radii.
+
+**Surface — one token per role:**
+
+| Role                                  | Classes                                       |
+| ------------------------------------- | --------------------------------------------- |
+| Page                                  | `bg-background`                               |
+| Normal panel / card                   | `bg-card edge`                                |
+| Inset panel (well, frame surround)    | `bg-muted/30 edge`                            |
+| Hover (rows, ghost controls)          | `bg-muted/30`                                 |
+| Selected / active                     | `bg-brand/10` (or `bg-brand/8`)               |
+| Inverse / floating chrome **only**    | `bg-dock text-dock-foreground`                |
+
+`bg-dock` is reserved for global floating nav, command/search launchers, and morph chrome — never for
+docs sidebars or ordinary navigation, which use `bg-card edge`. Keep depth quiet: `edge` is the
+baseline; reach for `depth-soft`/`depth-raised` only on genuinely floating overlays.
+
+**Control height — four tiers:**
+
+| Tier              | Height        | Use                                         |
+| ----------------- | ------------- | ------------------------------------------- |
+| xs                | `h-6` (24px)  | Dense toolbars, inline chips                 |
+| default app       | `h-8` (32px)  | Standard buttons, inputs, selects, tabs      |
+| large             | `h-9` (36px)  | Comfortable controls, list/table row rhythm  |
+| hero CTA          | `h-10` (40px) | Marketing primary actions only               |
+
+**Spacing — card and row rhythm:**
+
+| Surface           | Padding + gap   |
+| ----------------- | --------------- |
+| Compact card      | `p-4 gap-3`     |
+| Default card      | `p-5 gap-4`     |
+| Marketing card    | `p-6 gap-5`     |
+| List / table rows | consistent 36–40px row height (`h-9`/`h-10`) |
+
+**Hover / focus / state:**
+
+- Normal hover: `bg-muted/30`. Selected/active: `bg-brand/10`.
+- Danger surfaces: `bg-destructive/10` (or `/15` for stronger emphasis).
+- Focus ring: `focus-visible:ring-ring/50` (ring derives from `--brand`).
+- **No random green borders or fills** — brand color appears only on a selected/active state, or per
+  the green policy below. A resting card/input never carries a brand border.
+
+**Card structure — one anatomy for every card:**
+
+Optional icon/media → title → description → meta/action. Compose the `card` primitive
+(`bg-card edge rounded-2xl`, header/title/description/action/content/footer) rather than hand-rolling
+a bespoke surface. Composite cards (product, stat, video, customer, position, playlist…) follow the
+same anatomy and surface so they sit side by side as one family.
+
+**Green policy (brand accent, used sparingly):** the brand green is an accent, not a default. Keep it
+for primary/key actions, selected & active states, success/verification (foundation `success` and
+`ring` already derive from `--brand`), key metric emphasis, and at most one hero emphasis per surface.
+Convert decorative eyebrows, section labels, and ornamental icons to `text-muted-foreground` or a
+`bg-muted/40` chip. Never use brand green as general decoration.
+
 ### Typography — editorial restraint
 
 The system reads as a calm, warm, editorial canvas. Express hierarchy through **size + tight
@@ -472,6 +548,7 @@ Use the design research as behavior guidance, not visual cloning:
 3. Did I use an existing `@byronwade/ui` component instead of a raw element?
 4. Are all colors semantic tokens (no hex/rgb/named/arbitrary colors)?
 5. Is radius from the scale, and did I use `cn()` + a `className` passthrough?
+5a. Does every part map to the **cohesion contract** — the right radius (pill/`rounded-lg`/`rounded-2xl`/`rounded-3xl`), surface (`bg-card edge` / `bg-muted/30` / `bg-brand/10`), height tier (24/32/36/40px), and hover/focus — with no one-off treatment?
 6. Did I leave foundation tokens alone and only consider `--brand` for theming?
 7. Are focus states, labels, and keyboard behavior intact?
 8. Is long-form copy on `reading-ui` or `reading-prose` (not full-bleed `text-sm` sans)?

@@ -34,10 +34,12 @@ const ALL_SIZES = [
   "xs",
   "sm",
   "lg",
+  "xl",
   "icon",
   "icon-xs",
   "icon-sm",
   "icon-lg",
+  "icon-xl",
 ] as const;
 
 /** A class fragment expected for each size (from the CVA source). */
@@ -46,10 +48,12 @@ const SIZE_CLASS_FRAGMENT: Record<(typeof ALL_SIZES)[number], string> = {
   xs: "h-6",
   sm: "h-8",
   lg: "h-9",
+  xl: "h-10",
   icon: "size-8",
   "icon-xs": "size-6",
   "icon-sm": "size-8",
   "icon-lg": "size-9",
+  "icon-xl": "size-10",
 };
 
 // ─── Smoke ────────────────────────────────────────────────────────────────────

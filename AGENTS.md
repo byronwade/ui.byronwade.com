@@ -91,6 +91,20 @@ agent following that rule would produce identical-looking code.** That means:
   radius scale (`rounded-sm`…`rounded-4xl`, all from `--radius`) is used instead of pixel radii.
 - **`cn()` + `className` passthrough.** Always merge with `cn()` from `@/lib/utils` and accept a
   `className` prop so callers extend without clobbering base styles.
+- **Cohesion contract — standardize to fixed scales.** Every component maps to one shared vocabulary
+  so they read as one family side by side (full contract in `registry/rules/byronwade-ui.mdc`):
+  _Shape_ — indicators/buttons/badges/pills/tabs/toggles = `rounded-full`;
+  inputs/selects/menu rows = `rounded-lg`; cards/panels/popovers = `rounded-2xl`;
+  hero/modal/sheet/floating shells = `rounded-3xl`. `rounded-md`/`rounded-sm`/`rounded-xl` are not in
+  the control vocabulary (except button-group internal squaring).
+  _Surface_ — page `bg-background`; card/panel `bg-card edge`; inset `bg-muted/30 edge`;
+  hover `bg-muted/30`; selected/active `bg-brand/10`; floating chrome only `bg-dock text-dock-foreground`.
+  _Height_ — 24 / 32 / 36 / 40px (`h-6`/`h-8`/`h-9`/`h-10`; 40px is hero CTA only).
+  _Spacing_ — compact card `p-4 gap-3`, default `p-5 gap-4`, marketing `p-6 gap-5`; rows 36–40px.
+  _State_ — hover `bg-muted/30`, selected `bg-brand/10`, danger `bg-destructive/10`,
+  focus `focus-visible:ring-ring/50`; no brand border/fill except selected/active.
+  _Card anatomy_ — optional icon/media → title → description → meta/action; compose the `card`
+  primitive, never a bespoke surface.
 - **Composites compose primitives.** Patterns in `registry/components/` are built from UI primitives
   and tokens (e.g. `status-pill` = `status-dot` + token chip), never bespoke one-off elements.
 - **Accessibility & dark mode are non-optional.** Preserve labels, `aria-*`, keyboard behavior, and
