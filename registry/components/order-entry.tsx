@@ -78,7 +78,7 @@ function OrderEntry({
   return (
     <div
       data-slot="order-entry"
-      className={cn("w-full max-w-sm rounded-xl edge bg-card p-4", className)}
+      className={cn("w-full max-w-sm rounded-2xl edge bg-card p-4", className)}
       {...props}
     >
       <Tabs

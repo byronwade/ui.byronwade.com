@@ -63,7 +63,7 @@ function DescriptionBox({
       data-slot="description-box"
       data-expanded={isExpanded}
       className={cn(
-        "rounded-xl bg-secondary/80 p-3 text-sm text-foreground transition-colors hover:bg-secondary",
+        "rounded-2xl bg-secondary/80 p-3 text-sm text-foreground transition-colors hover:bg-secondary",
         className,
       )}
       {...props}

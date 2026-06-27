@@ -21,7 +21,7 @@ type ShortsAuthor = {
 const shortsPlayerVariants = cva("relative aspect-[9/16] overflow-hidden bg-muted", {
   variants: {
     variant: {
-      default: "rounded-xl",
+      default: "rounded-2xl",
       preview: "rounded-lg",
       immersive: "rounded-none",
     },

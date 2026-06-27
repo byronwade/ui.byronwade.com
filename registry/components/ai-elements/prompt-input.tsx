@@ -861,7 +861,7 @@ export const PromptInput = ({
         <InputGroup
           className={cn(
             "overflow-hidden transition-[border-radius,box-shadow,background-color]",
-            density === "compact" && "rounded-xl",
+            density === "compact" && "rounded-2xl",
             density === "default" && "rounded-2xl",
             density === "comfortable" && "rounded-2xl",
             frame === "inset" && "bg-card ring-1 ring-border/60",

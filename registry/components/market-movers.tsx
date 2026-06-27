@@ -87,7 +87,7 @@ function MarketMovers({
   return (
     <div
       data-slot="market-movers"
-      className={cn("w-full max-w-md rounded-xl edge bg-card p-3", className)}
+      className={cn("w-full max-w-md rounded-2xl edge bg-card p-3", className)}
       {...props}
     >
       <Tabs value={tab} onValueChange={(value) => setTab(value as MarketMoversTab)}>

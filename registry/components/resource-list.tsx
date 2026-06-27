@@ -329,7 +329,7 @@ function ResourceList({
         className={cn(
           "flex flex-col text-card-foreground",
           frame === "inset"
-            ? "rounded-xl edge bg-muted/20 p-1.5 ring-1 ring-border/70"
+            ? "rounded-2xl edge bg-muted/20 p-1.5 ring-1 ring-border/70"
             : "rounded-lg edge bg-card",
           depth === "none" && "shadow-none",
           depth === "soft" && "depth-soft",

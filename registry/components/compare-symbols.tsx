@@ -41,7 +41,7 @@ function CompareSymbols({
     <div
       data-slot="compare-symbols"
       className={cn(
-        "flex flex-wrap items-center gap-2 rounded-xl edge bg-card px-3 py-2",
+        "flex flex-wrap items-center gap-2 rounded-2xl edge bg-card px-3 py-2",
         className,
       )}
       {...props}

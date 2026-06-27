@@ -52,7 +52,7 @@ const videoCardVariants = cva("group/video-card text-foreground", {
       default: "flex flex-col gap-3",
       compact: "flex flex-col gap-2",
       horizontal: "grid grid-cols-[minmax(9rem,42%)_1fr] gap-3",
-      overlay: "relative isolate overflow-hidden rounded-xl",
+      overlay: "relative isolate overflow-hidden rounded-2xl",
       featured: "grid gap-4 md:grid-cols-[minmax(18rem,56%)_1fr]",
     },
     size: {
@@ -262,7 +262,7 @@ function VideoCard({
       data-disabled={disabled || undefined}
       className={cn(
         videoCardVariants({ variant, size, density }),
-        selected && "rounded-xl ring-2 ring-ring ring-offset-2 ring-offset-background",
+        selected && "rounded-2xl ring-2 ring-ring ring-offset-2 ring-offset-background",
         disabled && "pointer-events-none opacity-60",
         className,
       )}

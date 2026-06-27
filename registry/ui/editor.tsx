@@ -778,7 +778,7 @@ export const EditorBubbleMenu = ({
   return (
     <BubbleMenu
       className={cn(
-        "flex rounded-xl edge bg-background p-0.5 edge",
+        "flex rounded-2xl edge bg-background p-0.5 edge",
         "[&>*:first-child]:rounded-l-lg",
         "[&>*:last-child]:rounded-r-lg",
         className,

@@ -33,7 +33,7 @@ function PriceAlert({
   return (
     <div
       data-slot="price-alert"
-      className={cn("w-full max-w-lg rounded-xl edge bg-card", className)}
+      className={cn("w-full max-w-lg rounded-2xl edge bg-card", className)}
       {...props}
     >
       <ul className="divide-y divide-border">

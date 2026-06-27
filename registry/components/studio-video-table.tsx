@@ -94,7 +94,7 @@ function StudioVideoTable({
   return (
     <div
       data-slot="studio-video-table"
-      className={cn("overflow-hidden rounded-xl edge", className)}
+      className={cn("overflow-hidden rounded-2xl edge", className)}
     >
       <div
         data-slot="studio-video-table-header"

@@ -65,7 +65,7 @@ function ConversationRow({
       data-slot="conversation-row"
       data-active={active || undefined}
       className={cn(
-        "group/row relative flex cursor-pointer items-center gap-3 rounded-xl px-2.5 py-2 transition-colors",
+        "group/row relative flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 transition-colors",
         active ? "bg-accent" : "hover:bg-accent/60",
         !unread && !active && "opacity-70",
       )}
@@ -208,7 +208,7 @@ export function ConversationList({ onSelect, className }: { onSelect?: (id: stri
   return (
     <div data-slot="conversation-list" className={cn("flex h-full min-h-0 flex-col gap-2 p-2", className)}>
       {/* search */}
-      <label className="flex h-9 items-center gap-2 rounded-xl bg-muted px-3 text-[13px] text-muted-foreground edge">
+      <label className="flex h-9 items-center gap-2 rounded-lg bg-muted px-3 text-[13px] text-muted-foreground edge">
         <MagnifyingGlass className="size-4 shrink-0" />
         <input
           value={query}
@@ -240,7 +240,7 @@ export function ConversationList({ onSelect, className }: { onSelect?: (id: stri
 
       {/* bulk bar */}
       {selectMode ? (
-        <div data-slot="bulk-bar" className="flex items-center gap-1 rounded-xl bg-accent px-2 py-1.5 text-[12px]">
+        <div data-slot="bulk-bar" className="flex items-center gap-1 rounded-lg bg-accent px-2 py-1.5 text-[12px]">
           <span className="font-medium">{selected.size} selected</span>
           <div className="ml-auto flex items-center gap-0.5">
             <BulkBtn label="Mark read" onClick={() => runBulk("read")}><Envelope className="size-3.5" /></BulkBtn>

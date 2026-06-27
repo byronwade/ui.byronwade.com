@@ -13,8 +13,8 @@ const miniPlayerVariants = cva(
   {
     variants: {
       variant: {
-        floating: "rounded-xl",
-        inline: "grid rounded-xl sm:grid-cols-[minmax(12rem,44%)_1fr]",
+        floating: "rounded-2xl",
+        inline: "grid rounded-2xl sm:grid-cols-[minmax(12rem,44%)_1fr]",
         dock: "rounded-lg",
       },
       size: {

@@ -394,7 +394,7 @@ function SegmentedRing({
           <div
             data-slot="activity-ring-tooltip"
             role="status"
-            className="pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-[calc(100%+6px)] whitespace-nowrap rounded-xl bg-foreground px-2.5 py-1 text-xs font-medium text-background edge"
+            className="pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-[calc(100%+6px)] whitespace-nowrap rounded-lg bg-foreground px-2.5 py-1 text-xs font-medium text-background edge"
           >
             <span className="inline-flex items-center gap-1.5">
               <StatusDot tone={activeArc.tone} />

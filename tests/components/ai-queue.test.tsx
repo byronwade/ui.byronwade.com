@@ -251,10 +251,10 @@ describe("Queue — base classes", () => {
     expect(cls).toContain("edge");
   });
 
-  it("uses radius-scale rounding (rounded-xl)", () => {
+  it("uses radius-scale rounding (rounded-2xl)", () => {
     const { container } = render(<Queue />);
     expect((container.firstChild as HTMLElement).className).toContain(
-      "rounded-xl"
+      "rounded-2xl"
     );
   });
 });

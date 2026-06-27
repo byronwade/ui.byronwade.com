@@ -97,7 +97,7 @@ export const CursorBody = ({
     <span
       data-slot="cursor-body"
       className={cn(
-        "relative ml-3.5 flex flex-col whitespace-nowrap rounded-xl py-1 pr-3 pl-2.5 text-xs",
+        "relative ml-3.5 flex flex-col whitespace-nowrap rounded-lg py-1 pr-3 pl-2.5 text-xs",
         Children.count(children) > 1 &&
           "rounded-tl [&>:first-child]:opacity-70",
         cursorBodyTone[tone],

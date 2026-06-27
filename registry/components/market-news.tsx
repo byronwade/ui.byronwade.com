@@ -29,7 +29,7 @@ const sentimentTone: Record<
 const marketNewsVariants = cva("w-full max-w-2xl overflow-hidden edge", {
   variants: {
     variant: {
-      default: "rounded-xl bg-card",
+      default: "rounded-2xl bg-card",
       feed: "rounded-lg bg-background",
       terminal: "rounded-lg bg-background font-mono",
     },

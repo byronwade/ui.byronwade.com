@@ -32,7 +32,7 @@ describe("DescriptionBox – smoke", () => {
       <DescriptionBox className="custom-class">body</DescriptionBox>,
     )
     expect(root(container)).toHaveClass("custom-class")
-    expect(root(container)).toHaveClass("rounded-xl")
+    expect(root(container)).toHaveClass("rounded-2xl")
   })
 
   it("forwards arbitrary props to the root element", () => {

@@ -150,7 +150,7 @@ describe("AudioPlayer — variants", () => {
 
   it.each([
     ["minimal", "rounded-lg"],
-    ["card", "rounded-xl"],
+    ["card", "rounded-2xl"],
   ] as const)("applies the %s variant class", (variant, expected) => {
     const { container } = render(<FullPlayer variant={variant} />)
     const el = root(container)

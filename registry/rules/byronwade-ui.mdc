@@ -242,10 +242,12 @@ the matching row below; do not invent a new radius, surface, height, or hover tr
 | Cards, panels, popovers, dropdowns, hover-cards, tooltips, command panels      | `rounded-2xl`   |
 | Large hero / modal (dialog) / sheet / floating shells                          | `rounded-3xl`   |
 
-`rounded-md`, `rounded-sm`, and `rounded-xl` are **not** part of the standard control vocabulary —
-the only sanctioned `rounded-md` is the internal squaring of children inside a `button-group`
-(`in-data-[slot=button-group]:rounded-md`). Media/thumbnails inside a card square to the card's
-inner radius. Do not introduce other ad-hoc radii.
+`rounded-md` and `rounded-xl` are **not** part of the standard control vocabulary — the only
+sanctioned `rounded-md` is the internal squaring of children inside a `button-group`
+(`in-data-[slot=button-group]:rounded-md`), and `rounded-xl` only as a framed card's inner
+step-down (a `rounded-2xl` frame insetting a child card). `rounded-sm` is reserved for **sub-atomic
+details** — `kbd` keycaps, dense data/chart cells, citation markers — never for a control surface.
+Media/thumbnails inside a card square to the card's inner radius. Do not introduce other ad-hoc radii.
 
 **Surface — one token per role:**
 

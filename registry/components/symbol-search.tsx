@@ -58,7 +58,7 @@ function SymbolSearch({
   return (
     <div
       data-slot="symbol-search"
-      className={cn("w-full max-w-md overflow-hidden rounded-xl edge bg-popover", className)}
+      className={cn("w-full max-w-md overflow-hidden rounded-2xl edge bg-popover", className)}
       {...props}
     >
       <Command>

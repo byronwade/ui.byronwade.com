@@ -28,7 +28,7 @@ function PositionCard({
     <div
       data-slot="position-card"
       className={cn(
-        "flex w-full max-w-sm flex-col gap-4 rounded-xl edge bg-card p-4",
+        "flex w-full max-w-sm flex-col gap-4 rounded-2xl edge bg-card p-4",
         className,
       )}
       {...props}

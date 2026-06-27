@@ -326,7 +326,7 @@ export const Queue = ({ className, ...props }: QueueProps) => (
   <div
     data-slot="queue"
     className={cn(
-      "flex flex-col gap-2 rounded-xl edge bg-background px-3 pt-2 pb-2 ",
+      "flex flex-col gap-2 rounded-2xl edge bg-background px-3 pt-2 pb-2 ",
       className
     )}
     {...props}

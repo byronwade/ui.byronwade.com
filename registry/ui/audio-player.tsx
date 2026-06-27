@@ -45,7 +45,7 @@ const audioPlayerVariants = cva(
       variant: {
         default: "rounded-lg edge bg-card",
         minimal: "rounded-lg edge bg-transparent",
-        card: "flex items-center gap-3 rounded-xl edge bg-background p-2",
+        card: "flex items-center gap-3 rounded-2xl edge bg-background p-2",
       },
     },
     defaultVariants: { variant: "default" },

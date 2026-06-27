@@ -105,10 +105,10 @@ const videoPlayerVariants = cva(
         default: "rounded-lg edge",
         minimal: "rounded-lg edge",
         theater:
-          "mx-auto w-full max-w-4xl rounded-xl edge bg-background [&_media-control-bar]:px-2 [&_media-control-bar]:py-1",
+          "mx-auto w-full max-w-4xl rounded-2xl edge bg-background [&_media-control-bar]:px-2 [&_media-control-bar]:py-1",
         poster: "rounded-lg edge",
         youtube:
-          "rounded-xl bg-background [&_video]:bg-background [&_video]:object-contain [&_[data-slot$=-button]]:rounded-full [&_[data-slot$=-button]]:p-2 [&_[data-slot$=-button]]:transition-colors [&_[data-slot$=-button]]:hover:bg-foreground/10 [&_[data-slot=video-player-volume-range]]:max-w-24 [&_[data-slot=video-player-time-range]]:px-0 [&_[data-slot=video-player-time-range]]:py-1.5",
+          "rounded-2xl bg-background [&_video]:bg-background [&_video]:object-contain [&_[data-slot$=-button]]:rounded-full [&_[data-slot$=-button]]:p-2 [&_[data-slot$=-button]]:transition-colors [&_[data-slot$=-button]]:hover:bg-foreground/10 [&_[data-slot=video-player-volume-range]]:max-w-24 [&_[data-slot=video-player-time-range]]:px-0 [&_[data-slot=video-player-time-range]]:py-1.5",
       },
     },
     defaultVariants: {

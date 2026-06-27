@@ -554,7 +554,7 @@ function DataTable<Row>({
       data-frame={frame}
       data-depth={depth}
       className={cn(
-        "relative flex w-full flex-col overflow-hidden rounded-xl text-card-foreground shadow-none",
+        "relative flex w-full flex-col overflow-hidden rounded-2xl text-card-foreground shadow-none",
         frame === "inset"
           ? "edge bg-muted/20 p-1.5 ring-1 ring-border/70"
           : "edge bg-card",

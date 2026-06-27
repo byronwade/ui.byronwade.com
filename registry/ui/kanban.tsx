@@ -84,7 +84,7 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
     <div
       data-slot="kanban-board"
       className={cn(
-        "flex size-full min-h-40 flex-col divide-y divide-edge overflow-hidden rounded-xl edge bg-secondary text-xs edge ring-2 transition-all",
+        "flex size-full min-h-40 flex-col divide-y divide-edge overflow-hidden rounded-2xl edge bg-secondary text-xs edge ring-2 transition-all",
         isOver ? "ring-ring" : "ring-transparent",
         className,
       )}
