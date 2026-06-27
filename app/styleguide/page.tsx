@@ -227,11 +227,12 @@ export default function StyleguidePage() {
                 <Specimen name="Design engineer principles" plain>
                   <div className="space-y-4">
                     <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                      Adapted from Vercel&apos;s Design Engineer Principles for this
-                      registry: bias toward usefulness, own outcomes end-to-end (every
-                      state and edge case), find the binding constraint before you ship,
-                      design for the full audience, ship craft not volume, and raise the
-                      team&apos;s floor through registry patterns, lint, and examples.
+                      Adapted from Vercel&apos;s Design Engineer Principles for
+                      this registry: bias toward usefulness, own outcomes
+                      end-to-end (every state and edge case), find the binding
+                      constraint before you ship, design for the full audience,
+                      ship craft not volume, and raise the team&apos;s floor
+                      through registry patterns, lint, and examples.
                     </p>
                     <ul className="grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
                       {[
