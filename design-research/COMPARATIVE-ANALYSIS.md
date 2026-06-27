@@ -44,6 +44,7 @@ Every mature system in the set uses tokens or token-like constants:
 | Vercel       | `--ds-*`, `--geist-*`, typography classes, material classes.                      |
 | Linear       | Internal CSS variables for color, type, radius, shadow, easing, editor surfaces.  |
 | ChatGPT      | Apps SDK UI CSS variables across primitive, semantic, and component token layers. |
+| Cloudflare   | Auto-generated CSS custom properties (Kumo), semantic-only, lint-enforced.        |
 | byronwade/ui | `foundation` registry item, Tailwind v4 token utilities, shipped AI rule.         |
 
 **Why they do it:** tokens decouple design decisions from component code. They let a system enforce
@@ -67,6 +68,7 @@ The strongest systems use color for intent:
 | Vercel       | Mostly monochrome; blue is focus/link/active utility.                       |
 | Linear       | Mostly dark neutrals; indigo is action/focus/selection.                     |
 | ChatGPT      | Neutral host UI; user accent is separate from semantic app status colors.   |
+| Cloudflare   | Orange is brand identity; blue is product action; rest is oklch neutral.    |
 | byronwade/ui | One `--brand`; fixed semantic chart and agent-activity exceptions.          |
 
 **Why they do it:** decorative color creates ambiguity. Mature systems reserve color for action,
@@ -88,6 +90,7 @@ meaning. Avoid adding arbitrary tag palettes unless the semantic domain requires
 | Vercel       | Geist Sans/Mono/Pixel; developer-brand precision.                    |
 | Linear       | Inter Variable + Berkeley Mono + tuned variable weights.             |
 | ChatGPT      | OpenAI Sans for brand; system sans/mono in Apps SDK UI.              |
+| Cloudflare   | Proprietary brand wordmark; Inter/system + mono for product UI.      |
 | byronwade/ui | Editorial lane split: sans UI, mono data, serif prose.               |
 
 **Why they do it:** typeface choice encodes product posture. Developer systems use mono heavily.
@@ -102,14 +105,15 @@ legibility discipline without changing fonts everywhere.
 
 Systems built for repeated operational work are dense:
 
-| Dense work UI | Why                                                          |
-| ------------- | ------------------------------------------------------------ |
-| Linear        | Users triage many issues/projects quickly.                   |
-| Atlassian     | Teams scan boards, issues, comments, and admin states.       |
-| Shopify       | Merchants operate orders, inventory, products, and settings. |
-| Fluent 2      | Microsoft apps carry forms, tables, commands, collaboration. |
-| Twenty        | CRM records need table density and colorful data tags.       |
-| ChatGPT apps  | Embedded app cards must fit inside a conversational thread.  |
+| Dense work UI | Why                                                                |
+| ------------- | ------------------------------------------------------------------ |
+| Linear        | Users triage many issues/projects quickly.                         |
+| Atlassian     | Teams scan boards, issues, comments, and admin states.             |
+| Shopify       | Merchants operate orders, inventory, products, and settings.       |
+| Fluent 2      | Microsoft apps carry forms, tables, commands, collaboration.       |
+| Twenty        | CRM records need table density and colorful data tags.             |
+| ChatGPT apps  | Embedded app cards must fit inside a conversational thread.        |
+| Cloudflare    | Operators scan zones, DNS records, security events, and analytics. |
 
 Marketing/editorial surfaces are more spacious:
 
@@ -124,17 +128,18 @@ scan-friendly; long-form docs/marketing should use reading lanes and larger layo
 
 ### 1.5 AI works best when it inherits the product model
 
-| System       | AI treatment                                                              |
-| ------------ | ------------------------------------------------------------------------- |
-| Cursor       | Agent activity has semantic visual states: thinking/search/read/edit.     |
-| Shopify      | Magic/AI color is semantic automation, not generic purple decoration.     |
-| Atlassian    | Rovo/AI sits inside teamwork/productivity patterns.                       |
-| Fluent 2     | Copilot belongs inside neutral Microsoft productivity surfaces.           |
-| Vercel       | v0/AI SDK surfaces stay code-preview-deploy oriented.                     |
-| Linear       | Agents operate on issues/projects/comments in the existing product model. |
-| Twenty       | AI sits over CRM records/tables/workflow, not a separate visual language. |
-| ChatGPT      | Apps, tools, and generated UI stay subordinate to the conversation host.  |
-| byronwade/ui | Agent activity pastels are fixed semantic tokens for agent composites.    |
+| System       | AI treatment                                                                      |
+| ------------ | --------------------------------------------------------------------------------- |
+| Cursor       | Agent activity has semantic visual states: thinking/search/read/edit.             |
+| Shopify      | Magic/AI color is semantic automation, not generic purple decoration.             |
+| Atlassian    | Rovo/AI sits inside teamwork/productivity patterns.                               |
+| Fluent 2     | Copilot belongs inside neutral Microsoft productivity surfaces.                   |
+| Vercel       | v0/AI SDK surfaces stay code-preview-deploy oriented.                             |
+| Linear       | Agents operate on issues/projects/comments in the existing product model.         |
+| Twenty       | AI sits over CRM records/tables/workflow, not a separate visual language.         |
+| ChatGPT      | Apps, tools, and generated UI stay subordinate to the conversation host.          |
+| Cloudflare   | AI products render as ordinary infra objects; Kumo ships an AI-readable registry. |
+| byronwade/ui | Agent activity pastels are fixed semantic tokens for agent composites.            |
 
 **Why they do it:** AI that floats outside the product model becomes ornamental. AI that attaches to
 existing objects becomes accountable and useful.
@@ -292,6 +297,33 @@ assets, or hidden provenance between assistant output and third-party app UI.
 
 ---
 
+### 2.9 Cloudflare / Kumo
+
+| Dimension | Cloudflare                                        | byronwade/ui implication                                             |
+| --------- | ------------------------------------------------- | -------------------------------------------------------------------- |
+| Mood      | Trust-infrastructure pragmatism.                  | Strong reference for dense, operational dashboard surfaces.          |
+| Accent    | Two fixed accents: orange identity + blue action. | Validates accent scarcity; contrast to our single re-skin `--brand`. |
+| Stack     | Base UI + Phosphor + `cn()` + token-only.         | Near-identical to our primitive/icon/merge/token contract.           |
+| Theming   | `light-dark()` + `data-mode`/`data-theme` slots.  | Borrow single-declaration theming; `fedramp` slot ≈ our re-skin.     |
+| Depth     | `shadow-edge` hairline + low-alpha drop.          | Reinforces our flat `edge` hairline depth model.                     |
+| AI        | AI-readable registry + `AGENTS.md` + zod schemas. | Directly parallels our shipped `design-rules` item.                  |
+
+**Why Cloudflare does it:** it is a security/infrastructure company whose product is trust. The UI
+must read as reliable, accessible, and legible across a vast product surface, while the brand stays
+instantly recognizable. Splitting orange (identity) from blue (action) lets the brand stay loud
+without making the operational UI loud.
+
+**What to borrow:** `light-dark()` single-declaration theming, the named surface hierarchy
+(`canvas`/`base`/`elevated`/`recessed`), the machine-readable component registry for agents, and the
+"off-black, not pure black" dark-surface choice. Kumo is also live validation that our exact stack
+(Base UI + Phosphor + `cn()` + lint-enforced semantic tokens) is a sound, production-grade foundation.
+
+**What not to borrow:** the two-accent split (it would break our single-`--brand` re-skin contract),
+the literal orange/blue hex values, and the "inherit the platform font" stance — we treat typography
+as a deliberate lane decision, not a platform default.
+
+---
+
 ## 3. Similarities That Should Become byronwade/ui Principles
 
 These are already present or should be reinforced:
@@ -359,22 +391,24 @@ byronwade/ui should remain distinct in these ways:
 - Do not copy Fluent's broad enterprise scope unless a component needs it.
 - Do not copy Atlassian's governance complexity without matching scale.
 - Do not copy ChatGPT's host UI into operational components that need tables, panes, and dense lists.
+- Do not copy Cloudflare's two-accent split (orange identity + blue action); it breaks single-`--brand`.
 - Do not replace `--brand` with fixed external brand colors.
 
 ---
 
 ## 6. Research Coverage Matrix
 
-| System    | Brand | Tokens | Color | Type | Layout | Depth | Motion | Components | Accessibility | Implementation | AI/current layer | byronwade comparison |
-| --------- | ----- | ------ | ----- | ---- | ------ | ----- | ------ | ---------- | ------------- | -------------- | ---------------- | -------------------- |
-| Cursor    | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | Yes                  |
-| Twenty    | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | Yes                  |
-| Shopify   | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
-| Atlassian | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
-| Fluent 2  | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
-| Vercel    | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
-| Linear    | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
-| ChatGPT   | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
+| System     | Brand | Tokens | Color | Type | Layout | Depth | Motion | Components | Accessibility | Implementation | AI/current layer | byronwade comparison |
+| ---------- | ----- | ------ | ----- | ---- | ------ | ----- | ------ | ---------- | ------------- | -------------- | ---------------- | -------------------- |
+| Cursor     | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | Yes                  |
+| Twenty     | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | Yes                  |
+| Shopify    | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
+| Atlassian  | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
+| Fluent 2   | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
+| Vercel     | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
+| Linear     | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
+| ChatGPT    | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In this doc          |
+| Cloudflare | Yes   | Yes    | Yes   | Yes  | Yes    | Yes   | Yes    | Yes        | Yes           | Yes            | Yes              | In paper + this doc  |
 
 The comparison column is handled centrally here so the individual research papers can remain focused
 on source capture and teardown detail.

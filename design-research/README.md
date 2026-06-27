@@ -7,17 +7,18 @@ is in [`AGENTS.md`](../AGENTS.md#design-engineer-principles--how-we-work) and on
 
 ## Files
 
-| File                                                       | Subject                 | Research basis                               | Coverage status      |
-| ---------------------------------------------------------- | ----------------------- | -------------------------------------------- | -------------------- |
-| [`ATLASSIAN-DESIGN-SYSTEM.md`](ATLASSIAN-DESIGN-SYSTEM.md) | Atlassian Design System | Official ADS docs + Atlaskit npm artifacts   | Complete             |
-| [`CHATGPT-DESIGN-SYSTEM.md`](CHATGPT-DESIGN-SYSTEM.md)     | ChatGPT / Apps SDK UI   | OpenAI docs + Apps SDK UI package artifacts  | Complete             |
-| [`CURSOR-DESIGN-SYSTEM.md`](CURSOR-DESIGN-SYSTEM.md)       | Cursor                  | Live site inspection + brand/editor research | Complete, normalized |
-| [`FLUENT2-DESIGN-SYSTEM.md`](FLUENT2-DESIGN-SYSTEM.md)     | Microsoft Fluent 2      | Fluent docs + Fluent UI npm artifacts        | Complete             |
-| [`LINEAR-DESIGN-SYSTEM.md`](LINEAR-DESIGN-SYSTEM.md)       | Linear                  | Brand/docs + live CSS + SDK metadata         | Complete             |
-| [`SHOPIFY-DESIGN-SYSTEM.md`](SHOPIFY-DESIGN-SYSTEM.md)     | Shopify Polaris         | Polaris docs + package artifacts             | Complete             |
-| [`TWENTY-DESIGN-SYSTEM.md`](TWENTY-DESIGN-SYSTEM.md)       | Twenty                  | Source-code inspection of Twenty repo        | Complete, normalized |
-| [`VERCEL-DESIGN-SYSTEM.md`](VERCEL-DESIGN-SYSTEM.md)       | Vercel / Geist          | Geist docs + live CSS + Geist font package   | Complete             |
-| [`COMPARATIVE-ANALYSIS.md`](COMPARATIVE-ANALYSIS.md)       | Cross-system comparison | All papers + byronwade/ui rules              | Complete             |
+| File                                                         | Subject                 | Research basis                                      | Coverage status      |
+| ------------------------------------------------------------ | ----------------------- | --------------------------------------------------- | -------------------- |
+| [`ATLASSIAN-DESIGN-SYSTEM.md`](ATLASSIAN-DESIGN-SYSTEM.md)   | Atlassian Design System | Official ADS docs + Atlaskit npm artifacts          | Complete             |
+| [`CHATGPT-DESIGN-SYSTEM.md`](CHATGPT-DESIGN-SYSTEM.md)       | ChatGPT / Apps SDK UI   | OpenAI docs + Apps SDK UI package artifacts         | Complete             |
+| [`CLOUDFLARE-DESIGN-SYSTEM.md`](CLOUDFLARE-DESIGN-SYSTEM.md) | Cloudflare / Kumo       | Live `@cloudflare/kumo` source + cf-ui + brand/blog | Complete             |
+| [`CURSOR-DESIGN-SYSTEM.md`](CURSOR-DESIGN-SYSTEM.md)         | Cursor                  | Live site inspection + brand/editor research        | Complete, normalized |
+| [`FLUENT2-DESIGN-SYSTEM.md`](FLUENT2-DESIGN-SYSTEM.md)       | Microsoft Fluent 2      | Fluent docs + Fluent UI npm artifacts               | Complete             |
+| [`LINEAR-DESIGN-SYSTEM.md`](LINEAR-DESIGN-SYSTEM.md)         | Linear                  | Brand/docs + live CSS + SDK metadata                | Complete             |
+| [`SHOPIFY-DESIGN-SYSTEM.md`](SHOPIFY-DESIGN-SYSTEM.md)       | Shopify Polaris         | Polaris docs + package artifacts                    | Complete             |
+| [`TWENTY-DESIGN-SYSTEM.md`](TWENTY-DESIGN-SYSTEM.md)         | Twenty                  | Source-code inspection of Twenty repo               | Complete, normalized |
+| [`VERCEL-DESIGN-SYSTEM.md`](VERCEL-DESIGN-SYSTEM.md)         | Vercel / Geist          | Geist docs + live CSS + Geist font package          | Complete             |
+| [`COMPARATIVE-ANALYSIS.md`](COMPARATIVE-ANALYSIS.md)         | Cross-system comparison | All papers + byronwade/ui rules                     | Complete             |
 
 ## Coverage Standard
 
@@ -51,7 +52,8 @@ paper covers the same core questions:
   source, AI/current-layer, and replication sections.
 - Line counts vary because the systems expose different evidence. Fluent, Vercel, and Atlassian have
   broad public docs/package artifacts; Cursor and Linear require more live-site inference; Twenty
-  has source-code evidence; Shopify has broad but highly product-specific Polaris evidence.
+  and Cloudflare have direct source-code evidence (Twenty's repo; Cloudflare's live `@cloudflare/kumo`
+  token source); Shopify has broad but highly product-specific Polaris evidence.
 
 ## Reading Order
 
