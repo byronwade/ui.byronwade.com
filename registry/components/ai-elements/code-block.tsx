@@ -16,7 +16,7 @@ import {
 import { type BundledLanguage, codeToHtml, type ShikiTransformer } from "shiki";
 
 const codeBlockVariants = cva(
-  "group/code-block relative w-full overflow-hidden rounded-lg bg-card text-card-foreground edge",
+  "group/code-block relative w-full overflow-hidden rounded-2xl bg-card text-card-foreground edge",
   {
     variants: {},
     defaultVariants: {},

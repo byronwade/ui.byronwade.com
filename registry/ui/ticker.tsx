@@ -27,7 +27,7 @@ const tickerVariant: Record<TickerVariant, string> = {
   bare: "",
   soft: "rounded-full bg-muted px-3 py-1.5",
   outline: "rounded-full edge px-3 py-1.5",
-  card: "rounded-lg edge bg-card px-3 py-2",
+  card: "rounded-2xl edge bg-card px-3 py-2",
 }
 
 // Icon diameter + label text scale together; `default` matches the original.

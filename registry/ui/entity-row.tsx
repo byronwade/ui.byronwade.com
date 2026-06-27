@@ -11,7 +11,7 @@ const entityRowVariants = cva(
     variants: {
       variant: {
         default: "rounded-lg px-3 py-2.5",
-        card: "rounded-lg edge bg-card px-3 py-3 text-card-foreground",
+        card: "rounded-2xl edge bg-card px-3 py-3 text-card-foreground",
         compact: "gap-2 rounded-lg px-2 py-1.5",
       },
     },

@@ -184,10 +184,10 @@ describe("Tool — data-slot attributes", () => {
 // ---------------------------------------------------------------------------
 
 describe("Tool — base classes", () => {
-  it("has rounded-lg class", () => {
+  it("has rounded-2xl class", () => {
     const { container } = render(<Tool />);
     expect((container.firstChild as HTMLElement).className).toContain(
-      "rounded-lg"
+      "rounded-2xl"
     );
   });
 
@@ -588,7 +588,7 @@ describe("Tool family — className forwarding & merge", () => {
     const { container } = render(<Tool className="my-tool" />);
     const cls = (container.firstChild as HTMLElement).className;
     expect(cls).toContain("my-tool");
-    expect(cls).toContain("rounded-lg");
+    expect(cls).toContain("rounded-2xl");
     expect(cls).toContain("bg-card");
   });
 

@@ -209,10 +209,10 @@ describe("CodeBlock — design tokens", () => {
     expect(cls).toContain("text-card-foreground");
   });
 
-  it("uses a radius from the scale (rounded-lg) and clips overflow", () => {
+  it("uses a radius from the scale (rounded-2xl) and clips overflow", () => {
     const { container } = render(<CodeBlock code={SAMPLE} language="ts" />);
     const cls = (container.firstChild as HTMLElement).className;
-    expect(cls).toContain("rounded-lg");
+    expect(cls).toContain("rounded-2xl");
     expect(cls).toContain("overflow-hidden");
   });
 

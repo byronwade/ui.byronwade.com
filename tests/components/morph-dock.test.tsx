@@ -494,7 +494,7 @@ describe("MorphDock", () => {
         action={{ label: "Go", icon: MagnifyingGlass }}
       />,
     );
-    expect(document.querySelector('[data-slot="morph-dock-tools"]')).toHaveClass("rounded-xl");
+    expect(document.querySelector('[data-slot="morph-dock-tools"]')).toHaveClass("rounded-2xl");
   });
 
   it("anchors the cross-axis to the start for vertical placements", () => {

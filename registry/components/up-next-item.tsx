@@ -152,7 +152,7 @@ function UpNextItem({
           data-slot="up-next-item-title"
           className={cn(
             "line-clamp-2 text-sm font-medium leading-snug",
-            active ? "text-brand" : "text-foreground group-hover/up-next:text-brand",
+            active ? "text-brand" : "text-foreground",
           )}
         >
           {title}

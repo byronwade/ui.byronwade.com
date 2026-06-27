@@ -70,7 +70,7 @@ function OrderSummary({
     <div
       data-slot="order-summary"
       className={cn(
-        "flex flex-col gap-4 rounded-lg edge bg-card p-4",
+        "flex flex-col gap-4 rounded-2xl edge bg-card p-4",
         className,
       )}
       {...props}

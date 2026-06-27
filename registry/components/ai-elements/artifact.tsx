@@ -18,7 +18,7 @@ export const Artifact = ({ className, ...props }: ArtifactProps) => (
   <div
     data-slot="artifact"
     className={cn(
-      "flex flex-col overflow-hidden rounded-lg bg-card text-card-foreground edge",
+      "flex flex-col overflow-hidden rounded-2xl bg-card text-card-foreground edge",
       className
     )}
     {...props}

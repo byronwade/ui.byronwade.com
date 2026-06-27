@@ -20,7 +20,7 @@ export const Tool = ({ className, ...props }: ToolProps) => (
     data-slot="tool"
     data-provenance="tool"
     className={cn(
-      "not-prose mb-4 w-full overflow-hidden rounded-lg bg-card text-card-foreground edge",
+      "not-prose mb-4 w-full overflow-hidden rounded-2xl bg-card text-card-foreground edge",
       className
     )}
     {...props}

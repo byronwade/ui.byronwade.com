@@ -772,7 +772,7 @@ export function MorphDock({
               t.tool,
               !cluster && !action
                 ? "-mr-[3px] rounded-r-full pr-[7px]"
-                : "rounded-xl",
+                : "rounded-2xl",
             )}
           >
             {tools.map((a, i) => {

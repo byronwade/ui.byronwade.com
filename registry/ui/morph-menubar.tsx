@@ -59,7 +59,7 @@ export function MorphMenubar({
             )
           }}
           className={cn(
-            "rounded px-2.5 py-1 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
+            "rounded-lg px-2.5 py-1 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
             open && active?.id === menu.id
               ? "bg-muted text-foreground"
               : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -90,7 +90,7 @@ export function MorphMenubar({
               role="menu"
               aria-label={activeMenu.label}
               style={{ left: active!.left, top: BAR_H }}
-              className="absolute min-w-40 rounded-lg bg-popover p-1 text-popover-foreground edge"
+              className="absolute min-w-40 rounded-2xl bg-popover p-1 text-popover-foreground edge"
             >
               {activeMenu.items.map((mi) => (
                 <button

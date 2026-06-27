@@ -35,7 +35,7 @@ export function PlaylistCard({
     <div
       data-slot="playlist-card"
       className={cn(
-        "group/playlist-card flex w-full max-w-56 flex-col gap-3 rounded-lg bg-card p-3 transition-colors hover:bg-accent",
+        "group/playlist-card flex w-full max-w-56 flex-col gap-3 rounded-2xl bg-card p-3 transition-colors hover:bg-accent",
         className,
       )}
       {...props}

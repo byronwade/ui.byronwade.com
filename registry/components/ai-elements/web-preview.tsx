@@ -68,7 +68,7 @@ export const WebPreview = ({
       <div
         data-slot="web-preview"
         className={cn(
-          "flex size-full flex-col overflow-hidden rounded-lg bg-card edge",
+          "flex size-full flex-col overflow-hidden rounded-2xl bg-card edge",
           className
         )}
         {...props}

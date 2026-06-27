@@ -167,10 +167,10 @@ describe("Artifact — base classes (Design DNA)", () => {
     );
   });
 
-  it("has rounded-lg (radius scale)", () => {
+  it("has rounded-2xl (radius scale)", () => {
     const { container } = render(<Artifact />);
     expect((container.firstChild as HTMLElement).className).toContain(
-      "rounded-lg"
+      "rounded-2xl"
     );
   });
 

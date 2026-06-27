@@ -169,7 +169,7 @@ describe("WebPreview — root surface styling", () => {
     expect(cls).toContain("edge");
     expect(cls).toContain("bg-card");
     expect(cls).toContain("overflow-hidden");
-    expect(cls).toContain("rounded-lg");
+    expect(cls).toContain("rounded-2xl");
   });
 
   it("forwards custom className while keeping base classes", () => {

@@ -222,7 +222,7 @@ function TagInput({
         <ul
           data-slot="tag-input-suggestions"
           role="listbox"
-          className="absolute z-50 mt-1 flex max-h-56 w-full flex-col gap-0.5 overflow-y-auto rounded-lg bg-popover p-1 text-sm text-popover-foreground edge"
+          className="absolute z-50 mt-1 flex max-h-56 w-full flex-col gap-0.5 overflow-y-auto rounded-2xl bg-popover p-1 text-sm text-popover-foreground edge"
         >
           {matches.map((match, index) => (
             <li

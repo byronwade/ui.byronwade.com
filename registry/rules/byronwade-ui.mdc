@@ -238,8 +238,8 @@ the matching row below; do not invent a new radius, surface, height, or hover tr
 | ------------------------------------------------------------------------------ | --------------- |
 | Indicators (status dots, switch thumbs, avatars, dot/ping)                     | `rounded-full`  |
 | Buttons, badges, pills, tabs, toggles, segmented-control items, filter pills   | `rounded-full`  |
-| Inputs, selects, textareas, menu rows, command/list rows, combobox items       | `rounded-lg`    |
-| Cards, panels, popovers, dropdowns, hover-cards, tooltips, command panels      | `rounded-2xl`   |
+| Inputs, selects, textareas, menu rows, command/list rows, combobox items, tooltips | `rounded-lg` |
+| Cards, panels, popovers, dropdowns, hover-cards, command panels                 | `rounded-2xl`   |
 | Large hero / modal (dialog) / sheet / floating shells                          | `rounded-3xl`   |
 
 `rounded-md` and `rounded-xl` are **not** part of the standard control vocabulary — the only

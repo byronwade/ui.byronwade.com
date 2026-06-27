@@ -5,7 +5,7 @@ const tableContainerVariants = cva("relative w-full overflow-x-auto", {
     layout: {
       default: "",
       "sticky-header": "",
-      card: "rounded-lg edge bg-card text-card-foreground",
+      card: "rounded-2xl edge bg-card text-card-foreground",
     },
   },
   defaultVariants: {

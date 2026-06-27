@@ -56,7 +56,7 @@ describe("Ticker — variant (style)", () => {
       </Ticker>,
     );
     expect(ticker()).toHaveClass("bg-card");
-    expect(ticker()).toHaveClass("rounded-lg");
+    expect(ticker()).toHaveClass("rounded-2xl");
     expect(ticker()).toHaveClass("edge");
   });
 });
