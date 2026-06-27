@@ -149,7 +149,7 @@ describe("VideoPlayer — variants", () => {
   });
 
   it.each([
-    ["minimal", "rounded-md"],
+    ["minimal", "rounded-lg"],
     ["theater", "max-w-4xl"],
     ["poster", "rounded-lg"],
   ] as const)("applies the %s variant class", (variant, expected) => {

@@ -180,7 +180,7 @@ describe("ResourceList – default render", () => {
       "min-h-9",
       "px-2",
       "py-1.5",
-      "rounded-md",
+      "rounded-lg",
     )
     expect(
       container.querySelector("[data-slot='resource-item-media']"),

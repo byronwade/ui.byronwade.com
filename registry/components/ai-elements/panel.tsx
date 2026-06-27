@@ -9,7 +9,7 @@ export type PanelProps = ComponentProps<typeof PanelPrimitive>;
 export const Panel = ({ className, ...props }: PanelProps) => (
   <PanelPrimitive
     className={cn(
-      "edge m-4 overflow-hidden rounded-md bg-card p-1 text-card-foreground",
+      "edge m-4 overflow-hidden rounded-lg bg-card p-1 text-card-foreground",
       className
     )}
     data-slot="panel"

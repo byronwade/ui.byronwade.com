@@ -11,7 +11,7 @@ import { CaretDown, MagnifyingGlass } from "@/lib/icons"
 import type { ComponentProps } from "react";
 
 const taskItemFileVariants = cva(
-  "inline-flex items-center gap-1 rounded-md edge px-1.5 py-0.5 text-xs",
+  "inline-flex items-center gap-1 rounded-lg edge px-1.5 py-0.5 text-xs",
   {
     variants: {
       variant: {

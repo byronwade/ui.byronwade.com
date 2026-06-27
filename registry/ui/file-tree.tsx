@@ -393,7 +393,7 @@ const TreeIndicator = React.forwardRef<
       ref={ref}
       data-slot="file-tree-indicator"
       className={cn(
-        "absolute left-1.5 h-full w-px rounded-md bg-muted py-3 duration-300 ease-in-out hover:bg-muted-foreground/40 rtl:right-1.5",
+        "absolute left-1.5 h-full w-px rounded-lg bg-muted py-3 duration-300 ease-in-out hover:bg-muted-foreground/40 rtl:right-1.5",
         className,
       )}
       {...props}
@@ -404,7 +404,7 @@ TreeIndicator.displayName = "TreeIndicator"
 
 // Row treatment shared by File + Folder triggers. `panel` rows become
 // full-width selectable rows; `minimal` keeps today's tighter look.
-const rowVariants = cva("flex items-center gap-1 rounded-md text-sm", {
+const rowVariants = cva("flex items-center gap-1 rounded-lg text-sm", {
   variants: {
     variant: {
       minimal: "",

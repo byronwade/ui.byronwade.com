@@ -95,7 +95,7 @@ function ResourceItem({
         data-slot="resource-item-link"
         href={href}
         aria-label={label}
-        className="absolute inset-0 rounded-md focus-visible:ring-2 focus-visible:ring-ring outline-none"
+        className="absolute inset-0 rounded-lg focus-visible:ring-2 focus-visible:ring-ring outline-none"
         onClick={activate}
       />
     ) : (
@@ -103,7 +103,7 @@ function ResourceItem({
         type="button"
         data-slot="resource-item-link"
         aria-label={label}
-        className="absolute inset-0 rounded-md focus-visible:ring-2 focus-visible:ring-ring outline-none"
+        className="absolute inset-0 rounded-lg focus-visible:ring-2 focus-visible:ring-ring outline-none"
         onClick={activate}
       />
     )
@@ -127,7 +127,7 @@ function ResourceItem({
           <span
             data-slot="resource-item-media"
             className={cn(
-              "relative z-10 flex shrink-0 items-center justify-center overflow-hidden rounded-md [&>*]:size-full",
+              "relative z-10 flex shrink-0 items-center justify-center overflow-hidden rounded-lg [&>*]:size-full",
               density === "compact" && "size-7",
               density === "default" && "size-8",
               density === "comfortable" && "size-10",
@@ -149,7 +149,7 @@ function ResourceItem({
         density === "compact" && "min-h-9 px-2 py-1.5",
         density === "default" && "min-h-11",
         density === "comfortable" && "min-h-14 px-3.5 py-3",
-        frame === "inset" && "rounded-md",
+        frame === "inset" && "rounded-lg",
         interactive && "hover:bg-muted/50",
         isSelected && "bg-brand/5",
         className,

@@ -47,9 +47,9 @@ describe("Skeleton – base classes", () => {
     expect(container.firstChild).toHaveClass("animate-pulse");
   });
 
-  it("has rounded-md class", () => {
+  it("has rounded-lg class", () => {
     const { container } = render(<Skeleton />);
-    expect(container.firstChild).toHaveClass("rounded-md");
+    expect(container.firstChild).toHaveClass("rounded-lg");
   });
 
   it("has bg-muted class", () => {
@@ -61,7 +61,7 @@ describe("Skeleton – base classes", () => {
     const { container } = render(<Skeleton />);
     const el = container.firstChild as HTMLElement;
     expect(el.className).toContain("animate-pulse");
-    expect(el.className).toContain("rounded-md");
+    expect(el.className).toContain("rounded-lg");
     expect(el.className).toContain("bg-muted");
   });
 });
@@ -98,9 +98,9 @@ describe("Skeleton – className prop", () => {
     expect(container.firstChild).toHaveClass("animate-pulse");
   });
 
-  it("custom className does not remove rounded-md base class", () => {
+  it("custom className does not remove rounded-lg base class", () => {
     const { container } = render(<Skeleton className="w-full" />);
-    expect(container.firstChild).toHaveClass("rounded-md");
+    expect(container.firstChild).toHaveClass("rounded-lg");
   });
 
   it("custom className does not remove bg-muted base class", () => {

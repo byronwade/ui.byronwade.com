@@ -493,7 +493,7 @@ export const ColorPickerFormat = ({
       <div
         data-slot="color-picker-format"
         className={cn(
-          "-space-x-px relative flex w-full items-center rounded-md",
+          "-space-x-px relative flex w-full items-center rounded-lg",
           className,
         )}
         {...props}
@@ -519,7 +519,7 @@ export const ColorPickerFormat = ({
     return (
       <div
         data-slot="color-picker-format"
-        className={cn("-space-x-px flex items-center rounded-md", className)}
+        className={cn("-space-x-px flex items-center rounded-lg", className)}
         {...props}
       >
         {rgb.map((value, index) => (
@@ -550,7 +550,7 @@ export const ColorPickerFormat = ({
     return (
       <div
         data-slot="color-picker-format"
-        className={cn("w-full rounded-md", className)}
+        className={cn("w-full rounded-lg", className)}
         {...props}
       >
         <Input
@@ -574,7 +574,7 @@ export const ColorPickerFormat = ({
     return (
       <div
         data-slot="color-picker-format"
-        className={cn("-space-x-px flex items-center rounded-md", className)}
+        className={cn("-space-x-px flex items-center rounded-lg", className)}
         {...props}
       >
         {hsl.map((value, index) => (

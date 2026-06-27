@@ -101,7 +101,7 @@ export function MorphMenubar({
                     mi.onSelect?.()
                     close()
                   }}
-                  className="flex h-8 w-full items-center rounded-md px-2.5 text-sm text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+                  className="flex h-8 w-full items-center rounded-lg px-2.5 text-sm text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
                 >
                   {mi.label}
                 </button>

@@ -353,11 +353,11 @@ describe("TaskItemFile — variants", () => {
     );
   });
 
-  it("has edge and rounded-md base classes", () => {
+  it("has edge and rounded-lg base classes", () => {
     const { container } = render(<TaskItemFile>f</TaskItemFile>);
     const cls = (container.firstChild as HTMLElement).className;
     expect(cls).toContain("edge");
-    expect(cls).toContain("rounded-md");
+    expect(cls).toContain("rounded-lg");
   });
 
   it("has text-xs class", () => {

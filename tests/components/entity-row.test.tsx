@@ -54,7 +54,7 @@ describe("EntityRow", () => {
       <EntityRow title="Default" className="custom-row" />,
     )
     const root = container.querySelector('[data-slot="entity-row"]')
-    expect(root).toHaveClass("custom-row", "rounded-md", "px-3", "py-2.5")
+    expect(root).toHaveClass("custom-row", "rounded-lg", "px-3", "py-2.5")
 
     rerender(<EntityRow title="Card" variant="card" />)
     expect(root).toHaveClass("rounded-lg", "edge", "bg-card")

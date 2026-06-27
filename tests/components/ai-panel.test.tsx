@@ -103,9 +103,9 @@ describe("Panel — base classes", () => {
     expect(getPanel(container).className).toContain("text-card-foreground");
   });
 
-  it("has rounded-md from the radius scale", () => {
+  it("has rounded-lg from the radius scale", () => {
     const { container } = renderWithProvider(<Panel />);
-    expect(getPanel(container).className).toContain("rounded-md");
+    expect(getPanel(container).className).toContain("rounded-lg");
   });
 
   it("has overflow-hidden", () => {

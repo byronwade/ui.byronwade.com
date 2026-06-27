@@ -198,7 +198,7 @@ function MarketNews({
                 className={cn(
                   "flex w-full items-start text-left transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-60",
                   itemPadding,
-                  layout === "grid" ? "rounded-md edge" : "",
+                  layout === "grid" ? "rounded-lg edge" : "",
                   selectedId === item.id
                     ? "bg-brand/10 ring-1 ring-brand/30"
                     : "hover:bg-muted/40",

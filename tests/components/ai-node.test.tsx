@@ -215,12 +215,12 @@ describe("Node — root base classes", () => {
     expect(card.className).toContain("node-container");
   });
 
-  it("has rounded-md class", () => {
+  it("has rounded-lg class", () => {
     const { container } = renderInFlow(
       <Node handles={{ target: false, source: false }} />
     );
     const card = container.querySelector("[data-slot='card']") as HTMLElement;
-    expect(card.className).toContain("rounded-md");
+    expect(card.className).toContain("rounded-lg");
   });
 
   it("has w-sm width class", () => {

@@ -135,7 +135,7 @@ function IndexFilters({
                     data-slot="index-filters-search-clear"
                     aria-label="Clear search"
                     onClick={() => onQueryChange!("")}
-                    className="absolute right-1 grid size-6 place-items-center rounded-md text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+                    className="absolute right-1 grid size-6 place-items-center rounded-lg text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
                   >
                     <X className="size-3.5" />
                   </button>
@@ -199,7 +199,7 @@ function IndexFilters({
             <span
               key={filter.key}
               data-slot="index-filters-applied-filter"
-              className="inline-flex h-7 items-center gap-1 rounded-md edge bg-background pr-1 pl-2.5 text-xs text-foreground"
+              className="inline-flex h-7 items-center gap-1 rounded-lg edge bg-background pr-1 pl-2.5 text-xs text-foreground"
             >
               {filter.label}
               <button

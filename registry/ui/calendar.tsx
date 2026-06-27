@@ -52,7 +52,7 @@ function Calendar({
         month_grid: cn("w-full border-collapse", defaults.month_grid),
         weekdays: cn("flex", defaults.weekdays),
         weekday: cn(
-          "flex-1 select-none rounded-md text-[0.8rem] font-normal text-muted-foreground",
+          "flex-1 select-none rounded-lg text-[0.8rem] font-normal text-muted-foreground",
           defaults.weekday,
         ),
         week: cn("mt-2 flex w-full", defaults.week),

@@ -25,8 +25,8 @@ export const Controls = ({ className, ...props }: ControlsProps) => {
     <div className="contents" data-slot="ai-controls-host" ref={tagPanel}>
       <ControlsPrimitive
         className={cn(
-          "gap-px overflow-hidden rounded-md edge bg-card p-1 shadow-none!",
-          "[&>button]:rounded-md [&>button]:border-none! [&>button]:bg-transparent! [&>button]:text-foreground [&>button]:hover:bg-secondary!",
+          "gap-px overflow-hidden rounded-lg edge bg-card p-1 shadow-none!",
+          "[&>button]:rounded-lg [&>button]:border-none! [&>button]:bg-transparent! [&>button]:text-foreground [&>button]:hover:bg-secondary!",
           className
         )}
         {...props}

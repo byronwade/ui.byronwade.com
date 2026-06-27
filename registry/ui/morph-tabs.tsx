@@ -46,7 +46,7 @@ export function MorphTabs({
             aria-current={item.active ? "page" : undefined}
             onClick={() => item.onSelect?.()}
             className={cn(
-              "flex flex-1 flex-col items-center justify-center gap-1 rounded-md text-[11px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+              "flex flex-1 flex-col items-center justify-center gap-1 rounded-full text-[11px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
               item.active
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground",
@@ -62,7 +62,7 @@ export function MorphTabs({
         aria-label="Open sheet"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="grid w-10 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+        className="grid w-10 place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
       >
         <CaretUp className="size-4" />
       </button>

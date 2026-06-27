@@ -149,7 +149,7 @@ describe("AudioPlayer — variants", () => {
   })
 
   it.each([
-    ["minimal", "rounded-md"],
+    ["minimal", "rounded-lg"],
     ["card", "rounded-xl"],
   ] as const)("applies the %s variant class", (variant, expected) => {
     const { container } = render(<FullPlayer variant={variant} />)
@@ -159,7 +159,7 @@ describe("AudioPlayer — variants", () => {
   })
 
   it("exposes the cva recipe", () => {
-    expect(audioPlayerVariants({ variant: "minimal" })).toContain("rounded-md")
+    expect(audioPlayerVariants({ variant: "minimal" })).toContain("rounded-lg")
   })
 })
 

@@ -329,7 +329,7 @@ export function PromptInputAttachment({
           <div
             data-slot="prompt-input-attachment"
             className={cn(
-              "group relative flex h-8 cursor-pointer items-center gap-1.5 rounded-md edge px-1.5 text-sm font-medium transition-colors select-none hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+              "group relative flex h-8 cursor-pointer items-center gap-1.5 rounded-lg edge px-1.5 text-sm font-medium transition-colors select-none hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
               className
             )}
             key={data.id}
@@ -375,7 +375,7 @@ export function PromptInputAttachment({
       <PromptInputHoverCardContent className="w-auto p-2">
         <div className="w-auto space-y-3">
           {isImage && (
-            <div className="flex max-h-96 w-96 items-center justify-center overflow-hidden rounded-md edge">
+            <div className="flex max-h-96 w-96 items-center justify-center overflow-hidden rounded-lg edge">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt={filename || "attachment preview"}

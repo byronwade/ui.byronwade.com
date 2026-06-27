@@ -52,7 +52,7 @@ export function MorphBar({
               }
             }}
             className={cn(
-              "rounded-md px-3 py-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+              "rounded-lg px-3 py-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
               item.active
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground",
@@ -78,7 +78,7 @@ export function MorphBar({
           aria-label="Open menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="grid size-8 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+          className="grid size-8 place-items-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
         >
           <List className="size-4" />
         </button>

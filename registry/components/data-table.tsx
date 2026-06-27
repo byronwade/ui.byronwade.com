@@ -146,7 +146,7 @@ function renderCell<Row>(
           <span
             data-slot="data-table-primary-media"
             className={cn(
-              "flex shrink-0 overflow-hidden rounded-md bg-muted",
+              "flex shrink-0 overflow-hidden rounded-lg bg-muted",
               density === "condensed" && "size-7",
               density === "comfortable" && "size-8",
               density === "spacious" && "size-10",

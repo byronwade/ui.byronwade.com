@@ -103,7 +103,7 @@ const videoPlayerVariants = cva(
     variants: {
       variant: {
         default: "rounded-lg edge",
-        minimal: "rounded-md edge",
+        minimal: "rounded-lg edge",
         theater:
           "mx-auto w-full max-w-4xl rounded-xl edge bg-background [&_media-control-bar]:px-2 [&_media-control-bar]:py-1",
         poster: "rounded-lg edge",
@@ -523,7 +523,7 @@ export const VideoPlayerSettingsMenu = ({
   <MediaSettingsMenu
     data-slot="video-player-settings-menu"
     className={cn(
-      "rounded-md edge bg-popover text-popover-foreground edge",
+      "rounded-lg edge bg-popover text-popover-foreground edge",
       className,
     )}
     {...props}
@@ -952,7 +952,7 @@ export const VideoPlayerEndScreen = ({
         <img
           src={next.thumbnail}
           alt=""
-          className="aspect-video w-28 shrink-0 rounded-md object-cover"
+          className="aspect-video w-28 shrink-0 rounded-lg object-cover"
         />
       ) : null}
       <span className="flex flex-col gap-1">

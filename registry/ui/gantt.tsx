@@ -108,7 +108,7 @@ function ContextMenuItem({
       data-slot="context-menu-item"
       data-variant={variant}
       className={cn(
-        "relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "relative flex cursor-default items-center gap-1.5 rounded-lg px-1.5 py-1 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
@@ -688,7 +688,7 @@ export const GanttAddFeatureHelper: FC<GanttAddFeatureHelperProps> = ({
     >
       <button
         aria-label="Add feature"
-        className="flex h-full w-full items-center justify-center rounded-md border border-dashed border-border p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex h-full w-full items-center justify-center rounded-lg border border-dashed border-border p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         onClick={handleClick}
         type="button"
       >
@@ -847,7 +847,7 @@ export const GanttFeatureDragHelper: FC<GanttFeatureDragHelperProps> = ({
     <div
       data-slot="gantt-feature-drag-helper"
       className={cn(
-        "group -translate-y-1/2 !cursor-col-resize absolute top-1/2 z-[3] h-full w-6 rounded-md outline-none",
+        "group -translate-y-1/2 !cursor-col-resize absolute top-1/2 z-[3] h-full w-6 rounded-lg outline-none",
         direction === "left" ? "-left-2.5" : "-right-2.5",
       )}
       ref={setNodeRef}
@@ -901,7 +901,7 @@ export const GanttFeatureItemCard: FC<GanttFeatureItemCardProps> = ({
       data-slot="gantt-feature-item-card"
       data-status-color={statusColor || undefined}
       className={cn(
-        "relative h-full w-full gap-0 overflow-hidden rounded-md bg-background p-2 py-0 text-xs",
+        "relative h-full w-full gap-0 overflow-hidden rounded-lg bg-background p-2 py-0 text-xs",
         statusColor && "pl-2.5",
       )}
     >
@@ -1699,7 +1699,7 @@ export const GanttControls: FC<GanttControlsProps> = ({
       data-slot="gantt-controls"
       className={cn("flex items-center gap-2", className)}
     >
-      <div className="flex items-center gap-0.5 rounded-md bg-muted p-0.5">
+      <div className="flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
         {ranges.map((value) => (
           <button
             key={value}
@@ -1782,7 +1782,7 @@ export const GanttMilestone: FC<GanttMilestoneProps> = ({
           aria-hidden="true"
           className="size-2.5 rotate-45 rounded-[2px] bg-brand ring-2 ring-background"
         />
-        <span className="max-h-0 overflow-hidden whitespace-nowrap rounded-md bg-brand-muted px-1.5 py-0.5 font-mono text-[10px] text-foreground opacity-0 transition-all group-hover:max-h-8 group-hover:opacity-100">
+        <span className="max-h-0 overflow-hidden whitespace-nowrap rounded-lg bg-brand-muted px-1.5 py-0.5 font-mono text-[10px] text-foreground opacity-0 transition-all group-hover:max-h-8 group-hover:opacity-100">
           {label}
         </span>
       </div>

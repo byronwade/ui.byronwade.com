@@ -48,7 +48,7 @@ export function MorphRail({
               setActiveId((cur) => (cur === item.id ? null : item.id))
             }
             className={cn(
-              "grid size-9 place-items-center rounded-md outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+              "grid size-9 place-items-center rounded-lg outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
               open && activeId === item.id
                 ? "bg-muted text-foreground"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",

@@ -88,13 +88,13 @@ function OrderSummary({
               className="flex items-center gap-3"
             >
               {item.image ? (
-                <Avatar size="lg" className="rounded-md">
+                <Avatar size="lg" className="rounded-lg">
                   <AvatarImage
                     src={item.image}
                     alt={item.title}
-                    className="rounded-md"
+                    className="rounded-lg"
                   />
-                  <AvatarFallback className="rounded-md">
+                  <AvatarFallback className="rounded-lg">
                     {item.title.slice(0, 2)}
                   </AvatarFallback>
                 </Avatar>
@@ -102,7 +102,7 @@ function OrderSummary({
                 <div
                   data-slot="order-item-thumb"
                   aria-hidden
-                  className="grid size-10 shrink-0 place-items-center rounded-md edge bg-muted text-xs text-muted-foreground"
+                  className="grid size-10 shrink-0 place-items-center rounded-lg edge bg-muted text-xs text-muted-foreground"
                 >
                   {item.title.slice(0, 2)}
                 </div>

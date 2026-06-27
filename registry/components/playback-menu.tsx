@@ -64,7 +64,7 @@ function PlaybackMenu({
           trigger
             ? className
             : cn(
-                "inline-flex size-9 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring",
+                "inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring",
                 className,
               )
         }

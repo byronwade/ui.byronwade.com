@@ -68,7 +68,7 @@ export const GlimpseImage = ({
     data-slot="glimpse-image"
     alt={alt ?? ""}
     className={cn(
-      "mb-4 aspect-[120/63] w-full rounded-md edge object-cover",
+      "mb-4 aspect-[120/63] w-full rounded-lg edge object-cover",
       className,
     )}
     {...props}

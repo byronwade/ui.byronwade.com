@@ -42,7 +42,7 @@ export function MorphSidebar({
       aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
       aria-expanded={open}
       onClick={() => setOpen((v) => !v)}
-      className="grid size-9 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+      className="grid size-9 place-items-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
     >
       <Sidebar className="size-4" />
     </button>
@@ -63,7 +63,7 @@ export function MorphSidebar({
           }
         }}
         className={cn(
-          "flex h-9 items-center rounded-md outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+          "flex h-9 items-center rounded-lg outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
           expanded ? "gap-3 px-2.5 text-sm" : "w-9 justify-center",
           item.active
             ? "bg-muted text-foreground"

@@ -131,9 +131,9 @@ describe("Controls — base classes", () => {
     expect(getPanel(container).className).toContain("edge");
   });
 
-  it("has rounded-md radius from the scale", () => {
+  it("has rounded-lg radius from the scale", () => {
     const { container } = renderControls();
-    expect(getPanel(container).className).toContain("rounded-md");
+    expect(getPanel(container).className).toContain("rounded-lg");
   });
 
   it("has overflow-hidden", () => {
@@ -193,7 +193,7 @@ describe("Controls — className passthrough", () => {
     const cls = getPanel(container).className;
     expect(cls).toContain("extra");
     expect(cls).toContain("bg-card");
-    expect(cls).toContain("rounded-md");
+    expect(cls).toContain("rounded-lg");
   });
 });
 
