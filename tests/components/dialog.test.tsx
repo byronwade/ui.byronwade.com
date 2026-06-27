@@ -187,12 +187,12 @@ describe("DialogContent – open state", () => {
     expect(popup.className).toContain("fixed");
   });
 
-  it("dialog content has base class: rounded-xl", async () => {
+  it("dialog content has base class: rounded-3xl", async () => {
     const user = userEvent.setup();
     render(<SimpleDialog />);
     await openDialog(user);
     const popup = screen.getByRole("dialog");
-    expect(popup.className).toContain("rounded-xl");
+    expect(popup.className).toContain("rounded-3xl");
   });
 
   it("dialog content has base class: bg-popover", async () => {

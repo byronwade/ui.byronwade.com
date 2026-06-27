@@ -242,7 +242,7 @@ describe("Sheet – drawer variants", () => {
     await screen.findByRole("dialog");
     const content = document.querySelector("[data-slot='sheet-content']");
     expect(content).toHaveAttribute("data-variant", "inset");
-    expect((content as HTMLElement).className).toContain("rounded-2xl");
+    expect((content as HTMLElement).className).toContain("rounded-3xl");
   });
 
   it("showBar renders a grab bar; omitting it does not", async () => {

@@ -14,7 +14,7 @@
  * Test strategy:
  *   - Render without crashing (all sub-components)
  *   - data-slot attributes on every part
- *   - Class names on every part (rounded-lg, bg-popover, edge, flex-col, etc.)
+ *   - Class names on every part (rounded-2xl, bg-popover, edge, flex-col, etc.)
  *   - Interaction: click trigger → popup opens (portal, findByRole("dialog"))
  *   - Interaction: Escape key closes popup
  *   - Interaction: click outside closes popup
@@ -361,9 +361,9 @@ describe("PopoverContent — classes (open state)", () => {
     expect(content).toHaveClass("w-72");
   });
 
-  it("has rounded-lg class", async () => {
+  it("has rounded-2xl class", async () => {
     const content = await openAndGetContent();
-    expect(content).toHaveClass("rounded-lg");
+    expect(content).toHaveClass("rounded-2xl");
   });
 
   it("has bg-popover class", async () => {
@@ -398,7 +398,7 @@ describe("PopoverContent — classes (open state)", () => {
     await screen.findByRole("dialog");
     const content = document.querySelector("[data-slot='popover-content']");
     expect(content).toHaveClass("my-extra-class");
-    expect(content).toHaveClass("rounded-lg");
+    expect(content).toHaveClass("rounded-2xl");
   });
 });
 

@@ -17,7 +17,7 @@
  *            alignOffset (number, default 4)
  *            + all div HTML props / className
  *     data-slot="hover-card-content"
- *     Classes: z-50 w-64 rounded-lg bg-popover p-2.5 text-sm text-popover-foreground
+ *     Classes: z-50 w-64 rounded-2xl bg-popover p-2.5 text-sm text-popover-foreground
  *              edge ring-1 ring-foreground/10 outline-hidden duration-100
  *              + side/alignment animation data-attributes
  *
@@ -287,11 +287,11 @@ describe("HoverCardContent — classes and default props", () => {
     expect(popup.className).toContain("w-64");
   });
 
-  it("has class 'rounded-lg' when open", async () => {
+  it("has class 'rounded-2xl' when open", async () => {
     render(<BasicHoverCard defaultOpen contentText="rounded test" />);
     const content = await screen.findByText("rounded test");
     const popup = content.closest("[data-slot='hover-card-content']") as HTMLElement;
-    expect(popup.className).toContain("rounded-lg");
+    expect(popup.className).toContain("rounded-2xl");
   });
 
   it("has class 'bg-popover' when open", async () => {
@@ -340,7 +340,7 @@ describe("HoverCardContent — classes and default props", () => {
     const content = await screen.findByText("Custom class test");
     const popup = content.closest("[data-slot='hover-card-content']") as HTMLElement;
     expect(popup.className).toContain("custom-test-class");
-    expect(popup.className).toContain("rounded-lg"); // base still present
+    expect(popup.className).toContain("rounded-2xl"); // base still present
   });
 
   it("accepts custom width via className when open", async () => {

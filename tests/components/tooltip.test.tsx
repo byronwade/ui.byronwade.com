@@ -498,10 +498,10 @@ describe("TooltipContent — base CSS classes", () => {
     expect(content.className).toContain("max-w-xs");
   });
 
-  it("has rounded-md class", () => {
+  it("has rounded-lg class", () => {
     renderTooltip("tip", { defaultOpen: true });
     const content = document.querySelector('[data-slot="tooltip-content"]') as HTMLElement;
-    expect(content.className).toContain("rounded-md");
+    expect(content.className).toContain("rounded-lg");
   });
 
   it("has bg-foreground class", () => {

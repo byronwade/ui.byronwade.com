@@ -832,13 +832,13 @@ describe("DropdownMenuShortcut — classes", () => {
 // ---------------------------------------------------------------------------
 
 describe("DropdownMenuContent — classes", () => {
-  it("has rounded-lg class", async () => {
+  it("has rounded-2xl class", async () => {
     const user = userEvent.setup();
     render(<BasicMenu />);
     await user.click(screen.getByRole("button", { name: "Options" }));
     await waitFor(() => {
       const popup = document.querySelector("[data-slot='dropdown-menu-content']");
-      expect(popup).toHaveClass("rounded-lg");
+      expect(popup).toHaveClass("rounded-2xl");
     });
   });
 
@@ -876,7 +876,7 @@ describe("DropdownMenuContent — classes", () => {
     await waitFor(() => {
       const popup = document.querySelector("[data-slot='dropdown-menu-content']");
       expect(popup).toHaveClass("custom-extra");
-      expect(popup).toHaveClass("rounded-lg");
+      expect(popup).toHaveClass("rounded-2xl");
     });
   });
 });
@@ -1488,13 +1488,13 @@ describe("DropdownMenuItem — base classes", () => {
     });
   });
 
-  it("has rounded-md class", async () => {
+  it("has rounded-lg class", async () => {
     const user = userEvent.setup();
     render(<BasicMenu />);
     await user.click(screen.getByRole("button", { name: "Options" }));
     await waitFor(() => {
       const item = document.querySelector("[data-slot='dropdown-menu-item']");
-      expect(item).toHaveClass("rounded-md");
+      expect(item).toHaveClass("rounded-lg");
     });
   });
 

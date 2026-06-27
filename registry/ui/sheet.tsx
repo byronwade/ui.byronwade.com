@@ -51,12 +51,12 @@ const sheetSide = {
     left: "inset-y-0 left-0 h-full w-3/4 sm:max-w-sm data-starting-style:-translate-x-10 data-ending-style:-translate-x-10",
   },
   inset: {
-    top: "inset-x-2 top-2 h-auto rounded-2xl data-starting-style:-translate-y-10 data-ending-style:-translate-y-10",
+    top: "inset-x-2 top-2 h-auto rounded-3xl data-starting-style:-translate-y-10 data-ending-style:-translate-y-10",
     right:
-      "inset-y-2 right-2 w-3/4 rounded-2xl sm:max-w-sm data-starting-style:translate-x-10 data-ending-style:translate-x-10",
+      "inset-y-2 right-2 w-3/4 rounded-3xl sm:max-w-sm data-starting-style:translate-x-10 data-ending-style:translate-x-10",
     bottom:
-      "inset-x-2 bottom-2 h-auto rounded-2xl data-starting-style:translate-y-10 data-ending-style:translate-y-10",
-    left: "inset-y-2 left-2 w-3/4 rounded-2xl sm:max-w-sm data-starting-style:-translate-x-10 data-ending-style:-translate-x-10",
+      "inset-x-2 bottom-2 h-auto rounded-3xl data-starting-style:translate-y-10 data-ending-style:translate-y-10",
+    left: "inset-y-2 left-2 w-3/4 rounded-3xl sm:max-w-sm data-starting-style:-translate-x-10 data-ending-style:-translate-x-10",
   },
 } as const
 

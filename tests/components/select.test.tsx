@@ -488,13 +488,13 @@ describe("Select — opening the popup", () => {
     expect(content).not.toBeNull();
   });
 
-  it("popup has rounded-lg class", async () => {
+  it("popup has rounded-2xl class", async () => {
     const user = userEvent.setup();
     render(<BasicSelect />);
     await user.click(screen.getByRole("combobox"));
     await screen.findByRole("listbox");
     const content = document.querySelector("[data-slot='select-content']");
-    expect(content).toHaveClass("rounded-lg");
+    expect(content).toHaveClass("rounded-2xl");
   });
 
   it("popup has bg-popover class", async () => {
@@ -605,13 +605,13 @@ describe("SelectItem — structure", () => {
     expect(item).toHaveClass("text-sm");
   });
 
-  it("items have rounded-md class", async () => {
+  it("items have rounded-lg class", async () => {
     const user = userEvent.setup();
     render(<BasicSelect />);
     await user.click(screen.getByRole("combobox"));
     await screen.findByRole("listbox");
     const item = document.querySelector("[data-slot='select-item']");
-    expect(item).toHaveClass("rounded-md");
+    expect(item).toHaveClass("rounded-lg");
   });
 
   it("items have cursor-default class", async () => {
