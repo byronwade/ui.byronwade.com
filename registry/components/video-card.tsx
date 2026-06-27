@@ -85,7 +85,7 @@ const videoCardVariants = cva("group/video-card text-foreground", {
 })
 
 const titleVariants = cva(
-  "text-foreground group-hover/video-card:text-brand",
+  "text-foreground",
   {
     variants: {
       variant: {
