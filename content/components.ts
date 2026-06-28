@@ -56,6 +56,7 @@ export type ComponentDoc = {
     | "Forms"
     | "Overlays"
     | "Feedback"
+    | "Chat"
     | "Data display"
     | "Patterns"
     | "Charts"
@@ -2984,6 +2985,63 @@ export const components: ComponentDoc[] = [
       },
     ],
     examples: ["default", "card-list", "compact", "prose", "with-header"],
+  },
+  {
+    slug: "message-scroller",
+    name: "Message Scroller",
+    category: "Chat",
+    description:
+      "Scroll container for chat conversations with anchored turns, streamed replies, prepend preservation, jump-to-message, and scroll controls.",
+    npmDeps: ["@shadcn/react"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/button",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "message",
+    name: "Message",
+    category: "Chat",
+    description:
+      "Chat message row layout with avatar, alignment, header, content, footer, and grouped messages.",
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "bubble",
+    name: "Bubble",
+    category: "Chat",
+    description:
+      "Message bubble surface with token variants, alignment, reactions, and collapsible content slots.",
+    npmDeps: ["@base-ui/react", "class-variance-authority"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
+  },
+  {
+    slug: "attachment",
+    name: "Attachment",
+    category: "Chat",
+    description:
+      "File and image attachment card with media, metadata, upload state, actions, and a full-card trigger.",
+    npmDeps: ["@base-ui/react", "class-variance-authority"],
+    registryDeps: [
+      "@byronwade/foundation",
+      "@byronwade/utils",
+      "@byronwade/button",
+    ],
+    examples: ["default"],
+  },
+  {
+    slug: "marker",
+    name: "Marker",
+    category: "Chat",
+    description:
+      "Status updates, system notes, bordered rows, and labeled separators for streaming state and date breaks.",
+    npmDeps: ["@base-ui/react", "class-variance-authority"],
+    registryDeps: ["@byronwade/foundation", "@byronwade/utils"],
+    examples: ["default"],
   },
   {
     slug: "collapsible",
@@ -6122,6 +6180,7 @@ export const categories = [
   "Forms",
   "Overlays",
   "Feedback",
+  "Chat",
   "Data display",
   "Patterns",
   "Charts",

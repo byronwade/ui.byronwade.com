@@ -54,6 +54,7 @@ for (const name of colorTokens) {
 const utilities = [
   ...Object.keys(foundation.css?.["@layer utilities"] ?? {}),
   ...Object.keys(foundation.css ?? {}).filter((k) => k.startsWith(".")),
+  ...(foundation.documentedUtilities ?? []).map((u) => `.${u}`),
 ].map(utilityBase)
 
 const componentTypes = new Set(["registry:ui", "registry:component"])

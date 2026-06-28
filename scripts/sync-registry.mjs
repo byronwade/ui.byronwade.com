@@ -64,6 +64,13 @@ if (foundation.css) {
   css += "\n" + emitCss(foundation.css)
 }
 
+const rawUtilitiesPath = foundation.rawCss
+  ? join(root, foundation.rawCss)
+  : null
+if (rawUtilitiesPath && existsSync(rawUtilitiesPath)) {
+  css += "\n" + readFileSync(rawUtilitiesPath, "utf8")
+}
+
 const cssChanged = writeIfChanged(
   join(root, "app/foundation.generated.css"),
   css,
