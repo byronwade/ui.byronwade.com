@@ -18,6 +18,7 @@ import {
   DocsProse,
 } from "@/app/(docs)/_components/docs-prose"
 import { GuidePager } from "@/app/(docs)/_components/guide-pager"
+import { Reveal } from "@/app/_components/cinematic/reveal"
 
 export const metadata: Metadata = {
   title: "Introduction, byronwade/ui",
@@ -28,30 +29,35 @@ export const metadata: Metadata = {
 const PRINCIPLES = [
   "One warm accent; the rest is calm ink and warm gray.",
   "Depth from a single hairline edge, no shadows, no borders.",
-  "Every page earns one signature, never a repeated card grid.",
+  "App surfaces by default — dense, calm, operational, agent-native.",
   "Pure tokens, override --brand and the whole system re-skins.",
 ]
 
 export default function ComponentsIndexPage() {
   return (
     <article className="max-w-none">
-      <section className="grid gap-8 py-12 lg:grid-cols-[1fr_auto] lg:items-end lg:py-16">
+      <section className="relative isolate grid gap-8 py-12 lg:grid-cols-[1fr_auto] lg:items-end lg:py-16">
+        <div
+          aria-hidden
+          className="glow-brand pointer-events-none absolute inset-x-0 -top-8 -z-10 h-64 opacity-60"
+        />
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Introduction
           </p>
           <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
-            A master design system,{" "}
-            <span className="text-muted-foreground">entirely yours.</span>
+            An app-only design system,{" "}
+            <span className="text-gradient-brand">entirely yours.</span>
           </h1>
           <DocsIntro className="mt-5">
             <span className="text-foreground">byronwade/ui</span> is a calm,
-            content-first library published as a namespaced{" "}
+            dense, agent-native system for application surfaces, published as a
+            namespaced{" "}
             <a href="https://ui.shadcn.com" target="_blank" rel="noreferrer">
               shadcn
             </a>{" "}
-            registry. Token-driven primitives, composites, and full-page layouts
-            — install with the shadcn CLI and you own the copied code.
+            registry. Token-driven primitives, composites, and full-page app
+            layouts — install with the shadcn CLI and you own the copied code.
           </DocsIntro>
         </div>
 
@@ -89,12 +95,13 @@ export default function ComponentsIndexPage() {
       <section className="py-12">
         <DocsProse>
           <p className="reading-muted font-mono text-xs uppercase tracking-[0.2em]">
-            Two surfaces · one foundation
+            Application-first · one foundation
           </p>
           <p>
-            Application UI and marketing/editorial share the same tokens and
-            accent — they diverge in typography lane and layout density. Browse
-            the catalog in either mode; install only what your product needs.
+            Application UI is the primary lane; marketing and editorial are a
+            secondary lane for docs, screenshots, and demos — sharing the same
+            tokens and accent, never the default for product screens. Browse the
+            catalog in either mode; install only what your product needs.
           </p>
           <ol>
             {PRINCIPLES.map((p) => (
@@ -118,8 +125,12 @@ export default function ComponentsIndexPage() {
           </span>
         </div>
 
-        {catalogSurfaces.map((surface) => (
-          <div key={surface.id} className="border-b border-border py-10">
+        {catalogSurfaces.map((surface, i) => (
+          <Reveal
+            key={surface.id}
+            delay={i * 0.05}
+            className="border-b border-border py-10"
+          >
             <div className="reading-ui mb-8">
               <h3 className="text-[clamp(1.25rem,3vw,1.75rem)] font-normal tracking-tight text-foreground">
                 {surface.label}
@@ -163,7 +174,7 @@ export default function ComponentsIndexPage() {
                 </div>
               )
             })}
-          </div>
+          </Reveal>
         ))}
       </section>
 

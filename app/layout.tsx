@@ -39,6 +39,12 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        {/* No-flash skin: apply the saved token skin before first paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var s=localStorage.getItem("skin");if(s)document.documentElement.dataset.skin=s;}catch(e){}`,
+          }}
+        />
         <ThemeProvider>
           <AppChrome />
           {children}

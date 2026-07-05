@@ -5,7 +5,10 @@ import {
   type ComponentDoc,
 } from "@/content/components"
 
-/** Application UI vs marketing/editorial — one token system, two composition modes. */
+/**
+ * App-only system: application UI is the primary lane; marketing/editorial is a
+ * secondary docs/screenshot lane. One token system, app-first composition.
+ */
 export type CatalogSurface = "app" | "marketing"
 
 export type SurfaceFilter = CatalogSurface | "all"
@@ -58,7 +61,7 @@ export const catalogSurfaces: {
     label: "Application UI",
     shortLabel: "Application",
     description:
-      "Dashboards, forms, data surfaces, shells — sans UI lane, compact chrome, dense layouts.",
+      "The primary lane — dashboards, admin panels, developer tools, AI workbenches, resource lists, command centers, and object-detail workflows. Sans UI lane, compact chrome, dense operational layouts.",
     href: "/catalog?surface=app",
   },
   {
@@ -66,7 +69,7 @@ export const catalogSurfaces: {
     label: "Marketing & editorial",
     shortLabel: "Marketing",
     description:
-      "Landing pages, media, commerce, essays — reading-prose, hero compositions, full-bleed marketing scaffolds.",
+      "Secondary lane — screenshot, documentation, and demo utilities: landing pages, media, commerce, and essays on reading-prose and full-bleed scaffolds. Not the default for product screens.",
     href: "/catalog?surface=marketing",
   },
 ]

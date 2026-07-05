@@ -12,23 +12,24 @@ import {
 import { byCategory } from "@/content/components"
 import { DocsIntro, DocsProse } from "@/app/(docs)/_components/docs-prose"
 import { GuidePager } from "@/app/(docs)/_components/guide-pager"
+import { Reveal } from "@/app/_components/cinematic/reveal"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
   title: "Surfaces, byronwade/ui",
   description:
-    "One foundation, two composition modes — application UI vs marketing and editorial, without splitting the registry.",
+    "An app-only system: application UI is the primary lane; marketing and editorial are a secondary docs/screenshot lane — one foundation, no registry split.",
 }
 
 const ROUTING = [
   {
-    surface: "Application UI",
+    surface: "Application UI — primary",
     typography: "UI lane — font-sans, text-sm/text-base",
     layout: "app-shell, sidebar, tables, morph-dock",
-    examples: "Button, Table, App Shell, Morph Dock",
+    examples: "App Shell, Table, Resource List, Command",
   },
   {
-    surface: "Marketing & editorial",
+    surface: "Marketing & editorial — secondary",
     typography: "reading-prose / reading-ui for copy",
     layout: "marketing-layout, hero-section, full-bleed media",
     examples: "Hero Section, Video Shelf, Marketing Layout",
@@ -40,24 +41,32 @@ export default function SurfacesPage() {
 
   return (
     <article className="max-w-none">
-      <section className="py-12 lg:py-16">
+      <section className="relative isolate py-12 lg:py-16">
+        <div
+          aria-hidden
+          className="glow-brand pointer-events-none absolute inset-x-0 -top-8 -z-10 h-64 opacity-60"
+        />
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           Foundation · Surfaces
         </p>
         <h1 className="mt-4 text-[clamp(2.25rem,6vw,4rem)] font-normal leading-[1.05] tracking-tight text-foreground text-balance">
-          One system. Two surfaces.
+          App-first.{" "}
+          <span className="text-gradient-brand">One foundation.</span>
         </h1>
         <DocsIntro>
-          Dashboards and landing pages look nothing alike — but they should not
-          require two design systems. byronwade/ui routes composition by surface
-          while sharing every{" "}
+          byronwade/ui is an app-only system: build{" "}
+          <span className="text-foreground">application surfaces</span> by
+          default — dashboards, admin panels, developer tools, AI workbenches,
+          resource lists, and object-detail workflows. Marketing and editorial
+          are a <span className="text-foreground">secondary</span> lane for
+          docs, screenshots, and demos — sharing every{" "}
           <Link
             href="/docs/foundation"
             className="text-brand underline-offset-4 hover:underline"
           >
             shared token
           </Link>{" "}
-          and install path.
+          and install path, never the default for product screens.
         </DocsIntro>
       </section>
 
@@ -87,11 +96,12 @@ export default function SurfacesPage() {
           <ul>
             <li>
               <span className="text-foreground">{counts.app}</span> application
-              components
+              components (primary lane)
             </li>
             <li>
               <span className="text-foreground">{counts.marketing}</span>{" "}
-              marketing & editorial components
+              marketing & editorial components (secondary: docs / screenshots /
+              demos)
             </li>
           </ul>
         </DocsProse>
@@ -139,42 +149,44 @@ export default function SurfacesPage() {
         </DocsProse>
       </section>
 
-      {catalogSurfaces.map((surface) => (
+      {catalogSurfaces.map((surface, i) => (
         <section key={surface.id} className="border-t border-border py-10">
-          <DocsProse>
-            <h2>{surface.label}</h2>
-            <p>{surface.description}</p>
-            <p className="reading-muted">
-              {bySurface(surface.id).length} components ·{" "}
-              <Link href={surface.href} className="text-brand">
-                Browse in catalog
-              </Link>
-            </p>
-            {categoriesForSurface(surface.id).map((cat) => {
-              const items = byCategory(cat).filter(
-                (c) => getSurface(c) === surface.id,
-              )
-              if (items.length === 0) return null
-              return (
-                <div key={cat} className="mt-6">
-                  <h3>{cat}</h3>
-                  <ul>
-                    {items.slice(0, 6).map((c) => (
-                      <li key={c.slug}>
-                        <Link href={`/docs/${c.slug}`}>{c.name}</Link>
-                      </li>
-                    ))}
-                    {items.length > 6 ? (
-                      <li className="reading-muted">
-                        + {items.length - 6} more in{" "}
-                        <Link href={surface.href}>catalog</Link>
-                      </li>
-                    ) : null}
-                  </ul>
-                </div>
-              )
-            })}
-          </DocsProse>
+          <Reveal delay={i * 0.05}>
+            <DocsProse>
+              <h2>{surface.label}</h2>
+              <p>{surface.description}</p>
+              <p className="reading-muted">
+                {bySurface(surface.id).length} components ·{" "}
+                <Link href={surface.href} className="text-brand">
+                  Browse in catalog
+                </Link>
+              </p>
+              {categoriesForSurface(surface.id).map((cat) => {
+                const items = byCategory(cat).filter(
+                  (c) => getSurface(c) === surface.id,
+                )
+                if (items.length === 0) return null
+                return (
+                  <div key={cat} className="mt-6">
+                    <h3>{cat}</h3>
+                    <ul>
+                      {items.slice(0, 6).map((c) => (
+                        <li key={c.slug}>
+                          <Link href={`/docs/${c.slug}`}>{c.name}</Link>
+                        </li>
+                      ))}
+                      {items.length > 6 ? (
+                        <li className="reading-muted">
+                          + {items.length - 6} more in{" "}
+                          <Link href={surface.href}>catalog</Link>
+                        </li>
+                      ) : null}
+                    </ul>
+                  </div>
+                )
+              })}
+            </DocsProse>
+          </Reveal>
         </section>
       ))}
 

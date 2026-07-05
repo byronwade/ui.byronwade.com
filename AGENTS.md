@@ -10,6 +10,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 This repo is the **byronwade/ui design-system registry** — a standalone shadcn registry. All component source lives here in `registry/` and is edited directly in this repo.
 
+**Positioning: app-only.** byronwade/ui is a calm, dense, agent-native design system for **application
+surfaces** — dashboards, admin panels, developer tools, AI workbenches, resource lists, command
+centers, and object-detail workflows. Build application UI by default; marketing/editorial and media
+components are a **secondary** lane for docs, screenshots, and demos, never the default. The full
+rationale, surface hierarchy, color semantics, density, and approved/disallowed patterns live in
+`docs/app-only-design-doctrine.md`.
+
 See `README.md` for the full workflow (sync → registry:build → deploy).
 
 ## Design engineer principles — how we work
@@ -121,8 +128,10 @@ agent following that rule would produce identical-looking code.** That means:
   `shadow-300` + bevel; deeper overlays can use `depth-400` or `depth-600`). Dark mode keeps the
   Polaris elevation scale but uses a darker bevel so shadows do not read as white glow. Never use
   Tailwind `shadow-*` utilities or custom box-shadows in components.
-- **Two surfaces** — Application UI vs marketing/editorial share one foundation; route by surface
-  (`content/catalog-surfaces.ts`), don't split registry packages.
+- **App-first, one foundation** — Application UI is the primary lane; marketing/editorial is a
+  secondary docs/screenshot lane sharing the same foundation. Route by surface
+  (`content/catalog-surfaces.ts`), don't split registry packages, and never let marketing composition
+  become the default (see `docs/app-only-design-doctrine.md`).
 - **Density routes by task.** Dense operational UI (tables, dashboards, admin indexes, command
   palettes, kanban/gantt, file trees) uses compact spacing, stable row heights, and mono metadata.
   Product/editorial surfaces get more breathing room through the reading lanes and marketing layout
@@ -244,3 +253,13 @@ Both gates run automatically in CI on every push and pull request (`.github/work
 4. Write `tests/components/<slug>.test.tsx` covering all variants and states.
 5. Run `npm run test:ci` — must be green before committing.
 6. Commit.
+
+## Cursor Cloud specific instructions
+
+This is a single **Next.js 16 (Turbopack) web app** — a shadcn design-system registry — plus npm-workspace tooling packages under `packages/*`. There is no backend, database, or required env/secrets. Package manager is **npm** (`package-lock.json`, Node 22). The startup update script already runs `npm install`.
+
+- **Run the app:** `npm run dev` (serves `http://localhost:3000`). The `predev`/`pretest`/`pretest:ci` hooks auto-run `scripts/sync-registry.mjs`, which regenerates the git-ignored `components/`, `lib/`, and `app/foundation.generated.css` from `registry/`. Always edit source under `registry/`, never the generated copies.
+- **`/catalog` is a heavy page** — it renders 200+ live component previews at once and can crash a sandboxed / low-memory browser tab (Chrome "Aw, Snap!" `SIGTRAP`, "Page Unresponsive"). The server serves it fine (HTTP 200); this is a client-side render-cost issue. For interactive manual testing prefer individual `/docs/<component>` pages (e.g. `/docs/button`) or `/styleguide`.
+- **Lint:** `npm run lint` runs but currently reports **pre-existing errors** (mostly in `tests/**`) on a clean checkout — a non-zero exit here is not caused by your environment setup. `npm run lint:on-system` builds the workspace lint packages first and scans `registry/`.
+- **Tests:** `npm run test:run` (fast, no coverage) or `npm run test:ci` (coverage gate, single-worker — slow, ~3 min). jsdom prints `Not implemented: ... getContext()/getComputedStyle` warnings for canvas/Recharts components — expected and documented, not failures.
+- Standard commands and the full sync → build → validate pipeline are documented in `README.md` and the `scripts` block of `package.json`.

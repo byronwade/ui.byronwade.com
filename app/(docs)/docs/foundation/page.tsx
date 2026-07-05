@@ -5,6 +5,7 @@ import { ArrowRight } from "@/lib/icons"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 import { BLEED } from "@/app/(docs)/_components/docs-prose"
 import { GuidePager } from "@/app/(docs)/_components/guide-pager"
+import { Reveal } from "@/app/_components/cinematic/reveal"
 import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
@@ -67,19 +68,19 @@ export default function FoundationPage() {
         <div className="grid grid-cols-3 gap-2 pb-10 sm:grid-cols-5 lg:grid-cols-7">
           <div className="col-span-3 flex flex-col justify-center sm:col-span-2 lg:col-span-3">
             <h1 className="text-[clamp(2rem,6vw,4rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
-              The palette, <span className="text-brand">in full.</span>
+              The palette, <span className="text-gradient-brand">in full.</span>
             </h1>
             <p className="mt-3 max-w-md font-mono text-[13px] leading-relaxed text-muted-foreground">
-              Warm paper neutrals, one brand accent, fixed data hues. One base
-              for both{" "}
+              Warm paper neutrals, one brand accent, fixed data hues — tuned for
+              calm, dense{" "}
               <Link
                 href="/docs/surfaces"
                 className="text-brand underline-offset-4 hover:underline"
               >
-                surfaces
-              </Link>{" "}
-              — application UI and marketing. It owns your :root, install with
-              init.
+                application surfaces
+              </Link>
+              . A named surface ladder (canvas → card → recessed → tint) with
+              hairline depth. It owns your :root, install with init.
             </p>
           </div>
           {WALL.map((s) => (
@@ -219,6 +220,46 @@ export default function FoundationPage() {
           </div>
         </div>
       </section>
+
+      {/* ============================ SURFACE HIERARCHY ================= */}
+      <Reveal className="py-16">
+        <div className="flex items-baseline justify-between gap-4">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Surface hierarchy
+          </p>
+          <p className="font-mono text-[11px] text-muted-foreground">
+            calm · small steps · hairline
+          </p>
+        </div>
+        <p className="reading-ui mt-3 text-foreground text-pretty">
+          App surfaces sit on a named ladder of small luminosity steps,
+          separated by the <span className="text-foreground">edge</span>{" "}
+          hairline — not by shadows or heavy cards. Reach for a role by name;
+          never hand-tune a one-off gray.
+        </p>
+        <div className="mt-6 rounded-2xl edge bg-background p-4">
+          <p className="font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
+            canvas · bg-background
+          </p>
+          <div className="mt-3 rounded-xl edge bg-card p-4">
+            <p className="font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
+              base · bg-card edge
+            </p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-lg edge bg-muted/30 p-3">
+                <p className="font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
+                  recessed · bg-muted/30
+                </p>
+              </div>
+              <div className="rounded-lg bg-brand/10 p-3">
+                <p className="font-mono text-[10px] uppercase tracking-wide text-brand">
+                  tint / selected · bg-brand/10
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
 
       {/* ============================ TYPE + RESKIN (band) ============== */}
       <section className={`${BLEED} border-y border-border bg-muted/30`}>

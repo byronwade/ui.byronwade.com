@@ -97,7 +97,7 @@ export default async function ComponentPage({
   const deps = [...(doc.registryDeps ?? []), ...(doc.npmDeps ?? [])]
 
   return (
-    <article className="mx-auto max-w-4xl space-y-12">
+    <article className="max-w-none space-y-12">
       <header>
         <Link
           href={`/catalog?surface=${surface}`}

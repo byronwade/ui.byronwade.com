@@ -14,7 +14,6 @@ import {
   Plug,
   Robot,
   ShieldCheck,
-  Sidebar,
   Sparkle,
   SquaresFour,
   Stack,
@@ -41,24 +40,14 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 
-/* ── dock-toned vocabulary (matches the floating header chrome) ─────── */
+/* ── calm, token-driven vocabulary ─────────────────────────────────── */
 
-const IDLE =
-  "text-dock-foreground hover:bg-dock-active hover:text-dock-active-foreground"
-const ACTIVE = "bg-dock-active text-dock-active-foreground"
+const IDLE = "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+const ACTIVE = "bg-brand/10 font-medium text-foreground"
 const RING = "outline-none focus-visible:ring-2 focus-visible:ring-ring"
 const LABEL =
-  "px-3 pt-3 pb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-dock-foreground/45"
-/** The shared morph easing, ported from the header dock + launcher. */
-const MORPH = "transition-[width] duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
-const FADE = "transition-opacity duration-150"
-const EXPANDED_W = "w-64"
+  "px-2.5 pt-4 pb-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/70"
 
 const GUIDE_ICONS: Record<string, Icon> = {
   "": BookOpen,
@@ -131,7 +120,7 @@ function NavRow({
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="ml-auto rounded-full bg-dock-muted px-1.5 font-mono text-[10px] text-dock-foreground/55 tabular-nums">
+    <span className="ml-auto rounded-full bg-muted px-1.5 font-mono text-[10px] tabular-nums text-muted-foreground">
       {children}
     </span>
   )
@@ -153,7 +142,7 @@ function NavLeaf({
       aria-current={active ? "page" : undefined}
       onClick={onNavigate}
       className={cn(
-        "flex h-8 items-center rounded-md px-2.5 text-[13px] transition-colors",
+        "flex h-8 items-center rounded-lg px-2.5 text-[13px] transition-colors",
         active ? ACTIVE : IDLE,
         RING,
       )}
@@ -185,7 +174,7 @@ function FamilyCollapsible({
     <Collapsible open={open} onOpenChange={setOpen} className="group/family">
       <CollapsibleTrigger
         className={cn(
-          "flex h-8 w-full items-center gap-1.5 rounded-md px-2.5 text-[13px]",
+          "flex h-8 w-full items-center gap-1.5 rounded-lg px-2.5 text-[13px]",
           IDLE,
           RING,
         )}
@@ -195,7 +184,7 @@ function FamilyCollapsible({
         <Badge>{entry.children.length}</Badge>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="ml-3.5 flex flex-col gap-0.5 border-l border-dock-muted pl-2.5 py-0.5">
+        <div className="ml-3.5 flex flex-col gap-0.5 border-l border-border py-0.5 pl-2.5">
           {entry.children.map((child) => (
             <NavLeaf
               key={child.href}
@@ -251,7 +240,7 @@ function CategoryCollapsible({
         <Badge>{leafHrefs.length}</Badge>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="mt-0.5 ml-3.5 flex flex-col gap-0.5 border-l border-dock-muted pl-2.5">
+        <div className="mt-0.5 ml-3.5 flex flex-col gap-0.5 border-l border-border pl-2.5">
           {entries.map((entry) =>
             isDocsNavFamily(entry) ? (
               <FamilyCollapsible
@@ -275,7 +264,7 @@ function CategoryCollapsible({
   )
 }
 
-/* ── the bloomed tree (full nav) ───────────────────────────────────── */
+/* ── the nav tree ──────────────────────────────────────────────────── */
 
 function Tree({
   pathname,
@@ -285,170 +274,68 @@ function Tree({
   onNavigate?: () => void
 }) {
   return (
-    <div className="flex h-full flex-col">
-      <div className="scrollbar-thin flex-1 overflow-y-auto px-2 py-2">
-        {GUIDE_GROUPS.map((group) => (
-          <div key={group.label} className="mb-1">
-            <div className={LABEL}>{group.label}</div>
+    <div className="scrollbar-thin h-full overflow-y-auto px-3 pb-8">
+      {GUIDE_GROUPS.map((group) => (
+        <div key={group.label}>
+          <div className={LABEL}>{group.label}</div>
+          <div className="flex flex-col gap-0.5">
+            {group.slugs.map((slug) => {
+              const guide = guides.find((g) => g.slug === slug)
+              if (!guide) return null
+              return (
+                <NavRow
+                  key={guide.href}
+                  href={guide.href}
+                  icon={GUIDE_ICONS[slug] ?? BookOpen}
+                  label={guide.label}
+                  active={pathname === guide.href}
+                  onNavigate={onNavigate}
+                />
+              )
+            })}
+          </div>
+        </div>
+      ))}
+
+      <div className="my-3 h-px bg-border" />
+
+      {catalogSurfaces.map((surface) => {
+        const Icon = SURFACE_ICONS[surface.id]
+        return (
+          <div key={surface.id}>
+            <div className={LABEL}>{surface.label}</div>
             <div className="flex flex-col gap-0.5">
-              {group.slugs.map((slug) => {
-                const guide = guides.find((g) => g.slug === slug)
-                if (!guide) return null
+              <NavRow
+                href={surface.href}
+                icon={Icon}
+                label={`Browse ${surface.shortLabel.toLowerCase()}`}
+                active={false}
+                onNavigate={onNavigate}
+              />
+              {categoriesForSurface(surface.id).map((cat) => {
+                const entries = buildCategoryNav(cat, surface.id)
+                if (entries.length === 0) return null
                 return (
-                  <NavRow
-                    key={guide.href}
-                    href={guide.href}
-                    icon={GUIDE_ICONS[slug] ?? BookOpen}
-                    label={guide.label}
-                    active={pathname === guide.href}
+                  <CategoryCollapsible
+                    key={`${surface.id}-${cat}`}
+                    label={cat}
+                    entries={entries}
+                    pathname={pathname}
+                    defaultOpen={surface.id === "app" && cat === "UI"}
                     onNavigate={onNavigate}
                   />
                 )
               })}
             </div>
           </div>
-        ))}
-
-        <div className="mx-2 my-2 h-px bg-dock-muted" />
-
-        {catalogSurfaces.map((surface) => {
-          const Icon = SURFACE_ICONS[surface.id]
-          return (
-            <div key={surface.id}>
-              <div className={LABEL}>{surface.label}</div>
-              <div className="flex flex-col gap-0.5">
-                <NavRow
-                  href={surface.href}
-                  icon={Icon}
-                  label={`Browse ${surface.shortLabel.toLowerCase()}`}
-                  active={false}
-                  onNavigate={onNavigate}
-                />
-                {categoriesForSurface(surface.id).map((cat) => {
-                  const entries = buildCategoryNav(cat, surface.id)
-                  if (entries.length === 0) return null
-                  return (
-                    <CategoryCollapsible
-                      key={`${surface.id}-${cat}`}
-                      label={cat}
-                      entries={entries}
-                      pathname={pathname}
-                      defaultOpen={surface.id === "app" && cat === "UI"}
-                      onNavigate={onNavigate}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-          )
-        })}
-      </div>
+        )
+      })}
     </div>
   )
 }
-
-/* ── the resting icon rail ─────────────────────────────────────────── */
-
-type RailDest = { href: string; icon: Icon; label: string }
-
-function railDestinations(): RailDest[] {
-  return [
-    ...guides.map((g) => ({
-      href: g.href,
-      icon: GUIDE_ICONS[g.slug] ?? BookOpen,
-      label: g.label,
-    })),
-    ...catalogSurfaces.map((s) => ({
-      href: s.href,
-      icon: SURFACE_ICONS[s.id],
-      label: `Browse ${s.shortLabel.toLowerCase()}`,
-    })),
-  ]
-}
-
-function RailIcon({ dest, active }: { dest: RailDest; active: boolean }) {
-  const Icon = dest.icon
-  return (
-    <Tooltip>
-      <TooltipTrigger
-        render={
-          <Link
-            href={dest.href}
-            aria-label={dest.label}
-            aria-current={active ? "page" : undefined}
-            className={cn(
-              "grid size-9 shrink-0 place-items-center rounded-xl transition-colors",
-              active ? ACTIVE : IDLE,
-              RING,
-            )}
-          />
-        }
-      >
-        <Icon className="size-4" strokeWidth={2} />
-      </TooltipTrigger>
-      <TooltipContent side="right" sideOffset={10}>
-        {dest.label}
-      </TooltipContent>
-    </Tooltip>
-  )
-}
-
-function Rail({
-  pathname,
-  onExpand,
-}: {
-  pathname: string
-  onExpand: () => void
-}) {
-  return (
-    <div className="flex h-full w-14 flex-col items-center gap-1 p-2">
-      {/* Toggle pinned to the TOP — mirrors the collapse button's position so
-          nothing jumps vertically when the rail morphs into the tree. */}
-      <Tooltip>
-        <TooltipTrigger
-          render={
-            <button
-              type="button"
-              onClick={onExpand}
-              aria-label="Expand sidebar"
-              className={cn(
-                "grid size-9 shrink-0 place-items-center rounded-xl",
-                IDLE,
-                RING,
-              )}
-            />
-          }
-        >
-          <Sidebar className="size-4" strokeWidth={2} />
-        </TooltipTrigger>
-        <TooltipContent side="right" sideOffset={10}>
-          Expand sidebar
-        </TooltipContent>
-      </Tooltip>
-
-      <div className="my-1 h-px w-6 bg-dock-muted" />
-
-      <div className="scrollbar-none flex flex-1 flex-col items-center gap-1 overflow-y-auto">
-        {railDestinations().map((dest) => (
-          <RailIcon
-            key={dest.href}
-            dest={dest}
-            active={pathname === dest.href}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/* ── the dock-toned vessel that morphs rail ↔ tree ─────────────────── */
-
-const VESSEL =
-  "relative overflow-hidden rounded-3xl bg-dock text-dock-foreground edge"
 
 export function DocsSidebar() {
   const pathname = usePathname()
-  const [collapsed, setCollapsed] = React.useState(false)
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   // Close the mobile sheet whenever the route changes.
@@ -458,8 +345,7 @@ export function DocsSidebar() {
     if (mobileOpen) setMobileOpen(false)
   }
 
-  // The header chrome's hamburger lives outside this tree; it opens the sheet
-  // via this event (decoupled, like the ⌘K search launcher).
+  // The header's menu button opens the sheet via this decoupled event.
   React.useEffect(() => {
     const onOpen = () => setMobileOpen(true)
     window.addEventListener("open-docs-nav", onOpen)
@@ -468,102 +354,43 @@ export function DocsSidebar() {
 
   return (
     <>
-      {/* DESKTOP — sticky, dock-toned rail that morphs its width. */}
-      <aside className="group sticky top-16 z-20 hidden h-[calc(100dvh-5rem)] shrink-0 self-start py-2 pl-3 md:block">
-        <div className="relative h-full">
-          <div
-            className={cn(
-              VESSEL,
-              "h-full",
-              collapsed ? "w-14" : EXPANDED_W,
-              MORPH,
-            )}
-          >
-            {/* Tree (in flow → owns height); cross-fades with the rail. */}
-            <div
-              className={cn(
-                "h-full",
-                EXPANDED_W,
-                FADE,
-                collapsed && "pointer-events-none opacity-0",
-              )}
-            >
-              <Tree pathname={pathname} />
-            </div>
-
-            {/* Rail (absolute overlay); cross-fades with the tree. */}
-            <div
-              className={cn(
-                "absolute inset-0",
-                FADE,
-                collapsed ? "opacity-100" : "pointer-events-none opacity-0",
-              )}
-            >
-              <Rail pathname={pathname} onExpand={() => setCollapsed(false)} />
-            </div>
-          </div>
-
-          {/* Collapse handle — a dock-toned button straddling the rail's outer
-              right edge near the top, revealed on sidebar hover (expanded only). */}
-          {collapsed ? null : (
-            <div className="absolute top-3 right-0 z-10 translate-x-[calc(100%+0.625rem)] rounded-full bg-dock p-[3px] opacity-0 edge transition-opacity duration-150 group-hover:opacity-100 focus-within:opacity-100">
-              <Tooltip>
-                <TooltipTrigger
-                  render={
-                    <button
-                      type="button"
-                      onClick={() => setCollapsed(true)}
-                      aria-label="Collapse sidebar"
-                      className={cn(
-                        "flex size-8 items-center justify-center rounded-full transition-colors",
-                        IDLE,
-                        RING,
-                      )}
-                    />
-                  }
-                >
-                  <Sidebar className="size-4" strokeWidth={2} />
-                </TooltipTrigger>
-                <TooltipContent side="right" sideOffset={8}>
-                  Collapse sidebar
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          )}
-        </div>
+      {/* DESKTOP — calm sticky column with a hairline divider. */}
+      <aside className="sticky top-14 hidden h-[calc(100dvh-3.5rem)] w-64 shrink-0 self-start border-r border-border pt-4 md:block">
+        <Tree pathname={pathname} />
       </aside>
 
-      {/* MOBILE — the tree as a left sheet, opened from the header hamburger. */}
+      {/* MOBILE — slide-in sheet from the left. */}
       {mobileOpen ? (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-[60] md:hidden">
           <button
             type="button"
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
-            className="absolute inset-0 bg-foreground/50"
+            className="absolute inset-0 bg-foreground/40 backdrop-blur-sm animate-in fade-in duration-150"
           />
-          <div className="absolute inset-y-3 left-3 w-72">
-            <div className={cn(VESSEL, "h-full w-full")}>
-              <div className="flex items-center justify-end p-2">
-                <button
-                  type="button"
-                  onClick={() => setMobileOpen(false)}
-                  aria-label="Close menu"
-                  className={cn(
-                    "grid size-8 place-items-center rounded-lg",
-                    IDLE,
-                    RING,
-                  )}
-                >
-                  <X className="size-4" />
-                </button>
-              </div>
-              <div className="h-[calc(100%-3rem)]">
-                <Tree
-                  pathname={pathname}
-                  onNavigate={() => setMobileOpen(false)}
-                />
-              </div>
+          <div className="animate-in slide-in-from-left duration-200 absolute inset-y-0 left-0 flex w-72 flex-col border-r border-border bg-background">
+            <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-4">
+              <span className="font-mono text-sm font-medium text-foreground">
+                byronwade<span className="text-brand">/ui</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                className={cn(
+                  "grid size-8 place-items-center rounded-lg",
+                  IDLE,
+                  RING,
+                )}
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+            <div className="min-h-0 flex-1 pt-2">
+              <Tree
+                pathname={pathname}
+                onNavigate={() => setMobileOpen(false)}
+              />
             </div>
           </div>
         </div>

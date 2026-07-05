@@ -8,11 +8,21 @@
 
 ---
 
+## 0. Category — app-only
+
+byronwade/ui is an **app-only** design system: a token-governed component language for **application
+surfaces** — dashboards, admin panels, developer tools, AI workbenches, resource lists, command
+centers, and object-detail workflows. It is **not** a marketing kit. Marketing/editorial and media
+components ship as a **secondary** lane for docs, screenshots, and demos; they never define the
+identity or the center of the catalog. The house doctrine lives in
+[`app-only-design-doctrine.md`](./app-only-design-doctrine.md). Lead positioning with the
+category (app-only) and back it with the moat below.
+
 ## 1. The thesis (one paragraph)
 
 shadcn made design systems **ownable** — copy the code, it's yours, not a dependency.
-The next era's code is written _with_ an agent, and every agent drifts off-system the
-moment it reaches for `bg-[#f7f7f4]` instead of your token. byronwade/ui is the first
+The next era's product UI is built _with_ an agent, and every agent drifts off-system the
+moment it reaches for `bg-[#f7f7f4]` instead of your token. byronwade/ui is the first **app-only**
 design system that is **operated by agents and provably kept on-system** — not by
 convention, but by a single detection engine wired into the three places an agent
 touches: a **lint** that fails CI on off-system code, an **eval** that measures the
@@ -104,11 +114,12 @@ why people fall for it. Headline the unforgeable thing.
 
 ## 5. Tagline candidates (proof-forward)
 
-1. _"The design system agents can't take off-system."_
-2. _"One source of truth. One definition of on-system. Lint, eval, and MCP enforce it."_
-3. _"Provably on-system — we ship the number."_
-4. _"Warm, alive, and agent-native."_ (aesthetic + category, paired with a proof line)
-5. _"Your tokens, enforced everywhere an agent touches your code."_
+1. _"Calm app UI, enforced by agents."_ (category + moat)
+2. _"The app-only design system for agent-built products."_
+3. _"A product UI system agents can't take off-system."_
+4. _"Dense, calm, on-system app interfaces."_
+5. _"Warm precision for real application surfaces."_
+6. _"One source of truth. One definition of on-system. Lint, eval, and MCP enforce it."_
 
 ## 6. The narrative arc (for a landing page, in order)
 

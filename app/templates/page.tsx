@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { ArrowRight, Clock, Stack } from "@/lib/icons"
 
+import { SiteAtmosphere } from "@/app/_components/cinematic/site-atmosphere"
+
 const launchNotes = [
   "Template gallery is being rebuilt",
   "Docs and component catalog remain available",
@@ -9,11 +11,10 @@ const launchNotes = [
 
 export default async function TemplatesPage() {
   return (
-    <main className="fixed inset-0 h-dvh overflow-hidden bg-background text-foreground">
-      <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.32]" />
-      <div className="glow-brand pointer-events-none fixed inset-x-0 top-0 -z-10 h-[70vh] opacity-70" />
+    <main className="fixed inset-0 isolate h-dvh overflow-hidden text-foreground">
+      <SiteAtmosphere />
 
-      <section className="mx-auto flex h-dvh w-full max-w-6xl flex-col justify-center px-6 pb-20 pt-16 sm:pb-16">
+      <section className="mx-auto flex h-dvh w-full flex-col justify-center px-6 sm:px-8 lg:px-12 pb-20 pt-16 sm:pb-16">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end lg:gap-12">
           <div className="max-w-4xl">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">

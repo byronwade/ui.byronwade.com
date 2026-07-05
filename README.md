@@ -1,8 +1,19 @@
 # byronwade/ui
 
-A personal master design system, published as a **namespaced [shadcn](https://ui.shadcn.com) registry**.
-Token-driven components with a single warm-green brand accent that you re-skin from one CSS variable.
-Install components into any Next.js + Tailwind v4 project with the shadcn CLI — you own the copied code.
+**An app-only design system for building calm, dense, agent-native product interfaces.** Published as
+a **namespaced [shadcn](https://ui.shadcn.com) registry** of token-driven components with a single
+warm brand accent you re-skin from one CSS variable. Install into any Next.js + Tailwind v4 project
+with the shadcn CLI — you own the copied code.
+
+byronwade/ui gives agents a token-governed component language for **dashboards, admin panels,
+developer tools, AI workbenches, resource lists, command centers, and object-detail workflows** — not
+marketing pages. Application UI is the primary lane; marketing/editorial and media components are a
+**secondary** lane for docs, screenshots, and demos. The house doctrine (surface hierarchy, color
+semantics, density, object-bound AI, approved vs disallowed patterns) lives in
+[`docs/app-only-design-doctrine.md`](./docs/app-only-design-doctrine.md).
+
+> _Calm app UI, enforced by agents._ — dense, calm, on-system application surfaces, warm precision for
+> real product work.
 
 > **`<REGISTRY_URL>`** — wherever this README says `<REGISTRY_URL>`, substitute the registry's deployed
 > base URL. After you deploy this repo to Vercel that's the assigned deployment URL (e.g.
@@ -171,6 +182,30 @@ value) — rings, the primary chart line, active states, and status-success all 
 ```
 
 Neutrals, `--warning` (amber), `--destructive` (red), and the dark `--dock-*` tokens are independent by design.
+
+## Alternate skins (Polaris)
+
+Because every component consumes **semantic tokens only**, a whole alternate look is just a different
+set of token _values_ — no component changes. The registry ships one alternate skin today:
+
+- **`polaris`** — a Shopify-Polaris-inspired admin skin. Beyond token values (cool low-chroma neutral
+  surfaces, white cards on a light-gray canvas, a teal-green brand, a dark-neutral primary), it ships a
+  small **component layer** (a `css` block targeting shared `data-slot`s) that adopts Polaris's visual
+  language across every component at once: elevated white cards/overlays (border + soft drop shadow),
+  de-pilled rounded-rectangle buttons/badges, and bordered white form fields. Light and dark. It does
+  not fork component files — it restyles the shared primitives, so components Polaris has no equivalent
+  for (charts, players, etc.) inherit the palette and depth but keep their own structure.
+
+**Install it into your project** (opt-in — it's excluded from `@byronwade/all`):
+
+```bash
+npx shadcn@latest add @byronwade/polaris
+```
+
+This writes the Polaris token values into your `globals.css` (`:root` / `.dark`), so the whole system
+adopts the Polaris look. To keep both looks and **toggle between them at runtime**, scope the Polaris
+values under `:root[data-skin="polaris"]` (this is exactly how the docs site's skin switcher works —
+see the skin block in `app/globals.css`) and set `document.documentElement.dataset.skin = "polaris"`.
 
 ## Developing the registry
 
