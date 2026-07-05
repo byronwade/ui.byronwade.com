@@ -200,8 +200,8 @@ npx shadcn@latest add @byronwade/polaris
 
 This writes the Polaris token values into your `globals.css` (`:root` / `.dark`), so the whole system
 adopts the Polaris look. To keep both looks and **toggle between them at runtime**, scope the Polaris
-values under `[data-skin="polaris"]` (this is exactly how the docs site's skin switcher works — see
-`app/skins.css`) and set `document.documentElement.dataset.skin = "polaris"`.
+values under `:root[data-skin="polaris"]` (this is exactly how the docs site's skin switcher works —
+see the skin block in `app/globals.css`) and set `document.documentElement.dataset.skin = "polaris"`.
 
 ## Developing the registry
 

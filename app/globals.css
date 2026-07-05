@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./foundation.generated.css";
-@import "./skins.css";
 
 @source "../components";
 @source "../lib";
@@ -37,4 +36,71 @@
 }
 ::view-transition-new(root) {
   z-index: 9999;
+}
+
+/*
+ * Alternate token skins. A skin re-skins every component at once because the
+ * whole system consumes semantic tokens only — override the raw token values
+ * under a `data-skin` scope and the `bg-*` / `text-*` / `border-*` utilities
+ * (which resolve to `var(--<token>)`) cascade automatically, in light and dark.
+ * Default (no `data-skin`, or `data-skin="warm"`) = the byronwade warm system.
+ *
+ * Declared here (not an @import) so the rules are always emitted, and prefixed
+ * with `:root` so they outrank the foundation base's `:root` / `.dark` tokens on
+ * specificity regardless of stylesheet order.
+ *
+ * Polaris — a Shopify-Polaris-inspired admin skin: cool low-chroma neutral
+ * surfaces, white cards on a light-gray canvas, a teal-green brand, a
+ * dark-neutral primary, tighter radii. Ships as `@byronwade/polaris`.
+ */
+:root[data-skin="polaris"] {
+  --background: oklch(0.928 0.007 248);
+  --foreground: oklch(0.2 0.018 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.018 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.018 262);
+  --primary: oklch(0.22 0.016 262);
+  --primary-foreground: oklch(0.99 0.003 248);
+  --secondary: oklch(0.905 0.009 248);
+  --secondary-foreground: oklch(0.28 0.016 262);
+  --muted: oklch(0.902 0.009 248);
+  --muted-foreground: oklch(0.46 0.018 260);
+  --accent: oklch(0.892 0.012 248);
+  --accent-foreground: oklch(0.28 0.016 262);
+  --destructive: oklch(0.52 0.21 27);
+  --border: oklch(0.85 0.014 250);
+  --input: oklch(0.85 0.014 250);
+  --edge: oklch(0.5 0.05 262 / 16%);
+  --brand: oklch(0.6 0.13 185);
+  --brand-foreground: oklch(0.99 0.006 185);
+  --brand-muted: oklch(0.92 0.05 185);
+  --warning: oklch(0.76 0.15 72);
+  --radius: 0.5rem;
+}
+
+:root[data-skin="polaris"].dark {
+  --background: oklch(0.17 0.009 265);
+  --foreground: oklch(0.93 0.006 260);
+  --card: oklch(0.235 0.011 265);
+  --card-foreground: oklch(0.93 0.006 260);
+  --popover: oklch(0.235 0.011 265);
+  --popover-foreground: oklch(0.93 0.006 260);
+  --primary: oklch(0.93 0.006 260);
+  --primary-foreground: oklch(0.2 0.008 265);
+  --secondary: oklch(0.272 0.011 265);
+  --secondary-foreground: oklch(0.9 0.006 260);
+  --muted: oklch(0.272 0.011 265);
+  --muted-foreground: oklch(0.7 0.012 265);
+  --accent: oklch(0.3 0.013 265);
+  --accent-foreground: oklch(0.9 0.006 260);
+  --destructive: oklch(0.62 0.19 27);
+  --border: oklch(0.34 0.012 265);
+  --input: oklch(0.34 0.012 265);
+  --edge: oklch(0.8 0.04 260 / 12%);
+  --brand: oklch(0.68 0.125 178);
+  --brand-foreground: oklch(0.985 0.006 178);
+  --brand-muted: oklch(0.32 0.075 178);
+  --warning: oklch(0.8 0.14 75);
+  --radius: 0.5rem;
 }
