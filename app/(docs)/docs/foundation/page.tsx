@@ -5,6 +5,7 @@ import { ArrowRight } from "@/lib/icons"
 import { CodeBlock } from "@/app/(docs)/_components/code-block"
 import { BLEED } from "@/app/(docs)/_components/docs-prose"
 import { GuidePager } from "@/app/(docs)/_components/guide-pager"
+import { Reveal } from "@/app/_components/cinematic/reveal"
 import { REGISTRY_URL } from "@/content/guides"
 
 export const metadata: Metadata = {
@@ -67,7 +68,7 @@ export default function FoundationPage() {
         <div className="grid grid-cols-3 gap-2 pb-10 sm:grid-cols-5 lg:grid-cols-7">
           <div className="col-span-3 flex flex-col justify-center sm:col-span-2 lg:col-span-3">
             <h1 className="text-[clamp(2rem,6vw,4rem)] font-normal leading-[0.95] tracking-tight text-foreground text-balance">
-              The palette, <span className="text-brand">in full.</span>
+              The palette, <span className="text-gradient-brand">in full.</span>
             </h1>
             <p className="mt-3 max-w-md font-mono text-[13px] leading-relaxed text-muted-foreground">
               Warm paper neutrals, one brand accent, fixed data hues — tuned for
@@ -221,7 +222,7 @@ export default function FoundationPage() {
       </section>
 
       {/* ============================ SURFACE HIERARCHY ================= */}
-      <section className="py-16">
+      <Reveal className="py-16">
         <div className="flex items-baseline justify-between gap-4">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Surface hierarchy
@@ -258,7 +259,7 @@ export default function FoundationPage() {
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ============================ TYPE + RESKIN (band) ============== */}
       <section className={`${BLEED} border-y border-border bg-muted/30`}>
