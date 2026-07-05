@@ -50,9 +50,9 @@ const pillars = [
 export default function HomePage() {
   return (
     <main className="relative min-h-dvh overflow-x-clip bg-background text-foreground">
-      {/* Calm atmosphere, faint dotted grid + a single brand glow. */}
-      <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.35]" />
-      <div className="glow-brand pointer-events-none fixed inset-x-0 top-0 -z-10 h-[60vh] opacity-70" />
+      {/* Calm atmosphere — a whisper of dotted grid and a restrained brand glow. */}
+      <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.18]" />
+      <div className="glow-brand pointer-events-none fixed inset-x-0 top-0 -z-10 h-[50vh] opacity-40" />
 
       {/* ====================================================== HERO ===== */}
       <section className="mx-auto flex min-h-dvh max-w-4xl flex-col items-center justify-center px-6 pb-20 pt-28 text-center sm:pt-32">
