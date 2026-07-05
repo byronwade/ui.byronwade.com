@@ -11,7 +11,7 @@ const launchNotes = [
 
 export default async function TemplatesPage() {
   return (
-    <main className="fixed inset-0 h-dvh overflow-hidden bg-background text-foreground">
+    <main className="fixed inset-0 isolate h-dvh overflow-hidden text-foreground">
       <SiteAtmosphere />
 
       <section className="mx-auto flex h-dvh w-full max-w-6xl flex-col justify-center px-6 pb-20 pt-16 sm:pb-16">

@@ -51,7 +51,7 @@ const pillars = [
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-dvh overflow-x-clip bg-background text-foreground">
+    <main className="relative isolate min-h-dvh overflow-x-clip text-foreground">
       <SiteAtmosphere />
 
       {/* ====================================================== HERO ===== */}

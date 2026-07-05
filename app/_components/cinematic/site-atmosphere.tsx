@@ -16,14 +16,16 @@ export function SiteAtmosphere({ className }: { className?: string }) {
         className,
       )}
     >
-      {/* faint engineered grid — the system's texture */}
-      <div className="bg-grid absolute inset-0 opacity-[0.12]" />
+      {/* tonal wash — a whisper of brand light from the top for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brand/[0.05] via-transparent to-transparent" />
+      {/* engineered grid — the system's texture */}
+      <div className="bg-grid absolute inset-0 opacity-[0.17]" />
       {/* brand light source, top-center */}
-      <div className="glow-brand absolute inset-x-0 top-0 h-[65vh] opacity-45" />
+      <div className="glow-brand absolute inset-x-0 top-0 h-[70vh] opacity-60" />
       {/* soft brand orb for volumetric depth */}
-      <div className="absolute left-1/2 top-[-12%] h-[46vh] w-[70vw] -translate-x-1/2 rounded-full bg-brand/8 blur-[120px]" />
+      <div className="absolute left-1/2 top-[-12%] h-[52vh] w-[75vw] -translate-x-1/2 rounded-full bg-brand/10 blur-[130px]" />
       {/* cinematic vignette — focus toward center, dissolve to the canvas */}
-      <div className="absolute inset-0 [background:radial-gradient(135%_95%_at_50%_0%,transparent_55%,var(--background)_100%)]" />
+      <div className="absolute inset-0 [background:radial-gradient(135%_95%_at_50%_0%,transparent_50%,var(--background)_100%)]" />
     </div>
   )
 }

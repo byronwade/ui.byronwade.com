@@ -41,10 +41,10 @@ export default function SurfacesPage() {
 
   return (
     <article className="max-w-none">
-      <section className="relative py-12 lg:py-16">
+      <section className="relative isolate py-12 lg:py-16">
         <div
           aria-hidden
-          className="glow-brand pointer-events-none absolute inset-x-0 -top-8 -z-10 h-64 opacity-40"
+          className="glow-brand pointer-events-none absolute inset-x-0 -top-8 -z-10 h-64 opacity-60"
         />
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           Foundation · Surfaces

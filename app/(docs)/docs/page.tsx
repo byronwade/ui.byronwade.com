@@ -36,10 +36,10 @@ const PRINCIPLES = [
 export default function ComponentsIndexPage() {
   return (
     <article className="max-w-none">
-      <section className="relative grid gap-8 py-12 lg:grid-cols-[1fr_auto] lg:items-end lg:py-16">
+      <section className="relative isolate grid gap-8 py-12 lg:grid-cols-[1fr_auto] lg:items-end lg:py-16">
         <div
           aria-hidden
-          className="glow-brand pointer-events-none absolute inset-x-0 -top-8 -z-10 h-64 opacity-40"
+          className="glow-brand pointer-events-none absolute inset-x-0 -top-8 -z-10 h-64 opacity-60"
         />
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
