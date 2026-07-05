@@ -244,3 +244,13 @@ Both gates run automatically in CI on every push and pull request (`.github/work
 4. Write `tests/components/<slug>.test.tsx` covering all variants and states.
 5. Run `npm run test:ci` — must be green before committing.
 6. Commit.
+
+## Cursor Cloud specific instructions
+
+This is a single **Next.js 16 (Turbopack) web app** — a shadcn design-system registry — plus npm-workspace tooling packages under `packages/*`. There is no backend, database, or required env/secrets. Package manager is **npm** (`package-lock.json`, Node 22). The startup update script already runs `npm install`.
+
+- **Run the app:** `npm run dev` (serves `http://localhost:3000`). The `predev`/`pretest`/`pretest:ci` hooks auto-run `scripts/sync-registry.mjs`, which regenerates the git-ignored `components/`, `lib/`, and `app/foundation.generated.css` from `registry/`. Always edit source under `registry/`, never the generated copies.
+- **`/catalog` is a heavy page** — it renders 200+ live component previews at once and can crash a sandboxed / low-memory browser tab (Chrome "Aw, Snap!" `SIGTRAP`, "Page Unresponsive"). The server serves it fine (HTTP 200); this is a client-side render-cost issue. For interactive manual testing prefer individual `/docs/<component>` pages (e.g. `/docs/button`) or `/styleguide`.
+- **Lint:** `npm run lint` runs but currently reports **pre-existing errors** (mostly in `tests/**`) on a clean checkout — a non-zero exit here is not caused by your environment setup. `npm run lint:on-system` builds the workspace lint packages first and scans `registry/`.
+- **Tests:** `npm run test:run` (fast, no coverage) or `npm run test:ci` (coverage gate, single-worker — slow, ~3 min). jsdom prints `Not implemented: ... getContext()/getComputedStyle` warnings for canvas/Recharts components — expected and documented, not failures.
+- Standard commands and the full sync → build → validate pipeline are documented in `README.md` and the `scripts` block of `package.json`.
