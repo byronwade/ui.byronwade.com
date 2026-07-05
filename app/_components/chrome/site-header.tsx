@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { isActive, navItems } from "./nav-config"
+import { SkinToggle } from "./skin-toggle"
 import { ThemeToggleButton } from "./theme-toggle-button"
 
 const GITHUB_URL = "https://github.com/byronwade/ui"
@@ -172,6 +173,8 @@ export function SiteHeader() {
               ⌘K
             </kbd>
           </button>
+
+          <SkinToggle />
 
           <ThemeToggleButton />
 

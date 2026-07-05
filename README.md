@@ -183,6 +183,26 @@ value) — rings, the primary chart line, active states, and status-success all 
 
 Neutrals, `--warning` (amber), `--destructive` (red), and the dark `--dock-*` tokens are independent by design.
 
+## Alternate skins (Polaris)
+
+Because every component consumes **semantic tokens only**, a whole alternate look is just a different
+set of token _values_ — no component changes. The registry ships one alternate skin today:
+
+- **`polaris`** — a Shopify-Polaris-inspired admin skin: cool low-chroma neutral surfaces, white cards
+  on a light-gray canvas, a teal-green brand, a dark-neutral primary action, and tighter (more squared)
+  radii. It re-skins every component at once, in light and dark.
+
+**Install it into your project** (opt-in — it's excluded from `@byronwade/all`):
+
+```bash
+npx shadcn@latest add @byronwade/polaris
+```
+
+This writes the Polaris token values into your `globals.css` (`:root` / `.dark`), so the whole system
+adopts the Polaris look. To keep both looks and **toggle between them at runtime**, scope the Polaris
+values under `[data-skin="polaris"]` (this is exactly how the docs site's skin switcher works — see
+`app/skins.css`) and set `document.documentElement.dataset.skin = "polaris"`.
+
 ## Developing the registry
 
 Source of truth lives in `registry/` (`lib/`, `ui/`, `components/`) and the `registry.json` manifest.

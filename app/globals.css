@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./foundation.generated.css";
+@import "./skins.css";
 
 @source "../components";
 @source "../lib";
