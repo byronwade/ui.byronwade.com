@@ -188,9 +188,13 @@ Neutrals, `--warning` (amber), `--destructive` (red), and the dark `--dock-*` to
 Because every component consumes **semantic tokens only**, a whole alternate look is just a different
 set of token _values_ — no component changes. The registry ships one alternate skin today:
 
-- **`polaris`** — a Shopify-Polaris-inspired admin skin: cool low-chroma neutral surfaces, white cards
-  on a light-gray canvas, a teal-green brand, a dark-neutral primary action, and tighter (more squared)
-  radii. It re-skins every component at once, in light and dark.
+- **`polaris`** — a Shopify-Polaris-inspired admin skin. Beyond token values (cool low-chroma neutral
+  surfaces, white cards on a light-gray canvas, a teal-green brand, a dark-neutral primary), it ships a
+  small **component layer** (a `css` block targeting shared `data-slot`s) that adopts Polaris's visual
+  language across every component at once: elevated white cards/overlays (border + soft drop shadow),
+  de-pilled rounded-rectangle buttons/badges, and bordered white form fields. Light and dark. It does
+  not fork component files — it restyles the shared primitives, so components Polaris has no equivalent
+  for (charts, players, etc.) inherit the palette and depth but keep their own structure.
 
 **Install it into your project** (opt-in — it's excluded from `@byronwade/all`):
 
