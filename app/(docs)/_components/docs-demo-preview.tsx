@@ -37,6 +37,46 @@ export function getDisabledDemoControlsForSource(
   }
 }
 
+/** Example bases that express a density/frame axis via a dedicated example file. */
+const DENSITY_EXAMPLE_BASES = new Set([
+  "compact",
+  "comfortable",
+  "inset",
+  "compact-inset",
+  "comfortable-inset",
+])
+
+function normalizeExampleBase(example: string): string {
+  return (
+    example
+      .split("/")
+      .pop()
+      ?.replace(/\.tsx$/, "") ?? example
+  )
+}
+
+/**
+ * Viewer toolbar disabled-state for a component page. Frame + depth are
+ * universal viewer-level treatments (elevated stage / inset well), so they are
+ * always available. Density is available when the example reads the density
+ * hook or the component ships a density/frame example file. State is available
+ * only when the active example reads the state hook.
+ */
+function getDisabledDemoControls(
+  source: string,
+  exampleBases: string[],
+): DemoToolbarDisabledControls {
+  const densitySupported =
+    source.includes("useDemoDensity") ||
+    exampleBases.some((base) => DENSITY_EXAMPLE_BASES.has(base))
+  return {
+    density: !densitySupported,
+    frame: false,
+    depth: false,
+    state: !source.includes("useDemoState"),
+  }
+}
+
 type Props = {
   title?: string
   slug: string
@@ -86,8 +126,9 @@ export function DocsDemoPreview({
             frameCtx,
             allVariants,
           )
-          return getDisabledDemoControlsForSource(
+          return getDisabledDemoControls(
             codeByExample[example] ?? fallbackCode ?? "",
+            docExamples.map(normalizeExampleBase),
           )
         }}
         code={(frameCtx) => {

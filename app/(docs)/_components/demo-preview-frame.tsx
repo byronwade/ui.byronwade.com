@@ -41,9 +41,16 @@ import { cn } from "@/lib/utils"
 
 type DemoView = "preview" | "code"
 export type DemoToolbarDisabledControls = {
+  density?: boolean
   frame?: boolean
   depth?: boolean
   state?: boolean
+}
+
+const VIEWPORT_META: Record<DemoViewport, { label: string; width: string }> = {
+  desktop: { label: "Desktop", width: "100%" },
+  tablet: { label: "Tablet", width: "768px" },
+  mobile: { label: "Mobile", width: "375px" },
 }
 
 const VIEW_OPTIONS: {
@@ -242,13 +249,24 @@ function DemoPreviewContent({
   const width = demoViewportWidths[viewport]
   const ctx: DemoContext = { surface, viewport, density, frame, depth, state }
 
+  // Depth is a viewer-level treatment: it elevates the demo stage so the
+  // control visibly works for every component, not only ones reading the hook.
+  const depthClass =
+    depth === "soft"
+      ? "depth-soft rounded-2xl bg-background p-5"
+      : depth === "raised"
+        ? "depth-raised rounded-2xl bg-background p-5"
+        : ""
+
   return (
     <div
+      data-demo-stage
       className={cn(
         "mx-auto flex w-full justify-center transition-[max-width] duration-300",
         !skipSurfaceWrapper &&
           surface === "marketing" &&
           "reading-ui reading-measure",
+        depthClass,
       )}
       style={{ maxWidth: width != null ? `${width}px` : undefined }}
     >
@@ -451,14 +469,13 @@ export function DemoPreviewFrame({
     )
   }
 
+  const viewportMeta = VIEWPORT_META[ctx.viewport]
+
   return (
     <TooltipProvider delay={0}>
       <div
         data-slot="demo-preview-card"
-        className={cn(
-          "overflow-hidden rounded-xl bg-card text-card-foreground edge",
-          ctx.depth !== "none" && "edge",
-        )}
+        className="overflow-hidden rounded-2xl bg-card text-card-foreground edge"
       >
         <div
           data-slot="demo-preview-header"
@@ -496,15 +513,20 @@ export function DemoPreviewFrame({
                 </DemoToolbarIconButton>
               ))}
             </ToolbarGroup>
-            <ToolbarGroup label="Density">
+            <ToolbarGroup label="Density" disabled={disabled.density}>
               {DENSITY_OPTIONS.map(({ label, value, tooltip }) => (
                 <DemoToolbarIconButton
                   key={value}
                   label={label}
-                  tooltip={tooltip}
+                  tooltip={
+                    disabled.density
+                      ? "Density is not available for this example."
+                      : tooltip
+                  }
                   value={value}
                   currentValue={ctx.density}
                   onSelect={(density) => updateContext({ density })}
+                  disabled={disabled.density}
                 >
                   <DensityGlyph density={value} />
                 </DemoToolbarIconButton>
@@ -584,23 +606,44 @@ export function DemoPreviewFrame({
           data-demo-state={ctx.state}
           data-demo-view={view}
           className={cn(
-            "flex min-h-56 w-full items-center justify-center overflow-hidden",
+            "relative flex min-h-64 w-full items-center justify-center overflow-hidden",
             view === "preview" ? "p-6 sm:p-8" : "p-0",
-            ctx.frame === "inset" && "bg-muted/20",
+            view === "preview" && ctx.frame === "inset" && "bg-muted/40",
           )}
         >
           {view === "preview" ? (
-            <DemoPreviewContent
-              surface={ctx.surface}
-              viewport={ctx.viewport}
-              skipSurfaceWrapper={skipSurfaceWrapper}
-              density={ctx.density}
-              frame={ctx.frame}
-              depth={ctx.depth}
-              state={ctx.state}
-            >
-              {children}
-            </DemoPreviewContent>
+            <>
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "bg-grid pointer-events-none absolute inset-0",
+                  ctx.frame === "inset" ? "opacity-30" : "opacity-[0.18]",
+                )}
+              />
+              <span
+                data-slot="demo-preview-viewport-readout"
+                className="pointer-events-none absolute top-2.5 right-2.5 z-10 hidden items-center gap-1.5 rounded-full bg-background/90 px-2.5 py-1 font-mono text-[11px] text-muted-foreground edge tabular-nums backdrop-blur-sm sm:inline-flex"
+              >
+                <span
+                  className="size-1.5 rounded-full bg-brand"
+                  aria-hidden="true"
+                />
+                {viewportMeta.label} · {viewportMeta.width}
+              </span>
+              <div className="relative flex w-full justify-center">
+                <DemoPreviewContent
+                  surface={ctx.surface}
+                  viewport={ctx.viewport}
+                  skipSurfaceWrapper={skipSurfaceWrapper}
+                  density={ctx.density}
+                  frame={ctx.frame}
+                  depth={ctx.depth}
+                  state={ctx.state}
+                >
+                  {children}
+                </DemoPreviewContent>
+              </div>
+            </>
           ) : (
             <div className="w-full">{code?.(ctx)}</div>
           )}
