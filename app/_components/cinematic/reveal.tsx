@@ -1,7 +1,11 @@
 "use client"
 
-import * as React from "react"
-import { motion, useReducedMotion, type Variants } from "motion/react"
+import {
+  motion,
+  useReducedMotion,
+  type HTMLMotionProps,
+  type Variants,
+} from "motion/react"
 
 import { cn } from "@/lib/utils"
 
@@ -13,7 +17,7 @@ import { cn } from "@/lib/utils"
  */
 const EASE = [0.22, 1, 0.36, 1] as const
 
-type RevealProps = React.ComponentProps<"div"> & {
+type RevealProps = HTMLMotionProps<"div"> & {
   /** Seconds to delay the reveal — stagger siblings with 0.06–0.12 steps. */
   delay?: number
   /** Vertical travel distance in px. */
@@ -64,7 +68,7 @@ export function RevealGroup({
   className,
   stagger = 0.08,
   ...props
-}: React.ComponentProps<"div"> & { stagger?: number }) {
+}: HTMLMotionProps<"div"> & { stagger?: number }) {
   const variants: Variants = {
     hidden: {},
     visible: { transition: { staggerChildren: stagger } },

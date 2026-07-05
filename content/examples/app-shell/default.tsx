@@ -5,6 +5,7 @@ import {
   Cube,
   Gear,
   House,
+  type Icon,
   MagnifyingGlass,
   Pulse,
   Users,
@@ -21,14 +22,14 @@ import { Kbd } from "@/components/ui/kbd"
  * calm token surfaces with the `edge` hairline and mono metadata.
  */
 
-const NAV = [
+const NAV: { icon: Icon; label: string; active?: boolean }[] = [
   { icon: House, label: "Overview", active: true },
   { icon: Users, label: "Customers" },
   { icon: Cube, label: "Orders" },
   { icon: ChartBar, label: "Analytics" },
   { icon: CreditCard, label: "Billing" },
   { icon: Gear, label: "Settings" },
-] as const
+]
 
 const ACTIVITY: TimelineEvent[] = [
   {
