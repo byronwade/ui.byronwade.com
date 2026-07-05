@@ -13,12 +13,10 @@ import { DocsSidebar } from "@/app/(docs)/_components/docs-sidebar-nav"
 export function DocsSidebarShell({ children }: { children: React.ReactNode }) {
   return (
     <TooltipProvider delay={200}>
-      <div className="mx-auto flex w-full max-w-[1400px] pt-14">
+      <div className="flex w-full pt-14">
         <DocsSidebar />
         <main className="min-h-0 min-w-0 flex-1">
-          <div className="mx-auto max-w-5xl px-6 pb-16 pt-2 sm:px-8 lg:px-12">
-            {children}
-          </div>
+          <div className="px-6 pb-16 pt-2 sm:px-8 lg:px-10">{children}</div>
         </main>
       </div>
     </TooltipProvider>

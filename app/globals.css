@@ -167,3 +167,32 @@
     0 1px 1px oklch(0.2 0.03 262 / 0.2),
     inset 0 1px 0 oklch(1 0 0 / 0.12);
 }
+
+/* Polaris typography — product-admin tracking (not editorial-tight), semibold
+   titles, and tabular figures for the data-dense admin feel. */
+:root[data-skin="polaris"] {
+  font-variant-numeric: tabular-nums;
+}
+:root[data-skin="polaris"] body {
+  letter-spacing: normal;
+}
+:root[data-skin="polaris"] :is(h1, h2, h3, h4) {
+  letter-spacing: -0.01em;
+}
+:root[data-skin="polaris"] [data-slot="card-title"],
+:root[data-skin="polaris"] [data-slot="card-frame-title"],
+:root[data-skin="polaris"] [data-slot="dialog-title"],
+:root[data-skin="polaris"] [data-slot="sheet-title"],
+:root[data-skin="polaris"] [data-slot="page-header-title"],
+:root[data-skin="polaris"] [data-slot="detail-header-title"] {
+  font-weight: 600;
+}
+
+/* Polaris resting surfaces — sections and inset panels share the card border. */
+:root[data-skin="polaris"] [data-slot="section"],
+:root[data-skin="polaris"] [data-slot="empty"] {
+  box-shadow:
+    0 0 0 1px var(--edge),
+    0 1px 2px -1px oklch(0.2 0.03 262 / 0.14),
+    0 2px 6px -2px oklch(0.2 0.03 262 / 0.08);
+}

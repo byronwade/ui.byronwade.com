@@ -89,7 +89,7 @@ export default async function CatalogPage({
   const items = browseItems()
 
   return (
-    <div className="mx-auto w-full max-w-[110rem] px-6 pt-16 pb-24 sm:px-8 lg:px-12">
+    <div className="w-full px-6 pt-16 pb-24 sm:px-8 lg:px-12">
       <header className="max-w-2xl">
         <p className="font-mono text-xs tracking-[0.2em] text-brand uppercase">
           Browse

@@ -155,7 +155,7 @@ export default function StyleguidePage() {
       <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.35]" />
 
       {/* Top clearance for the centered floating nav dock (mounted globally). */}
-      <div className="mx-auto max-w-6xl px-6 pt-16">
+      <div className="w-full px-6 pt-16 sm:px-8 lg:px-12">
         {/* Hero */}
         <Reveal delay={0}>
           <header className="py-16 text-center">

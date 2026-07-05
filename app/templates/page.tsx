@@ -14,7 +14,7 @@ export default async function TemplatesPage() {
     <main className="fixed inset-0 isolate h-dvh overflow-hidden text-foreground">
       <SiteAtmosphere />
 
-      <section className="mx-auto flex h-dvh w-full max-w-6xl flex-col justify-center px-6 pb-20 pt-16 sm:pb-16">
+      <section className="mx-auto flex h-dvh w-full flex-col justify-center px-6 sm:px-8 lg:px-12 pb-20 pt-16 sm:pb-16">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end lg:gap-12">
           <div className="max-w-4xl">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
