@@ -9,6 +9,22 @@ This project uses the **@byronwade/ui** design system (a namespaced shadcn regis
 Every piece of UI you generate or edit MUST stay on-system. Treat the rules below as
 non-negotiable constraints, not suggestions.
 
+## What this system is: app-only
+
+byronwade/ui is an **app-only** design system for building **calm, dense, agent-native product
+interfaces** — dashboards, admin panels, developer tools, AI workbenches, resource lists, command
+centers, settings/billing screens, logs, activity timelines, and object-detail workflows. Default to
+**application UI**, not marketing pages.
+
+- **Build app surfaces by default.** Reach for shells, sidebars, tables, resource lists, forms,
+  command menus, object-detail layouts, and dense operational views — not hero sections, bento
+  grids, or landing-page compositions. Marketing/editorial and media components still exist, but they
+  are **secondary** (screenshot / documentation / demo utilities); never make them the default.
+- **Calm, not decorative.** No decorative glows, gradient hero cards, random accent borders, or
+  "purple AI sparkle." Depth is the `edge` hairline; color is semantic; headings are restrained.
+- **Dense but breathable.** Compact spacing, stable row heights, mono metadata, one brand emphasis
+  per view. See the full rationale in `docs/app-only-design-doctrine.md`.
+
 ## The one rule that matters
 
 **Compose from the installed design system. Never hand-roll what the system already provides,
@@ -384,24 +400,41 @@ Never stack negative body tracking on reading utilities — foundation resets `l
 - **`reading-muted`** — secondary copy inside a reading lane; higher contrast than `text-muted-foreground`.
 - **`reading-demo-break`** — full-width band above demos/previews; separates 65ch prose from wide specimens.
 
-### Two surfaces, one foundation
+### App-first, one foundation
 
-Application UI and marketing/editorial share tokens and `--brand` — they diverge in typography lane and layout density. Do **not** split the registry into two packages; route by surface instead.
+This is an **app-only** system: the default surface is application UI. Marketing/editorial is a
+**secondary** lane for docs, screenshots, and demos — it shares tokens and `--brand` and never
+becomes the default. Do **not** split the registry into two packages; route by surface instead, and
+lead with the app lane.
 
-| Surface                   | Typography                                               | Layout                                      | Example components                                |
-| ------------------------- | -------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------- |
-| **Application UI**        | UI lane — `font-sans`, `text-sm`/`text-base`             | Shells, tables, forms, dense dashboards     | `app-shell`, `sidebar`, `table`, `morph-dock`     |
-| **Marketing & editorial** | Essay lane — `reading-prose` for copy; heroes full-bleed | `marketing-layout`, media shelves, commerce | `hero-section`, `marketing-layout`, `video-shelf` |
+| Lane                         | Priority      | Typography                                               | Layout                                          | Example components                            |
+| ---------------------------- | ------------- | -------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------- |
+| **Application UI**           | **primary**   | UI lane — `font-sans`, `text-sm`/`text-base`             | Shells, tables, resource lists, forms, dashboards | `app-shell`, `sidebar`, `table`, `morph-dock` |
+| **Marketing & editorial**    | secondary     | Essay lane — `reading-prose` for copy; heroes full-bleed | `marketing-layout`, media shelves, commerce     | `hero-section`, `marketing-layout`, `video-shelf` |
 
-Media, Video, and Commerce categories are marketing surface. `hero-section`, `marketing-layout`, and `description-box` are marketing even when filed under Composites/Patterns.
+Media, Video, and Commerce categories are the secondary marketing lane. `hero-section`,
+`marketing-layout`, and `description-box` are marketing even when filed under Composites/Patterns —
+use them for landing/screenshot surfaces, not as the shape of a product screen.
 
-**Density routing:**
+**Named surface hierarchy (calm, small steps, hairline depth):**
+
+| Role                       | Classes                          | Job                                                        |
+| -------------------------- | -------------------------------- | ---------------------------------------------------------- |
+| Canvas / page              | `bg-background`                  | Deepest app surface; everything sits on it.                |
+| Base / card / panel        | `bg-card edge`                   | Default working surface — cards, panels, lists, shells.    |
+| Recessed / inset           | `bg-muted/30 edge`               | Wells, frame surrounds, code/log insets, secondary lanes.  |
+| Tint / selected            | `bg-brand/10`                    | Selected/active — the only resting brand fill.             |
+| Hover                      | `bg-muted/30`                    | Row and ghost-control hover.                               |
+| Overlay / popover          | `bg-popover` + `depth-raised`    | Floating chrome that leaves the plane.                     |
+| Floating chrome (only)     | `bg-dock text-dock-foreground`   | Global nav / command / search launchers, morph chrome.     |
+
+**Density routing (default to dense operational for app UI):**
 
 | Task density              | Use when                                                                      | Treatment                                                                                        |
 | ------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | **Dense operational**     | Tables, admin indexes, dashboards, command centers, kanban, gantt, file trees | Compact spacing, stable row heights, clear separators, mono metadata, no decorative color fields |
 | **Comfortable product**   | Setup flows, settings, empty states, detail pages, cards                      | Token spacing with visible grouping, `text-sm`/`text-base`, calm actions                         |
-| **Editorial / marketing** | Guides, articles, launch pages, commerce/media surfaces                       | Reading lanes, full-bleed media where useful, larger rhythm without card nesting                 |
+| **Editorial / marketing** | Guides, articles, launch pages, commerce/media surfaces (secondary lane)      | Reading lanes, full-bleed media where useful, larger rhythm without card nesting                 |
 
 ### House utilities (already defined by `foundation`)
 
@@ -560,5 +593,6 @@ Use the design research as behavior guidance, not visual cloning:
 12. Do framed surfaces use `edge` instead of outline borders or shadows?
 13. If this is AI UI, is it attached to an object/action with clear state and review?
 14. If I introduced a color family, did it pass the semantic expansion policy?
+15. Is this an **app surface** by default (dense, calm, operational) — not a marketing/landing composition, decorative glow, or gradient hero?
 
 If any answer is "no", fix it before moving on.

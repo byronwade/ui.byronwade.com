@@ -10,6 +10,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 This repo is the **byronwade/ui design-system registry** — a standalone shadcn registry. All component source lives here in `registry/` and is edited directly in this repo.
 
+**Positioning: app-only.** byronwade/ui is a calm, dense, agent-native design system for **application
+surfaces** — dashboards, admin panels, developer tools, AI workbenches, resource lists, command
+centers, and object-detail workflows. Build application UI by default; marketing/editorial and media
+components are a **secondary** lane for docs, screenshots, and demos, never the default. The full
+rationale, surface hierarchy, color semantics, density, and approved/disallowed patterns live in
+`docs/app-only-design-doctrine.md`.
+
 See `README.md` for the full workflow (sync → registry:build → deploy).
 
 ## Design engineer principles — how we work
@@ -121,8 +128,10 @@ agent following that rule would produce identical-looking code.** That means:
   `shadow-300` + bevel; deeper overlays can use `depth-400` or `depth-600`). Dark mode keeps the
   Polaris elevation scale but uses a darker bevel so shadows do not read as white glow. Never use
   Tailwind `shadow-*` utilities or custom box-shadows in components.
-- **Two surfaces** — Application UI vs marketing/editorial share one foundation; route by surface
-  (`content/catalog-surfaces.ts`), don't split registry packages.
+- **App-first, one foundation** — Application UI is the primary lane; marketing/editorial is a
+  secondary docs/screenshot lane sharing the same foundation. Route by surface
+  (`content/catalog-surfaces.ts`), don't split registry packages, and never let marketing composition
+  become the default (see `docs/app-only-design-doctrine.md`).
 - **Density routes by task.** Dense operational UI (tables, dashboards, admin indexes, command
   palettes, kanban/gantt, file trees) uses compact spacing, stable row heights, and mono metadata.
   Product/editorial surfaces get more breathing room through the reading lanes and marketing layout

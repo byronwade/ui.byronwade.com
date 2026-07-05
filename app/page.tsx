@@ -42,8 +42,8 @@ const pillars = [
   },
   {
     icon: Layout,
-    title: "Whole pages, not just parts",
-    body: "Ships opinionated, full-page layout archetypes, each built around one signature centerpiece.",
+    title: "App shells, not landing pages",
+    body: "Ships dense, operational page scaffolds — dashboards, master-detail, command centers — built for daily product work.",
   },
 ]
 
@@ -62,18 +62,19 @@ export default function HomePage() {
 
         <h1 className="mt-7 text-[clamp(2.75rem,9vw,7rem)] font-normal leading-[0.95] tracking-tight text-balance">
           <span className="block animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700 [animation-delay:80ms]">
-            One design system{" "}
+            Calm app UI,{" "}
           </span>
           <span className="block animate-in fade-in slide-in-from-bottom-4 fill-mode-both text-gradient-brand duration-700 [animation-delay:160ms]">
-            for every surface.
+            enforced by agents.
           </span>
         </h1>
 
         <p className="reading-ui animate-in fade-in slide-in-from-bottom-3 fill-mode-both mx-auto mt-7 text-foreground text-pretty duration-700 [animation-delay:240ms]">
-          A calm, content-first component library published as a namespaced{" "}
-          <span className="text-foreground">shadcn registry</span>. Token-driven
-          primitives, composites, and full-page layouts, all built around a
-          single warm accent you re-skin from one CSS variable. Install with the
+          An <span className="text-foreground">app-only design system</span> for
+          building calm, dense, agent-native product interfaces — dashboards,
+          admin panels, developer tools, AI workbenches, resource lists, and
+          object-detail workflows. Token-driven, published as a namespaced
+          shadcn registry, re-skinned from one CSS variable. Install with the
           shadcn CLI and you own the code.
         </p>
 
@@ -123,7 +124,7 @@ export default function HomePage() {
       {/* ============================================== SURFACE SPLIT ===== */}
       <section className="mx-auto max-w-5xl px-6 py-8">
         <p className="text-center font-mono text-xs uppercase tracking-[0.2em] text-brand">
-          Two surfaces · one foundation
+          Application-first · one foundation
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {catalogSurfaces.map((surface) => (
@@ -242,8 +243,8 @@ export default function HomePage() {
           <span className="text-gradient-brand">One install.</span>
         </h2>
         <p className="reading-ui mx-auto mt-5 text-foreground text-pretty">
-          Browse by surface — application UI or marketing — then make it yours
-          from a single variable.
+          Lead with application UI — shells, tables, resource lists, AI
+          workbenches — then make it yours from a single variable.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button size="lg" render={<Link href="/catalog?surface=app" />}>

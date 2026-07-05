@@ -1,8 +1,19 @@
 # byronwade/ui
 
-A personal master design system, published as a **namespaced [shadcn](https://ui.shadcn.com) registry**.
-Token-driven components with a single warm-green brand accent that you re-skin from one CSS variable.
-Install components into any Next.js + Tailwind v4 project with the shadcn CLI — you own the copied code.
+**An app-only design system for building calm, dense, agent-native product interfaces.** Published as
+a **namespaced [shadcn](https://ui.shadcn.com) registry** of token-driven components with a single
+warm brand accent you re-skin from one CSS variable. Install into any Next.js + Tailwind v4 project
+with the shadcn CLI — you own the copied code.
+
+byronwade/ui gives agents a token-governed component language for **dashboards, admin panels,
+developer tools, AI workbenches, resource lists, command centers, and object-detail workflows** — not
+marketing pages. Application UI is the primary lane; marketing/editorial and media components are a
+**secondary** lane for docs, screenshots, and demos. The house doctrine (surface hierarchy, color
+semantics, density, object-bound AI, approved vs disallowed patterns) lives in
+[`docs/app-only-design-doctrine.md`](./docs/app-only-design-doctrine.md).
+
+> _Calm app UI, enforced by agents._ — dense, calm, on-system application surfaces, warm precision for
+> real product work.
 
 > **`<REGISTRY_URL>`** — wherever this README says `<REGISTRY_URL>`, substitute the registry's deployed
 > base URL. After you deploy this repo to Vercel that's the assigned deployment URL (e.g.
