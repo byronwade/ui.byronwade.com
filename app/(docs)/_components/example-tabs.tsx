@@ -29,11 +29,12 @@ export function ExampleTabs({
   code: string
   demo?: DemoProps
 }) {
+  const [view, setView] = useState<"preview" | "code">("preview")
+
   if (demo) {
     return <DocsDemoPreview title={title} code={code} {...demo} />
   }
 
-  const [view, setView] = useState<"preview" | "code">("preview")
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">

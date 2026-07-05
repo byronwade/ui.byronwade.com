@@ -60,8 +60,12 @@ const ShimmerComponent = ({
   tone,
   size,
 }: TextShimmerProps) => {
-  const MotionComponent = motion.create(
-    Component as keyof JSX.IntrinsicElements
+  // The `as` prop is dynamic, so the motion component must be created at
+  // runtime. `useMemo` keeps it stable per `Component` so it is not recreated
+  // (and the element remounted) on every render.
+  const MotionComponent = useMemo(
+    () => motion.create(Component as keyof JSX.IntrinsicElements),
+    [Component]
   );
 
   const dynamicSpread = useMemo(
@@ -70,6 +74,9 @@ const ShimmerComponent = ({
   );
 
   return (
+    // MotionComponent is memoized above (stable per `Component`); the
+    // static-components rule can't see that, so it's disabled here.
+    // eslint-disable-next-line react-hooks/static-components
     <MotionComponent
       data-slot="shimmer"
       animate={{ backgroundPosition: "0% center" }}

@@ -45,13 +45,6 @@ export const ShowcaseCarousel = ({
   const [canScrollRight, setCanScrollRight] = React.useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = initialScroll
-      checkScrollability()
-    }
-  }, [initialScroll])
-
   const checkScrollability = () => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current
@@ -59,6 +52,13 @@ export const ShowcaseCarousel = ({
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth)
     }
   }
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollLeft = initialScroll
+      checkScrollability()
+    }
+  }, [initialScroll])
 
   const scrollLeft = () => {
     carouselRef.current?.scrollBy({ left: -300, behavior: "smooth" })
@@ -159,6 +159,13 @@ export const ShowcaseCard = ({
   const containerRef = useRef<HTMLDivElement>(null)
   const { onCardClose } = useContext(ShowcaseCarouselContext)
 
+  const handleOpen = () => setOpen(true)
+
+  const handleClose = () => {
+    setOpen(false)
+    onCardClose(index)
+  }
+
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -178,13 +185,6 @@ export const ShowcaseCard = ({
   }, [open])
 
   useOutsideClick(containerRef, () => handleClose())
-
-  const handleOpen = () => setOpen(true)
-
-  const handleClose = () => {
-    setOpen(false)
-    onCardClose(index)
-  }
 
   return (
     <>
