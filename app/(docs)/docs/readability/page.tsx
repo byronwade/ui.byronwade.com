@@ -86,7 +86,7 @@ export default function ReadabilityPage() {
       </section>
 
       {/* ============================ DECISIONS ======================== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-14">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Why we took this road
@@ -181,7 +181,7 @@ export default function ReadabilityPage() {
       </section>
 
       {/* ============================ SHIPPED ============================ */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-14">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Shipped in foundation

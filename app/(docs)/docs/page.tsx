@@ -71,7 +71,7 @@ export default function ComponentsIndexPage() {
         </div>
       </section>
 
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="grid gap-6 py-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-wide text-muted-foreground">
             <span>shadcn registry</span>
