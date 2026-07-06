@@ -192,7 +192,7 @@ export default function AiPage() {
             raw: {REGISTRY_URL}/r/design-rules.json
           </p>
         </div>
-        <div className="mt-6 divide-y divide-edge overflow-hidden rounded-2xl edge">
+        <div className="mt-6 divide-y divide-border overflow-hidden rounded-2xl edge">
           {TOOLS.map((t) => (
             <div
               key={t.name}

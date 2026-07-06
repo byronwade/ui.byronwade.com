@@ -121,7 +121,7 @@ export default function HomePage() {
       </section>
 
       {/* ============================================== SURFACE SPLIT ===== */}
-      <section className="mx-auto w-full px-6 py-16 sm:px-8 lg:px-12">
+      <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <Reveal className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Application-first · one foundation
@@ -162,7 +162,7 @@ export default function HomePage() {
       </section>
 
       {/* =================================================== PILLARS ===== */}
-      <section className="mx-auto w-full px-6 py-16 sm:px-8 lg:px-12">
+      <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Why it exists
@@ -191,7 +191,7 @@ export default function HomePage() {
       <section className="full-bleed relative my-8 overflow-hidden edge bg-card">
         <div className="glow-brand pointer-events-none absolute inset-x-0 top-0 h-full opacity-40" />
         <div className="bg-grid pointer-events-none absolute inset-0 opacity-[0.15]" />
-        <div className="relative mx-auto w-full px-6 py-24 sm:px-8 lg:px-12 text-center sm:py-32">
+        <div className="relative mx-auto max-w-5xl px-6 py-24 text-center sm:py-32">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
               One knob re-skins everything
@@ -212,7 +212,7 @@ export default function HomePage() {
       </section>
 
       {/* =================================================== AI RULES ===== */}
-      <section className="mx-auto w-full px-6 py-16 sm:px-8 lg:px-12">
+      <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <Reveal>
           <div className="overflow-hidden rounded-3xl edge bg-brand/5">
             <div className="p-6 text-left sm:p-10">
@@ -275,7 +275,7 @@ export default function HomePage() {
       </section>
 
       {/* ================================================ FOOTER CTA ===== */}
-      <section className="relative mx-auto w-full px-6 py-28 sm:px-8 lg:px-12 text-center sm:py-36">
+      <section className="relative mx-auto w-full max-w-4xl px-6 py-28 text-center sm:py-36">
         <Reveal>
           <h2 className="text-[clamp(2.25rem,7vw,4.5rem)] font-normal leading-[1.0] tracking-tight text-balance text-foreground">
             {components.length} components.{" "}

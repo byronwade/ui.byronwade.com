@@ -328,7 +328,7 @@ export default function TypographyPage() {
         <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-brand">
           The scale, a waterfall
         </p>
-        <div className="divide-y divide-edge overflow-hidden rounded-2xl edge">
+        <div className="divide-y divide-border overflow-hidden rounded-2xl edge">
           {SCALE.map((w) => (
             <div
               key={w.size}

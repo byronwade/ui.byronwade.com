@@ -688,7 +688,7 @@ export default function PhilosophyPage() {
         <h2 className="mt-3 max-w-2xl text-3xl font-normal tracking-tight text-foreground text-balance sm:text-4xl">
           The whole path, in order.
         </h2>
-        <div className="mt-8 divide-y divide-edge overflow-hidden rounded-2xl edge">
+        <div className="mt-8 divide-y divide-border overflow-hidden rounded-2xl edge">
           {JOURNEY.map((j) => (
             <Link
               key={j.href}
