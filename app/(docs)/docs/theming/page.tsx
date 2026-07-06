@@ -124,7 +124,7 @@ export default function ThemingPage() {
       </section>
 
       {/* ============================ ANATOMY OF --brand ============== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-16">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Anatomy of the token
@@ -225,7 +225,7 @@ export default function ThemingPage() {
       </section>
 
       {/* ============================ CASCADE ========================= */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-16">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             The cascade

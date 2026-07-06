@@ -108,7 +108,7 @@ export default function FoundationPage() {
       </section>
 
       {/* ============================ RADIUS (single morphing row) ====== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-14">
           <div className="flex items-baseline justify-between gap-4">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
@@ -262,7 +262,7 @@ export default function FoundationPage() {
       </Reveal>
 
       {/* ============================ TYPE + RESKIN (band) ============== */}
-      <section className={`${BLEED} border-y border-border bg-muted/30`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="grid gap-12 py-16 md:grid-cols-2">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">

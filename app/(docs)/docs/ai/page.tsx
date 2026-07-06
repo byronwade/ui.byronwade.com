@@ -159,7 +159,7 @@ export default function AiPage() {
       </section>
 
       {/* ============================ WHAT IT ENFORCES (strip) ========== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-14">
           <p className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-brand">
             What the rule enforces
@@ -192,7 +192,7 @@ export default function AiPage() {
             raw: {REGISTRY_URL}/r/design-rules.json
           </p>
         </div>
-        <div className="mt-6 divide-y divide-edge overflow-hidden rounded-2xl edge">
+        <div className="mt-6 divide-y divide-border overflow-hidden rounded-2xl edge">
           {TOOLS.map((t) => (
             <div
               key={t.name}

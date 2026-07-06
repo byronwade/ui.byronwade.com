@@ -289,7 +289,7 @@ export default function TypographyPage() {
       </section>
 
       {/* ============================ PRINCIPLES ======================= */}
-      <section className={`${BLEED} border-y border-border bg-card py-12`}>
+      <section className={`${BLEED} bg-muted/30 py-12`}>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           Editorial restraint
         </p>
@@ -328,7 +328,7 @@ export default function TypographyPage() {
         <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-brand">
           The scale, a waterfall
         </p>
-        <div className="divide-y divide-edge overflow-hidden rounded-2xl edge">
+        <div className="divide-y divide-border overflow-hidden rounded-2xl edge">
           {SCALE.map((w) => (
             <div
               key={w.size}
@@ -353,7 +353,7 @@ export default function TypographyPage() {
       </section>
 
       {/* ============================ FAMILIES (stacked rows) =========== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="divide-y divide-border">
           {FAMILIES.map((r) => (
             <div
@@ -446,7 +446,7 @@ export default function TypographyPage() {
       </section>
 
       {/* ============================ TRACKING ========================== */}
-      <section className={`${BLEED} border-y border-border bg-card py-16`}>
+      <section className={`${BLEED} bg-muted/30 py-16`}>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           Tracking & leading
         </p>
@@ -506,7 +506,7 @@ export default function TypographyPage() {
       </section>
 
       {/* ============================ EDITORIAL SPREAD ================== */}
-      <section className={`${BLEED} border-b border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-16">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
             How it reads
@@ -593,7 +593,7 @@ export default function TypographyPage() {
       </section>
 
       {/* ============================ IN PRACTICE ======================= */}
-      <section className={`${BLEED} border-y border-border bg-card py-16`}>
+      <section className={`${BLEED} bg-muted/30 py-16`}>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           In practice
         </p>

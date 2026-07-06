@@ -178,7 +178,7 @@ export default [ byronwadeUi.configs.recommended ];`}
       </section>
 
       {/* ================================================== CLI ===== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-16">
           <Eyebrow>02, CLI</Eyebrow>
           <p className="reading-ui mt-3 text-foreground text-pretty">
@@ -252,7 +252,7 @@ export default [ byronwadeUi.configs.recommended ];`}
       </section>
 
       {/* ========================================= BEFORE / AFTER ===== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-16">
           <Eyebrow>04, Before → after</Eyebrow>
           <p className="reading-ui mt-3 text-foreground text-pretty">
@@ -378,7 +378,7 @@ export default [ byronwadeUi.configs.recommended ];`}
       </section>
 
       {/* ================================================= CI ===== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-16">
           <Eyebrow>06, CI &amp; editor</Eyebrow>
           <p className="reading-ui mt-3 text-foreground text-pretty">

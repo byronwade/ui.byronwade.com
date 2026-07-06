@@ -143,7 +143,7 @@ export default function InstallationPage() {
       </section>
 
       {/* ============================ STEP RAIL ========================= */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-14">
           <p className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-brand">
             The fast path

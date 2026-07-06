@@ -410,7 +410,7 @@ export default function PhilosophyPage() {
       </section>
 
       {/* ============================ DESIGN ENGINEER ================ */}
-      <section className={`${BLEED} border-y border-border bg-muted/30 py-16`}>
+      <section className={`${BLEED} bg-muted/30 py-16`}>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           How we build
         </p>
@@ -440,7 +440,7 @@ export default function PhilosophyPage() {
         </p>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {DESIGN_ENGINEER.map((p) => (
-            <div key={p.title} className="rounded-xl edge bg-card p-5">
+            <div key={p.title} className="rounded-2xl edge bg-card p-5">
               <h3 className="text-base font-medium tracking-tight text-foreground">
                 {p.title}
               </h3>
@@ -455,7 +455,7 @@ export default function PhilosophyPage() {
       </section>
 
       {/* ============================ TENETS ========================== */}
-      <section className={`${BLEED} border-y border-border bg-card py-16`}>
+      <section className={`${BLEED} bg-muted/30 py-16`}>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
           Ten convictions
         </p>
@@ -498,7 +498,7 @@ export default function PhilosophyPage() {
           {REJECTS.map((r) => (
             <div
               key={r.label}
-              className="flex gap-3 rounded-xl edge bg-card p-4"
+              className="flex gap-3 rounded-2xl edge bg-card p-4"
             >
               <X className="mt-0.5 size-4 shrink-0 text-destructive" />
               <div>
@@ -513,7 +513,7 @@ export default function PhilosophyPage() {
       </section>
 
       {/* ============================ PULL QUOTE ====================== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-20">
           <blockquote className="mx-auto max-w-3xl text-center font-serif text-[clamp(1.75rem,5vw,3rem)] italic leading-snug text-foreground text-balance">
             “Good design gets out of the way. The system stays quiet so your
@@ -571,7 +571,7 @@ export default function PhilosophyPage() {
       </section>
 
       {/* ============================ LIVING CHROME =================== */}
-      <section className={`${BLEED} border-y border-border bg-card py-16`}>
+      <section className={`${BLEED} bg-muted/30 py-16`}>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
@@ -657,7 +657,7 @@ export default function PhilosophyPage() {
       </section>
 
       {/* ============================ LINEAGE ========================= */}
-      <section className={`${BLEED} border-y border-border bg-card py-16`}>
+      <section className={`${BLEED} bg-muted/30 py-16`}>
         <div className="mx-auto max-w-3xl text-center">
           <StackSimple className="mx-auto size-6 text-brand" />
           <h2 className="mt-4 text-2xl font-normal tracking-tight text-foreground text-balance sm:text-3xl">
@@ -688,7 +688,7 @@ export default function PhilosophyPage() {
         <h2 className="mt-3 max-w-2xl text-3xl font-normal tracking-tight text-foreground text-balance sm:text-4xl">
           The whole path, in order.
         </h2>
-        <div className="mt-8 divide-y divide-edge overflow-hidden rounded-2xl edge">
+        <div className="mt-8 divide-y divide-border overflow-hidden rounded-2xl edge">
           {JOURNEY.map((j) => (
             <Link
               key={j.href}

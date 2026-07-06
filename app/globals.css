@@ -120,6 +120,7 @@
 :root[data-skin="polaris"] [data-slot="card-frame"],
 :root[data-skin="polaris"] [data-slot="stat-card"],
 :root[data-skin="polaris"] [data-slot="metric"][data-variant="card"],
+:root[data-skin="polaris"] [data-slot="demo-preview-card"],
 :root[data-skin="polaris"] [data-slot="table-container"][data-layout="card"] {
   box-shadow:
     0 0 0 1px var(--edge),

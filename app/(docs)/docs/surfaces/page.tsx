@@ -70,7 +70,7 @@ export default function SurfacesPage() {
         </DocsIntro>
       </section>
 
-      <section className="border-y border-border bg-card py-12">
+      <section className="bg-muted/30 py-12">
         <DocsProse className="mx-auto">
           <p className="reading-muted font-mono text-xs uppercase tracking-[0.2em]">
             Do not split the registry

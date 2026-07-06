@@ -159,7 +159,7 @@ export default function McpPage() {
       </section>
 
       {/* ============================ INSTALL =========================== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-14">
           <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Install
@@ -205,7 +205,7 @@ export default function McpPage() {
       </section>
 
       {/* ========================== SUPPORTED HOSTS ==================== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-14">
           <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Supported hosts
@@ -256,7 +256,7 @@ export default function McpPage() {
       </section>
 
       {/* ============================ PAIRS WITH ====================== */}
-      <section className={`${BLEED} border-y border-border bg-card`}>
+      <section className={`${BLEED} bg-muted/30`}>
         <div className="py-14">
           <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-brand">
             Pairs with
