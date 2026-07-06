@@ -16,7 +16,12 @@ export function DocsSidebarShell({ children }: { children: React.ReactNode }) {
       <div className="flex w-full pt-14">
         <DocsSidebar />
         <main className="min-h-0 min-w-0 flex-1">
-          <div className="px-6 pb-16 pt-2 sm:px-8 lg:px-10">{children}</div>
+          {/* Shell + sidebar span full width; the reading/demo content sits in a
+              comfortable, consistent measure so component demos read as tidy,
+              intentional specimens instead of floating across the viewport. */}
+          <div className="mx-auto max-w-6xl px-6 pb-16 pt-2 sm:px-8 lg:px-10">
+            {children}
+          </div>
         </main>
       </div>
     </TooltipProvider>

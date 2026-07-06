@@ -606,20 +606,13 @@ export function DemoPreviewFrame({
           data-demo-state={ctx.state}
           data-demo-view={view}
           className={cn(
-            "relative flex min-h-64 w-full items-center justify-center overflow-hidden",
+            "relative flex min-h-56 w-full items-center justify-center overflow-hidden",
             view === "preview" ? "p-6 sm:p-8" : "p-0",
             view === "preview" && ctx.frame === "inset" && "bg-muted/40",
           )}
         >
           {view === "preview" ? (
             <>
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "bg-grid pointer-events-none absolute inset-0",
-                  ctx.frame === "inset" ? "opacity-30" : "opacity-[0.18]",
-                )}
-              />
               <span
                 data-slot="demo-preview-viewport-readout"
                 className="pointer-events-none absolute top-2.5 right-2.5 z-10 hidden items-center gap-1.5 rounded-full bg-background/90 px-2.5 py-1 font-mono text-[11px] text-muted-foreground edge tabular-nums backdrop-blur-sm sm:inline-flex"
