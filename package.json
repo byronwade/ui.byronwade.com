@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
     "sync": "node scripts/sync-registry.mjs",
@@ -19,6 +20,10 @@
     "validate": "node scripts/check-registry.mjs && node scripts/check-examples.mjs && node scripts/check-rule.mjs && node scripts/check-conventions.mjs && node scripts/check-docs-nav.mjs && npm run check:format && npm run check:tests && node scripts/check-lint-manifest.mjs && node scripts/check-mcp-data.mjs && node scripts/check-llms-txt.mjs && npm run build:lint && npm run test:packages && npm run lint:on-system",
     "predev": "node scripts/sync-registry.mjs",
     "dev": "next dev",
+    "dev:linear": "npm run dev --workspace linear",
+    "dev:polaris": "npm run dev --workspace polaris",
+    "build:linear": "npm run build --workspace linear",
+    "build:polaris": "npm run build --workspace polaris",
     "clean": "rm -rf .next .vitest-coverage .turbo",
     "dev:clean": "npm run clean && npm run dev",
     "registry:build": "shadcn build",

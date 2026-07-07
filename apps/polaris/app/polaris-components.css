@@ -1,0 +1,76 @@
+/*
+ * Polaris component reskin — admin-native signatures via data-slot.
+ * White elevated cards on gray canvas, rounded-rectangle controls, inset form
+ * fields, tactile primary buttons, tabular figures for data density.
+ */
+
+[data-slot="card"],
+[data-slot="empty"],
+[data-slot="table-container"] {
+  border-radius: var(--polaris-radius);
+  box-shadow: var(--polaris-shadow-card);
+  border: 1px solid rgba(48, 48, 48, 0.08);
+}
+
+[data-slot="dropdown-menu-content"],
+[data-slot="context-menu-content"],
+[data-slot="popover-content"],
+[data-slot="select-content"],
+[data-slot="dialog-content"],
+[data-slot="sheet-content"],
+[data-slot="hover-card-content"],
+[data-slot="command"] {
+  box-shadow: var(--polaris-shadow-overlay);
+  border-radius: var(--polaris-radius);
+}
+
+[data-slot="button"] {
+  border-radius: var(--polaris-radius-sm);
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+[data-slot="button"][data-variant="default"],
+[data-slot="button"].bg-primary {
+  box-shadow:
+    0 1px 1px rgba(48, 48, 48, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+[data-slot="badge"],
+[data-slot="filter-pill"] {
+  border-radius: var(--polaris-radius-sm);
+}
+
+[data-slot="input"],
+[data-slot="textarea"],
+[data-slot="select-trigger"] {
+  background-color: var(--polaris-surface);
+  border-radius: var(--polaris-radius-sm);
+  box-shadow: inset 0 1px 2px rgba(48, 48, 48, 0.08);
+}
+
+[data-slot="table-row"] {
+  min-height: 40px;
+}
+
+[data-slot="card-title"],
+[data-slot="dialog-title"],
+[data-slot="sheet-title"],
+[data-slot="page-header-title"] {
+  font-weight: 600;
+}
+
+[data-slot="sidebar-menu-button"][data-active="true"] {
+  background-color: var(--polaris-brand-muted);
+  color: var(--polaris-brand);
+}
+
+[data-slot="switch"][data-checked] {
+  background-color: var(--polaris-brand);
+}
+
+[data-slot="checkbox"][data-checked] {
+  background-color: var(--polaris-brand);
+  border-color: var(--polaris-brand);
+}

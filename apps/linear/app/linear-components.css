@@ -1,0 +1,251 @@
+/*
+ * Linear component reskin — applies across every shadcn primitive via data-slot.
+ * Signatures: dark surface ladder, 6px control radius, hairline borders, dense
+ * rows, indigo primary, Inter-tuned typography, fast out-quint motion.
+ */
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+
+[data-slot="button"] {
+  border-radius: var(--linear-radius-6);
+  font-size: 0.8125rem;
+  font-weight: 510;
+  transition:
+    background-color 140ms var(--linear-ease-out-quint),
+    border-color 140ms var(--linear-ease-out-quint),
+    color 140ms var(--linear-ease-out-quint),
+    box-shadow 140ms var(--linear-ease-out-quint);
+}
+
+[data-slot="button"][data-variant="default"],
+[data-slot="button"].bg-primary {
+  background-color: var(--linear-brand);
+  color: #ffffff;
+  border: 1px solid color-mix(in srgb, var(--linear-brand), white 12%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white, transparent 88%);
+}
+
+[data-slot="button"][data-variant="default"]:hover,
+[data-slot="button"].bg-primary:hover {
+  background-color: var(--linear-brand-hover);
+}
+
+[data-slot="button"][data-variant="outline"] {
+  background-color: transparent;
+  border-color: var(--linear-border-translucent-strong);
+  color: var(--linear-text-secondary);
+}
+
+[data-slot="button"][data-variant="outline"]:hover {
+  background-color: var(--linear-bg-level-2);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="button"][data-variant="ghost"]:hover {
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="button"][data-variant="link"] {
+  color: var(--linear-accent-hover);
+}
+
+/* ── Form fields ─────────────────────────────────────────────────────────── */
+
+[data-slot="input"],
+[data-slot="textarea"],
+[data-slot="select-trigger"],
+[data-slot="native-select"],
+[data-slot="input-group"] {
+  border-radius: var(--linear-radius-6);
+  border-width: var(--linear-hairline);
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-2);
+  color: var(--linear-text-primary);
+  font-size: 0.8125rem;
+}
+
+[data-slot="input"]:focus-visible,
+[data-slot="textarea"]:focus-visible,
+[data-slot="select-trigger"]:focus-visible {
+  border-color: var(--linear-focus-ring);
+  box-shadow: 0 0 0 1px var(--linear-focus-ring);
+}
+
+/* ── Cards & panels ──────────────────────────────────────────────────────── */
+
+[data-slot="card"],
+[data-slot="empty"] {
+  border-radius: var(--linear-radius-8);
+  background-color: var(--linear-bg-level-1);
+  box-shadow: var(--linear-shadow-low);
+  ring-color: transparent;
+  border: var(--linear-hairline) solid var(--linear-border-translucent);
+}
+
+[data-slot="card-title"],
+[data-slot="dialog-title"],
+[data-slot="sheet-title"] {
+  font-weight: 510;
+  letter-spacing: -0.015em;
+}
+
+[data-slot="card-description"],
+[data-slot="dialog-description"] {
+  color: var(--linear-text-tertiary);
+}
+
+/* ── Overlays ────────────────────────────────────────────────────────────── */
+
+[data-slot="dialog-content"],
+[data-slot="sheet-content"],
+[data-slot="drawer-content"],
+[data-slot="alert-dialog-content"] {
+  border-radius: var(--linear-radius-12);
+  background-color: var(--linear-bg-level-2);
+  border: var(--linear-hairline) solid var(--linear-border-translucent-strong);
+  box-shadow: var(--linear-shadow-high);
+}
+
+[data-slot="popover-content"],
+[data-slot="hover-card-content"],
+[data-slot="dropdown-menu-content"],
+[data-slot="context-menu-content"],
+[data-slot="select-content"],
+[data-slot="menubar-content"],
+[data-slot="command"] {
+  border-radius: var(--linear-radius-8);
+  background-color: var(--linear-bg-level-2);
+  border: var(--linear-hairline) solid var(--linear-border-translucent-strong);
+  box-shadow: var(--linear-shadow-medium);
+  transition:
+    opacity 180ms var(--linear-ease-out-quint),
+    transform 180ms var(--linear-ease-out-quint);
+}
+
+/* ── Badges & pills ──────────────────────────────────────────────────────── */
+
+[data-slot="badge"] {
+  border-radius: var(--linear-radius-4);
+  font-size: 0.75rem;
+  font-weight: 510;
+  letter-spacing: -0.01em;
+}
+
+/* ── Tables & lists (dense issue-row feel) ───────────────────────────────── */
+
+[data-slot="table-row"],
+[data-slot="item"] {
+  min-height: 36px;
+  border-bottom: var(--linear-hairline) solid var(--linear-border-translucent);
+  color: var(--linear-text-secondary);
+  font-size: 0.875rem;
+}
+
+[data-slot="table-row"]:hover,
+[data-slot="item"]:hover {
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="table-head"] {
+  color: var(--linear-text-tertiary);
+  font-size: 0.75rem;
+  font-weight: 510;
+  letter-spacing: -0.01em;
+}
+
+[data-slot="table-cell"] {
+  font-size: 0.875rem;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+
+[data-slot="tabs-list"] {
+  background-color: var(--linear-bg-level-1);
+  border: var(--linear-hairline) solid var(--linear-border-translucent);
+  border-radius: var(--linear-radius-6);
+  padding: 2px;
+}
+
+[data-slot="tabs-trigger"][data-state="active"] {
+  background-color: var(--linear-bg-level-3);
+  color: var(--linear-text-primary);
+  border-radius: calc(var(--linear-radius-6) - 2px);
+}
+
+/* ── Navigation & sidebar ────────────────────────────────────────────────── */
+
+[data-slot="sidebar"] {
+  background-color: var(--linear-bg-primary);
+  border-right: var(--linear-hairline) solid var(--linear-border-translucent);
+}
+
+[data-slot="sidebar-menu-button"][data-active="true"] {
+  background-color: var(--linear-accent-tint);
+  color: var(--linear-accent-hover);
+}
+
+/* ── Alerts & feedback ───────────────────────────────────────────────────── */
+
+[data-slot="alert"] {
+  border-radius: var(--linear-radius-8);
+  border: var(--linear-hairline) solid var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="alert-title"] {
+  font-weight: 510;
+}
+
+/* ── Toggle / switch / checkbox ──────────────────────────────────────────── */
+
+[data-slot="switch"][data-checked] {
+  background-color: var(--linear-brand);
+}
+
+[data-slot="checkbox"][data-checked] {
+  background-color: var(--linear-brand);
+  border-color: var(--linear-brand);
+}
+
+[data-slot="toggle"][data-pressed] {
+  background-color: var(--linear-accent-tint);
+  color: var(--linear-accent-hover);
+}
+
+/* ── Tooltip ─────────────────────────────────────────────────────────────── */
+
+[data-slot="tooltip-content"] {
+  border-radius: var(--linear-radius-6);
+  background-color: var(--linear-bg-level-3);
+  border: var(--linear-hairline) solid var(--linear-border-translucent-strong);
+  font-size: 0.75rem;
+  font-weight: 510;
+}
+
+/* ── Progress & skeleton ───────────────────────────────────────────────────── */
+
+[data-slot="progress-indicator"] {
+  background-color: var(--linear-brand);
+}
+
+[data-slot="skeleton"] {
+  background-color: var(--linear-bg-level-2);
+  border-radius: var(--linear-radius-4);
+}
+
+/* ── Separator ───────────────────────────────────────────────────────────── */
+
+[data-slot="separator"] {
+  background-color: var(--linear-border-translucent);
+}
+
+/* ── Command palette (Linear signature surface) ──────────────────────────── */
+
+[data-slot="command-input-wrapper"] {
+  border-bottom: var(--linear-hairline) solid var(--linear-border-translucent);
+}
+
+[data-slot="command-item"][data-selected="true"] {
+  background-color: var(--linear-accent-tint);
+  color: var(--linear-text-primary);
+}
