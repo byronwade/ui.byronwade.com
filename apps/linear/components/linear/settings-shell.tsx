@@ -9,6 +9,7 @@ import {
   Bot,
   ChevronLeft,
   ChevronRight,
+  CircleHelp,
   CreditCard,
   Download,
   ExternalLink,
@@ -18,6 +19,7 @@ import {
   RefreshCw,
   Settings,
   Shield,
+  Sparkles,
   Sun,
   Tag,
   Timer,
@@ -25,6 +27,8 @@ import {
   Users,
   AlertCircle,
   Columns3,
+  Plus,
+  SlidersHorizontal,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -54,6 +58,13 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { Switch } from "@/components/ui/switch"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 
 type SettingsNavItem = {
@@ -135,6 +146,35 @@ const NAV_GROUPS: SettingsNavGroup[] = [
     ],
   },
   {
+    label: "Features",
+    items: [
+      {
+        id: "ai-agents",
+        label: "AI & Agents",
+        icon: <Sparkles />,
+        href: "/settings/features/ai-agents",
+      },
+      {
+        id: "initiatives",
+        label: "Initiatives",
+        icon: <Columns3 />,
+        href: "/settings/features/initiatives",
+      },
+      {
+        id: "documents",
+        label: "Documents",
+        icon: <FileText />,
+        href: "/settings/features/documents",
+      },
+      {
+        id: "customer-requests",
+        label: "Customer requests",
+        icon: <Users />,
+        href: "/settings/features/customer-requests",
+      },
+    ],
+  },
+  {
     label: "Administration",
     items: [
       { id: "workspace", label: "Workspace", icon: <Settings /> },
@@ -208,7 +248,15 @@ function SettingsShell({
             </SidebarGroup>
           ))}
         </SidebarContent>
-        <SidebarFooter className="border-t border-border p-3">
+        <SidebarFooter className="gap-2 border-t border-border p-3">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="size-8 text-muted-foreground"
+            aria-label="Help"
+          >
+            <CircleHelp className="size-4" />
+          </Button>
           <Badge variant="outline" className="w-full justify-start gap-2 py-1.5">
             <AlertCircle className="size-3.5" />
             Business trial ends 29d
@@ -509,6 +557,357 @@ function SettingsRow({
   )
 }
 
+function SettingsEditRow({
+  summary,
+  onEdit,
+  editLabel = "Edit",
+}: {
+  summary: string
+  onEdit?: () => void
+  editLabel?: string
+}) {
+  return (
+    <div
+      data-slot="linear-settings-edit-row"
+      className="flex items-center justify-between gap-4 px-4 py-3"
+    >
+      <p className="text-sm text-foreground">{summary}</p>
+      <Button variant="ghost" size="sm" onClick={onEdit}>
+        {editLabel}
+      </Button>
+    </div>
+  )
+}
+
+function SettingsIntegrationRow({
+  icon,
+  title,
+  description,
+  actionLabel = "Connect",
+  onAction,
+}: {
+  icon?: React.ReactNode
+  title: string
+  description?: string
+  actionLabel?: string
+  onAction?: () => void
+}) {
+  return (
+    <div
+      data-slot="linear-settings-integration-row"
+      className="flex items-start justify-between gap-4 px-4 py-3"
+    >
+      <div className="flex min-w-0 items-start gap-3">
+        {icon ? (
+          <span className="mt-0.5 shrink-0 text-muted-foreground">{icon}</span>
+        ) : null}
+        <div className="min-w-0 space-y-0.5">
+          <p className="text-sm font-medium text-foreground">{title}</p>
+          {description ? (
+            <p className="text-xs text-muted-foreground">{description}</p>
+          ) : null}
+        </div>
+      </div>
+      <Button variant="ghost" size="sm" className="shrink-0 gap-1" onClick={onAction}>
+        {actionLabel}
+        <ExternalLink className="size-3" />
+      </Button>
+    </div>
+  )
+}
+
+function SettingsEmptyRow({
+  label,
+  onAdd,
+}: {
+  label: string
+  onAdd?: () => void
+}) {
+  return (
+    <div
+      data-slot="linear-settings-empty-row"
+      className="flex items-center justify-between gap-4 px-4 py-3"
+    >
+      <p className="text-sm text-muted-foreground">{label}</p>
+      <Button variant="ghost" size="icon-sm" aria-label="Add" onClick={onAdd}>
+        <Plus className="size-4" />
+      </Button>
+    </div>
+  )
+}
+
+function SettingsListHeader({
+  count,
+  onAdd,
+  addLabel = "Add",
+}: {
+  count: string
+  onAdd?: () => void
+  addLabel?: string
+}) {
+  return (
+    <div
+      data-slot="linear-settings-list-header"
+      className="flex items-center justify-between gap-3 rounded-t-lg border border-b-0 border-border bg-muted/30 px-4 py-2"
+    >
+      <span className="text-xs text-muted-foreground">{count}</span>
+      <Button
+        variant="ghost"
+        size="icon-sm"
+        aria-label={addLabel}
+        onClick={onAdd}
+      >
+        <Plus className="size-4" />
+      </Button>
+    </div>
+  )
+}
+
+type SettingsStatusSwatch = {
+  id: string
+  label: string
+  color: "blue" | "green" | "red" | "orange" | "purple" | "gray"
+}
+
+function SettingsStatusSwatchList({
+  count,
+  items,
+  onAdd,
+}: {
+  count: string
+  items: SettingsStatusSwatch[]
+  onAdd?: () => void
+}) {
+  return (
+    <div data-slot="linear-settings-status-list">
+      <SettingsListHeader count={count} onAdd={onAdd} />
+      <SettingsList className="rounded-t-none border-t-0">
+        {items.map((item) => (
+          <div
+            key={item.id}
+            data-slot="linear-settings-status-row"
+            className="flex items-center gap-3 px-4 py-2.5"
+          >
+            <span
+              data-slot="linear-status-swatch"
+              data-color={item.color}
+              className="size-3 shrink-0 rounded-sm"
+            />
+            <span className="text-sm text-foreground">{item.label}</span>
+          </div>
+        ))}
+      </SettingsList>
+    </div>
+  )
+}
+
+function SettingsBehaviorRow({
+  icon,
+  label,
+  value,
+  defaultValue = "show",
+  onValueChange,
+  onFilter,
+}: {
+  icon?: React.ReactNode
+  label: string
+  value?: string
+  defaultValue?: string
+  onValueChange?: (value: string) => void
+  onFilter?: () => void
+}) {
+  return (
+    <div
+      data-slot="linear-behavior-row"
+      className="flex items-center justify-between gap-3 px-4 py-2.5"
+    >
+      <div className="flex min-w-0 items-center gap-2.5">
+        {icon ? (
+          <span className="shrink-0 text-muted-foreground [&>svg]:size-4">
+            {icon}
+          </span>
+        ) : null}
+        <span className="text-sm text-foreground">{label}</span>
+      </div>
+      <div className="flex shrink-0 items-center gap-1">
+        <Select
+          value={value}
+          defaultValue={defaultValue}
+          onValueChange={(next) => {
+            if (next) onValueChange?.(next)
+          }}
+        >
+          <SelectTrigger
+            data-slot="linear-behavior-select"
+            className="h-7 w-[88px] border-0 bg-transparent px-2 text-xs shadow-none"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="show">Show</SelectItem>
+            <SelectItem value="hide">Hide</SelectItem>
+            <SelectItem value="auto">Auto-apply</SelectItem>
+          </SelectContent>
+        </Select>
+        {onFilter ? (
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="size-7 text-muted-foreground"
+            aria-label="Filter"
+            onClick={onFilter}
+          >
+            <SlidersHorizontal className="size-3.5" />
+          </Button>
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
+function SettingsScheduleCard({
+  cadence,
+  day = "Friday",
+  window = "2PM – 3PM",
+  onSave,
+}: {
+  cadence: "none" | "weekly" | "biweekly" | "monthly"
+  day?: string
+  window?: string
+  onSave?: (value: {
+    cadence: "none" | "weekly" | "biweekly" | "monthly"
+    day: string
+    window: string
+  }) => void
+}) {
+  const [editing, setEditing] = React.useState(false)
+  const [draftCadence, setDraftCadence] = React.useState(cadence)
+  const [draftDay, setDraftDay] = React.useState(day)
+  const [draftWindow, setDraftWindow] = React.useState(window)
+  const [saved, setSaved] = React.useState({ cadence, day, window })
+
+  const summary =
+    saved.cadence === "none"
+      ? "No expectation for updates"
+      : saved.cadence === "biweekly"
+        ? `Every 2 weeks on ${saved.day} between ${saved.window}`
+        : saved.cadence === "weekly"
+          ? `Every week on ${saved.day} between ${saved.window}`
+          : "Every month"
+
+  const handleSave = () => {
+    setSaved({
+      cadence: draftCadence,
+      day: draftDay,
+      window: draftWindow,
+    })
+    onSave?.({
+      cadence: draftCadence,
+      day: draftDay,
+      window: draftWindow,
+    })
+    setEditing(false)
+  }
+
+  const handleCancel = () => {
+    setDraftCadence(saved.cadence)
+    setDraftDay(saved.day)
+    setDraftWindow(saved.window)
+    setEditing(false)
+  }
+
+  if (!editing) {
+    return (
+      <SettingsList>
+        <SettingsEditRow
+          summary={summary}
+          onEdit={() => {
+            setDraftCadence(saved.cadence)
+            setDraftDay(saved.day)
+            setDraftWindow(saved.window)
+            setEditing(true)
+          }}
+        />
+      </SettingsList>
+    )
+  }
+
+  return (
+    <SettingsFormCard
+      footer={
+        <>
+          <Button variant="ghost" size="sm" onClick={handleCancel}>
+            Cancel
+          </Button>
+          <Button size="sm" onClick={handleSave}>
+            Save
+          </Button>
+        </>
+      }
+    >
+      <div
+        data-slot="linear-update-schedule"
+        className="flex flex-wrap items-center gap-2 text-sm"
+      >
+        <Select
+          value={draftCadence}
+          onValueChange={(value) => {
+            if (!value) return
+            setDraftCadence(value as typeof draftCadence)
+          }}
+        >
+          <SelectTrigger className="h-8 w-auto min-w-[220px]">
+            <SelectValue placeholder="Cadence" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">No expectation for updates</SelectItem>
+            <SelectItem value="weekly">Every week</SelectItem>
+            <SelectItem value="biweekly">Every 2 weeks</SelectItem>
+            <SelectItem value="monthly">Every month</SelectItem>
+          </SelectContent>
+        </Select>
+
+        {draftCadence !== "none" && draftCadence !== "monthly" ? (
+          <>
+            <span className="text-muted-foreground">on</span>
+            <Select
+              value={draftDay.toLowerCase()}
+              onValueChange={(value) => {
+                if (!value) return
+                setDraftDay(value.charAt(0).toUpperCase() + value.slice(1))
+              }}
+            >
+              <SelectTrigger className="h-8 w-[120px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="friday">Friday</SelectItem>
+                <SelectItem value="monday">Monday</SelectItem>
+              </SelectContent>
+            </Select>
+            <span className="text-muted-foreground">between</span>
+            <Select
+              value={draftWindow === "2PM – 3PM" ? "2-3" : "9-10"}
+              onValueChange={(value) => {
+                if (!value) return
+                setDraftWindow(value === "2-3" ? "2PM – 3PM" : "9AM – 10AM")
+              }}
+            >
+              <SelectTrigger className="h-8 w-[140px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2-3">2PM – 3PM</SelectItem>
+                <SelectItem value="9-10">9AM – 10AM</SelectItem>
+              </SelectContent>
+            </Select>
+          </>
+        ) : null}
+      </div>
+    </SettingsFormCard>
+  )
+}
+
 function ImportExportSettings() {
   return (
     <>
@@ -588,13 +987,20 @@ function ImportExportSettings() {
 export {
   ImportExportSettings,
   SettingsBackLink,
+  SettingsBehaviorRow,
+  SettingsEditRow,
+  SettingsEmptyRow,
   SettingsFormCard,
+  SettingsIntegrationRow,
   SettingsList,
+  SettingsListHeader,
   SettingsPageIntro,
   SettingsRow,
+  SettingsScheduleCard,
   SettingsSection,
   SettingsShell,
   SettingsStatusDot,
+  SettingsStatusSwatchList,
   SettingsSubheading,
   SettingsToggleRow,
 }

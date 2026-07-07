@@ -1144,3 +1144,90 @@
 [data-slot="linear-sla-custom-dialog"] [data-slot="dialog-content"] {
   border-radius: var(--linear-radius-12);
 }
+
+[data-slot="linear-settings-edit-row"] {
+  min-height: 44px;
+  background-color: transparent;
+}
+
+[data-slot="linear-settings-edit-row"] [data-slot="button"][data-variant="ghost"] {
+  color: var(--linear-text-secondary);
+}
+
+[data-slot="linear-settings-integration-row"] {
+  min-height: 44px;
+}
+
+[data-slot="linear-settings-empty-row"] {
+  min-height: 44px;
+}
+
+[data-slot="linear-settings-list-header"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-settings-status-list"] [data-slot="linear-settings-list"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+[data-slot="linear-settings-status-row"] {
+  border-bottom: 1px solid var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-status-row"]:last-child {
+  border-bottom: 0;
+}
+
+[data-slot="linear-status-swatch"][data-color="blue"] {
+  background-color: var(--chart-4, var(--primary));
+}
+
+[data-slot="linear-status-swatch"][data-color="green"] {
+  background-color: var(--linear-green);
+}
+
+[data-slot="linear-status-swatch"][data-color="red"] {
+  background-color: var(--destructive);
+}
+
+[data-slot="linear-status-swatch"][data-color="orange"] {
+  background-color: var(--chart-3, var(--warning));
+}
+
+[data-slot="linear-status-swatch"][data-color="purple"] {
+  background-color: var(--primary);
+}
+
+[data-slot="linear-status-swatch"][data-color="gray"] {
+  background-color: var(--linear-text-tertiary);
+}
+
+[data-slot="linear-behavior-row"] {
+  border-bottom: 1px solid var(--linear-border-translucent-strong);
+  min-height: 40px;
+}
+
+[data-slot="linear-behavior-row"]:last-child {
+  border-bottom: 0;
+}
+
+[data-slot="linear-behavior-select"] {
+  font-size: 0.75rem;
+  color: var(--linear-text-secondary);
+}
+
+[data-slot="linear-document-template-list"] [data-slot="linear-settings-list"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+[data-slot="linear-document-template"] {
+  max-width: 42rem;
+}
+
+[data-slot="linear-customer-tier-row"] [data-slot="input"] {
+  height: 36px;
+  font-size: 0.8125rem;
+}

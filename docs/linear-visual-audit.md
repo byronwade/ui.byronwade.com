@@ -17,8 +17,12 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Issue labels** | Filter toolbar, hierarchical table, colored dots, context menu | `/linear/settings/issues/labels` |
 | **SLAs** | Enable toggle, work week select, When/Then automation rules | `/linear/settings/issues/slas` |
 | **Issue templates** | Template chooser dialog, property bar editor | `/linear/settings/issues/templates` |
-| **Project updates** | Inline schedule selects, Save footer, Slack connect | `/linear/settings/projects/updates` |
+| **Project updates** | Saved schedule row + Edit, Slack connect | `/linear/settings/projects/updates` |
 | **Project statuses** | Grouped status board, inline create row | `/linear/settings/projects/statuses` |
+| **AI & Agents** | Triage Intelligence toggle, Behavior rows, guidance textarea | `/linear/settings/features/ai-agents` |
+| **Initiatives** | Enable toggle, schedule Edit row, Slack connect | `/linear/settings/features/initiatives` |
+| **Documents** | Template list header + row, new template editor | `/linear/settings/features/documents` |
+| **Customer requests** | Enable toggle, status swatches, tier create, display options | `/linear/settings/features/customer-requests` |
 | **SLA custom duration** | Custom duration dialog on rule editor | `/linear/settings/issues/slas` |
 | **Workspace app shell** | Sidebar nav, cycle panel, issue list, ⌘K, Ask Linear | `/linear/workspace` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |
@@ -49,6 +53,8 @@ Toggle **Light** on settings pages to compare against reference captures. Worksp
 | Tabs = underline (line variant) | Catalog + CSS for `tabs-list[data-variant=line]` |
 | Sidebar active = gray pill, not purple fill | `sidebar-menu-button[data-active]` |
 | Settings grouped list | `linear-settings-list` slot + `/settings` demo |
+| Settings edit/behavior rows | `SettingsEditRow`, `SettingsBehaviorRow`, `SettingsScheduleCard` |
+| Features settings nav | `/settings/features/*` routes in sidebar |
 | Issue row composite | `components/linear/issue-row.tsx` |
 | Cycle panel | `components/linear/cycle-panel.tsx` |
 | ⌘K command shell | `components/linear/command-shell.tsx` |
@@ -69,10 +75,11 @@ npm run build:linear          # all of the above + production build
 3. Open `/linear/settings/agent` and `/linear/settings/agent/skills/new` — guidance card, skill form.
 4. Open `/linear/settings/api/create` and `/linear/settings/api` — permissions form, green API key + copy toast.
 5. Open `/linear/settings/issues/labels`, `/slas`, `/templates`, `/templates/new` — Issues settings from Mobbin.
-6. Open `/linear/settings/import` — wizard stepper, radio workspace row, footer actions.
-7. Open `/linear/catalog` — scan each category in dark, then toggle light.
-8. Open `/linear/workspace` in **dark** — issue list density, cycle sidebar, ⌘K shell.
-9. Open `/linear/auth` in **light** — pill login flow.
+6. Open `/linear/settings/features/ai-agents`, `/initiatives`, `/documents`, `/customer-requests` — Features settings from Mobbin.
+7. Open `/linear/settings/import` — wizard stepper, radio workspace row, footer actions.
+8. Open `/linear/catalog` — scan each category in dark, then toggle light.
+9. Open `/linear/workspace` in **dark** — issue list density, cycle sidebar, ⌘K shell, help affordance.
+10. Open `/linear/auth` in **light** — pill login flow.
 
 ## Regenerate main-site skin after CSS changes
 

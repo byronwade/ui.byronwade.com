@@ -6,6 +6,7 @@ import { useTheme } from "next-themes"
 import {
   AlertCircle,
   CircleDot,
+  CircleHelp,
   FolderKanban,
   Settings,
   Inbox,
@@ -154,14 +155,24 @@ function WorkspaceShell({
         </SidebarContent>
 
         <SidebarFooter className="gap-2 border-t border-border p-3">
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton render={<Link href="/settings" />}>
-                <Settings />
-                <span>Settings</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="size-8 text-muted-foreground"
+              aria-label="Help"
+            >
+              <CircleHelp className="size-4" />
+            </Button>
+            <SidebarMenu className="flex-1">
+              <SidebarMenuItem>
+                <SidebarMenuButton render={<Link href="/settings" />}>
+                  <Settings />
+                  <span>Settings</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </div>
           <Badge variant="outline" className="w-full justify-start gap-2 py-1.5">
             <AlertCircle className="size-3.5" />
             Business trial ends 29d
