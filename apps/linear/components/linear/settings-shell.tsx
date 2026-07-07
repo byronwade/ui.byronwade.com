@@ -32,11 +32,13 @@ import {
   Circle,
   Columns3,
   Laptop,
+  Link2,
   MessageSquare,
   Plug,
   Plus,
   SlidersHorizontal,
   Smile,
+  User,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -92,22 +94,30 @@ const NAV_GROUPS: SettingsNavGroup[] = [
     label: "Preferences",
     items: [
       {
+        id: "preferences",
+        label: "Preferences",
+        icon: <SlidersHorizontal />,
+        href: "/settings/preferences",
+      },
+      { id: "profile", label: "Profile", icon: <User /> },
+      {
         id: "notifications",
         label: "Notifications",
         icon: <Bell />,
         href: "/settings/notifications",
       },
       {
-        id: "agent",
-        label: "Agent personalization",
-        icon: <Bot />,
-        href: "/settings/agent",
-      },
-      {
         id: "security",
         label: "Security & access",
         icon: <Shield />,
         href: "/settings/security",
+      },
+      { id: "connected-accounts", label: "Connected accounts", icon: <Link2 /> },
+      {
+        id: "agent",
+        label: "Agent personalization",
+        icon: <Bot />,
+        href: "/settings/agent",
       },
     ],
   },

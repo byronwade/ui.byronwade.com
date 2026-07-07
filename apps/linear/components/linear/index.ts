@@ -26,6 +26,17 @@ export { AskLinearWelcome } from "./ask-linear-welcome"
 export type { AskLinearWelcomeProps } from "./ask-linear-welcome"
 export { AskLinearChatPanel } from "./ask-linear-chat-panel"
 export type { AskLinearChatPanelProps } from "./ask-linear-chat-panel"
+export {
+  ProjectComment,
+  ProjectCommentComposer,
+  ProjectLogoBlock,
+  ProjectPropertiesPanel,
+  ProjectPropertyRow,
+} from "./project-detail"
+export type {
+  ProjectCommentProps,
+  ProjectPropertyRowProps,
+} from "./project-detail"
 export { ChatHistoryPopover } from "./chat-history-popover"
 export type {
   ChatHistoryGroup,

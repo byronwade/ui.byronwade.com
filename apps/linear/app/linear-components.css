@@ -1419,3 +1419,35 @@
 [data-slot="linear-cycle-date-dialog"] [data-slot="dialog-title"] {
   font-weight: var(--linear-font-medium);
 }
+
+[data-slot="linear-coding-tool-row"] {
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-project-comment"],
+[data-slot="linear-comment-composer"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-project-panel"] [data-slot="linear-project-property-row"] {
+  border-color: var(--linear-border-translucent);
+}
+
+[data-slot="linear-project-sidebar"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-project-tab"][data-active="true"] {
+  background-color: var(--linear-bg-level-2);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-emoji-picker"] {
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-comment-reaction"] {
+  border-color: color-mix(in srgb, var(--linear-brand) 40%, transparent);
+}

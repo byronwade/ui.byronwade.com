@@ -39,6 +39,9 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Cycles** | Enable toggle, duration/cooldown selects, start-date dialog, automation toggles | `/linear/settings/teams/as-mobbin/cycles` |
 | **Set parent team** | Inherit statuses/labels/members icon rows | `/linear/settings/teams/as-mobbin/parent` |
 | **Retire team** | Icon rows, cancel-issues select, destructive footer | `/linear/settings/teams/as-mobbin/retire` |
+| **Preferences — Coding tools** | Tool rows (icon/name/desc/Learn more) + toggles | `/linear/settings/preferences` |
+| **Project overview** | Breadcrumb+star header, tabs, inline props, comment thread, logo, properties/milestones/activity panel | `/linear/workspace/teams/as-mobbin/projects/user-insight` |
+| **Project comment** | Avatar, resolve, emoji picker, context menu, edit/reactions, reply composer | project overview |
 | **SLA custom duration** | Custom duration dialog on rule editor | `/linear/settings/issues/slas` |
 | **Workspace app shell** | Sidebar nav, cycle panel, issue list, ⌘K, Ask Linear | `/linear/workspace` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |

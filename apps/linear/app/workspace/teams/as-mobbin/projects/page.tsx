@@ -12,6 +12,11 @@ import {
 
 const PROJECTS = [
   {
+    title: "User Insight & Behavior Analytics Dashboard",
+    meta: "Backlog · 3 issues",
+    href: "/workspace/teams/as-mobbin/projects/user-insight",
+  },
+  {
     title: "AI UX Research Assistant",
     meta: "In Progress · 4 issues",
   },
@@ -41,13 +46,15 @@ export default function AsMobbinProjectsPage() {
     >
       <WorkspaceListPanel title="Projects" count={PROJECTS.length}>
         {PROJECTS.map((project) => (
-          <div
+          <button
             key={project.title}
-            className="flex items-center justify-between border-b border-border px-4 py-3 text-sm last:border-b-0"
+            type="button"
+            className="flex w-full items-center justify-between border-b border-border px-4 py-3 text-left text-sm last:border-b-0 hover:bg-muted/30"
+            onClick={project.href ? () => router.push(project.href!) : undefined}
           >
             <span className="font-medium">{project.title}</span>
             <span className="text-xs text-muted-foreground">{project.meta}</span>
-          </div>
+          </button>
         ))}
       </WorkspaceListPanel>
     </WorkspaceShell>
