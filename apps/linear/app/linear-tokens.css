@@ -105,33 +105,60 @@
   --sidebar-ring: var(--linear-focus-ring);
 }
 
-/* Linear light mode — Mercury White canvas for docs/marketing parity */
+/* Linear light mode — settings/admin surfaces (Mobbin reference: #F7F7F8 canvas) */
 .light {
-  --background: #f4f5f8;
-  --foreground: #222326;
+  /* Remap Linear ladder for light settings UI */
+  --linear-bg-primary: #f7f7f8;
+  --linear-bg-level-1: #ffffff;
+  --linear-bg-level-2: #f7f7f8;
+  --linear-bg-level-3: #e8eaef;
+  --linear-bg-secondary: #e8eaef;
+  --linear-bg-tertiary: #e1e1e3;
+  --linear-bg-quaternary: #d8d8dc;
+  --linear-text-primary: #222326;
+  --linear-text-secondary: #3d3d44;
+  --linear-text-tertiary: #6b6f76;
+  --linear-text-quaternary: #8a8f98;
+  --linear-border: #e1e1e3;
+  --linear-border-secondary: #d0d0d4;
+  --linear-border-translucent: rgba(35, 37, 42, 0.08);
+  --linear-border-translucent-strong: #e1e1e3;
+  --linear-accent-tint: #eef0ff;
+  --linear-overlay: rgba(0, 0, 0, 0.45);
+  --linear-selection: color-mix(in lch, var(--linear-brand), transparent 88%);
+  --linear-link: var(--linear-brand);
+  --linear-shadow-low: 0 0 0 1px var(--linear-border);
+  --linear-shadow-medium:
+    0 4px 12px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--linear-border);
+  --linear-shadow-high:
+    0 8px 24px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--linear-border);
+
+  /* shadcn semantic tokens */
+  --background: var(--linear-bg-primary);
+  --foreground: var(--linear-text-primary);
   --card: #ffffff;
-  --card-foreground: #222326;
+  --card-foreground: var(--linear-text-primary);
   --popover: #ffffff;
-  --popover-foreground: #222326;
+  --popover-foreground: var(--linear-text-primary);
   --primary: var(--linear-brand);
   --primary-foreground: #ffffff;
-  --secondary: #e8eaef;
-  --secondary-foreground: #222326;
-  --muted: #e8eaef;
-  --muted-foreground: #62666d;
-  --accent: #eef0ff;
+  --secondary: var(--linear-bg-secondary);
+  --secondary-foreground: var(--linear-text-primary);
+  --muted: var(--linear-bg-level-3);
+  --muted-foreground: var(--linear-text-tertiary);
+  --accent: var(--linear-accent-tint);
   --accent-foreground: var(--linear-brand);
   --destructive: var(--linear-red);
-  --border: rgba(35, 37, 42, 0.12);
-  --input: #e8eaef;
+  --border: var(--linear-border-translucent-strong);
+  --input: #ffffff;
   --ring: var(--linear-focus-ring);
-  --sidebar: #f4f5f8;
-  --sidebar-foreground: #222326;
+  --sidebar: var(--linear-bg-primary);
+  --sidebar-foreground: var(--linear-text-primary);
   --sidebar-primary: var(--linear-brand);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e8eaef;
-  --sidebar-accent-foreground: #222326;
-  --sidebar-border: rgba(35, 37, 42, 0.12);
+  --sidebar-accent: var(--linear-bg-level-3);
+  --sidebar-accent-foreground: var(--linear-text-primary);
+  --sidebar-border: var(--linear-border-translucent-strong);
   --sidebar-ring: var(--linear-focus-ring);
 }
 
@@ -160,6 +187,10 @@
 
   ::selection {
     background-color: var(--linear-selection);
+    color: var(--linear-text-primary);
+  }
+
+  .light ::selection {
     color: var(--linear-text-primary);
   }
 

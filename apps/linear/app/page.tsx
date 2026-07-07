@@ -35,8 +35,8 @@ export default function HomePage() {
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Button render={<Link href="/catalog" />}>All components ({CATALOG_COMPONENTS.length})</Button>
-          <Button variant="outline" render={<Link href="/styleguide" />}>
-            Styleguide
+          <Button variant="outline" render={<Link href="/settings" />}>
+            Settings demo
           </Button>
           <Button variant="outline" render={<Link href="/workspace" />}>
             Workspace demo
@@ -49,12 +49,12 @@ export default function HomePage() {
             <dd className="mt-1 text-lg font-medium">{CATALOG_COMPONENTS.length}</dd>
           </div>
           <div>
-            <dt className="font-mono text-xs text-muted-foreground">Source</dt>
-            <dd className="mt-1 text-lg font-medium">shadcn --all</dd>
+            <dt className="font-mono text-xs text-muted-foreground">Reference</dt>
+            <dd className="mt-1 text-lg font-medium">Mobbin captures</dd>
           </div>
           <div>
-            <dt className="font-mono text-xs text-muted-foreground">Theme</dt>
-            <dd className="mt-1 text-lg font-medium">Dark-first</dd>
+            <dt className="font-mono text-xs text-muted-foreground">Themes</dt>
+            <dd className="mt-1 text-lg font-medium">Dark + light</dd>
           </div>
         </dl>
       </main>
