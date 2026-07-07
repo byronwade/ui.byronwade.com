@@ -10,8 +10,14 @@ export { IssueRow } from "./issue-row"
 export type { IssueRowProps } from "./issue-row"
 export {
   ImportExportSettings,
+  SettingsBackLink,
+  SettingsFormCard,
   SettingsList,
+  SettingsPageIntro,
   SettingsRow,
   SettingsSection,
   SettingsShell,
+  SettingsStatusDot,
+  SettingsSubheading,
+  SettingsToggleRow,
 } from "./settings-shell"

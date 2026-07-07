@@ -5,6 +5,9 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 import {
   ArrowUpRight,
+  Bell,
+  Bot,
+  ChevronLeft,
   ChevronRight,
   CreditCard,
   Download,
@@ -46,6 +49,7 @@ import {
   SidebarProvider,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { Switch } from "@/components/ui/switch"
 import { cn } from "@/lib/utils"
 
 type SettingsNavItem = {
@@ -62,6 +66,29 @@ type SettingsNavGroup = {
 
 const NAV_GROUPS: SettingsNavGroup[] = [
   {
+    label: "Preferences",
+    items: [
+      {
+        id: "notifications",
+        label: "Notifications",
+        icon: <Bell />,
+        href: "/settings/notifications",
+      },
+      {
+        id: "agent",
+        label: "Agent personalization",
+        icon: <Bot />,
+        href: "/settings/agent",
+      },
+      {
+        id: "security",
+        label: "Security & access",
+        icon: <Shield />,
+        href: "/settings/security",
+      },
+    ],
+  },
+  {
     label: "Projects",
     items: [
       { id: "labels", label: "Labels", icon: <Tag /> },
@@ -73,8 +100,7 @@ const NAV_GROUPS: SettingsNavGroup[] = [
     items: [
       { id: "workspace", label: "Workspace", icon: <Settings /> },
       { id: "members", label: "Members", icon: <Users /> },
-      { id: "security", label: "Security", icon: <Shield /> },
-      { id: "api", label: "API", icon: <Key /> },
+      { id: "api", label: "API", icon: <Key />, href: "/settings/api" },
       {
         id: "import-export",
         label: "Import & export",
@@ -103,9 +129,15 @@ function SettingsShell({
     <SidebarProvider defaultOpen>
       <Sidebar collapsible="icon" className="border-r border-border">
         <SidebarHeader className="h-12 justify-center border-b border-border px-3">
-          <span className="truncate text-sm font-medium text-foreground">
-            Settings
-          </span>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8 w-full justify-start gap-1.5 px-2 text-muted-foreground"
+            render={<Link href="/workspace" />}
+          >
+            <ChevronLeft className="size-3.5" />
+            Back to app
+          </Button>
         </SidebarHeader>
         <SidebarContent>
           {NAV_GROUPS.map((group) => (
@@ -177,7 +209,10 @@ function SettingsShell({
           </div>
         </header>
 
-        <div className="flex-1 overflow-auto bg-background p-6 md:p-8">
+        <div
+          data-slot="linear-settings-shell"
+          className="flex-1 overflow-auto bg-background p-6 md:p-8"
+        >
           <div className="mx-auto max-w-2xl space-y-10">{children}</div>
         </div>
       </SidebarInset>
@@ -231,6 +266,145 @@ function SettingsList({
   )
 }
 
+function SettingsBackLink({
+  href,
+  children,
+}: {
+  href: string
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      data-slot="linear-settings-back-link"
+      className="inline-flex items-center gap-0.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+    >
+      <ChevronLeft className="size-3.5" />
+      {children}
+    </Link>
+  )
+}
+
+function SettingsPageIntro({
+  title,
+  description,
+}: {
+  title: string
+  description?: React.ReactNode
+}) {
+  return (
+    <div className="space-y-1">
+      <h1
+        data-slot="linear-settings-page-title"
+        className="text-xl font-medium tracking-tight text-foreground"
+      >
+        {title}
+      </h1>
+      {description ? (
+        <p data-slot="linear-settings-page-desc" className="text-sm text-muted-foreground">
+          {description}
+        </p>
+      ) : null}
+    </div>
+  )
+}
+
+function SettingsToggleRow({
+  title,
+  description,
+  checked,
+  defaultChecked,
+  onCheckedChange,
+}: {
+  title: string
+  description?: string
+  checked?: boolean
+  defaultChecked?: boolean
+  onCheckedChange?: (checked: boolean) => void
+}) {
+  return (
+    <div
+      data-slot="linear-settings-toggle-row"
+      className="flex items-center justify-between gap-4 px-4 py-3"
+    >
+      <div className="min-w-0 space-y-0.5">
+        <p className="text-sm font-medium text-foreground">{title}</p>
+        {description ? (
+          <p className="text-xs text-muted-foreground">{description}</p>
+        ) : null}
+      </div>
+      <Switch
+        checked={checked}
+        defaultChecked={defaultChecked}
+        onCheckedChange={onCheckedChange}
+      />
+    </div>
+  )
+}
+
+function SettingsFormCard({
+  children,
+  footer,
+  className,
+}: {
+  children: React.ReactNode
+  footer?: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      data-slot="linear-settings-form-card"
+      className={cn("overflow-hidden rounded-lg border border-border bg-card", className)}
+    >
+      <div className="p-5">{children}</div>
+      {footer ? (
+        <div
+          data-slot="linear-settings-form-footer"
+          className="flex items-center justify-end gap-2 border-t border-border px-5 py-3"
+        >
+          {footer}
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+function SettingsStatusDot({
+  status,
+  children,
+}: {
+  status: "enabled" | "disabled"
+  children: React.ReactNode
+}) {
+  return (
+    <span
+      data-slot="linear-status-dot"
+      data-status={status}
+      className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"
+    >
+      <span className="size-1.5 shrink-0 rounded-full bg-current" />
+      {children}
+    </span>
+  )
+}
+
+function SettingsSubheading({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <p
+      data-slot="linear-settings-subheading"
+      className={cn("text-xs font-medium text-foreground", className)}
+    >
+      {children}
+    </p>
+  )
+}
+
 function SettingsRow({
   icon,
   title,
@@ -241,7 +415,7 @@ function SettingsRow({
 }: {
   icon?: React.ReactNode
   title: string
-  description?: string
+  description?: React.ReactNode
   action?: React.ReactNode
   href?: string
   onClick?: () => void
@@ -365,8 +539,14 @@ function ImportExportSettings() {
 
 export {
   ImportExportSettings,
+  SettingsBackLink,
+  SettingsFormCard,
   SettingsList,
+  SettingsPageIntro,
   SettingsRow,
   SettingsSection,
   SettingsShell,
+  SettingsStatusDot,
+  SettingsSubheading,
+  SettingsToggleRow,
 }

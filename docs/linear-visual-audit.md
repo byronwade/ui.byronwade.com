@@ -7,6 +7,13 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | Surface | Key signatures | Demo route |
 | ------- | -------------- | ---------- |
 | **Settings sidebar** | `#F7F7F8` canvas, uppercase group labels, gray pill active state | `/linear/settings` |
+| **Notifications** | Channel list + chevrons, status dots, toggle rows, purple switches | `/linear/settings/notifications` |
+| **Email notifications** | Digest select, toggle rows in grouped card | `/linear/settings/notifications/email` |
+| **Agent personalization** | Guidance textarea, skills empty state + list | `/linear/settings/agent` |
+| **Create skill** | Back link, textarea form, Cancel/Create footer | `/linear/settings/agent/skills/new` |
+| **Security & access** | API key entry points | `/linear/settings/security` |
+| **Create API key** | Radio/checkbox permissions, team pills, form footer | `/linear/settings/api/create` |
+| **API key detail** | Green mono key, copy toast | `/linear/settings/api` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |
 | **Import wizard** | Stepper circles, white card, Back/Next footer, purple primary CTA | `/linear/settings/import` |
 | **Security / toggles** | White settings card, purple `#5E6AD2` switch when on | `/linear/catalog` → Switch |
@@ -51,12 +58,13 @@ npm run build:linear          # all of the above + production build
 ## Manual review checklist
 
 1. Open `/linear/settings` in **light** — sidebar, grouped import list, export row, toast.
-2. Open `/linear/settings/import` — wizard stepper, radio workspace row, footer actions.
-3. Open `/linear/catalog` — scan each category in dark, then toggle light.
-4. Open `/linear/workspace` in **dark** — issue list density, cycle sidebar, ⌘K shell.
-5. Compare overlays (dialog, sheet, command) — scrim + level-2 panel, no white glow rings.
-6. Compare form controls — 32px height, 1px border, indigo focus ring.
-7. Compare switches in light mode — purple track when checked.
+2. Open `/linear/settings/notifications` and `/linear/settings/notifications/email` — channels, toggles, digest select.
+3. Open `/linear/settings/agent` and `/linear/settings/agent/skills/new` — guidance card, skill form.
+4. Open `/linear/settings/api/create` and `/linear/settings/api` — permissions form, green API key + copy toast.
+5. Open `/linear/settings/import` — wizard stepper, radio workspace row, footer actions.
+6. Open `/linear/catalog` — scan each category in dark, then toggle light.
+7. Open `/linear/workspace` in **dark** — issue list density, cycle sidebar, ⌘K shell.
+8. Open `/linear/auth` in **light** — pill login flow.
 
 ## Regenerate main-site skin after CSS changes
 

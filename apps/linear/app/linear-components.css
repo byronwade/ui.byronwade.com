@@ -954,3 +954,76 @@
   text-transform: uppercase;
   color: var(--linear-text-tertiary);
 }
+
+/* Settings shell — light canvas from Mobbin captures */
+[data-slot="linear-settings-shell"] {
+  background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-settings-back-link"] {
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+}
+
+[data-slot="linear-settings-page-title"] {
+  font-size: 1.375rem;
+  font-weight: var(--linear-font-medium);
+  letter-spacing: -0.02em;
+}
+
+[data-slot="linear-settings-page-desc"] {
+  font-size: 0.8125rem;
+  color: var(--linear-text-tertiary);
+}
+
+[data-slot="linear-settings-toggle-row"] {
+  border-bottom: 1px solid var(--linear-border-translucent-strong);
+  background-color: transparent;
+}
+
+[data-slot="linear-settings-toggle-row"]:last-child {
+  border-bottom: 0;
+}
+
+[data-slot="linear-settings-form-card"] {
+  border-radius: var(--linear-radius-8);
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+  box-shadow: none;
+}
+
+[data-slot="linear-settings-form-footer"] [data-slot="button"][data-variant="ghost"] {
+  color: var(--linear-text-secondary);
+}
+
+[data-slot="linear-status-dot"][data-status="enabled"] {
+  color: var(--linear-green);
+}
+
+[data-slot="linear-status-dot"][data-status="disabled"] {
+  color: var(--linear-text-tertiary);
+}
+
+[data-slot="linear-api-key-value"] {
+  color: var(--linear-green);
+  letter-spacing: -0.02em;
+}
+
+[data-slot="linear-agent-guidance"] {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-settings-select-row"] {
+  border-bottom: 0;
+}
+
+[data-slot="linear-settings-permission-list"] {
+  margin-top: 0.25rem;
+}
+
+[data-slot="linear-settings-team-select"] {
+  border-radius: var(--linear-radius-6);
+  min-height: 36px;
+}
