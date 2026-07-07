@@ -5,20 +5,9 @@ import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { CATALOG_COMPONENTS } from "@/lib/component-catalog"
 import { CatalogSections } from "./catalog-sections"
-
-const NAV = [
-  { id: "actions", label: "Actions" },
-  { id: "forms", label: "Forms" },
-  { id: "data", label: "Data display" },
-  { id: "feedback", label: "Feedback" },
-  { id: "navigation", label: "Navigation" },
-  { id: "overlays", label: "Overlays" },
-  { id: "layout", label: "Layout" },
-  { id: "sidebar", label: "Sidebar" },
-  { id: "media", label: "Media & misc" },
-  { id: "linear", label: "Linear patterns" },
-]
+import { ComponentNav } from "./component-nav"
 
 export function CatalogView() {
   const { theme, setTheme } = useTheme()
@@ -35,9 +24,9 @@ export function CatalogView() {
               Linear UI
             </Link>
             <span className="text-muted-foreground">/</span>
-            <span className="truncate text-sm text-foreground">Catalog</span>
+            <span className="truncate text-sm text-foreground">Components</span>
             <Badge variant="outline" className="hidden sm:inline-flex font-mono text-[10px]">
-              60 components
+              {CATALOG_COMPONENTS.length} components
             </Badge>
           </div>
           <div className="flex items-center gap-2">
@@ -53,36 +42,34 @@ export function CatalogView() {
             </Button>
           </div>
         </div>
-        <nav className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-6 pb-2 scrollbar-thin">
-          {NAV.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className="shrink-0 rounded-md px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
       </header>
 
-      <main className="mx-auto max-w-7xl space-y-16 px-6 py-10">
-        <div>
-          <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-            Full component catalog
-          </p>
-          <h1 className="mt-2 text-2xl font-medium tracking-tight">
-            Every shadcn primitive, Linear reskin
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            All 60 components from <code className="font-mono text-xs">shadcn add --all</code>,
-            styled with tokens from{" "}
-            <code className="font-mono text-xs">LINEAR-DESIGN-SYSTEM.md</code>.
-          </p>
-        </div>
+      <div className="mx-auto flex max-w-7xl gap-10 px-6 py-10">
+        <aside className="sticky top-16 hidden h-[calc(100vh-5rem)] w-52 shrink-0 overflow-y-auto pb-10 lg:block">
+          <ComponentNav />
+        </aside>
 
-        <CatalogSections />
-      </main>
+        <main className="min-w-0 flex-1 space-y-16">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              Full component catalog
+            </p>
+            <h1 className="mt-2 text-2xl font-medium tracking-tight">
+              Every component, Linear reskin
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+              All {CATALOG_COMPONENTS.length} primitives from{" "}
+              <code className="font-mono text-xs">shadcn add --all</code>, plus Linear composites.
+              Use the sidebar or jump links to inspect each one.
+            </p>
+            <div className="mt-4 lg:hidden">
+              <ComponentNav />
+            </div>
+          </div>
+
+          <CatalogSections />
+        </main>
+      </div>
     </div>
   )
 }

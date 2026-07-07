@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { CATALOG_COMPONENTS } from "@/lib/component-catalog"
 
 export default function HomePage() {
   return (
@@ -33,7 +34,7 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button render={<Link href="/catalog" />}>Full catalog (60)</Button>
+          <Button render={<Link href="/catalog" />}>All components ({CATALOG_COMPONENTS.length})</Button>
           <Button variant="outline" render={<Link href="/styleguide" />}>
             Styleguide
           </Button>
@@ -45,7 +46,7 @@ export default function HomePage() {
         <dl className="mt-16 grid gap-6 border-t border-border pt-10 sm:grid-cols-3">
           <div>
             <dt className="font-mono text-xs text-muted-foreground">Components</dt>
-            <dd className="mt-1 text-lg font-medium">60</dd>
+            <dd className="mt-1 text-lg font-medium">{CATALOG_COMPONENTS.length}</dd>
           </div>
           <div>
             <dt className="font-mono text-xs text-muted-foreground">Source</dt>
