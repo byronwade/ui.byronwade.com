@@ -15,6 +15,7 @@ import {
   ExternalLink,
   FileText,
   Key,
+  Layers,
   Moon,
   RefreshCw,
   Settings,
@@ -26,9 +27,16 @@ import {
   Upload,
   Users,
   AlertCircle,
+  AppWindow,
+  Check,
+  Circle,
   Columns3,
+  Laptop,
+  MessageSquare,
+  Plug,
   Plus,
   SlidersHorizontal,
+  Smile,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -172,23 +180,89 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         icon: <Users />,
         href: "/settings/features/customer-requests",
       },
+      {
+        id: "pulse",
+        label: "Pulse",
+        icon: <Layers />,
+        href: "/settings/features/pulse",
+      },
+      {
+        id: "asks",
+        label: "Asks",
+        icon: <MessageSquare />,
+        href: "/settings/features/asks",
+      },
+      { id: "emojis", label: "Emojis", icon: <Smile /> },
+      { id: "integrations", label: "Integrations", icon: <Plug /> },
     ],
   },
   {
     label: "Administration",
     items: [
       { id: "workspace", label: "Workspace", icon: <Settings /> },
-      { id: "members", label: "Members", icon: <Users /> },
+      {
+        id: "teams",
+        label: "Teams",
+        icon: <Users />,
+        href: "/settings/teams/engineering",
+      },
+      {
+        id: "members",
+        label: "Members",
+        icon: <Users />,
+        href: "/settings/members",
+      },
+      {
+        id: "admin-security",
+        label: "Security",
+        icon: <Shield />,
+        href: "/settings/security",
+      },
       { id: "api", label: "API", icon: <Key />, href: "/settings/api" },
+      {
+        id: "applications",
+        label: "Applications",
+        icon: <AppWindow />,
+        href: "/settings/applications",
+      },
+      {
+        id: "billing",
+        label: "Billing",
+        icon: <CreditCard />,
+        href: "/settings/billing",
+      },
       {
         id: "import-export",
         label: "Import & export",
         icon: <Upload />,
         href: "/settings",
       },
-      { id: "billing", label: "Billing", icon: <CreditCard /> },
     ],
   },
+]
+
+const YOUR_TEAMS_GROUP: SettingsNavGroup = {
+  label: "Your teams",
+  items: [
+    {
+      id: "engineering-team",
+      label: "Engineering Team",
+      icon: <Laptop />,
+      href: "/settings/teams/engineering",
+    },
+    { id: "as-mobbin", label: "AS Mobbin", icon: <Users /> },
+    {
+      id: "create-team",
+      label: "Create a team",
+      icon: <Plus />,
+      href: "/settings/teams/new",
+    },
+  ],
+}
+
+const NAV_GROUPS_WITH_TEAMS: SettingsNavGroup[] = [
+  ...NAV_GROUPS,
+  YOUR_TEAMS_GROUP,
 ]
 
 type SettingsShellProps = {
@@ -221,7 +295,7 @@ function SettingsShell({
           </Button>
         </SidebarHeader>
         <SidebarContent>
-          {NAV_GROUPS.map((group) => (
+          {NAV_GROUPS_WITH_TEAMS.map((group) => (
             <SidebarGroup key={group.label}>
               <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
               <SidebarGroupContent>
@@ -249,6 +323,10 @@ function SettingsShell({
           ))}
         </SidebarContent>
         <SidebarFooter className="gap-2 border-t border-border p-3">
+          <SettingsWhatsNewCard
+            title="What's new"
+            description="Web forms for Linear Asks"
+          />
           <Button
             variant="ghost"
             size="icon-sm"
@@ -908,6 +986,230 @@ function SettingsScheduleCard({
   )
 }
 
+function SettingsWhatsNewCard({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) {
+  return (
+    <div
+      data-slot="linear-settings-whats-new"
+      className="rounded-lg border border-border bg-card p-3"
+    >
+      <p className="text-xs font-medium text-foreground">{title}</p>
+      <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
+    </div>
+  )
+}
+
+function SettingsFormGroup({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      data-slot="linear-settings-form-group"
+      className={cn(
+        "overflow-hidden rounded-lg border border-border bg-card",
+        className
+      )}
+    >
+      {children}
+    </div>
+  )
+}
+
+function SettingsFieldRow({
+  label,
+  description,
+  children,
+  trailing,
+  className,
+}: {
+  label: string
+  description?: string
+  children?: React.ReactNode
+  trailing?: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      data-slot="linear-settings-field-row"
+      className={cn(
+        "flex items-center justify-between gap-4 border-b border-border px-4 py-3 last:border-b-0",
+        className
+      )}
+    >
+      <div className="min-w-0 space-y-0.5">
+        <p className="text-sm font-medium text-foreground">{label}</p>
+        {description ? (
+          <p className="text-xs text-muted-foreground">{description}</p>
+        ) : null}
+      </div>
+      {children ?? trailing}
+    </div>
+  )
+}
+
+function SettingsMetaRow({
+  icon,
+  title,
+  description,
+  meta,
+  href,
+}: {
+  icon?: React.ReactNode
+  title: string
+  description?: React.ReactNode
+  meta?: string
+  href?: string
+}) {
+  return (
+    <SettingsRow
+      icon={icon}
+      title={title}
+      description={description}
+      href={href}
+      action={
+        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+          {meta}
+          <ChevronRight className="size-3.5" />
+        </span>
+      }
+    />
+  )
+}
+
+function SettingsTierList({
+  count,
+  items,
+  onAdd,
+}: {
+  count: string
+  items: Array<{ id: string; name: string; description: string }>
+  onAdd?: () => void
+}) {
+  return (
+    <div data-slot="linear-settings-tier-list">
+      <SettingsListHeader count={count} onAdd={onAdd} />
+      <SettingsList className="rounded-t-none border-t-0">
+        {items.map((item) => (
+          <div
+            key={item.id}
+            data-slot="linear-settings-tier-row"
+            className="px-4 py-3"
+          >
+            <p className="text-sm text-foreground">
+              <span className="font-medium">{item.name}</span>
+              <span className="text-muted-foreground"> · {item.description}</span>
+            </p>
+          </div>
+        ))}
+      </SettingsList>
+    </div>
+  )
+}
+
+function SettingsTeamHeader({
+  icon,
+  title,
+}: {
+  icon?: React.ReactNode
+  title: string
+}) {
+  return (
+    <div
+      data-slot="linear-settings-team-header"
+      className="flex items-center gap-3"
+    >
+      <span className="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-muted/30 text-muted-foreground">
+        {icon ?? <Laptop className="size-5" />}
+      </span>
+      <h1 className="text-xl font-medium tracking-tight text-foreground">
+        {title}
+      </h1>
+    </div>
+  )
+}
+
+function SettingsStepper({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      data-slot="linear-settings-stepper"
+      className={cn("space-y-8", className)}
+    >
+      {children}
+    </div>
+  )
+}
+
+function SettingsStep({
+  title,
+  description,
+  status = "pending",
+  children,
+  action,
+}: {
+  title: string
+  description?: React.ReactNode
+  status?: "pending" | "active" | "complete"
+  children?: React.ReactNode
+  action?: React.ReactNode
+}) {
+  return (
+    <div
+      data-slot="linear-settings-step"
+      data-status={status}
+      className="relative pl-8"
+    >
+      <span
+        data-slot="linear-settings-step-indicator"
+        className="absolute left-0 top-0.5 flex size-5 items-center justify-center"
+      >
+        {status === "complete" ? (
+          <span className="inline-flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <Check className="size-3" />
+          </span>
+        ) : status === "active" ? (
+          <span className="inline-flex size-5 items-center justify-center rounded-full border-2 border-primary">
+            <span className="size-2 rounded-full bg-primary" />
+          </span>
+        ) : (
+          <Circle className="size-5 text-muted-foreground/40" />
+        )}
+      </span>
+      <div className="space-y-3">
+        <div className="space-y-1">
+          <p
+            className={cn(
+              "text-sm font-medium",
+              status === "pending" ? "text-muted-foreground" : "text-foreground"
+            )}
+          >
+            {title}
+          </p>
+          {description ? (
+            <p className="text-xs text-muted-foreground">{description}</p>
+          ) : null}
+        </div>
+        {children}
+        {action ? <div className="flex justify-end">{action}</div> : null}
+      </div>
+    </div>
+  )
+}
+
 function ImportExportSettings() {
   return (
     <>
@@ -990,10 +1292,13 @@ export {
   SettingsBehaviorRow,
   SettingsEditRow,
   SettingsEmptyRow,
+  SettingsFieldRow,
   SettingsFormCard,
+  SettingsFormGroup,
   SettingsIntegrationRow,
   SettingsList,
   SettingsListHeader,
+  SettingsMetaRow,
   SettingsPageIntro,
   SettingsRow,
   SettingsScheduleCard,
@@ -1001,6 +1306,11 @@ export {
   SettingsShell,
   SettingsStatusDot,
   SettingsStatusSwatchList,
+  SettingsStep,
+  SettingsStepper,
   SettingsSubheading,
+  SettingsTeamHeader,
+  SettingsTierList,
   SettingsToggleRow,
+  SettingsWhatsNewCard,
 }

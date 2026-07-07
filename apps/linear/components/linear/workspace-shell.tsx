@@ -5,8 +5,10 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 import {
   AlertCircle,
+  ChevronRight,
   CircleDot,
   CircleHelp,
+  FileText,
   FolderKanban,
   Settings,
   Inbox,
@@ -56,23 +58,54 @@ type WorkspaceNavItem = {
 const WORKSPACE_NAV: WorkspaceNavItem[] = [
   { id: "inbox", label: "Inbox", icon: <Inbox />, badge: "3" },
   { id: "my-issues", label: "My issues", icon: <CircleDot /> },
-  { id: "drafts", label: "Drafts", icon: <Layers /> },
   { id: "projects", label: "Projects", icon: <FolderKanban /> },
   { id: "views", label: "Views", icon: <LayoutGrid /> },
+  { id: "more", label: "More", icon: <Layers /> },
 ]
 
 const TEAM_NAV: WorkspaceNavItem[] = [
-  { id: "engineering", label: "Engineering", icon: <Users />, href: "/workspace" },
-  { id: "design", label: "Design", icon: <Users /> },
-  { id: "mobile", label: "Mobile", icon: <Users /> },
+  {
+    id: "engineering",
+    label: "Engineering",
+    icon: <Users />,
+    href: "/workspace",
+  },
+  {
+    id: "as-mobbin",
+    label: "AS Mobbin",
+    icon: <Users />,
+    href: "/workspace/deleted/documents",
+  },
 ]
+
+const TRY_NAV: WorkspaceNavItem[] = [
+  { id: "import", label: "Import issues", icon: <Plus /> },
+  { id: "initiatives", label: "Initiatives", icon: <Layers /> },
+  { id: "cycles", label: "Cycles", icon: <CircleDot /> },
+]
+
+type WorkspaceBreadcrumb = {
+  label: string
+  href?: string
+}
+
+type WorkspaceViewTab = {
+  id: string
+  label: string
+  href?: string
+}
 
 type WorkspaceShellProps = {
   team?: string
   view?: string
+  breadcrumbs?: WorkspaceBreadcrumb[]
   activeNavId?: string
   activeTab?: string
   onTabChange?: (value: string) => void
+  viewTabs?: WorkspaceViewTab[]
+  activeViewTab?: string
+  showIssueTabs?: boolean
+  workspaceLabel?: string
   onSearch?: () => void
   children: React.ReactNode
   secondary?: React.ReactNode
@@ -82,9 +115,14 @@ type WorkspaceShellProps = {
 function WorkspaceShell({
   team = "Engineering",
   view = "Cycle 24",
+  breadcrumbs,
   activeNavId = "engineering",
   activeTab = "all",
   onTabChange,
+  viewTabs,
+  activeViewTab,
+  showIssueTabs = true,
+  workspaceLabel = "AS Mobbin",
   onSearch,
   children,
   secondary,
@@ -105,7 +143,7 @@ function WorkspaceShell({
             size="sm"
             className="h-8 w-full justify-between px-2 font-medium"
           >
-            <span className="truncate">Mobbin</span>
+            <span className="truncate">{workspaceLabel}</span>
             <span className="text-xs text-muted-foreground">⌄</span>
           </Button>
         </SidebarHeader>
@@ -152,6 +190,24 @@ function WorkspaceShell({
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
+
+          <SidebarSeparator />
+
+          <SidebarGroup>
+            <SidebarGroupLabel>Try</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {TRY_NAV.map((item) => (
+                  <SidebarMenuItem key={item.id}>
+                    <SidebarMenuButton isActive={item.id === activeNavId}>
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
         </SidebarContent>
 
         <SidebarFooter className="gap-2 border-t border-border p-3">
@@ -189,28 +245,66 @@ function WorkspaceShell({
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="h-4" />
           <div className="flex min-w-0 items-center gap-1.5 text-sm">
-            <span className="truncate font-medium">{team}</span>
-            <span className="text-muted-foreground">/</span>
-            <span className="truncate text-muted-foreground">{view}</span>
+            {breadcrumbs?.length ? (
+              breadcrumbs.map((crumb, index) => (
+                <React.Fragment key={`${crumb.label}-${index}`}>
+                  {index > 0 ? (
+                    <span className="text-muted-foreground">/</span>
+                  ) : null}
+                  {crumb.href ? (
+                    <Link
+                      href={crumb.href}
+                      className={cn(
+                        "truncate",
+                        index === breadcrumbs.length - 1
+                          ? "font-medium text-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      {crumb.label}
+                    </Link>
+                  ) : (
+                    <span
+                      className={cn(
+                        "truncate",
+                        index === breadcrumbs.length - 1
+                          ? "font-medium text-foreground"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      {crumb.label}
+                    </span>
+                  )}
+                </React.Fragment>
+              ))
+            ) : (
+              <>
+                <span className="truncate font-medium">{team}</span>
+                <span className="text-muted-foreground">/</span>
+                <span className="truncate text-muted-foreground">{view}</span>
+              </>
+            )}
           </div>
 
-          <Tabs
-            value={activeTab}
-            onValueChange={onTabChange}
-            className="ml-4 hidden md:block"
-          >
-            <TabsList variant="line" className="h-8 bg-transparent p-0">
-              <TabsTrigger value="all" className="h-8 px-3 text-xs">
-                All issues
-              </TabsTrigger>
-              <TabsTrigger value="active" className="h-8 px-3 text-xs">
-                Active
-              </TabsTrigger>
-              <TabsTrigger value="backlog" className="h-8 px-3 text-xs">
-                Backlog
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
+          {showIssueTabs ? (
+            <Tabs
+              value={activeTab}
+              onValueChange={onTabChange}
+              className="ml-4 hidden md:block"
+            >
+              <TabsList variant="line" className="h-8 bg-transparent p-0">
+                <TabsTrigger value="all" className="h-8 px-3 text-xs">
+                  All issues
+                </TabsTrigger>
+                <TabsTrigger value="active" className="h-8 px-3 text-xs">
+                  Active
+                </TabsTrigger>
+                <TabsTrigger value="backlog" className="h-8 px-3 text-xs">
+                  Backlog
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          ) : null}
 
           <div className="ml-auto flex items-center gap-2">
             <Button
@@ -249,7 +343,15 @@ function WorkspaceShell({
             </aside>
           ) : null}
 
-          <div className="flex min-w-0 flex-1 flex-col overflow-auto">{children}</div>
+          <div className="flex min-w-0 flex-1 flex-col overflow-auto">
+            {viewTabs?.length ? (
+              <WorkspaceFilterTabs
+                tabs={viewTabs}
+                activeId={activeViewTab ?? viewTabs[0]?.id}
+              />
+            ) : null}
+            {children}
+          </div>
         </div>
 
         {footer ? (
@@ -262,6 +364,86 @@ function WorkspaceShell({
         ) : null}
       </SidebarInset>
     </SidebarProvider>
+  )
+}
+
+function WorkspaceFilterTabs({
+  tabs,
+  activeId,
+}: {
+  tabs: WorkspaceViewTab[]
+  activeId: string
+}) {
+  return (
+    <div
+      data-slot="linear-workspace-filter-tabs"
+      className="flex flex-wrap gap-1 border-b border-border px-4 py-2"
+    >
+      {tabs.map((tab) => {
+        const active = tab.id === activeId
+        const className = cn(
+          "rounded-full px-2.5 py-1 text-xs transition-colors",
+          active
+            ? "bg-muted text-foreground"
+            : "text-muted-foreground hover:bg-muted/30 hover:text-foreground"
+        )
+
+        if (tab.href) {
+          return (
+            <Link
+              key={tab.id}
+              href={tab.href}
+              data-slot="linear-workspace-filter-tab"
+              data-active={active ? "true" : undefined}
+              className={className}
+            >
+              {tab.label}
+            </Link>
+          )
+        }
+
+        return (
+          <button
+            key={tab.id}
+            type="button"
+            data-slot="linear-workspace-filter-tab"
+            data-active={active ? "true" : undefined}
+            className={className}
+          >
+            {tab.label}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+function WorkspaceDocumentRow({
+  title,
+  project,
+  icon,
+}: {
+  title: string
+  project: string
+  icon?: React.ReactNode
+}) {
+  return (
+    <div
+      data-slot="linear-workspace-document-row"
+      className="flex items-center gap-2 border-b border-border px-4 py-2.5 last:border-b-0"
+    >
+      <span className="shrink-0 text-muted-foreground">
+        {icon ?? <FileText className="size-4" />}
+      </span>
+      <span className="min-w-0 flex-1 truncate text-sm text-foreground">
+        {title}
+      </span>
+      <ChevronRight className="size-3.5 shrink-0 text-muted-foreground" />
+      <span className="inline-flex min-w-0 max-w-[40%] items-center gap-1.5 truncate text-sm text-muted-foreground">
+        <FolderKanban className="size-3.5 shrink-0" />
+        <span className="truncate">{project}</span>
+      </span>
+    </div>
   )
 }
 
@@ -352,6 +534,8 @@ function WorkspaceAskBar({
 export {
   WorkspaceAskBar,
   WorkspaceAskTrigger,
+  WorkspaceDocumentRow,
+  WorkspaceFilterTabs,
   WorkspaceListPanel,
   WorkspaceShell,
 }

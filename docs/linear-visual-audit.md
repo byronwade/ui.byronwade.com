@@ -23,6 +23,11 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Initiatives** | Enable toggle, schedule Edit row, Slack connect | `/linear/settings/features/initiatives` |
 | **Documents** | Template list header + row, new template editor | `/linear/settings/features/documents` |
 | **Customer requests** | Enable toggle, status swatches, tier create, display options | `/linear/settings/features/customer-requests` |
+| **Pulse** | Enable toggle, workspace/personal schedule selects | `/linear/settings/features/pulse` |
+| **Asks** | Email intake list, multi-step DNS wizard | `/linear/settings/features/asks` |
+| **Create team** | Field rows, timezone select, Create CTA | `/linear/settings/teams/new` |
+| **Team settings** | Meta rows with counts, grouped sections | `/linear/settings/teams/engineering` |
+| **Recently deleted documents** | Breadcrumb header, filter tabs, document rows | `/linear/workspace/deleted/documents` |
 | **SLA custom duration** | Custom duration dialog on rule editor | `/linear/settings/issues/slas` |
 | **Workspace app shell** | Sidebar nav, cycle panel, issue list, ⌘K, Ask Linear | `/linear/workspace` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |
@@ -75,11 +80,13 @@ npm run build:linear          # all of the above + production build
 3. Open `/linear/settings/agent` and `/linear/settings/agent/skills/new` — guidance card, skill form.
 4. Open `/linear/settings/api/create` and `/linear/settings/api` — permissions form, green API key + copy toast.
 5. Open `/linear/settings/issues/labels`, `/slas`, `/templates`, `/templates/new` — Issues settings from Mobbin.
-6. Open `/linear/settings/features/ai-agents`, `/initiatives`, `/documents`, `/customer-requests` — Features settings from Mobbin.
-7. Open `/linear/settings/import` — wizard stepper, radio workspace row, footer actions.
-8. Open `/linear/catalog` — scan each category in dark, then toggle light.
-9. Open `/linear/workspace` in **dark** — issue list density, cycle sidebar, ⌘K shell, help affordance.
-10. Open `/linear/auth` in **light** — pill login flow.
+6. Open `/linear/settings/features/ai-agents`, `/initiatives`, `/documents`, `/customer-requests`, `/pulse`, `/asks` — Features settings from Mobbin.
+7. Open `/linear/settings/teams/new` and `/linear/settings/teams/engineering` — Administration team flows.
+8. Open `/linear/workspace/deleted/documents` in **light** — deleted items tabs + document list.
+9. Open `/linear/settings/import` — wizard stepper, radio workspace row, footer actions.
+10. Open `/linear/catalog` — scan each category in dark, then toggle light.
+11. Open `/linear/workspace` in **dark** — issue list density, cycle sidebar, ⌘K shell, help affordance.
+12. Open `/linear/auth` in **light** — pill login flow.
 
 ## Regenerate main-site skin after CSS changes
 

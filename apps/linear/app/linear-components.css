@@ -1231,3 +1231,86 @@
   height: 36px;
   font-size: 0.8125rem;
 }
+
+[data-slot="linear-settings-whats-new"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-settings-form-group"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-settings-field-row"] {
+  min-height: 44px;
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-tier-list"] [data-slot="linear-settings-list"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+[data-slot="linear-settings-tier-row"] {
+  border-bottom: 1px solid var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-tier-row"]:last-child {
+  border-bottom: 0;
+}
+
+[data-slot="linear-settings-team-header"] [data-slot="linear-settings-page-title"] {
+  font-size: 1.375rem;
+}
+
+[data-slot="linear-settings-stepper"] {
+  position: relative;
+}
+
+[data-slot="linear-settings-step"]::before {
+  content: "";
+  position: absolute;
+  left: 0.625rem;
+  top: 1.5rem;
+  bottom: -2rem;
+  width: 1px;
+  background-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-step"]:last-child::before {
+  display: none;
+}
+
+[data-slot="linear-asks-intake-list"] [data-slot="linear-settings-list"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+[data-slot="linear-asks-dns-table"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-billing-plan"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-workspace-filter-tabs"] {
+  background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-workspace-filter-tab"][data-active="true"] {
+  background-color: var(--linear-bg-level-2);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-workspace-document-row"] {
+  min-height: 40px;
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-workspace-document-row"]:hover {
+  background-color: var(--linear-bg-level-2);
+}

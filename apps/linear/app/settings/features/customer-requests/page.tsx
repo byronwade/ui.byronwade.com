@@ -14,6 +14,7 @@ import {
   SettingsSection,
   SettingsShell,
   SettingsStatusSwatchList,
+  SettingsTierList,
   SettingsToggleRow,
 } from "@/components/linear/settings-shell"
 import { Button } from "@/components/ui/button"
@@ -31,6 +32,24 @@ const CUSTOMER_STATUSES = [
   { id: "prospect", label: "Prospect", color: "green" as const },
   { id: "churned", label: "Churned", color: "red" as const },
   { id: "lost", label: "Lost", color: "orange" as const },
+]
+
+const CUSTOMER_TIERS = [
+  {
+    id: "basic",
+    name: "Basic",
+    description: "Non-paying or trial users",
+  },
+  {
+    id: "premium",
+    name: "Premium",
+    description: "Users with an active monthly or yearly subscription.",
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    description: "B2B clients or organizations with custom contracts.",
+  },
 ]
 
 export default function CustomerRequestsSettingsPage() {
@@ -125,7 +144,10 @@ export default function CustomerRequestsSettingsPage() {
             />
           </SettingsSection>
 
-          <SettingsSection title="Customer tiers">
+          <SettingsSection
+            title="Customer tiers"
+            description="Define tiers for segmenting customers."
+          >
             {creatingTier ? (
               <SettingsFormCard
                 footer={
@@ -160,12 +182,11 @@ export default function CustomerRequestsSettingsPage() {
                 </div>
               </SettingsFormCard>
             ) : (
-              <SettingsList>
-                <SettingsEmptyRow
-                  label="No customer tiers"
-                  onAdd={() => setCreatingTier(true)}
-                />
-              </SettingsList>
+              <SettingsTierList
+                count="3 customer tiers"
+                items={CUSTOMER_TIERS}
+                onAdd={() => setCreatingTier(true)}
+              />
             )}
           </SettingsSection>
 

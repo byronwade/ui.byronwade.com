@@ -1020,7 +1020,73 @@
 [data-slot="linear-document-template"] {:root[data-skin="linear"] max-width: 42rem;
 }
 
-[data-slot="linear-customer-tier-row"] [data-slot="input"] {
-  height: 36px;
+[data-slot="linear-customer-tier-row"] [data-slot="input"] {:root[data-skin="linear"] height: 36px;
   font-size: 0.8125rem;
+}
+
+[data-slot="linear-settings-whats-new"] {:root[data-skin="linear"] border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-settings-form-group"] {:root[data-skin="linear"] border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-settings-field-row"] {:root[data-skin="linear"] min-height: 44px;
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-tier-list"] [data-slot="linear-settings-list"] {:root[data-skin="linear"] border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+[data-slot="linear-settings-tier-row"] {:root[data-skin="linear"] border-bottom: 1px solid var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-tier-row"]:last-child {:root[data-skin="linear"] border-bottom: 0;
+}
+
+[data-slot="linear-settings-team-header"] [data-slot="linear-settings-page-title"] {:root[data-skin="linear"] font-size: 1.375rem;
+}
+
+[data-slot="linear-settings-stepper"] {:root[data-skin="linear"] position: relative;
+}
+
+[data-slot="linear-settings-step"]::before {:root[data-skin="linear"] content: "";
+  position: absolute;
+  left: 0.625rem;
+  top: 1.5rem;
+  bottom: -2rem;
+  width: 1px;
+  background-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-step"]:last-child::before {:root[data-skin="linear"] display: none;
+}
+
+[data-slot="linear-asks-intake-list"] [data-slot="linear-settings-list"] {:root[data-skin="linear"] border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+[data-slot="linear-asks-dns-table"] {:root[data-skin="linear"] border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-billing-plan"] {:root[data-skin="linear"] border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-workspace-filter-tabs"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-workspace-filter-tab"][data-active="true"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-2);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-workspace-document-row"] {:root[data-skin="linear"] min-height: 40px;
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-workspace-document-row"]:hover {
+  background-color: var(--linear-bg-level-2);
 }
