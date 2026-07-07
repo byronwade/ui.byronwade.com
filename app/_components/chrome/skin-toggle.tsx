@@ -14,40 +14,53 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-type Skin = "warm" | "polaris"
+type Skin = "warm" | "linear" | "polaris"
 
 const SKINS: { value: Skin; label: string; desc: string }[] = [
   { value: "warm", label: "Warm", desc: "byronwade — warm paper, one accent" },
+  {
+    value: "linear",
+    label: "Linear",
+    desc: "Dark product OS — indigo accent, dense rows",
+  },
   { value: "polaris", label: "Polaris", desc: "Shopify-inspired admin skin" },
 ]
 
 function currentSkin(): Skin {
   if (typeof document === "undefined") return "warm"
-  return document.documentElement.dataset.skin === "polaris"
-    ? "polaris"
-    : "warm"
+  const skin = document.documentElement.dataset.skin
+  if (skin === "linear" || skin === "polaris") return skin
+  return "warm"
 }
 
 /**
  * Skin switcher — toggles the active token skin across every component at once
  * by setting `data-skin` on the document root (persisted in localStorage). The
- * skins themselves are pure token overrides (see `app/skins.css`).
+ * skins themselves are pure token overrides (see `app/globals.css`).
  */
 export function SkinToggle() {
   const [skin, setSkin] = React.useState<Skin>("warm")
 
-  // Sync from the DOM after mount (set by the no-flash script in the layout).
   React.useEffect(() => {
     setSkin(currentSkin())
   }, [])
 
   const apply = React.useCallback((next: Skin) => {
     setSkin(next)
+    if (next === "warm") {
+      delete document.documentElement.dataset.skin
+      try {
+        localStorage.removeItem("skin")
+      } catch {
+        // ignore
+      }
+      return
+    }
     document.documentElement.dataset.skin = next
     try {
       localStorage.setItem("skin", next)
     } catch {
-      // ignore — best-effort persistence
+      // ignore
     }
   }, [])
 

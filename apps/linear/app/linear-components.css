@@ -249,3 +249,18 @@
   background-color: var(--linear-accent-tint);
   color: var(--linear-text-primary);
 }
+
+/* ── Linear composites ─────────────────────────────────────────────────────── */
+
+[data-slot="linear-issue-row"] {
+  font-size: 0.875rem;
+}
+
+[data-slot="linear-cycle-panel"] {
+  border-radius: var(--linear-radius-8);
+}
+
+[data-slot="linear-command-shell"] {
+  border-radius: var(--linear-radius-12);
+  padding: 0;
+}

@@ -197,3 +197,140 @@
     0 1px 2px -1px oklch(0.2 0.03 262 / 0.14),
     0 2px 6px -2px oklch(0.2 0.03 262 / 0.08);
 }
+
+/*
+ * Linear — dark-first product OS skin from design-research/LINEAR-DESIGN-SYSTEM.md.
+ * Indigo accent (#5e6ad2), near-black surface ladder, hairline borders, 6px controls.
+ * Ships as ui.byronwade.com/linear and as a live preview skin on the main registry.
+ */
+:root[data-skin="linear"] {
+  --background: #08090a;
+  --foreground: #f7f8f8;
+  --card: #0f1011;
+  --card-foreground: #f7f8f8;
+  --popover: #141516;
+  --popover-foreground: #f7f8f8;
+  --primary: #5e6ad2;
+  --primary-foreground: #ffffff;
+  --secondary: #1c1c1f;
+  --secondary-foreground: #d0d6e0;
+  --muted: #141516;
+  --muted-foreground: #8a8f98;
+  --accent: #18182f;
+  --accent-foreground: #828fff;
+  --destructive: #eb5757;
+  --border: rgba(255, 255, 255, 0.05);
+  --input: #232326;
+  --edge: rgba(255, 255, 255, 0.05);
+  --brand: #5e6ad2;
+  --brand-foreground: #ffffff;
+  --brand-muted: #18182f;
+  --success: #27a644;
+  --success-foreground: #ffffff;
+  --warning: #f0bf00;
+  --warning-foreground: #08090a;
+  --ring: #5e69d1;
+  --radius: 0.375rem;
+  --dock: #0f1011;
+  --dock-foreground: #8a8f98;
+  --dock-muted: rgba(255, 255, 255, 0.05);
+  --dock-active: #18182f;
+  --dock-active-foreground: #828fff;
+  --sidebar: #08090a;
+  --sidebar-foreground: #d0d6e0;
+  --sidebar-primary: #5e6ad2;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #141516;
+  --sidebar-accent-foreground: #f7f8f8;
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+  --sidebar-ring: #5e69d1;
+  font-feature-settings: "cv01", "ss03";
+  letter-spacing: -0.011em;
+}
+
+:root[data-skin="linear"].dark {
+  --background: #08090a;
+  --foreground: #f7f8f8;
+  --card: #0f1011;
+  --card-foreground: #f7f8f8;
+  --popover: #141516;
+  --popover-foreground: #f7f8f8;
+  --secondary: #1c1c1f;
+  --muted: #141516;
+  --muted-foreground: #8a8f98;
+  --border: rgba(255, 255, 255, 0.05);
+  --input: #232326;
+  --edge: rgba(255, 255, 255, 0.05);
+}
+
+/* Linear component layer — de-pill controls, hairline rows, indigo selection. */
+:root[data-skin="linear"] [data-slot="button"] {
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 510;
+}
+
+:root[data-skin="linear"] [data-slot="badge"],
+:root[data-skin="linear"] [data-slot="pill"],
+:root[data-skin="linear"] [data-slot="filter-pill"],
+:root[data-skin="linear"] [data-slot="status-pill"] {
+  border-radius: 4px;
+  font-weight: 510;
+}
+
+:root[data-skin="linear"] [data-slot="card"],
+:root[data-skin="linear"] [data-slot="card-frame"],
+:root[data-skin="linear"] [data-slot="stat-card"],
+:root[data-skin="linear"] [data-slot="section"],
+:root[data-skin="linear"] [data-slot="empty"] {
+  border-radius: 8px;
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.05), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-skin="linear"] [data-slot="dropdown-menu-content"],
+:root[data-skin="linear"] [data-slot="context-menu-content"],
+:root[data-skin="linear"] [data-slot="popover-content"],
+:root[data-skin="linear"] [data-slot="select-content"],
+:root[data-skin="linear"] [data-slot="dialog-content"],
+:root[data-skin="linear"] [data-slot="sheet-content"],
+:root[data-skin="linear"] [data-slot="command"] {
+  border-radius: 8px;
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+:root[data-skin="linear"] [data-slot="input"],
+:root[data-skin="linear"] [data-slot="textarea"],
+:root[data-skin="linear"] [data-slot="select-trigger"] {
+  border-radius: 6px;
+  border-width: 0.5px;
+  background-color: #141516;
+}
+
+:root[data-skin="linear"] [data-slot="entity-row"],
+:root[data-skin="linear"] [data-slot="table-row"] {
+  min-height: 36px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+  color: #d0d6e0;
+}
+
+:root[data-skin="linear"] [data-slot="entity-row"]:hover,
+:root[data-skin="linear"] [data-slot="table-row"]:hover {
+  background-color: #141516;
+}
+
+:root[data-skin="linear"] [data-slot="entity-row-meta"],
+:root[data-skin="linear"] [data-slot="table-cell"] .font-mono {
+  color: #8a8f98;
+}
+
+:root[data-skin="linear"] [data-slot="command-item"][data-selected="true"] {
+  background-color: #18182f;
+  color: #f7f8f8;
+}
+
+:root[data-skin="linear"] [data-slot="card-title"],
+:root[data-skin="linear"] [data-slot="page-header-title"],
+:root[data-skin="linear"] [data-slot="detail-header-title"] {
+  font-weight: 510;
+  letter-spacing: -0.015em;
+}

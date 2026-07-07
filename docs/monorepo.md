@@ -31,3 +31,28 @@ npx shadcn@latest add <component> -y
 ```
 
 Re-run the styleguide at `/styleguide` to verify the reskin layer covers new `data-slot` targets.
+
+## Deployment (Vercel)
+
+Create **two Vercel projects** from this repo, each with a different root directory:
+
+| Project | Root Directory | URL |
+| ------- | -------------- | --- |
+| linear-ui | `apps/linear` | `ui.byronwade.com/linear` |
+| polaris-ui | `apps/polaris` | `ui.byronwade.com/polaris` |
+
+Each app sets `basePath` in `next.config.ts` (`/linear`, `/polaris`) and includes a `vercel.json` that runs `npm install` from the monorepo root so workspace dependencies resolve.
+
+The main registry site continues to deploy from the repository root. Use the **Skin** toggle in the header to preview Linear or Polaris tokens live on the full component catalog without switching apps.
+
+## Linear composites (`apps/linear`)
+
+Product-specific patterns built on reskinned shadcn primitives:
+
+| Component | Path | Purpose |
+| --------- | ---- | ------- |
+| `IssueRow` | `components/linear/issue-row.tsx` | Dense issue list row (id, title, status, priority, assignee) |
+| `CyclePanel` | `components/linear/cycle-panel.tsx` | Cycle progress sidebar card |
+| `CommandShell` | `components/linear/command-shell.tsx` | ⌘K command menu dialog |
+
+Demo: `/workspace` in the Linear app (issue list + cycle panels + command palette).
