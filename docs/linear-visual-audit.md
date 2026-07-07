@@ -28,6 +28,12 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Create team** | Field rows, timezone select, Create CTA | `/linear/settings/teams/new` |
 | **Team settings** | Meta rows with counts, grouped sections | `/linear/settings/teams/engineering` |
 | **Recently deleted documents** | Breadcrumb header, filter tabs, document rows | `/linear/workspace/deleted/documents` |
+| **Ask Linear welcome** | Centered hero, large ask input, Skills row | `/linear/workspace/ask` |
+| **Ask Linear chat** | Floating panel, reply box, worked indicator | `/linear/workspace/ask/chat` |
+| **Global search** | Filter chips, result rows, empty state | `/linear/workspace/search` |
+| **Backlog issues (AS Mobbin)** | Collapsible section, dashed status, grip handle | `/linear/workspace/teams/as-mobbin/issues` |
+| **Team settings hub (AS Mobbin)** | Owned by you, access row, meta counts | `/linear/settings/teams/as-mobbin` |
+| **Team general (AS Mobbin)** | Icon/name, identifier, timezone, estimate toggles | `/linear/settings/teams/as-mobbin/general` |
 | **SLA custom duration** | Custom duration dialog on rule editor | `/linear/settings/issues/slas` |
 | **Workspace app shell** | Sidebar nav, cycle panel, issue list, ⌘K, Ask Linear | `/linear/workspace` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |

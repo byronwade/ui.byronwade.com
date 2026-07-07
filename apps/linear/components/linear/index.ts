@@ -13,9 +13,25 @@ export {
   WorkspaceAskTrigger,
   WorkspaceDocumentRow,
   WorkspaceFilterTabs,
+  WorkspaceFooterActions,
+  WorkspaceIssueTabs,
   WorkspaceListPanel,
   WorkspaceShell,
+  WorkspaceWhatsNewCard,
 } from "./workspace-shell"
+export { BacklogIssueRow, BacklogSection } from "./backlog-issue-row"
+export { SearchShell } from "./search-shell"
+export type { SearchFilter, SearchResult, SearchShellProps } from "./search-shell"
+export { AskLinearWelcome } from "./ask-linear-welcome"
+export type { AskLinearWelcomeProps } from "./ask-linear-welcome"
+export { AskLinearChatPanel } from "./ask-linear-chat-panel"
+export type { AskLinearChatPanelProps } from "./ask-linear-chat-panel"
+export { ChatHistoryPopover } from "./chat-history-popover"
+export type {
+  ChatHistoryGroup,
+  ChatHistoryItem,
+  ChatHistoryPopoverProps,
+} from "./chat-history-popover"
 export {
   ImportExportSettings,
   SettingsBackLink,

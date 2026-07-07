@@ -250,10 +250,15 @@ const YOUR_TEAMS_GROUP: SettingsNavGroup = {
       icon: <Laptop />,
       href: "/settings/teams/engineering",
     },
-    { id: "as-mobbin", label: "AS Mobbin", icon: <Users /> },
     {
-      id: "create-team",
-      label: "Create a team",
+      id: "as-mobbin",
+      label: "AS Mobbin",
+      icon: <Users />,
+      href: "/settings/teams/as-mobbin",
+    },
+    {
+      id: "join-team",
+      label: "Join or create a team",
       icon: <Plus />,
       href: "/settings/teams/new",
     },

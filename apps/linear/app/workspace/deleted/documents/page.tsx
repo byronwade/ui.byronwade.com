@@ -46,7 +46,7 @@ export default function RecentlyDeletedDocumentsPage() {
         { label: "AS Mobbin" },
         { label: "Recently deleted documents" },
       ]}
-      activeNavId="as-mobbin"
+      activeNavId="as-mobbin-issues"
       showIssueTabs={false}
       viewTabs={DELETED_TABS}
       activeViewTab="deleted-documents"

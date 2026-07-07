@@ -33,7 +33,7 @@ export default function CreateTeamPage() {
   }, [setTheme])
 
   return (
-    <SettingsShell title="Create a new team" activeId="create-team" wide>
+    <SettingsShell title="Create a new team" activeId="join-team" wide>
       <SettingsBackLink href="/settings/teams/engineering">Teams</SettingsBackLink>
 
       <SettingsPageIntro

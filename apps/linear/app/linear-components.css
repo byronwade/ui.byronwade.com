@@ -1314,3 +1314,86 @@
 [data-slot="linear-workspace-document-row"]:hover {
   background-color: var(--linear-bg-level-2);
 }
+
+[data-slot="linear-workspace-issue-tabs"] {
+  align-items: center;
+}
+
+[data-slot="linear-workspace-issue-tab"][data-active="true"] {
+  background-color: var(--linear-bg-level-2);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-workspace-whats-new"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-workspace-footer-actions"] {
+  font-size: 0.8125rem;
+}
+
+[data-slot="linear-backlog-section-header"] {
+  min-height: 36px;
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-backlog-issue-row"] {
+  min-height: 36px;
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-backlog-status"] {
+  border-color: var(--linear-border-secondary);
+}
+
+[data-slot="linear-search-shell"] {
+  background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-search-filter"][data-active="true"] {
+  background-color: var(--linear-text-primary);
+  color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-search-result-row"] {
+  min-height: 40px;
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-search-result-row"]:hover {
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-ask-welcome"] {
+  background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-ask-welcome-input"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-ask-welcome-input"] [data-slot="textarea"] {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+[data-slot="linear-ask-chat-panel"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-ask-chat-scroller"] {
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-chat-history"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-chat-history-item"][data-active="true"] {
+  background-color: var(--linear-bg-level-2);
+}
