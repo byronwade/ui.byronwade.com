@@ -20,6 +20,13 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -31,6 +38,10 @@ export default function IssueSlasPage() {
   const { setTheme } = useTheme()
   const [enabled, setEnabled] = React.useState(true)
   const [editing, setEditing] = React.useState(true)
+  const [customOpen, setCustomOpen] = React.useState(false)
+  const [duration, setDuration] = React.useState("28")
+  const [durationUnit, setDurationUnit] = React.useState("hours")
+  const [savedDuration, setSavedDuration] = React.useState("28 hours")
 
   React.useEffect(() => {
     setTheme("light")
@@ -132,7 +143,12 @@ export default function IssueSlasPage() {
                       <SelectItem value="remove">Remove SLA</SelectItem>
                     </SelectContent>
                   </Select>
-                  <Select defaultValue="12h">
+                  <Select
+                    defaultValue="12h"
+                    onValueChange={(value) => {
+                      if (value === "custom") setCustomOpen(true)
+                    }}
+                  >
                     <SelectTrigger className="h-8 w-[120px]">
                       <SelectValue />
                     </SelectTrigger>
@@ -141,6 +157,7 @@ export default function IssueSlasPage() {
                       <SelectItem value="24h">24 hours</SelectItem>
                       <SelectItem value="48h">48 hours</SelectItem>
                       <SelectItem value="1w">1 week</SelectItem>
+                      <SelectItem value="custom">Custom…</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -155,6 +172,27 @@ export default function IssueSlasPage() {
               </div>
             </div>
           ) : null}
+
+          <div data-slot="linear-sla-rule-card" className="rounded-lg border border-border bg-card px-4 py-3">
+            <p className="text-sm">
+              <span className="text-muted-foreground">When </span>
+              Priority is{" "}
+              <Badge variant="secondary" className="mx-0.5 gap-1 font-normal">
+                <span className="size-2 rounded-sm bg-destructive" />
+                Urgent
+              </Badge>
+              <span className="text-muted-foreground"> and </span>
+              Status is{" "}
+              <Badge variant="secondary" className="mx-0.5 gap-1 font-normal">
+                Todo
+              </Badge>
+              <span className="text-muted-foreground"> Then </span>
+              <Badge variant="secondary" className="mx-0.5 gap-1 font-normal">
+                <Flame className="size-3 text-brand" />
+                Add SLA of {savedDuration}
+              </Badge>
+            </p>
+          </div>
 
           <div data-slot="linear-sla-rule-card" className="rounded-lg border border-border bg-card px-4 py-3">
             <p className="text-sm">
@@ -203,6 +241,52 @@ export default function IssueSlasPage() {
           </div>
         </div>
       </SettingsSection>
+
+      <Dialog open={customOpen} onOpenChange={setCustomOpen}>
+        <DialogContent
+          data-slot="linear-sla-custom-dialog"
+          className="max-w-sm gap-0 p-0"
+        >
+          <DialogHeader className="border-b border-border px-5 py-4">
+            <DialogTitle className="text-base font-medium">
+              Set custom SLA duration
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex items-center gap-2 px-5 py-4">
+            <Input
+              value={duration}
+              onChange={(event) => setDuration(event.target.value)}
+              className="h-9 w-20"
+            />
+            <Select
+              value={durationUnit}
+              onValueChange={(value) => {
+                if (value) setDurationUnit(value)
+              }}
+            >
+              <SelectTrigger className="h-9 flex-1">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="hours">Hours</SelectItem>
+                <SelectItem value="days">Days</SelectItem>
+                <SelectItem value="weeks">Weeks</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="border-t border-border px-5 py-3">
+            <Button
+              className="w-full"
+              onClick={() => {
+                setSavedDuration(`${duration} ${durationUnit}`)
+                setCustomOpen(false)
+              }}
+            >
+              Save custom duration
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </SettingsShell>
   )
 }

@@ -15,6 +15,7 @@ import {
   FileText,
   Key,
   Moon,
+  RefreshCw,
   Settings,
   Shield,
   Sun,
@@ -23,6 +24,7 @@ import {
   Upload,
   Users,
   AlertCircle,
+  Columns3,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -118,6 +120,18 @@ const NAV_GROUPS: SettingsNavGroup[] = [
     items: [
       { id: "project-labels", label: "Labels", icon: <Tag /> },
       { id: "project-templates", label: "Templates", icon: <Settings /> },
+      {
+        id: "project-statuses",
+        label: "Statuses",
+        icon: <Columns3 />,
+        href: "/settings/projects/statuses",
+      },
+      {
+        id: "project-updates",
+        label: "Updates",
+        icon: <RefreshCw />,
+        href: "/settings/projects/updates",
+      },
     ],
   },
   {

@@ -1095,3 +1095,52 @@
   line-height: 1.6;
   color: var(--linear-text-primary);
 }
+
+[data-slot="linear-workspace-shell"] {
+  background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-workspace-header"] {
+  background-color: color-mix(in srgb, var(--linear-bg-level-0) 92%, transparent);
+}
+
+[data-slot="linear-workspace-secondary"] {
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-workspace-list"] {
+  background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-workspace-footer"] {
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-workspace-ask-trigger"],
+[data-slot="linear-workspace-ask-bar"] {
+  font-size: 0.8125rem;
+}
+
+[data-slot="linear-update-schedule"] [data-slot="select-trigger"] {
+  height: 32px;
+  font-size: 0.8125rem;
+}
+
+[data-slot="linear-status-board"] {
+  border-radius: var(--linear-radius-8);
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-status-group-header"] {
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-status-row"]:hover,
+[data-slot="linear-status-create-row"]:hover {
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-sla-custom-dialog"] [data-slot="dialog-content"] {
+  border-radius: var(--linear-radius-12);
+}

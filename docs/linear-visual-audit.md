@@ -17,6 +17,10 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Issue labels** | Filter toolbar, hierarchical table, colored dots, context menu | `/linear/settings/issues/labels` |
 | **SLAs** | Enable toggle, work week select, When/Then automation rules | `/linear/settings/issues/slas` |
 | **Issue templates** | Template chooser dialog, property bar editor | `/linear/settings/issues/templates` |
+| **Project updates** | Inline schedule selects, Save footer, Slack connect | `/linear/settings/projects/updates` |
+| **Project statuses** | Grouped status board, inline create row | `/linear/settings/projects/statuses` |
+| **SLA custom duration** | Custom duration dialog on rule editor | `/linear/settings/issues/slas` |
+| **Workspace app shell** | Sidebar nav, cycle panel, issue list, ⌘K, Ask Linear | `/linear/workspace` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |
 | **Import wizard** | Stepper circles, white card, Back/Next footer, purple primary CTA | `/linear/settings/import` |
 | **Security / toggles** | White settings card, purple `#5E6AD2` switch when on | `/linear/catalog` → Switch |

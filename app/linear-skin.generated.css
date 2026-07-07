@@ -910,8 +910,48 @@
   background-color: var(--linear-bg-level-2);
 }
 
-[data-slot="linear-template-editor"] {
-  font-size: 0.8125rem;
+[data-slot="linear-template-editor"] {:root[data-skin="linear"] font-size: 0.8125rem;
   line-height: 1.6;
   color: var(--linear-text-primary);
+}
+
+[data-slot="linear-workspace-shell"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-workspace-header"] {:root[data-skin="linear"] background-color: color-mix(in srgb,
+:root[data-skin="linear"] var(--linear-bg-level-0) 92%,
+:root[data-skin="linear"] transparent);
+}
+
+[data-slot="linear-workspace-secondary"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-workspace-list"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-0);
+}
+
+[data-slot="linear-workspace-footer"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-workspace-ask-trigger"],
+:root[data-skin="linear"] [data-slot="linear-workspace-ask-bar"] {:root[data-skin="linear"] font-size: 0.8125rem;
+}
+
+[data-slot="linear-update-schedule"] [data-slot="select-trigger"] {:root[data-skin="linear"] height: 32px;
+  font-size: 0.8125rem;
+}
+
+[data-slot="linear-status-board"] {:root[data-skin="linear"] border-radius: var(--linear-radius-8);
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-status-group-header"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-status-row"]:hover,
+:root[data-skin="linear"] [data-slot="linear-status-create-row"]:hover {:root[data-skin="linear"] background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-sla-custom-dialog"] [data-slot="dialog-content"] {
+  border-radius: var(--linear-radius-12);
 }

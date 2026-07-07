@@ -9,6 +9,12 @@ export type { CyclePanelProps } from "./cycle-panel"
 export { IssueRow } from "./issue-row"
 export type { IssueRowProps } from "./issue-row"
 export {
+  WorkspaceAskBar,
+  WorkspaceAskTrigger,
+  WorkspaceListPanel,
+  WorkspaceShell,
+} from "./workspace-shell"
+export {
   ImportExportSettings,
   SettingsBackLink,
   SettingsFormCard,

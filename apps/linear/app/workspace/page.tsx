@@ -1,16 +1,18 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
+import { useTheme } from "next-themes"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   CommandShell,
   CyclePanel,
   IssueRow,
+  WorkspaceAskBar,
+  WorkspaceAskTrigger,
+  WorkspaceListPanel,
+  WorkspaceShell,
 } from "@/components/linear"
-import { Search } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 const ISSUES = [
   {
@@ -19,6 +21,7 @@ const ISSUES = [
     statusLabel: "In progress",
     priority: "P2",
     assignee: { name: "Alex Chen", initials: "AC" },
+    tab: "active",
   },
   {
     id: "ENG-139",
@@ -26,6 +29,7 @@ const ISSUES = [
     statusLabel: "Todo",
     priority: "P1",
     assignee: { name: "Sam Rivera", initials: "SR" },
+    tab: "active",
   },
   {
     id: "ENG-128",
@@ -33,6 +37,7 @@ const ISSUES = [
     statusLabel: "Done",
     priority: "P3",
     assignee: { name: "Jordan Lee", initials: "JL" },
+    tab: "all",
   },
   {
     id: "ENG-121",
@@ -40,6 +45,23 @@ const ISSUES = [
     statusLabel: "Backlog",
     priority: "P2",
     assignee: { name: "Alex Chen", initials: "AC" },
+    tab: "backlog",
+  },
+  {
+    id: "ENG-118",
+    title: "SLA automation rule builder",
+    statusLabel: "In progress",
+    priority: "P1",
+    assignee: { name: "Sam Rivera", initials: "SR" },
+    tab: "active",
+  },
+  {
+    id: "ENG-115",
+    title: "Project status color picker",
+    statusLabel: "Todo",
+    priority: "P2",
+    assignee: { name: "Jordan Lee", initials: "JL" },
+    tab: "backlog",
   },
 ]
 
@@ -51,8 +73,16 @@ const COMMAND_ITEMS = ISSUES.map((issue) => ({
 }))
 
 export default function WorkspacePage() {
+  const { setTheme } = useTheme()
   const [commandOpen, setCommandOpen] = React.useState(false)
+  const [askOpen, setAskOpen] = React.useState(false)
+  const [askValue, setAskValue] = React.useState("")
+  const [activeTab, setActiveTab] = React.useState("all")
   const [selected, setSelected] = React.useState<Record<string, boolean>>({})
+
+  React.useEffect(() => {
+    setTheme("dark")
+  }, [setTheme])
 
   React.useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -65,96 +95,111 @@ export default function WorkspacePage() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [])
 
+  const visibleIssues = ISSUES.filter(
+    (issue) => activeTab === "all" || issue.tab === activeTab
+  )
+
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-sm">
-        <div className="mx-auto flex h-12 max-w-6xl items-center justify-between px-6">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
-            >
-              Linear UI
-            </Link>
-            <span className="text-muted-foreground">/</span>
-            <span className="text-sm text-foreground">Workspace</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setCommandOpen(true)}
-            >
-              <Search className="size-4" />
-              <span className="hidden sm:inline">Search</span>
-              <kbd className="hidden rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] sm:inline">
-                ⌘K
-              </kbd>
-            </Button>
-            <Badge variant="outline">Cycle 24</Badge>
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto grid max-w-6xl gap-6 px-6 py-8 lg:grid-cols-[240px_1fr]">
-        <aside className="space-y-4">
-          <CyclePanel
-            name="Cycle 24"
-            dateRange="Mar 3 – Mar 17"
-            issueCount={12}
-            progress={68}
-          />
-          <CyclePanel
-            name="Cycle 25"
-            dateRange="Mar 18 – Mar 31"
-            issueCount={4}
-            progress={12}
-          />
-        </aside>
-
-        <section className="overflow-hidden rounded-lg border border-border bg-card shadow-none">
-          <div className="flex items-center justify-between border-b border-border px-3 py-2">
-            <h1 className="text-sm font-medium tracking-tight">Active issues</h1>
-            <span className="font-mono text-xs text-muted-foreground">
-              {ISSUES.length} items
-            </span>
-          </div>
-          <div role="list">
-            {ISSUES.map((issue) => (
-              <IssueRow
-                key={issue.id}
-                {...issue}
-                selected={selected[issue.id] ?? false}
-                onSelectedChange={(value) =>
-                  setSelected((prev) => ({ ...prev, [issue.id]: value }))
+    <>
+      <WorkspaceShell
+        team="Engineering"
+        view="Cycle 24"
+        activeNavId="engineering"
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        onSearch={() => setCommandOpen(true)}
+        secondary={
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <p className="text-xs font-medium text-muted-foreground">Cycles</p>
+              <CyclePanel
+                name="Cycle 24"
+                dateRange="Mar 3 – Mar 17"
+                issueCount={12}
+                progress={68}
+                footer={
+                  <Badge variant="outline" className="font-normal">
+                    Current
+                  </Badge>
                 }
-                onActivate={() => setCommandOpen(true)}
               />
-            ))}
+              <CyclePanel
+                name="Cycle 25"
+                dateRange="Mar 18 – Mar 31"
+                issueCount={4}
+                progress={12}
+              />
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs font-medium text-muted-foreground">Quick filters</p>
+              <div className="flex flex-wrap gap-1.5">
+                <Badge variant="secondary">Assigned to me</Badge>
+                <Badge variant="outline">High priority</Badge>
+                <Badge variant="outline">Blocked</Badge>
+              </div>
+            </div>
           </div>
-        </section>
-      </main>
+        }
+        footer={
+          askOpen ? (
+            <WorkspaceAskBar
+              value={askValue}
+              onChange={setAskValue}
+              onSubmit={() => {
+                setAskValue("")
+                setAskOpen(false)
+              }}
+            />
+          ) : (
+            <WorkspaceAskTrigger onClick={() => setAskOpen(true)} />
+          )
+        }
+      >
+        <WorkspaceListPanel title="Active issues" count={visibleIssues.length}>
+          {visibleIssues.map((issue) => (
+            <IssueRow
+              key={issue.id}
+              id={issue.id}
+              title={issue.title}
+              status={
+                issue.statusLabel === "In progress" ? (
+                  <Badge variant="outline" className="gap-1.5 font-normal">
+                    <span className="size-1.5 rounded-full bg-warning" />
+                    {issue.statusLabel}
+                  </Badge>
+                ) : (
+                  <Badge variant="outline" className="font-normal">
+                    {issue.statusLabel}
+                  </Badge>
+                )
+              }
+              priority={issue.priority}
+              assignee={issue.assignee}
+              selected={selected[issue.id] ?? false}
+              onSelectedChange={(value) =>
+                setSelected((prev) => ({ ...prev, [issue.id]: value }))
+              }
+              onActivate={() => setCommandOpen(true)}
+            />
+          ))}
+        </WorkspaceListPanel>
+      </WorkspaceShell>
 
       <CommandShell
         open={commandOpen}
         onOpenChange={setCommandOpen}
         items={[
           ...COMMAND_ITEMS,
-          {
-            id: "act-new",
-            label: "Create issue",
-            group: "Actions",
-          },
-          {
-            id: "act-cycle",
-            label: "Start new cycle",
-            group: "Actions",
-          },
+          { id: "act-new", label: "Create issue", group: "Actions" },
+          { id: "act-cycle", label: "Start new cycle", group: "Actions" },
+          { id: "nav-settings", label: "Open settings", group: "Navigation" },
         ]}
         onSelect={(id) => {
-          console.log("selected", id)
+          if (id === "nav-settings") {
+            window.location.assign("/linear/settings")
+          }
         }}
       />
-    </div>
+    </>
   )
 }
