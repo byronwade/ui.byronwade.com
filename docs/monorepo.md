@@ -32,6 +32,16 @@ npx shadcn@latest add <component> -y
 
 Re-run the styleguide at `/styleguide` to verify the reskin layer covers new `data-slot` targets.
 
+### Linear quality gates
+
+| Command | Purpose |
+| ------- | ------- |
+| `npm run check:linear-slots` | Ensures `apps/linear/app/linear-components.css` styles every required `data-slot` in `apps/linear/components/ui` |
+| `npm run gen:linear-skin` | Regenerates `app/linear-skin.generated.css` for the main site's Linear skin toggle |
+| `npm run build:linear` | Runs slot check + production build (includes `/catalog`) |
+
+Full component preview: **`/catalog`** in the Linear app (all 60 shadcn primitives + Linear composites).
+
 ## Deployment (Vercel)
 
 Create **two Vercel projects** from this repo, each with a different root directory:

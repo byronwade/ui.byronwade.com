@@ -244,6 +244,33 @@
   --sidebar-accent-foreground: #f7f8f8;
   --sidebar-border: rgba(255, 255, 255, 0.05);
   --sidebar-ring: #5e69d1;
+  --linear-bg-primary: #08090a;
+  --linear-bg-level-1: #0f1011;
+  --linear-bg-level-2: #141516;
+  --linear-bg-level-3: #191a1b;
+  --linear-bg-secondary: #1c1c1f;
+  --linear-bg-tertiary: #232326;
+  --linear-text-primary: #f7f8f8;
+  --linear-text-secondary: #d0d6e0;
+  --linear-text-tertiary: #8a8f98;
+  --linear-text-quaternary: #62666d;
+  --linear-brand: #5e6ad2;
+  --linear-brand-hover: #6b77db;
+  --linear-accent: #7170ff;
+  --linear-accent-hover: #828fff;
+  --linear-accent-tint: #18182f;
+  --linear-focus-ring: #5e69d1;
+  --linear-red: #eb5757;
+  --linear-border-translucent: rgba(255, 255, 255, 0.05);
+  --linear-border-translucent-strong: rgba(255, 255, 255, 0.08);
+  --linear-border-secondary: #34343a;
+  --linear-hairline: 0.5px;
+  --linear-radius-4: 4px;
+  --linear-radius-6: 6px;
+  --linear-radius-8: 8px;
+  --linear-radius-12: 12px;
+  --linear-radius-16: 16px;
+  --linear-ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
   font-feature-settings: "cv01", "ss03";
   letter-spacing: -0.011em;
 }
@@ -263,74 +290,5 @@
   --edge: rgba(255, 255, 255, 0.05);
 }
 
-/* Linear component layer — de-pill controls, hairline rows, indigo selection. */
-:root[data-skin="linear"] [data-slot="button"] {
-  border-radius: 6px;
-  font-size: 0.8125rem;
-  font-weight: 510;
-}
-
-:root[data-skin="linear"] [data-slot="badge"],
-:root[data-skin="linear"] [data-slot="pill"],
-:root[data-skin="linear"] [data-slot="filter-pill"],
-:root[data-skin="linear"] [data-slot="status-pill"] {
-  border-radius: 4px;
-  font-weight: 510;
-}
-
-:root[data-skin="linear"] [data-slot="card"],
-:root[data-skin="linear"] [data-slot="card-frame"],
-:root[data-skin="linear"] [data-slot="stat-card"],
-:root[data-skin="linear"] [data-slot="section"],
-:root[data-skin="linear"] [data-slot="empty"] {
-  border-radius: 8px;
-  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.05), 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-:root[data-skin="linear"] [data-slot="dropdown-menu-content"],
-:root[data-skin="linear"] [data-slot="context-menu-content"],
-:root[data-skin="linear"] [data-slot="popover-content"],
-:root[data-skin="linear"] [data-slot="select-content"],
-:root[data-skin="linear"] [data-slot="dialog-content"],
-:root[data-skin="linear"] [data-slot="sheet-content"],
-:root[data-skin="linear"] [data-slot="command"] {
-  border-radius: 8px;
-  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.6);
-}
-
-:root[data-skin="linear"] [data-slot="input"],
-:root[data-skin="linear"] [data-slot="textarea"],
-:root[data-skin="linear"] [data-slot="select-trigger"] {
-  border-radius: 6px;
-  border-width: 0.5px;
-  background-color: #141516;
-}
-
-:root[data-skin="linear"] [data-slot="entity-row"],
-:root[data-skin="linear"] [data-slot="table-row"] {
-  min-height: 36px;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
-  color: #d0d6e0;
-}
-
-:root[data-skin="linear"] [data-slot="entity-row"]:hover,
-:root[data-skin="linear"] [data-slot="table-row"]:hover {
-  background-color: #141516;
-}
-
-:root[data-skin="linear"] [data-slot="entity-row-meta"],
-:root[data-skin="linear"] [data-slot="table-cell"] .font-mono {
-  color: #8a8f98;
-}
-
-:root[data-skin="linear"] [data-slot="command-item"][data-selected="true"] {
-  background-color: #18182f;
-  color: #f7f8f8;
-}
-
-:root[data-skin="linear"] [data-slot="card-title"],
-:root[data-skin="linear"] [data-slot="page-header-title"],
-:root[data-skin="linear"] [data-slot="detail-header-title"] {
-  font-weight: 510;
-  letter-spacing: -0.015em;
-}
+/* Linear component layer — synced from apps/linear/app/linear-components.css */
+@import "./linear-skin.generated.css";

@@ -33,7 +33,10 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button render={<Link href="/styleguide" />}>Browse components</Button>
+          <Button render={<Link href="/catalog" />}>Full catalog (60)</Button>
+          <Button variant="outline" render={<Link href="/styleguide" />}>
+            Styleguide
+          </Button>
           <Button variant="outline" render={<Link href="/workspace" />}>
             Workspace demo
           </Button>
