@@ -12,12 +12,14 @@ import {
   CreditCard,
   Download,
   ExternalLink,
+  FileText,
   Key,
   Moon,
   Settings,
   Shield,
   Sun,
   Tag,
+  Timer,
   Upload,
   Users,
   AlertCircle,
@@ -89,10 +91,33 @@ const NAV_GROUPS: SettingsNavGroup[] = [
     ],
   },
   {
+    label: "Issues",
+    items: [
+      {
+        id: "issue-labels",
+        label: "Labels",
+        icon: <Tag />,
+        href: "/settings/issues/labels",
+      },
+      {
+        id: "issue-templates",
+        label: "Templates",
+        icon: <FileText />,
+        href: "/settings/issues/templates",
+      },
+      {
+        id: "issue-slas",
+        label: "SLAs",
+        icon: <Timer />,
+        href: "/settings/issues/slas",
+      },
+    ],
+  },
+  {
     label: "Projects",
     items: [
-      { id: "labels", label: "Labels", icon: <Tag /> },
-      { id: "templates", label: "Templates", icon: <Settings /> },
+      { id: "project-labels", label: "Labels", icon: <Tag /> },
+      { id: "project-templates", label: "Templates", icon: <Settings /> },
     ],
   },
   {
@@ -116,12 +141,14 @@ type SettingsShellProps = {
   title: string
   children: React.ReactNode
   activeId?: string
+  wide?: boolean
 }
 
 function SettingsShell({
   title,
   children,
   activeId = "import-export",
+  wide = false,
 }: SettingsShellProps) {
   const { theme, setTheme } = useTheme()
 
@@ -213,7 +240,14 @@ function SettingsShell({
           data-slot="linear-settings-shell"
           className="flex-1 overflow-auto bg-background p-6 md:p-8"
         >
-          <div className="mx-auto max-w-2xl space-y-10">{children}</div>
+          <div
+            className={cn(
+              "mx-auto space-y-10",
+              wide ? "max-w-4xl" : "max-w-2xl"
+            )}
+          >
+            {children}
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

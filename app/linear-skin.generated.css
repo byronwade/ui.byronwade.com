@@ -855,7 +855,63 @@
 [data-slot="linear-settings-permission-list"] {:root[data-skin="linear"] margin-top: 0.25rem;
 }
 
-[data-slot="linear-settings-team-select"] {
-  border-radius: var(--linear-radius-6);
+[data-slot="linear-settings-team-select"] {:root[data-skin="linear"] border-radius: var(--linear-radius-6);
   min-height: 36px;
+}
+
+[data-slot="linear-settings-toolbar"] [data-slot="linear-settings-filter"] {:root[data-skin="linear"] height: 32px;
+  font-size: 0.8125rem;
+}
+
+[data-slot="linear-settings-table"] {:root[data-skin="linear"] border-radius: var(--linear-radius-8);
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-settings-table"] [data-slot="table-row"] {:root[data-skin="linear"] min-height: 40px;
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-table"] [data-slot="table-head"] {:root[data-skin="linear"] height: 36px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  color: var(--linear-text-tertiary);
+  background-color: transparent;
+}
+
+[data-slot="linear-label-dot"][data-color="red"] {:root[data-skin="linear"] background-color: var(--destructive);
+}
+
+[data-slot="linear-label-dot"][data-color="purple"] {:root[data-skin="linear"] background-color: var(--primary);
+}
+
+[data-slot="linear-label-dot"][data-color="blue"] {:root[data-skin="linear"] background-color: var(--chart-4,
+:root[data-skin="linear"] var(--primary));
+}
+
+[data-slot="linear-label-dot"][data-color="green"] {:root[data-skin="linear"] background-color: var(--linear-green);
+}
+
+[data-slot="linear-sla-rule-card"] {:root[data-skin="linear"] border-radius: var(--linear-radius-8);
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-template-preview"] {:root[data-skin="linear"] border-radius: var(--linear-radius-6);
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-template-chooser"] [data-slot="dialog-content"] {:root[data-skin="linear"] border-radius: var(--linear-radius-12);
+}
+
+[data-slot="linear-template-property-bar"] {:root[data-skin="linear"] border-radius: var(--linear-radius-8);
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-template-editor"] {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--linear-text-primary);
 }

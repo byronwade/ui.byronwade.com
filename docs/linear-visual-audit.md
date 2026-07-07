@@ -14,6 +14,9 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Security & access** | API key entry points | `/linear/settings/security` |
 | **Create API key** | Radio/checkbox permissions, team pills, form footer | `/linear/settings/api/create` |
 | **API key detail** | Green mono key, copy toast | `/linear/settings/api` |
+| **Issue labels** | Filter toolbar, hierarchical table, colored dots, context menu | `/linear/settings/issues/labels` |
+| **SLAs** | Enable toggle, work week select, When/Then automation rules | `/linear/settings/issues/slas` |
+| **Issue templates** | Template chooser dialog, property bar editor | `/linear/settings/issues/templates` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |
 | **Import wizard** | Stepper circles, white card, Back/Next footer, purple primary CTA | `/linear/settings/import` |
 | **Security / toggles** | White settings card, purple `#5E6AD2` switch when on | `/linear/catalog` → Switch |
@@ -61,10 +64,11 @@ npm run build:linear          # all of the above + production build
 2. Open `/linear/settings/notifications` and `/linear/settings/notifications/email` — channels, toggles, digest select.
 3. Open `/linear/settings/agent` and `/linear/settings/agent/skills/new` — guidance card, skill form.
 4. Open `/linear/settings/api/create` and `/linear/settings/api` — permissions form, green API key + copy toast.
-5. Open `/linear/settings/import` — wizard stepper, radio workspace row, footer actions.
-6. Open `/linear/catalog` — scan each category in dark, then toggle light.
-7. Open `/linear/workspace` in **dark** — issue list density, cycle sidebar, ⌘K shell.
-8. Open `/linear/auth` in **light** — pill login flow.
+5. Open `/linear/settings/issues/labels`, `/slas`, `/templates`, `/templates/new` — Issues settings from Mobbin.
+6. Open `/linear/settings/import` — wizard stepper, radio workspace row, footer actions.
+7. Open `/linear/catalog` — scan each category in dark, then toggle light.
+8. Open `/linear/workspace` in **dark** — issue list density, cycle sidebar, ⌘K shell.
+9. Open `/linear/auth` in **light** — pill login flow.
 
 ## Regenerate main-site skin after CSS changes
 
