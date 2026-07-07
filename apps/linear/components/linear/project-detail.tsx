@@ -2,25 +2,42 @@
 
 import * as React from "react"
 import {
+  AtSign,
+  Bold,
   Calendar,
   Check,
   ChevronDown,
   CircleDashed,
+  Code,
+  FileText,
   Hash,
+  Image as ImageIcon,
+  Italic,
+  Link2,
+  List,
+  Maximize2,
   MoreHorizontal,
   Paperclip,
   Plus,
   Send,
   SignalHigh,
   SmilePlus,
+  Strikethrough,
   Tag,
   Target,
+  TextQuote,
+  Underline,
   UserCircle2,
   Users,
+  X,
 } from "lucide-react"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +50,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 
@@ -161,6 +179,47 @@ function ProjectPropertiesPanel() {
         </p>
       </section>
 
+      <section
+        data-slot="linear-project-progress"
+        className="rounded-2xl border border-border p-4"
+      >
+        <button className="mb-3 flex items-center gap-1 text-sm font-medium text-foreground">
+          Progress
+          <ChevronDown className="size-3.5 text-muted-foreground" />
+        </button>
+        <div className="mb-3 grid grid-cols-2 gap-3 text-sm">
+          <div className="space-y-0.5">
+            <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <span className="size-1.5 rounded-[2px] bg-muted-foreground" />
+              Scope
+            </p>
+            <p className="font-mono text-foreground">1</p>
+          </div>
+          <div className="space-y-0.5">
+            <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <span className="size-1.5 rounded-[2px] bg-brand" />
+              Completed
+            </p>
+            <p className="font-mono text-foreground">0</p>
+          </div>
+        </div>
+        <div className="mb-2 grid grid-cols-2 gap-1 rounded-lg bg-muted/40 p-0.5 text-xs">
+          <button className="rounded-md bg-card px-2 py-1 text-foreground shadow-sm">
+            Assignees
+          </button>
+          <button className="rounded-md px-2 py-1 text-muted-foreground">
+            Labels
+          </button>
+        </div>
+        <div className="flex items-center justify-between py-1 text-sm">
+          <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+            <UserCircle2 className="size-3.5" />
+            No assignee
+          </span>
+          <span className="font-mono text-muted-foreground">1</span>
+        </div>
+      </section>
+
       <section className="rounded-2xl border border-border p-4">
         <div className="mb-2 flex items-center justify-between">
           <button className="flex items-center gap-1 text-sm font-medium text-foreground">
@@ -195,6 +254,7 @@ type ProjectCommentProps = {
   onReact?: (emoji: string) => void
   onEditSave?: (value: string) => void
   onDelete?: () => void
+  onNewIssue?: () => void
 }
 
 function ProjectComment({
@@ -207,6 +267,7 @@ function ProjectComment({
   onReact,
   onEditSave,
   onDelete,
+  onNewIssue,
 }: ProjectCommentProps) {
   const [editing, setEditing] = React.useState(false)
   const [draft, setDraft] = React.useState(body)
@@ -296,7 +357,9 @@ function ProjectComment({
               <DropdownMenuSeparator />
               <DropdownMenuItem>Copy link to comment</DropdownMenuItem>
               <DropdownMenuItem>Copy content as Markdown</DropdownMenuItem>
-              <DropdownMenuItem>New issue from comment…</DropdownMenuItem>
+              <DropdownMenuItem onClick={onNewIssue}>
+                New issue from comment…
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="text-destructive"
@@ -415,11 +478,314 @@ function ProjectCommentComposer({
   )
 }
 
+type OutlineItem = { id: string; label: string; emoji?: string; depth?: number }
+
+function ProjectOutline({
+  items,
+  activeId,
+  className,
+}: {
+  items: OutlineItem[]
+  activeId?: string
+  className?: string
+}) {
+  return (
+    <div
+      data-slot="linear-project-outline"
+      className={cn(
+        "w-64 overflow-hidden rounded-2xl border border-border bg-popover p-2 shadow-md",
+        className
+      )}
+    >
+      <div className="mb-1 flex items-center gap-1.5 px-2 py-1 text-sm font-medium text-foreground">
+        <List className="size-3.5 text-muted-foreground" />
+        Description
+      </div>
+      <div className="space-y-0.5">
+        {items.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            data-slot="linear-project-outline-item"
+            data-active={activeId === item.id ? "true" : undefined}
+            className={cn(
+              "flex w-full items-center gap-1.5 rounded-md px-2 py-1 text-left text-sm text-muted-foreground hover:bg-muted/40 hover:text-foreground",
+              activeId === item.id && "text-foreground"
+            )}
+            style={{ paddingLeft: `${(item.depth ?? 0) * 12 + 8}px` }}
+          >
+            {item.emoji ? <span>{item.emoji}</span> : null}
+            <span className="truncate">{item.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function RichTextToolbar({ className }: { className?: string }) {
+  const btn =
+    "inline-flex size-7 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
+  return (
+    <div
+      data-slot="linear-rich-text-toolbar"
+      className={cn(
+        "inline-flex items-center gap-0.5 rounded-xl border border-border bg-popover p-1 shadow-md",
+        className
+      )}
+    >
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          render={
+            <button className="inline-flex h-7 items-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-muted">
+              Aa
+              <ChevronDown className="size-3" />
+            </button>
+          }
+        />
+        <DropdownMenuContent align="start" className="w-44">
+          <DropdownMenuItem>Regular text</DropdownMenuItem>
+          <DropdownMenuItem>Heading 1</DropdownMenuItem>
+          <DropdownMenuItem>Heading 2</DropdownMenuItem>
+          <DropdownMenuItem>Heading 3</DropdownMenuItem>
+          <DropdownMenuItem>Heading 4</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <span className="mx-0.5 h-5 w-px bg-border" />
+      <button className={btn} aria-label="Bold">
+        <Bold className="size-3.5" />
+      </button>
+      <button className={btn} aria-label="Italic">
+        <Italic className="size-3.5" />
+      </button>
+      <button className={btn} aria-label="Strikethrough">
+        <Strikethrough className="size-3.5" />
+      </button>
+      <button className={btn} aria-label="Underline">
+        <Underline className="size-3.5" />
+      </button>
+      <button className={btn} aria-label="Link">
+        <Link2 className="size-3.5" />
+      </button>
+      <span className="mx-0.5 h-5 w-px bg-border" />
+      <button className={btn} aria-label="Quote">
+        <TextQuote className="size-3.5" />
+      </button>
+      <button className={btn} aria-label="Code">
+        <Code className="size-3.5" />
+      </button>
+      <button className={btn} aria-label="Image">
+        <ImageIcon className="size-3.5" />
+      </button>
+      <button className={btn} aria-label="List">
+        <List className="size-3.5" />
+      </button>
+      <span className="mx-0.5 h-5 w-px bg-border" />
+      <button className={btn} aria-label="Mention">
+        <AtSign className="size-3.5" />
+      </button>
+      <button className={btn} aria-label="Comment">
+        <SmilePlus className="size-3.5" />
+      </button>
+    </div>
+  )
+}
+
+const GIF_TILES = [
+  { id: "1", label: "GG", tone: "bg-brand/20" },
+  { id: "2", label: "LOL", tone: "bg-warning/20" },
+  { id: "3", label: "BOO", tone: "bg-destructive/20" },
+  { id: "4", label: "OK", tone: "bg-success/20" },
+  { id: "5", label: "YES", tone: "bg-muted" },
+  { id: "6", label: "WOW", tone: "bg-brand/10" },
+]
+
+function GifPicker({
+  onSelect,
+  className,
+}: {
+  onSelect?: (id: string) => void
+  className?: string
+}) {
+  const [query, setQuery] = React.useState("")
+  return (
+    <div
+      data-slot="linear-gif-picker"
+      className={cn(
+        "w-80 overflow-hidden rounded-2xl border border-border bg-popover p-2 shadow-md",
+        className
+      )}
+    >
+      <input
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        placeholder="Search for a gif"
+        className="mb-2 h-8 w-full rounded-md border border-border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring"
+      />
+      <div className="grid max-h-64 grid-cols-3 gap-1.5 overflow-auto">
+        {GIF_TILES.map((tile) => (
+          <button
+            key={tile.id}
+            type="button"
+            data-slot="linear-gif-tile"
+            className={cn(
+              "flex aspect-video items-center justify-center rounded-lg font-mono text-xs text-foreground",
+              tile.tone
+            )}
+            onClick={() => onSelect?.(tile.id)}
+          >
+            {tile.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function ProjectFileAttachment({
+  name,
+  size,
+}: {
+  name: string
+  size: string
+}) {
+  return (
+    <div
+      data-slot="linear-project-attachment"
+      className="flex items-center gap-2.5 rounded-lg border border-border bg-card px-3 py-2"
+    >
+      <FileText className="size-4 shrink-0 text-muted-foreground" />
+      <div className="min-w-0">
+        <p className="truncate text-sm text-foreground">{name}</p>
+        <p className="font-mono text-xs text-muted-foreground">{size}</p>
+      </div>
+    </div>
+  )
+}
+
+function CreateIssueDialog({
+  open,
+  onOpenChange,
+  title = "New Project Logo",
+  quoteAuthor = "@alexsmith.mobbin@gmail.com",
+  quoteBody = "Logo of AS Mobbin",
+  onCreate,
+}: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  title?: string
+  quoteAuthor?: string
+  quoteBody?: string
+  onCreate?: () => void
+}) {
+  const chip =
+    "inline-flex items-center gap-1.5 rounded-full border border-border px-2 py-1 text-xs text-muted-foreground hover:bg-muted/40"
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent
+        data-slot="linear-create-issue-dialog"
+        showCloseButton={false}
+        className="max-w-xl gap-0 p-0"
+      >
+        <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-2.5 text-xs text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="inline-flex size-4 items-center justify-center rounded-full bg-brand/20 text-[7px] text-brand">
+              ●
+            </span>
+            AS
+            <span>›</span>
+            <span className="text-foreground">New issue</span>
+          </span>
+          <div className="flex items-center gap-1">
+            <button className="rounded-md px-2 py-1 hover:bg-muted">Save as draft</button>
+            <Button variant="ghost" size="icon-sm" className="size-6" aria-label="Expand">
+              <Maximize2 className="size-3.5" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="size-6"
+              aria-label="Close"
+              onClick={() => onOpenChange(false)}
+            >
+              <X className="size-3.5" />
+            </Button>
+          </div>
+        </div>
+
+        <div className="space-y-3 px-4 py-3">
+          <input
+            defaultValue={title}
+            className="w-full bg-transparent text-lg font-medium text-foreground outline-none placeholder:text-muted-foreground"
+          />
+          <div className="rounded-lg border-l-2 border-border pl-3 text-sm text-muted-foreground">
+            <p className="text-xs">{quoteAuthor} said:</p>
+            <p className="text-foreground">{quoteBody}</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <button className={chip}>
+              <CircleDashed className="size-3.5" />
+              Backlog
+            </button>
+            <button className={chip}>
+              <SignalHigh className="size-3.5" />
+              Priority
+            </button>
+            <button className={chip}>
+              <UserCircle2 className="size-3.5" />
+              Assignee
+            </button>
+            <button className={chip}>
+              <span className="inline-flex size-3 items-center justify-center rounded-full bg-brand/20 text-[7px] text-brand">
+                ●
+              </span>
+              User Insight &amp; Behavior …
+            </button>
+            <button className={chip}>
+              <Tag className="size-3.5" />
+              Labels
+            </button>
+            <button className={chip}>
+              <MoreHorizontal className="size-3.5" />
+            </button>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-2 border-t border-border px-4 py-2.5">
+          <Button variant="ghost" size="icon-sm" aria-label="Attach">
+            <Paperclip className="size-4" />
+          </Button>
+          <div className="flex items-center gap-3">
+            <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Switch className="scale-90" />
+              Create more
+            </label>
+            <Button
+              size="sm"
+              onClick={() => {
+                onCreate?.()
+                onOpenChange(false)
+              }}
+            >
+              Create issue
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
 export {
+  CreateIssueDialog,
+  GifPicker,
   ProjectComment,
   ProjectCommentComposer,
+  ProjectFileAttachment,
   ProjectLogoBlock,
+  ProjectOutline,
   ProjectPropertiesPanel,
   ProjectPropertyRow,
+  RichTextToolbar,
 }
 export type { ProjectCommentProps, ProjectPropertyRowProps }

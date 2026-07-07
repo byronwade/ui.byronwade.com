@@ -27,11 +27,16 @@ export type { AskLinearWelcomeProps } from "./ask-linear-welcome"
 export { AskLinearChatPanel } from "./ask-linear-chat-panel"
 export type { AskLinearChatPanelProps } from "./ask-linear-chat-panel"
 export {
+  CreateIssueDialog,
+  GifPicker,
   ProjectComment,
   ProjectCommentComposer,
+  ProjectFileAttachment,
   ProjectLogoBlock,
+  ProjectOutline,
   ProjectPropertiesPanel,
   ProjectPropertyRow,
+  RichTextToolbar,
 } from "./project-detail"
 export type {
   ProjectCommentProps,

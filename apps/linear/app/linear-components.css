@@ -1451,3 +1451,25 @@
 [data-slot="linear-comment-reaction"] {
   border-color: color-mix(in srgb, var(--linear-brand) 40%, transparent);
 }
+
+[data-slot="linear-project-outline"],
+[data-slot="linear-rich-text-toolbar"],
+[data-slot="linear-gif-picker"],
+[data-slot="linear-create-issue-dialog"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-project-outline-item"][data-active="true"] {
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-project-progress"],
+[data-slot="linear-project-attachment"] {
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-project-markdown"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}

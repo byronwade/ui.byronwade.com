@@ -42,6 +42,12 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Preferences — Coding tools** | Tool rows (icon/name/desc/Learn more) + toggles | `/linear/settings/preferences` |
 | **Project overview** | Breadcrumb+star header, tabs, inline props, comment thread, logo, properties/milestones/activity panel | `/linear/workspace/teams/as-mobbin/projects/user-insight` |
 | **Project comment** | Avatar, resolve, emoji picker, context menu, edit/reactions, reply composer | project overview |
+| **Project progress** | Scope/Completed, Assignees/Labels tabs, assignee row | project overview panel |
+| **Document outline** | Floating TOC popover (Brief/Background/Goal/Users/Features) | project overview → Description ▾ |
+| **Rich Project Brief** | Headings, nested bullets, dividers, file attachment, + Milestone, Markdown toggle | project overview |
+| **Rich text toolbar** | Aa dropdown + B/I/S/U, link, quote, code, image, list, mention | project overview |
+| **GIF picker** | Search + tile grid popover | project overview composer |
+| **Create issue from comment** | Quoted comment, property chips, Save as draft, Create issue → toast | project overview comment menu |
 | **SLA custom duration** | Custom duration dialog on rule editor | `/linear/settings/issues/slas` |
 | **Workspace app shell** | Sidebar nav, cycle panel, issue list, ⌘K, Ask Linear | `/linear/workspace` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |
