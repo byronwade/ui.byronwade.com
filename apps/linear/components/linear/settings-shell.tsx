@@ -204,7 +204,7 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         id: "teams",
         label: "Teams",
         icon: <Users />,
-        href: "/settings/teams/engineering",
+        href: "/settings/teams",
       },
       {
         id: "members",
@@ -1090,6 +1090,41 @@ function SettingsMetaRow({
   )
 }
 
+function SettingsIconRow({
+  icon,
+  title,
+  description,
+  trailing,
+  tone = "default",
+}: {
+  icon?: React.ReactNode
+  title: string
+  description?: React.ReactNode
+  trailing?: React.ReactNode
+  tone?: "default" | "muted"
+}) {
+  return (
+    <div
+      data-slot="linear-settings-icon-row"
+      data-tone={tone}
+      className="flex items-start gap-3 border-b border-border px-4 py-3 last:border-b-0"
+    >
+      {icon ? (
+        <span className="mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-md border border-border bg-muted/30 text-muted-foreground">
+          {icon}
+        </span>
+      ) : null}
+      <div className="min-w-0 flex-1 space-y-0.5">
+        <p className="text-sm font-medium text-foreground">{title}</p>
+        {description ? (
+          <p className="text-xs text-muted-foreground">{description}</p>
+        ) : null}
+      </div>
+      {trailing ? <div className="shrink-0">{trailing}</div> : null}
+    </div>
+  )
+}
+
 function SettingsTierList({
   count,
   items,
@@ -1300,6 +1335,7 @@ export {
   SettingsFieldRow,
   SettingsFormCard,
   SettingsFormGroup,
+  SettingsIconRow,
   SettingsIntegrationRow,
   SettingsList,
   SettingsListHeader,

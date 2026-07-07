@@ -32,7 +32,7 @@ export default function EngineeringTeamSettingsPage() {
 
   return (
     <SettingsShell title="Engineering Team" activeId="engineering-team">
-      <SettingsBackLink href="/settings/teams/engineering">Teams</SettingsBackLink>
+      <SettingsBackLink href="/settings/teams">Teams</SettingsBackLink>
 
       <SettingsTeamHeader icon={<Laptop className="size-5" />} title="Engineering Team" />
 

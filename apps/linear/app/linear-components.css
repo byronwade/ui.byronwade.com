@@ -1397,3 +1397,25 @@
 [data-slot="linear-chat-history-item"][data-active="true"] {
   background-color: var(--linear-bg-level-2);
 }
+
+[data-slot="linear-teams-table"] {
+  border-color: var(--linear-border-translucent-strong);
+  background-color: var(--linear-bg-level-1);
+}
+
+[data-slot="linear-teams-row"]:hover {
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-settings-icon-row"] {
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-settings-icon-row"][data-tone="muted"] {
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-team-delete-dialog"] [data-slot="dialog-title"],
+[data-slot="linear-cycle-date-dialog"] [data-slot="dialog-title"] {
+  font-weight: var(--linear-font-medium);
+}

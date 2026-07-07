@@ -32,8 +32,13 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Ask Linear chat** | Floating panel, reply box, worked indicator | `/linear/workspace/ask/chat` |
 | **Global search** | Filter chips, result rows, empty state | `/linear/workspace/search` |
 | **Backlog issues (AS Mobbin)** | Collapsible section, dashed status, grip handle | `/linear/workspace/teams/as-mobbin/issues` |
-| **Team settings hub (AS Mobbin)** | Owned by you, access row, meta counts | `/linear/settings/teams/as-mobbin` |
+| **Team settings hub (AS Mobbin)** | Owned by you, workflow/AI/hierarchy sections, danger zone + delete dialog | `/linear/settings/teams/as-mobbin` |
 | **Team general (AS Mobbin)** | Icon/name, identifier, timezone, estimate toggles | `/linear/settings/teams/as-mobbin/general` |
+| **Teams list** | Filter toolbar, table (visibility/members/issues/created), delete toast | `/linear/settings/teams` |
+| **Access and permissions** | Visibility row, membership select, permission selects | `/linear/settings/teams/as-mobbin/access` |
+| **Cycles** | Enable toggle, duration/cooldown selects, start-date dialog, automation toggles | `/linear/settings/teams/as-mobbin/cycles` |
+| **Set parent team** | Inherit statuses/labels/members icon rows | `/linear/settings/teams/as-mobbin/parent` |
+| **Retire team** | Icon rows, cancel-issues select, destructive footer | `/linear/settings/teams/as-mobbin/retire` |
 | **SLA custom duration** | Custom duration dialog on rule editor | `/linear/settings/issues/slas` |
 | **Workspace app shell** | Sidebar nav, cycle panel, issue list, ⌘K, Ask Linear | `/linear/workspace` |
 | **Import & export** | Grouped list card, hairline row dividers, chevron rows, Docs ↗ links | `/linear/settings` |

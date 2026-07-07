@@ -34,7 +34,7 @@ export default function CreateTeamPage() {
 
   return (
     <SettingsShell title="Create a new team" activeId="join-team" wide>
-      <SettingsBackLink href="/settings/teams/engineering">Teams</SettingsBackLink>
+      <SettingsBackLink href="/settings/teams">Teams</SettingsBackLink>
 
       <SettingsPageIntro
         title="Create a new team"
@@ -143,7 +143,7 @@ export default function CreateTeamPage() {
       </SettingsSection>
 
       <div className="flex justify-end">
-        <Button size="sm" render={<Link href="/settings/teams/engineering" />}>
+        <Button size="sm" render={<Link href="/settings/teams" />}>
           Create team
         </Button>
       </div>
