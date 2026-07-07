@@ -495,8 +495,60 @@
 
 [data-slot="message-scroller-viewport"] {
   background-color: var(--linear-bg-level-1);
-  border: var(--linear-hairline) solid var(--linear-border-translucent);
+  border: 1px solid var(--linear-border-translucent-strong);
   border-radius: var(--linear-radius-8);
+}
+
+[data-slot="message-scroller-content"] {
+  gap: 1rem;
+}
+
+[data-slot="message-scroller-item"] {
+  content-visibility: visible;
+}
+
+[data-slot="message"] [data-slot="bubble-content"] {
+  border-radius: var(--linear-radius-8);
+}
+
+[data-slot="message"][data-provenance="assistant"] [data-slot="bubble-content"],
+[data-slot="message"][data-provenance="tool"] [data-slot="bubble-content"] {
+  background-color: var(--linear-bg-level-2);
+  border: 1px solid var(--linear-border-translucent-strong);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-ask-panel"] [data-slot="textarea"] {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+[data-slot="linear-ask-panel"] [data-slot="textarea"]:focus-visible {
+  box-shadow: none !important;
+}
+
+/* Auth / marketing lane — pill controls from login reference captures */
+[data-slot="linear-auth-shell"] [data-slot="input"],
+[data-slot="linear-auth-shell"] [data-slot="button"][data-variant="default"],
+[data-slot="linear-auth-shell"] [data-slot="button"][data-variant="outline"] {
+  border-radius: 9999px;
+  min-height: 2.75rem;
+}
+
+[data-slot="linear-auth-shell"] [data-slot="input"] {
+  background-color: var(--linear-bg-level-1);
+  padding-inline: 1.25rem;
+}
+
+[data-slot="linear-auth-shell"] [data-slot="button"][data-variant="outline"] {
+  background-color: var(--linear-bg-level-1);
+  border-color: var(--linear-border-translucent-strong);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-agent-timeline"] [data-slot="message-scroller-viewport"] {
+  background-color: var(--linear-bg-level-1);
 }
 
 /* ── Pagination & carousel ─────────────────────────────────────────────────── */

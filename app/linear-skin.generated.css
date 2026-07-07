@@ -422,10 +422,52 @@
 :root[data-skin="linear"] [data-slot="bubble"] {:root[data-skin="linear"] font-size: 0.875rem;
 }
 
-[data-slot="message-scroller-viewport"] {
-  background-color: var(--linear-bg-level-1);
-  border: var(--linear-hairline) solid var(--linear-border-translucent);
+[data-slot="message-scroller-viewport"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-1);
+  border: 1px solid var(--linear-border-translucent-strong);
   border-radius: var(--linear-radius-8);
+}
+
+[data-slot="message-scroller-content"] {:root[data-skin="linear"] gap: 1rem;
+}
+
+[data-slot="message-scroller-item"] {:root[data-skin="linear"] content-visibility: visible;
+}
+
+[data-slot="message"] [data-slot="bubble-content"] {:root[data-skin="linear"] border-radius: var(--linear-radius-8);
+}
+
+[data-slot="message"][data-provenance="assistant"] [data-slot="bubble-content"],
+:root[data-skin="linear"] [data-slot="message"][data-provenance="tool"] [data-slot="bubble-content"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-2);
+  border: 1px solid var(--linear-border-translucent-strong);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-ask-panel"] [data-slot="textarea"] {:root[data-skin="linear"] background-color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+[data-slot="linear-ask-panel"] [data-slot="textarea"]:focus-visible {
+  box-shadow: none !important;
+}
+
+/* Auth / marketing lane — pill controls from login reference captures */:root[data-skin="linear"] [data-slot="linear-auth-shell"] [data-slot="input"],
+:root[data-skin="linear"] [data-slot="linear-auth-shell"] [data-slot="button"][data-variant="default"],
+:root[data-skin="linear"] [data-slot="linear-auth-shell"] [data-slot="button"][data-variant="outline"] {:root[data-skin="linear"] border-radius: 9999px;
+  min-height: 2.75rem;
+}
+
+[data-slot="linear-auth-shell"] [data-slot="input"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-1);
+  padding-inline: 1.25rem;
+}
+
+[data-slot="linear-auth-shell"] [data-slot="button"][data-variant="outline"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-1);
+  border-color: var(--linear-border-translucent-strong);
+  color: var(--linear-text-primary);
+}
+
+[data-slot="linear-agent-timeline"] [data-slot="message-scroller-viewport"] {
+  background-color: var(--linear-bg-level-1);
 }
 
 /* ── Pagination & carousel ─────────────────────────────────────────────────── */:root[data-skin="linear"] [data-slot="pagination-link"][data-active="true"] {:root[data-skin="linear"] background-color: var(--linear-accent-tint);

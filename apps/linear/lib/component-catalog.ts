@@ -84,6 +84,8 @@ export const CATALOG_COMPONENTS: CatalogComponent[] = [
   { slug: "issue-row", name: "Issue row", category: "linear" },
   { slug: "cycle-panel", name: "Cycle panel", category: "linear" },
   { slug: "command-shell", name: "Command shell", category: "linear" },
+  { slug: "agent-timeline", name: "Agent timeline", category: "linear" },
+  { slug: "ask-linear-panel", name: "Ask Linear panel", category: "linear" },
 ]
 
 export function getCatalogComponent(slug: string) {

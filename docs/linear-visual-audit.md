@@ -12,7 +12,9 @@ Cross-check of `apps/linear` against `design-research/LINEAR-DESIGN-SYSTEM.md` a
 | **Security / toggles** | White settings card, purple `#5E6AD2` switch when on | `/linear/catalog` → Switch |
 | **Billing** | Pricing columns, comparison table, purple upgrade buttons | Catalog → Table, Button |
 | **Login** | Pill CTAs on white (marketing lane — secondary) | — |
-| **Dark issue view** | Near-black ladder, dense rows, property panel | `/linear/workspace` |
+| **Ask Linear** | White card, skills row, send affordance | `/linear/catalog` → Ask Linear panel |
+| **Auth login** | Pill inputs/buttons on white canvas | `/linear/auth` |
+| **Agent activity** | Message + bubble + scroller timeline | `/linear/catalog` → Message scroller |
 
 Toggle **Light** on settings pages to compare against reference captures. Workspace defaults to **Dark**.
 

@@ -141,14 +141,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar"
-import { Message, MessageContent } from "@/components/ui/message"
-import {
-  MessageScroller,
-  MessageScrollerContent,
-  MessageScrollerItem,
-  MessageScrollerProvider,
-  MessageScrollerViewport,
-} from "@/components/ui/message-scroller"
+import { Message, MessageAvatar, MessageContent, MessageFooter } from "@/components/ui/message"
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
 import {
   NavigationMenu,
@@ -221,7 +214,13 @@ import { Textarea } from "@/components/ui/textarea"
 import { Toggle } from "@/components/ui/toggle"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { CommandShell, CyclePanel, IssueRow } from "@/components/linear"
+import {
+  AgentTimeline,
+  AskLinearPanel,
+  CommandShell,
+  CyclePanel,
+  IssueRow,
+} from "@/components/linear"
 import { CategorySection, ComponentPreview } from "./component-preview"
 import { toast } from "sonner"
 import { Bar, BarChart, XAxis } from "recharts"
@@ -863,30 +862,31 @@ export function CatalogSections() {
         </ComponentPreview>
 
         <ComponentPreview slug="bubble" name="Bubble">
-          <Bubble className="max-w-md">
+          <Bubble variant="outline" className="max-w-md">
             <BubbleContent>Ship the cycle sidebar this week.</BubbleContent>
-            <p className="px-1 font-mono text-xs text-muted-foreground">@alex · 2m ago</p>
           </Bubble>
         </ComponentPreview>
 
         <ComponentPreview slug="message" name="Message">
-          <Message className="max-w-md">
-            <MessageContent>Agent completed code review on ENG-142.</MessageContent>
+          <Message className="max-w-md" data-provenance="assistant">
+            <MessageAvatar>
+              <Avatar className="size-8">
+                <AvatarFallback className="text-[10px]">AI</AvatarFallback>
+              </Avatar>
+            </MessageAvatar>
+            <MessageContent>
+              <Bubble variant="muted">
+                <BubbleContent>
+                  Agent completed code review on ENG-142.
+                </BubbleContent>
+              </Bubble>
+              <MessageFooter className="font-mono text-[10px]">just now</MessageFooter>
+            </MessageContent>
           </Message>
         </ComponentPreview>
 
         <ComponentPreview slug="message-scroller" name="Message scroller">
-          <MessageScrollerProvider>
-            <MessageScroller className="max-w-md">
-              <MessageScrollerViewport className="h-28">
-                <MessageScrollerContent>
-                  <MessageScrollerItem>User created issue</MessageScrollerItem>
-                  <MessageScrollerItem>Status changed</MessageScrollerItem>
-                  <MessageScrollerItem>Comment added</MessageScrollerItem>
-                </MessageScrollerContent>
-              </MessageScrollerViewport>
-            </MessageScroller>
-          </MessageScrollerProvider>
+          <AgentTimeline className="max-w-md" />
         </ComponentPreview>
 
         <ComponentPreview slug="carousel" name="Carousel">
@@ -988,6 +988,14 @@ export function CatalogSections() {
               { id: "eng-139", label: "ENG-139 · Cycle sidebar", group: "Issues" },
             ]}
           />
+        </ComponentPreview>
+
+        <ComponentPreview slug="agent-timeline" name="Agent timeline">
+          <AgentTimeline className="max-w-md" />
+        </ComponentPreview>
+
+        <ComponentPreview slug="ask-linear-panel" name="Ask Linear panel">
+          <AskLinearPanel />
         </ComponentPreview>
       </CategorySection>
     </>

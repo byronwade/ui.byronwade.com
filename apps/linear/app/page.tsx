@@ -38,6 +38,9 @@ export default function HomePage() {
           <Button variant="outline" render={<Link href="/settings" />}>
             Settings demo
           </Button>
+          <Button variant="outline" render={<Link href="/auth" />}>
+            Auth demo
+          </Button>
           <Button variant="outline" render={<Link href="/workspace" />}>
             Workspace demo
           </Button>

@@ -21,7 +21,13 @@ const uiSlugs = fs
   .filter((f) => f.endsWith(".tsx"))
   .map((f) => f.replace(/\.tsx$/, ""))
 
-const linearCompositeSlugs = ["issue-row", "cycle-panel", "command-shell"]
+const linearCompositeSlugs = [
+  "issue-row",
+  "cycle-panel",
+  "command-shell",
+  "agent-timeline",
+  "ask-linear-panel",
+]
 const expectedUiSlugs = new Set(uiSlugs)
 const catalogUiSlugs = catalogSlugs.filter((s) => !linearCompositeSlugs.includes(s))
 
