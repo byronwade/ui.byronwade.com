@@ -549,7 +549,7 @@ export function CatalogSections() {
       <CategorySection id="navigation" title="Navigation">
         <ComponentPreview slug="tabs" name="Tabs">
           <Tabs defaultValue="issues">
-            <TabsList>
+            <TabsList variant="line">
               <TabsTrigger value="issues">Issues</TabsTrigger>
               <TabsTrigger value="projects">Projects</TabsTrigger>
               <TabsTrigger value="cycles">Cycles</TabsTrigger>

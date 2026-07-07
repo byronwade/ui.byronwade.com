@@ -52,6 +52,16 @@
   --linear-ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
   --linear-ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
+  /* Typography weights (Inter Variable tuned) */
+  --linear-font-normal: 400;
+  --linear-font-medium: 510;
+  --linear-font-semibold: 590;
+
+  /* Overlays & selection */
+  --linear-overlay: rgba(0, 0, 0, 0.85);
+  --linear-selection: color-mix(in lch, var(--linear-brand), transparent 80%);
+  --linear-link: var(--linear-accent-hover);
+
   /* Shadows (dark elevation) */
   --linear-shadow-low: 0 0 0 1px var(--linear-border-translucent),
     0 2px 4px rgba(0, 0, 0, 0.4);
@@ -145,7 +155,16 @@
   h4 {
     letter-spacing: -0.02em;
     line-height: 1.15;
-    font-weight: 510;
+    font-weight: var(--linear-font-medium);
+  }
+
+  ::selection {
+    background-color: var(--linear-selection);
+    color: var(--linear-text-primary);
+  }
+
+  a:not([data-slot="button"]) {
+    color: var(--linear-link);
   }
 
   code,

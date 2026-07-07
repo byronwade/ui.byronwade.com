@@ -583,3 +583,139 @@
 [data-slot="tooltip-trigger"] {
   display: inline-flex;
 }
+
+/* ── Linear fidelity pass — override shadcn defaults that read off-brand ───── */:root[data-skin="linear"] [data-slot="dialog-overlay"],
+:root[data-skin="linear"] [data-slot="alert-dialog-overlay"],
+:root[data-skin="linear"] [data-slot="sheet-overlay"],
+:root[data-skin="linear"] [data-slot="drawer-overlay"] {:root[data-skin="linear"] background-color: var(--linear-overlay) !important;
+  backdrop-filter: blur(4px);
+}
+
+[data-slot="dialog-content"],
+:root[data-skin="linear"] [data-slot="alert-dialog-content"],
+:root[data-skin="linear"] [data-slot="sheet-content"],
+:root[data-skin="linear"] [data-slot="drawer-content"],
+:root[data-skin="linear"] [data-slot="popover-content"],
+:root[data-skin="linear"] [data-slot="dropdown-menu-content"],
+:root[data-skin="linear"] [data-slot="context-menu-content"],
+:root[data-skin="linear"] [data-slot="menubar-content"],
+:root[data-skin="linear"] [data-slot="menubar-sub-content"],
+:root[data-skin="linear"] [data-slot="select-content"],
+:root[data-skin="linear"] [data-slot="combobox-content"],
+:root[data-skin="linear"] [data-slot="hover-card-content"],
+:root[data-skin="linear"] [data-slot="command"],
+:root[data-skin="linear"] [data-slot="navigation-menu-content"] {:root[data-skin="linear"] --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-color: transparent !important;
+  box-shadow: var(--linear-shadow-medium);
+}
+
+[data-slot="dialog-content"],
+:root[data-skin="linear"] [data-slot="alert-dialog-content"] {:root[data-skin="linear"] border-radius: var(--linear-radius-12) !important;
+  box-shadow: var(--linear-shadow-high) !important;
+}
+
+[data-slot="command"] {:root[data-skin="linear"] border-radius: var(--linear-radius-8) !important;
+  padding: 0 !important;
+}
+
+[data-slot="command-input"] {:root[data-skin="linear"] border-radius: 0 !important;
+  border: 0 !important;
+  border-bottom: var(--linear-hairline) solid var(--linear-border-translucent) !important;
+  background-color: transparent !important;
+  height: 2.5rem;
+}
+
+[data-slot="attachment"] {:root[data-skin="linear"] border-radius: var(--linear-radius-8) !important;
+}
+
+[data-slot="avatar"],
+:root[data-skin="linear"] [data-slot="avatar-fallback"],
+:root[data-skin="linear"] [data-slot="avatar-image"] {:root[data-skin="linear"] border-radius: 50% !important;
+}
+
+[data-slot="badge"][data-variant="default"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-3) !important;
+  color: var(--linear-text-secondary) !important;
+  border: var(--linear-hairline) solid var(--linear-border-translucent);
+}
+
+[data-slot="badge"][data-variant="secondary"] {:root[data-skin="linear"] background-color: var(--linear-bg-secondary) !important;
+  color: var(--linear-text-tertiary) !important;
+}
+
+[data-slot="card-header"],
+:root[data-skin="linear"] [data-slot="card-footer"] {:root[data-skin="linear"] border-radius: 0 !important;
+}
+
+[data-slot="card-footer"] {:root[data-skin="linear"] background-color: var(--linear-bg-level-2) !important;
+}
+
+[data-slot="card-title"],
+:root[data-skin="linear"] [data-slot="tabs-trigger"],
+:root[data-skin="linear"] [data-slot="toggle"],
+:root[data-skin="linear"] [data-slot="label"],
+:root[data-skin="linear"] [data-slot="field-label"],
+:root[data-skin="linear"] [data-slot="menubar-trigger"],
+:root[data-skin="linear"] [data-slot="navigation-menu-trigger"] {:root[data-skin="linear"] font-weight: var(--linear-font-medium) !important;
+}
+
+[data-slot="tabs-list"][data-variant="line"] {:root[data-skin="linear"] background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  gap: 0.75rem;
+}
+
+[data-slot="tabs-list"][data-variant="line"] [data-slot="tabs-trigger"][data-state="active"] {:root[data-skin="linear"] background: transparent !important;
+  color: var(--linear-text-primary) !important;
+  box-shadow: none !important;
+}
+
+[data-slot="tabs-list"][data-variant="line"] [data-slot="tabs-trigger"][data-state="active"]::after {:root[data-skin="linear"] background-color: var(--linear-brand) !important;
+  opacity: 1 !important;
+}
+
+[data-slot="input"]:focus-visible,
+:root[data-skin="linear"] [data-slot="textarea"]:focus-visible,
+:root[data-skin="linear"] [data-slot="select-trigger"]:focus-visible,
+:root[data-skin="linear"] [data-slot="native-select"]:focus-visible,
+:root[data-skin="linear"] [data-slot="combobox-trigger"]:focus-visible,
+:root[data-skin="linear"] [data-slot="command-input"]:focus-visible,
+:root[data-skin="linear"] [data-slot="button"]:focus-visible,
+:root[data-skin="linear"] [data-slot="tabs-trigger"]:focus-visible {:root[data-skin="linear"] --tw-ring-shadow: 0 0 #0000 !important;
+  box-shadow: 0 0 0 1px var(--linear-focus-ring) !important;
+  outline: none !important;
+}
+
+[data-slot="linear-issue-row"] {:root[data-skin="linear"] min-height: 36px;
+  border-bottom: var(--linear-hairline) solid var(--linear-border-translucent);
+  color: var(--linear-text-secondary);
+  background-color: transparent;
+  transition: background-color 140ms var(--linear-ease-out-quint);
+}
+
+[data-slot="linear-issue-row"]:hover,
+:root[data-skin="linear"] [data-slot="linear-issue-row"]:has([data-slot="checkbox"]:focus-visible) {:root[data-skin="linear"] background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-issue-row"] [data-slot="checkbox"] {:root[data-skin="linear"] border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-cycle-panel"] [data-slot="progress-track"] {:root[data-skin="linear"] height: 3px;
+}
+
+[data-slot="linear-command-shell"] [data-slot="dialog-content"] {:root[data-skin="linear"] overflow: hidden;
+  padding: 0 !important;
+}
+
+[data-slot="linear-command-shell"] [data-slot="command"] {
+  background-color: var(--linear-bg-level-2) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Toasts — dark floating chip */:root[data-skin="linear"] [data-sonner-toaster] [data-sonner-toast] {
+  border-radius: var(--linear-radius-8) !important;
+  border: var(--linear-hairline) solid var(--linear-border-translucent-strong) !important;
+  background-color: var(--linear-bg-level-2) !important;
+  color: var(--linear-text-primary) !important;
+  box-shadow: var(--linear-shadow-medium) !important;
+}

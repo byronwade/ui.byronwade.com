@@ -46,7 +46,7 @@ export function ComponentPreview({
           {slug}
         </Badge>
       </div>
-      <div className="rounded-lg border border-border bg-card p-4">{children}</div>
+      <div className="rounded-lg border border-border bg-card p-4 shadow-none">{children}</div>
     </article>
   )
 }

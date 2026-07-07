@@ -22,13 +22,13 @@ function CyclePanel({
   footer,
 }: CyclePanelProps) {
   return (
-    <Card data-slot="linear-cycle-panel" className={cn("gap-3 py-4", className)}>
-      <CardHeader className="gap-1 pb-0">
-        <CardTitle className="text-sm font-medium">{name}</CardTitle>
+    <Card data-slot="linear-cycle-panel" className={cn("gap-3 border-border py-4 shadow-none", className)}>
+      <CardHeader className="gap-1 border-b border-border pb-3">
+        <CardTitle className="text-sm font-medium tracking-tight">{name}</CardTitle>
         <p className="font-mono text-xs text-muted-foreground">{dateRange}</p>
       </CardHeader>
-      <CardContent className="space-y-3">
-        <Progress value={progress} className="h-1" />
+      <CardContent className="space-y-3 pt-4">
+        <Progress value={progress} className="h-[3px]" />
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span className="font-mono tabular-nums">{progress}% complete</span>
           <span className="font-mono tabular-nums">{issueCount} issues</span>

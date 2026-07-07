@@ -112,9 +112,9 @@ export default function WorkspacePage() {
           />
         </aside>
 
-        <section className="overflow-hidden rounded-lg border border-border bg-card">
+        <section className="overflow-hidden rounded-lg border border-border bg-card shadow-none">
           <div className="flex items-center justify-between border-b border-border px-3 py-2">
-            <h1 className="text-sm font-medium">Active issues</h1>
+            <h1 className="text-sm font-medium tracking-tight">Active issues</h1>
             <span className="font-mono text-xs text-muted-foreground">
               {ISSUES.length} items
             </span>

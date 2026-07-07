@@ -38,7 +38,7 @@ function IssueRow({
     <div
       data-slot="linear-issue-row"
       className={cn(
-        "group/linear-issue-row relative grid min-h-9 grid-cols-[auto_auto_1fr_auto_auto_auto] items-center gap-2 border-b border-border px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/40",
+        "group/linear-issue-row relative grid min-h-9 grid-cols-[auto_auto_1fr_auto_auto_auto] items-center gap-2 px-3 text-sm",
         className,
       )}
     >
@@ -60,7 +60,7 @@ function IssueRow({
       <button
         type="button"
         className={cn(
-          "relative z-10 min-w-0 truncate text-left text-foreground/90 transition-colors hover:text-foreground",
+          "relative z-10 min-w-0 truncate text-left text-secondary-foreground transition-colors hover:text-foreground",
           interactive && "cursor-pointer",
         )}
         onClick={onActivate}
@@ -78,7 +78,7 @@ function IssueRow({
       ) : null}
 
       {priority != null ? (
-        <span className="relative z-10 shrink-0 font-mono text-xs tabular-nums">
+        <span className="relative z-10 shrink-0 font-mono text-xs tabular-nums text-muted-foreground">
           {priority}
         </span>
       ) : (
@@ -90,12 +90,10 @@ function IssueRow({
           {assignee.image ? (
             <AvatarImage src={assignee.image} alt={assignee.name} />
           ) : null}
-          <AvatarFallback className="text-[10px]">
-            {assignee.initials ?? assignee.name.slice(0, 2).toUpperCase()}
-          </AvatarFallback>
+          <AvatarFallback className="text-[10px]">{assignee.initials ?? assignee.name.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
       ) : (
-        <span className="relative z-10 size-6 shrink-0 rounded-full bg-muted/50" />
+        <span className="relative z-10 size-6 shrink-0 rounded-full bg-muted/40" aria-hidden />
       )}
     </div>
   )

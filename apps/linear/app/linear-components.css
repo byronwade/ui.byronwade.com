@@ -695,3 +695,163 @@
 [data-slot="tooltip-trigger"] {
   display: inline-flex;
 }
+
+/* ── Linear fidelity pass — override shadcn defaults that read off-brand ───── */
+
+[data-slot="dialog-overlay"],
+[data-slot="alert-dialog-overlay"],
+[data-slot="sheet-overlay"],
+[data-slot="drawer-overlay"] {
+  background-color: var(--linear-overlay) !important;
+  backdrop-filter: blur(4px);
+}
+
+[data-slot="dialog-content"],
+[data-slot="alert-dialog-content"],
+[data-slot="sheet-content"],
+[data-slot="drawer-content"],
+[data-slot="popover-content"],
+[data-slot="dropdown-menu-content"],
+[data-slot="context-menu-content"],
+[data-slot="menubar-content"],
+[data-slot="menubar-sub-content"],
+[data-slot="select-content"],
+[data-slot="combobox-content"],
+[data-slot="hover-card-content"],
+[data-slot="command"],
+[data-slot="navigation-menu-content"] {
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-color: transparent !important;
+  box-shadow: var(--linear-shadow-medium);
+}
+
+[data-slot="dialog-content"],
+[data-slot="alert-dialog-content"] {
+  border-radius: var(--linear-radius-12) !important;
+  box-shadow: var(--linear-shadow-high) !important;
+}
+
+[data-slot="command"] {
+  border-radius: var(--linear-radius-8) !important;
+  padding: 0 !important;
+}
+
+[data-slot="command-input"] {
+  border-radius: 0 !important;
+  border: 0 !important;
+  border-bottom: var(--linear-hairline) solid var(--linear-border-translucent) !important;
+  background-color: transparent !important;
+  height: 2.5rem;
+}
+
+[data-slot="attachment"] {
+  border-radius: var(--linear-radius-8) !important;
+}
+
+[data-slot="avatar"],
+[data-slot="avatar-fallback"],
+[data-slot="avatar-image"] {
+  border-radius: 50% !important;
+}
+
+[data-slot="badge"][data-variant="default"] {
+  background-color: var(--linear-bg-level-3) !important;
+  color: var(--linear-text-secondary) !important;
+  border: var(--linear-hairline) solid var(--linear-border-translucent);
+}
+
+[data-slot="badge"][data-variant="secondary"] {
+  background-color: var(--linear-bg-secondary) !important;
+  color: var(--linear-text-tertiary) !important;
+}
+
+[data-slot="card-header"],
+[data-slot="card-footer"] {
+  border-radius: 0 !important;
+}
+
+[data-slot="card-footer"] {
+  background-color: var(--linear-bg-level-2) !important;
+}
+
+[data-slot="card-title"],
+[data-slot="tabs-trigger"],
+[data-slot="toggle"],
+[data-slot="label"],
+[data-slot="field-label"],
+[data-slot="menubar-trigger"],
+[data-slot="navigation-menu-trigger"] {
+  font-weight: var(--linear-font-medium) !important;
+}
+
+[data-slot="tabs-list"][data-variant="line"] {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  gap: 0.75rem;
+}
+
+[data-slot="tabs-list"][data-variant="line"] [data-slot="tabs-trigger"][data-state="active"] {
+  background: transparent !important;
+  color: var(--linear-text-primary) !important;
+  box-shadow: none !important;
+}
+
+[data-slot="tabs-list"][data-variant="line"] [data-slot="tabs-trigger"][data-state="active"]::after {
+  background-color: var(--linear-brand) !important;
+  opacity: 1 !important;
+}
+
+[data-slot="input"]:focus-visible,
+[data-slot="textarea"]:focus-visible,
+[data-slot="select-trigger"]:focus-visible,
+[data-slot="native-select"]:focus-visible,
+[data-slot="combobox-trigger"]:focus-visible,
+[data-slot="command-input"]:focus-visible,
+[data-slot="button"]:focus-visible,
+[data-slot="tabs-trigger"]:focus-visible {
+  --tw-ring-shadow: 0 0 #0000 !important;
+  box-shadow: 0 0 0 1px var(--linear-focus-ring) !important;
+  outline: none !important;
+}
+
+[data-slot="linear-issue-row"] {
+  min-height: 36px;
+  border-bottom: var(--linear-hairline) solid var(--linear-border-translucent);
+  color: var(--linear-text-secondary);
+  background-color: transparent;
+  transition: background-color 140ms var(--linear-ease-out-quint);
+}
+
+[data-slot="linear-issue-row"]:hover,
+[data-slot="linear-issue-row"]:has([data-slot="checkbox"]:focus-visible) {
+  background-color: var(--linear-bg-level-2);
+}
+
+[data-slot="linear-issue-row"] [data-slot="checkbox"] {
+  border-color: var(--linear-border-translucent-strong);
+}
+
+[data-slot="linear-cycle-panel"] [data-slot="progress-track"] {
+  height: 3px;
+}
+
+[data-slot="linear-command-shell"] [data-slot="dialog-content"] {
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+[data-slot="linear-command-shell"] [data-slot="command"] {
+  background-color: var(--linear-bg-level-2) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Toasts — dark floating chip */
+[data-sonner-toaster] [data-sonner-toast] {
+  border-radius: var(--linear-radius-8) !important;
+  border: var(--linear-hairline) solid var(--linear-border-translucent-strong) !important;
+  background-color: var(--linear-bg-level-2) !important;
+  color: var(--linear-text-primary) !important;
+  box-shadow: var(--linear-shadow-medium) !important;
+}
