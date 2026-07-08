@@ -71,16 +71,18 @@ import { Toggle } from "@/components/ui/toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 function Section({
+  id,
   title,
   description,
   children,
 }: {
+  id?: string
   title: string
   description?: string
   children: React.ReactNode
 }) {
   return (
-    <section className="space-y-4">
+    <section id={id} className="scroll-mt-16 space-y-4">
       <div>
         <h2 className="text-lg font-medium tracking-tight text-foreground">{title}</h2>
         {description ? (
@@ -126,7 +128,11 @@ export default function StyleguidePage() {
           </p>
         </div>
 
-        <Section title="Buttons" description="8px radius, 600 weight, dark-neutral primary fill.">
+        <Section
+          id="button"
+          title="Buttons"
+          description="8px radius, 600 weight, dark-neutral primary fill."
+        >
           <div className="flex flex-wrap gap-2">
             <Button>Primary</Button>
             <Button variant="secondary">Secondary</Button>
@@ -137,54 +143,65 @@ export default function StyleguidePage() {
           </div>
         </Section>
 
-        <Section title="Form controls">
+        <Section id="input" title="Form controls">
           <div className="grid max-w-md gap-4">
             <div className="space-y-2">
               <Label htmlFor="product-title">Product title</Label>
               <Input id="product-title" placeholder="Organic cotton tote" />
             </div>
-            <div className="space-y-2">
+            <div id="textarea" className="scroll-mt-16 space-y-2">
               <Label htmlFor="description">Description</Label>
               <Textarea id="description" placeholder="Short product description…" rows={3} />
             </div>
-            <Select defaultValue="active">
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="draft">Draft</SelectItem>
-                <SelectItem value="archived">Archived</SelectItem>
-              </SelectContent>
-            </Select>
+            <div id="select" className="scroll-mt-16">
+              <Select defaultValue="active">
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="active">Active</SelectItem>
+                  <SelectItem value="draft">Draft</SelectItem>
+                  <SelectItem value="archived">Archived</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
+              <div id="checkbox" className="flex scroll-mt-16 items-center gap-2">
                 <Checkbox id="tracked" />
                 <Label htmlFor="tracked">Track quantity</Label>
               </div>
-              <div className="flex items-center gap-2">
+              <div id="switch" className="flex scroll-mt-16 items-center gap-2">
                 <Switch id="online" />
                 <Label htmlFor="online">Online store</Label>
               </div>
             </div>
-            <RadioGroup defaultValue="physical" className="flex gap-4">
-              <div className="flex items-center gap-2">
-                <RadioGroupItem value="physical" id="physical" />
-                <Label htmlFor="physical">Physical</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <RadioGroupItem value="digital" id="digital" />
-                <Label htmlFor="digital">Digital</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <RadioGroupItem value="service" id="service" />
-                <Label htmlFor="service">Service</Label>
-              </div>
-            </RadioGroup>
+            <div id="radio-group" className="scroll-mt-16">
+              <RadioGroup defaultValue="physical" className="flex gap-4">
+                <div className="flex items-center gap-2">
+                  <RadioGroupItem value="physical" id="physical" />
+                  <Label htmlFor="physical">Physical</Label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RadioGroupItem value="digital" id="digital" />
+                  <Label htmlFor="digital">Digital</Label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RadioGroupItem value="service" id="service" />
+                  <Label htmlFor="service">Service</Label>
+                </div>
+              </RadioGroup>
+            </div>
+            <div id="label" className="scroll-mt-16 text-xs text-muted-foreground">
+              Labels use the shared <code className="font-mono">label</code> primitive.
+            </div>
           </div>
         </Section>
 
-        <Section title="Orders table" description="Dense index rows, metadata in mono.">
+        <Section
+          id="table"
+          title="Orders table"
+          description="Dense index rows, metadata in mono."
+        >
           <Table>
             <TableHeader>
               <TableRow>
@@ -223,7 +240,7 @@ export default function StyleguidePage() {
           </Table>
         </Section>
 
-        <Section title="Cards & alerts">
+        <Section id="card" title="Cards & alerts">
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
               <CardHeader>
@@ -231,20 +248,24 @@ export default function StyleguidePage() {
                 <CardDescription>Mar 3 · 12 orders</CardDescription>
               </CardHeader>
               <CardContent>
-                <Progress value={68} className="h-1.5" />
+                <div id="progress" className="scroll-mt-16">
+                  <Progress value={68} className="h-1.5" />
+                </div>
                 <p className="mt-2 font-mono text-xs text-muted-foreground">68% of daily goal</p>
               </CardContent>
             </Card>
-            <Alert>
-              <AlertTitle>Payment gateway</AlertTitle>
-              <AlertDescription>
-                Shopify Payments needs verification before the next payout.
-              </AlertDescription>
-            </Alert>
+            <div id="alert" className="scroll-mt-16">
+              <Alert>
+                <AlertTitle>Payment gateway</AlertTitle>
+                <AlertDescription>
+                  Shopify Payments needs verification before the next payout.
+                </AlertDescription>
+              </Alert>
+            </div>
           </div>
         </Section>
 
-        <Section title="Navigation patterns">
+        <Section id="tabs" title="Navigation patterns">
           <Tabs defaultValue="orders">
             <TabsList>
               <TabsTrigger value="orders">Orders</TabsTrigger>
@@ -261,25 +282,29 @@ export default function StyleguidePage() {
               Customer profiles and segments.
             </TabsContent>
           </Tabs>
-          <Separator className="my-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="#">Products</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href="#">Apparel</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Organic cotton tote</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <div id="separator" className="scroll-mt-16">
+            <Separator className="my-4" />
+          </div>
+          <div id="breadcrumb" className="scroll-mt-16">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">Products</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">Apparel</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Organic cotton tote</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
         </Section>
 
-        <Section title="Overlays">
+        <Section id="dialog" title="Overlays">
           <div className="flex flex-wrap gap-2">
             <Dialog>
               <DialogTrigger render={<Button variant="outline" />}>Dialog</DialogTrigger>
@@ -297,34 +322,40 @@ export default function StyleguidePage() {
               </DialogContent>
             </Dialog>
 
-            <Popover>
-              <PopoverTrigger render={<Button variant="outline" />}>Popover</PopoverTrigger>
-              <PopoverContent className="w-64">
-                <p className="text-sm">Quick filters for the current index.</p>
-              </PopoverContent>
-            </Popover>
+            <div id="popover" className="scroll-mt-16">
+              <Popover>
+                <PopoverTrigger render={<Button variant="outline" />}>Popover</PopoverTrigger>
+                <PopoverContent className="w-64">
+                  <p className="text-sm">Quick filters for the current index.</p>
+                </PopoverContent>
+              </Popover>
+            </div>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger render={<Button variant="outline" />}>
-                Menu
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>Product actions</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Duplicate</DropdownMenuItem>
-                <DropdownMenuItem>View on store</DropdownMenuItem>
-                <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div id="dropdown-menu" className="scroll-mt-16">
+              <DropdownMenu>
+                <DropdownMenuTrigger render={<Button variant="outline" />}>
+                  Menu
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Product actions</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Duplicate</DropdownMenuItem>
+                  <DropdownMenuItem>View on store</DropdownMenuItem>
+                  <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
 
-            <Tooltip>
-              <TooltipTrigger render={<Button variant="ghost" />}>Tooltip</TooltipTrigger>
-              <TooltipContent>Keyboard shortcut: ⌘K</TooltipContent>
-            </Tooltip>
+            <div id="tooltip" className="scroll-mt-16">
+              <Tooltip>
+                <TooltipTrigger render={<Button variant="ghost" />}>Tooltip</TooltipTrigger>
+                <TooltipContent>Keyboard shortcut: ⌘K</TooltipContent>
+              </Tooltip>
+            </div>
           </div>
         </Section>
 
-        <Section title="Command palette">
+        <Section id="command" title="Command palette">
           <Command className="max-w-lg border border-border">
             <CommandInput placeholder="Search products, orders, customers…" />
             <CommandList>
@@ -337,26 +368,34 @@ export default function StyleguidePage() {
           </Command>
         </Section>
 
-        <Section title="Misc">
+        <Section id="badge" title="Misc">
           <div className="flex flex-wrap items-center gap-4">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-              <AvatarFallback>BW</AvatarFallback>
-            </Avatar>
-            <Toggle aria-label="Toggle bold">Bold</Toggle>
-            <Skeleton className="h-8 w-32" />
+            <div id="avatar" className="scroll-mt-16">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+                <AvatarFallback>BW</AvatarFallback>
+              </Avatar>
+            </div>
+            <div id="toggle" className="scroll-mt-16">
+              <Toggle aria-label="Toggle bold">Bold</Toggle>
+            </div>
+            <div id="skeleton" className="scroll-mt-16">
+              <Skeleton className="h-8 w-32" />
+            </div>
             <Badge>Label</Badge>
             <Badge variant="secondary">Draft</Badge>
           </div>
-          <Accordion defaultValue={["item-1"]} className="mt-4 max-w-lg">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Activity log</AccordionTrigger>
-              <AccordionContent className="font-mono text-xs text-muted-foreground">
-                inventory adjusted · status set to Active · published to Online Store
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <div className="mt-4 w-fit rounded-lg border border-border p-3">
+          <div id="accordion" className="scroll-mt-16">
+            <Accordion defaultValue={["item-1"]} className="mt-4 max-w-lg">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>Activity log</AccordionTrigger>
+                <AccordionContent className="font-mono text-xs text-muted-foreground">
+                  inventory adjusted · status set to Active · published to Online Store
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+          <div id="calendar" className="mt-4 w-fit scroll-mt-16 rounded-lg border border-border p-3">
             <Calendar mode="single" selected={new Date()} />
           </div>
         </Section>

@@ -6,9 +6,13 @@ Companion to `docs/linear-visual-audit.md` for the Shopify Polaris themed app.
 
 | Route | Status | Notes |
 | ----- | ------ | ----- |
-| `/` | Live | Landing → catalog + styleguide |
+| `/` | Live | Landing → products, orders, catalog, styleguide |
+| `/products` | Live | Products index table in AdminShell |
+| `/orders` | Live | Orders index table in AdminShell |
+| `/customers` | Live | Customers list in AdminShell |
+| `/settings` | Live | General / Payments / Shipping settings rows |
 | `/catalog` | Live | All 60 shadcn primitives indexed |
-| `/styleguide` | Live | Admin specimens (products, orders, customers) |
+| `/styleguide` | Live | Admin specimens with catalog slug anchors |
 
 ## Gates
 
