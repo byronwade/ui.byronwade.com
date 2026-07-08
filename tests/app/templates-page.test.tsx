@@ -20,9 +20,18 @@ describe("TemplatesPage", () => {
     expect(
       screen.getByRole("heading", { name: /starter templates/i }),
     ).toBeInTheDocument()
-    expect(screen.getByText(/pricing/i)).toBeInTheDocument()
-    expect(screen.getByText(/dashboard/i)).toBeInTheDocument()
-    expect(screen.getByText(/settings/i)).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /pricing/i })).toHaveAttribute(
+      "href",
+      "/templates/pricing",
+    )
+    expect(screen.getByRole("link", { name: /dashboard/i })).toHaveAttribute(
+      "href",
+      "/templates/dashboard",
+    )
+    expect(screen.getByRole("link", { name: /settings/i })).toHaveAttribute(
+      "href",
+      "/templates/settings",
+    )
   })
 
   it("has no axe violations", async () => {
