@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 
 import {
   SettingsBackLink,
@@ -47,15 +46,10 @@ const PERMISSIONS = [
 ]
 
 export default function AsMobbinAccessPage() {
-  const { setTheme } = useTheme()
   const [isPrivate, setIsPrivate] = React.useState(true)
 
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
-
   return (
-    <SettingsShell title="Access and permissions" activeId="teams" wide>
+    <SettingsShell title="Access and permissions" activeId="as-mobbin" wide>
       <SettingsBackLink href="/settings/teams/as-mobbin">AS Mobbin</SettingsBackLink>
 
       <div className="space-y-1">

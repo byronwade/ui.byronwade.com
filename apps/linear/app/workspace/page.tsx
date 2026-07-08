@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 
 import {
   CommandShell,
@@ -73,16 +72,11 @@ const COMMAND_ITEMS = ISSUES.map((issue) => ({
 }))
 
 export default function WorkspacePage() {
-  const { setTheme } = useTheme()
   const [commandOpen, setCommandOpen] = React.useState(false)
   const [askOpen, setAskOpen] = React.useState(false)
   const [askValue, setAskValue] = React.useState("")
   const [activeTab, setActiveTab] = React.useState("all")
   const [selected, setSelected] = React.useState<Record<string, boolean>>({})
-
-  React.useEffect(() => {
-    setTheme("dark")
-  }, [setTheme])
 
   React.useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {

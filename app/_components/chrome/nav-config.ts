@@ -1,10 +1,15 @@
-import { AppWindow, BookOpen, House, PuzzlePiece, type Icon } from "@/lib/icons"
+import {
+  AppWindow,
+  BookOpen,
+  House,
+  Palette,
+  PuzzlePiece,
+  type Icon,
+} from "@/lib/icons"
 
 /**
- * Primary destinations surfaced in the floating nav dock, the docs-site analogue
- * of SignalRoute's per-product `nav-config`. Kept deliberately small: the dock is
- * the always-visible primary nav, while the full component catalog is reached via
- * the launcher's browse panel, the breadcrumb, and the ⌘K command palette.
+ * Primary destinations in the fixed site header. Kept small: full catalog
+ * depth lives in Browse + ⌘K; Styleguide is the token specimen page.
  */
 export interface DocsNavItem {
   label: string
@@ -22,21 +27,22 @@ export const navItems: DocsNavItem[] = [
     match: (p) => p === "/",
   },
   {
-    // Guides + the Introduction landing + every component reference page (the
-    // restored docs sidebar lists them all).
     label: "Docs",
     href: "/docs",
     icon: BookOpen,
     match: (p) => p === "/docs" || p.startsWith("/docs/"),
   },
   {
-    // The merged Browse grid — components AND full-page layouts in one faceted,
-    // searchable page. Layouts are reached via its Type filter (the old /layouts
-    // index redirects in); the /layouts/<slug> inspector routes count as Browse.
     label: "Browse",
     href: "/catalog",
     icon: PuzzlePiece,
     match: (p) => p.startsWith("/catalog") || p.startsWith("/layouts"),
+  },
+  {
+    label: "Styleguide",
+    href: "/styleguide",
+    icon: Palette,
+    match: (p) => p.startsWith("/styleguide"),
   },
   {
     label: "Templates",

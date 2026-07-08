@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 
 import { AskLinearChatPanel } from "@/components/linear/ask-linear-chat-panel"
 import {
@@ -12,12 +11,7 @@ import {
 
 export default function AskLinearChatPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
   const [reply, setReply] = React.useState("")
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <WorkspaceShell

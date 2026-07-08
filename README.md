@@ -183,29 +183,34 @@ value) — rings, the primary chart line, active states, and status-success all 
 
 Neutrals, `--warning` (amber), `--destructive` (red), and the dark `--dock-*` tokens are independent by design.
 
-## Alternate skins (Polaris)
+## Alternate skins (Polaris + Linear)
 
 Because every component consumes **semantic tokens only**, a whole alternate look is just a different
-set of token _values_ — no component changes. The registry ships one alternate skin today:
+set of token _values_ — no component changes. The registry and main site ship two alternate skins:
 
-- **`polaris`** — a Shopify-Polaris-inspired admin skin. Beyond token values (cool low-chroma neutral
-  surfaces, white cards on a light-gray canvas, a teal-green brand, a dark-neutral primary), it ships a
-  small **component layer** (a `css` block targeting shared `data-slot`s) that adopts Polaris's visual
-  language across every component at once: elevated white cards/overlays (border + soft drop shadow),
-  de-pilled rounded-rectangle buttons/badges, and bordered white form fields. Light and dark. It does
-  not fork component files — it restyles the shared primitives, so components Polaris has no equivalent
-  for (charts, players, etc.) inherit the palette and depth but keep their own structure.
+- **`polaris`** — Shopify-Polaris-inspired admin skin (cool neutrals, white cards on gray canvas, teal
+  brand, dark-neutral primary) plus a `data-slot` component layer. Install: `npx shadcn@latest add @byronwade/polaris`.
+- **`linear`** — Linear product-OS skin (indigo accent, near-black ladder, 6px controls). Live on the
+  main site via the Skin toggle; full product demos live in `apps/linear`.
 
-**Install it into your project** (opt-in — it's excluded from `@byronwade/all`):
+Themed sibling apps (see [`docs/monorepo.md`](docs/monorepo.md)):
+
+```bash
+npm run dev:linear    # ui.byronwade.com/linear
+npm run dev:polaris   # ui.byronwade.com/polaris
+npm run gen:linear-skin
+npm run gen:polaris-skin
+```
+
+**Install Polaris into your project** (opt-in — excluded from `@byronwade/all`):
 
 ```bash
 npx shadcn@latest add @byronwade/polaris
 ```
 
-This writes the Polaris token values into your `globals.css` (`:root` / `.dark`), so the whole system
-adopts the Polaris look. To keep both looks and **toggle between them at runtime**, scope the Polaris
-values under `:root[data-skin="polaris"]` (this is exactly how the docs site's skin switcher works —
-see the skin block in `app/globals.css`) and set `document.documentElement.dataset.skin = "polaris"`.
+This writes the Polaris token values into your `globals.css` (`:root` / `.dark`). To keep both looks and
+**toggle between them at runtime**, scope values under `:root[data-skin="polaris"]` (how the docs site's
+skin switcher works — see `app/globals.css`) and set `document.documentElement.dataset.skin = "polaris"`.
 
 ## Developing the registry
 

@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 import {
   CalendarClock,
   CheckCircle2,
@@ -24,11 +23,6 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function EngineeringTeamSettingsPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Engineering Team" activeId="engineering-team">

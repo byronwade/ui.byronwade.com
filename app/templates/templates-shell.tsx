@@ -13,7 +13,7 @@ export function TemplatesShell({ children }: { children: React.ReactNode }) {
     <div className="flex h-dvh flex-col bg-background text-foreground">
       <main
         data-testid="templates-route-shell"
-        className="min-h-0 flex-1 overflow-auto pt-16"
+        className="min-h-0 flex-1 overflow-auto pt-14"
       >
         {children}
       </main>

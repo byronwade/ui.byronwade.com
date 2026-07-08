@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 
 import {
   SettingsBackLink,
@@ -20,12 +19,7 @@ import {
 } from "@/components/ui/select"
 
 export default function EmailNotificationsPage() {
-  const { setTheme } = useTheme()
   const [enabled, setEnabled] = React.useState(true)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Email" activeId="notifications">

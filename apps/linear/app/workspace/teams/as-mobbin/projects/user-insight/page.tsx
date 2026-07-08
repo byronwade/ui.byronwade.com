@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 import { toast } from "sonner"
 import {
   Bell,
@@ -78,16 +77,11 @@ const TABS = [
 
 export default function ProjectOverviewPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
   const [activeTab, setActiveTab] = React.useState("overview")
   const [reply, setReply] = React.useState("")
   const [outlineOpen, setOutlineOpen] = React.useState(false)
   const [markdown, setMarkdown] = React.useState(false)
   const [issueOpen, setIssueOpen] = React.useState(false)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <WorkspaceShell

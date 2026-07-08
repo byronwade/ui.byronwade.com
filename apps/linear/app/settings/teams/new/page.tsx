@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { Laptop } from "lucide-react"
 
 import {
@@ -24,13 +23,8 @@ import {
 } from "@/components/ui/select"
 
 export default function CreateTeamPage() {
-  const { setTheme } = useTheme()
   const [name, setName] = React.useState("Engineering Team")
   const [identifier, setIdentifier] = React.useState("ENG")
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Create a new team" activeId="join-team" wide>

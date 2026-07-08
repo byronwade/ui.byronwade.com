@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { ExternalLink } from "lucide-react"
 
 import {
@@ -16,11 +15,6 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function ProjectUpdatesPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Project updates" activeId="project-updates">

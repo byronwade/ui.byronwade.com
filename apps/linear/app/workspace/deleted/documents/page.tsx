@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 
 import {
   WorkspaceAskTrigger,
@@ -34,11 +33,6 @@ const DOCUMENTS = [
 ]
 
 export default function RecentlyDeletedDocumentsPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <WorkspaceShell
@@ -46,7 +40,7 @@ export default function RecentlyDeletedDocumentsPage() {
         { label: "AS Mobbin" },
         { label: "Recently deleted documents" },
       ]}
-      activeNavId="as-mobbin-issues"
+      activeNavId="more"
       showIssueTabs={false}
       viewTabs={DELETED_TABS}
       activeViewTab="deleted-documents"

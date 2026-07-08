@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { Copy, Download, ExternalLink } from "lucide-react"
 
 import {
@@ -39,12 +38,7 @@ const DNS_RECORDS = [
 ]
 
 export default function NewEmailIntakePage() {
-  const { setTheme } = useTheme()
   const [step, setStep] = React.useState<1 | 2 | 3>(1)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Add email intake" activeId="asks" wide>

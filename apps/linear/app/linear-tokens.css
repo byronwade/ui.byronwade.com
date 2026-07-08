@@ -6,6 +6,7 @@
 :root {
   /* Surface ladder */
   --linear-bg-primary: #08090a;
+  --linear-bg-level-0: #08090a;
   --linear-bg-level-1: #0f1011;
   --linear-bg-level-2: #141516;
   --linear-bg-level-3: #191a1b;
@@ -109,6 +110,7 @@
 .light {
   /* Remap Linear ladder for light settings UI */
   --linear-bg-primary: #f7f7f8;
+  --linear-bg-level-0: #f7f7f8;
   --linear-bg-level-1: #ffffff;
   --linear-bg-level-2: #f7f7f8;
   --linear-bg-level-3: #e8eaef;

@@ -26,6 +26,22 @@ import { ThemeToggleButton } from "./theme-toggle-button"
 
 const GITHUB_URL = "https://github.com/byronwade/ui"
 
+/** Sibling design-system demos on this host. */
+const SKIN_APPS = [
+  {
+    name: "Linear",
+    desc: "Linear-themed product demo",
+    href: "/linear",
+    external: false,
+  },
+  {
+    name: "Polaris",
+    desc: "Shopify Polaris-themed demo",
+    href: "/polaris",
+    external: false,
+  },
+] as const
+
 /** Cross-app switcher — the byronwade product umbrella. */
 const PRODUCTS = [
   {
@@ -69,6 +85,21 @@ function AppsMenu() {
         <GridFour className="size-4" strokeWidth={2} />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-64">
+        <DropdownMenuLabel className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+          Design skins
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {SKIN_APPS.map((p) => (
+          <DropdownMenuItem
+            key={p.href}
+            render={<Link href={p.href} />}
+            className="flex-col items-start gap-0.5"
+          >
+            <span className="text-sm text-foreground">{p.name}</span>
+            <span className="text-xs text-muted-foreground">{p.desc}</span>
+          </DropdownMenuItem>
+        ))}
+        <DropdownMenuSeparator />
         <DropdownMenuLabel className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
           byronwade
         </DropdownMenuLabel>

@@ -45,6 +45,10 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-brand: var(--linear-brand);
+  --color-brand-foreground: #ffffff;
+  --color-success: var(--linear-green);
+  --color-warning: var(--linear-yellow);
   --radius-sm: var(--linear-radius-4);
   --radius-md: var(--linear-radius-6);
   --radius-lg: var(--linear-radius-8);

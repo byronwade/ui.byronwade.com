@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { Plus } from "lucide-react"
 
 import {
@@ -27,11 +26,6 @@ const GUIDANCE = `1. Accurate Categorization: Instantly identify the type of wor
 4. Respect Team Conventions: Match existing label taxonomy, cycle boundaries, and project structure before creating new categories.`
 
 export default function AgentPersonalizationPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Agent personalization" activeId="agent">

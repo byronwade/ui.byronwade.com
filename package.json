@@ -28,6 +28,7 @@
     "check:linear-catalog": "node scripts/check-linear-catalog.mjs",
     "check:linear-visual": "node scripts/check-linear-visual.mjs",
     "gen:linear-skin": "node scripts/gen-linear-skin-scoped.mjs",
+    "gen:polaris-skin": "node scripts/gen-polaris-skin-scoped.mjs",
     "clean": "rm -rf .next .vitest-coverage .turbo",
     "dev:clean": "npm run clean && npm run dev",
     "registry:build": "shadcn build",

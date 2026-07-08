@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 import {
   CircleDashed,
   Ellipsis,
@@ -43,12 +42,7 @@ Acceptance Criteria
 ☐ Accessibility review complete`
 
 export default function NewIssueTemplatePage() {
-  const { setTheme } = useTheme()
   const router = useRouter()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Issue templates" activeId="issue-templates" wide>

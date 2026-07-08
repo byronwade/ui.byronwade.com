@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 import { toast } from "sonner"
 import { CheckCircle2, Tag, Users } from "lucide-react"
 
@@ -18,15 +17,10 @@ import { Switch } from "@/components/ui/switch"
 
 export default function AsMobbinSetParentPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
   const [inheritStatuses, setInheritStatuses] = React.useState(true)
 
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
-
   return (
-    <SettingsShell title="Set parent team" activeId="teams" wide>
+    <SettingsShell title="Set parent team" activeId="as-mobbin" wide>
       <SettingsBackLink href="/settings/teams/as-mobbin">AS Mobbin</SettingsBackLink>
 
       <SettingsPageIntro

@@ -292,3 +292,6 @@
 
 /* Linear component layer — synced from apps/linear/app/linear-components.css */
 @import "./linear-skin.generated.css";
+
+/* Polaris component layer — synced from apps/polaris/app/polaris-components.css */
+@import "./polaris-skin.generated.css";

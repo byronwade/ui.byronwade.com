@@ -79,14 +79,29 @@ type TeamNavItem = {
 }
 
 const WORKSPACE_NAV: WorkspaceNavItem[] = [
-  { id: "inbox", label: "Inbox", icon: <Inbox />, badge: "3" },
-  { id: "my-issues", label: "My issues", icon: <CircleDot /> },
+  { id: "inbox", label: "Inbox", icon: <Inbox />, badge: "3", href: "/workspace" },
+  { id: "my-issues", label: "My issues", icon: <CircleDot />, href: "/workspace" },
 ]
 
 const WORKSPACE_GROUP: WorkspaceNavItem[] = [
-  { id: "projects", label: "Projects", icon: <FolderKanban /> },
-  { id: "views", label: "Views", icon: <LayoutGrid /> },
-  { id: "more", label: "More", icon: <Layers /> },
+  {
+    id: "projects",
+    label: "Projects",
+    icon: <FolderKanban />,
+    href: "/workspace/teams/as-mobbin/projects",
+  },
+  {
+    id: "views",
+    label: "Views",
+    icon: <LayoutGrid />,
+    href: "/workspace/teams/as-mobbin/views",
+  },
+  {
+    id: "more",
+    label: "More",
+    icon: <Layers />,
+    href: "/workspace/deleted/documents",
+  },
 ]
 
 const FAVORITES_NAV: WorkspaceNavItem[] = [
@@ -94,6 +109,7 @@ const FAVORITES_NAV: WorkspaceNavItem[] = [
     id: "fav-dashboard",
     label: "User Insight & Behavior Analytics Dashboard",
     icon: <Star />,
+    href: "/workspace/teams/as-mobbin/projects/user-insight",
   },
 ]
 
@@ -133,11 +149,26 @@ const TEAM_NAV: TeamNavItem[] = [
 ]
 
 const TRY_NAV: WorkspaceNavItem[] = [
-  { id: "import", label: "Import issues", icon: <Plus /> },
-  { id: "invite", label: "Invite people", icon: <UserPlus /> },
-  { id: "initiatives", label: "Initiatives", icon: <Layers /> },
-  { id: "cycles", label: "Cycles", icon: <CircleDot /> },
-  { id: "github", label: "Connect GitHub", icon: <Layers /> },
+  { id: "import", label: "Import issues", icon: <Plus />, href: "/settings" },
+  {
+    id: "invite",
+    label: "Invite people",
+    icon: <UserPlus />,
+    href: "/settings/members",
+  },
+  {
+    id: "initiatives",
+    label: "Initiatives",
+    icon: <Layers />,
+    href: "/settings/features/initiatives",
+  },
+  {
+    id: "cycles",
+    label: "Cycles",
+    icon: <CircleDot />,
+    href: "/settings/teams/as-mobbin/cycles",
+  },
+  { id: "github", label: "Connect GitHub", icon: <Layers />, href: "/settings" },
 ]
 
 type WorkspaceBreadcrumb = {
@@ -287,7 +318,12 @@ function WorkspaceShell({
               <SidebarMenu>
                 {WORKSPACE_GROUP.map((item) => (
                   <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton isActive={item.id === activeNavId}>
+                    <SidebarMenuButton
+                      isActive={item.id === activeNavId}
+                      render={
+                        item.href ? <Link href={item.href} /> : <button type="button" />
+                      }
+                    >
                       {item.icon}
                       <span>{item.label}</span>
                     </SidebarMenuButton>
@@ -305,7 +341,12 @@ function WorkspaceShell({
               <SidebarMenu>
                 {FAVORITES_NAV.map((item) => (
                   <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton isActive={item.id === activeNavId}>
+                    <SidebarMenuButton
+                      isActive={item.id === activeNavId}
+                      render={
+                        item.href ? <Link href={item.href} /> : <button type="button" />
+                      }
+                    >
                       {item.icon}
                       <span className="truncate">{item.label}</span>
                     </SidebarMenuButton>
@@ -391,7 +432,12 @@ function WorkspaceShell({
               <SidebarMenu>
                 {TRY_NAV.map((item) => (
                   <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton isActive={item.id === activeNavId}>
+                    <SidebarMenuButton
+                      isActive={item.id === activeNavId}
+                      render={
+                        item.href ? <Link href={item.href} /> : <button type="button" />
+                      }
+                    >
                       {item.icon}
                       <span>{item.label}</span>
                     </SidebarMenuButton>

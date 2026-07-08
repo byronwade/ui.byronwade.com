@@ -61,7 +61,7 @@ function ProjectLogoBlock({ className }: { className?: string }) {
     <div
       data-slot="linear-project-logo"
       className={cn(
-        "flex aspect-square w-full max-w-md items-center justify-center rounded-2xl bg-[#050505] p-10",
+        "flex aspect-square w-full max-w-md items-center justify-center rounded-lg bg-background p-10",
         className
       )}
       aria-label="Logo of AS Mobbin"
@@ -162,7 +162,7 @@ function ProjectPropertiesPanel() {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-border p-4">
+      <section className="rounded-lg border border-border p-4">
         <div className="mb-2 flex items-center justify-between">
           <button className="flex items-center gap-1 text-sm font-medium text-foreground">
             Milestones
@@ -181,7 +181,7 @@ function ProjectPropertiesPanel() {
 
       <section
         data-slot="linear-project-progress"
-        className="rounded-2xl border border-border p-4"
+        className="rounded-lg border border-border p-4"
       >
         <button className="mb-3 flex items-center gap-1 text-sm font-medium text-foreground">
           Progress
@@ -204,7 +204,7 @@ function ProjectPropertiesPanel() {
           </div>
         </div>
         <div className="mb-2 grid grid-cols-2 gap-1 rounded-lg bg-muted/40 p-0.5 text-xs">
-          <button className="rounded-md bg-card px-2 py-1 text-foreground shadow-sm">
+          <button className="rounded-md bg-card px-2 py-1 text-foreground">
             Assignees
           </button>
           <button className="rounded-md px-2 py-1 text-muted-foreground">
@@ -220,7 +220,7 @@ function ProjectPropertiesPanel() {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-border p-4">
+      <section className="rounded-lg border border-border p-4">
         <div className="mb-2 flex items-center justify-between">
           <button className="flex items-center gap-1 text-sm font-medium text-foreground">
             Activity
@@ -276,7 +276,7 @@ function ProjectComment({
   return (
     <div
       data-slot="linear-project-comment"
-      className="rounded-2xl border border-border bg-popover p-3 shadow-sm"
+      className="rounded-lg border border-border bg-popover p-3"
     >
       <div className="flex items-center gap-2">
         <Avatar className="size-5">
@@ -451,7 +451,7 @@ function ProjectCommentComposer({
   return (
     <div
       data-slot="linear-comment-composer"
-      className="flex items-center gap-2 rounded-2xl border border-border bg-popover px-3 py-2 shadow-sm"
+      className="flex items-center gap-2 rounded-lg border border-border bg-popover px-3 py-2"
     >
       <Avatar className="size-5">
         <AvatarFallback className="text-[9px]">A</AvatarFallback>
@@ -493,7 +493,7 @@ function ProjectOutline({
     <div
       data-slot="linear-project-outline"
       className={cn(
-        "w-64 overflow-hidden rounded-2xl border border-border bg-popover p-2 shadow-md",
+        "w-64 overflow-hidden rounded-lg border border-border bg-popover p-2",
         className
       )}
     >
@@ -530,7 +530,7 @@ function RichTextToolbar({ className }: { className?: string }) {
     <div
       data-slot="linear-rich-text-toolbar"
       className={cn(
-        "inline-flex items-center gap-0.5 rounded-xl border border-border bg-popover p-1 shadow-md",
+        "inline-flex items-center gap-0.5 rounded-lg border border-border bg-popover p-1",
         className
       )}
     >
@@ -612,7 +612,7 @@ function GifPicker({
     <div
       data-slot="linear-gif-picker"
       className={cn(
-        "w-80 overflow-hidden rounded-2xl border border-border bg-popover p-2 shadow-md",
+        "w-80 overflow-hidden rounded-lg border border-border bg-popover p-2",
         className
       )}
     >

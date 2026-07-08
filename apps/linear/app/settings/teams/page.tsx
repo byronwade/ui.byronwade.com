@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 import { toast } from "sonner"
 import { ChevronDown, Globe, Laptop, Lock, Search, Server } from "lucide-react"
 
@@ -56,15 +55,13 @@ const TEAMS = [
 
 export default function TeamsListPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
 
   React.useEffect(() => {
-    setTheme("light")
     const timer = window.setTimeout(() => {
       toast.success("AS Mobbin and its dependencies were successfully deleted")
     }, 400)
     return () => window.clearTimeout(timer)
-  }, [setTheme])
+  }, [])
 
   return (
     <SettingsShell title="Teams" activeId="teams" wide>

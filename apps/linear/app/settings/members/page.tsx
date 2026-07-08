@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 
 import {
   SettingsList,
@@ -12,11 +11,6 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function MembersSettingsPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Members" activeId="members">

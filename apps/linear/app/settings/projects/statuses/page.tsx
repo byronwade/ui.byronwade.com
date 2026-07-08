@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 import {
   Check,
   Circle,
@@ -92,16 +91,11 @@ const INITIAL_GROUPS: StatusGroup[] = [
 ]
 
 export default function ProjectStatusesPage() {
-  const { setTheme } = useTheme()
   const [creating, setCreating] = React.useState(true)
   const [name, setName] = React.useState("Up Next")
   const [description, setDescription] = React.useState(
     "Prioritized, but not yet active"
   )
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Project statuses" activeId="project-statuses" wide>

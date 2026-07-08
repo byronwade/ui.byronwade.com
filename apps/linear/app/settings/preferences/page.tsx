@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 
 import {
   SettingsBackLink,
@@ -57,11 +56,6 @@ function CodingToolRow({ tool }: { tool: CodingTool }) {
 }
 
 export default function PreferencesPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Preferences" activeId="preferences" wide>

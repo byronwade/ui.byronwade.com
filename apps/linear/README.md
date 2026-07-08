@@ -21,8 +21,9 @@ Open [http://localhost:3000/linear](http://localhost:3000/linear) (basePath is `
 | Route | Description |
 | ----- | ----------- |
 | `/` | Landing |
-| `/styleguide` | All shadcn primitives |
+| `/catalog` | Searchable catalog of all shadcn primitives + Linear composites |
 | `/workspace` | Issue list + cycle panels + ⌘K command menu |
+| `/settings` | Settings demos (preferences, teams, features, …) |
 
 ## Composites
 

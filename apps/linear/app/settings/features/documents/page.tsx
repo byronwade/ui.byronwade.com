@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { ExternalLink, FileText } from "lucide-react"
 
 import {
@@ -15,11 +14,6 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function DocumentsSettingsPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Documents" activeId="documents">

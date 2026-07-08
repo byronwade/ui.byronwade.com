@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import {
   Copy,
   ExternalLink,
@@ -25,13 +24,8 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 
 export default function AiAgentsSettingsPage() {
-  const { setTheme } = useTheme()
   const [enabled, setEnabled] = React.useState(false)
   const [guidance, setGuidance] = React.useState("")
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="AI & Agents" activeId="ai-agents">

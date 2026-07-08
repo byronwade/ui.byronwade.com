@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
-
 import {
   SearchShell,
   type SearchFilter,
@@ -50,16 +48,14 @@ const DESIGN_RESULTS: SearchResult[] = [
 
 export default function WorkspaceSearchPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
   const [query, setQuery] = React.useState("")
   const [filter, setFilter] = React.useState<SearchFilter>("all")
 
   React.useEffect(() => {
-    setTheme("light")
     const params = new URLSearchParams(window.location.search)
     const initial = params.get("q")
     if (initial) setQuery(initial)
-  }, [setTheme])
+  }, [])
 
   const normalized = query.trim().toLowerCase()
   const results =

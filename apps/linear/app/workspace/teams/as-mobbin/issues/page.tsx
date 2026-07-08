@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 
 import {
   BacklogIssueRow,
@@ -64,11 +63,6 @@ const ISSUE_TABS = [
 
 export default function AsMobbinIssuesPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <WorkspaceShell

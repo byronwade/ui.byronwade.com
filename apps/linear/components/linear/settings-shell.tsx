@@ -99,7 +99,12 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         icon: <SlidersHorizontal />,
         href: "/settings/preferences",
       },
-      { id: "profile", label: "Profile", icon: <User /> },
+      {
+        id: "profile",
+        label: "Profile",
+        icon: <User />,
+        href: "/settings/preferences",
+      },
       {
         id: "notifications",
         label: "Notifications",
@@ -112,7 +117,12 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         icon: <Shield />,
         href: "/settings/security",
       },
-      { id: "connected-accounts", label: "Connected accounts", icon: <Link2 /> },
+      {
+        id: "connected-accounts",
+        label: "Connected accounts",
+        icon: <Link2 />,
+        href: "/settings/applications",
+      },
       {
         id: "agent",
         label: "Agent personalization",
@@ -147,8 +157,18 @@ const NAV_GROUPS: SettingsNavGroup[] = [
   {
     label: "Projects",
     items: [
-      { id: "project-labels", label: "Labels", icon: <Tag /> },
-      { id: "project-templates", label: "Templates", icon: <Settings /> },
+      {
+        id: "project-labels",
+        label: "Labels",
+        icon: <Tag />,
+        href: "/settings/issues/labels",
+      },
+      {
+        id: "project-templates",
+        label: "Templates",
+        icon: <Settings />,
+        href: "/settings/issues/templates",
+      },
       {
         id: "project-statuses",
         label: "Statuses",
@@ -202,14 +222,29 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         icon: <MessageSquare />,
         href: "/settings/features/asks",
       },
-      { id: "emojis", label: "Emojis", icon: <Smile /> },
-      { id: "integrations", label: "Integrations", icon: <Plug /> },
+      {
+        id: "emojis",
+        label: "Emojis",
+        icon: <Smile />,
+        href: "/settings/features",
+      },
+      {
+        id: "integrations",
+        label: "Integrations",
+        icon: <Plug />,
+        href: "/settings/applications",
+      },
     ],
   },
   {
     label: "Administration",
     items: [
-      { id: "workspace", label: "Workspace", icon: <Settings /> },
+      {
+        id: "workspace",
+        label: "Workspace",
+        icon: <Settings />,
+        href: "/settings",
+      },
       {
         id: "teams",
         label: "Teams",
@@ -221,12 +256,6 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         label: "Members",
         icon: <Users />,
         href: "/settings/members",
-      },
-      {
-        id: "admin-security",
-        label: "Security",
-        icon: <Shield />,
-        href: "/settings/security",
       },
       { id: "api", label: "API", icon: <Key />, href: "/settings/api" },
       {
@@ -514,7 +543,7 @@ function SettingsToggleRow({
   return (
     <div
       data-slot="linear-settings-toggle-row"
-      className="flex items-center justify-between gap-4 px-4 py-3"
+      className="flex items-center justify-between gap-4 px-4 py-2"
     >
       <div className="min-w-0 space-y-0.5">
         <p className="text-sm font-medium text-foreground">{title}</p>
@@ -627,7 +656,7 @@ function SettingsRow({
       <Item
         size="default"
         variant="default"
-        className="cursor-pointer rounded-none border-0 px-4 py-3"
+        className="cursor-pointer rounded-none border-0 px-4 py-2"
         render={<Link href={href} />}
       >
         {content}
@@ -640,7 +669,7 @@ function SettingsRow({
       size="default"
       variant="default"
       className={cn(
-        "rounded-none border-0 px-4 py-3",
+        "rounded-none border-0 px-4 py-2",
         onClick && "cursor-pointer"
       )}
       onClick={onClick}
@@ -662,7 +691,7 @@ function SettingsEditRow({
   return (
     <div
       data-slot="linear-settings-edit-row"
-      className="flex items-center justify-between gap-4 px-4 py-3"
+      className="flex items-center justify-between gap-4 px-4 py-2"
     >
       <p className="text-sm text-foreground">{summary}</p>
       <Button variant="ghost" size="sm" onClick={onEdit}>
@@ -688,7 +717,7 @@ function SettingsIntegrationRow({
   return (
     <div
       data-slot="linear-settings-integration-row"
-      className="flex items-start justify-between gap-4 px-4 py-3"
+      className="flex items-start justify-between gap-4 px-4 py-2"
     >
       <div className="flex min-w-0 items-start gap-3">
         {icon ? (
@@ -719,7 +748,7 @@ function SettingsEmptyRow({
   return (
     <div
       data-slot="linear-settings-empty-row"
-      className="flex items-center justify-between gap-4 px-4 py-3"
+      className="flex items-center justify-between gap-4 px-4 py-2"
     >
       <p className="text-sm text-muted-foreground">{label}</p>
       <Button variant="ghost" size="icon-sm" aria-label="Add" onClick={onAdd}>
@@ -1056,7 +1085,7 @@ function SettingsFieldRow({
     <div
       data-slot="linear-settings-field-row"
       className={cn(
-        "flex items-center justify-between gap-4 border-b border-border px-4 py-3 last:border-b-0",
+        "flex items-center justify-between gap-4 border-b border-border px-4 py-2 last:border-b-0",
         className
       )}
     >
@@ -1117,7 +1146,7 @@ function SettingsIconRow({
     <div
       data-slot="linear-settings-icon-row"
       data-tone={tone}
-      className="flex items-start gap-3 border-b border-border px-4 py-3 last:border-b-0"
+      className="flex items-start gap-3 border-b border-border px-4 py-2 last:border-b-0"
     >
       {icon ? (
         <span className="mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-md border border-border bg-muted/30 text-muted-foreground">
@@ -1152,7 +1181,7 @@ function SettingsTierList({
           <div
             key={item.id}
             data-slot="linear-settings-tier-row"
-            className="px-4 py-3"
+            className="px-4 py-2"
           >
             <p className="text-sm text-foreground">
               <span className="font-medium">{item.name}</span>
@@ -1321,7 +1350,7 @@ function ImportExportSettings() {
         title="Export"
         description="Download a copy of your workspace data."
       >
-        <div className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3">
+        <div className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-2">
           <div>
             <p className="text-sm font-medium">Include private teams</p>
             <p className="text-xs text-muted-foreground">None selected</p>

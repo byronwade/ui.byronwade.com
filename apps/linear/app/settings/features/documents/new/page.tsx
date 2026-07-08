@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { FilePlus2 } from "lucide-react"
 
 import {
@@ -15,13 +14,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 export default function NewDocumentTemplatePage() {
-  const { setTheme } = useTheme()
   const [title, setTitle] = React.useState("")
   const [body, setBody] = React.useState("")
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="New document template" activeId="documents" wide>

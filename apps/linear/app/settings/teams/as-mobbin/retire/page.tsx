@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 import { toast } from "sonner"
 import { CircleDot, FolderKanban, RefreshCcw } from "lucide-react"
 
@@ -24,14 +23,9 @@ import {
 
 export default function AsMobbinRetirePage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
-    <SettingsShell title="Retire team" activeId="teams" wide>
+    <SettingsShell title="Retire team" activeId="as-mobbin" wide>
       <SettingsBackLink href="/settings/teams/as-mobbin">AS Mobbin</SettingsBackLink>
 
       <SettingsPageIntro

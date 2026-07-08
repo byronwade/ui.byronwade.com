@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 import { toast } from "sonner"
 import { CalendarDays } from "lucide-react"
 
@@ -43,7 +42,6 @@ const WEEKDAYS = [
 ]
 
 export default function AsMobbinCyclesPage() {
-  const { setTheme } = useTheme()
   const [enabled, setEnabled] = React.useState(true)
   const [startDate, setStartDate] = React.useState<Date | undefined>(
     new Date(2026, 3, 13)
@@ -51,17 +49,13 @@ export default function AsMobbinCyclesPage() {
   const [pendingDate, setPendingDate] = React.useState<Date | undefined>(startDate)
   const [dateOpen, setDateOpen] = React.useState(false)
 
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
-
   const startLabel = startDate ? WEEKDAYS[startDate.getDay()] : "Monday"
   const nextCycle = startDate
     ? startDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })
     : "Apr 13"
 
   return (
-    <SettingsShell title="Cycles" activeId="teams" wide>
+    <SettingsShell title="Cycles" activeId="as-mobbin" wide>
       <SettingsBackLink href="/settings/teams/as-mobbin">AS Mobbin</SettingsBackLink>
 
       <SettingsPageIntro

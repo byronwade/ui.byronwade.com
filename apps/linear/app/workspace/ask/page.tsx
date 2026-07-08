@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 
 import { AskLinearWelcome } from "@/components/linear/ask-linear-welcome"
 import { ChatHistoryPopover } from "@/components/linear/chat-history-popover"
@@ -36,13 +35,8 @@ const HISTORY_GROUPS = [
 
 export default function AskLinearPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
   const [historyOpen, setHistoryOpen] = React.useState(false)
   const [activeChat, setActiveChat] = React.useState("gen-issues")
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <WorkspaceShell

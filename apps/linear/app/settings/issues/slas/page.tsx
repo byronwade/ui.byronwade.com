@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import {
   Circle,
   Flame,
@@ -35,17 +34,12 @@ import {
 } from "@/components/ui/select"
 
 export default function IssueSlasPage() {
-  const { setTheme } = useTheme()
   const [enabled, setEnabled] = React.useState(true)
   const [editing, setEditing] = React.useState(true)
   const [customOpen, setCustomOpen] = React.useState(false)
   const [duration, setDuration] = React.useState("28")
   const [durationUnit, setDurationUnit] = React.useState("hours")
   const [savedDuration, setSavedDuration] = React.useState("28 hours")
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="SLAs" activeId="issue-slas">

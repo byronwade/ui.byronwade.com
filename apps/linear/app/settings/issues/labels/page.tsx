@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import {
   ChevronDown,
   GripVertical,
@@ -52,12 +51,7 @@ function LabelDot({ color }: { color: "red" | "purple" | "blue" | "green" }) {
 }
 
 export default function IssueLabelsPage() {
-  const { setTheme } = useTheme()
   const [expanded, setExpanded] = React.useState(true)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Issue labels" activeId="issue-labels" wide>

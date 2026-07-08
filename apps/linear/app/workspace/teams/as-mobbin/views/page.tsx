@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 
 import {
   WorkspaceFooterActions,
@@ -12,11 +11,6 @@ import {
 
 export default function AsMobbinViewsPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <WorkspaceShell

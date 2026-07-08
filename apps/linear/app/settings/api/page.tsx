@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { toast } from "sonner"
 import { Copy, MoreHorizontal } from "lucide-react"
 
@@ -18,11 +17,6 @@ import { Button } from "@/components/ui/button"
 const API_KEY = "lin_api_7f3k9m2p8q1r4s6t0u5v8w2x4y6z8a1b"
 
 export default function ApiKeyDetailPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   const copyKey = React.useCallback(async () => {
     await navigator.clipboard.writeText(API_KEY)

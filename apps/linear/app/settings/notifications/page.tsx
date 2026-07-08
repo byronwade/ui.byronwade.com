@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { Hash, Mail, Monitor, Smartphone } from "lucide-react"
 
 import {
@@ -17,12 +16,7 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function NotificationsSettingsPage() {
-  const { setTheme } = useTheme()
   const [sidebarUpdates, setSidebarUpdates] = React.useState(true)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Notifications" activeId="notifications">

@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 import { X } from "lucide-react"
 
 import {
@@ -20,16 +19,11 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 export default function CreateApiKeyPage() {
-  const { setTheme } = useTheme()
   const router = useRouter()
   const [permissionMode, setPermissionMode] = React.useState("custom")
   const [teamMode, setTeamMode] = React.useState("selected")
   const [read, setRead] = React.useState(true)
   const [write, setWrite] = React.useState(true)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Create API key" activeId="api">

@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { ExternalLink } from "lucide-react"
 
 import {
@@ -17,12 +16,7 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function InitiativesSettingsPage() {
-  const { setTheme } = useTheme()
   const [enabled, setEnabled] = React.useState(true)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Initiatives" activeId="initiatives">

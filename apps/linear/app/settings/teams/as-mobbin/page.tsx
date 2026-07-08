@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 import {
   Bot,
   CalendarClock,
@@ -49,16 +48,11 @@ import {
 
 export default function AsMobbinTeamSettingsPage() {
   const router = useRouter()
-  const { setTheme } = useTheme()
   const [deleteOpen, setDeleteOpen] = React.useState(false)
   const [confirm, setConfirm] = React.useState("")
 
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
-
   return (
-    <SettingsShell title="AS Mobbin" activeId="teams">
+    <SettingsShell title="AS Mobbin" activeId="as-mobbin">
       <SettingsBackLink href="/settings/teams">Teams</SettingsBackLink>
 
       <div className="space-y-1">

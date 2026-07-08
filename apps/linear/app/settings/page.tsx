@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 import { toast } from "sonner"
 
 import {
@@ -10,11 +9,6 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function SettingsPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   React.useEffect(() => {
     const timer = window.setTimeout(() => {

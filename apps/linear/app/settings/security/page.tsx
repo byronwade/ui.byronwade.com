@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { Key, ShieldCheck } from "lucide-react"
 
 import {
@@ -14,11 +13,6 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function SecuritySettingsPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Security & access" activeId="security">

@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 
 import {
   SettingsPageIntro,
@@ -11,11 +10,6 @@ import {
 import { Button } from "@/components/ui/button"
 
 export default function BillingSettingsPage() {
-  const { setTheme } = useTheme()
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Billing" activeId="billing">

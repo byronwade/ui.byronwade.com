@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, EB_Garamond } from "next/font/google"
 import { ThemeProvider } from "@wrksz/themes/next"
 import "./globals.css"
 import { AppChrome } from "@/app/_components/chrome/app-chrome"
+import { SiteFooterGate } from "@/app/_components/chrome/site-footer-gate"
 import { Toaster } from "@/components/ui/sonner"
 
 const geistSans = Geist({
@@ -47,7 +48,8 @@ export default async function RootLayout({
         />
         <ThemeProvider>
           <AppChrome />
-          {children}
+          <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+          <SiteFooterGate />
           <Toaster />
         </ThemeProvider>
       </body>

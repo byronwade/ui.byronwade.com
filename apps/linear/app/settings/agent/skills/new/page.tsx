@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
 
 import {
   SettingsBackLink,
@@ -16,13 +15,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 export default function CreateSkillPage() {
-  const { setTheme } = useTheme()
   const router = useRouter()
   const [name, setName] = React.useState("")
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Skill name" activeId="agent">

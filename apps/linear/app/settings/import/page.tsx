@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { ChevronLeft, CheckCircle2 } from "lucide-react"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -20,12 +19,7 @@ const STEPS = [
 ]
 
 export default function ImportWizardPage() {
-  const { setTheme } = useTheme()
   const [step] = React.useState(0)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Linear to Linear import" activeId="import-export">

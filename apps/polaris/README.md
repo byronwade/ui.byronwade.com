@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Polaris UI — byronwade/ui
 
-## Getting Started
+Shopify Polaris–inspired shadcn component library at **ui.byronwade.com/polaris**.
 
-First, run the development server:
+- **60 shadcn components** (`npx shadcn add --all`)
+- Tokens from [`design-research/SHOPIFY-DESIGN-SYSTEM.md`](../../design-research/SHOPIFY-DESIGN-SYSTEM.md)
+- Reskin via `app/polaris-tokens.css` + `app/polaris-components.css`
+
+## Dev
+
+From the monorepo root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev:polaris
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000/polaris](http://localhost:3000/polaris) (basePath is `/polaris`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route | Description |
+| ----- | ----------- |
+| `/` | Landing |
+| `/styleguide` | All shadcn primitives with Polaris admin copy |
 
-## Learn More
+## Skin sync
 
-To learn more about Next.js, take a look at the following resources:
+After editing `app/polaris-components.css`, regenerate the main-site skin:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run gen:polaris-skin
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel project with **Root Directory** = `apps/polaris`. See [`docs/monorepo.md`](../../docs/monorepo.md).

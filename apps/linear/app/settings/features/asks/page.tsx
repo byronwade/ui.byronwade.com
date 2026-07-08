@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { ExternalLink, Mail, Plus } from "lucide-react"
 
 import {
@@ -16,12 +15,7 @@ import {
 } from "@/components/linear/settings-shell"
 
 export default function AsksSettingsPage() {
-  const { setTheme } = useTheme()
   const [enabled, setEnabled] = React.useState(true)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Asks" activeId="asks">

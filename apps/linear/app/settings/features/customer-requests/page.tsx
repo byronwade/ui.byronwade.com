@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { ChevronRight, ExternalLink } from "lucide-react"
 
 import {
@@ -53,15 +52,10 @@ const CUSTOMER_TIERS = [
 ]
 
 export default function CustomerRequestsSettingsPage() {
-  const { setTheme } = useTheme()
   const [enabled, setEnabled] = React.useState(true)
   const [creatingTier, setCreatingTier] = React.useState(false)
   const [tierName, setTierName] = React.useState("")
   const [tierDescription, setTierDescription] = React.useState("")
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="Customer requests" activeId="customer-requests">

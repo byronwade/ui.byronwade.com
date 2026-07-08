@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 import { Globe } from "lucide-react"
 
 import {
@@ -24,17 +23,12 @@ import {
 } from "@/components/ui/select"
 
 export default function AsMobbinTeamGeneralPage() {
-  const { setTheme } = useTheme()
   const [name, setName] = React.useState("AS Mobbin")
   const [identifier, setIdentifier] = React.useState("ASMOB")
   const [allowZero, setAllowZero] = React.useState(false)
   const [extendedScale, setExtendedScale] = React.useState(true)
   const [countUnestimated, setCountUnestimated] = React.useState(true)
   const [emailIssues, setEmailIssues] = React.useState(false)
-
-  React.useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   return (
     <SettingsShell title="General" activeId="as-mobbin" wide>

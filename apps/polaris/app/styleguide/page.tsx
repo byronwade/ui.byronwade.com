@@ -115,14 +115,14 @@ export default function StyleguidePage() {
           </p>
           <h1 className="mt-2 text-2xl font-medium tracking-tight">Component styleguide</h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Every primitive below uses Linear tokens from{" "}
+            Every primitive below uses Polaris tokens from{" "}
             <code className="font-mono text-xs">design-research/SHOPIFY-DESIGN-SYSTEM.md</code> —
-            gray canvas and white cards, teal brand accent, Inter typography, hairline borders, and dense
-            operational density.
+            gray canvas and white cards, teal success accent, Inter typography, hairline borders, and
+            dense admin density.
           </p>
         </div>
 
-        <Section title="Buttons" description="6px radius, 510 weight, indigo primary fill.">
+        <Section title="Buttons" description="8px radius, 600 weight, dark-neutral primary fill.">
           <div className="flex flex-wrap gap-2">
             <Button>Primary</Button>
             <Button variant="secondary">Secondary</Button>
@@ -136,84 +136,84 @@ export default function StyleguidePage() {
         <Section title="Form controls">
           <div className="grid max-w-md gap-4">
             <div className="space-y-2">
-              <Label htmlFor="issue-title">Issue title</Label>
-              <Input id="issue-title" placeholder="Fix navigation regression" />
+              <Label htmlFor="product-title">Product title</Label>
+              <Input id="product-title" placeholder="Organic cotton tote" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
-              <Textarea id="description" placeholder="Steps to reproduce…" rows={3} />
+              <Textarea id="description" placeholder="Short product description…" rows={3} />
             </div>
-            <Select defaultValue="todo">
+            <Select defaultValue="active">
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="todo">Todo</SelectItem>
-                <SelectItem value="progress">In progress</SelectItem>
-                <SelectItem value="done">Done</SelectItem>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="draft">Draft</SelectItem>
+                <SelectItem value="archived">Archived</SelectItem>
               </SelectContent>
             </Select>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
-                <Checkbox id="urgent" />
-                <Label htmlFor="urgent">Urgent</Label>
+                <Checkbox id="tracked" />
+                <Label htmlFor="tracked">Track quantity</Label>
               </div>
               <div className="flex items-center gap-2">
-                <Switch id="notify" />
-                <Label htmlFor="notify">Notify assignee</Label>
+                <Switch id="online" />
+                <Label htmlFor="online">Online store</Label>
               </div>
             </div>
-            <RadioGroup defaultValue="medium" className="flex gap-4">
+            <RadioGroup defaultValue="physical" className="flex gap-4">
               <div className="flex items-center gap-2">
-                <RadioGroupItem value="low" id="low" />
-                <Label htmlFor="low">Low</Label>
+                <RadioGroupItem value="physical" id="physical" />
+                <Label htmlFor="physical">Physical</Label>
               </div>
               <div className="flex items-center gap-2">
-                <RadioGroupItem value="medium" id="medium" />
-                <Label htmlFor="medium">Medium</Label>
+                <RadioGroupItem value="digital" id="digital" />
+                <Label htmlFor="digital">Digital</Label>
               </div>
               <div className="flex items-center gap-2">
-                <RadioGroupItem value="high" id="high" />
-                <Label htmlFor="high">High</Label>
+                <RadioGroupItem value="service" id="service" />
+                <Label htmlFor="service">Service</Label>
               </div>
             </RadioGroup>
           </div>
         </Section>
 
-        <Section title="Issue table" description="Dense 36px rows, metadata in mono.">
+        <Section title="Orders table" description="Dense index rows, metadata in mono.">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-24">ID</TableHead>
-                <TableHead>Title</TableHead>
+                <TableHead className="w-24">Order</TableHead>
+                <TableHead>Customer</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Priority</TableHead>
+                <TableHead>Total</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow>
-                <TableCell className="font-mono text-xs text-muted-foreground">ENG-142</TableCell>
-                <TableCell>Refactor command palette keyboard nav</TableCell>
+                <TableCell className="font-mono text-xs text-muted-foreground">#1042</TableCell>
+                <TableCell>Alex Rivera</TableCell>
                 <TableCell>
-                  <Badge variant="outline">In progress</Badge>
+                  <Badge variant="outline">Fulfilled</Badge>
                 </TableCell>
-                <TableCell className="font-mono text-xs">P2</TableCell>
+                <TableCell className="font-mono text-xs">$128.00</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="font-mono text-xs text-muted-foreground">ENG-139</TableCell>
-                <TableCell>Ship cycle planning sidebar</TableCell>
+                <TableCell className="font-mono text-xs text-muted-foreground">#1041</TableCell>
+                <TableCell>Jordan Lee</TableCell>
                 <TableCell>
-                  <Badge variant="outline">Todo</Badge>
+                  <Badge variant="outline">Unfulfilled</Badge>
                 </TableCell>
-                <TableCell className="font-mono text-xs">P1</TableCell>
+                <TableCell className="font-mono text-xs">$64.50</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="font-mono text-xs text-muted-foreground">ENG-128</TableCell>
-                <TableCell>Agent activity timeline polish</TableCell>
+                <TableCell className="font-mono text-xs text-muted-foreground">#1040</TableCell>
+                <TableCell>Sam Chen</TableCell>
                 <TableCell>
-                  <Badge variant="outline">Done</Badge>
+                  <Badge variant="outline">Paid</Badge>
                 </TableCell>
-                <TableCell className="font-mono text-xs">P3</TableCell>
+                <TableCell className="font-mono text-xs">$42.00</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -223,53 +223,53 @@ export default function StyleguidePage() {
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Cycle 24</CardTitle>
-                <CardDescription>Mar 3 – Mar 17 · 12 issues</CardDescription>
+                <CardTitle>Today&apos;s sales</CardTitle>
+                <CardDescription>Mar 3 · 12 orders</CardDescription>
               </CardHeader>
               <CardContent>
                 <Progress value={68} className="h-1.5" />
-                <p className="mt-2 font-mono text-xs text-muted-foreground">68% complete</p>
+                <p className="mt-2 font-mono text-xs text-muted-foreground">68% of daily goal</p>
               </CardContent>
             </Card>
             <Alert>
-              <AlertTitle>Sync required</AlertTitle>
+              <AlertTitle>Payment gateway</AlertTitle>
               <AlertDescription>
-                GitHub integration needs re-authorization before the next deploy.
+                Shopify Payments needs verification before the next payout.
               </AlertDescription>
             </Alert>
           </div>
         </Section>
 
         <Section title="Navigation patterns">
-          <Tabs defaultValue="issues">
+          <Tabs defaultValue="orders">
             <TabsList>
-              <TabsTrigger value="issues">Issues</TabsTrigger>
-              <TabsTrigger value="projects">Projects</TabsTrigger>
-              <TabsTrigger value="cycles">Cycles</TabsTrigger>
+              <TabsTrigger value="orders">Orders</TabsTrigger>
+              <TabsTrigger value="products">Products</TabsTrigger>
+              <TabsTrigger value="customers">Customers</TabsTrigger>
             </TabsList>
-            <TabsContent value="issues" className="mt-4 text-sm text-muted-foreground">
-              Active issues in the current workspace.
+            <TabsContent value="orders" className="mt-4 text-sm text-muted-foreground">
+              Open and fulfilled orders in the current store.
             </TabsContent>
-            <TabsContent value="projects" className="mt-4 text-sm text-muted-foreground">
-              Roadmap and project milestones.
+            <TabsContent value="products" className="mt-4 text-sm text-muted-foreground">
+              Catalog, inventory, and variants.
             </TabsContent>
-            <TabsContent value="cycles" className="mt-4 text-sm text-muted-foreground">
-              Time-boxed sprint containers.
+            <TabsContent value="customers" className="mt-4 text-sm text-muted-foreground">
+              Customer profiles and segments.
             </TabsContent>
           </Tabs>
           <Separator className="my-4" />
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="#">Engineering</BreadcrumbLink>
+                <BreadcrumbLink href="#">Products</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="#">Cycle 24</BreadcrumbLink>
+                <BreadcrumbLink href="#">Apparel</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>ENG-142</BreadcrumbPage>
+                <BreadcrumbPage>Organic cotton tote</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -281,9 +281,9 @@ export default function StyleguidePage() {
               <DialogTrigger render={<Button variant="outline" />}>Dialog</DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Archive project?</DialogTitle>
+                  <DialogTitle>Archive product?</DialogTitle>
                   <DialogDescription>
-                    Archived projects remain searchable but cannot receive new issues.
+                    Archived products stay searchable but are hidden from the online store.
                   </DialogDescription>
                 </DialogHeader>
                 <div className="flex justify-end gap-2">
@@ -296,7 +296,7 @@ export default function StyleguidePage() {
             <Popover>
               <PopoverTrigger render={<Button variant="outline" />}>Popover</PopoverTrigger>
               <PopoverContent className="w-64">
-                <p className="text-sm">Quick filters for the current view.</p>
+                <p className="text-sm">Quick filters for the current index.</p>
               </PopoverContent>
             </Popover>
 
@@ -305,10 +305,10 @@ export default function StyleguidePage() {
                 Menu
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuLabel>Issue actions</DropdownMenuLabel>
+                <DropdownMenuLabel>Product actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Copy link</DropdownMenuItem>
-                <DropdownMenuItem>Assign to me</DropdownMenuItem>
+                <DropdownMenuItem>Duplicate</DropdownMenuItem>
+                <DropdownMenuItem>View on store</DropdownMenuItem>
                 <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -322,12 +322,12 @@ export default function StyleguidePage() {
 
         <Section title="Command palette">
           <Command className="max-w-lg border border-border">
-            <CommandInput placeholder="Search issues, projects, people…" />
+            <CommandInput placeholder="Search products, orders, customers…" />
             <CommandList>
               <CommandEmpty>No results.</CommandEmpty>
-              <CommandGroup heading="Issues">
-                <CommandItem>ENG-142 · Command palette keyboard nav</CommandItem>
-                <CommandItem>ENG-139 · Cycle planning sidebar</CommandItem>
+              <CommandGroup heading="Products">
+                <CommandItem>Organic cotton tote · Apparel</CommandItem>
+                <CommandItem>Ceramic mug set · Home</CommandItem>
               </CommandGroup>
             </CommandList>
           </Command>
@@ -342,13 +342,13 @@ export default function StyleguidePage() {
             <Toggle aria-label="Toggle bold">Bold</Toggle>
             <Skeleton className="h-8 w-32" />
             <Badge>Label</Badge>
-            <Badge variant="secondary">Backlog</Badge>
+            <Badge variant="secondary">Draft</Badge>
           </div>
           <Accordion defaultValue={["item-1"]} className="mt-4 max-w-lg">
             <AccordionItem value="item-1">
               <AccordionTrigger>Activity log</AccordionTrigger>
               <AccordionContent className="font-mono text-xs text-muted-foreground">
-                status changed · priority set to P2 · assigned to @alex
+                inventory adjusted · status set to Active · published to Online Store
               </AccordionContent>
             </AccordionItem>
           </Accordion>

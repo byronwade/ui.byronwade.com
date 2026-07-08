@@ -19,6 +19,23 @@ rationale, surface hierarchy, color semantics, density, and approved/disallowed 
 
 See `README.md` for the full workflow (sync → registry:build → deploy).
 
+## Themed apps (Linear + Polaris)
+
+Sibling Next apps under `apps/linear` and `apps/polaris` demonstrate full product skins. They are
+**not** the registry source of truth — edit `registry/` for house components; edit themed-app files
+for skin demos. Full layout: [`docs/monorepo.md`](docs/monorepo.md).
+
+| Concern | Linear | Polaris |
+| ------- | ------ | ------- |
+| Dev | `npm run dev:linear` | `npm run dev:polaris` |
+| Tokens | `apps/linear/app/linear-tokens.css` | `apps/polaris/app/polaris-tokens.css` |
+| Reskin | `linear-components.css` | `polaris-components.css` |
+| Main-site sync | `npm run gen:linear-skin` | `npm run gen:polaris-skin` |
+| Build | `npm run build:linear` | `npm run build:polaris` |
+
+Main-site Skin toggle + Apps menu link to `/linear` and `/polaris`. After changing themed-app
+component CSS, regenerate the corresponding `app/*-skin.generated.css`.
+
 ## Design engineer principles — how we work
 
 Adapted from [Vercel's Design Engineer Principles](https://vercel.com/design/engineer), tailored for
