@@ -102,9 +102,13 @@ export default function StyleguidePage() {
               Polaris UI
             </Link>
             <span className="text-muted-foreground">/</span>
+            <Link href="/catalog" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+              Catalog
+            </Link>
+            <span className="text-muted-foreground">/</span>
             <span className="text-sm text-foreground">Styleguide</span>
           </div>
-          <Badge variant="outline">shadcn --all · 60 components</Badge>
+          <Badge variant="outline">shadcn --all · catalog + specimens</Badge>
         </div>
       </header>
 

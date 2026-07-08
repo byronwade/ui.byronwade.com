@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import {
   ArrowUpRight,
   Bell,
@@ -16,12 +15,10 @@ import {
   FileText,
   Key,
   Layers,
-  Moon,
   RefreshCw,
   Settings,
   Shield,
   Sparkles,
-  Sun,
   Tag,
   Timer,
   Upload,
@@ -322,8 +319,6 @@ function SettingsShell({
   activeId = "import-export",
   wide = false,
 }: SettingsShellProps) {
-  const { theme, setTheme } = useTheme()
-
   return (
     <SidebarProvider defaultOpen>
       <Sidebar collapsible="icon" className="border-r border-border">
@@ -402,18 +397,6 @@ function SettingsShell({
             <h1 className="truncate text-sm font-medium">{title}</h1>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              {theme === "dark" ? (
-                <Sun className="size-4" />
-              ) : (
-                <Moon className="size-4" />
-              )}
-              {theme === "dark" ? "Light" : "Dark"}
-            </Button>
             <Button variant="outline" size="sm" render={<Link href="/catalog" />}>
               Catalog
             </Button>

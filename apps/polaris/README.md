@@ -21,7 +21,8 @@ Open [http://localhost:3000/polaris](http://localhost:3000/polaris) (basePath is
 | Route | Description |
 | ----- | ----------- |
 | `/` | Landing |
-| `/styleguide` | All shadcn primitives with Polaris admin copy |
+| `/catalog` | Index of all 60 shadcn primitives |
+| `/styleguide` | Live admin specimens (products, orders, customers) |
 
 ## Skin sync
 

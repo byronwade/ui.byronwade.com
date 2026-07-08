@@ -147,8 +147,43 @@ function NavLink({ href, label }: { href: string; label: string }) {
  * (fixed), calm token surface with a hairline underline. Wordmark + app switcher
  * on the left, primary nav centered-left, and a search / theme / source cluster
  * on the right. Search opens the command palette (⌘K). On docs routes a menu
- * button blooms the docs sidebar sheet on small screens.
+ * button blooms the docs sidebar sheet on small screens; elsewhere a mobile
+ * nav menu mirrors primary destinations.
  */
+function MobileNavMenu() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        aria-label="Open navigation menu"
+        className={cn(ICON_BTN, "size-8 md:hidden")}
+      >
+        <List className="size-4" strokeWidth={2} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="w-56">
+        <DropdownMenuLabel className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+          Navigate
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {navItems.map((item) => (
+          <DropdownMenuItem key={item.href} render={<Link href={item.href} />}>
+            {item.label}
+          </DropdownMenuItem>
+        ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+          Skins
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {SKIN_APPS.map((p) => (
+          <DropdownMenuItem key={p.href} render={<Link href={p.href} />}>
+            {p.name}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
 export function SiteHeader() {
   const pathname = usePathname()
   const isDocs = pathname === "/docs" || pathname?.startsWith("/docs/")
@@ -156,7 +191,6 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md print:hidden">
       <div className="flex h-14 items-center gap-2 px-3 sm:px-4">
-        {/* docs menu (mobile only) */}
         {isDocs ? (
           <button
             type="button"
@@ -166,11 +200,11 @@ export function SiteHeader() {
           >
             <List className="size-4" strokeWidth={2} />
           </button>
-        ) : null}
+        ) : (
+          <MobileNavMenu />
+        )}
 
-        <div className="hidden sm:block">
-          <AppsMenu />
-        </div>
+        <AppsMenu />
 
         <Link
           href="/"
@@ -189,7 +223,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
-          {/* search */}
           <button
             type="button"
             onClick={() =>

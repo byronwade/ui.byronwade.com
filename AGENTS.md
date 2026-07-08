@@ -31,6 +31,7 @@ for skin demos. Full layout: [`docs/monorepo.md`](docs/monorepo.md).
 | Tokens | `apps/linear/app/linear-tokens.css` | `apps/polaris/app/polaris-tokens.css` |
 | Reskin | `linear-components.css` | `polaris-components.css` |
 | Main-site sync | `npm run gen:linear-skin` | `npm run gen:polaris-skin` |
+| Stale check | `npm run check:linear-skin` | `npm run check:polaris-skin` |
 | Build | `npm run build:linear` | `npm run build:polaris` |
 
 Main-site Skin toggle + Apps menu link to `/linear` and `/polaris`. After changing themed-app

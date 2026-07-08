@@ -4,11 +4,17 @@
  * Polaris component reskin — admin-native signatures via data-slot.
  * White elevated cards on gray canvas, rounded-rectangle controls, inset form
  * fields, tactile primary buttons, tabular figures for data density.
+ * Canonical source for main-site skin via `npm run gen:polaris-skin`.
  */
 
 :root[data-skin="polaris"] [data-slot="card"],
-:root[data-skin="polaris"] [data-slot="empty"],
-:root[data-skin="polaris"] [data-slot="table-container"] {
+:root[data-skin="polaris"] [data-slot="card-frame"],
+:root[data-skin="polaris"] [data-slot="stat-card"],
+:root[data-skin="polaris"] [data-slot="metric"][data-variant="card"],
+:root[data-skin="polaris"] [data-slot="demo-preview-card"],
+:root[data-skin="polaris"] [data-slot="table-container"],
+:root[data-skin="polaris"] [data-slot="section"],
+:root[data-skin="polaris"] [data-slot="empty"] {
   border-radius: var(--polaris-radius);
   box-shadow: var(--polaris-shadow-card);
   border: 1px solid rgba(48, 48, 48, 0.08);
@@ -40,6 +46,7 @@
 }
 
 :root[data-skin="polaris"] [data-slot="badge"],
+:root[data-skin="polaris"] [data-slot="pill"],
 :root[data-skin="polaris"] [data-slot="filter-pill"] {
   border-radius: var(--polaris-radius-sm);
 }
@@ -57,9 +64,11 @@
 }
 
 :root[data-skin="polaris"] [data-slot="card-title"],
+:root[data-skin="polaris"] [data-slot="card-frame-title"],
 :root[data-skin="polaris"] [data-slot="dialog-title"],
 :root[data-skin="polaris"] [data-slot="sheet-title"],
-:root[data-skin="polaris"] [data-slot="page-header-title"] {
+:root[data-skin="polaris"] [data-slot="page-header-title"],
+:root[data-skin="polaris"] [data-slot="detail-header-title"] {
   font-weight: 600;
 }
 

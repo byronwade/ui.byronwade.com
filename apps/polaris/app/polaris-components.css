@@ -2,11 +2,17 @@
  * Polaris component reskin — admin-native signatures via data-slot.
  * White elevated cards on gray canvas, rounded-rectangle controls, inset form
  * fields, tactile primary buttons, tabular figures for data density.
+ * Canonical source for main-site skin via `npm run gen:polaris-skin`.
  */
 
 [data-slot="card"],
-[data-slot="empty"],
-[data-slot="table-container"] {
+[data-slot="card-frame"],
+[data-slot="stat-card"],
+[data-slot="metric"][data-variant="card"],
+[data-slot="demo-preview-card"],
+[data-slot="table-container"],
+[data-slot="section"],
+[data-slot="empty"] {
   border-radius: var(--polaris-radius);
   box-shadow: var(--polaris-shadow-card);
   border: 1px solid rgba(48, 48, 48, 0.08);
@@ -38,6 +44,7 @@
 }
 
 [data-slot="badge"],
+[data-slot="pill"],
 [data-slot="filter-pill"] {
   border-radius: var(--polaris-radius-sm);
 }
@@ -55,9 +62,11 @@
 }
 
 [data-slot="card-title"],
+[data-slot="card-frame-title"],
 [data-slot="dialog-title"],
 [data-slot="sheet-title"],
-[data-slot="page-header-title"] {
+[data-slot="page-header-title"],
+[data-slot="detail-header-title"] {
   font-weight: 600;
 }
 

@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import {
   AlertCircle,
   ChevronRight,
@@ -15,14 +14,12 @@ import {
   Inbox,
   Layers,
   LayoutGrid,
-  Moon,
   Plus,
   Search,
   Settings,
   Sparkles,
   SquarePen,
   Star,
-  Sun,
   UserPlus,
   Users,
 } from "lucide-react"
@@ -233,7 +230,6 @@ function WorkspaceShell({
   secondary,
   footer,
 }: WorkspaceShellProps) {
-  const { theme, setTheme } = useTheme()
   const [expandedTeams, setExpandedTeams] = React.useState<Record<string, boolean>>(
     () =>
       Object.fromEntries(
@@ -542,18 +538,6 @@ function WorkspaceShell({
           <div className="ml-auto flex items-center gap-2">
             {headerActions ?? (
               <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="hidden sm:inline-flex"
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                >
-                  {theme === "dark" ? (
-                    <Sun className="size-4" />
-                  ) : (
-                    <Moon className="size-4" />
-                  )}
-                </Button>
                 <Button variant="outline" size="sm" onClick={onSearch}>
                   <Search className="size-4" />
                   <span className="hidden sm:inline">Search</span>

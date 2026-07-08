@@ -48,10 +48,13 @@ Full component preview: **`/catalog`** (or **`/components`**) in the Linear app.
 
 | Command | Purpose |
 | ------- | ------- |
+| `npm run check:polaris-slots` | Ensures core admin `data-slot`s stay styled in `polaris-components.css` |
+| `npm run check:polaris-catalog` | Ensures every `components/ui` slug has a catalog entry |
 | `npm run gen:polaris-skin` | Regenerates `app/polaris-skin.generated.css` for the main site's Polaris skin toggle |
-| `npm run build:polaris` | Production build of the Polaris app |
+| `npm run check:polaris-skin` | Fails if generated Polaris skin is stale vs source |
+| `npm run build:polaris` | Runs slot + catalog checks + production build |
 
-Styleguide: **`/styleguide`** in the Polaris app (admin/product copy — not Linear issue language).
+Catalog: **`/catalog`**. Live specimens: **`/styleguide`**.
 
 ## Skin sync (main site)
 

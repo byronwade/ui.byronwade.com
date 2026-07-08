@@ -6,15 +6,19 @@ Companion to `docs/linear-visual-audit.md` for the Shopify Polaris themed app.
 
 | Route | Status | Notes |
 | ----- | ------ | ----- |
-| `/` | Live | Landing → styleguide |
-| `/styleguide` | Live | All shadcn primitives with **admin** copy (products, orders, customers) |
+| `/` | Live | Landing → catalog + styleguide |
+| `/catalog` | Live | All 60 shadcn primitives indexed |
+| `/styleguide` | Live | Admin specimens (products, orders, customers) |
 
 ## Gates
 
 | Command | Purpose |
 | ------- | ------- |
+| `npm run check:polaris-slots` | Core admin slot coverage |
+| `npm run check:polaris-catalog` | Catalog ↔ UI file parity |
 | `npm run gen:polaris-skin` | Sync `apps/polaris/app/polaris-components.css` → main site |
-| `npm run build:polaris` | Production build |
+| `npm run check:polaris-skin` | Fail if generated skin is stale |
+| `npm run build:polaris` | Slots + catalog + production build |
 
 ## Visual signatures
 

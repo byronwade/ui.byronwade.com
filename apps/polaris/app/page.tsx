@@ -32,7 +32,10 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button render={<Link href="/styleguide" />}>Browse components</Button>
+          <Button render={<Link href="/catalog" />}>Browse catalog</Button>
+          <Button variant="outline" render={<Link href="/styleguide" />}>
+            Styleguide
+          </Button>
         </div>
 
         <dl className="mt-16 grid gap-6 border-t border-border pt-10 sm:grid-cols-3">

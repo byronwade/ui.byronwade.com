@@ -1,0 +1,31 @@
+name: Themed apps
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  themed-apps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Linear skin sync
+        run: npm run check:linear-skin
+
+      - name: Check Polaris skin sync
+        run: npm run check:polaris-skin
+
+      - name: Build Linear (slots + catalog + visual + next)
+        run: npm run build:linear
+
+      - name: Build Polaris (slots + next)
+        run: npm run build:polaris
