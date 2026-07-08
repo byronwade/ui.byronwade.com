@@ -31,7 +31,6 @@ import {
   Laptop,
   Link2,
   MessageSquare,
-  Plug,
   Plus,
   SlidersHorizontal,
   Smile,
@@ -97,12 +96,6 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         href: "/settings/preferences",
       },
       {
-        id: "profile",
-        label: "Profile",
-        icon: <User />,
-        href: "/settings/preferences",
-      },
-      {
         id: "notifications",
         label: "Notifications",
         icon: <Bell />,
@@ -154,18 +147,6 @@ const NAV_GROUPS: SettingsNavGroup[] = [
   {
     label: "Projects",
     items: [
-      {
-        id: "project-labels",
-        label: "Labels",
-        icon: <Tag />,
-        href: "/settings/issues/labels",
-      },
-      {
-        id: "project-templates",
-        label: "Templates",
-        icon: <Settings />,
-        href: "/settings/issues/templates",
-      },
       {
         id: "project-statuses",
         label: "Statuses",
@@ -223,13 +204,7 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         id: "emojis",
         label: "Emojis",
         icon: <Smile />,
-        href: "/settings/features",
-      },
-      {
-        id: "integrations",
-        label: "Integrations",
-        icon: <Plug />,
-        href: "/settings/applications",
+        href: "/settings/features/emojis",
       },
     ],
   },
@@ -240,7 +215,7 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         id: "workspace",
         label: "Workspace",
         icon: <Settings />,
-        href: "/settings",
+        href: "/settings/workspace",
       },
       {
         id: "teams",
@@ -271,7 +246,7 @@ const NAV_GROUPS: SettingsNavGroup[] = [
         id: "import-export",
         label: "Import & export",
         icon: <Upload />,
-        href: "/settings",
+        href: "/settings/import-export",
       },
     ],
   },

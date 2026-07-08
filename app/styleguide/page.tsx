@@ -154,7 +154,7 @@ export default function StyleguidePage() {
       {/* Faint dotted-grid atmosphere (calm, not loud) */}
       <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-[0.35]" />
 
-      {/* Top clearance for the centered floating nav dock (mounted globally). */}
+      {/* Top clearance for the fixed site header (h-14). */}
       <div className="w-full px-6 pt-14 sm:px-8 lg:px-12">
         {/* Hero */}
         <Reveal delay={0}>
@@ -175,7 +175,7 @@ export default function StyleguidePage() {
               <HeroPill>Geist</HeroPill>
               <HeroPill>
                 <span className="size-1.5 rounded-full bg-brand" />
-                Single green accent
+                Re-brandable accent
               </HeroPill>
             </div>
           </header>

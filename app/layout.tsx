@@ -25,7 +25,7 @@ const ebGaramond = EB_Garamond({
 export const metadata: Metadata = {
   title: "byronwade/ui, Design system",
   description:
-    "A personal design system, token-driven components with one swappable green accent.",
+    "A personal design system — token-driven components with a re-brandable warm default and Linear/Polaris skins.",
 }
 
 export default async function RootLayout({

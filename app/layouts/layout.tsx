@@ -12,7 +12,7 @@ export default function LayoutsLayout({
   children: React.ReactNode
 }) {
   // No bespoke header here, the gallery and inspector share the same global
-  // floating chrome (launcher + breadcrumb + nav dock) mounted in the root
+  // fixed site header mounted in the root
   // layout. `pt-14` clears the centered top dock; the inspector still gets a
   // full-height flex shell so its preview iframe can fill the viewport.
   return (

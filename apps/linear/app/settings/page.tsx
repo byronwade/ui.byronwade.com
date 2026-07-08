@@ -1,27 +1,6 @@
-"use client"
+import { redirect } from "next/navigation"
 
-import * as React from "react"
-import { toast } from "sonner"
-
-import {
-  ImportExportSettings,
-  SettingsShell,
-} from "@/components/linear/settings-shell"
-
-export default function SettingsPage() {
-
-  React.useEffect(() => {
-    const timer = window.setTimeout(() => {
-      toast("Check your email", {
-        description: "We sent a confirmation link to you@company.com",
-      })
-    }, 1200)
-    return () => window.clearTimeout(timer)
-  }, [])
-
-  return (
-    <SettingsShell title="Import & export" activeId="import-export">
-      <ImportExportSettings />
-    </SettingsShell>
-  )
+/** Settings index → workspace hub (Import & export lives at /settings/import-export). */
+export default function SettingsIndexPage() {
+  redirect("/settings/workspace")
 }

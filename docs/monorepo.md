@@ -78,7 +78,9 @@ Create **two Vercel projects** from this repo, each with a different root direct
 
 Each app sets `basePath` in `next.config.ts` (`/linear`, `/polaris`) and includes a `vercel.json` that runs `npm install` from the monorepo root so workspace dependencies resolve.
 
-The main registry site continues to deploy from the repository root. Use the **Skin** toggle in the header to preview Linear or Polaris tokens live on the full component catalog without switching apps. The Apps menu also links to `/linear` and `/polaris`.
+The main registry site continues to deploy from the repository root. Use the **Skin** toggle in the header to preview Linear or Polaris tokens live on the full component catalog without switching apps.
+
+Main-site `/linear` and `/polaris` are **hub pages** (explain Skin toggle vs sibling demo apps). The full demos are separate Vercel projects with `basePath` — locally run `npm run dev:linear` / `npm run dev:polaris` on their own ports (do not collide with `npm run dev`).
 
 ## Linear composites (`apps/linear`)
 

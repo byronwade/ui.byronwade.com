@@ -20,7 +20,7 @@
 }
 
 /*
- * Theme-toggle morph. The nav dock drives the swap through the View Transitions
+ * Theme-toggle morph. The fixed site header drives the swap through the View Transitions
  * API and animates `::view-transition-new(root)` with an expanding clip-path
  * circle anchored at the toggle button, so the new theme blooms outward from the
  * trigger, matching the dock/launcher morph language. We disable the default

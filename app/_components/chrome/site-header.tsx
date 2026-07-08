@@ -26,17 +26,17 @@ import { ThemeToggleButton } from "./theme-toggle-button"
 
 const GITHUB_URL = "https://github.com/byronwade/ui"
 
-/** Sibling design-system demos on this host. */
+/** Skin hubs on the main site (explain toggle vs sibling demo apps). */
 const SKIN_APPS = [
   {
     name: "Linear",
-    desc: "Linear-themed product demo",
+    desc: "Skin toggle + demo app hub",
     href: "/linear",
     external: false,
   },
   {
     name: "Polaris",
-    desc: "Shopify Polaris-themed demo",
+    desc: "Skin toggle + admin demo hub",
     href: "/polaris",
     external: false,
   },
