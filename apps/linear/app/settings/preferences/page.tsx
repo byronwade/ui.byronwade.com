@@ -59,7 +59,7 @@ export default function PreferencesPage() {
 
   return (
     <SettingsShell title="Preferences" activeId="preferences" wide>
-      <SettingsBackLink href="/settings">Preferences</SettingsBackLink>
+      <SettingsBackLink href="/settings/workspace">Settings</SettingsBackLink>
 
       <div className="space-y-1">
         <h1 className="text-xl font-medium tracking-tight text-foreground">

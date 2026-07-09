@@ -79,12 +79,14 @@ export default function AsMobbinTeamSettingsPage() {
             title="Members"
             description="Manage team members."
             meta="1 member"
+            href="/settings/members"
           />
           <SettingsMetaRow
             icon={<Shield />}
             title="Slack notifications"
             description="Broadcast notifications to Slack."
             meta="Off"
+            href="/settings/applications"
           />
         </SettingsList>
       </SettingsSection>
@@ -96,18 +98,21 @@ export default function AsMobbinTeamSettingsPage() {
             title="Issue labels"
             description="Labels available to this team's issues."
             meta="5 labels"
+            href="/settings/issues/labels"
           />
           <SettingsMetaRow
             icon={<FileText />}
             title="Templates"
             description="Pre-filled templates for issues, documents, and projects."
             meta="1 template"
+            href="/settings/issues/templates"
           />
           <SettingsMetaRow
             icon={<CalendarClock />}
             title="Recurring issues"
             description="Automatically create issues on a schedule."
             meta="None"
+            href="/settings/issues/slas"
           />
         </SettingsList>
       </SettingsSection>
@@ -119,17 +124,20 @@ export default function AsMobbinTeamSettingsPage() {
             title="Issue statuses"
             description="Customize the statuses issues go through."
             meta="6 statuses"
+            href="/settings/projects/statuses"
           />
           <SettingsMetaRow
             icon={<Settings />}
             title="Workflows & automations"
             description="Manage issue automations, git workflows and other workflows."
+            href="/settings/features/asks"
           />
           <SettingsMetaRow
             icon={<Target />}
             title="Triage"
             description="Streamline how you handle requests from outside your team."
             meta="Off"
+            href="/settings/teams/as-mobbin/access"
           />
           <SettingsMetaRow
             icon={<CircleDot />}
@@ -147,11 +155,13 @@ export default function AsMobbinTeamSettingsPage() {
             icon={<Bot />}
             title="Agents"
             description="Add guidance for how agents should operate within this team."
+            href="/settings/features/ai-agents"
           />
           <SettingsMetaRow
             icon={<MessageSquareText />}
             title="Discussion summaries"
             description="Automatically generate summaries for issues and comments."
+            href="/settings/agent"
           />
         </SettingsList>
       </SettingsSection>
@@ -166,8 +176,17 @@ export default function AsMobbinTeamSettingsPage() {
           </>
         }
       >
-        <SettingsFormGroup>
-          <SettingsFieldRow label="Parent team">
+        <SettingsList>
+          <SettingsMetaRow
+            icon={<Users />}
+            title="Parent team"
+            description="Nest this team under another to share workflows and settings."
+            meta="No parent"
+            href="/settings/teams/as-mobbin/parent"
+          />
+        </SettingsList>
+        <SettingsFormGroup className="mt-3">
+          <SettingsFieldRow label="Quick assign">
             <Select
               defaultValue="none"
               onValueChange={(value) => {

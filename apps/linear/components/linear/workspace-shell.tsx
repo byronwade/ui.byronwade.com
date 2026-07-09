@@ -76,8 +76,19 @@ type TeamNavItem = {
 }
 
 const WORKSPACE_NAV: WorkspaceNavItem[] = [
-  { id: "inbox", label: "Inbox", icon: <Inbox />, badge: "3", href: "/workspace" },
-  { id: "my-issues", label: "My issues", icon: <CircleDot />, href: "/workspace" },
+  {
+    id: "inbox",
+    label: "Inbox",
+    icon: <Inbox />,
+    badge: "3",
+    href: "/workspace/inbox",
+  },
+  {
+    id: "my-issues",
+    label: "My issues",
+    icon: <CircleDot />,
+    href: "/workspace/my-issues",
+  },
 ]
 
 const WORKSPACE_GROUP: WorkspaceNavItem[] = [
