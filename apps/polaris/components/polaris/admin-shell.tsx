@@ -4,11 +4,14 @@ import * as React from "react"
 import Link from "next/link"
 import {
   BookOpen,
+  CreditCard,
   Home,
   LayoutGrid,
   Package,
   Settings,
   ShoppingCart,
+  Store,
+  Truck,
   Users,
 } from "lucide-react"
 
@@ -46,9 +49,35 @@ const PRIMARY_NAV: AdminNavItem[] = [
   { id: "settings", label: "Settings", href: "/settings", icon: <Settings /> },
 ]
 
+const SETTINGS_NAV: AdminNavItem[] = [
+  {
+    id: "settings-general",
+    label: "General",
+    href: "/settings/general",
+    icon: <Store />,
+  },
+  {
+    id: "settings-payments",
+    label: "Payments",
+    href: "/settings/payments",
+    icon: <CreditCard />,
+  },
+  {
+    id: "settings-shipping",
+    label: "Shipping",
+    href: "/settings/shipping",
+    icon: <Truck />,
+  },
+]
+
 const DEV_NAV: AdminNavItem[] = [
   { id: "catalog", label: "Catalog", href: "/catalog", icon: <LayoutGrid /> },
-  { id: "styleguide", label: "Styleguide", href: "/styleguide", icon: <BookOpen /> },
+  {
+    id: "styleguide",
+    label: "Styleguide",
+    href: "/styleguide",
+    icon: <BookOpen />,
+  },
 ]
 
 type AdminShellProps = {
@@ -64,6 +93,9 @@ function AdminShell({
   children,
   headerActions,
 }: AdminShellProps) {
+  const showSettingsNav =
+    activeId === "settings" || activeId.startsWith("settings-")
+
   return (
     <SidebarProvider defaultOpen>
       <Sidebar
@@ -90,7 +122,10 @@ function AdminShell({
                 {PRIMARY_NAV.map((item) => (
                   <SidebarMenuItem key={item.id}>
                     <SidebarMenuButton
-                      isActive={item.id === activeId}
+                      isActive={
+                        item.id === activeId ||
+                        (item.id === "settings" && showSettingsNav)
+                      }
                       render={<Link href={item.href} />}
                     >
                       {item.icon}
@@ -101,6 +136,27 @@ function AdminShell({
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
+
+          {showSettingsNav ? (
+            <SidebarGroup>
+              <SidebarGroupLabel>Settings</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {SETTINGS_NAV.map((item) => (
+                    <SidebarMenuItem key={item.id}>
+                      <SidebarMenuButton
+                        isActive={item.id === activeId}
+                        render={<Link href={item.href} />}
+                      >
+                        {item.icon}
+                        <span>{item.label}</span>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ) : null}
 
           <SidebarGroup>
             <SidebarGroupLabel>Design system</SidebarGroupLabel>

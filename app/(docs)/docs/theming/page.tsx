@@ -390,6 +390,59 @@ export default function ThemingPage() {
         </div>
       </section>
 
+      <section className={`mt-16 border-t border-border pt-12 ${BLEED}`}>
+        <div className="max-w-3xl">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Alternate skins
+          </p>
+          <h2 className="mt-3 text-2xl font-medium tracking-tight">
+            Warm, Linear, and Polaris
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
+            Beyond a single{" "}
+            <code className="font-mono text-xs text-foreground">--brand</code>{" "}
+            override, the header{" "}
+            <strong className="font-medium text-foreground">Skin</strong> toggle
+            switches the whole registry site between the house warm theme, a
+            Linear product-OS look, and a Shopify Polaris admin look via{" "}
+            <code className="font-mono text-xs text-foreground">data-skin</code>
+            . Hub pages explain in-place preview versus the sibling demo apps.
+          </p>
+          <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+            <li>
+              <Link
+                href="/linear"
+                className="font-medium text-foreground underline-offset-2 hover:underline"
+              >
+                Linear skin hub
+              </Link>{" "}
+              — indigo accent, dense operational chrome
+            </li>
+            <li>
+              <Link
+                href="/polaris"
+                className="font-medium text-foreground underline-offset-2 hover:underline"
+              >
+                Polaris skin hub
+              </Link>{" "}
+              — gray canvas, white cards, teal accent
+            </li>
+            <li>
+              <Link
+                href="/docs/monorepo"
+                className="font-medium text-foreground underline-offset-2 hover:underline"
+              >
+                Monorepo guide
+              </Link>{" "}
+              — skin sync commands (
+              <code className="font-mono text-xs">gen:linear-skin</code>,{" "}
+              <code className="font-mono text-xs">gen:polaris-skin</code>) and
+              quality gates
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <GuidePager current="/docs/theming" />
     </article>
   )

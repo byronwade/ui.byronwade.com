@@ -24,7 +24,7 @@ import { isActive, navItems } from "./nav-config"
 import { SkinToggle } from "./skin-toggle"
 import { ThemeToggleButton } from "./theme-toggle-button"
 
-const GITHUB_URL = "https://github.com/byronwade/ui"
+const GITHUB_URL = "https://github.com/byronwade/ui.byronwade.com"
 
 /** Skin hubs on the main site (explain toggle vs sibling demo apps). */
 const SKIN_APPS = [
@@ -99,6 +99,42 @@ function AppsMenu() {
             <span className="text-xs text-muted-foreground">{p.desc}</span>
           </DropdownMenuItem>
         ))}
+        <DropdownMenuItem
+          render={
+            <a
+              href="https://ui.byronwade.com/linear"
+              target="_blank"
+              rel="noreferrer"
+            />
+          }
+          className="flex-col items-start gap-0.5"
+        >
+          <span className="flex w-full items-center gap-1.5 text-sm text-foreground">
+            Linear demo
+            <ArrowUpRight className="size-3 text-muted-foreground" />
+          </span>
+          <span className="text-xs text-muted-foreground">
+            Full product app (production)
+          </span>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          render={
+            <a
+              href="https://ui.byronwade.com/polaris"
+              target="_blank"
+              rel="noreferrer"
+            />
+          }
+          className="flex-col items-start gap-0.5"
+        >
+          <span className="flex w-full items-center gap-1.5 text-sm text-foreground">
+            Polaris demo
+            <ArrowUpRight className="size-3 text-muted-foreground" />
+          </span>
+          <span className="text-xs text-muted-foreground">
+            Full admin app (production)
+          </span>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuLabel className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
           byronwade

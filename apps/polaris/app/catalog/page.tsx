@@ -36,12 +36,22 @@ export default function CatalogPage() {
             Component catalog
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Every shadcn primitive in this app, grouped by role. Live specimens
-            for the admin signature live on the{" "}
-            <Link href="/styleguide" className="text-foreground underline-offset-2 hover:underline">
+            Every shadcn primitive plus Polaris admin patterns, grouped by role.
+            Live specimens for the admin signature live on the{" "}
+            <Link
+              href="/styleguide"
+              className="text-foreground underline-offset-2 hover:underline"
+            >
               styleguide
             </Link>
-            .
+            . Pattern entries deep-link into the admin demo (
+            <Link
+              href="/products"
+              className="text-foreground underline-offset-2 hover:underline"
+            >
+              products
+            </Link>
+            ).
           </p>
         </div>
 
@@ -59,19 +69,25 @@ export default function CatalogPage() {
                 </span>
               </h2>
               <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((item) => (
-                  <li key={item.slug}>
-                    <Link
-                      href={`/styleguide#${item.slug}`}
-                      className="flex items-center justify-between rounded-lg border border-border bg-card px-3 py-2 text-sm transition-colors hover:bg-muted/40"
-                    >
-                      <span>{item.name}</span>
-                      <span className="font-mono text-[10px] text-muted-foreground">
-                        {item.slug}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
+                {items.map((item) => {
+                  const href =
+                    item.category === "polaris"
+                      ? "/products"
+                      : `/styleguide#${item.slug}`
+                  return (
+                    <li key={item.slug}>
+                      <Link
+                        href={href}
+                        className="flex items-center justify-between rounded-lg border border-border bg-card px-3 py-2 text-sm transition-colors hover:bg-muted/40"
+                      >
+                        <span>{item.name}</span>
+                        <span className="font-mono text-[10px] text-muted-foreground">
+                          {item.slug}
+                        </span>
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </section>
           )

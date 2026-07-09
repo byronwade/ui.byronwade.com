@@ -58,6 +58,14 @@ const pageEntries: SearchEntry[] = [
   },
   {
     kind: "Section",
+    label: "Monorepo",
+    href: "/docs/monorepo",
+    meta: "Guide",
+    keywords:
+      "monorepo linear polaris apps skin sync themed apps workspaces vercel",
+  },
+  {
+    kind: "Section",
     label: "Surfaces",
     href: "/docs/surfaces",
     meta: "Guide",
@@ -284,7 +292,7 @@ const layoutEntries: SearchEntry[] = [
   {
     kind: "Section",
     label: "Layouts gallery",
-    href: "/catalog?type=layouts",
+    href: "/catalog?type=layout",
     meta: "Browse",
     keywords: "archetypes full page layouts gallery showcase browse catalog",
   },

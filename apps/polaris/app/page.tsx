@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { CATALOG_COMPONENTS } from "@/lib/component-catalog"
 
 export default function HomePage() {
   return (
@@ -23,18 +24,22 @@ export default function HomePage() {
           Polaris design system
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Merchant admin UI built on the latest shadcn components, reskinned with tokens from{" "}
+          Merchant admin UI built on the latest shadcn components, reskinned
+          with tokens from{" "}
           <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">
             design-research/SHOPIFY-DESIGN-SYSTEM.md
           </code>{" "}
-          — gray canvas, white elevated cards, dark-neutral primary actions, teal success, and
-          tabular data density.
+          — gray canvas, white elevated cards, dark-neutral primary actions,
+          teal success, and tabular data density.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Button render={<Link href="/products" />}>Products</Button>
           <Button variant="outline" render={<Link href="/orders" />}>
             Orders
+          </Button>
+          <Button variant="outline" render={<Link href="/customers" />}>
+            Customers
           </Button>
           <Button variant="outline" render={<Link href="/catalog" />}>
             Catalog
@@ -46,8 +51,12 @@ export default function HomePage() {
 
         <dl className="mt-16 grid gap-6 border-t border-border pt-10 sm:grid-cols-3">
           <div>
-            <dt className="font-mono text-xs text-muted-foreground">Components</dt>
-            <dd className="mt-1 text-lg font-semibold">60</dd>
+            <dt className="font-mono text-xs text-muted-foreground">
+              Components
+            </dt>
+            <dd className="mt-1 text-lg font-semibold">
+              {CATALOG_COMPONENTS.length}
+            </dd>
           </div>
           <div>
             <dt className="font-mono text-xs text-muted-foreground">Source</dt>

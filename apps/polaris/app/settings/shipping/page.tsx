@@ -69,7 +69,7 @@ const RATES = [
 export default function ShippingSettingsPage() {
   return (
     <AdminShell
-      activeId="settings"
+      activeId="settings-shipping"
       title="Shipping"
       headerActions={
         <Button size="sm" type="button">

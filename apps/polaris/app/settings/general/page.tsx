@@ -35,7 +35,7 @@ import { Textarea } from "@/components/ui/textarea"
 export default function GeneralSettingsPage() {
   return (
     <AdminShell
-      activeId="settings"
+      activeId="settings-general"
       title="General"
       headerActions={
         <Button size="sm" type="button">

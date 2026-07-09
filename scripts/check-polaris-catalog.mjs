@@ -19,8 +19,13 @@ const uiSlugs = fs
   .filter((f) => f.endsWith(".tsx"))
   .map((f) => f.replace(/\.tsx$/, ""))
 
+const polarisCompositeSlugs = ["admin-shell"]
+const catalogUiSlugs = catalogSlugs.filter(
+  (s) => !polarisCompositeSlugs.includes(s),
+)
+
 const missingFromCatalog = uiSlugs.filter((slug) => !catalogSlugs.includes(slug))
-const extraInCatalog = catalogSlugs.filter((slug) => !uiSlugs.includes(slug))
+const extraInCatalog = catalogUiSlugs.filter((slug) => !uiSlugs.includes(slug))
 
 let failed = false
 
@@ -39,5 +44,5 @@ if (extraInCatalog.length) {
 if (failed) process.exit(1)
 
 console.log(
-  `check-polaris-catalog: OK — ${catalogSlugs.length} catalog entries (${uiSlugs.length} UI).`,
+  `check-polaris-catalog: OK — ${catalogSlugs.length} catalog entries (${uiSlugs.length} UI + ${polarisCompositeSlugs.length} Polaris).`,
 )

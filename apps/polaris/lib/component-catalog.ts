@@ -8,6 +8,7 @@ export const COMPONENT_CATEGORIES = [
   { id: "layout", label: "Layout" },
   { id: "media", label: "Media & messaging" },
   { id: "utilities", label: "Utilities" },
+  { id: "polaris", label: "Polaris patterns" },
 ] as const
 
 export type ComponentCategory = (typeof COMPONENT_CATEGORIES)[number]["id"]
@@ -80,6 +81,7 @@ export const CATALOG_COMPONENTS: CatalogComponent[] = [
   { slug: "direction", name: "Direction", category: "utilities" },
   { slug: "empty", name: "Empty", category: "utilities" },
   { slug: "marker", name: "Marker", category: "utilities" },
+  { slug: "admin-shell", name: "Admin shell", category: "polaris" },
 ]
 
 export function getCatalogComponent(slug: string) {
