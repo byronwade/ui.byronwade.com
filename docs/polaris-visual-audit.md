@@ -8,9 +8,13 @@ Companion to `docs/linear-visual-audit.md` for the Shopify Polaris themed app.
 | ----- | ------ | ----- |
 | `/` | Live | Landing → products, orders, catalog, styleguide |
 | `/products` | Live | Products index table in AdminShell |
+| `/products/[id]` | Live | Product detail — title, status, inventory, variants |
 | `/orders` | Live | Orders index table in AdminShell |
 | `/customers` | Live | Customers list in AdminShell |
-| `/settings` | Live | General / Payments / Shipping settings rows |
+| `/settings` | Live | Settings index → general / payments / shipping |
+| `/settings/general` | Live | Store identity, currency, unit defaults |
+| `/settings/payments` | Live | Providers + checkout toggles |
+| `/settings/shipping` | Live | Zones + rates table |
 | `/catalog` | Live | All 60 shadcn primitives indexed |
 | `/styleguide` | Live | Admin specimens with catalog slug anchors |
 
@@ -18,11 +22,12 @@ Companion to `docs/linear-visual-audit.md` for the Shopify Polaris themed app.
 
 | Command | Purpose |
 | ------- | ------- |
-| `npm run check:polaris-slots` | Core admin slot coverage |
+| `npm run check:polaris-slots` | Core admin slot coverage (40+ required) |
 | `npm run check:polaris-catalog` | Catalog ↔ UI file parity |
+| `npm run check:polaris-visual` | Ban raw Tailwind palette / hex in components |
 | `npm run gen:polaris-skin` | Sync `apps/polaris/app/polaris-components.css` → main site |
 | `npm run check:polaris-skin` | Fail if generated skin is stale |
-| `npm run build:polaris` | Slots + catalog + production build |
+| `npm run build:polaris` | Slots + catalog + visual + production build |
 
 ## Visual signatures
 

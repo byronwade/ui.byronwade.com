@@ -12,18 +12,21 @@ import {
 const SETTINGS_ROWS = [
   {
     id: "general",
+    href: "/settings/general",
     title: "General",
     description: "Store name, contact details, and store defaults.",
     icon: <Store className="size-4 text-muted-foreground" />,
   },
   {
     id: "payments",
+    href: "/settings/payments",
     title: "Payments",
     description: "Payment providers, payouts, and checkout settings.",
     icon: <CreditCard className="size-4 text-muted-foreground" />,
   },
   {
     id: "shipping",
+    href: "/settings/shipping",
     title: "Shipping",
     description: "Shipping zones, rates, and delivery profiles.",
     icon: <Truck className="size-4 text-muted-foreground" />,
@@ -45,12 +48,7 @@ export default function SettingsPage() {
 
         <div className="space-y-2">
           {SETTINGS_ROWS.map((row) => (
-            <Link
-              key={row.id}
-              href={`/settings#${row.id}`}
-              id={row.id}
-              className="block"
-            >
+            <Link key={row.id} href={row.href} className="block">
               <Card className="transition-colors hover:bg-muted/30">
                 <CardHeader className="flex-row items-center gap-3 space-y-0">
                   <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted">

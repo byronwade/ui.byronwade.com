@@ -7,6 +7,8 @@
  * Canonical source for main-site skin via `npm run gen:polaris-skin`.
  */
 
+/* ── Surfaces: cards, empty, tables ──────────────────────────────────────── */
+
 :root[data-skin="polaris"] [data-slot="card"],
 :root[data-skin="polaris"] [data-slot="card-frame"],
 :root[data-skin="polaris"] [data-slot="stat-card"],
@@ -18,70 +20,545 @@
   border-radius: var(--polaris-radius);
   box-shadow: var(--polaris-shadow-card);
   border: 1px solid rgba(48, 48, 48, 0.08);
+  background-color: var(--polaris-surface);
 }
 
+:root[data-skin="polaris"] [data-slot="empty-title"] {
+  font-weight: 600;
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="empty-description"] {
+  color: var(--polaris-text-secondary);
+  font-size: 0.8125rem;
+}
+
+:root[data-skin="polaris"] [data-slot="empty-header"],
+:root[data-skin="polaris"] [data-slot="empty-content"] {
+  gap: 0.5rem;
+}
+
+/* ── Overlays & floating surfaces ────────────────────────────────────────── */
+
 :root[data-skin="polaris"] [data-slot="dropdown-menu-content"],
+:root[data-skin="polaris"] [data-slot="dropdown-menu-sub-content"],
 :root[data-skin="polaris"] [data-slot="context-menu-content"],
 :root[data-skin="polaris"] [data-slot="popover-content"],
 :root[data-skin="polaris"] [data-slot="select-content"],
 :root[data-skin="polaris"] [data-slot="dialog-content"],
 :root[data-skin="polaris"] [data-slot="sheet-content"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-content"],
 :root[data-skin="polaris"] [data-slot="hover-card-content"],
-:root[data-skin="polaris"] [data-slot="command"] {
+:root[data-skin="polaris"] [data-slot="menubar-content"],
+:root[data-skin="polaris"] [data-slot="menubar-sub-content"],
+:root[data-skin="polaris"] [data-slot="combobox-content"],
+:root[data-skin="polaris"] [data-slot="command"],
+:root[data-skin="polaris"] [data-slot="navigation-menu-content"] {
   box-shadow: var(--polaris-shadow-overlay);
   border-radius: var(--polaris-radius);
+  background-color: var(--polaris-surface);
+  border: 1px solid var(--polaris-border);
 }
 
-:root[data-skin="polaris"] [data-slot="button"] {
+:root[data-skin="polaris"] [data-slot="dialog-overlay"],
+:root[data-skin="polaris"] [data-slot="sheet-overlay"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-overlay"],
+:root[data-skin="polaris"] [data-slot="drawer-overlay"] {
+  background-color: rgba(48, 48, 48, 0.45);
+}
+
+:root[data-skin="polaris"] [data-slot="dialog-header"],
+:root[data-skin="polaris"] [data-slot="sheet-header"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-header"] {
+  gap: 0.25rem;
+}
+
+:root[data-skin="polaris"] [data-slot="dialog-footer"],
+:root[data-skin="polaris"] [data-slot="sheet-footer"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-footer"],
+:root[data-skin="polaris"] [data-slot="card-footer"] {
+  border-top: 1px solid var(--polaris-border);
+  background-color: color-mix(in srgb, var(--polaris-bg) 60%, var(--polaris-surface));
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="button"],
+:root[data-skin="polaris"] [data-slot="input-group-button"],
+:root[data-skin="polaris"] [data-slot="pagination-link"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-action"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-cancel"] {
   border-radius: var(--polaris-radius-sm);
   font-weight: 600;
   font-size: 0.8125rem;
 }
 
 :root[data-skin="polaris"] [data-slot="button"][data-variant="default"],
-:root[data-skin="polaris"] [data-slot="button"].bg-primary {
+:root[data-skin="polaris"] [data-slot="button"].bg-primary,
+:root[data-skin="polaris"] [data-slot="alert-dialog-action"] {
   box-shadow:
     0 1px 1px rgba(48, 48, 48, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
+:root[data-skin="polaris"] [data-slot="button"][data-variant="outline"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-cancel"] {
+  background-color: var(--polaris-surface);
+  border-color: var(--polaris-border);
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="button"][data-variant="outline"]:hover {
+  background-color: color-mix(in srgb, var(--polaris-bg) 80%, var(--polaris-surface));
+}
+
+:root[data-skin="polaris"] [data-slot="button"][data-variant="secondary"] {
+  background-color: color-mix(in srgb, var(--polaris-bg) 70%, var(--polaris-surface));
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="button"][data-variant="destructive"] {
+  background-color: color-mix(in srgb, var(--polaris-critical) 12%, transparent);
+  color: var(--polaris-critical);
+  border: 1px solid color-mix(in srgb, var(--polaris-critical) 30%, transparent);
+}
+
+/* ── Badges ──────────────────────────────────────────────────────────────── */
+
 :root[data-skin="polaris"] [data-slot="badge"],
 :root[data-skin="polaris"] [data-slot="pill"],
-:root[data-skin="polaris"] [data-slot="filter-pill"] {
+:root[data-skin="polaris"] [data-slot="filter-pill"],
+:root[data-skin="polaris"] [data-slot="sidebar-menu-badge"] {
   border-radius: var(--polaris-radius-sm);
+  font-weight: 550;
+  font-size: 0.75rem;
 }
+
+:root[data-skin="polaris"] [data-slot="badge"][data-variant="outline"] {
+  border-color: var(--polaris-border);
+  color: var(--polaris-text-secondary);
+  background: var(--polaris-surface);
+}
+
+/* ── Form fields ─────────────────────────────────────────────────────────── */
 
 :root[data-skin="polaris"] [data-slot="input"],
 :root[data-skin="polaris"] [data-slot="textarea"],
-:root[data-skin="polaris"] [data-slot="select-trigger"] {
+:root[data-skin="polaris"] [data-slot="select-trigger"],
+:root[data-skin="polaris"] [data-slot="native-select"],
+:root[data-skin="polaris"] [data-slot="input-group"],
+:root[data-skin="polaris"] [data-slot="input-group-control"],
+:root[data-skin="polaris"] [data-slot="sidebar-input"],
+:root[data-skin="polaris"] [data-slot="command-input"],
+:root[data-skin="polaris"] [data-slot="combobox-chip-input"] {
   background-color: var(--polaris-surface);
   border-radius: var(--polaris-radius-sm);
+  border-color: var(--polaris-border);
   box-shadow: inset 0 1px 2px rgba(48, 48, 48, 0.08);
+  color: var(--polaris-text);
+  font-size: 0.8125rem;
+}
+
+:root[data-skin="polaris"] [data-slot="input"]:focus-visible,
+:root[data-skin="polaris"] [data-slot="textarea"]:focus-visible,
+:root[data-skin="polaris"] [data-slot="select-trigger"]:focus-visible,
+:root[data-skin="polaris"] [data-slot="command-input"]:focus-visible {
+  border-color: var(--polaris-border-focus);
+  box-shadow:
+    inset 0 1px 2px rgba(48, 48, 48, 0.06),
+    0 0 0 1px var(--polaris-border-focus);
+}
+
+:root[data-skin="polaris"] [data-slot="label"],
+:root[data-skin="polaris"] [data-slot="field-label"],
+:root[data-skin="polaris"] [data-slot="field-legend"] {
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="field"] {
+  gap: 0.375rem;
+}
+
+:root[data-skin="polaris"] [data-slot="field-description"] {
+  font-size: 0.75rem;
+  color: var(--polaris-text-secondary);
+}
+
+:root[data-skin="polaris"] [data-slot="field-error"] {
+  font-size: 0.75rem;
+  color: var(--polaris-critical);
+}
+
+:root[data-skin="polaris"] [data-slot="field-group"],
+:root[data-skin="polaris"] [data-slot="field-set"] {
+  gap: 1rem;
+}
+
+:root[data-skin="polaris"] [data-slot="field-separator"] {
+  background-color: var(--polaris-border);
+}
+
+:root[data-skin="polaris"] [data-slot="input-otp-slot"] {
+  border-radius: var(--polaris-radius-sm);
+  border-color: var(--polaris-border);
+  background-color: var(--polaris-surface);
+  box-shadow: inset 0 1px 2px rgba(48, 48, 48, 0.08);
+}
+
+/* ── Menu / select items ─────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="dropdown-menu-item"],
+:root[data-skin="polaris"] [data-slot="dropdown-menu-checkbox-item"],
+:root[data-skin="polaris"] [data-slot="dropdown-menu-radio-item"],
+:root[data-skin="polaris"] [data-slot="dropdown-menu-sub-trigger"],
+:root[data-skin="polaris"] [data-slot="context-menu-item"],
+:root[data-skin="polaris"] [data-slot="menubar-item"],
+:root[data-skin="polaris"] [data-slot="select-item"],
+:root[data-skin="polaris"] [data-slot="combobox-item"],
+:root[data-skin="polaris"] [data-slot="command-item"] {
+  border-radius: var(--polaris-radius-sm);
+  font-size: 0.8125rem;
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="dropdown-menu-item"][data-highlighted],
+:root[data-skin="polaris"] [data-slot="dropdown-menu-checkbox-item"][data-highlighted],
+:root[data-skin="polaris"] [data-slot="dropdown-menu-radio-item"][data-highlighted],
+:root[data-skin="polaris"] [data-slot="context-menu-item"][data-highlighted],
+:root[data-skin="polaris"] [data-slot="menubar-item"][data-highlighted],
+:root[data-skin="polaris"] [data-slot="select-item"][data-highlighted],
+:root[data-skin="polaris"] [data-slot="combobox-item"][data-highlighted],
+:root[data-skin="polaris"] [data-slot="command-item"][data-selected="true"] {
+  background-color: var(--polaris-brand-muted);
+  color: var(--polaris-brand);
+}
+
+:root[data-skin="polaris"] [data-slot="dropdown-menu-item"][data-variant="destructive"],
+:root[data-skin="polaris"] [data-slot="context-menu-item"][data-variant="destructive"] {
+  color: var(--polaris-critical);
+}
+
+:root[data-skin="polaris"] [data-slot="dropdown-menu-label"],
+:root[data-skin="polaris"] [data-slot="select-label"],
+:root[data-skin="polaris"] [data-slot="dropdown-menu-shortcut"] {
+  color: var(--polaris-text-secondary);
+  font-size: 0.75rem;
+}
+
+:root[data-skin="polaris"] [data-slot="dropdown-menu-separator"],
+:root[data-skin="polaris"] [data-slot="select-separator"],
+:root[data-skin="polaris"] [data-slot="command-separator"] {
+  background-color: var(--polaris-border);
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="table"] {
+  font-size: 0.8125rem;
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="table-header"] {
+  background-color: color-mix(in srgb, var(--polaris-bg) 55%, var(--polaris-surface));
 }
 
 :root[data-skin="polaris"] [data-slot="table-row"] {
   min-height: 40px;
+  border-bottom: 1px solid var(--polaris-border);
 }
 
-:root[data-skin="polaris"] [data-slot="card-title"],
-:root[data-skin="polaris"] [data-slot="card-frame-title"],
-:root[data-skin="polaris"] [data-slot="dialog-title"],
-:root[data-skin="polaris"] [data-slot="sheet-title"],
-:root[data-skin="polaris"] [data-slot="page-header-title"],
-:root[data-skin="polaris"] [data-slot="detail-header-title"] {
-  font-weight: 600;
+:root[data-skin="polaris"] [data-slot="table-row"]:hover {
+  background-color: color-mix(in srgb, var(--polaris-bg) 40%, var(--polaris-surface));
+}
+
+:root[data-skin="polaris"] [data-slot="table-head"] {
+  color: var(--polaris-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  height: 2.25rem;
+}
+
+:root[data-skin="polaris"] [data-slot="table-cell"] {
+  font-size: 0.8125rem;
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="table-footer"] {
+  background-color: color-mix(in srgb, var(--polaris-bg) 55%, var(--polaris-surface));
+  border-top: 1px solid var(--polaris-border);
+}
+
+:root[data-skin="polaris"] [data-slot="table-caption"] {
+  color: var(--polaris-text-secondary);
+  font-size: 0.75rem;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="tabs-list"] {
+  background-color: color-mix(in srgb, var(--polaris-bg) 70%, var(--polaris-surface));
+  border: 1px solid var(--polaris-border);
+  border-radius: var(--polaris-radius-sm);
+  padding: 2px;
+}
+
+:root[data-skin="polaris"] [data-slot="tabs-trigger"] {
+  border-radius: calc(var(--polaris-radius-sm) - 1px);
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--polaris-text-secondary);
+}
+
+:root[data-skin="polaris"] [data-slot="tabs-trigger"][data-state="active"] {
+  background-color: var(--polaris-surface);
+  color: var(--polaris-text);
+  box-shadow: 0 1px 1px rgba(48, 48, 48, 0.08);
+}
+
+:root[data-skin="polaris"] [data-slot="tabs-content"] {
+  margin-top: 0.75rem;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="breadcrumb"],
+:root[data-skin="polaris"] [data-slot="breadcrumb-list"] {
+  font-size: 0.8125rem;
+  color: var(--polaris-text-secondary);
+}
+
+:root[data-skin="polaris"] [data-slot="breadcrumb-link"] {
+  color: var(--polaris-text-secondary);
+}
+
+:root[data-skin="polaris"] [data-slot="breadcrumb-link"]:hover {
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="breadcrumb-page"] {
+  color: var(--polaris-text);
+  font-weight: 550;
+}
+
+:root[data-skin="polaris"] [data-slot="breadcrumb-separator"] {
+  color: var(--polaris-border);
+}
+
+/* ── Pagination ──────────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="pagination"] {
+  gap: 0.25rem;
+}
+
+:root[data-skin="polaris"] [data-slot="pagination-content"] {
+  gap: 0.25rem;
+}
+
+:root[data-skin="polaris"] [data-slot="pagination-link"][data-active="true"] {
+  background-color: var(--polaris-brand-muted);
+  color: var(--polaris-brand);
+  border-color: transparent;
+}
+
+:root[data-skin="polaris"] [data-slot="pagination-ellipsis"] {
+  color: var(--polaris-text-secondary);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="sidebar"],
+:root[data-skin="polaris"] [data-slot="sidebar-container"],
+:root[data-skin="polaris"] [data-slot="sidebar-inner"] {
+  background-color: var(--polaris-bg);
+  border-color: var(--polaris-border);
+}
+
+:root[data-skin="polaris"] [data-slot="sidebar-header"],
+:root[data-skin="polaris"] [data-slot="sidebar-footer"] {
+  border-color: var(--polaris-border);
+}
+
+:root[data-skin="polaris"] [data-slot="sidebar-menu-button"] {
+  border-radius: var(--polaris-radius-sm);
+  font-size: 0.8125rem;
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="sidebar-menu-button"]:hover {
+  background-color: color-mix(in srgb, var(--polaris-bg) 35%, var(--polaris-border));
+  color: var(--polaris-text);
 }
 
 :root[data-skin="polaris"] [data-slot="sidebar-menu-button"][data-active="true"] {
   background-color: var(--polaris-brand-muted);
   color: var(--polaris-brand);
+  font-weight: 600;
 }
+
+:root[data-skin="polaris"] [data-slot="sidebar-menu-action"],
+:root[data-skin="polaris"] [data-slot="sidebar-menu-sub-button"] {
+  border-radius: var(--polaris-radius-sm);
+}
+
+:root[data-skin="polaris"] [data-slot="sidebar-menu-action"]:hover,
+:root[data-skin="polaris"] [data-slot="sidebar-menu-sub-button"]:hover,
+:root[data-skin="polaris"] [data-slot="sidebar-menu-sub-button"][data-active="true"] {
+  background-color: var(--polaris-brand-muted);
+  color: var(--polaris-brand);
+}
+
+:root[data-skin="polaris"] [data-slot="sidebar-group-label"] {
+  color: var(--polaris-text-secondary);
+  font-size: 0.6875rem;
+  font-weight: 550;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ── Titles ──────────────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="card-title"],
+:root[data-skin="polaris"] [data-slot="card-frame-title"],
+:root[data-skin="polaris"] [data-slot="dialog-title"],
+:root[data-skin="polaris"] [data-slot="sheet-title"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-title"],
+:root[data-skin="polaris"] [data-slot="drawer-title"],
+:root[data-skin="polaris"] [data-slot="page-header-title"],
+:root[data-skin="polaris"] [data-slot="detail-header-title"],
+:root[data-skin="polaris"] [data-slot="alert-title"],
+:root[data-skin="polaris"] [data-slot="popover-title"] {
+  font-weight: 600;
+  color: var(--polaris-text);
+}
+
+:root[data-skin="polaris"] [data-slot="card-description"],
+:root[data-skin="polaris"] [data-slot="dialog-description"],
+:root[data-skin="polaris"] [data-slot="sheet-description"],
+:root[data-skin="polaris"] [data-slot="alert-dialog-description"],
+:root[data-skin="polaris"] [data-slot="drawer-description"],
+:root[data-skin="polaris"] [data-slot="alert-description"],
+:root[data-skin="polaris"] [data-slot="popover-description"] {
+  color: var(--polaris-text-secondary);
+  font-size: 0.8125rem;
+}
+
+/* ── Alerts & feedback ───────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="alert"] {
+  border-radius: var(--polaris-radius);
+  border: 1px solid var(--polaris-border);
+  background-color: var(--polaris-surface);
+  box-shadow: none;
+}
+
+:root[data-skin="polaris"] [data-slot="alert"][data-variant="destructive"] {
+  border-color: color-mix(in srgb, var(--polaris-critical) 35%, var(--polaris-border));
+  background-color: color-mix(in srgb, var(--polaris-critical) 6%, var(--polaris-surface));
+}
+
+:root[data-skin="polaris"] [data-slot="progress"] {
+  gap: 0.5rem;
+}
+
+:root[data-skin="polaris"] [data-slot="progress-track"] {
+  background-color: color-mix(in srgb, var(--polaris-bg) 80%, var(--polaris-border));
+  border-radius: 9999px;
+  height: 0.375rem;
+}
+
+:root[data-skin="polaris"] [data-slot="progress-indicator"] {
+  background-color: var(--polaris-brand);
+  border-radius: 9999px;
+}
+
+:root[data-skin="polaris"] [data-slot="skeleton"] {
+  background-color: color-mix(in srgb, var(--polaris-bg) 70%, var(--polaris-border));
+  border-radius: var(--polaris-radius-sm);
+}
+
+:root[data-skin="polaris"] [data-slot="spinner"] {
+  color: var(--polaris-brand);
+}
+
+/* ── Selection controls ──────────────────────────────────────────────────── */
 
 :root[data-skin="polaris"] [data-slot="switch"][data-checked] {
   background-color: var(--polaris-brand);
 }
 
-:root[data-skin="polaris"] [data-slot="checkbox"][data-checked] {
+:root[data-skin="polaris"] [data-slot="switch-thumb"] {
+  background-color: var(--polaris-surface);
+}
+
+:root[data-skin="polaris"] [data-slot="checkbox"][data-checked],
+:root[data-skin="polaris"] [data-slot="checkbox"][data-indeterminate] {
   background-color: var(--polaris-brand);
   border-color: var(--polaris-brand);
+}
+
+:root[data-skin="polaris"] [data-slot="radio-group-item"][data-checked] {
+  border-color: var(--polaris-brand);
+  color: var(--polaris-brand);
+}
+
+:root[data-skin="polaris"] [data-slot="slider-track"] {
+  background-color: color-mix(in srgb, var(--polaris-bg) 80%, var(--polaris-border));
+}
+
+:root[data-skin="polaris"] [data-slot="slider-range"],
+:root[data-skin="polaris"] [data-slot="slider-thumb"] {
+  background-color: var(--polaris-brand);
+}
+
+/* ── Toggle ──────────────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="toggle-group"] {
+  border-radius: var(--polaris-radius-sm);
+  border: 1px solid var(--polaris-border);
+  background-color: color-mix(in srgb, var(--polaris-bg) 70%, var(--polaris-surface));
+  padding: 2px;
+}
+
+:root[data-skin="polaris"] [data-slot="toggle"][data-pressed],
+:root[data-skin="polaris"] [data-slot="toggle-group-item"][data-pressed] {
+  background-color: var(--polaris-surface);
+  color: var(--polaris-text);
+  box-shadow: 0 1px 1px rgba(48, 48, 48, 0.08);
+}
+
+/* ── Separator / accordion ───────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="separator"],
+:root[data-skin="polaris"] [data-slot="sidebar-separator"] {
+  background-color: var(--polaris-border);
+}
+
+:root[data-skin="polaris"] [data-slot="accordion-item"] {
+  border-color: var(--polaris-border);
+}
+
+:root[data-skin="polaris"] [data-slot="accordion-trigger"] {
+  font-size: 0.875rem;
+  font-weight: 550;
+  color: var(--polaris-text);
+}
+
+/* ── Tooltip / kbd ───────────────────────────────────────────────────────── */
+
+:root[data-skin="polaris"] [data-slot="tooltip-content"] {
+  border-radius: var(--polaris-radius-sm);
+  background-color: var(--polaris-text);
+  color: var(--polaris-surface);
+  font-size: 0.75rem;
+}
+
+:root[data-skin="polaris"] [data-slot="kbd"] {
+  border-radius: var(--polaris-radius-sm);
+  border-color: var(--polaris-border);
+  background-color: color-mix(in srgb, var(--polaris-bg) 70%, var(--polaris-surface));
+  color: var(--polaris-text-secondary);
+  font-size: 0.6875rem;
 }

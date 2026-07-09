@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { AdminShell } from "@/components/polaris/admin-shell"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -12,30 +14,35 @@ import {
 
 const PRODUCTS = [
   {
+    id: "organic-cotton-tote",
     name: "Organic cotton tote",
     status: "Active",
     inventory: 128,
     price: "$28.00",
   },
   {
+    id: "ceramic-mug-set",
     name: "Ceramic mug set",
     status: "Active",
     inventory: 64,
     price: "$42.00",
   },
   {
+    id: "wool-beanie",
     name: "Wool beanie",
     status: "Draft",
     inventory: 0,
     price: "$24.00",
   },
   {
+    id: "trail-daypack",
     name: "Trail daypack",
     status: "Active",
     inventory: 37,
     price: "$89.00",
   },
   {
+    id: "merino-base-layer",
     name: "Merino base layer",
     status: "Archived",
     inventory: 12,
@@ -70,8 +77,15 @@ export default function ProductsPage() {
           </TableHeader>
           <TableBody>
             {PRODUCTS.map((product) => (
-              <TableRow key={product.name}>
-                <TableCell className="font-medium">{product.name}</TableCell>
+              <TableRow key={product.id}>
+                <TableCell className="font-medium">
+                  <Link
+                    href={`/products/${product.id}`}
+                    className="text-foreground underline-offset-2 hover:underline"
+                  >
+                    {product.name}
+                  </Link>
+                </TableCell>
                 <TableCell>
                   <Badge variant="outline">{product.status}</Badge>
                 </TableCell>
