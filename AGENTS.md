@@ -21,21 +21,26 @@ See `README.md` for the full workflow (sync → registry:build → deploy).
 
 ## Themed apps (Linear + Polaris)
 
-Sibling Next apps under `apps/linear` and `apps/polaris` demonstrate full product skins. They are
-**not** the registry source of truth — edit `registry/` for house components; edit themed-app files
-for skin demos. Full layout: [`docs/monorepo.md`](docs/monorepo.md).
+Sibling Next apps under `apps/linear` and `apps/polaris` demonstrate full product skins — not
+styleguide-only pages. Linear ships workspace/settings demos; Polaris ships admin routes
+(`AdminShell` + products/orders/customers/settings). They are **not** the registry source of truth —
+edit `registry/` for house components; edit themed-app files for skin demos. Full layout:
+[`docs/monorepo.md`](docs/monorepo.md).
 
-| Concern | Linear | Polaris |
-| ------- | ------ | ------- |
-| Dev | `npm run dev:linear` | `npm run dev:polaris` |
-| Tokens | `apps/linear/app/linear-tokens.css` | `apps/polaris/app/polaris-tokens.css` |
-| Reskin | `linear-components.css` | `polaris-components.css` |
-| Main-site sync | `npm run gen:linear-skin` | `npm run gen:polaris-skin` |
-| Stale check | `npm run check:linear-skin` | `npm run check:polaris-skin` |
-| Build | `npm run build:linear` | `npm run build:polaris` |
+| Concern        | Linear                              | Polaris                                           |
+| -------------- | ----------------------------------- | ------------------------------------------------- |
+| Dev            | `npm run dev:linear`                | `npm run dev:polaris`                             |
+| Tokens         | `apps/linear/app/linear-tokens.css` | `apps/polaris/app/polaris-tokens.css`             |
+| Reskin         | `linear-components.css`             | `polaris-components.css`                          |
+| Composites     | `IssueRow`, `WorkspaceShell`, …     | `AdminShell`                                      |
+| Demo routes    | `/workspace`, `/settings`           | `/products`, `/orders`, `/customers`, `/settings` |
+| Main-site sync | `npm run gen:linear-skin`           | `npm run gen:polaris-skin`                        |
+| Stale check    | `npm run check:linear-skin`         | `npm run check:polaris-skin`                      |
+| Build          | `npm run build:linear`              | `npm run build:polaris`                           |
 
-Main-site Skin toggle + Apps menu link to `/linear` and `/polaris`. After changing themed-app
-component CSS, regenerate the corresponding `app/*-skin.generated.css`.
+Main-site Skin toggle + Apps menu link to `/linear` and `/polaris` hubs (explain toggle vs sibling
+apps). After changing themed-app component CSS, regenerate the corresponding
+`app/*-skin.generated.css`.
 
 ## Design engineer principles — how we work
 

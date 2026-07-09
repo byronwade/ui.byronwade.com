@@ -40,23 +40,28 @@ semantics, density, object-bound AI, approved vs disallowed patterns) lives in
 - `utils` — `cn()` (clsx + tailwind-merge)
 - `identity` — deterministic animal-name + OKLCH gradient from a seed string
 
-**UI primitives** (forms, overlays, feedback, data display)
+**Application UI** (primary lane — forms, overlays, feedback, data display, AI, morph)
 
-- Forms: `button`, `input`, `textarea`, `label`, `select`, `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`
-- Overlays: `tooltip`, `popover`, `dropdown-menu`, `dialog`, `sheet`, `hover-card`, `command`, `navigation-menu`
-- Feedback: `alert`, `progress`, `skeleton`, `sonner`
-- Data display: `badge`, `card`, `tabs`, `accordion`, `avatar`, `separator`, `breadcrumb`, `table`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`
+- Forms: `button`, `input`, `textarea`, `label`, `select`, `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, …
+- Overlays: `tooltip`, `popover`, `dropdown-menu`, `dialog`, `sheet`, `hover-card`, `command`, `navigation-menu`, …
+- Feedback / data display: `alert`, `progress`, `skeleton`, `sonner`, `badge`, `card`, `tabs`, `table`, `chart`, …
 - House UI: `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`, `segmented-control`
+- AI: object-bound agent surfaces (`ai-task`, `ai-sources`, `ai-confirmation`, `ai-code-block`, `ai-canvas`, …)
+- Morph: morphing chrome (`use-chrome-morph`, `morph-dock`, `morph-surface`, `morph-bar`, `morph-sidebar`, …)
+- Composites & patterns: `page-header`, `metric-stat`, `stat-card`, `empty-state`, `status-pill`, `app-shell`, …
 
-**Morph** (morphing chrome)
+**Secondary lanes** (docs / screenshots / demos — not default product UI)
 
-- `use-chrome-morph` · `morph-dock`
+- Market: trading widgets (`ticker-tape`, `quote-header`, `order-book`, `candlestick-chart`, …) — domain demo lane, not app chrome
+- Video: YouTube-modeled media UI (`video-card`, `video-shelf`, `channel-header`, …)
+- Commerce: Shopify-flavored admin/commerce patterns (`product-card`, `order-summary`, `money-input`, …)
+- Media / marketing scaffolds: audio shelves, `hero-section`, `marketing-layout`, device frames
 
-**Composites & patterns**
+**Skins & monorepo apps**
 
-- Layouts: `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`
-- Patterns: `page-header`, `metric-stat`, `stat-card`, `empty-state`, `status-pill`
-- House: `detail-header`, `section`, `event-timeline`
+- Skin toggle on the main site: Warm (default) · Linear · Polaris — token overrides via `data-skin`
+- Sibling demo apps: `apps/linear` (product OS) and `apps/polaris` (admin shell) — see [`docs/monorepo.md`](docs/monorepo.md)
+- Installable Polaris token pack: `@byronwade/polaris` (opt-in; excluded from `@byronwade/all`)
 
 **AI rule**
 

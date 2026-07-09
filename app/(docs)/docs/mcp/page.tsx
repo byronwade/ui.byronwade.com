@@ -34,7 +34,7 @@ const TOOLS: { name: string; description: string }[] = [
   {
     name: "check_on_system",
     description:
-      "Verify whether a given component is already installed in the consumer's project.",
+      "Check a TSX snippet for off-system code (raw colors, foreign primitives, missing house utilities). Returns violations with line numbers.",
   },
   {
     name: "get_design_rule",
@@ -83,9 +83,9 @@ search_components({ query: "status pill" })
 get_component_source({ slug: "status-pill" })
   → "export function StatusPill(…) { … }"
 
-// 3. Is it already in the consumer's project?
-check_on_system({ slug: "status-pill" })
-  → { installed: false, command: "npx shadcn add @byronwade/status-pill" }
+// 3. Lint a snippet before shipping — tokens / primitives / house utilities
+check_on_system({ code: '<div className="text-[#333]">…</div>' })
+  → "1 violation(s):\\n- [raw-color] line 1, col …: …"
 
 // 4. Stay on-system while authoring new markup
 get_design_rule()        → byronwade-ui.mdc (tokens-only, edge, font rules)

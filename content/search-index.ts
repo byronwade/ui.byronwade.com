@@ -119,6 +119,45 @@ const pageEntries: SearchEntry[] = [
     meta: "Page",
     keywords: "styleguide design philosophy tokens showcase",
   },
+  {
+    kind: "Section",
+    label: "Templates",
+    href: "/templates",
+    meta: "Page",
+    keywords: "templates starter screens pages gallery browse",
+  },
+  {
+    kind: "Section",
+    label: "Templates browse",
+    href: "/catalog?type=template",
+    meta: "Browse",
+    keywords:
+      "templates browse facet catalog type filter starter screens gallery",
+  },
+  {
+    kind: "Section",
+    label: "Skin toggle",
+    href: "/catalog",
+    meta: "Skin",
+    keywords:
+      "skin toggle warm linear polaris theme reskin data-skin token override",
+  },
+  {
+    kind: "Section",
+    label: "Linear skin",
+    href: "/linear",
+    meta: "Skin",
+    keywords:
+      "linear skin hub product os indigo dense dark data-skin monorepo apps/linear",
+  },
+  {
+    kind: "Section",
+    label: "Polaris skin",
+    href: "/polaris",
+    meta: "Skin",
+    keywords:
+      "polaris skin hub shopify admin teal data-skin monorepo apps/polaris",
+  },
 ]
 
 /* ── Sections (styleguide anchors) ─────────────────────────────────── */
