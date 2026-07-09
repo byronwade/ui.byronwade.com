@@ -34,7 +34,7 @@ describe("TemplatesShell", () => {
 
     expect(screen.getByTestId("templates-route-shell")).toHaveClass(
       "overflow-auto",
-      "pt-16",
+      "pt-14",
     )
   })
 })
