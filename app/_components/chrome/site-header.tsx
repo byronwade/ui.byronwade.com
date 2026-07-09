@@ -215,6 +215,34 @@ function MobileNavMenu() {
             {p.name}
           </DropdownMenuItem>
         ))}
+        <DropdownMenuItem
+          render={
+            <a
+              href="https://ui.byronwade.com/linear"
+              target="_blank"
+              rel="noreferrer"
+            />
+          }
+        >
+          <span className="flex w-full items-center gap-1.5">
+            Linear demo
+            <ArrowUpRight className="size-3 text-muted-foreground" />
+          </span>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          render={
+            <a
+              href="https://ui.byronwade.com/polaris"
+              target="_blank"
+              rel="noreferrer"
+            />
+          }
+        >
+          <span className="flex w-full items-center gap-1.5">
+            Polaris demo
+            <ArrowUpRight className="size-3 text-muted-foreground" />
+          </span>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
