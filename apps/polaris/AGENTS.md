@@ -21,4 +21,5 @@ Sibling of `apps/linear` — Shopify Polaris admin look on shadcn primitives.
 - Prefer tokens over raw hex in new work; existing hex in token files is the intentional Polaris fork.
 - After changing `polaris-components.css`, run `npm run gen:polaris-skin` from the monorepo root.
 - Keep styleguide demos in admin domain: products, orders, customers — not issues/cycles.
+- **Icons:** Lucide (`lucide-react`) is intentional in this themed app (product-faithful chrome). The main registry still requires Phosphor via `@/lib/icons`.
 - See `docs/monorepo.md` and `design-research/SHOPIFY-DESIGN-SYSTEM.md`.

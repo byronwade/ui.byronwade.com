@@ -110,4 +110,4 @@ Admin-specific chrome built on reskinned shadcn primitives:
 | ------------ | ------------------------------------ | ------------------------------------------------------------------------------------------- |
 | `AdminShell` | `components/polaris/admin-shell.tsx` | Shopify-style admin chrome (sidebar + inset) wrapping products, orders, customers, settings |
 
-Demo: `/products`, `/orders`, `/customers`, and `/settings` in the Polaris app.
+Demo: `/products`, `/orders`, `/customers` (with detail routes), and `/settings` in the Polaris app.

@@ -63,6 +63,14 @@ export const guides: Guide[] = [
       "Re-skin the entire system, light and dark, from a single CSS variable.",
   },
   {
+    slug: "monorepo",
+    href: "/docs/monorepo",
+    label: "Monorepo",
+    title: "Monorepo",
+    description:
+      "Main registry, Linear and Polaris themed apps, skin sync, and quality gates in one workspace.",
+  },
+  {
     slug: "typography",
     href: "/docs/typography",
     label: "Typography",

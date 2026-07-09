@@ -33,9 +33,12 @@ export default function LinearSkinHubPage() {
           </p>
           <h2 className="mt-2 text-lg font-medium">Skin toggle</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Use the header <strong className="font-medium text-foreground">Skin</strong>{" "}
+            Use the header{" "}
+            <strong className="font-medium text-foreground">Skin</strong>{" "}
             control and choose Linear. The main registry site restyles via{" "}
-            <code className="font-mono text-xs">data-skin=&quot;linear&quot;</code>{" "}
+            <code className="font-mono text-xs">
+              data-skin=&quot;linear&quot;
+            </code>{" "}
             without leaving this origin.
           </p>
           <Button className="mt-4" render={<Link href="/catalog" />}>
@@ -56,7 +59,7 @@ export default function LinearSkinHubPage() {
             <code className="font-mono text-xs">ui.byronwade.com/linear</code>.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Button variant="outline" render={<Link href="/docs" />}>
+            <Button variant="outline" render={<Link href="/docs/monorepo" />}>
               Read monorepo docs
             </Button>
             <Button

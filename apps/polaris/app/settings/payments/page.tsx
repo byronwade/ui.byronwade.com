@@ -45,7 +45,7 @@ const PROVIDERS = [
 export default function PaymentsSettingsPage() {
   return (
     <AdminShell
-      activeId="settings"
+      activeId="settings-payments"
       title="Payments"
       headerActions={
         <Button size="sm" type="button">

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
 import { SiteHeader } from "@/app/_components/chrome/site-header"
@@ -64,5 +65,19 @@ describe("SiteHeader", () => {
     expect(
       screen.getByRole("button", { name: "Toggle theme" }),
     ).toBeInTheDocument()
+  })
+
+  it("exposes Linear and Polaris hubs in the Apps menu", async () => {
+    const user = userEvent.setup()
+    render(<SiteHeader />)
+
+    await user.click(screen.getByRole("button", { name: "Switch app" }))
+
+    expect(
+      await screen.findByText("Skin toggle + demo app hub"),
+    ).toBeInTheDocument()
+    expect(screen.getByText("Skin toggle + admin demo hub")).toBeInTheDocument()
+    expect(document.querySelector('a[href="/linear"]')).toBeTruthy()
+    expect(document.querySelector('a[href="/polaris"]')).toBeTruthy()
   })
 })

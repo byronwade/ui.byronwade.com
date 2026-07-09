@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { AdminShell } from "@/components/polaris/admin-shell"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -11,6 +13,7 @@ import {
 
 const CUSTOMERS = [
   {
+    id: "alex-rivera",
     name: "Alex Rivera",
     email: "alex@example.com",
     orders: 12,
@@ -18,6 +21,7 @@ const CUSTOMERS = [
     location: "Portland, OR",
   },
   {
+    id: "jordan-lee",
     name: "Jordan Lee",
     email: "jordan@example.com",
     orders: 5,
@@ -25,6 +29,7 @@ const CUSTOMERS = [
     location: "Austin, TX",
   },
   {
+    id: "sam-chen",
     name: "Sam Chen",
     email: "sam@example.com",
     orders: 8,
@@ -32,6 +37,7 @@ const CUSTOMERS = [
     location: "Seattle, WA",
   },
   {
+    id: "riley-park",
     name: "Riley Park",
     email: "riley@example.com",
     orders: 2,
@@ -39,6 +45,7 @@ const CUSTOMERS = [
     location: "Denver, CO",
   },
   {
+    id: "casey-morgan",
     name: "Casey Morgan",
     email: "casey@example.com",
     orders: 1,
@@ -72,8 +79,15 @@ export default function CustomersPage() {
           </TableHeader>
           <TableBody>
             {CUSTOMERS.map((customer) => (
-              <TableRow key={customer.email}>
-                <TableCell className="font-medium">{customer.name}</TableCell>
+              <TableRow key={customer.id}>
+                <TableCell className="font-medium">
+                  <Link
+                    href={`/customers/${customer.id}`}
+                    className="text-foreground underline-offset-2 hover:underline"
+                  >
+                    {customer.name}
+                  </Link>
+                </TableCell>
                 <TableCell className="text-muted-foreground">
                   {customer.email}
                 </TableCell>

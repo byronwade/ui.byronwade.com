@@ -9,7 +9,7 @@ const FOOTER_LINKS = [
   { label: "Polaris", href: "/polaris" },
   {
     label: "GitHub",
-    href: "https://github.com/byronwade/ui",
+    href: "https://github.com/byronwade/ui.byronwade.com",
     external: true,
   },
 ] as const
@@ -54,3 +54,5 @@ export function SiteFooter() {
     </footer>
   )
 }
+
+export { FOOTER_LINKS }

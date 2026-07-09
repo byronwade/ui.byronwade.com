@@ -2,7 +2,7 @@
 
 Shopify Polaris–inspired shadcn component library at **ui.byronwade.com/polaris**.
 
-- **60 shadcn components** (`npx shadcn add --all`)
+- **shadcn primitives** (`npx shadcn add --all`) plus Polaris patterns (`AdminShell`)
 - Tokens from [`design-research/SHOPIFY-DESIGN-SYSTEM.md`](../../design-research/SHOPIFY-DESIGN-SYSTEM.md)
 - Reskin via `app/polaris-tokens.css` + `app/polaris-components.css`
 
@@ -24,12 +24,14 @@ Open [http://localhost:3000/polaris](http://localhost:3000/polaris) (basePath is
 | `/products` | Products index (admin shell) |
 | `/products/[id]` | Product detail — status, inventory, variants |
 | `/orders` | Orders index (admin shell) |
+| `/orders/[id]` | Order detail — line items, customer link |
 | `/customers` | Customers list (admin shell) |
+| `/customers/[id]` | Customer detail — spend, recent orders |
 | `/settings` | Settings index (admin shell) |
 | `/settings/general` | Store identity and defaults |
 | `/settings/payments` | Payment providers and checkout |
 | `/settings/shipping` | Shipping zones and rates |
-| `/catalog` | Index of all 60 shadcn primitives |
+| `/catalog` | Index of shadcn primitives + Polaris patterns |
 | `/styleguide` | Live admin specimens (`#button`, `#table`, …) |
 
 ## Skin sync

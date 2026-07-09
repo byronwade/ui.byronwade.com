@@ -17,7 +17,7 @@ import { archetypes } from "@/app/layouts/_archetypes"
 import { SiteAtmosphere } from "@/app/_components/cinematic/site-atmosphere"
 import { Reveal } from "@/app/_components/cinematic/reveal"
 
-const GITHUB_URL = "https://github.com/byronwade/ui"
+const GITHUB_URL = "https://github.com/byronwade/ui.byronwade.com"
 
 const stats = [
   { value: components.length, label: "components" },
@@ -158,6 +158,70 @@ export default function HomePage() {
               </Link>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* ==================================================== SKINS ===== */}
+      <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+        <Reveal className="text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            Alternate skins
+          </p>
+          <h2 className="mx-auto mt-4 max-w-2xl text-[clamp(1.75rem,4vw,2.75rem)] font-normal leading-tight tracking-tight text-foreground text-balance">
+            Preview Linear or Polaris without leaving the registry.
+          </h2>
+          <p className="reading-ui mx-auto mt-4 max-w-xl text-muted-foreground text-pretty">
+            Use the header Skin toggle for an in-place restyle, or open the
+            sibling demo apps for full product chrome.
+          </p>
+        </Reveal>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <Reveal delay={0.05}>
+            <Link
+              href="/linear"
+              className="group block h-full rounded-2xl edge bg-card p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:depth-raised"
+            >
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand">
+                data-skin=&quot;linear&quot;
+              </p>
+              <h3 className="mt-3 text-xl font-normal tracking-tight text-foreground">
+                Linear
+              </h3>
+              <p className="reading-ui mt-3 text-foreground text-pretty">
+                Indigo accent, near-black ladder, dense operational chrome for
+                product-OS surfaces.
+              </p>
+              <p className="mt-4 font-mono text-xs text-muted-foreground">
+                Hub + Skin toggle{" "}
+                <span className="inline-block text-brand transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              </p>
+            </Link>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <Link
+              href="/polaris"
+              className="group block h-full rounded-2xl edge bg-card p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:depth-raised"
+            >
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand">
+                data-skin=&quot;polaris&quot;
+              </p>
+              <h3 className="mt-3 text-xl font-normal tracking-tight text-foreground">
+                Polaris
+              </h3>
+              <p className="reading-ui mt-3 text-foreground text-pretty">
+                Gray canvas, white cards, dark-neutral primary, teal accent —
+                merchant admin density.
+              </p>
+              <p className="mt-4 font-mono text-xs text-muted-foreground">
+                Hub + Skin toggle{" "}
+                <span className="inline-block text-brand transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              </p>
+            </Link>
+          </Reveal>
         </div>
       </section>
 

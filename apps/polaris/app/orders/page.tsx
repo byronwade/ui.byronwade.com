@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { AdminShell } from "@/components/polaris/admin-shell"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -11,31 +13,36 @@ import {
 
 const ORDERS = [
   {
-    id: "#1042",
+    id: "1042",
+    number: "#1042",
     customer: "Alex Rivera",
     status: "Fulfilled",
     total: "$128.00",
   },
   {
-    id: "#1041",
+    id: "1041",
+    number: "#1041",
     customer: "Jordan Lee",
     status: "Unfulfilled",
     total: "$64.50",
   },
   {
-    id: "#1040",
+    id: "1040",
+    number: "#1040",
     customer: "Sam Chen",
     status: "Paid",
     total: "$42.00",
   },
   {
-    id: "#1039",
+    id: "1039",
+    number: "#1039",
     customer: "Riley Park",
     status: "Partially fulfilled",
     total: "$210.00",
   },
   {
-    id: "#1038",
+    id: "1038",
+    number: "#1038",
     customer: "Casey Morgan",
     status: "Refunded",
     total: "$36.00",
@@ -66,14 +73,21 @@ export default function OrdersPage() {
           <TableBody>
             {ORDERS.map((order) => (
               <TableRow key={order.id}>
-                <TableCell className="font-mono text-xs text-muted-foreground">
-                  {order.id}
+                <TableCell className="font-mono text-xs">
+                  <Link
+                    href={`/orders/${order.id}`}
+                    className="text-foreground underline-offset-2 hover:underline"
+                  >
+                    {order.number}
+                  </Link>
                 </TableCell>
                 <TableCell>{order.customer}</TableCell>
                 <TableCell>
                   <Badge variant="outline">{order.status}</Badge>
                 </TableCell>
-                <TableCell className="font-mono text-xs">{order.total}</TableCell>
+                <TableCell className="font-mono text-xs">
+                  {order.total}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

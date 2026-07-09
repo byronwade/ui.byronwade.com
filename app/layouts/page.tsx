@@ -4,5 +4,5 @@ import { redirect } from "next/navigation"
 // deep-links into the catalog with the Layouts type pre-selected; the
 // /layouts/<slug> inspector routes still render their own full-viewport shell.
 export default function LayoutsGalleryPage() {
-  redirect("/catalog?type=layouts")
+  redirect("/catalog?type=layout")
 }
