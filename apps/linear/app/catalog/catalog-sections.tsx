@@ -217,9 +217,22 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import {
   AgentTimeline,
   AskLinearPanel,
+  AskLinearWelcome,
+  BacklogIssueRow,
+  BacklogSection,
   CommandShell,
   CyclePanel,
   IssueRow,
+  ProjectLogoBlock,
+  ProjectPropertiesPanel,
+  SearchShell,
+  SettingsList,
+  SettingsPageIntro,
+  SettingsSection,
+  SettingsSubheading,
+  SettingsToggleRow,
+  WorkspaceIssueTabs,
+  WorkspaceListPanel,
 } from "@/components/linear"
 import { CategorySection, ComponentPreview } from "./component-preview"
 import { toast } from "sonner"
@@ -996,6 +1009,125 @@ export function CatalogSections() {
 
         <ComponentPreview slug="ask-linear-panel" name="Ask Linear panel">
           <AskLinearPanel />
+        </ComponentPreview>
+
+        <ComponentPreview slug="workspace-shell" name="Workspace shell">
+          <div
+            data-slot="linear-workspace-shell"
+            className="overflow-hidden rounded-lg border border-border"
+          >
+            <div
+              data-slot="linear-workspace-header"
+              className="flex h-12 items-center border-b border-border px-4 text-sm font-medium"
+            >
+              All issues
+            </div>
+            <WorkspaceIssueTabs
+              tabs={[
+                { id: "all", label: "All issues" },
+                { id: "active", label: "Active" },
+                { id: "backlog", label: "Backlog" },
+              ]}
+              activeId="all"
+            />
+            <WorkspaceListPanel title="Issues" count={2}>
+              <IssueRow
+                id="ENG-142"
+                title="Refactor command palette keyboard nav"
+                statusLabel="In progress"
+                priority="P2"
+                assignee={{ name: "Alex", initials: "AC" }}
+              />
+              <IssueRow
+                id="ENG-139"
+                title="Ship cycle planning sidebar"
+                statusLabel="Todo"
+                priority="P1"
+                assignee={{ name: "Sam", initials: "SR" }}
+              />
+            </WorkspaceListPanel>
+          </div>
+        </ComponentPreview>
+
+        <ComponentPreview slug="settings-shell" name="Settings shell">
+          <div className="max-w-lg space-y-4">
+            <SettingsPageIntro
+              title="Notifications"
+              description="Choose how and when Linear notifies you."
+            />
+            <SettingsSubheading>Channels</SettingsSubheading>
+            <SettingsSection title="Desktop" description="System notifications on this device.">
+              <SettingsList>
+                <SettingsToggleRow
+                  title="Desktop notifications"
+                  description="Show a system notification for inbox activity."
+                  checked
+                  onCheckedChange={() => {}}
+                />
+              </SettingsList>
+            </SettingsSection>
+          </div>
+        </ComponentPreview>
+
+        <ComponentPreview slug="search-shell" name="Search shell">
+          <div className="h-72 overflow-hidden rounded-lg border border-border">
+            <SearchShell
+              query="cycle"
+              onQueryChange={() => {}}
+              filter="all"
+              onFilterChange={() => {}}
+              results={[
+                {
+                  id: "ENG-139",
+                  type: "issue",
+                  title: "Ship cycle planning sidebar",
+                  breadcrumb: "Engineering",
+                  time: "2d",
+                },
+                {
+                  id: "proj-1",
+                  type: "project",
+                  title: "Cycle planning",
+                  meta: "AS Mobbin",
+                  time: "1w",
+                },
+              ]}
+            />
+          </div>
+        </ComponentPreview>
+
+        <ComponentPreview slug="backlog-issue-row" name="Backlog issue row">
+          <div className="max-w-xl overflow-hidden rounded-lg border border-border">
+            <BacklogSection title="Backlog" count={2}>
+              <BacklogIssueRow
+                id="AS-29"
+                title="Define product requirements (PRD)"
+                project="User insight"
+                date="Mar 12"
+                assigneeInitials="AC"
+              />
+              <BacklogIssueRow
+                id="AS-31"
+                title="Interview synthesis template"
+                project="User insight"
+                date="Mar 18"
+                assigneeInitials="SR"
+              />
+            </BacklogSection>
+          </div>
+        </ComponentPreview>
+
+        <ComponentPreview slug="ask-linear-welcome" name="Ask Linear welcome">
+          <div className="overflow-hidden rounded-lg border border-border">
+            <AskLinearWelcome className="min-h-[320px] py-8" />
+          </div>
+        </ComponentPreview>
+
+        <ComponentPreview slug="project-detail" name="Project detail">
+          <div className="grid max-w-2xl gap-4 md:grid-cols-[1fr_220px]">
+            <ProjectLogoBlock className="max-w-none" />
+            <ProjectPropertiesPanel />
+          </div>
         </ComponentPreview>
       </CategorySection>
     </>

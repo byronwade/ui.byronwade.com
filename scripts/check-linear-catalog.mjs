@@ -27,6 +27,12 @@ const linearCompositeSlugs = [
   "command-shell",
   "agent-timeline",
   "ask-linear-panel",
+  "workspace-shell",
+  "settings-shell",
+  "search-shell",
+  "backlog-issue-row",
+  "ask-linear-welcome",
+  "project-detail",
 ]
 const expectedUiSlugs = new Set(uiSlugs)
 const catalogUiSlugs = catalogSlugs.filter((s) => !linearCompositeSlugs.includes(s))

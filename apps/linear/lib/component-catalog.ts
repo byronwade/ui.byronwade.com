@@ -86,6 +86,12 @@ export const CATALOG_COMPONENTS: CatalogComponent[] = [
   { slug: "command-shell", name: "Command shell", category: "linear" },
   { slug: "agent-timeline", name: "Agent timeline", category: "linear" },
   { slug: "ask-linear-panel", name: "Ask Linear panel", category: "linear" },
+  { slug: "workspace-shell", name: "Workspace shell", category: "linear" },
+  { slug: "settings-shell", name: "Settings shell", category: "linear" },
+  { slug: "search-shell", name: "Search shell", category: "linear" },
+  { slug: "backlog-issue-row", name: "Backlog issue row", category: "linear" },
+  { slug: "ask-linear-welcome", name: "Ask Linear welcome", category: "linear" },
+  { slug: "project-detail", name: "Project detail", category: "linear" },
 ]
 
 export function getCatalogComponent(slug: string) {
