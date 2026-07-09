@@ -40,7 +40,8 @@ Re-run the app catalog / styleguide to verify the reskin layer covers new `data-
 | `npm run check:linear-catalog` | Ensures every `components/ui` slug has a catalog entry + live preview                                            |
 | `npm run check:linear-visual`  | Visual / density heuristics for Linear demos                                                                     |
 | `npm run gen:linear-skin`      | Regenerates `app/linear-skin.generated.css` for the main site's Linear skin toggle                               |
-| `npm run build:linear`         | Runs slot + catalog + visual checks + production build                                                           |
+| `npm run check:themed-nav`     | Sidebar hrefs in Linear/Polaris shells must resolve to a `page.tsx`                                              |
+| `npm run build:linear`         | Runs nav + slot + catalog + visual checks + production build                                                     |
 
 Full component preview: **`/catalog`** (or **`/components`**) in the Linear app.
 
@@ -52,7 +53,8 @@ Full component preview: **`/catalog`** (or **`/components`**) in the Linear app.
 | `npm run check:polaris-catalog` | Ensures every `components/ui` slug has a catalog entry                               |
 | `npm run gen:polaris-skin`      | Regenerates `app/polaris-skin.generated.css` for the main site's Polaris skin toggle |
 | `npm run check:polaris-skin`    | Fails if generated Polaris skin is stale vs source                                   |
-| `npm run build:polaris`         | Runs slot + catalog checks + production build                                        |
+| `npm run check:themed-nav`      | Sidebar hrefs in Linear/Polaris shells must resolve to a `page.tsx`                  |
+| `npm run build:polaris`         | Runs nav + slot + catalog + visual checks + production build                         |
 
 Catalog: **`/catalog`**. Live specimens: **`/styleguide`**.
 
@@ -84,17 +86,21 @@ Main-site `/linear` and `/polaris` are **hub pages** (explain Skin toggle vs sib
 
 ## Linear composites (`apps/linear`)
 
-Product-specific patterns built on reskinned shadcn primitives:
+Product-specific patterns built on reskinned shadcn primitives (also listed in `/catalog`):
 
-| Component        | Path                                    | Purpose                                                      |
-| ---------------- | --------------------------------------- | ------------------------------------------------------------ |
-| `IssueRow`       | `components/linear/issue-row.tsx`       | Dense issue list row (id, title, status, priority, assignee) |
-| `CyclePanel`     | `components/linear/cycle-panel.tsx`     | Cycle progress sidebar card                                  |
-| `CommandShell`   | `components/linear/command-shell.tsx`   | ⌘K command menu dialog                                       |
-| `WorkspaceShell` | `components/linear/workspace-shell.tsx` | Engineering workspace chrome                                 |
-| `SettingsShell`  | `components/linear/settings-shell.tsx`  | Settings navigation chrome                                   |
+| Component | Path | Purpose |
+| --------- | ---- | ------- |
+| `IssueRow` | `components/linear/issue-row.tsx` | Dense issue list row |
+| `CyclePanel` | `components/linear/cycle-panel.tsx` | Cycle progress sidebar card |
+| `CommandShell` | `components/linear/command-shell.tsx` | ⌘K command menu dialog |
+| `WorkspaceShell` | `components/linear/workspace-shell.tsx` | Engineering workspace chrome |
+| `SettingsShell` | `components/linear/settings-shell.tsx` | Settings navigation chrome |
+| `SearchShell` | `components/linear/search-shell.tsx` | Workspace search overlay |
+| `BacklogIssueRow` | `components/linear/backlog-issue-row.tsx` | Backlog section + rows |
+| `AskLinearWelcome` / `AskLinearPanel` | `components/linear/ask-linear-*.tsx` | Ask Linear surfaces |
+| `ProjectDetail` | `components/linear/project-detail.tsx` | Project overview |
 
-Demo: `/workspace` and `/settings` in the Linear app.
+Demo: `/workspace`, `/workspace/inbox`, `/workspace/my-issues`, and `/settings` in the Linear app.
 
 ## Polaris composites (`apps/polaris`)
 
