@@ -152,13 +152,14 @@ const TYPE_OPTIONS: { label: string; value: BrowseTypeFilter }[] = [
   { label: "All", value: "all" },
   { label: "Components", value: "component" },
   { label: "Layouts", value: "layout" },
+  { label: "Templates", value: "template" },
 ]
 
 /**
- * The merged Browse grid — components and full-page layouts in one place, with a
- * Type segmented control, the shared Surface filter, free-text search, and sort.
- * `?type=` and `?surface=` stay in the URL so any view is deep-linkable (the old
- * /layouts route redirects to `/catalog?type=layouts`).
+ * The merged Browse grid — components, layouts, and starter templates in one
+ * place, with a Type segmented control, the shared Surface filter, free-text
+ * search, and sort. `?type=` and `?surface=` stay in the URL so any view is
+ * deep-linkable.
  */
 export function BrowseGallery({
   items,
@@ -235,6 +236,7 @@ export function BrowseGallery({
       all: items.length,
       component: items.filter((i) => i.kind === "component").length,
       layout: items.filter((i) => i.kind === "layout").length,
+      template: items.filter((i) => i.kind === "template").length,
     }),
     [items],
   )
@@ -333,7 +335,7 @@ export function BrowseGallery({
         <ul className="mt-8 grid grid-cols-1 gap-x-6 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((item) => (
             <li key={`${item.kind}-${item.slug}`}>
-              {item.kind === "layout" ? (
+              {item.kind === "layout" || item.kind === "template" ? (
                 <LayoutCard item={item} />
               ) : (
                 <ComponentCard item={item} />

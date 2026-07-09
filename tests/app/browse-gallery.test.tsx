@@ -20,6 +20,16 @@ const items: BrowseItem[] = [
     previewSrc: "/preview/ops",
     search: "ops workspace operations app",
   },
+  {
+    kind: "template",
+    slug: "pricing",
+    name: "Pricing",
+    surface: "marketing",
+    group: "Marketing",
+    href: "/templates/pricing",
+    previewSrc: "/preview/pricing",
+    search: "pricing marketing template",
+  },
 ]
 
 const componentItems: BrowseItem[] = [
@@ -77,5 +87,14 @@ describe("BrowseGallery", () => {
 
     expect(screen.getByLabelText("Missing Thumb")).toBeInTheDocument()
     expect(container.querySelector("img")).not.toBeInTheDocument()
+  })
+
+  it("exposes a Templates type facet in the type control", () => {
+    render(<BrowseGallery items={items} />)
+
+    expect(
+      screen.getByRole("button", { name: /templates \(\d+\)/i }),
+    ).toBeInTheDocument()
+    expect(screen.getByLabelText("Pricing")).toBeInTheDocument()
   })
 })

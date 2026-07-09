@@ -412,9 +412,10 @@ lead with the app lane.
 | **Application UI**           | **primary**   | UI lane — `font-sans`, `text-sm`/`text-base`             | Shells, tables, resource lists, forms, dashboards | `app-shell`, `sidebar`, `table`, `morph-dock` |
 | **Marketing & editorial**    | secondary     | Essay lane — `reading-prose` for copy; heroes full-bleed | `marketing-layout`, media shelves, commerce     | `hero-section`, `marketing-layout`, `video-shelf` |
 
-Media, Video, and Commerce categories are the secondary marketing lane. `hero-section`,
-`marketing-layout`, and `description-box` are marketing even when filed under Composites/Patterns —
-use them for landing/screenshot surfaces, not as the shape of a product screen.
+Media, Video, Commerce, and Market categories are the secondary marketing lane (Market is a
+domain/demo trading lane — not default app chrome). `hero-section`, `marketing-layout`, and
+`description-box` are marketing even when filed under Composites/Patterns — use them for
+landing/screenshot surfaces, not as the shape of a product screen.
 
 **Named surface hierarchy (calm, small steps, hairline depth):**
 

@@ -9,50 +9,34 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }))
 
-async function renderPage() {
-  return render(await TemplatesPage())
+function renderPage() {
+  return render(<TemplatesPage />)
 }
 
 describe("TemplatesPage", () => {
-  it("renders a coming soon page instead of the templates gallery", async () => {
-    await renderPage()
+  it("renders the templates gallery with starter screens", () => {
+    renderPage()
 
     expect(
-      screen.getByRole("heading", { name: /templates coming soon/i }),
+      screen.getByRole("heading", { name: /starter templates/i }),
     ).toBeInTheDocument()
-    expect(
-      screen.getByRole("link", { name: /read the docs/i }),
-    ).toHaveAttribute("href", "/docs")
-    expect(
-      screen.getByRole("link", { name: /browse components/i }),
-    ).toHaveAttribute("href", "/catalog")
-
-    expect(screen.queryByText(/starter templates/i)).not.toBeInTheDocument()
-    expect(
-      screen.queryByText(/full website templates/i),
-    ).not.toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /pricing/i })).toHaveAttribute(
+      "href",
+      "/templates/pricing",
+    )
+    expect(screen.getByRole("link", { name: /dashboard/i })).toHaveAttribute(
+      "href",
+      "/templates/dashboard",
+    )
+    expect(screen.getByRole("link", { name: /settings/i })).toHaveAttribute(
+      "href",
+      "/templates/settings",
+    )
   })
 
   it("has no axe violations", async () => {
-    const { container } = await renderPage()
+    const { container } = renderPage()
 
     expect(await axe(container)).toHaveNoViolations()
-  })
-
-  it("uses a fixed viewport shell so the route does not need page scroll", async () => {
-    const { container } = await renderPage()
-    const main = container.querySelector("main")
-    const section = container.querySelector("section")
-
-    expect(main).toHaveClass("fixed", "inset-0", "h-dvh", "overflow-hidden")
-    expect(main).not.toHaveClass("min-h-dvh")
-    expect(section).toHaveClass("h-dvh")
-    expect(section).not.toHaveClass("min-h-dvh")
-    expect(screen.getByRole("complementary")).toHaveClass(
-      "[@media(max-height:760px)]:hidden",
-    )
-    expect(screen.getByRole("list")).toHaveClass(
-      "[@media(max-height:760px)]:hidden",
-    )
   })
 })

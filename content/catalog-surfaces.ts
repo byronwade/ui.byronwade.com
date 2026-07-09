@@ -17,6 +17,8 @@ const MARKETING_CATEGORIES = new Set<ComponentDoc["category"]>([
   "Media",
   "Video",
   "Commerce",
+  // Domain/demo lane — trading desks and market widgets are not default app chrome.
+  "Market",
 ])
 
 /** Slugs filed under app categories but composed primarily on marketing surfaces. */
@@ -24,6 +26,14 @@ const MARKETING_SLUGS = new Set([
   "hero-section",
   "marketing-layout",
   "description-box",
+  // Motion / decorative UI — secondary lane, not operational chrome.
+  "world-map",
+  "floating-dock",
+  "kinetic-text",
+  "backlight",
+  "safari",
+  "iphone",
+  "android",
 ])
 
 const MARKETING_TEMPLATE_CATEGORIES = new Set(["Marketing"])
@@ -69,7 +79,7 @@ export const catalogSurfaces: {
     label: "Marketing & editorial",
     shortLabel: "Marketing",
     description:
-      "Secondary lane — screenshot, documentation, and demo utilities: landing pages, media, commerce, and essays on reading-prose and full-bleed scaffolds. Not the default for product screens.",
+      "Secondary lane — screenshot, documentation, and demo utilities: landing pages, media, commerce, market/trading widgets, and essays on reading-prose and full-bleed scaffolds. Not the default for product screens.",
     href: "/catalog?surface=marketing",
   },
 ]

@@ -7,17 +7,19 @@ import { components } from "@/content/components"
 import { catalogItems } from "@/content/catalog"
 import {
   getArchetypeSurface,
+  getTemplateSurface,
   parseSurfaceParam,
 } from "@/content/catalog-surfaces"
 import { parseTypeParam, type BrowseItem } from "@/content/browse"
 import { archetypes } from "@/app/layouts/_archetypes"
+import { templates } from "@/app/templates/_templates"
 import { BrowseGallery } from "@/app/_components/browse-gallery"
 import { DocsIntro } from "@/app/(docs)/_components/docs-prose"
 
 export const metadata: Metadata = {
   title: "Browse, byronwade/ui",
   description:
-    "Browse everything in the system — components and full-page layouts. Filter by type and surface, search by name, variant, or tag.",
+    "Browse everything in the system — components, layouts, and starter templates. Filter by type and surface, search by name, variant, or tag.",
 }
 
 function exampleCounts(): Record<string, number> {
@@ -48,7 +50,7 @@ function thumbnailSlugs(): Set<string> {
   }
 }
 
-/** Components + layout archetypes, normalized into one unified browse list. */
+/** Components + layout archetypes + starter templates. */
 function browseItems(): BrowseItem[] {
   const availableThumbnails = thumbnailSlugs()
   const componentItems: BrowseItem[] = catalogItems(exampleCounts()).map(
@@ -75,7 +77,18 @@ function browseItems(): BrowseItem[] {
     previewSrc: `/preview/${a.slug}`,
     search: `${a.name} ${a.category} ${a.uses.join(" ")}`.toLowerCase(),
   }))
-  return [...componentItems, ...layoutItems]
+  const templateItems: BrowseItem[] = templates.map((t) => ({
+    kind: "template",
+    slug: t.slug,
+    name: t.name,
+    surface: getTemplateSurface(t),
+    group: t.category,
+    href: `/templates/${t.slug}`,
+    previewSrc: `/preview/${t.slug}`,
+    price: t.price,
+    search: `${t.name} ${t.category} ${t.tagline} ${t.uses.join(" ")}`.toLowerCase(),
+  }))
+  return [...componentItems, ...layoutItems, ...templateItems]
 }
 
 export default async function CatalogPage({
@@ -89,7 +102,7 @@ export default async function CatalogPage({
   const items = browseItems()
 
   return (
-    <div className="w-full px-6 pt-16 pb-24 sm:px-8 lg:px-12">
+    <div className="w-full px-6 pt-14 pb-24 sm:px-8 lg:px-12">
       <header className="max-w-2xl">
         <p className="font-mono text-xs tracking-[0.2em] text-brand uppercase">
           Browse

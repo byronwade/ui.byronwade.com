@@ -6,9 +6,9 @@ import { CommandPalette } from "./command-palette"
 import { SiteHeader } from "./site-header"
 
 /**
- * Global application chrome: a full-width top header (primary nav + app switcher
- * + search/theme/source) plus the command palette (⌘K). Chrome-free preview
- * routes (`/preview/*`) render without it.
+ * Global application chrome: fixed header + ⌘K palette.
+ * Chrome-free preview routes (`/preview/*`) render without it.
+ * Footer is mounted from the root layout after page content.
  */
 export function AppChrome() {
   const pathname = usePathname()

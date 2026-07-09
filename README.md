@@ -40,23 +40,28 @@ semantics, density, object-bound AI, approved vs disallowed patterns) lives in
 - `utils` — `cn()` (clsx + tailwind-merge)
 - `identity` — deterministic animal-name + OKLCH gradient from a seed string
 
-**UI primitives** (forms, overlays, feedback, data display)
+**Application UI** (primary lane — forms, overlays, feedback, data display, AI, morph)
 
-- Forms: `button`, `input`, `textarea`, `label`, `select`, `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`
-- Overlays: `tooltip`, `popover`, `dropdown-menu`, `dialog`, `sheet`, `hover-card`, `command`, `navigation-menu`
-- Feedback: `alert`, `progress`, `skeleton`, `sonner`
-- Data display: `badge`, `card`, `tabs`, `accordion`, `avatar`, `separator`, `breadcrumb`, `table`, `aspect-ratio`, `scroll-area`, `collapsible`, `chart`
+- Forms: `button`, `input`, `textarea`, `label`, `select`, `checkbox`, `switch`, `radio-group`, `toggle`, `toggle-group`, `input-group`, …
+- Overlays: `tooltip`, `popover`, `dropdown-menu`, `dialog`, `sheet`, `hover-card`, `command`, `navigation-menu`, …
+- Feedback / data display: `alert`, `progress`, `skeleton`, `sonner`, `badge`, `card`, `tabs`, `table`, `chart`, …
 - House UI: `status-dot`, `activity-ring`, `gradient-avatar`, `activity-grid`, `filter-pill`, `segmented-control`
+- AI: object-bound agent surfaces (`ai-task`, `ai-sources`, `ai-confirmation`, `ai-code-block`, `ai-canvas`, …)
+- Morph: morphing chrome (`use-chrome-morph`, `morph-dock`, `morph-surface`, `morph-bar`, `morph-sidebar`, …)
+- Composites & patterns: `page-header`, `metric-stat`, `stat-card`, `empty-state`, `status-pill`, `app-shell`, …
 
-**Morph** (morphing chrome)
+**Secondary lanes** (docs / screenshots / demos — not default product UI)
 
-- `use-chrome-morph` · `morph-dock`
+- Market: trading widgets (`ticker-tape`, `quote-header`, `order-book`, `candlestick-chart`, …) — domain demo lane, not app chrome
+- Video: YouTube-modeled media UI (`video-card`, `video-shelf`, `channel-header`, …)
+- Commerce: Shopify-flavored admin/commerce patterns (`product-card`, `order-summary`, `money-input`, …)
+- Media / marketing scaffolds: audio shelves, `hero-section`, `marketing-layout`, device frames
 
-**Composites & patterns**
+**Skins & monorepo apps**
 
-- Layouts: `hero-section`, `centered-focal`, `split-with-rail`, `timeline-rail`
-- Patterns: `page-header`, `metric-stat`, `stat-card`, `empty-state`, `status-pill`
-- House: `detail-header`, `section`, `event-timeline`
+- Skin toggle on the main site: Warm (default) · Linear · Polaris — token overrides via `data-skin`
+- Sibling demo apps: `apps/linear` (product OS) and `apps/polaris` (admin shell) — see [`docs/monorepo.md`](docs/monorepo.md)
+- Installable Polaris token pack: `@byronwade/polaris` (opt-in; excluded from `@byronwade/all`)
 
 **AI rule**
 
@@ -183,29 +188,34 @@ value) — rings, the primary chart line, active states, and status-success all 
 
 Neutrals, `--warning` (amber), `--destructive` (red), and the dark `--dock-*` tokens are independent by design.
 
-## Alternate skins (Polaris)
+## Alternate skins (Polaris + Linear)
 
 Because every component consumes **semantic tokens only**, a whole alternate look is just a different
-set of token _values_ — no component changes. The registry ships one alternate skin today:
+set of token _values_ — no component changes. The registry and main site ship two alternate skins:
 
-- **`polaris`** — a Shopify-Polaris-inspired admin skin. Beyond token values (cool low-chroma neutral
-  surfaces, white cards on a light-gray canvas, a teal-green brand, a dark-neutral primary), it ships a
-  small **component layer** (a `css` block targeting shared `data-slot`s) that adopts Polaris's visual
-  language across every component at once: elevated white cards/overlays (border + soft drop shadow),
-  de-pilled rounded-rectangle buttons/badges, and bordered white form fields. Light and dark. It does
-  not fork component files — it restyles the shared primitives, so components Polaris has no equivalent
-  for (charts, players, etc.) inherit the palette and depth but keep their own structure.
+- **`polaris`** — Shopify-Polaris-inspired admin skin (cool neutrals, white cards on gray canvas, teal
+  brand, dark-neutral primary) plus a `data-slot` component layer. Install: `npx shadcn@latest add @byronwade/polaris`.
+- **`linear`** — Linear product-OS skin (indigo accent, near-black ladder, 6px controls). Live on the
+  main site via the Skin toggle; full product demos live in `apps/linear`.
 
-**Install it into your project** (opt-in — it's excluded from `@byronwade/all`):
+Themed sibling apps (see [`docs/monorepo.md`](docs/monorepo.md)):
+
+```bash
+npm run dev:linear    # ui.byronwade.com/linear
+npm run dev:polaris   # ui.byronwade.com/polaris
+npm run gen:linear-skin
+npm run gen:polaris-skin
+```
+
+**Install Polaris into your project** (opt-in — excluded from `@byronwade/all`):
 
 ```bash
 npx shadcn@latest add @byronwade/polaris
 ```
 
-This writes the Polaris token values into your `globals.css` (`:root` / `.dark`), so the whole system
-adopts the Polaris look. To keep both looks and **toggle between them at runtime**, scope the Polaris
-values under `:root[data-skin="polaris"]` (this is exactly how the docs site's skin switcher works —
-see the skin block in `app/globals.css`) and set `document.documentElement.dataset.skin = "polaris"`.
+This writes the Polaris token values into your `globals.css` (`:root` / `.dark`). To keep both looks and
+**toggle between them at runtime**, scope values under `:root[data-skin="polaris"]` (how the docs site's
+skin switcher works — see `app/globals.css`) and set `document.documentElement.dataset.skin = "polaris"`.
 
 ## Developing the registry
 
