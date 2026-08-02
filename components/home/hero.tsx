@@ -22,8 +22,8 @@ function Hero() {
             ui.byronwade.com
           </h1>
           <p className="mt-6 max-w-sm text-base leading-relaxed tracking-tight text-dock-foreground/70">
-            Dense like Linear. Calm like Polaris. Typed like Vercel. AI bound to
-            the object — staged like a product film.
+            A calm, useful system for product UI — density by task, meaning in
+            every signal, the product as the only subject.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button variant="theater" size="pill" asChild>
@@ -38,7 +38,6 @@ function Hero() {
           </div>
         </div>
 
-        {/* Product owns the frame — cinema subject is the app, not a poster */}
         <div className="relative hidden md:block">
           <div className="absolute -inset-3 rounded-[1.35rem] bg-dock-foreground/5" />
           <Workbench className="relative h-[22rem] shadow-none md:h-[26rem]" />

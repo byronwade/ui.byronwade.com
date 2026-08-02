@@ -15,11 +15,11 @@ function Closing() {
           Meridian
         </p>
         <h2 className="mt-5 text-[clamp(2rem,5vw,3.5rem)] font-medium leading-[1.05] tracking-[-0.04em] text-dock-foreground">
-          Build product UI that feels inevitable.
+          Fewer decisions. Clearer product UI.
         </h2>
         <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-dock-foreground/60">
-          Not a collage of five brands — one calm system you can ship on every
-          surface.
+          Useful by default. Meaningful signals. Proven in the workbench — not
+          a mood board of other brands.
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Button variant="theater" size="pill" asChild>

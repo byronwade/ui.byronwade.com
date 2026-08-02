@@ -17,12 +17,11 @@ function SurfaceLane() {
               Surfaces
             </p>
             <h2 className="mt-3 text-3xl font-medium tracking-[-0.035em] md:text-4xl">
-              Same system. Four densities.
+              Same tokens. Density by task.
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-              Application, marketing, mobile, and desktop share tokens and
-              primitives — chrome and hit targets change, the philosophy does
-              not.
+              Application, marketing, mobile, and desktop share primitives —
+              hit targets and chrome adapt to the job, not a new visual kit.
             </p>
           </div>
           <Button variant="outline" asChild>

@@ -28,12 +28,11 @@ export default function SurfacesPage() {
           Surfaces
         </p>
         <h1 className="mt-4 max-w-[16ch] text-3xl font-medium tracking-[-0.035em] md:text-5xl">
-          One system. Four lanes.
+          One system. Density by task.
         </h1>
         <p className="reading-muted mt-5 max-w-2xl text-base leading-relaxed tracking-tight">
-          Web Application, Web Marketing, Mobile Native, and Desktop Native share
-          the same tokens, primitives, and laws — density and chrome change, the
-          philosophy does not.
+          Application, marketing, mobile, and desktop share tokens and primitives.
+          Hit targets and chrome adapt to the job — not a new kit per surface.
         </p>
 
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
