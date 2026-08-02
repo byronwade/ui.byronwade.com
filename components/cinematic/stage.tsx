@@ -8,7 +8,7 @@ type StageProps = {
   tone?: StageTone;
   children: ReactNode;
   className?: string;
-  /** Full viewport height — only for hero/theater moments. */
+  /** Full viewport height — only for the opening hero. */
   fullBleed?: boolean;
 };
 
@@ -25,8 +25,8 @@ function Stage({
       data-slot="cinema-stage"
       data-tone={tone}
       className={cn(
-        "relative overflow-hidden [content-visibility:auto] [contain-intrinsic-size:1px_720px]",
-        fullBleed && "min-h-dvh [content-visibility:visible]",
+        "relative",
+        fullBleed && "flex min-h-dvh flex-col",
         tone === "theater"
           ? "bg-dock text-dock-foreground"
           : "bg-background text-foreground",

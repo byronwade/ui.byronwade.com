@@ -69,7 +69,7 @@ Set the lane with `data-surface`:
 
 - Media owns the frame — full-bleed, not inset marketing cards
 - One idea per frame
-- Style over spectacle — no scroll choreography, SVG grain, or `mix-blend` on fixed chrome
+- Style over spectacle — no scroll choreography, SVG grain, `mix-blend` on fixed chrome, or `content-visibility` size placeholders (they hitch scroll)
 - Simple motion only — honor `prefers-reduced-motion`
 - Theater when earned — marketing presence; not app chrome
 - No overlay stickers on media

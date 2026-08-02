@@ -1,6 +1,5 @@
 import { Stage } from "@/components/cinematic/stage";
 import { MediaPlane } from "@/components/cinematic/media-plane";
-import { Reveal } from "@/components/cinematic/reveal";
 import { Separator } from "@/components/ui/separator";
 
 function CinemaStatement() {
@@ -8,13 +7,12 @@ function CinemaStatement() {
     <Stage
       id="cinema"
       tone="theater"
-      fullBleed
-      className="flex flex-col justify-center"
+      className="relative flex flex-col justify-center px-5 py-24 md:px-8 md:py-32"
     >
       <MediaPlane />
 
-      <Reveal className="relative z-10 mx-auto w-full max-w-5xl px-5 md:px-8">
-        <p className="font-mono text-xs tracking-[0.22em] text-brand uppercase">
+      <div className="relative z-10 mx-auto w-full max-w-5xl">
+        <p className="font-mono text-xs tracking-[0.2em] text-brand uppercase">
           Cinema
         </p>
         <h2 className="mt-6 space-y-3 text-[clamp(2rem,6vw,4.25rem)] font-medium leading-[1.05] tracking-[-0.04em]">
@@ -29,9 +27,9 @@ function CinemaStatement() {
         <Separator className="my-8 max-w-xs bg-dock-foreground/15" />
         <p className="max-w-lg text-base leading-relaxed tracking-tight text-dock-foreground/55 md:text-lg">
           Apple framing, Tesla theater, YouTube-scale media — composed as still
-          stages. Simple fades only. No scroll choreography.
+          stages. No scroll choreography.
         </p>
-      </Reveal>
+      </div>
     </Stage>
   );
 }

@@ -7,7 +7,7 @@ function SiteHeader() {
   return (
     <header
       data-slot="site-header"
-      className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-border/60 bg-background/90 px-5 md:px-8"
+      className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background px-5 md:px-8"
     >
       <Link
         href="/"

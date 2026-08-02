@@ -7,8 +7,7 @@ function Closing() {
   return (
     <Stage
       tone="theater"
-      fullBleed
-      className="flex flex-col items-center justify-center px-5 py-32 md:px-8 md:py-40"
+      className="relative flex flex-col items-center justify-center px-5 py-28 md:px-8 md:py-36"
     >
       <MediaPlane />
       <div className="relative z-10 mx-auto max-w-3xl text-center">

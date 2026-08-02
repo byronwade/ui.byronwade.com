@@ -211,12 +211,14 @@
   html {
     @apply antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-background font-sans text-foreground;
     font-feature-settings: "ss01" on, "cv11" on;
     letter-spacing: -0.011em;
+    overflow-x: clip;
   }
 
   ::selection {
@@ -332,65 +334,4 @@
     color: color-mix(in oklch, var(--foreground) 62%, transparent);
   }
 
-  /*
-   * Single-layer cinema atmosphere — no SVG filters, no mix-blend.
-   * Stacked blend modes + feTurbulence were janking mobile scroll.
-   */
-  .cinema-plane {
-    background:
-      linear-gradient(
-        to top,
-        color-mix(in oklch, var(--dock) 88%, transparent) 0%,
-        color-mix(in oklch, var(--dock) 30%, transparent) 42%,
-        transparent 72%
-      ),
-      radial-gradient(
-        ellipse 70% 55% at 50% 18%,
-        color-mix(in oklch, var(--brand) 22%, transparent),
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 45% 35% at 82% 72%,
-        color-mix(in oklch, var(--dock-foreground) 6%, transparent),
-        transparent 70%
-      );
-  }
-
-  @media (min-width: 768px) {
-    .cinema-plane {
-      background-image:
-        linear-gradient(
-          to right,
-          color-mix(in oklch, var(--dock-foreground) 4%, transparent) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          to bottom,
-          color-mix(in oklch, var(--dock-foreground) 4%, transparent) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          to top,
-          color-mix(in oklch, var(--dock) 88%, transparent) 0%,
-          color-mix(in oklch, var(--dock) 30%, transparent) 42%,
-          transparent 72%
-        ),
-        radial-gradient(
-          ellipse 70% 55% at 50% 18%,
-          color-mix(in oklch, var(--brand) 22%, transparent),
-          transparent 70%
-        ),
-        radial-gradient(
-          ellipse 45% 35% at 82% 72%,
-          color-mix(in oklch, var(--dock-foreground) 6%, transparent),
-          transparent 70%
-        );
-      background-size:
-        48px 48px,
-        48px 48px,
-        auto,
-        auto,
-        auto;
-    }
-  }
 }
