@@ -70,7 +70,7 @@ function Density() {
         </Reveal>
 
         <Reveal>
-          <Card className="rounded-2xl ring-foreground/8 depth-soft">
+          <Card className="depth-soft">
             <CardHeader className="border-b">
               <div className="flex items-center justify-between gap-3">
                 <div>

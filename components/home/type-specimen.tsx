@@ -28,7 +28,7 @@ function TypeSpecimen() {
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           <Reveal>
-            <Card className="h-full rounded-2xl">
+            <Card className="h-full">
               <CardHeader>
                 <CardTitle>Specimens</CardTitle>
                 <CardDescription>Geist Sans + Geist Mono</CardDescription>
@@ -66,7 +66,7 @@ function TypeSpecimen() {
           </Reveal>
 
           <Reveal>
-            <Card className="h-full rounded-2xl">
+            <Card className="h-full">
               <CardHeader>
                 <CardTitle>reading-ui</CardTitle>
                 <CardDescription>Docs lane</CardDescription>

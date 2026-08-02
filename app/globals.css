@@ -115,6 +115,18 @@
 
   --radius: 0.625rem;
 
+  /* Density scale — surfaces remap these */
+  --control-h-xs: 1.5rem; /* 24 */
+  --control-h-sm: 1.75rem; /* 28 */
+  --control-h: 2rem; /* 32 — application default */
+  --control-h-md: 2.25rem; /* 36 */
+  --control-h-lg: 2.5rem; /* 40 — marketing CTA */
+  --control-h-touch: 2.75rem; /* 44 — mobile native */
+  --row-h: 2.5rem; /* 40 */
+  --row-h-touch: 3.25rem; /* 52 */
+  --surface-pad: 1.25rem;
+  --surface-gap: 1rem;
+
   --shadow-100: 0 1px 0 oklch(0.18 0.02 255 / 0.04),
     0 1px 3px oklch(0.18 0.02 255 / 0.06);
   --shadow-300: 0 1px 0 oklch(0.18 0.02 255 / 0.04),
@@ -209,6 +221,49 @@
 
   ::selection {
     background: color-mix(in oklch, var(--brand) 28%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Surface density remaps — one component set, four lanes */
+  [data-surface="application"] {
+    --control-h: 2rem;
+    --row-h: 2.5rem;
+    --surface-pad: 1.25rem;
+    --surface-gap: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  [data-surface="marketing"] {
+    --control-h: 2.25rem;
+    --row-h: 2.75rem;
+    --surface-pad: 1.5rem;
+    --surface-gap: 1.25rem;
+  }
+
+  [data-surface="mobile"] {
+    --control-h: 2.75rem;
+    --row-h: 3.25rem;
+    --surface-pad: 1rem;
+    --surface-gap: 0.75rem;
+    font-size: 1rem;
+  }
+
+  [data-surface="desktop"] {
+    --control-h: 1.75rem;
+    --row-h: 2rem;
+    --surface-pad: 0.75rem;
+    --surface-gap: 0.5rem;
+    font-size: 0.8125rem;
   }
 }
 

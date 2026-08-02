@@ -46,7 +46,7 @@ function Tokens() {
         </Reveal>
 
         <Reveal className="mt-12">
-          <Card className="rounded-2xl bg-card/95 ring-foreground/10">
+          <Card className="bg-card/95">
             <CardHeader>
               <CardTitle>Color</CardTitle>
               <CardDescription>Semantic surfaces</CardDescription>

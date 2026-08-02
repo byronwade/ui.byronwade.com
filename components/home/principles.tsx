@@ -34,6 +34,10 @@ const principles = [
     source: "Cinema",
     take: "Full-bleed frames and theater stages — styled, not animated. shadcn underneath.",
   },
+  {
+    source: "Surfaces",
+    take: "Application, Marketing, Mobile Native, Desktop Native — one kit, remapped density.",
+  },
 ];
 
 function Principles() {
@@ -58,7 +62,7 @@ function Principles() {
         </Reveal>
 
         <Reveal className="mt-14">
-          <Card className="rounded-2xl py-0">
+          <Card className="py-0">
             <CardHeader className="border-b py-5">
               <CardTitle>Influences</CardTitle>
               <CardDescription>What we take — and compose</CardDescription>

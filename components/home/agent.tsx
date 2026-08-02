@@ -54,7 +54,6 @@ function Agent() {
             <Card
               key={event.label + event.body}
               data-provenance={event.provenance}
-              className="rounded-2xl"
               size="sm"
             >
               <CardHeader className="pb-0">

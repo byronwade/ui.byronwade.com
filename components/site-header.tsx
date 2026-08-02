@@ -17,16 +17,16 @@ function SiteHeader() {
       </Link>
       <nav className="flex items-center gap-1">
         <Link
-          href="#cinema"
+          href="/surfaces"
           className={cn(
             buttonVariants({ variant: "ghost", size: "sm" }),
             "text-muted-foreground hover:text-foreground",
           )}
         >
-          Cinema
+          Surfaces
         </Link>
         <Link
-          href="#system"
+          href="/#system"
           className={cn(
             buttonVariants({ variant: "ghost", size: "sm" }),
             "text-muted-foreground hover:text-foreground",

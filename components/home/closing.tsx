@@ -1,7 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Stage } from "@/components/cinematic/stage";
 import { MediaPlane } from "@/components/cinematic/media-plane";
-import { Reveal } from "@/components/cinematic/reveal";
 import { Button } from "@/components/ui/button";
 
 function Closing() {
@@ -12,28 +11,24 @@ function Closing() {
       className="flex flex-col items-center justify-center px-5 py-32 md:px-8 md:py-40"
     >
       <MediaPlane />
-      <Reveal className="relative z-10 mx-auto max-w-3xl text-center">
-        <p className="font-mono text-xs tracking-[0.22em] text-brand uppercase">
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
+        <p className="font-mono text-xs tracking-[0.2em] text-brand uppercase">
           Next frame
         </p>
         <h2 className="mt-6 text-[clamp(2.25rem,6vw,4rem)] font-medium leading-[1.02] tracking-[-0.04em] text-dock-foreground">
-          Build the interface. Stage the feeling.
+          Four lanes. One philosophy.
         </h2>
         <p className="mx-auto mt-6 max-w-md text-base leading-relaxed tracking-tight text-dock-foreground/60">
-          Meridian styling on the full shadcn set — ready for catalog, docs, and
-          product UI.
+          Application, marketing, mobile, and desktop — same tokens, same
+          primitives, clean everywhere.
         </p>
-        <Button
-          size="lg"
-          className="mt-10 rounded-full bg-dock-foreground text-dock hover:bg-dock-foreground/90"
-          asChild
-        >
-          <a href="#system">
-            Back to the system
+        <Button variant="theater" size="pill" className="mt-10" asChild>
+          <a href="/surfaces">
+            Open surfaces
             <ArrowRight data-icon="inline-end" />
           </a>
         </Button>
-      </Reveal>
+      </div>
     </Stage>
   );
 }
