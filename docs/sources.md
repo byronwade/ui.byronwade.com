@@ -1,0 +1,28 @@
+# Design sources — what Meridian follows
+
+Meridian’s controlled principles come from published guidance by teams and practitioners who ship top-tier product UI. We take **discipline**, not visual pastiche. We do not name these brands in product chrome.
+
+## Primary sources
+
+| Source | What we follow | What we ignore |
+| --- | --- | --- |
+| [Vercel — Design Engineer Principles](https://vercel.com/design/engineer) | Usefulness; own the whole experience; find constraints; build for everyone; excellence over volume; raise the team’s floor | Using “design engineer” as a style look |
+| [Shopify Polaris — Pro design language](https://polaris-react.shopify.com/design/pro-design-language) | Assign meaning; density by task; juicy but predictable interactions; action-driven, not verbose | Shopify green as brand; admin-only vocabulary |
+| [Linear — How we redesigned the Linear UI](https://linear.app/now/how-we-redesigned-the-linear-ui) | Reduce chrome noise; align hierarchy; soften/neutralize borders; improve content contrast; evolve without disassembling the product | Purple accent; Inter Display as required type; Electron-specific chrome |
+| [Brad Frost — Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/) | Parts and wholes concurrently; systems proven in real pages | Rigid atom→page waterfall; “atomic” as folder dogma |
+| [Brad Frost — Extending Atomic Design](https://bradfrost.com/blog/post/extending-atomic-design/) | Tokens as subatomic particles; components apply tokens | Tokenizing every one-off variation |
+| [Brad Frost — The Part and The Whole](https://bradfrost.com/blog/post/the-part-and-the-whole/) | Pattern libraries without context fail; compose wholes | Isolated styleguide screenshots as the product |
+
+## Supporting craft (encoded, not labeled)
+
+| Craft | Encode |
+| --- | --- |
+| Cursor-style agent UI | AI attached to an object; activity semantics separate from brand |
+| OpenAI / ChatGPT product simplicity | Progressive disclosure; product as hero; provenance without chatbot cliché |
+| Cinema staging (Apple / Tesla / YouTube product films) | Full-bleed product subject; one idea per frame; no scroll spectacle |
+
+## How to use this file
+
+1. When changing DNA or tokens, prefer advice that appears in the primary table.
+2. If a proposal only matches a trend mood board, reject it.
+3. Update this file when we adopt a new published rule — keep Meridian accountable to sources.

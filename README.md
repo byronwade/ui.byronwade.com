@@ -1,14 +1,20 @@
 # ui.byronwade.com
 
-Fresh Next.js foundation for the Byron Wade design site.
+**Meridian** — one design system across four surfaces, built on **shadcn/ui**.
+
+| Surface | Job |
+| --- | --- |
+| Web · Application | Operate |
+| Web · Marketing | Present |
+| Mobile Native | Thumb-first |
+| Desktop Native | Keyboard + pointer |
+
+DNA: [`docs/meridian.md`](docs/meridian.md) · Live gallery: [`/surfaces`](http://localhost:3000/surfaces)
 
 ## Stack
 
-- **Next.js 16** (App Router, Turbopack)
-- **React 19** with React Compiler
-- **TypeScript**
-- **Tailwind CSS v4**
-- **ESLint**
+- Next.js 16 · React 19 · React Compiler
+- shadcn/ui (Radix) · Tailwind CSS v4 · Geist
 
 ## Getting started
 
@@ -17,17 +23,16 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+## Add components
+
+```bash
+npx shadcn@latest add [component]
+```
 
 ## Scripts
 
-| Command         | Purpose                |
-| --------------- | ---------------------- |
-| `npm run dev`   | Local development      |
-| `npm run build` | Production build       |
-| `npm run start` | Serve production build |
-| `npm run lint`  | ESLint                 |
-
-## Deploy
-
-Configured for Vercel at [ui.byronwade.com](https://ui.byronwade.com).
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Local development |
+| `npm run build` | Production build |
+| `npm run lint` | ESLint |
