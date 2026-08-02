@@ -26,7 +26,7 @@ export default async function DesignPage() {
       source={source}
       actions={
         <Button variant="ghost" size="default" asChild>
-          <Link href="/for-agents">Agents</Link>
+          <Link href="/agents.md">Agents</Link>
         </Button>
       }
     >

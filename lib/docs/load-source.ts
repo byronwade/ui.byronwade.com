@@ -3,8 +3,9 @@ import { join } from "node:path"
 
 const ALLOWED = new Set([
   "design.md",
+  "agents.md",
+  "llms.txt",
   "docs/architecture.md",
-  "public/llms.txt",
   ".cursor/skills/meridian-theme/SKILL.md",
   ".cursor/skills/meridian-surface/SKILL.md",
   ".cursor/skills/meridian-compose/SKILL.md",

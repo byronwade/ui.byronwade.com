@@ -17,8 +17,8 @@ function TileAgents() {
         never in rogue color.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        <CinemaLink href="/for-agents">Learn more</CinemaLink>
-        <CinemaLink href="/design">design.md</CinemaLink>
+        <CinemaLink href="/agents.md">Learn more</CinemaLink>
+        <CinemaLink href="/design.md">design.md</CinemaLink>
       </div>
     </CinemaTile>
   )

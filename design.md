@@ -120,17 +120,17 @@ Shape: control `rounded-lg` · panel `rounded-2xl` · shell `rounded-3xl` · pil
 
 ## Endpoints
 
-| URL | Content |
-| --- | --- |
-| `/design` | Designed contract (Copy + Raw) |
-| `/design.md` | Raw markdown contract |
-| `/theme` | Live grammar + knobs |
-| `/for-agents` | Skills, agents, frozen vs creative |
-| `/architecture` | Designed architecture (Copy + Raw) |
-| `/architecture.md` | Raw architecture |
-| `/llms` | Designed discovery map |
-| `/llms.txt` | Raw discovery |
-| `/surfaces` | Surface proofs |
+Machine URLs content-negotiate: browsers get designed HTML; agents get raw
+(`Accept: text/markdown` / `text/plain`, or `?raw=1`).
+
+| URL | Human | Agent |
+| --- | --- | --- |
+| `/design.md` | Designed contract | Raw markdown |
+| `/agents.md` | Designed agents guide | Raw markdown |
+| `/llms.txt` | Designed discovery | Raw text |
+| `/architecture.md` | Designed architecture | Raw markdown |
+| `/design` · `/for-agents` · `/llms` · `/architecture` | Same designed pages (direct) | — |
+| `/theme` · `/surfaces` | Showcase | — |
 
 ## Done checklist
 

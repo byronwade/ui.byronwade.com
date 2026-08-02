@@ -68,6 +68,8 @@ export default async function ForAgentsPage() {
   const design = getDoc("design")
   const architecture = getDoc("architecture")
   const llms = getDoc("llms")
+  const agentsDoc = getDoc("for-agents")
+  const agentsSource = await loadSource(agentsDoc.sourcePath!)
 
   const skills = await Promise.all(
     skillFiles.map(async (skill) => ({
@@ -87,6 +89,9 @@ export default async function ForAgentsPage() {
       eyebrow="For agents"
       title="Built so models stay true."
       lead="Soft warm neutrals. One deep accent. Full-bleed cinema. TypeScript freezes the vocabulary; creativity stays in the story. Contrast is audited."
+      filename={agentsDoc.filename}
+      source={agentsSource}
+      rawHref={agentsDoc.rawHref}
       actions={
         <>
           <Button variant="outline" size="default" asChild>
@@ -105,24 +110,24 @@ export default async function ForAgentsPage() {
         <DocLinkRow
           items={[
             {
-              href: design.href,
-              label: design.filename!,
-              summary: design.summary,
+              href: "/design.md",
+              label: "design.md",
+              summary: `${design.summary} Negotiated URL.`,
             },
             {
-              href: architecture.href,
-              label: architecture.filename!,
-              summary: architecture.summary,
+              href: "/agents.md",
+              label: "agents.md",
+              summary: "This guide — designed for humans, markdown for agents.",
             },
             {
-              href: llms.href,
-              label: llms.filename!,
+              href: "/llms.txt",
+              label: "llms.txt",
               summary: llms.summary,
             },
             {
-              href: "/theme",
-              label: "Theme grammar",
-              summary: "Live knobs, roles, density, bans, contrast pairs.",
+              href: "/architecture.md",
+              label: "architecture.md",
+              summary: architecture.summary,
             },
           ]}
         />

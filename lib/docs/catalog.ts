@@ -1,6 +1,6 @@
 /**
  * Human + machine document catalog.
- * Designed routes render Meridian UI; rawHref stays fetchable for agents.
+ * Machine URLs (.md / .txt) content-negotiate: HTML for browsers, raw for agents.
  */
 
 export type DocId =
@@ -29,7 +29,7 @@ export const docs: readonly DocEntry[] = [
     title: "Design",
     summary: "AI contract — cinematic laws, MUST, bans, theme knobs.",
     href: "/design",
-    rawHref: "/design.md",
+    rawHref: "/design.md?raw=1",
     sourcePath: "design.md",
     filename: "design.md",
     nav: true,
@@ -56,6 +56,9 @@ export const docs: readonly DocEntry[] = [
     title: "Agents",
     summary: "Frozen vs creative, skills, agents, load order.",
     href: "/for-agents",
+    rawHref: "/agents.md?raw=1",
+    sourcePath: "agents.md",
+    filename: "agents.md",
     nav: true,
     navLabel: "Agents",
   },
@@ -64,7 +67,7 @@ export const docs: readonly DocEntry[] = [
     title: "Architecture",
     summary: "How the typed theme system is layered for AIs.",
     href: "/architecture",
-    rawHref: "/architecture.md",
+    rawHref: "/architecture.md?raw=1",
     sourcePath: "docs/architecture.md",
     filename: "architecture.md",
   },
@@ -73,8 +76,8 @@ export const docs: readonly DocEntry[] = [
     title: "llms.txt",
     summary: "Discovery map for agents and crawlers.",
     href: "/llms",
-    rawHref: "/llms.txt",
-    sourcePath: "public/llms.txt",
+    rawHref: "/llms.txt?raw=1",
+    sourcePath: "llms.txt",
     filename: "llms.txt",
   },
 ]

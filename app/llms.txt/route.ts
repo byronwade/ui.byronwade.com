@@ -5,11 +5,11 @@ import {
   wantsDesignedHtml,
 } from "@/lib/docs/negotiate"
 
-/** /design.md — designed HTML for humans, markdown for agents. */
+/** /llms.txt — designed HTML for humans, plain text for agents. */
 export async function GET(request: Request) {
   if (wantsDesignedHtml(request)) {
-    return redirectToDesigned(request, "/design")
+    return redirectToDesigned(request, "/llms")
   }
-  const body = await loadSource("design.md")
-  return rawFileResponse(body, "text/markdown")
+  const body = await loadSource("llms.txt")
+  return rawFileResponse(body, "text/plain")
 }

@@ -1,16 +1,15 @@
-import { readFile } from "node:fs/promises"
-import { join } from "node:path"
+import { loadSource } from "@/lib/docs/load-source"
+import {
+  rawFileResponse,
+  redirectToDesigned,
+  wantsDesignedHtml,
+} from "@/lib/docs/negotiate"
 
-/** Raw architecture doc — fetchable by agents at /architecture.md */
-export async function GET() {
-  const body = await readFile(
-    join(process.cwd(), "docs/architecture.md"),
-    "utf8",
-  )
-  return new Response(body, {
-    headers: {
-      "Content-Type": "text/markdown; charset=utf-8",
-      "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
-    },
-  })
+/** /architecture.md — designed HTML for humans, markdown for agents. */
+export async function GET(request: Request) {
+  if (wantsDesignedHtml(request)) {
+    return redirectToDesigned(request, "/architecture")
+  }
+  const body = await loadSource("docs/architecture.md")
+  return rawFileResponse(body, "text/markdown")
 }
