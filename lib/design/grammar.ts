@@ -149,11 +149,15 @@ export const banned = [
   "font-bold-display",
   "scroll-choreography",
   "overlay-stickers-on-media",
-  "warm-cream-paper",
+  "pure-white",
+  "pure-black",
+  "bright-neon-accent",
+  "cream-terracotta-cliche",
   "second-accent",
   "influence-brand-labels",
   "floating-chatbot",
   "nested-demo-scrollports",
+  "inset-hero-media",
 ] as const
 
 export type BannedPattern = (typeof banned)[number]

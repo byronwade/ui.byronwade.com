@@ -23,9 +23,9 @@ function GrammarSplit() {
             Open where they create.
           </h2>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-            Research is clear: models fabricate tokens and forget decisions.
-            Meridian freezes the vocabulary in TypeScript — then asks agents to
-            be inventive inside it.
+            Soft warm neutrals and one deep accent are frozen in the grammar.
+            Agents invent stories and compositions — not new whites, blacks, or
+            bright colors.
           </p>
         </div>
 

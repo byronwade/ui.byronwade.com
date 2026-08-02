@@ -11,35 +11,18 @@ This version has breaking changes — APIs, conventions, and file structure may 
 **Before UI work:** [`design.md`](./design.md) → [`lib/design/`](./lib/design/).  
 Architecture: [`docs/architecture.md`](./docs/architecture.md).
 
-Theme showcase for AIs. Aesthetic: **cinematic design**. Enforcement: TypeScript grammar + `npm run check:design`.
+Theme showcase for AIs. Aesthetic: **cinematic design** — soft warm neutrals, one deep accent, full-bleed media, structured reading.
 
 ## Frozen vs creative
 
-- **Frozen:** color, radius, depth, surface, cinema laws, bans (`lib/design/grammar.ts`)
+- **Frozen:** neutrals, one accent, radius, depth, surface, cinema laws, bans
 - **Creative:** copy, IA, domain, frame sequence, which shadcn wholes
-
-## Stack
-
-- Next.js 16 + React 19 + React Compiler
-- shadcn/ui · tokens in `app/globals.css`
-- Grammar in `lib/design/`
-
-## Toolchain
-
-| Kind | Path |
-| --- | --- |
-| Contract | `design.md` |
-| Grammar | `lib/design/*` |
-| Lint | `npm run check:design` |
-| Rule | `.cursor/rules/meridian.mdc` |
-| Skills | theme · surface · compose · **cinematic** |
-| Agents | author · reviewer |
 
 ## Laws (short)
 
-1. Obey `design.md` + import `@/lib/design` for structure
-2. Cinematic: one idea/frame, product subject, `svh`, no stickers
-3. Tokens only; one `--brand`
-4. shadcn only — no parallel kit
-5. `data-surface` for density
-6. Object-bound AI; pass `check:design`
+1. Obey `design.md` + `@/lib/design`
+2. Soft neutrals — never pure white/black; one deep `--brand`
+3. Full-bleed via `BleedImage`; reading via `ReadingArticle`
+4. Cinema: one idea/frame, `svh`, no stickers
+5. shadcn only; `data-surface` for density
+6. Pass `npm run check:design`

@@ -38,14 +38,18 @@ export const zones = {
 
 /** Cinematic design list — Meridian’s aesthetic contract. */
 export const cinematicLaws = {
-  /** Product / workbench owns the frame — chrome recedes. */
+  /** Product / workbench / photograph owns the frame — chrome recedes. */
   productIsSubject: true,
   /** Exactly one idea per viewport stage. */
   oneIdeaPerFrame: true as const,
-  /** Media is full-bleed, not inset marketing cards. */
+  /** Media is full-bleed edge-to-edge — never inset hero cards. */
   fullBleedMedia: true,
   /** No badges/stickers floating on media. */
   noOverlayStickers: true,
+  /** Soft warm neutrals; never pure white or pure black. */
+  softNeutrals: true,
+  /** One deep accent — prominent, not bright/neon. */
+  oneAccent: true,
   /** Stable viewport units — never dvh (mobile chrome jerk). */
   viewport: "svh" as const,
   /** Styling without spectacle — no scroll-jacking films. */
@@ -54,6 +58,8 @@ export const cinematicLaws = {
   tileAlternation: true,
   /** Hierarchy from size + tracking — never bold display weight. */
   typeWeight: "medium-max" as const,
+  /** Reading uses structured lanes — reading-ui / reading-prose. */
+  structuredReading: true,
 } as const
 
 /**

@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/hero"
+import { ReadingSection } from "@/components/home/reading-section"
 import { GrammarSplit } from "@/components/home/grammar-split"
 import { AiStack } from "@/components/home/ai-stack"
 import { ThemeStrip } from "@/components/home/theme-strip"
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <ReadingSection />
       <GrammarSplit />
       <AiStack />
       <ThemeStrip />

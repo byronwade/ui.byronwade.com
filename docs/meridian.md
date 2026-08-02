@@ -4,7 +4,7 @@ Meridian is the design language for **ui.byronwade.com**. One philosophy, four s
 
 > **Agents:** obey [`design.md`](../design.md) first. This file is the human-readable deep DNA. Architecture: [`architecture.md`](./architecture.md).
 
-Cool paper. One steel-teal accent (`--brand`). Product as the subject. Density follows the task. The **website is a theme showcase** for AI authors — not a custom component catalog.
+Soft warm neutrals (never pure white/black). One deep accent (`--brand`). Full-bleed cinema. Structured reading. Density follows the task. The **website is a theme showcase** for AI authors — not a custom component catalog.
 
 This DNA is distilled from what leading product designers and design-system practitioners publish — not from aesthetic collage. Sources and what we took: [`docs/sources.md`](./sources.md).
 

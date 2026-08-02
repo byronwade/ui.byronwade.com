@@ -32,10 +32,13 @@ defineCinemaFrame({
 | --- | --- |
 | Name | Meridian |
 | Design list | **Cinematic design** |
-| Accent | `--brand` (steel-teal / arc) |
-| Paper | Cool paper — never warm cream |
+| Accent | `--brand` — one deep ink-teal, prominent not bright |
+| Paper | Soft warm stone neutrals — never pure white/black |
+| Feeling | Crisp, calm, softly warm |
 | Type | Geist Sans + Geist Mono |
 | Depth | `edge` → `depth-soft` → `depth-raised` |
+| Media | Full-bleed photographs (`BleedImage`) |
+| Reading | `ReadingArticle` + `reading-ui` / `reading-prose` |
 | Default surface | `application` |
 | Grammar | `lib/design/grammar.ts` |
 
@@ -43,14 +46,17 @@ defineCinemaFrame({
 
 Encoded in `lib/design/recipes.ts` → `cinematicLaws`:
 
-1. **Product is the subject** — chrome recedes; workbench/product owns the frame
+1. **Product / photograph is the subject** — chrome recedes
 2. **One idea per frame** — typed as `ideas: 1`
-3. **Full-bleed media** — not inset marketing cards
+3. **Full-bleed media** — edge-to-edge; never inset hero cards
 4. **No overlay stickers** on media
-5. **Stable viewport** — `svh`, never `dvh`
-6. **Motion is micro** — no scroll choreography; honor reduced motion
-7. **Tile alternation** — paper ↔ theater rhythm without border soup
-8. **Type weight medium-max** — hierarchy from size + tracking
+5. **Soft neutrals** — never pure white or pure black
+6. **One accent** — deep and clear, never neon/bright noise
+7. **Stable viewport** — `svh`, never `dvh`
+8. **Motion is micro** — no scroll choreography
+9. **Tile alternation** — paper ↔ theater without border soup
+10. **Structured reading** — measured hierarchy, not dashboard type for essays
+11. **Type weight medium-max** — hierarchy from size + tracking
 
 ## MUST
 
@@ -66,7 +72,7 @@ Encoded in `lib/design/recipes.ts` → `cinematicLaws`:
 
 ## MUST NOT (`banned` in grammar)
 
-raw-hex · arbitrary-color-utility · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · warm-cream-paper · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports
+raw-hex · arbitrary-color-utility · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · pure-white · pure-black · bright-neon-accent · cream-terracotta-cliche · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports · inset-hero-media
 
 ## Surfaces
 

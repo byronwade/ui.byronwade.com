@@ -1,7 +1,9 @@
 import Link from "next/link"
 import { Stage } from "@/components/cinematic/stage"
+import { BleedImage } from "@/components/cinematic/bleed-image"
 import { Button } from "@/components/ui/button"
 import { aiStack } from "@/lib/theme-showcase"
+import { cinemaStills } from "@/lib/media"
 import { designCn, typeClass } from "@/lib/design"
 
 function AiStack() {
@@ -9,9 +11,13 @@ function AiStack() {
     <Stage
       id="for-agents"
       tone="theater"
-      className="px-5 py-20 md:px-8 md:py-28"
+      className="relative px-5 py-20 md:px-8 md:py-28"
     >
-      <div className="mx-auto max-w-6xl">
+      <BleedImage
+        src={cinemaStills.reading.src}
+        alt={cinemaStills.reading.alt}
+      />
+      <div className="relative z-10 mx-auto max-w-6xl">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-xl">
             <p className={designCn(typeClass("label"), "text-brand")}>
@@ -25,9 +31,9 @@ function AiStack() {
             >
               Contract → grammar → skills → whole.
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-dock-foreground/65 md:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-dock-foreground/70 md:text-base">
               design.md sets the law. TypeScript closes the set. Skills teach
-              the workflow. The workbench proves it.
+              the workflow. The frame stays cinematic.
             </p>
           </div>
           <Button variant="theater-outline" asChild>
@@ -40,13 +46,13 @@ function AiStack() {
             <Link
               key={item.id}
               href={item.href}
-              className="rounded-2xl bg-dock-foreground/[0.04] p-5 transition-colors hover:bg-dock-foreground/[0.07]"
+              className="rounded-2xl bg-dock/45 p-5 backdrop-blur-[2px] transition-colors hover:bg-dock/55"
             >
-              <p className="font-mono text-[10px] text-dock-foreground/45">
+              <p className="font-mono text-[10px] text-dock-foreground/50">
                 {String(index + 1).padStart(2, "0")}
               </p>
               <p className="mt-3 font-mono text-sm text-brand">{item.label}</p>
-              <p className="mt-2 text-sm leading-relaxed text-dock-foreground/60">
+              <p className="mt-2 text-sm leading-relaxed text-dock-foreground/70">
                 {item.summary}
               </p>
             </Link>

@@ -9,33 +9,36 @@ Aesthetic list: **cinematic design**. Laws live in `lib/design/recipes.ts` → `
 
 ## Laws (frozen)
 
-1. Product / workbench is the subject — chrome recedes
+1. Photograph / product is the subject — chrome recedes
 2. One idea per frame — `defineCinemaFrame({ ideas: 1, … })`
-3. Full-bleed media — not inset cards
-4. No overlay stickers on media
-5. Viewport `svh` — never `dvh`
-6. Motion micro-only — no scroll choreography
-7. Paper ↔ theater alternation for rhythm
-8. Type weight medium-max
+3. **Full-bleed media** via `BleedImage` — never inset hero cards
+4. Soft veil (`media-veil`) for legible type — no stickers on media
+5. Soft warm neutrals — never pure white/black; one deep accent
+6. Viewport `svh` — never `dvh`
+7. Motion micro-only — no scroll choreography
+8. Paper ↔ theater alternation for rhythm
+9. Structured reading for long copy (`ReadingArticle`)
 
 ## Creative (encouraged)
 
-- What the subject *is* (domain)
+- Which still / subject to stage
 - Copy and narrative pacing
 - Order of frames in a sequence
-- Which proof whole to embed (workbench, shell, …)
+- Which proof whole to embed
 
 ## Workflow
 
 1. Read `design.md` cinematic section.
 2. Import `defineCinemaFrame` from `@/lib/design`.
-3. Use `Stage` + optional `MediaPlane` from `components/cinematic/`.
-4. Keep application chrome on `tone="paper"`; earn `theater`.
-5. Run `npm run check:design`.
+3. Prefer `Stage` + `BleedImage` (`lib/media.ts` stills or product photos).
+4. Use `MediaPlane` only when a photograph isn’t available.
+5. Keep application chrome on `tone="paper"`; earn `theater`.
+6. Run `npm run check:design`.
 
 ## Anti-patterns
 
-- Scroll-jacking / pinned storyboards
+- Inset / rounded media cards in the hero
+- Pure white or pure black fills
+- Bright neon accents
 - Stickers, chips, or badges on media
 - Multiple competing headlines in one stage
-- Naming other brands in the frame

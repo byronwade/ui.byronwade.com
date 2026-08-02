@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s · ui.byronwade.com",
   },
   description:
-    "Meridian — cinematic design theme for AIs. Typed grammar, closed tokens, shadcn primitives. Creativity without drift.",
+    "Meridian — cinematic design with soft warm neutrals, one deep accent, full-bleed frames, and structured reading. Typed for AI agents.",
   metadataBase: new URL("https://ui.byronwade.com"),
 };
 

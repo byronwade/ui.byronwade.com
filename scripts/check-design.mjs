@@ -60,6 +60,18 @@ const RULES = [
     re: /content-visibility:\s*auto/,
     message: "content-visibility:auto causes reverse-scroll jumps",
   },
+  {
+    id: "pure-white",
+    re: /(?:bg|text|border|fill|stroke)-(?:white)(?:\/|\s|"|'|`|$)|['"`]#(?:fff|ffffff|FFF|FFFFFF)['"`]|oklch\(\s*1\s+0\s+0\s*\)/,
+    message: "Pure white banned — use soft warm neutrals (background/card)",
+    include: /\.(tsx|ts|css)$/,
+  },
+  {
+    id: "pure-black",
+    re: /(?:bg|text|border|fill|stroke)-(?:black)(?:\/|\s|"|'|`|$)|['"`]#(?:000|000000)['"`]/,
+    message: "Pure black banned — use soft warm dock/foreground charcoal",
+    include: /\.(tsx|ts|css)$/,
+  },
 ]
 
 async function walk(dir, out = []) {

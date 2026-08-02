@@ -3,19 +3,20 @@ import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { ReadingArticle } from "@/components/reading/article"
 import { zones, designCn, typeClass } from "@/lib/design"
 import { aiStack } from "@/lib/theme-showcase"
 
 export const metadata: Metadata = {
   title: "For agents",
   description:
-    "How AIs load Meridian — typed cinematic grammar, frozen vs creative, skills and agents.",
+    "How AIs load Meridian — soft neutrals, one accent, typed cinematic grammar, structured reading.",
 }
 
 const skills = [
   {
     name: "meridian-theme",
-    use: "Re-skin knobs; keep accent DNA",
+    use: "Re-skin knobs; keep one deep accent",
   },
   {
     name: "meridian-surface",
@@ -27,7 +28,7 @@ const skills = [
   },
   {
     name: "meridian-cinematic",
-    use: "Stage frames under cinematic laws",
+    use: "Full-bleed frames under cinematic laws",
   },
 ] as const
 
@@ -46,30 +47,21 @@ export default function ForAgentsPage() {
   return (
     <main className="px-5 pt-20 pb-24 md:px-8 md:pt-24 md:pb-32">
       <div className="mx-auto max-w-6xl">
-        <p className={designCn(typeClass("label"), "text-muted-foreground")}>
-          For agents
-        </p>
-        <h1
-          className={designCn(
-            typeClass("title"),
-            "mt-4 max-w-[22ch] text-3xl md:text-5xl",
-          )}
+        <ReadingArticle
+          lane="ui"
+          eyebrow="For agents"
+          title="Built so models can’t drift — and still invent."
+          lead="Soft warm neutrals. One deep accent. Full-bleed cinema. Structured reading. TypeScript freezes the vocabulary; creativity stays in the story."
         >
-          Built so models can’t drift — and still invent.
-        </h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed tracking-tight text-muted-foreground">
-          Closed TypeScript grammar. Cinematic laws. Skills for workflows.
-          Creativity in copy, sequence, and domain — never in rogue hex.
-        </p>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button asChild>
-            <a href="/design.md">Fetch design.md</a>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link href="/theme">Theme grammar</Link>
-          </Button>
-        </div>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild>
+              <a href="/design.md">Fetch design.md</a>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href="/theme">Theme grammar</Link>
+            </Button>
+          </div>
+        </ReadingArticle>
 
         <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {aiStack.map((item) => (
@@ -101,7 +93,10 @@ export default function ForAgentsPage() {
               </p>
               <ul className="mt-4 space-y-2">
                 {zones.frozen.map((item) => (
-                  <li key={item} className="font-mono text-sm text-muted-foreground">
+                  <li
+                    key={item}
+                    className="font-mono text-sm text-muted-foreground"
+                  >
                     {item}
                   </li>
                 ))}
@@ -115,7 +110,7 @@ export default function ForAgentsPage() {
                 {zones.creative.map((item) => (
                   <li
                     key={item}
-                    className="font-mono text-sm text-dock-foreground/65"
+                    className="font-mono text-sm text-dock-foreground/70"
                   >
                     {item}
                   </li>
@@ -128,33 +123,37 @@ export default function ForAgentsPage() {
         <Separator className="my-14" />
 
         <section id="architecture" className="scroll-mt-24">
-          <h2 className={designCn(typeClass("title"), "text-2xl")}>
-            Load order
-          </h2>
-          <ol className="mt-5 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-muted-foreground">
-            <li>
-              <span className="font-mono text-foreground">design.md</span>
-            </li>
-            <li>
-              <span className="font-mono text-foreground">lib/design/</span> —
-              grammar, recipes, cx
-            </li>
-            <li>
-              Matching skill under{" "}
-              <span className="font-mono text-foreground">.cursor/skills/</span>
-            </li>
-            <li>
-              <span className="font-mono text-foreground">
-                components/surfaces/workbench.tsx
-              </span>
-            </li>
-            <li>
-              Run{" "}
-              <span className="font-mono text-foreground">
-                npm run check:design
-              </span>
-            </li>
-          </ol>
+          <ReadingArticle lane="ui" title="Load order">
+            <ol className="list-decimal space-y-3 pl-5">
+              <li>
+                <span className="font-mono text-foreground">design.md</span>
+              </li>
+              <li>
+                <span className="font-mono text-foreground">lib/design/</span> —
+                grammar, recipes, cx
+              </li>
+              <li>
+                Matching skill under{" "}
+                <span className="font-mono text-foreground">
+                  .cursor/skills/
+                </span>
+              </li>
+              <li>
+                Full-bleed via{" "}
+                <span className="font-mono text-foreground">BleedImage</span>;
+                reading via{" "}
+                <span className="font-mono text-foreground">
+                  ReadingArticle
+                </span>
+              </li>
+              <li>
+                Run{" "}
+                <span className="font-mono text-foreground">
+                  npm run check:design
+                </span>
+              </li>
+            </ol>
+          </ReadingArticle>
         </section>
 
         <Separator className="my-14" />
@@ -212,7 +211,7 @@ export default function ForAgentsPage() {
                 ["/surfaces", "Surface proofs"],
               ] as const
             ).map(([href, label]) => (
-              <div key={href} className="rounded-2xl bg-muted/30 px-4 py-3">
+              <div key={href} className="rounded-2xl bg-muted/40 px-4 py-3">
                 <dt className="font-mono text-sm">
                   <a href={href} className="hover:underline">
                     {href}

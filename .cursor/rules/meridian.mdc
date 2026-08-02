@@ -17,11 +17,13 @@ copy · IA · domain objects · frame sequence · which shadcn wholes · narrati
 
 ## Hard rules
 
-- Tokens only; one `--brand`; status semantic
-- `defineCinemaFrame({ ideas: 1, overlayStickers: false })` for stages
-- shadcn primitives only; `data-surface` for density
+- Soft warm neutrals — never pure white/black or bright neon
+- One deep `--brand`; status semantic
+- Full-bleed media (`BleedImage`) — no inset heroes
+- Structured reading (`ReadingArticle` / `reading-prose` / `reading-ui`)
+- `defineCinemaFrame({ ideas: 1, overlayStickers: false })`
+- shadcn only; `data-surface` for density
 - `svh` never `dvh`; `edge`/`depth-*` never Tailwind `shadow-*`
-- Object-bound AI; no influence-brand labels in UI
 - Run `npm run check:design` before done
 
 ## Skills
