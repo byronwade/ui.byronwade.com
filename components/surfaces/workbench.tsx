@@ -138,7 +138,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
             withAgent ? "lg:grid-cols-[1fr_17rem]" : "grid-cols-1",
           )}
         >
-          <div className="min-h-0 overflow-auto border-border lg:border-r">
+          <div className="min-h-0 overflow-hidden border-border lg:border-r">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -190,7 +190,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                   ISS-1842
                 </span>
               </div>
-              <div className="min-h-0 flex-1 space-y-2 overflow-auto p-3">
+              <div className="min-h-0 flex-1 space-y-2 overflow-hidden p-3">
                 {events.map((event) => (
                   <article
                     key={event.label + event.body}

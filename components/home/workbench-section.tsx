@@ -24,8 +24,9 @@ function WorkbenchSection() {
           </p>
         </div>
 
-        <div className="mt-10">
-          <Workbench />
+        <div className="mt-10 overscroll-none">
+          {/* Clip nested scrollports — reverse-wheel must stay on the page */}
+          <Workbench className="pointer-events-none" />
         </div>
 
         <p className="mt-6 max-w-2xl text-xs leading-relaxed tracking-tight text-muted-foreground md:text-sm">

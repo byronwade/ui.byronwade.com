@@ -8,7 +8,11 @@ type StageProps = {
   tone?: StageTone;
   children: ReactNode;
   className?: string;
-  /** Full viewport height — only for the opening hero. */
+  /**
+   * Full viewport height — hero only.
+   * Uses svh (stable), never dvh: dynamic viewport resizes when mobile
+   * chrome shows/hides on scroll-direction change and jerks the page.
+   */
   fullBleed?: boolean;
 };
 
@@ -26,7 +30,8 @@ function Stage({
       data-tone={tone}
       className={cn(
         "relative",
-        fullBleed && "flex min-h-dvh flex-col",
+        /* overflow-anchor: reverse-scroll jumps when a tall stage reflows */
+        fullBleed && "flex min-h-svh flex-col [overflow-anchor:none]",
         tone === "theater"
           ? "bg-dock text-dock-foreground"
           : "bg-background text-foreground",

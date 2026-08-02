@@ -216,6 +216,8 @@
     @apply antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: clip;
+    /* Avoid smooth-scroll fighting trackpad direction changes */
+    scroll-behavior: auto;
   }
 
   body {
@@ -223,6 +225,11 @@
     font-feature-settings: "ss01" on, "cv11" on;
     letter-spacing: -0.011em;
     overflow-x: clip;
+  }
+
+  /* Demo shells must not become nested scrollports on the marketing page */
+  [data-slot="cinema-stage"] [data-slot="surface"] {
+    overscroll-behavior: none;
   }
 
   ::selection {

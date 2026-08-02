@@ -38,9 +38,13 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative hidden md:block">
+        <div
+          className="relative hidden md:block"
+          aria-hidden
+        >
           <div className="absolute -inset-3 rounded-[1.35rem] bg-dock-foreground/5" />
-          <Workbench className="relative h-[22rem] shadow-none md:h-[26rem]" />
+          {/* Decorative product subject — no pointer hit so wheel stays on the page */}
+          <Workbench className="pointer-events-none relative h-[22rem] shadow-none md:h-[26rem]" />
         </div>
       </div>
     </Stage>

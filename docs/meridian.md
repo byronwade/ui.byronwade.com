@@ -104,6 +104,8 @@ Do not name other brands in UI chrome or marketing headlines. Encode the discipl
 - Media owns the frame — full-bleed, not inset marketing cards
 - One idea per frame
 - No scroll choreography, SVG grain, `mix-blend` on fixed chrome, or `content-visibility` size placeholders
+- Hero height uses `svh`, never `dvh` — dynamic viewport resizes on mobile chrome show/hide and jerks reverse-scroll
+- Demo shells: `overflow-hidden`, not nested `overflow-auto` (nested scrollports steal the wheel on direction change)
 - Simple motion only — honor `prefers-reduced-motion`
 - Theater when earned — marketing presence; not app chrome
 - No overlay stickers on media

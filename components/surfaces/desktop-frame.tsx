@@ -65,7 +65,7 @@ function DesktopFrame({ className }: { className?: string }) {
           </div>
 
           <div className="grid min-h-0 flex-1 grid-cols-[11rem_1fr]">
-            <div className="overflow-auto border-r border-border p-2">
+            <div className="overflow-hidden border-r border-border p-2">
               <p className="px-1 font-mono text-[10px] text-muted-foreground uppercase">
                 Explorer
               </p>

@@ -35,7 +35,7 @@ function MobileFrame({ className }: { className?: string }) {
           </Badge>
         </header>
 
-        <ul className="min-h-0 flex-1 overflow-auto px-2">
+        <ul className="min-h-0 flex-1 overflow-hidden px-2">
           {items.map((item, index) => (
             <li key={item.id}>
               {index > 0 ? <Separator /> : null}

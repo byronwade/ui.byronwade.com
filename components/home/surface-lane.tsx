@@ -30,7 +30,7 @@ function SurfaceLane() {
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          <div>
+          <div className="pointer-events-none">
             <Badge variant="secondary" className="mb-3 font-mono text-[10px]">
               Web · Application
             </Badge>
@@ -42,13 +42,13 @@ function SurfaceLane() {
             </Badge>
             <MarketingFrame className="h-[22rem] md:h-[24rem]" />
           </div>
-          <div>
+          <div className="pointer-events-none">
             <Badge variant="secondary" className="mb-3 font-mono text-[10px]">
               Mobile Native
             </Badge>
             <MobileFrame />
           </div>
-          <div>
+          <div className="pointer-events-none">
             <Badge variant="secondary" className="mb-3 font-mono text-[10px]">
               Desktop Native
             </Badge>
