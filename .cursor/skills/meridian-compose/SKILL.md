@@ -12,7 +12,8 @@ Parts and wholes together: `@/lib/design` → shadcn atoms → product frames.
 1. Confirm surface with `meridian-surface` (default `application`).
 2. Import structure helpers from `@/lib/design` (`bg`, `depth`, `defineWorkbench`, …).
 3. Inventory needed primitives — missing? `npx shadcn@latest add …`
-4. Study `components/surfaces/workbench.tsx` as the merge proof.
+4. Remap any `lucide-react` imports to `@/lib/icons` (Phosphor, duotone).
+5. Study `components/surfaces/workbench.tsx` as the merge proof.
 5. Compose:
    - Quiet chrome (sidebar / topbar)
    - Dense index or detail
