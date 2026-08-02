@@ -1,8 +1,13 @@
-"use client";
-
 import { Stage } from "@/components/cinematic/stage";
 import { Reveal } from "@/components/cinematic/reveal";
-import { ScrollScale } from "@/components/cinematic/scroll-scale";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const events = [
   {
@@ -39,36 +44,42 @@ function Agent() {
             Agents attach to work — never float.
           </h2>
           <p className="reading-muted mt-5 max-w-md text-base leading-relaxed tracking-tight">
-            Provenance in every beat. Activity pastels encode thinking, search,
-            read, edit — semantics, not decoration.
+            Provenance on every Card. Activity badges encode thinking, search,
+            read, edit.
           </p>
         </Reveal>
 
-        <ScrollScale>
-          <div className="space-y-3">
-            {events.map((event) => (
-              <article
-                key={event.label + event.body}
-                data-provenance={event.provenance}
-                className="rounded-2xl bg-card p-5 edge depth-soft"
-              >
+        <Reveal className="space-y-3">
+          {events.map((event) => (
+            <Card
+              key={event.label + event.body}
+              data-provenance={event.provenance}
+              className="rounded-2xl"
+              size="sm"
+            >
+              <CardHeader className="pb-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs tracking-tight text-muted-foreground">
+                  <CardTitle className="font-mono text-xs font-normal text-muted-foreground">
                     {event.label}
-                  </span>
+                  </CardTitle>
                   {"activity" in event && event.activity ? (
-                    <span className="rounded-full bg-activity-edit px-2 py-0.5 font-mono text-[10px] tracking-tight text-foreground">
+                    <Badge className="border-transparent bg-activity-edit font-mono text-[10px] text-foreground">
                       {event.activity}
-                    </span>
+                    </Badge>
                   ) : null}
                 </div>
-                <p className="mt-2 text-sm leading-relaxed tracking-tight text-foreground">
+                <CardDescription className="sr-only">
+                  {event.provenance}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm leading-relaxed tracking-tight text-foreground">
                   {event.body}
                 </p>
-              </article>
-            ))}
-          </div>
-        </ScrollScale>
+              </CardContent>
+            </Card>
+          ))}
+        </Reveal>
       </div>
     </Stage>
   );

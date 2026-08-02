@@ -1,6 +1,6 @@
 # ui.byronwade.com
 
-Design site for Byron Wade, built on **Meridian** — a synthesis of Shopify Polaris, Vercel, Linear, Cursor, and OpenAI, staged with the cinematic craft of Apple, Tesla, and YouTube.
+**Meridian** — cinematic staging on **shadcn/ui**, synthesizing Polaris, Vercel, Linear, Cursor, and OpenAI.
 
 Read the DNA: [`docs/meridian.md`](docs/meridian.md)
 
@@ -8,9 +8,8 @@ Read the DNA: [`docs/meridian.md`](docs/meridian.md)
 
 - Next.js 16 (App Router, Turbopack)
 - React 19 + React Compiler
-- TypeScript
-- Tailwind CSS v4
-- Geist Sans / Geist Mono
+- shadcn/ui (Radix)
+- TypeScript · Tailwind CSS v4 · Geist
 
 ## Getting started
 
@@ -20,6 +19,14 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+## Components
+
+Add more shadcn primitives anytime:
+
+```bash
+npx shadcn@latest add [component]
+```
 
 ## Scripts
 

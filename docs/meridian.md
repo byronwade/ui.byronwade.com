@@ -1,6 +1,10 @@
 # Meridian — design DNA
 
-Meridian is the design language for **ui.byronwade.com**. It is not a skin of Polaris, Vercel, Linear, Cursor, or OpenAI. It is a deliberate merge of what each does best — with a single identity that none of them own alone — staged with the cinematic craft of Apple, Tesla, and YouTube.
+Meridian is the design language for **ui.byronwade.com**. It merges Polaris, Vercel, Linear, Cursor, and OpenAI into one identity — staged with cinematic *styling* (Apple / Tesla / YouTube framing) on top of **shadcn/ui**.
+
+## Foundation
+
+**Everything builds on shadcn.** Primitives live in `components/ui/` (Button, Card, Table, Dialog, …). Meridian is tokens + composition + cinematic stage rules — not a parallel component library.
 
 ## The merge
 
@@ -12,56 +16,40 @@ Meridian is the design language for **ui.byronwade.com**. It is not a skin of Po
 | Cursor     | Object-bound AI, activity semantics, panel composition   | IDE darkness as the default skin     |
 | OpenAI     | Conversational provenance, approachable message rhythm   | Soft chatbot cliché                  |
 
-## Cinema — the sixth pillar
+## Cinema — styling, not spectacle
 
-Meridian surfaces are not styleguide grids. They are **frames**.
-
-| Source  | Take                                                              | Leave behind                    |
-| ------- | ----------------------------------------------------------------- | ------------------------------- |
-| Apple   | Product as the only subject. Scroll reveals one idea per frame.   | Glossy gadget fetish            |
-| Tesla   | Confident dark theater. UI is sparse overlay on the product.      | Gamer HUD clutter               |
-| YouTube | Media owns the viewport. Everything else is chrome around it.     | Autoplay noise / thumbnail soup |
+| Source  | Take                                                            | Leave behind                         |
+| ------- | --------------------------------------------------------------- | ------------------------------------ |
+| Apple   | Product as the only subject. One idea per frame.                | Scroll-jacking product films         |
+| Tesla   | Confident dark theater. Sparse chrome on the product.           | Animated HUD clutter                 |
+| YouTube | Media owns the viewport.                                        | Autoplay / thumbnail soup            |
 
 ### Cinematic laws
 
-9. **Media owns the frame** — heroes and feature stages are full-bleed planes, not inset cards.
-10. **One idea per frame** — a stage has one headline, one supporting line, one subject.
-11. **Scroll is the cut** — motion reveals and scales subjects; it never decorates idle UI.
-12. **Theater when earned** — dark `dock` stages for product moments; cool paper for operational work.
-13. **No overlay stickers** — no floating badges, promo chips, or callout boxes on media.
-14. **Respect stillness** — honor `prefers-reduced-motion`; meaning remains without motion.
-
-## What Meridian is
-
-**Operational editorial, staged like film.** Product density you can scan for hours, with the typographic confidence of a carefully set essay — introduced in full-bleed frames the way Apple reveals a product or YouTube fills the screen with media. Light-first for work. Dark theater for presence. One accent — **arc**, a steel-teal. Depth is Polaris-shaped but defaults to none. AI attaches to objects, never floats as decoration.
+9. **Media owns the frame** — full-bleed stages, not inset marketing cards.
+10. **One idea per frame** — one headline, one line, one subject.
+11. **Style over spectacle** — atmosphere from light, grain, veil, and type. No scroll choreography, parallax, or sticky opacity plays.
+12. **Simple motion only** — short CSS fades (`animate-in fade-in`). Honor `prefers-reduced-motion`.
+13. **Theater when earned** — dark `dock` stages for presence; cool paper for work.
+14. **No overlay stickers** — no floating badges or promo chips on media.
 
 ## Laws
 
-1. **Tokens only** — no raw hex in components; use semantic utilities.
-2. **One accent** — `--brand` (arc). Rings, charts, success, and selected states derive from it.
-3. **Hierarchy from size + tracking** — not bold weight on display type.
-4. **Mono for data** — IDs, counts, timestamps, prices, model names, tool params.
-5. **Depth defaults to none** — corners + edge hairline first; `depth-soft` / `depth-raised` only when elevation is earned.
-6. **Fixed shape vocabulary** — controls `rounded-full`; inputs `rounded-lg`; panels `rounded-2xl`; shells `rounded-3xl`.
-7. **Object-bound AI** — every agent surface names a product object and shows state/provenance.
-8. **Density by task** — indexes and tables stay compact; reading surfaces open up.
-9. **Media owns the frame** — see Cinema above.
-10. **One idea per frame**
-11. **Scroll is the cut**
-12. **Theater when earned**
-13. **No overlay stickers**
-14. **Respect stillness**
+1. **Tokens only** — no raw hex in components.
+2. **One accent** — `--brand` (arc). Primary, ring, success, selected derive from it.
+3. **Hierarchy from size + tracking** — not bold display weight.
+4. **Mono for data** — IDs, counts, timestamps, prices, model/tool names.
+5. **Depth defaults to none** — `edge` first; `depth-soft` / `depth-raised` sparingly.
+6. **Shape vocabulary** — prefer shadcn radii; marketing CTAs may use `rounded-full`.
+7. **Object-bound AI** — provenance + activity tokens.
+8. **Density by task** — compact indexes; open reading lanes.
+9–14. **Cinema** — see above.
 
 ## Surfaces
 
-| Surface              | Treatment                                      |
-| -------------------- | ---------------------------------------------- |
-| App chrome / tables  | `font-sans`, compact, tight tracking           |
-| Docs / help          | `reading-ui` — 65ch, 16px, 1.6 lh               |
-| Essays / manifesto   | `reading-prose` — 65ch, 18px, 1.7 lh            |
-| Floating chrome      | `bg-dock text-dock-foreground` only            |
-| Cinematic stage      | Full-bleed; `bg-dock` theater or paper work    |
-
-## Why this is not a pastiche
-
-Anyone can stack “Linear rows + Vercel type + Polaris cards” or slap a parallax hero on a docs site. Meridian binds operational systems with one accent, one depth model, one shape scale — and stages them with cinematic discipline so the site feels inevitable, not referential.
+| Surface           | Treatment                                   |
+| ----------------- | ------------------------------------------- |
+| App chrome        | shadcn + cool paper                         |
+| Docs              | `reading-ui`                                |
+| Essays            | `reading-prose`                             |
+| Cinematic stage   | Full-bleed `bg-dock` theater or paper work  |

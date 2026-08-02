@@ -1,9 +1,21 @@
-"use client";
-
-import { Circle } from "lucide-react";
 import { Stage } from "@/components/cinematic/stage";
 import { Reveal } from "@/components/cinematic/reveal";
-import { ScrollScale } from "@/components/cinematic/scroll-scale";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const rows = [
   {
@@ -52,56 +64,62 @@ function Density() {
             Scan like Linear. Rest like Polaris.
           </h2>
           <p className="reading-muted mt-5 max-w-md text-base leading-relaxed tracking-tight">
-            The product fills the frame. Stable rows, mono metadata, selected
-            state as brand wash — presented as a close-up, not a styleguide tile.
+            Built on shadcn Table and Card. Selected state is brand wash — never
+            a loud border.
           </p>
         </Reveal>
 
-        <ScrollScale>
-          <div className="overflow-hidden rounded-3xl bg-card depth-raised">
-            <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <span className="text-sm tracking-tight text-foreground">
-                Issues
-              </span>
-              <span className="font-mono text-xs text-muted-foreground">
-                4 open
-              </span>
-            </div>
-            <ul>
-              {rows.map((row) => (
-                <li
-                  key={row.id}
-                  className={
-                    row.active
-                      ? "flex h-11 items-center gap-3 bg-brand/10 px-5"
-                      : "flex h-11 items-center gap-3 px-5 transition-colors hover:bg-muted/30"
-                  }
-                >
-                  <Circle
-                    className={
-                      row.active
-                        ? "size-3.5 text-brand"
-                        : "size-3.5 text-muted-foreground/50"
-                    }
-                    strokeWidth={row.active ? 2.5 : 1.5}
-                  />
-                  <span className="font-mono text-xs text-muted-foreground">
-                    {row.id}
-                  </span>
-                  <span className="min-w-0 flex-1 truncate text-sm tracking-tight text-foreground">
-                    {row.title}
-                  </span>
-                  <span className="hidden font-mono text-xs text-muted-foreground sm:inline">
-                    {row.status}
-                  </span>
-                  <span className="w-8 text-right font-mono text-xs text-muted-foreground">
-                    {row.meta}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </ScrollScale>
+        <Reveal>
+          <Card className="rounded-2xl ring-foreground/8 depth-soft">
+            <CardHeader className="border-b">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <CardTitle>Issues</CardTitle>
+                  <CardDescription>Resource density demo</CardDescription>
+                </div>
+                <Badge variant="secondary" className="font-mono">
+                  4 open
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="px-0 pb-0">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="pl-5">ID</TableHead>
+                    <TableHead>Title</TableHead>
+                    <TableHead className="hidden sm:table-cell">
+                      Status
+                    </TableHead>
+                    <TableHead className="pr-5 text-right">Age</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.active ? "selected" : undefined}
+                      className="data-[state=selected]:bg-brand/10"
+                    >
+                      <TableCell className="pl-5 font-mono text-xs text-muted-foreground">
+                        {row.id}
+                      </TableCell>
+                      <TableCell className="max-w-[16rem] truncate tracking-tight">
+                        {row.title}
+                      </TableCell>
+                      <TableCell className="hidden font-mono text-xs text-muted-foreground sm:table-cell">
+                        {row.status}
+                      </TableCell>
+                      <TableCell className="pr-5 text-right font-mono text-xs text-muted-foreground">
+                        {row.meta}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </Reveal>
       </div>
     </Stage>
   );

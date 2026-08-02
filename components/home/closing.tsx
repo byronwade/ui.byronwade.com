@@ -1,11 +1,8 @@
-"use client";
-
 import { ArrowRight } from "lucide-react";
 import { Stage } from "@/components/cinematic/stage";
 import { MediaPlane } from "@/components/cinematic/media-plane";
 import { Reveal } from "@/components/cinematic/reveal";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 function Closing() {
   return (
@@ -22,19 +19,19 @@ function Closing() {
           Build the interface. Stage the feeling.
         </h2>
         <p className="mx-auto mt-6 max-w-md text-base leading-relaxed tracking-tight text-dock-foreground/60">
-          Meridian is ready for primitives, catalogs, and product film — all on
-          the same tokens.
+          Meridian styling on the full shadcn set — ready for catalog, docs, and
+          product UI.
         </p>
-        <a
-          href="#system"
-          className={cn(
-            buttonVariants({ size: "lg" }),
-            "mt-10 bg-dock-foreground text-dock hover:bg-dock-foreground/90",
-          )}
+        <Button
+          size="lg"
+          className="mt-10 rounded-full bg-dock-foreground text-dock hover:bg-dock-foreground/90"
+          asChild
         >
-          Back to the system
-          <ArrowRight />
-        </a>
+          <a href="#system">
+            Back to the system
+            <ArrowRight data-icon="inline-end" />
+          </a>
+        </Button>
       </Reveal>
     </Stage>
   );

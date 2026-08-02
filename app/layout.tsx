@@ -3,6 +3,9 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/sonner";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s · ui.byronwade.com",
   },
   description:
-    "Meridian — operational density, staged like film. A design system for application UI.",
+    "Meridian — cinematic staging on shadcn. A design system for application UI.",
   metadataBase: new URL("https://ui.byronwade.com"),
 };
 
@@ -35,16 +38,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={cn(GeistSans.variable, GeistMono.variable)}
       suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <TooltipProvider>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+          <Toaster />
+        </TooltipProvider>
       </body>
     </html>
   );

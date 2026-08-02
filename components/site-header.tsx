@@ -1,7 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 function SiteHeader() {
   return (
@@ -18,13 +18,19 @@ function SiteHeader() {
       <nav className="flex items-center gap-1">
         <Link
           href="#cinema"
-          className="rounded-full px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "sm" }),
+            "text-white hover:bg-white/10 hover:text-white",
+          )}
         >
           Cinema
         </Link>
         <Link
           href="#system"
-          className="rounded-full px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "sm" }),
+            "text-white hover:bg-white/10 hover:text-white",
+          )}
         >
           System
         </Link>

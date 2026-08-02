@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-/* ── Meridian tokens ───────────────────────────────────────────────
-   Cool paper (not cream). Steel-teal brand. Polaris-shaped depth.
-   One accent: --brand. Everything accented derives from it.
+/* ── Meridian on shadcn ────────────────────────────────────────────
+   Cool paper. Steel-teal brand. Cinematic stages. Simple motion only.
    ──────────────────────────────────────────────────────────────── */
 
 @custom-variant dark (&:is(.dark *));
@@ -23,7 +24,6 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -45,8 +45,17 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -66,7 +75,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.02 255);
 
-  /* Arc — steel-teal. Neither Linear purple nor Polaris green. */
+  /* Arc — steel-teal */
   --brand: oklch(0.52 0.11 205);
   --brand-foreground: oklch(0.99 0.01 205);
   --brand-muted: oklch(0.94 0.03 205);
@@ -81,7 +90,6 @@
   --accent-foreground: oklch(0.28 0.04 205);
 
   --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.99 0.01 25);
   --success: var(--brand);
   --success-foreground: var(--brand-foreground);
   --warning: oklch(0.75 0.14 75);
@@ -94,7 +102,6 @@
   --dock: oklch(0.16 0.02 255);
   --dock-foreground: oklch(0.96 0.01 240);
 
-  /* Agent activity — fixed semantics, do not follow --brand */
   --activity-thinking: oklch(0.88 0.04 280);
   --activity-search: oklch(0.88 0.05 220);
   --activity-read: oklch(0.9 0.05 160);
@@ -108,12 +115,20 @@
 
   --radius: 0.625rem;
 
-  /* Polaris-compatible elevation */
   --shadow-100: 0 1px 0 oklch(0.18 0.02 255 / 0.04),
     0 1px 3px oklch(0.18 0.02 255 / 0.06);
   --shadow-300: 0 1px 0 oklch(0.18 0.02 255 / 0.04),
     0 4px 12px oklch(0.18 0.02 255 / 0.08);
   --bevel: inset 0 1px 0 oklch(1 0 0 / 0.7);
+
+  --sidebar: oklch(0.98 0.004 240);
+  --sidebar-foreground: oklch(0.18 0.02 255);
+  --sidebar-primary: var(--brand);
+  --sidebar-primary-foreground: var(--brand-foreground);
+  --sidebar-accent: oklch(0.96 0.008 240);
+  --sidebar-accent-foreground: oklch(0.28 0.02 255);
+  --sidebar-border: oklch(0.9 0.01 240);
+  --sidebar-ring: var(--brand);
 }
 
 .dark {
@@ -139,7 +154,6 @@
   --accent-foreground: oklch(0.92 0.02 205);
 
   --destructive: oklch(0.65 0.18 25);
-  --destructive-foreground: oklch(0.98 0.01 25);
   --success: var(--brand);
   --success-foreground: var(--brand-foreground);
   --warning: oklch(0.8 0.12 85);
@@ -166,11 +180,20 @@
   --shadow-100: 0 1px 0 oklch(0 0 0 / 0.35), 0 1px 3px oklch(0 0 0 / 0.4);
   --shadow-300: 0 1px 0 oklch(0 0 0 / 0.35), 0 8px 24px oklch(0 0 0 / 0.45);
   --bevel: inset 0 1px 0 oklch(1 0 0 / 0.06);
+
+  --sidebar: oklch(0.19 0.015 255);
+  --sidebar-foreground: oklch(0.96 0.01 240);
+  --sidebar-primary: var(--brand);
+  --sidebar-primary-foreground: var(--brand-foreground);
+  --sidebar-accent: oklch(0.24 0.015 255);
+  --sidebar-accent-foreground: oklch(0.92 0.01 240);
+  --sidebar-border: oklch(0.3 0.015 255);
+  --sidebar-ring: var(--brand);
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
 
   html {
@@ -179,7 +202,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background font-sans text-foreground;
     font-feature-settings: "ss01" on, "cv11" on;
     letter-spacing: -0.011em;
   }
@@ -222,10 +245,6 @@
     background-size: 48px 48px;
   }
 
-  .mask-fade-b {
-    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-  }
-
   .reading-measure {
     max-width: 65ch;
   }
@@ -258,7 +277,7 @@
     color: color-mix(in oklch, var(--foreground) 62%, transparent);
   }
 
-  /* Cinematic stage utilities */
+  /* Cinematic styling — static atmosphere, no motion */
   .cinema-grain {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
     background-size: 180px 180px;
@@ -287,26 +306,5 @@
         color-mix(in oklch, var(--foreground) 8%, transparent),
         transparent 70%
       );
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .cinema-drift {
-      animation: none !important;
-      transform: none !important;
-    }
-  }
-
-  @keyframes cinema-drift {
-    from {
-      transform: scale(1) translate3d(0, 0, 0);
-    }
-    to {
-      transform: scale(1.08) translate3d(0, -1.5%, 0);
-    }
-  }
-
-  .cinema-drift {
-    animation: cinema-drift 22s ease-in-out infinite alternate;
-    will-change: transform;
   }
 }

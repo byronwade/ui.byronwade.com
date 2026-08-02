@@ -1,33 +1,23 @@
-"use client";
-
 import { type ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
-  delay?: number;
-  y?: number;
 };
 
-function Reveal({ children, className, delay = 0, y = 28 }: RevealProps) {
-  const reduce = useReducedMotion();
-
+/** Lightweight enter fade — CSS only, no scroll choreography. */
+function Reveal({ children, className }: RevealProps) {
   return (
-    <motion.div
-      className={cn(className)}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-12% 0px -8% 0px" }}
-      transition={{
-        duration: reduce ? 0 : 0.8,
-        delay: reduce ? 0 : delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+    <div
+      data-slot="reveal"
+      className={cn(
+        "animate-in fade-in duration-500 fill-mode-both motion-reduce:animate-none",
+        className,
+      )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 

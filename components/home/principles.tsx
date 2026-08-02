@@ -1,7 +1,13 @@
-"use client";
-
 import { Stage } from "@/components/cinematic/stage";
 import { Reveal } from "@/components/cinematic/reveal";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const principles = [
   {
@@ -26,7 +32,7 @@ const principles = [
   },
   {
     source: "Cinema",
-    take: "Full-bleed frames. One idea per cut. Product as the only subject in the shot.",
+    take: "Full-bleed frames and theater stages — styled, not animated. shadcn underneath.",
   },
 ];
 
@@ -43,30 +49,39 @@ function Principles() {
             The merge
           </p>
           <h2 className="mt-4 max-w-[18ch] text-3xl font-medium tracking-[-0.035em] text-foreground md:text-5xl">
-            Five systems. Plus cinema. One accent.
+            Five systems. Plus cinema. On shadcn.
           </h2>
           <p className="reading-muted mt-5 max-w-xl text-base leading-relaxed tracking-tight">
-            Operational craft from the tools you trust — staged with the
-            discipline of a product film.
+            Operational craft staged like film — implemented with the shadcn
+            component set as the foundation.
           </p>
         </Reveal>
 
-        <ul className="mt-16 divide-y divide-border overflow-hidden rounded-3xl bg-card edge">
-          {principles.map((item, index) => (
-            <li key={item.source}>
-              <Reveal delay={index * 0.04} y={16}>
-                <div className="grid gap-2 px-5 py-5 transition-colors hover:bg-muted/30 md:grid-cols-[8rem_1fr] md:gap-8 md:px-6 md:py-6">
-                  <span className="font-mono text-xs tracking-tight text-brand">
-                    {item.source}
-                  </span>
-                  <p className="text-sm leading-relaxed tracking-tight text-foreground md:text-base">
-                    {item.take}
-                  </p>
-                </div>
-              </Reveal>
-            </li>
-          ))}
-        </ul>
+        <Reveal className="mt-14">
+          <Card className="rounded-2xl py-0">
+            <CardHeader className="border-b py-5">
+              <CardTitle>Influences</CardTitle>
+              <CardDescription>What we take — and compose</CardDescription>
+            </CardHeader>
+            <CardContent className="p-0">
+              <ul>
+                {principles.map((item, index) => (
+                  <li key={item.source}>
+                    {index > 0 ? <Separator /> : null}
+                    <div className="grid gap-2 px-5 py-5 transition-colors hover:bg-muted/30 md:grid-cols-[8rem_1fr] md:gap-8 md:px-6">
+                      <span className="font-mono text-xs tracking-tight text-brand">
+                        {item.source}
+                      </span>
+                      <p className="text-sm leading-relaxed tracking-tight text-foreground md:text-base">
+                        {item.take}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </Reveal>
       </div>
     </Stage>
   );

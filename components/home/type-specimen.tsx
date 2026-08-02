@@ -1,7 +1,13 @@
-"use client";
-
 import { Stage } from "@/components/cinematic/stage";
 import { Reveal } from "@/components/cinematic/reveal";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 function TypeSpecimen() {
   return (
@@ -20,48 +26,64 @@ function TypeSpecimen() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-2">
-          <Reveal delay={0.05} className="space-y-8">
-            <div>
-              <p className="font-mono text-xs text-muted-foreground">
-                display
-              </p>
-              <p className="mt-2 text-4xl font-medium tracking-[-0.045em] md:text-6xl">
-                Meridian
-              </p>
-            </div>
-            <div>
-              <p className="font-mono text-xs text-muted-foreground">ui</p>
-              <p className="mt-2 text-sm tracking-tight text-foreground">
-                Resource lists stay compact —{" "}
-                <span className="text-muted-foreground">
-                  14px / tight tracking / Geist Sans
-                </span>
-              </p>
-            </div>
-            <div>
-              <p className="font-mono text-xs text-muted-foreground">mono</p>
-              <p className="mt-2 font-mono text-sm tracking-tight text-foreground">
-                ISS-1842 · 48m · bg-brand/10 · --brand
-              </p>
-            </div>
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
+          <Reveal>
+            <Card className="h-full rounded-2xl">
+              <CardHeader>
+                <CardTitle>Specimens</CardTitle>
+                <CardDescription>Geist Sans + Geist Mono</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <p className="font-mono text-xs text-muted-foreground">
+                    display
+                  </p>
+                  <p className="mt-2 text-4xl font-medium tracking-[-0.045em] md:text-5xl">
+                    Meridian
+                  </p>
+                </div>
+                <Separator />
+                <div>
+                  <p className="font-mono text-xs text-muted-foreground">ui</p>
+                  <p className="mt-2 text-sm tracking-tight">
+                    Resource lists stay compact —{" "}
+                    <span className="text-muted-foreground">
+                      14px / tight tracking
+                    </span>
+                  </p>
+                </div>
+                <Separator />
+                <div>
+                  <p className="font-mono text-xs text-muted-foreground">
+                    mono
+                  </p>
+                  <p className="mt-2 font-mono text-sm tracking-tight">
+                    ISS-1842 · 48m · bg-brand/10 · --brand
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="rounded-3xl bg-card p-6 edge md:p-8">
-              <p className="font-mono text-xs text-muted-foreground">
-                reading-ui
-              </p>
-              <div className="reading-ui mt-4 text-foreground">
-                <p className="reading-lead">
-                  Web reading on emissive screens is not e-ink.
-                </p>
-                <p className="reading-muted mt-4">
-                  Docs use a capped measure and relaxed line-height so
-                  paragraphs stay readable without abandoning the product voice.
-                </p>
-              </div>
-            </div>
+          <Reveal>
+            <Card className="h-full rounded-2xl">
+              <CardHeader>
+                <CardTitle>reading-ui</CardTitle>
+                <CardDescription>Docs lane</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="reading-ui text-foreground">
+                  <p className="reading-lead">
+                    Web reading on emissive screens is not e-ink.
+                  </p>
+                  <p className="reading-muted mt-4">
+                    Docs use a capped measure and relaxed line-height so
+                    paragraphs stay readable without abandoning the product
+                    voice.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </Reveal>
         </div>
       </div>
