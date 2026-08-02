@@ -232,25 +232,29 @@ function FileCard({
   source: string
 }) {
   return (
-    <li
-      className={cn(
-        "flex flex-col gap-3 rounded-2xl bg-card p-4 edge sm:flex-row sm:items-center sm:justify-between sm:gap-4",
-      )}
-    >
-      <div className="min-w-0">
-        <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
-          {kind}
-        </p>
-        <p className="mt-1 truncate font-mono text-sm text-foreground">
-          {name}
-        </p>
-        <p className="mt-1 text-sm text-muted-foreground">{use}</p>
+    <li className="rounded-2xl bg-card p-4 edge">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+            {kind}
+          </p>
+          <p className="mt-1 font-mono text-sm break-all text-foreground">
+            {name}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">{use}</p>
+        </div>
+        <CopyButton
+          value={source}
+          label="Copy"
+          size="icon-touch"
+          className="shrink-0 sm:hidden"
+        />
       </div>
       <CopyButton
         value={source}
-        label="Copy"
+        label="Copy file"
         size="touch"
-        className="w-full shrink-0 sm:w-auto sm:size-auto"
+        className={cn("mt-3 hidden w-full sm:inline-flex sm:w-auto")}
       />
     </li>
   )
