@@ -6,16 +6,10 @@ type RevealProps = {
   className?: string;
 };
 
-/** Lightweight enter fade — CSS only, no scroll choreography. */
+/** Pass-through wrapper — keep motion out of the scroll path. */
 function Reveal({ children, className }: RevealProps) {
   return (
-    <div
-      data-slot="reveal"
-      className={cn(
-        "animate-in fade-in duration-500 fill-mode-both motion-reduce:animate-none",
-        className,
-      )}
-    >
+    <div data-slot="reveal" className={cn(className)}>
       {children}
     </div>
   );

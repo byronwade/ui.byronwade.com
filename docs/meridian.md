@@ -28,8 +28,8 @@ Meridian is the design language for **ui.byronwade.com**. It merges Polaris, Ver
 
 9. **Media owns the frame** — full-bleed stages, not inset marketing cards.
 10. **One idea per frame** — one headline, one line, one subject.
-11. **Style over spectacle** — atmosphere from light, grain, veil, and type. No scroll choreography, parallax, or sticky opacity plays.
-12. **Simple motion only** — short CSS fades (`animate-in fade-in`). Honor `prefers-reduced-motion`.
+11. **Style over spectacle** — atmosphere from light and type. No scroll choreography, parallax, sticky opacity, SVG grain filters, or `mix-blend` on fixed chrome (they jank mobile scroll).
+12. **Simple motion only** — prefer none on scroll paths; honor `prefers-reduced-motion`.
 13. **Theater when earned** — dark `dock` stages for presence; cool paper for work.
 14. **No overlay stickers** — no floating badges or promo chips on media.
 

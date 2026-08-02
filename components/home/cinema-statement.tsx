@@ -8,7 +8,8 @@ function CinemaStatement() {
     <Stage
       id="cinema"
       tone="theater"
-      className="flex min-h-dvh flex-col justify-center"
+      fullBleed
+      className="flex flex-col justify-center"
     >
       <MediaPlane />
 

@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 
 function Hero() {
   return (
-    <Stage tone="theater" className="flex flex-col justify-end">
+    <Stage tone="theater" fullBleed className="flex flex-col justify-end">
       <MediaPlane />
 
       <Reveal className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 pt-28 md:px-8 md:pb-24">

@@ -7,11 +7,11 @@ function SiteHeader() {
   return (
     <header
       data-slot="site-header"
-      className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between px-5 mix-blend-difference md:px-8"
+      className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-border/60 bg-background/90 px-5 md:px-8"
     >
       <Link
         href="/"
-        className="font-mono text-xs tracking-tight text-white transition-opacity hover:opacity-80"
+        className="font-mono text-xs tracking-tight text-foreground/80 transition-colors hover:text-foreground"
       >
         ui.byronwade.com
       </Link>
@@ -20,7 +20,7 @@ function SiteHeader() {
           href="#cinema"
           className={cn(
             buttonVariants({ variant: "ghost", size: "sm" }),
-            "text-white hover:bg-white/10 hover:text-white",
+            "text-muted-foreground hover:text-foreground",
           )}
         >
           Cinema
@@ -29,14 +29,12 @@ function SiteHeader() {
           href="#system"
           className={cn(
             buttonVariants({ variant: "ghost", size: "sm" }),
-            "text-white hover:bg-white/10 hover:text-white",
+            "text-muted-foreground hover:text-foreground",
           )}
         >
           System
         </Link>
-        <div className="text-white [&_button]:text-white [&_button:hover]:bg-white/10">
-          <ThemeToggle />
-        </div>
+        <ThemeToggle />
       </nav>
     </header>
   );
