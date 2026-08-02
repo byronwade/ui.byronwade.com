@@ -9,8 +9,9 @@ Meridian’s product is the **theme**. Components come from shadcn; personality 
 
 ## Source of truth
 
-- Contract: `design.md` → “Theme knobs”
-- Tokens: `app/globals.css` (`:root` + `.dark`)
+- Contract: `design.md` → “Theme knobs” + Accessibility
+- Tokens: `app/globals.css` — strict **OKLCH** (`:root` + `.dark` + `[data-tone="theater"]`)
+- Contrast: `lib/design/contrast.ts` · `npm run check:contrast`
 - Live proof: `/theme`
 
 ## Knobs (safe to override)
