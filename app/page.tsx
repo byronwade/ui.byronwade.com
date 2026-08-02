@@ -1,22 +1,20 @@
 import { Hero } from "@/components/home/hero"
-import { ReadingSection } from "@/components/home/reading-section"
-import { GrammarSplit } from "@/components/home/grammar-split"
-import { AiStack } from "@/components/home/ai-stack"
-import { ThemeStrip } from "@/components/home/theme-strip"
-import { WorkbenchSection } from "@/components/home/workbench-section"
-import { SurfaceLane } from "@/components/home/surface-lane"
+import { TileCraft } from "@/components/home/tile-craft"
+import { TileFocus } from "@/components/home/tile-focus"
+import { TileAgents } from "@/components/home/tile-agents"
 import { Closing } from "@/components/home/closing"
 
+/**
+ * Cinematic film — Apple-style stacked tiles.
+ * System docs live on /theme and /for-agents, not in the hero reel.
+ */
 export default function Home() {
   return (
     <main>
       <Hero />
-      <ReadingSection />
-      <GrammarSplit />
-      <AiStack />
-      <ThemeStrip />
-      <WorkbenchSection />
-      <SurfaceLane />
+      <TileCraft />
+      <TileFocus />
+      <TileAgents />
       <Closing />
     </main>
   )

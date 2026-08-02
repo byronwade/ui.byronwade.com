@@ -29,10 +29,10 @@ Aesthetic list: **cinematic design**. Laws live in `lib/design/recipes.ts` → `
 ## Workflow
 
 1. Read `design.md` cinematic section.
-2. Import `defineCinemaFrame` from `@/lib/design`.
-3. Prefer `Stage` + `BleedImage` (`lib/media.ts` stills or product photos).
-4. Use `MediaPlane` only when a photograph isn’t available.
-5. Keep application chrome on `tone="paper"`; earn `theater`.
+2. Prefer `CinemaTile` + `CinemaLink` (`components/cinematic/tile.tsx`) — Apple-style stacked viewports.
+3. One idea per tile. Centered sparse copy. Photograph edge-to-edge.
+4. CTAs are quiet text links (“Learn more ›”), not fat button clusters.
+5. Keep system docs off the film — link out to `/theme` and `/for-agents`.
 6. Run `npm run check:design`.
 
 ## Anti-patterns

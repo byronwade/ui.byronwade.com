@@ -1,25 +1,26 @@
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 
+type Veil = "none" | "soft" | "bottom" | "top"
+
 type BleedImageProps = {
   src: string
   alt: string
-  /** Soft gradient so type stays readable over the image. */
-  veil?: boolean
+  /** Apple-like: light veil, not a heavy poster grade. */
+  veil?: Veil
   priority?: boolean
   className?: string
+  /** Focal point for object-cover */
+  objectPosition?: string
 }
 
-/**
- * Edge-to-edge cinematic media — the image owns the frame.
- * Never use as an inset card; pair with Stage fullBleed.
- */
 function BleedImage({
   src,
   alt,
-  veil = true,
+  veil = "soft",
   priority = false,
   className,
+  objectPosition = "center",
 }: BleedImageProps) {
   return (
     <div
@@ -32,14 +33,23 @@ function BleedImage({
         fill
         priority={priority}
         sizes="100vw"
-        className="object-cover object-center"
+        className="object-cover"
+        style={{ objectPosition }}
       />
-      {veil ? (
-        <div aria-hidden className="absolute inset-0 media-veil" />
+      {veil !== "none" ? (
+        <div
+          aria-hidden
+          className={cn(
+            "absolute inset-0",
+            veil === "soft" && "media-veil-soft",
+            veil === "bottom" && "media-veil-bottom",
+            veil === "top" && "media-veil-top",
+          )}
+        />
       ) : null}
     </div>
   )
 }
 
 export { BleedImage }
-export type { BleedImageProps }
+export type { BleedImageProps, Veil }

@@ -48,15 +48,16 @@ Encoded in `lib/design/recipes.ts` → `cinematicLaws`:
 
 1. **Product / photograph is the subject** — chrome recedes
 2. **One idea per frame** — typed as `ideas: 1`
-3. **Full-bleed media** — edge-to-edge; never inset hero cards
+3. **Full-bleed media** — edge-to-edge `CinemaTile` / `BleedImage`; never inset hero cards
 4. **No overlay stickers** on media
 5. **Soft neutrals** — never pure white or pure black
 6. **One accent** — deep and clear, never neon/bright noise
 7. **Stable viewport** — `svh`, never `dvh`
 8. **Motion is micro** — no scroll choreography
-9. **Tile alternation** — paper ↔ theater without border soup
-10. **Structured reading** — measured hierarchy, not dashboard type for essays
-11. **Type weight medium-max** — hierarchy from size + tracking
+9. **Tile alternation** — photograph ↔ parchment rhythm (Apple stacking)
+10. **Sparse copy** — product name, one headline, one line, text links (`CinemaLink`)
+11. **Structured reading** — off the film (docs routes); measured hierarchy
+12. **Type weight medium-max** — hierarchy from size + tracking
 
 ## MUST
 

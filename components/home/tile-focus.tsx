@@ -1,37 +1,38 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
 import { cinemaStills } from "@/lib/media"
 
-function Closing() {
+function TileFocus() {
   return (
     <CinemaTile
+      id="focus"
       tone="theater"
       align="center"
       image={{
-        src: cinemaStills.closing.src,
-        alt: cinemaStills.closing.alt,
+        src: cinemaStills.focus.src,
+        alt: cinemaStills.focus.alt,
         veil: "soft",
-        objectPosition: "center 45%",
+        objectPosition: "center center",
       }}
     >
       <p className="text-[21px] font-medium tracking-tight text-dock-foreground">
-        Meridian
+        Accent
       </p>
-      <h2 className="mt-2 text-[clamp(2.5rem,7vw,4.75rem)] font-medium leading-[1.05] tracking-[-0.045em] text-dock-foreground">
-        The frame is the product.
+      <h2 className="mt-2 text-[clamp(2.25rem,6vw,4.25rem)] font-medium leading-[1.06] tracking-[-0.04em] text-dock-foreground">
+        One color that leads.
       </h2>
       <p className="mx-auto mt-4 max-w-sm text-[19px] leading-snug tracking-tight text-dock-foreground/70 md:text-[21px]">
-        One idea. Full bleed. Soft structure.
+        Deep ink-teal for action and selection. Everything else stays neutral.
       </p>
       <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
         <CinemaLink href="/theme" className="text-dock-foreground">
-          View theme
+          See the brand
         </CinemaLink>
-        <CinemaLink href="/surfaces" className="text-dock-foreground">
-          Surfaces
+        <CinemaLink href="#agents" className="text-dock-foreground">
+          For agents
         </CinemaLink>
       </div>
     </CinemaTile>
   )
 }
 
-export { Closing }
+export { TileFocus }

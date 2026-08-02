@@ -1,56 +1,38 @@
-import { ArrowRight } from "lucide-react"
-import { Stage } from "@/components/cinematic/stage"
-import { BleedImage } from "@/components/cinematic/bleed-image"
-import { Button } from "@/components/ui/button"
+import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
 import { cinemaStills } from "@/lib/media"
-import { designCn, typeClass } from "@/lib/design"
 
 function Hero() {
   return (
-    <Stage
+    <CinemaTile
       tone="theater"
-      fullBleed
-      className="justify-end pb-14 md:pb-20"
+      align="center"
+      image={{
+        src: cinemaStills.hero.src,
+        alt: cinemaStills.hero.alt,
+        veil: "soft",
+        priority: true,
+        objectPosition: "center 40%",
+      }}
     >
-      <BleedImage
-        src={cinemaStills.hero.src}
-        alt={cinemaStills.hero.alt}
-        priority
-      />
-
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-5 md:px-8">
-        <div className="max-w-xl">
-          <p className={designCn(typeClass("label"), "text-brand")}>
-            Meridian · cinematic design
-          </p>
-          <h1
-            className={designCn(
-              typeClass("display"),
-              "mt-5 text-[clamp(2.75rem,8vw,5rem)] text-dock-foreground",
-            )}
-          >
-            Soft neutrals.
-            <br />
-            One clear accent.
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed tracking-tight text-dock-foreground/75 md:text-lg">
-            Full-bleed frames. Structured reading. Crisp chrome on warm stone —
-            never pure white, never pure black, never bright noise.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Button variant="theater" size="pill" asChild>
-              <a href="#reading">
-                Read the system
-                <ArrowRight data-icon="inline-end" />
-              </a>
-            </Button>
-            <Button variant="theater-outline" size="pill" asChild>
-              <a href="/theme">Theme</a>
-            </Button>
-          </div>
-        </div>
+      <p className="text-[21px] font-medium tracking-tight text-dock-foreground">
+        Meridian
+      </p>
+      <h1 className="mt-2 text-[clamp(2.75rem,7.5vw,5.5rem)] font-medium leading-[1.05] tracking-[-0.045em] text-dock-foreground">
+        Designed to be seen.
+      </h1>
+      <p className="mx-auto mt-4 max-w-md text-[19px] leading-snug tracking-tight text-dock-foreground/70 md:text-[21px]">
+        A cinematic theme for product UI — soft neutrals, one accent, full
+        bleed.
+      </p>
+      <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        <CinemaLink href="#craft" className="text-dock-foreground">
+          Learn more
+        </CinemaLink>
+        <CinemaLink href="/theme" className="text-dock-foreground">
+          View theme
+        </CinemaLink>
       </div>
-    </Stage>
+    </CinemaTile>
   )
 }
 
