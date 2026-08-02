@@ -30,7 +30,7 @@ type CinemaTileProps = {
 }
 
 /**
- * Apple-style cinematic tile — one viewport, one idea.
+ * Cinematic tile — one viewport, one idea.
  * Stack layout puts the product on stage; overlay keeps media full-bleed.
  */
 function CinemaTile({
@@ -108,20 +108,17 @@ type CinemaLinkProps = {
   className?: string
 }
 
-/** Apple-style text CTA — quiet, not a fat button. */
+/** Quiet cinematic text CTA — brand link, no chevron. */
 function CinemaLink({ href, children, className }: CinemaLinkProps) {
   return (
     <a
       href={href}
       className={cn(
-        "inline-flex items-center gap-1 text-[17px] tracking-tight text-brand transition-opacity hover:opacity-80",
+        "text-[17px] tracking-tight text-brand underline-offset-[0.18em] transition-opacity hover:opacity-70 hover:underline",
         className,
       )}
     >
       {children}
-      <span aria-hidden className="text-lg leading-none">
-        ›
-      </span>
     </a>
   )
 }
