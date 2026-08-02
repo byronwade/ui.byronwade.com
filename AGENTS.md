@@ -25,4 +25,5 @@ Theme showcase for AIs. Aesthetic: **cinematic design** — soft warm neutrals, 
 3. Full-bleed via `BleedImage`; reading via `ReadingArticle`
 4. Cinema: one idea/frame, `svh`, no stickers
 5. shadcn only; icons from `@/lib/icons` (Phosphor); `data-surface` for density
-6. Pass `npm run check:design`
+6. Skills live in `skills/` — browse at `/skills`; install via `npx skills add byronwade/ui.byronwade.com`
+7. Pass `npm run check:design`
