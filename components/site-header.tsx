@@ -17,6 +17,15 @@ function SiteHeader() {
       </Link>
       <nav className="flex items-center gap-1">
         <Link
+          href="/#workbench"
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "sm" }),
+            "text-muted-foreground hover:text-foreground",
+          )}
+        >
+          Workbench
+        </Link>
+        <Link
           href="/surfaces"
           className={cn(
             buttonVariants({ variant: "ghost", size: "sm" }),
@@ -24,15 +33,6 @@ function SiteHeader() {
           )}
         >
           Surfaces
-        </Link>
-        <Link
-          href="/#system"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "text-muted-foreground hover:text-foreground",
-          )}
-        >
-          System
         </Link>
         <ThemeToggle />
       </nav>

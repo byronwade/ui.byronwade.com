@@ -49,6 +49,8 @@ Set the lane with `data-surface`:
 
 ## The merge
 
+Influences are **ingredients**, not labels on the UI. The homepage workbench should feel like the merge without naming Polaris / Linear / etc. in chrome.
+
 | Source | Take | Leave behind |
 | --- | --- | --- |
 | Polaris | Soft elevation, dense resources, calm neutrals | Green-as-brand |
@@ -56,6 +58,8 @@ Set the lane with `data-surface`:
 | Linear | Row density, selected states, keyboard scan | Purple, dark-only |
 | Cursor | Object-bound AI, activity semantics | IDE dark as default |
 | OpenAI | Provenance, message rhythm | Chatbot cliché |
+
+**Composition rule:** Prefer one product frame that contains density + type + AI + edge depth over a page that lists influences.
 
 ## Cinema — styling, not spectacle
 
