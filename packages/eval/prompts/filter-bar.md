@@ -1,1 +1,0 @@
-Build a filter bar with a search input, a few dropdown filters, active filter chips, and a "Clear" button. Return one self-contained React .tsx component.

@@ -1,1 +1,0 @@
-Build an empty state for a projects list: an icon, a heading, a short description, and a primary "Create project" button. Return one self-contained React .tsx component.

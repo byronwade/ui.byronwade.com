@@ -1,1 +1,0 @@
-Build a dashboard stat row of four metric cards (label, big value, trend delta). Return one self-contained React .tsx component.

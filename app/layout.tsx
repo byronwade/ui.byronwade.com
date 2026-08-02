@@ -1,58 +1,23 @@
-import type { Metadata } from "next"
-import { Geist, Geist_Mono, EB_Garamond } from "next/font/google"
-import { ThemeProvider } from "@wrksz/themes/next"
-import "./globals.css"
-import { AppChrome } from "@/app/_components/chrome/app-chrome"
-import { SiteFooterGate } from "@/app/_components/chrome/site-footer-gate"
-import { Toaster } from "@/components/ui/sonner"
-
-const geistSans = Geist({
-  variable: "--font-sans",
-  subsets: ["latin"],
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
-
-// Editorial serif, backs the `font-serif` token for quotes / long-form moments.
-const ebGaramond = EB_Garamond({
-  variable: "--font-serif",
-  subsets: ["latin"],
-})
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "byronwade/ui, Design system",
-  description:
-    "A personal design system — token-driven components with a re-brandable warm default and Linear/Polaris skins.",
-}
+  title: {
+    default: "ui.byronwade.com",
+    template: "%s · ui.byronwade.com",
+  },
+  description: "Design system and UI for Byron Wade.",
+  metadataBase: new URL("https://ui.byronwade.com"),
+};
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} h-full antialiased`}
-      suppressHydrationWarning
-    >
-      <body className="min-h-full flex flex-col">
-        {/* No-flash skin: apply the saved token skin before first paint. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var s=localStorage.getItem("skin");if(s)document.documentElement.dataset.skin=s;}catch(e){}`,
-          }}
-        />
-        <ThemeProvider>
-          <AppChrome />
-          <div className="flex min-h-0 flex-1 flex-col">{children}</div>
-          <SiteFooterGate />
-          <Toaster />
-        </ThemeProvider>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
-  )
+  );
 }
