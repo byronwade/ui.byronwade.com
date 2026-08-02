@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s · ui.byronwade.com",
   },
   description:
-    "Meridian — AI-native theme and surface system on shadcn. design.md, skills, and agents so models ship on-brand UI.",
+    "Meridian — cinematic design theme for AIs. Typed grammar, closed tokens, shadcn primitives. Creativity without drift.",
   metadataBase: new URL("https://ui.byronwade.com"),
 };
 

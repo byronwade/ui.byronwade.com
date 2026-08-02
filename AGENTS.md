@@ -6,59 +6,40 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
-# ui.byronwade.com — Meridian (AI-native)
+# ui.byronwade.com — Meridian (cinematic · typed)
 
-**Before any UI work, read [`design.md`](./design.md).**  
-Architecture: [`docs/architecture.md`](./docs/architecture.md). Deep DNA: [`docs/meridian.md`](./docs/meridian.md).
+**Before UI work:** [`design.md`](./design.md) → [`lib/design/`](./lib/design/).  
+Architecture: [`docs/architecture.md`](./docs/architecture.md).
 
-This site is a **theme showcase for AIs** — not a custom component catalog. shadcn owns primitives; Meridian owns theme, surfaces, skills, and agents.
+Theme showcase for AIs. Aesthetic: **cinematic design**. Enforcement: TypeScript grammar + `npm run check:design`.
+
+## Frozen vs creative
+
+- **Frozen:** color, radius, depth, surface, cinema laws, bans (`lib/design/grammar.ts`)
+- **Creative:** copy, IA, domain, frame sequence, which shadcn wholes
 
 ## Stack
 
 - Next.js 16 + React 19 + React Compiler
-- **shadcn/ui** in `components/ui/`
-- Tokens in `app/globals.css`
-- Surfaces via `data-surface`
+- shadcn/ui · tokens in `app/globals.css`
+- Grammar in `lib/design/`
 
-## AI toolchain
+## Toolchain
 
 | Kind | Path |
 | --- | --- |
 | Contract | `design.md` |
+| Grammar | `lib/design/*` |
+| Lint | `npm run check:design` |
 | Rule | `.cursor/rules/meridian.mdc` |
-| Skills | `.cursor/skills/*/SKILL.md` |
-| Agents | `.cursor/agents/*.md` |
-
-### Skills
-
-- `meridian-theme` — re-skin / theme knobs
-- `meridian-surface` — pick surface + density
-- `meridian-compose` — build product wholes
-
-### Agents
-
-- `meridian-author` — implement under design.md
-- `meridian-reviewer` — audit MUST / MUST NOT
+| Skills | theme · surface · compose · **cinematic** |
+| Agents | author · reviewer |
 
 ## Laws (short)
 
-1. Obey `design.md`
-2. Tokens only; one `--brand`
-3. shadcn only — never fork a parallel kit
-4. `data-surface` for density
-5. Compose wholes; prove on `/theme` + `/surfaces`
-6. Object-bound AI; cinema = styling not spectacle
-
-## Where things go
-
-| Path | Role |
-| --- | --- |
-| `design.md` | AI contract |
-| `docs/architecture.md` | Layer map |
-| `app/globals.css` | Theme tokens |
-| `components/ui/` | shadcn primitives |
-| `components/surfaces/` | Wholes / proofs |
-| `.cursor/skills/` | Agent skills |
-| `.cursor/agents/` | Agent roles |
-| `app/theme/` | Theme showcase |
-| `app/for-agents/` | Agent onboarding |
+1. Obey `design.md` + import `@/lib/design` for structure
+2. Cinematic: one idea/frame, product subject, `svh`, no stickers
+3. Tokens only; one `--brand`
+4. shadcn only — no parallel kit
+5. `data-surface` for density
+6. Object-bound AI; pass `check:design`

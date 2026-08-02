@@ -1,23 +1,29 @@
 ---
-description: Meridian AI-native theme constraints — always on for this repo
+description: Meridian cinematic typed theme — always on
 alwaysApply: true
 ---
 
 # Meridian
 
-Read `design.md` before writing UI. This repo showcases a **theme for AIs**, not a custom component zoo.
+Read `design.md`, then import from `@/lib/design`. Aesthetic: **cinematic design**.
+
+## Frozen (do not invent)
+
+colorRoles · radii · depths · surfaces · themeKnobs · activity · cinematicLaws · banned
+
+## Creative (invent freely)
+
+copy · IA · domain objects · frame sequence · which shadcn wholes · narrative inside one-idea frames
 
 ## Hard rules
 
-- Tokens only; one accent `--brand`; status stays semantic (`destructive` / `warning`)
-- Primitives from shadcn (`components/ui/`) — `npx shadcn@latest add`; never fork a parallel kit
-- Surfaces via `data-surface`: `application` (default) | `marketing` | `mobile` | `desktop`
-- Compose wholes (`components/surfaces/`); prove on `/theme` and `/surfaces`
-- Mono for data; hierarchy from size + tracking; `edge` before shadows
-- AI UI is object-bound (provenance + `activity-*`); no chatbot cliché
-- No other brand names in UI chrome; cinema styling without scroll spectacle
-- Hero height: `min-h-svh` never `dvh`; demo shells avoid nested `overflow-auto`
+- Tokens only; one `--brand`; status semantic
+- `defineCinemaFrame({ ideas: 1, overlayStickers: false })` for stages
+- shadcn primitives only; `data-surface` for density
+- `svh` never `dvh`; `edge`/`depth-*` never Tailwind `shadow-*`
+- Object-bound AI; no influence-brand labels in UI
+- Run `npm run check:design` before done
 
 ## Skills
 
-Use when relevant: `meridian-theme`, `meridian-surface`, `meridian-compose`.
+`meridian-theme` · `meridian-surface` · `meridian-compose` · `meridian-cinematic`

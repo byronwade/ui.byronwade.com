@@ -1,80 +1,73 @@
 # Meridian — architecture for AIs
 
-Meridian is an **AI-native theme system**. The website showcases the *theme and surfaces*, not a handmade component catalog. shadcn owns primitives; Meridian owns tokens, surface contracts, agents, and skills so models can author consistent UI.
+Meridian is a **cinematic, typed theme system**. The site showcases the theme; TypeScript + lint stop agents from drifting; creativity stays in composition and content.
+
+## Research → system
+
+| Finding | Our response |
+| --- | --- |
+| Agents fabricate tokens ([Superdesign](https://superdesign.dev/blog/ai-design-system-drift), [Hardik Pandya](https://hvpandya.com/llm-design-systems)) | Closed unions in `lib/design/grammar.ts` |
+| Docs ≠ code ≠ components | One grammar imported by UI + audited by `check:design` |
+| Creativity dies if everything is locked | Explicit **frozen vs creative** zones in `recipes.ts` |
+| Cinematic product sites subordinate chrome to subject ([Apple DESIGN.md patterns](https://github.com/VoltAgent/awesome-design-md)) | `cinematicLaws` + `defineCinemaFrame` |
+| Compose, don’t invent components ([Puck / schema UI gen](https://puckeditor.com/blog/top-5-ai-tools-for-ui-generation)) | shadcn atoms + surface wholes |
 
 ## North star
 
 ```
-design.md  →  tokens + surfaces  →  shadcn atoms  →  product wholes
-     ↑                ↑                              ↑
-  AI contract     theme knobs              workbench / frames
+design.md  →  lib/design (typed)  →  tokens CSS  →  shadcn  →  cinema wholes
+     ↑              ↑ check:design                    ↑
+  contract      compile-time + CI                 /theme proof
 ```
 
-Humans browse `/theme` and `/surfaces`. Agents load `design.md`, then skills.
+## Frozen vs creative
+
+```
+FROZEN                          CREATIVE
+─────────────────────────       ─────────────────────────────
+colorRoles                      copy / voice
+radii / depths                  information architecture
+surfaces / themeKnobs           domain objects (issues, orders…)
+activity / provenance           frame sequence (still ideas: 1 each)
+cinematicLaws / banned          which shadcn wholes to compose
+```
 
 ## Layers
 
-| Layer | Path | Owner | AI rule |
-| --- | --- | --- | --- |
-| Contract | `design.md` | Hand | Obey MUST / MUST NOT |
-| Deep DNA | `docs/meridian.md` | Hand | Read when unsure |
-| Sources | `docs/sources.md` | Hand | Discipline citations |
-| Tokens | `app/globals.css` | Hand | Reskin via CSS vars |
-| Primitives | `components/ui/*` | shadcn CLI | Add, don’t fork |
-| Wholes | `components/surfaces/*` | Hand | Compose, prove |
-| Cinema | `components/cinematic/*` | Hand | Marketing staging only |
-| Skills | `.cursor/skills/*` | Hand | Task workflows |
-| Agents | `.cursor/agents/*` | Hand | Multi-step roles |
-| Rules | `.cursor/rules/*` | Hand | Always-on short law |
-
-## Toolchain (Cursor / Claude / Codex)
-
-| Kind | Role | Loads when |
-| --- | --- | --- |
-| **Rule** `.cursor/rules/meridian.mdc` | Always-on constraints | Every chat in this repo |
-| **Skill** `.cursor/skills/<name>/SKILL.md` | Procedural workflow | Task matches description |
-| **Agent** `.cursor/agents/<name>.md` | Role + checklist | Invoked for author / review |
-| **design.md** | Source of truth | First file for any UI task |
-
-Compatible skill roots also work if mirrored: `.claude/skills/`, `.agents/skills/`.
-
-## Skills shipped
-
-| Skill | Use |
+| Layer | Path |
 | --- | --- |
-| `meridian-theme` | Re-skin / apply theme knobs; keep accent DNA |
-| `meridian-surface` | Choose `data-surface` + density |
-| `meridian-compose` | Build a product whole from shadcn + tokens |
+| Contract | `design.md` |
+| Typed grammar | `lib/design/grammar.ts` |
+| Recipes | `lib/design/recipes.ts` |
+| Helpers | `lib/design/cx.ts` |
+| Drift lint | `scripts/check-design.mjs` → `npm run check:design` |
+| Tokens | `app/globals.css` |
+| Primitives | `components/ui/*` (shadcn) |
+| Wholes | `components/surfaces/*` |
+| Skills / agents | `.cursor/skills` · `.cursor/agents` |
 
-## Agents shipped
+## Toolchain
 
-| Agent | Use |
+| Kind | Role |
 | --- | --- |
-| `meridian-author` | Implement UI end-to-end under design.md |
-| `meridian-reviewer` | Audit a diff against MUST / MUST NOT |
+| Rule | Always-on short law |
+| Skill | Task workflow (`meridian-theme`, `meridian-surface`, `meridian-compose`, `meridian-cinematic`) |
+| Agent | `meridian-author` / `meridian-reviewer` |
+| Lint | Fails CI / local on banned patterns |
 
-## Website map (showcase, not catalog)
+## Website
 
 | Route | Job |
 | --- | --- |
-| `/` | Positioning: theme for AIs |
-| `/theme` | Live token + density + brand showcase |
-| `/surfaces` | Four surface proofs |
-| `/for-agents` | How to load contract, skills, agents |
+| `/` | Cinematic positioning |
+| `/theme` | Live grammar + knobs |
+| `/for-agents` | Frozen vs creative |
+| `/surfaces` | Four density proofs |
 | `/design.md` | Raw contract |
-| `/llms.txt` | Discovery for AI crawlers |
 
-## What we intentionally don’t do
+## Extension
 
-- Maintain a parallel component library beside shadcn
-- Showcase “200 custom components” as the product
-- Encode other brands’ names into UI chrome
-- Let marketing theater leak into application density
-
-## Extension path
-
-1. Change theme → tokens in `globals.css` (and document knobs in `design.md` if new).
-2. Need a primitive → `npx shadcn@latest add`.
-3. Need a pattern → compose in `components/surfaces/` + prove on `/theme` or `/surfaces`.
-4. Teach agents a new workflow → add `.cursor/skills/<slug>/SKILL.md`.
-5. Keep `design.md` MUST list short — raise the floor, don’t grow a novel.
+1. New token role → add to `grammar.ts` + CSS + `cx.ts` maps (same PR).
+2. New ban → `banned` + `check-design.mjs` rule.
+3. New skill when a workflow repeats three times.
+4. Keep MUST list short — raise the floor, don’t write a novel.

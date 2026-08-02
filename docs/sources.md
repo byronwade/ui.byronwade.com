@@ -21,6 +21,18 @@ Meridian’s controlled principles come from published guidance by teams and pra
 | OpenAI / ChatGPT product simplicity | Progressive disclosure; product as hero; provenance without chatbot cliché |
 | Cinema staging (Apple / Tesla / YouTube product films) | Full-bleed product subject; one idea per frame; no scroll spectacle |
 
+## AI + typed design (2025–2026)
+
+| Source | What we follow |
+| --- | --- |
+| [Why AI Breaks Your Design System](https://superdesign.dev/blog/ai-design-system-drift) | Freeze a contract; constrain components; validate output |
+| [Expose your design system to LLMs](https://hvpandya.com/llm-design-systems) | Spec + closed token layer + audit script |
+| [Design tokens as AI guardrails](https://otf-kit.dev/blog/design-tokens-as-guardrails) | Tokens as typed API; lint off-token values |
+| [Into Design Systems — not ready for agents](https://www.intodesignsystems.com/blog/design-system-not-ready-for-ai-agents) | Align docs/tokens/components; always-on foundation rules |
+| Cinematic product staging (Apple-class DESIGN.md patterns) | Product as subject; one idea/frame; chrome recedes |
+
+Encoded as: `lib/design/` + `npm run check:design` + frozen/creative zones.
+
 ## How to use this file
 
 1. When changing DNA or tokens, prefer advice that appears in the primary table.

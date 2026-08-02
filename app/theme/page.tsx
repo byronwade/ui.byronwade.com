@@ -1,35 +1,52 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import type { Metadata } from "next"
+import Link from "next/link"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import {
-  activityTokens,
-  densitySteps,
+  activity,
+  activityRoles,
+  banned,
+  cinematicLaws,
+  colorRoles,
+  depths,
+  radii,
+  surfaces as surfaceIds,
   themeKnobs,
-} from "@/lib/theme-showcase";
-import { surfaces } from "@/lib/surfaces";
-import { cn } from "@/lib/utils";
+  typeClass,
+  designCn,
+} from "@/lib/design"
+import { surfaces } from "@/lib/surfaces"
+import { densitySteps } from "@/lib/theme-showcase"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Theme",
   description:
-    "Meridian theme showcase — tokens, brand, density, and surfaces for AI authors.",
-};
+    "Meridian cinematic design grammar — closed TypeScript tokens, density, and theme knobs.",
+}
 
 export default function ThemePage() {
   return (
     <main className="px-5 pt-20 pb-24 md:px-8 md:pt-24 md:pb-32">
       <div className="mx-auto max-w-6xl">
-        <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
-          Theme showcase
+        <p className={designCn(typeClass("label"), "text-muted-foreground")}>
+          Theme · cinematic grammar
         </p>
-        <h1 className="mt-4 max-w-[18ch] text-3xl font-medium tracking-[-0.035em] md:text-5xl">
-          The product is the theme.
+        <h1
+          className={designCn(
+            typeClass("title"),
+            "mt-4 max-w-[18ch] text-3xl md:text-5xl",
+          )}
+        >
+          The product is a typed theme.
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-relaxed tracking-tight text-muted-foreground">
-          Meridian is not a custom component zoo. AIs re-skin products through
-          tokens and surface contracts — primitives stay shadcn. Contract:{" "}
+          Closed sets in{" "}
+          <span className="font-mono text-foreground">lib/design</span>. Live
+          knobs in CSS. Drift fails{" "}
+          <span className="font-mono text-foreground">check:design</span>.
+          Contract:{" "}
           <Link
             href="/design.md"
             className="font-mono text-foreground underline-offset-4 hover:underline"
@@ -44,36 +61,54 @@ export default function ThemePage() {
             <Link href="/for-agents">For agents</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/surfaces">Surfaces</Link>
+            <Link href="/design.md">design.md</Link>
           </Button>
         </div>
 
         <Separator className="my-14" />
 
         <section>
-          <header className="mb-6 max-w-xl">
-            <h2 className="text-2xl font-medium tracking-[-0.03em]">
-              Theme knobs
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Override these variables to theme a product. Accented UI follows{" "}
-              <span className="font-mono text-foreground">--brand</span>.
-            </p>
-          </header>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {themeKnobs.map((knob) => (
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>
+            Cinematic laws
+          </h2>
+          <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+            Encoded as constants — agents compose freely inside them.
+          </p>
+          <dl className="mt-6 grid gap-3 sm:grid-cols-2">
+            {Object.entries(cinematicLaws).map(([key, value]) => (
               <div
-                key={knob.name}
-                className="rounded-2xl bg-card p-4 edge"
+                key={key}
+                className="flex items-baseline justify-between gap-3 rounded-2xl bg-card px-4 py-3 edge"
               >
+                <dt className="font-mono text-xs text-foreground">{key}</dt>
+                <dd className="font-mono text-xs text-muted-foreground">
+                  {String(value)}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <Separator className="my-14" />
+
+        <section>
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>
+            Theme knobs
+          </h2>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {themeKnobs.map((name) => (
+              <div key={name} className="rounded-2xl bg-card p-4 edge">
                 <div
-                  className={cn("mb-3 h-10 rounded-lg", knob.swatch)}
+                  className={cn(
+                    "mb-3 h-10 rounded-lg",
+                    name.includes("brand") && "bg-brand",
+                    name === "--background" && "bg-background edge",
+                    name === "--foreground" && "bg-foreground",
+                    name === "--radius" && "bg-muted",
+                  )}
                   aria-hidden
                 />
-                <p className="font-mono text-xs text-foreground">{knob.name}</p>
-                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  {knob.role}
-                </p>
+                <p className="font-mono text-xs">{name}</p>
               </div>
             ))}
           </div>
@@ -82,15 +117,69 @@ export default function ThemePage() {
         <Separator className="my-14" />
 
         <section>
-          <header className="mb-6 max-w-xl">
-            <h2 className="text-2xl font-medium tracking-[-0.03em]">
-              Density scale
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Surfaces remap control height by task — one Button, four lanes.
-            </p>
-          </header>
-          <ul className="space-y-2">
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>
+            Closed color roles
+          </h2>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {colorRoles.map((role) => (
+              <Badge
+                key={role}
+                variant="secondary"
+                className="font-mono text-[11px]"
+              >
+                {role}
+              </Badge>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {activityRoles.map((role) => (
+              <Badge
+                key={role}
+                className={cn(
+                  "border-transparent font-mono text-[11px] text-foreground",
+                  activity(role),
+                )}
+              >
+                activity/{role}
+              </Badge>
+            ))}
+          </div>
+        </section>
+
+        <Separator className="my-14" />
+
+        <section>
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>
+            Radius · depth · density
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl bg-card p-5 edge">
+              <p className={designCn(typeClass("label"), "text-muted-foreground")}>
+                radii
+              </p>
+              <ul className="mt-4 space-y-2 font-mono text-sm">
+                {radii.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl bg-card p-5 edge">
+              <p className={designCn(typeClass("label"), "text-muted-foreground")}>
+                depths
+              </p>
+              <ul className="mt-4 space-y-3">
+                {depths.map((d) => (
+                  <li
+                    key={d}
+                    className={cn("rounded-xl bg-background px-3 py-2", d)}
+                  >
+                    <span className="font-mono text-sm">{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <ul className="mt-6 space-y-2">
             {densitySteps.map((step) => (
               <li
                 key={step.token}
@@ -101,8 +190,8 @@ export default function ThemePage() {
                   style={{ height: `var(${step.token})` }}
                   aria-hidden
                 />
-                <div className="min-w-0">
-                  <p className="font-mono text-xs text-foreground">
+                <div>
+                  <p className="font-mono text-xs">
                     {step.token}{" "}
                     <span className="text-muted-foreground">{step.px}px</span>
                   </p>
@@ -116,69 +205,19 @@ export default function ThemePage() {
         <Separator className="my-14" />
 
         <section>
-          <header className="mb-6 max-w-xl">
-            <h2 className="text-2xl font-medium tracking-[-0.03em]">
-              Depth + type
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Edge first. Mono for data. Hierarchy from size and tracking.
-            </p>
-          </header>
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl bg-card p-5 edge">
-              <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
-                edge
-              </p>
-              <p className="mt-3 text-sm tracking-tight">Hairline inset only</p>
-            </div>
-            <div className="rounded-2xl bg-card p-5 depth-soft">
-              <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
-                depth-soft
-              </p>
-              <p className="mt-3 text-sm tracking-tight">Floated panels</p>
-            </div>
-            <div className="rounded-2xl bg-card p-5 depth-raised">
-              <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
-                depth-raised
-              </p>
-              <p className="mt-3 text-sm tracking-tight">Overlays sparingly</p>
-            </div>
-          </div>
-          <div className="mt-6 rounded-2xl bg-card p-5 edge">
-            <p className="text-3xl font-medium tracking-[-0.035em]">
-              Display stays medium
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              UI chrome{" "}
-              <span className="text-foreground">text-sm tracking-tight</span>
-            </p>
-            <p className="mt-2 font-mono text-xs text-muted-foreground">
-              ISS-1842 · 2h · brand/10 selected
-            </p>
-          </div>
-        </section>
-
-        <Separator className="my-14" />
-
-        <section>
-          <header className="mb-6 max-w-xl">
-            <h2 className="text-2xl font-medium tracking-[-0.03em]">
-              Agent activity
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Fixed pastels for what the agent is doing — not a second brand.
-            </p>
-          </header>
-          <div className="flex flex-wrap gap-2">
-            {activityTokens.map((token) => (
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>Banned</h2>
+          <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+            Shortest list, highest leverage — also enforced by{" "}
+            <span className="font-mono">npm run check:design</span>.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {banned.map((item) => (
               <Badge
-                key={token.name}
-                className={cn(
-                  "border-transparent px-3 py-1 font-mono text-xs text-foreground",
-                  token.className,
-                )}
+                key={item}
+                variant="outline"
+                className="font-mono text-[11px] text-destructive"
               >
-                {token.name}
+                {item}
               </Badge>
             ))}
           </div>
@@ -187,19 +226,19 @@ export default function ThemePage() {
         <Separator className="my-14" />
 
         <section>
-          <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
-            <div className="max-w-xl">
-              <h2 className="text-2xl font-medium tracking-[-0.03em]">
-                Surfaces remap the theme
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className={designCn(typeClass("title"), "text-2xl")}>
+                Surfaces ({surfaceIds.length})
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Same tokens. Density and chrome change with the job.
+                Density remaps — same grammar, different task.
               </p>
             </div>
             <Button variant="outline" size="sm" asChild>
-              <Link href="/surfaces">Open gallery</Link>
+              <Link href="/surfaces">Gallery</Link>
             </Button>
-          </header>
+          </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {surfaces.map((surface) => (
               <Link
@@ -222,5 +261,5 @@ export default function ThemePage() {
         </section>
       </div>
     </main>
-  );
+  )
 }

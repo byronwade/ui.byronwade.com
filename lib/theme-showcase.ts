@@ -1,47 +1,4 @@
-/** Structured theme showcase data — for /theme and agent-facing pages. */
-
-export const themeKnobs = [
-  {
-    name: "--brand",
-    role: "Accent / primary / selected / success",
-    swatch: "bg-brand",
-  },
-  {
-    name: "--background",
-    role: "Cool paper page",
-    swatch: "bg-background edge",
-  },
-  {
-    name: "--foreground",
-    role: "Primary text",
-    swatch: "bg-foreground",
-  },
-  {
-    name: "--card",
-    role: "Panel surface",
-    swatch: "bg-card edge",
-  },
-  {
-    name: "--muted",
-    role: "Inset / quiet fill",
-    swatch: "bg-muted",
-  },
-  {
-    name: "--destructive",
-    role: "Danger (fixed meaning)",
-    swatch: "bg-destructive",
-  },
-  {
-    name: "--warning",
-    role: "Caution (fixed meaning)",
-    swatch: "bg-warning",
-  },
-  {
-    name: "--dock",
-    role: "Theater / floating chrome",
-    swatch: "bg-dock",
-  },
-] as const;
+/** Structured showcase data for /theme and marketing sections. */
 
 export const densitySteps = [
   { token: "--control-h-xs", px: "24", use: "Desktop toolbar icons" },
@@ -50,38 +7,31 @@ export const densitySteps = [
   { token: "--control-h-md", px: "36", use: "Marketing secondary" },
   { token: "--control-h-lg", px: "40", use: "Marketing primary CTA" },
   { token: "--control-h-touch", px: "44", use: "Mobile native targets" },
-] as const;
-
-export const activityTokens = [
-  { name: "thinking", className: "bg-activity-thinking" },
-  { name: "search", className: "bg-activity-search" },
-  { name: "read", className: "bg-activity-read" },
-  { name: "edit", className: "bg-activity-edit" },
-] as const;
+] as const
 
 export const aiStack = [
   {
     id: "design-md",
     label: "design.md",
-    summary: "The AI contract — MUST / MUST NOT, theme knobs, decision tree.",
+    summary: "AI contract — MUST, bans, cinematic list, frozen vs creative.",
     href: "/design.md",
+  },
+  {
+    id: "grammar",
+    label: "lib/design",
+    summary: "Typed grammar — closed unions agents cannot fabricate.",
+    href: "/theme",
   },
   {
     id: "skills",
     label: "Skills",
-    summary: "meridian-theme · meridian-surface · meridian-compose",
+    summary: "theme · surface · compose · cinematic",
     href: "/for-agents#skills",
   },
   {
     id: "agents",
     label: "Agents",
-    summary: "meridian-author · meridian-reviewer",
+    summary: "author · reviewer — plus check:design drift lint",
     href: "/for-agents#agents",
   },
-  {
-    id: "theme",
-    label: "Theme showcase",
-    summary: "Live tokens, density, depth — what AIs re-skin.",
-    href: "/theme",
-  },
-] as const;
+] as const

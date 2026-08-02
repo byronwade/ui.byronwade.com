@@ -1,121 +1,115 @@
 # Meridian — design.md
 
-> **This is the AI contract.** Load this before writing UI for ui.byronwade.com or any product that adopts Meridian. Humans read `docs/meridian.md` for prose; agents obey this file.
+> **AI contract.** Read this before any UI work. Typed grammar: `lib/design/`. Drift lint: `npm run check:design`.
 
-**Product:** theme + surface system for AIs — not a custom component zoo.  
-**Primitives:** shadcn/ui. **Theme:** tokens in `app/globals.css`. **Proof:** surfaces + workbench.
+**Product:** cinematic theme system for AIs — not a custom component zoo.  
+**Primitives:** shadcn/ui. **Enforcement:** TypeScript closed sets + CI audit.  
+**Aesthetic list:** **Cinematic design**.
+
+## The model — strict + creative
+
+| Zone | What’s locked | What’s free |
+| --- | --- | --- |
+| **Frozen** | Color roles, radii, depth, surfaces, theme knobs, activity, bans, cinematic laws | — |
+| **Creative** | — | Copy, IA, domain objects, frame sequence, which shadcn wholes to compose, narrative inside one-idea frames |
+
+Agents invent **stories and compositions**. They do not invent **colors, shadows, or radii**. Import `@/lib/design` — TypeScript rejects fabrication.
+
+```ts
+import { bg, defineCinemaFrame, typeClass } from "@/lib/design"
+
+defineCinemaFrame({
+  tone: "theater",
+  subject: "workbench",
+  ideas: 1,              // literal — cannot be 2
+  overlayStickers: false // cannot be true
+})
+```
 
 ## Identity
 
 | Key | Value |
 | --- | --- |
 | Name | Meridian |
-| Accent | `--brand` (steel-teal / “arc”) |
-| Paper | Cool paper (`oklch` blue-gray), never warm cream |
+| Design list | **Cinematic design** |
+| Accent | `--brand` (steel-teal / arc) |
+| Paper | Cool paper — never warm cream |
 | Type | Geist Sans + Geist Mono |
-| Depth | `edge` first; `depth-soft` / `depth-raised` sparingly |
+| Depth | `edge` → `depth-soft` → `depth-raised` |
 | Default surface | `application` |
+| Grammar | `lib/design/grammar.ts` |
+
+## Cinematic design list
+
+Encoded in `lib/design/recipes.ts` → `cinematicLaws`:
+
+1. **Product is the subject** — chrome recedes; workbench/product owns the frame
+2. **One idea per frame** — typed as `ideas: 1`
+3. **Full-bleed media** — not inset marketing cards
+4. **No overlay stickers** on media
+5. **Stable viewport** — `svh`, never `dvh`
+6. **Motion is micro** — no scroll choreography; honor reduced motion
+7. **Tile alternation** — paper ↔ theater rhythm without border soup
+8. **Type weight medium-max** — hierarchy from size + tracking
 
 ## MUST
 
-1. Use **tokens only** — no raw hex / `rgb()` / arbitrary color utilities in components.
-2. Keep **one accent** — primary, ring, selected, and success resolve to `--brand`.
-3. Keep **status semantic** — `destructive` and `warning` never become brand tint.
-4. Build on **shadcn** in `components/ui/` — add with `npx shadcn@latest add …`; never fork a parallel kit.
-5. Set surface with **`data-surface`** — `application` | `marketing` | `mobile` | `desktop`.
-6. Prefer **composition** — prove UI in wholes (`components/surfaces/workbench.tsx`), not isolated atom grids.
-7. Use **mono for data** — IDs, counts, timestamps, prices, model/tool names, hashes, filenames.
-8. Derive hierarchy from **size + tracking**, not bold display weight.
-9. Bind AI UI to a **product object** — provenance + activity tokens; no floating chatbot cliché.
-10. Keep motion **micro and optional** — honor `prefers-reduced-motion`; no scroll choreography.
+1. Import design decisions from `@/lib/design` when choosing color/radius/depth/cinema structure
+2. **Tokens only** — no raw hex / arbitrary color utilities
+3. **One accent** — primary, ring, selected, success → `--brand`
+4. **Status semantic** — destructive / warning never become brand
+5. **shadcn only** for primitives — `npx shadcn@latest add`
+6. **`data-surface`** — `application` | `marketing` | `mobile` | `desktop`
+7. **Mono for data** — IDs, counts, times, prices, model/tool names
+8. **Object-bound AI** — provenance + activity; no floating chatbot
+9. Pass **`npm run check:design`**
 
-## MUST NOT
+## MUST NOT (`banned` in grammar)
 
-1. Name other brands (Polaris, Linear, Vercel, …) in product chrome or marketing headlines.
-2. Invent per-surface component forks.
-3. Use `min-h-dvh` for heroes — use `min-h-svh` (stable). Nested demo scrollports: `overflow-hidden`.
-4. Use Tailwind `shadow-*` or custom box-shadows — only `edge` / `depth-*`.
-5. Decorate with color — if removing a color doesn’t hurt meaning, remove it.
-6. Ship marketing theater inside application chrome.
+raw-hex · arbitrary-color-utility · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · warm-cream-paper · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports
 
-## Surfaces (density by task)
+## Surfaces
 
-| `data-surface` | Job | Controls | Rows |
-| --- | --- | --- | --- |
-| `application` | Operate | 32px | 40px |
-| `marketing` | Present | 36–40px CTAs | comfortable |
-| `mobile` | Thumb-first | 44px | 52px |
-| `desktop` | Keyboard + pointer | 28–32px chrome | compact |
+| `data-surface` | Job | Controls |
+| --- | --- | --- |
+| `application` | Operate | 32px |
+| `marketing` | Present / cinema tiles | 36–40px CTAs |
+| `mobile` | Thumb-first | 44px |
+| `desktop` | Keyboard + pointer | 28–32px chrome |
 
-Shape vocabulary: controls `rounded-lg` · panels `rounded-2xl` · marketing CTAs may `rounded-full` · shells `rounded-3xl`.
+Shape: control `rounded-lg` · panel `rounded-2xl` · shell `rounded-3xl` · pill `rounded-full` (`radiusFor` in grammar).
 
-## Theme knobs (what AIs re-skin)
-
-Override these — not component source — to theme a product:
+## Theme knobs
 
 ```css
---brand
---brand-foreground
---brand-muted
---background
---foreground
---radius
+--brand --brand-foreground --brand-muted
+--background --foreground --radius
 ```
 
-Everything accented (ring, selected `bg-brand/10`, chart-1, success) follows `--brand`.
+## Load order
 
-## Agent activity (fixed meaning — not brand)
+1. `design.md` (this file)
+2. `lib/design/` (typed grammar + recipes)
+3. `docs/architecture.md`
+4. Matching skill (`.cursor/skills/…`)
+5. Proof: `components/surfaces/workbench.tsx`
 
-| Token | Meaning |
-| --- | --- |
-| `bg-activity-thinking` | Model thinking |
-| `bg-activity-search` | Search / retrieve |
-| `bg-activity-read` | Read file / context |
-| `bg-activity-edit` | Edit / write |
-
-## Decision tree
-
-```
-Building UI?
-├─ Need a primitive? → shadcn add → components/ui
-├─ Need a product frame? → compose surfaces/workbench patterns
-├─ Which surface?
-│  ├─ App / admin / tool → data-surface="application"
-│  ├─ Landing / docs hero → marketing (+ theater only if product is subject)
-│  ├─ Phone product → mobile
-│  └─ Desktop shell → desktop
-├─ Color?
-│  ├─ Accent / selected / go → brand
-│  ├─ Danger → destructive
-│  ├─ Caution → warning
-│  └─ Agent step → activity-*
-└─ Unsure → application + edge + text-sm + mono for data
-```
-
-## Load order for agents
-
-1. This file (`design.md`)
-2. `docs/architecture.md` — repo map + AI toolchain
-3. Skill matching the task (`.cursor/skills/…`)
-4. Canonical whole: `components/surfaces/workbench.tsx`
-5. Tokens: `app/globals.css`
-
-## Machine endpoints
+## Endpoints
 
 | URL | Content |
 | --- | --- |
-| `/design.md` | This contract (raw markdown) |
-| `/llms.txt` | Site map for AI crawlers |
-| `/theme` | Live theme showcase |
-| `/for-agents` | Human + agent onboarding |
-| `/surfaces` | Four surface proofs |
+| `/design.md` | This contract |
+| `/theme` | Live grammar + knobs |
+| `/for-agents` | Frozen vs creative onboarding |
+| `/llms.txt` | Discovery |
+| `/surfaces` | Surface proofs |
 
 ## Done checklist
 
-- [ ] Tokens only; one `--brand`
+- [ ] Used `@/lib/design` for structure (or equivalent closed tokens)
+- [ ] `ideas: 1` on every cinema frame
 - [ ] Correct `data-surface`
 - [ ] shadcn primitive (no bespoke twin)
 - [ ] Mono on data; quiet chrome
-- [ ] AI (if any) object-bound with provenance
-- [ ] No influence-name labels in UI
-- [ ] Matches a whole on `/theme` or `/surfaces`
+- [ ] AI object-bound (if any)
+- [ ] `npm run check:design` clean

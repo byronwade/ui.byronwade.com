@@ -1,61 +1,65 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { aiStack } from "@/lib/theme-showcase";
+import type { Metadata } from "next"
+import Link from "next/link"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { zones, designCn, typeClass } from "@/lib/design"
+import { aiStack } from "@/lib/theme-showcase"
 
 export const metadata: Metadata = {
   title: "For agents",
   description:
-    "How AIs load Meridian — design.md, skills, agents, and theme architecture.",
-};
+    "How AIs load Meridian — typed cinematic grammar, frozen vs creative, skills and agents.",
+}
 
 const skills = [
   {
     name: "meridian-theme",
-    path: ".cursor/skills/meridian-theme",
-    use: "Re-skin tokens; keep accent DNA",
+    use: "Re-skin knobs; keep accent DNA",
   },
   {
     name: "meridian-surface",
-    path: ".cursor/skills/meridian-surface",
     use: "Pick data-surface + density",
   },
   {
     name: "meridian-compose",
-    path: ".cursor/skills/meridian-compose",
-    use: "Build product wholes from shadcn + tokens",
+    use: "Build product wholes from shadcn + grammar",
   },
-] as const;
+  {
+    name: "meridian-cinematic",
+    use: "Stage frames under cinematic laws",
+  },
+] as const
 
 const agents = [
   {
     name: "meridian-author",
-    path: ".cursor/agents/meridian-author.md",
-    use: "Implement UI end-to-end under design.md",
+    use: "Implement under design.md + lib/design",
   },
   {
     name: "meridian-reviewer",
-    path: ".cursor/agents/meridian-reviewer.md",
-    use: "Audit diffs against MUST / MUST NOT",
+    use: "Audit MUST / banned / cinema laws",
   },
-] as const;
+] as const
 
 export default function ForAgentsPage() {
   return (
     <main className="px-5 pt-20 pb-24 md:px-8 md:pt-24 md:pb-32">
       <div className="mx-auto max-w-6xl">
-        <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+        <p className={designCn(typeClass("label"), "text-muted-foreground")}>
           For agents
         </p>
-        <h1 className="mt-4 max-w-[20ch] text-3xl font-medium tracking-[-0.035em] md:text-5xl">
-          Built so models can ship on-theme UI.
+        <h1
+          className={designCn(
+            typeClass("title"),
+            "mt-4 max-w-[22ch] text-3xl md:text-5xl",
+          )}
+        >
+          Built so models can’t drift — and still invent.
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-relaxed tracking-tight text-muted-foreground">
-          Meridian is architecture for AIs: a short contract, theme knobs,
-          surface remaps, skills, and agents. Humans showcase the theme —
-          agents author the product.
+          Closed TypeScript grammar. Cinematic laws. Skills for workflows.
+          Creativity in copy, sequence, and domain — never in rogue hex.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -63,7 +67,7 @@ export default function ForAgentsPage() {
             <a href="/design.md">Fetch design.md</a>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/theme">Theme showcase</Link>
+            <Link href="/theme">Theme grammar</Link>
           </Button>
         </div>
 
@@ -86,33 +90,69 @@ export default function ForAgentsPage() {
 
         <Separator className="my-14" />
 
+        <section id="zones" className="scroll-mt-24">
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>
+            Frozen vs creative
+          </h2>
+          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+            <div className="rounded-3xl bg-card p-6 edge">
+              <p className={designCn(typeClass("label"), "text-brand")}>
+                Frozen
+              </p>
+              <ul className="mt-4 space-y-2">
+                {zones.frozen.map((item) => (
+                  <li key={item} className="font-mono text-sm text-muted-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-3xl bg-dock p-6 text-dock-foreground">
+              <p className={designCn(typeClass("label"), "text-brand")}>
+                Creative
+              </p>
+              <ul className="mt-4 space-y-2">
+                {zones.creative.map((item) => (
+                  <li
+                    key={item}
+                    className="font-mono text-sm text-dock-foreground/65"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <Separator className="my-14" />
+
         <section id="architecture" className="scroll-mt-24">
-          <h2 className="text-2xl font-medium tracking-[-0.03em]">
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>
             Load order
           </h2>
-          <ol className="reading-ui mt-5 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-muted-foreground">
+          <ol className="mt-5 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-muted-foreground">
             <li>
-              <span className="font-mono text-foreground">design.md</span> —
-              MUST / MUST NOT and theme knobs
+              <span className="font-mono text-foreground">design.md</span>
             </li>
             <li>
-              <span className="font-mono text-foreground">
-                docs/architecture.md
-              </span>{" "}
-              — layer map
+              <span className="font-mono text-foreground">lib/design/</span> —
+              grammar, recipes, cx
             </li>
-            <li>Matching skill under{" "}
+            <li>
+              Matching skill under{" "}
               <span className="font-mono text-foreground">.cursor/skills/</span>
             </li>
             <li>
-              Canonical whole{" "}
               <span className="font-mono text-foreground">
                 components/surfaces/workbench.tsx
               </span>
             </li>
             <li>
-              Tokens in{" "}
-              <span className="font-mono text-foreground">app/globals.css</span>
+              Run{" "}
+              <span className="font-mono text-foreground">
+                npm run check:design
+              </span>
             </li>
           </ol>
         </section>
@@ -120,32 +160,18 @@ export default function ForAgentsPage() {
         <Separator className="my-14" />
 
         <section id="skills" className="scroll-mt-24">
-          <h2 className="text-2xl font-medium tracking-[-0.03em]">Skills</h2>
-          <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-            Progressive workflows — loaded when the task matches. Mirrored for
-            Claude under{" "}
-            <span className="font-mono text-foreground">.claude/skills/</span>.
-          </p>
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>Skills</h2>
           <ul className="mt-6 space-y-3">
             {skills.map((skill) => (
               <li
                 key={skill.name}
-                className="flex flex-wrap items-baseline justify-between gap-2 rounded-2xl bg-card px-4 py-3 edge"
+                className="rounded-2xl bg-card px-4 py-3 edge"
               >
-                <div>
-                  <Badge variant="secondary" className="font-mono text-[10px]">
-                    skill
-                  </Badge>
-                  <p className="mt-2 font-mono text-sm text-foreground">
-                    {skill.name}
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {skill.use}
-                  </p>
-                </div>
-                <p className="font-mono text-[11px] text-muted-foreground">
-                  {skill.path}
-                </p>
+                <Badge variant="secondary" className="font-mono text-[10px]">
+                  skill
+                </Badge>
+                <p className="mt-2 font-mono text-sm">{skill.name}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{skill.use}</p>
               </li>
             ))}
           </ul>
@@ -154,34 +180,18 @@ export default function ForAgentsPage() {
         <Separator className="my-14" />
 
         <section id="agents" className="scroll-mt-24">
-          <h2 className="text-2xl font-medium tracking-[-0.03em]">Agents</h2>
-          <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-            Roles with checklists. Always-on rule:{" "}
-            <span className="font-mono text-foreground">
-              .cursor/rules/meridian.mdc
-            </span>
-            .
-          </p>
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>Agents</h2>
           <ul className="mt-6 space-y-3">
             {agents.map((agent) => (
               <li
                 key={agent.name}
-                className="flex flex-wrap items-baseline justify-between gap-2 rounded-2xl bg-card px-4 py-3 edge"
+                className="rounded-2xl bg-card px-4 py-3 edge"
               >
-                <div>
-                  <Badge variant="secondary" className="font-mono text-[10px]">
-                    agent
-                  </Badge>
-                  <p className="mt-2 font-mono text-sm text-foreground">
-                    {agent.name}
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {agent.use}
-                  </p>
-                </div>
-                <p className="font-mono text-[11px] text-muted-foreground">
-                  {agent.path}
-                </p>
+                <Badge variant="secondary" className="font-mono text-[10px]">
+                  agent
+                </Badge>
+                <p className="mt-2 font-mono text-sm">{agent.name}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{agent.use}</p>
               </li>
             ))}
           </ul>
@@ -190,23 +200,20 @@ export default function ForAgentsPage() {
         <Separator className="my-14" />
 
         <section>
-          <h2 className="text-2xl font-medium tracking-[-0.03em]">
+          <h2 className={designCn(typeClass("title"), "text-2xl")}>
             Machine endpoints
           </h2>
           <dl className="mt-6 grid gap-3 sm:grid-cols-2">
             {(
               [
-                ["/design.md", "AI contract (raw markdown)"],
-                ["/llms.txt", "Discovery map for AI crawlers"],
-                ["/theme", "Live theme showcase"],
-                ["/surfaces", "Four surface proofs"],
+                ["/design.md", "AI contract"],
+                ["/llms.txt", "Discovery map"],
+                ["/theme", "Live grammar"],
+                ["/surfaces", "Surface proofs"],
               ] as const
             ).map(([href, label]) => (
-              <div
-                key={href}
-                className="rounded-2xl bg-muted/30 px-4 py-3"
-              >
-                <dt className="font-mono text-sm text-foreground">
+              <div key={href} className="rounded-2xl bg-muted/30 px-4 py-3">
+                <dt className="font-mono text-sm">
                   <a href={href} className="hover:underline">
                     {href}
                   </a>
@@ -218,5 +225,5 @@ export default function ForAgentsPage() {
         </section>
       </div>
     </main>
-  );
+  )
 }

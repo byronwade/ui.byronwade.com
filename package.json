@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:design": "node scripts/check-design.mjs",
+    "validate": "npm run check:design && npm run lint"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

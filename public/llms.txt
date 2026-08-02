@@ -1,27 +1,21 @@
 # ui.byronwade.com
 
-> Meridian — an AI-native theme and surface system on shadcn/ui. Showcase the theme, not a custom component zoo.
+> Meridian — cinematic design theme for AIs. Typed grammar. shadcn primitives. Not a custom component zoo.
 
 ## For agents
 
-- [design.md](https://ui.byronwade.com/design.md): AI contract (MUST / MUST NOT)
-- [For agents](https://ui.byronwade.com/for-agents): Load order, skills, agents
-- [Architecture](https://ui.byronwade.com/for-agents#architecture): Layer map
+- [design.md](https://ui.byronwade.com/design.md): AI contract (frozen vs creative)
+- [For agents](https://ui.byronwade.com/for-agents): Load order, skills, zones
+- Theme grammar lives in-repo at lib/design/
 
 ## Showcase
 
-- [Theme](https://ui.byronwade.com/theme): Tokens, brand, density, depth
+- [Theme](https://ui.byronwade.com/theme): Laws, knobs, closed roles, bans
 - [Surfaces](https://ui.byronwade.com/surfaces): Application · Marketing · Mobile · Desktop
 - [Home](https://ui.byronwade.com/): Positioning
 
-## Repo (when coding in-tree)
+## Enforce
 
-- design.md
-- docs/architecture.md
-- docs/meridian.md
-- .cursor/skills/
-- .cursor/agents/
-- .cursor/rules/meridian.mdc
-- app/globals.css
-- components/ui/ (shadcn)
-- components/surfaces/workbench.tsx
+- npm run check:design
+- TypeScript unions in lib/design/grammar.ts
+- Cinematic laws in lib/design/recipes.ts

@@ -1,6 +1,10 @@
+import type { SurfaceId } from "@/lib/design/grammar"
+
+export type { SurfaceId }
+
 export const surfaces = [
   {
-    id: "application",
+    id: "application" as const,
     label: "Application",
     platform: "Web",
     summary:
@@ -8,7 +12,7 @@ export const surfaces = [
     density: "compact · 32px controls · 40px rows",
   },
   {
-    id: "marketing",
+    id: "marketing" as const,
     label: "Marketing",
     platform: "Web",
     summary:
@@ -16,7 +20,7 @@ export const surfaces = [
     density: "comfortable · 36–40px CTAs",
   },
   {
-    id: "mobile",
+    id: "mobile" as const,
     label: "Mobile Native",
     platform: "Native",
     summary:
@@ -24,13 +28,17 @@ export const surfaces = [
     density: "touch · 44px controls · 52px rows",
   },
   {
-    id: "desktop",
+    id: "desktop" as const,
     label: "Desktop Native",
     platform: "Native",
     summary:
       "Keyboard + pointer productivity — compact toolbars, menus, status. Quiet chrome.",
     density: "compact chrome · 28px toolbars",
   },
-] as const;
-
-export type SurfaceId = (typeof surfaces)[number]["id"];
+] as const satisfies ReadonlyArray<{
+  id: SurfaceId
+  label: string
+  platform: string
+  summary: string
+  density: string
+}>
