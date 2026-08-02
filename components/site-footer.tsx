@@ -1,37 +1,57 @@
 import Link from "next/link"
+import { docs, primaryNav } from "@/lib/docs/catalog"
 
 function SiteFooter() {
+  const files = docs.filter((d) => Boolean(d.filename))
+
   return (
     <footer
       data-slot="site-footer"
-      className="bg-background px-5 py-12 md:px-8"
+      className="border-t border-border/50 bg-background px-5 py-12 md:px-8 md:py-16"
     >
-      <div className="mx-auto flex max-w-4xl flex-col items-center gap-4 text-center">
-        <p className="text-[12px] tracking-tight text-muted-foreground">
-          Meridian
-        </p>
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[12px] text-muted-foreground">
-          <Link href="/theme" className="transition-opacity hover:opacity-70">
-            Theme
-          </Link>
-          <Link
-            href="/for-agents"
-            className="transition-opacity hover:opacity-70"
-          >
-            Agents
-          </Link>
-          <Link
-            href="/surfaces"
-            className="transition-opacity hover:opacity-70"
-          >
-            Surfaces
-          </Link>
-          <Link
-            href="/design.md"
-            className="transition-opacity hover:opacity-70"
-          >
-            design.md
-          </Link>
+      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div>
+          <p className="text-sm font-medium tracking-tight text-foreground">
+            Meridian
+          </p>
+          <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            Cinematic theme for product UI — soft neutrals, one accent, typed
+            for agents.
+          </p>
+        </div>
+        <div>
+          <p className="font-mono text-[10px] tracking-[0.16em] text-muted-foreground uppercase">
+            Explore
+          </p>
+          <ul className="mt-3 space-y-2">
+            {primaryNav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="text-sm text-foreground/80 transition-opacity hover:opacity-70"
+                >
+                  {item.navLabel ?? item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="font-mono text-[10px] tracking-[0.16em] text-muted-foreground uppercase">
+            Files
+          </p>
+          <ul className="mt-3 space-y-2">
+            {files.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="font-mono text-sm text-foreground/80 transition-opacity hover:opacity-70"
+                >
+                  {item.filename}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

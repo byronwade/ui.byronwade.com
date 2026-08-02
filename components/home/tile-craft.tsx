@@ -16,7 +16,7 @@ function TileCraft() {
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
         <CinemaLink href="/theme">Explore knobs</CinemaLink>
-        <CinemaLink href="#product">Continue</CinemaLink>
+        <CinemaLink href="/design">Read design</CinemaLink>
       </div>
     </CinemaTile>
   )

@@ -4,8 +4,10 @@
 
 ## For agents
 
-- [design.md](https://ui.byronwade.com/design.md): AI contract (frozen vs creative)
-- [For agents](https://ui.byronwade.com/for-agents): Load order, skills, zones
+- [Design](https://ui.byronwade.com/design): Designed contract with copy
+- [design.md](https://ui.byronwade.com/design.md): Raw AI contract (frozen vs creative)
+- [For agents](https://ui.byronwade.com/for-agents): Load order, skills, agents
+- [Architecture](https://ui.byronwade.com/architecture): System layers
 - Theme grammar lives in-repo at lib/design/
 
 ## Showcase
@@ -13,6 +15,7 @@
 - [Theme](https://ui.byronwade.com/theme): Laws, knobs, closed roles, bans
 - [Surfaces](https://ui.byronwade.com/surfaces): Application · Marketing · Mobile · Desktop
 - [Home](https://ui.byronwade.com/): Positioning
+- [llms.txt](https://ui.byronwade.com/llms.txt): This file (raw)
 
 ## Enforce
 

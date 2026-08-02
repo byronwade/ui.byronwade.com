@@ -14,7 +14,7 @@ export const aiStack = [
     id: "design-md",
     label: "design.md",
     summary: "AI contract — MUST, bans, cinematic list, frozen vs creative.",
-    href: "/design.md",
+    href: "/design",
   },
   {
     id: "grammar",

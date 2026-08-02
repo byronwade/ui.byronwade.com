@@ -1,228 +1,257 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
+import { CopyButton } from "@/components/docs/copy-button"
+import { DocShell, DocLinkRow } from "@/components/docs/doc-shell"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { ReadingArticle } from "@/components/reading/article"
-import { zones, designCn, typeClass } from "@/lib/design"
-import { aiStack } from "@/lib/theme-showcase"
+import { zones } from "@/lib/design"
+import { getDoc } from "@/lib/docs/catalog"
+import { loadSource } from "@/lib/docs/load-source"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "For agents",
+  title: "Agents",
   description:
-    "How AIs load Meridian — soft neutrals, one accent, typed cinematic grammar, structured reading.",
+    "How AIs load Meridian — contract, skills, agents, frozen vs creative.",
 }
 
-const skills = [
+const skillFiles = [
   {
     name: "meridian-theme",
+    path: ".cursor/skills/meridian-theme/SKILL.md",
     use: "Re-skin knobs; keep one deep accent",
   },
   {
     name: "meridian-surface",
+    path: ".cursor/skills/meridian-surface/SKILL.md",
     use: "Pick data-surface + density",
   },
   {
     name: "meridian-compose",
+    path: ".cursor/skills/meridian-compose/SKILL.md",
     use: "Build product wholes from shadcn + grammar",
   },
   {
     name: "meridian-cinematic",
+    path: ".cursor/skills/meridian-cinematic/SKILL.md",
     use: "Full-bleed frames under cinematic laws",
   },
 ] as const
 
-const agents = [
+const agentFiles = [
   {
     name: "meridian-author",
+    path: ".cursor/agents/meridian-author.md",
     use: "Implement under design.md + lib/design",
   },
   {
     name: "meridian-reviewer",
+    path: ".cursor/agents/meridian-reviewer.md",
     use: "Audit MUST / banned / cinema laws",
   },
 ] as const
 
-export default function ForAgentsPage() {
+export default async function ForAgentsPage() {
+  const design = getDoc("design")
+  const architecture = getDoc("architecture")
+  const llms = getDoc("llms")
+
+  const skills = await Promise.all(
+    skillFiles.map(async (skill) => ({
+      ...skill,
+      source: await loadSource(skill.path),
+    })),
+  )
+  const agents = await Promise.all(
+    agentFiles.map(async (agent) => ({
+      ...agent,
+      source: await loadSource(agent.path),
+    })),
+  )
+
   return (
-    <main className="px-5 pt-20 pb-24 md:px-8 md:pt-24 md:pb-32">
-      <div className="mx-auto max-w-6xl">
-        <ReadingArticle
-          lane="ui"
-          eyebrow="For agents"
-          title="Built so models can’t drift — and still invent."
-          lead="Soft warm neutrals. One deep accent. Full-bleed cinema. Structured reading. TypeScript freezes the vocabulary; creativity stays in the story."
-        >
-          <div className="flex flex-wrap gap-3">
-            <Button asChild>
-              <a href="/design.md">Fetch design.md</a>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/theme">Theme grammar</Link>
-            </Button>
-          </div>
-        </ReadingArticle>
+    <DocShell
+      eyebrow="For agents"
+      title="Built so models stay true."
+      lead="Soft warm neutrals. One deep accent. Full-bleed cinema. TypeScript freezes the vocabulary; creativity stays in the story."
+      actions={
+        <>
+          <Button variant="outline" size="default" asChild>
+            <Link href="/design">Design</Link>
+          </Button>
+          <Button variant="ghost" size="default" asChild>
+            <Link href="/theme">Theme</Link>
+          </Button>
+        </>
+      }
+    >
+      <section>
+        <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
+          Start here
+        </h2>
+        <DocLinkRow
+          items={[
+            {
+              href: design.href,
+              label: design.filename!,
+              summary: design.summary,
+            },
+            {
+              href: architecture.href,
+              label: architecture.filename!,
+              summary: architecture.summary,
+            },
+            {
+              href: llms.href,
+              label: llms.filename!,
+              summary: llms.summary,
+            },
+            {
+              href: "/theme",
+              label: "Theme grammar",
+              summary: "Live knobs, roles, density, and bans.",
+            },
+          ]}
+        />
+      </section>
 
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {aiStack.map((item) => (
-            <Link
-              key={item.id}
-              href={item.href}
-              className="rounded-2xl bg-card p-4 transition-colors edge hover:bg-muted/30"
-            >
-              <p className="font-mono text-[10px] tracking-[0.14em] text-brand uppercase">
-                {item.label}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {item.summary}
-              </p>
-            </Link>
-          ))}
+      <section className="mt-14">
+        <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
+          Frozen vs creative
+        </h2>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-2xl bg-card p-5 edge md:p-6">
+            <p className="font-mono text-[11px] tracking-[0.14em] text-brand uppercase">
+              Frozen
+            </p>
+            <ul className="mt-4 space-y-2">
+              {zones.frozen.map((item) => (
+                <li
+                  key={item}
+                  className="font-mono text-sm text-muted-foreground"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl bg-dock p-5 text-dock-foreground md:p-6">
+            <p className="font-mono text-[11px] tracking-[0.14em] text-brand uppercase">
+              Creative
+            </p>
+            <ul className="mt-4 space-y-2">
+              {zones.creative.map((item) => (
+                <li
+                  key={item}
+                  className="font-mono text-sm text-dock-foreground/70"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+      </section>
 
-        <Separator className="my-14" />
+      <section className="mt-14">
+        <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
+          Load order
+        </h2>
+        <ol className="mt-5 space-y-3">
+          {[
+            "design.md — contract",
+            "lib/design/ — grammar, recipes, cx",
+            "Matching skill under .cursor/skills/",
+            "BleedImage for cinema · ReadingArticle for docs",
+            "npm run check:design",
+          ].map((step, i) => (
+            <li
+              key={step}
+              className="flex gap-3 text-[1.0625rem] leading-relaxed tracking-tight text-foreground/90"
+            >
+              <span className="font-mono text-sm text-muted-foreground">
+                {i + 1}.
+              </span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-        <section id="zones" className="scroll-mt-24">
-          <h2 className={designCn(typeClass("title"), "text-2xl")}>
-            Frozen vs creative
-          </h2>
-          <div className="mt-6 grid gap-4 lg:grid-cols-2">
-            <div className="rounded-3xl bg-card p-6 edge">
-              <p className={designCn(typeClass("label"), "text-brand")}>
-                Frozen
-              </p>
-              <ul className="mt-4 space-y-2">
-                {zones.frozen.map((item) => (
-                  <li
-                    key={item}
-                    className="font-mono text-sm text-muted-foreground"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-3xl bg-dock p-6 text-dock-foreground">
-              <p className={designCn(typeClass("label"), "text-brand")}>
-                Creative
-              </p>
-              <ul className="mt-4 space-y-2">
-                {zones.creative.map((item) => (
-                  <li
-                    key={item}
-                    className="font-mono text-sm text-dock-foreground/70"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
+      <section id="skills" className="mt-14 scroll-mt-24">
+        <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
+          Skills
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Copy the skill file into your agent context.
+        </p>
+        <ul className="mt-6 space-y-3">
+          {skills.map((skill) => (
+            <FileCard
+              key={skill.name}
+              kind="skill"
+              name={skill.name}
+              use={skill.use}
+              source={skill.source}
+            />
+          ))}
+        </ul>
+      </section>
 
-        <Separator className="my-14" />
+      <section id="agents" className="mt-14 scroll-mt-24">
+        <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
+          Agents
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Author implements; reviewer audits cinema laws and bans.
+        </p>
+        <ul className="mt-6 space-y-3">
+          {agents.map((agent) => (
+            <FileCard
+              key={agent.name}
+              kind="agent"
+              name={agent.name}
+              use={agent.use}
+              source={agent.source}
+            />
+          ))}
+        </ul>
+      </section>
+    </DocShell>
+  )
+}
 
-        <section id="architecture" className="scroll-mt-24">
-          <ReadingArticle lane="ui" title="Load order">
-            <ol className="list-decimal space-y-3 pl-5">
-              <li>
-                <span className="font-mono text-foreground">design.md</span>
-              </li>
-              <li>
-                <span className="font-mono text-foreground">lib/design/</span> —
-                grammar, recipes, cx
-              </li>
-              <li>
-                Matching skill under{" "}
-                <span className="font-mono text-foreground">
-                  .cursor/skills/
-                </span>
-              </li>
-              <li>
-                Full-bleed via{" "}
-                <span className="font-mono text-foreground">BleedImage</span>;
-                reading via{" "}
-                <span className="font-mono text-foreground">
-                  ReadingArticle
-                </span>
-              </li>
-              <li>
-                Run{" "}
-                <span className="font-mono text-foreground">
-                  npm run check:design
-                </span>
-              </li>
-            </ol>
-          </ReadingArticle>
-        </section>
-
-        <Separator className="my-14" />
-
-        <section id="skills" className="scroll-mt-24">
-          <h2 className={designCn(typeClass("title"), "text-2xl")}>Skills</h2>
-          <ul className="mt-6 space-y-3">
-            {skills.map((skill) => (
-              <li
-                key={skill.name}
-                className="rounded-2xl bg-card px-4 py-3 edge"
-              >
-                <Badge variant="secondary" className="font-mono text-[10px]">
-                  skill
-                </Badge>
-                <p className="mt-2 font-mono text-sm">{skill.name}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{skill.use}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <Separator className="my-14" />
-
-        <section id="agents" className="scroll-mt-24">
-          <h2 className={designCn(typeClass("title"), "text-2xl")}>Agents</h2>
-          <ul className="mt-6 space-y-3">
-            {agents.map((agent) => (
-              <li
-                key={agent.name}
-                className="rounded-2xl bg-card px-4 py-3 edge"
-              >
-                <Badge variant="secondary" className="font-mono text-[10px]">
-                  agent
-                </Badge>
-                <p className="mt-2 font-mono text-sm">{agent.name}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{agent.use}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <Separator className="my-14" />
-
-        <section>
-          <h2 className={designCn(typeClass("title"), "text-2xl")}>
-            Machine endpoints
-          </h2>
-          <dl className="mt-6 grid gap-3 sm:grid-cols-2">
-            {(
-              [
-                ["/design.md", "AI contract"],
-                ["/llms.txt", "Discovery map"],
-                ["/theme", "Live grammar"],
-                ["/surfaces", "Surface proofs"],
-              ] as const
-            ).map(([href, label]) => (
-              <div key={href} className="rounded-2xl bg-muted/40 px-4 py-3">
-                <dt className="font-mono text-sm">
-                  <a href={href} className="hover:underline">
-                    {href}
-                  </a>
-                </dt>
-                <dd className="mt-1 text-sm text-muted-foreground">{label}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+function FileCard({
+  kind,
+  name,
+  use,
+  source,
+}: {
+  kind: "skill" | "agent"
+  name: string
+  use: string
+  source: string
+}) {
+  return (
+    <li
+      className={cn(
+        "flex flex-col gap-3 rounded-2xl bg-card p-4 edge sm:flex-row sm:items-center sm:justify-between sm:gap-4",
+      )}
+    >
+      <div className="min-w-0">
+        <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+          {kind}
+        </p>
+        <p className="mt-1 truncate font-mono text-sm text-foreground">
+          {name}
+        </p>
+        <p className="mt-1 text-sm text-muted-foreground">{use}</p>
       </div>
-    </main>
+      <CopyButton
+        value={source}
+        label="Copy"
+        size="touch"
+        className="w-full shrink-0 sm:w-auto sm:size-auto"
+      />
+    </li>
   )
 }

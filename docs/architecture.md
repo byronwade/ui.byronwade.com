@@ -60,10 +60,13 @@ cinematicLaws / banned          which shadcn wholes to compose
 | Route | Job |
 | --- | --- |
 | `/` | Cinematic positioning |
-| `/theme` | Live grammar + knobs |
-| `/for-agents` | Frozen vs creative |
-| `/surfaces` | Four density proofs |
+| `/design` | Designed contract (Copy) |
 | `/design.md` | Raw contract |
+| `/theme` | Live grammar + knobs |
+| `/for-agents` | Skills, agents, zones |
+| `/architecture` | Designed architecture (Copy) |
+| `/surfaces` | Four density proofs |
+| `/llms` · `/llms.txt` | Discovery |
 
 ## Extension
 

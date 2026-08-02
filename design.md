@@ -105,10 +105,14 @@ Shape: control `rounded-lg` · panel `rounded-2xl` · shell `rounded-3xl` · pil
 
 | URL | Content |
 | --- | --- |
-| `/design.md` | This contract |
+| `/design` | Designed contract (Copy + Raw) |
+| `/design.md` | Raw markdown contract |
 | `/theme` | Live grammar + knobs |
-| `/for-agents` | Frozen vs creative onboarding |
-| `/llms.txt` | Discovery |
+| `/for-agents` | Skills, agents, frozen vs creative |
+| `/architecture` | Designed architecture (Copy + Raw) |
+| `/architecture.md` | Raw architecture |
+| `/llms` | Designed discovery map |
+| `/llms.txt` | Raw discovery |
 | `/surfaces` | Surface proofs |
 
 ## Done checklist

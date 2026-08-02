@@ -22,8 +22,8 @@ function Hero() {
         Quiet product UI. Soft neutrals. One accent.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        <CinemaLink href="#product">Learn more</CinemaLink>
         <CinemaLink href="/theme">View theme</CinemaLink>
+        <CinemaLink href="/design">Design</CinemaLink>
       </div>
     </CinemaTile>
   )

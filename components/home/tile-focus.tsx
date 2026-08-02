@@ -31,7 +31,7 @@ function TileFocus() {
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
         <CinemaLink href="/theme">See the brand</CinemaLink>
-        <CinemaLink href="#agents">For agents</CinemaLink>
+        <CinemaLink href="/for-agents">For agents</CinemaLink>
       </div>
     </CinemaTile>
   )
