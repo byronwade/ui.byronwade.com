@@ -1,20 +1,32 @@
 # ui.byronwade.com
 
-**Meridian** — one design system across four surfaces, built on **shadcn/ui**.
+**Meridian** — an AI-native **theme** and surface system on [shadcn/ui](https://ui.shadcn.com).
 
-| Surface | Job |
+This site showcases the theme (tokens, density, surfaces) and the toolchain that lets agents author on-brand UI. It is **not** a custom component zoo.
+
+| For | Start here |
 | --- | --- |
-| Web · Application | Operate |
-| Web · Marketing | Present |
-| Mobile Native | Thumb-first |
-| Desktop Native | Keyboard + pointer |
+| Agents | [`design.md`](./design.md) · [`/for-agents`](http://localhost:3000/for-agents) |
+| Theme | [`/theme`](http://localhost:3000/theme) |
+| Surfaces | [`/surfaces`](http://localhost:3000/surfaces) |
+| Architecture | [`docs/architecture.md`](./docs/architecture.md) |
 
-DNA: [`docs/meridian.md`](docs/meridian.md) · Live gallery: [`/surfaces`](http://localhost:3000/surfaces)
+## AI toolchain
+
+| Kind | Path |
+| --- | --- |
+| Contract | `design.md` |
+| Rule | `.cursor/rules/meridian.mdc` |
+| Skills | `.cursor/skills/meridian-{theme,surface,compose}/` |
+| Agents | `.cursor/agents/meridian-{author,reviewer}.md` |
+| Discovery | `public/llms.txt` → `/llms.txt` |
+
+Mirrored under `.claude/` for Claude Code.
 
 ## Stack
 
 - Next.js 16 · React 19 · React Compiler
-- shadcn/ui (Radix) · Tailwind CSS v4 · Geist
+- shadcn/ui · Tailwind CSS v4 · Geist
 
 ## Getting started
 
@@ -23,16 +35,10 @@ npm install
 npm run dev
 ```
 
-## Add components
+## Add primitives
 
 ```bash
 npx shadcn@latest add [component]
 ```
 
-## Scripts
-
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Local development |
-| `npm run build` | Production build |
-| `npm run lint` | ESLint |
+Theme personality lives in `app/globals.css` — override `--brand` to re-skin.

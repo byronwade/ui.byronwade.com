@@ -2,7 +2,9 @@
 
 Meridian is the design language for **ui.byronwade.com**. One philosophy, four surfaces, built on **shadcn/ui**.
 
-Cool paper. One steel-teal accent (`--brand`). Product as the subject. Density follows the task.
+> **Agents:** obey [`design.md`](../design.md) first. This file is the human-readable deep DNA. Architecture: [`architecture.md`](./architecture.md).
+
+Cool paper. One steel-teal accent (`--brand`). Product as the subject. Density follows the task. The **website is a theme showcase** for AI authors — not a custom component catalog.
 
 This DNA is distilled from what leading product designers and design-system practitioners publish — not from aesthetic collage. Sources and what we took: [`docs/sources.md`](./sources.md).
 
@@ -147,11 +149,16 @@ Do not name other brands in UI chrome or marketing headlines. Encode the discipl
 
 | Path | Role |
 | --- | --- |
-| `app/globals.css` | Tokens (subatomic) |
+| `design.md` | AI contract (source of truth for agents) |
+| `docs/architecture.md` | AI layer map + toolchain |
+| `app/globals.css` | Tokens (subatomic / theme knobs) |
 | `components/ui/` | shadcn primitives |
 | `components/surfaces/` | Surface shells & workbench (wholes) |
 | `components/cinematic/` | Stage / media plane |
 | `components/home/` | Marketing homepage sections |
+| `app/theme/` | Theme showcase |
+| `app/for-agents/` | Agent onboarding |
 | `app/surfaces/` | Live surface gallery |
+| `.cursor/skills/` · `.cursor/agents/` | AI toolchain (mirrored in `.claude/`) |
 | `docs/meridian.md` | This DNA |
 | `docs/sources.md` | Designer sources we follow |

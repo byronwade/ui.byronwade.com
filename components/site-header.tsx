@@ -3,6 +3,12 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+const links = [
+  { href: "/theme", label: "Theme" },
+  { href: "/surfaces", label: "Surfaces" },
+  { href: "/for-agents", label: "Agents" },
+] as const;
+
 function SiteHeader() {
   return (
     <header
@@ -16,24 +22,18 @@ function SiteHeader() {
         ui.byronwade.com
       </Link>
       <nav className="flex items-center gap-1">
-        <Link
-          href="/#workbench"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "text-muted-foreground hover:text-foreground",
-          )}
-        >
-          Workbench
-        </Link>
-        <Link
-          href="/surfaces"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "text-muted-foreground hover:text-foreground",
-          )}
-        >
-          Surfaces
-        </Link>
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {link.label}
+          </Link>
+        ))}
         <ThemeToggle />
       </nav>
     </header>

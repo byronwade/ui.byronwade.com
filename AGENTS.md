@@ -6,50 +6,59 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
-# ui.byronwade.com — Meridian
+# ui.byronwade.com — Meridian (AI-native)
 
-Design language: **Meridian**. Full DNA: `docs/meridian.md`. Sources: `docs/sources.md`.
+**Before any UI work, read [`design.md`](./design.md).**  
+Architecture: [`docs/architecture.md`](./docs/architecture.md). Deep DNA: [`docs/meridian.md`](./docs/meridian.md).
+
+This site is a **theme showcase for AIs** — not a custom component catalog. shadcn owns primitives; Meridian owns theme, surfaces, skills, and agents.
 
 ## Stack
 
 - Next.js 16 + React 19 + React Compiler
 - **shadcn/ui** in `components/ui/`
-- Surfaces: Application · Marketing · Mobile Native · Desktop Native
+- Tokens in `app/globals.css`
+- Surfaces via `data-surface`
 
-## Controlled principles (short)
+## AI toolchain
 
-1. **Useful** — solve real tasks; every control earns its place (Vercel)
-2. **Meaningful** — color/depth/icons have role, not decoration (Polaris Pro)
-3. **Density by task** — compact for indexes; room for focus; surfaces remap via `data-surface`
-4. **Predictable** — same look → same behavior; micro feedback only
-5. **Parts + wholes** — tokens → shadcn atoms → workbench/surfaces as proof (Frost)
-6. **Progressive disclosure** — complexity available, not required
+| Kind | Path |
+| --- | --- |
+| Contract | `design.md` |
+| Rule | `.cursor/rules/meridian.mdc` |
+| Skills | `.cursor/skills/*/SKILL.md` |
+| Agents | `.cursor/agents/*.md` |
 
-## Composition rule
+### Skills
 
-**Embody the system — don’t label influences.** Prefer one workbench (density + mono + ⌘K + object-bound AI + edge) over pages that name other brands.
+- `meridian-theme` — re-skin / theme knobs
+- `meridian-surface` — pick surface + density
+- `meridian-compose` — build product wholes
 
-Canonical composition: `components/surfaces/workbench.tsx`.
+### Agents
+
+- `meridian-author` — implement under design.md
+- `meridian-reviewer` — audit MUST / MUST NOT
 
 ## Laws (short)
 
-1. Build on shadcn — never fork a parallel kit
-2. One accent `--brand`; tokens only; status stays semantic
-3. Four surfaces via `data-surface`; Application is default
-4. Cinema = styling, not spectacle
-5. Mono for data; hierarchy from size + tracking
-6. Depth: `edge` first; quieter chrome
-7. AI is object-bound with provenance
+1. Obey `design.md`
+2. Tokens only; one `--brand`
+3. shadcn only — never fork a parallel kit
+4. `data-surface` for density
+5. Compose wholes; prove on `/theme` + `/surfaces`
+6. Object-bound AI; cinema = styling not spectacle
 
 ## Where things go
 
 | Path | Role |
 | --- | --- |
-| `app/globals.css` | Tokens |
+| `design.md` | AI contract |
+| `docs/architecture.md` | Layer map |
+| `app/globals.css` | Theme tokens |
 | `components/ui/` | shadcn primitives |
-| `components/surfaces/` | Workbench, shells, frames |
-| `components/cinematic/` | Stage / media plane |
-| `components/home/` | Marketing homepage |
-| `app/surfaces/` | Surface gallery |
-| `docs/meridian.md` | Design DNA |
-| `docs/sources.md` | Designer sources |
+| `components/surfaces/` | Wholes / proofs |
+| `.cursor/skills/` | Agent skills |
+| `.cursor/agents/` | Agent roles |
+| `app/theme/` | Theme showcase |
+| `app/for-agents/` | Agent onboarding |

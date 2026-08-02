@@ -1,0 +1,23 @@
+---
+description: Meridian AI-native theme constraints — always on for this repo
+alwaysApply: true
+---
+
+# Meridian
+
+Read `design.md` before writing UI. This repo showcases a **theme for AIs**, not a custom component zoo.
+
+## Hard rules
+
+- Tokens only; one accent `--brand`; status stays semantic (`destructive` / `warning`)
+- Primitives from shadcn (`components/ui/`) — `npx shadcn@latest add`; never fork a parallel kit
+- Surfaces via `data-surface`: `application` (default) | `marketing` | `mobile` | `desktop`
+- Compose wholes (`components/surfaces/`); prove on `/theme` and `/surfaces`
+- Mono for data; hierarchy from size + tracking; `edge` before shadows
+- AI UI is object-bound (provenance + `activity-*`); no chatbot cliché
+- No other brand names in UI chrome; cinema styling without scroll spectacle
+- Hero height: `min-h-svh` never `dvh`; demo shells avoid nested `overflow-auto`
+
+## Skills
+
+Use when relevant: `meridian-theme`, `meridian-surface`, `meridian-compose`.

@@ -1,0 +1,27 @@
+# ui.byronwade.com
+
+> Meridian — an AI-native theme and surface system on shadcn/ui. Showcase the theme, not a custom component zoo.
+
+## For agents
+
+- [design.md](https://ui.byronwade.com/design.md): AI contract (MUST / MUST NOT)
+- [For agents](https://ui.byronwade.com/for-agents): Load order, skills, agents
+- [Architecture](https://ui.byronwade.com/for-agents#architecture): Layer map
+
+## Showcase
+
+- [Theme](https://ui.byronwade.com/theme): Tokens, brand, density, depth
+- [Surfaces](https://ui.byronwade.com/surfaces): Application · Marketing · Mobile · Desktop
+- [Home](https://ui.byronwade.com/): Positioning
+
+## Repo (when coding in-tree)
+
+- design.md
+- docs/architecture.md
+- docs/meridian.md
+- .cursor/skills/
+- .cursor/agents/
+- .cursor/rules/meridian.mdc
+- app/globals.css
+- components/ui/ (shadcn)
+- components/surfaces/workbench.tsx
