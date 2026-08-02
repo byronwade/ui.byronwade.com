@@ -5,8 +5,9 @@ import { TileAgents } from "@/components/home/tile-agents"
 import { Closing } from "@/components/home/closing"
 
 /**
- * Cinematic film — Apple-style stacked tiles.
- * System docs live on /theme and /for-agents, not in the hero reel.
+ * Cinematic film — Apple product-page rhythm.
+ * Brand → craft → product proof → agents → close.
+ * System docs live on /theme and /for-agents.
  */
 export default function Home() {
   return (

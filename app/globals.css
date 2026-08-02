@@ -432,17 +432,17 @@
   .media-veil-soft {
     background: linear-gradient(
       to bottom,
-      color-mix(in oklch, var(--dock) 28%, transparent) 0%,
-      color-mix(in oklch, var(--dock) 12%, transparent) 42%,
-      color-mix(in oklch, var(--dock) 38%, transparent) 100%
+      color-mix(in oklch, var(--dock) 22%, transparent) 0%,
+      color-mix(in oklch, var(--dock) 8%, transparent) 48%,
+      color-mix(in oklch, var(--dock) 32%, transparent) 100%
     );
   }
 
   .media-veil-bottom {
     background: linear-gradient(
       to top,
-      color-mix(in oklch, var(--dock) 55%, transparent) 0%,
-      color-mix(in oklch, var(--dock) 8%, transparent) 55%,
+      color-mix(in oklch, var(--dock) 48%, transparent) 0%,
+      color-mix(in oklch, var(--dock) 6%, transparent) 55%,
       transparent 100%
     );
   }
@@ -454,5 +454,41 @@
       color-mix(in oklch, var(--background) 28%, transparent) 45%,
       transparent 100%
     );
+  }
+
+  /* Soft product-page light — brand wash + warm falloff, no hard spotlights */
+  .cinema-atmosphere {
+    background:
+      radial-gradient(
+        ellipse 70% 55% at 50% 100%,
+        color-mix(in oklch, var(--brand) 14%, transparent),
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 90% 60% at 50% 0%,
+        color-mix(in oklch, var(--foreground) 4%, transparent),
+        transparent 70%
+      );
+  }
+
+  /* Display type — Apple-scale tracking, medium weight max */
+  .cinema-display {
+    font-size: clamp(3rem, 8.5vw, 6rem);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+
+  .cinema-title {
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .cinema-lede {
+    font-size: clamp(1.125rem, 2vw, 1.3125rem);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
   }
 }

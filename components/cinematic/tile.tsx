@@ -4,6 +4,7 @@ import { BleedImage, type Veil } from "@/components/cinematic/bleed-image"
 import { cn } from "@/lib/utils"
 
 type Align = "center" | "bottom"
+type Layout = "overlay" | "stack"
 
 type CinemaTileProps = {
   id?: string
@@ -16,23 +17,64 @@ type CinemaTileProps = {
     priority?: boolean
     objectPosition?: string
   }
+  /**
+   * overlay — copy floats on media (sparse, bottom or center)
+   * stack — Apple product page: copy above, product subject below
+   */
+  layout?: Layout
   align?: Align
+  /** Product / workbench subject for stack layout */
+  subject?: ReactNode
   children: ReactNode
   className?: string
 }
 
 /**
- * Apple-style cinematic tile — one viewport, one idea, media edge-to-edge.
- * Copy is sparse. Never pack cards into a tile.
+ * Apple-style cinematic tile — one viewport, one idea.
+ * Stack layout puts the product on stage; overlay keeps media full-bleed.
  */
 function CinemaTile({
   id,
   tone = "theater",
   image,
+  layout = "overlay",
   align = "center",
+  subject,
   children,
   className,
 }: CinemaTileProps) {
+  if (layout === "stack") {
+    return (
+      <Stage
+        id={id}
+        tone={tone}
+        fullBleed
+        className={cn(
+          "items-center justify-between gap-10 pt-28 pb-0 md:pt-32",
+          className,
+        )}
+      >
+        {image ? (
+          <BleedImage
+            src={image.src}
+            alt={image.alt}
+            veil={image.veil ?? "soft"}
+            priority={image.priority}
+            objectPosition={image.objectPosition}
+          />
+        ) : null}
+        <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center md:px-8">
+          {children}
+        </div>
+        {subject ? (
+          <div className="relative z-10 w-full flex-1 overflow-hidden pb-0 pt-2">
+            {subject}
+          </div>
+        ) : null}
+      </Stage>
+    )
+  }
+
   return (
     <Stage
       id={id}
@@ -40,7 +82,7 @@ function CinemaTile({
       fullBleed
       className={cn(
         align === "center" && "items-center justify-center",
-        align === "bottom" && "justify-end pb-16 md:pb-24",
+        align === "bottom" && "justify-end pb-20 md:pb-28",
         className,
       )}
     >

@@ -1,35 +1,37 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
-import { cinemaStills } from "@/lib/media"
+import { ProductFrame } from "@/components/cinematic/product-frame"
+import { Workbench } from "@/components/surfaces/workbench"
 
+/**
+ * Theater product stage — one accent leads; the workbench proves it.
+ */
 function TileFocus() {
   return (
     <CinemaTile
-      id="focus"
+      id="product"
       tone="theater"
-      align="center"
-      image={{
-        src: cinemaStills.focus.src,
-        alt: cinemaStills.focus.alt,
-        veil: "soft",
-        objectPosition: "center center",
-      }}
+      layout="stack"
+      subject={
+        <ProductFrame className="translate-y-6 md:translate-y-10">
+          <Workbench
+            withAgent
+            className="h-[22rem] rounded-none border-0 md:h-[min(48vh,34rem)]"
+          />
+        </ProductFrame>
+      }
     >
-      <p className="text-[21px] font-medium tracking-tight text-dock-foreground">
+      <p className="text-[19px] font-medium tracking-tight text-brand md:text-[21px]">
         Accent
       </p>
-      <h2 className="mt-2 text-[clamp(2.25rem,6vw,4.25rem)] font-medium leading-[1.06] tracking-[-0.04em] text-dock-foreground">
+      <h2 className="cinema-title mt-3 text-dock-foreground">
         One color that leads.
       </h2>
-      <p className="mx-auto mt-4 max-w-sm text-[19px] leading-snug tracking-tight text-dock-foreground/70 md:text-[21px]">
+      <p className="cinema-lede mx-auto mt-5 max-w-sm text-dock-foreground/65">
         Deep ink-teal for action and selection. Everything else stays neutral.
       </p>
-      <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        <CinemaLink href="/theme" className="text-dock-foreground">
-          See the brand
-        </CinemaLink>
-        <CinemaLink href="#agents" className="text-dock-foreground">
-          For agents
-        </CinemaLink>
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        <CinemaLink href="/theme">See the brand</CinemaLink>
+        <CinemaLink href="#agents">For agents</CinemaLink>
       </div>
     </CinemaTile>
   )

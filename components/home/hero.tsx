@@ -1,36 +1,29 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
-import { cinemaStills } from "@/lib/media"
+import { ProductFrame } from "@/components/cinematic/product-frame"
+import { Workbench } from "@/components/surfaces/workbench"
 
+/**
+ * Apple product-page hero — brand is the display, product owns the frame.
+ * Soft paper light. No stock photograph competing with the workbench.
+ */
 function Hero() {
   return (
     <CinemaTile
-      tone="theater"
-      align="center"
-      image={{
-        src: cinemaStills.hero.src,
-        alt: cinemaStills.hero.alt,
-        veil: "soft",
-        priority: true,
-        objectPosition: "center 40%",
-      }}
+      tone="paper"
+      layout="stack"
+      subject={
+        <ProductFrame className="translate-y-6 md:translate-y-10">
+          <Workbench className="h-[22rem] rounded-none border-0 md:h-[min(48vh,34rem)]" />
+        </ProductFrame>
+      }
     >
-      <p className="text-[21px] font-medium tracking-tight text-dock-foreground">
-        Meridian
+      <h1 className="cinema-display text-foreground">Meridian</h1>
+      <p className="cinema-lede mx-auto mt-4 max-w-md text-muted-foreground">
+        Quiet product UI. Soft neutrals. One accent.
       </p>
-      <h1 className="mt-2 text-[clamp(2.75rem,7.5vw,5.5rem)] font-medium leading-[1.05] tracking-[-0.045em] text-dock-foreground">
-        Designed to be seen.
-      </h1>
-      <p className="mx-auto mt-4 max-w-md text-[19px] leading-snug tracking-tight text-dock-foreground/70 md:text-[21px]">
-        A cinematic theme for product UI — soft neutrals, one accent, full
-        bleed.
-      </p>
-      <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        <CinemaLink href="#craft" className="text-dock-foreground">
-          Learn more
-        </CinemaLink>
-        <CinemaLink href="/theme" className="text-dock-foreground">
-          View theme
-        </CinemaLink>
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        <CinemaLink href="#product">Learn more</CinemaLink>
+        <CinemaLink href="/theme">View theme</CinemaLink>
       </div>
     </CinemaTile>
   )

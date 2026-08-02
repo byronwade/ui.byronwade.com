@@ -1,32 +1,22 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
-import { cinemaStills } from "@/lib/media"
 
+/**
+ * Type-only paper tile — Apple air. The space is the craft.
+ */
 function TileCraft() {
   return (
-    <CinemaTile
-      id="craft"
-      tone="paper"
-      align="center"
-      image={{
-        src: cinemaStills.craft.src,
-        alt: cinemaStills.craft.alt,
-        veil: "top",
-        objectPosition: "center 55%",
-      }}
-    >
-      <p className="text-[21px] font-medium tracking-tight text-foreground">
+    <CinemaTile id="craft" tone="paper" align="center">
+      <p className="text-[19px] font-medium tracking-tight text-brand md:text-[21px]">
         Neutrals
       </p>
-      <h2 className="mt-2 text-[clamp(2.25rem,6vw,4.25rem)] font-medium leading-[1.06] tracking-[-0.04em] text-foreground">
-        Warm. Quiet. Exact.
-      </h2>
-      <p className="mx-auto mt-4 max-w-sm text-[19px] leading-snug tracking-tight text-muted-foreground md:text-[21px]">
+      <h2 className="cinema-title mt-3 text-foreground">Warm. Quiet. Exact.</h2>
+      <p className="cinema-lede mx-auto mt-5 max-w-sm text-muted-foreground">
         Soft stone paper. Soft charcoal type. Never pure white. Never pure
         black.
       </p>
-      <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
         <CinemaLink href="/theme">Explore knobs</CinemaLink>
-        <CinemaLink href="#focus">Continue</CinemaLink>
+        <CinemaLink href="#product">Continue</CinemaLink>
       </div>
     </CinemaTile>
   )
