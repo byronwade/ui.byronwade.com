@@ -1,1 +1,0 @@
-Build a responsive grid of product cards (image area, title, price, "Add to cart" button). Return one self-contained React .tsx component.
