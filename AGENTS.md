@@ -6,20 +6,32 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
-# ui.byronwade.com
+# ui.byronwade.com — Meridian
 
-Blank Next.js 16 app for the Byron Wade design site. Build application UI and design surfaces here from a clean foundation.
+Design site for Byron Wade. The design language is **Meridian** — see `docs/meridian.md`.
 
 ## Stack
 
 - Next.js 16 App Router + Turbopack
-- React 19 + React Compiler (`reactCompiler: true` in `next.config.ts`)
-- Tailwind CSS v4 (`@import "tailwindcss"` in `app/globals.css`)
+- React 19 + React Compiler
+- Tailwind CSS v4 + Geist Sans / Geist Mono
 - TypeScript, ESLint
 
-## Conventions
+## Design laws (short)
 
-- Edit under `app/`
-- Prefer Server Components; add `"use client"` only when needed
-- Keep the surface blank until intentional design work lands
-- Read Next.js docs in `node_modules/next/dist/docs/` before using unfamiliar APIs
+1. Tokens only — no raw color in components
+2. One accent: `--brand` (steel-teal arc); success/ring/selected derive from it
+3. Hierarchy from size + tracking, not bold display weight
+4. Mono for data (IDs, counts, timestamps, prices, model/tool names)
+5. Depth defaults to none + `edge`; use `depth-soft` / `depth-raised` sparingly
+6. Shape scale: controls `rounded-full`, inputs `rounded-lg`, panels `rounded-2xl`, shells `rounded-3xl`
+7. AI is object-bound with `data-provenance` and activity tokens
+8. Light-first cool paper — not warm cream, not dark-default
+
+## Where things go
+
+- Pages → `app/`
+- UI primitives → `components/ui/`
+- Site chrome / sections → `components/`
+- Helpers → `lib/`
+- Design DNA → `docs/meridian.md`

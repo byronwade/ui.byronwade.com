@@ -1,14 +1,16 @@
 # ui.byronwade.com
 
-Fresh Next.js foundation for the Byron Wade design site.
+Design site for Byron Wade, built on **Meridian** — a synthesis of Shopify Polaris, Vercel, Linear, Cursor, and OpenAI into one operational-editorial system.
+
+Read the DNA: [`docs/meridian.md`](docs/meridian.md)
 
 ## Stack
 
-- **Next.js 16** (App Router, Turbopack)
-- **React 19** with React Compiler
-- **TypeScript**
-- **Tailwind CSS v4**
-- **ESLint**
+- Next.js 16 (App Router, Turbopack)
+- React 19 + React Compiler
+- TypeScript
+- Tailwind CSS v4
+- Geist Sans / Geist Mono
 
 ## Getting started
 
@@ -27,7 +29,3 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Production build       |
 | `npm run start` | Serve production build |
 | `npm run lint`  | ESLint                 |
-
-## Deploy
-
-Configured for Vercel at [ui.byronwade.com](https://ui.byronwade.com).
