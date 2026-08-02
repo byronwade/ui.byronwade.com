@@ -17,7 +17,15 @@ Browsers hitting these URLs get designed HTML. Agents receive this raw text
 
 - [Theme](https://ui.byronwade.com/theme): Laws, knobs, closed roles, bans, contrast pairs
 - [Surfaces](https://ui.byronwade.com/surfaces): Application · Marketing · Mobile · Desktop
+- [Skills](https://ui.byronwade.com/skills): Top agent skills (skills.sh-ready under `skills/`)
 - [Home](https://ui.byronwade.com/): Cinematic positioning
+
+## Install skills
+
+```bash
+npx skills add byronwade/ui.byronwade.com
+npx skills add byronwade/ui.byronwade.com --skill meridian-theme
+```
 
 ## Enforce
 

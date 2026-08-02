@@ -26,27 +26,32 @@ export const metadata: Metadata = {
 const skillFiles = [
   {
     name: "meridian-theme",
-    path: ".cursor/skills/meridian-theme/SKILL.md",
+    path: "skills/meridian-theme/SKILL.md",
+    href: "/skills/meridian-theme",
     use: "Re-skin knobs; keep one deep accent",
   },
   {
-    name: "meridian-surface",
-    path: ".cursor/skills/meridian-surface/SKILL.md",
-    use: "Pick data-surface + density",
-  },
-  {
     name: "meridian-compose",
-    path: ".cursor/skills/meridian-compose/SKILL.md",
+    path: "skills/meridian-compose/SKILL.md",
+    href: "/skills/meridian-compose",
     use: "Build product wholes from shadcn + grammar",
   },
   {
     name: "meridian-cinematic",
-    path: ".cursor/skills/meridian-cinematic/SKILL.md",
+    path: "skills/meridian-cinematic/SKILL.md",
+    href: "/skills/meridian-cinematic",
     use: "Full-bleed frames under cinematic laws",
   },
   {
+    name: "meridian-surface",
+    path: "skills/meridian-surface/SKILL.md",
+    href: "/skills/meridian-surface",
+    use: "Pick data-surface + density",
+  },
+  {
     name: "meridian-a11y",
-    path: ".cursor/skills/meridian-a11y/SKILL.md",
+    path: "skills/meridian-a11y/SKILL.md",
+    href: "/skills/meridian-a11y",
     use: "OKLCH + contrast audit on every UI change",
   },
 ] as const
@@ -197,7 +202,7 @@ export default async function ForAgentsPage() {
           {[
             "design.md — contract",
             "lib/design/ — grammar, recipes, contrast",
-            "Matching skill under .cursor/skills/",
+            "Matching skill under skills/ (see /skills)",
             "Compose shadcn primitives into wholes",
             "npm run check:design && npm run check:contrast",
           ].map((step, i) => (
@@ -217,12 +222,21 @@ export default async function ForAgentsPage() {
       <Separator className="my-14" />
 
       <section id="skills" className="scroll-mt-24">
-        <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
-          Skills
-        </h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Copy the skill file into your agent context.
-        </p>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
+              Skills
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Canonical under{" "}
+              <span className="font-mono text-[12px]">skills/</span> — browse
+              the full index or copy a file.
+            </p>
+          </div>
+          <Button variant="outline" size="default" asChild>
+            <Link href="/skills">All skills</Link>
+          </Button>
+        </div>
         <ul className="mt-6 space-y-3">
           {skills.map((skill) => (
             <FileCard
@@ -231,6 +245,7 @@ export default async function ForAgentsPage() {
               name={skill.name}
               use={skill.use}
               source={skill.source}
+              href={skill.href}
             />
           ))}
         </ul>
@@ -266,11 +281,13 @@ function FileCard({
   name,
   use,
   source,
+  href,
 }: {
   kind: "skill" | "agent"
   name: string
   use: string
   source: string
+  href?: string
 }) {
   return (
     <li>
@@ -280,15 +297,26 @@ function FileCard({
             {kind}
           </Badge>
           <CardTitle className="mt-1 font-mono text-sm break-all">
-            {name}
+            {href ? (
+              <Link href={href} className="transition-opacity hover:opacity-70">
+                {name}
+              </Link>
+            ) : (
+              name
+            )}
           </CardTitle>
           <CardDescription>{use}</CardDescription>
           <CardAction className="sm:hidden">
             <CopyButton value={source} label="Copy" size="icon-touch" />
           </CardAction>
         </CardHeader>
-        <CardFooter className="hidden border-t-0 bg-transparent sm:flex">
+        <CardFooter className="hidden flex-wrap gap-2 border-t-0 bg-transparent sm:flex">
           <CopyButton value={source} label="Copy file" size="default" />
+          {href ? (
+            <Button variant="ghost" size="default" asChild>
+              <Link href={href}>Details</Link>
+            </Button>
+          ) : null}
         </CardFooter>
       </Card>
     </li>

@@ -28,19 +28,26 @@ Agents invent **stories and compositions**. They do not invent **colors, shadows
 
 1. `design.md`
 2. `lib/design/` (grammar · recipes · contrast · cx)
-3. Matching skill under `.cursor/skills/`
+3. Matching skill under `skills/` (mirrored to `.cursor/skills/`)
 4. Compose shadcn primitives into surface wholes
 5. `npm run check:design && npm run check:contrast`
 
 ## Skills
 
-| Skill | Use |
-| --- | --- |
-| `meridian-theme` | Re-skin knobs; keep one deep accent |
-| `meridian-surface` | Pick `data-surface` + density |
-| `meridian-compose` | Build product wholes from shadcn + grammar |
-| `meridian-cinematic` | Full-bleed frames under cinematic laws |
-| `meridian-a11y` | OKLCH + contrast audit on every UI change |
+Human index: [`/skills`](/skills). Canonical files: `skills/<name>/SKILL.md` (skills.sh-ready).
+
+| Skill | Use | Detail |
+| --- | --- | --- |
+| `meridian-theme` | Re-skin knobs; keep one deep accent | [`/skills/meridian-theme`](/skills/meridian-theme) |
+| `meridian-compose` | Build product wholes from shadcn + grammar | [`/skills/meridian-compose`](/skills/meridian-compose) |
+| `meridian-cinematic` | Full-bleed frames under cinematic laws | [`/skills/meridian-cinematic`](/skills/meridian-cinematic) |
+| `meridian-surface` | Pick `data-surface` + density | [`/skills/meridian-surface`](/skills/meridian-surface) |
+| `meridian-a11y` | OKLCH + contrast audit on every UI change | [`/skills/meridian-a11y`](/skills/meridian-a11y) |
+
+```bash
+npx skills add byronwade/ui.byronwade.com
+npx skills add byronwade/ui.byronwade.com --skill meridian-theme
+```
 
 ## Agents
 

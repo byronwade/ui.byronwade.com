@@ -14,15 +14,15 @@ Parts and wholes together: `@/lib/design` → shadcn atoms → product frames.
 3. Inventory needed primitives — missing? `npx shadcn@latest add …`
 4. Remap any `lucide-react` imports to `@/lib/icons` (Phosphor, duotone).
 5. Study `components/surfaces/workbench.tsx` as the merge proof.
-5. Compose:
+6. Compose:
    - Quiet chrome (sidebar / topbar)
    - Dense index or detail
    - Mono IDs + keyboard hints
    - Selected = `bg-brand/10` (not a loud border)
    - Optional AI rail **on the selected object** with `data-provenance` + `activity-*`
-6. Depth: `edge` first; raise only when floated.
-7. Keep demo embeds from stealing scroll (`overflow-hidden`).
-8. `npm run check:design`.
+7. Depth: `edge` first; raise only when floated.
+8. Keep demo embeds from stealing scroll (`overflow-hidden`).
+9. `npm run check:design`.
 
 ## Anatomy (application)
 

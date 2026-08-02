@@ -10,6 +10,7 @@ export type DocId =
   | "for-agents"
   | "theme"
   | "surfaces"
+  | "skills"
 
 export type DocEntry = {
   id: DocId
@@ -50,6 +51,14 @@ export const docs: readonly DocEntry[] = [
     href: "/surfaces",
     nav: true,
     navLabel: "Surfaces",
+  },
+  {
+    id: "skills",
+    title: "Skills",
+    summary: "Top Meridian agent skills — ready for skills.sh.",
+    href: "/skills",
+    nav: true,
+    navLabel: "Skills",
   },
   {
     id: "for-agents",
