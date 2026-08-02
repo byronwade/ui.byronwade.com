@@ -24,5 +24,5 @@ Theme showcase for AIs. Aesthetic: **cinematic design** — soft warm neutrals, 
 2. Soft neutrals — never pure white/black; one deep `--brand`
 3. Full-bleed via `BleedImage`; reading via `ReadingArticle`
 4. Cinema: one idea/frame, `svh`, no stickers
-5. shadcn only; `data-surface` for density
+5. shadcn only; icons from `@/lib/icons` (Phosphor); `data-surface` for density
 6. Pass `npm run check:design`

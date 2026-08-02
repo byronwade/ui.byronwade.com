@@ -3,7 +3,7 @@
 > **For AI agents.** Humans see a designed page at this URL; agents receive this markdown (`?raw=1` forces raw).
 
 **Product:** cinematic theme system — not a custom component zoo.  
-**Primitives:** shadcn/ui. **Color:** strict OKLCH. **Contrast:** WCAG AA (`npm run check:contrast`).
+**Primitives:** shadcn/ui. **Icons:** Phosphor via `@/lib/icons`. **Color:** strict OKLCH. **Contrast:** WCAG AA (`npm run check:contrast`).
 
 ## Start here
 

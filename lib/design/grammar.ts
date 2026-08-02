@@ -162,6 +162,8 @@ export const banned = [
   "inset-hero-media",
   "low-contrast-on-dock",
   "foreground-opacity-cheat",
+  "direct-lucide-import",
+  "direct-phosphor-import",
 ] as const
 
 export type BannedPattern = (typeof banned)[number]

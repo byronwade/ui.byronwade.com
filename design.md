@@ -42,6 +42,7 @@ defineCinemaFrame({
 | Media | Full-bleed photographs (`BleedImage`) |
 | Reading | `ReadingArticle` + `reading-ui` / `reading-prose` |
 | Primitives | shadcn/ui — compose, don’t fork |
+| Icons | Phosphor via `@/lib/icons` — duotone default |
 | Default surface | `application` |
 | Grammar | `lib/design/grammar.ts` |
 
@@ -82,15 +83,16 @@ Every UI or token change must pass this audit (skill: `meridian-a11y`):
 3. **One accent** — primary, ring, selected, success → `--brand`
 4. **Status semantic** — destructive / warning never become brand
 5. **shadcn only** for primitives — compose `Button`, `Card`, `Badge`, `Input`, … (`npx shadcn@latest add`)
-6. **`data-surface`** — `application` | `marketing` | `mobile` | `desktop`
-7. **Mono for data** — IDs, counts, times, prices, model/tool names
-8. **Object-bound AI** — provenance + activity; no floating chatbot
-9. **Audit accessibility + contrast** on every change
-10. Pass **`npm run check:design`** and **`npm run check:contrast`**
+6. **Icons from `@/lib/icons`** — Phosphor, duotone by default; never `lucide-react` or `@phosphor-icons/react` direct
+7. **`data-surface`** — `application` | `marketing` | `mobile` | `desktop`
+8. **Mono for data** — IDs, counts, times, prices, model/tool names
+9. **Object-bound AI** — provenance + activity; no floating chatbot
+10. **Audit accessibility + contrast** on every change
+11. Pass **`npm run check:design`** and **`npm run check:contrast`**
 
 ## MUST NOT (`banned` in grammar)
 
-raw-hex · arbitrary-color-utility · non-oklch-color · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · pure-white · pure-black · bright-neon-accent · cream-terracotta-cliche · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports · inset-hero-media · low-contrast-on-dock · foreground-opacity-cheat
+raw-hex · arbitrary-color-utility · non-oklch-color · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · pure-white · pure-black · bright-neon-accent · cream-terracotta-cliche · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports · inset-hero-media · low-contrast-on-dock · foreground-opacity-cheat · direct-lucide-import · direct-phosphor-import
 
 ## Surfaces
 
@@ -138,6 +140,7 @@ Machine URLs content-negotiate: browsers get designed HTML; agents get raw
 - [ ] `ideas: 1` on every cinema frame
 - [ ] Correct `data-surface`
 - [ ] shadcn primitive (no bespoke twin)
+- [ ] Icons from `@/lib/icons` (Phosphor)
 - [ ] Mono on data; quiet chrome
 - [ ] AI object-bound (if any)
 - [ ] `npm run check:design` clean

@@ -25,6 +25,7 @@ copy · IA · domain objects · frame sequence · which shadcn wholes · narrati
 - Full-bleed media (`BleedImage`) — no inset heroes
 - Structured reading (`ReadingArticle` / `reading-prose` / `reading-ui`)
 - Compose **shadcn** primitives (`Button`, `Card`, `Badge`, …) into wholes
+- Icons from **`@/lib/icons`** (Phosphor, duotone) — never `lucide-react` or direct `@phosphor-icons/react`
 - `defineCinemaFrame({ ideas: 1, overlayStickers: false })`
 - `data-surface` for density; `svh` never `dvh`; `edge`/`depth-*` never `shadow-*`
 - Run `npm run check:design` + `npm run check:contrast` before done

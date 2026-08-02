@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/lib/icons";
 import { Surface } from "@/components/surfaces/surface";
 import { MediaPlane } from "@/components/cinematic/media-plane";
 import { Button } from "@/components/ui/button";

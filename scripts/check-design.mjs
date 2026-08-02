@@ -18,9 +18,11 @@ const EXTENSIONS = new Set([".tsx", ".ts", ".css"])
 const IGNORE = [
   /node_modules/,
   /\.next/,
-  /components\/ui\//, // shadcn primitives — upstream may use shadows briefly
   /scripts\//,
 ]
+
+/** Paths where upstream shadcn may still use Tailwind shadows briefly */
+const SHADCN_UI = /components\/ui\//
 
 const RULES = [
   {
@@ -39,6 +41,21 @@ const RULES = [
     re: /(?:^|[\s"'`])shadow-(?:sm|md|lg|xl|2xl|inner)(?:$|[\s"'`])/,
     message: "Tailwind shadow-* banned — use edge / depth-*",
     include: /\.(tsx|ts)$/,
+    exclude: SHADCN_UI,
+  },
+  {
+    id: "direct-lucide-import",
+    re: /from\s+["']lucide-react["']/,
+    message: "lucide-react banned — import from @/lib/icons (Phosphor)",
+    include: /\.(tsx|ts)$/,
+  },
+  {
+    id: "direct-phosphor-import",
+    re: /from\s+["']@phosphor-icons\/react(?:\/ssr)?["']/,
+    message:
+      "@phosphor-icons/react direct import banned — use @/lib/icons barrel",
+    include: /\.(tsx|ts)$/,
+    allow: /lib\/icons\.tsx$/,
   },
   {
     id: "min-h-dvh",
@@ -65,18 +82,21 @@ const RULES = [
     re: /(?:bg|text|border|fill|stroke)-(?:white)(?:\/|\s|"|'|`|$)|['"`]#(?:fff|ffffff|FFF|FFFFFF)['"`]|oklch\(\s*1\s+0\s+0\s*\)/,
     message: "Pure white banned — use soft warm neutrals (background/card)",
     include: /\.(tsx|ts|css)$/,
+    exclude: SHADCN_UI,
   },
   {
     id: "pure-black",
     re: /(?:bg|text|border|fill|stroke)-(?:black)(?:\/|\s|"|'|`|$)|['"`]#(?:000|000000)['"`]|oklch\(\s*0\s+0\s+0/,
     message: "Pure black banned — use soft warm dock/foreground charcoal",
     include: /\.(tsx|ts|css)$/,
+    exclude: SHADCN_UI,
   },
   {
     id: "non-oklch-color",
     re: /(?:^|[\s:,(])(?:hsl|hsla|rgb|rgba|hwb|lab|lch)\(/i,
     message: "Non-OKLCH color function — tokens must be oklch(...) or var(--token)",
     include: /\.(tsx|ts|css)$/,
+    exclude: SHADCN_UI,
   },
   {
     id: "foreground-opacity-cheat",
@@ -84,6 +104,7 @@ const RULES = [
     message:
       "Opacity on foreground cheats contrast — use muted-foreground or dock-muted",
     include: /\.(tsx|ts)$/,
+    exclude: SHADCN_UI,
   },
   {
     id: "low-contrast-on-dock",
@@ -129,6 +150,8 @@ for (const file of files) {
     const line = lines[i]
     for (const rule of RULES) {
       if (rule.include && !rule.include.test(file)) continue
+      if (rule.exclude && rule.exclude.test(rel)) continue
+      if (rule.allow && rule.allow.test(rel)) continue
       if (rule.re.test(line)) {
         hits.push({
           rule: rule.id,

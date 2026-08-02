@@ -1,4 +1,4 @@
-import { House, ListTodo, Search, Settings, Circle } from "lucide-react";
+import { House, ListTodo, Search, Settings, Circle } from "@/lib/icons";
 import { Surface } from "@/components/surfaces/surface";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

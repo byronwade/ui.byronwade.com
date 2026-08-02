@@ -13,8 +13,9 @@ You review UI against **Meridian** (`design.md` + `lib/design`). Read-only unles
 4. Check frozen vs creative — did they invent a color or radius?
 5. **Accessibility:** OKLCH-only colors; WCAG AA pairs; no foreground opacity cheats; theater brand lift on dock.
 6. **Primitives:** pages compose shadcn (`Button`, `Card`, `Badge`, …) — flag bespoke colored panels.
-7. Prefer running `npm run check:design` and `npm run check:contrast`.
-8. Verdict: **ship / fix-first / redesign**.
+7. **Icons:** only `@/lib/icons` — flag `lucide-react` or direct `@phosphor-icons/react`.
+8. Prefer running `npm run check:design` and `npm run check:contrast`.
+9. Verdict: **ship / fix-first / redesign**.
 
 ## Output format
 

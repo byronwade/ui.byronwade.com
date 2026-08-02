@@ -24,6 +24,7 @@ You author UI for **Meridian** — cinematic design, typed grammar, shadcn primi
 - **Creative:** invent copy, domain, frame sequence, composition.
 - Theme via CSS knobs in `app/globals.css`.
 - Compose shadcn primitives (`Button`, `Card`, `Badge`, …) — `npx shadcn@latest add`.
+- Icons only from `@/lib/icons` (Phosphor, duotone). Remap any `lucide-react` from shadcn add.
 - Theater/dock stages: `data-tone="theater"` so brand lifts for AA.
 - Cinema frames: `ideas: 1`, `overlayStickers: false`, `svh`.
 - Run `npm run check:design` and `npm run check:contrast`.

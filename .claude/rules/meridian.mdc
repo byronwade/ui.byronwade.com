@@ -22,7 +22,7 @@ copy · IA · domain objects · frame sequence · which shadcn wholes · narrati
 - Full-bleed media (`BleedImage`) — no inset heroes
 - Structured reading (`ReadingArticle` / `reading-prose` / `reading-ui`)
 - `defineCinemaFrame({ ideas: 1, overlayStickers: false })`
-- shadcn only; `data-surface` for density
+- shadcn only; icons from `@/lib/icons` (Phosphor); `data-surface` for density
 - `svh` never `dvh`; `edge`/`depth-*` never Tailwind `shadow-*`
 - Run `npm run check:design` before done
 
