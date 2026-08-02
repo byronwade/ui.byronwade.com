@@ -1,6 +1,6 @@
 # ui.byronwade.com
 
-Design site for Byron Wade, built on **Meridian** — a synthesis of Shopify Polaris, Vercel, Linear, Cursor, and OpenAI into one operational-editorial system.
+Design site for Byron Wade, built on **Meridian** — a synthesis of Shopify Polaris, Vercel, Linear, Cursor, and OpenAI, staged with the cinematic craft of Apple, Tesla, and YouTube.
 
 Read the DNA: [`docs/meridian.md`](docs/meridian.md)
 

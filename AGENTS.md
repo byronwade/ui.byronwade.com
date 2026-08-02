@@ -27,11 +27,13 @@ Design site for Byron Wade. The design language is **Meridian** — see `docs/me
 6. Shape scale: controls `rounded-full`, inputs `rounded-lg`, panels `rounded-2xl`, shells `rounded-3xl`
 7. AI is object-bound with `data-provenance` and activity tokens
 8. Light-first cool paper — not warm cream, not dark-default
+9. **Cinema** — media owns the frame; one idea per cut; scroll is the edit; theater (`bg-dock`) when earned; no overlay stickers; honor `prefers-reduced-motion`
 
 ## Where things go
 
 - Pages → `app/`
 - UI primitives → `components/ui/`
+- Cinematic primitives → `components/cinematic/`
 - Site chrome / sections → `components/`
 - Helpers → `lib/`
 - Design DNA → `docs/meridian.md`

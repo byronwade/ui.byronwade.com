@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s · ui.byronwade.com",
   },
   description:
-    "Meridian — operational density meets editorial clarity. A design system for application UI.",
+    "Meridian — operational density, staged like film. A design system for application UI.",
   metadataBase: new URL("https://ui.byronwade.com"),
 };
 

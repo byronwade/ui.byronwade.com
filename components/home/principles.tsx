@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import { Stage } from "@/components/cinematic/stage";
+import { Reveal } from "@/components/cinematic/reveal";
 
 const principles = [
   {
@@ -23,53 +24,51 @@ const principles = [
     source: "OpenAI",
     take: "Conversational provenance. Approachable message rhythm without chatbot cliché.",
   },
+  {
+    source: "Cinema",
+    take: "Full-bleed frames. One idea per cut. Product as the only subject in the shot.",
+  },
 ];
 
 function Principles() {
   return (
-    <section
+    <Stage
       id="system"
-      data-slot="principles"
-      className="scroll-mt-20 border-t border-border px-5 py-24 md:px-8 md:py-32"
+      tone="paper"
+      className="flex flex-col justify-center px-5 py-24 md:px-8 md:py-32"
     >
-      <div className="mx-auto max-w-6xl">
-        <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
-          The merge
-        </p>
-        <h2 className="mt-4 max-w-[18ch] text-3xl font-medium tracking-[-0.03em] text-foreground md:text-5xl">
-          Five systems. One accent. One depth model.
-        </h2>
-        <p className="reading-muted mt-5 max-w-xl text-base leading-relaxed tracking-tight">
-          Anyone can stack Linear rows on Vercel type. Meridian binds them with
-          cool paper, steel-teal brand, Polaris-shaped depth that defaults to
-          none, and AI that only appears when attached to a product object.
-        </p>
+      <div className="mx-auto w-full max-w-6xl">
+        <Reveal>
+          <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+            The merge
+          </p>
+          <h2 className="mt-4 max-w-[18ch] text-3xl font-medium tracking-[-0.035em] text-foreground md:text-5xl">
+            Five systems. Plus cinema. One accent.
+          </h2>
+          <p className="reading-muted mt-5 max-w-xl text-base leading-relaxed tracking-tight">
+            Operational craft from the tools you trust — staged with the
+            discipline of a product film.
+          </p>
+        </Reveal>
 
-        <ul className="mt-16 divide-y divide-border edge overflow-hidden rounded-2xl bg-card">
+        <ul className="mt-16 divide-y divide-border overflow-hidden rounded-3xl bg-card edge">
           {principles.map((item, index) => (
-            <motion.li
-              key={item.source}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{
-                duration: 0.45,
-                delay: index * 0.05,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="grid gap-2 px-5 py-5 transition-colors hover:bg-muted/30 md:grid-cols-[8rem_1fr] md:gap-8 md:px-6 md:py-6"
-            >
-              <span className="font-mono text-xs tracking-tight text-brand">
-                {item.source}
-              </span>
-              <p className="text-sm leading-relaxed tracking-tight text-foreground md:text-base">
-                {item.take}
-              </p>
-            </motion.li>
+            <li key={item.source}>
+              <Reveal delay={index * 0.04} y={16}>
+                <div className="grid gap-2 px-5 py-5 transition-colors hover:bg-muted/30 md:grid-cols-[8rem_1fr] md:gap-8 md:px-6 md:py-6">
+                  <span className="font-mono text-xs tracking-tight text-brand">
+                    {item.source}
+                  </span>
+                  <p className="text-sm leading-relaxed tracking-tight text-foreground md:text-base">
+                    {item.take}
+                  </p>
+                </div>
+              </Reveal>
+            </li>
           ))}
         </ul>
       </div>
-    </section>
+    </Stage>
   );
 }
 
