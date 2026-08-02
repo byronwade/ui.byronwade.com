@@ -26,7 +26,7 @@ function TileFocus() {
       <h2 className="cinema-title mt-3 text-dock-foreground">
         One color that leads.
       </h2>
-      <p className="cinema-lede mx-auto mt-5 max-w-sm text-dock-foreground/65">
+      <p className="cinema-lede mx-auto mt-5 max-w-sm text-dock-muted">
         Deep ink-teal for action and selection. Everything else stays neutral.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">

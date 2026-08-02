@@ -9,7 +9,7 @@ Read `design.md`, then import from `@/lib/design`. Aesthetic: **cinematic design
 
 ## Frozen (do not invent)
 
-colorRoles · radii · depths · surfaces · themeKnobs · activity · cinematicLaws · banned
+colorRoles · radii · depths · surfaces · themeKnobs · activity · cinematicLaws · contrastLaws · banned
 
 ## Creative (invent freely)
 
@@ -17,15 +17,18 @@ copy · IA · domain objects · frame sequence · which shadcn wholes · narrati
 
 ## Hard rules
 
+- **OKLCH only** for color tokens — never hex / rgb / hsl
 - Soft warm neutrals — never pure white/black or bright neon
-- One deep `--brand`; status semantic
+- One deep `--brand`; status semantic; theater lifts brand on `data-tone="theater"`
+- **Audit contrast** (WCAG AA) on every UI change — `npm run check:contrast`
+- No `text-foreground/70` opacity cheats — use `muted-foreground` / `dock-muted`
 - Full-bleed media (`BleedImage`) — no inset heroes
 - Structured reading (`ReadingArticle` / `reading-prose` / `reading-ui`)
+- Compose **shadcn** primitives (`Button`, `Card`, `Badge`, …) into wholes
 - `defineCinemaFrame({ ideas: 1, overlayStickers: false })`
-- shadcn only; `data-surface` for density
-- `svh` never `dvh`; `edge`/`depth-*` never Tailwind `shadow-*`
-- Run `npm run check:design` before done
+- `data-surface` for density; `svh` never `dvh`; `edge`/`depth-*` never `shadow-*`
+- Run `npm run check:design` + `npm run check:contrast` before done
 
 ## Skills
 
-`meridian-theme` · `meridian-surface` · `meridian-compose` · `meridian-cinematic`
+`meridian-theme` · `meridian-surface` · `meridian-compose` · `meridian-cinematic` · `meridian-a11y`

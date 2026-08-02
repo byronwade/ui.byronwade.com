@@ -2,6 +2,12 @@ import { type ReactNode } from "react"
 import Link from "next/link"
 import { CopyButton } from "@/components/docs/copy-button"
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
 type DocShellProps = {
@@ -23,6 +29,7 @@ type DocShellProps = {
 /**
  * Minimal document chrome — title, optional copy/raw, measured body.
  * Mobile: sticky bottom action bar with touch targets.
+ * Built on shadcn Button (+ Card for link rows).
  */
 function DocShell({
   eyebrow,
@@ -105,7 +112,12 @@ function DocShell({
         >
           <div className="mx-auto flex max-w-3xl gap-2">
             {source ? (
-              <CopyButton value={source} label="Copy" size="touch" className="flex-1" />
+              <CopyButton
+                value={source}
+                label="Copy"
+                size="touch"
+                className="flex-1"
+              />
             ) : null}
             {rawHref ? (
               <Button variant="outline" size="touch" className="flex-1" asChild>
@@ -128,14 +140,15 @@ function DocLinkRow({ items }: DocLinkRowProps) {
     <ul className="mt-6 space-y-2">
       {items.map((item) => (
         <li key={item.href}>
-          <Link
-            href={item.href}
-            className="flex flex-col gap-0.5 rounded-2xl bg-card px-4 py-3.5 transition-colors edge hover:bg-muted/30 active:bg-muted/40"
-          >
-            <span className="text-sm font-medium tracking-tight text-foreground">
-              {item.label}
-            </span>
-            <span className="text-sm text-muted-foreground">{item.summary}</span>
+          <Link href={item.href} className="block transition-opacity hover:opacity-90">
+            <Card className="py-0 transition-colors hover:bg-muted/30">
+              <CardHeader className="gap-0.5 py-3.5">
+                <CardTitle className="text-sm tracking-tight">
+                  {item.label}
+                </CardTitle>
+                <CardDescription>{item.summary}</CardDescription>
+              </CardHeader>
+            </Card>
           </Link>
         </li>
       ))}

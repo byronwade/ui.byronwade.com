@@ -4,6 +4,7 @@
  */
 export * from "@/lib/design/grammar"
 export * from "@/lib/design/recipes"
+export * from "@/lib/design/contrast"
 export {
   activity,
   bg,

@@ -60,6 +60,10 @@ export const cinematicLaws = {
   typeWeight: "medium-max" as const,
   /** Reading uses structured lanes — reading-ui / reading-prose. */
   structuredReading: true,
+  /** Colors are strict OKLCH; contrast audited (WCAG AA). */
+  oklchOnly: true,
+  /** Accessibility + contrast are mandatory on every UI change. */
+  auditContrast: true,
 } as const
 
 /**

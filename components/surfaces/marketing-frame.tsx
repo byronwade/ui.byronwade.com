@@ -8,6 +8,7 @@ function MarketingFrame({ className }: { className?: string }) {
   return (
     <Surface
       id="marketing"
+      data-tone="theater"
       className={cn(
         "relative flex h-[28rem] flex-col justify-end overflow-hidden rounded-3xl bg-dock text-dock-foreground md:h-[32rem]",
         className,
@@ -21,7 +22,7 @@ function MarketingFrame({ className }: { className?: string }) {
         <h3 className="max-w-[12ch] text-3xl font-medium tracking-[-0.04em] md:text-4xl">
           Ship interfaces that feel finished.
         </h3>
-        <p className="max-w-sm text-sm leading-relaxed text-dock-foreground/65">
+        <p className="max-w-sm text-sm leading-relaxed text-dock-muted">
           Marketing lane — theater when the product is the subject, never when
           it is decoration.
         </p>

@@ -25,7 +25,7 @@ const components: Components = {
     </h3>
   ),
   p: ({ children }) => (
-    <p className="mt-4 text-[1.0625rem] leading-[1.65] tracking-tight text-foreground/90 first:mt-0">
+    <p className="mt-4 text-[1.0625rem] leading-[1.65] tracking-tight text-foreground first:mt-0">
       {children}
     </p>
   ),
@@ -40,19 +40,21 @@ const components: Components = {
   strong: ({ children }) => (
     <strong className="font-medium text-foreground">{children}</strong>
   ),
-  em: ({ children }) => <em className="italic text-foreground/80">{children}</em>,
+  em: ({ children }) => (
+    <em className="italic text-muted-foreground">{children}</em>
+  ),
   blockquote: ({ children }) => (
-    <blockquote className="mt-6 border-l-2 border-brand/55 pl-4 text-foreground/80">
+    <blockquote className="mt-6 border-l-2 border-brand/55 pl-4 text-muted-foreground">
       {children}
     </blockquote>
   ),
   ul: ({ children }) => (
-    <ul className="mt-4 list-disc space-y-2 pl-5 text-[1.0625rem] leading-relaxed text-foreground/90">
+    <ul className="mt-4 list-disc space-y-2 pl-5 text-[1.0625rem] leading-relaxed text-foreground">
       {children}
     </ul>
   ),
   ol: ({ children }) => (
-    <ol className="mt-4 list-decimal space-y-2 pl-5 text-[1.0625rem] leading-relaxed text-foreground/90">
+    <ol className="mt-4 list-decimal space-y-2 pl-5 text-[1.0625rem] leading-relaxed text-foreground">
       {children}
     </ol>
   ),
@@ -92,7 +94,7 @@ const components: Components = {
     </th>
   ),
   td: ({ children }) => (
-    <td className="px-3 py-3 text-foreground/90 first:pl-0 last:pr-0">{children}</td>
+    <td className="px-3 py-3 text-foreground first:pl-0 last:pr-0">{children}</td>
   ),
   input: () => null,
 }

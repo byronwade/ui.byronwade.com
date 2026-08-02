@@ -28,7 +28,7 @@ function SiteFooter() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm text-foreground/80 transition-opacity hover:opacity-70"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {item.navLabel ?? item.title}
                 </Link>
@@ -45,7 +45,7 @@ function SiteFooter() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="font-mono text-sm text-foreground/80 transition-opacity hover:opacity-70"
+                  className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {item.filename}
                 </Link>

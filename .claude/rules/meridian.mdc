@@ -1,0 +1,31 @@
+---
+description: Meridian cinematic typed theme — always on
+alwaysApply: true
+---
+
+# Meridian
+
+Read `design.md`, then import from `@/lib/design`. Aesthetic: **cinematic design**.
+
+## Frozen (do not invent)
+
+colorRoles · radii · depths · surfaces · themeKnobs · activity · cinematicLaws · banned
+
+## Creative (invent freely)
+
+copy · IA · domain objects · frame sequence · which shadcn wholes · narrative inside one-idea frames
+
+## Hard rules
+
+- Soft warm neutrals — never pure white/black or bright neon
+- One deep `--brand`; status semantic
+- Full-bleed media (`BleedImage`) — no inset heroes
+- Structured reading (`ReadingArticle` / `reading-prose` / `reading-ui`)
+- `defineCinemaFrame({ ideas: 1, overlayStickers: false })`
+- shadcn only; `data-surface` for density
+- `svh` never `dvh`; `edge`/`depth-*` never Tailwind `shadow-*`
+- Run `npm run check:design` before done
+
+## Skills
+
+`meridian-theme` · `meridian-surface` · `meridian-compose` · `meridian-cinematic`

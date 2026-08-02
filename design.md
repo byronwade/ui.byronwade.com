@@ -10,7 +10,7 @@
 
 | Zone | What’s locked | What’s free |
 | --- | --- | --- |
-| **Frozen** | Color roles, radii, depth, surfaces, theme knobs, activity, bans, cinematic laws | — |
+| **Frozen** | Color roles (OKLCH), radii, depth, surfaces, theme knobs, activity, bans, cinematic laws, contrast pairs | — |
 | **Creative** | — | Copy, IA, domain objects, frame sequence, which shadcn wholes to compose, narrative inside one-idea frames |
 
 Agents invent **stories and compositions**. They do not invent **colors, shadows, or radii**. Import `@/lib/design` — TypeScript rejects fabrication.
@@ -32,13 +32,16 @@ defineCinemaFrame({
 | --- | --- |
 | Name | Meridian |
 | Design list | **Cinematic design** |
-| Accent | `--brand` — one deep ink-teal, prominent not bright |
-| Paper | Soft warm stone neutrals — never pure white/black |
+| Accent | `--brand` — one deep ink-teal (lifts on theater) |
+| Color space | **OKLCH only** — never hex / rgb / hsl |
+| Contrast | WCAG AA — `npm run check:contrast` |
+| Paper | Soft warm neutrals — never pure white/black |
 | Feeling | Crisp, calm, softly warm |
 | Type | Geist Sans + Geist Mono |
 | Depth | `edge` → `depth-soft` → `depth-raised` |
 | Media | Full-bleed photographs (`BleedImage`) |
 | Reading | `ReadingArticle` + `reading-ui` / `reading-prose` |
+| Primitives | shadcn/ui — compose, don’t fork |
 | Default surface | `application` |
 | Grammar | `lib/design/grammar.ts` |
 
@@ -58,22 +61,36 @@ Encoded in `lib/design/recipes.ts` → `cinematicLaws`:
 10. **Sparse copy** — product name, one headline, one line, text links (`CinemaLink`)
 11. **Structured reading** — off the film (docs routes); measured hierarchy
 12. **Type weight medium-max** — hierarchy from size + tracking
+13. **OKLCH only** — all color tokens are `oklch(...)` or `var(--token)`
+14. **Contrast audited** — WCAG AA on paper + theater; no opacity cheats
+
+## Accessibility (mandatory)
+
+Every UI or token change must pass this audit (skill: `meridian-a11y`):
+
+1. Colors are **OKLCH** semantic tokens — never hex / rgb / hsl / named colors
+2. Body/UI text ≥ **4.5:1**; large/display ≥ **3:1** (`lib/design/contrast.ts`)
+3. On `bg-dock` / theater stages use `data-tone="theater"` so `--brand` lifts
+4. Secondary text uses `text-muted-foreground` or `text-dock-muted` — never `text-*/70`
+5. Focus uses `ring-ring`; touch targets follow `data-surface="mobile"` (44px)
+6. Run **`npm run check:contrast`** (and `check:design`) before done
 
 ## MUST
 
 1. Import design decisions from `@/lib/design` when choosing color/radius/depth/cinema structure
-2. **Tokens only** — no raw hex / arbitrary color utilities
+2. **OKLCH tokens only** — no raw hex / rgb / hsl / arbitrary color utilities
 3. **One accent** — primary, ring, selected, success → `--brand`
 4. **Status semantic** — destructive / warning never become brand
-5. **shadcn only** for primitives — `npx shadcn@latest add`
+5. **shadcn only** for primitives — compose `Button`, `Card`, `Badge`, `Input`, … (`npx shadcn@latest add`)
 6. **`data-surface`** — `application` | `marketing` | `mobile` | `desktop`
 7. **Mono for data** — IDs, counts, times, prices, model/tool names
 8. **Object-bound AI** — provenance + activity; no floating chatbot
-9. Pass **`npm run check:design`**
+9. **Audit accessibility + contrast** on every change
+10. Pass **`npm run check:design`** and **`npm run check:contrast`**
 
 ## MUST NOT (`banned` in grammar)
 
-raw-hex · arbitrary-color-utility · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · pure-white · pure-black · bright-neon-accent · cream-terracotta-cliche · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports · inset-hero-media
+raw-hex · arbitrary-color-utility · non-oklch-color · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · pure-white · pure-black · bright-neon-accent · cream-terracotta-cliche · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports · inset-hero-media · low-contrast-on-dock · foreground-opacity-cheat
 
 ## Surfaces
 

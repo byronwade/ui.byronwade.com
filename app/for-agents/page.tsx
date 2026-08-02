@@ -2,11 +2,20 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { CopyButton } from "@/components/docs/copy-button"
 import { DocShell, DocLinkRow } from "@/components/docs/doc-shell"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 import { zones } from "@/lib/design"
 import { getDoc } from "@/lib/docs/catalog"
 import { loadSource } from "@/lib/docs/load-source"
-import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Agents",
@@ -35,6 +44,11 @@ const skillFiles = [
     path: ".cursor/skills/meridian-cinematic/SKILL.md",
     use: "Full-bleed frames under cinematic laws",
   },
+  {
+    name: "meridian-a11y",
+    path: ".cursor/skills/meridian-a11y/SKILL.md",
+    use: "OKLCH + contrast audit on every UI change",
+  },
 ] as const
 
 const agentFiles = [
@@ -46,7 +60,7 @@ const agentFiles = [
   {
     name: "meridian-reviewer",
     path: ".cursor/agents/meridian-reviewer.md",
-    use: "Audit MUST / banned / cinema laws",
+    use: "Audit MUST / banned / cinema / contrast",
   },
 ] as const
 
@@ -72,7 +86,7 @@ export default async function ForAgentsPage() {
     <DocShell
       eyebrow="For agents"
       title="Built so models stay true."
-      lead="Soft warm neutrals. One deep accent. Full-bleed cinema. TypeScript freezes the vocabulary; creativity stays in the story."
+      lead="Soft warm neutrals. One deep accent. Full-bleed cinema. TypeScript freezes the vocabulary; creativity stays in the story. Contrast is audited."
       actions={
         <>
           <Button variant="outline" size="default" asChild>
@@ -108,22 +122,32 @@ export default async function ForAgentsPage() {
             {
               href: "/theme",
               label: "Theme grammar",
-              summary: "Live knobs, roles, density, and bans.",
+              summary: "Live knobs, roles, density, bans, contrast pairs.",
             },
           ]}
         />
       </section>
 
-      <section className="mt-14">
+      <Separator className="my-14" />
+
+      <section>
         <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
           Frozen vs creative
         </h2>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-2xl bg-card p-5 edge md:p-6">
-            <p className="font-mono text-[11px] tracking-[0.14em] text-brand uppercase">
-              Frozen
-            </p>
-            <ul className="mt-4 space-y-2">
+          <Card>
+            <CardHeader>
+              <Badge variant="secondary" className="font-mono text-[10px]">
+                frozen
+              </Badge>
+              <CardTitle className="mt-2 font-mono text-sm text-brand">
+                Locked
+              </CardTitle>
+              <CardDescription>
+                Color, radius, depth, surfaces, bans, cinema laws, contrast.
+              </CardDescription>
+            </CardHeader>
+            <ul className="space-y-2 px-(--card-spacing) pb-(--card-spacing)">
               {zones.frozen.map((item) => (
                 <li
                   key={item}
@@ -133,40 +157,48 @@ export default async function ForAgentsPage() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="rounded-2xl bg-dock p-5 text-dock-foreground md:p-6">
-            <p className="font-mono text-[11px] tracking-[0.14em] text-brand uppercase">
-              Creative
-            </p>
-            <ul className="mt-4 space-y-2">
+          </Card>
+          <Card
+            data-tone="theater"
+            className="bg-dock text-dock-foreground edge"
+          >
+            <CardHeader>
+              <Badge className="font-mono text-[10px]">creative</Badge>
+              <CardTitle className="mt-2 font-mono text-sm text-brand">
+                Free
+              </CardTitle>
+              <CardDescription className="text-dock-muted">
+                Copy, IA, domain objects, frame sequence, shadcn composition.
+              </CardDescription>
+            </CardHeader>
+            <ul className="space-y-2 px-(--card-spacing) pb-(--card-spacing)">
               {zones.creative.map((item) => (
-                <li
-                  key={item}
-                  className="font-mono text-sm text-dock-foreground/70"
-                >
+                <li key={item} className="font-mono text-sm text-dock-muted">
                   {item}
                 </li>
               ))}
             </ul>
-          </div>
+          </Card>
         </div>
       </section>
 
-      <section className="mt-14">
+      <Separator className="my-14" />
+
+      <section>
         <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
           Load order
         </h2>
         <ol className="mt-5 space-y-3">
           {[
             "design.md — contract",
-            "lib/design/ — grammar, recipes, cx",
+            "lib/design/ — grammar, recipes, contrast",
             "Matching skill under .cursor/skills/",
-            "BleedImage for cinema · ReadingArticle for docs",
-            "npm run check:design",
+            "Compose shadcn primitives into wholes",
+            "npm run check:design && npm run check:contrast",
           ].map((step, i) => (
             <li
               key={step}
-              className="flex gap-3 text-[1.0625rem] leading-relaxed tracking-tight text-foreground/90"
+              className="flex gap-3 text-[1.0625rem] leading-relaxed tracking-tight text-foreground"
             >
               <span className="font-mono text-sm text-muted-foreground">
                 {i + 1}.
@@ -177,7 +209,9 @@ export default async function ForAgentsPage() {
         </ol>
       </section>
 
-      <section id="skills" className="mt-14 scroll-mt-24">
+      <Separator className="my-14" />
+
+      <section id="skills" className="scroll-mt-24">
         <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
           Skills
         </h2>
@@ -197,12 +231,14 @@ export default async function ForAgentsPage() {
         </ul>
       </section>
 
-      <section id="agents" className="mt-14 scroll-mt-24">
+      <Separator className="my-14" />
+
+      <section id="agents" className="scroll-mt-24">
         <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
           Agents
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Author implements; reviewer audits cinema laws and bans.
+          Author implements; reviewer audits cinema laws, bans, and contrast.
         </p>
         <ul className="mt-6 space-y-3">
           {agents.map((agent) => (
@@ -232,30 +268,24 @@ function FileCard({
   source: string
 }) {
   return (
-    <li className="rounded-2xl bg-card p-4 edge">
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+    <li>
+      <Card>
+        <CardHeader className="has-data-[slot=card-action]:grid-cols-[1fr_auto]">
+          <Badge variant="secondary" className="w-fit font-mono text-[10px]">
             {kind}
-          </p>
-          <p className="mt-1 font-mono text-sm break-all text-foreground">
+          </Badge>
+          <CardTitle className="mt-1 font-mono text-sm break-all">
             {name}
-          </p>
-          <p className="mt-1 text-sm text-muted-foreground">{use}</p>
-        </div>
-        <CopyButton
-          value={source}
-          label="Copy"
-          size="icon-touch"
-          className="shrink-0 sm:hidden"
-        />
-      </div>
-      <CopyButton
-        value={source}
-        label="Copy file"
-        size="touch"
-        className={cn("mt-3 hidden w-full sm:inline-flex sm:w-auto")}
-      />
+          </CardTitle>
+          <CardDescription>{use}</CardDescription>
+          <CardAction className="sm:hidden">
+            <CopyButton value={source} label="Copy" size="icon-touch" />
+          </CardAction>
+        </CardHeader>
+        <CardFooter className="hidden border-t-0 bg-transparent sm:flex">
+          <CopyButton value={source} label="Copy file" size="default" />
+        </CardFooter>
+      </Card>
     </li>
   )
 }

@@ -28,6 +28,7 @@ export const colorRoles = [
   "input",
   "ring",
   "dock",
+  "dock-muted",
   "sidebar",
 ] as const
 
@@ -144,6 +145,7 @@ export type ThemeKnob = (typeof themeKnobs)[number]
 export const banned = [
   "raw-hex-color",
   "arbitrary-color-utility",
+  "non-oklch-color",
   "tailwind-shadow",
   "dvh-viewport",
   "font-bold-display",
@@ -158,6 +160,8 @@ export const banned = [
   "floating-chatbot",
   "nested-demo-scrollports",
   "inset-hero-media",
+  "low-contrast-on-dock",
+  "foreground-opacity-cheat",
 ] as const
 
 export type BannedPattern = (typeof banned)[number]

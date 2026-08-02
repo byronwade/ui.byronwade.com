@@ -68,9 +68,29 @@ const RULES = [
   },
   {
     id: "pure-black",
-    re: /(?:bg|text|border|fill|stroke)-(?:black)(?:\/|\s|"|'|`|$)|['"`]#(?:000|000000)['"`]/,
+    re: /(?:bg|text|border|fill|stroke)-(?:black)(?:\/|\s|"|'|`|$)|['"`]#(?:000|000000)['"`]|oklch\(\s*0\s+0\s+0/,
     message: "Pure black banned — use soft warm dock/foreground charcoal",
     include: /\.(tsx|ts|css)$/,
+  },
+  {
+    id: "non-oklch-color",
+    re: /(?:^|[\s:,(])(?:hsl|hsla|rgb|rgba|hwb|lab|lch)\(/i,
+    message: "Non-OKLCH color function — tokens must be oklch(...) or var(--token)",
+    include: /\.(tsx|ts|css)$/,
+  },
+  {
+    id: "foreground-opacity-cheat",
+    re: /text-(?:dock-)?foreground\/(?:[1-9]\d?|100)\b/,
+    message:
+      "Opacity on foreground cheats contrast — use muted-foreground or dock-muted",
+    include: /\.(tsx|ts)$/,
+  },
+  {
+    id: "low-contrast-on-dock",
+    re: /bg-dock[^"'`\n]*text-brand\b|text-brand[^"'`\n]*bg-dock\b/,
+    message:
+      "Brand on dock without theater lift — wrap in data-tone=theater or use dock tokens",
+    include: /\.(tsx|ts)$/,
   },
 ]
 

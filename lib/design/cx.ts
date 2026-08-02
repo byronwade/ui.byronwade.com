@@ -28,6 +28,7 @@ const bgSolid: Record<ColorRole, string> = {
   input: "bg-input",
   ring: "bg-ring",
   dock: "bg-dock",
+  "dock-muted": "bg-dock-muted",
   sidebar: "bg-sidebar",
 }
 
@@ -78,6 +79,7 @@ const textSolid: Record<ColorRole, string> = {
   input: "text-input",
   ring: "text-ring",
   dock: "text-dock-foreground",
+  "dock-muted": "text-dock-muted",
   sidebar: "text-sidebar-foreground",
 }
 

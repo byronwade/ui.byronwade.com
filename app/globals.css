@@ -37,6 +37,7 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-dock: var(--dock);
   --color-dock-foreground: var(--dock-foreground);
+  --color-dock-muted: var(--dock-muted);
   --color-activity-thinking: var(--activity-thinking);
   --color-activity-search: var(--activity-search);
   --color-activity-read: var(--activity-read);
@@ -67,43 +68,47 @@
 }
 
 :root {
-  /* Soft warm stone — never pure white, never cream+terracotta cliché */
-  --background: oklch(0.962 0.012 72);
-  --foreground: oklch(0.30 0.02 55);
+  /*
+   * Strict OKLCH only — every color token is oklch(...) or var(...).
+   * Tuned for WCAG AA body text (≥4.5:1) on paper + theater.
+   * Never pure white/black. Never cream+terracotta cliché.
+   */
+  --background: oklch(0.965 0.01 72);
+  --foreground: oklch(0.28 0.02 55);
 
-  --card: oklch(0.978 0.008 72);
-  --card-foreground: oklch(0.30 0.02 55);
-  --popover: oklch(0.978 0.008 72);
-  --popover-foreground: oklch(0.30 0.02 55);
+  --card: oklch(0.98 0.008 72);
+  --card-foreground: oklch(0.28 0.02 55);
+  --popover: oklch(0.98 0.008 72);
+  --popover-foreground: oklch(0.28 0.02 55);
 
-  /* One prominent accent — deep ink-teal, rich not bright */
-  --brand: oklch(0.44 0.085 200);
+  /* One accent — deep ink-teal on paper; theater lifts it (below) */
+  --brand: oklch(0.42 0.09 200);
   --brand-foreground: oklch(0.97 0.01 85);
-  --brand-muted: oklch(0.92 0.03 200);
+  --brand-muted: oklch(0.93 0.03 200);
 
   --primary: var(--brand);
   --primary-foreground: var(--brand-foreground);
   --secondary: oklch(0.94 0.012 72);
-  --secondary-foreground: oklch(0.34 0.02 55);
+  --secondary-foreground: oklch(0.32 0.02 55);
   --muted: oklch(0.94 0.012 72);
-  --muted-foreground: oklch(0.48 0.02 55);
+  --muted-foreground: oklch(0.42 0.02 55);
   --accent: oklch(0.93 0.02 200);
-  --accent-foreground: oklch(0.34 0.03 200);
+  --accent-foreground: oklch(0.32 0.03 200);
 
-  /* Soft status — muted, not neon */
-  --destructive: oklch(0.5 0.12 28);
+  --destructive: oklch(0.48 0.14 28);
   --success: var(--brand);
   --success-foreground: var(--brand-foreground);
-  --warning: oklch(0.62 0.1 75);
-  --warning-foreground: oklch(0.32 0.04 55);
+  --warning: oklch(0.55 0.11 75);
+  --warning-foreground: oklch(0.28 0.04 55);
 
-  --border: oklch(0.88 0.014 72);
+  --border: oklch(0.86 0.014 72);
   --input: oklch(0.92 0.012 72);
   --ring: var(--brand);
 
-  /* Soft warm dark — never pure black */
-  --dock: oklch(0.27 0.018 50);
-  --dock-foreground: oklch(0.94 0.012 75);
+  /* Theater / dock — soft charcoal stage, never pure black */
+  --dock: oklch(0.24 0.018 50);
+  --dock-foreground: oklch(0.96 0.01 75);
+  --dock-muted: oklch(0.78 0.012 70);
 
   --activity-thinking: oklch(0.9 0.03 280);
   --activity-search: oklch(0.9 0.035 210);
@@ -111,10 +116,10 @@
   --activity-edit: oklch(0.91 0.04 85);
 
   --chart-1: var(--brand);
-  --chart-2: oklch(0.55 0.07 160);
-  --chart-3: oklch(0.5 0.06 250);
-  --chart-4: oklch(0.58 0.07 80);
-  --chart-5: oklch(0.48 0.05 30);
+  --chart-2: oklch(0.5 0.07 160);
+  --chart-3: oklch(0.48 0.06 250);
+  --chart-4: oklch(0.52 0.07 80);
+  --chart-5: oklch(0.46 0.05 30);
 
   --radius: 0.625rem;
 
@@ -136,74 +141,93 @@
   --bevel: inset 0 1px 0 oklch(0.99 0.01 75 / 0.65);
 
   --sidebar: oklch(0.955 0.012 72);
-  --sidebar-foreground: oklch(0.30 0.02 55);
+  --sidebar-foreground: oklch(0.28 0.02 55);
   --sidebar-primary: var(--brand);
   --sidebar-primary-foreground: var(--brand-foreground);
   --sidebar-accent: oklch(0.94 0.012 72);
-  --sidebar-accent-foreground: oklch(0.34 0.02 55);
-  --sidebar-border: oklch(0.88 0.014 72);
+  --sidebar-accent-foreground: oklch(0.32 0.02 55);
+  --sidebar-border: oklch(0.86 0.014 72);
   --sidebar-ring: var(--brand);
 }
 
 .dark {
   /* Warm charcoal night — never pure black */
   --background: oklch(0.22 0.016 50);
-  --foreground: oklch(0.92 0.012 75);
+  --foreground: oklch(0.94 0.01 75);
 
-  --card: oklch(0.26 0.016 50);
-  --card-foreground: oklch(0.92 0.012 75);
-  --popover: oklch(0.26 0.016 50);
-  --popover-foreground: oklch(0.92 0.012 75);
+  --card: oklch(0.27 0.016 50);
+  --card-foreground: oklch(0.94 0.01 75);
+  --popover: oklch(0.27 0.016 50);
+  --popover-foreground: oklch(0.94 0.01 75);
 
-  --brand: oklch(0.68 0.08 200);
-  --brand-foreground: oklch(0.22 0.02 50);
-  --brand-muted: oklch(0.32 0.035 200);
+  /* Lifted brand for body/link text on dark surfaces */
+  --brand: oklch(0.76 0.08 200);
+  --brand-foreground: oklch(0.2 0.02 50);
+  --brand-muted: oklch(0.34 0.04 200);
 
   --primary: var(--brand);
   --primary-foreground: var(--brand-foreground);
   --secondary: oklch(0.3 0.016 50);
-  --secondary-foreground: oklch(0.9 0.01 75);
+  --secondary-foreground: oklch(0.92 0.01 75);
   --muted: oklch(0.3 0.016 50);
-  --muted-foreground: oklch(0.7 0.015 70);
-  --accent: oklch(0.32 0.03 200);
-  --accent-foreground: oklch(0.9 0.015 75);
+  --muted-foreground: oklch(0.76 0.015 70);
+  --accent: oklch(0.34 0.03 200);
+  --accent-foreground: oklch(0.92 0.015 75);
 
-  --destructive: oklch(0.62 0.12 28);
+  --destructive: oklch(0.72 0.12 28);
   --success: var(--brand);
   --success-foreground: var(--brand-foreground);
-  --warning: oklch(0.7 0.09 80);
-  --warning-foreground: oklch(0.25 0.03 55);
+  --warning: oklch(0.78 0.09 80);
+  --warning-foreground: oklch(0.22 0.03 55);
 
-  --border: oklch(0.34 0.016 50);
+  --border: oklch(0.36 0.016 50);
   --input: oklch(0.3 0.016 50);
   --ring: var(--brand);
 
-  --dock: oklch(0.18 0.014 50);
-  --dock-foreground: oklch(0.93 0.012 75);
+  --dock: oklch(0.17 0.014 50);
+  --dock-foreground: oklch(0.95 0.01 75);
+  --dock-muted: oklch(0.76 0.012 70);
 
-  --activity-thinking: oklch(0.34 0.035 280);
-  --activity-search: oklch(0.34 0.035 210);
-  --activity-read: oklch(0.34 0.035 155);
-  --activity-edit: oklch(0.36 0.04 85);
+  --activity-thinking: oklch(0.36 0.035 280);
+  --activity-search: oklch(0.36 0.035 210);
+  --activity-read: oklch(0.36 0.035 155);
+  --activity-edit: oklch(0.38 0.04 85);
 
   --chart-1: var(--brand);
-  --chart-2: oklch(0.62 0.07 160);
-  --chart-3: oklch(0.6 0.06 250);
-  --chart-4: oklch(0.65 0.07 80);
-  --chart-5: oklch(0.58 0.05 30);
+  --chart-2: oklch(0.68 0.07 160);
+  --chart-3: oklch(0.66 0.06 250);
+  --chart-4: oklch(0.7 0.07 80);
+  --chart-5: oklch(0.64 0.05 30);
 
-  --shadow-100: 0 1px 0 oklch(0 0 0 / 0.28), 0 1px 3px oklch(0 0 0 / 0.32);
-  --shadow-300: 0 1px 0 oklch(0 0 0 / 0.28), 0 8px 24px oklch(0 0 0 / 0.38);
-  --bevel: inset 0 1px 0 oklch(1 0 0 / 0.05);
+  --shadow-100: 0 1px 0 oklch(0.12 0.01 50 / 0.35),
+    0 1px 3px oklch(0.12 0.01 50 / 0.4);
+  --shadow-300: 0 1px 0 oklch(0.12 0.01 50 / 0.35),
+    0 8px 24px oklch(0.12 0.01 50 / 0.45);
+  --bevel: inset 0 1px 0 oklch(0.96 0.01 75 / 0.06);
 
   --sidebar: oklch(0.26 0.016 50);
-  --sidebar-foreground: oklch(0.92 0.012 75);
+  --sidebar-foreground: oklch(0.94 0.01 75);
   --sidebar-primary: var(--brand);
   --sidebar-primary-foreground: var(--brand-foreground);
   --sidebar-accent: oklch(0.3 0.016 50);
-  --sidebar-accent-foreground: oklch(0.9 0.01 75);
-  --sidebar-border: oklch(0.34 0.016 50);
+  --sidebar-accent-foreground: oklch(0.92 0.01 75);
+  --sidebar-border: oklch(0.36 0.016 50);
   --sidebar-ring: var(--brand);
+}
+
+/*
+ * Theater stages sit on --dock. Paper --brand is too dark for links/fills
+ * on that surface — lift brand inside the stage so text-brand passes AA.
+ */
+[data-tone="theater"] {
+  --brand: oklch(0.78 0.075 200);
+  --brand-foreground: oklch(0.2 0.02 50);
+  --brand-muted: oklch(0.36 0.045 200);
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --ring: var(--brand);
+  --success: var(--brand);
+  --success-foreground: var(--brand-foreground);
 }
 
 @layer base {

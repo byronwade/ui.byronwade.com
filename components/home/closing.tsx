@@ -17,7 +17,7 @@ function Closing() {
       }}
     >
       <h2 className="cinema-display text-dock-foreground">Meridian</h2>
-      <p className="cinema-lede mx-auto mt-4 max-w-sm text-dock-foreground/70">
+      <p className="cinema-lede mx-auto mt-4 max-w-sm text-dock-muted">
         The frame is the product.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">

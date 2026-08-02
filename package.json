@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "check:design": "node scripts/check-design.mjs",
-    "validate": "npm run check:design && npm run lint"
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "validate": "npm run check:design && npm run check:contrast && npm run lint"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

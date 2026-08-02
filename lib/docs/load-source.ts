@@ -9,6 +9,7 @@ const ALLOWED = new Set([
   ".cursor/skills/meridian-surface/SKILL.md",
   ".cursor/skills/meridian-compose/SKILL.md",
   ".cursor/skills/meridian-cinematic/SKILL.md",
+  ".cursor/skills/meridian-a11y/SKILL.md",
   ".cursor/agents/meridian-author.md",
   ".cursor/agents/meridian-reviewer.md",
 ])
