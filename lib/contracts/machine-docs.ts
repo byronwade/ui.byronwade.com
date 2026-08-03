@@ -3,19 +3,15 @@
  * Meridian prefers repo SSOT files; others get a DNA + platform kit brief.
  */
 
-import { readFile } from "node:fs/promises"
-import { join } from "node:path"
-
 import { getDna } from "@/lib/contracts/dna"
 import { getContractInstall } from "@/lib/contracts/install"
+import { loadSource } from "@/lib/docs/load-source"
 import { MCP_TOOLS, PLATFORM_VERSION } from "@/lib/platform/skeleton"
 import { agentMandate } from "@/lib/platform/consistency"
 
-const ROOT = process.cwd()
-
-async function readIfExists(rel: string) {
+async function readIfAllowed(rel: string) {
   try {
-    return await readFile(join(ROOT, rel), "utf8")
+    return await loadSource(rel)
   } catch {
     return null
   }
@@ -23,7 +19,7 @@ async function readIfExists(rel: string) {
 
 export async function getDesignMarkdown(contractId: string): Promise<string> {
   if (contractId === "meridian") {
-    const src = await readIfExists("design.md")
+    const src = await readIfAllowed("design.md")
     if (src) return src
   }
 
@@ -84,7 +80,7 @@ Skin via \`data-contract="${dna.id}"\` / \`CONTRACT_ID=${dna.id}\`.
 
 export async function getAgentsMarkdown(contractId: string): Promise<string> {
   if (contractId === "meridian") {
-    const src = await readIfExists("agents.md")
+    const src = await readIfAllowed("agents.md")
     if (src) return src
   }
 
@@ -143,14 +139,14 @@ export async function getArchitectureMarkdown(
   contractId: string,
 ): Promise<string> {
   if (contractId === "meridian") {
-    const src = await readIfExists("docs/architecture.md")
+    const src = await readIfAllowed("docs/architecture.md")
     if (src) return src
   }
 
   const dna = getDna(contractId)
   if (!dna) return `# architecture\n\nUnknown contract.\n`
 
-  const shared = await readIfExists("docs/architecture.md")
+  const shared = await readIfAllowed("docs/architecture.md")
   const preface = `# ${dna.name} — architecture
 
 > Platform architecture is shared. DNA = \`${dna.id}\`.
@@ -166,7 +162,7 @@ ${dna.aesthetic}
 
 export async function getLlmsTxt(contractId: string): Promise<string> {
   if (contractId === "meridian") {
-    const src = await readIfExists("llms.txt")
+    const src = await readIfAllowed("llms.txt")
     if (src) return src
   }
 
