@@ -12,32 +12,36 @@ const frame = defineCinemaFrame({
 })
 
 /**
- * Theater beat — editor + object-bound agent (Cursor-app shape).
- * Distinct from the hero workbench index.
+ * Rail beat — object-bound composer owns the right edge.
  */
 function TileFocus() {
   return (
     <CinemaTile
       id="product"
       tone={frame.tone}
-      layout="stack"
+      layout="rail"
       subject={
-        <ProductFrame atmosphere={false} className="translate-y-4 md:translate-y-8">
-          <ComposerShell className="h-[22rem] rounded-none border-0 md:h-[min(50vh,36rem)]" />
+        <ProductFrame
+          atmosphere={false}
+          className="md:translate-x-4 lg:translate-x-8"
+        >
+          <ComposerShell className="h-[min(52svh,28rem)] rounded-none border-0 md:h-[min(78svh,44rem)]" />
         </ProductFrame>
       }
     >
       <p className="font-mono text-[11px] tracking-[0.16em] text-brand uppercase">
-        Agent
+        02 · Agent
       </p>
-      <h2 className={`cinema-title mt-3 ${text("dock")}`}>
-        Bound to the file.
+      <h2 className={`cinema-title mt-4 ${text("dock")}`}>
+        Bound to
+        <br />
+        the file.
       </h2>
-      <p className={`cinema-lede mx-auto mt-5 max-w-sm ${text("dock-muted")}`}>
+      <p className={`cinema-lede mt-5 max-w-sm ${text("dock-muted")}`}>
         Composer rides the selected object — provenance, activity, review —
         never a floating chatbot.
       </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+      <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
         <CinemaLink href="/surfaces#proofs" priority="primary">
           Composer proof
         </CinemaLink>

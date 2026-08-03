@@ -17,6 +17,7 @@ export default function SystemIndexPage() {
       eyebrow="System"
       title="Research specs."
       lead="Influences ranked and merged — Fluent 2, Cursor app, Polaris, Linear, anti-drift — into detailed layout, architecture, UX, and motion contracts. DNA and sources live here too."
+      measure="split"
       actions={
         <>
           <Button variant="outline" size="default" asChild>

@@ -41,7 +41,7 @@ export default function SurfacesPage() {
           </Button>
         </>
       }
-      measure="wide"
+      measure="split"
       className="pb-24 md:pb-32"
     >
       <section id="proofs" className="scroll-mt-24">

@@ -51,7 +51,7 @@ export default function ThemePage() {
       eyebrow="Theme"
       title="See the system."
       lead="Strict OKLCH tokens. Fluent 2 material + Cursor-app density, frozen in lib/design. Contrast audited to WCAG AA."
-      measure="wide"
+      measure="split"
       actions={
         <>
           <Button variant="outline" size="default" asChild>

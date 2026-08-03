@@ -9,22 +9,24 @@ const frame = defineCinemaFrame({
 })
 
 /**
- * Paper beat — typed grammar + research specs. Human routes, not .md traps.
+ * Ledger beat — typed grammar. Left index, right contract.
  */
 function TileAgents() {
   return (
-    <CinemaTile id="agents" tone={frame.tone} align="center">
+    <CinemaTile id="agents" tone={frame.tone} layout="ledger" index="04">
       <p className="font-mono text-[11px] tracking-[0.16em] text-brand uppercase">
         Grammar
       </p>
-      <h2 className={`cinema-title mt-3 ${text("foreground")}`}>
-        Typed so it stays true.
+      <h2 className={`cinema-title mt-4 ${text("foreground")}`}>
+        Typed so
+        <br />
+        it stays true.
       </h2>
-      <p className={`cinema-lede mx-auto mt-5 max-w-md ${text("muted")}`}>
+      <p className={`cinema-lede mt-6 max-w-md ${text("muted")}`}>
         Closed tokens in lib/design. Research specs under /system. Creativity in
         the story — never in rogue color.
       </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+      <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
         <CinemaLink href="/design" priority="primary">
           design.md
         </CinemaLink>

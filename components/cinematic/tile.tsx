@@ -4,13 +4,18 @@ import { BleedImage, type Veil } from "@/components/cinematic/bleed-image"
 import { designCn, text } from "@/lib/design"
 import { cn } from "@/lib/utils"
 
-type Align = "center" | "bottom"
-type Layout = "overlay" | "stack"
+type Align = "center" | "bottom" | "start"
+/**
+ * overlay — copy on full-bleed media
+ * stack — copy above, subject below (centered)
+ * rail — asymmetric: copy column + edge-bleed subject (app owns the frame)
+ * ledger — editorial index: mono rail + statement (paper beats)
+ */
+type Layout = "overlay" | "stack" | "rail" | "ledger"
 
 type CinemaTileProps = {
   id?: string
   tone?: StageTone
-  /** Photograph owns the frame. Omit for solid paper/theater canvas. */
   image?: {
     src: string
     alt: string
@@ -18,22 +23,19 @@ type CinemaTileProps = {
     priority?: boolean
     objectPosition?: string
   }
-  /**
-   * overlay — copy floats on media (sparse, bottom or center)
-   * stack — copy above, app subject below (Cursor-app proof, not marketing card)
-   */
   layout?: Layout
   align?: Align
-  /** Product / workbench subject for stack layout */
+  /** Product / workbench subject for stack + rail */
   subject?: ReactNode
+  /** Optional mono index for ledger (e.g. "01") */
+  index?: string
   children: ReactNode
   className?: string
 }
 
 /**
  * One-idea stage tile.
- * Stack layout puts the application on stage; overlay keeps media full-bleed.
- * Callers must satisfy cinematicLaws via defineCinemaFrame at the call site.
+ * Layouts vary composition; tokens stay frozen via Stage + design helpers.
  */
 function CinemaTile({
   id,
@@ -42,9 +44,76 @@ function CinemaTile({
   layout = "overlay",
   align = "center",
   subject,
+  index,
   children,
   className,
 }: CinemaTileProps) {
+  if (layout === "rail") {
+    return (
+      <Stage
+        id={id}
+        tone={tone}
+        fullBleed
+        className={cn(
+          "justify-end pt-24 md:justify-center md:pt-0",
+          className,
+        )}
+      >
+        {image ? (
+          <BleedImage
+            src={image.src}
+            alt={image.alt}
+            veil={image.veil ?? "soft"}
+            priority={image.priority}
+            objectPosition={image.objectPosition}
+          />
+        ) : null}
+        <div className="relative z-10 mx-auto grid w-full max-w-[92rem] flex-1 items-end gap-8 px-5 pb-0 md:grid-cols-[minmax(16rem,28rem)_minmax(0,1fr)] md:items-center md:gap-10 md:px-8 lg:grid-cols-[minmax(18rem,32rem)_minmax(0,1fr)]">
+          <div className="max-w-md pb-6 text-left md:pb-0 md:pl-2 lg:pl-6">
+            {children}
+          </div>
+          {subject ? (
+            <div className="relative min-h-0 w-full overflow-hidden md:h-full md:min-h-[min(70svh,40rem)] md:self-end">
+              {subject}
+            </div>
+          ) : null}
+        </div>
+      </Stage>
+    )
+  }
+
+  if (layout === "ledger") {
+    return (
+      <Stage
+        id={id}
+        tone={tone}
+        fullBleed
+        className={cn("items-stretch justify-center", className)}
+      >
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center gap-10 px-5 py-28 md:flex-row md:items-start md:gap-16 md:px-8 md:py-32">
+          <aside className="shrink-0 md:sticky md:top-28 md:w-28">
+            <p
+              className={designCn(
+                "font-mono text-[11px] tracking-[0.2em] uppercase",
+                tone === "theater" ? text("brand") : text("brand"),
+              )}
+            >
+              {index ?? "—"}
+            </p>
+            <div
+              className={cn(
+                "mt-4 hidden h-px w-12 md:block",
+                tone === "theater" ? "bg-dock-muted/40" : "bg-border",
+              )}
+              aria-hidden
+            />
+          </aside>
+          <div className="min-w-0 max-w-2xl flex-1 text-left">{children}</div>
+        </div>
+      </Stage>
+    )
+  }
+
   if (layout === "stack") {
     return (
       <Stage
@@ -65,7 +134,12 @@ function CinemaTile({
             objectPosition={image.objectPosition}
           />
         ) : null}
-        <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center md:px-8">
+        <div
+          className={cn(
+            "relative z-10 mx-auto w-full max-w-4xl px-6 md:px-8",
+            align === "start" ? "text-left" : "text-center",
+          )}
+        >
           {children}
         </div>
         {subject ? (
@@ -85,6 +159,7 @@ function CinemaTile({
       className={cn(
         align === "center" && "items-center justify-center",
         align === "bottom" && "justify-end pb-20 md:pb-28",
+        align === "start" && "items-end justify-end pb-20 md:pb-28",
         className,
       )}
     >
@@ -97,7 +172,13 @@ function CinemaTile({
           objectPosition={image.objectPosition}
         />
       ) : null}
-      <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center md:px-8">
+      <div
+        className={cn(
+          "relative z-10 mx-auto w-full max-w-4xl px-6 md:px-8",
+          align === "start" ? "mr-auto text-left" : "text-center",
+          align === "start" && "max-w-xl",
+        )}
+      >
         {children}
       </div>
     </Stage>
@@ -108,7 +189,6 @@ type CinemaLinkProps = {
   href: string
   children: ReactNode
   className?: string
-  /** primary = hairline underline; secondary = quieter muted */
   priority?: "primary" | "secondary"
 }
 
@@ -128,7 +208,10 @@ function CinemaLink({
         priority === "primary" &&
           designCn(text("brand"), "font-medium underline hover:opacity-80"),
         priority === "secondary" &&
-          designCn(text("brand"), "opacity-90 hover:opacity-100 hover:underline"),
+          designCn(
+            text("brand"),
+            "opacity-90 hover:opacity-100 hover:underline",
+          ),
         className,
       )}
     >

@@ -516,4 +516,26 @@
     line-height: 1.35;
     letter-spacing: -0.015em;
   }
+
+  /* Rail subjects — quiet entrance, no scroll choreography */
+  [data-slot="product-frame"][data-frame="edge"] {
+    animation: meridian-rail-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes meridian-rail-in {
+    from {
+      opacity: 0.01;
+      transform: translate3d(1.25rem, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-slot="product-frame"][data-frame="edge"] {
+      animation: none;
+    }
+  }
 }

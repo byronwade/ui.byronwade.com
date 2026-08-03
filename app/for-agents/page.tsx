@@ -99,6 +99,7 @@ export default async function ForAgentsPage() {
       filename={agentsDoc.filename}
       source={agentsSource}
       rawHref={agentsDoc.rawHref}
+      measure="split"
       actions={
         <>
           <Button variant="outline" size="default" asChild>

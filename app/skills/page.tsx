@@ -31,7 +31,7 @@ export default async function SkillsPage() {
       eyebrow="Skills"
       title="Top skills for Meridian."
       lead="Agent skills that keep AIs on-system — theme knobs, surfaces, composition, cinema, and contrast. Canonical source lives in skills/ for skills.sh."
-      measure="wide"
+      measure="split"
       actions={
         <>
           <CopyButton value={installAll} label="Install all" size="default" />

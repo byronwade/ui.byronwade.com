@@ -11,13 +11,14 @@ const frame = defineCinemaFrame({
 })
 
 /**
- * Closing — one next step, not a repeat of the hero CTAs.
+ * Closing — left-anchored on full-bleed still. One next step.
  */
 function Closing() {
   return (
     <CinemaTile
       tone={frame.tone}
-      align="bottom"
+      layout="overlay"
+      align="start"
       image={{
         src: cinemaStills.closing.src,
         alt: cinemaStills.closing.alt,
@@ -25,11 +26,14 @@ function Closing() {
         objectPosition: "center 40%",
       }}
     >
-      <h2 className={`cinema-display ${text("dock")}`}>Meridian</h2>
-      <p className={`cinema-lede mx-auto mt-4 max-w-sm ${text("dock-muted")}`}>
+      <p className="font-mono text-[11px] tracking-[0.16em] text-brand uppercase">
+        Next
+      </p>
+      <h2 className={`cinema-display mt-3 ${text("dock")}`}>Meridian</h2>
+      <p className={`cinema-lede mt-4 max-w-sm ${text("dock-muted")}`}>
         Ship application UI agents can keep honest.
       </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+      <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
         <CinemaLink href="/skills" priority="primary">
           Install skills
         </CinemaLink>
