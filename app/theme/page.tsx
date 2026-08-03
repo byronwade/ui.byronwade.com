@@ -19,6 +19,8 @@ import {
   colorRoles,
   contrastPairs,
   depths,
+  designInfluences,
+  materialLaws,
   radii,
   themeKnobs,
 } from "@/lib/design"
@@ -46,7 +48,7 @@ export default function ThemePage() {
     <DocShell
       eyebrow="Theme"
       title="See the system."
-      lead="Strict OKLCH tokens. Closed sets in lib/design. Contrast audited to WCAG AA."
+      lead="Strict OKLCH tokens. Fluent 2 material + Cursor-app density, frozen in lib/design. Contrast audited to WCAG AA."
       measure="wide"
       actions={
         <>
@@ -203,6 +205,58 @@ export default function ThemePage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
+          Material laws
+        </h2>
+        <p className="mt-2 max-w-prose text-sm text-muted-foreground">
+          Fluent 2 shape/stroke/elevation expressed as closed Meridian behaviors
+          — absorb, never label.
+        </p>
+        <ol className="mt-6 space-y-3">
+          {Object.entries(materialLaws).map(([key, value], i) => (
+            <li
+              key={key}
+              className="flex gap-3 border-b border-border/60 py-3 last:border-b-0"
+            >
+              <span className="w-6 shrink-0 font-mono text-sm text-muted-foreground">
+                {i + 1}
+              </span>
+              <div className="min-w-0">
+                <p className="font-mono text-sm text-foreground">{key}</p>
+                <p className="mt-0.5 font-mono text-xs text-muted-foreground">
+                  {String(value)}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {Object.entries(designInfluences).map(([key, value]) => (
+            <Card key={key}>
+              <CardHeader>
+                <CardTitle className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                  {key}
+                </CardTitle>
+                <CardDescription className="font-mono text-xs">
+                  absorb {value.absorb.length} · reject {value.reject.length}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-1">
+                {value.absorb.map((item) => (
+                  <p
+                    key={item}
+                    className="font-mono text-[11px] text-muted-foreground"
+                  >
+                    + {item}
+                  </p>
+                ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </section>
 
       <section className="mt-14">

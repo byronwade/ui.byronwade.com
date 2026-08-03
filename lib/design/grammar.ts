@@ -168,18 +168,35 @@ export const banned = [
 
 export type BannedPattern = (typeof banned)[number]
 
-/** Radius intent → allowed token. */
+/**
+ * Radius intent → allowed token.
+ * Fluent 2 analogue: controlCornerRadius vs layerCornerRadius.
+ * Never use rounded-md / rounded-xl / rounded-sm outside shadcn internals.
+ */
 export const radiusFor = {
+  /** Buttons, inputs, menu rows, nav items — Fluent Medium/Large. */
   control: "rounded-lg",
+  /** Cards, panes, popovers — Fluent layer / X-Large. */
   panel: "rounded-2xl",
+  /** Hero shells, modal/sheet frames. */
   shell: "rounded-3xl",
   pill: "rounded-full",
 } as const satisfies Record<string, RadiusToken>
 
-/** Depth intent → allowed token. */
+/** Depth intent → allowed token (Fluent elevation ramp, Polaris-shaped). */
 export const depthFor = {
+  /** Default chrome — thin stroke, no drop shadow. */
   default: "edge",
   flat: "depth-none",
   float: "depth-soft",
   overlay: "depth-raised",
 } as const satisfies Record<string, DepthToken>
+
+/**
+ * Stroke intent — Fluent thin (1px) default; thick reserved for focus affordance.
+ * Implemented via `edge` / `border` / `ring-ring`, not ad-hoc widths.
+ */
+export const strokeFor = {
+  thin: "edge",
+  focus: "ring-ring",
+} as const

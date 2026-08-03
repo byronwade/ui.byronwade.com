@@ -1,74 +1,195 @@
-# Meridian — architecture for AIs
+# Meridian — architecture.md
 
-Meridian is a **cinematic, typed theme system**. The site showcases the theme; TypeScript + lint stop agents from drifting; creativity stays in composition and content.
+> System layers for humans and agents. Influences: [`influences.md`](./influences.md).  
+> Contracts: [`../design.md`](../design.md) · [`../agents.md`](../agents.md). Specs: layout · ux · animations · color · typography · density · ai-surfaces.
 
-## Research → system
+## 1. What Meridian is
 
-| Finding | Our response |
+A **cinematic, typed theme system** showcased on a website. Not a custom component zoo.
+
+| Is | Is not |
 | --- | --- |
-| Agents fabricate tokens ([Superdesign](https://superdesign.dev/blog/ai-design-system-drift), [Hardik Pandya](https://hvpandya.com/llm-design-systems)) | Closed unions in `lib/design/grammar.ts` |
-| Docs ≠ code ≠ components | One grammar imported by UI + audited by `check:design` |
-| Creativity dies if everything is locked | Explicit **frozen vs creative** zones in `recipes.ts` |
-| Cinematic product sites subordinate chrome to subject ([Apple DESIGN.md patterns](https://github.com/VoltAgent/awesome-design-md)) | `cinematicLaws` + `defineCinemaFrame` |
-| Compose, don’t invent components ([Puck / schema UI gen](https://puckeditor.com/blog/top-5-ai-tools-for-ui-generation)) | shadcn atoms + surface wholes |
+| Tokens + grammar + surface contracts | Parallel component library |
+| shadcn primitives composed into wholes | Forked Button/Card twins |
+| Frozen material + creative composition | Freeform vibe coding |
+| Agent-readable contracts + lint | Prompt-only hope |
 
-## North star
+## 2. Research → system (why each layer exists)
+
+| Finding | Source | Response |
+| --- | --- | --- |
+| Agents fabricate tokens / drift mid-session | [Superdesign](https://superdesign.dev/blog/ai-design-system-drift) | Closed unions in `lib/design/grammar.ts` |
+| Docs ≠ code ≠ components | [Pandya](https://hvpandya.com/llm-design-systems) | One grammar imported by UI + `check:design` |
+| Creativity dies if everything locked | Internal model | Frozen vs creative zones in `recipes.ts` |
+| Productivity apps need quiet dense chrome | Cursor app, [Linear](https://linear.app/now/how-we-redesigned-the-linear-ui) | Workbench / composer proofs |
+| Material needs control vs layer + stroke | [Fluent 2](https://fluent2.microsoft.design/) | `materialLaws`, `radiusFor`, `edge` |
+| Meaning-bearing color + task density | [Polaris Pro](https://polaris-react.shopify.com/design/pro-design-language) | Status semantics, `data-surface` |
+| Cinema staging | Apple-class film patterns | `cinematicLaws`, `defineCinemaFrame` |
+| Parts without wholes fail | [Brad Frost](https://bradfrost.com/blog/post/the-part-and-the-whole/) | Surfaces prove atoms in product frames |
+| Compose don’t invent | shadcn / schema UI gen | `npx shadcn@latest add` |
+
+## 3. North star pipeline
 
 ```
-design.md  →  lib/design (typed)  →  tokens CSS  →  shadcn  →  cinema wholes
-     ↑              ↑ check:design                    ↑
-  contract      compile-time + CI                 /theme proof
+influences.md (ranked absorb)
+        ↓
+design.md + agents.md          ← contracts (MUST / load order)
+        ↓
+lib/design/{grammar,recipes,contrast,cx}.ts
+        ↓
+app/globals.css                ← OKLCH tokens / knobs
+        ↓
+components/ui/*                ← shadcn atoms
+        ↓
+components/surfaces/*          ← application wholes
+components/cinematic/*         ← film stages
+        ↓
+npm run check:design + check:contrast
 ```
 
-## Frozen vs creative
+Agents invent **stories and compositions**. They do not invent **colors, shadows, or radii**.
+
+## 4. Frozen vs creative
 
 ```
-FROZEN                          CREATIVE
-─────────────────────────       ─────────────────────────────
-colorRoles                      copy / voice
-radii / depths                  information architecture
-surfaces / themeKnobs           domain objects (issues, orders…)
-activity / provenance           frame sequence (still ideas: 1 each)
-cinematicLaws / banned          which shadcn wholes to compose
+FROZEN                              CREATIVE
+──────────────────────────────      ─────────────────────────────
+colorRoles / OKLCH                  copy / voice
+radii / depths / strokeFor          information architecture
+surfaces / themeKnobs               domain objects
+activity / provenance               frame sequence (ideas: 1)
+cinematicLaws / materialLaws        which shadcn wholes
+banned / designInfluences           narrative within one idea
+contrast pairs
 ```
 
-## Layers
+## 5. Layer catalog
 
-| Layer | Path |
+| Layer | Path | Owner |
+| --- | --- | --- |
+| Ranked influences | `docs/influences.md` | Research |
+| Spatial system | `docs/layout.md` | Research |
+| Interaction / UX | `docs/ux.md` | Research |
+| Motion | `docs/animations.md` | Research |
+| Color | `docs/color.md` | Research |
+| Type | `docs/typography.md` | Research |
+| Density | `docs/density.md` | Research |
+| AI UI | `docs/ai-surfaces.md` | Research |
+| Human DNA | `docs/meridian.md` | DNA |
+| Source ledger | `docs/sources.md` | DNA |
+| AI contract | `design.md` | Contract |
+| Agent OS manual | `agents.md` | Contract |
+| Typed grammar | `lib/design/grammar.ts` | Code |
+| Recipes / laws | `lib/design/recipes.ts` | Code |
+| Contrast pairs | `lib/design/contrast.ts` | Code |
+| Class helpers | `lib/design/cx.ts` | Code |
+| Drift lint | `scripts/check-design.mjs` | CI |
+| Tokens | `app/globals.css` | Theme |
+| Primitives | `components/ui/*` | shadcn |
+| Wholes | `components/surfaces/*` | Product |
+| Film | `components/cinematic/*` | Marketing |
+| Skills | `skills/*/SKILL.md` | Agents |
+| Agents | `.cursor/agents/*` | Agents |
+
+## 6. Typed grammar surface
+
+Import `@/lib/design` — never ad-hoc fabrication.
+
+| Export | Job |
 | --- | --- |
-| Contract | `design.md` |
-| Typed grammar | `lib/design/grammar.ts` |
-| Recipes | `lib/design/recipes.ts` |
-| Helpers | `lib/design/cx.ts` |
-| Drift lint | `scripts/check-design.mjs` → `npm run check:design` |
-| Tokens | `app/globals.css` |
-| Primitives | `components/ui/*` (shadcn) |
-| Wholes | `components/surfaces/*` |
-| Skills / agents | `.cursor/skills` · `.cursor/agents` |
+| `colorRoles` | Closed semantic colors |
+| `radii` / `radiusFor` | Control vs layer vs shell |
+| `depths` / `depthFor` | edge → soft → raised |
+| `strokeFor` | thin edge / focus ring |
+| `surfaces` | application · marketing · mobile · desktop |
+| `activityRoles` | thinking · search · read · edit |
+| `provenanceRoles` | user · assistant · tool · … |
+| `banned` | Drift patterns |
+| `cinematicLaws` | Film contract |
+| `materialLaws` | Fluent-shaped material |
+| `designInfluences` | Absorb / reject lists |
+| `defineCinemaFrame` | Typed one-idea frames |
+| `defineWorkbench` | App recipe |
+| `contrastPairs` | WCAG AA audit data |
 
-## Toolchain
+## 7. Runtime architecture (Next.js)
 
-| Kind | Role |
-| --- | --- |
-| Rule | Always-on short law |
-| Skill | Task workflow (`meridian-theme`, `meridian-surface`, `meridian-compose`, `meridian-cinematic`) |
-| Agent | `meridian-author` / `meridian-reviewer` |
-| Lint | Fails CI / local on banned patterns |
+```
+app/
+  page.tsx                 home film
+  globals.css              tokens
+  theme/                   grammar showcase
+  surfaces/                live surface gallery
+  for-agents/              designed agents guide
+  architecture/            designed architecture
+  system/                  research docs index + [slug]
+  design.md/route.ts       negotiated contract
+  agents.md/route.ts
+  architecture.md/route.ts
+  *.md/route.ts            other negotiated docs
+components/
+  ui/                      shadcn
+  surfaces/                wholes
+  cinematic/               stages
+  home/                    film beats
+  docs/                    DocShell, MarkdownBody
+lib/design/                typed law
+scripts/check-*.mjs        gates
+```
 
-## Website
+Content negotiation: browsers → designed HTML; agents → raw markdown (`Accept` or `?raw=1`).
+
+## 8. Toolchain roles
+
+| Kind | Role | Examples |
+| --- | --- | --- |
+| Contract | Always-on law | `design.md`, `agents.md` |
+| Research spec | Deep merge rules | `docs/layout.md`, … |
+| Skill | Task workflow | `meridian-compose` |
+| Agent | Author / reviewer | `meridian-author` |
+| Lint | Fail closed | `check:design`, `check:contrast` |
+
+## 9. Website routes
 
 | Route | Job |
 | --- | --- |
 | `/` | Cinematic positioning |
-| `/design.md` · `/design` | Contract — HTML for humans, markdown for agents |
-| `/agents.md` · `/for-agents` | Agents guide — negotiated |
-| `/llms.txt` · `/llms` | Discovery — negotiated |
-| `/architecture.md` · `/architecture` | Architecture — negotiated |
-| `/theme` · `/surfaces` | Showcase |
+| `/design` · `/design.md` | Contract |
+| `/for-agents` · `/agents.md` | Agent OS |
+| `/architecture` · `/architecture.md` | This file |
+| `/system` · `/system/[slug]` | Research specs (influences, layout, ux, …) |
+| `/theme` · `/surfaces` · `/skills` | Showcase |
+| `/llms` · `/llms.txt` | Discovery |
 
-## Extension
+## 10. Extension protocol
 
-1. New token role → add to `grammar.ts` + CSS + `cx.ts` maps (same PR).
-2. New ban → `banned` + `check-design.mjs` rule.
-3. New skill when a workflow repeats three times.
-4. Keep MUST list short — raise the floor, don’t write a novel.
+1. **New token role** → `grammar.ts` + `globals.css` + `cx.ts` + contrast if text/bg (same PR).  
+2. **New ban** → `banned` + `check-design.mjs` rule.  
+3. **New influence win** → update `influences.md` merge matrix + encode in recipes/CSS.  
+4. **New skill** when a workflow repeats three times.  
+5. Keep MUST lists short — raise the floor, don’t write a novel in the contract; put depth in `docs/*`.
+
+## 11. Dependency rules
+
+```
+docs/research  →  informs  →  design.md / recipes
+recipes        →  imported by  →  UI / theme pages
+UI             →  may import  →  @/lib/design, @/components/ui, @/lib/icons
+UI             ✗  must not    →  invent hex, shadow-*, lucide direct
+```
+
+## 12. Done definition (architectural)
+
+- [ ] Change sits in the correct layer  
+- [ ] Frozen vocabulary unchanged unless intentional + tests/lint updated  
+- [ ] Influence merge matrix still true (or updated)  
+- [ ] Gates green  
+
+## Sources
+
+- [Superdesign — AI design system drift](https://superdesign.dev/blog/ai-design-system-drift)
+- [Pandya — LLM design systems](https://hvpandya.com/llm-design-systems)
+- [Fluent 2](https://fluent2.microsoft.design/)
+- [Polaris Pro](https://polaris-react.shopify.com/design/pro-design-language)
+- [Linear UI redesign](https://linear.app/now/how-we-redesigned-the-linear-ui)
+- [Vercel Design Engineer Principles](https://vercel.com/design/engineer)

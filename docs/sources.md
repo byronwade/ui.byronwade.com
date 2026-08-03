@@ -2,6 +2,8 @@
 
 Meridian’s controlled principles come from published guidance by teams and practitioners who ship top-tier product UI. We take **discipline**, not visual pastiche. We do not name these brands in product chrome.
 
+**Ranked merge + detailed specs:** [`influences.md`](./influences.md) · [`layout.md`](./layout.md) · [`architecture.md`](./architecture.md) · [`ux.md`](./ux.md) · [`animations.md`](./animations.md) · [`color.md`](./color.md) · [`typography.md`](./typography.md) · [`density.md`](./density.md) · [`ai-surfaces.md`](./ai-surfaces.md) — browsable at [`/system`](/system).
+
 ## Primary sources
 
 | Source | What we follow | What we ignore |
@@ -17,7 +19,8 @@ Meridian’s controlled principles come from published guidance by teams and pra
 
 | Craft | Encode |
 | --- | --- |
-| Cursor-style agent UI | AI attached to an object; activity semantics separate from brand |
+| [Fluent 2](https://fluent2.microsoft.design/) | 4px grid; control vs layer radius; thin stroke; motion tokens; neutrals + brand sparingly |
+| Cursor application (not Cursor.com) | Dense quiet chrome; object-bound composer; mono metadata |
 | OpenAI / ChatGPT product simplicity | Progressive disclosure; product as hero; provenance without chatbot cliché |
 | Cinema staging (Apple / Tesla / YouTube product films) | Full-bleed product subject; one idea per frame; no scroll spectacle |
 

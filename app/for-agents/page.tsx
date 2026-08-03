@@ -93,7 +93,7 @@ export default async function ForAgentsPage() {
     <DocShell
       eyebrow="For agents"
       title="Built so models stay true."
-      lead="Soft warm neutrals. One deep accent. Full-bleed cinema. TypeScript freezes the vocabulary; creativity stays in the story. Contrast is audited."
+      lead="Strict load order. Fluent 2 material + Cursor-app density, frozen as typed laws. Soft warm neutrals, one accent, audited contrast — creativity stays in the story."
       filename={agentsDoc.filename}
       source={agentsSource}
       rawHref={agentsDoc.rawHref}
@@ -133,6 +133,12 @@ export default async function ForAgentsPage() {
               href: "/architecture.md",
               label: "architecture.md",
               summary: architecture.summary,
+            },
+            {
+              href: "/system",
+              label: "system specs",
+              summary:
+                "Ranked influences + layout, UX, animations, color, density, AI.",
             },
           ]}
         />

@@ -25,6 +25,8 @@ export const zones = {
     "activityRoles",
     "banned",
     "cinematicLaws",
+    "materialLaws",
+    "designInfluences",
   ],
   creative: [
     "copy",
@@ -36,10 +38,62 @@ export const zones = {
   ],
 } as const
 
+/**
+ * Influences we absorb into closed laws — never paste brand chrome,
+ * never ship FluentUI / Cursor kits, never label influences in UI.
+ */
+export const designInfluences = {
+  fluent2: {
+    source: "https://fluent2.microsoft.design/",
+    absorb: [
+      "global-alias-tokens",
+      "neutral-hierarchy",
+      "brand-sparingly",
+      "semantic-status",
+      "control-vs-layer-radius",
+      "thin-stroke",
+      "elevation-ramp",
+      "density-unit",
+      "rest-hover-selected",
+    ],
+    reject: [
+      "fluentui-packages",
+      "windows-purple-chrome",
+      "influence-labels-in-ui",
+    ],
+  },
+  cursorApplication: {
+    absorb: [
+      "quiet-dense-chrome",
+      "object-bound-ai",
+      "mono-metadata",
+      "composer-shaped-proofs",
+    ],
+    reject: ["cursor-com-marketing", "spectacle-hero-collage"],
+  },
+} as const
+
+/**
+ * Material laws — Fluent 2 shape/stroke/elevation expressed in Meridian tokens.
+ */
+export const materialLaws = {
+  controlRadiusSeparateFromLayer: true,
+  strokeBeforeShadow: true,
+  depthOnlyWhenFloated: true,
+  neutralStack: true,
+  fourPxGrid: true,
+  focusIsStrokeNotFill: true,
+  dataIsMono: true,
+  aiObjectBound: true,
+  selectedBrandWash: "bg-brand/10" as const,
+} as const
+
 /** Cinematic design list — Meridian’s aesthetic contract. */
 export const cinematicLaws = {
   /** Product / workbench / photograph owns the frame — chrome recedes. */
   productIsSubject: true,
+  /** Fluent stroke/radius + Cursor density — quiet operational subject. */
+  fluentMaterialWithCursorDensity: true,
   /** Exactly one idea per viewport stage. */
   oneIdeaPerFrame: true as const,
   /** Media is full-bleed edge-to-edge — never inset hero cards. */
