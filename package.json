@@ -14,9 +14,11 @@
     "check:typeset": "node scripts/check-typeset.mjs",
     "check:experience": "node scripts/check-experience.mjs",
     "check:meridian": "node scripts/meridian-check.mjs",
+    "check:platform": "node scripts/check-platform.mjs",
     "gen:contract": "node scripts/gen-contract.mjs",
-    "mcp:meridian": "node packages/meridian-mcp/server.mjs",
-    "validate": "npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:experience && npm run check:contrast && npm run lint"
+    "mcp:meridian": "CONTRACT_ID=meridian node packages/contract-mcp/server.mjs",
+    "mcp:contract": "node packages/contract-mcp/server.mjs",
+    "validate": "npm run check:platform && npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:experience && npm run check:contrast && npm run lint"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

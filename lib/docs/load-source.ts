@@ -7,6 +7,7 @@ const ALLOWED = new Set([
   "llms.txt",
   "docs/architecture.md",
   "docs/north-star.md",
+  "docs/platform.md",
   "docs/influences.md",
   "docs/absorb.md",
   "docs/layout.md",

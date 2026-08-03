@@ -6,23 +6,28 @@
 
 Meridian is an **AI design contract** — a ground-up rule system so that an agent under extreme constraints **always** produces on-brand, high-quality UI with excellent **user experience** and **developer/agent experience**.
 
+It is one contract in a **platform family** (Harbor, Atlas, Vellum, …). **Design DNA may differ; architecture must not.** Structural change lands once in [`platform.md`](./platform.md) / `lib/platform/skeleton.ts` and regenerates every contract.
+
 It is **not**:
 
 - a custom component library
 - a zoo of app shells to re-create
 - a marketing collage kit
 - a place to invent second Buttons / Cards / Workbenches
+- a place to invent Meridian-only MCP tools or filenames
 
 It **is**:
 
 | Layer | Job |
 | --- | --- |
-| `design.md` / `agents.md` | Fail-closed MUST / MUST NOT |
+| `lib/platform/skeleton.ts` | Shared MCP / routes / filenames / JSON keys for **all** contracts |
+| `lib/contracts/dna/{id}.ts` | Per-contract aesthetic DNA (may differ) |
+| `design.md` / `agents.md` | Fail-closed MUST / MUST NOT (+ platform consistency) |
 | `lib/design/*` | Typed closed unions (tokens, UX/DX laws, shells, typeset, cinema) |
 | `app/globals.css` + `typeset.css` | OKLCH theme + shadcn/typeset rhythm |
 | `components/ui/*` | **shadcn primitives** — compose, don’t fork |
 | Proofs (`surfaces/*`) | **Validation only** — prove rules work; not the product |
-| `check:*` gates | CI that agents cannot skip |
+| `check:platform` + `check:*` | CI that agents cannot skip — including cross-contract parity |
 
 ## Twin pillars (biggest features)
 

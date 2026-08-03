@@ -12,10 +12,17 @@ Browsers hitting these URLs get designed HTML. Agents receive raw text
 - [Meridian](https://ui.byronwade.com/meridian): Live cinematic contract (film + proofs)
 - [Harbor](https://ui.byronwade.com/harbor) · [Atlas](https://ui.byronwade.com/atlas) · [Vellum](https://ui.byronwade.com/vellum): Soon / preview
 
+## Platform (all contracts)
+
+- [platform.md](https://ui.byronwade.com/meridian/system/platform): Shared architecture — MCP, filenames, JSON keys
+- Skeleton SSOT: `lib/platform/skeleton.ts`
+- DNA packs: `lib/contracts/dna/{id}.ts` (aesthetics may differ; structure must not)
+- Contract JSON (same shape): `/r/{id}.contract.json` for every id
+
 ## Meridian — for agents
 
 - [design.md](https://ui.byronwade.com/meridian/design.md): AI contract (frozen vs creative, OKLCH, contrast)
-- [agents.md](https://ui.byronwade.com/meridian/agents.md): Strict operating manual — load order, skills, gates
+- [agents.md](https://ui.byronwade.com/meridian/agents.md): Strict operating manual — load order, **platform consistency**, skills, gates
 - [architecture.md](https://ui.byronwade.com/meridian/architecture.md): System layers
 - [llms.txt](https://ui.byronwade.com/meridian/llms.txt): Meridian discovery map
 - [meridian.contract.json](https://ui.byronwade.com/r/meridian.contract.json): Machine contract
@@ -24,15 +31,16 @@ Browsers hitting these URLs get designed HTML. Agents receive raw text
 ## MCP · CLI
 
 ```bash
-# MCP server (stdio)
-node packages/meridian-mcp/server.mjs
+# Shared MCP (CONTRACT_ID selects DNA) — never fork tool lists per contract
+CONTRACT_ID=meridian node packages/contract-mcp/server.mjs
 
-# Validate UI snippets / trees
+# Validate UI snippets / trees + regenerate ALL contract JSON
 node scripts/meridian-check.mjs --json
-node scripts/gen-contract.mjs
+npm run gen:contract
+npm run check:platform
 ```
 
-MCP tools: get_contract · resolve_token · validate_ui · list_primitives · get_recipe
+MCP tools (identical on every contract): get_contract · resolve_token · validate_ui · list_primitives · get_recipe
 
 ## Skill loop (prove on site)
 
@@ -68,9 +76,11 @@ npx skills add byronwade/ui.byronwade.com --skill meridian-theme
 
 ## Enforce
 
+- npm run check:platform — cross-contract structural parity
 - npm run check:design
 - npm run check:contrast
 - npm run check:meridian
 - TypeScript unions in lib/design/grammar.ts
 - Cinematic + material laws in lib/design/recipes.ts
 - Contract JSON + MCP tools for runtime agent guidance
+- Structural renames land in skeleton.ts and regenerate every contract

@@ -1,5 +1,34 @@
 {
   "$schema": "https://ui.byronwade.com/r/meridian.contract.schema.json",
+  "platform": {
+    "id": "design-contracts",
+    "version": "1.0.0",
+    "mcpTools": [
+      "get_contract",
+      "resolve_token",
+      "validate_ui",
+      "list_primitives",
+      "get_recipe"
+    ],
+    "priceMonthlyUsd": 9,
+    "contractJsonKeys": [
+      "$schema",
+      "platform",
+      "id",
+      "name",
+      "version",
+      "priceMonthlyUsd",
+      "mcp",
+      "urls",
+      "aesthetic",
+      "frozen",
+      "laws",
+      "typesetPresets",
+      "shellSurfaces",
+      "taskRecipes",
+      "fewShots"
+    ]
+  },
   "id": "meridian",
   "name": "Meridian",
   "version": "0.1.0",
@@ -18,9 +47,28 @@
     "home": "https://ui.byronwade.com/meridian",
     "design": "https://ui.byronwade.com/meridian/design.md",
     "agents": "https://ui.byronwade.com/meridian/agents.md",
+    "architecture": "https://ui.byronwade.com/meridian/architecture.md",
     "llms": "https://ui.byronwade.com/meridian/llms.txt",
     "contract": "https://ui.byronwade.com/r/meridian.contract.json"
   },
+  "aesthetic": "Soft warm neutrals, one deep ink accent, full-bleed cinema, dense app chrome.",
+  "status": "live",
+  "taskRecipeIds": [
+    "list-resource",
+    "edit-record",
+    "object-detail",
+    "agent-rail",
+    "settings-form",
+    "empty-recovery"
+  ],
+  "fewShotIds": [
+    "row-selected",
+    "panel-depth",
+    "agent-disclosure",
+    "typeset-docs",
+    "icon-import"
+  ],
+  "generatedAt": "2026-08-03T14:20:54.130Z",
   "frozen": {
     "colorRoles": [
       "background",
@@ -107,21 +155,5 @@
     "chat",
     "reading",
     "compact"
-  ],
-  "taskRecipeIds": [
-    "list-resource",
-    "edit-record",
-    "object-detail",
-    "agent-rail",
-    "settings-form",
-    "empty-recovery"
-  ],
-  "fewShotIds": [
-    "row-selected",
-    "panel-depth",
-    "agent-disclosure",
-    "typeset-docs",
-    "icon-import"
-  ],
-  "generatedAt": "2026-08-03T14:13:25.166Z"
+  ]
 }

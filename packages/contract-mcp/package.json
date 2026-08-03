@@ -1,0 +1,16 @@
+{
+  "name": "@byronwade/contract-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared design-contract MCP server — identical tools for every contract. Set CONTRACT_ID.",
+  "type": "module",
+  "bin": {
+    "contract-mcp": "./server.mjs"
+  },
+  "scripts": {
+    "start": "node ./server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

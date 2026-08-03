@@ -5,6 +5,7 @@
 
 export type SystemDocSlug =
   | "north-star"
+  | "platform"
   | "ux"
   | "dx"
   | "influences"
@@ -34,6 +35,14 @@ export const systemDocs: readonly SystemDoc[] = [
     summary: "AI design contract — UX + DX pillars, not a shell zoo.",
     sourcePath: "docs/north-star.md",
     filename: "north-star.md",
+  },
+  {
+    slug: "platform",
+    title: "Platform",
+    summary:
+      "Shared architecture for every design contract — MCP, filenames, JSON keys.",
+    sourcePath: "docs/platform.md",
+    filename: "platform.md",
   },
   {
     slug: "ux",

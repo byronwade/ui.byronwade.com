@@ -1,43 +1,88 @@
 #!/usr/bin/env node
 /**
- * Emit public/r/meridian.contract.json from the TypeScript contract builder
- * via a small dynamic import of the built route helper logic duplicated here
- * for Node (no TS runtime). Keep in sync with lib/contracts/*.
+ * Emit public/r/{id}.contract.json for EVERY DNA pack.
+ * Structural fields come from lib/platform/skeleton.ts (parsed).
+ * Never hand-edit a single contract JSON into a unique shape.
  */
-import { mkdir, writeFile, readFile } from "node:fs/promises"
+import { mkdir, writeFile, readFile, readdir } from "node:fs/promises"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = join(ROOT, "public", "r")
-const outFile = join(outDir, "meridian.contract.json")
+const DNA_DIR = join(ROOT, "lib/contracts/dna")
 
-async function readTsExports(rel, names) {
-  const src = await readFile(join(ROOT, rel), "utf8")
-  const result = {}
-  for (const name of names) {
-    const arrayMatch = src.match(
-      new RegExp(`export const ${name} = \\[([\\s\\S]*?)\\] as const`),
-    )
-    if (arrayMatch) {
-      result[name] = [...arrayMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1])
-      continue
-    }
+const MCP_TOOLS = [
+  "get_contract",
+  "resolve_token",
+  "validate_ui",
+  "list_primitives",
+  "get_recipe",
+]
+
+const CONTRACT_JSON_KEYS = [
+  "$schema",
+  "platform",
+  "id",
+  "name",
+  "version",
+  "priceMonthlyUsd",
+  "mcp",
+  "urls",
+  "aesthetic",
+  "frozen",
+  "laws",
+  "typesetPresets",
+  "shellSurfaces",
+  "taskRecipes",
+  "fewShots",
+]
+
+async function readDnaFiles() {
+  const entries = await readdir(DNA_DIR)
+  const ids = []
+  for (const name of entries) {
+    if (!name.endsWith(".ts")) continue
+    if (name === "index.ts" || name === "types.ts") continue
+    const src = await readFile(join(DNA_DIR, name), "utf8")
+    const id = src.match(/id:\s*"([^"]+)"/)?.[1]
+    const display = src.match(/name:\s*"([^"]+)"/)?.[1]
+    const version = src.match(/version:\s*"([^"]+)"/)?.[1] ?? "0.0.0"
+    const aesthetic = src.match(/aesthetic:\s*"([^"]+)"/)?.[1] ?? ""
+    const status = src.match(/status:\s*"([^"]+)"/)?.[1] ?? "soon"
+    if (id) ids.push({ id, name: display ?? id, version, aesthetic, status })
   }
-  return result
+  return ids.sort((a, b) => a.id.localeCompare(b.id))
 }
 
-const grammar = await readTsExports("lib/design/grammar.ts", [
-  "colorRoles",
-  "activityRoles",
-  "provenanceRoles",
-  "radii",
-  "depths",
-  "surfaces",
-  "banned",
-])
+async function readTsStringArray(rel, exportName) {
+  const src = await readFile(join(ROOT, rel), "utf8")
+  const arrayMatch = src.match(
+    new RegExp(`export const ${exportName} = \\[([\\s\\S]*?)\\] as const`),
+  )
+  if (!arrayMatch) return []
+  return [...arrayMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1])
+}
 
-const typeset = await readTsExports("lib/design/typeset.ts", ["typesetPresets"])
+const grammar = {
+  colorRoles: await readTsStringArray("lib/design/grammar.ts", "colorRoles"),
+  activityRoles: await readTsStringArray(
+    "lib/design/grammar.ts",
+    "activityRoles",
+  ),
+  provenanceRoles: await readTsStringArray(
+    "lib/design/grammar.ts",
+    "provenanceRoles",
+  ),
+  radii: await readTsStringArray("lib/design/grammar.ts", "radii"),
+  depths: await readTsStringArray("lib/design/grammar.ts", "depths"),
+  surfaces: await readTsStringArray("lib/design/grammar.ts", "surfaces"),
+  banned: await readTsStringArray("lib/design/grammar.ts", "banned"),
+  typesetPresets: await readTsStringArray(
+    "lib/design/typeset.ts",
+    "typesetPresets",
+  ),
+}
 
 const recipesSrc = await readFile(
   join(ROOT, "lib/contracts/task-recipes.ts"),
@@ -48,48 +93,58 @@ const recipeIds = [...recipesSrc.matchAll(/id: "([^"]+)"/g)].map((m) => m[1])
 const fewSrc = await readFile(join(ROOT, "lib/contracts/few-shots.ts"), "utf8")
 const fewIds = [...fewSrc.matchAll(/id: "([^"]+)"/g)].map((m) => m[1])
 
-const contract = {
-  $schema: "https://ui.byronwade.com/r/meridian.contract.schema.json",
-  id: "meridian",
-  name: "Meridian",
-  version: "0.1.0",
-  priceMonthlyUsd: 9,
-  mcp: {
-    slug: "meridian",
-    tools: [
-      "get_contract",
-      "resolve_token",
-      "validate_ui",
-      "list_primitives",
-      "get_recipe",
-    ],
-  },
-  urls: {
-    home: "https://ui.byronwade.com/meridian",
-    design: "https://ui.byronwade.com/meridian/design.md",
-    agents: "https://ui.byronwade.com/meridian/agents.md",
-    llms: "https://ui.byronwade.com/meridian/llms.txt",
-    contract: "https://ui.byronwade.com/r/meridian.contract.json",
-  },
-  frozen: {
-    colorRoles: grammar.colorRoles ?? [],
-    activityRoles: grammar.activityRoles ?? [],
-    provenanceRoles: grammar.provenanceRoles ?? [],
-    radii: grammar.radii ?? [],
-    depths: grammar.depths ?? [],
-    surfaces: grammar.surfaces ?? [],
-    banned: grammar.banned ?? [],
-  },
-  typesetPresets: typeset.typesetPresets ?? [],
-  taskRecipeIds: recipeIds,
-  fewShotIds: fewIds,
-  generatedAt: new Date().toISOString(),
-}
-
+const dnas = await readDnaFiles()
 await mkdir(outDir, { recursive: true })
-await writeFile(outFile, `${JSON.stringify(contract, null, 2)}\n`)
-console.log(`wrote ${relativeSafe(outFile)}`)
 
-function relativeSafe(p) {
-  return p.replace(`${ROOT}/`, "")
+for (const dna of dnas) {
+  const site = "https://ui.byronwade.com"
+  const live = dna.status === "live"
+  const contract = {
+    $schema: `${site}/r/${dna.id}.contract.schema.json`,
+    platform: {
+      id: "design-contracts",
+      version: "1.0.0",
+      mcpTools: MCP_TOOLS,
+      priceMonthlyUsd: 9,
+      contractJsonKeys: CONTRACT_JSON_KEYS,
+    },
+    id: dna.id,
+    name: dna.name,
+    version: dna.version,
+    priceMonthlyUsd: 9,
+    mcp: { slug: dna.id, tools: [...MCP_TOOLS] },
+    urls: {
+      home: `${site}/${dna.id}`,
+      design: `${site}/${dna.id}/design.md`,
+      agents: `${site}/${dna.id}/agents.md`,
+      architecture: `${site}/${dna.id}/architecture.md`,
+      llms: `${site}/${dna.id}/llms.txt`,
+      contract: `${site}/r/${dna.id}.contract.json`,
+    },
+    aesthetic: dna.aesthetic,
+    status: dna.status,
+    taskRecipeIds: recipeIds,
+    fewShotIds: fewIds,
+    generatedAt: new Date().toISOString(),
+  }
+
+  // Live contracts embed Meridian grammar today; stubs stay structural-only.
+  if (live && dna.id === "meridian") {
+    contract.frozen = {
+      colorRoles: grammar.colorRoles,
+      activityRoles: grammar.activityRoles,
+      provenanceRoles: grammar.provenanceRoles,
+      radii: grammar.radii,
+      depths: grammar.depths,
+      surfaces: grammar.surfaces,
+      banned: grammar.banned,
+    }
+    contract.typesetPresets = grammar.typesetPresets
+  }
+
+  const outFile = join(outDir, `${dna.id}.contract.json`)
+  await writeFile(outFile, `${JSON.stringify(contract, null, 2)}\n`)
+  console.log(`wrote public/r/${dna.id}.contract.json`)
 }
+
+console.log(`gen:contract OK — ${dnas.length} contract(s), shared platform shape`)

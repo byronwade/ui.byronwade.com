@@ -3,8 +3,10 @@
 > **Strict AI operating manual.** Compact by design. Humans get a designed page; agents get this markdown (`?raw=1` forces raw).
 
 **Product:** AI design contract (rules first) — not a custom component or shell zoo.  
-**Biggest features:** **UX** + **DX** ([`/system/ux`](/system/ux) · [`/system/dx`](/system/dx)) — twin pillars.  
-**North star:** [`docs/north-star.md`](/system/north-star).  
+**Platform:** Meridian is one contract in a **family**. Structure is shared; aesthetics may differ.  
+**Biggest features:** **UX** + **DX** ([`/meridian/system/ux`](/meridian/system/ux) · [`/meridian/system/dx`](/meridian/system/dx)) — twin pillars.  
+**North star:** [`docs/north-star.md`](/meridian/system/north-star).  
+**Platform law:** [`docs/platform.md`](/meridian/system/platform).  
 **Primitives:** shadcn/ui + shadcn/typeset. **Icons:** Phosphor `@/lib/icons`. **Color:** OKLCH only.  
 **Influences (absorb, never label):** [Fluent 2](https://fluent2.microsoft.design/) material language + **Cursor application** density — not Fluent marketing, not Cursor.com.
 
@@ -25,29 +27,75 @@
 | `edge` / `depth-*` | Tailwind `shadow-*` |
 | `svh` viewport | `dvh` |
 | Own empty / loading / error on resource surfaces | Demo-only happy paths |
-| Pass gates below | Ship without contrast / experience audit |
+| Keep **platform structure** identical across contracts | Fork MCP tools / filenames / JSON keys for one contract |
+| Pass gates below | Ship without contrast / experience / platform audit |
 
-**Frozen** = tokens, radii, depths, surfaces, shell rhythm, typeset presets, **uxLaws / dxLaws**, knobs, activity, bans, cinematic + material laws, contrast pairs.  
-**Creative** = copy, IA, domain objects, frame sequence, which shadcn wholes / typeset preset / disclosure level to compose.
+**Frozen** = tokens, radii, depths, surfaces, shell rhythm, typeset presets, **uxLaws / dxLaws**, knobs, activity, bans, cinematic + material laws, contrast pairs, **platform skeleton**.  
+**Creative** = copy, IA, domain objects, frame sequence, which shadcn wholes / typeset preset / disclosure level to compose, **per-contract DNA aesthetics**.
 
 ---
 
 ## 1. Load order (mandatory)
 
-1. [`docs/north-star.md`](/system/north-star) — product definition (UX + DX pillars; rules ≠ shells)
-2. [`design.md`](/design.md) — contract
-3. `@/lib/design` — `grammar` · `experience` (`uxLaws`/`dxLaws`) · `typeset` · `shell` · `recipes` · `contrast`
-4. When shaping interaction or APIs — [`/system/ux`](/system/ux) · [`/system/dx`](/system/dx)
-5. Other research specs as needed — [`/system`](/system)
-6. Matching skill under `skills/<name>/SKILL.md`
-7. Proof (validation only): `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
-8. Gates: `npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:experience && npm run check:contrast`
+1. [`docs/north-star.md`](/meridian/system/north-star) — product definition (UX + DX pillars; rules ≠ shells)
+2. [`docs/platform.md`](/meridian/system/platform) — **shared architecture for every contract**
+3. [`design.md`](/meridian/design.md) — this contract’s DNA laws
+4. `@/lib/design` — `grammar` · `experience` (`uxLaws`/`dxLaws`) · `typeset` · `shell` · `recipes` · `contrast`
+5. When shaping interaction or APIs — [`/meridian/system/ux`](/meridian/system/ux) · [`/meridian/system/dx`](/meridian/system/dx)
+6. Other research specs as needed — [`/meridian/system`](/meridian/system)
+7. Matching skill under `skills/<name>/SKILL.md`
+8. Proof (validation only): `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
+9. Gates: `npm run check:platform && npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:experience && npm run check:contrast`
 
 Skip a step → drift.
 
 ---
 
-## 2. Design influences → Meridian mapping
+## 2. Platform consistency (all contracts)
+
+> **Design DNA may differ. Architecture must not.**  
+> If you change how something is named, routed, downloaded, or exposed over MCP/API, **change it for every contract** — never Meridian alone.
+
+### Single source of truth
+
+| Concern | Edit here only |
+| --- | --- |
+| MCP tool names / jobs | `lib/platform/skeleton.ts` → `packages/contract-mcp` |
+| Machine filenames | `MACHINE_FILES` in skeleton |
+| Route slots (`/theme`, `/surfaces`, …) | `ROUTE_SLOTS` |
+| Contract JSON keys | `CONTRACT_JSON_KEYS` + `lib/platform/build-contract.ts` |
+| This manual’s section order | `AGENTS_MD_SECTIONS` |
+| Task recipe ids | `lib/contracts/task-recipes.ts` |
+| Price | `MCP_PRICE_USD` |
+| Aesthetic / voice / tokens | `lib/contracts/dna/{id}.ts` (+ design grammar when live) |
+
+### MUST
+
+- Use **identical** MCP tools on every contract: `get_contract` · `resolve_token` · `validate_ui` · `list_primitives` · `get_recipe`
+- Ship the same machine files: `design.md` · `agents.md` · `architecture.md` · `llms.txt`
+- Serve contract JSON at `/r/{id}.contract.json` with the **same keys** (`buildContractEnvelope`)
+- Keep `agents.md` sections in `AGENTS_MD_SECTIONS` order (DNA fills content; structure stays)
+- Run `npm run gen:contract` after skeleton/DNA changes so **all** `public/r/*.contract.json` regenerate
+- Start MCP via `packages/contract-mcp` with `CONTRACT_ID={id}` — thin aliases only (see `packages/meridian-mcp`)
+
+### MUST NOT fork
+
+- A Meridian-only MCP tool or renamed tool for Harbor/Atlas/Vellum
+- A one-off machine filename (`meridian-design.md`, `rules.json`, …)
+- A bespoke contract JSON shape that other contracts do not share
+- A divergent route slot (`/meridian/tokens` while others use `/theme`)
+- Copy-pasting `server.mjs` tool lists per package — **MUST NOT fork** the shared MCP surface
+
+### When aesthetics change (allowed)
+
+Changing Meridian’s OKLCH paper, cinema tone, or proof emphasis does **not** require changing Harbor.  
+Changing “we renamed `validate_ui` → `lint_classes`” **does** — update skeleton, regenerate every contract, update every `agents.md` that names the tool, pass `check:platform`.
+
+Full law: [`docs/platform.md`](/meridian/system/platform).
+
+---
+
+## 3. Design influences → mapping
 
 Encode Fluent 2 + Cursor-app as **closed behaviors**, not brand pastiche.
 
@@ -67,7 +115,7 @@ Do **not** ship FluentUI packages, Windows purple, or “Fluent / Cursor” labe
 
 ---
 
-## 3. Material laws (app chrome)
+## 4. Material laws (app chrome)
 
 1. **Control ≠ layer** — inputs/buttons/menu rows use control radius; cards/panels/popovers use layer; floating shells use shell.
 2. **Stroke first** — default separation is 1px stroke / `edge`, not shadow.
@@ -82,56 +130,61 @@ Typed: `materialLaws` + `designInfluences` in `lib/design/recipes.ts`.
 
 ---
 
-## 4. Skills
+## 5. Skills
 
-Human index: [`/skills`](/skills). Canonical: `skills/<name>/SKILL.md`.
+Human index: [`/meridian/skills`](/meridian/skills). Canonical: `skills/<name>/SKILL.md`.
 
 | Skill | When | Prove on site |
 | --- | --- | --- |
-| `meridian-theme` | Re-skin knobs; keep one deep accent | [`/theme`](/theme) |
-| `meridian-surface` | `data-surface` + density | [`/surfaces`](/surfaces) |
-| `meridian-compose` | Product wholes (workbench / composer) | [`/surfaces#proofs`](/surfaces#proofs) |
-| `meridian-cinematic` | Full-bleed frames under cinema laws | [`/`](/) home film |
-| `meridian-a11y` | OKLCH + WCAG AA on every UI change | [`/theme#contrast`](/theme#contrast) |
+| `meridian-theme` | Re-skin knobs; keep one deep accent | [`/meridian/theme`](/meridian/theme) |
+| `meridian-surface` | `data-surface` + density | [`/meridian/surfaces`](/meridian/surfaces) |
+| `meridian-compose` | Product wholes (workbench / composer) | [`/meridian/surfaces#proofs`](/meridian/surfaces#proofs) |
+| `meridian-cinematic` | Full-bleed frames under cinema laws | [`/meridian`](/meridian) film |
+| `meridian-a11y` | OKLCH + WCAG AA on every UI change | [`/meridian/theme#contrast`](/meridian/theme#contrast) |
 
 ```bash
 npx skills add byronwade/ui.byronwade.com
 npx skills add byronwade/ui.byronwade.com --skill meridian-theme
 ```
 
-## 5. Agents
+## 6. Agents
 
 | Agent | Job |
 | --- | --- |
-| `meridian-author` | Implement under design.md + `@/lib/design` |
-| `meridian-reviewer` | Audit MUST / banned / cinema / material / contrast |
+| `meridian-author` | Implement under design.md + `@/lib/design` + platform skeleton |
+| `meridian-reviewer` | Audit MUST / banned / cinema / material / contrast / **platform parity** |
 
-## 6. Negotiated endpoints
+## 7. Negotiated endpoints
+
+Same filenames on **every** contract (`/{id}/…`). Meridian:
 
 | URL | Agent payload |
 | --- | --- |
-| `/design.md` | Contract |
-| `/agents.md` | This manual |
-| `/llms.txt` | Discovery |
-| `/architecture.md` | Layers |
+| `/meridian/design.md` | Contract |
+| `/meridian/agents.md` | This manual |
+| `/meridian/llms.txt` | Discovery |
+| `/meridian/architecture.md` | Layers |
+| `/r/meridian.contract.json` | Machine contract (platform + DNA) |
 
-`?raw=1` forces machine representation in a browser.
+`?raw=1` forces machine representation in a browser.  
+MCP: `CONTRACT_ID=meridian node packages/contract-mcp/server.mjs`
 
-## 7. Done gate
+## 8. Done gate
 
 ```bash
+npm run check:platform && npm run gen:contract
 npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:experience && npm run check:contrast
 ```
 
-- [ ] Load order followed (north star → contract → experience grammar)  
-- [ ] UX: status visible; empty/error owned; keyboard path  
-- [ ] DX: closed presets; self-verified gates; no twin kit  
-- [ ] No invented tokens / radii / shadows / type scales  
-- [ ] Typeset preset for rendered markdown (no per-tag soup)  
-- [ ] Control vs layer radius correct  
-- [ ] Selected = brand wash; AI object-bound (outcome → trace)  
-- [ ] Icons from `@/lib/icons`  
-- [ ] Did not invent a new shell / twin component  
-- [ ] All checks green  
- 
- 
+- [ ] Load order followed (north star → **platform** → contract → experience grammar)
+- [ ] Structural change (if any) landed in `lib/platform/skeleton.ts` and regenerated **all** contracts
+- [ ] No forked MCP tools / filenames / JSON keys for Meridian only
+- [ ] UX: status visible; empty/error owned; keyboard path
+- [ ] DX: closed presets; self-verified gates; no twin kit
+- [ ] No invented tokens / radii / shadows / type scales
+- [ ] Typeset preset for rendered markdown (no per-tag soup)
+- [ ] Control vs layer radius correct
+- [ ] Selected = brand wash; AI object-bound (outcome → trace)
+- [ ] Icons from `@/lib/icons`
+- [ ] Did not invent a new shell / twin component
+- [ ] `check:platform` + all checks green

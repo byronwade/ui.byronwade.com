@@ -1,0 +1,72 @@
+{
+  "$schema": "https://ui.byronwade.com/r/vellum.contract.schema.json",
+  "platform": {
+    "id": "design-contracts",
+    "version": "1.0.0",
+    "mcpTools": [
+      "get_contract",
+      "resolve_token",
+      "validate_ui",
+      "list_primitives",
+      "get_recipe"
+    ],
+    "priceMonthlyUsd": 9,
+    "contractJsonKeys": [
+      "$schema",
+      "platform",
+      "id",
+      "name",
+      "version",
+      "priceMonthlyUsd",
+      "mcp",
+      "urls",
+      "aesthetic",
+      "frozen",
+      "laws",
+      "typesetPresets",
+      "shellSurfaces",
+      "taskRecipes",
+      "fewShots"
+    ]
+  },
+  "id": "vellum",
+  "name": "Vellum",
+  "version": "0.0.0",
+  "priceMonthlyUsd": 9,
+  "mcp": {
+    "slug": "vellum",
+    "tools": [
+      "get_contract",
+      "resolve_token",
+      "validate_ui",
+      "list_primitives",
+      "get_recipe"
+    ]
+  },
+  "urls": {
+    "home": "https://ui.byronwade.com/vellum",
+    "design": "https://ui.byronwade.com/vellum/design.md",
+    "agents": "https://ui.byronwade.com/vellum/agents.md",
+    "architecture": "https://ui.byronwade.com/vellum/architecture.md",
+    "llms": "https://ui.byronwade.com/vellum/llms.txt",
+    "contract": "https://ui.byronwade.com/r/vellum.contract.json"
+  },
+  "aesthetic": "Mist reading lanes, measured prose, typeset-first help surfaces.",
+  "status": "preview",
+  "taskRecipeIds": [
+    "list-resource",
+    "edit-record",
+    "object-detail",
+    "agent-rail",
+    "settings-form",
+    "empty-recovery"
+  ],
+  "fewShotIds": [
+    "row-selected",
+    "panel-depth",
+    "agent-disclosure",
+    "typeset-docs",
+    "icon-import"
+  ],
+  "generatedAt": "2026-08-03T14:20:54.131Z"
+}

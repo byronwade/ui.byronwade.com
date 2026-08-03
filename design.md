@@ -1,12 +1,13 @@
 # Meridian — design.md
 
 > **AI contract.** Read this before any UI work. Typed grammar: `lib/design/`. Drift lint: `npm run check:design`.  
-> **North star:** [`docs/north-star.md`](docs/north-star.md) — we build a **rule system**, not shells.
+> **North star:** [`docs/north-star.md`](docs/north-star.md) — we build a **rule system**, not shells.  
+> **Platform:** one contract in a family — aesthetic DNA may differ; MCP tools, filenames, routes, and JSON keys must not. See [`docs/platform.md`](docs/platform.md) · `lib/platform/skeleton.ts` · `agents.md` §2.
 
 **Product:** ground-up AI design contract so agents under extreme constraints ship on-brand UI.  
 **Biggest features:** **UX** + **DX** — twin pillars ([`docs/ux.md`](docs/ux.md) · [`docs/dx.md`](docs/dx.md)).  
-**Not:** a custom component library, app-shell zoo, or place to invent twin Buttons/Cards.  
-**Primitives:** shadcn/ui + shadcn/typeset. **Enforcement:** TypeScript closed sets + CI audit.  
+**Not:** a custom component library, app-shell zoo, or place to invent twin Buttons/Cards / Meridian-only MCP forks.  
+**Primitives:** shadcn/ui + shadcn/typeset. **Enforcement:** TypeScript closed sets + CI audit (`check:platform`).  
 **Aesthetic list:** **Cinematic design** (serves UX/DX — never outranks them).
 
 ## The model — strict + creative

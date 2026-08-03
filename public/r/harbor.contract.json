@@ -1,0 +1,72 @@
+{
+  "$schema": "https://ui.byronwade.com/r/harbor.contract.schema.json",
+  "platform": {
+    "id": "design-contracts",
+    "version": "1.0.0",
+    "mcpTools": [
+      "get_contract",
+      "resolve_token",
+      "validate_ui",
+      "list_primitives",
+      "get_recipe"
+    ],
+    "priceMonthlyUsd": 9,
+    "contractJsonKeys": [
+      "$schema",
+      "platform",
+      "id",
+      "name",
+      "version",
+      "priceMonthlyUsd",
+      "mcp",
+      "urls",
+      "aesthetic",
+      "frozen",
+      "laws",
+      "typesetPresets",
+      "shellSurfaces",
+      "taskRecipes",
+      "fewShots"
+    ]
+  },
+  "id": "harbor",
+  "name": "Harbor",
+  "version": "0.0.0",
+  "priceMonthlyUsd": 9,
+  "mcp": {
+    "slug": "harbor",
+    "tools": [
+      "get_contract",
+      "resolve_token",
+      "validate_ui",
+      "list_primitives",
+      "get_recipe"
+    ]
+  },
+  "urls": {
+    "home": "https://ui.byronwade.com/harbor",
+    "design": "https://ui.byronwade.com/harbor/design.md",
+    "agents": "https://ui.byronwade.com/harbor/agents.md",
+    "architecture": "https://ui.byronwade.com/harbor/architecture.md",
+    "llms": "https://ui.byronwade.com/harbor/llms.txt",
+    "contract": "https://ui.byronwade.com/r/harbor.contract.json"
+  },
+  "aesthetic": "Quiet paper ops surfaces, semantic status chips, dense index rows.",
+  "status": "soon",
+  "taskRecipeIds": [
+    "list-resource",
+    "edit-record",
+    "object-detail",
+    "agent-rail",
+    "settings-form",
+    "empty-recovery"
+  ],
+  "fewShotIds": [
+    "row-selected",
+    "panel-depth",
+    "agent-disclosure",
+    "typeset-docs",
+    "icon-import"
+  ],
+  "generatedAt": "2026-08-03T14:20:54.130Z"
+}

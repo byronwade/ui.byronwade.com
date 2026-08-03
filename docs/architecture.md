@@ -35,10 +35,14 @@ Surfaces are **proofs**, not the product. See [`north-star.md`](./north-star.md)
 
 ```
 docs/north-star.md             ← product = AI contract
+docs/platform.md               ← shared architecture (all contracts)
+        ↓
+lib/platform/skeleton.ts       ← MCP · filenames · routes · JSON keys (SSOT)
+lib/contracts/dna/{id}.ts      ← aesthetic DNA only (may differ)
         ↓
 influences.md (ranked absorb)
         ↓
-design.md + agents.md          ← contracts (MUST / load order)
+design.md + agents.md          ← contracts (MUST / load order / platform parity)
         ↓
 lib/design/{grammar,recipes,typeset,shell,contrast,cx,knobs}.ts
         ↓
@@ -49,10 +53,11 @@ components/ui/*                ← shadcn atoms (compose only)
 components/surfaces/*          ← proofs (validation only)
 components/cinematic/*         ← film stages
         ↓
-check:design · shell · proofs · typeset · contrast
+check:platform · design · shell · proofs · typeset · contrast
 ```
 
-Agents invent **stories and compositions**. They do not invent **colors, shadows, radii, or type scales**.
+Agents invent **stories and compositions**. They do not invent **colors, shadows, radii, or type scales**.  
+They also do not invent **Meridian-only MCP tools or machine filenames** — see [`platform.md`](./platform.md).
 
 ## 4. Frozen vs creative
 
