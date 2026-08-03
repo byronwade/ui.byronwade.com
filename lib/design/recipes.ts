@@ -46,6 +46,10 @@ export const zones = {
     "dxLoadTiers",
     "requiredUiStates",
     "interactionStateRecipe",
+    "interactionClasses",
+    "resourceProofStates",
+    "primitiveContracts",
+    "primitiveLaws",
   ],
   creative: [
     "copy",
@@ -66,9 +70,16 @@ export const interactiveProofStates = [
   "selected",
   "ask",
   "empty",
+  "loading",
+  "error",
 ] as const
 
 export type InteractiveProofState = (typeof interactiveProofStates)[number]
+
+/** Resource indexes must prove these UX states (NN/g + Vercel every-state). */
+export const resourceProofStates = ["empty", "loading", "error"] as const
+
+export type ResourceProofState = (typeof resourceProofStates)[number]
 
 export const interactiveInteractions = [
   "select",
@@ -90,10 +101,17 @@ export type InteractiveProof = {
   /** Must include idle + selected for application/desktop proofs. */
   states: readonly InteractiveProofState[]
   interactions: readonly InteractiveInteraction[]
+  /**
+   * Resource index proofs must own empty + loading + error
+   * (and list them in `states`).
+   */
+  ownsResourceStates?: true
   agent?: {
     boundTo: string
     /** Activity legend is mandatory when agent is present. */
     activityLegend: true
+    /** Outcome first; activity trace one click away. */
+    disclosure: "outcome-then-trace"
     activities: readonly ActivityRole[]
     provenance: readonly ProvenanceRole[]
   }
@@ -112,9 +130,23 @@ export function defineInteractiveProof<T extends InteractiveProof>(
       `defineInteractiveProof(${proof.id}): application/desktop proofs need idle + selected`,
     )
   }
+  if (proof.ownsResourceStates) {
+    for (const s of resourceProofStates) {
+      if (!proof.states.includes(s)) {
+        throw new Error(
+          `defineInteractiveProof(${proof.id}): ownsResourceStates requires "${s}" in states`,
+        )
+      }
+    }
+  }
   if (proof.agent && proof.agent.activityLegend !== true) {
     throw new Error(
       `defineInteractiveProof(${proof.id}): agent proofs require activityLegend: true`,
+    )
+  }
+  if (proof.agent && proof.agent.disclosure !== "outcome-then-trace") {
+    throw new Error(
+      `defineInteractiveProof(${proof.id}): agent proofs require disclosure: "outcome-then-trace"`,
     )
   }
   return proof
@@ -298,11 +330,13 @@ export const proofs = {
   interactiveWorkbench: defineInteractiveProof({
     id: "workbench",
     surface: "application",
-    states: ["idle", "selected", "ask", "empty"],
+    states: ["idle", "selected", "ask", "empty", "loading", "error"],
     interactions: ["select", "search", "ask", "navigate"],
+    ownsResourceStates: true,
     agent: {
       boundTo: "ISS-1842",
       activityLegend: true,
+      disclosure: "outcome-then-trace",
       activities: ["thinking", "search", "read", "edit"],
       provenance: ["user", "assistant", "tool"],
     },
@@ -311,11 +345,13 @@ export const proofs = {
   interactiveComposer: defineInteractiveProof({
     id: "composer",
     surface: "desktop",
-    states: ["idle", "selected", "ask"],
+    states: ["idle", "selected", "ask", "empty", "loading", "error"],
     interactions: ["select", "ask", "navigate"],
+    ownsResourceStates: true,
     agent: {
       boundTo: "IssueRow.tsx",
       activityLegend: true,
+      disclosure: "outcome-then-trace",
       activities: ["thinking", "search", "read", "edit"],
       provenance: ["user", "assistant", "tool"],
     },

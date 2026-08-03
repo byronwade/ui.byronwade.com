@@ -129,6 +129,27 @@ export const interactionStateRecipe = {
   error: "specific message + retry",
 } as const
 
+/**
+ * Frozen Tailwind class bundles for interaction physics.
+ * Prefer these over inventing hover/focus/selected strings.
+ */
+export const interactionClasses = {
+  hoverQuiet: "hover:bg-muted/30",
+  hoverQuietStrong: "hover:bg-muted/40",
+  selected: "bg-brand/10 data-[state=selected]:bg-brand/10",
+  focusRing:
+    "outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+  focusWash: "outline-none focus-visible:bg-brand/10",
+  press: "motion-press",
+  selectMotion: "motion-select",
+  disabled: "disabled:pointer-events-none disabled:opacity-50",
+  danger: "bg-destructive/10 text-destructive",
+  row:
+    "motion-select outline-none hover:bg-muted/30 focus-visible:bg-brand/10 data-[state=selected]:bg-brand/10",
+  control:
+    "motion-press outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
+} as const
+
 export type ExperienceLaws = {
   ux: typeof uxLaws
   dx: typeof dxLaws

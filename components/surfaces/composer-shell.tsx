@@ -12,8 +12,19 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { ActivityLegend } from "@/components/site/activity-legend"
-import { activity, bg, designCn, radiusIntent } from "@/lib/design"
+import {
+  activity,
+  bg,
+  designCn,
+  interactionClasses,
+  proofs,
+  radiusIntent,
+} from "@/lib/design"
 import { cn } from "@/lib/utils"
+
+const interactive = proofs.interactiveComposer
+
+type ResourceDemo = "ready" | "loading" | "error" | "empty"
 
 const fileBodies: Record<
   string,
@@ -149,12 +160,19 @@ function ComposerShell({ className }: ComposerShellProps) {
     },
   ])
   const [settled, setSettled] = useState(false)
+  const [resourceDemo, setResourceDemo] = useState<ResourceDemo>("ready")
 
   const body = fileBodies[activeFile] ?? fileBodies["IssueRow.tsx"]
+  const outcome =
+    [...thread].reverse().find((m) => m.provenance === "assistant" && !m.busy)
+      ?.body ?? "Ask about the open file — outcome lands here first."
+  const isLoading =
+    resourceDemo === "loading" || thread.some((m) => m.busy)
 
   function openFile(name: FileName) {
     setActiveFile(name)
     setOpenTabs((tabs) => (tabs.includes(name) ? tabs : [...tabs, name]))
+    if (resourceDemo === "empty") setResourceDemo("ready")
   }
 
   function sendAsk() {
@@ -162,6 +180,7 @@ function ComposerShell({ className }: ComposerShellProps) {
     if (!text) return
     setDraft("")
     setSettled(false)
+    setResourceDemo("ready")
     setThread((prev) => [
       ...prev.map((m) => ({ ...m, busy: false })),
       { provenance: "user", body: text },
@@ -203,27 +222,101 @@ function ComposerShell({ className }: ComposerShellProps) {
         <p className="px-2 pt-2 font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
           Explorer
         </p>
-        <ul className="mt-1 flex flex-col gap-0.5 px-1">
-          {explorerFiles.map((name) => (
-            <li key={name}>
-              <button
-                type="button"
-                onClick={() => openFile(name)}
-                aria-current={activeFile === name ? "true" : undefined}
-                className={cn(
-                  "flex h-7 w-full items-center gap-1.5 px-1.5 text-left text-[12px] tracking-tight",
-                  radiusIntent("control"),
-                  activeFile === name
-                    ? "bg-brand/10 text-foreground"
-                    : "text-muted-foreground hover:bg-muted/40 hover:text-foreground",
-                )}
-              >
-                <FileText className="size-3.5 shrink-0 opacity-70" />
-                <span className="truncate font-mono text-[11px]">{name}</span>
-              </button>
-            </li>
+        <div
+          className="flex flex-wrap gap-0.5 px-1 pb-1"
+          role="group"
+          aria-label="Resource state demo"
+        >
+          {(
+            [
+              ["ready", "Ready"],
+              ["loading", "Load"],
+              ["empty", "Empty"],
+              ["error", "Err"],
+            ] as const
+          ).map(([id, label]) => (
+            <Button
+              key={id}
+              type="button"
+              size="xs"
+              variant={resourceDemo === id ? "secondary" : "ghost"}
+              aria-pressed={resourceDemo === id}
+              className={cn(
+                "h-5 px-1.5 font-mono text-[9px]",
+                radiusIntent("control"),
+              )}
+              onClick={() => setResourceDemo(id)}
+            >
+              {label}
+            </Button>
           ))}
-        </ul>
+        </div>
+        {resourceDemo === "loading" ? (
+          <div className="space-y-1 px-2" role="status" aria-busy="true">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="h-7 animate-pulse rounded-lg bg-muted/40" />
+            ))}
+          </div>
+        ) : null}
+        {resourceDemo === "error" ? (
+          <div
+            className={cn(
+              "m-1 space-y-2 p-2 edge",
+              radiusIntent("control"),
+              interactionClasses.danger,
+            )}
+            role="alert"
+          >
+            <p className="text-[11px] font-medium">Explorer failed</p>
+            <Button
+              type="button"
+              size="xs"
+              variant="outline"
+              className={radiusIntent("control")}
+              onClick={() => setResourceDemo("ready")}
+            >
+              Retry
+            </Button>
+          </div>
+        ) : null}
+        {resourceDemo === "empty" ? (
+          <div className="space-y-2 px-2 py-3 text-center">
+            <p className="text-[11px] text-muted-foreground">No files open.</p>
+            <Button
+              type="button"
+              size="xs"
+              variant="outline"
+              className={radiusIntent("control")}
+              onClick={() => openFile("IssueRow.tsx")}
+            >
+              Open IssueRow
+            </Button>
+          </div>
+        ) : null}
+        {resourceDemo === "ready" ? (
+          <ul className="mt-1 flex flex-col gap-0.5 px-1">
+            {explorerFiles.map((name) => (
+              <li key={name}>
+                <button
+                  type="button"
+                  onClick={() => openFile(name)}
+                  aria-current={activeFile === name ? "true" : undefined}
+                  className={cn(
+                    "flex h-7 w-full items-center gap-1.5 px-1.5 text-left text-[12px] tracking-tight",
+                    radiusIntent("control"),
+                    interactionClasses.focusWash,
+                    activeFile === name
+                      ? "bg-brand/10 text-foreground"
+                      : "text-muted-foreground hover:bg-muted/40 hover:text-foreground",
+                  )}
+                >
+                  <FileText className="size-3.5 shrink-0 opacity-70" />
+                  <span className="truncate font-mono text-[11px]">{name}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
@@ -273,7 +366,10 @@ function ComposerShell({ className }: ComposerShellProps) {
             ))}
           </div>
 
-          <aside className="hidden min-h-0 flex-col bg-muted/15 lg:flex">
+          <aside
+            className="hidden min-h-0 flex-col bg-muted/15 lg:flex"
+            data-disclosure={interactive.agent?.disclosure}
+          >
             <div className="flex h-8 items-center gap-2 border-b border-border px-3">
               <Sparkle className="size-3.5 text-brand" />
               <span className="font-mono text-[11px] text-muted-foreground">
@@ -284,10 +380,10 @@ function ComposerShell({ className }: ComposerShellProps) {
                 className={cn(
                   "ml-auto h-4 border-transparent px-1.5 font-mono text-[9px] tracking-[0.08em] text-foreground uppercase opacity-90",
                   radiusIntent("pill"),
-                  activity(settled ? "edit" : "thinking"),
+                  activity(settled ? "edit" : isLoading ? "thinking" : "edit"),
                 )}
               >
-                {settled ? "edit" : "thinking"}
+                {settled ? "edit" : isLoading ? "thinking" : "idle"}
               </Badge>
             </div>
             <div className="border-b border-border px-2 py-1.5">
@@ -304,41 +400,62 @@ function ComposerShell({ className }: ComposerShellProps) {
               <p className="px-0.5 font-mono text-[10px] text-muted-foreground">
                 bound · {activeFile}
               </p>
-              {thread.map((msg, i) => (
-                <article
-                  key={`${msg.provenance}-${i}`}
-                  data-provenance={msg.provenance}
-                  className={designCn(
-                    "bg-card px-2.5 py-2 edge",
-                    radiusIntent("control"),
-                  )}
-                >
-                  <div className="flex items-center gap-1.5">
-                    {msg.busy ? (
-                      <CircleNotch className="size-3 animate-spin text-brand" />
-                    ) : msg.provenance === "assistant" ? (
-                      <CheckCircle className="size-3 text-brand" />
-                    ) : null}
-                    <p className="font-mono text-[10px] text-muted-foreground">
-                      {msg.provenance === "user" ? "You" : "Assistant"}
-                    </p>
-                    {msg.activity ? (
-                      <Badge
-                        className={cn(
-                          "h-4 border-transparent px-1.5 font-mono text-[9px] tracking-[0.08em] text-foreground uppercase",
-                          radiusIntent("pill"),
-                          activity(msg.activity),
-                        )}
-                      >
-                        {msg.activity}
-                      </Badge>
-                    ) : null}
-                  </div>
-                  <p className="mt-1 text-[12px] leading-relaxed tracking-tight">
-                    {msg.body}
-                  </p>
-                </article>
-              ))}
+              <div
+                data-slot="agent-outcome"
+                className={designCn(
+                  "bg-card px-2.5 py-2 edge",
+                  radiusIntent("control"),
+                )}
+              >
+                <p className="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase">
+                  Outcome
+                </p>
+                <p className="mt-1 text-[12px] leading-snug tracking-tight">
+                  {isLoading && !settled ? "Working…" : outcome}
+                </p>
+              </div>
+              <details data-slot="agent-trace" className="rounded-lg edge">
+                <summary className="cursor-pointer list-none px-2.5 py-2 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase marker:content-none [&::-webkit-details-marker]:hidden">
+                  Activity trace ({thread.length})
+                </summary>
+                <div className="space-y-2 border-t border-border px-2 py-2">
+                  {thread.map((msg, i) => (
+                    <article
+                      key={`${msg.provenance}-${i}`}
+                      data-provenance={msg.provenance}
+                      className={designCn(
+                        "bg-card px-2.5 py-2 edge",
+                        radiusIntent("control"),
+                      )}
+                    >
+                      <div className="flex items-center gap-1.5">
+                        {msg.busy ? (
+                          <CircleNotch className="size-3 animate-spin text-brand" />
+                        ) : msg.provenance === "assistant" ? (
+                          <CheckCircle className="size-3 text-brand" />
+                        ) : null}
+                        <p className="font-mono text-[10px] text-muted-foreground">
+                          {msg.provenance === "user" ? "You" : "Assistant"}
+                        </p>
+                        {msg.activity ? (
+                          <Badge
+                            className={cn(
+                              "h-4 border-transparent px-1.5 font-mono text-[9px] tracking-[0.08em] text-foreground uppercase",
+                              radiusIntent("pill"),
+                              activity(msg.activity),
+                            )}
+                          >
+                            {msg.activity}
+                          </Badge>
+                        ) : null}
+                      </div>
+                      <p className="mt-1 text-[12px] leading-relaxed tracking-tight">
+                        {msg.body}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </details>
             </div>
             <Separator />
             <form

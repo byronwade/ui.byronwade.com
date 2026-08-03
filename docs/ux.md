@@ -165,13 +165,21 @@ Every index/detail must define:
 | Status color as decoration | Polaris meaning |
 | Infinite onboarding modals | Usefulness fails |
 
-## 12. Agent checklist
+## 12. Proofs
 
-- [ ] States: rest/hover/focus/selected/disabled/empty/error  
+| Proof | Where |
+| --- | --- |
+| Resource empty / loading / error | Workbench + Composer demos |
+| Outcome → activity trace | Agent rails (`data-slot="agent-outcome"` / `agent-trace`) |
+| Keyboard parity | [`/theme#keyboard`](/theme#keyboard) · [`/surfaces#keyboard`](/surfaces#keyboard) |
+
+## 13. Agent checklist
+
+- [ ] States: rest/hover/focus/selected/disabled/empty/loading/error  
 - [ ] Selected = brand wash; focus = ring  
-- [ ] AI attached to object ID + provenance  
+- [ ] AI: outcome first, trace one click away  
 - [ ] Keyboard path exists  
-- [ ] `meridian-a11y` + contrast gate  
+- [ ] `meridian-a11y` + contrast + experience gates  
 
 ## Sources
 

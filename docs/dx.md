@@ -20,6 +20,8 @@ If the contract is hard to load, ambiguous, or unverifiable, the system fails â€
 
 ## 2. Golden path (minimal)
 
+Live on [`/for-agents#golden-path`](/for-agents#golden-path). Primitive contracts: [`/for-agents#primitives`](/for-agents#primitives).
+
 ```ts
 import { Button } from "@/components/ui/button"
 import { typesetClass, bg, radiusIntent } from "@/lib/design"

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { DocShell } from "@/components/docs/doc-shell"
 import { SkillLoop } from "@/components/site/skill-loop"
 import { ThemePlayground } from "@/components/site/theme-playground"
+import { KeyboardProof } from "@/components/site/keyboard-proof"
 import { ShellRhythmProof } from "@/components/site/shell-rhythm"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -387,6 +388,20 @@ export default function ThemePage() {
               })}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section className="mt-14" id="keyboard">
+        <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
+          Focus & keyboard
+        </h2>
+        <p className="mt-2 max-w-prose text-sm text-muted-foreground">
+          UX pillar — focus is ring/stroke weight, not brand fill alone. Every
+          control needs a keyboard path (
+          <span className="font-mono text-[12px]">keyboardParity</span>).
+        </p>
+        <div className="mt-6">
+          <KeyboardProof />
         </div>
       </section>
 

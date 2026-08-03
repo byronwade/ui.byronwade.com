@@ -19,10 +19,20 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { ActivityLegend } from "@/components/site/activity-legend"
-import { activity, bg, designCn, proofs, radiusIntent } from "@/lib/design"
+import {
+  activity,
+  bg,
+  designCn,
+  interactionClasses,
+  proofs,
+  radiusIntent,
+} from "@/lib/design"
 import { cn } from "@/lib/utils"
 
 const recipe = proofs.workbench
+const interactive = proofs.interactiveWorkbench
+
+type ResourceDemo = "ready" | "loading" | "error"
 
 const navItems = [
   { id: "home" as const, label: "Home", icon: House },
@@ -143,6 +153,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
   const [query, setQuery] = useState("")
   const [draft, setDraft] = useState("")
   const [eventsById, setEventsById] = useState(seedEvents)
+  const [resourceDemo, setResourceDemo] = useState<ResourceDemo>("ready")
 
   const filtered = issueRows.filter((row) => {
     if (!query.trim()) return true
@@ -154,6 +165,10 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
 
   const events = eventsById[selectedId] ?? []
   const selected = issueRows.find((r) => r.id === selectedId) ?? issueRows[0]
+  const outcome =
+    [...events].reverse().find((e) => e.provenance === "assistant")?.body ??
+    "Select an issue — outcome appears here; activity stays in the trace."
+  const activeActivity = [...events].reverse().find((e) => e.activity)?.activity
 
   function sendAsk() {
     const text = draft.trim()
@@ -299,79 +314,175 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
             ) : null}
 
             {nav === "issues" ? (
-              <table className="w-full caption-bottom text-sm">
-                <thead className="sticky top-0 z-10 bg-background [&_tr]:border-b">
-                  <tr className="h-8 border-b border-border">
-                    <th className="h-8 w-7 pl-2.5 text-left font-medium text-muted-foreground" />
-                    <th className="h-8 w-20 text-left text-[11px] font-medium text-muted-foreground">
-                      ID
-                    </th>
-                    <th className="h-8 text-left text-[11px] font-medium text-muted-foreground">
-                      Title
-                    </th>
-                    <th className="hidden h-8 pr-2.5 text-right text-[11px] font-medium text-muted-foreground sm:table-cell">
-                      Meta
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.length === 0 ? (
-                    <tr>
-                      <td
-                        colSpan={4}
-                        className="px-3 py-8 text-center text-sm text-muted-foreground"
-                      >
-                        No issues match “{query}”.
-                      </td>
-                    </tr>
-                  ) : (
-                    filtered.map((row) => {
-                      const active = row.id === selectedId
-                      return (
-                        <tr
-                          key={row.id}
-                          data-state={active ? "selected" : undefined}
-                          tabIndex={0}
-                          aria-selected={active}
-                          onClick={() => setSelectedId(row.id)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault()
-                              setSelectedId(row.id)
-                            }
-                          }}
-                          className="motion-select h-8 cursor-pointer border-b border-border/60 outline-none hover:bg-muted/30 focus-visible:bg-brand/10 data-[state=selected]:bg-brand/10"
-                        >
-                          <td className="pl-2.5">
-                            <Circle
-                              className={
-                                active
-                                  ? "size-2.5 text-brand"
-                                  : "size-2.5 text-muted-foreground"
-                              }
-                              weight={active ? "fill" : "regular"}
-                            />
-                          </td>
-                          <td className="font-mono text-[11px] text-muted-foreground">
-                            {row.id}
-                          </td>
-                          <td className="truncate text-[13px] tracking-tight">
-                            {row.title}
-                          </td>
-                          <td className="hidden pr-2.5 text-right font-mono text-[11px] text-muted-foreground sm:table-cell">
-                            {row.meta}
+              <div className="flex min-h-0 flex-1 flex-col">
+                <div
+                  className="flex flex-wrap items-center gap-1 border-b border-border px-2 py-1"
+                  role="group"
+                  aria-label="Resource state demo"
+                >
+                  {(
+                    [
+                      ["ready", "Ready"],
+                      ["loading", "Loading"],
+                      ["error", "Error"],
+                    ] as const
+                  ).map(([id, label]) => (
+                    <Button
+                      key={id}
+                      type="button"
+                      size="xs"
+                      variant={resourceDemo === id ? "secondary" : "ghost"}
+                      aria-pressed={resourceDemo === id}
+                      className={cn(
+                        "h-6 px-2 font-mono text-[10px]",
+                        radiusIntent("control"),
+                      )}
+                      onClick={() => setResourceDemo(id)}
+                    >
+                      {label}
+                    </Button>
+                  ))}
+                  <span className="ml-auto font-mono text-[9px] text-muted-foreground">
+                    empty via search
+                  </span>
+                </div>
+
+                {resourceDemo === "loading" ? (
+                  <div
+                    className="space-y-2 p-3"
+                    role="status"
+                    aria-live="polite"
+                    aria-busy="true"
+                  >
+                    <p className="font-mono text-[11px] text-muted-foreground">
+                      Loading issues…
+                    </p>
+                    {[0, 1, 2, 3].map((i) => (
+                      <div
+                        key={i}
+                        className="h-8 animate-pulse rounded-lg bg-muted/40"
+                      />
+                    ))}
+                  </div>
+                ) : null}
+
+                {resourceDemo === "error" ? (
+                  <div
+                    className={cn(
+                      "m-3 space-y-3 p-4 edge",
+                      radiusIntent("control"),
+                      interactionClasses.danger,
+                    )}
+                    role="alert"
+                  >
+                    <p className="text-sm font-medium tracking-tight">
+                      Couldn’t load issues
+                    </p>
+                    <p className="text-[12px] text-muted-foreground">
+                      Index request failed — try again or clear filters.
+                    </p>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      className={radiusIntent("control")}
+                      onClick={() => setResourceDemo("ready")}
+                    >
+                      Retry
+                    </Button>
+                  </div>
+                ) : null}
+
+                {resourceDemo === "ready" ? (
+                  <table className="w-full caption-bottom text-sm">
+                    <thead className="sticky top-0 z-10 bg-background [&_tr]:border-b">
+                      <tr className="h-8 border-b border-border">
+                        <th className="h-8 w-7 pl-2.5 text-left font-medium text-muted-foreground" />
+                        <th className="h-8 w-20 text-left text-[11px] font-medium text-muted-foreground">
+                          ID
+                        </th>
+                        <th className="h-8 text-left text-[11px] font-medium text-muted-foreground">
+                          Title
+                        </th>
+                        <th className="hidden h-8 pr-2.5 text-right text-[11px] font-medium text-muted-foreground sm:table-cell">
+                          Meta
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filtered.length === 0 ? (
+                        <tr>
+                          <td colSpan={4} className="px-3 py-8 text-center">
+                            <p className="text-sm text-muted-foreground">
+                              No issues match “{query}”.
+                            </p>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="outline"
+                              className={cn("mt-3", radiusIntent("control"))}
+                              onClick={() => setQuery("")}
+                            >
+                              Clear search
+                            </Button>
                           </td>
                         </tr>
-                      )
-                    })
-                  )}
-                </tbody>
-              </table>
+                      ) : (
+                        filtered.map((row) => {
+                          const active = row.id === selectedId
+                          return (
+                            <tr
+                              key={row.id}
+                              data-state={active ? "selected" : undefined}
+                              tabIndex={0}
+                              aria-selected={active}
+                              onClick={() => setSelectedId(row.id)}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                  e.preventDefault()
+                                  setSelectedId(row.id)
+                                }
+                              }}
+                              className={cn(
+                                interactionClasses.row,
+                                "h-8 cursor-pointer border-b border-border/60",
+                              )}
+                            >
+                              <td className="pl-2.5">
+                                <Circle
+                                  className={
+                                    active
+                                      ? "size-2.5 text-brand"
+                                      : "size-2.5 text-muted-foreground"
+                                  }
+                                  weight={active ? "fill" : "regular"}
+                                />
+                              </td>
+                              <td className="font-mono text-[11px] text-muted-foreground">
+                                {row.id}
+                              </td>
+                              <td className="truncate text-[13px] tracking-tight">
+                                {row.title}
+                              </td>
+                              <td className="hidden pr-2.5 text-right font-mono text-[11px] text-muted-foreground sm:table-cell">
+                                {row.meta}
+                              </td>
+                            </tr>
+                          )
+                        })
+                      )}
+                    </tbody>
+                  </table>
+                ) : null}
+              </div>
             ) : null}
           </div>
 
           {withAgent && nav === "issues" ? (
-            <aside className="hidden min-h-0 flex-col bg-muted/15 lg:flex">
+            <aside
+              className="hidden min-h-0 flex-col bg-muted/15 lg:flex"
+              data-disclosure={interactive.agent?.disclosure}
+            >
               <div className="flex h-8 items-center gap-1.5 border-b border-border px-2.5">
                 <Sparkle className="size-3.5 text-brand" />
                 <span className="font-mono text-[11px] tracking-tight text-muted-foreground">
@@ -379,46 +490,73 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                 </span>
               </div>
               <div className="border-b border-border px-2 py-1.5">
-                <ActivityLegend
-                  active={
-                    [...events].reverse().find((e) => e.activity)?.activity
-                  }
-                />
+                <ActivityLegend active={activeActivity} />
               </div>
-              <div className="min-h-0 flex-1 space-y-1.5 overflow-auto p-2">
-                <p className="px-0.5 pb-1 text-[11px] tracking-tight text-muted-foreground">
+              <div className="min-h-0 flex-1 space-y-2 overflow-auto p-2">
+                <p className="px-0.5 text-[11px] tracking-tight text-muted-foreground">
                   {selected.title}
                 </p>
-                {events.map((event, i) => (
-                  <article
-                    key={`${event.label}-${i}-${event.body.slice(0, 24)}`}
-                    data-provenance={event.provenance}
-                    className={designCn(
-                      "bg-card px-2 py-1.5 edge",
-                      radiusIntent("control"),
-                    )}
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-mono text-[10px] text-muted-foreground">
-                        {event.label}
+                {/* Level 1 — outcome (Nielsen progressive disclosure) */}
+                <div
+                  data-slot="agent-outcome"
+                  className={designCn(
+                    "bg-card px-2.5 py-2 edge",
+                    radiusIntent("control"),
+                  )}
+                >
+                  <p className="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase">
+                    Outcome
+                  </p>
+                  <p className="mt-1 text-[12px] leading-snug tracking-tight">
+                    {outcome}
+                  </p>
+                </div>
+                {/* Level 2 — activity trace, one click away */}
+                <details
+                  data-slot="agent-trace"
+                  className="group rounded-lg edge"
+                >
+                  <summary className="cursor-pointer list-none px-2.5 py-2 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase marker:content-none [&::-webkit-details-marker]:hidden">
+                    <span className="inline-flex items-center gap-1.5">
+                      Activity trace
+                      <span className="text-muted-foreground/80 normal-case tracking-tight">
+                        ({events.length})
                       </span>
-                      {event.activity ? (
-                        <Badge
-                          className={cn(
-                            "h-4 border-transparent px-1.5 font-mono text-[9px] tracking-[0.08em] text-foreground uppercase",
-                            radiusIntent("pill"),
-                            activity(event.activity),
-                          )}
-                        >
-                          {event.activity}
-                        </Badge>
-                      ) : null}
-                    </div>
-                    <p className="mt-0.5 text-[12px] leading-snug tracking-tight">
-                      {event.body}
-                    </p>
-                  </article>
-                ))}
+                    </span>
+                  </summary>
+                  <div className="space-y-1.5 border-t border-border px-2 py-2">
+                    {events.map((event, i) => (
+                      <article
+                        key={`${event.label}-${i}-${event.body.slice(0, 24)}`}
+                        data-provenance={event.provenance}
+                        className={designCn(
+                          "bg-card px-2 py-1.5 edge",
+                          radiusIntent("control"),
+                        )}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-mono text-[10px] text-muted-foreground">
+                            {event.label}
+                          </span>
+                          {event.activity ? (
+                            <Badge
+                              className={cn(
+                                "h-4 border-transparent px-1.5 font-mono text-[9px] tracking-[0.08em] text-foreground uppercase",
+                                radiusIntent("pill"),
+                                activity(event.activity),
+                              )}
+                            >
+                              {event.activity}
+                            </Badge>
+                          ) : null}
+                        </div>
+                        <p className="mt-0.5 text-[12px] leading-snug tracking-tight">
+                          {event.body}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                </details>
               </div>
               <Separator />
               <form
@@ -454,7 +592,15 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
         <footer className="flex h-6 items-center justify-between border-t border-border bg-muted/20 px-2.5 font-mono text-[10px] text-muted-foreground">
           <span>{recipe.surface}</span>
           <span>
-            {withAgent && nav === "issues" ? `${selectedId} bound` : "idle"}
+            {nav !== "issues"
+              ? "idle"
+              : resourceDemo !== "ready"
+                ? resourceDemo
+                : filtered.length === 0
+                  ? "empty"
+                  : withAgent
+                    ? `${selectedId} bound`
+                    : "selected"}
           </span>
         </footer>
       </div>

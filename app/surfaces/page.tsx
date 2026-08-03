@@ -6,6 +6,7 @@ import { MobileFrame } from "@/components/surfaces/mobile-frame"
 import { DesktopFrame } from "@/components/surfaces/desktop-frame"
 import { SkillLoop } from "@/components/site/skill-loop"
 import { SurfaceStudio } from "@/components/site/surface-studio"
+import { KeyboardProof } from "@/components/site/keyboard-proof"
 import { ShellRhythmProof } from "@/components/site/shell-rhythm"
 import { DocShell } from "@/components/docs/doc-shell"
 import { Button } from "@/components/ui/button"
@@ -90,6 +91,28 @@ export default function SurfacesPage() {
         </p>
         <div className="mt-6">
           <ShellRhythmProof />
+        </div>
+      </section>
+
+      <section id="keyboard" className="mt-16 scroll-mt-24">
+        <p
+          className={designCn(
+            typeClass("label"),
+            text("muted"),
+            "text-[10px] tracking-[0.14em]",
+          )}
+        >
+          UX · keyboardParity
+        </p>
+        <h2 className="mt-2 text-xl font-medium tracking-[-0.03em] md:text-2xl">
+          Focus & keyboard
+        </h2>
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Focus is ring weight, not brand fill. Tab, Enter/Space on rows, Escape
+          to clear — prove it here.
+        </p>
+        <div className="mt-6">
+          <KeyboardProof />
         </div>
       </section>
 

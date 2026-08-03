@@ -2,7 +2,8 @@
 /**
  * Interactive proof + agent-rail completeness gate.
  *
- * - Agent surfaces must ship ActivityLegend
+ * - Agent surfaces must ship ActivityLegend + outcome-then-trace disclosure
+ * - Resource proofs must own empty / loading / error
  * - Theme playground must use frozen knobs (no local OKLCH preset tables)
  * - Interactive proof recipes must exist in lib/design/recipes
  */
@@ -32,6 +33,20 @@ for (const [name, src] of [
   if (!src.includes('"use client"') && !src.includes("'use client'")) {
     hits.push(`${name}: interactive proof must be a client component`)
   }
+  if (!src.includes('data-slot="agent-outcome"') || !src.includes('data-slot="agent-trace"')) {
+    hits.push(`${name}: agent disclosure needs agent-outcome + agent-trace`)
+  }
+  for (const state of ["loading", "error", "empty"]) {
+    if (!src.toLowerCase().includes(state)) {
+      hits.push(`${name}: resource proof must demonstrate "${state}" state`)
+    }
+  }
+  if (!src.includes("role=\"alert\"") && !src.includes("role='alert'")) {
+    hits.push(`${name}: error state needs role="alert"`)
+  }
+  if (!src.includes("aria-busy")) {
+    hits.push(`${name}: loading state needs aria-busy`)
+  }
 }
 
 if (!playground.includes("from \"@/lib/design\"") && !playground.includes("from '@/lib/design'")) {
@@ -42,9 +57,6 @@ if (!playground.includes("brandPresets") || !playground.includes("knobStyleVars"
 }
 if (/const brandPresets\s*=/.test(playground)) {
   hits.push("theme-playground.tsx: local brandPresets table banned — use lib/design/knobs")
-}
-if (/oklch\(0\.\d+/.test(playground) && !playground.includes("style={{ background:")) {
-  // allow style background from preset refs; ban raw oklch string literals in file body tables
 }
 const playgroundOklchLiterals = playground.match(/oklch\([^)]+\)/g) ?? []
 if (playgroundOklchLiterals.length > 0) {
@@ -60,6 +72,9 @@ for (const id of [
   "defineInteractiveProof",
   "laneLaws",
   "motionLaws",
+  "resourceProofStates",
+  "ownsResourceStates",
+  'disclosure: "outcome-then-trace"',
 ]) {
   if (!recipes.includes(id)) {
     hits.push(`recipes.ts: missing ${id}`)
@@ -74,7 +89,7 @@ for (const id of ["brandPresets", "radiusPresets", "paperPresets", "knobDefaults
 
 if (hits.length === 0) {
   console.log(
-    "check:proofs OK — agent legends, frozen knobs, interactive recipes present",
+    "check:proofs OK — resource states, disclosure, legends, knobs present",
   )
   process.exit(0)
 }

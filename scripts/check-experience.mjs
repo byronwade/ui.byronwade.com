@@ -13,6 +13,7 @@ async function read(rel) {
 }
 
 const experience = await read("lib/design/experience.ts")
+const primitives = await read("lib/design/primitives.ts")
 const index = await read("lib/design/index.ts")
 const recipes = await read("lib/design/recipes.ts")
 const northStar = await read("docs/north-star.md")
@@ -20,6 +21,9 @@ const ux = await read("docs/ux.md")
 const dx = await read("docs/dx.md")
 const systemDocs = await read("lib/docs/system-docs.ts")
 const agents = await read("agents.md")
+const forAgents = await read("app/for-agents/page.tsx")
+const keyboard = await read("components/site/keyboard-proof.tsx")
+const button = await read("components/ui/button.tsx")
 
 for (const id of [
   "export const uxLaws",
@@ -40,20 +44,55 @@ for (const key of [
   "selfVerification",
   "closedTokenApi",
   "progressiveComplexity",
+  "interactionClasses",
 ]) {
   if (!experience.includes(key)) {
     hits.push(`experience.ts: missing law ${key}`)
   }
 }
 
+for (const id of [
+  "export const primitiveContracts",
+  "export const primitiveLaws",
+  "button",
+  "input",
+  "iconOnlyNeedsLabel",
+]) {
+  if (!primitives.includes(id.replace(/^export const /, "")) && !primitives.includes(id)) {
+    hits.push(`primitives.ts: missing ${id}`)
+  }
+}
+
 if (!index.includes('export * from "@/lib/design/experience"')) {
   hits.push("lib/design/index.ts: must re-export experience")
 }
+if (!index.includes('export * from "@/lib/design/primitives"')) {
+  hits.push("lib/design/index.ts: must re-export primitives")
+}
 
-for (const z of ["uxLaws", "dxLaws", "dxLoadTiers", "requiredUiStates"]) {
+for (const z of [
+  "uxLaws",
+  "dxLaws",
+  "dxLoadTiers",
+  "requiredUiStates",
+  "primitiveContracts",
+  "interactionClasses",
+]) {
   if (!recipes.includes(`"${z}"`) && !recipes.includes(z)) {
     hits.push(`recipes.ts zones.frozen: missing ${z}`)
   }
+}
+
+if (!forAgents.includes("GoldenPath") || !forAgents.includes("PrimitiveContractsPanel")) {
+  hits.push("for-agents page: must lead with GoldenPath + PrimitiveContractsPanel")
+}
+
+if (!keyboard.includes("KeyboardProof") || !keyboard.includes("focus-visible")) {
+  hits.push("keyboard-proof.tsx: missing KeyboardProof / focus-visible coverage")
+}
+
+if (!button.includes("motion-press") || !button.includes("focus-visible:ring-ring")) {
+  hits.push("button.tsx: must keep motion-press + focus-visible ring (interactionClasses.control)")
 }
 
 if (!/twin pillars/i.test(northStar)) {

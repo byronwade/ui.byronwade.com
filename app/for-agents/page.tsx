@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { CopyButton } from "@/components/docs/copy-button"
 import { DocShell, DocLinkRow } from "@/components/docs/doc-shell"
+import { GoldenPath } from "@/components/site/golden-path"
+import { PrimitiveContractsPanel } from "@/components/site/primitive-contracts"
 import { SkillLoop } from "@/components/site/skill-loop"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -95,7 +97,7 @@ export default async function ForAgentsPage() {
     <DocShell
       eyebrow="For agents"
       title="Built so models stay true."
-      lead="Strict load order. Fluent 2 material + Cursor-app density, frozen as typed laws. Soft warm neutrals, one accent, audited contrast — creativity stays in the story."
+      lead="UX + DX first. Strict load order. Compose shadcn under frozen laws — creativity stays in the story, not the tokens."
       filename={agentsDoc.filename}
       source={agentsSource}
       rawHref={agentsDoc.rawHref}
@@ -103,17 +105,28 @@ export default async function ForAgentsPage() {
       actions={
         <>
           <Button variant="outline" size="default" asChild>
-            <Link href="/design">Design</Link>
+            <Link href="#golden-path">Golden path</Link>
+          </Button>
+          <Button variant="ghost" size="default" asChild>
+            <Link href="/system/ux">UX</Link>
+          </Button>
+          <Button variant="ghost" size="default" asChild>
+            <Link href="/system/dx">DX</Link>
           </Button>
           <Button variant="ghost" size="default" asChild>
             <Link href="/surfaces#proofs">Proofs</Link>
           </Button>
-          <Button variant="ghost" size="default" asChild>
-            <Link href="/skills">Skills</Link>
-          </Button>
         </>
       }
     >
+      <GoldenPath />
+
+      <Separator className="my-14" />
+
+      <PrimitiveContractsPanel />
+
+      <Separator className="my-14" />
+
       <section>
         <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
           Prove every skill
