@@ -9,8 +9,9 @@ Absorb **Fluent 2** material (tokens, control vs layer radius, thin stroke, elev
 ## Before coding
 
 1. Read `design.md` and `agents.md` (strict MUST / load order / material laws).
-2. Import structure from `@/lib/design` (grammar, recipes, contrast, cx).
-3. Load the matching skill:
+2. For space/motion/AI deep rules, open `/system` specs (`influences` → `layout` · `ux` · `animations` · `ai-surfaces`).
+3. Import structure from `@/lib/design` (grammar, recipes, contrast, cx).
+4. Load the matching skill:
    - Theme / re-skin → `meridian-theme`
    - Lane / density → `meridian-surface`
    - Screen / shell → `meridian-compose`
