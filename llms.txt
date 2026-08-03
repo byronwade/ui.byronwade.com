@@ -8,7 +8,7 @@ Browsers hitting these URLs get designed HTML. Agents receive this raw text
 ## For agents
 
 - [design.md](https://ui.byronwade.com/design.md): AI contract (frozen vs creative, OKLCH, contrast)
-- [agents.md](https://ui.byronwade.com/agents.md): Load order, skills, agents, zones
+- [agents.md](https://ui.byronwade.com/agents.md): Strict operating manual — load order, Fluent 2 + Cursor mapping, skills, gates
 - [architecture.md](https://ui.byronwade.com/architecture.md): System layers
 - [llms.txt](https://ui.byronwade.com/llms.txt): This discovery map
 - Theme grammar lives in-repo at lib/design/

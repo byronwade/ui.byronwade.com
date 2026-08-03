@@ -121,7 +121,8 @@
   --chart-4: oklch(0.52 0.07 80);
   --chart-5: oklch(0.46 0.05 30);
 
-  --radius: 0.625rem;
+  /* Fluent Large (8px) control base — layers scale via --radius-* */
+  --radius: 0.5rem;
 
   --control-h-xs: 1.5rem;
   --control-h-sm: 1.75rem;

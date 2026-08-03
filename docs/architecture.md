@@ -10,6 +10,8 @@ Meridian is a **cinematic, typed theme system**. The site showcases the theme; T
 | Docs ≠ code ≠ components | One grammar imported by UI + audited by `check:design` |
 | Creativity dies if everything is locked | Explicit **frozen vs creative** zones in `recipes.ts` |
 | Cinematic product sites subordinate chrome to subject ([Apple DESIGN.md patterns](https://github.com/VoltAgent/awesome-design-md)) | `cinematicLaws` + `defineCinemaFrame` |
+| Fluent 2 tokens / control vs layer / thin stroke / elevation | `materialLaws` + `radiusFor` + `edge`/`depth-*` |
+| Cursor application density + object-bound AI | Workbench / composer proofs; provenance |
 | Compose, don’t invent components ([Puck / schema UI gen](https://puckeditor.com/blog/top-5-ai-tools-for-ui-generation)) | shadcn atoms + surface wholes |
 
 ## North star
@@ -29,7 +31,8 @@ colorRoles                      copy / voice
 radii / depths                  information architecture
 surfaces / themeKnobs           domain objects (issues, orders…)
 activity / provenance           frame sequence (still ideas: 1 each)
-cinematicLaws / banned          which shadcn wholes to compose
+cinematicLaws / materialLaws    which shadcn wholes to compose
+banned / designInfluences
 ```
 
 ## Layers

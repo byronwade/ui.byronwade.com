@@ -28,7 +28,7 @@ function ProductFrame({
         />
       ) : null}
       <div className="relative mx-auto w-full max-w-[76rem] px-3 md:px-6">
-        <div className="overflow-hidden rounded-xl bg-card edge md:rounded-2xl">
+        <div className="overflow-hidden rounded-2xl bg-card edge">
           {children}
         </div>
       </div>

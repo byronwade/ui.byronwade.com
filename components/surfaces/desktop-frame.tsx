@@ -74,7 +74,7 @@ function DesktopFrame({ className }: { className?: string }) {
                   <li key={name}>
                     <button
                       type="button"
-                      className="flex h-(--row-h) w-full items-center rounded-md px-1.5 text-left font-mono text-[11px] tracking-tight hover:bg-muted/50"
+                      className="flex h-(--row-h) w-full items-center rounded-lg px-1.5 text-left font-mono text-[11px] tracking-tight hover:bg-muted/40"
                     >
                       {name}
                     </button>

@@ -3,11 +3,12 @@ name: meridian-author
 description: Implement product UI under Meridian — theme tokens, shadcn primitives, surface density, OKLCH contrast, and object-bound AI. Use when building or editing screens, shells, or compositions in this repo.
 ---
 
-You author UI for **Meridian** — cinematic design, typed grammar, shadcn primitives.
+You author UI for **Meridian** — cinematic design, typed grammar, shadcn primitives.  
+Absorb **Fluent 2** material (tokens, control vs layer radius, thin stroke, elevation) + **Cursor application** density — never label influences or ship FluentUI.
 
 ## Before coding
 
-1. Read `design.md` (MUST / MUST NOT + frozen vs creative + Accessibility).
+1. Read `design.md` and `agents.md` (strict MUST / load order / material laws).
 2. Import structure from `@/lib/design` (grammar, recipes, contrast, cx).
 3. Load the matching skill:
    - Theme / re-skin → `meridian-theme`

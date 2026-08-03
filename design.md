@@ -37,7 +37,8 @@ defineCinemaFrame({
 | Contrast | WCAG AA — `npm run check:contrast` |
 | Paper | Soft warm neutrals — never pure white/black |
 | Feeling | Crisp, calm, softly warm |
-| App reference | **Cursor application** chrome (dense, object-bound) — not Cursor.com marketing |
+| App chrome | **Cursor application** density (object-bound AI) — not Cursor.com |
+| Material language | **Fluent 2** tokens/shape/stroke/elevation — not FluentUI packages or Windows chrome |
 | Type | Geist Sans + Geist Mono |
 | Depth | `edge` → `depth-soft` → `depth-raised` |
 | Media | Full-bleed photographs (`BleedImage`) when staging; app windows otherwise |
@@ -47,11 +48,28 @@ defineCinemaFrame({
 | Default surface | `application` |
 | Grammar | `lib/design/grammar.ts` |
 
+## Material (Fluent 2 → Meridian)
+
+Absorb Fluent 2; never paste Fluent brand or ship `@fluentui/*`.
+
+| Fluent 2 concept | Meridian |
+| --- | --- |
+| Global → alias tokens | OKLCH roles / CSS vars |
+| Neutral hierarchy | Soft warm stack; focus via surface lift |
+| Brand sparingly (CTA / selected) | `--brand` + `bg-brand/10` |
+| Semantic status ≠ decoration | `destructive` / `warning` never become brand |
+| Control vs layer corner radius | `radiusFor.control` vs `panel` / `shell` |
+| Thin stroke (1px) | `edge` + `border-border`; focus = `ring-ring` |
+| Elevation ramp | `edge` → `depth-soft` → `depth-raised` |
+| Density / design unit | `data-surface` + 4px grid |
+
+Typed as `designInfluences` + `materialLaws` in `lib/design/recipes.ts`. See [`agents.md`](/agents.md).
+
 ## Cinematic design list
 
 Encoded in `lib/design/recipes.ts` → `cinematicLaws`:
 
-1. **Application is the subject** — Cursor-app density; chrome is quiet, not marketing spectacle
+1. **Application is the subject** — Cursor-app density + Fluent stroke/radius discipline; chrome is quiet
 2. **One idea per frame** — typed as `ideas: 1`
 3. **Full-bleed media** — edge-to-edge when photographing; app windows otherwise — never inset hero cards
 4. **No overlay stickers** on media
@@ -65,6 +83,8 @@ Encoded in `lib/design/recipes.ts` → `cinematicLaws`:
 12. **Type weight medium-max** — hierarchy from size + tracking
 13. **OKLCH only** — all color tokens are `oklch(...)` or `var(--token)`
 14. **Contrast audited** — WCAG AA on paper + theater; no opacity cheats
+15. **Control ≠ layer** — Fluent corner-radius split via `radiusFor`
+16. **Stroke before shadow** — default `edge`; depth only when floated
 
 ## Accessibility (mandatory)
 
@@ -104,7 +124,7 @@ raw-hex · arbitrary-color-utility · non-oklch-color · tailwind-shadow · dvh-
 | `mobile` | Thumb-first | 44px |
 | `desktop` | Keyboard + pointer | 28–32px chrome |
 
-Shape: control `rounded-lg` · panel `rounded-2xl` · shell `rounded-3xl` · pill `rounded-full` (`radiusFor` in grammar).
+Shape (Fluent control vs layer): control `rounded-lg` · panel `rounded-2xl` · shell `rounded-3xl` · pill `rounded-full` (`radiusFor`). Base `--radius` ≈ Fluent Large (8px); layers scale from it.
 
 ## Theme knobs
 
@@ -117,9 +137,9 @@ Shape: control `rounded-lg` · panel `rounded-2xl` · shell `rounded-3xl` · pil
 
 1. `design.md` (this file)
 2. `lib/design/` (typed grammar + recipes)
-3. `docs/architecture.md`
-4. Matching skill (`.cursor/skills/…`)
-5. Proof: `components/surfaces/workbench.tsx`
+3. [`agents.md`](/agents.md) — strict operating manual
+4. Matching skill (`skills/…`)
+5. Proof: `components/surfaces/workbench.tsx` · `composer-shell.tsx`
 
 ## Endpoints
 
