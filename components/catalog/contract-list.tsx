@@ -6,25 +6,25 @@ function ContractList() {
     <section
       id="contracts"
       data-slot="contract-list"
-      data-surface="marketing"
-      className="scroll-mt-16 px-5 pb-8 md:px-8 md:pb-12"
+      data-site="platform"
+      className="scroll-mt-14 px-4 py-14 md:px-6 md:py-20"
     >
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-8 flex items-end justify-between gap-4">
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-border/70 pb-4">
           <div>
             <p className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
               Catalog
             </p>
             <h2 className="mt-2 text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
-              Design systems you can install
+              Systems — each with its own skin
             </h2>
           </div>
-          <p className="hidden max-w-xs text-right text-sm text-muted-foreground sm:block">
-            Each card is a full AI design system — open a live one for the film,
-            theme grammar, and proofs.
+          <p className="max-w-xs font-mono text-[11px] leading-relaxed text-muted-foreground sm:text-right">
+            Preview panes use that contract&apos;s tokens. Open the page for the
+            full experience.
           </p>
         </div>
-        <ul className="flex flex-col gap-4 sm:gap-5">
+        <ul className="flex flex-col gap-4">
           {designContracts.map((contract, index) => (
             <li key={contract.id}>
               <ContractCard contract={contract} index={index} />

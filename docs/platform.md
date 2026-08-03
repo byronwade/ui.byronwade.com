@@ -14,8 +14,9 @@
 | `agents.md` section order | **YES — locked** | `AGENTS_MD_SECTIONS` |
 | Task recipe ids | **YES — locked** | `lib/contracts/task-recipes.ts` |
 | Price (open source / $0) | **YES — locked** | `MCP_PRICE_USD` · `PRICING_MODEL` · [`pricing.md`](./pricing.md) |
-| OKLCH values, cinema voice, paper tone | **NO — DNA** | `lib/contracts/dna/{id}.ts` + per-contract design grammar |
+| OKLCH values, cinema voice, paper tone | **NO — DNA** | `app/contract-skins.css` via `[data-contract="{id}"]` + `lib/contracts/dna/{id}.ts` |
 | Marketing copy / film narrative | **NO — DNA** | contract pages / content |
+| Platform homepage chrome | **Platform only** | `app/(platform)/*` + `:root` in `globals.css` — never a contract skin |
 
 ## Agent rule (non-negotiable)
 
@@ -44,13 +45,23 @@ check:platform                    ← parity + slim-kit gate
 
 MCP responses always include `obey.must` / `obey.mustNot`. Fat prose stays in markdown.
 
+## Skins (homepage ≠ contracts)
+
+| Surface | Skin owner |
+| --- | --- |
+| `/` platform index | `:root` platform tokens + `components/chrome/platform-*` |
+| `/{id}/**` | `[data-contract="{id}"]` in `contract-skins.css` + `ContractFrame` |
+
+Landing a contract must feel like that DNA end-to-end (chrome included). The catalog stays on the platform shell so systems can be compared without guessing.
+
 ## Adding a new contract
 
 1. Add `lib/contracts/dna/{id}.ts` and register in `dna/index.ts`.
-2. Do **not** invent new MCP tools or machine filenames.
-3. `npm run gen:contract` — emits `/r/{id}.contract.json` with the shared shape.
-4. Add `app/{id}/…` pages using the same `ROUTE_SLOTS`.
-5. When the contract goes `live`, attach its design grammar through `buildContractEnvelope` (same keys as Meridian).
+2. Add a `[data-contract="{id}"]` (+ dark) block in `app/contract-skins.css`.
+3. Wrap `app/{id}/layout.tsx` in `<ContractFrame contractId="{id}">`.
+4. Do **not** invent new MCP tools or machine filenames.
+5. `npm run gen:contract` — emits `/r/{id}.contract.json` with the shared shape.
+6. Add `app/{id}/…` pages using the same `ROUTE_SLOTS` when live.
 
 ## Gates
 

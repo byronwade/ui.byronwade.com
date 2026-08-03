@@ -179,7 +179,8 @@ Demo bands under prose: `reading-demo-break` / `DocsDemoSection` — not full-bl
 | Radius intent | `radiusFor` in `lib/design/grammar.ts` |
 | Shells | `components/surfaces/*` |
 | Cinema stages | `components/cinematic/*` |
-| Site chrome | `components/site-header.tsx` |
+| Platform chrome | `components/chrome/platform-header.tsx` |
+| Contract chrome | `components/chrome/contract-frame.tsx` |
 
 ## 12. Agent checklist
 

@@ -1,53 +1,61 @@
 #!/usr/bin/env node
 /**
- * Meridian contrast audit — WCAG AA (≥4.5:1) on frozen OKLCH token pairs.
- * Large-text pairs (≥3:1) marked with large: true.
+ * Contrast audit — WCAG AA (≥4.5:1) on platform :root + Meridian contract skin.
  */
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
 const ROOT = process.cwd()
 const CSS_PATH = join(ROOT, "app/globals.css")
+const SKINS_PATH = join(ROOT, "app/contract-skins.css")
 
 const AA_BODY = 4.5
 const AA_LARGE = 3
 
-/** @type {{ name: string, fg: string, bg: string, large?: boolean, scope?: "root"|"dark"|"theater" }[]} */
+/** @type {{ name: string, fg: string, bg: string, large?: boolean, scope?: string }[]} */
 const PAIRS = [
-  // Paper (light)
-  { name: "paper body", fg: "foreground", bg: "background", scope: "root" },
-  { name: "paper muted", fg: "muted-foreground", bg: "background", scope: "root" },
-  { name: "paper brand link", fg: "brand", bg: "background", scope: "root" },
-  { name: "card body", fg: "card-foreground", bg: "card", scope: "root" },
-  { name: "on-brand", fg: "brand-foreground", bg: "brand", scope: "root" },
-  { name: "dock body", fg: "dock-foreground", bg: "dock", scope: "root" },
-  { name: "dock muted", fg: "dock-muted", bg: "dock", scope: "root" },
-  // Theater lifts brand for links on dock
+  // Platform catalog
+  { name: "platform body", fg: "foreground", bg: "background", scope: "root" },
+  { name: "platform muted", fg: "muted-foreground", bg: "background", scope: "root" },
+  { name: "platform brand link", fg: "brand", bg: "background", scope: "root" },
+  { name: "platform on-brand", fg: "brand-foreground", bg: "brand", scope: "root" },
+  // Meridian paper
+  { name: "meridian body", fg: "foreground", bg: "background", scope: "meridian" },
+  { name: "meridian muted", fg: "muted-foreground", bg: "background", scope: "meridian" },
+  { name: "meridian brand link", fg: "brand", bg: "background", scope: "meridian" },
+  { name: "meridian on-brand", fg: "brand-foreground", bg: "brand", scope: "meridian" },
+  { name: "meridian dock body", fg: "dock-foreground", bg: "dock", scope: "meridian" },
+  { name: "meridian dock muted", fg: "dock-muted", bg: "dock", scope: "meridian" },
   {
     name: "theater brand on dock",
     fg: "brand",
     bg: "dock",
     scope: "theater",
   },
-  // Dark mode
-  { name: "dark body", fg: "foreground", bg: "background", scope: "dark" },
-  { name: "dark muted", fg: "muted-foreground", bg: "background", scope: "dark" },
-  { name: "dark brand link", fg: "brand", bg: "background", scope: "dark" },
-  { name: "dark on-brand", fg: "brand-foreground", bg: "brand", scope: "dark" },
-  { name: "dark dock body", fg: "dock-foreground", bg: "dock", scope: "dark" },
-  { name: "dark dock muted", fg: "dock-muted", bg: "dock", scope: "dark" },
+  // Meridian dark
+  { name: "meridian dark body", fg: "foreground", bg: "background", scope: "meridian-dark" },
+  { name: "meridian dark muted", fg: "muted-foreground", bg: "background", scope: "meridian-dark" },
+  { name: "meridian dark brand", fg: "brand", bg: "background", scope: "meridian-dark" },
+  { name: "meridian dark on-brand", fg: "brand-foreground", bg: "brand", scope: "meridian-dark" },
 ]
 
 function extractBlock(css, startMarker) {
-  const start = css.indexOf(startMarker)
+  // Prefer a real rule opener ("marker {") so comments like "(:root)" don't match.
+  const rule = `${startMarker} {`
+  let start = css.indexOf(rule)
+  if (start < 0) start = css.indexOf(startMarker)
   if (start < 0) return ""
   let i = css.indexOf("{", start)
+  if (i < 0) return ""
   let depth = 0
   for (; i < css.length; i++) {
     if (css[i] === "{") depth++
     else if (css[i] === "}") {
       depth--
-      if (depth === 0) return css.slice(css.indexOf("{", start) + 1, i)
+      if (depth === 0) {
+        const open = css.indexOf("{", start)
+        return css.slice(open + 1, i)
+      }
     }
   }
   return ""
@@ -78,11 +86,7 @@ function parseOklch(value) {
     /oklch\(\s*([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)(?:\s*\/\s*([0-9.]+%?))?\s*\)/i,
   )
   if (!m) throw new Error(`Not OKLCH: ${value}`)
-  return {
-    L: Number(m[1]),
-    C: Number(m[2]),
-    h: Number(m[3]),
-  }
+  return { L: Number(m[1]), C: Number(m[2]), h: Number(m[3]) }
 }
 
 function oklchToLinearSrgb(L, C, h) {
@@ -96,7 +100,7 @@ function oklchToLinearSrgb(L, C, h) {
   const m = m_ ** 3
   const s = s_ ** 3
   return {
-    r: 4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+    r: +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
     g: -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
     b: -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
   }
@@ -117,14 +121,29 @@ function contrastRatio(a, b) {
 }
 
 const css = await readFile(CSS_PATH, "utf8")
+const skins = await readFile(SKINS_PATH, "utf8")
 const root = parseTokens(extractBlock(css, ":root"))
-const dark = { ...root, ...parseTokens(extractBlock(css, ".dark")) }
-const theater = {
+const meridian = {
   ...root,
-  ...parseTokens(extractBlock(css, '[data-tone="theater"]')),
+  ...parseTokens(extractBlock(skins, '[data-contract="meridian"]')),
+}
+const meridianDark = {
+  ...meridian,
+  ...parseTokens(extractBlock(skins, '.dark [data-contract="meridian"]')),
+}
+const theater = {
+  ...meridian,
+  ...parseTokens(
+    extractBlock(skins, '[data-contract="meridian"] [data-tone="theater"]'),
+  ),
 }
 
-const scopes = { root, dark, theater }
+const scopes = {
+  root,
+  meridian,
+  "meridian-dark": meridianDark,
+  theater,
+}
 const failures = []
 
 for (const pair of PAIRS) {

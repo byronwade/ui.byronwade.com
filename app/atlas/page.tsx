@@ -1,17 +1,17 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { ComingSoonContract } from "@/components/catalog/coming-soon"
+import { ContractExperience } from "@/components/contracts/contract-experience"
 import { getContract } from "@/lib/contracts/catalog"
 
 export const metadata: Metadata = {
   title: "Atlas",
   description:
-    "Atlas design contract — developer workbench. Coming soon as an MCP server.",
+    "Atlas design contract — developer workbench. Experience the DNA on this page.",
 }
 
 export default function AtlasPage() {
   const contract = getContract("atlas")
   if (!contract) notFound()
-  return <ComingSoonContract contract={contract} />
+  return <ContractExperience contract={contract} />
 }

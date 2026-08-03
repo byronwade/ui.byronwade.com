@@ -13,10 +13,10 @@ function Pricing() {
     <section
       id="pricing"
       data-slot="pricing"
-      data-surface="marketing"
-      className="scroll-mt-16 border-t border-border/40 px-5 py-20 md:px-8 md:py-28"
+      data-site="platform"
+      className="scroll-mt-14 border-t border-border/70 px-4 py-16 md:px-6 md:py-24"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-5xl">
         <p className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
           Pricing
         </p>
@@ -30,19 +30,15 @@ function Pricing() {
                 <>
                   The MCP runs on{" "}
                   <span className="text-foreground">your machine</span> over
-                  stdio — our hosting cost per contract is effectively zero. Even
-                  a shared remote host would be a few dollars a month for the
-                  whole platform, so charging per seat fails a honest cost-plus
-                  bar. Every design contract MCP is free to install and use.
+                  stdio. Every design contract MCP is free to install — pick a
+                  system and stay inside its skin.
                 </>
               ) : (
-                <>
-                  One contract, one MCP, one monthly seat for your agent stack.
-                </>
+                <>One contract, one MCP, one monthly seat.</>
               )}
             </p>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Cost notes:{" "}
+              Cost notes live on Meridian&apos;s system doc:{" "}
               <Link
                 href="/meridian/system/pricing"
                 className="text-foreground underline-offset-4 hover:underline"
@@ -52,25 +48,24 @@ function Pricing() {
               .
             </p>
           </div>
-          <div className="rounded-3xl bg-muted/30 p-6 edge sm:p-8">
-            <p className="text-sm font-medium tracking-tight text-foreground">
+          <div className="border border-border/80 bg-muted/20 p-6 sm:p-8">
+            <p className="font-mono text-[11px] tracking-[0.14em] text-foreground uppercase">
               What you get
             </p>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
-              <li>Lightweight MCP — must/mustNot, closed tokens, validate_ui</li>
-              <li>Machine docs — design.md · agents.md · contract.json</li>
-              <li>CLI gate — check your UI against the contract</li>
-              <li>Task recipes with must/never for common app intents</li>
-              <li>Same consistency kit on every future contract</li>
+              <li>Per-contract DNA on every page of that route</li>
+              <li>Shared architecture — MCP tools, JSON keys, recipes</li>
+              <li>Machine docs + contract.json per system</li>
+              <li>CLI gate against the contract you installed</li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
               {contracts.map((c) => (
                 <Link
                   key={c.id}
                   href={c.href}
-                  className="inline-flex h-8 items-center rounded-full bg-background/80 px-3 font-mono text-[11px] text-foreground transition-colors hover:bg-brand/10 edge"
+                  className="inline-flex h-8 items-center border border-border bg-background px-3 font-mono text-[11px] text-foreground transition-colors hover:border-foreground/30"
                 >
-                  {c.name} · {priceLabel(c.priceMonthly)}
+                  {c.name}
                 </Link>
               ))}
             </div>

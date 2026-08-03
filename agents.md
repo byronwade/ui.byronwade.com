@@ -56,6 +56,8 @@ Skip a step → drift.
 > **Design DNA may differ. Architecture must not.**  
 > If you change how something is named, routed, downloaded, or exposed over MCP/API, **change it for every contract** — never Meridian alone.
 
+**Skins:** `/` is the platform catalog (`:root` + platform chrome). Every `/{id}/**` route must wrap in `ContractFrame` so `[data-contract="{id}"]` tokens from `app/contract-skins.css` own the whole page — including chrome. Never style the homepage like Meridian (or any single contract).
+
 ### Single source of truth
 
 | Concern | Edit here only |
@@ -64,6 +66,7 @@ Skip a step → drift.
 | Machine filenames | `MACHINE_FILES` in skeleton |
 | Route slots (`/theme`, `/surfaces`, …) | `ROUTE_SLOTS` |
 | Contract JSON keys | `CONTRACT_JSON_KEYS` + `lib/platform/build-contract.ts` |
+| Per-contract OKLCH skins | `app/contract-skins.css` via `[data-contract]` |
 | This manual’s section order | `AGENTS_MD_SECTIONS` |
 | Task recipe ids | `lib/contracts/task-recipes.ts` |
 | Price | `MCP_PRICE_USD` |

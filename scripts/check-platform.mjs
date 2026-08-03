@@ -190,8 +190,35 @@ try {
   if (!platformDoc.includes("lib/platform/skeleton.ts")) {
     hits.push("docs/platform.md: must document skeleton as single source")
   }
+  if (!platformDoc.includes("data-contract") && !platformDoc.includes("contract-skins")) {
+    hits.push("docs/platform.md: must document per-contract skins vs platform homepage")
+  }
 } catch {
   hits.push("docs/platform.md: missing — required platform law doc")
+}
+
+try {
+  const skins = await read("app/contract-skins.css")
+  for (const id of dnaIds) {
+    if (!skins.includes(`[data-contract="${id}"]`)) {
+      hits.push(`contract-skins.css: missing [data-contract="${id}"] token pack`)
+    }
+  }
+  const frame = await read("components/chrome/contract-frame.tsx")
+  if (!frame.includes("data-contract")) {
+    hits.push("contract-frame.tsx: must set data-contract for skin scoping")
+  }
+  const rootLayout = await read("app/layout.tsx")
+  if (rootLayout.includes("SiteHeader") || rootLayout.includes("site-header")) {
+    hits.push("app/layout.tsx: must not wrap all routes in Meridian/global site chrome")
+  }
+  if (!rootLayout.includes("globals.css")) {
+    hits.push("app/layout.tsx: must import globals.css")
+  }
+} catch (err) {
+  hits.push(
+    `skins/chrome: ${err instanceof Error ? err.message : String(err)}`,
+  )
 }
 
 if (hits.length === 0) {

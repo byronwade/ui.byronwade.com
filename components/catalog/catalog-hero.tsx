@@ -2,58 +2,57 @@ function CatalogHero() {
   return (
     <section
       data-slot="catalog-hero"
-      data-surface="marketing"
-      className="relative overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-36"
+      data-site="platform"
+      className="relative border-b border-border/70 px-4 pb-14 pt-16 md:px-6 md:pb-20 md:pt-20"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35]"
         style={{
-          background: `
-            radial-gradient(80% 60% at 15% 10%, color-mix(in oklch, var(--brand) 14%, transparent) 0%, transparent 55%),
-            radial-gradient(70% 50% at 85% 30%, color-mix(in oklch, var(--muted) 80%, transparent) 0%, transparent 50%),
-            linear-gradient(180deg, var(--background) 0%, color-mix(in oklch, var(--muted) 35%, var(--background)) 100%)
+          backgroundImage: `
+            linear-gradient(to right, color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px),
+            linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px)
           `,
+          backgroundSize: "72px 72px",
+          maskImage:
+            "linear-gradient(180deg, black 0%, black 55%, transparent 100%)",
         }}
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-background to-transparent"
-      />
 
-      <div className="mx-auto max-w-6xl">
-        <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
-          For developers · open source
-        </p>
-        <h1 className="mt-4 max-w-3xl text-4xl font-medium tracking-tight text-foreground sm:text-5xl md:text-6xl md:leading-[1.05]">
-          Design systems your agents can actually obey
+      <div className="mx-auto max-w-5xl">
+        <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border/60 pb-4">
+          <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
+            Platform index
+          </p>
+          <p className="font-mono text-[11px] text-muted-foreground">
+            open source · MCP install
+          </p>
+        </div>
+
+        <h1 className="mt-8 max-w-3xl text-[clamp(2.5rem,7vw,4.25rem)] font-medium leading-[1.02] tracking-[-0.04em] text-foreground">
+          Design contracts
         </h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Each{" "}
-          <span className="text-foreground">design contract</span> is a fail-closed
-          UI system — tokens, density, typeset, UX/DX laws — delivered as an{" "}
-          <span className="text-foreground">MCP server</span> you install in Cursor,
-          Claude, or your agent stack. Ship dashboards and workbenches that look
-          like one hand made them.
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          A catalog of AI design systems. Each contract keeps its own DNA —
+          click in and the{" "}
+          <span className="text-foreground">entire page becomes that system</span>
+          . This index stays on the platform shell so you can compare without
+          guessing.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <a
             href="#contracts"
-            className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium tracking-tight text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+            className="inline-flex h-9 items-center border border-foreground/15 bg-foreground px-4 font-mono text-[12px] tracking-tight text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            Browse design systems
+            Browse systems
           </a>
           <a
             href="#pricing"
-            className="inline-flex h-10 items-center rounded-full px-5 text-sm tracking-tight text-muted-foreground transition-colors hover:bg-muted/30 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+            className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             Free · open source
           </a>
         </div>
-        <p className="mt-6 max-w-xl font-mono text-[11px] leading-relaxed text-muted-foreground">
-          Not a component zoo. A contract your AI must follow — MCP tools +
-          machine docs + check gates.
-        </p>
       </div>
     </section>
   )

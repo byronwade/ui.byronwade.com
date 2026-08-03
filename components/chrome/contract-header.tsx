@@ -14,35 +14,29 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { contractPrimaryNav } from "@/lib/contracts/catalog"
+import { contractPrimaryNav, getContract } from "@/lib/contracts/catalog"
 import { cn } from "@/lib/utils"
 
-function linkActive(pathname: string, href: string) {
-  if (href === "/meridian") {
-    return pathname === "/meridian" || pathname === "/meridian/"
-  }
-  if (href.startsWith("/#") || href === "/") {
-    return pathname === "/"
+function linkActive(pathname: string, href: string, base: string) {
+  if (href === base) {
+    return pathname === base || pathname === `${base}/`
   }
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
-function SiteHeader() {
+function ContractHeader({ contractId }: { contractId: string }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [overTheater, setOverTheater] = useState(false)
-
-  const onMeridian =
-    pathname === "/meridian" || pathname.startsWith("/meridian/")
-  const onHome = pathname === "/"
-
-  const nav = onMeridian
-    ? contractPrimaryNav("meridian")
+  const contract = getContract(contractId)
+  const name = contract?.name ?? contractId
+  const base = `/${contractId}`
+  const live = contract?.status === "live"
+  const nav = live
+    ? contractPrimaryNav(contractId)
     : ([
-        { href: "/#contracts", label: "Systems" },
-        { href: "/#how-it-works", label: "How it works" },
-        { href: "/#pricing", label: "Open source" },
-        { href: "/meridian", label: "Meridian" },
+        { href: base, label: "Experience" },
+        { href: "/#contracts", label: "All contracts" },
       ] as const)
 
   useEffect(() => {
@@ -76,7 +70,7 @@ function SiteHeader() {
 
   return (
     <header
-      data-slot="site-header"
+      data-slot="contract-header"
       data-surface="marketing"
       data-over={overTheater ? "theater" : "paper"}
       data-tone={overTheater ? "theater" : undefined}
@@ -84,7 +78,7 @@ function SiteHeader() {
         "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200",
         overTheater
           ? "border-border/30 bg-dock/85 text-dock-foreground backdrop-blur-xl"
-          : "border-border/50 bg-background/75 text-foreground backdrop-blur-xl",
+          : "border-border/50 bg-background/80 text-foreground backdrop-blur-xl",
       )}
     >
       <div className="mx-auto flex h-11 max-w-6xl items-center justify-between gap-3 px-4 md:h-12 md:px-6">
@@ -93,44 +87,37 @@ function SiteHeader() {
             href="/"
             className={cn(
               "text-[13px] font-medium tracking-tight transition-opacity hover:opacity-70",
-              overTheater ? "text-dock-foreground" : "text-foreground",
+              overTheater ? "text-dock-muted" : "text-muted-foreground",
             )}
           >
             Contracts
           </Link>
-          {onMeridian ? (
-            <>
-              <span
-                className={cn(
-                  "text-[13px]",
-                  overTheater ? "text-dock-muted" : "text-muted-foreground",
-                )}
-                aria-hidden
-              >
-                /
-              </span>
-              <Link
-                href="/meridian"
-                className={cn(
-                  "truncate text-[13px] tracking-tight transition-opacity hover:opacity-70",
-                  overTheater ? "text-dock-muted" : "text-muted-foreground",
-                )}
-              >
-                Meridian
-              </Link>
-            </>
-          ) : null}
+          <span
+            className={cn(
+              "text-[13px]",
+              overTheater ? "text-dock-muted" : "text-muted-foreground",
+            )}
+            aria-hidden
+          >
+            /
+          </span>
+          <Link
+            href={base}
+            className={cn(
+              "truncate text-[13px] font-medium tracking-tight transition-opacity hover:opacity-70",
+              overTheater ? "text-dock-foreground" : "text-foreground",
+            )}
+          >
+            {name}
+          </Link>
         </div>
 
         <nav
-          aria-label="Primary"
+          aria-label={`${name} primary`}
           className="hidden min-w-0 flex-1 items-center justify-end gap-0.5 md:flex lg:justify-center"
         >
           {nav.map((item) => {
-            const active =
-              onHome && item.href.startsWith("/#")
-                ? false
-                : linkActive(pathname, item.href)
+            const active = linkActive(pathname, item.href, base)
             return (
               <Link
                 key={item.href}
@@ -172,11 +159,11 @@ function SiteHeader() {
             <SheetContent side="right" className="w-[min(100%,20rem)]">
               <SheetHeader>
                 <SheetTitle className="text-left text-sm font-medium tracking-tight">
-                  {onMeridian ? "Meridian" : "Contracts"}
+                  {name}
                 </SheetTitle>
               </SheetHeader>
               <nav
-                aria-label="Mobile"
+                aria-label="Mobile contract"
                 className="mt-4 flex flex-col gap-1 px-2"
               >
                 {nav.map((item) => (
@@ -198,4 +185,4 @@ function SiteHeader() {
   )
 }
 
-export { SiteHeader }
+export { ContractHeader }
