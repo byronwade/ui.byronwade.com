@@ -80,13 +80,13 @@ Typed: `materialLaws` + `designInfluences` in `lib/design/recipes.ts`.
 
 Human index: [`/skills`](/skills). Canonical: `skills/<name>/SKILL.md`.
 
-| Skill | When |
-| --- | --- |
-| `meridian-theme` | Re-skin knobs; keep one deep accent |
-| `meridian-compose` | Product wholes (workbench / composer) |
-| `meridian-cinematic` | Full-bleed frames under cinema laws |
-| `meridian-surface` | `data-surface` + density |
-| `meridian-a11y` | OKLCH + WCAG AA on every UI change |
+| Skill | When | Prove on site |
+| --- | --- | --- |
+| `meridian-theme` | Re-skin knobs; keep one deep accent | [`/theme`](/theme) |
+| `meridian-surface` | `data-surface` + density | [`/surfaces`](/surfaces) |
+| `meridian-compose` | Product wholes (workbench / composer) | [`/surfaces#proofs`](/surfaces#proofs) |
+| `meridian-cinematic` | Full-bleed frames under cinema laws | [`/`](/) home film |
+| `meridian-a11y` | OKLCH + WCAG AA on every UI change | [`/theme#contrast`](/theme#contrast) |
 
 ```bash
 npx skills add byronwade/ui.byronwade.com
