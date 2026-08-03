@@ -13,21 +13,30 @@ Browsers hitting these URLs get designed HTML. Agents receive this raw text
 - [llms.txt](https://ui.byronwade.com/llms.txt): This discovery map
 - Theme grammar lives in-repo at lib/design/
 
+## Skill loop (prove on site)
+
+1. Theme → https://ui.byronwade.com/theme · skill meridian-theme
+2. Surface → https://ui.byronwade.com/surfaces · skill meridian-surface
+3. Compose → https://ui.byronwade.com/surfaces#proofs · skill meridian-compose
+4. Cinematic → https://ui.byronwade.com/ · skill meridian-cinematic
+5. A11y → https://ui.byronwade.com/theme#contrast · skill meridian-a11y
+
 ## Research specs (ranked merge)
 
-- [System index](https://ui.byronwade.com/system): All detailed specs
-- [influences](https://ui.byronwade.com/system/influences/raw): Ranked inspirations + merge matrix
-- [layout](https://ui.byronwade.com/system/layout/raw) · [ux](https://ui.byronwade.com/system/ux/raw) · [animations](https://ui.byronwade.com/system/animations/raw)
-- [color](https://ui.byronwade.com/system/color/raw) · [typography](https://ui.byronwade.com/system/typography/raw) · [density](https://ui.byronwade.com/system/density/raw)
-- [ai-surfaces](https://ui.byronwade.com/system/ai-surfaces/raw)
-- Repo paths: `docs/influences.md`, `docs/layout.md`, `docs/architecture.md`, `docs/ux.md`, `docs/animations.md`, …
+- [System index](https://ui.byronwade.com/system): All detailed specs + DNA
+- [influences](https://ui.byronwade.com/system/influences) · [meridian](https://ui.byronwade.com/system/meridian) · [sources](https://ui.byronwade.com/system/sources)
+- [layout](https://ui.byronwade.com/system/layout) · [ux](https://ui.byronwade.com/system/ux) · [animations](https://ui.byronwade.com/system/animations)
+- [color](https://ui.byronwade.com/system/color) · [typography](https://ui.byronwade.com/system/typography) · [density](https://ui.byronwade.com/system/density)
+- [ai-surfaces](https://ui.byronwade.com/system/ai-surfaces)
+- Repo paths: `docs/*.md`
 
 ## Showcase
 
-- [Theme](https://ui.byronwade.com/theme): Laws, knobs, closed roles, bans, contrast pairs
-- [Surfaces](https://ui.byronwade.com/surfaces): Application · Marketing · Mobile · Desktop
-- [Skills](https://ui.byronwade.com/skills): Top agent skills (skills.sh-ready under `skills/`)
-- [Home](https://ui.byronwade.com/): Cinematic positioning
+- [Theme](https://ui.byronwade.com/theme): Laws, knobs, workbench proof, contrast pairs
+- [Surfaces](https://ui.byronwade.com/surfaces): Workbench + composer + four density lanes
+- [Skills](https://ui.byronwade.com/skills): Top agent skills with on-site proofs
+- [System](https://ui.byronwade.com/system): Ranked research specs
+- [Home](https://ui.byronwade.com/): Cinematic film covering the full skill loop
 
 ## Install skills
 
@@ -41,4 +50,4 @@ npx skills add byronwade/ui.byronwade.com --skill meridian-theme
 - npm run check:design
 - npm run check:contrast
 - TypeScript unions in lib/design/grammar.ts
-- Cinematic laws in lib/design/recipes.ts
+- Cinematic + material laws in lib/design/recipes.ts

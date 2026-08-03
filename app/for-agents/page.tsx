@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { CopyButton } from "@/components/docs/copy-button"
 import { DocShell, DocLinkRow } from "@/components/docs/doc-shell"
+import { SkillLoop } from "@/components/site/skill-loop"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -16,6 +17,7 @@ import { Separator } from "@/components/ui/separator"
 import { zones } from "@/lib/design"
 import { getDoc } from "@/lib/docs/catalog"
 import { loadSource } from "@/lib/docs/load-source"
+import { skillProofs } from "@/lib/site/skill-proofs"
 
 export const metadata: Metadata = {
   title: "Agents",
@@ -103,11 +105,29 @@ export default async function ForAgentsPage() {
             <Link href="/design">Design</Link>
           </Button>
           <Button variant="ghost" size="default" asChild>
-            <Link href="/theme">Theme</Link>
+            <Link href="/surfaces#proofs">Proofs</Link>
+          </Button>
+          <Button variant="ghost" size="default" asChild>
+            <Link href="/skills">Skills</Link>
           </Button>
         </>
       }
     >
+      <section>
+        <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
+          Prove every skill
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          The website exercises the full loop — {skillProofs.length} skills, each
+          with a live proof.
+        </p>
+        <div className="mt-6">
+          <SkillLoop dense />
+        </div>
+      </section>
+
+      <Separator className="my-14" />
+
       <section>
         <h2 className="text-xl font-medium tracking-[-0.03em] text-foreground md:text-2xl">
           Start here
@@ -208,8 +228,9 @@ export default async function ForAgentsPage() {
           {[
             "design.md — contract",
             "lib/design/ — grammar, recipes, contrast",
-            "Matching skill under skills/ (see /skills)",
-            "Compose shadcn primitives into wholes",
+            "/system — research specs when composing space/motion/AI",
+            "Matching skill under skills/ (see /skills + prove links)",
+            "Compose via Workbench / ComposerShell proofs on /surfaces#proofs",
             "npm run check:design && npm run check:contrast",
           ].map((step, i) => (
             <li

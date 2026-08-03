@@ -92,7 +92,7 @@ function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-lg px-2.5 py-1 text-[12px] tracking-tight transition-colors",
+                  "rounded-lg px-2 py-1 text-[12px] tracking-tight transition-colors lg:px-2.5",
                   overTheater
                     ? active
                       ? "bg-brand/15 text-dock-foreground"

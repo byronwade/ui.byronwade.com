@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { CopyButton } from "@/components/docs/copy-button"
 import { DocShell } from "@/components/docs/doc-shell"
+import { SkillLoop } from "@/components/site/skill-loop"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -13,6 +14,7 @@ import {
 } from "@/components/ui/card"
 import { CaretRight } from "@/lib/icons"
 import { listSkills, SKILLS_REPO } from "@/lib/skills/catalog"
+import { skillProofs } from "@/lib/site/skill-proofs"
 
 export const metadata: Metadata = {
   title: "Skills",
@@ -33,6 +35,9 @@ export default async function SkillsPage() {
       actions={
         <>
           <CopyButton value={installAll} label="Install all" size="default" />
+          <Button variant="ghost" size="default" asChild>
+            <Link href="/surfaces#proofs">Proofs</Link>
+          </Button>
           <Button variant="ghost" size="default" asChild>
             <Link href="/for-agents">Agents</Link>
           </Button>
@@ -63,6 +68,19 @@ export default async function SkillsPage() {
 
       <section className="mt-12">
         <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
+          Prove on this site
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+          Each skill maps to a live Meridian surface — theme, surfaces, compose
+          proofs, cinema film, contrast audit.
+        </p>
+        <div className="mt-6">
+          <SkillLoop />
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
           Featured
         </h2>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
@@ -71,46 +89,56 @@ export default async function SkillsPage() {
         </p>
 
         <ul className="mt-8 grid gap-3 md:grid-cols-2">
-          {skills.map((skill) => (
-            <li key={skill.slug}>
-              <Card className="h-full py-0 transition-colors hover:bg-muted/30">
-                <CardHeader className="gap-1.5 py-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <p className="font-mono text-[10px] tracking-[0.14em] text-brand uppercase">
-                      {String(skill.order + 1).padStart(2, "0")}
-                    </p>
-                    <Badge variant="outline" className="font-mono text-[10px]">
-                      {skill.name}
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-base tracking-tight">
-                    <Link
-                      href={skill.href}
-                      className="transition-opacity hover:opacity-70"
-                    >
-                      {skill.name}
-                    </Link>
-                  </CardTitle>
-                  <CardDescription className="line-clamp-3 leading-relaxed">
-                    {skill.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardFooter className="flex flex-wrap items-center justify-between gap-2 border-t border-border/60 py-3">
-                  <CopyButton
-                    value={skill.install}
-                    label="Install"
-                    size="sm"
-                  />
-                  <Button variant="ghost" size="sm" asChild>
-                    <Link href={skill.href}>
-                      Details
-                      <CaretRight className="size-3.5" />
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            </li>
-          ))}
+          {skills.map((skill) => {
+            const proof = skillProofs.find((p) => p.slug === skill.slug)
+            return (
+              <li key={skill.slug}>
+                <Card className="h-full py-0 transition-colors hover:bg-muted/30">
+                  <CardHeader className="gap-1.5 py-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="font-mono text-[10px] tracking-[0.14em] text-brand uppercase">
+                        {String(skill.order + 1).padStart(2, "0")}
+                      </p>
+                      <Badge variant="outline" className="font-mono text-[10px]">
+                        {skill.name}
+                      </Badge>
+                    </div>
+                    <CardTitle className="text-base tracking-tight">
+                      <Link
+                        href={skill.href}
+                        className="transition-opacity hover:opacity-70"
+                      >
+                        {skill.name}
+                      </Link>
+                    </CardTitle>
+                    <CardDescription className="line-clamp-3 leading-relaxed">
+                      {skill.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardFooter className="flex flex-wrap items-center justify-between gap-2 border-t border-border/60 py-3">
+                    <CopyButton
+                      value={skill.install}
+                      label="Install"
+                      size="sm"
+                    />
+                    <div className="flex items-center gap-1">
+                      {proof ? (
+                        <Button variant="ghost" size="sm" asChild>
+                          <Link href={proof.proveHref}>{proof.proveLabel}</Link>
+                        </Button>
+                      ) : null}
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link href={skill.href}>
+                          Details
+                          <CaretRight className="size-3.5" />
+                        </Link>
+                      </Button>
+                    </div>
+                  </CardFooter>
+                </Card>
+              </li>
+            )
+          })}
         </ul>
       </section>
     </DocShell>

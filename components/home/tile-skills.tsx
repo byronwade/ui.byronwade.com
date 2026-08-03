@@ -1,34 +1,34 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
+import { SkillLoop } from "@/components/site/skill-loop"
 
 /**
- * Paper beat — typed grammar + research specs. Human routes, not .md traps.
+ * Paper beat — the full Meridian skill loop, each step proven on this site.
  */
-function TileAgents() {
+function TileSkills() {
   return (
-    <CinemaTile id="agents" tone="paper" align="center">
+    <CinemaTile id="skills" tone="paper" align="center">
       <p className="font-mono text-[11px] tracking-[0.16em] text-brand uppercase">
-        Grammar
+        Skills
       </p>
       <h2 className="cinema-title mt-3 text-foreground">
-        Typed so it stays true.
+        Theme → surface → compose → cinema → a11y.
       </h2>
       <p className="cinema-lede mx-auto mt-5 max-w-md text-muted-foreground">
-        Closed tokens in lib/design. Research specs under /system. Creativity in
-        the story — never in rogue color.
+        Every skill has a live proof on this site — not just an install card.
       </p>
+      <div className="mx-auto mt-10 w-full max-w-5xl text-left">
+        <SkillLoop dense />
+      </div>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
-        <CinemaLink href="/design" priority="primary">
-          design.md
+        <CinemaLink href="/skills" priority="primary">
+          Browse skills
         </CinemaLink>
         <CinemaLink href="/system" priority="secondary">
           System specs
-        </CinemaLink>
-        <CinemaLink href="/for-agents" priority="secondary">
-          Agents
         </CinemaLink>
       </div>
     </CinemaTile>
   )
 }
 
-export { TileAgents }
+export { TileSkills }

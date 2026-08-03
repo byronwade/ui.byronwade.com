@@ -5,6 +5,8 @@
 
 export type SystemDocSlug =
   | "influences"
+  | "meridian"
+  | "sources"
   | "layout"
   | "architecture"
   | "ux"
@@ -29,6 +31,20 @@ export const systemDocs: readonly SystemDoc[] = [
     summary: "Ranked inspirations and merge matrix.",
     sourcePath: "docs/influences.md",
     filename: "influences.md",
+  },
+  {
+    slug: "meridian",
+    title: "Meridian DNA",
+    summary: "Human-readable design DNA — principles and surfaces.",
+    sourcePath: "docs/meridian.md",
+    filename: "meridian.md",
+  },
+  {
+    slug: "sources",
+    title: "Sources",
+    summary: "What we absorb from published craft — discipline, not pastiche.",
+    sourcePath: "docs/sources.md",
+    filename: "sources.md",
   },
   {
     slug: "layout",

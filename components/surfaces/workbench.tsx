@@ -1,6 +1,7 @@
 /**
  * Canonical application whole — Fluent 2 material + Cursor-app density:
  * thin stroke chrome, control vs layer radius, object-bound agent rail.
+ * Structure imported from `@/lib/design` — never invent radius/wash.
  */
 import {
   House,
@@ -23,7 +24,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import {
+  activity,
+  bg,
+  designCn,
+  proofs,
+  radiusIntent,
+} from "@/lib/design"
 import { cn } from "@/lib/utils"
+
+const recipe = proofs.workbench
 
 const nav = [
   { label: "Home", icon: House, active: false },
@@ -84,11 +94,15 @@ type WorkbenchProps = {
 }
 
 function Workbench({ className, withAgent = true }: WorkbenchProps) {
+  const boundTo = recipe.agent?.boundTo ?? "ISS-1842"
+
   return (
     <Surface
-      id="application"
-      className={cn(
-        "flex h-[32rem] overflow-hidden rounded-2xl bg-background edge md:h-[36rem]",
+      id={recipe.surface}
+      className={designCn(
+        "flex h-[32rem] overflow-hidden edge md:h-[36rem]",
+        radiusIntent("panel"),
+        bg("background"),
         className,
       )}
     >
@@ -103,8 +117,10 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
               variant="ghost"
               size="sm"
               className={cn(
-                "h-7 justify-start gap-2 rounded-lg px-1.5 text-[12px] hover:bg-muted/40",
-                item.active && "bg-brand/10 text-foreground hover:bg-brand/10",
+                "h-7 justify-start gap-2 px-1.5 text-[12px] hover:bg-muted/40",
+                radiusIntent("control"),
+                item.active &&
+                  cn(recipe.selected, "text-foreground hover:bg-brand/10"),
               )}
             >
               <item.icon className="size-3.5 opacity-70" />
@@ -123,7 +139,10 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
             <Search className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search or jump…"
-              className="h-7 rounded-lg border border-transparent bg-background pl-7 text-[12px] shadow-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40"
+              className={cn(
+                "h-7 border border-transparent bg-background pl-7 text-[12px] shadow-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40",
+                radiusIntent("control"),
+              )}
             />
           </div>
           <kbd className="font-mono text-[10px] tracking-tight text-muted-foreground">
@@ -186,7 +205,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
               <div className="flex h-8 items-center gap-1.5 border-b border-border px-2.5">
                 <Sparkle className="size-3.5 text-brand" />
                 <span className="font-mono text-[11px] tracking-tight text-muted-foreground">
-                  ISS-1842
+                  {boundTo}
                 </span>
               </div>
               <div className="min-h-0 flex-1 space-y-1.5 overflow-hidden p-2">
@@ -194,14 +213,23 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                   <article
                     key={event.label + event.body}
                     data-provenance={event.provenance}
-                    className="rounded-lg bg-card px-2 py-1.5 edge"
+                    className={designCn(
+                      "bg-card px-2 py-1.5 edge",
+                      radiusIntent("control"),
+                    )}
                   >
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono text-[10px] text-muted-foreground">
                         {event.label}
                       </span>
                       {event.activity ? (
-                        <Badge className="h-4 rounded-full border-transparent bg-activity-edit px-1.5 font-mono text-[9px] text-foreground">
+                        <Badge
+                          className={cn(
+                            "h-4 border-transparent px-1.5 font-mono text-[9px] text-foreground",
+                            radiusIntent("pill"),
+                            activity(event.activity),
+                          )}
+                        >
                           {event.activity}
                         </Badge>
                       ) : null}
@@ -216,7 +244,10 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
               <div className="p-1.5">
                 <Input
                   placeholder="Ask about this issue…"
-                  className="h-7 rounded-lg border border-transparent bg-background text-[12px] shadow-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40"
+                  className={cn(
+                    "h-7 border border-transparent bg-background text-[12px] shadow-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40",
+                    radiusIntent("control"),
+                  )}
                 />
               </div>
             </aside>
@@ -224,7 +255,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
         </div>
 
         <footer className="flex h-6 items-center justify-between border-t border-border bg-muted/20 px-2.5 font-mono text-[10px] text-muted-foreground">
-          <span>application</span>
+          <span>{recipe.surface}</span>
           <span>{withAgent ? "agent bound" : "idle"}</span>
         </footer>
       </div>

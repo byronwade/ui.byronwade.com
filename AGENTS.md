@@ -6,24 +6,30 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
-# ui.byronwade.com — Meridian (cinematic · typed)
+# Meridian — agent entry
 
-**Before UI work:** [`design.md`](./design.md) → [`lib/design/`](./lib/design/).  
-Architecture: [`docs/architecture.md`](./docs/architecture.md).
+**Obey the full operating manual:** [`agents.md`](./agents.md)  
+**AI contract:** [`design.md`](./design.md) · **Grammar:** [`lib/design/`](./lib/design/)  
+**Research specs:** [`/system`](./docs/influences.md) · **Skills:** [`/skills`](./skills/)
 
-Theme showcase for AIs. Aesthetic: **cinematic design** — soft warm neutrals, one deep accent, full-bleed media, structured reading.
+This file is a stub so Next.js / Claude default loaders land on Meridian.  
+Do not invent color, radius, depth, or cinema laws — import from `@/lib/design`.
 
-## Frozen vs creative
+## Load order (must)
 
-- **Frozen:** neutrals, one accent, radius, depth, surface, cinema laws, bans
-- **Creative:** copy, IA, domain, frame sequence, which shadcn wholes
+1. `design.md` + `lib/design/`
+2. Relevant skill under `skills/meridian-*`
+3. Surface proof (`Workbench` / `ComposerShell`) when composing product UI
+4. `npm run check:design` + `npm run check:contrast` before done
 
-## Laws (short)
+## Skill loop
 
-1. Obey `design.md` + `@/lib/design`
-2. Soft neutrals — never pure white/black; one deep `--brand`
-3. Full-bleed via `BleedImage`; reading via `ReadingArticle`
-4. Cinema: one idea/frame, `svh`, no stickers
-5. shadcn only; icons from `@/lib/icons` (Phosphor); `data-surface` for density
-6. Skills live in `skills/` — browse at `/skills`; install via `npx skills add byronwade/ui.byronwade.com`
-7. Pass `npm run check:design`
+| Skill | Prove on site |
+| --- | --- |
+| `meridian-theme` | `/theme` |
+| `meridian-surface` | `/surfaces` |
+| `meridian-compose` | `/surfaces#proofs` |
+| `meridian-cinematic` | `/` home film |
+| `meridian-a11y` | `/theme#contrast` |
+
+Install: `npx skills add byronwade/ui.byronwade.com`

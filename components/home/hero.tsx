@@ -1,6 +1,10 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
 import { ProductFrame } from "@/components/cinematic/product-frame"
 import { Workbench } from "@/components/surfaces/workbench"
+import { defineCinemaFrame, proofs } from "@/lib/design"
+
+/** Typed hero frame — product/workbench subject, one idea. */
+const heroFrame = defineCinemaFrame(proofs.hero)
 
 /**
  * App-first hero — brand names the system; the workbench is the proof.
@@ -9,7 +13,7 @@ import { Workbench } from "@/components/surfaces/workbench"
 function Hero() {
   return (
     <CinemaTile
-      tone="paper"
+      tone={heroFrame.tone}
       layout="stack"
       subject={
         <ProductFrame className="translate-y-4 md:translate-y-8">
@@ -23,11 +27,11 @@ function Hero() {
         typed rules.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
-        <CinemaLink href="/surfaces" priority="primary">
-          Open surfaces
+        <CinemaLink href="/surfaces#proofs" priority="primary">
+          Open proofs
         </CinemaLink>
-        <CinemaLink href="/design" priority="secondary">
-          Design contract
+        <CinemaLink href="/#skills" priority="secondary">
+          Skill loop
         </CinemaLink>
       </div>
     </CinemaTile>

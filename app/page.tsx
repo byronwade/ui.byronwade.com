@@ -1,12 +1,13 @@
 import { Hero } from "@/components/home/hero"
 import { TileCraft } from "@/components/home/tile-craft"
 import { TileFocus } from "@/components/home/tile-focus"
+import { TileSkills } from "@/components/home/tile-skills"
 import { TileAgents } from "@/components/home/tile-agents"
 import { Closing } from "@/components/home/closing"
 
 /**
- * App-first film — Cursor-app density as the proof, not marketing spectacle.
- * Brand → neutrals → agent/composer → grammar → close.
+ * App-first film — full Meridian loop on stage.
+ * Compose → theme → cinema/agent → skills → grammar → close (a11y + install).
  */
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <TileCraft />
       <TileFocus />
+      <TileSkills />
       <TileAgents />
       <Closing />
     </main>

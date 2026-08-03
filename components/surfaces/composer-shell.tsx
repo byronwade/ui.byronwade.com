@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
+import { activity, bg, designCn, radiusIntent } from "@/lib/design"
 import { cn } from "@/lib/utils"
 
 const files = [
@@ -29,8 +30,10 @@ function ComposerShell({ className }: ComposerShellProps) {
   return (
     <Surface
       id="desktop"
-      className={cn(
-        "flex h-[32rem] overflow-hidden rounded-2xl bg-background edge md:h-[36rem]",
+      className={designCn(
+        "flex h-[32rem] overflow-hidden edge md:h-[36rem]",
+        radiusIntent("panel"),
+        bg("background"),
         className,
       )}
     >
@@ -44,7 +47,8 @@ function ComposerShell({ className }: ComposerShellProps) {
               <button
                 type="button"
                 className={cn(
-                  "flex h-7 w-full items-center gap-1.5 rounded-lg px-1.5 text-left text-[12px] tracking-tight",
+                  "flex h-7 w-full items-center gap-1.5 px-1.5 text-left text-[12px] tracking-tight",
+                  radiusIntent("control"),
                   file.active
                     ? "bg-brand/10 text-foreground"
                     : "text-muted-foreground hover:bg-muted/40 hover:text-foreground",
@@ -124,7 +128,11 @@ function ComposerShell({ className }: ComposerShellProps) {
               </span>
               <Badge
                 variant="outline"
-                className="ml-auto h-4 rounded-full border-transparent bg-activity-edit/80 px-1.5 font-mono text-[9px] text-foreground"
+                className={cn(
+                  "ml-auto h-4 border-transparent px-1.5 font-mono text-[9px] text-foreground opacity-80",
+                  radiusIntent("pill"),
+                  activity("edit"),
+                )}
               >
                 edit
               </Badge>
@@ -132,7 +140,10 @@ function ComposerShell({ className }: ComposerShellProps) {
             <div className="min-h-0 flex-1 space-y-2 overflow-hidden p-2">
               <article
                 data-provenance="user"
-                className="rounded-lg bg-card px-2.5 py-2 edge"
+                className={designCn(
+                  "bg-card px-2.5 py-2 edge",
+                  radiusIntent("control"),
+                )}
               >
                 <p className="font-mono text-[10px] text-muted-foreground">
                   You
@@ -144,7 +155,10 @@ function ComposerShell({ className }: ComposerShellProps) {
               </article>
               <article
                 data-provenance="assistant"
-                className="rounded-lg bg-card px-2.5 py-2 edge"
+                className={designCn(
+                  "bg-card px-2.5 py-2 edge",
+                  radiusIntent("control"),
+                )}
               >
                 <div className="flex items-center gap-1.5">
                   <CircleNotch className="size-3 animate-spin text-brand" />

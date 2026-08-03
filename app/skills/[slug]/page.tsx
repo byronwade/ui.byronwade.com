@@ -14,6 +14,7 @@ import {
   getSkillSlugs,
   type SkillSlug,
 } from "@/lib/skills/catalog"
+import { skillProofs } from "@/lib/site/skill-proofs"
 
 type SkillPageProps = {
   params: Promise<{ slug: string }>
@@ -42,6 +43,7 @@ export default async function SkillDetailPage({ params }: SkillPageProps) {
 
   const skill = await getSkill(slug)
   if (!skill) notFound()
+  const proof = skillProofs.find((p) => p.slug === skill.slug)
 
   return (
     <DocShell
@@ -59,6 +61,11 @@ export default async function SkillDetailPage({ params }: SkillPageProps) {
               Back
             </Link>
           </Button>
+          {proof ? (
+            <Button variant="default" size="default" asChild>
+              <Link href={proof.proveHref}>{proof.proveLabel}</Link>
+            </Button>
+          ) : null}
           <CopyButton value={skill.install} label="Install" size="default" />
         </>
       }
@@ -88,13 +95,36 @@ export default async function SkillDetailPage({ params }: SkillPageProps) {
             </CardTitle>
           </CardHeader>
         </Card>
+        {proof ? (
+          <Card className="py-0">
+            <CardHeader className="gap-1 py-4">
+              <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+                Prove on site · step {String(proof.step).padStart(2, "0")}
+              </p>
+              <CardTitle className="text-sm tracking-tight">
+                <Link
+                  href={proof.proveHref}
+                  className="transition-opacity hover:opacity-70"
+                >
+                  {proof.proveLabel}
+                </Link>
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">{proof.summary}</p>
+            </CardHeader>
+          </Card>
+        ) : null}
       </section>
 
       <article className="reading-ui mt-12">
         <MarkdownBody source={skill.body} />
       </article>
 
-      <div className="mt-14 border-t border-border/70 pt-8">
+      <div className="mt-14 flex flex-wrap gap-2 border-t border-border/70 pt-8">
+        {proof ? (
+          <Button variant="default" size="default" asChild>
+            <Link href={proof.proveHref}>{proof.proveLabel}</Link>
+          </Button>
+        ) : null}
         <Button variant="outline" size="default" asChild>
           <Link href="/skills">
             <CaretLeft className="size-4" data-icon="inline-start" />

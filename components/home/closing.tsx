@@ -24,8 +24,11 @@ function Closing() {
         <CinemaLink href="/skills" priority="primary">
           Install skills
         </CinemaLink>
-        <CinemaLink href="/theme" priority="secondary">
-          See the system
+        <CinemaLink href="/theme#contrast" priority="secondary">
+          Contrast audit
+        </CinemaLink>
+        <CinemaLink href="/system" priority="secondary">
+          System
         </CinemaLink>
       </div>
     </CinemaTile>

@@ -18,6 +18,9 @@ function TileCraft() {
         <CinemaLink href="/theme" priority="primary">
           Theme knobs
         </CinemaLink>
+        <CinemaLink href="/skills/meridian-theme" priority="secondary">
+          meridian-theme
+        </CinemaLink>
       </div>
     </CinemaTile>
   )

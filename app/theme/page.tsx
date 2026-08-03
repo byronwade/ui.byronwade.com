@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { DocShell } from "@/components/docs/doc-shell"
+import { SkillLoop } from "@/components/site/skill-loop"
+import { Workbench } from "@/components/surfaces/workbench"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -56,11 +58,40 @@ export default function ThemePage() {
             <Link href="/design">Design</Link>
           </Button>
           <Button variant="ghost" size="default" asChild>
-            <Link href="/surfaces">Surfaces</Link>
+            <Link href="/surfaces#proofs">Proofs</Link>
+          </Button>
+          <Button variant="ghost" size="default" asChild>
+            <Link href="/skills">Skills</Link>
           </Button>
         </>
       }
     >
+      <section>
+        <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
+          Skill loop
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Theme is step one — every Meridian skill has a live proof on this site.
+        </p>
+        <div className="mt-6">
+          <SkillLoop dense />
+        </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
+          Live workbench
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Compose proof on theme paper — tokens + object-bound AI together.
+        </p>
+        <div className="mt-6 overflow-hidden rounded-3xl bg-muted/20 edge">
+          <Workbench />
+        </div>
+      </section>
+
+      <Separator className="my-14" />
+
       <section>
         <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
           Accent
@@ -99,13 +130,13 @@ export default function ThemePage() {
         </Card>
       </section>
 
-      <section className="mt-14">
+      <section id="contrast" className="mt-14 scroll-mt-24">
         <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
           Contrast pairs
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Frozen pairs from lib/design/contrast.ts — checked by npm run
-          check:contrast.
+          meridian-a11y — frozen pairs from lib/design/contrast.ts, checked by
+          npm run check:contrast.
         </p>
         <ul className="mt-6 grid gap-2 sm:grid-cols-2">
           {contrastPairs.map((pair) => (

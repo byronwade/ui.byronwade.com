@@ -62,6 +62,15 @@ export const docs: readonly DocEntry[] = [
     navLabel: "Skills",
   },
   {
+    id: "system",
+    title: "System",
+    summary:
+      "Ranked influences + detailed layout, UX, motion, color, density, AI specs.",
+    href: "/system",
+    nav: true,
+    navLabel: "System",
+  },
+  {
     id: "for-agents",
     title: "Agents",
     summary: "Frozen vs creative, skills, agents, load order.",
@@ -80,13 +89,6 @@ export const docs: readonly DocEntry[] = [
     rawHref: "/architecture.md?raw=1",
     sourcePath: "docs/architecture.md",
     filename: "architecture.md",
-  },
-  {
-    id: "system",
-    title: "System",
-    summary:
-      "Ranked influences + detailed layout, UX, motion, color, density, AI specs.",
-    href: "/system",
   },
   {
     id: "llms",
