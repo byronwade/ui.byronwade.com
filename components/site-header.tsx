@@ -30,27 +30,33 @@ function SiteHeader() {
   const more = docs.filter((d) => !d.nav && d.filename)
 
   useEffect(() => {
-    const stages = Array.from(
-      document.querySelectorAll<HTMLElement>('[data-tone="theater"]'),
-    )
-    if (stages.length === 0) {
-      setOverTheater(false)
-      return
+    const update = () => {
+      const stages = document.querySelectorAll<HTMLElement>(
+        '[data-tone="theater"]',
+      )
+      if (stages.length === 0) {
+        setOverTheater(false)
+        return
+      }
+      // Theater owns the band under the fixed header.
+      let hit = false
+      for (const stage of stages) {
+        const rect = stage.getBoundingClientRect()
+        if (rect.top < 96 && rect.bottom > 180) {
+          hit = true
+          break
+        }
+      }
+      setOverTheater(hit)
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Prefer any theater stage that owns the upper viewport (under the header).
-        const hit = entries.some(
-          (entry) => entry.isIntersecting && entry.intersectionRatio >= 0.28,
-        )
-        setOverTheater(hit)
-      },
-      { threshold: [0.28, 0.45, 0.6], rootMargin: "-12% 0px -35% 0px" },
-    )
-
-    for (const stage of stages) observer.observe(stage)
-    return () => observer.disconnect()
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    window.addEventListener("resize", update)
+    return () => {
+      window.removeEventListener("scroll", update)
+      window.removeEventListener("resize", update)
+    }
   }, [pathname])
 
   return (
