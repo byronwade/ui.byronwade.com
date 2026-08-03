@@ -109,20 +109,23 @@ Every UI or token change must pass this audit (skill: `meridian-a11y`):
 8. **Mono for data** — IDs, counts, times, prices, model/tool names
 9. **Object-bound AI** — provenance + activity; no floating chatbot
 10. **Audit accessibility + contrast** on every change
-11. Pass **`npm run check:design`** and **`npm run check:contrast`**
+11. Pass **`npm run check:design`**, **`check:shell`**, and **`check:contrast`**
+12. **Shell rhythm** — wrap app chrome in `data-surface`; size/type via shell utilities
 
 ## MUST NOT (`banned` in grammar)
 
-raw-hex · arbitrary-color-utility · non-oklch-color · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · pure-white · pure-black · bright-neon-accent · cream-terracotta-cliche · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports · inset-hero-media · low-contrast-on-dock · foreground-opacity-cheat · direct-lucide-import · direct-phosphor-import
+raw-hex · arbitrary-color-utility · non-oklch-color · tailwind-shadow · dvh-viewport · font-bold-display · scroll-choreography · overlay-stickers-on-media · pure-white · pure-black · bright-neon-accent · cream-terracotta-cliche · second-accent · influence-brand-labels · floating-chatbot · nested-demo-scrollports · inset-hero-media · low-contrast-on-dock · foreground-opacity-cheat · direct-lucide-import · direct-phosphor-import · arbitrary-px-height · arbitrary-px-type · arbitrary-px-padding
 
-## Surfaces
+## Surfaces & shell rhythm
 
-| `data-surface` | Job | Controls |
-| --- | --- | --- |
-| `application` | Operate | 32px |
-| `marketing` | Present / cinema tiles | 36–40px CTAs |
-| `mobile` | Thumb-first | 44px |
-| `desktop` | Keyboard + pointer | 28–32px chrome |
+| `data-surface` | Job | Controls | Type UI |
+| --- | --- | ---: | ---: |
+| `application` | Operate | 32px | 14px |
+| `marketing` | Present / cinema tiles | 36–40px CTAs | 16px |
+| `mobile` | Thumb-first | 44px | 16px |
+| `desktop` | Keyboard + pointer | 28px chrome | 13px |
+
+**One shell contract:** spacing / sizing / type remap through CSS vars (`lib/design/shell.ts`). Use `h-control`, `h-row`, `shell-pad`, `shell-gap`, `type-ui` / `type-row` / `type-meta` / `type-label` — never invent off-scale `h-[NNpx]` / `text-[NNpx]` / `p-[NNpx]`. Proof: `/theme#shell-rhythm`.
 
 Shape (Fluent control vs layer): control `rounded-lg` · panel `rounded-2xl` · shell `rounded-3xl` · pill `rounded-full` (`radiusFor`). Base `--radius` ≈ Fluent Large (8px); layers scale from it.
 

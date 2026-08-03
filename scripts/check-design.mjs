@@ -116,6 +116,31 @@ const RULES = [
       "Brand on dock without theater lift — wrap in data-tone=theater or use dock tokens",
     include: /\.(tsx|ts)$/,
   },
+  {
+    id: "arbitrary-px-height",
+    re: /(?:^|[\s"'`])(?:h|min-h|max-h)-\[\d+(?:\.\d+)?px\]/,
+    message:
+      "Arbitrary px height — use h-control / h-row / h-(--control-h*) shell rhythm",
+    include: /\.(tsx|ts)$/,
+    exclude: SHADCN_UI,
+  },
+  {
+    id: "arbitrary-px-type",
+    // Closed chrome sizes 9–16px; prefer type-ui/row/meta/label under data-surface.
+    re: /(?:^|[\s"'`])text-\[(?!(?:9|10|11|12|13|14|15|16)px\b)\d+(?:\.\d+)?px\]/,
+    message:
+      "Off-scale px type — use type-ui / type-row / type-meta / type-label (or 9–16px chrome)",
+    include: /\.(tsx|ts)$/,
+    exclude: SHADCN_UI,
+  },
+  {
+    id: "arbitrary-px-padding",
+    re: /(?:^|[\s"'`])(?:p|px|py|pt|pb|pl|pr|gap)-\[\d+(?:\.\d+)?px\]/,
+    message:
+      "Arbitrary px padding/gap — use shell-pad / shell-gap or 4px scale utilities",
+    include: /\.(tsx|ts)$/,
+    exclude: SHADCN_UI,
+  },
 ]
 
 async function walk(dir, out = []) {

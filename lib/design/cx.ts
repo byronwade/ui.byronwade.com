@@ -129,7 +129,10 @@ export function activity(role: ActivityRole) {
   return activityMap[role]
 }
 
-/** Opinionated type recipes — creative content, frozen treatment. */
+/**
+ * Opinionated type recipes — frozen treatment.
+ * Body / label / data follow shell rhythm vars under `data-surface`.
+ */
 export function typeClass(role: TypeRole) {
   switch (role) {
     case "display":
@@ -137,15 +140,29 @@ export function typeClass(role: TypeRole) {
     case "title":
       return "font-medium tracking-[-0.035em]"
     case "body":
-      return "text-base leading-relaxed tracking-tight"
+      return "type-ui"
     case "label":
-      return "font-mono text-xs tracking-[0.18em] uppercase"
+      return "type-label text-muted-foreground"
     case "data":
-      return "font-mono text-xs tracking-tight"
+      return "type-meta text-muted-foreground"
     case "reading-ui":
       return "reading-ui"
     case "reading-prose":
       return "reading-prose"
+  }
+}
+
+/** Shell chrome type — ui / row / meta / label via surface CSS vars. */
+export function shellType(role: "ui" | "row" | "meta" | "label") {
+  switch (role) {
+    case "ui":
+      return "type-ui"
+    case "row":
+      return "type-row"
+    case "meta":
+      return "type-meta"
+    case "label":
+      return "type-label"
   }
 }
 

@@ -27,6 +27,10 @@ export const zones = {
     "cinematicLaws",
     "materialLaws",
     "designInfluences",
+    "shellRhythm",
+    "shellLaws",
+    "controlScale",
+    "spaceScale",
   ],
   creative: [
     "copy",

@@ -6,6 +6,7 @@ import { MobileFrame } from "@/components/surfaces/mobile-frame"
 import { DesktopFrame } from "@/components/surfaces/desktop-frame"
 import { SkillLoop } from "@/components/site/skill-loop"
 import { SurfaceStudio } from "@/components/site/surface-studio"
+import { ShellRhythmProof } from "@/components/site/shell-rhythm"
 import { DocShell } from "@/components/docs/doc-shell"
 import { Button } from "@/components/ui/button"
 import { proofs, designCn, radiusIntent, typeClass, text } from "@/lib/design"
@@ -65,6 +66,30 @@ export default function SurfacesPage() {
         </p>
         <div className="mt-8">
           <SurfaceStudio />
+        </div>
+      </section>
+
+      <section id="shell-rhythm" className="mt-16 scroll-mt-24">
+        <p
+          className={designCn(
+            typeClass("label"),
+            text("muted"),
+            "text-[10px] tracking-[0.14em]",
+          )}
+        >
+          Shell rhythm
+        </p>
+        <h2 className="mt-2 text-xl font-medium tracking-[-0.03em] md:text-2xl">
+          Same chrome, every shell
+        </h2>
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Spacing, control height, row height, and type stay clean because they
+          remap through{" "}
+          <span className="font-mono text-[12px]">data-surface</span> — not
+          one-off pixels.
+        </p>
+        <div className="mt-6">
+          <ShellRhythmProof />
         </div>
       </section>
 

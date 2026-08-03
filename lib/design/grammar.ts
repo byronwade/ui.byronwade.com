@@ -164,6 +164,9 @@ export const banned = [
   "foreground-opacity-cheat",
   "direct-lucide-import",
   "direct-phosphor-import",
+  "arbitrary-px-height",
+  "arbitrary-px-type",
+  "arbitrary-px-padding",
 ] as const
 
 export type BannedPattern = (typeof banned)[number]

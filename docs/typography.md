@@ -24,14 +24,19 @@
 | `reading-ui` | 16px sans | normal | 0 | Docs |
 | `reading-prose` | 18px serif | normal | 0 | Essays |
 
-## 3. Surface type
+## 3. Surface type (shell rhythm)
 
-| Surface | UI size | Notes |
-| --- | --- | --- |
-| `application` | 14px (0.875rem) | Dense |
-| `desktop` | 13px (0.8125rem) | Chrome |
-| `mobile` | 16px labels | Touch |
-| `marketing` | Display clamps + reading lanes | Film |
+Remapped by `data-surface` via `--type-ui` / `--type-row` / `--type-meta` / `--type-label`  
+(see `lib/design/shell.ts` + `.type-*` utilities).
+
+| Surface | UI | Row | Meta | Notes |
+| --- | ---: | ---: | ---: | --- |
+| `application` | 14 | 13 | 11 | Dense operate |
+| `desktop` | 13 | 12 | 10 | Compact chrome |
+| `mobile` | 16 | 15 | 12 | Touch floor |
+| `marketing` | 16 | 14 | 12 | Present + cinema |
+
+Prefer `typeClass("body"|"label"|"data")` or `shellType("ui"|"row"|"meta"|"label")` over raw `text-[NNpx]`.
 
 ## 4. Reading lanes
 

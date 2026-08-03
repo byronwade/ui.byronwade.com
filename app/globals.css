@@ -269,12 +269,31 @@
     }
   }
 
+  /*
+   * Shell rhythm — mirrored in lib/design/shell.ts → shellRhythm.
+   * Components use type-ui / h-row / shell-pad; surfaces remap vars.
+   */
+  :root {
+    --type-ui: 0.875rem;
+    --type-row: 0.8125rem;
+    --type-meta: 0.6875rem;
+    --type-label: 0.625rem;
+    --leading-ui: 1.35;
+    --leading-tight: 1.25;
+  }
+
   [data-surface="application"] {
     --control-h: 2rem;
     --row-h: 2.5rem;
     --surface-pad: 1.25rem;
     --surface-gap: 0.75rem;
-    font-size: 0.875rem;
+    --type-ui: 0.875rem;
+    --type-row: 0.8125rem;
+    --type-meta: 0.6875rem;
+    --type-label: 0.625rem;
+    --leading-ui: 1.35;
+    --leading-tight: 1.25;
+    font-size: var(--type-ui);
   }
 
   [data-surface="marketing"] {
@@ -282,6 +301,13 @@
     --row-h: 2.75rem;
     --surface-pad: 1.5rem;
     --surface-gap: 1.25rem;
+    --type-ui: 1rem;
+    --type-row: 0.875rem;
+    --type-meta: 0.75rem;
+    --type-label: 0.625rem;
+    --leading-ui: 1.45;
+    --leading-tight: 1.3;
+    font-size: var(--type-ui);
   }
 
   [data-surface="mobile"] {
@@ -289,7 +315,13 @@
     --row-h: 3.25rem;
     --surface-pad: 1rem;
     --surface-gap: 0.75rem;
-    font-size: 1rem;
+    --type-ui: 1rem;
+    --type-row: 0.9375rem;
+    --type-meta: 0.75rem;
+    --type-label: 0.6875rem;
+    --leading-ui: 1.4;
+    --leading-tight: 1.3;
+    font-size: var(--type-ui);
   }
 
   [data-surface="desktop"] {
@@ -297,11 +329,70 @@
     --row-h: 2rem;
     --surface-pad: 0.75rem;
     --surface-gap: 0.5rem;
-    font-size: 0.8125rem;
+    --type-ui: 0.8125rem;
+    --type-row: 0.75rem;
+    --type-meta: 0.625rem;
+    --type-label: 0.625rem;
+    --leading-ui: 1.3;
+    --leading-tight: 1.2;
+    font-size: var(--type-ui);
   }
 }
 
 @layer utilities {
+  /* Shell rhythm — always read surface CSS vars */
+  .type-ui {
+    font-size: var(--type-ui);
+    line-height: var(--leading-ui);
+    letter-spacing: -0.01em;
+  }
+
+  .type-row {
+    font-size: var(--type-row);
+    line-height: var(--leading-tight);
+    letter-spacing: -0.012em;
+  }
+
+  .type-meta {
+    font-family: var(--font-mono);
+    font-size: var(--type-meta);
+    line-height: var(--leading-tight);
+    letter-spacing: -0.01em;
+  }
+
+  .type-label {
+    font-family: var(--font-mono);
+    font-size: var(--type-label);
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .shell-pad {
+    padding: var(--surface-pad);
+  }
+
+  .shell-gap {
+    gap: var(--surface-gap);
+  }
+
+  .shell-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--surface-gap);
+    padding: var(--surface-pad);
+  }
+
+  .h-control {
+    height: var(--control-h);
+    min-height: var(--control-h);
+  }
+
+  .h-row {
+    height: var(--row-h);
+    min-height: var(--row-h);
+  }
+
   .edge {
     box-shadow: inset 0 0 0 1px
       color-mix(in oklch, var(--border) 72%, transparent);

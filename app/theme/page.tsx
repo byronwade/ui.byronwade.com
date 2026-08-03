@@ -3,6 +3,7 @@ import Link from "next/link"
 import { DocShell } from "@/components/docs/doc-shell"
 import { SkillLoop } from "@/components/site/skill-loop"
 import { ThemePlayground } from "@/components/site/theme-playground"
+import { ShellRhythmProof } from "@/components/site/shell-rhythm"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -25,6 +26,8 @@ import {
   materialLaws,
   radii,
   themeKnobs,
+  shellRhythm,
+  surfaces as surfaceIds,
 } from "@/lib/design"
 import { surfaces } from "@/lib/surfaces"
 import { densitySteps } from "@/lib/theme-showcase"
@@ -341,9 +344,55 @@ export default function ThemePage() {
         </div>
       </section>
 
+      <section className="mt-14" id="shell-rhythm">
+        <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
+          Shell rhythm
+        </h2>
+        <p className="mt-2 max-w-prose text-sm text-muted-foreground">
+          Same chrome across every app shell — spacing, control height, row
+          height, and type remap through{" "}
+          <span className="font-mono text-[12px]">data-surface</span>. No
+          off-scale pixel inventing.
+        </p>
+        <div className="mt-6">
+          <ShellRhythmProof />
+        </div>
+        <div className="mt-8 overflow-x-auto">
+          <table className="w-full min-w-[36rem] text-left text-sm">
+            <thead>
+              <tr className="border-b border-border type-meta text-muted-foreground">
+                <th className="py-2 pr-3 font-medium">Surface</th>
+                <th className="py-2 pr-3 font-medium">Control</th>
+                <th className="py-2 pr-3 font-medium">Row</th>
+                <th className="py-2 pr-3 font-medium">Pad / gap</th>
+                <th className="py-2 font-medium">Type ui / row / meta</th>
+              </tr>
+            </thead>
+            <tbody>
+              {surfaceIds.map((id) => {
+                const r = shellRhythm[id]
+                return (
+                  <tr key={id} className="border-b border-border/60">
+                    <td className="py-2.5 pr-3 font-mono text-[12px]">{id}</td>
+                    <td className="py-2.5 pr-3 type-meta">{r.controlPx}px</td>
+                    <td className="py-2.5 pr-3 type-meta">{r.rowPx}px</td>
+                    <td className="py-2.5 pr-3 type-meta">
+                      {r.padPx} / {r.gapPx}
+                    </td>
+                    <td className="py-2.5 type-meta">
+                      {r.typeUiPx} / {r.typeRowPx} / {r.typeMetaPx}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section className="mt-14">
         <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
-          Density
+          Control scale
         </h2>
         <ul className="mt-6 space-y-2">
           {densitySteps.map((step) => (

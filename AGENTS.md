@@ -20,7 +20,7 @@ Do not invent color, radius, depth, or cinema laws — import from `@/lib/design
 1. `design.md` + `lib/design/`
 2. Relevant skill under `skills/meridian-*`
 3. Surface proof (`Workbench` / `ComposerShell`) when composing product UI
-4. `npm run check:design` + `npm run check:contrast` before done
+4. `npm run check:design` + `check:shell` + `check:contrast` before done
 
 ## Skill loop
 
