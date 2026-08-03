@@ -47,10 +47,16 @@ function CatalogHero() {
             Browse systems
           </a>
           <a
-            href="#pricing"
+            href="/meridian/install"
             className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            Free · open source
+            Install Meridian
+          </a>
+          <a
+            href="#how-it-works"
+            className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          >
+            How it works
           </a>
         </div>
       </div>

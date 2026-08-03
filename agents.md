@@ -58,7 +58,7 @@ Skip a step → drift.
 
 **Skins:** `/` is the platform catalog (`:root` + platform chrome). Every `/{id}/**` route must wrap in `ContractFrame` so `[data-contract="{id}"]` tokens from `app/contract-skins.css` own the whole page — including chrome. Never style the homepage like Meridian (or any single contract).
 
-**DX on every contract:** `/install` (MCP · JSON API · npx skills · shadcn), `/ui` (shared `components/ui` gallery under the skin), `/surfaces` (shared app shells). Showcase modules live in `components/contracts/showcase/*` — never fork Buttons/Workbenches per DNA.
+**DX on every contract:** `/install` (MCP · JSON API · npx skills · shadcn), `/ui` (shared `components/ui` gallery under the skin), `/surfaces` (shared app shells), `/design` · `/skills` · `/system` · `/for-agents` (docs parity). Showcase modules live in `components/contracts/showcase/*` — never fork Buttons/Workbenches per DNA.
 
 ### Single source of truth
 

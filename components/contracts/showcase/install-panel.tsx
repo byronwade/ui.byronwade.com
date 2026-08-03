@@ -77,7 +77,7 @@ function InstallPanel({
             <CodeBlock code={install.skillsNpx} label="all skills" />
             <CodeBlock
               code={install.skillsNpxTheme}
-              label={`${install.id}-theme`}
+              label={install.themeSkillNote}
             />
           </CardContent>
         </Card>
@@ -168,6 +168,7 @@ function InstallPanel({
             <Separator />
             <CodeBlock code={install.shadcnInit} label="shadcn init" />
             <CodeBlock code={install.shadcnAdd} label="add primitives" />
+            <CodeBlock code={install.checkCli} label="local gates" />
           </CardContent>
         </Card>
       </div>
@@ -188,12 +189,19 @@ function InstallPanel({
           >
             app shells
           </Link>
-          , and{" "}
+          ,{" "}
           <Link
             href={install.pages.theme}
             className="text-foreground underline-offset-4 hover:underline"
           >
             theme
+          </Link>
+          , and{" "}
+          <Link
+            href={install.pages.design}
+            className="text-foreground underline-offset-4 hover:underline"
+          >
+            design.md
           </Link>{" "}
           — all styled with {install.name} tokens on this route.
         </p>

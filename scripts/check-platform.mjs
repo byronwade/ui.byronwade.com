@@ -2,7 +2,7 @@
 /**
  * Platform consistency gate — structural parity + slim consistency kit.
  */
-import { readFile, readdir } from "node:fs/promises"
+import { access, readFile, readdir } from "node:fs/promises"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -12,6 +12,35 @@ const hits = []
 async function read(rel) {
   return readFile(join(ROOT, rel), "utf8")
 }
+
+async function exists(rel) {
+  try {
+    await access(join(ROOT, rel))
+    return true
+  } catch {
+    return false
+  }
+}
+
+/** Every DNA id must ship these page slots (see lib/contracts/routes.ts). */
+const REQUIRED_CONTRACT_SEGMENTS = [
+  "",
+  "install",
+  "ui",
+  "theme",
+  "surfaces",
+  "design",
+  "skills",
+  "system",
+  "for-agents",
+]
+
+const REQUIRED_MACHINE_FILES = [
+  "design.md",
+  "agents.md",
+  "architecture.md",
+  "llms.txt",
+]
 
 const skeleton = await read("lib/platform/skeleton.ts")
 const consistency = await read("lib/platform/consistency.ts")
@@ -90,6 +119,50 @@ for (const id of dnaIds) {
   if (!index.includes(`${id}Dna`) && !index.includes(`"${id}"`)) {
     hits.push(`dna/index.ts: must register ${id}`)
   }
+}
+
+for (const id of dnaIds) {
+  if (!(await exists(`app/${id}/layout.tsx`))) {
+    hits.push(`app/${id}/layout.tsx: missing ContractFrame layout`)
+  }
+  for (const seg of REQUIRED_CONTRACT_SEGMENTS) {
+    const pageRel = seg
+      ? `app/${id}/${seg}/page.tsx`
+      : `app/${id}/page.tsx`
+    if (!(await exists(pageRel))) {
+      hits.push(`${pageRel}: required ROUTE_SLOTS page missing`)
+    }
+  }
+  for (const file of REQUIRED_MACHINE_FILES) {
+    const routeRel = `app/${id}/${file}/route.ts`
+    if (!(await exists(routeRel))) {
+      hits.push(`${routeRel}: required MACHINE_FILES handler missing`)
+    }
+  }
+  if (!(await exists(`app/${id}/system/[slug]/page.tsx`))) {
+    hits.push(`app/${id}/system/[slug]/page.tsx: system doc page missing`)
+  }
+  if (!(await exists(`app/${id}/system/[slug]/raw/route.ts`))) {
+    hits.push(`app/${id}/system/[slug]/raw/route.ts: system raw route missing`)
+  }
+}
+
+const routesHelper = await read("lib/contracts/routes.ts")
+if (!routesHelper.includes("REQUIRED_CONTRACT_SEGMENTS")) {
+  hits.push("lib/contracts/routes.ts: must export REQUIRED_CONTRACT_SEGMENTS")
+}
+if (!routesHelper.includes("advertisedThemeSkill")) {
+  hits.push("lib/contracts/routes.ts: must export advertisedThemeSkill")
+}
+const installSrc = await read("lib/contracts/install.ts")
+if (!installSrc.includes("themeSkillNote") || !installSrc.includes("checkCli")) {
+  hits.push("lib/contracts/install.ts: must expose themeSkillNote + checkCli")
+}
+if (!(await exists("lib/contracts/machine-docs.ts"))) {
+  hits.push("lib/contracts/machine-docs.ts: missing machine markdown generators")
+}
+if (!(await exists("lib/contracts/machine-route.ts"))) {
+  hits.push("lib/contracts/machine-route.ts: missing shared negotiated GET helper")
 }
 
 if (!catalog.includes("listDna") || !catalog.includes("pathTemplates")) {

@@ -11,8 +11,10 @@ const steps = [
   },
   {
     n: "03",
-    title: "Install the MCP",
-    body: "Agents get the same architecture everywhere — tools, JSON keys, recipes — with aesthetics locked to the contract you chose.",
+    title: "Install MCP · API · npx",
+    body: "Same architecture on every contract — CONTRACT_ID selects DNA. Start with /meridian/install or any /{id}/install page.",
+    href: "/meridian/install",
+    cta: "Open Meridian install",
   },
 ] as const
 
@@ -33,7 +35,8 @@ function HowItWorks() {
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
           No guessing which aesthetic you opened — the route owns the skin
-          end-to-end.
+          end-to-end. Install surface is identical under every{" "}
+          <span className="font-mono text-foreground">/{`{id}`}/install</span>.
         </p>
         <ol className="mt-12 grid gap-0 border border-border/80 md:grid-cols-3">
           {steps.map((step, i) => (
@@ -54,6 +57,14 @@ function HowItWorks() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {step.body}
               </p>
+              {"href" in step && step.href ? (
+                <a
+                  href={step.href}
+                  className="mt-4 inline-flex font-mono text-[12px] text-foreground underline-offset-4 hover:underline"
+                >
+                  {step.cta}
+                </a>
+              ) : null}
             </li>
           ))}
         </ol>

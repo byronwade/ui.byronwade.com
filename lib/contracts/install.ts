@@ -3,8 +3,9 @@
  * Same shape for Meridian / Harbor / Atlas / Vellum — only ids change.
  */
 
-import { MCP_TOOLS, contractUrls, pathTemplates } from "@/lib/platform/skeleton"
+import { advertisedThemeSkill } from "@/lib/contracts/routes"
 import { getDna } from "@/lib/contracts/dna"
+import { MCP_TOOLS, contractUrls, pathTemplates } from "@/lib/platform/skeleton"
 
 const SITE = "https://ui.byronwade.com"
 const REPO = "byronwade/ui.byronwade.com"
@@ -15,6 +16,7 @@ export type ContractInstall = {
   status: string
   skillsNpx: string
   skillsNpxTheme: string
+  themeSkillNote: string
   mcpCommand: string
   mcpCursorJson: string
   contractJsonUrl: string
@@ -35,6 +37,7 @@ export type ContractInstall = {
     theme: string
     surfaces: string
     agents: string
+    design: string
   }
 }
 
@@ -45,16 +48,15 @@ export function getContractInstall(contractId: string): ContractInstall | null {
   const urls = contractUrls(dna.id, SITE)
   const base = pathTemplates.base(dna.id)
   const mcpCommand = `CONTRACT_ID=${dna.id} node packages/contract-mcp/server.mjs`
+  const themeSkill = advertisedThemeSkill(dna.id)
+  const themeIsNative = themeSkill === `${dna.id}-theme`
 
   const mcpCursorJson = JSON.stringify(
     {
       mcpServers: {
         [`${dna.id}-contract`]: {
           command: "node",
-          args: [
-            // Clone the repo (or point at your checkout) then:
-            "packages/contract-mcp/server.mjs",
-          ],
+          args: ["packages/contract-mcp/server.mjs"],
           env: {
             CONTRACT_ID: dna.id,
           },
@@ -70,7 +72,10 @@ export function getContractInstall(contractId: string): ContractInstall | null {
     name: dna.name,
     status: dna.status,
     skillsNpx: `npx skills add ${REPO}`,
-    skillsNpxTheme: `npx skills add ${REPO} --skill ${dna.id}-theme`,
+    skillsNpxTheme: `npx skills add ${REPO} --skill ${themeSkill}`,
+    themeSkillNote: themeIsNative
+      ? `${dna.name} theme skill`
+      : `Platform theme skill (${themeSkill}) — DNA skins via CONTRACT_ID=${dna.id}`,
     mcpCommand,
     mcpCursorJson,
     contractJsonUrl: urls.contract,
@@ -83,7 +88,7 @@ export function getContractInstall(contractId: string): ContractInstall | null {
     },
     shadcnInit: "npx shadcn@latest init -d --base radix",
     shadcnAdd: "npx shadcn@latest add button card input table tabs dialog",
-    checkCli: `npm run meridian-check`,
+    checkCli: "npm run check:meridian",
     tools: MCP_TOOLS,
     pages: {
       install: `${base}/install`,
@@ -91,6 +96,7 @@ export function getContractInstall(contractId: string): ContractInstall | null {
       theme: `${base}/theme`,
       surfaces: `${base}/surfaces`,
       agents: `${base}/for-agents`,
+      design: `${base}/design`,
     },
   }
 }
