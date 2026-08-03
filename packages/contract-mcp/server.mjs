@@ -8,7 +8,7 @@
  * CONTRACT_ID selects DNA (default: meridian). Fetches live
  * /r/{id}.contract.json so it works from any project via npx.
  *
- * Tools: get_contract · resolve_token · validate_ui · list_primitives · get_recipe
+ * Tools: get_contract · resolve_token · validate_ui · list_primitives · get_recipe · apply_prefs
  * Prompts: build_surface · done_gate
  * Resources: contract://kit · contract://mandate
  */
@@ -29,7 +29,82 @@ const MCP_TOOLS = [
   "validate_ui",
   "list_primitives",
   "get_recipe",
+  "apply_prefs",
 ]
+
+const FALLBACK_PREFS = {
+  defaults: { brand: "teal", radius: "compact", paper: "warm" },
+  brand: [
+    {
+      id: "teal",
+      label: "Ink teal",
+      brand: "oklch(0.42 0.09 200)",
+      brandFg: "oklch(0.97 0.01 85)",
+      brandMuted: "oklch(0.93 0.03 200)",
+      accent: "oklch(0.93 0.02 200)",
+    },
+    {
+      id: "slate",
+      label: "Slate",
+      brand: "oklch(0.42 0.08 250)",
+      brandFg: "oklch(0.97 0.01 85)",
+      brandMuted: "oklch(0.93 0.03 250)",
+      accent: "oklch(0.93 0.02 250)",
+    },
+    {
+      id: "moss",
+      label: "Moss",
+      brand: "oklch(0.42 0.08 155)",
+      brandFg: "oklch(0.97 0.01 85)",
+      brandMuted: "oklch(0.93 0.03 155)",
+      accent: "oklch(0.93 0.02 155)",
+    },
+    {
+      id: "wine",
+      label: "Wine",
+      brand: "oklch(0.42 0.09 15)",
+      brandFg: "oklch(0.97 0.01 85)",
+      brandMuted: "oklch(0.93 0.03 15)",
+      accent: "oklch(0.93 0.02 15)",
+    },
+  ],
+  radius: [
+    { id: "compact", label: "Compact", value: "0.375rem" },
+    { id: "default", label: "Default", value: "0.5rem" },
+    { id: "soft", label: "Soft", value: "0.75rem" },
+  ],
+  paper: [
+    {
+      id: "warm",
+      label: "Warm paper",
+      background: "oklch(0.965 0.01 72)",
+      foreground: "oklch(0.28 0.02 55)",
+      card: "oklch(0.98 0.008 72)",
+    },
+    {
+      id: "cool",
+      label: "Cool paper",
+      background: "oklch(0.96 0.01 230)",
+      foreground: "oklch(0.28 0.02 240)",
+      card: "oklch(0.98 0.008 230)",
+    },
+    {
+      id: "night",
+      label: "Night",
+      background: "oklch(0.22 0.016 50)",
+      foreground: "oklch(0.94 0.01 75)",
+      card: "oklch(0.27 0.016 50)",
+    },
+  ],
+  notPrefs: [
+    "Freeform hex / OKLCH color pickers",
+    "Second brand accent",
+    "Layout builders or preferred-layout marketplaces",
+    "Animation catalogs as user settings",
+    "Per-component theme overrides",
+  ],
+  applyTool: "apply_prefs",
+}
 
 const FALLBACK_MANDATE = {
   purpose:
@@ -223,6 +298,127 @@ function primitiveEntries(kit) {
   }))
 }
 
+function prefsFromKit(kit) {
+  return kit.prefs ?? FALLBACK_PREFS
+}
+
+function applyPrefs(kit, args = {}) {
+  const prefs = prefsFromKit(kit)
+  const hits = []
+  const brandId = args.brand ?? prefs.defaults?.brand ?? "teal"
+  const radiusId = args.radius ?? prefs.defaults?.radius ?? "compact"
+  const paperId = args.paper ?? prefs.defaults?.paper ?? "warm"
+  const brand = (prefs.brand ?? []).find((p) => p.id === brandId)
+  const radius = (prefs.radius ?? []).find((p) => p.id === radiusId)
+  const paper = (prefs.paper ?? []).find((p) => p.id === paperId)
+
+  if (!brand) {
+    hits.push({
+      ban: "unknown-brand",
+      fix: `Use brand: ${(prefs.brand ?? []).map((p) => p.id).join(" | ")}`,
+    })
+  }
+  if (!radius) {
+    hits.push({
+      ban: "unknown-radius",
+      fix: `Use radius: ${(prefs.radius ?? []).map((p) => p.id).join(" | ")}`,
+    })
+  }
+  if (!paper) {
+    hits.push({
+      ban: "unknown-paper",
+      fix: `Use paper: ${(prefs.paper ?? []).map((p) => p.id).join(" | ")}`,
+    })
+  }
+  if (args.surface !== undefined) {
+    const allowed = ["application", "marketing", "mobile", "desktop"]
+    if (!allowed.includes(args.surface)) {
+      hits.push({
+        ban: "unknown-surface",
+        fix: `surface?: ${allowed.join(" | ")}`,
+      })
+    }
+  }
+  for (const key of Object.keys(args)) {
+    if (!["brand", "radius", "paper", "surface", "contractId"].includes(key)) {
+      hits.push({
+        ban: "unknown-pref-key",
+        fix: `Remove "${key}" — layout/motion/colors are not freeform prefs`,
+      })
+    }
+  }
+  if (hits.length) {
+    return {
+      ok: false,
+      hits,
+      catalog: {
+        brand: (prefs.brand ?? []).map((p) => ({ id: p.id, label: p.label })),
+        radius: (prefs.radius ?? []).map((p) => ({ id: p.id, label: p.label })),
+        paper: (prefs.paper ?? []).map((p) => ({ id: p.id, label: p.label })),
+        defaults: prefs.defaults,
+        notPrefs: prefs.notPrefs,
+      },
+      next: "Fix ids, then call apply_prefs again.",
+    }
+  }
+
+  const selection = {
+    contractId: args.contractId ?? kit.id ?? CONTRACT_ID,
+    brand: brandId,
+    radius: radiusId,
+    paper: paperId,
+    ...(args.surface ? { surface: args.surface } : {}),
+  }
+
+  const vars = {
+    "--brand": brand.brand,
+    "--brand-foreground": brand.brandFg,
+    "--brand-muted": brand.brandMuted,
+    "--accent": brand.accent,
+    "--primary": brand.brand,
+    "--primary-foreground": brand.brandFg,
+    "--ring": brand.brand,
+    "--success": brand.brand,
+    "--chart-1": brand.brand,
+    "--sidebar-primary": brand.brand,
+    "--sidebar-ring": brand.brand,
+    "--background": paper.background,
+    "--foreground": paper.foreground,
+    "--card": paper.card,
+    "--card-foreground": paper.foreground,
+    "--popover": paper.card,
+    "--popover-foreground": paper.foreground,
+    "--radius": radius.value,
+  }
+  const lines = Object.entries(vars).map(([k, v]) => `  ${k}: ${v};`)
+  const colorScheme = paperId === "night" ? "dark" : "light"
+  const css = `/* contract-prefs — closed preset ids only. Re-run apply_prefs to change.
+ * ${JSON.stringify(selection)}
+ */
+:root {
+  color-scheme: ${colorScheme};
+${lines.join("\n")}
+}
+`
+
+  return {
+    ok: true,
+    prefs: selection,
+    files: {
+      css: { path: "app/contract-prefs.css", contents: css },
+      json: {
+        path: "contract.prefs.json",
+        contents: `${JSON.stringify(selection, null, 2)}\n`,
+      },
+    },
+    importHint:
+      'Add to global CSS: @import "./contract-prefs.css"; (path relative to your styles entry)',
+    instruction:
+      "Write files.prefs.css into the project, import it, keep JSON for agents. Layout shells and motion stay laws — not prefs. Then validate_ui on new UI.",
+    notPrefs: prefs.notPrefs,
+  }
+}
+
 function toolList() {
   return [
     {
@@ -271,6 +467,27 @@ function toolList() {
         type: "object",
         properties: { id: { type: "string" } },
         required: ["id"],
+      },
+    },
+    {
+      name: "apply_prefs",
+      description:
+        "Apply closed theme prefs (brand | radius | paper preset ids only). Returns CSS + JSON to write into the project. Rejects freeform colors. Layout/animation are NOT prefs — use recipes + motion laws.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          brand: { type: "string", description: "teal | slate | moss | wine" },
+          radius: {
+            type: "string",
+            description: "compact | default | soft",
+          },
+          paper: { type: "string", description: "warm | cool | night" },
+          surface: {
+            type: "string",
+            enum: ["application", "marketing", "mobile", "desktop"],
+          },
+          contractId: { type: "string" },
+        },
       },
     },
   ]
@@ -490,6 +707,23 @@ async function callTool(name, args = {}) {
           must: r.must,
           never: r.never,
         })),
+        prefs: {
+          defaults: prefsFromKit(kit).defaults,
+          brand: (prefsFromKit(kit).brand ?? []).map((p) => ({
+            id: p.id,
+            label: p.label,
+          })),
+          radius: (prefsFromKit(kit).radius ?? []).map((p) => ({
+            id: p.id,
+            label: p.label,
+          })),
+          paper: (prefsFromKit(kit).paper ?? []).map((p) => ({
+            id: p.id,
+            label: p.label,
+          })),
+          notPrefs: prefsFromKit(kit).notPrefs,
+          applyTool: "apply_prefs",
+        },
         beforeUi: kit.mandate?.beforeUi ?? FALLBACK_MANDATE.beforeUi,
         beforeDone: kit.mandate?.beforeDone ?? FALLBACK_MANDATE.beforeDone,
       })
@@ -590,6 +824,9 @@ async function callTool(name, args = {}) {
       })
     }
 
+    case "apply_prefs":
+      return withMandate(kit, applyPrefs(kit, args))
+
     default:
       return { error: `Unhandled tool: ${name}` }
   }
@@ -616,6 +853,7 @@ async function handle(message) {
             "Fail-closed design-contract MCP (open source).",
             "Unlike shadcn MCP (component install), this server is the consistency law.",
             "REQUIRED FIRST: get_contract. REQUIRED BEFORE DONE: validate_ui.",
+            "Closed theme tweaks: apply_prefs({ brand, radius, paper }). Layout/motion are laws, not prefs.",
             "Prompts: build_surface, done_gate. Resources: contract://kit, contract://mandate.",
             `CONTRACT_ID=${CONTRACT_ID}. Kit URL: ${CONTRACT_URL}`,
           ].join(" "),

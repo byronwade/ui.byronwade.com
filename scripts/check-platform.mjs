@@ -77,7 +77,10 @@ const toolMatch = skeleton.match(
 const tools = toolMatch
   ? [...toolMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1])
   : []
-if (tools.length < 5) hits.push("skeleton.ts: MCP_TOOLS incomplete")
+if (tools.length < 6) hits.push("skeleton.ts: MCP_TOOLS incomplete")
+if (!tools.includes("apply_prefs")) {
+  hits.push("skeleton.ts: MCP_TOOLS must include apply_prefs for closed theme tweaks")
+}
 
 for (const tool of tools) {
   if (!sharedMcp.includes(`"${tool}"`) && !sharedMcp.includes(`'${tool}'`)) {
@@ -93,6 +96,9 @@ if (!sharedMcp.includes("REQUIRED FIRST") && !sharedMcp.includes("get_contract")
 }
 if (!sharedMcp.includes("REQUIRED BEFORE DONE") && !sharedMcp.includes("validate_ui")) {
   hits.push("contract-mcp: validate_ui must be required before done")
+}
+if (!sharedMcp.includes("apply_prefs") || !sharedMcp.includes("unknown-brand")) {
+  hits.push("contract-mcp: apply_prefs must fail closed on unknown preset ids")
 }
 if (!sharedMcp.includes("prompts/list") || !sharedMcp.includes("build_surface")) {
   hits.push("contract-mcp: must expose MCP prompts (build_surface)")

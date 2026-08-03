@@ -30,6 +30,13 @@ import {
   radii,
   surfaces,
 } from "@/lib/design/grammar"
+import {
+  brandPresets,
+  knobDefaults,
+  paperPresets,
+  radiusPresets,
+} from "@/lib/design/knobs"
+import { prefsNotAllowed } from "@/lib/design/prefs"
 import { typesetPresets } from "@/lib/design/typeset"
 
 export function platformBlock() {
@@ -89,6 +96,15 @@ export type ContractJson = {
   consistencyBans: readonly string[]
   primitives: readonly string[]
   recipes: ReturnType<typeof compactRecipes>
+  /** Closed consumer tweaks — brand/radius/paper only (not layout/motion). */
+  prefs: {
+    defaults: typeof knobDefaults
+    brand: typeof brandPresets
+    radius: typeof radiusPresets
+    paper: typeof paperPresets
+    notPrefs: typeof prefsNotAllowed
+    applyTool: "apply_prefs"
+  }
 }
 
 export type LiveGrammar = {
@@ -144,6 +160,14 @@ export function buildContractEnvelope(
     consistencyBans,
     primitives: approvedPrimitives,
     recipes: compactRecipes(),
+    prefs: {
+      defaults: knobDefaults,
+      brand: brandPresets,
+      radius: radiusPresets,
+      paper: paperPresets,
+      notPrefs: prefsNotAllowed,
+      applyTool: "apply_prefs",
+    },
   }
 }
 

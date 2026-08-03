@@ -49,7 +49,10 @@ Enable both servers in Cursor Settings → MCP.
 | `resolve_token` | Closed color / radius / depth / surface |
 | `list_primitives` | Approved shadcn atoms + import/add mapping |
 | `get_recipe` | Task recipes (`list-resource`, `agent-rail`, …) |
+| `apply_prefs` | Closed theme tweaks (`brand` · `radius` · `paper` ids) → CSS/JSON |
 | `validate_ui` | **Required before done** — lint className / snippets |
+
+**Not prefs:** layout builders, animation catalogs, freeform colors — those stay laws.
 
 ## Prompts · resources
 

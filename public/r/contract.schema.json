@@ -104,6 +104,18 @@
           "never": { "type": "array", "items": { "type": "string" } }
         }
       }
+    },
+    "prefs": {
+      "type": "object",
+      "description": "Closed consumer tweaks — brand/radius/paper only",
+      "properties": {
+        "defaults": { "type": "object" },
+        "brand": { "type": "array" },
+        "radius": { "type": "array" },
+        "paper": { "type": "array" },
+        "notPrefs": { "type": "array", "items": { "type": "string" } },
+        "applyTool": { "const": "apply_prefs" }
+      }
     }
   },
   "additionalProperties": true

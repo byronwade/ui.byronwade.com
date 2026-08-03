@@ -19,6 +19,7 @@ const ALLOWED = new Set([
   "docs/typography.md",
   "docs/density.md",
   "docs/ai-surfaces.md",
+  "docs/prefs.md",
   "docs/meridian.md",
   "docs/sources.md",
   "skills/meridian-theme/SKILL.md",

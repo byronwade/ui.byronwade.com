@@ -114,6 +114,7 @@ export function getContractInstall(contractId: string): ContractInstall | null {
     checkCli: "npm run check:platform",
     agentLoop: [
       "get_contract — load must / mustNot + closed tokens (REQUIRED FIRST)",
+      "apply_prefs — optional closed brand/radius/paper tweak (not layout/motion)",
       "get_recipe — pick list-resource / agent-rail / … when it fits",
       "list_primitives + shadcn add — compose approved atoms only",
       "resolve_token — never invent OKLCH / radii / depth",

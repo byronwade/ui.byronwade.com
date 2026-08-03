@@ -17,6 +17,7 @@ const MCP_TOOLS = [
   "validate_ui",
   "list_primitives",
   "get_recipe",
+  "apply_prefs",
 ]
 
 const CONTRACT_JSON_KEYS = [
@@ -35,6 +36,7 @@ const CONTRACT_JSON_KEYS = [
   "consistencyBans",
   "primitives",
   "recipes",
+  "prefs",
 ]
 
 async function readTsStringArray(rel, exportName) {
@@ -160,6 +162,53 @@ const recipesSrc = await readFile(
 )
 const recipes = parseRecipes(recipesSrc)
 
+async function readConstArray(rel, exportName) {
+  const src = await readFile(join(ROOT, rel), "utf8")
+  const m = src.match(
+    new RegExp(`export const ${exportName} = (\\[[\\s\\S]*?\\]) as const`),
+  )
+  if (!m) return []
+  return Function(`"use strict"; return (${m[1]})`)()
+}
+
+async function readConstObject(rel, exportName) {
+  const src = await readFile(join(ROOT, rel), "utf8")
+  const m = src.match(
+    new RegExp(
+      `export const ${exportName} = (\\{[\\s\\S]*?\\}) as const satisfies`,
+    ),
+  )
+  if (!m) {
+    const m2 = src.match(
+      new RegExp(`export const ${exportName} = (\\{[\\s\\S]*?\\}) as const`),
+    )
+    if (!m2) return {}
+    return Function(`"use strict"; return (${m2[1]})`)()
+  }
+  return Function(`"use strict"; return (${m[1]})`)()
+}
+
+const brandPresets = await readConstArray("lib/design/knobs.ts", "brandPresets")
+const radiusPresets = await readConstArray(
+  "lib/design/knobs.ts",
+  "radiusPresets",
+)
+const paperPresets = await readConstArray("lib/design/knobs.ts", "paperPresets")
+const knobDefaults = await readConstObject("lib/design/knobs.ts", "knobDefaults")
+const prefsNotAllowed = await readConstArray(
+  "lib/design/prefs.ts",
+  "prefsNotAllowed",
+)
+
+const prefsBlock = {
+  defaults: knobDefaults,
+  brand: brandPresets,
+  radius: radiusPresets,
+  paper: paperPresets,
+  notPrefs: prefsNotAllowed,
+  applyTool: "apply_prefs",
+}
+
 const dnas = await readDnaFiles()
 await mkdir(outDir, { recursive: true })
 
@@ -209,6 +258,7 @@ for (const dna of dnas) {
     consistencyBans,
     primitives,
     recipes,
+    prefs: prefsBlock,
     generatedAt: new Date().toISOString(),
   }
 
@@ -232,6 +282,7 @@ await writeFile(
         must: r.must,
         never: r.never,
       })),
+      prefs: prefsBlock,
       generatedAt: new Date().toISOString(),
     },
     null,
