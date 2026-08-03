@@ -96,10 +96,9 @@ export const CONTRACT_JSON_KEYS = [
 export const pathTemplates = {
   /** App route base */
   base: (id: string) => `/${id}`,
-  /** Machine contract JSON (public + route) */
+  /** Machine contract JSON — static only (never dual App Router; conflicts with public/) */
   contractJson: (id: string) => `/r/${id}.contract.json`,
   contractJsonFile: (id: string) => `public/r/${id}.contract.json`,
-  contractJsonRoute: (id: string) => `app/r/${id}.contract.json/route.ts`,
   /** Negotiated machine docs */
   machine: (id: string, file: MachineFile) => `/${id}/${file}`,
   /** DNA pack (the only place aesthetic may diverge) */

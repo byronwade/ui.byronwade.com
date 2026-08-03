@@ -109,7 +109,7 @@ function KeyboardProof({ className }: { className?: string }) {
           type="button"
           data-state={selected ? "selected" : undefined}
           tabIndex={0}
-          aria-selected={selected}
+          aria-pressed={selected}
           onClick={() => {
             setSelected(true)
             mark("row")
