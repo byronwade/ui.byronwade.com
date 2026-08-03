@@ -32,9 +32,10 @@
 
 1. [`design.md`](/design.md) — contract
 2. `@/lib/design` — `grammar` · `recipes` · `contrast` · `cx`
-3. Matching skill under `skills/<name>/SKILL.md`
-4. Proof: `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
-5. Gates: `npm run check:design && npm run check:contrast`
+3. Research specs when composing space/motion/AI — [`/system`](/system) (`influences` → `layout` · `ux` · `animations` · …)
+4. Matching skill under `skills/<name>/SKILL.md`
+5. Proof: `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
+6. Gates: `npm run check:design && npm run check:contrast`
 
 Skip a step → drift.
 

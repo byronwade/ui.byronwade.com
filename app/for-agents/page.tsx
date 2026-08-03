@@ -134,6 +134,12 @@ export default async function ForAgentsPage() {
               label: "architecture.md",
               summary: architecture.summary,
             },
+            {
+              href: "/system",
+              label: "system specs",
+              summary:
+                "Ranked influences + layout, UX, animations, color, density, AI.",
+            },
           ]}
         />
       </section>

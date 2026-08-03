@@ -138,8 +138,9 @@ Shape (Fluent control vs layer): control `rounded-lg` · panel `rounded-2xl` · 
 1. `design.md` (this file)
 2. `lib/design/` (typed grammar + recipes)
 3. [`agents.md`](/agents.md) — strict operating manual
-4. Matching skill (`skills/…`)
-5. Proof: `components/surfaces/workbench.tsx` · `composer-shell.tsx`
+4. Research specs when needed — [`/system`](/system) (`influences`, `layout`, `ux`, `animations`, …)
+5. Matching skill (`skills/…`)
+6. Proof: `components/surfaces/workbench.tsx` · `composer-shell.tsx`
 
 ## Endpoints
 

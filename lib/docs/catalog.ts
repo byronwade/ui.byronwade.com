@@ -11,6 +11,7 @@ export type DocId =
   | "theme"
   | "surfaces"
   | "skills"
+  | "system"
 
 export type DocEntry = {
   id: DocId
@@ -79,6 +80,13 @@ export const docs: readonly DocEntry[] = [
     rawHref: "/architecture.md?raw=1",
     sourcePath: "docs/architecture.md",
     filename: "architecture.md",
+  },
+  {
+    id: "system",
+    title: "System",
+    summary:
+      "Ranked influences + detailed layout, UX, motion, color, density, AI specs.",
+    href: "/system",
   },
   {
     id: "llms",
