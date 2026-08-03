@@ -40,12 +40,13 @@ function SiteHeader() {
 
     const observer = new IntersectionObserver(
       (entries) => {
+        // Prefer any theater stage that owns the upper viewport (under the header).
         const hit = entries.some(
-          (entry) => entry.isIntersecting && entry.intersectionRatio >= 0.45,
+          (entry) => entry.isIntersecting && entry.intersectionRatio >= 0.28,
         )
         setOverTheater(hit)
       },
-      { threshold: [0.45, 0.6] },
+      { threshold: [0.28, 0.45, 0.6], rootMargin: "-12% 0px -35% 0px" },
     )
 
     for (const stage of stages) observer.observe(stage)
