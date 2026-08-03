@@ -5,9 +5,8 @@ import { TileAgents } from "@/components/home/tile-agents"
 import { Closing } from "@/components/home/closing"
 
 /**
- * Cinematic film — Apple product-page rhythm.
- * Brand → craft → product proof → agents → close.
- * System docs live on /theme and /for-agents.
+ * App-first film — Cursor-app density as the proof, not marketing spectacle.
+ * Brand → neutrals → agent/composer → grammar → close.
  */
 export default function Home() {
   return (

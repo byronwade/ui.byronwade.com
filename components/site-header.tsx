@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { List, X } from "@/lib/icons"
@@ -22,27 +22,61 @@ function linkActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
+/** Quiet app chrome — denser than marketing pills; adapts over theater stages. */
 function SiteHeader() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [overTheater, setOverTheater] = useState(false)
   const more = docs.filter((d) => !d.nav && d.filename)
+
+  useEffect(() => {
+    const stages = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-tone="theater"]'),
+    )
+    if (stages.length === 0) {
+      setOverTheater(false)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const hit = entries.some(
+          (entry) => entry.isIntersecting && entry.intersectionRatio >= 0.45,
+        )
+        setOverTheater(hit)
+      },
+      { threshold: [0.45, 0.6] },
+    )
+
+    for (const stage of stages) observer.observe(stage)
+    return () => observer.disconnect()
+  }, [pathname])
 
   return (
     <header
       data-slot="site-header"
-      className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-2xl"
+      data-over={overTheater ? "theater" : "paper"}
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200",
+        overTheater
+          ? "border-border/30 bg-dock/85 text-dock-foreground backdrop-blur-xl"
+          : "border-border/50 bg-background/75 text-foreground backdrop-blur-xl",
+      )}
     >
-      <div className="mx-auto flex h-12 max-w-6xl items-center justify-between gap-3 px-4 md:h-14 md:px-8">
+      <div className="mx-auto flex h-11 max-w-6xl items-center justify-between gap-3 px-4 md:h-12 md:px-6">
         <Link
           href="/"
-          className="relative z-10 text-[13px] font-medium tracking-tight text-foreground transition-opacity hover:opacity-60"
+          className={cn(
+            "relative z-10 text-[13px] font-medium tracking-tight transition-opacity hover:opacity-70",
+            overTheater ? "text-dock-foreground" : "text-foreground",
+          )}
         >
           Meridian
         </Link>
 
         <nav
           aria-label="Primary"
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 md:flex"
         >
           {primaryNav.map((item) => {
             const active = linkActive(pathname, item.href)
@@ -51,10 +85,14 @@ function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-full px-3 py-1.5 text-[13px] tracking-tight transition-colors",
-                  active
-                    ? "bg-brand/10 text-foreground"
-                    : "text-muted-foreground hover:text-foreground",
+                  "rounded-md px-2.5 py-1 text-[12px] tracking-tight transition-colors",
+                  overTheater
+                    ? active
+                      ? "bg-brand/15 text-dock-foreground"
+                      : "text-dock-muted hover:text-dock-foreground"
+                    : active
+                      ? "bg-brand/10 text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {item.navLabel ?? item.title}
@@ -63,7 +101,7 @@ function SiteHeader() {
           })}
         </nav>
 
-        <div className="relative z-10 flex items-center gap-1">
+        <div className="relative z-10 flex items-center gap-0.5">
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -71,7 +109,10 @@ function SiteHeader() {
                 type="button"
                 variant="ghost"
                 size="icon-touch"
-                className="md:hidden"
+                className={cn(
+                  "md:hidden",
+                  overTheater && "text-dock-foreground hover:bg-muted/20",
+                )}
                 aria-label="Open menu"
               >
                 <List className="size-5" />
@@ -99,14 +140,14 @@ function SiteHeader() {
               </SheetHeader>
               <nav
                 aria-label="Mobile"
-                className="flex flex-col gap-1 px-3 py-4"
+                className="flex flex-col gap-0.5 px-3 py-3"
                 data-surface="mobile"
               >
                 <SheetClose asChild>
                   <Link
                     href="/"
                     className={cn(
-                      "rounded-2xl px-4 py-3.5 text-base tracking-tight transition-colors",
+                      "rounded-lg px-3 py-3 text-[15px] tracking-tight transition-colors",
                       pathname === "/"
                         ? "bg-brand/10 text-foreground"
                         : "text-foreground hover:bg-muted/40",
@@ -122,7 +163,7 @@ function SiteHeader() {
                       <Link
                         href={item.href}
                         className={cn(
-                          "rounded-2xl px-4 py-3.5 text-base tracking-tight transition-colors",
+                          "rounded-lg px-3 py-3 text-[15px] tracking-tight transition-colors",
                           active
                             ? "bg-brand/10 text-foreground"
                             : "text-foreground hover:bg-muted/40",
@@ -133,14 +174,14 @@ function SiteHeader() {
                     </SheetClose>
                   )
                 })}
-                <p className="mt-4 px-4 font-mono text-[10px] tracking-[0.16em] text-muted-foreground uppercase">
+                <p className="mt-3 px-3 font-mono text-[10px] tracking-[0.16em] text-muted-foreground uppercase">
                   Files
                 </p>
                 {more.map((item) => (
                   <SheetClose asChild key={item.href}>
                     <Link
                       href={item.href}
-                      className="rounded-2xl px-4 py-3.5 text-base tracking-tight text-foreground hover:bg-muted/40"
+                      className="rounded-lg px-3 py-3 text-[15px] tracking-tight text-foreground hover:bg-muted/40"
                     >
                       {item.filename ?? item.title}
                     </Link>

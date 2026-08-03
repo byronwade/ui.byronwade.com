@@ -1,9 +1,10 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
 import { ProductFrame } from "@/components/cinematic/product-frame"
-import { Workbench } from "@/components/surfaces/workbench"
+import { ComposerShell } from "@/components/surfaces/composer-shell"
 
 /**
- * Theater product stage — one accent leads; the workbench proves it.
+ * Theater beat — editor + object-bound agent (Cursor-app shape).
+ * Distinct from the hero workbench index.
  */
 function TileFocus() {
   return (
@@ -12,26 +13,28 @@ function TileFocus() {
       tone="theater"
       layout="stack"
       subject={
-        <ProductFrame className="translate-y-6 md:translate-y-10">
-          <Workbench
-            withAgent
-            className="h-[22rem] rounded-none border-0 md:h-[min(48vh,34rem)]"
-          />
+        <ProductFrame atmosphere={false} className="translate-y-4 md:translate-y-8">
+          <ComposerShell className="h-[22rem] rounded-none border-0 md:h-[min(50vh,36rem)]" />
         </ProductFrame>
       }
     >
-      <p className="text-[19px] font-medium tracking-tight text-brand md:text-[21px]">
-        Accent
+      <p className="font-mono text-[11px] tracking-[0.16em] text-brand uppercase">
+        Agent
       </p>
       <h2 className="cinema-title mt-3 text-dock-foreground">
-        One color that leads.
+        Bound to the file.
       </h2>
       <p className="cinema-lede mx-auto mt-5 max-w-sm text-dock-muted">
-        Deep ink-teal for action and selection. Everything else stays neutral.
+        Composer rides the selected object — provenance, activity, review —
+        never a floating chatbot.
       </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        <CinemaLink href="/theme">See the brand</CinemaLink>
-        <CinemaLink href="/for-agents">For agents</CinemaLink>
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+        <CinemaLink href="/for-agents" priority="primary">
+          For agents
+        </CinemaLink>
+        <CinemaLink href="/skills" priority="secondary">
+          Skills
+        </CinemaLink>
       </div>
     </CinemaTile>
   )

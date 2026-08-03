@@ -3,8 +3,8 @@ import { ProductFrame } from "@/components/cinematic/product-frame"
 import { Workbench } from "@/components/surfaces/workbench"
 
 /**
- * Apple product-page hero — brand is the display, product owns the frame.
- * Soft paper light. No stock photograph competing with the workbench.
+ * App-first hero — brand names the system; the workbench is the proof.
+ * Cursor-app density, not marketing-site spectacle.
  */
 function Hero() {
   return (
@@ -12,18 +12,23 @@ function Hero() {
       tone="paper"
       layout="stack"
       subject={
-        <ProductFrame className="translate-y-6 md:translate-y-10">
-          <Workbench className="h-[22rem] rounded-none border-0 md:h-[min(48vh,34rem)]" />
+        <ProductFrame className="translate-y-4 md:translate-y-8">
+          <Workbench className="h-[22rem] rounded-none border-0 md:h-[min(50vh,36rem)]" />
         </ProductFrame>
       }
     >
       <h1 className="cinema-display text-foreground">Meridian</h1>
       <p className="cinema-lede mx-auto mt-4 max-w-md text-muted-foreground">
-        Quiet product UI. Soft neutrals. One accent.
+        Application UI that stays calm under agents — dense chrome, one accent,
+        typed rules.
       </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        <CinemaLink href="/theme">View theme</CinemaLink>
-        <CinemaLink href="/design">Design</CinemaLink>
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+        <CinemaLink href="/surfaces" priority="primary">
+          Open surfaces
+        </CinemaLink>
+        <CinemaLink href="/design" priority="secondary">
+          Design contract
+        </CinemaLink>
       </div>
     </CinemaTile>
   )

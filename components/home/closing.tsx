@@ -2,7 +2,7 @@ import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
 import { cinemaStills } from "@/lib/media"
 
 /**
- * Closing atmosphere — brand returns as the display; media stays quiet.
+ * Closing — one next step, not a repeat of the hero CTAs.
  */
 function Closing() {
   return (
@@ -18,11 +18,15 @@ function Closing() {
     >
       <h2 className="cinema-display text-dock-foreground">Meridian</h2>
       <p className="cinema-lede mx-auto mt-4 max-w-sm text-dock-muted">
-        The frame is the product.
+        Ship application UI agents can keep honest.
       </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        <CinemaLink href="/theme">View theme</CinemaLink>
-        <CinemaLink href="/design">Design</CinemaLink>
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+        <CinemaLink href="/skills" priority="primary">
+          Install skills
+        </CinemaLink>
+        <CinemaLink href="/theme" priority="secondary">
+          See the system
+        </CinemaLink>
       </div>
     </CinemaTile>
   )

@@ -19,7 +19,7 @@ type CinemaTileProps = {
   }
   /**
    * overlay — copy floats on media (sparse, bottom or center)
-   * stack — Apple product page: copy above, product subject below
+   * stack — copy above, app subject below (Cursor-app proof, not marketing card)
    */
   layout?: Layout
   align?: Align
@@ -30,8 +30,8 @@ type CinemaTileProps = {
 }
 
 /**
- * Cinematic tile — one viewport, one idea.
- * Stack layout puts the product on stage; overlay keeps media full-bleed.
+ * One-idea stage tile.
+ * Stack layout puts the application on stage; overlay keeps media full-bleed.
  */
 function CinemaTile({
   id,
@@ -106,15 +106,27 @@ type CinemaLinkProps = {
   href: string
   children: ReactNode
   className?: string
+  /** primary = hairline underline; secondary = quieter muted brand */
+  priority?: "primary" | "secondary"
 }
 
-/** Quiet cinematic text CTA — brand link, no chevron. */
-function CinemaLink({ href, children, className }: CinemaLinkProps) {
+/** Quiet text CTA — Cursor-app calm, no chevron. */
+function CinemaLink({
+  href,
+  children,
+  className,
+  priority = "primary",
+}: CinemaLinkProps) {
   return (
     <a
       href={href}
+      data-priority={priority}
       className={cn(
-        "text-[17px] tracking-tight text-brand underline-offset-[0.18em] transition-opacity hover:opacity-70 hover:underline",
+        "text-[15px] tracking-tight underline-offset-[0.2em] transition-opacity md:text-[16px]",
+        priority === "primary" &&
+          "font-medium text-brand underline hover:opacity-80",
+        priority === "secondary" &&
+          "text-brand/80 hover:text-brand hover:underline",
         className,
       )}
     >
