@@ -1,18 +1,18 @@
 const steps = [
   {
     n: "01",
-    title: "Pick a contract",
-    body: "Each design contract is a fail-closed rule pack — tokens, density, typeset, UX/DX laws — not a pile of one-off components.",
+    title: "Pick a design system",
+    body: "Choose a contract — Meridian for cinematic app UI, Harbor for calm ops, Atlas for workbenches, Vellum for docs. Same architecture; different DNA.",
   },
   {
     n: "02",
-    title: "Install the MCP",
-    body: "Agents connect via MCP: get_contract, resolve_token, validate_ui, list_primitives, get_recipe. One accent. Closed grammar.",
+    title: "Install the MCP in your editor",
+    body: "Point Cursor or Claude at the contract MCP. Agents call get_contract, resolve_token, validate_ui, list_primitives, and get_recipe — locally on your machine.",
   },
   {
     n: "03",
-    title: "Ship under the law",
-    body: "Compose shadcn primitives. Run meridian check. Surfaces stay coherent because creativity lives in content, not new colors.",
+    title: "Build your product under the law",
+    body: "Compose shadcn. Stay inside OKLCH tokens and closed radii. Run the check CLI. Your app UI stays coherent because the rules are frozen, not the widgets.",
   },
 ] as const
 
@@ -28,9 +28,14 @@ function HowItWorks() {
         <p className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
           How it works
         </p>
-        <h2 className="mt-3 max-w-xl text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-          Agents install the law. Humans keep the craft.
+        <h2 className="mt-3 max-w-2xl text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
+          You sell product. The contract keeps the UI honest.
         </h2>
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Built for developers who use AI to ship application UI — not for
+          browsing a styleguide. The MCP is the install surface; the design
+          system is the product.
+        </p>
         <ol className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
           {steps.map((step) => (
             <li key={step.n} className="relative">

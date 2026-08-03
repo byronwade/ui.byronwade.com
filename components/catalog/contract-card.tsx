@@ -1,7 +1,10 @@
 import Link from "next/link"
 
 import { ContractPreview } from "@/components/catalog/contract-preview"
-import type { DesignContract } from "@/lib/contracts/catalog"
+import {
+  priceLabel,
+  type DesignContract,
+} from "@/lib/contracts/catalog"
 import { cn } from "@/lib/utils"
 
 const statusLabel: Record<DesignContract["status"], string> = {
@@ -55,10 +58,10 @@ function ContractCard({
         </div>
         <div className="shrink-0 text-left sm:text-right">
           <p className="font-mono text-xs text-muted-foreground">
-            ${contract.priceMonthly}/mo · mcp/{contract.mcpSlug}
+            {priceLabel(contract.priceMonthly)} · mcp/{contract.mcpSlug}
           </p>
           <p className="mt-1 text-sm tracking-tight text-muted-foreground">
-            {interactive ? "Open contract →" : "Join waitlist →"}
+            {interactive ? "Open system →" : "Preview →"}
           </p>
         </div>
       </div>

@@ -8,6 +8,7 @@ const ALLOWED = new Set([
   "docs/architecture.md",
   "docs/north-star.md",
   "docs/platform.md",
+  "docs/pricing.md",
   "docs/influences.md",
   "docs/absorb.md",
   "docs/layout.md",

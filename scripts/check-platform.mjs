@@ -144,8 +144,11 @@ try {
     if (toolKey !== JSON.stringify(tools)) {
       hits.push(`${f}: mcpTools diverge from skeleton MCP_TOOLS`)
     }
-    if (json.priceMonthlyUsd !== 9) {
-      hits.push(`${f}: priceMonthlyUsd must match platform (9)`)
+    if (json.priceMonthlyUsd !== 0) {
+      hits.push(`${f}: priceMonthlyUsd must be 0 (open-source)`)
+    }
+    if (json.platform?.pricingModel && json.platform.pricingModel !== "open-source") {
+      hits.push(`${f}: platform.pricingModel must be open-source`)
     }
   }
   const toolKeys = new Set(shapes.map((s) => s.toolKey))

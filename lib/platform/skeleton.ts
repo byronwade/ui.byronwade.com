@@ -12,8 +12,13 @@
 export const PLATFORM_ID = "design-contracts" as const
 export const PLATFORM_VERSION = "1.0.0" as const
 
-/** Monthly price — same for every contract MCP. */
-export const MCP_PRICE_USD = 9 as const
+/**
+ * Pricing — open source.
+ * Stdio MCP runs on the customer machine ($0 COGS). Remote hosting, if ever
+ * needed, is shared ~$0–5/mo infra — not a per-contract seat. See docs/pricing.md.
+ */
+export const MCP_PRICE_USD = 0 as const
+export const PRICING_MODEL = "open-source" as const
 
 /**
  * MCP tools — identical names + jobs on every contract server.
@@ -137,7 +142,7 @@ export const platformZones = {
     "agents.md section order (AGENTS_MD_SECTIONS)",
     "Task recipe ids (list-resource, agent-rail, …)",
     "CLI surface (check / gen:contract)",
-    "Price model (MCP_PRICE_USD)",
+    "Price model (open-source / MCP_PRICE_USD = 0)",
     "UX/DX platform pillars (experience laws shape)",
   ],
   perContract: [

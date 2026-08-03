@@ -5,7 +5,6 @@ function CatalogHero() {
       data-surface="marketing"
       className="relative overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-36"
     >
-      {/* Soft atmosphere — token washes, not flat fill */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -24,29 +23,37 @@ function CatalogHero() {
 
       <div className="mx-auto max-w-6xl">
         <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
-          ui.byronwade.com
+          For developers · open source
         </p>
         <h1 className="mt-4 max-w-3xl text-4xl font-medium tracking-tight text-foreground sm:text-5xl md:text-6xl md:leading-[1.05]">
-          Design contracts
+          Design systems your agents can actually obey
         </h1>
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Strict AI design systems agents install over MCP — so every dashboard,
-          workbench, and AI rail they ship looks like one hand made it.
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Each{" "}
+          <span className="text-foreground">design contract</span> is a fail-closed
+          UI system — tokens, density, typeset, UX/DX laws — delivered as an{" "}
+          <span className="text-foreground">MCP server</span> you install in Cursor,
+          Claude, or your agent stack. Ship dashboards and workbenches that look
+          like one hand made them.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <a
             href="#contracts"
             className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium tracking-tight text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            Browse contracts
+            Browse design systems
           </a>
           <a
             href="#pricing"
             className="inline-flex h-10 items-center rounded-full px-5 text-sm tracking-tight text-muted-foreground transition-colors hover:bg-muted/30 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            Pricing · $9/mo
+            Free · open source
           </a>
         </div>
+        <p className="mt-6 max-w-xl font-mono text-[11px] leading-relaxed text-muted-foreground">
+          Not a component zoo. A contract your AI must follow — MCP tools +
+          machine docs + check gates.
+        </p>
       </div>
     </section>
   )

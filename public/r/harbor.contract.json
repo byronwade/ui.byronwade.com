@@ -10,7 +10,8 @@
       "list_primitives",
       "get_recipe"
     ],
-    "priceMonthlyUsd": 9,
+    "pricingModel": "open-source",
+    "priceMonthlyUsd": 0,
     "contractJsonKeys": [
       "$schema",
       "platform",
@@ -32,7 +33,7 @@
   "id": "harbor",
   "name": "Harbor",
   "version": "0.0.0",
-  "priceMonthlyUsd": 9,
+  "priceMonthlyUsd": 0,
   "mcp": {
     "slug": "harbor",
     "tools": [
@@ -68,5 +69,5 @@
     "typeset-docs",
     "icon-import"
   ],
-  "generatedAt": "2026-08-03T14:20:54.130Z"
+  "generatedAt": "2026-08-03T14:36:15.270Z"
 }

@@ -6,11 +6,18 @@
 import { listDna, getDna, type ContractDna } from "@/lib/contracts/dna"
 import {
   MCP_PRICE_USD,
+  PRICING_MODEL,
   contractPrimaryNavFromSkeleton,
   pathTemplates,
 } from "@/lib/platform/skeleton"
 
-export { MCP_PRICE_USD }
+export { MCP_PRICE_USD, PRICING_MODEL }
+
+/** Human label for catalog / pricing surfaces. */
+export function priceLabel(priceMonthly = MCP_PRICE_USD) {
+  if (PRICING_MODEL === "open-source" || priceMonthly <= 0) return "Open source"
+  return `$${priceMonthly}/mo`
+}
 
 export type ContractStatus = ContractDna["status"]
 

@@ -6,6 +6,7 @@
 export type SystemDocSlug =
   | "north-star"
   | "platform"
+  | "pricing"
   | "ux"
   | "dx"
   | "influences"
@@ -43,6 +44,13 @@ export const systemDocs: readonly SystemDoc[] = [
       "Shared architecture for every design contract — MCP, filenames, JSON keys.",
     sourcePath: "docs/platform.md",
     filename: "platform.md",
+  },
+  {
+    slug: "pricing",
+    title: "Pricing",
+    summary: "Why MCP is open source — COGS research and cost-plus decision.",
+    sourcePath: "docs/pricing.md",
+    filename: "pricing.md",
   },
   {
     slug: "ux",

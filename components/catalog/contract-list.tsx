@@ -16,12 +16,12 @@ function ContractList() {
               Catalog
             </p>
             <h2 className="mt-2 text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
-              Systems under contract
+              Design systems you can install
             </h2>
           </div>
           <p className="hidden max-w-xs text-right text-sm text-muted-foreground sm:block">
-            Soft previews of each grammar. Click a live contract to enter its
-            film, theme, and proofs.
+            Each card is a full AI design system — open a live one for the film,
+            theme grammar, and proofs.
           </p>
         </div>
         <ul className="flex flex-col gap-4 sm:gap-5">

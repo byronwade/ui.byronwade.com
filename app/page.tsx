@@ -6,13 +6,13 @@ import { HowItWorks } from "@/components/catalog/how-it-works"
 import { Pricing } from "@/components/catalog/pricing"
 
 export const metadata: Metadata = {
-  title: "Design contracts",
+  title: "Design systems for AI agents",
   description:
-    "Strict AI design systems agents install over MCP — Meridian and siblings. $9/mo per contract server.",
+    "Open-source AI design systems for developers. Install a design-contract MCP in Cursor or Claude — ship coherent app UI.",
   openGraph: {
-    title: "Design contracts · ui.byronwade.com",
+    title: "Design contracts · open source",
     description:
-      "A soft catalog of fail-closed AI design contracts. Install Meridian MCP — ship coherent app UI.",
+      "Fail-closed design systems delivered as MCP servers. Free to install — stdio runs on your machine.",
   },
 }
 

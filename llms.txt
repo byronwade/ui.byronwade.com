@@ -1,20 +1,21 @@
 # ui.byronwade.com
 
-> Design contracts — fail-closed AI design systems agents install over MCP.
-> Meridian is the first live contract. Harbor, Atlas, and Vellum follow.
+> Open-source design systems for developers — fail-closed contracts agents install over MCP.
+> Meridian is the first live contract. Harbor, Atlas, and Vellum follow. Free (stdio COGS ≈ $0).
 
 Browsers hitting these URLs get designed HTML. Agents receive raw text
 (`Accept: text/markdown` / `text/plain`, or `?raw=1`).
 
 ## Platform
 
-- [Home](https://ui.byronwade.com/): Soft catalog of design contracts · how it works · pricing ($9/mo per MCP)
+- [Home](https://ui.byronwade.com/): Catalog of open-source design systems for developers · how it works · pricing ($0)
 - [Meridian](https://ui.byronwade.com/meridian): Live cinematic contract (film + proofs)
 - [Harbor](https://ui.byronwade.com/harbor) · [Atlas](https://ui.byronwade.com/atlas) · [Vellum](https://ui.byronwade.com/vellum): Soon / preview
 
 ## Platform (all contracts)
 
 - [platform.md](https://ui.byronwade.com/meridian/system/platform): Shared architecture — MCP, filenames, JSON keys
+- [pricing.md](https://ui.byronwade.com/meridian/system/pricing): Why MCP is open source (COGS ≈ $0 on stdio)
 - Skeleton SSOT: `lib/platform/skeleton.ts`
 - DNA packs: `lib/contracts/dna/{id}.ts` (aesthetics may differ; structure must not)
 - Contract JSON (same shape): `/r/{id}.contract.json` for every id

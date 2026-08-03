@@ -1,8 +1,10 @@
 import Link from "next/link"
 
 import { ContractPreview } from "@/components/catalog/contract-preview"
-import type { DesignContract } from "@/lib/contracts/catalog"
-import { MCP_PRICE_USD } from "@/lib/contracts/catalog"
+import {
+  priceLabel,
+  type DesignContract,
+} from "@/lib/contracts/catalog"
 
 function ComingSoonContract({ contract }: { contract: DesignContract }) {
   return (
@@ -23,7 +25,7 @@ function ComingSoonContract({ contract }: { contract: DesignContract }) {
             {contract.tagline}
           </p>
           <p className="mt-6 font-mono text-sm text-muted-foreground">
-            ${MCP_PRICE_USD}/mo · mcp/{contract.mcpSlug} when live
+            {priceLabel()} · mcp/{contract.mcpSlug} when live
           </p>
           <ul className="mt-6 space-y-2">
             {contract.features.map((f) => (

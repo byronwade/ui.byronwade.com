@@ -39,9 +39,9 @@ function SiteHeader() {
   const nav = onMeridian
     ? contractPrimaryNav("meridian")
     : ([
-        { href: "/#contracts", label: "Contracts" },
+        { href: "/#contracts", label: "Systems" },
         { href: "/#how-it-works", label: "How it works" },
-        { href: "/#pricing", label: "Pricing" },
+        { href: "/#pricing", label: "Open source" },
         { href: "/meridian", label: "Meridian" },
       ] as const)
 

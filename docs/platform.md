@@ -13,7 +13,7 @@
 | Contract JSON keys | **YES — locked** | `CONTRACT_JSON_KEYS` + `buildContractEnvelope` |
 | `agents.md` section order | **YES — locked** | `AGENTS_MD_SECTIONS` |
 | Task recipe ids | **YES — locked** | `lib/contracts/task-recipes.ts` |
-| Price ($9/mo MCP) | **YES — locked** | `MCP_PRICE_USD` |
+| Price (open source / $0) | **YES — locked** | `MCP_PRICE_USD` · `PRICING_MODEL` · [`pricing.md`](./pricing.md) |
 | OKLCH values, cinema voice, paper tone | **NO — DNA** | `lib/contracts/dna/{id}.ts` + per-contract design grammar |
 | Marketing copy / film narrative | **NO — DNA** | contract pages / content |
 

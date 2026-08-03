@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { contracts, MCP_PRICE_USD } from "@/lib/contracts/catalog"
+import { contracts, priceLabel } from "@/lib/contracts/catalog"
 import { docs, primaryNav } from "@/lib/docs/catalog"
 import { skillProofs } from "@/lib/site/skill-proofs"
 
@@ -20,11 +20,11 @@ function SiteFooter() {
             Design contracts
           </p>
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Strict AI design systems — MCP servers agents install so every
-            surface they ship looks like it came from one hand.
+            Open-source AI design systems for developers — install an MCP, keep
+            every surface your agents ship looking like one hand made it.
           </p>
           <p className="mt-3 font-mono text-[11px] text-muted-foreground">
-            {live} live · {contracts.length} catalogued · ${MCP_PRICE_USD}/mo
+            {live} live · {contracts.length} catalogued · {priceLabel()}
           </p>
         </div>
         <div>
@@ -37,7 +37,7 @@ function SiteFooter() {
                 href="/#contracts"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                Contracts
+                Systems
               </Link>
             </li>
             <li>
@@ -53,7 +53,7 @@ function SiteFooter() {
                 href="/#pricing"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                Pricing
+                Open source
               </Link>
             </li>
             {primaryNav.slice(0, 3).map((item) => (

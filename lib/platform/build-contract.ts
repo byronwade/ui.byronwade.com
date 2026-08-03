@@ -9,6 +9,7 @@ import {
   MCP_TOOLS,
   PLATFORM_ID,
   PLATFORM_VERSION,
+  PRICING_MODEL,
   contractUrls,
 } from "@/lib/platform/skeleton"
 import { getDna, type ContractDna } from "@/lib/contracts/dna"
@@ -21,6 +22,7 @@ export function platformBlock() {
     id: PLATFORM_ID,
     version: PLATFORM_VERSION,
     mcpTools: [...MCP_TOOLS],
+    pricingModel: PRICING_MODEL,
     priceMonthlyUsd: MCP_PRICE_USD,
     contractJsonKeys: [...CONTRACT_JSON_KEYS],
   } as const
