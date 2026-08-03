@@ -38,7 +38,7 @@ function ContractFooter({ contractId }: { contractId: string }) {
                 href={base}
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                {live ? "Film home" : "Experience"}
+                Home
               </Link>
             </li>
             {live ? (

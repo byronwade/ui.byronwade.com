@@ -8,9 +8,9 @@ import { TileAgents } from "@/components/home/tile-agents"
 import { Closing } from "@/components/home/closing"
 
 export const metadata: Metadata = {
-  title: "Film",
+  title: "Home",
   description:
-    "Meridian cinematic film — theme, surfaces, skills, and agent grammar on stage.",
+    "Meridian design contract — cinematic film, install DX, UI gallery, and agent grammar on stage.",
 }
 
 /**

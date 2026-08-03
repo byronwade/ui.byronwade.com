@@ -1,5 +1,8 @@
 import Link from "next/link"
 
+import { InstallPanel } from "@/components/contracts/showcase/install-panel"
+import { PrimitivesGallery } from "@/components/contracts/showcase/primitives-gallery"
+import { ShellShowcase } from "@/components/contracts/showcase/shell-showcase"
 import { priceLabel, type DesignContract } from "@/lib/contracts/catalog"
 import { pathTemplates } from "@/lib/platform/skeleton"
 import { cn } from "@/lib/utils"
@@ -105,20 +108,21 @@ function statusClass(tone: string) {
 }
 
 /**
- * Full-page DNA demo for contracts that are not live film yet.
- * Entire page sits inside ContractFrame → [data-contract] tokens apply.
+ * Feature-rich contract home for non-film systems.
+ * Showcases DNA + shared UI/shells + install DX under [data-contract].
  */
 function ContractExperience({ contract }: { contract: DesignContract }) {
   const demo = demos[contract.id] ?? demos.harbor!
+  const base = pathTemplates.base(contract.id)
   const jsonHref = pathTemplates.contractJson(contract.id)
 
   return (
     <main
       data-slot="contract-experience"
       data-surface="marketing"
-      className="px-5 pb-20 pt-28 md:px-8 md:pb-28 md:pt-32"
+      className="px-5 pb-24 pt-28 md:px-8 md:pb-32 md:pt-32"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl space-y-20">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <div>
             <p className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
@@ -148,16 +152,22 @@ function ContractExperience({ contract }: { contract: DesignContract }) {
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href={jsonHref}
+                href={`${base}/install`}
                 className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium tracking-tight text-primary-foreground"
               >
-                Read contract JSON
+                Install MCP · API · npx
               </Link>
               <Link
-                href="/#contracts"
+                href={`${base}/ui`}
                 className="inline-flex h-10 items-center rounded-full px-5 text-sm tracking-tight text-muted-foreground hover:bg-muted/30 hover:text-foreground"
               >
-                All contracts
+                UI gallery
+              </Link>
+              <Link
+                href={jsonHref}
+                className="inline-flex h-10 items-center rounded-full px-5 font-mono text-sm tracking-tight text-muted-foreground hover:bg-muted/30 hover:text-foreground"
+              >
+                contract.json
               </Link>
             </div>
           </div>
@@ -205,30 +215,61 @@ function ContractExperience({ contract }: { contract: DesignContract }) {
           </div>
         </div>
 
-        <section className="mt-16 grid gap-4 border-t border-border/50 pt-10 sm:grid-cols-3">
-          {[
-            {
-              t: "Tokens in play",
-              b: "This page remaps --brand, paper, radius, and dock through data-contract — what you see is the DNA.",
-            },
-            {
-              t: "Same architecture",
-              b: "MCP tools, route slots, and JSON keys match every other contract. Only aesthetics diverge.",
-            },
-            {
-              t: "When live",
-              b: "Film home, theme playground, surfaces, skills, and machine docs land under the same skin.",
-            },
-          ].map((block) => (
-            <div key={block.t} className="rounded-2xl bg-muted/20 p-5 edge">
-              <h2 className="text-sm font-medium tracking-tight text-foreground">
-                {block.t}
+        <section id="install" className="scroll-mt-24 space-y-6 border-t border-border/50 pt-12">
+          <InstallPanel contractId={contract.id} />
+        </section>
+
+        <section id="ui" className="scroll-mt-24 space-y-4 border-t border-border/50 pt-12">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
+                UI gallery
+              </p>
+              <h2 className="mt-2 text-2xl font-medium tracking-tight text-foreground">
+                Shared shadcn — {contract.name} skin
               </h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {block.b}
+              <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+                One component set under{" "}
+                <span className="font-mono text-foreground">components/ui</span>
+                . This route applies the DNA; we do not fork controls per
+                contract.
               </p>
             </div>
-          ))}
+            <Link
+              href={`${base}/ui`}
+              className="font-mono text-[12px] text-foreground underline-offset-4 hover:underline"
+            >
+              Open full UI page →
+            </Link>
+          </div>
+          <PrimitivesGallery />
+        </section>
+
+        <section
+          id="shells"
+          className="scroll-mt-24 space-y-4 border-t border-border/50 pt-12"
+        >
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
+                App shells
+              </p>
+              <h2 className="mt-2 text-2xl font-medium tracking-tight text-foreground">
+                Workbench & composer proofs
+              </h2>
+              <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+                Detailed product chrome — same shells as Meridian, restyled by{" "}
+                {contract.name}.
+              </p>
+            </div>
+            <Link
+              href={`${base}/surfaces`}
+              className="font-mono text-[12px] text-foreground underline-offset-4 hover:underline"
+            >
+              Open surfaces →
+            </Link>
+          </div>
+          <ShellShowcase />
         </section>
       </div>
     </main>

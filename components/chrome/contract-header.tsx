@@ -31,13 +31,7 @@ function ContractHeader({ contractId }: { contractId: string }) {
   const contract = getContract(contractId)
   const name = contract?.name ?? contractId
   const base = `/${contractId}`
-  const live = contract?.status === "live"
-  const nav = live
-    ? contractPrimaryNav(contractId)
-    : ([
-        { href: base, label: "Experience" },
-        { href: "/#contracts", label: "All contracts" },
-      ] as const)
+  const nav = contractPrimaryNav(contractId)
 
   useEffect(() => {
     const update = () => {

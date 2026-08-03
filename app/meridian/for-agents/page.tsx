@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { CopyButton } from "@/components/docs/copy-button"
 import { DocShell, DocLinkRow } from "@/components/docs/doc-shell"
+import { InstallPanel } from "@/components/contracts/showcase/install-panel"
 import { GoldenPath } from "@/components/site/golden-path"
 import { PrimitiveContractsPanel } from "@/components/site/primitive-contracts"
 import { SkillLoop } from "@/components/site/skill-loop"
@@ -105,6 +106,9 @@ export default async function ForAgentsPage() {
       actions={
         <>
           <Button variant="outline" size="default" asChild>
+            <Link href="/meridian/install">Install</Link>
+          </Button>
+          <Button variant="outline" size="default" asChild>
             <Link href="#golden-path">Golden path</Link>
           </Button>
           <Button variant="ghost" size="default" asChild>
@@ -119,6 +123,12 @@ export default async function ForAgentsPage() {
         </>
       }
     >
+      <section id="install" className="scroll-mt-24">
+        <InstallPanel contractId="meridian" />
+      </section>
+
+      <Separator className="my-14" />
+
       <GoldenPath />
 
       <Separator className="my-14" />
