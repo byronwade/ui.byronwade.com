@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ui.byronwade.com/r/vellum.contract.schema.json",
+  "$schema": "https://ui.byronwade.com/r/contract.schema.json",
   "platform": {
     "id": "design-contracts",
     "version": "1.0.0",
@@ -49,7 +49,9 @@
     "home": "https://ui.byronwade.com/vellum",
     "design": "https://ui.byronwade.com/vellum/design.md",
     "agents": "https://ui.byronwade.com/vellum/agents.md",
-    "contract": "https://ui.byronwade.com/r/vellum.contract.json"
+    "contract": "https://ui.byronwade.com/r/vellum.contract.json",
+    "install": "https://ui.byronwade.com/vellum/install",
+    "schema": "https://ui.byronwade.com/r/contract.schema.json"
   },
   "aesthetic": "Mist reading lanes, measured prose, typeset-first help surfaces.",
   "status": "preview",
@@ -71,7 +73,7 @@
     "must": [
       "OKLCH semantic tokens only (bg-background, text-foreground, bg-brand, …)",
       "One accent → --brand (selected = bg-brand/10)",
-      "Closed radii: control/pill rounded-full · input rounded-lg · panel rounded-2xl · shell rounded-3xl",
+      "Closed radii: control rounded-lg · pill rounded-full · input rounded-lg · panel rounded-2xl · shell rounded-3xl",
       "data-surface for density (application | marketing | mobile | desktop)",
       "Object-bound AI with outcome-then-trace disclosure",
       "typeset presets for markdown/HTML — no per-tag class soup",
@@ -117,7 +119,7 @@
       "rounded-full"
     ],
     "radiusIntents": {
-      "control": "rounded-full",
+      "control": "rounded-lg",
       "pill": "rounded-full",
       "input": "rounded-lg",
       "panel": "rounded-2xl",
@@ -197,6 +199,7 @@
     "tailwind-shadow",
     "font-bold-display",
     "lucide-import",
+    "phosphor-direct-import",
     "arbitrary-color-utility",
     "second-accent"
   ],
@@ -308,5 +311,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-08-03T14:40:24.698Z"
+  "generatedAt": "2026-08-03T21:26:20.647Z"
 }

@@ -1,20 +1,20 @@
 const steps = [
   {
     n: "01",
-    title: "Browse the platform index",
-    body: "This homepage is the catalog shell — cool, technical, shared. It is not Meridian, Harbor, Atlas, or Vellum.",
+    title: "Pick a design contract",
+    body: "This homepage is the catalog shell. Open /meridian (or Harbor, Atlas, Vellum) and the whole route becomes that DNA — proof the system is real.",
   },
   {
     n: "02",
-    title: "Open a design contract",
-    body: "Landing /meridian (or Harbor, Atlas, Vellum) remaps tokens and chrome to that DNA. The whole page is the proof.",
+    title: "Install the contract MCP",
+    body: "One npx line into any project. Agents get get_contract / validate_ui / recipes. Pair with shadcn MCP for atom delivery — different jobs.",
+    href: "/meridian/install",
+    cta: "Open Meridian install",
   },
   {
     n: "03",
-    title: "Install MCP · API · npx",
-    body: "Same architecture on every contract — CONTRACT_ID selects DNA. Start with /meridian/install or any /{id}/install page.",
-    href: "/meridian/install",
-    cta: "Open Meridian install",
+    title: "Compose fail-closed",
+    body: "Golden path: get_contract → get_recipe → list_primitives → compose → validate_ui. Creativity stays in content and composition — never new tokens.",
   },
 ] as const
 
@@ -31,12 +31,13 @@ function HowItWorks() {
           How it works
         </p>
         <h2 className="mt-3 max-w-2xl text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-          Platform for discovery. Contracts for design.
+          Catalog for discovery. MCP for install.
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          No guessing which aesthetic you opened — the route owns the skin
-          end-to-end. Install surface is identical under every{" "}
-          <span className="font-mono text-foreground">/{`{id}`}/install</span>.
+          DESIGN.md files teach agents with prose. Component MCPs install atoms.
+          Design contracts add the missing piece: a{" "}
+          <span className="text-foreground">runtime consistency server</span>{" "}
+          with the same tools on every DNA.
         </p>
         <ol className="mt-12 grid gap-0 border border-border/80 md:grid-cols-3">
           {steps.map((step, i) => (

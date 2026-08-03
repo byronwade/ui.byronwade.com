@@ -68,6 +68,8 @@ export type ContractJson = {
     design: string
     agents: string
     contract: string
+    install: string
+    schema: string
   }
   aesthetic: string
   /** Imperative consistency law — read first */
@@ -107,7 +109,7 @@ export function buildContractEnvelope(
 ): ContractJson {
   const urls = contractUrls(dna.id)
   return {
-    $schema: `https://ui.byronwade.com/r/${dna.id}.contract.schema.json`,
+    $schema: "https://ui.byronwade.com/r/contract.schema.json",
     platform: platformBlock(),
     id: dna.id,
     name: dna.name,
@@ -122,6 +124,8 @@ export function buildContractEnvelope(
       design: urls.design,
       agents: urls.agents,
       contract: urls.contract,
+      install: `${urls.home}/install`,
+      schema: "https://ui.byronwade.com/r/contract.schema.json",
     },
     aesthetic: dna.aesthetic,
     mandate: agentMandate,

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.byronwade.com/r/contract.schema.json",
+  "title": "Design contract consistency kit",
+  "description": "Slim MCP kit for fail-closed design systems. Fat docs stay in design.md / agents.md.",
+  "type": "object",
+  "required": [
+    "platform",
+    "id",
+    "name",
+    "version",
+    "mcp",
+    "urls",
+    "mandate",
+    "tokens",
+    "primitives",
+    "recipes"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "platform": {
+      "type": "object",
+      "required": ["id", "mcpTools", "kit"],
+      "properties": {
+        "id": { "const": "design-contracts" },
+        "version": { "type": "string" },
+        "mcpTools": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 5
+        },
+        "pricingModel": { "const": "open-source" },
+        "priceMonthlyUsd": { "const": 0 },
+        "kit": { "const": "consistency" }
+      }
+    },
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "priceMonthlyUsd": { "type": "number" },
+    "mcp": {
+      "type": "object",
+      "required": ["slug", "tools"],
+      "properties": {
+        "slug": { "type": "string" },
+        "tools": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "urls": {
+      "type": "object",
+      "required": ["home", "design", "agents", "contract"],
+      "properties": {
+        "home": { "type": "string", "format": "uri" },
+        "design": { "type": "string", "format": "uri" },
+        "agents": { "type": "string", "format": "uri" },
+        "contract": { "type": "string", "format": "uri" },
+        "install": { "type": "string", "format": "uri" },
+        "schema": { "type": "string", "format": "uri" }
+      }
+    },
+    "aesthetic": { "type": "string" },
+    "mandate": {
+      "type": "object",
+      "required": ["must", "mustNot"],
+      "properties": {
+        "purpose": { "type": "string" },
+        "beforeUi": { "type": "array", "items": { "type": "string" } },
+        "beforeDone": { "type": "array", "items": { "type": "string" } },
+        "must": { "type": "array", "items": { "type": "string" } },
+        "mustNot": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "tokens": {
+      "type": "object",
+      "required": ["colorRoles", "radiusIntents"],
+      "properties": {
+        "colorRoles": { "type": "array", "items": { "type": "string" } },
+        "radiusIntents": {
+          "type": "object",
+          "required": ["control", "pill", "input", "panel", "shell"],
+          "properties": {
+            "control": { "type": "string" },
+            "pill": { "type": "string" },
+            "input": { "type": "string" },
+            "panel": { "type": "string" },
+            "shell": { "type": "string" }
+          }
+        },
+        "depthIntents": { "type": "array", "items": { "type": "string" } },
+        "surfaces": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "banned": { "type": "array", "items": { "type": "string" } },
+    "consistencyBans": { "type": "array", "items": { "type": "string" } },
+    "primitives": { "type": "array", "items": { "type": "string" } },
+    "recipes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "must", "never"],
+        "properties": {
+          "id": { "type": "string" },
+          "must": { "type": "array", "items": { "type": "string" } },
+          "never": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

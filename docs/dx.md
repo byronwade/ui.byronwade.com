@@ -18,9 +18,37 @@ If the contract is hard to load, ambiguous, or unverifiable, the system fails �
 | Compose, don’t fork | [shadcn/ui](https://ui.shadcn.com) | `npx shadcn@latest add`; no twin kits |
 | Quiet evolution | [Linear redesign](https://linear.app/now/how-we-redesigned-the-linear-ui) | Evolve chrome without disassembling the product |
 
-## 2. Golden path (minimal)
+## 2. Golden path — into any project (MCP)
 
-Live on [`/meridian/for-agents#golden-path`](/meridian/for-agents#golden-path). Primitive contracts: [`/meridian/for-agents#primitives`](/meridian/for-agents#primitives).
+Live install: [`/meridian/install`](/meridian/install).
+
+This product is a **design-contract MCP**, not a DESIGN.md-only file and not
+[shadcn MCP](https://ui.shadcn.com/docs/mcp) (which installs components). Pair them:
+
+| Server | Job |
+| --- | --- |
+| **Contract MCP** (`contract-mcp`) | Fail-closed law: `get_contract` → `validate_ui` |
+| **shadcn MCP** | Browse / install registry atoms |
+
+```bash
+# .cursor/mcp.json — any Next/shadcn app
+npx -y --package=github:byronwade/ui.byronwade.com contract-mcp
+# env: CONTRACT_ID=meridian  CONTRACT_SITE=https://ui.byronwade.com
+```
+
+Agent loop:
+
+1. `get_contract` (required first)
+2. `get_recipe` when it fits
+3. `list_primitives` → `npx shadcn@latest add …` (or shadcn MCP)
+4. Compose under closed tokens (`resolve_token`)
+5. `validate_ui` (required before done)
+
+Prompts: `build_surface`, `done_gate`. Resources: `contract://kit`.
+
+### In-repo compose proof
+
+Live on [`/meridian/for-agents`](/meridian/for-agents). When working inside this monorepo:
 
 ```ts
 import { Button } from "@/components/ui/button"
@@ -43,9 +71,9 @@ That’s enough for a correct first surface. Depth (cinema, knobs, proofs) loads
 
 | Tier | Load |
 | --- | --- |
-| **Always** | `north-star` → `design.md` → `@/lib/design` → typeset/shell presets → gates |
-| **Ask** | `ux.md` / `dx.md`, influences, skills, surface proofs |
-| **Never** | Invent tokens/shells; skip empty/error; skip gates; floating chatbot |
+| **Always** | Contract MCP `get_contract` → `design.md` / kit JSON → closed tokens → `validate_ui` |
+| **Ask** | `ux.md` / `dx.md`, influences, skills, surface proofs, `@/lib/design` (this repo) |
+| **Never** | Invent tokens/shells; skip empty/error; skip `validate_ui`; floating chatbot |
 
 Typed as `dxLoadTiers` — keep `agents.md` aligned.
 

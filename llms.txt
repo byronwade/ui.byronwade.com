@@ -1,6 +1,7 @@
 # ui.byronwade.com
 
-> Open-source design systems for developers — fail-closed contracts agents install over MCP.
+> Design systems that install as MCP — fail-closed consistency kits for agents.
+> Differentiator: shadcn MCP installs components; contract MCP enforces get_contract → validate_ui.
 > Meridian is the first live contract. Harbor, Atlas, and Vellum follow. Free (stdio COGS ≈ $0).
 
 Browsers hitting these URLs get designed HTML. Agents receive raw text
@@ -32,14 +33,22 @@ Browsers hitting these URLs get designed HTML. Agents receive raw text
 ## MCP · CLI
 
 ```bash
-# Shared MCP (CONTRACT_ID selects DNA) — never fork tool lists per contract
+# Into ANY project (npx) — fetches /r/{id}.contract.json live
+CONTRACT_ID=meridian CONTRACT_SITE=https://ui.byronwade.com \
+  npx -y --package=github:byronwade/ui.byronwade.com contract-mcp
+
+# Contributor checkout
 CONTRACT_ID=meridian node packages/contract-mcp/server.mjs
 
-# Validate UI snippets / trees + regenerate ALL contract JSON
-node scripts/meridian-check.mjs --json
+# Pair with shadcn MCP for atom install (different job)
+# npx shadcn@latest mcp
+
 npm run gen:contract
 npm run check:platform
 ```
+
+Install UI: https://ui.byronwade.com/meridian/install  
+Prompts: `build_surface` · `done_gate` · Resources: `contract://kit`
 
 MCP = lightweight consistency kit (identical tools on every contract):
 get_contract (before UI) · resolve_token · list_primitives · get_recipe · validate_ui (before done)

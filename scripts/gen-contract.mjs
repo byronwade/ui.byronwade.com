@@ -131,13 +131,28 @@ const depthIntents = await readTsStringArray(
   "depthIntents",
 )
 
-const radiusIntents = {
-  control: "rounded-full",
-  pill: "rounded-full",
-  input: "rounded-lg",
-  panel: "rounded-2xl",
-  shell: "rounded-3xl",
+async function readRadiusIntents() {
+  const src = await readFile(join(ROOT, "lib/platform/consistency.ts"), "utf8")
+  const block = src.match(
+    /export const radiusIntents = \{([\s\S]*?)\} as const/,
+  )
+  if (!block) {
+    return {
+      control: "rounded-lg",
+      pill: "rounded-full",
+      input: "rounded-lg",
+      panel: "rounded-2xl",
+      shell: "rounded-3xl",
+    }
+  }
+  const out = {}
+  for (const m of block[1].matchAll(/(\w+):\s*"([^"]+)"/g)) {
+    out[m[1]] = m[2]
+  }
+  return out
 }
+
+const radiusIntents = await readRadiusIntents()
 
 const recipesSrc = await readFile(
   join(ROOT, "lib/contracts/task-recipes.ts"),
@@ -153,7 +168,7 @@ const site = "https://ui.byronwade.com"
 for (const dna of dnas) {
   const live = dna.status === "live" && dna.id === "meridian"
   const contract = {
-    $schema: `${site}/r/${dna.id}.contract.schema.json`,
+    $schema: `${site}/r/contract.schema.json`,
     platform: {
       id: "design-contracts",
       version: "1.0.0",
@@ -173,6 +188,8 @@ for (const dna of dnas) {
       design: `${site}/${dna.id}/design.md`,
       agents: `${site}/${dna.id}/agents.md`,
       contract: `${site}/r/${dna.id}.contract.json`,
+      install: `${site}/${dna.id}/install`,
+      schema: `${site}/r/contract.schema.json`,
     },
     aesthetic: dna.aesthetic,
     status: dna.status,

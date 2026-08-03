@@ -1,6 +1,10 @@
 /**
  * Paste-ready install DX for every design contract.
  * Same shape for Meridian / Harbor / Atlas / Vellum — only ids change.
+ *
+ * Product job: install a fail-closed design-contract MCP into ANY project
+ * (not only this monorepo). shadcn MCP installs components; this MCP keeps
+ * agents inside closed tokens + validate_ui.
  */
 
 import { advertisedThemeSkill } from "@/lib/contracts/routes"
@@ -17,7 +21,11 @@ export type ContractInstall = {
   skillsNpx: string
   skillsNpxTheme: string
   themeSkillNote: string
+  /** Primary: works from any project via npx + remote contract JSON. */
+  mcpNpx: string
   mcpCommand: string
+  /** Contributor checkout path (optional). */
+  mcpLocalCommand: string
   mcpCursorJson: string
   contractJsonUrl: string
   contractJsonCurl: string
@@ -29,7 +37,10 @@ export type ContractInstall = {
   }
   shadcnInit: string
   shadcnAdd: string
+  /** Pair with shadcn MCP for component delivery — different job. */
+  shadcnMcpNote: string
   checkCli: string
+  agentLoop: readonly string[]
   tools: readonly string[]
   pages: {
     install: string
@@ -47,19 +58,27 @@ export function getContractInstall(contractId: string): ContractInstall | null {
 
   const urls = contractUrls(dna.id, SITE)
   const base = pathTemplates.base(dna.id)
-  const mcpCommand = `CONTRACT_ID=${dna.id} node packages/contract-mcp/server.mjs`
   const themeSkill = advertisedThemeSkill(dna.id)
   const themeIsNative = themeSkill === `${dna.id}-theme`
+
+  const mcpNpx = `npx -y --package=github:${REPO} contract-mcp`
+  const mcpCommand = `CONTRACT_ID=${dna.id} CONTRACT_SITE=${SITE} ${mcpNpx}`
+  const mcpLocalCommand = `CONTRACT_ID=${dna.id} node packages/contract-mcp/server.mjs`
 
   const mcpCursorJson = JSON.stringify(
     {
       mcpServers: {
         [`${dna.id}-contract`]: {
-          command: "node",
-          args: ["packages/contract-mcp/server.mjs"],
+          command: "npx",
+          args: ["-y", `--package=github:${REPO}`, "contract-mcp"],
           env: {
             CONTRACT_ID: dna.id,
+            CONTRACT_SITE: SITE,
           },
+        },
+        shadcn: {
+          command: "npx",
+          args: ["shadcn@latest", "mcp"],
         },
       },
     },
@@ -76,7 +95,9 @@ export function getContractInstall(contractId: string): ContractInstall | null {
     themeSkillNote: themeIsNative
       ? `${dna.name} theme skill`
       : `Platform theme skill (${themeSkill}) — DNA skins via CONTRACT_ID=${dna.id}`,
+    mcpNpx,
     mcpCommand,
+    mcpLocalCommand,
     mcpCursorJson,
     contractJsonUrl: urls.contract,
     contractJsonCurl: `curl -sS ${urls.contract}`,
@@ -88,7 +109,16 @@ export function getContractInstall(contractId: string): ContractInstall | null {
     },
     shadcnInit: "npx shadcn@latest init -d --base radix",
     shadcnAdd: "npx shadcn@latest add button card input table tabs dialog",
-    checkCli: "npm run check:meridian",
+    shadcnMcpNote:
+      "shadcn MCP installs atoms. This contract MCP is the fail-closed law (get_contract → validate_ui).",
+    checkCli: "npm run check:platform",
+    agentLoop: [
+      "get_contract — load must / mustNot + closed tokens (REQUIRED FIRST)",
+      "get_recipe — pick list-resource / agent-rail / … when it fits",
+      "list_primitives + shadcn add — compose approved atoms only",
+      "resolve_token — never invent OKLCH / radii / depth",
+      "validate_ui — REQUIRED BEFORE DONE on every new className",
+    ],
     tools: MCP_TOOLS,
     pages: {
       install: `${base}/install`,

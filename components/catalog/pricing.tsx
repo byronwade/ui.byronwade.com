@@ -28,10 +28,10 @@ function Pricing() {
             <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
               {open ? (
                 <>
-                  The MCP runs on{" "}
+                  Fail-closed design-contract MCPs run on{" "}
                   <span className="text-foreground">your machine</span> over
-                  stdio. Every design contract MCP is free to install — pick a
-                  system and stay inside its skin.
+                  stdio — $0 COGS. Install into any project with npx; pick a DNA
+                  and agents stay inside its skin.
                 </>
               ) : (
                 <>One contract, one MCP, one monthly seat.</>
@@ -53,10 +53,10 @@ function Pricing() {
               What you get
             </p>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
-              <li>Per-contract DNA on every page of that route</li>
-              <li>Shared architecture — MCP tools, JSON keys, recipes</li>
-              <li>Machine docs + contract.json per system</li>
-              <li>CLI gate against the contract you installed</li>
+              <li>npx install into any agent project (not just this repo)</li>
+              <li>get_contract → validate_ui loop + build_surface prompt</li>
+              <li>Shared tools/JSON keys — DNA only changes aesthetics</li>
+              <li>Machine docs + /r/{"{id}"}.contract.json per system</li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
               {contracts.map((c) => (

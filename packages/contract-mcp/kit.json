@@ -18,7 +18,7 @@
     "must": [
       "OKLCH semantic tokens only (bg-background, text-foreground, bg-brand, …)",
       "One accent → --brand (selected = bg-brand/10)",
-      "Closed radii: control/pill rounded-full · input rounded-lg · panel rounded-2xl · shell rounded-3xl",
+      "Closed radii: control rounded-lg · pill rounded-full · input rounded-lg · panel rounded-2xl · shell rounded-3xl",
       "data-surface for density (application | marketing | mobile | desktop)",
       "Object-bound AI with outcome-then-trace disclosure",
       "typeset presets for markdown/HTML — no per-tag class soup",
@@ -58,7 +58,7 @@
       "sidebar"
     ],
     "radiusIntents": {
-      "control": "rounded-full",
+      "control": "rounded-lg",
       "pill": "rounded-full",
       "input": "rounded-lg",
       "panel": "rounded-2xl",
@@ -176,5 +176,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-08-03T14:40:24.700Z"
+  "generatedAt": "2026-08-03T21:26:20.647Z"
 }

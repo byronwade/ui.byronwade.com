@@ -94,6 +94,32 @@ if (!sharedMcp.includes("REQUIRED FIRST") && !sharedMcp.includes("get_contract")
 if (!sharedMcp.includes("REQUIRED BEFORE DONE") && !sharedMcp.includes("validate_ui")) {
   hits.push("contract-mcp: validate_ui must be required before done")
 }
+if (!sharedMcp.includes("prompts/list") || !sharedMcp.includes("build_surface")) {
+  hits.push("contract-mcp: must expose MCP prompts (build_surface)")
+}
+if (!sharedMcp.includes("resources/list") || !sharedMcp.includes("contract://kit")) {
+  hits.push("contract-mcp: must expose MCP resources (contract://kit)")
+}
+if (!sharedMcp.includes("kit.json")) {
+  hits.push("contract-mcp: must load kit.json offline snapshot")
+}
+if (!consistency.includes('control: "rounded-lg"')) {
+  hits.push("consistency.ts: radiusIntents.control must be rounded-lg (live controls)")
+}
+try {
+  const rootPkg = JSON.parse(await read("package.json"))
+  if (!rootPkg.bin?.["contract-mcp"]) {
+    hits.push("package.json: root bin.contract-mcp required for npx github install")
+  }
+} catch {
+  hits.push("package.json: unable to verify contract-mcp bin")
+}
+if (!(await exists("public/r/contract.schema.json"))) {
+  hits.push("public/r/contract.schema.json: missing shared kit schema")
+}
+if (!(await exists("packages/contract-mcp/README.md"))) {
+  hits.push("packages/contract-mcp/README.md: consumer install docs required")
+}
 
 if (!meridianMcp.includes("contract-mcp")) {
   hits.push("meridian-mcp: must delegate to packages/contract-mcp (no fork)")
