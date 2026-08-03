@@ -57,11 +57,11 @@ function Pricing() {
               What you get
             </p>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
-              <li>MCP server — contract, tokens, validate, recipes</li>
+              <li>Lightweight MCP — must/mustNot, closed tokens, validate_ui</li>
               <li>Machine docs — design.md · agents.md · contract.json</li>
               <li>CLI gate — check your UI against the contract</li>
-              <li>Few-shots + task recipes for app intents</li>
-              <li>Same architecture on every future contract</li>
+              <li>Task recipes with must/never for common app intents</li>
+              <li>Same consistency kit on every future contract</li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
               {contracts.map((c) => (

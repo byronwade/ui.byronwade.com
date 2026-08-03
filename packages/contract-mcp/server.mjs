@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Shared design-contract MCP server.
+ * Lightweight design-contract MCP — consistency kit only.
  *
- * CONTRACT_ID selects which DNA/contract JSON to load (default: meridian).
- * Tool names are PLATFORM-LOCKED — never fork a sibling tool list per contract.
+ * Exists so agents stay consistent: closed tokens, bans, primitives, recipes.
+ * CONTRACT_ID selects DNA (default: meridian). Tool names are platform-locked.
  *
  * Tools: get_contract · resolve_token · validate_ui · list_primitives · get_recipe
  */
@@ -18,7 +18,6 @@ const SITE = process.env.CONTRACT_SITE ?? "https://ui.byronwade.com"
 const CONTRACT_URL =
   process.env.CONTRACT_URL ?? `${SITE}/r/${CONTRACT_ID}.contract.json`
 
-/** Keep in sync with lib/platform/skeleton.ts MCP_TOOLS */
 const MCP_TOOLS = [
   "get_contract",
   "resolve_token",
@@ -27,77 +26,163 @@ const MCP_TOOLS = [
   "get_recipe",
 ]
 
-const COLOR_ROLES = [
-  "background",
-  "foreground",
-  "card",
-  "popover",
-  "primary",
-  "secondary",
-  "muted",
-  "accent",
-  "destructive",
-  "warning",
-  "success",
-  "brand",
-  "brand-muted",
-  "border",
-  "input",
-  "ring",
-  "dock",
-  "sidebar",
-]
+/** Embedded fallback — keep in sync with lib/platform/consistency.ts via gen:contract */
+const FALLBACK_MANDATE = {
+  purpose:
+    "Keep application UI consistent across the product. Creativity is content + composition — never new tokens, shadows, or twin components.",
+  beforeUi: [
+    "Call get_contract and obey must / mustNot",
+    "Resolve colors/radii/depths only via resolve_token (closed set)",
+    "Compose only list_primitives — never fork Button/Card/shell twins",
+    "Pick a get_recipe intent when the surface matches",
+  ],
+  beforeDone: [
+    "Run validate_ui on every new className / snippet",
+    "Own empty, loading, and error on resource surfaces",
+    "Selected rows/items use bg-brand/10",
+    "Icons only from @/lib/icons",
+    "Depth only via edge / depth-*",
+  ],
+  must: [
+    "OKLCH semantic tokens only",
+    "One accent → --brand (selected = bg-brand/10)",
+    "Closed radii: pill/control full · input lg · panel 2xl · shell 3xl",
+    "data-surface for density",
+    "Object-bound AI with outcome-then-trace",
+    "Same MCP tools on every design contract",
+  ],
+  mustNot: [
+    "Invent hex / rgb / hsl / arbitrary colors",
+    "Use Tailwind shadow-*",
+    "Import lucide-react directly",
+    "Second brand accent",
+    "font-bold on display headings",
+    "Twin components or bespoke shells",
+    "Fork MCP tools for one contract only",
+  ],
+}
 
-const PRIMITIVES = [
+const FALLBACK_TOKENS = {
+  colorRoles: [
+    "background",
+    "foreground",
+    "card",
+    "popover",
+    "primary",
+    "secondary",
+    "muted",
+    "accent",
+    "destructive",
+    "warning",
+    "success",
+    "brand",
+    "brand-muted",
+    "border",
+    "input",
+    "ring",
+    "dock",
+    "sidebar",
+  ],
+  radiusIntents: {
+    control: "rounded-full",
+    pill: "rounded-full",
+    input: "rounded-lg",
+    panel: "rounded-2xl",
+    shell: "rounded-3xl",
+  },
+  depthIntents: [
+    "depth-none",
+    "depth-soft",
+    "depth-raised",
+    "depth-100",
+    "depth-300",
+    "depth-400",
+    "depth-600",
+  ],
+  surfaces: ["application", "marketing", "mobile", "desktop"],
+}
+
+const FALLBACK_PRIMITIVES = [
   "button",
   "input",
+  "textarea",
   "select",
+  "checkbox",
+  "switch",
   "table",
   "card",
   "dialog",
   "sheet",
   "tabs",
   "tooltip",
+  "dropdown-menu",
   "sonner",
+  "separator",
+  "badge",
 ]
 
-const BANNED = [
-  "hex colors",
-  "rgb()/hsl() literals",
-  "shadow-*",
-  "font-bold on display",
-  "lucide-react direct import",
-  "second brand accent",
+const FALLBACK_RECIPES = [
+  {
+    id: "list-resource",
+    must: ["stable row height", "mono metadata", "empty/loading/error", "bg-brand/10 selected"],
+    never: ["marketing cards for rows", "raw hex", "shadow-*"],
+  },
+  {
+    id: "agent-rail",
+    must: ["outcome-then-trace", "data-provenance", "bg-activity-* for verbs only"],
+    never: ["activity as brand", "hidden errors"],
+  },
+  {
+    id: "empty-recovery",
+    must: ["role=alert on errors", "one clear CTA"],
+    never: ["illustration zoo", "multiple competing CTAs"],
+  },
 ]
 
-let cachedContract = null
+let cached = null
 
-async function loadContract() {
-  if (cachedContract) return cachedContract
+async function loadKit() {
+  if (cached) return cached
   try {
     const res = await fetch(CONTRACT_URL, {
       headers: { Accept: "application/json" },
     })
     if (res.ok) {
-      cachedContract = await res.json()
-      return cachedContract
+      cached = await res.json()
+      return cached
     }
   } catch {
     /* offline */
   }
   try {
     const here = dirname(fileURLToPath(import.meta.url))
-    const local = join(here, `../../public/r/${CONTRACT_ID}.contract.json`)
-    cachedContract = JSON.parse(readFileSync(local, "utf8"))
-    return cachedContract
+    cached = JSON.parse(
+      readFileSync(join(here, `../../public/r/${CONTRACT_ID}.contract.json`), "utf8"),
+    )
+    return cached
   } catch {
-    cachedContract = {
+    cached = {
       id: CONTRACT_ID,
-      platform: { mcpTools: MCP_TOOLS },
-      frozen: { colorRoles: COLOR_ROLES, banned: BANNED },
-      taskRecipes: [],
+      mandate: FALLBACK_MANDATE,
+      tokens: FALLBACK_TOKENS,
+      primitives: FALLBACK_PRIMITIVES,
+      recipes: FALLBACK_RECIPES,
+      banned: FALLBACK_MANDATE.mustNot,
     }
-    return cachedContract
+    return cached
+  }
+}
+
+/** Every response carries the consistency reminder — agents cannot miss it. */
+function withMandate(kit, payload) {
+  return {
+    contract: kit.id ?? CONTRACT_ID,
+    obey: {
+      purpose: kit.mandate?.purpose ?? FALLBACK_MANDATE.purpose,
+      must: kit.mandate?.must ?? FALLBACK_MANDATE.must,
+      mustNot: kit.mandate?.mustNot ?? FALLBACK_MANDATE.mustNot,
+    },
+    ...payload,
   }
 }
 
@@ -105,13 +190,14 @@ function toolList() {
   return [
     {
       name: "get_contract",
-      description: `Return the ${CONTRACT_ID} design contract JSON (platform + DNA + grammar).`,
+      description:
+        "REQUIRED FIRST. Return the lightweight consistency kit: must/mustNot, closed tokens, bans, primitives, recipes. Call before writing any UI.",
       inputSchema: { type: "object", properties: {} },
     },
     {
       name: "resolve_token",
       description:
-        "Resolve a semantic color/radius/depth/surface token to its closed value.",
+        "Resolve a closed token (color | radius | depth | surface). Inventing values is forbidden — only these closed sets.",
       inputSchema: {
         type: "object",
         properties: {
@@ -127,7 +213,7 @@ function toolList() {
     {
       name: "validate_ui",
       description:
-        "Lint a className / snippet against platform bans (hex, shadow-*, …).",
+        "REQUIRED BEFORE DONE. Lint a className/snippet against consistency bans (hex, shadow-*, lucide, arbitrary color).",
       inputSchema: {
         type: "object",
         properties: { source: { type: "string" } },
@@ -136,12 +222,14 @@ function toolList() {
     },
     {
       name: "list_primitives",
-      description: "List approved shadcn primitives to compose (no twin zoo).",
+      description:
+        "List approved shadcn primitives. Compose these only — never invent twin components or app shells.",
       inputSchema: { type: "object", properties: {} },
     },
     {
       name: "get_recipe",
-      description: "Fetch a task recipe (list-resource, agent-rail, …).",
+      description:
+        "Fetch a task recipe (list-resource, agent-rail, …) with must/never rules that keep surfaces consistent.",
       inputSchema: {
         type: "object",
         properties: { id: { type: "string" } },
@@ -151,21 +239,33 @@ function toolList() {
   ]
 }
 
-function validateUi(source) {
+function validateUi(kit, source) {
   const hits = []
-  if (/#[0-9a-fA-F]{3,8}\b/.test(source)) hits.push("hex color banned")
-  if (/\b(?:rgb|hsl)a?\(/.test(source)) hits.push("rgb/hsl literal banned")
+  if (/#[0-9a-fA-F]{3,8}\b/.test(source)) {
+    hits.push({ ban: "hex-color", fix: "Use semantic tokens (bg-brand, text-foreground)" })
+  }
+  if (/\b(?:rgb|hsl)a?\(/.test(source)) {
+    hits.push({ ban: "rgb-hsl-literal", fix: "OKLCH tokens / utilities only" })
+  }
   if (/\bshadow-(?:sm|md|lg|xl|2xl|inner)\b/.test(source)) {
-    hits.push("Tailwind shadow-* banned — use depth-*")
+    hits.push({ ban: "tailwind-shadow", fix: "Use edge / depth-soft / depth-raised" })
   }
-  if (/\bfont-bold\b/.test(source)) hits.push("font-bold on display banned")
+  if (/\bfont-bold\b/.test(source)) {
+    hits.push({ ban: "font-bold-display", fix: "font-normal / font-medium for hierarchy" })
+  }
   if (/from\s+["']lucide-react["']/.test(source)) {
-    hits.push("lucide-react import banned — use @/lib/icons")
+    hits.push({ ban: "lucide-import", fix: 'import from "@/lib/icons"' })
   }
-  if (/text-\[[^\]]+\]/.test(source) || /bg-\[[^\]]+\]/.test(source)) {
-    hits.push("arbitrary color utility banned")
+  if (/\b(?:text|bg|border)-\[[^\]]+\]/.test(source)) {
+    hits.push({ ban: "arbitrary-color-utility", fix: "Closed semantic utilities only" })
   }
-  return { ok: hits.length === 0, hits, banned: BANNED }
+  return {
+    ok: hits.length === 0,
+    hits,
+    next: hits.length
+      ? "Fix every hit, then call validate_ui again before shipping."
+      : "Consistency check passed — still obey must/mustNot for structure.",
+  }
 }
 
 async function callTool(name, args = {}) {
@@ -176,75 +276,130 @@ async function callTool(name, args = {}) {
       hint: "Tool names are platform-locked — do not invent per-contract tools.",
     }
   }
-  const contract = await loadContract()
+  const kit = await loadKit()
+  const tokens = kit.tokens ?? FALLBACK_TOKENS
+
   switch (name) {
     case "get_contract":
-      return contract
+      return withMandate(kit, {
+        instruction:
+          "Obey mandate.must / mandate.mustNot for ALL UI. Do not invent tokens. validate_ui before done.",
+        aesthetic: kit.aesthetic,
+        urls: kit.urls,
+        tokens: {
+          colorRoles: tokens.colorRoles,
+          radiusIntents: tokens.radiusIntents ?? FALLBACK_TOKENS.radiusIntents,
+          depthIntents: tokens.depthIntents ?? FALLBACK_TOKENS.depthIntents,
+          surfaces: tokens.surfaces,
+          typesetPresets: tokens.typesetPresets,
+        },
+        banned: kit.banned ?? kit.consistencyBans,
+        primitives: kit.primitives ?? FALLBACK_PRIMITIVES,
+        recipes: (kit.recipes ?? FALLBACK_RECIPES).map((r) => ({
+          id: r.id,
+          must: r.must,
+          never: r.never,
+        })),
+        beforeUi: kit.mandate?.beforeUi ?? FALLBACK_MANDATE.beforeUi,
+        beforeDone: kit.mandate?.beforeDone ?? FALLBACK_MANDATE.beforeDone,
+      })
+
     case "resolve_token": {
       const { kind, name: token } = args
       if (kind === "color") {
-        const ok = (contract.frozen?.colorRoles ?? COLOR_ROLES).includes(token)
-        return {
+        const roles = tokens.colorRoles ?? FALLBACK_TOKENS.colorRoles
+        const ok = roles.includes(token)
+        return withMandate(kit, {
           ok,
-          token: ok ? `var(--${token})` : null,
-          utility: ok
-            ? [`bg-${token}`, `text-${token}`, `border-${token}`]
-            : [],
-          message: ok ? "closed role" : "unknown color role — do not invent",
-        }
+          kind,
+          name: token,
+          value: ok ? `var(--${token})` : null,
+          utilities: ok ? [`bg-${token}`, `text-${token}`, `border-${token}`] : [],
+          message: ok
+            ? "Closed color role — use these utilities only."
+            : "UNKNOWN color role — do not invent. Pick from tokens.colorRoles.",
+        })
       }
       if (kind === "radius") {
-        const map = {
-          control: "rounded-full",
-          input: "rounded-lg",
-          panel: "rounded-2xl",
-          shell: "rounded-3xl",
-        }
-        return { ok: Boolean(map[token]), token: map[token] ?? null }
+        const map = tokens.radiusIntents ?? FALLBACK_TOKENS.radiusIntents
+        const value = map[token]
+        return withMandate(kit, {
+          ok: Boolean(value),
+          kind,
+          name: token,
+          value: value ?? null,
+          message: value
+            ? "Closed radius intent."
+            : `UNKNOWN radius intent — use: ${Object.keys(map).join(", ")}`,
+        })
       }
       if (kind === "depth") {
-        const ok = ["none", "soft", "raised", "100", "300", "400", "600"].some(
-          (d) => token === d || token === `depth-${d}`,
-        )
-        return {
-          ok,
-          token: ok
-            ? token.startsWith("depth-")
-              ? token
-              : `depth-${token}`
-            : null,
-        }
+        const list = tokens.depthIntents ?? FALLBACK_TOKENS.depthIntents
+        const value = list.includes(token)
+          ? token
+          : list.includes(`depth-${token}`)
+            ? `depth-${token}`
+            : null
+        return withMandate(kit, {
+          ok: Boolean(value),
+          kind,
+          name: token,
+          value,
+          message: value
+            ? "Closed depth intent — never Tailwind shadow-*."
+            : `UNKNOWN depth — use: ${list.join(", ")}`,
+        })
       }
       if (kind === "surface") {
-        const list = contract.shellSurfaces ?? [
-          "application",
-          "marketing",
-          "mobile",
-          "desktop",
-        ]
-        return { ok: list.includes(token), token, surfaces: list }
+        const list = tokens.surfaces ?? FALLBACK_TOKENS.surfaces
+        const ok = list.includes(token)
+        return withMandate(kit, {
+          ok,
+          kind,
+          name: token,
+          value: ok ? token : null,
+          surfaces: list,
+          message: ok
+            ? "Set data-surface to this value."
+            : `UNKNOWN surface — use: ${list.join(", ")}`,
+        })
       }
-      return { ok: false, message: "unknown kind" }
+      return withMandate(kit, { ok: false, message: "unknown kind" })
     }
+
     case "validate_ui":
-      return validateUi(String(args.source ?? ""))
+      return withMandate(kit, validateUi(kit, String(args.source ?? "")))
+
     case "list_primitives":
-      return {
-        primitives: contract.primitives ?? PRIMITIVES,
-        rule: "Compose these — never invent twin components.",
-      }
+      return withMandate(kit, {
+        primitives: kit.primitives ?? FALLBACK_PRIMITIVES,
+        instruction:
+          "Compose these shadcn atoms only. New components are almost always wrong — prefer a rule or a recipe.",
+      })
+
     case "get_recipe": {
-      const recipes = contract.taskRecipes ?? []
+      const recipes = kit.recipes ?? FALLBACK_RECIPES
       const recipe = recipes.find((r) => r.id === args.id)
       if (!recipe) {
-        return {
+        return withMandate(kit, {
           ok: false,
           message: `Unknown recipe: ${args.id}`,
           available: recipes.map((r) => r.id),
-        }
+        })
       }
-      return { ok: true, recipe }
+      return withMandate(kit, {
+        ok: true,
+        instruction: "Follow recipe.must exactly. Never do recipe.never.",
+        recipe: {
+          id: recipe.id,
+          intent: recipe.intent,
+          surface: recipe.surface,
+          must: recipe.must,
+          never: recipe.never,
+        },
+      })
     }
+
     default:
       return { error: `Unhandled tool: ${name}` }
   }
@@ -260,9 +415,11 @@ async function handle(message) {
         protocolVersion: "2024-11-05",
         capabilities: { tools: {} },
         serverInfo: {
-          name: `${CONTRACT_ID}-contract`,
-          version: "1.0.0",
+          name: `${CONTRACT_ID}-consistency`,
+          version: "1.1.0",
           platform: "design-contracts",
+          instructions:
+            "Open-source consistency MCP. Call get_contract before UI. Call validate_ui before done. Obey must/mustNot — do not invent tokens.",
         },
       },
     }
@@ -303,5 +460,5 @@ rl.on("line", async (line) => {
 })
 
 process.stderr.write(
-  `[contract-mcp] id=${CONTRACT_ID} tools=${MCP_TOOLS.join(",")}\n`,
+  `[contract-mcp] consistency-kit id=${CONTRACT_ID} tools=${MCP_TOOLS.join(",")}\n`,
 )

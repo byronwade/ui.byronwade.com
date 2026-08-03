@@ -73,7 +73,7 @@ export const AGENTS_MD_SECTIONS = [
   "8. Done gate",
 ] as const
 
-/** Contract JSON top-level keys — never rename for one contract. */
+/** Contract JSON top-level keys — slim consistency kit (never rename for one contract). */
 export const CONTRACT_JSON_KEYS = [
   "$schema",
   "platform",
@@ -84,12 +84,12 @@ export const CONTRACT_JSON_KEYS = [
   "mcp",
   "urls",
   "aesthetic",
-  "frozen",
-  "laws",
-  "typesetPresets",
-  "shellSurfaces",
-  "taskRecipes",
-  "fewShots",
+  "mandate",
+  "tokens",
+  "banned",
+  "consistencyBans",
+  "primitives",
+  "recipes",
 ] as const
 
 /** Paths relative to a contract id — templates only. */

@@ -6,8 +6,8 @@ const steps = [
   },
   {
     n: "02",
-    title: "Install the MCP in your editor",
-    body: "Point Cursor or Claude at the contract MCP. Agents call get_contract, resolve_token, validate_ui, list_primitives, and get_recipe — locally on your machine.",
+    title: "Install the consistency MCP",
+    body: "Open-source and tiny. Agents must call get_contract before UI and validate_ui before done — closed tokens, bans, primitives, and recipes that keep the system consistent.",
   },
   {
     n: "03",

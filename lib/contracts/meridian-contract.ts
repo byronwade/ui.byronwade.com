@@ -1,6 +1,5 @@
 /**
- * Meridian live contract — DNA + Meridian grammar through the platform builder.
- * Other contracts use the same builder with their DNA (+ grammar when live).
+ * Meridian live contract — DNA + Meridian grammar through the slim kit builder.
  */
 
 import {
@@ -12,10 +11,7 @@ import {
   radii,
   surfaces,
 } from "@/lib/design/grammar"
-import { uxLaws, dxLaws, dxLoadTiers } from "@/lib/design/experience"
-import { typesetLaws, typesetPresets } from "@/lib/design/typeset"
-import { shellLaws, shellRhythm } from "@/lib/design/shell"
-import { zones } from "@/lib/design/recipes"
+import { typesetPresets } from "@/lib/design/typeset"
 import { meridianDna } from "@/lib/contracts/dna/meridian"
 import {
   buildContractEnvelope,
@@ -24,25 +20,14 @@ import {
 
 export function meridianGrammar() {
   return {
-    frozen: {
-      colorRoles,
-      activityRoles,
-      provenanceRoles,
-      radii,
-      depths,
-      surfaces,
-      banned,
-      zones: zones.frozen,
-    },
-    laws: {
-      ux: uxLaws,
-      dx: dxLaws,
-      dxLoadTiers,
-      typeset: typesetLaws,
-      shell: shellLaws,
-    },
+    colorRoles,
+    radii,
+    depths,
+    surfaces,
+    activityRoles,
+    provenanceRoles,
+    banned,
     typesetPresets: [...typesetPresets],
-    shellSurfaces: Object.keys(shellRhythm),
   }
 }
 

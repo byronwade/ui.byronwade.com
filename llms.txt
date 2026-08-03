@@ -41,7 +41,9 @@ npm run gen:contract
 npm run check:platform
 ```
 
-MCP tools (identical on every contract): get_contract · resolve_token · validate_ui · list_primitives · get_recipe
+MCP = lightweight consistency kit (identical tools on every contract):
+get_contract (before UI) · resolve_token · list_primitives · get_recipe · validate_ui (before done)
+Every response includes obey.must / obey.mustNot — agents must not invent tokens.
 
 ## Skill loop (prove on site)
 

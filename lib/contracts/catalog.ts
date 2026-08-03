@@ -14,7 +14,7 @@ import {
 export { MCP_PRICE_USD, PRICING_MODEL }
 
 /** Human label for catalog / pricing surfaces. */
-export function priceLabel(priceMonthly = MCP_PRICE_USD) {
+export function priceLabel(priceMonthly: number = MCP_PRICE_USD) {
   if (PRICING_MODEL === "open-source" || priceMonthly <= 0) return "Open source"
   return `$${priceMonthly}/mo`
 }

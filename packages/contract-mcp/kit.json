@@ -1,58 +1,5 @@
 {
-  "$schema": "https://ui.byronwade.com/r/meridian.contract.schema.json",
-  "platform": {
-    "id": "design-contracts",
-    "version": "1.0.0",
-    "mcpTools": [
-      "get_contract",
-      "resolve_token",
-      "validate_ui",
-      "list_primitives",
-      "get_recipe"
-    ],
-    "pricingModel": "open-source",
-    "priceMonthlyUsd": 0,
-    "contractJsonKeys": [
-      "$schema",
-      "platform",
-      "id",
-      "name",
-      "version",
-      "priceMonthlyUsd",
-      "mcp",
-      "urls",
-      "aesthetic",
-      "mandate",
-      "tokens",
-      "banned",
-      "consistencyBans",
-      "primitives",
-      "recipes"
-    ],
-    "kit": "consistency"
-  },
-  "id": "meridian",
-  "name": "Meridian",
-  "version": "0.1.0",
-  "priceMonthlyUsd": 0,
-  "mcp": {
-    "slug": "meridian",
-    "tools": [
-      "get_contract",
-      "resolve_token",
-      "validate_ui",
-      "list_primitives",
-      "get_recipe"
-    ]
-  },
-  "urls": {
-    "home": "https://ui.byronwade.com/meridian",
-    "design": "https://ui.byronwade.com/meridian/design.md",
-    "agents": "https://ui.byronwade.com/meridian/agents.md",
-    "contract": "https://ui.byronwade.com/r/meridian.contract.json"
-  },
-  "aesthetic": "Soft warm neutrals, one deep ink accent, full-bleed cinema, dense app chrome.",
-  "status": "live",
+  "kit": "consistency",
   "mandate": {
     "purpose": "Keep application UI consistent across the product. Creativity is content + composition — never new tokens, shadows, or twin components.",
     "beforeUi": [
@@ -110,12 +57,6 @@
       "dock-muted",
       "sidebar"
     ],
-    "radii": [
-      "rounded-lg",
-      "rounded-2xl",
-      "rounded-3xl",
-      "rounded-full"
-    ],
     "radiusIntents": {
       "control": "rounded-full",
       "pill": "rounded-full",
@@ -123,12 +64,6 @@
       "panel": "rounded-2xl",
       "shell": "rounded-3xl"
     },
-    "depths": [
-      "edge",
-      "depth-none",
-      "depth-soft",
-      "depth-raised"
-    ],
     "depthIntents": [
       "depth-none",
       "depth-soft",
@@ -143,63 +78,8 @@
       "marketing",
       "mobile",
       "desktop"
-    ],
-    "activityRoles": [
-      "thinking",
-      "search",
-      "read",
-      "edit"
-    ],
-    "provenanceRoles": [
-      "user",
-      "assistant",
-      "tool",
-      "source",
-      "app",
-      "action"
-    ],
-    "typesetPresets": [
-      "docs",
-      "chat",
-      "reading",
-      "compact"
     ]
   },
-  "banned": [
-    "raw-hex-color",
-    "arbitrary-color-utility",
-    "non-oklch-color",
-    "tailwind-shadow",
-    "dvh-viewport",
-    "font-bold-display",
-    "scroll-choreography",
-    "overlay-stickers-on-media",
-    "pure-white",
-    "pure-black",
-    "bright-neon-accent",
-    "cream-terracotta-cliche",
-    "second-accent",
-    "influence-brand-labels",
-    "floating-chatbot",
-    "nested-demo-scrollports",
-    "inset-hero-media",
-    "low-contrast-on-dock",
-    "foreground-opacity-cheat",
-    "direct-lucide-import",
-    "direct-phosphor-import",
-    "arbitrary-px-height",
-    "arbitrary-px-type",
-    "arbitrary-px-padding"
-  ],
-  "consistencyBans": [
-    "hex-color",
-    "rgb-hsl-literal",
-    "tailwind-shadow",
-    "font-bold-display",
-    "lucide-import",
-    "arbitrary-color-utility",
-    "second-accent"
-  ],
   "primitives": [
     "button",
     "input",
@@ -221,8 +101,6 @@
   "recipes": [
     {
       "id": "list-resource",
-      "intent": "Scanable index of domain objects with filter + row actions.",
-      "surface": "application",
       "must": [
         "stable row height",
         "mono metadata",
@@ -237,8 +115,6 @@
     },
     {
       "id": "edit-record",
-      "intent": "Form to create/update one object with clear save path.",
-      "surface": "application",
       "must": [
         "labels on every field",
         "validation inline",
@@ -252,8 +128,6 @@
     },
     {
       "id": "object-detail",
-      "intent": "One product object with meta, actions, related lists.",
-      "surface": "application",
       "must": [
         "title → description → meta",
         "edge panels",
@@ -266,8 +140,6 @@
     },
     {
       "id": "agent-rail",
-      "intent": "AI attached to an object — outcome first, trace disclosed.",
-      "surface": "application",
       "must": [
         "data-provenance",
         "outcome-then-trace",
@@ -281,8 +153,6 @@
     },
     {
       "id": "settings-form",
-      "intent": "Workspace or user preferences in calm chrome.",
-      "surface": "application",
       "must": [
         "grouped sections",
         "quiet destructive",
@@ -295,8 +165,6 @@
     },
     {
       "id": "empty-recovery",
-      "intent": "Empty/error states that teach the next action.",
-      "surface": "application",
       "must": [
         "role=alert on errors",
         "one clear CTA",
@@ -308,5 +176,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-08-03T14:40:24.698Z"
+  "generatedAt": "2026-08-03T14:40:24.700Z"
 }

@@ -1,6 +1,6 @@
 /**
- * Merge platform skeleton + contract DNA (+ optional live grammar) → contract JSON.
- * One builder for every contract — never hand-shape a sibling JSON.
+ * Build the lightweight MCP consistency kit for a contract.
+ * Fat docs stay in design.md / agents.md — JSON stays small and agent-actionable.
  */
 
 import {
@@ -12,11 +12,26 @@ import {
   PRICING_MODEL,
   contractUrls,
 } from "@/lib/platform/skeleton"
+import {
+  agentMandate,
+  approvedPrimitives,
+  consistencyBans,
+  depthIntents,
+  radiusIntents,
+} from "@/lib/platform/consistency"
 import { getDna, type ContractDna } from "@/lib/contracts/dna"
 import { taskRecipes } from "@/lib/contracts/task-recipes"
-import { fewShots } from "@/lib/contracts/few-shots"
+import {
+  activityRoles,
+  banned,
+  colorRoles,
+  depths,
+  provenanceRoles,
+  radii,
+  surfaces,
+} from "@/lib/design/grammar"
+import { typesetPresets } from "@/lib/design/typeset"
 
-/** Shared platform payload every contract JSON embeds. */
 export function platformBlock() {
   return {
     id: PLATFORM_ID,
@@ -25,7 +40,19 @@ export function platformBlock() {
     pricingModel: PRICING_MODEL,
     priceMonthlyUsd: MCP_PRICE_USD,
     contractJsonKeys: [...CONTRACT_JSON_KEYS],
+    kit: "consistency",
   } as const
+}
+
+/** Compact recipe — must/never only (what keeps UI consistent). */
+export function compactRecipes() {
+  return taskRecipes.map((r) => ({
+    id: r.id,
+    intent: r.intent,
+    surface: r.surface,
+    must: r.must,
+    never: r.never,
+  }))
 }
 
 export type ContractJson = {
@@ -36,21 +63,41 @@ export type ContractJson = {
   version: string
   priceMonthlyUsd: number
   mcp: { slug: string; tools: string[] }
-  urls: ReturnType<typeof contractUrls>
+  urls: {
+    home: string
+    design: string
+    agents: string
+    contract: string
+  }
   aesthetic: string
-  frozen?: Record<string, unknown>
-  laws?: Record<string, unknown>
-  typesetPresets?: string[]
-  shellSurfaces?: string[]
-  taskRecipes: typeof taskRecipes
-  fewShots: typeof fewShots
+  /** Imperative consistency law — read first */
+  mandate: typeof agentMandate
+  tokens: {
+    colorRoles: readonly string[]
+    radii: readonly string[]
+    radiusIntents: typeof radiusIntents
+    depths: readonly string[]
+    depthIntents: readonly string[]
+    surfaces: readonly string[]
+    activityRoles: readonly string[]
+    provenanceRoles: readonly string[]
+    typesetPresets: readonly string[]
+  }
+  banned: readonly string[]
+  consistencyBans: readonly string[]
+  primitives: readonly string[]
+  recipes: ReturnType<typeof compactRecipes>
 }
 
 export type LiveGrammar = {
-  frozen: Record<string, unknown>
-  laws: Record<string, unknown>
-  typesetPresets: string[]
-  shellSurfaces: string[]
+  colorRoles?: readonly string[]
+  radii?: readonly string[]
+  depths?: readonly string[]
+  surfaces?: readonly string[]
+  activityRoles?: readonly string[]
+  provenanceRoles?: readonly string[]
+  banned?: readonly string[]
+  typesetPresets?: readonly string[]
 }
 
 /** Structural envelope — same for live and stub contracts. */
@@ -58,7 +105,8 @@ export function buildContractEnvelope(
   dna: ContractDna,
   grammar?: LiveGrammar,
 ): ContractJson {
-  const base: ContractJson = {
+  const urls = contractUrls(dna.id)
+  return {
     $schema: `https://ui.byronwade.com/r/${dna.id}.contract.schema.json`,
     platform: platformBlock(),
     id: dna.id,
@@ -69,20 +117,30 @@ export function buildContractEnvelope(
       slug: dna.id,
       tools: [...MCP_TOOLS],
     },
-    urls: contractUrls(dna.id),
+    urls: {
+      home: urls.home,
+      design: urls.design,
+      agents: urls.agents,
+      contract: urls.contract,
+    },
     aesthetic: dna.aesthetic,
-    taskRecipes,
-    fewShots,
+    mandate: agentMandate,
+    tokens: {
+      colorRoles: grammar?.colorRoles ?? colorRoles,
+      radii: grammar?.radii ?? radii,
+      radiusIntents,
+      depths: grammar?.depths ?? depths,
+      depthIntents,
+      surfaces: grammar?.surfaces ?? surfaces,
+      activityRoles: grammar?.activityRoles ?? activityRoles,
+      provenanceRoles: grammar?.provenanceRoles ?? provenanceRoles,
+      typesetPresets: grammar?.typesetPresets ?? typesetPresets,
+    },
+    banned: grammar?.banned ?? banned,
+    consistencyBans,
+    primitives: approvedPrimitives,
+    recipes: compactRecipes(),
   }
-
-  if (grammar) {
-    base.frozen = grammar.frozen
-    base.laws = grammar.laws
-    base.typesetPresets = grammar.typesetPresets
-    base.shellSurfaces = grammar.shellSurfaces
-  }
-
-  return base
 }
 
 export function buildContractById(

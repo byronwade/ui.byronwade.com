@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 /**
- * Emit public/r/{id}.contract.json for EVERY DNA pack.
- * Structural fields come from lib/platform/skeleton.ts (parsed).
- * Never hand-edit a single contract JSON into a unique shape.
+ * Emit slim consistency-kit JSON for EVERY DNA pack + shared MCP kit snapshot.
+ * Fat docs stay in markdown — MCP payloads stay small and imperative.
  */
 import { mkdir, writeFile, readFile, readdir } from "node:fs/promises"
 import { join, dirname } from "node:path"
@@ -30,13 +29,43 @@ const CONTRACT_JSON_KEYS = [
   "mcp",
   "urls",
   "aesthetic",
-  "frozen",
-  "laws",
-  "typesetPresets",
-  "shellSurfaces",
-  "taskRecipes",
-  "fewShots",
+  "mandate",
+  "tokens",
+  "banned",
+  "consistencyBans",
+  "primitives",
+  "recipes",
 ]
+
+async function readTsStringArray(rel, exportName) {
+  const src = await readFile(join(ROOT, rel), "utf8")
+  const arrayMatch = src.match(
+    new RegExp(`export const ${exportName} = \\[([\\s\\S]*?)\\] as const`),
+  )
+  if (!arrayMatch) return []
+  return [...arrayMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1])
+}
+
+async function readMandate() {
+  const src = await readFile(join(ROOT, "lib/platform/consistency.ts"), "utf8")
+  function block(name) {
+    const m = src.match(
+      new RegExp(`${name}:\\s*\\[([\\s\\S]*?)\\]`, "m"),
+    )
+    if (!m) return []
+    return [...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1])
+  }
+  const purpose =
+    src.match(/purpose:\s*"([^"]+)"/)?.[1] ??
+    "Keep application UI consistent across the product."
+  return {
+    purpose,
+    beforeUi: block("beforeUi"),
+    beforeDone: block("beforeDone"),
+    must: block("must"),
+    mustNot: block("mustNot"),
+  }
+}
 
 async function readDnaFiles() {
   const entries = await readdir(DNA_DIR)
@@ -55,50 +84,74 @@ async function readDnaFiles() {
   return ids.sort((a, b) => a.id.localeCompare(b.id))
 }
 
-async function readTsStringArray(rel, exportName) {
-  const src = await readFile(join(ROOT, rel), "utf8")
-  const arrayMatch = src.match(
-    new RegExp(`export const ${exportName} = \\[([\\s\\S]*?)\\] as const`),
-  )
-  if (!arrayMatch) return []
-  return [...arrayMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1])
+function parseRecipes(src) {
+  const recipes = []
+  const chunks = src.split(/{\s*id:\s*"/).slice(1)
+  for (const chunk of chunks) {
+    const id = chunk.match(/^([^"]+)"/)?.[1]
+    const intent = chunk.match(/intent:\s*"([^"]+)"/)?.[1]
+    const surface = chunk.match(/surface:\s*"([^"]+)"/)?.[1]
+    const mustBlock = chunk.match(/must:\s*\[([^\]]*)\]/)?.[1] ?? ""
+    const neverBlock = chunk.match(/never:\s*\[([^\]]*)\]/)?.[1] ?? ""
+    const must = [...mustBlock.matchAll(/"([^"]+)"/g)].map((m) => m[1])
+    const never = [...neverBlock.matchAll(/"([^"]+)"/g)].map((m) => m[1])
+    if (id) recipes.push({ id, intent, surface, must, never })
+  }
+  return recipes
 }
 
-const grammar = {
-  colorRoles: await readTsStringArray("lib/design/grammar.ts", "colorRoles"),
-  activityRoles: await readTsStringArray(
-    "lib/design/grammar.ts",
-    "activityRoles",
-  ),
-  provenanceRoles: await readTsStringArray(
-    "lib/design/grammar.ts",
-    "provenanceRoles",
-  ),
-  radii: await readTsStringArray("lib/design/grammar.ts", "radii"),
-  depths: await readTsStringArray("lib/design/grammar.ts", "depths"),
-  surfaces: await readTsStringArray("lib/design/grammar.ts", "surfaces"),
-  banned: await readTsStringArray("lib/design/grammar.ts", "banned"),
-  typesetPresets: await readTsStringArray(
-    "lib/design/typeset.ts",
-    "typesetPresets",
-  ),
+const mandate = await readMandate()
+const colorRoles = await readTsStringArray("lib/design/grammar.ts", "colorRoles")
+const radii = await readTsStringArray("lib/design/grammar.ts", "radii")
+const depths = await readTsStringArray("lib/design/grammar.ts", "depths")
+const surfaces = await readTsStringArray("lib/design/grammar.ts", "surfaces")
+const activityRoles = await readTsStringArray(
+  "lib/design/grammar.ts",
+  "activityRoles",
+)
+const provenanceRoles = await readTsStringArray(
+  "lib/design/grammar.ts",
+  "provenanceRoles",
+)
+const banned = await readTsStringArray("lib/design/grammar.ts", "banned")
+const typesetPresets = await readTsStringArray(
+  "lib/design/typeset.ts",
+  "typesetPresets",
+)
+const consistencyBans = await readTsStringArray(
+  "lib/platform/consistency.ts",
+  "consistencyBans",
+)
+const primitives = await readTsStringArray(
+  "lib/platform/consistency.ts",
+  "approvedPrimitives",
+)
+const depthIntents = await readTsStringArray(
+  "lib/platform/consistency.ts",
+  "depthIntents",
+)
+
+const radiusIntents = {
+  control: "rounded-full",
+  pill: "rounded-full",
+  input: "rounded-lg",
+  panel: "rounded-2xl",
+  shell: "rounded-3xl",
 }
 
 const recipesSrc = await readFile(
   join(ROOT, "lib/contracts/task-recipes.ts"),
   "utf8",
 )
-const recipeIds = [...recipesSrc.matchAll(/id: "([^"]+)"/g)].map((m) => m[1])
-
-const fewSrc = await readFile(join(ROOT, "lib/contracts/few-shots.ts"), "utf8")
-const fewIds = [...fewSrc.matchAll(/id: "([^"]+)"/g)].map((m) => m[1])
+const recipes = parseRecipes(recipesSrc)
 
 const dnas = await readDnaFiles()
 await mkdir(outDir, { recursive: true })
 
+const site = "https://ui.byronwade.com"
+
 for (const dna of dnas) {
-  const site = "https://ui.byronwade.com"
-  const live = dna.status === "live"
+  const live = dna.status === "live" && dna.id === "meridian"
   const contract = {
     $schema: `${site}/r/${dna.id}.contract.schema.json`,
     platform: {
@@ -108,6 +161,7 @@ for (const dna of dnas) {
       pricingModel: "open-source",
       priceMonthlyUsd: 0,
       contractJsonKeys: CONTRACT_JSON_KEYS,
+      kit: "consistency",
     },
     id: dna.id,
     name: dna.name,
@@ -118,34 +172,56 @@ for (const dna of dnas) {
       home: `${site}/${dna.id}`,
       design: `${site}/${dna.id}/design.md`,
       agents: `${site}/${dna.id}/agents.md`,
-      architecture: `${site}/${dna.id}/architecture.md`,
-      llms: `${site}/${dna.id}/llms.txt`,
       contract: `${site}/r/${dna.id}.contract.json`,
     },
     aesthetic: dna.aesthetic,
     status: dna.status,
-    taskRecipeIds: recipeIds,
-    fewShotIds: fewIds,
+    mandate,
+    tokens: {
+      colorRoles: live ? colorRoles : colorRoles,
+      radii: live ? radii : radii,
+      radiusIntents,
+      depths: live ? depths : depths,
+      depthIntents,
+      surfaces: live ? surfaces : surfaces,
+      activityRoles,
+      provenanceRoles,
+      typesetPresets,
+    },
+    banned,
+    consistencyBans,
+    primitives,
+    recipes,
     generatedAt: new Date().toISOString(),
   }
 
-  // Live contracts embed Meridian grammar today; stubs stay structural-only.
-  if (live && dna.id === "meridian") {
-    contract.frozen = {
-      colorRoles: grammar.colorRoles,
-      activityRoles: grammar.activityRoles,
-      provenanceRoles: grammar.provenanceRoles,
-      radii: grammar.radii,
-      depths: grammar.depths,
-      surfaces: grammar.surfaces,
-      banned: grammar.banned,
-    }
-    contract.typesetPresets = grammar.typesetPresets
-  }
-
-  const outFile = join(outDir, `${dna.id}.contract.json`)
-  await writeFile(outFile, `${JSON.stringify(contract, null, 2)}\n`)
+  await writeFile(
+    join(outDir, `${dna.id}.contract.json`),
+    `${JSON.stringify(contract, null, 2)}\n`,
+  )
   console.log(`wrote public/r/${dna.id}.contract.json`)
 }
 
-console.log(`gen:contract OK — ${dnas.length} contract(s), shared platform shape`)
+await writeFile(
+  join(ROOT, "packages/contract-mcp/kit.json"),
+  `${JSON.stringify(
+    {
+      kit: "consistency",
+      mandate,
+      tokens: { colorRoles, radiusIntents, depthIntents, surfaces },
+      primitives,
+      recipes: recipes.map((r) => ({
+        id: r.id,
+        must: r.must,
+        never: r.never,
+      })),
+      generatedAt: new Date().toISOString(),
+    },
+    null,
+    2,
+  )}\n`,
+)
+console.log("wrote packages/contract-mcp/kit.json")
+console.log(
+  `gen:contract OK — ${dnas.length} slim consistency kit(s), open-source MCP`,
+)

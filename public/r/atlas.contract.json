@@ -22,13 +22,14 @@
       "mcp",
       "urls",
       "aesthetic",
-      "frozen",
-      "laws",
-      "typesetPresets",
-      "shellSurfaces",
-      "taskRecipes",
-      "fewShots"
-    ]
+      "mandate",
+      "tokens",
+      "banned",
+      "consistencyBans",
+      "primitives",
+      "recipes"
+    ],
+    "kit": "consistency"
   },
   "id": "atlas",
   "name": "Atlas",
@@ -48,26 +49,264 @@
     "home": "https://ui.byronwade.com/atlas",
     "design": "https://ui.byronwade.com/atlas/design.md",
     "agents": "https://ui.byronwade.com/atlas/agents.md",
-    "architecture": "https://ui.byronwade.com/atlas/architecture.md",
-    "llms": "https://ui.byronwade.com/atlas/llms.txt",
     "contract": "https://ui.byronwade.com/r/atlas.contract.json"
   },
   "aesthetic": "Ink-forward workbench, mono metadata, keyboard-first scanning chrome.",
   "status": "soon",
-  "taskRecipeIds": [
-    "list-resource",
-    "edit-record",
-    "object-detail",
-    "agent-rail",
-    "settings-form",
-    "empty-recovery"
+  "mandate": {
+    "purpose": "Keep application UI consistent across the product. Creativity is content + composition — never new tokens, shadows, or twin components.",
+    "beforeUi": [
+      "Call get_contract and obey must / mustNot",
+      "Resolve colors/radii/depths only via resolve_token (closed set)",
+      "Compose only list_primitives — never fork Button/Card/shell twins",
+      "Pick a get_recipe intent when the surface matches (list, detail, agent-rail, …)"
+    ],
+    "beforeDone": [
+      "Run validate_ui on every new className / snippet",
+      "Own empty, loading, and error on resource surfaces",
+      "Selected rows/items use bg-brand/10 — not a new border color",
+      "Icons only from @/lib/icons (Phosphor) — never lucide-react",
+      "Depth only via edge / depth-* — never Tailwind shadow-*"
+    ],
+    "must": [
+      "OKLCH semantic tokens only (bg-background, text-foreground, bg-brand, …)",
+      "One accent → --brand (selected = bg-brand/10)",
+      "Closed radii: control/pill rounded-full · input rounded-lg · panel rounded-2xl · shell rounded-3xl",
+      "data-surface for density (application | marketing | mobile | desktop)",
+      "Object-bound AI with outcome-then-trace disclosure",
+      "typeset presets for markdown/HTML — no per-tag class soup",
+      "Same MCP tools + machine filenames on every design contract"
+    ],
+    "mustNot": [
+      "Invent hex / rgb / hsl / arbitrary color utilities",
+      "Use Tailwind shadow-* (use edge / depth-*)",
+      "Import lucide-react or @phosphor-icons/react directly",
+      "Add a second brand accent or status-as-brand",
+      "Ship font-bold on display/section headings",
+      "Invent twin components or bespoke app shells",
+      "Fork MCP tools / filenames / JSON keys for one contract only",
+      "Demo-only happy paths without empty/loading/error"
+    ]
+  },
+  "tokens": {
+    "colorRoles": [
+      "background",
+      "foreground",
+      "card",
+      "popover",
+      "primary",
+      "secondary",
+      "muted",
+      "accent",
+      "destructive",
+      "warning",
+      "success",
+      "brand",
+      "brand-muted",
+      "border",
+      "input",
+      "ring",
+      "dock",
+      "dock-muted",
+      "sidebar"
+    ],
+    "radii": [
+      "rounded-lg",
+      "rounded-2xl",
+      "rounded-3xl",
+      "rounded-full"
+    ],
+    "radiusIntents": {
+      "control": "rounded-full",
+      "pill": "rounded-full",
+      "input": "rounded-lg",
+      "panel": "rounded-2xl",
+      "shell": "rounded-3xl"
+    },
+    "depths": [
+      "edge",
+      "depth-none",
+      "depth-soft",
+      "depth-raised"
+    ],
+    "depthIntents": [
+      "depth-none",
+      "depth-soft",
+      "depth-raised",
+      "depth-100",
+      "depth-300",
+      "depth-400",
+      "depth-600"
+    ],
+    "surfaces": [
+      "application",
+      "marketing",
+      "mobile",
+      "desktop"
+    ],
+    "activityRoles": [
+      "thinking",
+      "search",
+      "read",
+      "edit"
+    ],
+    "provenanceRoles": [
+      "user",
+      "assistant",
+      "tool",
+      "source",
+      "app",
+      "action"
+    ],
+    "typesetPresets": [
+      "docs",
+      "chat",
+      "reading",
+      "compact"
+    ]
+  },
+  "banned": [
+    "raw-hex-color",
+    "arbitrary-color-utility",
+    "non-oklch-color",
+    "tailwind-shadow",
+    "dvh-viewport",
+    "font-bold-display",
+    "scroll-choreography",
+    "overlay-stickers-on-media",
+    "pure-white",
+    "pure-black",
+    "bright-neon-accent",
+    "cream-terracotta-cliche",
+    "second-accent",
+    "influence-brand-labels",
+    "floating-chatbot",
+    "nested-demo-scrollports",
+    "inset-hero-media",
+    "low-contrast-on-dock",
+    "foreground-opacity-cheat",
+    "direct-lucide-import",
+    "direct-phosphor-import",
+    "arbitrary-px-height",
+    "arbitrary-px-type",
+    "arbitrary-px-padding"
   ],
-  "fewShotIds": [
-    "row-selected",
-    "panel-depth",
-    "agent-disclosure",
-    "typeset-docs",
-    "icon-import"
+  "consistencyBans": [
+    "hex-color",
+    "rgb-hsl-literal",
+    "tailwind-shadow",
+    "font-bold-display",
+    "lucide-import",
+    "arbitrary-color-utility",
+    "second-accent"
   ],
-  "generatedAt": "2026-08-03T14:36:15.266Z"
+  "primitives": [
+    "button",
+    "input",
+    "textarea",
+    "select",
+    "checkbox",
+    "switch",
+    "table",
+    "card",
+    "dialog",
+    "sheet",
+    "tabs",
+    "tooltip",
+    "dropdown-menu",
+    "sonner",
+    "separator",
+    "badge"
+  ],
+  "recipes": [
+    {
+      "id": "list-resource",
+      "intent": "Scanable index of domain objects with filter + row actions.",
+      "surface": "application",
+      "must": [
+        "stable row height",
+        "mono metadata",
+        "owns empty + loading + error",
+        "selected = bg-brand/10"
+      ],
+      "never": [
+        "marketing cards for rows",
+        "raw hex",
+        "shadow-*"
+      ]
+    },
+    {
+      "id": "edit-record",
+      "intent": "Form to create/update one object with clear save path.",
+      "surface": "application",
+      "must": [
+        "labels on every field",
+        "validation inline",
+        "h-8/h-9 controls",
+        "rounded-lg inputs"
+      ],
+      "never": [
+        "hero CTA height on every button",
+        "serif body in forms"
+      ]
+    },
+    {
+      "id": "object-detail",
+      "intent": "One product object with meta, actions, related lists.",
+      "surface": "application",
+      "must": [
+        "title → description → meta",
+        "edge panels",
+        "object-bound AI"
+      ],
+      "never": [
+        "detached promo chips",
+        "second accent color"
+      ]
+    },
+    {
+      "id": "agent-rail",
+      "intent": "AI attached to an object — outcome first, trace disclosed.",
+      "surface": "application",
+      "must": [
+        "data-provenance",
+        "outcome-then-trace",
+        "bg-activity-* for agent verbs only",
+        "mono tool/model names"
+      ],
+      "never": [
+        "activity colors as brand",
+        "hidden errors"
+      ]
+    },
+    {
+      "id": "settings-form",
+      "intent": "Workspace or user preferences in calm chrome.",
+      "surface": "application",
+      "must": [
+        "grouped sections",
+        "quiet destructive",
+        "focus rings"
+      ],
+      "never": [
+        "theater tone for settings",
+        "dense mono walls of copy"
+      ]
+    },
+    {
+      "id": "empty-recovery",
+      "intent": "Empty/error states that teach the next action.",
+      "surface": "application",
+      "must": [
+        "role=alert on errors",
+        "one clear CTA",
+        "no shame copy"
+      ],
+      "never": [
+        "illustration zoo",
+        "multiple competing CTAs"
+      ]
+    }
+  ],
+  "generatedAt": "2026-08-03T14:40:24.693Z"
 }

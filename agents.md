@@ -69,14 +69,30 @@ Skip a step → drift.
 | Price | `MCP_PRICE_USD` |
 | Aesthetic / voice / tokens | `lib/contracts/dna/{id}.ts` (+ design grammar when live) |
 
+### MCP = consistency kit (open source, lightweight)
+
+The MCP server is **not** a docs browser. It only ships what keeps agents consistent:
+
+| Tool | When | Job |
+| --- | --- | --- |
+| `get_contract` | **Before any UI** | MUST/MUST NOT + closed tokens + primitives + recipes |
+| `resolve_token` | Picking color/radius/depth/surface | Closed set only — inventing fails |
+| `list_primitives` | Choosing atoms | Compose shadcn list — never twin kits |
+| `get_recipe` | Matching an intent | `must` / `never` for list, detail, agent-rail, … |
+| `validate_ui` | **Before done** | Lint hex / shadow-* / lucide / arbitrary color |
+
+Every tool response includes `obey.must` / `obey.mustNot`. Ignore them → drift.
+
 ### MUST
 
+- Call **`get_contract` first**, obey `mandate.must` / `mandate.mustNot`, then compose
+- Call **`validate_ui`** on new snippets before claiming done
 - Use **identical** MCP tools on every contract: `get_contract` · `resolve_token` · `validate_ui` · `list_primitives` · `get_recipe`
 - Ship the same machine files: `design.md` · `agents.md` · `architecture.md` · `llms.txt`
-- Serve contract JSON at `/r/{id}.contract.json` with the **same keys** (`buildContractEnvelope`)
+- Serve slim kit JSON at `/r/{id}.contract.json` (`buildContractEnvelope` — no fat laws dump)
 - Keep `agents.md` sections in `AGENTS_MD_SECTIONS` order (DNA fills content; structure stays)
-- Run `npm run gen:contract` after skeleton/DNA changes so **all** `public/r/*.contract.json` regenerate
-- Start MCP via `packages/contract-mcp` with `CONTRACT_ID={id}` — thin aliases only (see `packages/meridian-mcp`)
+- Run `npm run gen:contract` after skeleton/DNA/consistency changes so **all** kits regenerate
+- Start MCP via `packages/contract-mcp` with `CONTRACT_ID={id}` — thin aliases only (`packages/meridian-mcp`)
 
 ### MUST NOT fork
 

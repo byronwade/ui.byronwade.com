@@ -1,13 +1,6 @@
 #!/usr/bin/env node
 /**
- * Platform consistency gate — structural parity across ALL design contracts.
- *
- * Fails if:
- * - A DNA pack is missing / catalog id drifts
- * - agents.md lacks required platform sections
- * - MCP tool lists diverge from skeleton
- * - Generated contract JSON shapes diverge across contracts
- * - Someone invents a one-off machine filename or route slot
+ * Platform consistency gate — structural parity + slim consistency kit.
  */
 import { readFile, readdir } from "node:fs/promises"
 import { join, dirname } from "node:path"
@@ -21,13 +14,13 @@ async function read(rel) {
 }
 
 const skeleton = await read("lib/platform/skeleton.ts")
+const consistency = await read("lib/platform/consistency.ts")
 const agents = await read("agents.md")
 const buildContract = await read("lib/platform/build-contract.ts")
 const catalog = await read("lib/contracts/catalog.ts")
 const sharedMcp = await read("packages/contract-mcp/server.mjs")
 const meridianMcp = await read("packages/meridian-mcp/server.mjs")
 
-// --- skeleton exports present ---
 for (const id of [
   "export const PLATFORM_VERSION",
   "export const MCP_TOOLS",
@@ -40,7 +33,15 @@ for (const id of [
   if (!skeleton.includes(id)) hits.push(`skeleton.ts: missing ${id}`)
 }
 
-// --- MCP tools locked ---
+for (const id of [
+  "export const agentMandate",
+  "export const radiusIntents",
+  "export const approvedPrimitives",
+  "export const consistencyBans",
+]) {
+  if (!consistency.includes(id)) hits.push(`consistency.ts: missing ${id}`)
+}
+
 const toolMatch = skeleton.match(
   /export const MCP_TOOLS = \[([\s\S]*?)\] as const/,
 )
@@ -55,6 +56,16 @@ for (const tool of tools) {
   }
 }
 
+if (!sharedMcp.includes("withMandate") && !sharedMcp.includes("obey")) {
+  hits.push("contract-mcp: every response must carry consistency mandate (obey)")
+}
+if (!sharedMcp.includes("REQUIRED FIRST") && !sharedMcp.includes("get_contract")) {
+  hits.push("contract-mcp: get_contract must be described as required first")
+}
+if (!sharedMcp.includes("REQUIRED BEFORE DONE") && !sharedMcp.includes("validate_ui")) {
+  hits.push("contract-mcp: validate_ui must be required before done")
+}
+
 if (!meridianMcp.includes("contract-mcp")) {
   hits.push("meridian-mcp: must delegate to packages/contract-mcp (no fork)")
 }
@@ -62,7 +73,6 @@ if (/const MCP_TOOLS\s*=/.test(meridianMcp)) {
   hits.push("meridian-mcp: must not redefine MCP_TOOLS — use shared server")
 }
 
-// --- DNA packs cover every catalog id ---
 const dnaDir = join(ROOT, "lib/contracts/dna")
 const dnaFiles = (await readdir(dnaDir)).filter(
   (f) => f.endsWith(".ts") && f !== "index.ts" && f !== "types.ts",
@@ -89,7 +99,6 @@ if (/priceMonthly:\s*\d+/.test(catalog)) {
   hits.push("catalog.ts: do not hardcode price — use MCP_PRICE_USD from skeleton")
 }
 
-// --- agents.md platform consistency ---
 const requiredSections = [
   "0. Hard rules (fail closed)",
   "1. Load order (mandatory)",
@@ -106,18 +115,25 @@ for (const phrase of [
   "lib/platform/skeleton.ts",
   "Design DNA may differ",
   "MUST NOT fork",
+  "get_contract",
+  "validate_ui",
 ]) {
   if (!agents.toLowerCase().includes(phrase.toLowerCase())) {
     hits.push(`agents.md: must stress platform consistency ("${phrase}")`)
   }
 }
 
-// --- builder is the only JSON assembly path ---
 if (!buildContract.includes("buildContractEnvelope")) {
   hits.push("build-contract.ts: missing buildContractEnvelope")
 }
-if (!buildContract.includes("MCP_TOOLS")) {
-  hits.push("build-contract.ts: must use platform MCP_TOOLS")
+if (!buildContract.includes("agentMandate") && !buildContract.includes("mandate")) {
+  hits.push("build-contract.ts: must embed consistency mandate")
+}
+if (!buildContract.includes("compactRecipes")) {
+  hits.push("build-contract.ts: recipes must be compact (must/never)")
+}
+if (buildContract.includes("fewShots")) {
+  hits.push("build-contract.ts: fewShots bloated the MCP kit — keep docs-only")
 }
 
 const meridianContract = await read("lib/contracts/meridian-contract.ts")
@@ -125,7 +141,6 @@ if (!meridianContract.includes("buildContractEnvelope")) {
   hits.push("meridian-contract.ts: must use platform builder (no bespoke JSON shape)")
 }
 
-// --- generated JSON parity (if present) ---
 try {
   const pub = join(ROOT, "public/r")
   const files = (await readdir(pub)).filter((f) => f.endsWith(".contract.json"))
@@ -139,27 +154,37 @@ try {
       hits.push(`${f}: missing platform.mcpTools`)
       continue
     }
+    if (!json.mandate?.must || !json.mandate?.mustNot) {
+      hits.push(`${f}: missing mandate.must / mandate.mustNot`)
+    }
+    if (!json.tokens?.colorRoles || !json.primitives || !json.recipes) {
+      hits.push(`${f}: slim kit requires tokens + primitives + recipes`)
+    }
+    if (json.laws || json.fewShots || json.taskRecipes) {
+      hits.push(`${f}: fat fields (laws/fewShots/taskRecipes) banned from MCP kit`)
+    }
     const toolKey = JSON.stringify(json.platform.mcpTools)
-    shapes.push({ f, toolKey, keys: Object.keys(json).sort().join(",") })
+    shapes.push({ f, toolKey })
     if (toolKey !== JSON.stringify(tools)) {
       hits.push(`${f}: mcpTools diverge from skeleton MCP_TOOLS`)
     }
     if (json.priceMonthlyUsd !== 0) {
       hits.push(`${f}: priceMonthlyUsd must be 0 (open-source)`)
     }
-    if (json.platform?.pricingModel && json.platform.pricingModel !== "open-source") {
+    if (
+      json.platform?.pricingModel &&
+      json.platform.pricingModel !== "open-source"
+    ) {
       hits.push(`${f}: platform.pricingModel must be open-source`)
     }
   }
-  const toolKeys = new Set(shapes.map((s) => s.toolKey))
-  if (toolKeys.size > 1) {
+  if (new Set(shapes.map((s) => s.toolKey)).size > 1) {
     hits.push("public/r: contract JSON mcpTools not identical across contracts")
   }
 } catch {
   hits.push("public/r: unable to read generated contract JSON")
 }
 
-// --- docs ---
 try {
   const platformDoc = await read("docs/platform.md")
   if (!platformDoc.includes("lib/platform/skeleton.ts")) {
@@ -171,7 +196,7 @@ try {
 
 if (hits.length === 0) {
   console.log(
-    `check:platform OK — ${dnaIds.length} DNA packs, MCP tools locked, agents.md consistent`,
+    `check:platform OK — ${dnaIds.length} DNA packs, slim consistency MCP, agents.md locked`,
   )
   process.exit(0)
 }

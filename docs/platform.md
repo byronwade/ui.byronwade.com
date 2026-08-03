@@ -33,13 +33,16 @@ Design DNA **may** differ: Harbor can feel like quiet ops paper while Meridian s
 ## Pipeline
 
 ```
-lib/platform/skeleton.ts          ← structural SSOT
+lib/platform/skeleton.ts          ← structural SSOT (tools, routes, filenames)
+lib/platform/consistency.ts       ← agent MUST / MUST NOT + closed intents
 lib/contracts/dna/{id}.ts         ← aesthetic SSOT per contract
-lib/platform/build-contract.ts    ← merge → contract JSON
-packages/contract-mcp             ← one MCP binary; CONTRACT_ID selects DNA
-public/r/{id}.contract.json       ← generated for ALL ids
-check:platform                    ← parity gate
+lib/platform/build-contract.ts    ← merge → slim consistency-kit JSON
+packages/contract-mcp             ← lightweight MCP; CONTRACT_ID selects DNA
+public/r/{id}.contract.json       ← generated for ALL ids (mandate + tokens + recipes)
+check:platform                    ← parity + slim-kit gate
 ```
+
+MCP responses always include `obey.must` / `obey.mustNot`. Fat prose stays in markdown.
 
 ## Adding a new contract
 
