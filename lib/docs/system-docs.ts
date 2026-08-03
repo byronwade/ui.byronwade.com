@@ -5,6 +5,7 @@
 
 export type SystemDocSlug =
   | "influences"
+  | "absorb"
   | "meridian"
   | "sources"
   | "layout"
@@ -31,6 +32,13 @@ export const systemDocs: readonly SystemDoc[] = [
     summary: "Ranked inspirations and merge matrix.",
     sourcePath: "docs/influences.md",
     filename: "influences.md",
+  },
+  {
+    slug: "absorb",
+    title: "Absorb checklist",
+    summary: "Take / leave / encode before influence-driven UI.",
+    sourcePath: "docs/absorb.md",
+    filename: "absorb.md",
   },
   {
     slug: "meridian",
