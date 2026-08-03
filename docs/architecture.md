@@ -81,6 +81,8 @@ contrast pairs
 | Color | `docs/color.md` | Research |
 | Type + typeset | `docs/typography.md` | Research |
 | Density | `docs/density.md` | Research |
+| Operator UX | `docs/ux.md` | Pillar |
+| Developer / agent DX | `docs/dx.md` | Pillar |
 | AI UI | `docs/ai-surfaces.md` | Research |
 | Human DNA | `docs/meridian.md` | DNA |
 | Source ledger | `docs/sources.md` | DNA |
@@ -116,6 +118,7 @@ Import `@/lib/design` — never ad-hoc fabrication.
 | `provenanceRoles` | user · assistant · tool · … |
 | `banned` | Drift patterns |
 | `typesetClass` / `typesetLaws` | Frozen HTML/markdown rhythm |
+| `uxLaws` / `dxLaws` | Twin pillars — operator + agent/dev experience |
 | `shellRhythm` / `shellLaws` | Surface density contract |
 | `cinematicLaws` | Film contract |
 | `materialLaws` | Fluent-shaped material |

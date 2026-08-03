@@ -1,7 +1,12 @@
 # Meridian — ux.md
 
-> Interaction, states, and operator ergonomics. Ranking: [`influences.md`](./influences.md).  
-> **Primary absorb:** Polaris Pro (meaning, predictable, juicy) + Cursor (keyboard, object-bound) + Fluent (rest→hover→selected, focus stroke) + Linear (quiet chrome) + Vercel (every state).
+> **User experience** — twin pillar with [`dx.md`](./dx.md). Typed: `uxLaws` in `lib/design/experience.ts`.  
+> Ranking: [`influences.md`](./influences.md).  
+> **Primary absorb:** Polaris Pro (meaning, predictable, juicy) + Cursor (keyboard, object-bound) + Fluent (rest→hover→selected, focus stroke) + Linear (quiet chrome) + Vercel (every state) + [NN/g heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/).
+
+## 0. Twin pillars
+
+UX (this file) and DX ([`dx.md`](./dx.md)) outrank cinema polish. If a change improves a screenshot but worsens operator clarity or agent reliability, reject it.
 
 ## 1. North-star UX principles
 
@@ -14,6 +19,27 @@
 | 5 | Quiet chrome, loud content | [Linear](https://linear.app/now/how-we-redesigned-the-linear-ui) | Brand tint limited in chrome |
 | 6 | Object-bound AI | Cursor app | No floating chatbot |
 | 7 | Focus ≠ fill | [Fluent color/interaction](https://fluent2.microsoft.design/color) | Ring/stroke for keyboard |
+| 8 | Visibility of status | [NN/g #1](https://www.nngroup.com/articles/ten-usability-heuristics/) | Loading + agent activity always visible |
+| 9 | Error prevention & recovery | NN/g #5 · #9 | Specific copy + retry; confirm destructive |
+| 10 | Recognition over recall | NN/g #6 | Show labels / kbd hints; don’t rely on memory |
+
+### NN/g → Meridian map (compressed)
+
+| Heuristic | Encode |
+| --- | --- |
+| 1 Status | Skeletons, `bg-activity-*`, mono tool names |
+| 3 Control & freedom | Escape, undo-friendly defaults, non-modal where possible |
+| 4 Consistency | Closed radii / states / typeset presets |
+| 5–9 Errors | `emptyAndErrorOwned`; never silent failure |
+| 7 Flexibility | Keyboard power + pointer defaults (`data-surface`) |
+| 8 Minimalist | Quiet chrome; one idea per cinema frame |
+| 10 Help | `typesetClass("docs")` drawers — not walls of tip text |
+
+### Agent UI disclosure ([Nielsen on progressive disclosure](https://jakobnielsenphd.substack.com/p/progressive-disclosure))
+
+1. **Level 1** — outcome + decision-critical ask  
+2. **Level 2** — activity / tool trace (one click)  
+3. Never narrate every tool call in the primary pane — and never hide the ledger entirely.
 
 ## 2. Interaction state model (Fluent + Polaris)
 
@@ -149,6 +175,8 @@ Every index/detail must define:
 
 ## Sources
 
+- [NN/g — 10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/)
+- [Progressive disclosure for AI (Nielsen)](https://jakobnielsenphd.substack.com/p/progressive-disclosure)
 - [Polaris Pro](https://polaris-react.shopify.com/design/pro-design-language)
 - [Fluent 2 Color](https://fluent2.microsoft.design/color)
 - [Linear UI redesign](https://linear.app/now/how-we-redesigned-the-linear-ui)

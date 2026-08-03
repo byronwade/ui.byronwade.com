@@ -22,7 +22,7 @@ Do not invent twin components or app shells — compose shadcn + frozen presets.
 1. `docs/north-star.md` → `design.md` + `lib/design/`
 2. Relevant skill under `skills/meridian-*`
 3. Surface proof (`Workbench` / `ComposerShell`) only to validate product UI
-4. `npm run check:design` + `check:shell` + `check:proofs` + `check:typeset` + `check:contrast` before done
+4. `npm run check:design` + `check:shell` + `check:proofs` + `check:typeset` + `check:experience` + `check:contrast` before done
 
 ## Skill loop
 

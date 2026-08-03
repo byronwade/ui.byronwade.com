@@ -41,6 +41,11 @@ export const zones = {
     "typesetPresets",
     "typesetLaws",
     "typesetRhythm",
+    "uxLaws",
+    "dxLaws",
+    "dxLoadTiers",
+    "requiredUiStates",
+    "interactionStateRecipe",
   ],
   creative: [
     "copy",
@@ -51,6 +56,7 @@ export const zones = {
     "whichTypesetPreset",
     "narrativeWithinOneIdea",
     "whichInteractiveProof",
+    "whichDisclosureLevel",
   ],
 } as const
 

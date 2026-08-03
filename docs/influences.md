@@ -7,14 +7,18 @@
 
 ## Product goals (scoring axes)
 
+UX + DX are the **highest-weight** axes — visual/cinema craft serves them.
+
 | Axis | Weight | Meaning |
 | --- | ---: | --- |
-| **A — App operator density** | 5 | Long sessions, indexes, keyboards, quiet chrome |
+| **U — Operator UX** | 6 | Usefulness, status, empty/error, density-by-task, keyboard |
+| **X — Developer / agent DX** | 6 | Closed API, progressive complexity, verifiable gates |
+| **A — App operator density** | 5 | Long sessions, indexes, quiet chrome |
 | **B — Agent-native** | 5 | Object-bound AI, provenance, typed anti-drift |
 | **C — Material coherence** | 4 | Tokens, radius/stroke/elevation as one family |
-| **D — Cinema / showcase** | 3 | Full-bleed film for theme marketing only |
 | **E — A11y / contrast** | 5 | WCAG AA, OKLCH, reduced motion |
 | **F — Implementability** | 4 | Works with shadcn + Tailwind v4 + lint |
+| **D — Cinema / showcase** | 2 | Full-bleed film for theme marketing only |
 
 Score = weighted fit (1–5 per axis × weight). Higher = stronger claim on Meridian defaults.
 
@@ -63,6 +67,9 @@ Score = weighted fit (1–5 per axis × weight). Higher = stronger claim on Meri
 | Cinema | Apple-class film | — | `cinematicLaws` |
 | Anti-drift | Superdesign / Pandya | Frost | `design.md` + `lib/design` + `check:design` |
 | Process | Vercel DE principles | — | DNA in `meridian.md` |
+| UX heuristics | [NN/g 10](https://www.nngroup.com/articles/ten-usability-heuristics/) | Polaris | `uxLaws` · [`ux.md`](./ux.md) |
+| DX / agent specs | Pandya + [Osmani](https://addyosmani.com/blog/good-spec/) | Capozzi layers | `dxLaws` · [`dx.md`](./dx.md) |
+| Agent disclosure | [Nielsen progressive disclosure](https://jakobnielsenphd.substack.com/p/progressive-disclosure) | Cursor app | outcome → trace (`agentOutcomeThenTrace`) |
 
 ## Per-influence deep notes (compressed)
 

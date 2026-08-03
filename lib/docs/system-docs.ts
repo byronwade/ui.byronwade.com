@@ -5,13 +5,14 @@
 
 export type SystemDocSlug =
   | "north-star"
+  | "ux"
+  | "dx"
   | "influences"
   | "absorb"
   | "meridian"
   | "sources"
   | "layout"
   | "architecture"
-  | "ux"
   | "animations"
   | "color"
   | "typography"
@@ -30,9 +31,23 @@ export const systemDocs: readonly SystemDoc[] = [
   {
     slug: "north-star",
     title: "North star",
-    summary: "AI design contract — rules first, not a shell zoo.",
+    summary: "AI design contract — UX + DX pillars, not a shell zoo.",
     sourcePath: "docs/north-star.md",
     filename: "north-star.md",
+  },
+  {
+    slug: "ux",
+    title: "UX",
+    summary: "Operator experience — states, heuristics, disclosure, empty/error.",
+    sourcePath: "docs/ux.md",
+    filename: "ux.md",
+  },
+  {
+    slug: "dx",
+    title: "DX",
+    summary: "Developer + agent experience — golden path, load tiers, gates.",
+    sourcePath: "docs/dx.md",
+    filename: "dx.md",
   },
   {
     slug: "influences",
@@ -77,13 +92,6 @@ export const systemDocs: readonly SystemDoc[] = [
     filename: "architecture.md",
   },
   {
-    slug: "ux",
-    title: "UX",
-    summary: "States, keyboard, disclosure, empty/error.",
-    sourcePath: "docs/ux.md",
-    filename: "ux.md",
-  },
-  {
     slug: "animations",
     title: "Animations",
     summary: "Fluent motion ramp, micro-only, reduced motion.",
@@ -100,7 +108,7 @@ export const systemDocs: readonly SystemDoc[] = [
   {
     slug: "typography",
     title: "Typography",
-    summary: "Roles, mono data, reading lanes.",
+    summary: "Roles, mono data, typeset presets.",
     sourcePath: "docs/typography.md",
     filename: "typography.md",
   },

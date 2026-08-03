@@ -12,7 +12,8 @@
     "check:shell": "node scripts/check-shell.mjs",
     "check:proofs": "node scripts/check-proofs.mjs",
     "check:typeset": "node scripts/check-typeset.mjs",
-    "validate": "npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:contrast && npm run lint"
+    "check:experience": "node scripts/check-experience.mjs",
+    "validate": "npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:experience && npm run check:contrast && npm run lint"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

@@ -4,16 +4,17 @@
 > **North star:** [`docs/north-star.md`](docs/north-star.md) — we build a **rule system**, not shells.
 
 **Product:** ground-up AI design contract so agents under extreme constraints ship on-brand UI.  
+**Biggest features:** **UX** + **DX** — twin pillars ([`docs/ux.md`](docs/ux.md) · [`docs/dx.md`](docs/dx.md)).  
 **Not:** a custom component library, app-shell zoo, or place to invent twin Buttons/Cards.  
 **Primitives:** shadcn/ui + shadcn/typeset. **Enforcement:** TypeScript closed sets + CI audit.  
-**Aesthetic list:** **Cinematic design**.
+**Aesthetic list:** **Cinematic design** (serves UX/DX — never outranks them).
 
 ## The model — strict + creative
 
 | Zone | What’s locked | What’s free |
 | --- | --- | --- |
-| **Frozen** | Color (OKLCH), radii, depth, surfaces, shell rhythm, **typeset presets**, theme knobs, activity, bans, cinematic + material laws, contrast pairs | — |
-| **Creative** | — | Copy, IA, domain objects, frame sequence, which shadcn wholes / typeset preset to compose, narrative inside one-idea frames |
+| **Frozen** | Color (OKLCH), radii, depth, surfaces, shell rhythm, typeset presets, **uxLaws / dxLaws**, theme knobs, activity, bans, cinematic + material laws, contrast pairs | — |
+| **Creative** | — | Copy, IA, domain objects, frame sequence, which shadcn wholes / typeset preset / disclosure level to compose, narrative inside one-idea frames |
 
 Agents invent **stories and compositions**. They do not invent **colors, shadows, radii, or typography scales**. Import `@/lib/design` — TypeScript rejects fabrication.
 
@@ -113,12 +114,14 @@ Every UI or token change must pass this audit (skill: `meridian-a11y`):
 9. **Mono for data** — IDs, counts, times, prices, model/tool names
 10. **Object-bound AI** — provenance + activity; no floating chatbot
 11. **Audit accessibility + contrast** on every change
-12. Pass **`npm run check:design`**, **`check:shell`**, **`check:proofs`**, **`check:typeset`**, and **`check:contrast`**
-13. **Shell rhythm** — wrap app chrome in `data-surface`; size/type via shell utilities (proof rails, not a shell zoo)
-14. **Interactive proofs** — `defineInteractiveProof` (idle + selected; agent ⇒ ActivityLegend) — validation only
-15. **Theme knobs** — only `lib/design/knobs` presets (brand / radius / paper)
-16. **Absorb first** — fill [`docs/absorb.md`](docs/absorb.md) before influence-driven UI changes
-17. **North star** — if a change doesn’t make AI-consistent design more reliable, it’s out of scope
+12. Pass **`check:design`**, **`check:shell`**, **`check:proofs`**, **`check:typeset`**, **`check:experience`**, **`check:contrast`**
+13. **UX** — usefulness, visible status, owned empty/loading/error, keyboard parity (`uxLaws`)
+14. **DX** — closed grammar, golden path, Always/Ask/Never load, self-verify gates (`dxLaws`)
+15. **Shell rhythm** — wrap app chrome in `data-surface`; size/type via shell utilities (proof rails, not a shell zoo)
+16. **Interactive proofs** — `defineInteractiveProof` (idle + selected; agent ⇒ ActivityLegend) — validation only
+17. **Theme knobs** — only `lib/design/knobs` presets (brand / radius / paper)
+18. **Absorb first** — fill [`docs/absorb.md`](docs/absorb.md) before influence-driven UI changes
+19. **North star** — if a change doesn’t make UX or DX more reliable for agents, it’s out of scope
 
 ## MUST NOT (`banned` in grammar)
 
@@ -177,4 +180,4 @@ Machine URLs content-negotiate: browsers get designed HTML; agents get raw
 - [ ] Icons from `@/lib/icons` (Phosphor)
 - [ ] Mono on data; quiet chrome
 - [ ] AI object-bound (if any)
-- [ ] `check:design` · `shell` · `proofs` · `typeset` · `contrast` clean
+- [ ] `check:design` · `shell` · `proofs` · `typeset` · `experience` · `contrast` clean

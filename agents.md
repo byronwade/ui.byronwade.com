@@ -3,6 +3,7 @@
 > **Strict AI operating manual.** Compact by design. Humans get a designed page; agents get this markdown (`?raw=1` forces raw).
 
 **Product:** AI design contract (rules first) — not a custom component or shell zoo.  
+**Biggest features:** **UX** + **DX** ([`/system/ux`](/system/ux) · [`/system/dx`](/system/dx)) — twin pillars.  
 **North star:** [`docs/north-star.md`](/system/north-star).  
 **Primitives:** shadcn/ui + shadcn/typeset. **Icons:** Phosphor `@/lib/icons`. **Color:** OKLCH only.  
 **Influences (absorb, never label):** [Fluent 2](https://fluent2.microsoft.design/) material language + **Cursor application** density — not Fluent marketing, not Cursor.com.
@@ -23,22 +24,24 @@
 | Object-bound AI + provenance | Floating chatbot |
 | `edge` / `depth-*` | Tailwind `shadow-*` |
 | `svh` viewport | `dvh` |
-| Pass gates below | Ship without contrast audit |
+| Own empty / loading / error on resource surfaces | Demo-only happy paths |
+| Pass gates below | Ship without contrast / experience audit |
 
-**Frozen** = tokens, radii, depths, surfaces, shell rhythm, **typeset presets**, knobs, activity, bans, cinematic + material laws, contrast pairs.  
-**Creative** = copy, IA, domain objects, frame sequence, which shadcn wholes / typeset preset to compose.
+**Frozen** = tokens, radii, depths, surfaces, shell rhythm, typeset presets, **uxLaws / dxLaws**, knobs, activity, bans, cinematic + material laws, contrast pairs.  
+**Creative** = copy, IA, domain objects, frame sequence, which shadcn wholes / typeset preset / disclosure level to compose.
 
 ---
 
 ## 1. Load order (mandatory)
 
-1. [`docs/north-star.md`](/system/north-star) — product definition (rules ≠ shells)
+1. [`docs/north-star.md`](/system/north-star) — product definition (UX + DX pillars; rules ≠ shells)
 2. [`design.md`](/design.md) — contract
-3. `@/lib/design` — `grammar` · `recipes` · `typeset` · `shell` · `contrast` · `cx`
-4. Research specs when composing space/motion/AI — [`/system`](/system) (`typography` → `layout` · `ux` · …)
-5. Matching skill under `skills/<name>/SKILL.md`
-6. Proof (validation only): `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
-7. Gates: `npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:contrast`
+3. `@/lib/design` — `grammar` · `experience` (`uxLaws`/`dxLaws`) · `typeset` · `shell` · `recipes` · `contrast`
+4. When shaping interaction or APIs — [`/system/ux`](/system/ux) · [`/system/dx`](/system/dx)
+5. Other research specs as needed — [`/system`](/system)
+6. Matching skill under `skills/<name>/SKILL.md`
+7. Proof (validation only): `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
+8. Gates: `npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:experience && npm run check:contrast`
 
 Skip a step → drift.
 
@@ -117,16 +120,18 @@ npx skills add byronwade/ui.byronwade.com --skill meridian-theme
 ## 7. Done gate
 
 ```bash
-npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:contrast
+npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:experience && npm run check:contrast
 ```
 
-- [ ] Load order followed (north star → contract → grammar)  
+- [ ] Load order followed (north star → contract → experience grammar)  
+- [ ] UX: status visible; empty/error owned; keyboard path  
+- [ ] DX: closed presets; self-verified gates; no twin kit  
 - [ ] No invented tokens / radii / shadows / type scales  
 - [ ] Typeset preset for rendered markdown (no per-tag soup)  
 - [ ] Control vs layer radius correct  
-- [ ] Stroke/edge default; depth only when floated  
-- [ ] Selected = brand wash; AI object-bound  
+- [ ] Selected = brand wash; AI object-bound (outcome → trace)  
 - [ ] Icons from `@/lib/icons`  
 - [ ] Did not invent a new shell / twin component  
 - [ ] All checks green  
+ 
  
