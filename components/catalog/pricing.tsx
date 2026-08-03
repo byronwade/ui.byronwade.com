@@ -53,11 +53,19 @@ function Pricing() {
               What you get
             </p>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
-              <li>npx install into any agent project (not just this repo)</li>
-              <li>get_contract → validate_ui loop + build_surface prompt</li>
-              <li>Shared tools/JSON keys — DNA only changes aesthetics</li>
-              <li>Machine docs + /r/{"{id}"}.contract.json per system</li>
+              <li>Contract MCP — required fail-closed runtime</li>
+              <li>design.md / agents.md — law book on every contract</li>
+              <li>Optional skills cookbook (theme · compose · cinema)</li>
+              <li>Closed prefs via apply_prefs · shared JSON keys</li>
             </ul>
+            <p className="mt-4 text-xs text-muted-foreground">
+              <Link
+                href="/stack"
+                className="text-foreground underline-offset-4 hover:underline"
+              >
+                Read why we ship all three layers
+              </Link>
+            </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {contracts.map((c) => (
                 <Link

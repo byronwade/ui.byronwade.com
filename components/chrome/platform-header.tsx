@@ -17,8 +17,9 @@ import {
 import { cn } from "@/lib/utils"
 
 const nav = [
+  { href: "/#stack", label: "Agent stack" },
   { href: "/#contracts", label: "Systems" },
-  { href: "/#how-it-works", label: "How it works" },
+  { href: "/stack", label: "Why MCP" },
   { href: "/#pricing", label: "Open source" },
 ] as const
 

@@ -62,6 +62,8 @@ Skip a step → drift.
 
 **vs shadcn MCP:** [shadcn MCP](https://ui.shadcn.com/docs/mcp) delivers registry components. **Contract MCP** is the fail-closed law (`get_contract` / `validate_ui` / recipes). Install both; do not treat them as substitutes.
 
+**Agent stack (marketing + ops):** MCP required · markdown SSOT required · skills optional. Full pitch: [`/stack`](/stack) · [`docs/stack.md`](./docs/stack.md). Never ship MCP-only without docs, or docs/skills without MCP enforcement.
+
 ### Single source of truth
 
 | Concern | Edit here only |

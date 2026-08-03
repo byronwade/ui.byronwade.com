@@ -3,6 +3,16 @@
 > **One architecture. Many aesthetics.**  
 > Structural change happens once — in `lib/platform/skeleton.ts` — and applies to every contract.
 
+## Agent stack (product)
+
+| Layer | Required? | Job |
+| --- | --- | --- |
+| Contract MCP | **Yes** | Runtime law — install product |
+| design.md / agents.md | **Yes** | Law book |
+| Skills | Optional | Cookbook |
+
+Marketing: [`/stack`](/stack) · homepage `#stack` · [`stack.md`](./stack.md).
+
 ## The split
 
 | Layer | Shared across all contracts? | Where |

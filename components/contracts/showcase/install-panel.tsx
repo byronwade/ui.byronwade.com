@@ -58,11 +58,16 @@ function InstallPanel({
             Install into any project
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            First-of-kind fail-closed design system over MCP.{" "}
-            <span className="text-foreground">shadcn MCP</span> installs
-            components;{" "}
+            <Link
+              href="/stack"
+              className="text-foreground underline-offset-4 hover:underline"
+            >
+              Agent stack
+            </Link>
+            : MCP is required, markdown is the law book, skills are optional.{" "}
+            <span className="text-foreground">shadcn MCP</span> installs atoms;{" "}
             <span className="text-foreground">{install.name} contract MCP</span>{" "}
-            keeps agents inside closed tokens with{" "}
+            enforces{" "}
             <span className="font-mono text-foreground">get_contract</span> →{" "}
             <span className="font-mono text-foreground">validate_ui</span>.
           </p>

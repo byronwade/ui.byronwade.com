@@ -1,15 +1,19 @@
 # ui.byronwade.com
 
 > Design systems that install as MCP — fail-closed consistency kits for agents.
+> Stack: Contract MCP (required) · design.md/agents.md (law book) · skills (optional cookbook).
 > Differentiator: shadcn MCP installs components; contract MCP enforces get_contract → validate_ui.
 > Meridian is the first live contract. Harbor, Atlas, and Vellum follow. Free (stdio COGS ≈ $0).
+> Marketing: https://ui.byronwade.com/stack · https://ui.byronwade.com/#stack
 
 Browsers hitting these URLs get designed HTML. Agents receive raw text
 (`Accept: text/markdown` / `text/plain`, or `?raw=1`).
 
 ## Platform
 
-- [Home](https://ui.byronwade.com/): Catalog of open-source design systems for developers · how it works · pricing ($0)
+- [Home](https://ui.byronwade.com/): Catalog · agent stack · how it works · pricing ($0)
+- [Agent stack](https://ui.byronwade.com/stack): Why MCP + markdown + skills (full docs)
+- [stack.md](https://ui.byronwade.com/meridian/system/stack): Same doctrine under Meridian system
 - [Meridian](https://ui.byronwade.com/meridian): Live cinematic contract (film + proofs)
 - [Harbor](https://ui.byronwade.com/harbor) · [Atlas](https://ui.byronwade.com/atlas) · [Vellum](https://ui.byronwade.com/vellum): Soon / preview
 

@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     template: "%s · ui.byronwade.com",
   },
   description:
-    "First open catalog of fail-closed design systems that install as MCP servers — get_contract before UI, validate_ui before done.",
+    "Fail-closed design systems that install as MCP — with design.md as the law book and optional skills as the cookbook. get_contract before UI, validate_ui before done.",
   metadataBase: new URL("https://ui.byronwade.com"),
   openGraph: {
     title: "Design systems that install as MCP",
     description:
-      "Fail-closed design-contract MCP — not a component zoo. Free and open source.",
+      "MCP · markdown · skills. Runtime law, law book, optional cookbook — free and open source.",
     url: "https://ui.byronwade.com",
     siteName: "ui.byronwade.com",
   },

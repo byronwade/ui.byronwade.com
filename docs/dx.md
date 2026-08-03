@@ -20,7 +20,8 @@ If the contract is hard to load, ambiguous, or unverifiable, the system fails �
 
 ## 2. Golden path — into any project (MCP)
 
-Live install: [`/meridian/install`](/meridian/install).
+Live install: [`/meridian/install`](/meridian/install).  
+Stack doctrine (MCP · markdown · skills): [`/stack`](/stack) · [`stack.md`](./stack.md).
 
 This product is a **design-contract MCP**, not a DESIGN.md-only file and not
 [shadcn MCP](https://ui.shadcn.com/docs/mcp) (which installs components). Pair them:

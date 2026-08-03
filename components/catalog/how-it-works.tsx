@@ -34,10 +34,15 @@ function HowItWorks() {
           Catalog for discovery. MCP for install.
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          DESIGN.md files teach agents with prose. Component MCPs install atoms.
-          Design contracts add the missing piece: a{" "}
-          <span className="text-foreground">runtime consistency server</span>{" "}
-          with the same tools on every DNA.
+          The{" "}
+          <a
+            href="#stack"
+            className="text-foreground underline-offset-4 hover:underline"
+          >
+            agent stack
+          </a>{" "}
+          is MCP + markdown + optional skills. This section is the install loop
+          once you&apos;ve picked a DNA.
         </p>
         <ol className="mt-12 grid gap-0 border border-border/80 md:grid-cols-3">
           {steps.map((step, i) => (

@@ -2,8 +2,18 @@
 
 **Design systems that install as MCP** — the first open catalog of fail-closed design contracts agents run over the [Model Context Protocol](https://modelcontextprotocol.io).
 
-- **[shadcn MCP](https://ui.shadcn.com/docs/mcp)** installs registry components.
-- **Contract MCP** (`contract-mcp`) is the consistency law: `get_contract` → `validate_ui`.
+**Agent stack (we ship all three):**
+
+| Layer | Job |
+| --- | --- |
+| **Contract MCP** | Required runtime law — `get_contract` → `validate_ui` |
+| **design.md / agents.md** | Required law book |
+| **Skills** | Optional cookbook |
+
+Marketing + docs: [`/`](https://ui.byronwade.com/) · [`/stack`](https://ui.byronwade.com/stack) · [`docs/stack.md`](./docs/stack.md).
+
+- **[shadcn MCP](https://ui.shadcn.com/docs/mcp)** installs registry components (pair it; different job).
+- **Contract MCP** (`contract-mcp`) is the consistency law.
 
 Homepage (`/`) is the platform catalog. Each `/{id}` route is that contract’s DNA end-to-end.
 

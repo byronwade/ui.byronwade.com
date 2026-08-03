@@ -33,14 +33,13 @@ function CatalogHero() {
           Design systems that install as MCP
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Not another component zoo. Each contract is a{" "}
-          <span className="text-foreground">fail-closed consistency kit</span>{" "}
-          agents run over MCP —{" "}
+          Not DESIGN.md alone. Not skills alone. Each contract installs a{" "}
+          <span className="text-foreground">fail-closed MCP</span> —{" "}
           <span className="font-mono text-foreground">get_contract</span> before
           UI,{" "}
           <span className="font-mono text-foreground">validate_ui</span> before
-          done. shadcn MCP installs atoms; this is the law that keeps them
-          coherent.
+          done — with markdown as the law book and skills as an optional
+          cookbook.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <a
@@ -50,16 +49,16 @@ function CatalogHero() {
             Install Meridian MCP
           </a>
           <a
-            href="#contracts"
+            href="#stack"
             className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            Browse systems
+            MCP · docs · skills
           </a>
           <a
-            href="#how-it-works"
+            href="/stack"
             className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            How it works
+            Full stack docs
           </a>
         </div>
       </div>
