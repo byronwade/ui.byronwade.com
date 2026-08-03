@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { ContractFrame } from "@/components/chrome/contract-frame"
+
 export const metadata: Metadata = {
   title: {
     default: "Meridian",
@@ -14,13 +16,10 @@ export const metadata: Metadata = {
   },
 }
 
-/**
- * Meridian contract shell — nested under the site root catalog.
- */
 export default function MeridianLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return <ContractFrame contractId="meridian">{children}</ContractFrame>
 }

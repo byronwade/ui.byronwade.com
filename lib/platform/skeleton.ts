@@ -46,13 +46,15 @@ export type MachineFile = (typeof MACHINE_FILES)[number]
 
 /**
  * Public page slots under /{contractId}/…
- * Film home is "" (the contract root). Order = primary nav for live contracts.
+ * Home is "" (the contract root). Order = primary nav for every contract.
  */
 export const ROUTE_SLOTS = [
-  { segment: "", label: "Film", nav: true },
-  { segment: "design", label: "Design", nav: true },
+  { segment: "", label: "Home", nav: true },
+  { segment: "install", label: "Install", nav: true },
+  { segment: "ui", label: "UI", nav: true },
   { segment: "theme", label: "Theme", nav: true },
   { segment: "surfaces", label: "Surfaces", nav: true },
+  { segment: "design", label: "Design", nav: true },
   { segment: "skills", label: "Skills", nav: true },
   { segment: "system", label: "System", nav: true },
   { segment: "for-agents", label: "Agents", nav: true },
