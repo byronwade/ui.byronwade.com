@@ -35,7 +35,7 @@
 3. Research specs when composing space/motion/AI — [`/system`](/system) (`influences` → `layout` · `ux` · `animations` · …)
 4. Matching skill under `skills/<name>/SKILL.md`
 5. Proof: `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
-6. Gates: `npm run check:design && npm run check:shell && npm run check:contrast`
+6. Gates: `npm run check:design && npm run check:shell && npm run check:proofs && npm run check:contrast`
 
 Skip a step → drift.
 
@@ -114,7 +114,7 @@ npx skills add byronwade/ui.byronwade.com --skill meridian-theme
 ## 7. Done gate
 
 ```bash
-npm run check:design && npm run check:shell && npm run check:contrast
+npm run check:design && npm run check:shell && npm run check:proofs && npm run check:contrast
 ```
 
 - [ ] Load order followed  

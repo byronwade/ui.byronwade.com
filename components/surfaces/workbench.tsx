@@ -340,7 +340,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                               setSelectedId(row.id)
                             }
                           }}
-                          className="h-8 cursor-pointer border-b border-border/60 outline-none hover:bg-muted/30 focus-visible:bg-brand/10 data-[state=selected]:bg-brand/10"
+                          className="motion-select h-8 cursor-pointer border-b border-border/60 outline-none hover:bg-muted/30 focus-visible:bg-brand/10 data-[state=selected]:bg-brand/10"
                         >
                           <td className="pl-2.5">
                             <Circle

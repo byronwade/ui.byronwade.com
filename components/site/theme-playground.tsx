@@ -1,6 +1,6 @@
 /**
  * Live theme knobs — scoped CSS variables on an app preview.
- * Marketing page that behaves like a product settings surface.
+ * Presets are frozen in lib/design/knobs — never invent OKLCH at call sites.
  */
 "use client"
 
@@ -8,121 +8,41 @@ import { useMemo, useState, type CSSProperties, type ReactNode } from "react"
 import { ActivityLegend } from "@/components/site/activity-legend"
 import { Workbench } from "@/components/surfaces/workbench"
 import { Button } from "@/components/ui/button"
-import { designCn, radiusIntent, themeKnobs } from "@/lib/design"
+import {
+  brandPresets,
+  designCn,
+  getBrandPreset,
+  getPaperPreset,
+  getRadiusPreset,
+  knobDefaults,
+  knobStyleVars,
+  paperPresets,
+  radiusIntent,
+  radiusPresets,
+  themeKnobs,
+  type BrandPresetId,
+  type PaperPresetId,
+  type RadiusPresetId,
+} from "@/lib/design"
 import { cn } from "@/lib/utils"
-
-type BrandPreset = {
-  id: string
-  label: string
-  brand: string
-  brandFg: string
-  brandMuted: string
-  accent: string
-}
-
-/** Closed OKLCH presets — same lightness/chroma family, hue rotates. */
-const brandPresets: BrandPreset[] = [
-  {
-    id: "teal",
-    label: "Ink teal",
-    brand: "oklch(0.42 0.09 200)",
-    brandFg: "oklch(0.97 0.01 85)",
-    brandMuted: "oklch(0.93 0.03 200)",
-    accent: "oklch(0.93 0.02 200)",
-  },
-  {
-    id: "slate",
-    label: "Slate",
-    brand: "oklch(0.42 0.08 250)",
-    brandFg: "oklch(0.97 0.01 85)",
-    brandMuted: "oklch(0.93 0.03 250)",
-    accent: "oklch(0.93 0.02 250)",
-  },
-  {
-    id: "moss",
-    label: "Moss",
-    brand: "oklch(0.42 0.08 155)",
-    brandFg: "oklch(0.97 0.01 85)",
-    brandMuted: "oklch(0.93 0.03 155)",
-    accent: "oklch(0.93 0.02 155)",
-  },
-  {
-    id: "wine",
-    label: "Wine",
-    brand: "oklch(0.42 0.09 15)",
-    brandFg: "oklch(0.97 0.01 85)",
-    brandMuted: "oklch(0.93 0.03 15)",
-    accent: "oklch(0.93 0.02 15)",
-  },
-]
-
-const radiusPresets = [
-  { id: "compact", label: "Compact", value: "0.375rem" },
-  { id: "default", label: "Default", value: "0.5rem" },
-  { id: "soft", label: "Soft", value: "0.75rem" },
-] as const
-
-const paperPresets = [
-  {
-    id: "warm",
-    label: "Warm paper",
-    background: "oklch(0.965 0.01 72)",
-    foreground: "oklch(0.28 0.02 55)",
-    card: "oklch(0.98 0.008 72)",
-  },
-  {
-    id: "cool",
-    label: "Cool paper",
-    background: "oklch(0.96 0.01 230)",
-    foreground: "oklch(0.28 0.02 240)",
-    card: "oklch(0.98 0.008 230)",
-  },
-  {
-    id: "night",
-    label: "Night",
-    background: "oklch(0.22 0.016 50)",
-    foreground: "oklch(0.94 0.01 75)",
-    card: "oklch(0.27 0.016 50)",
-  },
-] as const
 
 type ThemePlaygroundProps = {
   className?: string
 }
 
 function ThemePlayground({ className }: ThemePlaygroundProps) {
-  const [brandId, setBrandId] = useState(brandPresets[0].id)
-  const [radiusId, setRadiusId] =
-    useState<(typeof radiusPresets)[number]["id"]>("compact")
-  const [paperId, setPaperId] =
-    useState<(typeof paperPresets)[number]["id"]>("warm")
+  const [brandId, setBrandId] = useState<BrandPresetId>(knobDefaults.brand)
+  const [radiusId, setRadiusId] = useState<RadiusPresetId>(knobDefaults.radius)
+  const [paperId, setPaperId] = useState<PaperPresetId>(knobDefaults.paper)
 
-  const brand = brandPresets.find((b) => b.id === brandId) ?? brandPresets[0]
-  const radius =
-    radiusPresets.find((r) => r.id === radiusId) ?? radiusPresets[1]
-  const paper = paperPresets.find((p) => p.id === paperId) ?? paperPresets[0]
+  const brand = getBrandPreset(brandId)
+  const radius = getRadiusPreset(radiusId)
+  const paper = getPaperPreset(paperId)
 
   const style = useMemo(
     () =>
       ({
-        "--brand": brand.brand,
-        "--brand-foreground": brand.brandFg,
-        "--brand-muted": brand.brandMuted,
-        "--accent": brand.accent,
-        "--primary": brand.brand,
-        "--primary-foreground": brand.brandFg,
-        "--ring": brand.brand,
-        "--success": brand.brand,
-        "--chart-1": brand.brand,
-        "--sidebar-primary": brand.brand,
-        "--sidebar-ring": brand.brand,
-        "--background": paper.background,
-        "--foreground": paper.foreground,
-        "--card": paper.card,
-        "--card-foreground": paper.foreground,
-        "--popover": paper.card,
-        "--popover-foreground": paper.foreground,
-        "--radius": radius.value,
+        ...knobStyleVars({ brand, radius, paper }),
         colorScheme: paperId === "night" ? "dark" : "light",
       }) as CSSProperties,
     [brand, paper, radius, paperId],
@@ -145,8 +65,9 @@ function ThemePlayground({ className }: ThemePlaygroundProps) {
             Reskin the workbench
           </h3>
           <p className="mt-1 max-w-md text-sm text-muted-foreground">
-            Scoped {themeKnobs.length} CSS variables — click a preset, watch
-            the app update.
+            Closed presets from{" "}
+            <span className="font-mono text-[12px]">lib/design/knobs</span> —
+            {themeKnobs.length} CSS variables, no invented colors.
           </p>
         </div>
         <p className="shrink-0 font-mono text-[11px] text-muted-foreground">

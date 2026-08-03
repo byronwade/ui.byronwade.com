@@ -1,4 +1,5 @@
 import type {
+  ActivityRole,
   CinemaSubject,
   CinemaTone,
   DepthToken,
@@ -31,6 +32,12 @@ export const zones = {
     "shellLaws",
     "controlScale",
     "spaceScale",
+    "brandPresets",
+    "radiusPresets",
+    "paperPresets",
+    "interactiveProofStates",
+    "laneLaws",
+    "motionLaws",
   ],
   creative: [
     "copy",
@@ -39,7 +46,113 @@ export const zones = {
     "frameSequence",
     "whichShadcnPrimitives",
     "narrativeWithinOneIdea",
+    "whichInteractiveProof",
   ],
+} as const
+
+/** Required / optional states for live app proofs. */
+export const interactiveProofStates = [
+  "idle",
+  "selected",
+  "ask",
+  "empty",
+] as const
+
+export type InteractiveProofState = (typeof interactiveProofStates)[number]
+
+export const interactiveInteractions = [
+  "select",
+  "search",
+  "ask",
+  "navigate",
+  "switch-lane",
+] as const
+
+export type InteractiveInteraction = (typeof interactiveInteractions)[number]
+
+/**
+ * Interactive proof recipe — marketing that behaves like product chrome.
+ * Agents compose proofs from this shape instead of inventing demo UX.
+ */
+export type InteractiveProof = {
+  id: string
+  surface: SurfaceId
+  /** Must include idle + selected for application/desktop proofs. */
+  states: readonly InteractiveProofState[]
+  interactions: readonly InteractiveInteraction[]
+  agent?: {
+    boundTo: string
+    /** Activity legend is mandatory when agent is present. */
+    activityLegend: true
+    activities: readonly ActivityRole[]
+    provenance: readonly ProvenanceRole[]
+  }
+  /** Live knobs allowed on this proof (theme playground). */
+  knobs?: readonly ("brand" | "radius" | "paper")[]
+}
+
+export function defineInteractiveProof<T extends InteractiveProof>(
+  proof: T,
+): T {
+  if (
+    (proof.surface === "application" || proof.surface === "desktop") &&
+    (!proof.states.includes("idle") || !proof.states.includes("selected"))
+  ) {
+    throw new Error(
+      `defineInteractiveProof(${proof.id}): application/desktop proofs need idle + selected`,
+    )
+  }
+  if (proof.agent && proof.agent.activityLegend !== true) {
+    throw new Error(
+      `defineInteractiveProof(${proof.id}): agent proofs require activityLegend: true`,
+    )
+  }
+  return proof
+}
+
+/**
+ * Lane laws — marketing vs application contracts (linted).
+ * Absorb structure from Cursor/Framer research; reject brand pastiche.
+ */
+export const laneLaws = {
+  application: {
+    allow: [
+      "quiet-dense-chrome",
+      "object-bound-ai",
+      "shell-rhythm",
+      "selected-brand-wash",
+      "activity-pastels-scoped",
+    ],
+    forbid: [
+      "gradient-spotlight-cards",
+      "marketing-collage",
+      "second-accent-fill",
+      "spectacle-hero",
+    ],
+  },
+  marketing: {
+    allow: [
+      "theater-stage",
+      "scarce-brand-cta",
+      "cinema-one-idea",
+      "product-as-subject",
+    ],
+    forbid: [
+      "floating-chatbot",
+      "overlay-stickers",
+      "scroll-choreography",
+      "pure-black-canvas",
+    ],
+  },
+} as const
+
+/** Micro motion only — Fluent functional + Polaris press. */
+export const motionLaws = {
+  pressMs: 120,
+  selectMs: 160,
+  railInMs: 700,
+  reducedMotionRespect: true,
+  noScrollChoreography: true,
 } as const
 
 /**
@@ -171,6 +284,37 @@ export const proofs = {
       boundTo: "ISS-1842",
       provenance: ["user", "assistant", "tool"],
     },
+  }),
+  interactiveWorkbench: defineInteractiveProof({
+    id: "workbench",
+    surface: "application",
+    states: ["idle", "selected", "ask", "empty"],
+    interactions: ["select", "search", "ask", "navigate"],
+    agent: {
+      boundTo: "ISS-1842",
+      activityLegend: true,
+      activities: ["thinking", "search", "read", "edit"],
+      provenance: ["user", "assistant", "tool"],
+    },
+    knobs: ["brand", "radius", "paper"],
+  }),
+  interactiveComposer: defineInteractiveProof({
+    id: "composer",
+    surface: "desktop",
+    states: ["idle", "selected", "ask"],
+    interactions: ["select", "ask", "navigate"],
+    agent: {
+      boundTo: "IssueRow.tsx",
+      activityLegend: true,
+      activities: ["thinking", "search", "read", "edit"],
+      provenance: ["user", "assistant", "tool"],
+    },
+  }),
+  interactiveStudio: defineInteractiveProof({
+    id: "surface-studio",
+    surface: "application",
+    states: ["idle", "selected"],
+    interactions: ["switch-lane", "select", "ask"],
   }),
   hero: defineCinemaFrame({
     tone: "theater",

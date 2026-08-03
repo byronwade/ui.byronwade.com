@@ -109,8 +109,11 @@ Every UI or token change must pass this audit (skill: `meridian-a11y`):
 8. **Mono for data** — IDs, counts, times, prices, model/tool names
 9. **Object-bound AI** — provenance + activity; no floating chatbot
 10. **Audit accessibility + contrast** on every change
-11. Pass **`npm run check:design`**, **`check:shell`**, and **`check:contrast`**
+11. Pass **`npm run check:design`**, **`check:shell`**, **`check:proofs`**, and **`check:contrast`**
 12. **Shell rhythm** — wrap app chrome in `data-surface`; size/type via shell utilities
+13. **Interactive proofs** — `defineInteractiveProof` (idle + selected; agent ⇒ ActivityLegend)
+14. **Theme knobs** — only `lib/design/knobs` presets (brand / radius / paper)
+15. **Absorb first** — fill [`docs/absorb.md`](docs/absorb.md) before influence-driven UI changes
 
 ## MUST NOT (`banned` in grammar)
 

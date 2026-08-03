@@ -6,6 +6,7 @@ export * from "@/lib/design/grammar"
 export * from "@/lib/design/recipes"
 export * from "@/lib/design/contrast"
 export * from "@/lib/design/shell"
+export * from "@/lib/design/knobs"
 export {
   activity,
   bg,

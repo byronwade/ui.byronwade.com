@@ -280,6 +280,10 @@
     --type-label: 0.625rem;
     --leading-ui: 1.35;
     --leading-tight: 1.25;
+    /* Micro motion — Fluent functional + Polaris press (motionLaws) */
+    --motion-press: 120ms;
+    --motion-select: 160ms;
+    --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   [data-surface="application"] {
@@ -391,6 +395,29 @@
   .h-row {
     height: var(--row-h);
     min-height: var(--row-h);
+  }
+
+  .motion-press {
+    transition: transform var(--motion-press) var(--motion-ease);
+  }
+
+  .motion-press:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  .motion-select {
+    transition: background-color var(--motion-select) var(--motion-ease);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-press,
+    .motion-select {
+      transition: none;
+    }
+
+    .motion-press:active:not(:disabled) {
+      transform: none;
+    }
   }
 
   .edge {

@@ -141,6 +141,21 @@ const RULES = [
     include: /\.(tsx|ts)$/,
     exclude: SHADCN_UI,
   },
+  {
+    id: "app-lane-gradient-spectacle",
+    re: /bg-gradient-|from-(?:purple|violet|fuchsia|pink|orange)|via-(?:purple|violet|fuchsia)/,
+    message:
+      "Application lane: gradient spotlight / marketing collage banned (laneLaws)",
+    include: /components\/surfaces\/(?:workbench|composer|application)/,
+  },
+  {
+    id: "oklch-outside-token-files",
+    re: /oklch\(/,
+    message:
+      "OKLCH literals only in knobs.ts / contrast.ts / globals.css — use presets",
+    include: /\.(tsx|ts)$/,
+    allow: /lib\/design\/(?:knobs|contrast)\.ts$/,
+  },
 ]
 
 async function walk(dir, out = []) {
