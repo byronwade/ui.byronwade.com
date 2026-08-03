@@ -7,6 +7,7 @@ export * from "@/lib/design/recipes"
 export * from "@/lib/design/contrast"
 export * from "@/lib/design/shell"
 export * from "@/lib/design/knobs"
+export * from "@/lib/design/typeset"
 export {
   activity,
   bg,

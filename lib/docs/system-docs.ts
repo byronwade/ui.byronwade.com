@@ -4,6 +4,7 @@
  */
 
 export type SystemDocSlug =
+  | "north-star"
   | "influences"
   | "absorb"
   | "meridian"
@@ -26,6 +27,13 @@ export type SystemDoc = {
 }
 
 export const systemDocs: readonly SystemDoc[] = [
+  {
+    slug: "north-star",
+    title: "North star",
+    summary: "AI design contract — rules first, not a shell zoo.",
+    sourcePath: "docs/north-star.md",
+    filename: "north-star.md",
+  },
   {
     slug: "influences",
     title: "Influences",

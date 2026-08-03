@@ -153,8 +153,9 @@ Never double: thick border + heavy shadow + loud background.
 
 | Lane | Measure | Type |
 | --- | --- | --- |
-| `reading-ui` | ≤65ch | Docs |
-| `reading-prose` | ≤65ch | Essays |
+| `typeset typeset-docs` | ≤65ch | Docs / help |
+| `typeset typeset-reading` | ≤65ch | Essays |
+| `typeset typeset-chat` | ≤56ch | Agent messages |
 | Never | &gt;80ch | — |
 
 Demo bands under prose: `reading-demo-break` / `DocsDemoSection` — not full-bleed `text-sm` paragraphs.

@@ -17,7 +17,7 @@
 2. **Lane laws** — application forbids gradient spotlight / collage; marketing forbids floating chat + scroll spectacle (`laneLaws`).  
 3. **Shell rhythm** — spacing / sizing / type via `data-surface`, not off-scale pixels.  
 4. **Interactive proofs** — use `defineInteractiveProof` (idle + selected; agent ⇒ `activityLegend: true`).  
-5. **Gates** — `npm run check:design && check:shell && check:proofs && check:contrast`.
+5. **Gates** — `npm run check:design && check:shell && check:proofs && check:typeset && check:contrast`.
 
 ## Do not open a UI PR until
 

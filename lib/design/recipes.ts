@@ -38,6 +38,9 @@ export const zones = {
     "interactiveProofStates",
     "laneLaws",
     "motionLaws",
+    "typesetPresets",
+    "typesetLaws",
+    "typesetRhythm",
   ],
   creative: [
     "copy",
@@ -45,6 +48,7 @@ export const zones = {
     "domainObjects",
     "frameSequence",
     "whichShadcnPrimitives",
+    "whichTypesetPreset",
     "narrativeWithinOneIdea",
     "whichInteractiveProof",
   ],
@@ -229,7 +233,7 @@ export const cinematicLaws = {
   tileAlternation: true,
   /** Hierarchy from size + tracking — never bold display weight. */
   typeWeight: "medium-max" as const,
-  /** Reading uses structured lanes — reading-ui / reading-prose. */
+  /** Reading uses shadcn/typeset presets — docs / chat / reading / compact. */
   structuredReading: true,
   /** Colors are strict OKLCH; contrast audited (WCAG AA). */
   oklchOnly: true,

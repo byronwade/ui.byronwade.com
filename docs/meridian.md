@@ -69,7 +69,7 @@ Four surfaces. Same tokens. Different density, chrome, and theater rules — dri
 | **Density** | Compact — 32 dpx controls, 40 dpx rows | Comfortable — 36–40 dpx CTAs | Touch — 44 dpx targets | Compact chrome — 28–32 dpx toolbars |
 | **Shape** | Controls `rounded-lg`; panels `rounded-2xl` | CTAs may `rounded-full`; shells `rounded-3xl` | Same as app; larger hit areas | Same as app; tighter toolbars |
 | **Depth** | `edge` first; soft only when floated | Theater stages; product as subject | Flat + edge; avoid blur | Edge; raised for floating panels |
-| **Type** | `text-sm` UI; mono for data | Display clamps; `reading-ui` / `reading-prose` | `text-base` primary labels | `text-sm` / `text-xs` chrome |
+| **Type** | `type-ui` + mono data | Display clamps; `typeset` presets | `text-base` primary labels | `text-sm` / `text-xs` chrome |
 | **Chrome** | Quiet sidebar / topbar | Sparse header; theater-aware | Bottom bar + safe areas | Titlebar / menu / status |
 | **Motion** | Micro state only | Still cinema; optional enter fade | System-like; respect reduce | Instant; keyboard feedback |
 | **AI** | Object-bound in detail panes | Provenance demos only | Compact provenance chips | Same as app; shortcut-led |
@@ -142,8 +142,9 @@ Do not name other brands in UI chrome or marketing headlines. Encode the discipl
 
 | Lane | Class | Use |
 | --- | --- | --- |
-| Docs / help | `reading-ui` | Marketing + in-app help |
-| Essays | `reading-prose` | Long-form marketing only |
+| Docs / help | `typeset typeset-docs` | Marketing + in-app help |
+| Essays | `typeset typeset-reading` | Long-form marketing only |
+| Chat | `typeset typeset-chat` | Agent message bodies |
 | Measure only | `reading-measure` | 65ch cap |
 
 ## Where things go

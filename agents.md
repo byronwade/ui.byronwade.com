@@ -2,8 +2,9 @@
 
 > **Strict AI operating manual.** Compact by design. Humans get a designed page; agents get this markdown (`?raw=1` forces raw).
 
-**Product:** cinematic theme system — not a custom component zoo.  
-**Primitives:** shadcn/ui. **Icons:** Phosphor `@/lib/icons`. **Color:** OKLCH only.  
+**Product:** AI design contract (rules first) — not a custom component or shell zoo.  
+**North star:** [`docs/north-star.md`](/system/north-star).  
+**Primitives:** shadcn/ui + shadcn/typeset. **Icons:** Phosphor `@/lib/icons`. **Color:** OKLCH only.  
 **Influences (absorb, never label):** [Fluent 2](https://fluent2.microsoft.design/) material language + **Cursor application** density — not Fluent marketing, not Cursor.com.
 
 ---
@@ -12,10 +13,11 @@
 
 | MUST | MUST NOT |
 | --- | --- |
-| Import structure from `@/lib/design` | Invent colors, radii, depths, shadows |
+| Import structure from `@/lib/design` | Invent colors, radii, depths, shadows, type scales |
 | OKLCH semantic tokens only | hex / rgb / hsl / arbitrary color utils |
 | One accent → `--brand` | Second accent, neon, status-as-brand |
-| shadcn primitives + compose | Fork twin components |
+| shadcn primitives + compose | Fork twin components / invent app shells |
+| `typesetClass()` for HTML/markdown | Per-tag class soup on markdown |
 | Icons via `@/lib/icons` | `lucide-react` or direct Phosphor |
 | `data-surface` + `ideas: 1` cinema | Overlay stickers, inset hero media |
 | Object-bound AI + provenance | Floating chatbot |
@@ -23,19 +25,20 @@
 | `svh` viewport | `dvh` |
 | Pass gates below | Ship without contrast audit |
 
-**Frozen** = tokens, radii, depths, surfaces, knobs, activity, bans, cinematic + material laws, contrast pairs.  
-**Creative** = copy, IA, domain objects, frame sequence, which shadcn wholes to compose.
+**Frozen** = tokens, radii, depths, surfaces, shell rhythm, **typeset presets**, knobs, activity, bans, cinematic + material laws, contrast pairs.  
+**Creative** = copy, IA, domain objects, frame sequence, which shadcn wholes / typeset preset to compose.
 
 ---
 
 ## 1. Load order (mandatory)
 
-1. [`design.md`](/design.md) — contract
-2. `@/lib/design` — `grammar` · `recipes` · `contrast` · `cx`
-3. Research specs when composing space/motion/AI — [`/system`](/system) (`influences` → `layout` · `ux` · `animations` · …)
-4. Matching skill under `skills/<name>/SKILL.md`
-5. Proof: `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
-6. Gates: `npm run check:design && npm run check:shell && npm run check:proofs && npm run check:contrast`
+1. [`docs/north-star.md`](/system/north-star) — product definition (rules ≠ shells)
+2. [`design.md`](/design.md) — contract
+3. `@/lib/design` — `grammar` · `recipes` · `typeset` · `shell` · `contrast` · `cx`
+4. Research specs when composing space/motion/AI — [`/system`](/system) (`typography` → `layout` · `ux` · …)
+5. Matching skill under `skills/<name>/SKILL.md`
+6. Proof (validation only): `components/surfaces/workbench.tsx` (+ `composer-shell.tsx`)
+7. Gates: `npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:contrast`
 
 Skip a step → drift.
 
@@ -114,13 +117,16 @@ npx skills add byronwade/ui.byronwade.com --skill meridian-theme
 ## 7. Done gate
 
 ```bash
-npm run check:design && npm run check:shell && npm run check:proofs && npm run check:contrast
+npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:contrast
 ```
 
-- [ ] Load order followed  
-- [ ] No invented tokens / radii / shadows  
+- [ ] Load order followed (north star → contract → grammar)  
+- [ ] No invented tokens / radii / shadows / type scales  
+- [ ] Typeset preset for rendered markdown (no per-tag soup)  
 - [ ] Control vs layer radius correct  
 - [ ] Stroke/edge default; depth only when floated  
 - [ ] Selected = brand wash; AI object-bound  
 - [ ] Icons from `@/lib/icons`  
-- [ ] Both checks green  
+- [ ] Did not invent a new shell / twin component  
+- [ ] All checks green  
+ 

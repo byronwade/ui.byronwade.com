@@ -5,12 +5,14 @@
 
 ## 1. What Meridian is
 
-A **cinematic, typed theme system** showcased on a website. Not a custom component zoo.
+An **AI design contract** — strict guidelines + typed grammar so agents under
+extreme constraints always produce good UI. Showcased on a cinematic website.
+Surfaces are **proofs**, not the product. See [`north-star.md`](./north-star.md).
 
 | Is | Is not |
 | --- | --- |
-| Tokens + grammar + surface contracts | Parallel component library |
-| shadcn primitives composed into wholes | Forked Button/Card twins |
+| Tokens + grammar + fail-closed laws | Parallel component library |
+| shadcn primitives + typeset rhythm | Forked Button/Card twins / shell zoo |
 | Frozen material + creative composition | Freeform vibe coding |
 | Agent-readable contracts + lint | Prompt-only hope |
 
@@ -21,33 +23,36 @@ A **cinematic, typed theme system** showcased on a website. Not a custom compone
 | Agents fabricate tokens / drift mid-session | [Superdesign](https://superdesign.dev/blog/ai-design-system-drift) | Closed unions in `lib/design/grammar.ts` |
 | Docs ≠ code ≠ components | [Pandya](https://hvpandya.com/llm-design-systems) | One grammar imported by UI + `check:design` |
 | Creativity dies if everything locked | Internal model | Frozen vs creative zones in `recipes.ts` |
-| Productivity apps need quiet dense chrome | Cursor app, [Linear](https://linear.app/now/how-we-redesigned-the-linear-ui) | Workbench / composer proofs |
+| Productivity apps need quiet dense chrome | Cursor app, [Linear](https://linear.app/now/how-we-redesigned-the-linear-ui) | Shell rhythm + workbench proofs |
 | Material needs control vs layer + stroke | [Fluent 2](https://fluent2.microsoft.design/) | `materialLaws`, `radiusFor`, `edge` |
 | Meaning-bearing color + task density | [Polaris Pro](https://polaris-react.shopify.com/design/pro-design-language) | Status semantics, `data-surface` |
+| HTML/markdown type soup repeats | [shadcn/typeset](https://ui.shadcn.com/docs/typeset) | Owned `typeset.css` + frozen presets |
 | Cinema staging | Apple-class film patterns | `cinematicLaws`, `defineCinemaFrame` |
-| Parts without wholes fail | [Brad Frost](https://bradfrost.com/blog/post/the-part-and-the-whole/) | Surfaces prove atoms in product frames |
+| Parts without wholes fail | [Brad Frost](https://bradfrost.com/blog/post/the-part-and-the-whole/) | Surfaces **validate** atoms in product frames |
 | Compose don’t invent | shadcn / schema UI gen | `npx shadcn@latest add` |
 
 ## 3. North star pipeline
 
 ```
+docs/north-star.md             ← product = AI contract
+        ↓
 influences.md (ranked absorb)
         ↓
 design.md + agents.md          ← contracts (MUST / load order)
         ↓
-lib/design/{grammar,recipes,contrast,cx}.ts
+lib/design/{grammar,recipes,typeset,shell,contrast,cx,knobs}.ts
         ↓
-app/globals.css                ← OKLCH tokens / knobs
+app/globals.css + typeset.css  ← OKLCH tokens + typeset rhythm
         ↓
-components/ui/*                ← shadcn atoms
+components/ui/*                ← shadcn atoms (compose only)
         ↓
-components/surfaces/*          ← application wholes
+components/surfaces/*          ← proofs (validation only)
 components/cinematic/*         ← film stages
         ↓
-npm run check:design + check:contrast
+check:design · shell · proofs · typeset · contrast
 ```
 
-Agents invent **stories and compositions**. They do not invent **colors, shadows, or radii**.
+Agents invent **stories and compositions**. They do not invent **colors, shadows, radii, or type scales**.
 
 ## 4. Frozen vs creative
 
@@ -56,8 +61,9 @@ FROZEN                              CREATIVE
 ──────────────────────────────      ─────────────────────────────
 colorRoles / OKLCH                  copy / voice
 radii / depths / strokeFor          information architecture
-surfaces / themeKnobs               domain objects
-activity / provenance               frame sequence (ideas: 1)
+surfaces / shell rhythm             domain objects
+typeset presets / laws              which typeset preset
+themeKnobs / activity               frame sequence (ideas: 1)
 cinematicLaws / materialLaws        which shadcn wholes
 banned / designInfluences           narrative within one idea
 contrast pairs
@@ -67,12 +73,13 @@ contrast pairs
 
 | Layer | Path | Owner |
 | --- | --- | --- |
+| North star | `docs/north-star.md` | Product |
 | Ranked influences | `docs/influences.md` | Research |
 | Spatial system | `docs/layout.md` | Research |
 | Interaction / UX | `docs/ux.md` | Research |
 | Motion | `docs/animations.md` | Research |
 | Color | `docs/color.md` | Research |
-| Type | `docs/typography.md` | Research |
+| Type + typeset | `docs/typography.md` | Research |
 | Density | `docs/density.md` | Research |
 | AI UI | `docs/ai-surfaces.md` | Research |
 | Human DNA | `docs/meridian.md` | DNA |
@@ -81,12 +88,15 @@ contrast pairs
 | Agent OS manual | `agents.md` | Contract |
 | Typed grammar | `lib/design/grammar.ts` | Code |
 | Recipes / laws | `lib/design/recipes.ts` | Code |
+| Typeset presets | `lib/design/typeset.ts` | Code |
+| Shell rhythm | `lib/design/shell.ts` | Code |
 | Contrast pairs | `lib/design/contrast.ts` | Code |
 | Class helpers | `lib/design/cx.ts` | Code |
-| Drift lint | `scripts/check-design.mjs` | CI |
+| Drift lint | `scripts/check-*.mjs` | CI |
 | Tokens | `app/globals.css` | Theme |
+| Typeset CSS | `app/typeset.css` | Theme |
 | Primitives | `components/ui/*` | shadcn |
-| Wholes | `components/surfaces/*` | Product |
+| Proofs | `components/surfaces/*` | Validation |
 | Film | `components/cinematic/*` | Marketing |
 | Skills | `skills/*/SKILL.md` | Agents |
 | Agents | `.cursor/agents/*` | Agents |
@@ -105,11 +115,13 @@ Import `@/lib/design` — never ad-hoc fabrication.
 | `activityRoles` | thinking · search · read · edit |
 | `provenanceRoles` | user · assistant · tool · … |
 | `banned` | Drift patterns |
+| `typesetClass` / `typesetLaws` | Frozen HTML/markdown rhythm |
+| `shellRhythm` / `shellLaws` | Surface density contract |
 | `cinematicLaws` | Film contract |
 | `materialLaws` | Fluent-shaped material |
 | `designInfluences` | Absorb / reject lists |
 | `defineCinemaFrame` | Typed one-idea frames |
-| `defineWorkbench` | App recipe |
+| `defineInteractiveProof` | Proof recipe (validation) |
 | `contrastPairs` | WCAG AA audit data |
 
 ## 7. Runtime architecture (Next.js)
@@ -118,8 +130,9 @@ Import `@/lib/design` — never ad-hoc fabrication.
 app/
   page.tsx                 home film
   globals.css              tokens
+  typeset.css              shadcn/typeset (owned)
   theme/                   grammar showcase
-  surfaces/                live surface gallery
+  surfaces/                proof gallery (validation)
   for-agents/              designed agents guide
   architecture/            designed architecture
   system/                  research docs index + [slug]
@@ -128,11 +141,11 @@ app/
   architecture.md/route.ts
   *.md/route.ts            other negotiated docs
 components/
-  ui/                      shadcn
-  surfaces/                wholes
+  ui/                      shadcn (compose only)
+  surfaces/                proofs — not a shell product
   cinematic/               stages
   home/                    film beats
-  docs/                    DocShell, MarkdownBody
+  docs/                    DocShell, MarkdownBody (typeset)
 lib/design/                typed law
 scripts/check-*.mjs        gates
 ```
@@ -143,11 +156,11 @@ Content negotiation: browsers → designed HTML; agents → raw markdown (`Accep
 
 | Kind | Role | Examples |
 | --- | --- | --- |
-| Contract | Always-on law | `design.md`, `agents.md` |
-| Research spec | Deep merge rules | `docs/layout.md`, … |
+| Contract | Always-on law | `design.md`, `agents.md`, `north-star.md` |
+| Research spec | Deep merge rules | `docs/layout.md`, `typography.md`, … |
 | Skill | Task workflow | `meridian-compose` |
 | Agent | Author / reviewer | `meridian-author` |
-| Lint | Fail closed | `check:design`, `check:contrast` |
+| Lint | Fail closed | `check:design`, `shell`, `proofs`, `typeset`, `contrast` |
 
 ## 9. Website routes
 

@@ -92,13 +92,13 @@ const seedEvents: Record<string, AgentEvent[]> = {
     {
       provenance: "assistant",
       label: "Assistant",
-      body: "Help drawer should use reading-ui — 65ch, not dense chrome type.",
+      body: "Help drawer should use typeset docs — 65ch, not dense chrome type.",
       activity: "thinking",
     },
     {
       provenance: "tool",
       label: "read · readability.md",
-      body: "reading-ui lane confirmed for help copy.",
+      body: "typeset docs preset confirmed for help copy.",
       activity: "read",
     },
   ],

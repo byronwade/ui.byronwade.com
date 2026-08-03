@@ -1,0 +1,230 @@
+/**
+ * Meridian typeset — shadcn/typeset architecture, Meridian tokens.
+ *
+ * One owned CSS file. Three rhythm controls: size · leading · flow.
+ * Streaming-stable: margin-block-start only, no :last-child / :has() layout.
+ * Opt out with .not-typeset or [data-not-typeset].
+ *
+ * Frozen presets: docs · chat · reading · compact (lib/design/typeset.ts).
+ * Legacy aliases: .reading-ui → docs · .reading-prose → reading.
+ *
+ * @see https://ui.shadcn.com/docs/typeset
+ */
+
+@layer components {
+  :is(.typeset, .reading-ui, .reading-prose) {
+    --typeset-font-body: var(--font-sans);
+    --typeset-font-heading: var(--font-heading);
+    --typeset-font-mono: var(--font-mono);
+    --typeset-size: 1em;
+    --typeset-leading: 1.65;
+    --typeset-flow: 1.15em;
+    --typeset-measure: 65ch;
+
+    max-width: var(--typeset-measure);
+    font-family: var(--typeset-font-body);
+    font-size: var(--typeset-size);
+    line-height: var(--typeset-leading);
+    letter-spacing: 0;
+    color: var(--foreground);
+  }
+
+  @media (max-width: 640px) {
+    :is(.typeset, .reading-ui, .reading-prose) {
+      font-size: calc(var(--typeset-size) * 1.04);
+    }
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--typeset-font-heading);
+    font-weight: 500;
+    color: var(--foreground);
+    text-wrap: balance;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(h1) {
+    margin-block-start: calc(var(--typeset-flow) * 0);
+    font-size: 1.75em;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(h2) {
+    margin-block-start: calc(var(--typeset-flow) * 2.1);
+    font-size: 1.35em;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(h3) {
+    margin-block-start: calc(var(--typeset-flow) * 1.6);
+    font-size: 1.12em;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(h4) {
+    margin-block-start: calc(var(--typeset-flow) * 1.35);
+    font-size: 1em;
+    letter-spacing: -0.015em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose)
+    :where(p, ul, ol, blockquote, pre, table, hr) {
+    margin-block-start: var(--typeset-flow);
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(*:first-child) {
+    margin-block-start: 0;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(a) {
+    color: var(--brand);
+    text-underline-offset: 0.2em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(a:hover) {
+    text-decoration: underline;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(strong) {
+    font-weight: 500;
+    color: var(--foreground);
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(em) {
+    font-style: italic;
+    color: var(--muted-foreground);
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(ul) {
+    list-style: disc;
+    padding-inline-start: 1.25em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(ol) {
+    list-style: decimal;
+    padding-inline-start: 1.25em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(li + li) {
+    margin-block-start: calc(var(--typeset-flow) * 0.35);
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(blockquote) {
+    padding-inline-start: 1em;
+    border-inline-start: 2px solid
+      color-mix(in oklch, var(--brand) 55%, transparent);
+    color: var(--muted-foreground);
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(hr) {
+    border: 0;
+    border-block-start: 1px solid var(--border);
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(code) {
+    font-family: var(--typeset-font-mono);
+    font-size: 0.875em;
+    border-radius: var(--radius);
+    background: color-mix(in oklch, var(--muted) 70%, transparent);
+    padding: 0.1em 0.35em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(pre) {
+    overflow-x: auto;
+    border-radius: calc(var(--radius) * 2);
+    background: var(--dock);
+    color: var(--dock-foreground);
+    padding: 1em 1.15em;
+    font-family: var(--typeset-font-mono);
+    font-size: 0.8125em;
+    line-height: 1.55;
+    box-shadow: inset 0 0 0 1px
+      color-mix(in oklch, var(--border) 72%, transparent);
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(pre code) {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925em;
+    text-align: left;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(th) {
+    font-weight: 500;
+    color: var(--muted-foreground);
+    border-block-end: 1px solid var(--border);
+    padding: 0.65em 0.75em;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose) :where(td) {
+    border-block-end: 1px solid
+      color-mix(in oklch, var(--border) 70%, transparent);
+    padding: 0.65em 0.75em;
+    vertical-align: top;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose)
+    :where(th:first-child, td:first-child) {
+    padding-inline-start: 0;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose)
+    :where(th:last-child, td:last-child) {
+    padding-inline-end: 0;
+  }
+
+  :is(.typeset, .reading-ui, .reading-prose)
+    :where(.not-typeset, [data-not-typeset]),
+  :is(.typeset, .reading-ui, .reading-prose)
+    :where(.not-typeset *, [data-not-typeset] *) {
+    all: revert;
+  }
+
+  .typeset-scroll {
+    overflow-x: auto;
+  }
+
+  /* ── Frozen Meridian presets (lib/design/typeset.ts) ─────────── */
+
+  .typeset-docs,
+  .reading-ui {
+    --typeset-size: 1.0625rem;
+    --typeset-leading: 1.65;
+    --typeset-flow: 1.15em;
+  }
+
+  .typeset-chat {
+    --typeset-size: 0.875rem;
+    --typeset-leading: 1.5;
+    --typeset-flow: 0.85em;
+    --typeset-measure: 56ch;
+  }
+
+  .typeset-reading,
+  .reading-prose {
+    --typeset-size: 1.125rem;
+    --typeset-leading: 1.75;
+    --typeset-flow: 1.5em;
+  }
+
+  .typeset-compact {
+    --typeset-size: 0.875rem;
+    --typeset-leading: 1.45;
+    --typeset-flow: 0.75em;
+    --typeset-measure: 60ch;
+  }
+
+  .dark :is(.typeset, .reading-ui, .reading-prose) {
+    --typeset-leading: 1.7;
+  }
+}

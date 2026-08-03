@@ -1,81 +1,64 @@
-# Meridian — typography.md
+# Typography
 
-> Type system. Ranking: [`influences.md`](./influences.md).  
-> **Primary absorb:** Vercel craft (authority + mono data) + Linear hierarchy clarity + Meridian editorial rules (no bold display) + reading-lane science.
+Two layers. Do not collapse them.
 
-## 1. Laws
+## 1. UI chrome — role classes
 
-1. **Hierarchy from size + tracking**, not bold display weight (`font-medium` max on display).  
-2. **Geist Sans + Geist Mono** — not Inter Display mandate (Linear leave-behind).  
-3. **Mono for data** — IDs, counts, times, prices, filenames, model/tool names, kbd.  
-4. **Two reading lanes** — UI chrome ≠ long-form prose.  
-5. **Left-align body**; measure ≤65ch (hard cap 80ch).  
-6. **Quiet chrome labels** — small caps / tracking on section meta, not loud color.
+Dense product UI (nav, tables, forms, labels, buttons):
 
-## 2. Roles
+| Role | Class | Use |
+| --- | --- | --- |
+| Display | `type-display` | Rare marketing heroes only |
+| Title | `type-title` | Page / panel titles |
+| Section | `type-section` | Section heads |
+| Body | `type-body` | Short UI copy |
+| Caption | `type-caption` | Meta under chrome |
+| Mono | `type-mono` | IDs, counts, prices, hashes, tool names |
+| UI | `type-ui` | Default control / row chrome (`text-sm` + tracking) |
 
-| Role | Typical size | Weight | Tracking | Use |
-| --- | --- | --- | --- | --- |
-| Display | clamp / 3xl+ | normal–medium | tight (−0.03em) | Marketing stage titles |
-| Title | xl–2xl | medium | tight | Section heads |
-| Body | sm–base | normal | slight negative UI | App copy |
-| Label | xs–sm | medium | normal | Form labels |
-| Data | 10–12px mono | normal | tight | IDs, meta |
-| `reading-ui` | 16px sans | normal | 0 | Docs |
-| `reading-prose` | 18px serif | normal | 0 | Essays |
+Hierarchy from **size + tracking**, never `font-bold` on display/section.
 
-## 3. Surface type (shell rhythm)
+Defined in `app/globals.css`. Prefer `typeClass()` / `shellType()` from
+`@/lib/design` when composing from grammar.
 
-Remapped by `data-surface` via `--type-ui` / `--type-row` / `--type-meta` / `--type-label`  
-(see `lib/design/shell.ts` + `.type-*` utilities).
+## 2. Rendered HTML / markdown — shadcn typeset
 
-| Surface | UI | Row | Meta | Notes |
-| --- | ---: | ---: | ---: | --- |
-| `application` | 14 | 13 | 11 | Dense operate |
-| `desktop` | 13 | 12 | 10 | Compact chrome |
-| `mobile` | 16 | 15 | 12 | Touch floor |
-| `marketing` | 16 | 14 | 12 | Present + cinema |
+Longer copy that arrives as HTML or markdown (docs, chat messages, essays,
+release notes) uses **typeset**, not a hand-rolled per-tag class soup.
 
-Prefer `typeClass("body"|"label"|"data")` or `shellType("ui"|"row"|"meta"|"label")` over raw `text-[NNpx]`.
+```tsx
+import { typesetClass } from "@/lib/design"
 
-## 4. Reading lanes
+<div className={typesetClass("docs")}>{/* markdown HTML */}</div>
+<div className={typesetClass("chat")}>{messageHtml}</div>
+<article className={typesetClass("reading")}>{essay}</article>
+```
 
-| Class | Job |
-| --- | --- |
-| `reading-ui` | Docs/help — 65ch, 1.6 lh |
-| `reading-prose` | Essays — serif, 1.7 lh, paragraph gap |
-| `reading-measure` | Width only |
-| `reading-lead` | Lead paragraph |
-| `reading-muted` | Secondary in prose (not `text-muted-foreground` on body) |
-| `reading-demo-break` | Demo band under prose |
+| Preset | Class | Surface |
+| --- | --- | --- |
+| Docs | `typeset typeset-docs` | Help, release notes, `/system` prose |
+| Chat | `typeset typeset-chat` | Agent / assistant message bodies |
+| Reading | `typeset typeset-reading` | Essays, long articles (serif) |
+| Compact | `typeset typeset-compact` | Dense panels, side notes |
 
-## 5. Chrome type patterns (Linear + Cursor)
+Source: `app/typeset.css` (shadcn typeset shape — size/leading/flow, streaming-stable).
+Laws: `typesetLaws` in `lib/design/typeset.ts`.
 
-- Sidebar section: `font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground`  
-- Table headers: 11px muted  
-- Row titles: 13px tracking-tight  
-- Status bar: 10px mono  
+Rules:
 
-## 6. Anti-patterns
+- Always pair base `typeset` with exactly one preset.
+- Do not nest typeset inside typeset.
+- Do not override typeset tag styles with ad-hoc `text-sm` / `leading-*` on children.
+- UI chrome around a typeset block stays on role classes (`type-ui`, etc.).
 
-| Ban | Why |
-| --- | --- |
-| `font-bold` on display clamps | Editorial law |
-| Full-bleed `text-sm` paragraphs | Readability |
-| Inter/Roboto as required stack | Theme identity |
-| Body copy in pure mono | Exhausting |
-| All-caps long sentences | Scan fail |
+## Reading measure
 
-## 7. Implementation
+- Cap continuous prose at **65ch** (hard stop **80ch**) — baked into typeset presets.
+- Left-align body. Token contrast only.
+- No Bionic Reading, no e-ink sepia simulation, no full-bleed `text-sm` paragraphs.
 
-| Concern | Where |
-| --- | --- |
-| Fonts | Geist via Next font pipeline |
-| Roles | `typeRoles` / `typeClass` in `lib/design` |
-| Reading utilities | `globals.css` |
+## Mono is for data
 
-## Sources
-
-- [Vercel Design Engineer Principles](https://vercel.com/design/engineer)
-- [Linear UI redesign](https://linear.app/now/how-we-redesigned-the-linear-ui)
-- Meridian `design.md` readability lanes
+`font-mono` / `type-mono` for stats, prices, timestamps, durations, counts, IDs,
+hashes, slugs, filenames, `kbd`, model/tool names, JSON-like parameters, agent logs.
+Not for marketing slogans.

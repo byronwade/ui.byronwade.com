@@ -146,9 +146,9 @@ export function typeClass(role: TypeRole) {
     case "data":
       return "type-meta text-muted-foreground"
     case "reading-ui":
-      return "reading-ui"
+      return "typeset typeset-docs"
     case "reading-prose":
-      return "reading-prose"
+      return "typeset typeset-reading"
   }
 }
 

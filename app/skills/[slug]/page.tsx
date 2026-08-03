@@ -115,9 +115,9 @@ export default async function SkillDetailPage({ params }: SkillPageProps) {
         ) : null}
       </section>
 
-      <article className="reading-ui mt-12">
+      <div className="mt-12">
         <MarkdownBody source={skill.body} />
-      </article>
+      </div>
 
       <div className="mt-14 flex flex-wrap gap-2 border-t border-border/70 pt-8">
         {proof ? (

@@ -1,10 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./typeset.css";
 
 /* ── Meridian on shadcn ────────────────────────────────────────────
    Soft warm neutrals. One deep accent. Never pure white/black.
    Full-bleed cinema. Structured reading. Crisp, calm chrome.
+   Product = AI design contract — not a custom component / shell zoo.
    ──────────────────────────────────────────────────────────────── */
 
 @custom-variant dark (&:is(.dark *));
@@ -462,96 +464,7 @@
     max-width: 65ch;
   }
 
-  /* Structured reading — docs / help */
-  .reading-ui {
-    max-width: 65ch;
-    font-size: 1.0625rem;
-    line-height: 1.65;
-    letter-spacing: 0;
-  }
-
-  .reading-ui :where(h2) {
-    margin-top: 2.25em;
-    margin-bottom: 0.6em;
-    font-size: 1.35rem;
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.25;
-  }
-
-  .reading-ui :where(h3) {
-    margin-top: 1.75em;
-    margin-bottom: 0.5em;
-    font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-  }
-
-  .reading-ui :where(p + p) {
-    margin-top: 1.15em;
-  }
-
-  .reading-ui :where(ul, ol) {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding-left: 1.25em;
-  }
-
-  .reading-ui :where(li + li) {
-    margin-top: 0.4em;
-  }
-
-  .reading-ui :where(blockquote) {
-    margin: 1.5em 0;
-    padding-left: 1em;
-    border-left: 2px solid color-mix(in oklch, var(--brand) 55%, transparent);
-    color: color-mix(in oklch, var(--foreground) 72%, transparent);
-  }
-
-  /* Structured reading — essays */
-  .reading-prose {
-    max-width: 65ch;
-    font-size: 1.125rem;
-    line-height: 1.75;
-    letter-spacing: 0;
-  }
-
-  .reading-prose :where(h2) {
-    margin-top: 2.5em;
-    margin-bottom: 0.65em;
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: -0.035em;
-    line-height: 1.2;
-  }
-
-  .reading-prose :where(h3) {
-    margin-top: 2em;
-    margin-bottom: 0.55em;
-    font-size: 1.2rem;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-  }
-
-  .reading-prose :where(p + p) {
-    margin-top: 1.5em;
-  }
-
-  .reading-prose :where(ul, ol) {
-    margin: 1.25em 0;
-    padding-left: 1.35em;
-  }
-
-  .reading-prose :where(li + li) {
-    margin-top: 0.5em;
-  }
-
-  .reading-prose :where(blockquote) {
-    margin: 1.75em 0;
-    padding-left: 1.15em;
-    border-left: 2px solid color-mix(in oklch, var(--brand) 55%, transparent);
-    color: color-mix(in oklch, var(--foreground) 70%, transparent);
-  }
+  /* reading-ui / reading-prose aliases live in typeset.css — prefer typesetClass() */
 
   .reading-lead {
     font-size: 1.3rem;

@@ -11,7 +11,8 @@
     "check:contrast": "node scripts/check-contrast.mjs",
     "check:shell": "node scripts/check-shell.mjs",
     "check:proofs": "node scripts/check-proofs.mjs",
-    "validate": "npm run check:design && npm run check:shell && npm run check:proofs && npm run check:contrast && npm run lint"
+    "check:typeset": "node scripts/check-typeset.mjs",
+    "validate": "npm run check:design && npm run check:shell && npm run check:proofs && npm run check:typeset && npm run check:contrast && npm run lint"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

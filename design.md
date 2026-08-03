@@ -1,19 +1,21 @@
 # Meridian — design.md
 
-> **AI contract.** Read this before any UI work. Typed grammar: `lib/design/`. Drift lint: `npm run check:design`.
+> **AI contract.** Read this before any UI work. Typed grammar: `lib/design/`. Drift lint: `npm run check:design`.  
+> **North star:** [`docs/north-star.md`](docs/north-star.md) — we build a **rule system**, not shells.
 
-**Product:** cinematic theme system for AIs — not a custom component zoo.  
-**Primitives:** shadcn/ui. **Enforcement:** TypeScript closed sets + CI audit.  
+**Product:** ground-up AI design contract so agents under extreme constraints ship on-brand UI.  
+**Not:** a custom component library, app-shell zoo, or place to invent twin Buttons/Cards.  
+**Primitives:** shadcn/ui + shadcn/typeset. **Enforcement:** TypeScript closed sets + CI audit.  
 **Aesthetic list:** **Cinematic design**.
 
 ## The model — strict + creative
 
 | Zone | What’s locked | What’s free |
 | --- | --- | --- |
-| **Frozen** | Color roles (OKLCH), radii, depth, surfaces, theme knobs, activity, bans, cinematic laws, contrast pairs | — |
-| **Creative** | — | Copy, IA, domain objects, frame sequence, which shadcn wholes to compose, narrative inside one-idea frames |
+| **Frozen** | Color (OKLCH), radii, depth, surfaces, shell rhythm, **typeset presets**, theme knobs, activity, bans, cinematic + material laws, contrast pairs | — |
+| **Creative** | — | Copy, IA, domain objects, frame sequence, which shadcn wholes / typeset preset to compose, narrative inside one-idea frames |
 
-Agents invent **stories and compositions**. They do not invent **colors, shadows, or radii**. Import `@/lib/design` — TypeScript rejects fabrication.
+Agents invent **stories and compositions**. They do not invent **colors, shadows, radii, or typography scales**. Import `@/lib/design` — TypeScript rejects fabrication.
 
 ```ts
 import { bg, defineCinemaFrame, typeClass } from "@/lib/design"
@@ -42,8 +44,8 @@ defineCinemaFrame({
 | Type | Geist Sans + Geist Mono |
 | Depth | `edge` → `depth-soft` → `depth-raised` |
 | Media | Full-bleed photographs (`BleedImage`) when staging; app windows otherwise |
-| Reading | `ReadingArticle` + `reading-ui` / `reading-prose` |
-| Primitives | shadcn/ui — compose, don’t fork |
+| Reading | shadcn/typeset — `typesetClass("docs"\|"chat"\|"reading"\|"compact")` |
+| Primitives | shadcn/ui — compose, don’t fork; never grow a shell zoo |
 | Icons | Phosphor via `@/lib/icons` — duotone default |
 | Default surface | `application` |
 | Grammar | `lib/design/grammar.ts` |
@@ -79,12 +81,13 @@ Encoded in `lib/design/recipes.ts` → `cinematicLaws`:
 8. **Motion is micro** — no scroll choreography
 9. **Tile alternation** — app proof ↔ parchment rhythm (distinct beats, no repeated subject)
 10. **Sparse copy** — one primary `CinemaLink` (+ optional secondary); no chevrons
-11. **Structured reading** — off the film (docs routes); measured hierarchy
+11. **Structured reading** — shadcn/typeset presets; no per-tag class soup
 12. **Type weight medium-max** — hierarchy from size + tracking
 13. **OKLCH only** — all color tokens are `oklch(...)` or `var(--token)`
 14. **Contrast audited** — WCAG AA on paper + theater; no opacity cheats
 15. **Control ≠ layer** — Fluent corner-radius split via `radiusFor`
 16. **Stroke before shadow** — default `edge`; depth only when floated
+17. **Rules over widgets** — prefer a frozen preset / law over a new component
 
 ## Accessibility (mandatory)
 
@@ -104,16 +107,18 @@ Every UI or token change must pass this audit (skill: `meridian-a11y`):
 3. **One accent** — primary, ring, selected, success → `--brand`
 4. **Status semantic** — destructive / warning never become brand
 5. **shadcn only** for primitives — compose `Button`, `Card`, `Badge`, `Input`, … (`npx shadcn@latest add`)
-6. **Icons from `@/lib/icons`** — Phosphor, duotone by default; never `lucide-react` or `@phosphor-icons/react` direct
-7. **`data-surface`** — `application` | `marketing` | `mobile` | `desktop`
-8. **Mono for data** — IDs, counts, times, prices, model/tool names
-9. **Object-bound AI** — provenance + activity; no floating chatbot
-10. **Audit accessibility + contrast** on every change
-11. Pass **`npm run check:design`**, **`check:shell`**, **`check:proofs`**, and **`check:contrast`**
-12. **Shell rhythm** — wrap app chrome in `data-surface`; size/type via shell utilities
-13. **Interactive proofs** — `defineInteractiveProof` (idle + selected; agent ⇒ ActivityLegend)
-14. **Theme knobs** — only `lib/design/knobs` presets (brand / radius / paper)
-15. **Absorb first** — fill [`docs/absorb.md`](docs/absorb.md) before influence-driven UI changes
+6. **Typeset for HTML/markdown** — `typesetClass(...)` from `@/lib/design`; never invent per-tag type soup
+7. **Icons from `@/lib/icons`** — Phosphor, duotone by default; never `lucide-react` or `@phosphor-icons/react` direct
+8. **`data-surface`** — `application` | `marketing` | `mobile` | `desktop`
+9. **Mono for data** — IDs, counts, times, prices, model/tool names
+10. **Object-bound AI** — provenance + activity; no floating chatbot
+11. **Audit accessibility + contrast** on every change
+12. Pass **`npm run check:design`**, **`check:shell`**, **`check:proofs`**, **`check:typeset`**, and **`check:contrast`**
+13. **Shell rhythm** — wrap app chrome in `data-surface`; size/type via shell utilities (proof rails, not a shell zoo)
+14. **Interactive proofs** — `defineInteractiveProof` (idle + selected; agent ⇒ ActivityLegend) — validation only
+15. **Theme knobs** — only `lib/design/knobs` presets (brand / radius / paper)
+16. **Absorb first** — fill [`docs/absorb.md`](docs/absorb.md) before influence-driven UI changes
+17. **North star** — if a change doesn’t make AI-consistent design more reliable, it’s out of scope
 
 ## MUST NOT (`banned` in grammar)
 
@@ -167,8 +172,9 @@ Machine URLs content-negotiate: browsers get designed HTML; agents get raw
 - [ ] Used `@/lib/design` for structure (or equivalent closed tokens)
 - [ ] `ideas: 1` on every cinema frame
 - [ ] Correct `data-surface`
-- [ ] shadcn primitive (no bespoke twin)
+- [ ] shadcn primitive (no bespoke twin / no new shell)
+- [ ] Typeset preset for HTML/markdown (no per-tag soup)
 - [ ] Icons from `@/lib/icons` (Phosphor)
 - [ ] Mono on data; quiet chrome
 - [ ] AI object-bound (if any)
-- [ ] `npm run check:design` clean
+- [ ] `check:design` · `shell` · `proofs` · `typeset` · `contrast` clean
