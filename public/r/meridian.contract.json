@@ -1,0 +1,127 @@
+{
+  "$schema": "https://ui.byronwade.com/r/meridian.contract.schema.json",
+  "id": "meridian",
+  "name": "Meridian",
+  "version": "0.1.0",
+  "priceMonthlyUsd": 9,
+  "mcp": {
+    "slug": "meridian",
+    "tools": [
+      "get_contract",
+      "resolve_token",
+      "validate_ui",
+      "list_primitives",
+      "get_recipe"
+    ]
+  },
+  "urls": {
+    "home": "https://ui.byronwade.com/meridian",
+    "design": "https://ui.byronwade.com/meridian/design.md",
+    "agents": "https://ui.byronwade.com/meridian/agents.md",
+    "llms": "https://ui.byronwade.com/meridian/llms.txt",
+    "contract": "https://ui.byronwade.com/r/meridian.contract.json"
+  },
+  "frozen": {
+    "colorRoles": [
+      "background",
+      "foreground",
+      "card",
+      "popover",
+      "primary",
+      "secondary",
+      "muted",
+      "accent",
+      "destructive",
+      "warning",
+      "success",
+      "brand",
+      "brand-muted",
+      "border",
+      "input",
+      "ring",
+      "dock",
+      "dock-muted",
+      "sidebar"
+    ],
+    "activityRoles": [
+      "thinking",
+      "search",
+      "read",
+      "edit"
+    ],
+    "provenanceRoles": [
+      "user",
+      "assistant",
+      "tool",
+      "source",
+      "app",
+      "action"
+    ],
+    "radii": [
+      "rounded-lg",
+      "rounded-2xl",
+      "rounded-3xl",
+      "rounded-full"
+    ],
+    "depths": [
+      "edge",
+      "depth-none",
+      "depth-soft",
+      "depth-raised"
+    ],
+    "surfaces": [
+      "application",
+      "marketing",
+      "mobile",
+      "desktop"
+    ],
+    "banned": [
+      "raw-hex-color",
+      "arbitrary-color-utility",
+      "non-oklch-color",
+      "tailwind-shadow",
+      "dvh-viewport",
+      "font-bold-display",
+      "scroll-choreography",
+      "overlay-stickers-on-media",
+      "pure-white",
+      "pure-black",
+      "bright-neon-accent",
+      "cream-terracotta-cliche",
+      "second-accent",
+      "influence-brand-labels",
+      "floating-chatbot",
+      "nested-demo-scrollports",
+      "inset-hero-media",
+      "low-contrast-on-dock",
+      "foreground-opacity-cheat",
+      "direct-lucide-import",
+      "direct-phosphor-import",
+      "arbitrary-px-height",
+      "arbitrary-px-type",
+      "arbitrary-px-padding"
+    ]
+  },
+  "typesetPresets": [
+    "docs",
+    "chat",
+    "reading",
+    "compact"
+  ],
+  "taskRecipeIds": [
+    "list-resource",
+    "edit-record",
+    "object-detail",
+    "agent-rail",
+    "settings-form",
+    "empty-recovery"
+  ],
+  "fewShotIds": [
+    "row-selected",
+    "panel-depth",
+    "agent-disclosure",
+    "typeset-docs",
+    "icon-import"
+  ],
+  "generatedAt": "2026-08-03T14:13:25.166Z"
+}

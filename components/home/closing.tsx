@@ -34,10 +34,10 @@ function Closing() {
         Ship application UI agents can keep honest.
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <CinemaLink href="/skills" priority="primary">
+        <CinemaLink href="/meridian/skills" priority="primary">
           Install skills
         </CinemaLink>
-        <CinemaLink href="/theme#contrast" priority="secondary">
+        <CinemaLink href="/meridian/theme#contrast" priority="secondary">
           Contrast audit
         </CinemaLink>
       </div>

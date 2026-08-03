@@ -27,10 +27,10 @@ function TileAgents() {
         the story — never in rogue color.
       </p>
       <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <CinemaLink href="/design" priority="primary">
+        <CinemaLink href="/meridian/design" priority="primary">
           design.md
         </CinemaLink>
-        <CinemaLink href="/for-agents" priority="secondary">
+        <CinemaLink href="/meridian/for-agents" priority="secondary">
           Agents
         </CinemaLink>
       </div>

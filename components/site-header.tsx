@@ -14,20 +14,36 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { primaryNav, docs } from "@/lib/docs/catalog"
+import { contractPrimaryNav } from "@/lib/contracts/catalog"
 import { cn } from "@/lib/utils"
 
 function linkActive(pathname: string, href: string) {
-  if (href === "/") return pathname === "/"
+  if (href === "/meridian") {
+    return pathname === "/meridian" || pathname === "/meridian/"
+  }
+  if (href.startsWith("/#") || href === "/") {
+    return pathname === "/"
+  }
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
-/** Quiet app chrome — denser than marketing pills; adapts over theater stages. */
 function SiteHeader() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [overTheater, setOverTheater] = useState(false)
-  const more = docs.filter((d) => !d.nav && d.filename)
+
+  const onMeridian =
+    pathname === "/meridian" || pathname.startsWith("/meridian/")
+  const onHome = pathname === "/"
+
+  const nav = onMeridian
+    ? contractPrimaryNav("meridian")
+    : ([
+        { href: "/#contracts", label: "Contracts" },
+        { href: "/#how-it-works", label: "How it works" },
+        { href: "/#pricing", label: "Pricing" },
+        { href: "/meridian", label: "Meridian" },
+      ] as const)
 
   useEffect(() => {
     const update = () => {
@@ -38,7 +54,6 @@ function SiteHeader() {
         setOverTheater(false)
         return
       }
-      // Theater owns the band under the fixed header.
       let hit = false
       for (const stage of stages) {
         const rect = stage.getBoundingClientRect()
@@ -73,126 +88,104 @@ function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-11 max-w-6xl items-center justify-between gap-3 px-4 md:h-12 md:px-6">
-        <Link
-          href="/"
-          className={cn(
-            "relative z-10 text-[13px] font-medium tracking-tight transition-opacity hover:opacity-70",
-            overTheater ? "text-dock-foreground" : "text-foreground",
-          )}
-        >
-          Meridian
-        </Link>
+        <div className="relative z-10 flex min-w-0 items-center gap-2">
+          <Link
+            href="/"
+            className={cn(
+              "text-[13px] font-medium tracking-tight transition-opacity hover:opacity-70",
+              overTheater ? "text-dock-foreground" : "text-foreground",
+            )}
+          >
+            Contracts
+          </Link>
+          {onMeridian ? (
+            <>
+              <span
+                className={cn(
+                  "text-[13px]",
+                  overTheater ? "text-dock-muted" : "text-muted-foreground",
+                )}
+                aria-hidden
+              >
+                /
+              </span>
+              <Link
+                href="/meridian"
+                className={cn(
+                  "truncate text-[13px] tracking-tight transition-opacity hover:opacity-70",
+                  overTheater ? "text-dock-muted" : "text-muted-foreground",
+                )}
+              >
+                Meridian
+              </Link>
+            </>
+          ) : null}
+        </div>
 
         <nav
           aria-label="Primary"
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 md:flex"
+          className="hidden min-w-0 flex-1 items-center justify-end gap-0.5 md:flex lg:justify-center"
         >
-          {primaryNav.map((item) => {
-            const active = linkActive(pathname, item.href)
+          {nav.map((item) => {
+            const active =
+              onHome && item.href.startsWith("/#")
+                ? false
+                : linkActive(pathname, item.href)
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={cn(
-                  "rounded-lg px-2 py-1 text-[12px] tracking-tight transition-colors lg:px-2.5",
+                  "inline-flex h-8 shrink-0 items-center rounded-full px-2.5 text-[13px] tracking-tight transition-colors",
                   overTheater
                     ? active
-                      ? "bg-brand/15 text-dock-foreground"
-                      : "text-dock-muted hover:bg-dock-foreground/5 hover:text-dock-foreground"
+                      ? "bg-background/15 text-dock-foreground"
+                      : "text-dock-muted hover:bg-background/10 hover:text-dock-foreground"
                     : active
                       ? "bg-brand/10 text-foreground"
-                      : "text-muted-foreground hover:bg-muted/40 hover:text-foreground",
+                      : "text-muted-foreground hover:bg-muted/30 hover:text-foreground",
                 )}
               >
-                {item.navLabel ?? item.title}
+                {item.label}
               </Link>
             )
           })}
         </nav>
 
-        <div className="relative z-10 flex items-center gap-0.5">
+        <div className="relative z-10 flex items-center gap-1.5">
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button
-                type="button"
                 variant="ghost"
-                size="icon-touch"
+                size="icon"
                 className={cn(
                   "md:hidden",
-                  overTheater && "text-dock-foreground hover:bg-muted/20",
+                  overTheater && "text-dock-foreground hover:bg-background/10",
                 )}
                 aria-label="Open menu"
               >
-                <List className="size-5" />
+                {open ? <X className="size-4" /> : <List className="size-4" />}
               </Button>
             </SheetTrigger>
-            <SheetContent
-              side="right"
-              showCloseButton={false}
-              className="w-full max-w-none border-border/60 bg-background p-0 sm:max-w-sm"
-            >
-              <SheetHeader className="flex-row items-center justify-between gap-3 border-b border-border/60 px-5 py-4">
-                <SheetTitle className="text-[15px] font-medium tracking-tight">
-                  Menu
+            <SheetContent side="right" className="w-[min(100%,20rem)]">
+              <SheetHeader>
+                <SheetTitle className="text-left text-sm font-medium tracking-tight">
+                  {onMeridian ? "Meridian" : "Contracts"}
                 </SheetTitle>
-                <SheetClose asChild>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon-touch"
-                    aria-label="Close menu"
-                  >
-                    <X className="size-5" />
-                  </Button>
-                </SheetClose>
               </SheetHeader>
               <nav
                 aria-label="Mobile"
-                className="flex flex-col gap-0.5 px-3 py-3"
-                data-surface="mobile"
+                className="mt-4 flex flex-col gap-1 px-2"
               >
-                <SheetClose asChild>
-                  <Link
-                    href="/"
-                    className={cn(
-                      "rounded-lg px-3 py-3 text-[15px] tracking-tight transition-colors",
-                      pathname === "/"
-                        ? "bg-brand/10 text-foreground"
-                        : "text-foreground hover:bg-muted/40",
-                    )}
-                  >
-                    Home
-                  </Link>
-                </SheetClose>
-                {primaryNav.map((item) => {
-                  const active = linkActive(pathname, item.href)
-                  return (
-                    <SheetClose asChild key={item.href}>
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          "rounded-lg px-3 py-3 text-[15px] tracking-tight transition-colors",
-                          active
-                            ? "bg-brand/10 text-foreground"
-                            : "text-foreground hover:bg-muted/40",
-                        )}
-                      >
-                        {item.navLabel ?? item.title}
-                      </Link>
-                    </SheetClose>
-                  )
-                })}
-                <p className="mt-3 px-3 font-mono text-[10px] tracking-[0.16em] text-muted-foreground uppercase">
-                  Files
-                </p>
-                {more.map((item) => (
+                {nav.map((item) => (
                   <SheetClose asChild key={item.href}>
                     <Link
                       href={item.href}
-                      className="rounded-lg px-3 py-3 text-[15px] tracking-tight text-foreground hover:bg-muted/40"
+                      className="rounded-lg px-3 py-2.5 text-sm tracking-tight text-foreground hover:bg-muted/30"
                     >
-                      {item.filename ?? item.title}
+                      {item.label}
                     </Link>
                   </SheetClose>
                 ))}

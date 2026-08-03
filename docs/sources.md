@@ -2,7 +2,7 @@
 
 Meridian’s controlled principles come from published guidance by teams and practitioners who ship top-tier product UI. We take **discipline**, not visual pastiche. We do not name these brands in product chrome.
 
-**Ranked merge + detailed specs:** [`influences.md`](./influences.md) · [`layout.md`](./layout.md) · [`architecture.md`](./architecture.md) · [`ux.md`](./ux.md) · [`animations.md`](./animations.md) · [`color.md`](./color.md) · [`typography.md`](./typography.md) · [`density.md`](./density.md) · [`ai-surfaces.md`](./ai-surfaces.md) — browsable at [`/system`](/system).
+**Ranked merge + detailed specs:** [`influences.md`](./influences.md) · [`layout.md`](./layout.md) · [`architecture.md`](./architecture.md) · [`ux.md`](./ux.md) · [`animations.md`](./animations.md) · [`color.md`](./color.md) · [`typography.md`](./typography.md) · [`density.md`](./density.md) · [`ai-surfaces.md`](./ai-surfaces.md) — browsable at [`/system`](/meridian/system).
 
 ## Primary sources
 

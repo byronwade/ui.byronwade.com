@@ -3,7 +3,7 @@
 Meridian is the design language for **ui.byronwade.com**. One philosophy, four surfaces, built on **shadcn/ui**.
 
 > **Agents:** obey [`design.md`](../design.md) first. This file is the human-readable deep DNA.  
-> Architecture: [`architecture.md`](./architecture.md). Ranked influences + specs: [`influences.md`](./influences.md) · [`/system`](/system).
+> Architecture: [`architecture.md`](./architecture.md). Ranked influences + specs: [`influences.md`](./influences.md) · [`/system`](/meridian/system).
 
 Soft warm neutrals (never pure white/black). One deep accent (`--brand`). Full-bleed cinema. Structured reading. Density follows the task. The **website is a theme showcase** for AI authors — not a custom component catalog.
 

@@ -63,7 +63,7 @@ Utilities: `.h-control` · `.h-row` · `.shell-pad` · `.shell-gap` · `.shell-s
 
 ## 7. Proof
 
-Live matrix: `/theme#shell-rhythm` → `ShellRhythmProof`.
+Live matrix: `/meridian/theme#shell-rhythm` → `ShellRhythmProof`.
 
 ## Sources
 

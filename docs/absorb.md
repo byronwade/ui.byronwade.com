@@ -23,4 +23,4 @@
 
 - [ ] Absorb table filled (or “no new influence”)  
 - [ ] Tokens / recipes updated if grammar changed  
-- [ ] Live proof on `/theme` or `/surfaces` if interaction changed  
+- [ ] Live proof on `/meridian/theme` or `/meridian/surfaces` if interaction changed  

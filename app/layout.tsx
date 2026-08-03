@@ -11,12 +11,19 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: {
-    default: "ui.byronwade.com",
+    default: "Design contracts · ui.byronwade.com",
     template: "%s · ui.byronwade.com",
   },
   description:
-    "Meridian — cinematic design with soft warm neutrals, one deep accent, full-bleed frames, and structured reading. Typed for AI agents.",
+    "Strict AI design contracts agents install over MCP — Meridian and siblings. Soft catalog, fail-closed grammar, $9/mo per server.",
   metadataBase: new URL("https://ui.byronwade.com"),
+  openGraph: {
+    title: "Design contracts",
+    description:
+      "Fail-closed AI design systems. Install a contract MCP — ship coherent app UI.",
+    url: "https://ui.byronwade.com",
+    siteName: "ui.byronwade.com",
+  },
 }
 
 export default function RootLayout({

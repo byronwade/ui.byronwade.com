@@ -29,10 +29,10 @@ function TileCraft() {
         black. Chrome stays out of the way.
       </p>
       <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <CinemaLink href="/theme" priority="primary">
+        <CinemaLink href="/meridian/theme" priority="primary">
           Theme knobs
         </CinemaLink>
-        <CinemaLink href="/skills/meridian-theme" priority="secondary">
+        <CinemaLink href="/meridian/skills/meridian-theme" priority="secondary">
           meridian-theme
         </CinemaLink>
       </div>

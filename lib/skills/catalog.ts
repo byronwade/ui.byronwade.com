@@ -70,7 +70,7 @@ async function listSkills(): Promise<SkillMeta[]> {
         name: name ?? slug,
         description: description ?? "",
         path: `${SKILLS_DIR}/${slug}/SKILL.md`,
-        href: `/skills/${slug}`,
+        href: `/meridian/skills/${slug}`,
         install: installCommand(slug),
         order,
       } satisfies SkillMeta
@@ -89,7 +89,7 @@ async function getSkill(slug: string): Promise<SkillDetail | null> {
       name: name ?? slug,
       description: description ?? "",
       path: `${SKILLS_DIR}/${slug}/SKILL.md`,
-      href: `/skills/${slug}`,
+      href: `/meridian/skills/${slug}`,
       install: installCommand(slug),
       order: FEATURED_ORDER.indexOf(slug as SkillSlug),
       source,

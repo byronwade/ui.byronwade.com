@@ -36,10 +36,10 @@ function MarketingFrame({ className }: { className?: string }) {
         </p>
         <div className="flex flex-wrap gap-2">
           <Button variant="theater-ink" size="pill" asChild>
-            <a href="/surfaces#marketing">Explore</a>
+            <a href="/meridian/surfaces#marketing">Explore</a>
           </Button>
           <Button variant="theater-outline" size="pill" asChild>
-            <a href="/design">Docs</a>
+            <a href="/meridian/design">Docs</a>
           </Button>
         </div>
       </div>

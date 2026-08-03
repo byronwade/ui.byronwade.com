@@ -24,7 +24,7 @@ function PrimitiveContractsPanel({ className }: { className?: string }) {
         <p className="mt-2 max-w-prose text-sm text-muted-foreground">
           Required states + ARIA for shipped shadcn atoms. Prefer a rule over a
           new component — see{" "}
-          <Link href="/system/dx" className="text-brand underline-offset-4 hover:underline">
+          <Link href="/meridian/system/dx" className="text-brand underline-offset-4 hover:underline">
             dx.md
           </Link>
           .

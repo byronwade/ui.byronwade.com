@@ -170,12 +170,12 @@ Content negotiation: browsers → designed HTML; agents → raw markdown (`Accep
 | Route | Job |
 | --- | --- |
 | `/` | Cinematic positioning |
-| `/design` · `/design.md` | Contract |
-| `/for-agents` · `/agents.md` | Agent OS |
-| `/architecture` · `/architecture.md` | This file |
-| `/system` · `/system/[slug]` | Research specs (influences, layout, ux, …) |
-| `/theme` · `/surfaces` · `/skills` | Showcase |
-| `/llms` · `/llms.txt` | Discovery |
+| `/design` · `/meridian/design.md` | Contract |
+| `/meridian/for-agents` · `/meridian/agents.md` | Agent OS |
+| `/meridian/architecture` · `/meridian/architecture.md` | This file |
+| `/system` · `/meridian/system/[slug]` | Research specs (influences, layout, ux, …) |
+| `/meridian/theme` · `/meridian/surfaces` · `/skills` | Showcase |
+| `/llms` · `/meridian/llms.txt` | Discovery |
 
 ## 10. Extension protocol
 

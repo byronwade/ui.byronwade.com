@@ -171,7 +171,7 @@ Every index/detail must define:
 | --- | --- |
 | Resource empty / loading / error | Workbench + Composer demos |
 | Outcome → activity trace | Agent rails (`data-slot="agent-outcome"` / `agent-trace`) |
-| Keyboard parity | [`/theme#keyboard`](/theme#keyboard) · [`/surfaces#keyboard`](/surfaces#keyboard) |
+| Keyboard parity | [`/meridian/theme#keyboard`](/meridian/theme#keyboard) · [`/meridian/surfaces#keyboard`](/meridian/surfaces#keyboard) |
 
 ## 13. Agent checklist
 

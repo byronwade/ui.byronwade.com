@@ -1,7 +1,9 @@
 /**
- * Human + machine document catalog.
- * Machine URLs (.md / .txt) content-negotiate: HTML for browsers, raw for agents.
+ * Human + machine document catalog for a design contract.
+ * Meridian lives under /meridian — machine URLs content-negotiate.
  */
+
+export const CONTRACT_BASE = "/meridian" as const
 
 export type DocId =
   | "design"
@@ -25,13 +27,17 @@ export type DocEntry = {
   navLabel?: string
 }
 
+function path(segment: string) {
+  return `${CONTRACT_BASE}${segment}`
+}
+
 export const docs: readonly DocEntry[] = [
   {
     id: "design",
     title: "Design",
     summary: "AI contract — cinematic laws, MUST, bans, theme knobs.",
-    href: "/design",
-    rawHref: "/design.md?raw=1",
+    href: path("/design"),
+    rawHref: `${path("/design.md")}?raw=1`,
     sourcePath: "design.md",
     filename: "design.md",
     nav: true,
@@ -41,7 +47,7 @@ export const docs: readonly DocEntry[] = [
     id: "theme",
     title: "Theme",
     summary: "Live grammar — knobs, roles, density, bans.",
-    href: "/theme",
+    href: path("/theme"),
     nav: true,
     navLabel: "Theme",
   },
@@ -49,7 +55,7 @@ export const docs: readonly DocEntry[] = [
     id: "surfaces",
     title: "Surfaces",
     summary: "Application · marketing · mobile · desktop proofs.",
-    href: "/surfaces",
+    href: path("/surfaces"),
     nav: true,
     navLabel: "Surfaces",
   },
@@ -57,7 +63,7 @@ export const docs: readonly DocEntry[] = [
     id: "skills",
     title: "Skills",
     summary: "Top Meridian agent skills — ready for skills.sh.",
-    href: "/skills",
+    href: path("/skills"),
     nav: true,
     navLabel: "Skills",
   },
@@ -66,7 +72,7 @@ export const docs: readonly DocEntry[] = [
     title: "System",
     summary:
       "Ranked influences + detailed layout, UX, motion, color, density, AI specs.",
-    href: "/system",
+    href: path("/system"),
     nav: true,
     navLabel: "System",
   },
@@ -74,8 +80,8 @@ export const docs: readonly DocEntry[] = [
     id: "for-agents",
     title: "Agents",
     summary: "Frozen vs creative, skills, agents, load order.",
-    href: "/for-agents",
-    rawHref: "/agents.md?raw=1",
+    href: path("/for-agents"),
+    rawHref: `${path("/agents.md")}?raw=1`,
     sourcePath: "agents.md",
     filename: "agents.md",
     nav: true,
@@ -85,8 +91,8 @@ export const docs: readonly DocEntry[] = [
     id: "architecture",
     title: "Architecture",
     summary: "How the typed theme system is layered for AIs.",
-    href: "/architecture",
-    rawHref: "/architecture.md?raw=1",
+    href: path("/architecture"),
+    rawHref: `${path("/architecture.md")}?raw=1`,
     sourcePath: "docs/architecture.md",
     filename: "architecture.md",
   },
@@ -94,8 +100,8 @@ export const docs: readonly DocEntry[] = [
     id: "llms",
     title: "llms.txt",
     summary: "Discovery map for agents and crawlers.",
-    href: "/llms",
-    rawHref: "/llms.txt?raw=1",
+    href: path("/llms"),
+    rawHref: `${path("/llms.txt")}?raw=1`,
     sourcePath: "llms.txt",
     filename: "llms.txt",
   },

@@ -1,0 +1,16 @@
+{
+  "name": "@byronwade/meridian-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Meridian design-contract MCP server — get_contract, resolve_token, validate_ui, list_primitives, get_recipe",
+  "type": "module",
+  "bin": {
+    "meridian-mcp": "./server.mjs"
+  },
+  "scripts": {
+    "start": "node ./server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -37,10 +37,10 @@ function Hero() {
         accent, typed rules.
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <CinemaLink href="/surfaces#proofs" priority="primary">
+        <CinemaLink href="/meridian/surfaces#proofs" priority="primary">
           Open proofs
         </CinemaLink>
-        <CinemaLink href="/skills" priority="secondary">
+        <CinemaLink href="/meridian/skills" priority="secondary">
           Skills
         </CinemaLink>
       </div>

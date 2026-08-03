@@ -77,6 +77,19 @@ export const paperPresets = [
 export type PaperPresetId = (typeof paperPresets)[number]["id"]
 export type PaperPreset = (typeof paperPresets)[number]
 
+/**
+ * Soft catalog preview washes — display-only accents for contract cards.
+ * Not a second brand; maps to closed OKLCH for cinematic previews.
+ */
+export const contractPreviewAccents = {
+  theater: "oklch(0.42 0.06 220)",
+  paper: "oklch(0.48 0.05 165)",
+  ink: "oklch(0.55 0.08 280)",
+  mist: "oklch(0.5 0.04 60)",
+} as const
+
+export type ContractPreviewTone = keyof typeof contractPreviewAccents
+
 /** Default playground selection — compact radius = Cursor-like control dialect. */
 export const knobDefaults = {
   brand: "teal",

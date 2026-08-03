@@ -20,7 +20,7 @@ If the contract is hard to load, ambiguous, or unverifiable, the system fails �
 
 ## 2. Golden path (minimal)
 
-Live on [`/for-agents#golden-path`](/for-agents#golden-path). Primitive contracts: [`/for-agents#primitives`](/for-agents#primitives).
+Live on [`/meridian/for-agents#golden-path`](/meridian/for-agents#golden-path). Primitive contracts: [`/meridian/for-agents#primitives`](/meridian/for-agents#primitives).
 
 ```ts
 import { Button } from "@/components/ui/button"
@@ -80,8 +80,8 @@ Hope is not a DX strategy — audit is ([Pandya](https://hvpandya.com/llm-design
 
 | Endpoint | Job |
 | --- | --- |
-| `/design.md` · `/agents.md` | Negotiated contracts (`?raw=1`) |
-| `/system/*` | Research specs |
+| `/meridian/design.md` · `/meridian/agents.md` | Negotiated contracts (`?raw=1`) |
+| `/meridian/system/*` | Research specs |
 | `@/lib/design` | Closed TypeScript unions |
 | `check:*` | Fail-closed CI |
 

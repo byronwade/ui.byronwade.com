@@ -21,7 +21,7 @@ const ux = await read("docs/ux.md")
 const dx = await read("docs/dx.md")
 const systemDocs = await read("lib/docs/system-docs.ts")
 const agents = await read("agents.md")
-const forAgents = await read("app/for-agents/page.tsx")
+const forAgents = await read("app/meridian/for-agents/page.tsx")
 const keyboard = await read("components/site/keyboard-proof.tsx")
 const button = await read("components/ui/button.tsx")
 

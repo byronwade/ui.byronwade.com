@@ -1,23 +1,32 @@
-import { Hero } from "@/components/home/hero"
-import { TileCraft } from "@/components/home/tile-craft"
-import { TileFocus } from "@/components/home/tile-focus"
-import { TileSkills } from "@/components/home/tile-skills"
-import { TileAgents } from "@/components/home/tile-agents"
-import { Closing } from "@/components/home/closing"
+import type { Metadata } from "next"
+
+import { CatalogHero } from "@/components/catalog/catalog-hero"
+import { ContractList } from "@/components/catalog/contract-list"
+import { HowItWorks } from "@/components/catalog/how-it-works"
+import { Pricing } from "@/components/catalog/pricing"
+
+export const metadata: Metadata = {
+  title: "Design contracts",
+  description:
+    "Strict AI design systems agents install over MCP — Meridian and siblings. $9/mo per contract server.",
+  openGraph: {
+    title: "Design contracts · ui.byronwade.com",
+    description:
+      "A soft catalog of fail-closed AI design contracts. Install Meridian MCP — ship coherent app UI.",
+  },
+}
 
 /**
- * App-first film — full Meridian loop on stage.
- * Compose → theme → cinema/agent → skills → grammar → close (a11y + install).
+ * Platform homepage — cinematic catalog of design contracts.
+ * Individual systems (Meridian, …) live under /{contract}.
  */
-export default function Home() {
+export default function HomePage() {
   return (
-    <main>
-      <Hero />
-      <TileCraft />
-      <TileFocus />
-      <TileSkills />
-      <TileAgents />
-      <Closing />
+    <main data-slot="contracts-home">
+      <CatalogHero />
+      <ContractList />
+      <HowItWorks />
+      <Pricing />
     </main>
   )
 }

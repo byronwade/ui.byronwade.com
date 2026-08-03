@@ -1,42 +1,63 @@
 # ui.byronwade.com
 
-> Meridian — cinematic design theme for AIs. Typed grammar. shadcn primitives. Not a custom component zoo.
+> Design contracts — fail-closed AI design systems agents install over MCP.
+> Meridian is the first live contract. Harbor, Atlas, and Vellum follow.
 
-Browsers hitting these URLs get designed HTML. Agents receive this raw text
+Browsers hitting these URLs get designed HTML. Agents receive raw text
 (`Accept: text/markdown` / `text/plain`, or `?raw=1`).
 
-## For agents
+## Platform
 
-- [design.md](https://ui.byronwade.com/design.md): AI contract (frozen vs creative, OKLCH, contrast)
-- [agents.md](https://ui.byronwade.com/agents.md): Strict operating manual — load order, Fluent 2 + Cursor mapping, skills, gates
-- [architecture.md](https://ui.byronwade.com/architecture.md): System layers
-- [llms.txt](https://ui.byronwade.com/llms.txt): This discovery map
+- [Home](https://ui.byronwade.com/): Soft catalog of design contracts · how it works · pricing ($9/mo per MCP)
+- [Meridian](https://ui.byronwade.com/meridian): Live cinematic contract (film + proofs)
+- [Harbor](https://ui.byronwade.com/harbor) · [Atlas](https://ui.byronwade.com/atlas) · [Vellum](https://ui.byronwade.com/vellum): Soon / preview
+
+## Meridian — for agents
+
+- [design.md](https://ui.byronwade.com/meridian/design.md): AI contract (frozen vs creative, OKLCH, contrast)
+- [agents.md](https://ui.byronwade.com/meridian/agents.md): Strict operating manual — load order, skills, gates
+- [architecture.md](https://ui.byronwade.com/meridian/architecture.md): System layers
+- [llms.txt](https://ui.byronwade.com/meridian/llms.txt): Meridian discovery map
+- [meridian.contract.json](https://ui.byronwade.com/r/meridian.contract.json): Machine contract
 - Theme grammar lives in-repo at lib/design/
+
+## MCP · CLI
+
+```bash
+# MCP server (stdio)
+node packages/meridian-mcp/server.mjs
+
+# Validate UI snippets / trees
+node scripts/meridian-check.mjs --json
+node scripts/gen-contract.mjs
+```
+
+MCP tools: get_contract · resolve_token · validate_ui · list_primitives · get_recipe
 
 ## Skill loop (prove on site)
 
-1. Theme → https://ui.byronwade.com/theme · skill meridian-theme
-2. Surface → https://ui.byronwade.com/surfaces · skill meridian-surface
-3. Compose → https://ui.byronwade.com/surfaces#proofs · skill meridian-compose
-4. Cinematic → https://ui.byronwade.com/ · skill meridian-cinematic
-5. A11y → https://ui.byronwade.com/theme#contrast · skill meridian-a11y
+1. Theme → https://ui.byronwade.com/meridian/theme · skill meridian-theme
+2. Surface → https://ui.byronwade.com/meridian/surfaces · skill meridian-surface
+3. Compose → https://ui.byronwade.com/meridian/surfaces#proofs · skill meridian-compose
+4. Cinematic → https://ui.byronwade.com/meridian · skill meridian-cinematic
+5. A11y → https://ui.byronwade.com/meridian/theme#contrast · skill meridian-a11y
 
 ## Research specs (ranked merge)
 
-- [System index](https://ui.byronwade.com/system): All detailed specs + DNA
-- [influences](https://ui.byronwade.com/system/influences) · [meridian](https://ui.byronwade.com/system/meridian) · [sources](https://ui.byronwade.com/system/sources)
-- [layout](https://ui.byronwade.com/system/layout) · [ux](https://ui.byronwade.com/system/ux) · [animations](https://ui.byronwade.com/system/animations)
-- [color](https://ui.byronwade.com/system/color) · [typography](https://ui.byronwade.com/system/typography) · [density](https://ui.byronwade.com/system/density)
-- [ai-surfaces](https://ui.byronwade.com/system/ai-surfaces)
+- [System index](https://ui.byronwade.com/meridian/system): All detailed specs + DNA
+- [influences](https://ui.byronwade.com/meridian/system/influences) · [meridian](https://ui.byronwade.com/meridian/system/meridian) · [sources](https://ui.byronwade.com/meridian/system/sources)
+- [layout](https://ui.byronwade.com/meridian/system/layout) · [ux](https://ui.byronwade.com/meridian/system/ux) · [dx](https://ui.byronwade.com/meridian/system/dx)
+- [color](https://ui.byronwade.com/meridian/system/color) · [typography](https://ui.byronwade.com/meridian/system/typography) · [density](https://ui.byronwade.com/meridian/system/density)
+- [ai-surfaces](https://ui.byronwade.com/meridian/system/ai-surfaces)
 - Repo paths: `docs/*.md`
 
 ## Showcase
 
-- [Theme](https://ui.byronwade.com/theme): Laws, knobs, workbench proof, contrast pairs
-- [Surfaces](https://ui.byronwade.com/surfaces): Workbench + composer + four density lanes
-- [Skills](https://ui.byronwade.com/skills): Top agent skills with on-site proofs
-- [System](https://ui.byronwade.com/system): Ranked research specs
-- [Home](https://ui.byronwade.com/): Cinematic film covering the full skill loop
+- [Theme](https://ui.byronwade.com/meridian/theme): Laws, knobs, workbench proof, contrast pairs
+- [Surfaces](https://ui.byronwade.com/meridian/surfaces): Workbench + composer + four density lanes
+- [Skills](https://ui.byronwade.com/meridian/skills): Top agent skills with on-site proofs
+- [System](https://ui.byronwade.com/meridian/system): Ranked research specs
+- [Film](https://ui.byronwade.com/meridian): Cinematic film covering the full skill loop
 
 ## Install skills
 
@@ -49,5 +70,7 @@ npx skills add byronwade/ui.byronwade.com --skill meridian-theme
 
 - npm run check:design
 - npm run check:contrast
+- npm run check:meridian
 - TypeScript unions in lib/design/grammar.ts
 - Cinematic + material laws in lib/design/recipes.ts
+- Contract JSON + MCP tools for runtime agent guidance

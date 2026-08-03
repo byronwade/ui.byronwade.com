@@ -14,24 +14,24 @@ export const aiStack = [
     id: "design-md",
     label: "design.md",
     summary: "AI contract — MUST, bans, cinematic list, frozen vs creative.",
-    href: "/design",
+    href: "/meridian/design",
   },
   {
     id: "grammar",
     label: "lib/design",
     summary: "Typed grammar — closed unions agents cannot fabricate.",
-    href: "/theme",
+    href: "/meridian/theme",
   },
   {
     id: "skills",
     label: "Skills",
     summary: "theme · surface · compose · cinematic",
-    href: "/for-agents#skills",
+    href: "/meridian/for-agents#skills",
   },
   {
     id: "agents",
     label: "Agents",
     summary: "author · reviewer — plus check:design drift lint",
-    href: "/for-agents#agents",
+    href: "/meridian/for-agents#agents",
   },
 ] as const

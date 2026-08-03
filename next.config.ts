@@ -11,6 +11,22 @@ const tracedAgentSources = [
   "./.cursor/agents/**/*.md",
 ]
 
+/** Legacy root routes → Meridian contract namespace. */
+const meridianRedirects = [
+  "/design",
+  "/theme",
+  "/surfaces",
+  "/skills",
+  "/system",
+  "/for-agents",
+  "/architecture",
+  "/llms",
+  "/design.md",
+  "/agents.md",
+  "/architecture.md",
+  "/llms.txt",
+] as const
+
 const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
@@ -23,11 +39,30 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingIncludes: {
     "/*": tracedAgentSources,
-    "/system/[slug]/raw": tracedAgentSources,
-    "/design.md": tracedAgentSources,
-    "/agents.md": tracedAgentSources,
-    "/architecture.md": tracedAgentSources,
-    "/llms.txt": tracedAgentSources,
+    "/meridian/system/[slug]/raw": tracedAgentSources,
+    "/meridian/design.md": tracedAgentSources,
+    "/meridian/agents.md": tracedAgentSources,
+    "/meridian/architecture.md": tracedAgentSources,
+    "/meridian/llms.txt": tracedAgentSources,
+  },
+  async redirects() {
+    return [
+      ...meridianRedirects.map((source) => ({
+        source,
+        destination: `/meridian${source === "/llms" ? "/llms" : source}`,
+        permanent: true,
+      })),
+      {
+        source: "/skills/:slug*",
+        destination: "/meridian/skills/:slug*",
+        permanent: true,
+      },
+      {
+        source: "/system/:slug*",
+        destination: "/meridian/system/:slug*",
+        permanent: true,
+      },
+    ]
   },
 }
 

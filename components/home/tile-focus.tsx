@@ -42,10 +42,10 @@ function TileFocus() {
         floating chatbot.
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <CinemaLink href="/surfaces#proofs" priority="primary">
+        <CinemaLink href="/meridian/surfaces#proofs" priority="primary">
           Composer proof
         </CinemaLink>
-        <CinemaLink href="/skills/meridian-compose" priority="secondary">
+        <CinemaLink href="/meridian/skills/meridian-compose" priority="secondary">
           meridian-compose
         </CinemaLink>
       </div>

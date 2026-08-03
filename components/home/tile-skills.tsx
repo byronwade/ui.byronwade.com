@@ -49,10 +49,10 @@ function TileSkills() {
         site.
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <CinemaLink href="/skills" priority="primary">
+        <CinemaLink href="/meridian/skills" priority="primary">
           Browse skills
         </CinemaLink>
-        <CinemaLink href="/system" priority="secondary">
+        <CinemaLink href="/meridian/system" priority="secondary">
           System specs
         </CinemaLink>
       </div>

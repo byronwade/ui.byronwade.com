@@ -1,6 +1,6 @@
 /**
  * Research / merge specs under docs/ — detailed influence synthesis.
- * Served at /system and /system/[slug]; raw via /system/[slug].md
+ * Served at /meridian/system and /meridian/system/[slug]; raw via …/raw
  */
 
 export type SystemDocSlug =

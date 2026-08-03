@@ -14,11 +14,13 @@ const ROOT = process.cwd()
 const SCAN_DIRS = ["components", "app", "lib"]
 const EXTENSIONS = new Set([".tsx", ".ts", ".css"])
 
-/** Skip generated / vendor-ish paths */
+/** Skip generated / vendor-ish paths + intentional anti-example catalogs */
 const IGNORE = [
   /node_modules/,
   /\.next/,
   /scripts\//,
+  /lib\/contracts\/few-shots\.ts$/,
+  /lib\/contracts\/eval\.ts$/,
 ]
 
 /** Paths where upstream shadcn may still use Tailwind shadows briefly */
