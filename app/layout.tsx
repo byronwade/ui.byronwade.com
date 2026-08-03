@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { ThemeProvider } from "@/components/theme-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "@/components/ui/sonner";
-import { cn } from "@/lib/utils";
-import "./globals.css";
+import type { Metadata } from "next"
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
+import { ThemeProvider } from "@/components/theme-provider"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { Toaster } from "@/components/ui/sonner"
+import { cn } from "@/lib/utils"
+import "./globals.css"
 
 export const metadata: Metadata = {
   title: {
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
   description:
     "Meridian — cinematic design with soft warm neutrals, one deep accent, full-bleed frames, and structured reading. Typed for AI agents.",
   metadataBase: new URL("https://ui.byronwade.com"),
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html
@@ -30,7 +30,7 @@ export default function RootLayout({
       className={cn(GeistSans.variable, GeistMono.variable)}
       suppressHydrationWarning
     >
-      <body>
+      <body data-surface="application">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -46,5 +46,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

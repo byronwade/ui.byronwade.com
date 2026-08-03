@@ -1,6 +1,15 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
 import { ProductFrame } from "@/components/cinematic/product-frame"
 import { ComposerShell } from "@/components/surfaces/composer-shell"
+import { defineCinemaFrame, text } from "@/lib/design"
+
+const frame = defineCinemaFrame({
+  tone: "theater",
+  subject: "workbench",
+  ideas: 1,
+  overlayStickers: false,
+  fullBleed: true,
+})
 
 /**
  * Theater beat — editor + object-bound agent (Cursor-app shape).
@@ -10,7 +19,7 @@ function TileFocus() {
   return (
     <CinemaTile
       id="product"
-      tone="theater"
+      tone={frame.tone}
       layout="stack"
       subject={
         <ProductFrame atmosphere={false} className="translate-y-4 md:translate-y-8">
@@ -21,10 +30,10 @@ function TileFocus() {
       <p className="font-mono text-[11px] tracking-[0.16em] text-brand uppercase">
         Agent
       </p>
-      <h2 className="cinema-title mt-3 text-dock-foreground">
+      <h2 className={`cinema-title mt-3 ${text("dock")}`}>
         Bound to the file.
       </h2>
-      <p className="cinema-lede mx-auto mt-5 max-w-sm text-dock-muted">
+      <p className={`cinema-lede mx-auto mt-5 max-w-sm ${text("dock-muted")}`}>
         Composer rides the selected object — provenance, activity, review —
         never a floating chatbot.
       </p>

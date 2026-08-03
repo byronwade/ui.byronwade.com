@@ -16,8 +16,9 @@ function MobileFrame({ className }: { className?: string }) {
   return (
     <div
       className={designCn(
-        "mx-auto w-full max-w-[22rem] bg-foreground/90 p-2",
+        "mx-auto w-full max-w-[22rem] p-2",
         radiusIntent("shell"),
+        bg("dock"),
         depthIntent("overlay"),
         className,
       )}

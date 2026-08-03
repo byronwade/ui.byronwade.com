@@ -85,7 +85,7 @@ export default function ThemePage() {
         <p className="mt-2 text-sm text-muted-foreground">
           Compose proof on theme paper — tokens + object-bound AI together.
         </p>
-        <div className="mt-6 overflow-hidden rounded-3xl bg-muted/20 edge">
+        <div className="mt-6 overflow-hidden rounded-3xl bg-muted/30 edge">
           <Workbench />
         </div>
       </section>

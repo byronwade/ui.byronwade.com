@@ -62,7 +62,9 @@ function SiteHeader() {
   return (
     <header
       data-slot="site-header"
+      data-surface="marketing"
       data-over={overTheater ? "theater" : "paper"}
+      data-tone={overTheater ? "theater" : undefined}
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200",
         overTheater

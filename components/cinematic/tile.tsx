@@ -1,6 +1,7 @@
 import { type ReactNode } from "react"
 import { Stage, type StageTone } from "@/components/cinematic/stage"
 import { BleedImage, type Veil } from "@/components/cinematic/bleed-image"
+import { designCn, text } from "@/lib/design"
 import { cn } from "@/lib/utils"
 
 type Align = "center" | "bottom"
@@ -32,6 +33,7 @@ type CinemaTileProps = {
 /**
  * One-idea stage tile.
  * Stack layout puts the application on stage; overlay keeps media full-bleed.
+ * Callers must satisfy cinematicLaws via defineCinemaFrame at the call site.
  */
 function CinemaTile({
   id,
@@ -106,7 +108,7 @@ type CinemaLinkProps = {
   href: string
   children: ReactNode
   className?: string
-  /** primary = hairline underline; secondary = quieter muted brand */
+  /** primary = hairline underline; secondary = quieter muted */
   priority?: "primary" | "secondary"
 }
 
@@ -121,12 +123,12 @@ function CinemaLink({
     <a
       href={href}
       data-priority={priority}
-      className={cn(
+      className={designCn(
         "text-[15px] tracking-tight underline-offset-[0.2em] transition-opacity md:text-[16px]",
         priority === "primary" &&
-          "font-medium text-brand underline hover:opacity-80",
+          designCn(text("brand"), "font-medium underline hover:opacity-80"),
         priority === "secondary" &&
-          "text-brand/80 hover:text-brand hover:underline",
+          designCn(text("brand"), "opacity-90 hover:opacity-100 hover:underline"),
         className,
       )}
     >

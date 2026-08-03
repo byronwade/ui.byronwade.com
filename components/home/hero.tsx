@@ -1,14 +1,14 @@
 import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
 import { ProductFrame } from "@/components/cinematic/product-frame"
 import { Workbench } from "@/components/surfaces/workbench"
-import { defineCinemaFrame, proofs } from "@/lib/design"
+import { defineCinemaFrame, proofs, text } from "@/lib/design"
 
 /** Typed hero frame — product/workbench subject, one idea. */
 const heroFrame = defineCinemaFrame(proofs.hero)
 
 /**
  * App-first hero — brand names the system; the workbench is the proof.
- * Cursor-app density, not marketing-site spectacle.
+ * Theater stage → dock text tokens (never paper charcoal on dock).
  */
 function Hero() {
   return (
@@ -21,8 +21,12 @@ function Hero() {
         </ProductFrame>
       }
     >
-      <h1 className="cinema-display text-foreground">Meridian</h1>
-      <p className="cinema-lede mx-auto mt-4 max-w-md text-muted-foreground">
+      <h1 className={designDisplay(heroFrame.tone)}>Meridian</h1>
+      <p
+        className={`cinema-lede mx-auto mt-4 max-w-md ${
+          heroFrame.tone === "theater" ? text("dock-muted") : text("muted")
+        }`}
+      >
         Application UI that stays calm under agents — dense chrome, one accent,
         typed rules.
       </p>
@@ -30,12 +34,16 @@ function Hero() {
         <CinemaLink href="/surfaces#proofs" priority="primary">
           Open proofs
         </CinemaLink>
-        <CinemaLink href="/#skills" priority="secondary">
-          Skill loop
+        <CinemaLink href="/skills" priority="secondary">
+          Skills
         </CinemaLink>
       </div>
     </CinemaTile>
   )
+}
+
+function designDisplay(tone: "paper" | "theater") {
+  return `cinema-display ${tone === "theater" ? text("dock") : text("foreground")}`
 }
 
 export { Hero }

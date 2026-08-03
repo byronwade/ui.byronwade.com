@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { designCn, text, typeClass } from "@/lib/design"
 import { cn } from "@/lib/utils"
 
 type DocShellProps = {
@@ -28,8 +29,7 @@ type DocShellProps = {
 
 /**
  * Minimal document chrome — title, optional copy/raw, measured body.
- * Mobile: sticky bottom action bar with touch targets.
- * Built on shadcn Button (+ Card for link rows).
+ * Marketing density for reading; touch actions on mobile.
  */
 function DocShell({
   eyebrow,
@@ -48,6 +48,7 @@ function DocShell({
   return (
     <main
       data-slot="doc-shell"
+      data-surface="marketing"
       className={cn(
         "px-5 pt-20 pb-28 md:px-8 md:pt-24 md:pb-32",
         className,
@@ -60,19 +61,37 @@ function DocShell({
         )}
       >
         <header className="max-w-2xl">
-          <p className="font-mono text-[11px] tracking-[0.16em] text-brand uppercase">
+          <p
+            className={designCn(
+              typeClass("label"),
+              text("brand"),
+              "text-[11px] tracking-[0.16em]",
+            )}
+          >
             {eyebrow}
           </p>
-          <h1 className="mt-4 text-[clamp(2rem,5vw,3rem)] font-medium leading-[1.1] tracking-[-0.04em] text-foreground">
+          <h1
+            className={designCn(
+              typeClass("display"),
+              text("foreground"),
+              "mt-4 text-[clamp(2rem,5vw,3rem)]",
+            )}
+          >
             {title}
           </h1>
           {lead ? (
-            <p className="mt-4 text-base leading-relaxed tracking-tight text-muted-foreground md:text-[1.0625rem]">
+            <p
+              className={designCn(
+                typeClass("body"),
+                text("muted"),
+                "mt-4 md:text-[1.0625rem]",
+              )}
+            >
               {lead}
             </p>
           ) : null}
           {filename ? (
-            <p className="mt-3 font-mono text-xs text-muted-foreground">
+            <p className={designCn(typeClass("data"), text("muted"), "mt-3")}>
               {filename}
             </p>
           ) : null}
@@ -108,6 +127,7 @@ function DocShell({
       {hasSourceActions ? (
         <div
           data-slot="doc-mobile-actions"
+          data-surface="mobile"
           className="fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-background/90 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden"
         >
           <div className="mx-auto flex max-w-3xl gap-2">
@@ -140,7 +160,10 @@ function DocLinkRow({ items }: DocLinkRowProps) {
     <ul className="mt-6 space-y-2">
       {items.map((item) => (
         <li key={item.href}>
-          <Link href={item.href} className="block transition-opacity hover:opacity-90">
+          <Link
+            href={item.href}
+            className="block transition-opacity hover:opacity-90"
+          >
             <Card className="py-0 transition-colors hover:bg-muted/30">
               <CardHeader className="gap-0.5 py-3.5">
                 <CardTitle className="text-sm tracking-tight">

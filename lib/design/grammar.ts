@@ -171,7 +171,7 @@ export type BannedPattern = (typeof banned)[number]
 /**
  * Radius intent → allowed token.
  * Fluent 2 analogue: controlCornerRadius vs layerCornerRadius.
- * Never use rounded-md / rounded-xl / rounded-sm outside shadcn internals.
+ * Never use control radii outside the closed set (lg / 2xl / 3xl / full).
  */
 export const radiusFor = {
   /** Buttons, inputs, menu rows, nav items — Fluent Medium/Large. */

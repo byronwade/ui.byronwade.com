@@ -1,5 +1,5 @@
 import { type ReactNode } from "react"
-import { cn } from "@/lib/utils"
+import { bg, designCn, depthIntent, radiusIntent } from "@/lib/design"
 
 type ProductFrameProps = {
   children: ReactNode
@@ -10,6 +10,7 @@ type ProductFrameProps = {
 
 /**
  * Stages the application as the subject — window chrome, not a marketing card.
+ * Shell radius (rounded-3xl) + edge — never inset hero cards.
  */
 function ProductFrame({
   children,
@@ -19,7 +20,7 @@ function ProductFrame({
   return (
     <div
       data-slot="product-frame"
-      className={cn("relative w-full", className)}
+      className={designCn("relative w-full", className)}
     >
       {atmosphere ? (
         <div
@@ -28,7 +29,14 @@ function ProductFrame({
         />
       ) : null}
       <div className="relative mx-auto w-full max-w-[76rem] px-3 md:px-6">
-        <div className="overflow-hidden rounded-2xl bg-card edge">
+        <div
+          className={designCn(
+            "overflow-hidden",
+            radiusIntent("shell"),
+            bg("card"),
+            depthIntent("default"),
+          )}
+        >
           {children}
         </div>
       </div>

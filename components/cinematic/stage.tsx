@@ -1,20 +1,20 @@
-import { type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { type ReactNode } from "react"
+import { bg, designCn, text, type CinemaTone } from "@/lib/design"
 
-type StageTone = "paper" | "theater";
+type StageTone = CinemaTone
 
 type StageProps = {
-  id?: string;
-  tone?: StageTone;
-  children: ReactNode;
-  className?: string;
+  id?: string
+  tone?: StageTone
+  children: ReactNode
+  className?: string
   /**
    * Full viewport height — hero only.
    * Uses svh (stable), never dvh: dynamic viewport resizes when mobile
    * chrome shows/hides on scroll-direction change and jerks the page.
    */
-  fullBleed?: boolean;
-};
+  fullBleed?: boolean
+}
 
 function Stage({
   id,
@@ -28,20 +28,21 @@ function Stage({
       id={id}
       data-slot="cinema-stage"
       data-tone={tone}
-      className={cn(
+      data-surface="marketing"
+      className={designCn(
         "relative",
         /* overflow-anchor: reverse-scroll jumps when a tall stage reflows */
         fullBleed && "flex min-h-svh flex-col [overflow-anchor:none]",
         tone === "theater"
-          ? "bg-dock text-dock-foreground"
-          : "bg-background text-foreground",
+          ? designCn(bg("dock"), text("dock"))
+          : designCn(bg("background"), text("foreground")),
         className,
       )}
     >
       {children}
     </section>
-  );
+  )
 }
 
-export { Stage };
-export type { StageProps, StageTone };
+export { Stage }
+export type { StageProps, StageTone }

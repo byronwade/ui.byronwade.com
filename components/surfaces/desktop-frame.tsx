@@ -1,25 +1,32 @@
-import { PanelLeft, Search, Terminal, FileText } from "@/lib/icons";
-import { Surface } from "@/components/surfaces/surface";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
+import { PanelLeft, Search, Terminal, FileText } from "@/lib/icons"
+import { Surface } from "@/components/surfaces/surface"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { bg, designCn, depthIntent, radiusIntent, text } from "@/lib/design"
 
 function DesktopFrame({ className }: { className?: string }) {
   return (
     <div
-      className={cn(
-        "overflow-hidden rounded-2xl bg-foreground/10 depth-soft",
+      className={designCn(
+        "overflow-hidden bg-muted/40",
+        radiusIntent("shell"),
+        depthIntent("float"),
         className,
       )}
     >
       <div className="flex h-8 items-center gap-2 border-b border-border/60 bg-muted/80 px-3">
         <div className="flex gap-1.5">
-          <span className="size-2.5 rounded-full bg-foreground/20" />
-          <span className="size-2.5 rounded-full bg-foreground/20" />
-          <span className="size-2.5 rounded-full bg-foreground/20" />
+          <span className="size-2.5 rounded-full bg-muted-foreground/40" />
+          <span className="size-2.5 rounded-full bg-muted-foreground/40" />
+          <span className="size-2.5 rounded-full bg-muted-foreground/40" />
         </div>
-        <p className="flex-1 text-center font-mono text-[10px] text-muted-foreground">
+        <p
+          className={designCn(
+            "flex-1 text-center font-mono text-[10px]",
+            text("muted"),
+          )}
+        >
           Meridian — Issues
         </p>
         <Badge variant="outline" className="h-5 font-mono text-[10px]">
@@ -27,7 +34,10 @@ function DesktopFrame({ className }: { className?: string }) {
         </Badge>
       </div>
 
-      <Surface id="desktop" className="flex h-[26rem] bg-background md:h-[28rem]">
+      <Surface
+        id="desktop"
+        className={designCn("flex h-[26rem] md:h-[28rem]", bg("background"))}
+      >
         <aside className="flex w-10 flex-col items-center gap-1 border-r border-border py-2">
           <Button variant="ghost" size="icon-xs" aria-label="Sidebar">
             <PanelLeft />
@@ -74,7 +84,10 @@ function DesktopFrame({ className }: { className?: string }) {
                   <li key={name}>
                     <button
                       type="button"
-                      className="flex h-(--row-h) w-full items-center rounded-lg px-1.5 text-left font-mono text-[11px] tracking-tight hover:bg-muted/40"
+                      className={designCn(
+                        "flex h-(--row-h) w-full items-center px-1.5 text-left font-mono text-[11px] tracking-tight hover:bg-muted/40",
+                        radiusIntent("control"),
+                      )}
                     >
                       {name}
                     </button>
@@ -96,7 +109,12 @@ function DesktopFrame({ className }: { className?: string }) {
                   menus, activity bar, status — not an OS theme fork.
                 </p>
                 <Separator className="my-3" />
-                <div className="rounded-lg bg-muted/40 p-2 font-mono text-[11px] leading-relaxed">
+                <div
+                  className={designCn(
+                    "bg-muted/40 p-2 font-mono text-[11px] leading-relaxed",
+                    radiusIntent("control"),
+                  )}
+                >
                   <span className="text-brand">edit</span> · IssueRow.tsx
                   <br />
                   bg-brand/10 on selected
@@ -111,7 +129,7 @@ function DesktopFrame({ className }: { className?: string }) {
         </div>
       </Surface>
     </div>
-  );
+  )
 }
 
-export { DesktopFrame };
+export { DesktopFrame }

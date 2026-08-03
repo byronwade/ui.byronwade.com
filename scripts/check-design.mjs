@@ -41,7 +41,6 @@ const RULES = [
     re: /(?:^|[\s"'`])shadow-(?:sm|md|lg|xl|2xl|inner)(?:$|[\s"'`])/,
     message: "Tailwind shadow-* banned — use edge / depth-*",
     include: /\.(tsx|ts)$/,
-    exclude: SHADCN_UI,
   },
   {
     id: "direct-lucide-import",
@@ -82,14 +81,12 @@ const RULES = [
     re: /(?:bg|text|border|fill|stroke)-(?:white)(?:\/|\s|"|'|`|$)|['"`]#(?:fff|ffffff|FFF|FFFFFF)['"`]|oklch\(\s*1\s+0\s+0\s*\)/,
     message: "Pure white banned — use soft warm neutrals (background/card)",
     include: /\.(tsx|ts|css)$/,
-    exclude: SHADCN_UI,
   },
   {
     id: "pure-black",
     re: /(?:bg|text|border|fill|stroke)-(?:black)(?:\/|\s|"|'|`|$)|['"`]#(?:000|000000)['"`]|oklch\(\s*0\s+0\s+0/,
     message: "Pure black banned — use soft warm dock/foreground charcoal",
     include: /\.(tsx|ts|css)$/,
-    exclude: SHADCN_UI,
   },
   {
     id: "non-oklch-color",
@@ -104,7 +101,13 @@ const RULES = [
     message:
       "Opacity on foreground cheats contrast — use muted-foreground or dock-muted",
     include: /\.(tsx|ts)$/,
-    exclude: SHADCN_UI,
+  },
+  {
+    id: "off-scale-radius",
+    re: /(?:^|[\s"'`])rounded-(?:md|xl|sm|4xl)(?:$|[\s"'`/:])/,
+    message:
+      "Off-scale radius — use rounded-lg (control) / 2xl (panel) / 3xl (shell) / full (pill)",
+    include: /\.(tsx|ts)$/,
   },
   {
     id: "low-contrast-on-dock",
