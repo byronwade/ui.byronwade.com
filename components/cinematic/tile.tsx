@@ -192,7 +192,10 @@ type CinemaLinkProps = {
   priority?: "primary" | "secondary"
 }
 
-/** Quiet text CTA — Cursor-app calm, no chevron. */
+/**
+ * Quiet text CTA — brand stays scarce (eyebrow / wordmark).
+ * Primary = dock ink underline; secondary = muted link.
+ */
 function CinemaLink({
   href,
   children,
@@ -206,12 +209,9 @@ function CinemaLink({
       className={designCn(
         "text-[15px] tracking-tight underline-offset-[0.2em] transition-opacity md:text-[16px]",
         priority === "primary" &&
-          designCn(text("brand"), "font-medium underline hover:opacity-80"),
+          designCn(text("dock"), "font-medium underline hover:opacity-80"),
         priority === "secondary" &&
-          designCn(
-            text("brand"),
-            "opacity-90 hover:opacity-100 hover:underline",
-          ),
+          designCn(text("dock-muted"), "hover:text-dock-foreground hover:underline"),
         className,
       )}
     >

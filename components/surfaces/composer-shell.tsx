@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
+import { ActivityLegend } from "@/components/site/activity-legend"
 import { activity, bg, designCn, radiusIntent } from "@/lib/design"
 import { cn } from "@/lib/utils"
 
@@ -115,7 +116,7 @@ type ThreadMsg = {
   provenance: "user" | "assistant"
   body: string
   busy?: boolean
-  activity?: "thinking" | "edit"
+  activity?: "thinking" | "search" | "read" | "edit"
 }
 
 type ComposerShellProps = {
@@ -133,6 +134,12 @@ function ComposerShell({ className }: ComposerShellProps) {
     {
       provenance: "user",
       body: "Apply brand wash on the selected row — Fluent stroke, Cursor density.",
+    },
+    {
+      provenance: "assistant",
+      body: "Searching call sites for selected-state borders…",
+      busy: false,
+      activity: "search",
     },
     {
       provenance: "assistant",
@@ -275,13 +282,23 @@ function ComposerShell({ className }: ComposerShellProps) {
               <Badge
                 variant="outline"
                 className={cn(
-                  "ml-auto h-4 border-transparent px-1.5 font-mono text-[9px] text-foreground opacity-80",
+                  "ml-auto h-4 border-transparent px-1.5 font-mono text-[9px] tracking-[0.08em] text-foreground uppercase opacity-90",
                   radiusIntent("pill"),
                   activity(settled ? "edit" : "thinking"),
                 )}
               >
                 {settled ? "edit" : "thinking"}
               </Badge>
+            </div>
+            <div className="border-b border-border px-2 py-1.5">
+              <ActivityLegend
+                active={
+                  settled
+                    ? "edit"
+                    : ([...thread].reverse().find((m) => m.activity)
+                        ?.activity ?? "thinking")
+                }
+              />
             </div>
             <div className="min-h-0 flex-1 space-y-2 overflow-auto p-2">
               <p className="px-0.5 font-mono text-[10px] text-muted-foreground">
@@ -305,6 +322,17 @@ function ComposerShell({ className }: ComposerShellProps) {
                     <p className="font-mono text-[10px] text-muted-foreground">
                       {msg.provenance === "user" ? "You" : "Assistant"}
                     </p>
+                    {msg.activity ? (
+                      <Badge
+                        className={cn(
+                          "h-4 border-transparent px-1.5 font-mono text-[9px] tracking-[0.08em] text-foreground uppercase",
+                          radiusIntent("pill"),
+                          activity(msg.activity),
+                        )}
+                      >
+                        {msg.activity}
+                      </Badge>
+                    ) : null}
                   </div>
                   <p className="mt-1 text-[12px] leading-relaxed tracking-tight">
                     {msg.body}

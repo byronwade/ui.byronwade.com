@@ -5,6 +5,7 @@
 "use client"
 
 import { useMemo, useState, type CSSProperties, type ReactNode } from "react"
+import { ActivityLegend } from "@/components/site/activity-legend"
 import { Workbench } from "@/components/surfaces/workbench"
 import { Button } from "@/components/ui/button"
 import { designCn, radiusIntent, themeKnobs } from "@/lib/design"
@@ -92,7 +93,7 @@ type ThemePlaygroundProps = {
 function ThemePlayground({ className }: ThemePlaygroundProps) {
   const [brandId, setBrandId] = useState(brandPresets[0].id)
   const [radiusId, setRadiusId] =
-    useState<(typeof radiusPresets)[number]["id"]>("default")
+    useState<(typeof radiusPresets)[number]["id"]>("compact")
   const [paperId, setPaperId] =
     useState<(typeof paperPresets)[number]["id"]>("warm")
 
@@ -227,6 +228,16 @@ function ThemePlayground({ className }: ThemePlaygroundProps) {
               </Button>
             ))}
           </ControlGroup>
+
+          <div>
+            <p className="mb-1.5 font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+              Activity (scoped)
+            </p>
+            <ActivityLegend dense={false} />
+            <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
+              Pastels mark agent stages only — never CTAs.
+            </p>
+          </div>
         </aside>
 
         <div className="min-w-0 bg-muted/15 p-3 md:p-4" style={style}>

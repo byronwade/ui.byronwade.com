@@ -19,10 +19,14 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        /* Scarce brand fill — one primary CTA per theater band */
         theater:
           "bg-brand text-brand-foreground hover:bg-brand/90",
+        /* Ink CTA on dock — Cursor-style download weight without second accent */
+        "theater-ink":
+          "bg-dock-foreground text-dock hover:opacity-90",
         "theater-outline":
-          "border-dock-foreground/30 bg-dock/20 text-dock-foreground backdrop-blur-[2px] hover:bg-dock/35 hover:text-dock-foreground",
+          "border border-dock-foreground/35 bg-transparent text-dock-foreground hover:bg-dock-foreground/10",
       },
       size: {
         default:

@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
+import { ActivityLegend } from "@/components/site/activity-legend"
 import { activity, bg, designCn, proofs, radiusIntent } from "@/lib/design"
 import { cn } from "@/lib/utils"
 
@@ -71,7 +72,14 @@ const seedEvents: Record<string, AgentEvent[]> = {
     {
       provenance: "assistant",
       label: "Assistant",
-      body: "Updating IssueRow to bg-brand/10; checking paper + theater.",
+      body: "Checking selected-state contrast on paper + theater.",
+      activity: "thinking",
+    },
+    {
+      provenance: "tool",
+      label: "search · IssueRow",
+      body: "Found selected → border treatment in three call sites.",
+      activity: "search",
     },
     {
       provenance: "tool",
@@ -85,6 +93,13 @@ const seedEvents: Record<string, AgentEvent[]> = {
       provenance: "assistant",
       label: "Assistant",
       body: "Help drawer should use reading-ui — 65ch, not dense chrome type.",
+      activity: "thinking",
+    },
+    {
+      provenance: "tool",
+      label: "read · readability.md",
+      body: "reading-ui lane confirmed for help copy.",
+      activity: "read",
     },
   ],
   "ISS-1831": [
@@ -94,12 +109,24 @@ const seedEvents: Record<string, AgentEvent[]> = {
       body: "Mapped thinking / search / read / edit to timeline chips.",
       activity: "read",
     },
+    {
+      provenance: "assistant",
+      label: "Assistant",
+      body: "Pastels stay on the agent rail — never system CTAs.",
+      activity: "thinking",
+    },
   ],
   "ISS-1820": [
     {
       provenance: "user",
       label: "You",
       body: "Panels need edge hairline — no shadow-* utilities.",
+    },
+    {
+      provenance: "tool",
+      label: "search · shadow-",
+      body: "No Tailwind shadow-* in registry surfaces.",
+      activity: "search",
     },
   ],
 }
@@ -351,6 +378,13 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                   {selectedId}
                 </span>
               </div>
+              <div className="border-b border-border px-2 py-1.5">
+                <ActivityLegend
+                  active={
+                    [...events].reverse().find((e) => e.activity)?.activity
+                  }
+                />
+              </div>
               <div className="min-h-0 flex-1 space-y-1.5 overflow-auto p-2">
                 <p className="px-0.5 pb-1 text-[11px] tracking-tight text-muted-foreground">
                   {selected.title}
@@ -371,7 +405,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                       {event.activity ? (
                         <Badge
                           className={cn(
-                            "h-4 border-transparent px-1.5 font-mono text-[9px] text-foreground",
+                            "h-4 border-transparent px-1.5 font-mono text-[9px] tracking-[0.08em] text-foreground uppercase",
                             radiusIntent("pill"),
                             activity(event.activity),
                           )}

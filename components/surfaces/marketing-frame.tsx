@@ -35,7 +35,7 @@ function MarketingFrame({ className }: { className?: string }) {
           it is decoration.
         </p>
         <div className="flex flex-wrap gap-2">
-          <Button variant="theater" size="pill" asChild>
+          <Button variant="theater-ink" size="pill" asChild>
             <a href="/surfaces#marketing">Explore</a>
           </Button>
           <Button variant="theater-outline" size="pill" asChild>
