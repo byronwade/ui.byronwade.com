@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { DocShell } from "@/components/docs/doc-shell"
 import { SkillLoop } from "@/components/site/skill-loop"
-import { Workbench } from "@/components/surfaces/workbench"
+import { ThemePlayground } from "@/components/site/theme-playground"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -50,7 +50,7 @@ export default function ThemePage() {
     <DocShell
       eyebrow="Theme"
       title="See the system."
-      lead="Strict OKLCH tokens. Fluent 2 material + Cursor-app density, frozen in lib/design. Contrast audited to WCAG AA."
+      lead="Twist the knobs — brand, radius, paper — and watch the workbench reskin. Strict OKLCH, frozen in lib/design."
       measure="split"
       actions={
         <>
@@ -78,15 +78,16 @@ export default function ThemePage() {
         </div>
       </section>
 
-      <section className="mt-14">
+      <section className="mt-14" id="playground">
         <h2 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
-          Live workbench
+          Theme playground
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Compose proof on theme paper — tokens + object-bound AI together.
+          App settings energy on a marketing page — presets write scoped CSS
+          variables; the workbench stays interactive.
         </p>
-        <div className="mt-6 overflow-hidden rounded-3xl bg-muted/30 edge">
-          <Workbench />
+        <div className="mt-6">
+          <ThemePlayground />
         </div>
       </section>
 

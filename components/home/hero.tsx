@@ -33,8 +33,8 @@ function Hero() {
       </p>
       <h1 className={`cinema-display mt-4 ${text("dock")}`}>Meridian</h1>
       <p className={`cinema-lede mt-5 max-w-sm ${text("dock-muted")}`}>
-        Application UI that stays calm under agents — dense chrome, one accent,
-        typed rules.
+        Click the workbench — select issues, ask the agent. Dense chrome, one
+        accent, typed rules.
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
         <CinemaLink href="/surfaces#proofs" priority="primary">

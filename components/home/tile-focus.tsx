@@ -38,8 +38,8 @@ function TileFocus() {
         the file.
       </h2>
       <p className={`cinema-lede mt-5 max-w-sm ${text("dock-muted")}`}>
-        Composer rides the selected object — provenance, activity, review —
-        never a floating chatbot.
+        Open files, ask the rail — composer rides the selected object, never a
+        floating chatbot.
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
         <CinemaLink href="/surfaces#proofs" priority="primary">

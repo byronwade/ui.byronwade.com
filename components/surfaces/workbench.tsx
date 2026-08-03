@@ -1,8 +1,10 @@
 /**
- * Canonical application whole — Fluent 2 material + Cursor-app density:
- * thin stroke chrome, control vs layer radius, object-bound agent rail.
- * Structure imported from `@/lib/design` — never invent radius/wash.
+ * Canonical application whole — Fluent 2 material + Cursor-app density.
+ * Interactive: nav, row selection, search, object-bound agent rail.
  */
+"use client"
+
+import { useState } from "react"
 import {
   House,
   ListTodo,
@@ -16,76 +18,91 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import {
-  activity,
-  bg,
-  designCn,
-  proofs,
-  radiusIntent,
-} from "@/lib/design"
+import { activity, bg, designCn, proofs, radiusIntent } from "@/lib/design"
 import { cn } from "@/lib/utils"
 
 const recipe = proofs.workbench
 
-const nav = [
-  { label: "Home", icon: House, active: false },
-  { label: "Issues", icon: ListTodo, active: true },
-  { label: "Settings", icon: Settings, active: false },
+const navItems = [
+  { id: "home" as const, label: "Home", icon: House },
+  { id: "issues" as const, label: "Issues", icon: ListTodo },
+  { id: "settings" as const, label: "Settings", icon: Settings },
 ]
 
-const rows = [
+type NavId = (typeof navItems)[number]["id"]
+
+const issueRows = [
   {
     id: "ISS-1842",
     title: "Tighten selected-state contrast",
     meta: "2h",
-    active: true,
   },
   {
     id: "ISS-1839",
     title: "Ship help drawer reading lane",
     meta: "48m",
-    active: false,
   },
   {
     id: "ISS-1831",
     title: "Map activity to agent timeline",
     meta: "—",
-    active: false,
   },
   {
     id: "ISS-1820",
     title: "Align edge depth on panels",
     meta: "1d",
-    active: false,
   },
 ]
 
-const events = [
-  {
-    provenance: "user",
-    label: "You",
-    body: "Use brand wash on selected rows — not a border.",
-  },
-  {
-    provenance: "assistant",
-    label: "Assistant",
-    body: "Updating IssueRow to bg-brand/10; checking paper + theater.",
-  },
-  {
-    provenance: "tool",
-    label: "edit · IssueRow.tsx",
-    body: "Selected treatment → brand/10 fill.",
-    activity: "edit" as const,
-  },
-]
+type AgentEvent = {
+  provenance: "user" | "assistant" | "tool"
+  label: string
+  body: string
+  activity?: "thinking" | "search" | "read" | "edit"
+}
+
+const seedEvents: Record<string, AgentEvent[]> = {
+  "ISS-1842": [
+    {
+      provenance: "user",
+      label: "You",
+      body: "Use brand wash on selected rows — not a border.",
+    },
+    {
+      provenance: "assistant",
+      label: "Assistant",
+      body: "Updating IssueRow to bg-brand/10; checking paper + theater.",
+    },
+    {
+      provenance: "tool",
+      label: "edit · IssueRow.tsx",
+      body: "Selected treatment → brand/10 fill.",
+      activity: "edit",
+    },
+  ],
+  "ISS-1839": [
+    {
+      provenance: "assistant",
+      label: "Assistant",
+      body: "Help drawer should use reading-ui — 65ch, not dense chrome type.",
+    },
+  ],
+  "ISS-1831": [
+    {
+      provenance: "tool",
+      label: "read · activity.ts",
+      body: "Mapped thinking / search / read / edit to timeline chips.",
+      activity: "read",
+    },
+  ],
+  "ISS-1820": [
+    {
+      provenance: "user",
+      label: "You",
+      body: "Panels need edge hairline — no shadow-* utilities.",
+    },
+  ],
+}
 
 type WorkbenchProps = {
   className?: string
@@ -94,7 +111,44 @@ type WorkbenchProps = {
 }
 
 function Workbench({ className, withAgent = true }: WorkbenchProps) {
-  const boundTo = recipe.agent?.boundTo ?? "ISS-1842"
+  const [nav, setNav] = useState<NavId>("issues")
+  const [selectedId, setSelectedId] = useState(issueRows[0].id)
+  const [query, setQuery] = useState("")
+  const [draft, setDraft] = useState("")
+  const [eventsById, setEventsById] = useState(seedEvents)
+
+  const filtered = issueRows.filter((row) => {
+    if (!query.trim()) return true
+    const q = query.toLowerCase()
+    return (
+      row.id.toLowerCase().includes(q) || row.title.toLowerCase().includes(q)
+    )
+  })
+
+  const events = eventsById[selectedId] ?? []
+  const selected = issueRows.find((r) => r.id === selectedId) ?? issueRows[0]
+
+  function sendAsk() {
+    const text = draft.trim()
+    if (!text) return
+    setEventsById((prev) => {
+      const prior = prev[selectedId] ?? []
+      return {
+        ...prev,
+        [selectedId]: [
+          ...prior,
+          { provenance: "user", label: "You", body: text },
+          {
+            provenance: "assistant",
+            label: "Assistant",
+            body: `On ${selectedId}: applying brand wash + edge depth — keeping Fluent stroke.`,
+            activity: "thinking",
+          },
+        ],
+      }
+    })
+    setDraft("")
+  }
 
   return (
     <Surface
@@ -110,16 +164,19 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
         <p className="px-2.5 pt-2 font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
           Workspace
         </p>
-        <nav className="mt-1 flex flex-col gap-0.5 px-1">
-          {nav.map((item) => (
+        <nav className="mt-1 flex flex-col gap-0.5 px-1" aria-label="Workspace">
+          {navItems.map((item) => (
             <Button
-              key={item.label}
+              key={item.id}
+              type="button"
               variant="ghost"
               size="sm"
+              aria-current={nav === item.id ? "page" : undefined}
+              onClick={() => setNav(item.id)}
               className={cn(
                 "h-7 justify-start gap-2 px-1.5 text-[12px] hover:bg-muted/40",
                 radiusIntent("control"),
-                item.active &&
+                nav === item.id &&
                   cn(recipe.selected, "text-foreground hover:bg-brand/10"),
               )}
             >
@@ -129,7 +186,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
           ))}
         </nav>
         <p className="mt-auto px-2.5 pb-2 font-mono text-[10px] text-muted-foreground">
-          {withAgent ? "Agent on selection" : "Ready"}
+          {withAgent ? `Agent · ${selectedId}` : "Ready"}
         </p>
       </aside>
 
@@ -138,7 +195,10 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
           <div className="relative min-w-0 flex-1">
             <Search className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-muted-foreground" />
             <Input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Search or jump…"
+              aria-label="Search issues"
               className={cn(
                 "h-7 border border-transparent bg-background pl-7 text-[12px] shadow-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40",
                 radiusIntent("control"),
@@ -153,65 +213,151 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
         <div
           className={cn(
             "grid min-h-0 flex-1",
-            withAgent ? "lg:grid-cols-[1fr_16.5rem]" : "grid-cols-1",
+            withAgent && nav === "issues"
+              ? "lg:grid-cols-[1fr_16.5rem]"
+              : "grid-cols-1",
           )}
         >
-          <div className="min-h-0 overflow-hidden border-border lg:border-r">
-            <Table>
-              <TableHeader>
-                <TableRow className="h-8 hover:bg-transparent">
-                  <TableHead className="h-8 w-7 pl-2.5" />
-                  <TableHead className="h-8 w-20 text-[11px]">ID</TableHead>
-                  <TableHead className="h-8 text-[11px]">Title</TableHead>
-                  <TableHead className="hidden h-8 pr-2.5 text-right text-[11px] sm:table-cell">
-                    Meta
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.active ? "selected" : undefined}
-                    className="h-8 hover:bg-muted/30 data-[state=selected]:bg-brand/10"
-                  >
-                    <TableCell className="pl-2.5">
-                      <Circle
-                        className={
-                          row.active
-                            ? "size-2.5 text-brand"
-                            : "size-2.5 text-muted-foreground"
-                        }
-                        weight={row.active ? "fill" : "regular"}
-                      />
-                    </TableCell>
-                    <TableCell className="font-mono text-[11px] text-muted-foreground">
-                      {row.id}
-                    </TableCell>
-                    <TableCell className="truncate text-[13px] tracking-tight">
-                      {row.title}
-                    </TableCell>
-                    <TableCell className="hidden pr-2.5 text-right font-mono text-[11px] text-muted-foreground sm:table-cell">
-                      {row.meta}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          <div className="min-h-0 overflow-auto border-border lg:border-r">
+            {nav === "home" ? (
+              <div className="space-y-3 p-4">
+                <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+                  Home
+                </p>
+                <h3 className="text-base font-medium tracking-tight">
+                  {selected.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Jump into Issues to select an object — the agent rail binds to
+                  it.
+                </p>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  className={radiusIntent("control")}
+                  onClick={() => setNav("issues")}
+                >
+                  Open issues
+                </Button>
+              </div>
+            ) : null}
+
+            {nav === "settings" ? (
+              <div className="space-y-3 p-4">
+                <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+                  Settings
+                </p>
+                <ul className="space-y-1.5 text-sm tracking-tight">
+                  <li className="flex h-8 items-center justify-between rounded-lg bg-muted/30 px-2.5">
+                    <span>Density</span>
+                    <span className="font-mono text-[11px] text-muted-foreground">
+                      application
+                    </span>
+                  </li>
+                  <li className="flex h-8 items-center justify-between rounded-lg px-2.5 hover:bg-muted/30">
+                    <span>Accent</span>
+                    <span className="font-mono text-[11px] text-brand">
+                      --brand
+                    </span>
+                  </li>
+                  <li className="flex h-8 items-center justify-between rounded-lg px-2.5 hover:bg-muted/30">
+                    <span>Material</span>
+                    <span className="font-mono text-[11px] text-muted-foreground">
+                      edge
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            ) : null}
+
+            {nav === "issues" ? (
+              <table className="w-full caption-bottom text-sm">
+                <thead className="sticky top-0 z-10 bg-background [&_tr]:border-b">
+                  <tr className="h-8 border-b border-border">
+                    <th className="h-8 w-7 pl-2.5 text-left font-medium text-muted-foreground" />
+                    <th className="h-8 w-20 text-left text-[11px] font-medium text-muted-foreground">
+                      ID
+                    </th>
+                    <th className="h-8 text-left text-[11px] font-medium text-muted-foreground">
+                      Title
+                    </th>
+                    <th className="hidden h-8 pr-2.5 text-right text-[11px] font-medium text-muted-foreground sm:table-cell">
+                      Meta
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.length === 0 ? (
+                    <tr>
+                      <td
+                        colSpan={4}
+                        className="px-3 py-8 text-center text-sm text-muted-foreground"
+                      >
+                        No issues match “{query}”.
+                      </td>
+                    </tr>
+                  ) : (
+                    filtered.map((row) => {
+                      const active = row.id === selectedId
+                      return (
+                        <tr
+                          key={row.id}
+                          data-state={active ? "selected" : undefined}
+                          tabIndex={0}
+                          aria-selected={active}
+                          onClick={() => setSelectedId(row.id)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault()
+                              setSelectedId(row.id)
+                            }
+                          }}
+                          className="h-8 cursor-pointer border-b border-border/60 outline-none hover:bg-muted/30 focus-visible:bg-brand/10 data-[state=selected]:bg-brand/10"
+                        >
+                          <td className="pl-2.5">
+                            <Circle
+                              className={
+                                active
+                                  ? "size-2.5 text-brand"
+                                  : "size-2.5 text-muted-foreground"
+                              }
+                              weight={active ? "fill" : "regular"}
+                            />
+                          </td>
+                          <td className="font-mono text-[11px] text-muted-foreground">
+                            {row.id}
+                          </td>
+                          <td className="truncate text-[13px] tracking-tight">
+                            {row.title}
+                          </td>
+                          <td className="hidden pr-2.5 text-right font-mono text-[11px] text-muted-foreground sm:table-cell">
+                            {row.meta}
+                          </td>
+                        </tr>
+                      )
+                    })
+                  )}
+                </tbody>
+              </table>
+            ) : null}
           </div>
 
-          {withAgent ? (
+          {withAgent && nav === "issues" ? (
             <aside className="hidden min-h-0 flex-col bg-muted/15 lg:flex">
               <div className="flex h-8 items-center gap-1.5 border-b border-border px-2.5">
                 <Sparkle className="size-3.5 text-brand" />
                 <span className="font-mono text-[11px] tracking-tight text-muted-foreground">
-                  {boundTo}
+                  {selectedId}
                 </span>
               </div>
-              <div className="min-h-0 flex-1 space-y-1.5 overflow-hidden p-2">
-                {events.map((event) => (
+              <div className="min-h-0 flex-1 space-y-1.5 overflow-auto p-2">
+                <p className="px-0.5 pb-1 text-[11px] tracking-tight text-muted-foreground">
+                  {selected.title}
+                </p>
+                {events.map((event, i) => (
                   <article
-                    key={event.label + event.body}
+                    key={`${event.label}-${i}-${event.body.slice(0, 24)}`}
                     data-provenance={event.provenance}
                     className={designCn(
                       "bg-card px-2 py-1.5 edge",
@@ -241,22 +387,41 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                 ))}
               </div>
               <Separator />
-              <div className="p-1.5">
+              <form
+                className="flex items-center gap-1 p-1.5"
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  sendAsk()
+                }}
+              >
                 <Input
+                  value={draft}
+                  onChange={(e) => setDraft(e.target.value)}
                   placeholder="Ask about this issue…"
+                  aria-label={`Ask about ${selectedId}`}
                   className={cn(
                     "h-7 border border-transparent bg-background text-[12px] shadow-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40",
                     radiusIntent("control"),
                   )}
                 />
-              </div>
+                <Button
+                  type="submit"
+                  size="sm"
+                  variant="ghost"
+                  className="h-7 shrink-0 rounded-lg px-2 font-mono text-[10px]"
+                >
+                  ⌘↵
+                </Button>
+              </form>
             </aside>
           ) : null}
         </div>
 
         <footer className="flex h-6 items-center justify-between border-t border-border bg-muted/20 px-2.5 font-mono text-[10px] text-muted-foreground">
           <span>{recipe.surface}</span>
-          <span>{withAgent ? "agent bound" : "idle"}</span>
+          <span>
+            {withAgent && nav === "issues" ? `${selectedId} bound` : "idle"}
+          </span>
         </footer>
       </div>
     </Surface>

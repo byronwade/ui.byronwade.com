@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Workbench } from "@/components/surfaces/workbench"
-import { ComposerShell } from "@/components/surfaces/composer-shell"
 import { MarketingFrame } from "@/components/surfaces/marketing-frame"
 import { MobileFrame } from "@/components/surfaces/mobile-frame"
 import { DesktopFrame } from "@/components/surfaces/desktop-frame"
 import { SkillLoop } from "@/components/site/skill-loop"
+import { SurfaceStudio } from "@/components/site/surface-studio"
 import { DocShell } from "@/components/docs/doc-shell"
 import { Button } from "@/components/ui/button"
 import { proofs, designCn, radiusIntent, typeClass, text } from "@/lib/design"
@@ -14,7 +14,7 @@ import { surfaces } from "@/lib/surfaces"
 export const metadata: Metadata = {
   title: "Surfaces",
   description:
-    "Meridian proofs — workbench, composer, and density lanes across application, marketing, mobile, and desktop.",
+    "Meridian proofs — interactive workbench, composer, and density lanes across application, marketing, mobile, and desktop.",
 }
 
 const laneDemos = {
@@ -30,14 +30,14 @@ export default function SurfacesPage() {
     <DocShell
       eyebrow="Surfaces"
       title="Density by task."
-      lead="Canonical compose proofs first — then every surface lane. Same tokens, remapped hit targets."
+      lead="Switch lanes in the studio — select rows, open files, ask the agent. Same tokens, remapped hit targets."
       actions={
         <>
           <Button variant="outline" size="default" asChild>
             <Link href="/skills">Skills</Link>
           </Button>
           <Button variant="ghost" size="default" asChild>
-            <Link href="/theme">Theme</Link>
+            <Link href="/theme#playground">Theme knobs</Link>
           </Button>
         </>
       }
@@ -55,30 +55,16 @@ export default function SurfacesPage() {
           Compose · meridian-compose
         </p>
         <h2 className="mt-2 text-2xl font-medium tracking-[-0.03em] md:text-3xl">
-          Live proofs
+          Surface studio
         </h2>
         <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
           Workbench ({workbench.surface}, agent → {workbench.agent?.boundTo}) and
-          composer shell — typed via{" "}
-          <span className="font-mono text-[12px]">@/lib/design</span>.
+          every lane — typed via{" "}
+          <span className="font-mono text-[12px]">@/lib/design</span>. Click
+          around; it behaves like the product.
         </p>
-        <div className="mt-8 space-y-8">
-          <div
-            className={designCn(
-              "overflow-hidden bg-muted/20 edge",
-              radiusIntent("shell"),
-            )}
-          >
-            <Workbench />
-          </div>
-          <div
-            className={designCn(
-              "overflow-hidden bg-muted/20 edge",
-              radiusIntent("shell"),
-            )}
-          >
-            <ComposerShell />
-          </div>
+        <div className="mt-8">
+          <SurfaceStudio />
         </div>
       </section>
 
