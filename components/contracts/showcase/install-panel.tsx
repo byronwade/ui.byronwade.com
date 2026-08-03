@@ -52,46 +52,63 @@ function InstallPanel({
       {!compact ? (
         <div>
           <p className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
-            Developer install
+            Design-contract MCP
           </p>
           <h2 className="mt-2 text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
-            MCP · API · npx · shadcn
+            Install into any project
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Same architecture on every contract. Set{" "}
-            <span className="font-mono text-foreground">CONTRACT_ID={install.id}</span>{" "}
-            and your agents get {install.name}&apos;s DNA with identical tools.
+            <Link
+              href="/stack"
+              className="text-foreground underline-offset-4 hover:underline"
+            >
+              Agent stack
+            </Link>
+            : MCP is required, markdown is the law book, skills are optional.{" "}
+            <span className="text-foreground">shadcn MCP</span> installs atoms;{" "}
+            <span className="text-foreground">{install.name} contract MCP</span>{" "}
+            enforces{" "}
+            <span className="font-mono text-foreground">get_contract</span> →{" "}
+            <span className="font-mono text-foreground">validate_ui</span>.
           </p>
         </div>
       ) : null}
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card size="sm">
+        <Card size="sm" className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>1. Skills (npx)</CardTitle>
+            <CardTitle>0. Agent loop (golden path)</CardTitle>
             <CardDescription>
-              Install agent skills into Cursor / Claude from the repo.
+              Use the MCP prompt{" "}
+              <span className="font-mono">build_surface</span> or follow this
+              order every time.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
-            <CodeBlock code={install.skillsNpx} label="all skills" />
-            <CodeBlock
-              code={install.skillsNpxTheme}
-              label={`${install.id}-theme`}
-            />
+          <CardContent>
+            <ol className="space-y-2 text-sm text-muted-foreground">
+              {install.agentLoop.map((step, i) => (
+                <li key={step} className="flex gap-3">
+                  <span className="font-mono text-[11px] text-foreground">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
           </CardContent>
         </Card>
 
         <Card size="sm">
           <CardHeader>
-            <CardTitle>2. MCP server</CardTitle>
+            <CardTitle>1. MCP into your project</CardTitle>
             <CardDescription>
-              Stdio consistency kit — get_contract before UI, validate_ui before
-              done.
+              npx from any app — fetches{" "}
+              <span className="font-mono">/r/{install.id}.contract.json</span>{" "}
+              live. No monorepo checkout required.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
-            <CodeBlock code={install.mcpCommand} label="run locally" />
+            <CodeBlock code={install.mcpCommand} label="npx (any project)" />
             <div className="flex flex-wrap gap-1.5">
               {install.tools.map((t) => (
                 <Badge key={t} variant="secondary" className="font-mono text-[10px]">
@@ -99,21 +116,42 @@ function InstallPanel({
                 </Badge>
               ))}
             </div>
+            <p className="text-xs text-muted-foreground">
+              Prompts:{" "}
+              <span className="font-mono text-foreground">build_surface</span>,{" "}
+              <span className="font-mono text-foreground">done_gate</span> ·
+              Resources:{" "}
+              <span className="font-mono text-foreground">contract://kit</span>
+            </p>
           </CardContent>
         </Card>
 
-        <Card size="sm" className="lg:col-span-2">
+        <Card size="sm">
           <CardHeader>
-            <CardTitle>3. Cursor mcp.json</CardTitle>
+            <CardTitle>2. Cursor mcp.json</CardTitle>
             <CardDescription>
-              Point{" "}
-              <span className="font-mono">args</span> at your checkout of{" "}
-              <span className="font-mono">packages/contract-mcp/server.mjs</span>
-              .
+              Contract MCP + optional shadcn MCP. Different jobs — keep both.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-3">
             <CodeBlock code={install.mcpCursorJson} label=".cursor/mcp.json" />
+            <p className="text-xs text-muted-foreground">{install.shadcnMcpNote}</p>
+          </CardContent>
+        </Card>
+
+        <Card size="sm">
+          <CardHeader>
+            <CardTitle>3. Skills (npx)</CardTitle>
+            <CardDescription>
+              Optional agent skills. MCP is the law; skills teach composition.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <CodeBlock code={install.skillsNpx} label="all skills" />
+            <CodeBlock
+              code={install.skillsNpxTheme}
+              label={install.themeSkillNote}
+            />
           </CardContent>
         </Card>
 
@@ -121,7 +159,7 @@ function InstallPanel({
           <CardHeader>
             <CardTitle>4. Contract API (JSON)</CardTitle>
             <CardDescription>
-              Machine kit — mandate, tokens, primitives, recipes. CORS open.
+              Slim consistency kit — mandate, tokens, primitives, recipes.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -137,15 +175,19 @@ function InstallPanel({
           </CardContent>
         </Card>
 
-        <Card size="sm">
+        <Card size="sm" className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>5. Machine docs + shadcn</CardTitle>
+            <CardTitle>5. Compose with shadcn · machine docs · gates</CardTitle>
             <CardDescription>
-              Negotiated markdown · compose atoms under this skin — never fork
-              twin kits.
+              Install atoms, then stay inside the contract. Machine markdown is
+              negotiated HTML ↔ raw.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
+            <div className="grid gap-3 md:grid-cols-2">
+              <CodeBlock code={install.shadcnInit} label="shadcn init" />
+              <CodeBlock code={install.shadcnAdd} label="add primitives" />
+            </div>
             <ul className="space-y-1.5 font-mono text-[12px] text-muted-foreground">
               {(
                 [
@@ -166,8 +208,13 @@ function InstallPanel({
               ))}
             </ul>
             <Separator />
-            <CodeBlock code={install.shadcnInit} label="shadcn init" />
-            <CodeBlock code={install.shadcnAdd} label="add primitives" />
+            <CodeBlock code={install.checkCli} label="platform gate" />
+            <p className="text-xs text-muted-foreground">
+              Contributor checkout:{" "}
+              <span className="font-mono text-foreground">
+                {install.mcpLocalCommand}
+              </span>
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -188,12 +235,19 @@ function InstallPanel({
           >
             app shells
           </Link>
-          , and{" "}
+          ,{" "}
           <Link
             href={install.pages.theme}
             className="text-foreground underline-offset-4 hover:underline"
           >
             theme
+          </Link>
+          , and{" "}
+          <Link
+            href={install.pages.design}
+            className="text-foreground underline-offset-4 hover:underline"
+          >
+            design.md
           </Link>{" "}
           — all styled with {install.name} tokens on this route.
         </p>

@@ -25,7 +25,7 @@ export const agentMandate = {
   must: [
     "OKLCH semantic tokens only (bg-background, text-foreground, bg-brand, …)",
     "One accent → --brand (selected = bg-brand/10)",
-    "Closed radii: control/pill rounded-full · input rounded-lg · panel rounded-2xl · shell rounded-3xl",
+    "Closed radii: control rounded-lg · pill rounded-full · input rounded-lg · panel rounded-2xl · shell rounded-3xl",
     "data-surface for density (application | marketing | mobile | desktop)",
     "Object-bound AI with outcome-then-trace disclosure",
     "typeset presets for markdown/HTML — no per-tag class soup",
@@ -45,7 +45,8 @@ export const agentMandate = {
 
 /** Closed radius intents — agents resolve these, they do not invent px radii. */
 export const radiusIntents = {
-  control: "rounded-full",
+  /** Buttons, inputs, menu rows — matches live shadcn controls. */
+  control: "rounded-lg",
   pill: "rounded-full",
   input: "rounded-lg",
   panel: "rounded-2xl",
@@ -90,6 +91,14 @@ export const consistencyBans = [
   "tailwind-shadow",
   "font-bold-display",
   "lucide-import",
+  "phosphor-direct-import",
   "arbitrary-color-utility",
   "second-accent",
 ] as const
+
+/** Primitive → project install mapping for agents composing into apps. */
+export const primitiveInstallMap = approvedPrimitives.map((id) => ({
+  id,
+  importPath: `@/components/ui/${id}`,
+  shadcn: `npx shadcn@latest add ${id}`,
+}))

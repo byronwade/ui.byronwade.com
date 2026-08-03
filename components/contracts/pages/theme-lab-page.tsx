@@ -16,14 +16,14 @@ function ContractThemeLabPage({ contractId }: { contractId: string }) {
     <DocShell
       eyebrow="Theme"
       title={`${contract.name} tokens in a live workbench`}
-      lead="The page chrome already uses this contract's OKLCH skin. The playground lets you try closed knob presets on a scoped preview — still one component set."
+      lead="Chrome already uses this contract's DNA. Tweak closed prefs (brand · radius · paper), then install them into any project via MCP apply_prefs."
       actions={
         <>
           <Button variant="outline" size="default" asChild>
-            <Link href={`${base}/ui`}>UI gallery</Link>
+            <Link href={`${base}/install`}>Install MCP</Link>
           </Button>
           <Button variant="ghost" size="default" asChild>
-            <Link href={`${base}/install`}>Install</Link>
+            <Link href={`${base}/ui`}>UI gallery</Link>
           </Button>
         </>
       }
@@ -32,10 +32,24 @@ function ContractThemeLabPage({ contractId }: { contractId: string }) {
     >
       <div className="space-y-4">
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          {contract.aesthetic} Brand, paper, and radius knobs are frozen
-          presets — agents must not invent new OKLCH at call sites.
+          {contract.aesthetic} Prefs are closed presets only — not layout
+          builders or animation pickers. Those stay laws (
+          <Link
+            href={`${base}/system/layout`}
+            className="text-foreground underline-offset-4 hover:underline"
+          >
+            layout
+          </Link>
+          ,{" "}
+          <Link
+            href={`${base}/system/animations`}
+            className="text-foreground underline-offset-4 hover:underline"
+          >
+            animations
+          </Link>
+          ).
         </p>
-        <ThemePlayground />
+        <ThemePlayground contractId={contractId} />
       </div>
     </DocShell>
   )

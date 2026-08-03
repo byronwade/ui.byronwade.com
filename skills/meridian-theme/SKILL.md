@@ -33,13 +33,21 @@ Primary, ring, selected (`bg-brand/10`), chart-1, and success follow `--brand`.
 - `--activity-*` encode agent steps only
 - `--chart-2…5` stay a data ramp, not accents
 
-## Workflow
+## Workflow (preferred — MCP)
+
+1. Pick closed presets on `/meridian/theme` (brand · radius · paper) or name ids.
+2. Call MCP **`apply_prefs({ brand, radius, paper })`** — writes `app/contract-prefs.css` + `contract.prefs.json`.
+3. Import the CSS. Do **not** invent OKLCH outside presets.
+4. Layout / animations are **not** prefs — use recipes + `motionLaws`.
+5. `validate_ui` on new UI. Confirm light/dark still read as one system.
+
+## Workflow (this repo / manual)
 
 1. Read current tokens in `app/globals.css`.
-2. Change knobs only; rebuild mentally against cool paper (not cream) + one accent.
+2. Change knobs only via preset values from `lib/design/knobs.ts`.
 3. Verify light and dark.
-4. Confirm `/theme` still reads as one system.
-5. If documenting a new knob, update `design.md` in the same change.
+4. Confirm `/meridian/theme` still reads as one system.
+5. If documenting a new knob, update `design.md` + `docs/prefs.md` in the same change.
 
 ## Anti-patterns
 

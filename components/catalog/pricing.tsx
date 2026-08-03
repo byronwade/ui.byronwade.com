@@ -28,10 +28,10 @@ function Pricing() {
             <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
               {open ? (
                 <>
-                  The MCP runs on{" "}
+                  Fail-closed design-contract MCPs run on{" "}
                   <span className="text-foreground">your machine</span> over
-                  stdio. Every design contract MCP is free to install — pick a
-                  system and stay inside its skin.
+                  stdio — $0 COGS. Install into any project with npx; pick a DNA
+                  and agents stay inside its skin.
                 </>
               ) : (
                 <>One contract, one MCP, one monthly seat.</>
@@ -53,11 +53,19 @@ function Pricing() {
               What you get
             </p>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
-              <li>Per-contract DNA on every page of that route</li>
-              <li>Shared architecture — MCP tools, JSON keys, recipes</li>
-              <li>Machine docs + contract.json per system</li>
-              <li>CLI gate against the contract you installed</li>
+              <li>Contract MCP — required fail-closed runtime</li>
+              <li>design.md / agents.md — law book on every contract</li>
+              <li>Optional skills cookbook (theme · compose · cinema)</li>
+              <li>Closed prefs via apply_prefs · shared JSON keys</li>
             </ul>
+            <p className="mt-4 text-xs text-muted-foreground">
+              <Link
+                href="/stack"
+                className="text-foreground underline-offset-4 hover:underline"
+              >
+                Read why we ship all three layers
+              </Link>
+            </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {contracts.map((c) => (
                 <Link

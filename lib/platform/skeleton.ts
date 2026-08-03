@@ -30,6 +30,7 @@ export const MCP_TOOLS = [
   "validate_ui",
   "list_primitives",
   "get_recipe",
+  "apply_prefs",
 ] as const
 
 export type McpToolName = (typeof MCP_TOOLS)[number]
@@ -92,6 +93,7 @@ export const CONTRACT_JSON_KEYS = [
   "consistencyBans",
   "primitives",
   "recipes",
+  "prefs",
 ] as const
 
 /** Paths relative to a contract id — templates only. */

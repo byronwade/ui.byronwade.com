@@ -9,6 +9,8 @@ export type SystemDocSlug =
   | "pricing"
   | "ux"
   | "dx"
+  | "prefs"
+  | "stack"
   | "influences"
   | "absorb"
   | "meridian"
@@ -65,6 +67,22 @@ export const systemDocs: readonly SystemDoc[] = [
     summary: "Developer + agent experience — golden path, load tiers, gates.",
     sourcePath: "docs/dx.md",
     filename: "dx.md",
+  },
+  {
+    slug: "prefs",
+    title: "Closed prefs",
+    summary:
+      "Brand · radius · paper tweaks via apply_prefs — not layout/animation freeform.",
+    sourcePath: "docs/prefs.md",
+    filename: "prefs.md",
+  },
+  {
+    slug: "stack",
+    title: "Agent stack",
+    summary:
+      "MCP · markdown · skills — why we ship all three and lead with MCP.",
+    sourcePath: "docs/stack.md",
+    filename: "stack.md",
   },
   {
     slug: "influences",
