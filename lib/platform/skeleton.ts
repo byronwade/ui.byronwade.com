@@ -150,6 +150,8 @@ export const platformZones = {
     "OKLCH token values / brand presets / paper tone",
     "Cinema voice, preview wash, marketing copy",
     "Which surfaces/proofs emphasize the DNA",
+    "Landing page architecture at /{id} (the route is shared, the layout is not)",
+    "Default data-surface density lane for that contract's own pages",
     "Skill body copy (prefix stays {id}-*)",
     "Influence mapping details inside the closed behaviors",
   ],

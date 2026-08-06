@@ -16,6 +16,7 @@
 | Price (open source / $0) | **YES — locked** | `MCP_PRICE_USD` · `PRICING_MODEL` · [`pricing.md`](./pricing.md) |
 | OKLCH values, cinema voice, paper tone | **NO — DNA** | `app/contract-skins.css` via `[data-contract="{id}"]` + `lib/contracts/dna/{id}.ts` |
 | Marketing copy / film narrative | **NO — DNA** | contract pages / content |
+| **Landing page architecture** | **NO — DNA** | `components/contracts/layouts/{id}-landing.tsx` |
 | Platform homepage chrome | **Platform only** | `app/(platform)/*` + `:root` in `globals.css` — never a contract skin |
 
 ## Agent rule (non-negotiable)
@@ -30,6 +31,24 @@ If you change **architecture**, a **filename used by MCP/API/download**, a **JSO
 **MUST NOT** invent a Meridian-only (or Harbor-only) MCP tool, machine filename, or JSON shape.
 
 Design DNA **may** differ: Harbor can feel like quiet ops paper while Meridian stays cinematic — as long as agents still call `get_contract` / `validate_ui` the same way and still fetch `/{id}/design.md`.
+
+### Landing pages are part of the DNA
+
+`/{id}` is a shared **route**, not a shared **layout**. A contract that claims a
+density lane has to render in it, so each system builds its home page in its own
+idiom — a shared marketing shell with swapped tokens proves nothing:
+
+| Contract | Landing architecture | Density |
+| --- | --- | ---: |
+| Meridian | Cinematic film — full-bleed stages, one idea per frame | `marketing` |
+| Harbor | Ops console — console bar, work queue, dense index, panels | `application` |
+| Atlas | Editor workbench — title bar, explorer rail, gutter panes, status bar | `desktop` |
+| Vellum | Typeset document — frontispiece, contents rail, prose column, figures | `marketing` (reading measure) |
+
+Shared kit (`InstallPanel`, `PrimitivesGallery`, `ShellShowcase`) appears on
+every landing — framed by that contract's idiom, never re-implemented.
+`GenericLanding` in `contract-experience.tsx` is a placeholder for a contract
+whose surface pack has not landed; growing a real layout is the expectation.
 
 ## Pipeline
 

@@ -1,5 +1,8 @@
 import Link from "next/link"
 
+import { AtlasLanding } from "@/components/contracts/layouts/atlas-landing"
+import { HarborLanding } from "@/components/contracts/layouts/harbor-landing"
+import { VellumLanding } from "@/components/contracts/layouts/vellum-landing"
 import { DnaProof } from "@/components/contracts/showcase/dna-proof"
 import { InstallPanel } from "@/components/contracts/showcase/install-panel"
 import { PrimitivesGallery } from "@/components/contracts/showcase/primitives-gallery"
@@ -10,11 +13,34 @@ import { pathTemplates } from "@/lib/platform/skeleton"
 import { cn } from "@/lib/utils"
 
 /**
- * Band — one rhythm for every section on a contract landing page.
+ * Contract landing pages.
  *
- * Alternating tone gives the page distinct beats without cinema; the padding
- * and measure are identical everywhere so no section drifts off the grid.
+ * Every contract shares routes, MCP tools, and JSON keys (lib/platform/
+ * skeleton.ts). What a contract does NOT share is how its own home page is
+ * built: a page architecture is part of the DNA, so each system gets a layout
+ * that argues its case in its own idiom —
+ *
+ *   meridian → cinematic film      (app/meridian/page.tsx)
+ *   harbor   → ops console         (layouts/harbor-landing.tsx)
+ *   atlas    → editor workbench    (layouts/atlas-landing.tsx)
+ *   vellum   → typeset document    (layouts/vellum-landing.tsx)
+ *
+ * `GenericLanding` below is the fallback for a contract whose surface pack
+ * has not landed yet. It is not the house style — a new contract is expected
+ * to grow its own layout, not settle here.
  */
+
+const layouts: Record<
+  string,
+  (props: { contract: DesignContract }) => React.ReactElement
+> = {
+  harbor: HarborLanding,
+  atlas: AtlasLanding,
+  vellum: VellumLanding,
+}
+
+/* ── Fallback layout — neutral bands, no borrowed personality ─────── */
+
 function Band({
   id,
   tone = "paper",
@@ -40,12 +66,6 @@ function Band({
   )
 }
 
-/**
- * Section head — eyebrow / title / lead on the left, one link on the right.
- *
- * Baseline-aligned rather than `items-end`: when the lead wraps, an end-aligned
- * link slides down to the last line and breaks the header rule.
- */
 function BandHead({
   eyebrow,
   title,
@@ -80,19 +100,12 @@ function BandHead({
   )
 }
 
-/**
- * Feature-rich contract home for non-film systems.
- *
- * Structure is shared with every other contract (platform skeleton); the DNA
- * frame in the hero is the one place a system shows its own density.
- */
-function ContractExperience({ contract }: { contract: DesignContract }) {
+function GenericLanding({ contract }: { contract: DesignContract }) {
   const base = pathTemplates.base(contract.id)
   const jsonHref = pathTemplates.contractJson(contract.id)
 
   return (
     <main data-slot="contract-experience" data-surface="marketing">
-      {/* ── Hero — statement left, DNA frame right, spec strip under both ── */}
       <Band className="pt-28 md:pt-32">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
           <div className="max-w-xl">
@@ -133,7 +146,6 @@ function ContractExperience({ contract }: { contract: DesignContract }) {
           />
         </div>
 
-        {/* Spec strip spans the full measure so neither column runs long */}
         <dl className="mt-14 grid gap-x-8 gap-y-6 border-t border-border/60 pt-8 sm:grid-cols-2 lg:grid-cols-4">
           {contract.features.map((feature, i) => (
             <div key={feature}>
@@ -168,7 +180,7 @@ function ContractExperience({ contract }: { contract: DesignContract }) {
         <BandHead
           eyebrow="App shells"
           title="Workbench & composer proofs"
-          lead={`Detailed product chrome — the same shells every contract ships, restyled by ${contract.name}. Switch lanes to see hit targets remap without a second component set.`}
+          lead={`Detailed product chrome — the same shells every contract ships, restyled by ${contract.name}.`}
           action={{ href: `${base}/surfaces`, label: "Open surfaces" }}
         />
         <div className="mt-8">
@@ -177,6 +189,12 @@ function ContractExperience({ contract }: { contract: DesignContract }) {
       </Band>
     </main>
   )
+}
+
+/** Routes a contract to its own landing architecture. */
+function ContractExperience({ contract }: { contract: DesignContract }) {
+  const Layout = layouts[contract.id] ?? GenericLanding
+  return <Layout contract={contract} />
 }
 
 export { ContractExperience }
