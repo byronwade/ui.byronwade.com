@@ -124,39 +124,38 @@ for (const phrase of [
 }
 
 /*
- * Root AGENTS.md is the repository engineering protocol; agents.md is the
- * design-contract manual. They must both exist, stay wired to each other, and
- * not become competing sources of truth for the same rules.
+ * agents.md carries both halves: the engineering protocol (how to change
+ * anything) and the design-contract law (what is frozen). Root AGENTS.md is a
+ * loader stub — it must point here and must not grow a second copy of either.
  */
-const rootAgents = await read("AGENTS.md")
 for (const heading of [
   "## Mission",
   "## Authority",
-  "## Required Workflow",
-  "## Reconnaissance Before Creation",
-  "## Reuse Decision Ladder",
-  "## Bounded Recursive Cleanup",
-  "## Architecture Invariants",
-  "## Mechanical Prevention and Ratchets",
-  "## Verification Gate",
-  "## Required Final Report",
+  "## Repository bindings",
+  "## Required workflow",
+  "## Reconnaissance before creation",
+  "## Reuse decision ladder",
+  "## Bounded recursive cleanup",
+  "## Architecture invariants",
+  "## Mechanical prevention and ratchets",
+  "## Verification gate",
+  "## Required final report",
   "## Never",
 ]) {
-  if (!rootAgents.includes(heading)) {
-    hits.push(`AGENTS.md: missing protocol section "${heading}"`)
+  if (!agents.includes(heading)) {
+    hits.push(`agents.md: missing protocol section "${heading}"`)
   }
 }
+
+const rootAgents = await read("AGENTS.md")
 if (!rootAgents.includes("agents.md")) {
-  hits.push("AGENTS.md: must point at agents.md for design-contract law")
+  hits.push("AGENTS.md: stub must point at agents.md")
 }
-if (!agents.includes("AGENTS.md")) {
-  hits.push("agents.md: must point at AGENTS.md for the engineering protocol")
-}
-/* Duplicating the contract manual's gated sections would fork the manual. */
-for (const section of requiredSections) {
-  if (rootAgents.includes(`## ${section}`)) {
+/* A second copy of the manual in the stub forks the operating manual. */
+for (const section of [...requiredSections, "Reuse decision ladder"]) {
+  if (rootAgents.includes(`# ${section}`)) {
     hits.push(
-      `AGENTS.md: duplicates agents.md section "${section}" — link, do not restate`,
+      `AGENTS.md: restates agents.md section "${section}" — link, do not duplicate`,
     )
   }
 }
