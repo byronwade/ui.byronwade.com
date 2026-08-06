@@ -1,6 +1,8 @@
 # Meridian — agents.md
 
 > **Strict AI operating manual.** Compact by design. Humans get a designed page; agents get this markdown (`?raw=1` forces raw).
+>
+> **Scope:** design-contract law only. The repository-wide engineering protocol — reuse ladder, bounded cleanup, verification gate, required report — lives in [`AGENTS.md`](./AGENTS.md) and is not restated here.
 
 **Product:** AI design contract (rules first) — not a custom component or shell zoo.  
 **Platform:** Meridian is one contract in a **family**. Structure is shared; aesthetics may differ.  
@@ -37,6 +39,7 @@
 
 ## 1. Load order (mandatory)
 
+0. [`AGENTS.md`](./AGENTS.md) — repository engineering protocol (reuse before create, bounded cleanup, verification gate)
 1. [`docs/north-star.md`](/meridian/system/north-star) — product definition (UX + DX pillars; rules ≠ shells)
 2. [`docs/platform.md`](/meridian/system/platform) — **shared architecture for every contract**
 3. [`design.md`](/meridian/design.md) — this contract’s DNA laws

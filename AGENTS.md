@@ -6,32 +6,299 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
-# Meridian — agent entry
+# AGENTS.md — engineering protocol
 
-**Obey the full operating manual:** [`agents.md`](./agents.md)  
-**North star:** [`docs/north-star.md`](./docs/north-star.md) — AI rule system, not a shell zoo  
-**AI contract:** [`design.md`](./design.md) · **Grammar:** [`lib/design/`](./lib/design/)  
-**Research specs:** [`/system`](./docs/influences.md) · **Skills:** [`/skills`](./skills/)
+This file governs AI-assisted work in this repository. Keep it concise, current, and enforceable. Put package-specific facts in the nearest nested AGENTS.md; do not repeat root rules. Read [`docs/north-star.md`](./docs/north-star.md) for the rationale behind this protocol only when changing it, not during normal tasks.
 
-This file is a stub so Next.js / Claude default loaders land on Meridian.  
-Do not invent color, radius, depth, type scales, or cinema laws — import from `@/lib/design`.  
-Do not invent twin components or app shells — compose shadcn + frozen presets.
+## Mission
 
-## Load order (must)
+Complete the requested change while leaving its affected dependency cone healthier than before.
 
-1. `docs/north-star.md` → `design.md` + `lib/design/`
-2. Relevant skill under `skills/meridian-*`
-3. Surface proof (`Workbench` / `ComposerShell`) only to validate product UI
-4. `npm run check:design` + `check:shell` + `check:proofs` + `check:typeset` + `check:experience` + `check:contrast` before done
+Success means:
 
-## Skill loop
+- requested behavior is correct and verified;
+- existing concepts are reused before new ones are created;
+- architecture, security, accessibility, maintainability, and measured performance do not regress;
+- relevant duplication, dead code, and accidental complexity are reduced;
+- recurring objective failures become mechanical checks;
+- unrelated repository-wide rewrites do not enter the task.
 
-| Skill | Prove on site |
-| --- | --- |
-| `meridian-theme` | `/theme` |
-| `meridian-surface` | `/surfaces` |
-| `meridian-compose` | `/surfaces#proofs` |
-| `meridian-cinematic` | `/` home film |
-| `meridian-a11y` | `/theme#contrast` |
+Optimize for the fewest necessary concepts and the lowest future change cost — not merely fewer lines, files, or abstractions.
 
-Install: `npx skills add byronwade/ui.byronwade.com`
+## Authority
+
+Apply instructions in this order:
+
+1. User request and acceptance criteria.
+2. Closest applicable nested AGENTS.md.
+3. This file.
+4. Architecture decisions, public contracts, security requirements, and repository documentation.
+5. Existing conventions, only when they do not degrade code health.
+
+Report meaningful conflicts. Never preserve a bad pattern solely because it already exists.
+
+## This repository
+
+A catalog of **design contracts**: fail-closed design systems that agents install as MCP servers. The product is a rule system, not a component library. Two documents sit below this one and own their domains — do not restate them here:
+
+| Domain | Owner | Read when |
+| --- | --- | --- |
+| Design-contract laws, MCP surface, platform parity | [`agents.md`](./agents.md) | Any UI, token, MCP, or contract change |
+| Token/typography/cinema grammar (this contract's DNA) | [`design.md`](./design.md) · [`lib/design/`](./lib/design/) | Choosing color, radius, depth, type, surface |
+| Product definition and the UX/DX pillars | [`docs/north-star.md`](./docs/north-star.md) | Scoping whether a change belongs at all |
+| Shared-vs-DNA split across contracts | [`docs/platform.md`](./docs/platform.md) · `lib/platform/skeleton.ts` | Anything named, routed, or exposed over MCP/API |
+
+Repository-specific bindings of the generic rules below:
+
+- **Reuse ladder → primitives.** shadcn/ui under `components/ui` is the canonical atom set. Never fork a twin Button, Card, or app shell per contract; compose, or reskin through `[data-contract]` CSS variables.
+- **One source of truth → the skeleton.** MCP tool names, machine filenames, route slots, and contract JSON keys live once in `lib/platform/skeleton.ts`. Changing one changes every contract; run `npm run gen:contract`.
+- **DNA may differ.** OKLCH values, voice, preview drawing, **and landing page architecture** are per-contract. `components/contracts/layouts/{id}-landing.tsx` is expected to diverge; `/{id}` is a shared route, not a shared layout.
+- **Mechanical prevention → the gates.** `scripts/check-*.mjs` are this repo's sensors. A recurring objective failure becomes a rule there, not a paragraph of prose.
+- **Verification → `npm run validate`.** Runs platform, design, shell, proofs, typeset, experience, contrast, and lint.
+
+```bash
+npm run validate     # all gates + lint
+npm run gen:contract # regenerate every contract kit after a skeleton/DNA change
+npx tsc --noEmit     # type check
+npm run build        # production build
+```
+
+## Required Workflow
+
+For every nontrivial task:
+
+1. Frame the behavior, constraints, non-goals, and verification target.
+2. Reconnoiter the relevant code before editing.
+3. Decide whether to reuse, configure, extend, extract, or create.
+4. Implement the smallest coherent solution.
+5. Recursively clean the task-related dependency cone until it converges.
+6. Verify with deterministic checks and full-diff review.
+7. Report decisions, checks, cleanup, and remaining findings truthfully.
+
+Before implementation, provide a compact decision record for substantial work:
+
+```text
+Target and acceptance criteria:
+Existing candidates inspected:
+Reuse/extend/extract/create decision:
+Expected dependency cone:
+Verification plan:
+```
+
+## Reconnaissance Before Creation
+
+Expand inspection progressively:
+
+1. Read nearest instructions, manifests, architecture notes, tests, and CI configuration.
+2. Inspect target symbols, direct callers, dependencies, data contracts, and owners.
+3. Search repository-wide for exact and semantic equivalents.
+4. Inspect comparable completed features and tests.
+5. Inspect history when intent or ownership is unclear.
+6. Run a narrow baseline check before risky work.
+
+Before creating any component, hook, service, utility, formatter, validator, schema, type, client, state container, query, or abstraction, search for:
+
+- equivalent names, inputs, outputs, invariants, and side effects;
+- shared-package exports and internal package APIs;
+- copies or near-copies in other applications;
+- platform, language, framework, or existing-dependency capabilities;
+- deprecated implementations whose callers should be migrated;
+- tests that reveal the intended contract.
+
+No exact name match does not mean no equivalent exists. Search by behavior and domain meaning.
+
+## Reuse Decision Ladder
+
+Choose the first sound option:
+
+1. **Reuse** unchanged when semantics and lifecycle match.
+2. **Configure or compose** through existing props, slots, callbacks, adapters, or children.
+3. **Extend** coherently when the behavior belongs to the same concept and does not create unrelated flags or invalid states.
+4. **Extract** shared behavior when multiple implementations express one stable concept with a clear owner.
+5. **Create** new only when existing concepts differ materially or extension would confuse ownership and evolution.
+
+New code requires a brief reason earlier options were rejected.
+
+A shared abstraction must have one stable responsibility, a clear owner, a simpler interface than the behavior it hides, and lower change amplification than separate implementations. Do not merge incidental similarity. Do not copy a shared concept merely because presentation differs; prefer composition around one canonical primitive.
+
+Do not add wrappers that only rename an API or forward arguments without enforcing a meaningful invariant.
+
+## Bounded Recursive Cleanup
+
+"Leave it better" applies to the task-related dependency cone, not the whole repository.
+
+Seed a queue with each changed file, symbol, contract, and test. For each item:
+
+1. Inspect direct callers and dependencies.
+2. Search for semantic duplicates and competing sources of truth.
+3. Find dead paths, obsolete compatibility code, boundary violations, and defects exposed by the change.
+4. Classify each finding as fix now, migrate atomically, or record.
+5. Enqueue only items directly affected by an accepted fix or migration.
+6. Repeat until no task-related violation remains.
+
+**Fix now** when the issue:
+
+- is introduced, exposed, or made riskier by the task;
+- is in code already being changed;
+- is a correctness, security, data-integrity, accessibility, or measured-performance defect;
+- is a duplicate or competing implementation of the same concept;
+- is dead code or an obsolete export revealed by migration;
+- blocks correct architecture or complete caller migration;
+- is small, safe, and verifiable.
+
+**Migrate atomically** when:
+
+- a contract, schema, shared primitive, or boundary must change;
+- every current caller can be updated and verified together;
+- parallel old and new paths would create drift.
+
+When the user or repository explicitly identifies the product as pre-production, internal backward compatibility is not a default requirement: use the better contract, migrate every caller, and delete the obsolete path. Persisted data, public APIs, external integrations, migration history, and user-visible behavior remain protected unless explicitly authorized otherwise.
+
+**Record instead of fixing** when the issue is:
+
+- unrelated to the request or its dependency/contract chain;
+- speculative, subjective, or unsupported by evidence;
+- a broad migration without a safe verification path;
+- likely to create a mixed-purpose diff;
+- dependent on a separate product or architecture decision.
+
+Stop when acceptance criteria are met, affected callers are migrated, task-related duplicates and obsolete paths are gone, checks pass, and the next change would be unrelated or disproportionately risky.
+
+Each recursion must reduce a concrete cost: duplication, coupling, obscurity, invalid states, dead code, unsafe operations, failing checks, or measured resource use. Moving, renaming, formatting, or abstracting without reducing such a cost is not cleanup.
+
+## Architecture Invariants
+
+- Organize around stable responsibilities and hidden change-prone decisions, not execution order.
+- Prefer narrow, capable interfaces over shallow abstractions.
+- Maintain high cohesion, low coupling, explicit ownership, one-way dependencies, and no cycles.
+- Keep domain rules in their domain; generic UI/shared packages must not become dumping grounds.
+- Keep application workflows out of generic primitives.
+- Keep side effects at explicit boundaries; prefer deterministic domain logic where practical.
+- Maintain one source of truth for every invariant; derive values instead of synchronizing duplicated state.
+- Do not bypass layers or import through backdoors for convenience.
+- Avoid indiscriminate barrel exports and leaked implementation details.
+- Do not add packages, layers, services, events, factories, or configuration for hypothetical future use.
+- Enforce important architecture with dependency or structural checks rather than diagrams alone.
+
+## Simplicity and Code Quality
+
+- Prefer language, platform, framework, and existing-library capabilities over custom machinery.
+- Prefer direct readable flow over clever compression and needless indirection.
+- Do not equate shorter code with faster or better code.
+- Do not duplicate constants, business rules, schemas, formatting, validation, or error handling.
+- Avoid catch-all utils, helpers, and common modules without cohesive ownership.
+- Make invalid states unrepresentable when practical.
+- Do not use `any`, unsafe casts, suppressions, ignored promises, swallowed errors, or disabled rules as shortcuts.
+- Comments explain intent, tradeoffs, and invariants — not obvious syntax.
+- Delete replaced implementations, dead exports, abandoned files, commented-out code, and temporary shims.
+- Modify generated code through its source or generator.
+- Before adding a dependency, check repository/platform alternatives and evaluate maintenance, security, runtime cost, bundle size, and overlap.
+
+## TypeScript and React
+
+When applicable:
+
+- preserve strict inference and validate untrusted data at boundaries;
+- derive render values instead of storing synchronized state;
+- use effects only to synchronize with external systems;
+- do not memoize without a demonstrated identity or performance need;
+- keep server-capable work off the client when supported;
+- use canonical formatting, class-name, schema, data-access, and error primitives;
+- preserve accessibility, keyboard behavior, stable identity, hydration safety, and deterministic rendering.
+
+In this repository specifically: a component embedded at several widths folds on **container** queries, not viewport breakpoints; anything that renders differently after hydration (theme, resolved locale) must render the server value on the hydrating pass; and color chosen by a component must come from a token that follows its context, never a hard-coded role that is correct on only one surface.
+
+## Performance Protocol
+
+Performance claims require evidence:
+
+1. Establish a representative baseline.
+2. Measure or profile one level below the visible symptom.
+3. Identify the dominant bottleneck.
+4. Change the smallest responsible design or implementation.
+5. Repeat the same measurement.
+6. Preserve a benchmark or budget when regression risk matters.
+
+Prioritize algorithms, database/query behavior, network trips, serialization, caching, client JavaScript, rendering, allocations, concurrency, and hot-path I/O before cosmetic micro-optimization. Do not claim speed from fewer lines, different syntax, or a newer library without representative measurement.
+
+## Correctness, Testing, and Safety
+
+- Test observable behavior and public contracts, not private arrangement.
+- Before risky refactoring, identify or add characterization tests.
+- A bug fix should include a regression test that fails for the defect when practical.
+- Cover success, failure, boundary, authorization, and concurrency cases as relevant.
+- Prefer result/state assertions over brittle interaction assertions and excessive mocking.
+- Keep tests deterministic and readable; test code may repeat setup when abstraction would hide the scenario.
+- Run checks from narrowest to broadest: affected tests, package tests, type check, lint/static analysis, integration/end-to-end, then build/repository checks as risk requires.
+- Never weaken a valid test merely to pass a change.
+- Validate and normalize data at trust boundaries.
+- Enforce authorization on the trusted side.
+- Use parameterized data access and context-appropriate escaping.
+- Keep secrets out of source, logs, client bundles, fixtures, and errors.
+- Centralize risky operations behind safe typed abstractions.
+- Prefer allowlists, least privilege, and structural prevention of vulnerability classes.
+
+This repository's checks are static and visual rather than unit tests. Treat `scripts/check-*.mjs` as the regression suite, and treat rendering a changed page — light, dark, and narrow — as the integration test.
+
+## Mechanical Prevention and Ratchets
+
+When an objective failure can recur, add the smallest reliable sensor:
+
+- type invariant;
+- formatter, linter, or AST rule;
+- forbidden-import or dependency-boundary check;
+- exact/near-duplicate detector;
+- dead-file/export check;
+- contract, regression, property, or architecture test;
+- secret, dependency, or static-security scan;
+- bundle, latency, query-count, memory, or throughput budget.
+
+Sensors should be deterministic where possible, actionable, low-noise, and fast enough for their execution stage. Messages must explain how to correct violations.
+
+For existing debt, record a baseline, block new violations, and reduce the baseline when touched. Do not introduce a noisy repository-wide gate that will be ignored. Prefer safe autofixes when semantics are unambiguous.
+
+Sensors in this repository live in `scripts/` and run from `npm run validate`. A sensor that audits only one contract is a latent gap — audit every contract the rule applies to.
+
+## Verification Gate
+
+Before completion:
+
+- review the full diff;
+- verify every acceptance criterion and non-goal;
+- confirm existing candidates were reused or explicitly rejected;
+- search again for duplicate helpers, components, services, schemas, and sources of truth;
+- migrate every affected caller, import, export, test, and contract;
+- remove dead and obsolete code;
+- verify package, dependency, and client/server boundaries;
+- run checks appropriate to the risk;
+- compare before/after measurements for performance claims;
+- confirm no unrelated cleanup entered the diff;
+- run `git diff --check` or the repository equivalent;
+- state any unrun check and why.
+
+Never call a solution "best," "optimal," "safe," or "fully verified" without evidence.
+
+## Required Final Report
+
+- **Decision** — chosen design and why.
+- **Reused** — existing concepts used.
+- **Created or extended** — what changed and why reuse unchanged was insufficient.
+- **Recursive cleanup** — duplicates, dead paths, or debt removed in the dependency cone.
+- **Mechanical prevention** — sensors added or the highest-value next sensor.
+- **Verification** — exact checks and results.
+- **Remaining findings** — relevant issues intentionally kept out of this change.
+
+## Never
+
+- create before searching;
+- copy-paste implementations across applications by default;
+- reimplement an existing canonical helper locally;
+- force unrelated concepts together merely to satisfy DRY;
+- create wrappers with no invariant or meaningful simplification;
+- preserve obsolete internal paths solely for pre-production compatibility;
+- perform an unbounded cleanup rewrite during a focused task;
+- optimize without measurement;
+- broaden public exports for convenience;
+- suppress types, lint, tests, security findings, or errors without a justified exception;
+- leave old and new implementations competing after migration;
+- mistake passing AI-generated tests for proof that the requested behavior is correct.
