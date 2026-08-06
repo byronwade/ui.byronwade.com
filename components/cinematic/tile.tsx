@@ -73,7 +73,7 @@ function CinemaTile({
         <div className="relative z-10 flex min-h-svh w-full flex-col md:flex-row md:items-stretch">
           <div
             className={cn(
-              "flex shrink-0 flex-col justify-end pt-24 pb-10",
+              "flex shrink-0 flex-col justify-start pt-20 pb-6",
               "px-5 md:justify-center md:py-0 md:pr-10",
               "md:pl-[max(1.25rem,calc((100vw-72rem)/2+2rem))]",
               "md:w-[min(100%,calc(max(1.25rem,calc((100vw-72rem)/2+2rem))+22rem))]",
@@ -86,8 +86,8 @@ function CinemaTile({
           </div>
 
           {subject ? (
-            <div className="relative flex min-h-0 min-w-0 flex-1 items-stretch pt-0 md:pt-12">
-              <div className="h-[min(56svh,32rem)] w-full self-end md:h-full md:self-stretch">
+            <div className="relative flex min-h-0 min-w-0 flex-1 items-stretch md:pt-12">
+              <div className="h-[min(58svh,34rem)] w-full md:h-full">
                 {subject}
               </div>
             </div>

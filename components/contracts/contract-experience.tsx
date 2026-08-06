@@ -175,17 +175,17 @@ function IndexRows({
   dense?: boolean
 }) {
   return (
-    <ul className="divide-y divide-border/60">
+    <ul className="flex h-full min-h-0 flex-col divide-y divide-border/60">
       {rows.map((row, i) => (
         <li
           key={row.id}
           className={cn(
-            "flex items-center justify-between gap-4 transition-colors hover:bg-muted/30",
-            dense ? "h-10 px-4 md:px-5" : "h-12 px-4 md:px-5",
+            "flex min-h-10 flex-1 items-center justify-between gap-4 transition-colors hover:bg-muted/30",
+            dense ? "px-4 md:px-5" : "min-h-12 px-4 md:px-5",
             i === 0 && "bg-brand/10",
           )}
         >
-          <div className="min-w-0 flex items-baseline gap-3">
+          <div className="flex min-w-0 items-baseline gap-3">
             <p className="shrink-0 font-mono text-[11px] tracking-tight text-muted-foreground">
               {row.id}
             </p>
@@ -295,7 +295,7 @@ function ContractHero({
       {/* Copy — same left gutter as contract header (max-w-6xl + px-8) */}
       <div
         className={cn(
-          "relative z-10 flex shrink-0 flex-col justify-end pt-24 pb-10",
+          "relative z-10 flex shrink-0 flex-col justify-start pt-20 pb-6",
           "px-5 md:justify-center md:py-0 md:pr-10",
           "md:pl-[max(1.25rem,calc((100vw-72rem)/2+2rem))]",
           "md:w-[min(100%,calc(max(1.25rem,calc((100vw-72rem)/2+2rem))+22rem))]",
@@ -333,11 +333,11 @@ function ContractHero({
       </div>
 
       {/* Index — fills remaining plane; flush right + bottom, no promo footer */}
-      <div className="relative z-10 flex min-h-0 min-w-0 flex-1 items-stretch pt-0 md:pt-12">
+      <div className="relative z-10 flex min-h-0 min-w-0 flex-1 items-stretch md:pt-12">
         <div
           className={cn(
-            "flex h-[min(56svh,32rem)] w-full flex-col self-end overflow-hidden bg-card edge",
-            "rounded-t-2xl md:h-full md:self-stretch md:rounded-tl-3xl md:rounded-tr-none md:rounded-br-none md:rounded-bl-none",
+            "flex h-[min(58svh,34rem)] w-full flex-col overflow-hidden bg-card edge",
+            "rounded-t-2xl md:h-full md:rounded-tl-3xl md:rounded-tr-none md:rounded-br-none md:rounded-bl-none",
             isAtlas && "font-mono",
           )}
         >
