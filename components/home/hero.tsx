@@ -20,7 +20,7 @@ function Hero() {
       layout="rail"
       subject={
         <ProductFrame atmosphere={false}>
-          <Workbench className="h-full min-h-[min(52svh,28rem)] rounded-none border-0 md:min-h-0" />
+          <Workbench className="h-full min-h-[min(58svh,34rem)] rounded-none border-0 md:h-full md:min-h-0" />
         </ProductFrame>
       }
     >
