@@ -1,0 +1,30 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "app/**/{page,layout,route,sitemap,robots,not-found,error}.{ts,tsx}",
+    "scripts/*.mjs",
+    "packages/*/server.mjs",
+    "lib/design/index.ts",
+    "lib/platform/index.ts",
+    "lib/platform/consistency.ts",
+    "lib/contracts/task-recipes.ts"
+  ],
+  "project": [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "lib/**/*.{ts,tsx,mjs}",
+    "scripts/**/*.mjs",
+    "packages/**/*.mjs"
+  ],
+  "ignore": [
+    "components/ui/**",
+    "lib/icons.tsx"
+  ],
+  "ignoreDependencies": [
+    "playwright",
+    "shadcn",
+    "tailwindcss",
+    "tw-animate-css"
+  ],
+  "ignoreExportsUsedInFile": true
+}

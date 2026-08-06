@@ -285,6 +285,45 @@ For existing debt, record a baseline, block new violations, and reduce the basel
 
 Sensors live in `scripts/` and run from `npm run validate`. **A sensor that audits one contract is a latent gap** — audit every contract the rule applies to.
 
+## Toolchain
+
+Repo-owned gates (`scripts/check-*.mjs`) enforce *this system's* laws. The tools
+below cover the general classes those gates were never meant to catch — dead
+code, formatting, render cost, React correctness, a11y fundamentals, hosting
+spend. Run them; do not hand-roll their jobs.
+
+| Tool | Job | Command |
+| --- | --- | --- |
+| **Biome** | Format + fast general lint | `npm run format` · `npm run lint:biome` |
+| **Knip** | Unused files, exports, dependencies | `npm run scan:dead` |
+| **react-doctor** | React correctness — the mistakes agents make | `npm run scan:react` |
+| **shadscan** | shadcn UI fundamentals (a11y, missing states) | `npm run scan:ui` |
+| **react-scan** | Render cost — measured, not guessed | dev overlay: `npm run dev`, read the on-page report |
+| **vercel-doctor** | Hosting-cost regressions in the Next build | `npm run scan:cost` |
+
+`npm run scan` runs the static ones in sequence. react-scan is the exception:
+its URL-scanning CLI was removed in v0.5, so it mounts as a dev-only overlay
+(`components/dev/react-scan.tsx`) and is read in the browser, not in CI.
+
+**Ownership, so two linters never fight:**
+
+- **Biome owns formatting** and general-purpose lint. It is the formatter of
+  record — do not add Prettier.
+- **ESLint keeps `eslint-config-next`** and the React Compiler plugin. Those
+  rules are framework-specific and Biome does not have them; the
+  `no-html-link-for-pages` rule has already caught a real bug here. Both run in
+  `validate`; neither is allowed to re-implement the other's rules.
+- **`lib/design/bans.mjs` owns design bans.** Never encode a design law as a
+  Biome or ESLint rule — it would become a fifth copy.
+
+**Reading the output.** These are third-party heuristics, not this repo's law.
+A finding is evidence, not a verdict: confirm it against the protocol above
+before acting, and record what you reject and why. Two known caveats —
+`vercel-doctor` is a community package (not official Vercel tooling) and needs
+a linked project to say anything useful; `knip` will flag the `lib/design`
+grammar exports, which are the published API and deliberately have no internal
+caller.
+
 ## Verification gate
 
 Before completion:

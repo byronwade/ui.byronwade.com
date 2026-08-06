@@ -1,4 +1,4 @@
-import { type ReactNode } from "react"
+import type { ReactNode } from "react"
 import { bg, designCn, depthIntent } from "@/lib/design"
 
 type ProductFrameProps = {

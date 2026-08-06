@@ -246,7 +246,7 @@ function toolList() {
  * A verdict here that disagreed with CI would make this tool worse than
  * useless — agents are told to call it before claiming done.
  */
-function validateUi(kit, source) {
+function validateUi(source) {
   const hits = lintSource(source)
   return {
     ok: hits.length === 0,
@@ -358,7 +358,7 @@ async function callTool(name, args = {}) {
     }
 
     case "validate_ui":
-      return withMandate(kit, validateUi(kit, String(args.source ?? "")))
+      return withMandate(kit, validateUi(String(args.source ?? "")))
 
     case "list_primitives":
       return withMandate(kit, {

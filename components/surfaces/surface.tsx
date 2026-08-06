@@ -1,4 +1,4 @@
-import { type ReactNode } from "react"
+import type { ReactNode } from "react"
 import { designCn, getShellRhythm } from "@/lib/design"
 import type { SurfaceId } from "@/lib/surfaces"
 

@@ -482,13 +482,24 @@ function ComposerShell({ className }: ComposerShellProps) {
                 aria-label={`Ask about ${activeFile}`}
                 className="h-8 rounded-lg border border-transparent bg-background text-[12px] shadow-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40"
               />
+              {/* Pending state is visible and blocks duplicate submission —
+                  uxLaws: status is never invisible. */}
               <Button
                 type="submit"
                 size="sm"
                 variant="ghost"
+                disabled={isLoading || draft.trim().length === 0}
+                aria-busy={isLoading}
                 className="h-8 shrink-0 rounded-lg px-2"
               >
-                ⌘↵
+                {isLoading ? (
+                  <CircleNotch className="size-3.5 animate-spin" />
+                ) : (
+                  "⌘↵"
+                )}
+                <span className="sr-only">
+                  {isLoading ? "Working" : "Send message"}
+                </span>
               </Button>
             </form>
           </aside>

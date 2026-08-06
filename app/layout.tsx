@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
+import { ReactScan } from "@/components/dev/react-scan"
 import { cn } from "@/lib/utils"
 import "./globals.css"
 
@@ -36,6 +37,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body data-surface="application">
+        <ReactScan />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

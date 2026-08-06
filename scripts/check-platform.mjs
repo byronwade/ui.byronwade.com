@@ -138,6 +138,7 @@ for (const heading of [
   "## Bounded recursive cleanup",
   "## Architecture invariants",
   "## Mechanical prevention and ratchets",
+  "## Toolchain",
   "## Verification gate",
   "## Required final report",
   "## Never",

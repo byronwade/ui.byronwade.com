@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { List, X } from "@/lib/icons"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
@@ -14,7 +13,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { cn } from "@/lib/utils"
 
 const nav = [
   { href: "/#contracts", label: "Systems" },
@@ -23,7 +21,6 @@ const nav = [
 ] as const
 
 function PlatformHeader() {
-  const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
   return (
@@ -44,22 +41,17 @@ function PlatformHeader() {
           aria-label="Platform"
           className="hidden items-center gap-1 md:flex"
         >
-          {nav.map((item) => {
-            const active =
-              pathname === "/" && item.href === "/#contracts" ? false : false
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "inline-flex h-8 items-center px-2.5 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:text-foreground",
-                  active && "text-foreground",
-                )}
-              >
-                {item.label}
-              </Link>
-            )
-          })}
+          {/* Every item is an in-page anchor on the single platform route, so
+              there is no active route to mark — hover carries the affordance. */}
+          {nav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="inline-flex h-8 items-center px-2.5 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-1">

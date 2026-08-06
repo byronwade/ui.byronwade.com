@@ -4,7 +4,7 @@
  */
 "use client"
 
-import { useMemo, useState, type CSSProperties, type ReactNode } from "react"
+import { useState, type CSSProperties, type ReactNode } from "react"
 import { ActivityLegend } from "@/components/site/activity-legend"
 import { Workbench } from "@/components/surfaces/workbench"
 import { Button } from "@/components/ui/button"
@@ -39,14 +39,12 @@ function ThemePlayground({ className }: ThemePlaygroundProps) {
   const radius = getRadiusPreset(radiusId)
   const paper = getPaperPreset(paperId)
 
-  const style = useMemo(
-    () =>
-      ({
-        ...knobStyleVars({ brand, radius, paper }),
-        colorScheme: paperId === "night" ? "dark" : "light",
-      }) as CSSProperties,
-    [brand, paper, radius, paperId],
-  )
+  /* React Compiler is enabled (next.config.ts), so manual memoisation here is
+     redundant work the compiler already does. */
+  const style = {
+    ...knobStyleVars({ brand, radius, paper }),
+    colorScheme: paperId === "night" ? "dark" : "light",
+  } as CSSProperties
 
   return (
     <div

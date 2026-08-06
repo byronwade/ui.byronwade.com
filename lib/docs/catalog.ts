@@ -117,5 +117,3 @@ export function requireSource(doc: DocEntry): string {
   if (!doc.sourcePath) throw new Error(`Doc ${doc.id} has no sourcePath`)
   return doc.sourcePath
 }
-
-export const primaryNav = docs.filter((d) => d.nav)

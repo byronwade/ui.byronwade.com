@@ -1,4 +1,4 @@
-import { type ReactNode } from "react"
+import type { ReactNode } from "react"
 import { Stage, type StageTone } from "@/components/cinematic/stage"
 import { BleedImage, type Veil } from "@/components/cinematic/bleed-image"
 import { designCn, stageInk, text } from "@/lib/design"

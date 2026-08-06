@@ -1,9 +1,9 @@
 import Link from "next/link"
 
-import { contracts, priceLabel } from "@/lib/contracts/catalog"
+import { designContracts, priceLabel } from "@/lib/contracts/catalog"
 
 function PlatformFooter() {
-  const live = contracts.filter((c) => c.status === "live").length
+  const live = designContracts.filter((c) => c.status === "live").length
 
   return (
     <footer
@@ -21,7 +21,7 @@ function PlatformFooter() {
             that system end-to-end — tokens, chrome, density, and voice.
           </p>
           <p className="mt-4 font-mono text-[11px] text-muted-foreground">
-            {live} live · {contracts.length} catalogued · {priceLabel()}
+            {live} live · {designContracts.length} catalogued · {priceLabel()}
           </p>
         </div>
         <div>
@@ -60,7 +60,7 @@ function PlatformFooter() {
             Contracts
           </p>
           <ul className="mt-3 space-y-2">
-            {contracts.map((c) => (
+            {designContracts.map((c) => (
               <li key={c.id}>
                 <Link
                   href={c.href}

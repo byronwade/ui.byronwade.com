@@ -1,4 +1,4 @@
-import { type ReactNode } from "react"
+import type { ReactNode } from "react"
 import { bg, designCn, text, type CinemaTone } from "@/lib/design"
 
 type StageTone = CinemaTone

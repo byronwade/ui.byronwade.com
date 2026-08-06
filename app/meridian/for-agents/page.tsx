@@ -79,20 +79,23 @@ export default async function ForAgentsPage() {
   const architecture = getDoc("architecture")
   const llms = getDoc("llms")
   const agentsDoc = getDoc("for-agents")
-  const agentsSource = await loadSource(agentsDoc.sourcePath!)
-
-  const skills = await Promise.all(
-    skillFiles.map(async (skill) => ({
-      ...skill,
-      source: await loadSource(skill.path),
-    })),
-  )
-  const agents = await Promise.all(
-    agentFiles.map(async (agent) => ({
-      ...agent,
-      source: await loadSource(agent.path),
-    })),
-  )
+  /* These three reads are independent; awaiting them in sequence added their
+     latencies together on every request. */
+  const [agentsSource, skills, agents] = await Promise.all([
+    loadSource(agentsDoc.sourcePath!),
+    Promise.all(
+      skillFiles.map(async (skill) => ({
+        ...skill,
+        source: await loadSource(skill.path),
+      })),
+    ),
+    Promise.all(
+      agentFiles.map(async (agent) => ({
+        ...agent,
+        source: await loadSource(agent.path),
+      })),
+    ),
+  ])
 
   return (
     <DocShell

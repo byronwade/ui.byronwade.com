@@ -63,7 +63,7 @@ if (!markdown.includes("typesetClass") || !markdown.includes("ReactMarkdown")) {
   hits.push("markdown-body.tsx: must render via ReactMarkdown under typesetClass")
 }
 
-if (/className=\"text-\[/.test(markdown) || /className=\{cn\(\"mt-/.test(markdown)) {
+if (/className="text-\[/.test(markdown) || /className=\{cn\("mt-/.test(markdown)) {
   hits.push("markdown-body.tsx: per-tag type soup banned — typeset owns rhythm")
 }
 

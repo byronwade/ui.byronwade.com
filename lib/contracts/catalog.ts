@@ -55,9 +55,6 @@ function toCatalogEntry(dna: ContractDna): DesignContract {
 export const designContracts: readonly DesignContract[] =
   listDna().map(toCatalogEntry)
 
-/** Alias for platform surfaces that list the catalog. */
-export const contracts = designContracts
-
 export function getContract(id: string): DesignContract | undefined {
   const dna = getDna(id)
   return dna ? toCatalogEntry(dna) : undefined

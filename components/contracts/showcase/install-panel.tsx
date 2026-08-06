@@ -10,10 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import {
-  getContractInstall,
-  type ContractInstall,
-} from "@/lib/contracts/install"
+import { getContractInstall } from "@/lib/contracts/install"
 
 function CodeBlock({
   code,
@@ -219,4 +216,3 @@ function InstallPanel({
 }
 
 export { InstallPanel }
-export type { ContractInstall }

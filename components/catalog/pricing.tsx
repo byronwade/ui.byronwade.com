@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import {
-  contracts,
+  designContracts,
   priceLabel,
   PRICING_MODEL,
 } from "@/lib/contracts/catalog"
@@ -59,7 +59,7 @@ function Pricing() {
               <li>CLI gate against the contract you installed</li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              {contracts.map((c) => (
+              {designContracts.map((c) => (
                 <Link
                   key={c.id}
                   href={c.href}

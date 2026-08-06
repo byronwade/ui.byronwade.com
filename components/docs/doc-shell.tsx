@@ -1,4 +1,4 @@
-import { type ReactNode } from "react"
+import type { ReactNode } from "react"
 import Link from "next/link"
 import { CopyButton } from "@/components/docs/copy-button"
 import { Button } from "@/components/ui/button"
