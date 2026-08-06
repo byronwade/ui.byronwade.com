@@ -83,7 +83,7 @@ async function readDnaFiles() {
     const status = src.match(/status:\s*"([^"]+)"/)?.[1] ?? "soon"
     if (id) ids.push({ id, name: display ?? id, version, aesthetic, status })
   }
-  return ids.sort((a, b) => a.id.localeCompare(b.id))
+  return ids.toSorted((a, b) => a.id.localeCompare(b.id))
 }
 
 function parseRecipes(src) {

@@ -166,9 +166,9 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
   const events = eventsById[selectedId] ?? []
   const selected = issueRows.find((r) => r.id === selectedId) ?? issueRows[0]
   const outcome =
-    [...events].reverse().find((e) => e.provenance === "assistant")?.body ??
+    events.toReversed().find((e) => e.provenance === "assistant")?.body ??
     "Select an issue — outcome appears here; activity stays in the trace."
-  const activeActivity = [...events].reverse().find((e) => e.activity)?.activity
+  const activeActivity = events.toReversed().find((e) => e.activity)?.activity
 
   function sendAsk() {
     const text = draft.trim()

@@ -294,7 +294,7 @@ spend. Run them; do not hand-roll their jobs.
 
 | Tool | Job | Command |
 | --- | --- | --- |
-| **Biome** | Format + fast general lint | `npm run format` · `npm run lint:biome` |
+| **Ultracite** | Curated oxlint + oxfmt ruleset — general correctness, a11y, security | `npm run lint:ultracite` · `npm run format` |
 | **Knip** | Unused files, exports, dependencies | `npm run scan:dead` |
 | **react-doctor** | React correctness — the mistakes agents make | `npm run scan:react` |
 | **shadscan** | shadcn UI fundamentals (a11y, missing states) | `npm run scan:ui` |
@@ -307,14 +307,25 @@ its URL-scanning CLI was removed in v0.5, so it mounts as a dev-only overlay
 
 **Ownership, so two linters never fight:**
 
-- **Biome owns formatting** and general-purpose lint. It is the formatter of
-  record — do not add Prettier.
+- **Ultracite owns general lint and formatting** (`oxlint.config.ts` /
+  `oxfmt.config.ts`, both extending Ultracite presets). It replaced Biome —
+  they occupy the same slot, and three general linters is the exact duplication
+  this manual bans. Do not add Prettier or Biome back.
 - **ESLint keeps `eslint-config-next`** and the React Compiler plugin. Those
-  rules are framework-specific and Biome does not have them; the
-  `no-html-link-for-pages` rule has already caught a real bug here. Both run in
-  `validate`; neither is allowed to re-implement the other's rules.
-- **`lib/design/bans.mjs` owns design bans.** Never encode a design law as a
-  Biome or ESLint rule — it would become a fifth copy.
+  rules are framework-specific and more accurate than the oxc ports; ESLint's
+  `no-html-link-for-pages` has caught two real bugs here, while oxlint's port
+  flags a static `/r/*.json` asset as a page. Where both ship a rule, ESLint
+  owns it and the oxlint copy is switched off.
+- **`lib/design/bans.mjs` owns design bans.** Never encode a design law as an
+  oxlint or ESLint rule — it would become a fifth copy.
+
+**Turning an Ultracite rule off requires a reason in `oxlint.config.ts`.** Every
+disabled rule there names the convention it contradicts. A rule switched off to
+reach a green gate, rather than because it fights a documented convention, is a
+suppression and is banned. Correctness, a11y, and security rules are never
+disabled. Run `npx oxlint --config oxlint.config.ts --fix` only on a clean tree
+and read the diff: its fixer emits single quotes and semicolons, which fight
+this repo's style, so unreviewed autofix makes the codebase less consistent.
 
 **Reading the output.** These are third-party heuristics, not this repo's law.
 A finding is evidence, not a verdict: confirm it against the protocol above

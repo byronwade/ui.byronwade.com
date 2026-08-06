@@ -186,6 +186,28 @@ for (const rel of banConsumers) {
   }
 }
 
+/*
+ * Every rule switched off in oxlint.config.ts must be preceded by a comment
+ * saying which convention it contradicts. Disabling a rule to reach a green
+ * gate is a suppression; agents.md bans it.
+ */
+const oxlintConfig = await read("oxlint.config.ts")
+const offBlocks = oxlintConfig.split(/\n\s*\n/)
+for (const block of offBlocks) {
+  if (!/"[^"]+":\s*"off"/.test(block)) continue
+  if (!/\/\*|\/\//.test(block)) {
+    const rule = block.match(/"([^"]+)":\s*"off"/)?.[1] ?? "?"
+    hits.push(
+      `oxlint.config.ts: rule "${rule}" disabled without a reason comment`,
+    )
+  }
+}
+for (const critical of ["jsx-a11y", "no-danger", "security"]) {
+  if (new RegExp(`"${critical}[^"]*":\\s*"off"`).test(oxlintConfig)) {
+    hits.push(`oxlint.config.ts: must not disable ${critical} rules`)
+  }
+}
+
 if (!buildContract.includes("buildContractEnvelope")) {
   hits.push("build-contract.ts: missing buildContractEnvelope")
 }

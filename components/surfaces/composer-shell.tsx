@@ -172,7 +172,7 @@ function ComposerShell({ className }: ComposerShellProps) {
 
   const body = fileBodies[activeFile] ?? fileBodies["IssueRow.tsx"]
   const outcome =
-    [...thread].reverse().find((m) => m.provenance === "assistant" && !m.busy)
+    thread.toReversed().find((m) => m.provenance === "assistant" && !m.busy)
       ?.body ?? "Ask about the open file — outcome lands here first."
   const isLoading =
     resourceDemo === "loading" || thread.some((m) => m.busy)
@@ -401,7 +401,7 @@ function ComposerShell({ className }: ComposerShellProps) {
                 active={
                   settled
                     ? "edit"
-                    : ([...thread].reverse().find((m) => m.activity)
+                    : (thread.toReversed().find((m) => m.activity)
                         ?.activity ?? "thinking")
                 }
               />

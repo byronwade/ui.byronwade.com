@@ -60,10 +60,11 @@ function withDuotone(
   Icon: PhosphorIcon,
   displayName: string
 ): IconComponent {
+  /* displayName is assigned below, so DevTools still names it. */
   const Wrapped = React.forwardRef<SVGSVGElement, IconProps>(
-    function WrappedIcon({ weight = "duotone", ...props }, ref) {
-      return <Icon ref={ref} weight={weight} {...props} />
-    }
+    ({ weight = "duotone", ...props }, ref) => (
+      <Icon ref={ref} weight={weight} {...props} />
+    )
   )
   Wrapped.displayName = displayName
   return Wrapped

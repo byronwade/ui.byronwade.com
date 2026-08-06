@@ -94,7 +94,7 @@ const activityMap: Record<ActivityRole, string> = {
 
 /** Background utility from a closed color role. */
 export function bg(role: ColorRole, opacity?: 10 | 15 | 25 | 30 | 40 | 50) {
-  if (opacity != null) {
+  if (opacity !== undefined) {
     const wash = bgWash[role]?.[opacity]
     if (!wash) {
       throw new Error(
@@ -166,6 +166,8 @@ export function typeClass(role: TypeRole) {
       return "typeset typeset-docs"
     case "reading-prose":
       return "typeset typeset-reading"
+    default:
+      throw new Error(`design: typeClass(${role}) is not a closed type role`)
   }
 }
 
@@ -180,6 +182,8 @@ export function shellType(role: "ui" | "row" | "meta" | "label") {
       return "type-meta"
     case "label":
       return "type-label"
+    default:
+      throw new Error(`design: shellType(${role}) is not a closed shell role`)
   }
 }
 

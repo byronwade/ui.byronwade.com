@@ -11,7 +11,11 @@ import { Button } from "@/components/ui/button";
  * markup — React logs it and, more visibly, leaves the wrong icon in the
  * header until the next paint.
  */
-const noopSubscribe = () => () => {};
+/* useSyncExternalStore requires an unsubscribe fn; there is nothing to
+   unsubscribe from — hydration state never changes again. */
+const noopSubscribe = () => () => {
+  /* Nothing to unsubscribe from: hydration happens once. */
+};
 
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();

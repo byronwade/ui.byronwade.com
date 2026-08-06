@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { zones } from "@/lib/design"
-import { getDoc } from "@/lib/docs/catalog"
+import { getDoc, requireSource } from "@/lib/docs/catalog"
 import { loadSource } from "@/lib/docs/load-source"
 import { skillProofs } from "@/lib/site/skill-proofs"
 
@@ -82,7 +82,7 @@ export default async function ForAgentsPage() {
   /* These three reads are independent; awaiting them in sequence added their
      latencies together on every request. */
   const [agentsSource, skills, agents] = await Promise.all([
-    loadSource(agentsDoc.sourcePath!),
+    loadSource(requireSource(agentsDoc)),
     Promise.all(
       skillFiles.map(async (skill) => ({
         ...skill,

@@ -81,8 +81,8 @@ function extractBlock(css, startMarker) {
   // Prefer a real rule opener ("marker {") so comments like "(:root)" don't match.
   const rule = `${startMarker} {`
   let start = css.indexOf(rule)
-  if (start < 0) start = css.indexOf(startMarker)
-  if (start < 0) return ""
+  if (start === -1) start = css.indexOf(startMarker)
+  if (start === -1) return ""
   let i = css.indexOf("{", start)
   if (i < 0) return ""
   let depth = 0
@@ -165,7 +165,7 @@ function extractAllBlocks(css, startMarker) {
   let from = 0
   for (;;) {
     const start = css.indexOf(rule, from)
-    if (start < 0) break
+    if (start === -1) break
     let depth = 0
     let i = css.indexOf("{", start)
     const open = i
@@ -176,7 +176,7 @@ function extractAllBlocks(css, startMarker) {
         if (depth === 0) break
       }
     }
-    out += css.slice(open + 1, i) + "\n"
+    out += `${css.slice(open + 1, i)}\n`
     from = i + 1
   }
   return out

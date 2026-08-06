@@ -71,15 +71,13 @@ if (jsonMode) {
   process.stdout.write(
     `${JSON.stringify({ ok: hits.length === 0, hits }, null, 2)}\n`,
   )
+} else if (hits.length === 0) {
+  console.log(`meridian check: ok — ${mechanicalBans.length} bans`)
 } else {
-  if (hits.length === 0) {
-    console.log(`meridian check: ok — ${mechanicalBans.length} bans`)
-  } else {
-    console.error(`meridian check: ${hits.length} hit(s)`)
-    for (const h of hits) {
-      console.error(`  ${h.file}:${h.line} [${h.rule}] ${h.message}`)
-      console.error(`    Fix: ${h.fix}`)
-    }
+  console.error(`meridian check: ${hits.length} hit(s)`)
+  for (const h of hits) {
+    console.error(`  ${h.file}:${h.line} [${h.rule}] ${h.message}`)
+    console.error(`    Fix: ${h.fix}`)
   }
 }
 

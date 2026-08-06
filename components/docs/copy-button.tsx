@@ -24,10 +24,10 @@ async function writeClipboard(value: string) {
   area.setAttribute("readonly", "")
   area.style.position = "fixed"
   area.style.opacity = "0"
-  document.body.appendChild(area)
+  document.body.append(area)
   area.select()
   const ok = document.execCommand("copy")
-  document.body.removeChild(area)
+  area.remove()
   if (!ok) throw new Error("Copy failed")
 }
 

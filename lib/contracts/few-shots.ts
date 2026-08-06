@@ -1,4 +1,4 @@
-/**
+/*
  * @ban-examples — this file intentionally contains banned code as the
  * `bad` half of each pair. check:design skips it and reports the exemption.
  */

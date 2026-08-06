@@ -431,7 +431,7 @@ async function handle(message) {
   return {
     jsonrpc: "2.0",
     id,
-    error: { code: -32601, message: `Method not found: ${method}` },
+    error: { code: -32_601, message: `Method not found: ${method}` },
   }
 }
 

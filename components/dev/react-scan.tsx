@@ -17,13 +17,15 @@ function ReactScan() {
   useEffect(() => {
     if (process.env.NODE_ENV !== "development") return
     let cancelled = false
-    import("react-scan")
-      .then(({ scan }) => {
+    const start = async () => {
+      try {
+        const { scan } = await import("react-scan")
         if (!cancelled) scan({ enabled: true })
-      })
-      .catch(() => {
+      } catch {
         /* Overlay is optional; never break the app because it failed. */
-      })
+      }
+    }
+    void start()
     return () => {
       cancelled = true
     }
