@@ -1,8 +1,10 @@
 # @byronwade/contract-mcp
 
-**Fail-closed design-contract MCP** — the consistency law agents obey while composing UI.
+**Optional design-contract MCP** — a queryable consistency kit for tool-calling agents.
 
-This is **not** [shadcn MCP](https://ui.shadcn.com/docs/mcp). shadcn MCP browses/installs registry components. This server keeps agents inside closed tokens, recipes, and `validate_ui`.
+This is **not** the primary bailiff. On ui.byronwade.com the required stack is **law book + verified skills + `npm run validate`**. This server accelerates MCP-wired sessions with closed tokens, recipes, and `validate_ui`.
+
+This is also **not** [shadcn MCP](https://ui.shadcn.com/docs/mcp). shadcn MCP browses/installs registry components.
 
 ## Install into any project (Cursor)
 
@@ -59,12 +61,15 @@ Enable both servers in Cursor Settings → MCP.
 - Prompts: `build_surface`, `done_gate`
 - Resources: `contract://kit`, `contract://mandate`
 
-## Golden path
+## Golden path (when using MCP)
+
+Prefer law book + skills + `npm run validate` first. When MCP is wired:
 
 1. `get_contract`
 2. `get_recipe` (when it fits)
 3. `list_primitives` → shadcn add (CLI or shadcn MCP)
 4. Compose under closed tokens
 5. `validate_ui` until `ok: true`
+6. Still run project CI / `npm run validate` before done
 
-Docs: https://ui.byronwade.com/meridian/install
+Docs: https://ui.byronwade.com/stack · https://ui.byronwade.com/meridian/install

@@ -5,9 +5,9 @@ import { MarkdownBody } from "@/components/docs/markdown-body"
 import { loadSource } from "@/lib/docs/load-source"
 
 export const metadata: Metadata = {
-  title: "Agent stack — MCP · markdown · skills",
+  title: "Agent stack — law book · skills · gates",
   description:
-    "Why design contracts lead with a fail-closed MCP, keep design.md as the law book, and treat skills as an optional cookbook.",
+    "Why design contracts lead with authored law books, verified skills, and fail-closed CI gates — with contract MCP as an optional accelerator.",
 }
 
 /**
@@ -28,16 +28,17 @@ export default async function StackPage() {
             How agents actually stay inside a design system
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            We ship all three layers on purpose. MCP is required. Markdown is
-            required. Skills are optional. This page is the long-form pitch —
-            the homepage summarizes it; install pages make it runnable.
+            Law books and verified skills are required. CI gates are the
+            bailiff. Contract MCP is optional. This page is the long-form pitch
+            — the homepage summarizes it; every contract&apos;s install page
+            makes it runnable.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/meridian/install"
               className="inline-flex h-9 items-center border border-foreground/15 bg-foreground px-4 font-mono text-[12px] text-background transition-opacity hover:opacity-90"
             >
-              Install Meridian MCP
+              Install a contract
             </Link>
             <Link
               href="/#stack"

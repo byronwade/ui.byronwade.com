@@ -41,8 +41,8 @@ const demos: Record<
     ],
     panelTitle: "Quiet paper ops",
     panelBody:
-      "Dense rows, semantic status, calm chrome. Harbor is the admin contract — indexes and details agents can keep consistent.",
-    density: "Compact rows · semantic chips · no cinema",
+      "Law book + harbor-* skills + CI gates. Dense rows, semantic status, calm chrome — cinema banned. Agents reuse list-resource before inventing admin shells.",
+    density: "Compact rows · semantic chips · no cinema · validate required",
   },
   atlas: {
     eyebrow: "Workbench",
@@ -55,7 +55,7 @@ const demos: Record<
       },
       {
         id: "tool.call",
-        title: "validate_ui",
+        title: "check:design",
         meta: "passed",
         tone: "success",
       },
@@ -68,8 +68,8 @@ const demos: Record<
     ],
     panelTitle: "Ink-forward scanning",
     panelBody:
-      "Mono metadata, sharp radius, keyboard-first chrome. Atlas is the developer workbench contract.",
-    density: "Desktop density · mono meta · steel ink",
+      "Law book + atlas-* skills + CI gates. Mono metadata, keyboard-first chrome, command palette patterns — not Meridian theater.",
+    density: "Desktop density · mono meta · steel ink · validate required",
   },
   vellum: {
     eyebrow: "Reading lane",
@@ -95,8 +95,8 @@ const demos: Record<
     ],
     panelTitle: "Mist, measured prose",
     panelBody:
-      "Docs and help surfaces with reading lanes — not dashboard chrome. Vellum keeps long-form honest for agents and humans.",
-    density: "reading-ui · soft radius · bronze accent",
+      "Law book + vellum-* skills + CI gates. Reading lanes and typeset presets — not dashboard card grids. Measure stays honest at ~65ch.",
+    density: "reading-ui · soft radius · bronze accent · validate required",
   },
 }
 

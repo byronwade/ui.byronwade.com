@@ -1,0 +1,19 @@
+---
+description: Atlas developer-workbench design contract — always on for Atlas work
+alwaysApply: false
+globs:
+  - app/atlas/**
+  - contracts/atlas/**
+  - skills/atlas-*/**
+  - docs/atlas.md
+  - lib/contracts/dna/atlas.ts
+---
+
+# Atlas
+
+Workbench DNA. Read `contracts/atlas/DESIGN.md` + `docs/atlas.md` before UI.
+
+- Ink paper, mono metadata, keyboard-first — cinema at most subtle
+- Skills: `atlas-theme` · `atlas-compose` · `atlas-workbench` · `atlas-surface` · `atlas-a11y`
+- Done = `npm run validate` green; MCP optional
+- Never fork platform MCP tools / filenames for Atlas alone

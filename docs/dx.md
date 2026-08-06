@@ -18,34 +18,30 @@ If the contract is hard to load, ambiguous, or unverifiable, the system fails �
 | Compose, don’t fork | [shadcn/ui](https://ui.shadcn.com) | `npx shadcn@latest add`; no twin kits |
 | Quiet evolution | [Linear redesign](https://linear.app/now/how-we-redesigned-the-linear-ui) | Evolve chrome without disassembling the product |
 
-## 2. Golden path — into any project (MCP)
+## 2. Golden path — into any project
 
 Live install: [`/meridian/install`](/meridian/install).  
-Stack doctrine (MCP · markdown · skills): [`/stack`](/stack) · [`stack.md`](./stack.md).
+Stack doctrine (law book · skills · gates · optional MCP): [`/stack`](/stack) · [`stack.md`](./stack.md).
 
-This product is a **design-contract MCP**, not a DESIGN.md-only file and not
-[shadcn MCP](https://ui.shadcn.com/docs/mcp) (which installs components). Pair them:
+This product is a **fail-closed design contract**, not DESIGN.md vibes alone and not
+[shadcn MCP](https://ui.shadcn.com/docs/mcp) (which installs components).
 
-| Server | Job |
+| Layer | Job |
 | --- | --- |
-| **Contract MCP** (`contract-mcp`) | Fail-closed law: `get_contract` → `validate_ui` |
-| **shadcn MCP** | Browse / install registry atoms |
-
-```bash
-# .cursor/mcp.json — any Next/shadcn app
-npx -y --package=github:byronwade/ui.byronwade.com contract-mcp
-# env: CONTRACT_ID=meridian  CONTRACT_SITE=https://ui.byronwade.com
-```
+| **Law book** | `design.md` / `agents.md` / DNA |
+| **Skills** | Verified `{id}-*` cookbooks |
+| **CI gates** | `npm run validate` — the bailiff |
+| **Contract MCP** (optional) | Queryable kit: `get_contract` → `validate_ui` |
+| **shadcn MCP / CLI** | Browse / install registry atoms |
 
 Agent loop:
 
-1. `get_contract` (required first)
-2. `get_recipe` when it fits
-3. `list_primitives` → `npx shadcn@latest add …` (or shadcn MCP)
-4. Compose under closed tokens (`resolve_token`)
-5. `validate_ui` (required before done)
-
-Prompts: `build_surface`, `done_gate`. Resources: `contract://kit`.
+1. Load law book (required first)
+2. Open matching skill + recipe when it fits
+3. `npx shadcn@latest add …` (or shadcn MCP) for atoms
+4. Compose under closed tokens
+5. `npm run validate` (required before done)
+6. Optional MCP tools when the session is tool-wired
 
 ### In-repo compose proof
 

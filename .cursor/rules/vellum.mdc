@@ -1,0 +1,19 @@
+---
+description: Vellum reading-first design contract — always on for Vellum work
+alwaysApply: false
+globs:
+  - app/vellum/**
+  - contracts/vellum/**
+  - skills/vellum-*/**
+  - docs/vellum.md
+  - lib/contracts/dna/vellum.ts
+---
+
+# Vellum
+
+Reading-first DNA. Read `contracts/vellum/DESIGN.md` + `docs/vellum.md` before UI.
+
+- Mist paper, typeset lanes, ~65ch measure — not ops/workbench defaults
+- Skills: `vellum-theme` · `vellum-compose` · `vellum-reading` · `vellum-surface` · `vellum-a11y`
+- Done = `npm run validate` green; MCP optional
+- Never fork platform MCP tools / filenames for Vellum alone

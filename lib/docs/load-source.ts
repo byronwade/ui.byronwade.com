@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
-const ALLOWED = new Set([
+import { contractDnaById } from "@/lib/contracts/dna"
+
+const BASE_ALLOWED = [
   "design.md",
   "agents.md",
   "llms.txt",
@@ -22,20 +24,26 @@ const ALLOWED = new Set([
   "docs/prefs.md",
   "docs/stack.md",
   "docs/meridian.md",
+  "docs/harbor.md",
+  "docs/atlas.md",
+  "docs/vellum.md",
   "docs/sources.md",
-  "skills/meridian-theme/SKILL.md",
-  "skills/meridian-surface/SKILL.md",
-  "skills/meridian-compose/SKILL.md",
-  "skills/meridian-cinematic/SKILL.md",
-  "skills/meridian-a11y/SKILL.md",
-  ".cursor/skills/meridian-theme/SKILL.md",
-  ".cursor/skills/meridian-surface/SKILL.md",
-  ".cursor/skills/meridian-compose/SKILL.md",
-  ".cursor/skills/meridian-cinematic/SKILL.md",
-  ".cursor/skills/meridian-a11y/SKILL.md",
   ".cursor/agents/meridian-author.md",
   ".cursor/agents/meridian-reviewer.md",
+] as const
+
+const dnaAllowed = Object.values(contractDnaById).flatMap((dna) => [
+  dna.dnaDoc,
+  `${dna.lawBookDir}/DESIGN.md`,
+  `${dna.lawBookDir}/AGENTS.md`,
+  ...dna.skillSlugs.flatMap((slug) => [
+    `skills/${slug}/SKILL.md`,
+    `.cursor/skills/${slug}/SKILL.md`,
+    `.claude/skills/${slug}/SKILL.md`,
+  ]),
 ])
+
+const ALLOWED = new Set<string>([...BASE_ALLOWED, ...dnaAllowed])
 
 /** Load a known repo file as UTF-8 text for designed docs + copy actions. */
 async function loadSource(relativePath: string): Promise<string> {
@@ -48,4 +56,4 @@ async function loadSource(relativePath: string): Promise<string> {
   )
 }
 
-export { loadSource }
+export { loadSource, ALLOWED }

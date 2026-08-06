@@ -33,17 +33,18 @@ Primary, ring, selected (`bg-brand/10`), chart-1, and success follow `--brand`.
 - `--activity-*` encode agent steps only
 - `--chart-2…5` stay a data ramp, not accents
 
-## Workflow (preferred — MCP)
+## Workflow (preferred — law book + gates)
 
-1. Pick closed presets on `/meridian/theme` (brand · radius · paper) or name ids.
-2. Call MCP **`apply_prefs({ brand, radius, paper })`** — writes `app/contract-prefs.css` + `contract.prefs.json`.
-3. Import the CSS. Do **not** invent OKLCH outside presets.
+1. Read `contracts/meridian/DESIGN.md` theme knobs + Accessibility.
+2. Pick closed presets on `/meridian/theme` (brand · radius · paper) or name ids from `lib/design/knobs.ts`.
+3. Apply via CSS / prefs file — do **not** invent OKLCH outside presets.
 4. Layout / animations are **not** prefs — use recipes + `motionLaws`.
-5. `validate_ui` on new UI. Confirm light/dark still read as one system.
+5. Run `npm run check:contrast` + `check:design`. Confirm light/dark still read as one system.
+6. Optional: MCP **`apply_prefs`** / `validate_ui` when tool-wired.
 
 ## Workflow (this repo / manual)
 
-1. Read current tokens in `app/globals.css`.
+1. Read current tokens in `app/globals.css` + Meridian skin in `app/contract-skins.css`.
 2. Change knobs only via preset values from `lib/design/knobs.ts`.
 3. Verify light and dark.
 4. Confirm `/meridian/theme` still reads as one system.

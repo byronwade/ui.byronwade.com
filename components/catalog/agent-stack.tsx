@@ -3,27 +3,35 @@ import Link from "next/link"
 const layers = [
   {
     n: "01",
-    name: "Contract MCP",
-    role: "Required · product centerpiece",
-    job: "Runtime consistency law agents call in-session.",
-    tools: ["get_contract", "apply_prefs", "validate_ui", "get_recipe"],
-    body: "Fail-closed. Same tools on every DNA. Unlike shadcn MCP (which installs atoms), this keeps agents inside closed tokens and bans.",
+    name: "Law book",
+    role: "Required · source of truth",
+    job: "design.md · agents.md · DNA docs agents reread.",
+    tools: ["design.md", "agents.md", "docs/{id}.md"],
+    body: "Persistent why, negatives, and load order per DNA. Negotiated HTML for humans, raw for machines. Not optional vibes.",
   },
   {
     n: "02",
-    name: "design.md · agents.md",
-    role: "Required · source of truth",
-    job: "Persistent law book — why, load order, material rules.",
-    tools: ["design.md", "agents.md", "system/*"],
-    body: "Markdown agents can reread. Negotiated HTML for humans, raw for machines. MCP stays slim; fat prose lives here.",
+    name: "Verified skills",
+    role: "Required · cookbook",
+    job: "On-demand playbooks grounded in real primitives.",
+    tools: ["{id}-compose", "{id}-theme", "specialty"],
+    body: "Every contract ships a native skill pack. Skills teach reuse and recipes — they are not a Meridian monopoly.",
   },
   {
     n: "03",
-    name: "Skills",
-    role: "Optional · cookbook",
-    job: "On-demand playbooks for theme, compose, cinema, a11y.",
-    tools: ["meridian-theme", "meridian-compose", "…"],
-    body: "Accelerate common work. Easy to skip — so skills teach MCP usage; they never replace get_contract / validate_ui.",
+    name: "Fail-closed gates",
+    role: "Required · bailiff",
+    job: "CI + check:* agents cannot skip.",
+    tools: ["check:design", "check:platform", "check:contrast"],
+    body: "The real enforcement. Lint bans, route parity, contrast on every skin. Done means validate is green — not that a tool was called.",
+  },
+  {
+    n: "04",
+    name: "Contract MCP",
+    role: "Optional · accelerator",
+    job: "Queryable kit for tool-calling sessions.",
+    tools: ["get_contract", "validate_ui", "get_recipe"],
+    body: "Useful when agents are MCP-wired. Never the only bailiff — schemas cost context and tools are skippable.",
   },
 ] as const
 
@@ -31,22 +39,22 @@ const compare = [
   {
     approach: "DESIGN.md only",
     strength: "Portable prose identity",
-    gap: "Easy to ignore · no lint",
+    gap: "Easy to ignore · no PR fail",
   },
   {
     approach: "Skills only",
     strength: "Great procedures",
-    gap: "Opt-in · never loaded = no contract",
+    gap: "Opt-in · invent APIs without catalogs",
   },
   {
-    approach: "shadcn MCP only",
-    strength: "Installs registry atoms",
-    gap: "No brand / ban / recipe enforcement",
+    approach: "MCP only",
+    strength: "Queryable tools",
+    gap: "Context tax · agents skip tools",
   },
   {
-    approach: "MCP + markdown + skills",
-    strength: "Law · law book · cookbook",
-    gap: "Slightly more to learn — intentional",
+    approach: "Law + skills + CI (+ optional MCP)",
+    strength: "Context · procedure · enforcement",
+    gap: "Slightly more surface — intentional",
   },
 ] as const
 
@@ -63,30 +71,31 @@ function AgentStack() {
           Agent stack
         </p>
         <h2 className="mt-3 max-w-2xl text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-          MCP is the product. Markdown is the law book. Skills are the cookbook.
+          Law book. Skills. Gates that fail the PR. MCP optional.
         </h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Don&apos;t pick one. DESIGN.md-style files teach agents with prose.
-          Skills teach procedures. Neither{" "}
-          <span className="text-foreground">enforces</span> a design system at
-          runtime. Design contracts install a fail-closed MCP — then keep the
-          docs and optional skills beside it.
+          Inspired by how{" "}
+          <span className="text-foreground">v0 grounds agents in real source</span>{" "}
+          and verified starters — not protocol theater. Every contract on this
+          platform ships the same stack shape with its own DNA.
         </p>
 
-        <ol className="mt-12 grid gap-0 border border-border/80 lg:grid-cols-3">
+        <ol className="mt-12 grid gap-0 border border-border/80 sm:grid-cols-2 lg:grid-cols-4">
           {layers.map((layer, i) => (
             <li
               key={layer.n}
               className={
                 i === 0
-                  ? "p-6 lg:border-r lg:border-border/80"
+                  ? "p-5 sm:border-r sm:border-border/80"
                   : i === 1
-                    ? "border-t border-border/80 p-6 lg:border-t-0 lg:border-r"
-                    : "border-t border-border/80 p-6 lg:border-t-0"
+                    ? "border-t border-border/80 p-5 sm:border-t-0 sm:border-r lg:border-r"
+                    : i === 2
+                      ? "border-t border-border/80 p-5 lg:border-t-0 lg:border-r"
+                      : "border-t border-border/80 p-5 lg:border-t-0"
               }
             >
               <p className="font-mono text-xs text-muted-foreground">{layer.n}</p>
-              <h3 className="mt-2 text-lg font-medium tracking-tight text-foreground">
+              <h3 className="mt-2 text-base font-medium tracking-tight text-foreground">
                 {layer.name}
               </h3>
               <p className="mt-1 font-mono text-[11px] text-foreground">
@@ -120,27 +129,29 @@ function AgentStack() {
             Honest comparison
           </h3>
           <div className="mt-6 overflow-x-auto border border-border/80">
-            <table className="w-full min-w-[36rem] text-left text-sm">
-              <thead className="border-b border-border/80 bg-muted/20 font-mono text-[11px] tracking-tight text-muted-foreground uppercase">
+            <table className="w-full min-w-[32rem] text-left text-sm">
+              <thead className="border-b border-border/80 bg-muted/30 font-mono text-[11px] tracking-tight text-muted-foreground uppercase">
                 <tr>
-                  <th className="px-4 py-3 font-medium">Approach</th>
-                  <th className="px-4 py-3 font-medium">Strength</th>
-                  <th className="px-4 py-3 font-medium">Gap alone</th>
+                  <th className="px-3 py-2 font-medium">Approach</th>
+                  <th className="px-3 py-2 font-medium">Strength</th>
+                  <th className="px-3 py-2 font-medium">Gap</th>
                 </tr>
               </thead>
               <tbody>
                 {compare.map((row) => (
                   <tr
                     key={row.approach}
-                    className="border-b border-border/60 last:border-b-0"
+                    className="border-b border-border/60 last:border-0"
                   >
-                    <td className="px-4 py-3 font-medium text-foreground">
+                    <td className="px-3 py-2.5 font-medium text-foreground">
                       {row.approach}
                     </td>
-                    <td className="px-4 py-3 text-muted-foreground">
+                    <td className="px-3 py-2.5 text-muted-foreground">
                       {row.strength}
                     </td>
-                    <td className="px-4 py-3 text-muted-foreground">{row.gap}</td>
+                    <td className="px-3 py-2.5 text-muted-foreground">
+                      {row.gap}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -148,24 +159,18 @@ function AgentStack() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-3">
+        <div className="mt-10 flex flex-wrap gap-3">
           <Link
             href="/stack"
-            className="inline-flex h-9 items-center border border-foreground/15 bg-foreground px-4 font-mono text-[12px] tracking-tight text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+            className="inline-flex h-9 items-center border border-foreground/15 bg-foreground px-4 font-mono text-[12px] text-background transition-opacity hover:opacity-90"
           >
-            Full stack docs
+            Full stack doctrine
           </Link>
           <Link
             href="/meridian/install"
-            className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+            className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] text-muted-foreground transition-colors hover:text-foreground"
           >
-            Install Meridian MCP
-          </Link>
-          <Link
-            href="/meridian/system/stack"
-            className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-          >
-            stack.md
+            Install a contract
           </Link>
         </div>
       </div>

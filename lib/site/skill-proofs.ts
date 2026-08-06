@@ -1,12 +1,11 @@
 import { CONTRACT_BASE } from "@/lib/docs/catalog"
-import type { SkillSlug } from "@/lib/skills/catalog"
 
 /**
- * On-site proof for every Meridian skill — the website must exercise
+ * On-site proof for Meridian skills — the website must exercise
  * the full loop, not only list install commands.
  */
 export type SkillProof = {
-  slug: SkillSlug
+  slug: string
   step: number
   label: string
   summary: string

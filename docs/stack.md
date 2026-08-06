@@ -1,7 +1,7 @@
-# Agent stack — MCP · markdown · skills
+# Agent stack — law book · skills · fail-closed gates · optional MCP
 
-> **Use all three. Lead with MCP.**  
-> Design contracts are fail-closed systems agents *install*, not mood boards they *read once*.
+> **Lead with what agents cannot skip.**  
+> Design contracts are fail-closed systems — not mood boards, not protocol theater.
 
 This is the product architecture behind ui.byronwade.com. Marketing and agents should tell the same story.
 
@@ -9,87 +9,73 @@ This is the product architecture behind ui.byronwade.com. Marketing and agents s
 
 | Layer | Required? | Job |
 | --- | --- | --- |
-| **Contract MCP** | **Yes — product centerpiece** | Runtime law: `get_contract` → `apply_prefs` → `validate_ui` |
-| **design.md / agents.md** | **Yes — SSOT** | Persistent “why” + load order + material laws |
-| **Skills** | Optional cookbook | Playbooks for compose / theme / cinema — teach MCP, don’t replace it |
+| **design.md · agents.md · DNA docs** | **Yes — law book** | Persistent why, load order, negatives, per-contract identity |
+| **Skills (verified adapters)** | **Yes — cookbook** | Exhaustive playbooks grounded in real primitives / recipes |
+| **Fail-closed gates** | **Yes — bailiff** | ESLint + `check:*` + CI — agents fail the PR when they freestyle |
+| **Contract MCP** | **Optional accelerator** | Queryable kit + `validate_ui` for tool-calling agents |
+| **shadcn MCP / CLI** | Optional | Atom delivery only — not design law |
 
-**Do not pick one.** MCP without markdown is brittle taste. Markdown without MCP is easy to ignore. Skills without either are opt-in folklore.
+**Do not ship vibes alone.** Markdown without gates drifts. Skills without catalogs invent twins. MCP without local lint is opt-in folklore.
 
-## Why MCP is the install product
+## Why this order (research-backed)
 
-[shadcn MCP](https://ui.shadcn.com/docs/mcp) already owns **component delivery** (browse / add registry items).  
-[DESIGN.md](https://github.com/google-labs-code/design.md)-style files own **prose identity**.
+[v0 Design Systems 2.0](https://v0.app/docs/design-systems-2) teaches systems as a **skill adapter** grounded in real source + a verified **starter** — not as a docs dump and not as MCP-first protocol.
 
-Neither gives agents a **fail-closed consistency loop**:
+[DESIGN.md](https://github.com/google-labs-code/design.md) is portable identity (tokens + prose + don’t-rules). It is necessary and lintable — and still skippable unless CI fails.
 
-1. Call `get_contract` before writing UI  
-2. Optionally `apply_prefs` with closed brand / radius / paper ids  
-3. Compose approved primitives (often via shadcn CLI or shadcn MCP)  
-4. Call `validate_ui` before claiming done  
+MCP tool schemas cost context ([CircleCI on MCP vs CLI](https://circleci.com/blog/mcp-vs-cli/)). Design-system obedience is mostly **local**: imports, classnames, forbidden patterns. Linters and scripts outperform agents for deterministic checks ([The Design System Guide](https://learn.thedesignsystem.guide/p/should-you-build-an-agent-for-your)).
 
-That loop is the wedge: **design systems that install as MCP servers**.
+## Fail-closed loop (every contract)
 
-Install: [`/meridian/install`](/meridian/install) · package: `packages/contract-mcp`.
+1. Load **this contract’s** `design.md` + `agents.md` (always-on rules / AGENTS.md)
+2. Open the matching **skill** (`{id}-compose`, `{id}-theme`, …) — verified APIs only
+3. Prefer a **task recipe** over freeform layout (`list-resource`, `agent-rail`, …)
+4. Compose **approved shadcn primitives** — never twin Buttons/Cards/shells
+5. Run **`npm run validate`** (or at least `check:design` + `check:platform` + `check:contrast`) before done
+6. Optionally call contract MCP `get_contract` / `validate_ui` when the agent is tool-wired
 
-```bash
-CONTRACT_ID=meridian CONTRACT_SITE=https://ui.byronwade.com \
-  npx -y --package=github:byronwade/ui.byronwade.com contract-mcp
-```
+## Per-contract DNA
 
-## Why markdown still matters
+| Contract | Feeling | Skill prefix |
+| --- | --- | --- |
+| **Meridian** | Cinematic warm paper · ink-teal · full-bleed frames | `meridian-*` |
+| **Harbor** | Quiet ops paper · semantic status · dense indexes | `harbor-*` |
+| **Atlas** | Ink workbench · mono metadata · keyboard-first | `atlas-*` |
+| **Vellum** | Mist reading lanes · measured prose · typeset-first | `vellum-*` |
 
-Fat docs stay outside the slim kit on purpose:
-
-| File | Role |
-| --- | --- |
-| `design.md` | Frozen vs creative, tokens, contrast, cinema |
-| `agents.md` | Operating manual — load order, platform consistency, done gate |
-| `architecture.md` · system specs | Layout, motion, density, UX/DX pillars |
-
-Served negotiated at `/{id}/design.md`, `/{id}/agents.md`, … — HTML for humans, raw for agents (`?raw=1`).
-
-Markdown is the **law book**. MCP is the **bailiff**.
-
-## Why skills are optional
-
-Skills (`npx skills add byronwade/ui.byronwade.com`) are on-demand playbooks:
-
-- `meridian-theme` — closed knobs + `apply_prefs`  
-- `meridian-compose` — workbench / shells under the kit  
-- `meridian-cinematic` · `meridian-surface` · `meridian-a11y`
-
-They accelerate common tasks. They **must not** be the only enforcement — agents can skip skills. Every skill should point back to MCP tools.
+Structure (routes, machine filenames, recipe ids, JSON keys) is **shared** via `lib/platform/skeleton.ts`. Aesthetics and skill cookbooks **may** differ. See [`platform.md`](./platform.md).
 
 ## Comparison (honest)
 
 | Approach | Strength | Failure mode |
 | --- | --- | --- |
-| DESIGN.md / docs only | Great rationale; portable | Agents skip or drift; no lint |
-| Skills only | Great procedures | Opt-in; never loaded = no contract |
-| shadcn MCP only | Great atom install | No brand/radius/ban enforcement |
-| **Contract MCP + markdown + skills** | Runtime law + law book + cookbook | Slightly more surface to learn — worth it |
+| DESIGN.md only | Portable rationale | Agents skip; no PR fail |
+| Skills only | Great procedures | Opt-in; invent APIs without catalogs |
+| MCP only | Queryable tools | Context tax; agents skip tools |
+| shadcn MCP only | Atom install | No brand / ban / recipe law |
+| **Law book + verified skills + CI gates (+ optional MCP)** | Context + procedure + enforcement | Slightly more surface — intentional |
 
-## What is *not* in the stack
+## What is *not* the wedge
 
-- Freeform theme playgrounds as product prefs (only closed `apply_prefs` ids)  
-- Layout / animation “preferred settings” marketplaces (those stay UX laws)  
-- Forking MCP tools or JSON keys per DNA  
+- Marketing MCP as the only way to stay on-system
+- Freeform theme playgrounds as product prefs
+- Forking MCP tools or JSON keys per DNA
+- Twin component kits “just for this screen”
 
-See [`prefs.md`](./prefs.md) · [`layout.md`](./layout.md) · [`animations.md`](./animations.md).
+## Golden path
 
-## Golden path (marketing + agents)
-
-1. Browse the platform catalog (`/`)  
-2. Open a contract route — the page *is* the DNA (`/meridian`)  
-3. Install contract MCP (+ optional shadcn MCP)  
-4. Optional: install skills  
-5. Agent loop: `get_contract` → (`apply_prefs`) → `get_recipe` → compose → `validate_ui`  
-6. Read markdown when taste or edge cases matter  
+1. Pick a contract on the platform catalog (`/`)
+2. Open `/{id}` — the page *is* the DNA
+3. Install skills: `npx skills add byronwade/ui.byronwade.com`
+4. Copy `design.md` / `agents.md` (or fetch `/{id}/design.md?raw=1`)
+5. Wire always-on AGENTS / Cursor rules
+6. Agent loop: law book → skill → recipe → compose → **validate**
+7. Optional: add contract MCP for tool-calling sessions
 
 ## Links
 
-- Install UI: `/meridian/install`  
-- Theme prefs: `/meridian/theme`  
-- Agents: `/meridian/for-agents`  
-- Contract JSON: `/r/meridian.contract.json`  
+- Platform stack UI: [`/stack`](/stack)
+- Install (any contract): `/{id}/install`
+- Agents: `/{id}/for-agents`
+- Contract JSON: `/r/{id}.contract.json`
 - Platform law: [`platform.md`](./platform.md)

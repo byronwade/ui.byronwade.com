@@ -12,28 +12,31 @@ import {
 } from "@/components/ui/card"
 import { getContract } from "@/lib/contracts/catalog"
 import { getContractInstall } from "@/lib/contracts/install"
-import { PLATFORM_SKILL_SLUGS } from "@/lib/contracts/routes"
+import { contractSkillSlugs } from "@/lib/contracts/routes"
 import { pathTemplates } from "@/lib/platform/skeleton"
+import { listSkillsForContract } from "@/lib/skills/catalog"
 import { notFound } from "next/navigation"
 
-function ContractSkillsLabPage({ contractId }: { contractId: string }) {
+async function ContractSkillsLabPage({ contractId }: { contractId: string }) {
   const contract = getContract(contractId)
   const install = getContractInstall(contractId)
   if (!contract || !install) notFound()
   const base = pathTemplates.base(contractId)
+  const slugs = contractSkillSlugs(contractId)
+  const skills = await listSkillsForContract(contractId)
 
   return (
     <DocShell
       eyebrow="Skills"
       title={`${contract.name} agent skills`}
-      lead="Install the platform skill pack. DNA skins come from CONTRACT_ID / data-contract — skill bodies stay one set until per-contract packs ship."
+      lead={`${contract.name} ships a native skill pack — verified cookbooks for theme, compose, and DNA specialty. Law book + skills + CI gates are required; contract MCP is optional.`}
       actions={
         <>
           <Button variant="outline" size="default" asChild>
             <Link href={`${base}/install`}>Full install</Link>
           </Button>
           <Button variant="ghost" size="default" asChild>
-            <Link href="/meridian/skills">Skill proofs</Link>
+            <Link href={`${base}/for-agents`}>For agents</Link>
           </Button>
         </>
       }
@@ -67,20 +70,28 @@ function ContractSkillsLabPage({ contractId }: { contractId: string }) {
         </Card>
 
         <ul className="grid gap-3 sm:grid-cols-2">
-          {PLATFORM_SKILL_SLUGS.map((slug) => (
-            <li key={slug}>
-              <Link
-                href={`/meridian/skills/${slug}`}
-                className="block rounded-2xl bg-card p-4 transition-colors hover:bg-muted/30 edge"
-              >
-                <p className="font-mono text-[12px] text-foreground">{slug}</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Platform skill · prove on Meridian · apply DNA via{" "}
-                  <span className="font-mono">CONTRACT_ID={contractId}</span>
-                </p>
-              </Link>
-            </li>
-          ))}
+          {(skills.length > 0 ? skills : slugs.map((slug) => ({ slug }))).map(
+            (item) => {
+              const slug = item.slug
+              const meta = skills.find((s) => s.slug === slug)
+              return (
+                <li key={slug}>
+                  <Link
+                    href={`${base}/skills/${slug}`}
+                    className="block rounded-2xl bg-card p-4 transition-colors hover:bg-muted/30 edge"
+                  >
+                    <p className="font-mono text-[12px] text-foreground">
+                      {slug}
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {meta?.description ??
+                        `Native ${contract.name} skill · prove on ${base}`}
+                    </p>
+                  </Link>
+                </li>
+              )
+            },
+          )}
         </ul>
       </div>
     </DocShell>

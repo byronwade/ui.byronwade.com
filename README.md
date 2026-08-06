@@ -1,63 +1,67 @@
 # ui.byronwade.com
 
-**Design systems that install as MCP** — the first open catalog of fail-closed design contracts agents run over the [Model Context Protocol](https://modelcontextprotocol.io).
+**Fail-closed design contracts** — law books, verified skills, and CI gates agents cannot skip. Contract MCP is an optional accelerator.
 
-**Agent stack (we ship all three):**
+**Agent stack (every contract):**
 
 | Layer | Job |
 | --- | --- |
-| **Contract MCP** | Required runtime law — `get_contract` → `validate_ui` |
-| **design.md / agents.md** | Required law book |
-| **Skills** | Optional cookbook |
+| **design.md / agents.md / DNA** | Required law book |
+| **`{id}-*` skills** | Required verified cookbook |
+| **`npm run validate`** | Required bailiff |
+| **Contract MCP** | Optional tool-calling accelerator |
 
 Marketing + docs: [`/`](https://ui.byronwade.com/) · [`/stack`](https://ui.byronwade.com/stack) · [`docs/stack.md`](./docs/stack.md).
 
-- **[shadcn MCP](https://ui.shadcn.com/docs/mcp)** installs registry components (pair it; different job).
-- **Contract MCP** (`contract-mcp`) is the consistency law.
+- **[shadcn MCP](https://ui.shadcn.com/docs/mcp)** / CLI installs registry components (pair it; different job).
+- **Gates + skills + law books** keep agents inside closed tokens — inspired by [v0 Design Systems 2.0](https://v0.app/docs/design-systems-2) (source-grounded skills + starters), not protocol theater.
 
 Homepage (`/`) is the platform catalog. Each `/{id}` route is that contract’s DNA end-to-end.
 
 | Contract | Status | Start |
 | --- | --- | --- |
 | **Meridian** | Live | [`/meridian/install`](https://ui.byronwade.com/meridian/install) |
-| Harbor · Atlas · Vellum | Preview / soon | `/{id}/install` — same tools + JSON shape |
+| **Harbor** · **Atlas** · **Vellum** | Preview | `/{id}/install` — same stack shape, unique DNA |
 
 ## Install into any project
 
 ```bash
-# Cursor — .cursor/mcp.json
-npx -y --package=github:byronwade/ui.byronwade.com contract-mcp
-# env: CONTRACT_ID=meridian  CONTRACT_SITE=https://ui.byronwade.com
+npx skills add byronwade/ui.byronwade.com
+npx skills add byronwade/ui.byronwade.com --skill harbor-compose
 ```
 
-Pair with shadcn MCP for atom delivery. Agent loop:
+Fetch the law book: `/{id}/design.md?raw=1` · `/{id}/agents.md?raw=1`.
 
-1. `get_contract` (required first)
-2. `get_recipe` when it fits
-3. `list_primitives` → `npx shadcn@latest add …`
+Agent loop:
+
+1. Load law book (required first)
+2. Open matching `{id}-*` skill + recipe
+3. `npx shadcn@latest add …` for atoms
 4. Compose under closed tokens
-5. `validate_ui` (required before done)
-
-Prompts: `build_surface`, `done_gate`. Resources: `contract://kit`.
+5. `npm run validate` (required before done)
+6. Optional: contract MCP `get_contract` / `validate_ui`
 
 ```bash
-npx skills add byronwade/ui.byronwade.com
-npx skills add byronwade/ui.byronwade.com --skill meridian-theme
+# Optional MCP
+CONTRACT_ID=meridian CONTRACT_SITE=https://ui.byronwade.com \
+  npx -y --package=github:byronwade/ui.byronwade.com contract-mcp
 ```
 
 ## For agents
 
 | Resource | Path |
 | --- | --- |
-| Design contract | `/{id}/design.md` |
-| Agents law | `/{id}/agents.md` |
+| Design contract | `/{id}/design.md` · `contracts/{id}/DESIGN.md` |
+| Agents law | `/{id}/agents.md` · `contracts/{id}/AGENTS.md` |
+| Deep DNA | `docs/{id}.md` |
+| Skills | `skills/{id}-*/SKILL.md` |
 | Machine kit JSON | `/r/{id}.contract.json` |
 | Schema | `/r/contract.schema.json` |
-| MCP package | `packages/contract-mcp` |
+| MCP package | `packages/contract-mcp` (optional) |
 
 ## Route parity (every contract)
 
-`/install` · `/ui` · `/theme` · `/surfaces` · `/design` · `/skills` · `/system` · `/for-agents` (+ machine docs).
+`/install` · `/ui` · `/theme` · `/surfaces` · `/design` · `/skills` · `/system` · `/for-agents` (+ machine docs + skill detail routes).
 
 Structural SSOT: `lib/platform/skeleton.ts`. Gate: `npm run check:platform`.
 

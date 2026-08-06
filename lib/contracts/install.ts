@@ -2,9 +2,8 @@
  * Paste-ready install DX for every design contract.
  * Same shape for Meridian / Harbor / Atlas / Vellum — only ids change.
  *
- * Product job: install a fail-closed design-contract MCP into ANY project
- * (not only this monorepo). shadcn MCP installs components; this MCP keeps
- * agents inside closed tokens + validate_ui.
+ * Product job: law book + verified skills + fail-closed gates into ANY project.
+ * Contract MCP is an optional accelerator; shadcn MCP/CLI installs atoms.
  */
 
 import { advertisedThemeSkill } from "@/lib/contracts/routes"
@@ -110,15 +109,15 @@ export function getContractInstall(contractId: string): ContractInstall | null {
     shadcnInit: "npx shadcn@latest init -d --base radix",
     shadcnAdd: "npx shadcn@latest add button card input table tabs dialog",
     shadcnMcpNote:
-      "shadcn MCP installs atoms. This contract MCP is the fail-closed law (get_contract → validate_ui).",
-    checkCli: "npm run check:platform",
+      "shadcn MCP/CLI installs atoms. Law book + skills + npm run validate enforce the system. Contract MCP is optional.",
+    checkCli: "npm run validate",
     agentLoop: [
-      "get_contract — load must / mustNot + closed tokens (REQUIRED FIRST)",
-      "apply_prefs — optional closed brand/radius/paper tweak (not layout/motion)",
-      "get_recipe — pick list-resource / agent-rail / … when it fits",
-      "list_primitives + shadcn add — compose approved atoms only",
-      "resolve_token — never invent OKLCH / radii / depth",
-      "validate_ui — REQUIRED BEFORE DONE on every new className",
+      `Load /${dna.id}/design.md + /${dna.id}/agents.md (REQUIRED FIRST)`,
+      `Open ${dna.id}-* skill (compose / specialty) — verified cookbook`,
+      "Pick a task recipe — list-resource / object-detail / agent-rail / …",
+      "list_primitives + shadcn add — compose approved atoms only; never twin kits",
+      "npm run validate — REQUIRED BEFORE DONE (check:design · platform · contrast)",
+      "Optional MCP: get_contract → validate_ui when the session is tool-wired",
     ],
     tools: MCP_TOOLS,
     pages: {

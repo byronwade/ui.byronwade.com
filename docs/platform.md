@@ -7,9 +7,10 @@
 
 | Layer | Required? | Job |
 | --- | --- | --- |
-| Contract MCP | **Yes** | Runtime law — install product |
-| design.md / agents.md | **Yes** | Law book |
-| Skills | Optional | Cookbook |
+| design.md / agents.md / DNA docs | **Yes** | Law book |
+| `{id}-*` skills | **Yes** | Verified cookbook per DNA |
+| `npm run validate` / check:* | **Yes** | Fail-closed bailiff |
+| Contract MCP | Optional | Queryable accelerator |
 
 Marketing: [`/stack`](/stack) · homepage `#stack` · [`stack.md`](./stack.md).
 

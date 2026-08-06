@@ -177,6 +177,41 @@ for (const id of dnaIds) {
   if (!(await exists(`app/${id}/system/[slug]/raw/route.ts`))) {
     hits.push(`app/${id}/system/[slug]/raw/route.ts: system raw route missing`)
   }
+
+  // Authored law books + deep DNA (not generated stubs)
+  if (!(await exists(`contracts/${id}/DESIGN.md`))) {
+    hits.push(`contracts/${id}/DESIGN.md: authored law book required`)
+  }
+  if (!(await exists(`contracts/${id}/AGENTS.md`))) {
+    hits.push(`contracts/${id}/AGENTS.md: authored agents manual required`)
+  }
+  if (!(await exists(`docs/${id}.md`))) {
+    hits.push(`docs/${id}.md: deep DNA doc required`)
+  }
+
+  // Native skill pack — at least theme + compose + one specialty
+  for (const slug of [`${id}-theme`, `${id}-compose`]) {
+    if (!(await exists(`skills/${slug}/SKILL.md`))) {
+      hits.push(`skills/${slug}/SKILL.md: native skill pack required`)
+    }
+  }
+  if (!(await exists(`app/${id}/skills/[slug]/page.tsx`))) {
+    hits.push(`app/${id}/skills/[slug]/page.tsx: skill detail route required`)
+  }
+
+  const dnaSrc = await read(`lib/contracts/dna/${id}.ts`)
+  for (const field of [
+    "skillSlugs",
+    "must:",
+    "mustNot:",
+    "lawBookDir",
+    "dnaDoc",
+    "cinema:",
+  ]) {
+    if (!dnaSrc.includes(field)) {
+      hits.push(`dna/${id}.ts: missing strengthened field ${field}`)
+    }
+  }
 }
 
 const routesHelper = await read("lib/contracts/routes.ts")
@@ -220,12 +255,27 @@ for (const phrase of [
   "lib/platform/skeleton.ts",
   "Design DNA may differ",
   "MUST NOT fork",
-  "get_contract",
-  "validate_ui",
+  "check:design",
+  "law book",
 ]) {
   if (!agents.toLowerCase().includes(phrase.toLowerCase())) {
     hits.push(`agents.md: must stress platform consistency ("${phrase}")`)
   }
+}
+
+try {
+  const stackDoc = await read("docs/stack.md")
+  if (!stackDoc.includes("Fail-closed gates") && !stackDoc.includes("fail-closed")) {
+    hits.push("docs/stack.md: must document fail-closed gates")
+  }
+  if (!stackDoc.toLowerCase().includes("optional") || !stackDoc.includes("MCP")) {
+    hits.push("docs/stack.md: must frame contract MCP as optional")
+  }
+  if (stackDoc.includes("Lead with MCP")) {
+    hits.push("docs/stack.md: must not lead with MCP as product centerpiece")
+  }
+} catch {
+  hits.push("docs/stack.md: missing — required agent stack doctrine")
 }
 
 if (!buildContract.includes("buildContractEnvelope")) {

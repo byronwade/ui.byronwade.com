@@ -8,7 +8,7 @@ import {
   ROUTE_SLOTS,
   pathTemplates,
 } from "@/lib/platform/skeleton"
-import { getDna } from "@/lib/contracts/dna"
+import { contractDnaById, getDna } from "@/lib/contracts/dna"
 
 /** Primary nav segments every contract must ship (incl. home ""). */
 export const REQUIRED_CONTRACT_SEGMENTS = [
@@ -26,14 +26,14 @@ export const REQUIRED_CONTRACT_SEGMENTS = [
 /** Negotiated machine docs every contract must serve. */
 export const REQUIRED_MACHINE_FILES = MACHINE_FILES
 
-/** Skills currently in the repo (platform pack). DNA-specific packs may add later. */
-export const PLATFORM_SKILL_SLUGS = [
-  "meridian-theme",
-  "meridian-compose",
-  "meridian-cinematic",
-  "meridian-surface",
-  "meridian-a11y",
-] as const
+/** All native skill slugs across contracts (from DNA packs). */
+export const PLATFORM_SKILL_SLUGS = Object.values(contractDnaById).flatMap(
+  (dna) => dna.skillSlugs,
+) as readonly string[]
+
+export function contractSkillSlugs(contractId: string): readonly string[] {
+  return getDna(contractId)?.skillSlugs ?? []
+}
 
 export function contractNav(contractId: string) {
   const dna = getDna(contractId)
@@ -47,11 +47,10 @@ export function contractNav(contractId: string) {
   }))
 }
 
-/** Theme skill slug to advertise — falls back to platform theme skill. */
+/** Theme skill slug — every contract ships a native `{id}-theme`. */
 export function advertisedThemeSkill(contractId: string) {
   const preferred = `${contractId}-theme`
-  if ((PLATFORM_SKILL_SLUGS as readonly string[]).includes(preferred)) {
-    return preferred
-  }
+  const slugs = contractSkillSlugs(contractId)
+  if (slugs.includes(preferred)) return preferred
   return "meridian-theme"
 }

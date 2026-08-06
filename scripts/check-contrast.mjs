@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Contrast audit — WCAG AA (≥4.5:1) on platform :root + Meridian contract skin.
+ * Contrast audit — WCAG AA (≥4.5:1) on platform :root + every contract skin.
  */
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
@@ -37,6 +37,27 @@ const PAIRS = [
   { name: "meridian dark muted", fg: "muted-foreground", bg: "background", scope: "meridian-dark" },
   { name: "meridian dark brand", fg: "brand", bg: "background", scope: "meridian-dark" },
   { name: "meridian dark on-brand", fg: "brand-foreground", bg: "brand", scope: "meridian-dark" },
+  // Harbor
+  { name: "harbor body", fg: "foreground", bg: "background", scope: "harbor" },
+  { name: "harbor muted", fg: "muted-foreground", bg: "background", scope: "harbor" },
+  { name: "harbor brand", fg: "brand", bg: "background", scope: "harbor" },
+  { name: "harbor on-brand", fg: "brand-foreground", bg: "brand", scope: "harbor" },
+  { name: "harbor dark body", fg: "foreground", bg: "background", scope: "harbor-dark" },
+  { name: "harbor dark brand", fg: "brand", bg: "background", scope: "harbor-dark" },
+  // Atlas
+  { name: "atlas body", fg: "foreground", bg: "background", scope: "atlas" },
+  { name: "atlas muted", fg: "muted-foreground", bg: "background", scope: "atlas" },
+  { name: "atlas brand", fg: "brand", bg: "background", scope: "atlas" },
+  { name: "atlas on-brand", fg: "brand-foreground", bg: "brand", scope: "atlas" },
+  { name: "atlas dark body", fg: "foreground", bg: "background", scope: "atlas-dark" },
+  { name: "atlas dark brand", fg: "brand", bg: "background", scope: "atlas-dark" },
+  // Vellum
+  { name: "vellum body", fg: "foreground", bg: "background", scope: "vellum" },
+  { name: "vellum muted", fg: "muted-foreground", bg: "background", scope: "vellum" },
+  { name: "vellum brand", fg: "brand", bg: "background", scope: "vellum" },
+  { name: "vellum on-brand", fg: "brand-foreground", bg: "brand", scope: "vellum" },
+  { name: "vellum dark body", fg: "foreground", bg: "background", scope: "vellum-dark" },
+  { name: "vellum dark brand", fg: "brand", bg: "background", scope: "vellum-dark" },
 ]
 
 function extractBlock(css, startMarker) {
@@ -138,11 +159,35 @@ const theater = {
   ),
 }
 
+function skinScope(id) {
+  return {
+    ...root,
+    ...parseTokens(extractBlock(skins, `[data-contract="${id}"]`)),
+  }
+}
+
+function skinDarkScope(id, light) {
+  return {
+    ...light,
+    ...parseTokens(extractBlock(skins, `.dark [data-contract="${id}"]`)),
+  }
+}
+
+const harbor = skinScope("harbor")
+const atlas = skinScope("atlas")
+const vellum = skinScope("vellum")
+
 const scopes = {
   root,
   meridian,
   "meridian-dark": meridianDark,
   theater,
+  harbor,
+  "harbor-dark": skinDarkScope("harbor", harbor),
+  atlas,
+  "atlas-dark": skinDarkScope("atlas", atlas),
+  vellum,
+  "vellum-dark": skinDarkScope("vellum", vellum),
 }
 const failures = []
 
