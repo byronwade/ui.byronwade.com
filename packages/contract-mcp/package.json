@@ -1,16 +1,34 @@
 {
   "name": "@byronwade/contract-mcp",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Lightweight open-source consistency MCP — must/mustNot, closed tokens, validate_ui. Set CONTRACT_ID.",
+  "version": "1.2.0",
+  "description": "Fail-closed design-contract MCP — get_contract, validate_ui, closed tokens. Set CONTRACT_ID.",
   "type": "module",
   "bin": {
     "contract-mcp": "./server.mjs"
   },
+  "files": [
+    "server.mjs",
+    "kit.json",
+    "README.md"
+  ],
   "scripts": {
     "start": "node ./server.mjs"
   },
   "engines": {
     "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "design-system",
+    "design-contract",
+    "shadcn",
+    "cursor",
+    "agents"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byronwade/ui.byronwade.com.git",
+    "directory": "packages/contract-mcp"
   }
 }

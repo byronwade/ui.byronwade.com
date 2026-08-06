@@ -6,32 +6,37 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
-# Meridian — agent entry
+# ui.byronwade.com — design contracts
 
-**Obey the full operating manual:** [`agents.md`](./agents.md)  
-**North star:** [`docs/north-star.md`](./docs/north-star.md) — AI rule system, not a shell zoo  
-**AI contract:** [`design.md`](./design.md) · **Grammar:** [`lib/design/`](./lib/design/)  
-**Research specs:** [`/system`](./docs/influences.md) · **Skills:** [`/skills`](./skills/)
+Multi-contract platform. **Structure is shared. DNA differs.**
 
-This file is a stub so Next.js / Claude default loaders land on Meridian.  
-Do not invent color, radius, depth, type scales, or cinema laws — import from `@/lib/design`.  
-Do not invent twin components or app shells — compose shadcn + frozen presets.
+| Contract | Law book | DNA | Skills |
+| --- | --- | --- | --- |
+| Meridian | `contracts/meridian/` · root `design.md` | `docs/meridian.md` | `meridian-*` |
+| Harbor | `contracts/harbor/` | `docs/harbor.md` | `harbor-*` |
+| Atlas | `contracts/atlas/` | `docs/atlas.md` | `atlas-*` |
+| Vellum | `contracts/vellum/` | `docs/vellum.md` | `vellum-*` |
 
-## Load order (must)
+## Agent stack (required)
 
-1. `docs/north-star.md` → `design.md` + `lib/design/`
-2. Relevant skill under `skills/meridian-*`
-3. Surface proof (`Workbench` / `ComposerShell`) only to validate product UI
-4. `npm run check:design` + `check:shell` + `check:proofs` + `check:typeset` + `check:experience` + `check:contrast` before done
+1. **Law book** — `design.md` / `agents.md` for the active contract  
+2. **Verified skills** — `{id}-compose` + specialty  
+3. **Fail-closed gates** — `npm run validate`  
+4. **Contract MCP** — optional accelerator  
 
-## Skill loop
+Doctrine: [`docs/stack.md`](docs/stack.md) · [`/stack`](/stack)
 
-| Skill | Prove on site |
-| --- | --- |
-| `meridian-theme` | `/theme` |
-| `meridian-surface` | `/surfaces` |
-| `meridian-compose` | `/surfaces#proofs` |
-| `meridian-cinematic` | `/` home film |
-| `meridian-a11y` | `/theme#contrast` |
+## Load order
 
-Install: `npx skills add byronwade/ui.byronwade.com`
+1. [`docs/platform.md`](docs/platform.md)  
+2. Active contract DNA + law book  
+3. Matching `skills/{id}-*/SKILL.md`  
+4. Task recipe → shadcn compose  
+5. `npm run validate` before done  
+
+## Never
+
+- Invent hex / shadows / twin Button-Card shells  
+- Fork MCP tools / filenames / JSON keys for one DNA  
+- Treat MCP as the only enforcement  
+- Skip contrast / design / platform checks  

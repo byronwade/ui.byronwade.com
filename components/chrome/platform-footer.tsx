@@ -17,8 +17,9 @@ function PlatformFooter() {
             Design contracts
           </p>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            A platform index of AI design systems. Open a contract to experience
-            that system end-to-end — tokens, chrome, density, and voice.
+            Fail-closed design systems that install as MCP — with design.md as
+            the law book and optional skills as the cookbook. Open a contract to
+            experience that DNA end-to-end.
           </p>
           <p className="mt-4 font-mono text-[11px] text-muted-foreground">
             {live} live · {contracts.length} catalogued · {priceLabel()}
@@ -31,6 +32,22 @@ function PlatformFooter() {
           <ul className="mt-3 space-y-2">
             <li>
               <Link
+                href="/#stack"
+                className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Agent stack
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/stack"
+                className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Why MCP · docs · skills
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/#contracts"
                 className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
@@ -39,10 +56,10 @@ function PlatformFooter() {
             </li>
             <li>
               <Link
-                href="/#how-it-works"
+                href="/meridian/install"
                 className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                How it works
+                Install Meridian
               </Link>
             </li>
             <li>

@@ -3,6 +3,17 @@
 > **One architecture. Many aesthetics.**  
 > Structural change happens once — in `lib/platform/skeleton.ts` — and applies to every contract.
 
+## Agent stack (product)
+
+| Layer | Required? | Job |
+| --- | --- | --- |
+| design.md / agents.md / DNA docs | **Yes** | Law book |
+| `{id}-*` skills | **Yes** | Verified cookbook per DNA |
+| `npm run validate` / check:* | **Yes** | Fail-closed bailiff |
+| Contract MCP | Optional | Queryable accelerator |
+
+Marketing: [`/stack`](/stack) · homepage `#stack` · [`stack.md`](./stack.md).
+
 ## The split
 
 | Layer | Shared across all contracts? | Where |
@@ -61,7 +72,7 @@ Landing a contract must feel like that DNA end-to-end (chrome included). The cat
 3. Wrap `app/{id}/layout.tsx` in `<ContractFrame contractId="{id}">`.
 4. Do **not** invent new MCP tools or machine filenames.
 5. `npm run gen:contract` — emits `/r/{id}.contract.json` with the shared shape.
-6. Add `app/{id}/…` pages using the same `ROUTE_SLOTS` when live.
+6. Add `app/{id}/…` pages for every `ROUTE_SLOTS` segment (`install`, `ui`, `theme`, `surfaces`, `design`, `skills`, `system`, `for-agents`, …) plus `MACHINE_FILES` route handlers (`design.md`, `agents.md`, …). `check:platform` asserts the files exist.
 
 ## Gates
 

@@ -2,6 +2,9 @@
   "name": "ui.byronwade.com",
   "version": "0.1.0",
   "private": true,
+  "bin": {
+    "contract-mcp": "./packages/contract-mcp/server.mjs"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

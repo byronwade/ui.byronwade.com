@@ -1,0 +1,19 @@
+---
+description: Harbor ops-admin design contract — always on for Harbor work
+alwaysApply: false
+globs:
+  - app/harbor/**
+  - contracts/harbor/**
+  - skills/harbor-*/**
+  - docs/harbor.md
+  - lib/contracts/dna/harbor.ts
+---
+
+# Harbor
+
+Ops admin DNA. Read `contracts/harbor/DESIGN.md` + `docs/harbor.md` before UI.
+
+- Dense indexes, semantic status, quiet paper — **no cinema**
+- Skills: `harbor-theme` · `harbor-compose` · `harbor-ops` · `harbor-surface` · `harbor-a11y`
+- Done = `npm run validate` green; MCP optional
+- Never fork platform MCP tools / filenames for Harbor alone

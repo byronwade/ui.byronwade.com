@@ -15,6 +15,7 @@ type ProductFrameProps = {
 
 /**
  * Stages the application as the subject — window chrome, not a marketing card.
+ * Edge frames flush to the right of a rail; no inset margins.
  */
 function ProductFrame({
   children,
@@ -26,7 +27,7 @@ function ProductFrame({
     <div
       data-slot="product-frame"
       data-frame={frame}
-      className={designCn("relative w-full", className)}
+      className={designCn("relative h-full w-full", className)}
     >
       {atmosphere ? (
         <div
@@ -36,18 +37,19 @@ function ProductFrame({
       ) : null}
       <div
         className={designCn(
-          "relative w-full",
+          "relative h-full w-full",
           frame === "shell" && "mx-auto max-w-[76rem] px-3 md:px-6",
         )}
       >
         <div
           className={designCn(
-            "overflow-hidden edge",
+            "h-full overflow-hidden edge",
             bg("card"),
             depthIntent("default"),
             frame === "shell" && "rounded-3xl",
+            /* Mobile: top radii only; desktop: open right + bottom to own the stage edge */
             frame === "edge" &&
-              "rounded-3xl md:rounded-l-3xl md:rounded-r-none max-md:mx-3",
+              "rounded-t-2xl md:rounded-tl-3xl md:rounded-tr-none md:rounded-br-none md:rounded-bl-none",
           )}
         >
           {children}

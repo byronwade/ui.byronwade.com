@@ -13,9 +13,9 @@ function ContractFooter({ contractId }: { contractId: string }) {
     <footer
       data-slot="contract-footer"
       data-surface="marketing"
-      className="border-t border-border/50 bg-background px-5 py-12 md:px-8 md:py-16"
+      className="border-t border-border/50 bg-background px-5 py-14 md:px-8 md:py-16"
     >
-      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
         <div>
           <p className="text-sm font-medium tracking-tight text-foreground">
             {name}

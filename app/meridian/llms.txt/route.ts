@@ -1,15 +1,6 @@
-import { loadSource } from "@/lib/docs/load-source"
-import {
-  rawFileResponse,
-  redirectToDesigned,
-  wantsDesignedHtml,
-} from "@/lib/docs/negotiate"
+import { machineDocGet } from "@/lib/contracts/machine-route"
 
-/** /llms.txt — designed HTML for humans, plain text for agents. */
+/** /meridian/llms.txt — designed HTML for humans, plain text for agents. */
 export async function GET(request: Request) {
-  if (wantsDesignedHtml(request)) {
-    return redirectToDesigned(request, "/meridian/llms")
-  }
-  const body = await loadSource("llms.txt")
-  return rawFileResponse(body, "text/plain")
+  return machineDocGet("meridian", "llms", request)
 }

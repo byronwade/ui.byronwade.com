@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     template: "%s · ui.byronwade.com",
   },
   description:
-    "Open-source AI design systems for developers — install a design-contract MCP so agents ship coherent app UI.",
+    "Fail-closed design systems that install as MCP — with design.md as the law book and optional skills as the cookbook. get_contract before UI, validate_ui before done.",
   metadataBase: new URL("https://ui.byronwade.com"),
   openGraph: {
-    title: "Design contracts",
+    title: "Design systems that install as MCP",
     description:
-      "Fail-closed design systems as MCP servers. Free and open source.",
+      "MCP · markdown · skills. Runtime law, law book, optional cookbook — free and open source.",
     url: "https://ui.byronwade.com",
     siteName: "ui.byronwade.com",
   },

@@ -2,7 +2,7 @@
 /**
  * Platform consistency gate — structural parity + slim consistency kit.
  */
-import { readFile, readdir } from "node:fs/promises"
+import { access, readFile, readdir } from "node:fs/promises"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -12,6 +12,35 @@ const hits = []
 async function read(rel) {
   return readFile(join(ROOT, rel), "utf8")
 }
+
+async function exists(rel) {
+  try {
+    await access(join(ROOT, rel))
+    return true
+  } catch {
+    return false
+  }
+}
+
+/** Every DNA id must ship these page slots (see lib/contracts/routes.ts). */
+const REQUIRED_CONTRACT_SEGMENTS = [
+  "",
+  "install",
+  "ui",
+  "theme",
+  "surfaces",
+  "design",
+  "skills",
+  "system",
+  "for-agents",
+]
+
+const REQUIRED_MACHINE_FILES = [
+  "design.md",
+  "agents.md",
+  "architecture.md",
+  "llms.txt",
+]
 
 const skeleton = await read("lib/platform/skeleton.ts")
 const consistency = await read("lib/platform/consistency.ts")
@@ -48,7 +77,10 @@ const toolMatch = skeleton.match(
 const tools = toolMatch
   ? [...toolMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1])
   : []
-if (tools.length < 5) hits.push("skeleton.ts: MCP_TOOLS incomplete")
+if (tools.length < 6) hits.push("skeleton.ts: MCP_TOOLS incomplete")
+if (!tools.includes("apply_prefs")) {
+  hits.push("skeleton.ts: MCP_TOOLS must include apply_prefs for closed theme tweaks")
+}
 
 for (const tool of tools) {
   if (!sharedMcp.includes(`"${tool}"`) && !sharedMcp.includes(`'${tool}'`)) {
@@ -64,6 +96,35 @@ if (!sharedMcp.includes("REQUIRED FIRST") && !sharedMcp.includes("get_contract")
 }
 if (!sharedMcp.includes("REQUIRED BEFORE DONE") && !sharedMcp.includes("validate_ui")) {
   hits.push("contract-mcp: validate_ui must be required before done")
+}
+if (!sharedMcp.includes("apply_prefs") || !sharedMcp.includes("unknown-brand")) {
+  hits.push("contract-mcp: apply_prefs must fail closed on unknown preset ids")
+}
+if (!sharedMcp.includes("prompts/list") || !sharedMcp.includes("build_surface")) {
+  hits.push("contract-mcp: must expose MCP prompts (build_surface)")
+}
+if (!sharedMcp.includes("resources/list") || !sharedMcp.includes("contract://kit")) {
+  hits.push("contract-mcp: must expose MCP resources (contract://kit)")
+}
+if (!sharedMcp.includes("kit.json")) {
+  hits.push("contract-mcp: must load kit.json offline snapshot")
+}
+if (!consistency.includes('control: "rounded-lg"')) {
+  hits.push("consistency.ts: radiusIntents.control must be rounded-lg (live controls)")
+}
+try {
+  const rootPkg = JSON.parse(await read("package.json"))
+  if (!rootPkg.bin?.["contract-mcp"]) {
+    hits.push("package.json: root bin.contract-mcp required for npx github install")
+  }
+} catch {
+  hits.push("package.json: unable to verify contract-mcp bin")
+}
+if (!(await exists("public/r/contract.schema.json"))) {
+  hits.push("public/r/contract.schema.json: missing shared kit schema")
+}
+if (!(await exists("packages/contract-mcp/README.md"))) {
+  hits.push("packages/contract-mcp/README.md: consumer install docs required")
 }
 
 if (!meridianMcp.includes("contract-mcp")) {
@@ -92,6 +153,85 @@ for (const id of dnaIds) {
   }
 }
 
+for (const id of dnaIds) {
+  if (!(await exists(`app/${id}/layout.tsx`))) {
+    hits.push(`app/${id}/layout.tsx: missing ContractFrame layout`)
+  }
+  for (const seg of REQUIRED_CONTRACT_SEGMENTS) {
+    const pageRel = seg
+      ? `app/${id}/${seg}/page.tsx`
+      : `app/${id}/page.tsx`
+    if (!(await exists(pageRel))) {
+      hits.push(`${pageRel}: required ROUTE_SLOTS page missing`)
+    }
+  }
+  for (const file of REQUIRED_MACHINE_FILES) {
+    const routeRel = `app/${id}/${file}/route.ts`
+    if (!(await exists(routeRel))) {
+      hits.push(`${routeRel}: required MACHINE_FILES handler missing`)
+    }
+  }
+  if (!(await exists(`app/${id}/system/[slug]/page.tsx`))) {
+    hits.push(`app/${id}/system/[slug]/page.tsx: system doc page missing`)
+  }
+  if (!(await exists(`app/${id}/system/[slug]/raw/route.ts`))) {
+    hits.push(`app/${id}/system/[slug]/raw/route.ts: system raw route missing`)
+  }
+
+  // Authored law books + deep DNA (not generated stubs)
+  if (!(await exists(`contracts/${id}/DESIGN.md`))) {
+    hits.push(`contracts/${id}/DESIGN.md: authored law book required`)
+  }
+  if (!(await exists(`contracts/${id}/AGENTS.md`))) {
+    hits.push(`contracts/${id}/AGENTS.md: authored agents manual required`)
+  }
+  if (!(await exists(`docs/${id}.md`))) {
+    hits.push(`docs/${id}.md: deep DNA doc required`)
+  }
+
+  // Native skill pack — at least theme + compose + one specialty
+  for (const slug of [`${id}-theme`, `${id}-compose`]) {
+    if (!(await exists(`skills/${slug}/SKILL.md`))) {
+      hits.push(`skills/${slug}/SKILL.md: native skill pack required`)
+    }
+  }
+  if (!(await exists(`app/${id}/skills/[slug]/page.tsx`))) {
+    hits.push(`app/${id}/skills/[slug]/page.tsx: skill detail route required`)
+  }
+
+  const dnaSrc = await read(`lib/contracts/dna/${id}.ts`)
+  for (const field of [
+    "skillSlugs",
+    "must:",
+    "mustNot:",
+    "lawBookDir",
+    "dnaDoc",
+    "cinema:",
+  ]) {
+    if (!dnaSrc.includes(field)) {
+      hits.push(`dna/${id}.ts: missing strengthened field ${field}`)
+    }
+  }
+}
+
+const routesHelper = await read("lib/contracts/routes.ts")
+if (!routesHelper.includes("REQUIRED_CONTRACT_SEGMENTS")) {
+  hits.push("lib/contracts/routes.ts: must export REQUIRED_CONTRACT_SEGMENTS")
+}
+if (!routesHelper.includes("advertisedThemeSkill")) {
+  hits.push("lib/contracts/routes.ts: must export advertisedThemeSkill")
+}
+const installSrc = await read("lib/contracts/install.ts")
+if (!installSrc.includes("themeSkillNote") || !installSrc.includes("checkCli")) {
+  hits.push("lib/contracts/install.ts: must expose themeSkillNote + checkCli")
+}
+if (!(await exists("lib/contracts/machine-docs.ts"))) {
+  hits.push("lib/contracts/machine-docs.ts: missing machine markdown generators")
+}
+if (!(await exists("lib/contracts/machine-route.ts"))) {
+  hits.push("lib/contracts/machine-route.ts: missing shared negotiated GET helper")
+}
+
 if (!catalog.includes("listDna") || !catalog.includes("pathTemplates")) {
   hits.push("catalog.ts: must derive from DNA + platform pathTemplates")
 }
@@ -115,12 +255,27 @@ for (const phrase of [
   "lib/platform/skeleton.ts",
   "Design DNA may differ",
   "MUST NOT fork",
-  "get_contract",
-  "validate_ui",
+  "check:design",
+  "law book",
 ]) {
   if (!agents.toLowerCase().includes(phrase.toLowerCase())) {
     hits.push(`agents.md: must stress platform consistency ("${phrase}")`)
   }
+}
+
+try {
+  const stackDoc = await read("docs/stack.md")
+  if (!stackDoc.includes("Fail-closed gates") && !stackDoc.includes("fail-closed")) {
+    hits.push("docs/stack.md: must document fail-closed gates")
+  }
+  if (!stackDoc.toLowerCase().includes("optional") || !stackDoc.includes("MCP")) {
+    hits.push("docs/stack.md: must frame contract MCP as optional")
+  }
+  if (stackDoc.includes("Lead with MCP")) {
+    hits.push("docs/stack.md: must not lead with MCP as product centerpiece")
+  }
+} catch {
+  hits.push("docs/stack.md: missing — required agent stack doctrine")
 }
 
 if (!buildContract.includes("buildContractEnvelope")) {

@@ -17,6 +17,7 @@ const MCP_TOOLS = [
   "validate_ui",
   "list_primitives",
   "get_recipe",
+  "apply_prefs",
 ]
 
 const CONTRACT_JSON_KEYS = [
@@ -35,6 +36,7 @@ const CONTRACT_JSON_KEYS = [
   "consistencyBans",
   "primitives",
   "recipes",
+  "prefs",
 ]
 
 async function readTsStringArray(rel, exportName) {
@@ -131,19 +133,81 @@ const depthIntents = await readTsStringArray(
   "depthIntents",
 )
 
-const radiusIntents = {
-  control: "rounded-full",
-  pill: "rounded-full",
-  input: "rounded-lg",
-  panel: "rounded-2xl",
-  shell: "rounded-3xl",
+async function readRadiusIntents() {
+  const src = await readFile(join(ROOT, "lib/platform/consistency.ts"), "utf8")
+  const block = src.match(
+    /export const radiusIntents = \{([\s\S]*?)\} as const/,
+  )
+  if (!block) {
+    return {
+      control: "rounded-lg",
+      pill: "rounded-full",
+      input: "rounded-lg",
+      panel: "rounded-2xl",
+      shell: "rounded-3xl",
+    }
+  }
+  const out = {}
+  for (const m of block[1].matchAll(/(\w+):\s*"([^"]+)"/g)) {
+    out[m[1]] = m[2]
+  }
+  return out
 }
+
+const radiusIntents = await readRadiusIntents()
 
 const recipesSrc = await readFile(
   join(ROOT, "lib/contracts/task-recipes.ts"),
   "utf8",
 )
 const recipes = parseRecipes(recipesSrc)
+
+async function readConstArray(rel, exportName) {
+  const src = await readFile(join(ROOT, rel), "utf8")
+  const m = src.match(
+    new RegExp(`export const ${exportName} = (\\[[\\s\\S]*?\\]) as const`),
+  )
+  if (!m) return []
+  return Function(`"use strict"; return (${m[1]})`)()
+}
+
+async function readConstObject(rel, exportName) {
+  const src = await readFile(join(ROOT, rel), "utf8")
+  const m = src.match(
+    new RegExp(
+      `export const ${exportName} = (\\{[\\s\\S]*?\\}) as const satisfies`,
+    ),
+  )
+  if (!m) {
+    const m2 = src.match(
+      new RegExp(`export const ${exportName} = (\\{[\\s\\S]*?\\}) as const`),
+    )
+    if (!m2) return {}
+    return Function(`"use strict"; return (${m2[1]})`)()
+  }
+  return Function(`"use strict"; return (${m[1]})`)()
+}
+
+const brandPresets = await readConstArray("lib/design/knobs.ts", "brandPresets")
+const radiusPresets = await readConstArray(
+  "lib/design/knobs.ts",
+  "radiusPresets",
+)
+const paperPresets = await readConstArray("lib/design/knobs.ts", "paperPresets")
+const knobDefaults = await readConstObject("lib/design/knobs.ts", "knobDefaults")
+const prefsNotAllowed = await readConstArray(
+  "lib/design/prefs.ts",
+  "prefsNotAllowed",
+)
+
+const prefsBlock = {
+  defaults: knobDefaults,
+  brand: brandPresets,
+  radius: radiusPresets,
+  paper: paperPresets,
+  notPrefs: prefsNotAllowed,
+  applyTool: "apply_prefs",
+}
 
 const dnas = await readDnaFiles()
 await mkdir(outDir, { recursive: true })
@@ -153,7 +217,7 @@ const site = "https://ui.byronwade.com"
 for (const dna of dnas) {
   const live = dna.status === "live" && dna.id === "meridian"
   const contract = {
-    $schema: `${site}/r/${dna.id}.contract.schema.json`,
+    $schema: `${site}/r/contract.schema.json`,
     platform: {
       id: "design-contracts",
       version: "1.0.0",
@@ -173,6 +237,8 @@ for (const dna of dnas) {
       design: `${site}/${dna.id}/design.md`,
       agents: `${site}/${dna.id}/agents.md`,
       contract: `${site}/r/${dna.id}.contract.json`,
+      install: `${site}/${dna.id}/install`,
+      schema: `${site}/r/contract.schema.json`,
     },
     aesthetic: dna.aesthetic,
     status: dna.status,
@@ -192,6 +258,7 @@ for (const dna of dnas) {
     consistencyBans,
     primitives,
     recipes,
+    prefs: prefsBlock,
     generatedAt: new Date().toISOString(),
   }
 
@@ -215,6 +282,7 @@ await writeFile(
         must: r.must,
         never: r.never,
       })),
+      prefs: prefsBlock,
       generatedAt: new Date().toISOString(),
     },
     null,

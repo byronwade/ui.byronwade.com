@@ -22,35 +22,43 @@ function CatalogHero() {
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border/60 pb-4">
           <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
-            Platform index
+            First MCP design contracts
           </p>
           <p className="font-mono text-[11px] text-muted-foreground">
-            open source · MCP install
+            open source · fail-closed
           </p>
         </div>
 
         <h1 className="mt-8 max-w-3xl text-[clamp(2.5rem,7vw,4.25rem)] font-medium leading-[1.02] tracking-[-0.04em] text-foreground">
-          Design contracts
+          Design systems that install as MCP
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          A catalog of AI design systems. Each contract keeps its own DNA —
-          click in and the{" "}
-          <span className="text-foreground">entire page becomes that system</span>
-          . This index stays on the platform shell so you can compare without
-          guessing.
+          Not DESIGN.md alone. Not skills alone. Each contract installs a{" "}
+          <span className="text-foreground">fail-closed MCP</span> —{" "}
+          <span className="font-mono text-foreground">get_contract</span> before
+          UI,{" "}
+          <span className="font-mono text-foreground">validate_ui</span> before
+          done — with markdown as the law book and skills as an optional
+          cookbook.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <a
-            href="#contracts"
+            href="/meridian/install"
             className="inline-flex h-9 items-center border border-foreground/15 bg-foreground px-4 font-mono text-[12px] tracking-tight text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            Browse systems
+            Install Meridian MCP
           </a>
           <a
-            href="#pricing"
+            href="#stack"
             className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            Free · open source
+            MCP · docs · skills
+          </a>
+          <a
+            href="/stack"
+            className="inline-flex h-9 items-center border border-border px-4 font-mono text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          >
+            Full stack docs
           </a>
         </div>
       </div>
