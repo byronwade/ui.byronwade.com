@@ -101,9 +101,30 @@ export const systemDocs: readonly SystemDoc[] = [
   {
     slug: "meridian",
     title: "Meridian DNA",
-    summary: "Human-readable design DNA — principles and surfaces.",
+    summary: "Cinematic warm paper — principles and surfaces.",
     sourcePath: "docs/meridian.md",
     filename: "meridian.md",
+  },
+  {
+    slug: "harbor",
+    title: "Harbor DNA",
+    summary: "Quiet ops admin — dense indexes, semantic status, no cinema.",
+    sourcePath: "docs/harbor.md",
+    filename: "harbor.md",
+  },
+  {
+    slug: "atlas",
+    title: "Atlas DNA",
+    summary: "Ink workbench — mono metadata, keyboard-first scanning.",
+    sourcePath: "docs/atlas.md",
+    filename: "atlas.md",
+  },
+  {
+    slug: "vellum",
+    title: "Vellum DNA",
+    summary: "Reading-first — typeset lanes, measured prose, ~65ch.",
+    sourcePath: "docs/vellum.md",
+    filename: "vellum.md",
   },
   {
     slug: "sources",
