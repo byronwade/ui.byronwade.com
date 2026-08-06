@@ -1,14 +1,14 @@
-import { CinemaTile, CinemaLink } from "@/components/cinematic/tile";
-import { ProductFrame } from "@/components/cinematic/product-frame";
-import { Workbench } from "@/components/surfaces/workbench";
-import { defineCinemaFrame, proofs, text } from "@/lib/design";
+import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
+import { ProductFrame } from "@/components/cinematic/product-frame"
+import { Workbench } from "@/components/surfaces/workbench"
+import { defineCinemaFrame, proofs, text } from "@/lib/design"
 
 /** Typed hero — rail composition: brand names the system; app owns the frame. */
 const heroFrame = defineCinemaFrame({
   ...proofs.hero,
   tone: "theater",
   subject: "workbench",
-});
+})
 
 /**
  * Asymmetric rail — Meridian left; workbench flushes the right viewport edge.
@@ -41,7 +41,7 @@ function Hero() {
         </CinemaLink>
       </div>
     </CinemaTile>
-  );
+  )
 }
 
-export { Hero };
+export { Hero }

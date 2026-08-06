@@ -1,7 +1,7 @@
-import { CinemaTile, CinemaLink } from "@/components/cinematic/tile";
-import { ProductFrame } from "@/components/cinematic/product-frame";
-import { ComposerShell } from "@/components/surfaces/composer-shell";
-import { defineCinemaFrame, text } from "@/lib/design";
+import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
+import { ProductFrame } from "@/components/cinematic/product-frame"
+import { ComposerShell } from "@/components/surfaces/composer-shell"
+import { defineCinemaFrame, text } from "@/lib/design"
 
 const frame = defineCinemaFrame({
   tone: "theater",
@@ -9,7 +9,7 @@ const frame = defineCinemaFrame({
   ideas: 1,
   overlayStickers: false,
   fullBleed: true,
-});
+})
 
 /**
  * Rail beat — object-bound composer flushes the right edge.
@@ -50,7 +50,7 @@ function TileFocus() {
         </CinemaLink>
       </div>
     </CinemaTile>
-  );
+  )
 }
 
-export { TileFocus };
+export { TileFocus }

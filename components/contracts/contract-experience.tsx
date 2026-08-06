@@ -1,20 +1,20 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { InstallPanel } from "@/components/contracts/showcase/install-panel";
-import { PrimitivesGallery } from "@/components/contracts/showcase/primitives-gallery";
-import { ShellShowcase } from "@/components/contracts/showcase/shell-showcase";
-import { priceLabel, type DesignContract } from "@/lib/contracts/catalog";
-import { pathTemplates } from "@/lib/platform/skeleton";
-import { cn } from "@/lib/utils";
+import { InstallPanel } from "@/components/contracts/showcase/install-panel"
+import { PrimitivesGallery } from "@/components/contracts/showcase/primitives-gallery"
+import { ShellShowcase } from "@/components/contracts/showcase/shell-showcase"
+import { priceLabel, type DesignContract } from "@/lib/contracts/catalog"
+import { pathTemplates } from "@/lib/platform/skeleton"
+import { cn } from "@/lib/utils"
 
 const demos: Record<
   string,
   {
-    eyebrow: string;
-    sampleRows: { id: string; title: string; meta: string; tone: string }[];
-    panelTitle: string;
-    panelBody: string;
-    density: string;
+    eyebrow: string
+    sampleRows: { id: string; title: string; meta: string; tone: string }[]
+    panelTitle: string
+    panelBody: string
+    density: string
   }
 > = {
   harbor: {
@@ -158,21 +158,21 @@ const demos: Record<
       "Reading lanes and typeset presets — not dashboard card grids. Measure stays honest at ~65ch.",
     density: "reading-ui · 65ch",
   },
-};
+}
 
 function statusClass(tone: string) {
-  if (tone === "warning") return "bg-warning/15 text-foreground";
-  if (tone === "success") return "bg-brand/10 text-foreground";
-  if (tone === "brand") return "bg-brand/10 text-foreground";
-  return "bg-muted/50 text-muted-foreground";
+  if (tone === "warning") return "bg-warning/15 text-foreground"
+  if (tone === "success") return "bg-brand/10 text-foreground"
+  if (tone === "brand") return "bg-brand/10 text-foreground"
+  return "bg-muted/50 text-muted-foreground"
 }
 
 function IndexRows({
   rows,
   dense = false,
 }: {
-  rows: { id: string; title: string; meta: string; tone: string }[];
-  dense?: boolean;
+  rows: { id: string; title: string; meta: string; tone: string }[]
+  dense?: boolean
 }) {
   return (
     <ul className="divide-y divide-border/60">
@@ -204,17 +204,17 @@ function IndexRows({
         </li>
       ))}
     </ul>
-  );
+  )
 }
 
 function ContractHero({
   contract,
   demo,
 }: {
-  contract: DesignContract;
-  demo: (typeof demos)[string];
+  contract: DesignContract
+  demo: (typeof demos)[string]
 }) {
-  const base = pathTemplates.base(contract.id);
+  const base = pathTemplates.base(contract.id)
 
   if (contract.id === "vellum") {
     return (
@@ -276,10 +276,10 @@ function ContractHero({
           </nav>
         </div>
       </section>
-    );
+    )
   }
 
-  const isAtlas = contract.id === "atlas";
+  const isAtlas = contract.id === "atlas"
 
   return (
     <section
@@ -355,7 +355,7 @@ function ContractHero({
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 /**
@@ -363,8 +363,8 @@ function ContractHero({
  * First viewport is DNA-specific; below folds share install / UI / shells.
  */
 function ContractExperience({ contract }: { contract: DesignContract }) {
-  const demo = demos[contract.id] ?? demos.harbor!;
-  const base = pathTemplates.base(contract.id);
+  const demo = demos[contract.id] ?? demos.harbor!
+  const base = pathTemplates.base(contract.id)
 
   return (
     <main data-slot="contract-experience" data-surface="marketing">
@@ -435,7 +435,7 @@ function ContractExperience({ contract }: { contract: DesignContract }) {
         </section>
       </div>
     </main>
-  );
+  )
 }
 
-export { ContractExperience };
+export { ContractExperience }

@@ -1,6 +1,6 @@
-import { CinemaTile, CinemaLink } from "@/components/cinematic/tile";
-import { cinemaStills } from "@/lib/media";
-import { defineCinemaFrame, text } from "@/lib/design";
+import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
+import { cinemaStills } from "@/lib/media"
+import { defineCinemaFrame, text } from "@/lib/design"
 
 const frame = defineCinemaFrame({
   tone: "theater",
@@ -8,7 +8,7 @@ const frame = defineCinemaFrame({
   ideas: 1,
   overlayStickers: false,
   fullBleed: true,
-});
+})
 
 /**
  * Closing — left-anchored on full-bleed still. One next step.
@@ -42,7 +42,7 @@ function Closing() {
         </CinemaLink>
       </div>
     </CinemaTile>
-  );
+  )
 }
 
-export { Closing };
+export { Closing }

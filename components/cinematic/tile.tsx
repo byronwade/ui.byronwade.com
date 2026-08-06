@@ -1,37 +1,37 @@
-import { type ReactNode } from "react";
-import { Stage, type StageTone } from "@/components/cinematic/stage";
-import { BleedImage, type Veil } from "@/components/cinematic/bleed-image";
-import { designCn, text } from "@/lib/design";
-import { cn } from "@/lib/utils";
+import { type ReactNode } from "react"
+import { Stage, type StageTone } from "@/components/cinematic/stage"
+import { BleedImage, type Veil } from "@/components/cinematic/bleed-image"
+import { designCn, text } from "@/lib/design"
+import { cn } from "@/lib/utils"
 
-type Align = "center" | "bottom" | "start";
+type Align = "center" | "bottom" | "start"
 /**
  * overlay — copy on full-bleed media
  * stack — copy above, subject below (centered)
  * rail — asymmetric: copy column + edge-bleed subject (app owns the frame)
  * ledger — editorial index: mono rail + statement (paper beats)
  */
-type Layout = "overlay" | "stack" | "rail" | "ledger";
+type Layout = "overlay" | "stack" | "rail" | "ledger"
 
 type CinemaTileProps = {
-  id?: string;
-  tone?: StageTone;
+  id?: string
+  tone?: StageTone
   image?: {
-    src: string;
-    alt: string;
-    veil?: Veil;
-    priority?: boolean;
-    objectPosition?: string;
-  };
-  layout?: Layout;
-  align?: Align;
+    src: string
+    alt: string
+    veil?: Veil
+    priority?: boolean
+    objectPosition?: string
+  }
+  layout?: Layout
+  align?: Align
   /** Product / workbench subject for stack + rail */
-  subject?: ReactNode;
+  subject?: ReactNode
   /** Optional mono index for ledger (e.g. "01") */
-  index?: string;
-  children: ReactNode;
-  className?: string;
-};
+  index?: string
+  children: ReactNode
+  className?: string
+}
 
 /**
  * One-idea stage tile.
@@ -94,7 +94,7 @@ function CinemaTile({
           ) : null}
         </div>
       </Stage>
-    );
+    )
   }
 
   if (layout === "ledger") {
@@ -126,7 +126,7 @@ function CinemaTile({
           <div className="min-w-0 max-w-2xl flex-1 text-left">{children}</div>
         </div>
       </Stage>
-    );
+    )
   }
 
   if (layout === "stack") {
@@ -163,7 +163,7 @@ function CinemaTile({
           </div>
         ) : null}
       </Stage>
-    );
+    )
   }
 
   return (
@@ -199,17 +199,17 @@ function CinemaTile({
         {children}
       </div>
     </Stage>
-  );
+  )
 }
 
 type CinemaLinkProps = {
-  href: string;
-  children: ReactNode;
-  className?: string;
-  priority?: "primary" | "secondary";
+  href: string
+  children: ReactNode
+  className?: string
+  priority?: "primary" | "secondary"
   /** theater = dock ink (default); paper = foreground on light stages */
-  tone?: StageTone;
-};
+  tone?: StageTone
+}
 
 /**
  * Quiet text CTA — brand stays scarce (eyebrow / wordmark).
@@ -222,7 +222,7 @@ function CinemaLink({
   priority = "primary",
   tone = "theater",
 }: CinemaLinkProps) {
-  const onPaper = tone === "paper";
+  const onPaper = tone === "paper"
   return (
     <a
       href={href}
@@ -246,8 +246,8 @@ function CinemaLink({
     >
       {children}
     </a>
-  );
+  )
 }
 
-export { CinemaTile, CinemaLink };
-export type { CinemaTileProps, CinemaLinkProps };
+export { CinemaTile, CinemaLink }
+export type { CinemaTileProps, CinemaLinkProps }

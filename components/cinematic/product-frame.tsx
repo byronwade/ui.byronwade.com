@@ -1,17 +1,17 @@
-import { type ReactNode } from "react";
-import { bg, designCn, depthIntent } from "@/lib/design";
+import { type ReactNode } from "react"
+import { bg, designCn, depthIntent } from "@/lib/design"
 
 type ProductFrameProps = {
-  children: ReactNode;
-  className?: string;
+  children: ReactNode
+  className?: string
   /** Soft falloff behind the window — keep subtle; app chrome is the subject. */
-  atmosphere?: boolean;
+  atmosphere?: boolean
   /**
    * edge — bleeds toward the stage edge (rail layouts)
    * shell — fully rounded window (centered stacks)
    */
-  frame?: "edge" | "shell";
-};
+  frame?: "edge" | "shell"
+}
 
 /**
  * Stages the application as the subject — window chrome, not a marketing card.
@@ -56,8 +56,8 @@ function ProductFrame({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export { ProductFrame };
-export type { ProductFrameProps };
+export { ProductFrame }
+export type { ProductFrameProps }
