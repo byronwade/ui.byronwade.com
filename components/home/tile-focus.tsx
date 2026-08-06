@@ -21,11 +21,8 @@ function TileFocus() {
       tone={frame.tone}
       layout="rail"
       subject={
-        <ProductFrame
-          atmosphere={false}
-          className="md:translate-x-4 lg:translate-x-8"
-        >
-          <ComposerShell className="h-[min(52svh,28rem)] rounded-none border-0 md:h-[min(78svh,44rem)]" />
+        <ProductFrame atmosphere={false} className="md:translate-x-6 lg:translate-x-10">
+          <ComposerShell className="h-[min(48svh,26rem)] rounded-none border-0 md:h-full" />
         </ProductFrame>
       }
     >
@@ -45,7 +42,10 @@ function TileFocus() {
         <CinemaLink href="/meridian/surfaces#proofs" priority="primary">
           Composer proof
         </CinemaLink>
-        <CinemaLink href="/meridian/skills/meridian-compose" priority="secondary">
+        <CinemaLink
+          href="/meridian/skills/meridian-compose"
+          priority="secondary"
+        >
           meridian-compose
         </CinemaLink>
       </div>

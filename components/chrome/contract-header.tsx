@@ -75,7 +75,7 @@ function ContractHeader({ contractId }: { contractId: string }) {
           : "border-border/50 bg-background/80 text-foreground backdrop-blur-xl",
       )}
     >
-      <div className="mx-auto flex h-11 max-w-6xl items-center justify-between gap-3 px-4 md:h-12 md:px-6">
+      <div className="mx-auto flex h-11 max-w-6xl items-center justify-between gap-3 px-5 md:h-12 md:px-8">
         <div className="relative z-10 flex min-w-0 items-center gap-2">
           <Link
             href="/"

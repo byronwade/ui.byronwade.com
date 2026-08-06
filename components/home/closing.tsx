@@ -35,13 +35,10 @@ function Closing() {
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
         <CinemaLink href="/meridian/install" priority="primary">
-          Install MCP · API · npx
+          Install
         </CinemaLink>
         <CinemaLink href="/meridian/ui" priority="secondary">
           UI gallery
-        </CinemaLink>
-        <CinemaLink href="/meridian/surfaces" priority="secondary">
-          App shells
         </CinemaLink>
       </div>
     </CinemaTile>

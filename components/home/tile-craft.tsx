@@ -28,11 +28,15 @@ function TileCraft() {
         Soft stone paper. Soft charcoal type. Never pure white. Never pure
         black. Chrome stays out of the way.
       </p>
-      <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <CinemaLink href="/meridian/theme" priority="primary">
+      <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
+        <CinemaLink href="/meridian/theme" priority="primary" tone="paper">
           Theme knobs
         </CinemaLink>
-        <CinemaLink href="/meridian/skills/meridian-theme" priority="secondary">
+        <CinemaLink
+          href="/meridian/skills/meridian-theme"
+          priority="secondary"
+          tone="paper"
+        >
           meridian-theme
         </CinemaLink>
       </div>

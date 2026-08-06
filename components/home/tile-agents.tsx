@@ -26,11 +26,11 @@ function TileAgents() {
         Closed tokens in lib/design. Research specs under /system. Creativity in
         the story — never in rogue color.
       </p>
-      <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <CinemaLink href="/meridian/design" priority="primary">
+      <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
+        <CinemaLink href="/meridian/design" priority="primary" tone="paper">
           design.md
         </CinemaLink>
-        <CinemaLink href="/meridian/for-agents" priority="secondary">
+        <CinemaLink href="/meridian/for-agents" priority="secondary" tone="paper">
           Agents
         </CinemaLink>
       </div>

@@ -20,11 +20,8 @@ function Hero() {
       tone={heroFrame.tone}
       layout="rail"
       subject={
-        <ProductFrame
-          atmosphere={false}
-          className="md:translate-x-4 lg:translate-x-8"
-        >
-          <Workbench className="h-[min(52svh,28rem)] rounded-none border-0 md:h-[min(78svh,44rem)]" />
+        <ProductFrame atmosphere={false} className="md:translate-x-6 lg:translate-x-10">
+          <Workbench className="h-[min(48svh,26rem)] rounded-none border-0 md:h-full" />
         </ProductFrame>
       }
     >

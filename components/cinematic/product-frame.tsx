@@ -26,7 +26,7 @@ function ProductFrame({
     <div
       data-slot="product-frame"
       data-frame={frame}
-      className={designCn("relative w-full", className)}
+      className={designCn("relative h-full w-full", className)}
     >
       {atmosphere ? (
         <div
@@ -36,18 +36,19 @@ function ProductFrame({
       ) : null}
       <div
         className={designCn(
-          "relative w-full",
+          "relative h-full w-full",
           frame === "shell" && "mx-auto max-w-[76rem] px-3 md:px-6",
         )}
       >
         <div
           className={designCn(
-            "overflow-hidden edge",
+            "h-full overflow-hidden edge",
             bg("card"),
             depthIntent("default"),
             frame === "shell" && "rounded-3xl",
+            /* Mobile: top-radius only so the stage edge stays flush; desktop: left radius, open right bleed */
             frame === "edge" &&
-              "rounded-3xl md:rounded-l-3xl md:rounded-r-none max-md:mx-3",
+              "rounded-t-2xl md:rounded-l-3xl md:rounded-tr-none md:rounded-br-none",
           )}
         >
           {children}
