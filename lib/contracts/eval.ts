@@ -1,8 +1,11 @@
 /**
- * Eval harness stub — score agent UI snippets against Meridian bans.
- * Wire into CI or offline batches; not a full visual eval.
+ * Eval harness — score agent UI snippets against the shared consistency bans.
+ *
+ * NOTE: nothing runs this yet. Harbor's DNA advertises an "Eval harness";
+ * wiring it into CI is a product decision, not a cleanup.
  */
 
+import { lintSource } from "@/lib/design/bans.mjs"
 import { fewShots } from "@/lib/contracts/few-shots"
 
 export type EvalCase = {
@@ -17,32 +20,16 @@ export type EvalHit = {
   message: string
 }
 
-const rules: { id: string; re: RegExp; message: string }[] = [
-  {
-    id: "hex-color",
-    re: /#[0-9a-fA-F]{3,8}\b/,
-    message: "hex color banned",
-  },
-  {
-    id: "shadow-util",
-    re: /\bshadow-(?:sm|md|lg|xl|2xl|inner)\b/,
-    message: "shadow-* banned",
-  },
-  {
-    id: "lucide-import",
-    re: /from\s+["']lucide-react["']/,
-    message: "lucide-react banned",
-  },
-]
-
+/**
+ * Rules come from the shared ban module so this harness, the repository
+ * gate, and the MCP `validate_ui` tool cannot disagree about what is banned.
+ */
 export function lintSnippet(source: string): EvalHit[] {
-  const hits: EvalHit[] = []
-  for (const rule of rules) {
-    if (rule.re.test(source)) {
-      hits.push({ id: "snippet", rule: rule.id, message: rule.message })
-    }
-  }
-  return hits
+  return lintSource(source).map((hit: { ban: string; why: string }) => ({
+    id: "snippet",
+    rule: hit.ban,
+    message: hit.why,
+  }))
 }
 
 /** Built-in cases derived from few-shots (good must pass, bad must fail). */

@@ -3,12 +3,9 @@ import type { MetadataRoute } from "next"
 import { designContracts } from "@/lib/contracts/catalog"
 import { docs } from "@/lib/docs/catalog"
 import { systemDocs } from "@/lib/docs/system-docs"
-import { ROUTE_SLOTS } from "@/lib/platform/skeleton"
+import { contractSegments } from "@/lib/platform/skeleton"
 
 const site = "https://ui.byronwade.com"
-
-/** Shared showcase slots every contract should expose for DX. */
-const showcaseSegments = ["install", "ui", "theme", "surfaces", "for-agents"] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
@@ -23,11 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ...base,
       priority: c.status === "live" ? 0.9 : 0.55,
     }
-    const showcases = showcaseSegments.map((seg) => ({
-      url: `${site}${c.href}/${seg}`,
-      ...base,
-      priority: 0.65,
-    }))
+    /* Derived, never hand-listed: the sitemap cannot advertise a slot the
+       contract has not authored. */
+    const showcases = contractSegments(c.authored)
+      .filter((seg) => seg !== "")
+      .map((seg) => ({
+        url: `${site}${c.href}/${seg}`,
+        ...base,
+        priority: 0.65,
+      }))
     return [home, ...showcases]
   })
 
@@ -45,8 +46,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  // Keep ROUTE_SLOTS referenced so sitemap stays aligned with platform nav.
-  void ROUTE_SLOTS
 
   return [
     {

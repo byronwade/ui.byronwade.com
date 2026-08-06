@@ -7,6 +7,8 @@ import { mkdir, writeFile, readFile, readdir } from "node:fs/promises"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
+import { banIds } from "../lib/design/bans.mjs"
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = join(ROOT, "public", "r")
 const DNA_DIR = join(ROOT, "lib/contracts/dna")
@@ -113,7 +115,8 @@ const provenanceRoles = await readTsStringArray(
   "lib/design/grammar.ts",
   "provenanceRoles",
 )
-const banned = await readTsStringArray("lib/design/grammar.ts", "banned")
+/* Bans come from the shared module, not a text-parse of grammar.ts. */
+const banned = banIds
 const typesetPresets = await readTsStringArray(
   "lib/design/typeset.ts",
   "typesetPresets",

@@ -197,8 +197,9 @@ function HarborLanding({ contract }: { contract: DesignContract }) {
           <ul className="divide-y divide-border/50">
             {queue.map((item) => {
               const chip = stateChip[item.state]
-              const href =
-                item.state === "ready" ? `#${item.section}` : `${base}/for-agents`
+              /* Queued work has no section on this page yet — send readers to
+                 the machine kit, which is live, rather than a 404. */
+              const href = item.state === "ready" ? `#${item.section}` : jsonHref
               return (
                 <li key={item.id}>
                   <Link

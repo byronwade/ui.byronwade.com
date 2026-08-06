@@ -1,13 +1,26 @@
 import Link from "next/link"
 
-import { getContract, priceLabel } from "@/lib/contracts/catalog"
-import { pathTemplates } from "@/lib/platform/skeleton"
+import {
+  contractPrimaryNav,
+  getContract,
+  priceLabel,
+} from "@/lib/contracts/catalog"
+import { MACHINE_FILES, pathTemplates } from "@/lib/platform/skeleton"
 
+/**
+ * Footer links are derived, never hand-listed.
+ *
+ * "In this system" mirrors the primary nav, so it can only offer routes the
+ * contract actually serves. Machine files appear once the DNA declares the
+ * docs as authored — status is not the right gate, since a preview contract
+ * can publish docs and a live one could lag.
+ */
 function ContractFooter({ contractId }: { contractId: string }) {
   const contract = getContract(contractId)
   const name = contract?.name ?? contractId
-  const live = contract?.status === "live"
   const base = pathTemplates.base(contractId)
+  const nav = contractPrimaryNav(contractId).filter((i) => i.href !== base)
+  const hasMachineDocs = contract?.authored.includes("design") ?? false
 
   return (
     <footer
@@ -28,7 +41,8 @@ function ContractFooter({ contractId }: { contractId: string }) {
             {priceLabel()} · mcp/{contractId}
           </p>
         </div>
-        <div>
+
+        <nav aria-label={`${name} footer`}>
           <p className="font-mono text-[10px] tracking-[0.16em] text-muted-foreground uppercase">
             In this system
           </p>
@@ -41,45 +55,27 @@ function ContractFooter({ contractId }: { contractId: string }) {
                 Home
               </Link>
             </li>
-            {live ? (
-              <>
-                <li>
-                  <Link
-                    href={`${base}/theme`}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    Theme
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={`${base}/surfaces`}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    Surfaces
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={`${base}/for-agents`}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    For agents
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <li>
+            {nav.map((item) => (
+              <li key={item.href}>
                 <Link
-                  href="/#contracts"
+                  href={item.href}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Back to catalog
+                  {item.label}
                 </Link>
               </li>
-            )}
+            ))}
+            <li>
+              <Link
+                href="/#contracts"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Back to catalog
+              </Link>
+            </li>
           </ul>
-        </div>
+        </nav>
+
         <div>
           <p className="font-mono text-[10px] tracking-[0.16em] text-muted-foreground uppercase">
             Machine
@@ -93,26 +89,18 @@ function ContractFooter({ contractId }: { contractId: string }) {
                 {contractId}.contract.json
               </Link>
             </li>
-            {live ? (
-              <>
-                <li>
-                  <Link
-                    href={`${base}/design.md`}
-                    className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    design.md
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={`${base}/agents.md`}
-                    className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    agents.md
-                  </Link>
-                </li>
-              </>
-            ) : null}
+            {hasMachineDocs
+              ? MACHINE_FILES.map((file) => (
+                  <li key={file}>
+                    <Link
+                      href={`${base}/${file}`}
+                      className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {file}
+                    </Link>
+                  </li>
+                ))
+              : null}
           </ul>
         </div>
       </div>

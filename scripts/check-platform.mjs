@@ -160,6 +160,31 @@ for (const section of [...requiredSections, "Reuse decision ladder"]) {
   }
 }
 
+/*
+ * Ban parity — lib/design/bans.mjs is the only place a ban pattern may live.
+ * This repo previously carried four divergent copies, so `validate_ui` passed
+ * snippets that CI rejected. Every consumer must import the shared module and
+ * must not re-declare a pattern.
+ */
+const { banIds } = await import("../lib/design/bans.mjs")
+const banConsumers = [
+  "scripts/check-design.mjs",
+  "scripts/meridian-check.mjs",
+  "scripts/gen-contract.mjs",
+  "packages/contract-mcp/server.mjs",
+  "lib/contracts/eval.ts",
+  "lib/design/grammar.ts",
+]
+for (const rel of banConsumers) {
+  const src = await read(rel)
+  if (!/bans\.mjs/.test(src)) {
+    hits.push(`${rel}: must import bans from lib/design/bans.mjs`)
+  }
+  if (/lucide-react\\?["']\s*\//.test(src) || /re:\s*\/.*lucide-react/.test(src)) {
+    hits.push(`${rel}: re-declares a ban pattern — import it from bans.mjs`)
+  }
+}
+
 if (!buildContract.includes("buildContractEnvelope")) {
   hits.push("build-contract.ts: missing buildContractEnvelope")
 }
@@ -173,9 +198,21 @@ if (buildContract.includes("fewShots")) {
   hits.push("build-contract.ts: fewShots bloated the MCP kit — keep docs-only")
 }
 
-const meridianContract = await read("lib/contracts/meridian-contract.ts")
-if (!meridianContract.includes("buildContractEnvelope")) {
-  hits.push("meridian-contract.ts: must use platform builder (no bespoke JSON shape)")
+/*
+ * The generator must emit every key the skeleton declares. It currently
+ * assembles the envelope itself rather than calling buildContractEnvelope
+ * (see docs/platform.md — unifying the two builders is tracked separately),
+ * so assert the output shape rather than the call.
+ */
+const genContract = await read("scripts/gen-contract.mjs")
+const keyBlock = skeleton.match(/export const CONTRACT_JSON_KEYS = \[([\s\S]*?)\] as const/)
+for (const key of keyBlock
+  ? [...keyBlock[1].matchAll(/"([^"]+)"/g)].map((m) => m[1])
+  : []) {
+  if (key === "$schema") continue
+  if (!new RegExp(`\\b${key.replace("$", "\\$")}\\b`).test(genContract)) {
+    hits.push(`gen-contract.mjs: never emits CONTRACT_JSON_KEYS entry "${key}"`)
+  }
 }
 
 try {
@@ -204,6 +241,9 @@ try {
     shapes.push({ f, toolKey })
     if (toolKey !== JSON.stringify(tools)) {
       hits.push(`${f}: mcpTools diverge from skeleton MCP_TOOLS`)
+    }
+    if (JSON.stringify(json.banned) !== JSON.stringify(banIds)) {
+      hits.push(`${f}: banned list diverges from lib/design/bans.mjs`)
     }
     if (json.priceMonthlyUsd !== 0) {
       hits.push(`${f}: priceMonthlyUsd must be 0 (open-source)`)

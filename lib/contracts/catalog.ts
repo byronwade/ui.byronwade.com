@@ -32,6 +32,8 @@ export type DesignContract = {
   priceMonthly: number
   features: readonly string[]
   aesthetic: string
+  /** Route segments with authored content — drives nav and route parity. */
+  authored: readonly string[]
 }
 
 function toCatalogEntry(dna: ContractDna): DesignContract {
@@ -46,6 +48,7 @@ function toCatalogEntry(dna: ContractDna): DesignContract {
     priceMonthly: MCP_PRICE_USD,
     features: dna.features,
     aesthetic: dna.aesthetic,
+    authored: dna.authored ?? [],
   }
 }
 
@@ -60,11 +63,7 @@ export function getContract(id: string): DesignContract | undefined {
   return dna ? toCatalogEntry(dna) : undefined
 }
 
-export function liveContracts() {
-  return designContracts.filter((c) => c.status === "live")
-}
-
-/** Primary nav — always from platform ROUTE_SLOTS (same for every live contract). */
+/** Primary nav — platform ROUTE_SLOTS filtered by what this contract authored. */
 export function contractPrimaryNav(contractId: string) {
-  return contractPrimaryNavFromSkeleton(contractId)
+  return contractPrimaryNavFromSkeleton(contractId, getDna(contractId)?.authored ?? [])
 }

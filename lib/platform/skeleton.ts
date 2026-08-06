@@ -49,18 +49,22 @@ export type MachineFile = (typeof MACHINE_FILES)[number]
  * Home is "" (the contract root). Order = primary nav for every contract.
  */
 export const ROUTE_SLOTS = [
-  { segment: "", label: "Home", nav: true },
-  { segment: "install", label: "Install", nav: true },
-  { segment: "ui", label: "UI", nav: true },
-  { segment: "theme", label: "Theme", nav: true },
-  { segment: "surfaces", label: "Surfaces", nav: true },
-  { segment: "design", label: "Design", nav: true },
-  { segment: "skills", label: "Skills", nav: true },
-  { segment: "system", label: "System", nav: true },
-  { segment: "for-agents", label: "Agents", nav: true },
-  { segment: "architecture", label: "Architecture", nav: false },
-  { segment: "llms", label: "llms.txt", nav: false },
+  { segment: "", label: "Home", nav: true, scope: "all" },
+  { segment: "install", label: "Install", nav: true, scope: "all" },
+  { segment: "ui", label: "UI", nav: true, scope: "all" },
+  { segment: "theme", label: "Theme", nav: true, scope: "all" },
+  { segment: "surfaces", label: "Surfaces", nav: true, scope: "all" },
+  { segment: "design", label: "Design", nav: true, scope: "authored" },
+  { segment: "skills", label: "Skills", nav: true, scope: "authored" },
+  { segment: "system", label: "System", nav: true, scope: "authored" },
+  { segment: "for-agents", label: "Agents", nav: true, scope: "authored" },
+  { segment: "architecture", label: "Architecture", nav: false, scope: "authored" },
+  { segment: "llms", label: "llms.txt", nav: false, scope: "authored" },
 ] as const
+
+export type RouteSlot = (typeof ROUTE_SLOTS)[number]
+/** Slots every contract gets from shared components — no authored content. */
+export type RouteSegment = RouteSlot["segment"]
 
 /** Required sections in every contract's agents.md (order fixed). */
 export const AGENTS_MD_SECTIONS = [
@@ -126,11 +130,31 @@ export function contractUrls(id: string, site = "https://ui.byronwade.com") {
   } as const
 }
 
-export function contractPrimaryNavFromSkeleton(contractId: string) {
-  return ROUTE_SLOTS.filter((s) => s.nav).map((s) => ({
+/**
+ * Primary nav for a contract.
+ *
+ * `scope: "all"` slots are built from shared components, so every contract has
+ * them. `scope: "authored"` slots need per-contract prose (design.md, skills,
+ * research specs) and only appear when the DNA declares them — a nav link to a
+ * page a contract has not authored is a 404 with extra steps.
+ */
+export function contractPrimaryNavFromSkeleton(
+  contractId: string,
+  authored: readonly string[] = [],
+) {
+  return ROUTE_SLOTS.filter(
+    (s) => s.nav && (s.scope === "all" || authored.includes(s.segment)),
+  ).map((s) => ({
     href: s.segment ? `/${contractId}/${s.segment}` : `/${contractId}`,
     label: s.label,
   }))
+}
+
+/** Every segment a contract actually serves, for parity checks. */
+export function contractSegments(authored: readonly string[] = []) {
+  return ROUTE_SLOTS.filter(
+    (s) => s.scope === "all" || authored.includes(s.segment),
+  ).map((s) => s.segment)
 }
 
 /** What agents MAY change per contract vs MUST keep shared. */

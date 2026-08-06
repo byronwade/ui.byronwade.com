@@ -220,12 +220,20 @@ function VellumLanding({ contract }: { contract: DesignContract }) {
                   enough to load on every task.
                 </p>
               </div>
+              {/* Only link what this contract has actually published. */}
               <div className="mt-6 flex flex-wrap items-center gap-2.5">
+                {contract.authored.includes("for-agents") ? (
+                  <Button size="pill" variant="outline" asChild>
+                    <Link href={`${base}/for-agents`}>agents.md</Link>
+                  </Button>
+                ) : null}
                 <Button size="pill" variant="outline" asChild>
-                  <Link href={`${base}/for-agents`}>agents.md</Link>
+                  <Link href={jsonHref} className="font-mono">
+                    contract.json
+                  </Link>
                 </Button>
                 <Button size="pill" variant="ghost" asChild>
-                  <Link href={`${base}/design`}>design.md</Link>
+                  <Link href={`${base}/install`}>Install</Link>
                 </Button>
               </div>
             </section>

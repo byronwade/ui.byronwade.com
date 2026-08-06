@@ -166,30 +166,35 @@
     ]
   },
   "banned": [
-    "raw-hex-color",
     "arbitrary-color-utility",
+    "raw-hex-color",
     "non-oklch-color",
     "tailwind-shadow",
     "dvh-viewport",
     "font-bold-display",
-    "scroll-choreography",
-    "overlay-stickers-on-media",
     "pure-white",
     "pure-black",
-    "bright-neon-accent",
-    "cream-terracotta-cliche",
-    "second-accent",
-    "influence-brand-labels",
-    "floating-chatbot",
-    "nested-demo-scrollports",
-    "inset-hero-media",
-    "low-contrast-on-dock",
     "foreground-opacity-cheat",
+    "low-contrast-on-dock",
     "direct-lucide-import",
     "direct-phosphor-import",
+    "off-scale-radius",
     "arbitrary-px-height",
     "arbitrary-px-type",
-    "arbitrary-px-padding"
+    "arbitrary-px-padding",
+    "mix-blend-chrome",
+    "content-visibility-auto",
+    "app-lane-gradient-spectacle",
+    "oklch-outside-token-files",
+    "scroll-choreography",
+    "overlay-stickers-on-media",
+    "inset-hero-media",
+    "bright-neon-accent",
+    "second-accent",
+    "cream-terracotta-cliche",
+    "influence-brand-labels",
+    "floating-chatbot",
+    "nested-demo-scrollports"
   ],
   "consistencyBans": [
     "hex-color",
@@ -308,5 +313,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-08-03T14:40:24.697Z"
+  "generatedAt": "2026-08-06T22:35:04.748Z"
 }

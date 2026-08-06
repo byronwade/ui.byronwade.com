@@ -1,4 +1,8 @@
 /**
+ * @ban-examples — this file intentionally contains banned code as the
+ * `bad` half of each pair. check:design skips it and reports the exemption.
+ */
+/**
  * Few-shot good/bad pairs — short examples agents can load with the contract.
  */
 

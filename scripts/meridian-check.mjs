@@ -1,43 +1,21 @@
 #!/usr/bin/env node
 /**
- * npx meridian check — validate source against Meridian bans.
+ * npx meridian check — validate arbitrary paths against the consistency bans.
+ *
+ * Rules come from lib/design/bans.mjs, the same module the repository gate
+ * and the MCP `validate_ui` tool read, so this CLI cannot give a different
+ * verdict from CI.
  * Usage: node scripts/meridian-check.mjs [--json] [paths...]
  */
 import { readFile, readdir, stat } from "node:fs/promises"
 import { join, relative } from "node:path"
 
+import { lintLine, mechanicalBans } from "../lib/design/bans.mjs"
+
 const ROOT = process.cwd()
 const jsonMode = process.argv.includes("--json")
 const args = process.argv.slice(2).filter((a) => a !== "--json")
 const targets = args.length > 0 ? args : ["components", "app", "lib"]
-
-const rules = [
-  {
-    id: "hex-color",
-    re: /#[0-9a-fA-F]{3,8}\b/,
-    message: "hex color banned — use semantic tokens",
-  },
-  {
-    id: "rgb-hsl",
-    re: /\b(?:rgb|hsl)a?\(/,
-    message: "rgb/hsl literal banned — use oklch tokens / utilities",
-  },
-  {
-    id: "shadow-util",
-    re: /\bshadow-(?:sm|md|lg|xl|2xl|inner)\b/,
-    message: "Tailwind shadow-* banned — use depth-*",
-  },
-  {
-    id: "lucide-import",
-    re: /from\s+["']lucide-react["']/,
-    message: "lucide-react import banned — use @/lib/icons",
-  },
-  {
-    id: "arbitrary-color",
-    re: /\b(?:text|bg|border)-\[(?:#|rgb|hsl)/,
-    message: "arbitrary color utility banned",
-  },
-]
 
 const skipDir = new Set([
   "node_modules",
@@ -77,20 +55,13 @@ for (const target of targets) {
   }
   const files = st.isDirectory() ? await walk(abs) : [abs]
   for (const file of files) {
-    // Allow OKLCH + hex only in foundation / knobs / globals token files
     const rel = relative(ROOT, file)
-    const allowColorLiterals =
-      /globals\.css$|knobs\.ts$|contrast\.ts$|typeset\.css$/.test(rel)
     const src = await readFile(file, "utf8")
-    for (const rule of rules) {
-      if (
-        allowColorLiterals &&
-        (rule.id === "hex-color" || rule.id === "rgb-hsl")
-      ) {
-        continue
-      }
-      if (rule.re.test(src)) {
-        hits.push({ file: rel, rule: rule.id, message: rule.message })
+    if (src.includes("@ban-examples")) continue
+    const lines = src.split(/\r?\n/)
+    for (let i = 0; i < lines.length; i++) {
+      for (const hit of lintLine(lines[i], rel)) {
+        hits.push({ file: rel, line: i + 1, rule: hit.ban, message: hit.why, fix: hit.fix })
       }
     }
   }
@@ -102,11 +73,12 @@ if (jsonMode) {
   )
 } else {
   if (hits.length === 0) {
-    console.log("meridian check: ok")
+    console.log(`meridian check: ok — ${mechanicalBans.length} bans`)
   } else {
     console.error(`meridian check: ${hits.length} hit(s)`)
     for (const h of hits) {
-      console.error(`  ${h.file}: [${h.rule}] ${h.message}`)
+      console.error(`  ${h.file}:${h.line} [${h.rule}] ${h.message}`)
+      console.error(`    Fix: ${h.fix}`)
     }
   }
 }

@@ -146,25 +146,41 @@ function InstallPanel({
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
-            <ul className="space-y-1.5 font-mono text-[12px] text-muted-foreground">
-              {(
-                [
-                  ["design.md", install.machineUrls.design],
-                  ["agents.md", install.machineUrls.agents],
-                  ["architecture.md", install.machineUrls.architecture],
-                  ["llms.txt", install.machineUrls.llms],
-                ] as const
-              ).map(([label, href]) => (
-                <li key={label}>
-                  <Link
-                    href={href.replace("https://ui.byronwade.com", "")}
-                    className="text-foreground underline-offset-4 hover:underline"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {install.machineUrls ? (
+              <ul className="space-y-1.5 font-mono text-[12px] text-muted-foreground">
+                {(
+                  [
+                    ["design.md", install.machineUrls.design],
+                    ["agents.md", install.machineUrls.agents],
+                    ["architecture.md", install.machineUrls.architecture],
+                    ["llms.txt", install.machineUrls.llms],
+                  ] as const
+                ).map(([label, href]) => (
+                  <li key={label}>
+                    <Link
+                      href={href.replace("https://ui.byronwade.com", "")}
+                      className="text-foreground underline-offset-4 hover:underline"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              /* Owned empty state — a "soon" contract has not authored docs
+                 yet, and a dead link is worse than saying so. */
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {install.name} has not published machine docs yet. The MCP kit
+                and{" "}
+                <Link
+                  href={`/r/${install.id}.contract.json`}
+                  className="font-mono text-foreground underline-offset-4 hover:underline"
+                >
+                  contract.json
+                </Link>{" "}
+                above are live and carry the same mandate, tokens, and recipes.
+              </p>
+            )}
             <Separator />
             <CodeBlock code={install.shadcnInit} label="shadcn init" />
             <CodeBlock code={install.shadcnAdd} label="add primitives" />

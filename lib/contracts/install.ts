@@ -19,12 +19,13 @@ export type ContractInstall = {
   mcpCursorJson: string
   contractJsonUrl: string
   contractJsonCurl: string
+  /** Only present when the contract has authored its machine docs. */
   machineUrls: {
     design: string
     agents: string
     architecture: string
     llms: string
-  }
+  } | null
   shadcnInit: string
   shadcnAdd: string
   checkCli: string
@@ -34,7 +35,8 @@ export type ContractInstall = {
     ui: string
     theme: string
     surfaces: string
-    agents: string
+    /** Null until the contract authors its agents page. */
+    agents: string | null
   }
 }
 
@@ -43,6 +45,7 @@ export function getContractInstall(contractId: string): ContractInstall | null {
   if (!dna) return null
 
   const urls = contractUrls(dna.id, SITE)
+  const authored = dna.authored ?? []
   const base = pathTemplates.base(dna.id)
   const mcpCommand = `CONTRACT_ID=${dna.id} node packages/contract-mcp/server.mjs`
 
@@ -75,12 +78,16 @@ export function getContractInstall(contractId: string): ContractInstall | null {
     mcpCursorJson,
     contractJsonUrl: urls.contract,
     contractJsonCurl: `curl -sS ${urls.contract}`,
-    machineUrls: {
-      design: urls.design,
-      agents: urls.agents,
-      architecture: urls.architecture,
-      llms: urls.llms,
-    },
+    /* A "soon" contract has no authored docs yet — advertising the URLs
+       would hand agents four 404s. See ROUTE_SLOTS scope: "authored". */
+    machineUrls: authored.includes("design")
+      ? {
+          design: urls.design,
+          agents: urls.agents,
+          architecture: urls.architecture,
+          llms: urls.llms,
+        }
+      : null,
     shadcnInit: "npx shadcn@latest init -d --base radix",
     shadcnAdd: "npx shadcn@latest add button card input table tabs dialog",
     checkCli: `npm run meridian-check`,
@@ -90,7 +97,7 @@ export function getContractInstall(contractId: string): ContractInstall | null {
       ui: `${base}/ui`,
       theme: `${base}/theme`,
       surfaces: `${base}/surfaces`,
-      agents: `${base}/for-agents`,
+      agents: authored.includes("for-agents") ? `${base}/for-agents` : null,
     },
   }
 }

@@ -1,9 +1,20 @@
+"use client"
+
+import Link from "next/link"
+
+import { useContractScope } from "@/components/chrome/contract-scope"
 import { Surface } from "@/components/surfaces/surface"
 import { MediaPlane } from "@/components/cinematic/media-plane"
 import { Button } from "@/components/ui/button"
 import { bg, designCn, radiusIntent, text, typeClass } from "@/lib/design"
 
+/**
+ * Marketing-lane proof. Renders inside every contract's surface studio, so its
+ * links resolve against the owning contract — hardcoded /meridian paths would
+ * navigate a Harbor visitor out of Harbor.
+ */
 function MarketingFrame({ className }: { className?: string }) {
+  const { id } = useContractScope()
   return (
     <Surface
       id="marketing"
@@ -36,10 +47,10 @@ function MarketingFrame({ className }: { className?: string }) {
         </p>
         <div className="flex flex-wrap gap-2">
           <Button variant="theater-ink" size="pill" asChild>
-            <a href="/meridian/surfaces#marketing">Explore</a>
+            <Link href={`/${id}/surfaces#marketing`}>Explore</Link>
           </Button>
           <Button variant="theater-outline" size="pill" asChild>
-            <a href="/meridian/design">Docs</a>
+            <Link href={`/${id}/ui`}>Primitives</Link>
           </Button>
         </div>
       </div>

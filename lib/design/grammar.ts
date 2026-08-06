@@ -9,6 +9,8 @@
  * Agents import from `@/lib/design`. Anything outside these unions is drift.
  */
 
+import { banIds } from "@/lib/design/bans.mjs"
+
 /** Semantic color roles — map to CSS vars / Tailwind tokens only. */
 export const colorRoles = [
   "background",
@@ -139,37 +141,15 @@ export const themeKnobs = [
 export type ThemeKnob = (typeof themeKnobs)[number]
 
 /**
- * Banned patterns — shortest list, highest leverage against drift.
- * Enforced by `npm run check:design` + agent rules.
+ * Banned patterns — the vocabulary agents and reviewers share.
+ *
+ * Names come from `lib/design/bans.mjs`, which also holds the enforcement
+ * patterns read by `check:design`, the MCP `validate_ui` tool, and the
+ * generated contract JSON. One list, one enforcement, no drift.
  */
-export const banned = [
-  "raw-hex-color",
-  "arbitrary-color-utility",
-  "non-oklch-color",
-  "tailwind-shadow",
-  "dvh-viewport",
-  "font-bold-display",
-  "scroll-choreography",
-  "overlay-stickers-on-media",
-  "pure-white",
-  "pure-black",
-  "bright-neon-accent",
-  "cream-terracotta-cliche",
-  "second-accent",
-  "influence-brand-labels",
-  "floating-chatbot",
-  "nested-demo-scrollports",
-  "inset-hero-media",
-  "low-contrast-on-dock",
-  "foreground-opacity-cheat",
-  "direct-lucide-import",
-  "direct-phosphor-import",
-  "arbitrary-px-height",
-  "arbitrary-px-type",
-  "arbitrary-px-padding",
-] as const
+export const banned = banIds as readonly string[]
 
-export type BannedPattern = (typeof banned)[number]
+export type BannedPattern = string
 
 /**
  * Radius intent → allowed token.

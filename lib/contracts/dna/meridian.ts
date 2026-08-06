@@ -16,4 +16,12 @@ export const meridianDna = {
   ],
   aesthetic:
     "Soft warm neutrals, one deep ink accent, full-bleed cinema, dense app chrome.",
+  authored: [
+    "design",
+    "skills",
+    "system",
+    "for-agents",
+    "architecture",
+    "llms",
+  ],
 } as const satisfies ContractDna

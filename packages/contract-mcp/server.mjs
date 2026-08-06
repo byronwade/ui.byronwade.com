@@ -13,6 +13,8 @@ import { fileURLToPath } from "node:url"
 import { dirname, join } from "node:path"
 import { createInterface } from "node:readline"
 
+import { lintSource, mechanicalBans } from "../../lib/design/bans.mjs"
+
 const CONTRACT_ID = (process.env.CONTRACT_ID ?? "meridian").toLowerCase()
 const SITE = process.env.CONTRACT_SITE ?? "https://ui.byronwade.com"
 const CONTRACT_URL =
@@ -213,7 +215,7 @@ function toolList() {
     {
       name: "validate_ui",
       description:
-        "REQUIRED BEFORE DONE. Lint a className/snippet against consistency bans (hex, shadow-*, lucide, arbitrary color).",
+        "REQUIRED BEFORE DONE. Lint a className/snippet against every mechanical consistency ban — the same rules the repository gate enforces.",
       inputSchema: {
         type: "object",
         properties: { source: { type: "string" } },
@@ -239,28 +241,16 @@ function toolList() {
   ]
 }
 
+/**
+ * Lint against the SAME rules the repository gate runs (lib/design/bans.mjs).
+ * A verdict here that disagreed with CI would make this tool worse than
+ * useless — agents are told to call it before claiming done.
+ */
 function validateUi(kit, source) {
-  const hits = []
-  if (/#[0-9a-fA-F]{3,8}\b/.test(source)) {
-    hits.push({ ban: "hex-color", fix: "Use semantic tokens (bg-brand, text-foreground)" })
-  }
-  if (/\b(?:rgb|hsl)a?\(/.test(source)) {
-    hits.push({ ban: "rgb-hsl-literal", fix: "OKLCH tokens / utilities only" })
-  }
-  if (/\bshadow-(?:sm|md|lg|xl|2xl|inner)\b/.test(source)) {
-    hits.push({ ban: "tailwind-shadow", fix: "Use edge / depth-soft / depth-raised" })
-  }
-  if (/\bfont-bold\b/.test(source)) {
-    hits.push({ ban: "font-bold-display", fix: "font-normal / font-medium for hierarchy" })
-  }
-  if (/from\s+["']lucide-react["']/.test(source)) {
-    hits.push({ ban: "lucide-import", fix: 'import from "@/lib/icons"' })
-  }
-  if (/\b(?:text|bg|border)-\[[^\]]+\]/.test(source)) {
-    hits.push({ ban: "arbitrary-color-utility", fix: "Closed semantic utilities only" })
-  }
+  const hits = lintSource(source)
   return {
     ok: hits.length === 0,
+    checked: mechanicalBans.length,
     hits,
     next: hits.length
       ? "Fix every hit, then call validate_ui again before shipping."

@@ -148,9 +148,3 @@ export const systemDocs: readonly SystemDoc[] = [
 export function getSystemDoc(slug: string): SystemDoc | undefined {
   return systemDocs.find((d) => d.slug === slug)
 }
-
-export function requireSystemDoc(slug: string): SystemDoc {
-  const doc = getSystemDoc(slug)
-  if (!doc) throw new Error(`Unknown system doc: ${slug}`)
-  return doc
-}
