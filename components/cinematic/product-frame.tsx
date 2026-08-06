@@ -1,20 +1,21 @@
-import { type ReactNode } from "react"
-import { bg, designCn, depthIntent } from "@/lib/design"
+import { type ReactNode } from "react";
+import { bg, designCn, depthIntent } from "@/lib/design";
 
 type ProductFrameProps = {
-  children: ReactNode
-  className?: string
+  children: ReactNode;
+  className?: string;
   /** Soft falloff behind the window — keep subtle; app chrome is the subject. */
-  atmosphere?: boolean
+  atmosphere?: boolean;
   /**
    * edge — bleeds toward the stage edge (rail layouts)
    * shell — fully rounded window (centered stacks)
    */
-  frame?: "edge" | "shell"
-}
+  frame?: "edge" | "shell";
+};
 
 /**
  * Stages the application as the subject — window chrome, not a marketing card.
+ * Edge frames flush to the right of a rail; no inset margins.
  */
 function ProductFrame({
   children,
@@ -46,17 +47,17 @@ function ProductFrame({
             bg("card"),
             depthIntent("default"),
             frame === "shell" && "rounded-3xl",
-            /* Mobile: top-radius only so the stage edge stays flush; desktop: left radius, open right bleed */
+            /* Mobile: top radii only; desktop: open right + bottom to own the stage edge */
             frame === "edge" &&
-              "rounded-t-2xl md:rounded-l-3xl md:rounded-tr-none md:rounded-br-none",
+              "rounded-t-2xl md:rounded-tl-3xl md:rounded-tr-none md:rounded-br-none md:rounded-bl-none",
           )}
         >
           {children}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export { ProductFrame }
-export type { ProductFrameProps }
+export { ProductFrame };
+export type { ProductFrameProps };

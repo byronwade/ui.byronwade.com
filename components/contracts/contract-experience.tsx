@@ -1,20 +1,20 @@
-import Link from "next/link"
+import Link from "next/link";
 
-import { InstallPanel } from "@/components/contracts/showcase/install-panel"
-import { PrimitivesGallery } from "@/components/contracts/showcase/primitives-gallery"
-import { ShellShowcase } from "@/components/contracts/showcase/shell-showcase"
-import { priceLabel, type DesignContract } from "@/lib/contracts/catalog"
-import { pathTemplates } from "@/lib/platform/skeleton"
-import { cn } from "@/lib/utils"
+import { InstallPanel } from "@/components/contracts/showcase/install-panel";
+import { PrimitivesGallery } from "@/components/contracts/showcase/primitives-gallery";
+import { ShellShowcase } from "@/components/contracts/showcase/shell-showcase";
+import { priceLabel, type DesignContract } from "@/lib/contracts/catalog";
+import { pathTemplates } from "@/lib/platform/skeleton";
+import { cn } from "@/lib/utils";
 
 const demos: Record<
   string,
   {
-    eyebrow: string
-    sampleRows: { id: string; title: string; meta: string; tone: string }[]
-    panelTitle: string
-    panelBody: string
-    density: string
+    eyebrow: string;
+    sampleRows: { id: string; title: string; meta: string; tone: string }[];
+    panelTitle: string;
+    panelBody: string;
+    density: string;
   }
 > = {
   harbor: {
@@ -43,6 +43,30 @@ const demos: Record<
         title: "Carrier delay — East",
         meta: "Watching",
         tone: "muted",
+      },
+      {
+        id: "ORD-2371",
+        title: "Pick wave — Bay 4",
+        meta: "In progress",
+        tone: "brand",
+      },
+      {
+        id: "ORD-2366",
+        title: "Vendor credit — Alder",
+        meta: "Queued",
+        tone: "muted",
+      },
+      {
+        id: "ORD-2359",
+        title: "Cycle count — Shelf C",
+        meta: "Healthy",
+        tone: "success",
+      },
+      {
+        id: "ORD-2348",
+        title: "Hold — damaged carton",
+        meta: "Blocked",
+        tone: "warning",
       },
     ],
     panelTitle: "Quiet paper ops",
@@ -77,6 +101,30 @@ const demos: Record<
         meta: "33 pairs",
         tone: "success",
       },
+      {
+        id: "lib/dna.ts",
+        title: "assertTokens()",
+        meta: "watch",
+        tone: "muted",
+      },
+      {
+        id: "skill.run",
+        title: "atlas-compose",
+        meta: "ready",
+        tone: "brand",
+      },
+      {
+        id: "git/diff",
+        title: "surfaces/workbench",
+        meta: "+42 −8",
+        tone: "success",
+      },
+      {
+        id: "err/12",
+        title: "contrast: chart-2",
+        meta: "warn",
+        tone: "warning",
+      },
     ],
     panelTitle: "Ink-forward scanning",
     panelBody:
@@ -110,21 +158,21 @@ const demos: Record<
       "Reading lanes and typeset presets — not dashboard card grids. Measure stays honest at ~65ch.",
     density: "reading-ui · 65ch",
   },
-}
+};
 
 function statusClass(tone: string) {
-  if (tone === "warning") return "bg-warning/15 text-foreground"
-  if (tone === "success") return "bg-brand/10 text-foreground"
-  if (tone === "brand") return "bg-brand/10 text-foreground"
-  return "bg-muted/50 text-muted-foreground"
+  if (tone === "warning") return "bg-warning/15 text-foreground";
+  if (tone === "success") return "bg-brand/10 text-foreground";
+  if (tone === "brand") return "bg-brand/10 text-foreground";
+  return "bg-muted/50 text-muted-foreground";
 }
 
 function IndexRows({
   rows,
   dense = false,
 }: {
-  rows: { id: string; title: string; meta: string; tone: string }[]
-  dense?: boolean
+  rows: { id: string; title: string; meta: string; tone: string }[];
+  dense?: boolean;
 }) {
   return (
     <ul className="divide-y divide-border/60">
@@ -156,37 +204,37 @@ function IndexRows({
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 function ContractHero({
   contract,
   demo,
 }: {
-  contract: DesignContract
-  demo: (typeof demos)[string]
+  contract: DesignContract;
+  demo: (typeof demos)[string];
 }) {
-  const base = pathTemplates.base(contract.id)
+  const base = pathTemplates.base(contract.id);
 
   if (contract.id === "vellum") {
     return (
       <section
         data-slot="contract-hero"
         data-dna="vellum"
-        className="border-b border-border/60 px-5 pt-24 pb-16 md:px-8 md:pt-28 md:pb-24"
+        className="border-b border-border/60 px-5 pt-20 pb-14 md:px-8 md:pt-24 md:pb-20"
       >
         <div className="reading-ui mx-auto">
           <p className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
             Design contract · {contract.status}
           </p>
-          <h1 className="mt-5 text-[clamp(2.75rem,7vw,4.5rem)] font-medium leading-[0.96] tracking-[-0.04em] text-foreground">
+          <h1 className="mt-4 text-[clamp(2.75rem,7vw,4.5rem)] font-medium leading-[0.96] tracking-[-0.04em] text-foreground">
             {contract.name}
           </h1>
-          <p className="reading-lead mt-6 text-foreground">
+          <p className="reading-lead mt-5 text-foreground">
             {contract.tagline}
           </p>
-          <p className="reading-muted mt-4">{demo.panelBody}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <p className="reading-muted mt-3">{demo.panelBody}</p>
+          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link
               href={`${base}/install`}
               className="text-[15px] font-medium tracking-tight text-foreground underline underline-offset-[0.2em] transition-opacity hover:opacity-70"
@@ -202,7 +250,7 @@ function ContractHero({
           </div>
           <nav
             aria-label="Contents"
-            className="mt-12 border-t border-border/70 pt-6"
+            className="mt-10 border-t border-border/70 pt-5"
           >
             <p className="font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
               {demo.eyebrow}
@@ -228,24 +276,33 @@ function ContractHero({
           </nav>
         </div>
       </section>
-    )
+    );
   }
 
-  const isAtlas = contract.id === "atlas"
+  const isAtlas = contract.id === "atlas";
 
   return (
     <section
       data-slot="contract-hero"
       data-dna={contract.id}
-      className="relative flex min-h-[calc(100svh-2.75rem)] flex-col justify-end overflow-hidden md:min-h-svh md:justify-center"
+      className="relative flex min-h-svh w-full flex-col overflow-hidden md:flex-row md:items-stretch"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-1/4 top-0 h-[55vh] w-[70vw] rounded-full bg-brand/[0.06] blur-3xl"
+        className="pointer-events-none absolute -right-1/5 top-[-10%] h-[50vh] w-[55vw] rounded-full bg-brand/[0.05] blur-3xl"
       />
 
-      <div className="relative mx-auto grid w-full max-w-[92rem] flex-1 items-end gap-8 px-5 pt-24 pb-0 md:grid-cols-[minmax(15rem,26rem)_minmax(0,1fr)] md:items-center md:gap-12 md:px-8 md:pt-0 lg:grid-cols-[minmax(16rem,28rem)_minmax(0,1fr)]">
-        <div className="max-w-md pb-2 md:pb-0">
+      {/* Copy — same left gutter as contract header (max-w-6xl + px-8) */}
+      <div
+        className={cn(
+          "relative z-10 flex shrink-0 flex-col justify-end pt-24 pb-10",
+          "px-5 md:justify-center md:py-0 md:pr-10",
+          "md:pl-[max(1.25rem,calc((100vw-72rem)/2+2rem))]",
+          "md:w-[min(100%,calc(max(1.25rem,calc((100vw-72rem)/2+2rem))+22rem))]",
+          "lg:w-[min(100%,calc(max(1.25rem,calc((100vw-72rem)/2+2rem))+24rem))]",
+        )}
+      >
+        <div className="max-w-[22rem] lg:max-w-md">
           <p className="font-mono text-[11px] tracking-[0.18em] text-brand uppercase">
             {demo.eyebrow} · {contract.status}
           </p>
@@ -255,7 +312,7 @@ function ContractHero({
           <p className="mt-5 max-w-sm text-base leading-relaxed tracking-tight text-muted-foreground md:text-[1.0625rem]">
             {contract.tagline}
           </p>
-          <p className="mt-6 font-mono text-[11px] tracking-tight text-muted-foreground">
+          <p className="mt-5 font-mono text-[11px] tracking-tight text-muted-foreground">
             {priceLabel()} · {demo.density}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
@@ -273,37 +330,32 @@ function ContractHero({
             </Link>
           </div>
         </div>
+      </div>
 
-        <div className="relative min-h-0 w-full md:self-end">
-          <div
-            className={cn(
-              "overflow-hidden bg-card edge",
-              "rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none md:rounded-br-none",
-              isAtlas && "font-mono",
-            )}
-          >
-            <div className="flex items-center justify-between gap-3 border-b border-border/60 px-4 py-2.5 md:px-5">
-              <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
-                {demo.eyebrow}
-              </p>
-              <p className="truncate font-mono text-[11px] text-muted-foreground">
-                {demo.density}
-              </p>
-            </div>
+      {/* Index — fills remaining plane; flush right + bottom, no promo footer */}
+      <div className="relative z-10 flex min-h-0 min-w-0 flex-1 items-stretch pt-0 md:pt-12">
+        <div
+          className={cn(
+            "flex h-[min(56svh,32rem)] w-full flex-col self-end overflow-hidden bg-card edge",
+            "rounded-t-2xl md:h-full md:self-stretch md:rounded-tl-3xl md:rounded-tr-none md:rounded-br-none md:rounded-bl-none",
+            isAtlas && "font-mono",
+          )}
+        >
+          <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border/60 px-4 py-2.5 md:px-5">
+            <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+              {demo.eyebrow}
+            </p>
+            <p className="truncate font-mono text-[11px] text-muted-foreground">
+              {demo.density}
+            </p>
+          </div>
+          <div className="min-h-0 flex-1 overflow-auto">
             <IndexRows rows={demo.sampleRows} dense={isAtlas} />
-            <div className="border-t border-border/60 px-4 py-3.5 md:px-5">
-              <p className="text-sm font-medium tracking-tight text-foreground">
-                {demo.panelTitle}
-              </p>
-              <p className="mt-1 max-w-prose text-sm leading-relaxed text-muted-foreground">
-                {demo.panelBody}
-              </p>
-            </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 /**
@@ -311,8 +363,8 @@ function ContractHero({
  * First viewport is DNA-specific; below folds share install / UI / shells.
  */
 function ContractExperience({ contract }: { contract: DesignContract }) {
-  const demo = demos[contract.id] ?? demos.harbor!
-  const base = pathTemplates.base(contract.id)
+  const demo = demos[contract.id] ?? demos.harbor!;
+  const base = pathTemplates.base(contract.id);
 
   return (
     <main data-slot="contract-experience" data-surface="marketing">
@@ -383,7 +435,7 @@ function ContractExperience({ contract }: { contract: DesignContract }) {
         </section>
       </div>
     </main>
-  )
+  );
 }
 
-export { ContractExperience }
+export { ContractExperience };

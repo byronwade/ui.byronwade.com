@@ -1,6 +1,6 @@
-import { CinemaTile, CinemaLink } from "@/components/cinematic/tile"
-import { cinemaStills } from "@/lib/media"
-import { defineCinemaFrame, text } from "@/lib/design"
+import { CinemaTile, CinemaLink } from "@/components/cinematic/tile";
+import { cinemaStills } from "@/lib/media";
+import { defineCinemaFrame, text } from "@/lib/design";
 
 const frame = defineCinemaFrame({
   tone: "theater",
@@ -8,7 +8,7 @@ const frame = defineCinemaFrame({
   ideas: 1,
   overlayStickers: false,
   fullBleed: true,
-})
+});
 
 /**
  * Closing — left-anchored on full-bleed still. One next step.
@@ -29,11 +29,11 @@ function Closing() {
       <p className="font-mono text-[11px] tracking-[0.16em] text-brand uppercase">
         Next
       </p>
-      <h2 className={`cinema-display mt-3 ${text("dock")}`}>Meridian</h2>
-      <p className={`cinema-lede mt-4 max-w-sm ${text("dock-muted")}`}>
+      <h2 className={`cinema-display mt-2 ${text("dock")}`}>Meridian</h2>
+      <p className={`cinema-lede mt-3 max-w-sm ${text("dock-muted")}`}>
         Ship application UI agents can keep honest.
       </p>
-      <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
+      <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
         <CinemaLink href="/meridian/install" priority="primary">
           Install
         </CinemaLink>
@@ -42,7 +42,7 @@ function Closing() {
         </CinemaLink>
       </div>
     </CinemaTile>
-  )
+  );
 }
 
-export { Closing }
+export { Closing };

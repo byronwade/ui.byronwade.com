@@ -1,37 +1,37 @@
-import { type ReactNode } from "react"
-import { Stage, type StageTone } from "@/components/cinematic/stage"
-import { BleedImage, type Veil } from "@/components/cinematic/bleed-image"
-import { designCn, text } from "@/lib/design"
-import { cn } from "@/lib/utils"
+import { type ReactNode } from "react";
+import { Stage, type StageTone } from "@/components/cinematic/stage";
+import { BleedImage, type Veil } from "@/components/cinematic/bleed-image";
+import { designCn, text } from "@/lib/design";
+import { cn } from "@/lib/utils";
 
-type Align = "center" | "bottom" | "start"
+type Align = "center" | "bottom" | "start";
 /**
  * overlay — copy on full-bleed media
  * stack — copy above, subject below (centered)
  * rail — asymmetric: copy column + edge-bleed subject (app owns the frame)
  * ledger — editorial index: mono rail + statement (paper beats)
  */
-type Layout = "overlay" | "stack" | "rail" | "ledger"
+type Layout = "overlay" | "stack" | "rail" | "ledger";
 
 type CinemaTileProps = {
-  id?: string
-  tone?: StageTone
+  id?: string;
+  tone?: StageTone;
   image?: {
-    src: string
-    alt: string
-    veil?: Veil
-    priority?: boolean
-    objectPosition?: string
-  }
-  layout?: Layout
-  align?: Align
+    src: string;
+    alt: string;
+    veil?: Veil;
+    priority?: boolean;
+    objectPosition?: string;
+  };
+  layout?: Layout;
+  align?: Align;
   /** Product / workbench subject for stack + rail */
-  subject?: ReactNode
+  subject?: ReactNode;
   /** Optional mono index for ledger (e.g. "01") */
-  index?: string
-  children: ReactNode
-  className?: string
-}
+  index?: string;
+  children: ReactNode;
+  className?: string;
+};
 
 /**
  * One-idea stage tile.
@@ -54,10 +54,7 @@ function CinemaTile({
         id={id}
         tone={tone}
         fullBleed
-        className={cn(
-          "justify-end pt-20 md:justify-center md:pt-0",
-          className,
-        )}
+        className={cn("overflow-hidden", className)}
       >
         {image ? (
           <BleedImage
@@ -68,16 +65,36 @@ function CinemaTile({
             objectPosition={image.objectPosition}
           />
         ) : null}
-        <div className="relative z-10 mx-auto grid w-full max-w-[92rem] flex-1 items-end gap-6 px-5 pb-0 md:grid-cols-[minmax(15rem,26rem)_minmax(0,1fr)] md:items-center md:gap-10 md:px-8 lg:grid-cols-[minmax(16rem,28rem)_minmax(0,1fr)]">
-          <div className="max-w-md pb-4 text-left md:pb-0">{children}</div>
+
+        {/*
+          Edge-bleed rail — copy left (gutter matches contract header max-w-6xl),
+          subject fills the rest and flushes the right + bottom viewport edges.
+        */}
+        <div className="relative z-10 flex min-h-svh w-full flex-col md:flex-row md:items-stretch">
+          <div
+            className={cn(
+              "flex shrink-0 flex-col justify-end pt-24 pb-10",
+              "px-5 md:justify-center md:py-0 md:pr-10",
+              "md:pl-[max(1.25rem,calc((100vw-72rem)/2+2rem))]",
+              "md:w-[min(100%,calc(max(1.25rem,calc((100vw-72rem)/2+2rem))+22rem))]",
+              "lg:w-[min(100%,calc(max(1.25rem,calc((100vw-72rem)/2+2rem))+24rem))]",
+            )}
+          >
+            <div className="max-w-[22rem] text-left lg:max-w-md">
+              {children}
+            </div>
+          </div>
+
           {subject ? (
-            <div className="relative w-full md:h-[min(72svh,42rem)] md:self-end">
-              {subject}
+            <div className="relative flex min-h-0 min-w-0 flex-1 items-stretch pt-0 md:pt-12">
+              <div className="h-[min(56svh,32rem)] w-full self-end md:h-full md:self-stretch">
+                {subject}
+              </div>
             </div>
           ) : null}
         </div>
       </Stage>
-    )
+    );
   }
 
   if (layout === "ledger") {
@@ -88,7 +105,7 @@ function CinemaTile({
         fullBleed={false}
         className={cn("items-stretch", className)}
       >
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-8 px-5 py-20 md:flex-row md:items-start md:gap-14 md:px-8 md:py-24">
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-8 px-5 py-16 md:flex-row md:items-start md:gap-14 md:px-8 md:py-20">
           <aside className="shrink-0 md:sticky md:top-24 md:w-24">
             <p
               className={designCn(
@@ -109,7 +126,7 @@ function CinemaTile({
           <div className="min-w-0 max-w-2xl flex-1 text-left">{children}</div>
         </div>
       </Stage>
-    )
+    );
   }
 
   if (layout === "stack") {
@@ -146,7 +163,7 @@ function CinemaTile({
           </div>
         ) : null}
       </Stage>
-    )
+    );
   }
 
   return (
@@ -155,9 +172,10 @@ function CinemaTile({
       tone={tone}
       fullBleed
       className={cn(
+        "overflow-hidden",
         align === "center" && "items-center justify-center",
         align === "bottom" && "justify-end pb-16 md:pb-24",
-        align === "start" && "items-end justify-end pb-16 md:pb-24",
+        align === "start" && "items-start justify-end pb-16 md:pb-24",
         className,
       )}
     >
@@ -172,25 +190,26 @@ function CinemaTile({
       ) : null}
       <div
         className={cn(
-          "relative z-10 mx-auto w-full max-w-4xl px-5 md:px-8",
-          align === "start" ? "mr-auto text-left" : "text-center",
-          align === "start" && "max-w-xl",
+          "relative z-10 w-full px-5 md:px-8",
+          align === "start"
+            ? "max-w-xl pl-5 text-left md:pl-[max(1.25rem,calc((100vw-72rem)/2+2rem))]"
+            : "mx-auto max-w-4xl text-center",
         )}
       >
         {children}
       </div>
     </Stage>
-  )
+  );
 }
 
 type CinemaLinkProps = {
-  href: string
-  children: ReactNode
-  className?: string
-  priority?: "primary" | "secondary"
+  href: string;
+  children: ReactNode;
+  className?: string;
+  priority?: "primary" | "secondary";
   /** theater = dock ink (default); paper = foreground on light stages */
-  tone?: StageTone
-}
+  tone?: StageTone;
+};
 
 /**
  * Quiet text CTA — brand stays scarce (eyebrow / wordmark).
@@ -203,7 +222,7 @@ function CinemaLink({
   priority = "primary",
   tone = "theater",
 }: CinemaLinkProps) {
-  const onPaper = tone === "paper"
+  const onPaper = tone === "paper";
   return (
     <a
       href={href}
@@ -227,8 +246,8 @@ function CinemaLink({
     >
       {children}
     </a>
-  )
+  );
 }
 
-export { CinemaTile, CinemaLink }
-export type { CinemaTileProps, CinemaLinkProps }
+export { CinemaTile, CinemaLink };
+export type { CinemaTileProps, CinemaLinkProps };
