@@ -1,7 +1,7 @@
 import { type ReactNode } from "react"
 import { Stage, type StageTone } from "@/components/cinematic/stage"
 import { BleedImage, type Veil } from "@/components/cinematic/bleed-image"
-import { designCn, text } from "@/lib/design"
+import { designCn, stageInk, text } from "@/lib/design"
 import { cn } from "@/lib/utils"
 
 type Align = "center" | "bottom" | "start"
@@ -90,25 +90,33 @@ function CinemaTile({
         fullBleed
         className={cn("items-stretch justify-center", className)}
       >
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center gap-10 px-5 py-28 md:flex-row md:items-start md:gap-16 md:px-8 md:py-32">
-          <aside className="shrink-0 md:sticky md:top-28 md:w-28">
-            <p
-              className={designCn(
-                "font-mono text-[11px] tracking-[0.2em] uppercase",
-                tone === "theater" ? text("brand") : text("brand"),
-              )}
-            >
-              {index ?? "—"}
-            </p>
-            <div
-              className={cn(
-                "mt-4 hidden h-px w-12 md:block",
-                tone === "theater" ? "bg-dock-muted/40" : "bg-border",
-              )}
-              aria-hidden
-            />
-          </aside>
-          <div className="min-w-0 max-w-2xl flex-1 text-left">{children}</div>
+        {/*
+          Outer column centers the beat in the stage; the inner row keeps the
+          editorial ledger alignment (index at the top of the statement).
+          Without the outer centering the copy pins to the top padding and
+          leaves a viewport-tall void under every paper beat.
+        */}
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-5 py-24 md:px-8 md:py-28">
+          <div className="flex flex-col gap-10 md:flex-row md:items-start md:gap-16">
+            <aside className="shrink-0 md:w-28">
+              <p
+                className={designCn(
+                  "font-mono text-[11px] tracking-[0.2em] uppercase",
+                  text("brand"),
+                )}
+              >
+                {index ?? "—"}
+              </p>
+              <div
+                className={cn(
+                  "mt-4 hidden h-px w-12 md:block",
+                  tone === "theater" ? "bg-dock-muted/40" : "bg-border",
+                )}
+                aria-hidden
+              />
+            </aside>
+            <div className="min-w-0 max-w-2xl flex-1 text-left">{children}</div>
+          </div>
         </div>
       </Stage>
     )
@@ -194,7 +202,11 @@ type CinemaLinkProps = {
 
 /**
  * Quiet text CTA — brand stays scarce (eyebrow / wordmark).
- * Primary = dock ink underline; secondary = muted link.
+ * Primary = stage ink underline; secondary = muted stage ink.
+ *
+ * Ink comes from `--stage-ink`, which `[data-tone]` remaps, so the same link
+ * reads on paper and on theater. Hard-coded dock tokens collapse to ~1:1 on
+ * a paper tile — see `stageInk()` in lib/design/cx.ts.
  */
 function CinemaLink({
   href,
@@ -207,11 +219,11 @@ function CinemaLink({
       href={href}
       data-priority={priority}
       className={designCn(
-        "text-[15px] tracking-tight underline-offset-[0.2em] transition-opacity md:text-[16px]",
+        "inline-flex min-h-8 items-center text-[15px] tracking-tight underline-offset-[0.2em] transition-opacity md:text-[16px]",
         priority === "primary" &&
-          designCn(text("dock"), "font-medium underline hover:opacity-80"),
+          designCn(stageInk("ink"), "font-medium underline hover:opacity-80"),
         priority === "secondary" &&
-          designCn(text("dock-muted"), "hover:text-dock-foreground hover:underline"),
+          designCn(stageInk("muted"), "hover:stage-ink hover:underline"),
         className,
       )}
     >

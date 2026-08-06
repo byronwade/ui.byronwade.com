@@ -71,8 +71,10 @@ const textSolid: Record<ColorRole, string> = {
   muted: "text-muted-foreground",
   accent: "text-accent-foreground",
   destructive: "text-destructive",
-  warning: "text-warning-foreground",
-  success: "text-success-foreground",
+  /* Status inks read on paper, like destructive — the `-foreground` tokens are
+     the on-fill colors and are near-white on light skins. */
+  warning: "text-warning",
+  success: "text-success",
   brand: "text-brand",
   "brand-muted": "text-brand-muted",
   border: "text-border",
@@ -107,6 +109,21 @@ export function bg(role: ColorRole, opacity?: 10 | 15 | 25 | 30 | 40 | 50) {
 /** Text utility from a closed color role. */
 export function text(role: ColorRole) {
   return textSolid[role]
+}
+
+const stageInkMap = {
+  ink: "stage-ink",
+  muted: "stage-ink-muted",
+} as const
+
+/**
+ * Copy color for cinema stages — resolves against `[data-tone]` at paint time.
+ *
+ * Use this instead of `text("dock")` / `text("dock-muted")` inside a tile:
+ * dock tokens are correct only on theater and collapse to ~1:1 on paper.
+ */
+export function stageInk(role: keyof typeof stageInkMap = "ink") {
+  return stageInkMap[role]
 }
 
 export function depth(token: DepthToken) {

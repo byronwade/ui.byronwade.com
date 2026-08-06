@@ -19,6 +19,7 @@ export {
   radius,
   radiusIntent,
   shellType,
+  stageInk,
   text,
   typeClass,
 } from "@/lib/design/cx"

@@ -1,4 +1,5 @@
 import { PanelLeft, Search, Terminal, FileText } from "@/lib/icons"
+import { ContractName } from "@/components/chrome/contract-scope"
 import { Surface } from "@/components/surfaces/surface"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -27,7 +28,7 @@ function DesktopFrame({ className }: { className?: string }) {
             text("muted"),
           )}
         >
-          Meridian — Issues
+          <ContractName /> — Issues
         </p>
         <Badge variant="outline" className="h-5 font-mono text-[10px]">
           ⌘⇧P
@@ -105,8 +106,8 @@ function DesktopFrame({ className }: { className?: string }) {
                   Selected state uses brand wash
                 </h4>
                 <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  Desktop native keeps Meridian tokens with tighter chrome —
-                  menus, activity bar, status — not an OS theme fork.
+                  Desktop native keeps <ContractName /> tokens with tighter
+                  chrome — menus, activity bar, status — not an OS theme fork.
                 </p>
                 <Separator className="my-3" />
                 <div

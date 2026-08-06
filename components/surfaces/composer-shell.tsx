@@ -6,6 +6,7 @@
 
 import { useState, type ReactNode } from "react"
 import { FileText, Sparkle, CircleNotch, CheckCircle } from "@/lib/icons"
+import { ContractName } from "@/components/chrome/contract-scope"
 import { Surface } from "@/components/surfaces/surface"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -91,7 +92,14 @@ const fileBodies: Record<
   },
   "design.md": {
     lines: [
-      { n: "01", html: <># Meridian</> },
+      {
+        n: "01",
+        html: (
+          <>
+            # <ContractName />
+          </>
+        ),
+      },
       {
         n: "02",
         highlight: true,
@@ -212,13 +220,15 @@ function ComposerShell({ className }: ComposerShellProps) {
     <Surface
       id="desktop"
       className={designCn(
-        "flex h-[32rem] overflow-hidden edge md:h-[36rem]",
+        /* @container: same reason as Workbench — this shell is embedded at
+           several widths and must fold on its own box, not the viewport. */
+        "@container flex h-[32rem] overflow-hidden edge md:h-[36rem]",
         radiusIntent("panel"),
         bg("background"),
         className,
       )}
     >
-      <aside className="hidden w-40 shrink-0 flex-col border-r border-border bg-muted/20 md:flex">
+      <aside className="hidden w-40 shrink-0 flex-col border-r border-border bg-muted/20 @md:flex">
         <p className="px-2 pt-2 font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
           Explorer
         </p>
@@ -348,8 +358,8 @@ function ComposerShell({ className }: ComposerShellProps) {
           })}
         </div>
 
-        <div className="grid min-h-0 flex-1 lg:grid-cols-[1fr_18rem]">
-          <div className="min-h-0 overflow-auto border-border p-4 font-mono text-[12px] leading-relaxed text-muted-foreground lg:border-r">
+        <div className="grid min-h-0 flex-1 @3xl:grid-cols-[1fr_18rem]">
+          <div className="min-h-0 overflow-auto border-border p-4 font-mono text-[12px] leading-relaxed text-muted-foreground @3xl:border-r">
             {body.lines.map((line) => (
               <p
                 key={line.n}
@@ -367,7 +377,7 @@ function ComposerShell({ className }: ComposerShellProps) {
           </div>
 
           <aside
-            className="hidden min-h-0 flex-col bg-muted/15 lg:flex"
+            className="hidden min-h-0 flex-col bg-muted/15 @3xl:flex"
             data-disclosure={interactive.agent?.disclosure}
           >
             <div className="flex h-8 items-center gap-2 border-b border-border px-3">
@@ -485,7 +495,9 @@ function ComposerShell({ className }: ComposerShellProps) {
         </div>
 
         <footer className="flex h-6 items-center justify-between border-t border-border bg-muted/20 px-3 font-mono text-[10px] text-muted-foreground">
-          <span>Meridian · application</span>
+          <span>
+            <ContractName /> · application
+          </span>
           <span>{activeFile}</span>
         </footer>
       </div>

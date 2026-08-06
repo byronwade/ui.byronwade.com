@@ -1,277 +1,180 @@
 import Link from "next/link"
 
+import { DnaProof } from "@/components/contracts/showcase/dna-proof"
 import { InstallPanel } from "@/components/contracts/showcase/install-panel"
 import { PrimitivesGallery } from "@/components/contracts/showcase/primitives-gallery"
 import { ShellShowcase } from "@/components/contracts/showcase/shell-showcase"
+import { Button } from "@/components/ui/button"
 import { priceLabel, type DesignContract } from "@/lib/contracts/catalog"
 import { pathTemplates } from "@/lib/platform/skeleton"
 import { cn } from "@/lib/utils"
 
-const demos: Record<
-  string,
-  {
-    eyebrow: string
-    sampleRows: { id: string; title: string; meta: string; tone: string }[]
-    panelTitle: string
-    panelBody: string
-    density: string
-  }
-> = {
-  harbor: {
-    eyebrow: "Ops index",
-    sampleRows: [
-      {
-        id: "ORD-2401",
-        title: "Restock ceramic vessels",
-        meta: "Open · 12m",
-        tone: "warning",
-      },
-      {
-        id: "ORD-2398",
-        title: "Refund #4821",
-        meta: "Needs review",
-        tone: "brand",
-      },
-      {
-        id: "ORD-2390",
-        title: "Ship queue — West",
-        meta: "Healthy",
-        tone: "success",
-      },
-    ],
-    panelTitle: "Quiet paper ops",
-    panelBody:
-      "Dense rows, semantic status, calm chrome. Harbor is the admin contract — indexes and details agents can keep consistent.",
-    density: "Compact rows · semantic chips · no cinema",
-  },
-  atlas: {
-    eyebrow: "Workbench",
-    sampleRows: [
-      {
-        id: "src/app.ts",
-        title: "bootAgent()",
-        meta: "edited 2m",
-        tone: "brand",
-      },
-      {
-        id: "tool.call",
-        title: "validate_ui",
-        meta: "passed",
-        tone: "success",
-      },
-      {
-        id: "cmd+k",
-        title: "Jump to recipe",
-        meta: "palette",
-        tone: "muted",
-      },
-    ],
-    panelTitle: "Ink-forward scanning",
-    panelBody:
-      "Mono metadata, sharp radius, keyboard-first chrome. Atlas is the developer workbench contract.",
-    density: "Desktop density · mono meta · steel ink",
-  },
-  vellum: {
-    eyebrow: "Reading lane",
-    sampleRows: [
-      {
-        id: "§01",
-        title: "How agents load the contract",
-        meta: "3 min read",
-        tone: "brand",
-      },
-      {
-        id: "§02",
-        title: "Typeset presets for help",
-        meta: "streaming-safe",
-        tone: "muted",
-      },
-      {
-        id: "§03",
-        title: "Context budgets",
-        meta: "measured",
-        tone: "success",
-      },
-    ],
-    panelTitle: "Mist, measured prose",
-    panelBody:
-      "Docs and help surfaces with reading lanes — not dashboard chrome. Vellum keeps long-form honest for agents and humans.",
-    density: "reading-ui · soft radius · bronze accent",
-  },
+/**
+ * Band — one rhythm for every section on a contract landing page.
+ *
+ * Alternating tone gives the page distinct beats without cinema; the padding
+ * and measure are identical everywhere so no section drifts off the grid.
+ */
+function Band({
+  id,
+  tone = "paper",
+  className,
+  children,
+}: {
+  id?: string
+  tone?: "paper" | "sunk"
+  className?: string
+  children: React.ReactNode
+}) {
+  return (
+    <section
+      id={id}
+      className={cn(
+        "scroll-mt-16 border-b border-border/60 px-5 py-20 md:px-8 md:py-24",
+        tone === "sunk" && "bg-muted/20",
+        className,
+      )}
+    >
+      <div className="mx-auto max-w-6xl">{children}</div>
+    </section>
+  )
 }
 
-function statusClass(tone: string) {
-  if (tone === "warning") return "bg-warning/15 text-foreground"
-  if (tone === "success") return "bg-brand/10 text-foreground"
-  if (tone === "brand") return "bg-brand/10 text-foreground"
-  return "bg-muted/50 text-muted-foreground"
+/**
+ * Section head — eyebrow / title / lead on the left, one link on the right.
+ *
+ * Baseline-aligned rather than `items-end`: when the lead wraps, an end-aligned
+ * link slides down to the last line and breaks the header rule.
+ */
+function BandHead({
+  eyebrow,
+  title,
+  lead,
+  action,
+}: {
+  eyebrow: string
+  title: string
+  lead: string
+  action?: { href: string; label: string }
+}) {
+  return (
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+      <div className="max-w-2xl">
+        <p className="type-label text-muted-foreground">{eyebrow}</p>
+        <h2 className="mt-2.5 text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          {lead}
+        </p>
+      </div>
+      {action ? (
+        <Link
+          href={action.href}
+          className="type-meta inline-flex min-h-8 shrink-0 items-center text-foreground underline-offset-4 hover:underline sm:mt-1"
+        >
+          {action.label} →
+        </Link>
+      ) : null}
+    </div>
+  )
 }
 
 /**
  * Feature-rich contract home for non-film systems.
- * Showcases DNA + shared UI/shells + install DX under [data-contract].
+ *
+ * Structure is shared with every other contract (platform skeleton); the DNA
+ * frame in the hero is the one place a system shows its own density.
  */
 function ContractExperience({ contract }: { contract: DesignContract }) {
-  const demo = demos[contract.id] ?? demos.harbor!
   const base = pathTemplates.base(contract.id)
   const jsonHref = pathTemplates.contractJson(contract.id)
 
   return (
-    <main
-      data-slot="contract-experience"
-      data-surface="marketing"
-      className="px-5 pb-24 pt-28 md:px-8 md:pb-32 md:pt-32"
-    >
-      <div className="mx-auto max-w-6xl space-y-20">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-          <div>
-            <p className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
+    <main data-slot="contract-experience" data-surface="marketing">
+      {/* ── Hero — statement left, DNA frame right, spec strip under both ── */}
+      <Band className="pt-28 md:pt-32">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
+          <div className="max-w-xl">
+            <p className="type-label text-muted-foreground">
               Design contract · {contract.status}
             </p>
-            <h1 className="mt-3 text-4xl font-medium tracking-tight text-foreground sm:text-5xl">
+            <h1 className="mt-4 text-[clamp(2.75rem,6vw,4rem)] leading-[1.02] font-medium tracking-[-0.04em] text-foreground">
               {contract.name}
             </h1>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+            <p className="mt-5 text-lg leading-snug tracking-tight text-foreground sm:text-xl">
               {contract.tagline}
             </p>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               {contract.aesthetic}
             </p>
-            <p className="mt-6 font-mono text-sm text-muted-foreground">
+            <div className="mt-8 flex flex-wrap items-center gap-2.5">
+              <Button size="pill" asChild>
+                <Link href={`${base}/install`}>Install MCP · API · npx</Link>
+              </Button>
+              <Button size="pill" variant="outline" asChild>
+                <Link href={`${base}/ui`}>UI gallery</Link>
+              </Button>
+              <Button size="pill" variant="ghost" asChild>
+                <Link href={jsonHref} className="font-mono">
+                  contract.json
+                </Link>
+              </Button>
+            </div>
+            <p className="type-meta mt-5 text-muted-foreground">
               {priceLabel()} · mcp/{contract.mcpSlug}
             </p>
-            <ul className="mt-6 space-y-2">
-              {contract.features.map((f) => (
-                <li
-                  key={f}
-                  className="text-sm text-muted-foreground before:mr-2 before:text-brand before:content-['·']"
-                >
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href={`${base}/install`}
-                className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium tracking-tight text-primary-foreground"
-              >
-                Install MCP · API · npx
-              </Link>
-              <Link
-                href={`${base}/ui`}
-                className="inline-flex h-10 items-center rounded-full px-5 text-sm tracking-tight text-muted-foreground hover:bg-muted/30 hover:text-foreground"
-              >
-                UI gallery
-              </Link>
-              <Link
-                href={jsonHref}
-                className="inline-flex h-10 items-center rounded-full px-5 font-mono text-sm tracking-tight text-muted-foreground hover:bg-muted/30 hover:text-foreground"
-              >
-                contract.json
-              </Link>
-            </div>
           </div>
 
-          <div className="overflow-hidden rounded-2xl bg-card edge depth-soft">
-            <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
-              <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
-                {demo.eyebrow}
-              </p>
-              <p className="font-mono text-[11px] text-brand">{demo.density}</p>
-            </div>
-            <ul className="divide-y divide-border/50">
-              {demo.sampleRows.map((row) => (
-                <li
-                  key={row.id}
-                  className="flex h-row items-center justify-between gap-3 px-4 transition-colors hover:bg-muted/30"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate text-sm tracking-tight text-foreground">
-                      {row.title}
-                    </p>
-                    <p className="font-mono text-[11px] text-muted-foreground">
-                      {row.id}
-                    </p>
-                  </div>
-                  <span
-                    className={cn(
-                      "shrink-0 rounded-full px-2 py-0.5 font-mono text-[10px] uppercase",
-                      statusClass(row.tone),
-                    )}
-                  >
-                    {row.meta}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className="border-t border-border/60 bg-muted/25 px-4 py-4">
-              <p className="text-sm font-medium tracking-tight text-foreground">
-                {demo.panelTitle}
-              </p>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                {demo.panelBody}
-              </p>
-            </div>
-          </div>
+          <DnaProof
+            contractId={contract.id}
+            name={contract.name}
+            aesthetic={contract.aesthetic}
+          />
         </div>
 
-        <section id="install" className="scroll-mt-24 space-y-6 border-t border-border/50 pt-12">
-          <InstallPanel contractId={contract.id} />
-        </section>
-
-        <section id="ui" className="scroll-mt-24 space-y-4 border-t border-border/50 pt-12">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <p className="font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
-                UI gallery
-              </p>
-              <h2 className="mt-2 text-2xl font-medium tracking-tight text-foreground">
-                Shared shadcn — {contract.name} skin
-              </h2>
-              <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-                One component set under{" "}
-                <span className="font-mono text-foreground">components/ui</span>
-                . This route applies the DNA; we do not fork controls per
-                contract.
-              </p>
+        {/* Spec strip spans the full measure so neither column runs long */}
+        <dl className="mt-14 grid gap-x-8 gap-y-6 border-t border-border/60 pt-8 sm:grid-cols-2 lg:grid-cols-4">
+          {contract.features.map((feature, i) => (
+            <div key={feature}>
+              <dt className="type-meta text-brand">
+                {String(i + 1).padStart(2, "0")}
+              </dt>
+              <dd className="mt-2 text-sm leading-snug tracking-tight text-foreground">
+                {feature}
+              </dd>
             </div>
-            <Link
-              href={`${base}/ui`}
-              className="font-mono text-[12px] text-foreground underline-offset-4 hover:underline"
-            >
-              Open full UI page →
-            </Link>
-          </div>
+          ))}
+        </dl>
+      </Band>
+
+      <Band id="install" tone="sunk">
+        <InstallPanel contractId={contract.id} />
+      </Band>
+
+      <Band id="ui">
+        <BandHead
+          eyebrow="UI gallery"
+          title={`Shared shadcn — ${contract.name} skin`}
+          lead="One component set under components/ui. This route applies the DNA through CSS variables; we never fork controls per contract."
+          action={{ href: `${base}/ui`, label: "Open full UI page" }}
+        />
+        <div className="mt-8">
           <PrimitivesGallery />
-        </section>
+        </div>
+      </Band>
 
-        <section
-          id="shells"
-          className="scroll-mt-24 space-y-4 border-t border-border/50 pt-12"
-        >
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <p className="font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
-                App shells
-              </p>
-              <h2 className="mt-2 text-2xl font-medium tracking-tight text-foreground">
-                Workbench & composer proofs
-              </h2>
-              <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-                Detailed product chrome — same shells as Meridian, restyled by{" "}
-                {contract.name}.
-              </p>
-            </div>
-            <Link
-              href={`${base}/surfaces`}
-              className="font-mono text-[12px] text-foreground underline-offset-4 hover:underline"
-            >
-              Open surfaces →
-            </Link>
-          </div>
-          <ShellShowcase />
-        </section>
-      </div>
+      <Band id="shells" tone="sunk">
+        <BandHead
+          eyebrow="App shells"
+          title="Workbench & composer proofs"
+          lead={`Detailed product chrome — the same shells every contract ships, restyled by ${contract.name}. Switch lanes to see hit targets remap without a second component set.`}
+          action={{ href: `${base}/surfaces`, label: "Open surfaces" }}
+        />
+        <div className="mt-8">
+          <ShellShowcase variant="studio" />
+        </div>
+      </Band>
     </main>
   )
 }

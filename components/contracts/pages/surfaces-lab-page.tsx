@@ -27,7 +27,7 @@ function ContractSurfacesLabPage({ contractId }: { contractId: string }) {
           </Button>
         </>
       }
-      measure="split"
+      measure="wide"
       className="pb-24"
     >
       <ShellShowcase />

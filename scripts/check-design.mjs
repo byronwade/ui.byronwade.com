@@ -80,13 +80,14 @@ const RULES = [
   },
   {
     id: "pure-white",
-    re: /(?:bg|text|border|fill|stroke)-(?:white)(?:\/|\s|"|'|`|$)|['"`]#(?:fff|ffffff|FFF|FFFFFF)['"`]|oklch\(\s*1\s+0\s+0\s*\)/,
+    // Includes gradient stops (from-/via-/to-) — they paint the same pixels.
+    re: /(?:bg|text|border|fill|stroke|from|via|to)-(?:white)(?:\/|\s|"|'|`|$)|['"`]#(?:fff|ffffff|FFF|FFFFFF)['"`]|oklch\(\s*1\s+0\s+0\s*\)/,
     message: "Pure white banned — use soft warm neutrals (background/card)",
     include: /\.(tsx|ts|css)$/,
   },
   {
     id: "pure-black",
-    re: /(?:bg|text|border|fill|stroke)-(?:black)(?:\/|\s|"|'|`|$)|['"`]#(?:000|000000)['"`]|oklch\(\s*0\s+0\s+0/,
+    re: /(?:bg|text|border|fill|stroke|from|via|to)-(?:black)(?:\/|\s|"|'|`|$)|['"`]#(?:000|000000)['"`]|oklch\(\s*0\s+0\s+0/,
     message: "Pure black banned — use soft warm dock/foreground charcoal",
     include: /\.(tsx|ts|css)$/,
   },

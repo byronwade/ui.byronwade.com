@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 /**
- * Contrast audit — WCAG AA (≥4.5:1) on platform :root + Meridian contract skin.
+ * Contrast audit — WCAG AA (≥4.5:1) on the platform shell and EVERY contract
+ * skin, light and dark.
+ *
+ * Skins diverge on purpose (that is the DNA), so every one of them has to be
+ * audited on its own tokens — auditing Meridian and assuming the rest inherit
+ * is how a sibling contract ships an unreadable chip.
  */
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
@@ -12,32 +17,65 @@ const SKINS_PATH = join(ROOT, "app/contract-skins.css")
 const AA_BODY = 4.5
 const AA_LARGE = 3
 
+/** Every contract that ships a skin block in app/contract-skins.css. */
+const CONTRACTS = ["meridian", "harbor", "atlas", "vellum"]
+
+/**
+ * Pairs that actually get painted. `--stage-ink` resolves through `[data-tone]`,
+ * so both stage tones are checked against the surface they land on.
+ * @type {{ name: string, fg: string, bg: string, large?: boolean }[]}
+ */
+const SKIN_PAIRS = [
+  { name: "body", fg: "foreground", bg: "background" },
+  { name: "muted", fg: "muted-foreground", bg: "background" },
+  { name: "brand link", fg: "brand", bg: "background" },
+  { name: "on-brand fill", fg: "brand-foreground", bg: "brand" },
+  { name: "body on card", fg: "foreground", bg: "card" },
+  { name: "muted on card", fg: "muted-foreground", bg: "card" },
+  { name: "brand on card", fg: "brand", bg: "card" },
+  { name: "text on muted chip", fg: "foreground", bg: "muted" },
+  { name: "muted on muted chip", fg: "muted-foreground", bg: "muted" },
+  { name: "on-secondary", fg: "secondary-foreground", bg: "secondary" },
+  { name: "on-accent", fg: "accent-foreground", bg: "accent" },
+  { name: "on-warning", fg: "warning-foreground", bg: "warning" },
+  { name: "destructive text", fg: "destructive", bg: "background" },
+  { name: "dock body", fg: "dock-foreground", bg: "dock" },
+  { name: "dock muted", fg: "dock-muted", bg: "dock" },
+  // Cinema copy — paper stages read stage ink on --background …
+  { name: "stage ink on paper", fg: "stage-ink", bg: "background" },
+  { name: "stage ink muted on paper", fg: "stage-ink-muted", bg: "background" },
+]
+
+/** Theater stages remap --stage-ink to dock tokens and lift --brand. */
+const THEATER_PAIRS = [
+  { name: "stage ink on theater", fg: "stage-ink", bg: "dock" },
+  { name: "stage ink muted on theater", fg: "stage-ink-muted", bg: "dock" },
+  { name: "brand on dock", fg: "brand", bg: "dock" },
+]
+
 /** @type {{ name: string, fg: string, bg: string, large?: boolean, scope?: string }[]} */
 const PAIRS = [
-  // Platform catalog
+  // Platform catalog shell
   { name: "platform body", fg: "foreground", bg: "background", scope: "root" },
   { name: "platform muted", fg: "muted-foreground", bg: "background", scope: "root" },
   { name: "platform brand link", fg: "brand", bg: "background", scope: "root" },
   { name: "platform on-brand", fg: "brand-foreground", bg: "brand", scope: "root" },
-  // Meridian paper
-  { name: "meridian body", fg: "foreground", bg: "background", scope: "meridian" },
-  { name: "meridian muted", fg: "muted-foreground", bg: "background", scope: "meridian" },
-  { name: "meridian brand link", fg: "brand", bg: "background", scope: "meridian" },
-  { name: "meridian on-brand", fg: "brand-foreground", bg: "brand", scope: "meridian" },
-  { name: "meridian dock body", fg: "dock-foreground", bg: "dock", scope: "meridian" },
-  { name: "meridian dock muted", fg: "dock-muted", bg: "dock", scope: "meridian" },
-  {
-    name: "theater brand on dock",
-    fg: "brand",
-    bg: "dock",
-    scope: "theater",
-  },
-  // Meridian dark
-  { name: "meridian dark body", fg: "foreground", bg: "background", scope: "meridian-dark" },
-  { name: "meridian dark muted", fg: "muted-foreground", bg: "background", scope: "meridian-dark" },
-  { name: "meridian dark brand", fg: "brand", bg: "background", scope: "meridian-dark" },
-  { name: "meridian dark on-brand", fg: "brand-foreground", bg: "brand", scope: "meridian-dark" },
 ]
+
+for (const id of CONTRACTS) {
+  for (const mode of ["", "-dark"]) {
+    for (const pair of SKIN_PAIRS) {
+      PAIRS.push({ ...pair, name: `${id}${mode} ${pair.name}`, scope: `${id}${mode}` })
+    }
+    for (const pair of THEATER_PAIRS) {
+      PAIRS.push({
+        ...pair,
+        name: `${id}${mode} ${pair.name}`,
+        scope: `${id}${mode}-theater`,
+      })
+    }
+  }
+}
 
 function extractBlock(css, startMarker) {
   // Prefer a real rule opener ("marker {") so comments like "(:root)" don't match.
@@ -120,29 +158,54 @@ function contrastRatio(a, b) {
   return (hi + 0.05) / (lo + 0.05)
 }
 
-const css = await readFile(CSS_PATH, "utf8")
-const skins = await readFile(SKINS_PATH, "utf8")
-const root = parseTokens(extractBlock(css, ":root"))
-const meridian = {
-  ...root,
-  ...parseTokens(extractBlock(skins, '[data-contract="meridian"]')),
-}
-const meridianDark = {
-  ...meridian,
-  ...parseTokens(extractBlock(skins, '.dark [data-contract="meridian"]')),
-}
-const theater = {
-  ...meridian,
-  ...parseTokens(
-    extractBlock(skins, '[data-contract="meridian"] [data-tone="theater"]'),
-  ),
+/** Merge every rule with this selector (tokens are split across @layer blocks). */
+function extractAllBlocks(css, startMarker) {
+  const rule = `${startMarker} {`
+  let out = ""
+  let from = 0
+  for (;;) {
+    const start = css.indexOf(rule, from)
+    if (start < 0) break
+    let depth = 0
+    let i = css.indexOf("{", start)
+    const open = i
+    for (; i < css.length; i++) {
+      if (css[i] === "{") depth++
+      else if (css[i] === "}") {
+        depth--
+        if (depth === 0) break
+      }
+    }
+    out += css.slice(open + 1, i) + "\n"
+    from = i + 1
+  }
+  return out
 }
 
-const scopes = {
-  root,
-  meridian,
-  "meridian-dark": meridianDark,
-  theater,
+const css = await readFile(CSS_PATH, "utf8")
+const skins = await readFile(SKINS_PATH, "utf8")
+const root = parseTokens(extractAllBlocks(css, ":root"))
+/** Stage-tone remap lives in globals (tone is contract-agnostic). */
+const toneTheater = parseTokens(extractAllBlocks(css, '[data-tone="theater"]'))
+
+const scopes = { root }
+
+for (const id of CONTRACTS) {
+  const light = {
+    ...root,
+    ...parseTokens(extractBlock(skins, `[data-contract="${id}"]`)),
+  }
+  const dark = {
+    ...light,
+    ...parseTokens(extractBlock(skins, `.dark [data-contract="${id}"]`)),
+  }
+  const lift = parseTokens(
+    extractBlock(skins, `[data-contract="${id}"] [data-tone="theater"]`),
+  )
+  scopes[id] = light
+  scopes[`${id}-dark`] = dark
+  scopes[`${id}-theater`] = { ...light, ...toneTheater, ...lift }
+  scopes[`${id}-dark-theater`] = { ...dark, ...toneTheater, ...lift }
 }
 const failures = []
 

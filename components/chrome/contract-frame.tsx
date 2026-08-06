@@ -1,5 +1,6 @@
 import { ContractFooter } from "@/components/chrome/contract-footer"
 import { ContractHeader } from "@/components/chrome/contract-header"
+import { ContractScopeProvider } from "@/components/chrome/contract-scope"
 
 /**
  * Scopes the entire contract route tree to that DNA's tokens + chrome.
@@ -13,15 +14,17 @@ function ContractFrame({
   children: React.ReactNode
 }) {
   return (
-    <div
-      data-contract={contractId}
-      data-slot="contract-frame"
-      className="min-h-svh bg-background text-foreground"
-    >
-      <ContractHeader contractId={contractId} />
-      {children}
-      <ContractFooter contractId={contractId} />
-    </div>
+    <ContractScopeProvider contractId={contractId}>
+      <div
+        data-contract={contractId}
+        data-slot="contract-frame"
+        className="min-h-svh bg-background text-foreground"
+      >
+        <ContractHeader contractId={contractId} />
+        {children}
+        <ContractFooter contractId={contractId} />
+      </div>
+    </ContractScopeProvider>
   )
 }
 

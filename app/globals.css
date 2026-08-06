@@ -266,6 +266,19 @@
     --motion-press: 120ms;
     --motion-select: 160ms;
     --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    /*
+     * Stage ink — copy color that follows the stage tone, not the component.
+     * Paper stages read on --background; theater stages read on --dock.
+     * Cinema components use .stage-ink / .stage-ink-muted so a tile can flip
+     * tone without re-picking tokens (and without silently going invisible).
+     */
+    --stage-ink: var(--foreground);
+    --stage-ink-muted: var(--muted-foreground);
+  }
+
+  [data-tone="theater"] {
+    --stage-ink: var(--dock-foreground);
+    --stage-ink-muted: var(--dock-muted);
   }
 
   [data-surface="application"] {
@@ -352,6 +365,19 @@
     line-height: 1.2;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+  }
+
+  /* Stage ink — follows [data-tone] so cinema copy never inverts itself */
+  .stage-ink {
+    color: var(--stage-ink);
+  }
+
+  .stage-ink-muted {
+    color: var(--stage-ink-muted);
+  }
+
+  .hover\:stage-ink:hover {
+    color: var(--stage-ink);
   }
 
   .shell-pad {

@@ -196,13 +196,16 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
     <Surface
       id={recipe.surface}
       className={designCn(
-        "flex h-[32rem] overflow-hidden edge md:h-[36rem]",
+        /* @container: this shell is embedded at many widths (studio, cards,
+           split doc columns). Viewport breakpoints would keep all three
+           columns open in a 32rem slot and collide the rows. */
+        "@container flex h-[32rem] overflow-hidden edge md:h-[36rem]",
         radiusIntent("panel"),
         bg("background"),
         className,
       )}
     >
-      <aside className="hidden w-40 shrink-0 flex-col border-r border-border bg-muted/20 text-sidebar-foreground md:flex">
+      <aside className="hidden w-40 shrink-0 flex-col border-r border-border bg-muted/20 text-sidebar-foreground @md:flex">
         <p className="px-2.5 pt-2 font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
           Workspace
         </p>
@@ -256,11 +259,11 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
           className={cn(
             "grid min-h-0 flex-1",
             withAgent && nav === "issues"
-              ? "lg:grid-cols-[1fr_16.5rem]"
+              ? "@3xl:grid-cols-[1fr_16.5rem]"
               : "grid-cols-1",
           )}
         >
-          <div className="min-h-0 overflow-auto border-border lg:border-r">
+          <div className="min-h-0 overflow-auto border-border @3xl:border-r">
             {nav === "home" ? (
               <div className="space-y-3 p-4">
                 <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
@@ -404,7 +407,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                         <th className="h-8 text-left text-[11px] font-medium text-muted-foreground">
                           Title
                         </th>
-                        <th className="hidden h-8 pr-2.5 text-right text-[11px] font-medium text-muted-foreground sm:table-cell">
+                        <th className="hidden h-8 pr-2.5 text-right text-[11px] font-medium text-muted-foreground @sm:table-cell">
                           Meta
                         </th>
                       </tr>
@@ -464,7 +467,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
                               <td className="truncate text-[13px] tracking-tight">
                                 {row.title}
                               </td>
-                              <td className="hidden pr-2.5 text-right font-mono text-[11px] text-muted-foreground sm:table-cell">
+                              <td className="hidden pr-2.5 text-right font-mono text-[11px] text-muted-foreground @sm:table-cell">
                                 {row.meta}
                               </td>
                             </tr>
@@ -480,7 +483,7 @@ function Workbench({ className, withAgent = true }: WorkbenchProps) {
 
           {withAgent && nav === "issues" ? (
             <aside
-              className="hidden min-h-0 flex-col bg-muted/15 lg:flex"
+              className="hidden min-h-0 flex-col bg-muted/15 @3xl:flex"
               data-disclosure={interactive.agent?.disclosure}
             >
               <div className="flex h-8 items-center gap-1.5 border-b border-border px-2.5">

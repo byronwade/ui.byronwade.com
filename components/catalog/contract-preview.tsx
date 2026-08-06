@@ -46,7 +46,16 @@ function ContractPreview({
             radial-gradient(90% 70% at 90% 100%, color-mix(in oklch, var(--preview-accent) 35%, transparent) 0%, transparent 60%)`,
         }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/5" />
+      {/* Depth vignette from tokens — pure black/white is banned (design.md) */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: `linear-gradient(to top,
+            color-mix(in oklch, var(--dock) 25%, transparent) 0%,
+            transparent 55%,
+            color-mix(in oklch, var(--background) 6%, transparent) 100%)`,
+        }}
+      />
 
       {/* Mini product chrome */}
       <div className="absolute inset-x-5 top-5 bottom-5 flex flex-col gap-2.5 sm:inset-x-6 sm:top-6 sm:bottom-6">

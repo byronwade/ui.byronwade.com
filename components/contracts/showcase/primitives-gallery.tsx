@@ -49,7 +49,9 @@ function PrimitivesGallery({ className }: { className?: string }) {
       className={cn("space-y-6", className)}
     >
       <Tabs defaultValue="actions">
-        <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1">
+        {/* w-fit, not w-full: TabsTrigger is flex-1, so a full-width list
+            stretches four tabs across the page and reads as a nav bar. */}
+        <TabsList className="flex h-auto w-fit max-w-full flex-wrap justify-start gap-1">
           <TabsTrigger value="actions">Actions</TabsTrigger>
           <TabsTrigger value="forms">Forms</TabsTrigger>
           <TabsTrigger value="data">Data</TabsTrigger>

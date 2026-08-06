@@ -98,9 +98,10 @@ Every UI or token change must pass this audit (skill: `meridian-a11y`):
 1. Colors are **OKLCH** semantic tokens — never hex / rgb / hsl / named colors
 2. Body/UI text ≥ **4.5:1**; large/display ≥ **3:1** (`lib/design/contrast.ts`)
 3. On `bg-dock` / theater stages use `data-tone="theater"` so `--brand` lifts
-4. Secondary text uses `text-muted-foreground` or `text-dock-muted` — never `text-*/70`
-5. Focus uses `ring-ring`; touch targets follow `data-surface="mobile"` (44px)
-6. Run **`npm run check:contrast`** (and `check:design`) before done
+4. Cinema copy uses **`stageInk()`** (`--stage-ink` / `--stage-ink-muted`), which `data-tone` remaps — hard-coded dock tokens collapse to ~1:1 on a paper stage
+5. Secondary text uses `text-muted-foreground` or `text-dock-muted` — never `text-*/70`
+6. Focus uses `ring-ring`; touch targets follow `data-surface="mobile"` (44px)
+7. Run **`npm run check:contrast`** (and `check:design`) before done — it audits **every contract skin**, light and dark, not just Meridian
 
 ## MUST
 

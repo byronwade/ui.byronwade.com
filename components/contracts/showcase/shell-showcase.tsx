@@ -14,19 +14,31 @@ import { cn } from "@/lib/utils"
 
 /**
  * Detailed app-shell proofs — shared shells, contract skin via ancestors.
+ *
+ * `studio` shows only the lane switcher (the landing page already has its own
+ * DNA frame above, and the studio contains both shells anyway). `full` adds
+ * the isolated shells for the dedicated surfaces route.
+ *
+ * The isolated shells stack one per row rather than sitting two-up: these are
+ * real application chrome with three internal columns, and at half a page
+ * width their list rows collide with their own metadata.
  */
-function ShellShowcase({ className }: { className?: string }) {
+function ShellShowcase({
+  className,
+  variant = "full",
+}: {
+  className?: string
+  variant?: "full" | "studio"
+}) {
   return (
-    <div data-slot="shell-showcase" className={cn("space-y-8", className)}>
-      <section className="space-y-3">
+    <div data-slot="shell-showcase" className={cn("space-y-10", className)}>
+      <section className="space-y-4">
         <div>
-          <p className="font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
-            Surface studio
-          </p>
-          <h3 className="mt-1 text-lg font-medium tracking-tight text-foreground">
+          <p className="type-label text-muted-foreground">Surface studio</p>
+          <h3 className="mt-1.5 text-lg font-medium tracking-tight text-foreground">
             Switch density lanes in one chrome
           </h3>
-          <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+          <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             Workbench, composer, marketing, mobile, desktop — same tokens,
             remapped hit targets. This is the product-shaped proof of the
             contract.
@@ -35,36 +47,38 @@ function ShellShowcase({ className }: { className?: string }) {
         <SurfaceStudio />
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-2">
-        <Card className="overflow-hidden">
-          <CardHeader>
-            <CardTitle>Application workbench</CardTitle>
-            <CardDescription>
-              Object list + detail + agent rail — compose shadcn, don&apos;t twin
-              shells.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="px-3 pb-3">
-            <div className="overflow-hidden rounded-2xl edge">
-              <Workbench />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="overflow-hidden">
-          <CardHeader>
-            <CardTitle>Composer shell</CardTitle>
-            <CardDescription>
-              Bound AI next to the object — provenance and activity stay
-              readable.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="px-3 pb-3">
-            <div className="overflow-hidden rounded-2xl edge">
-              <ComposerShell />
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+      {variant === "full" ? (
+        <section className="space-y-4">
+          <Card className="overflow-hidden">
+            <CardHeader>
+              <CardTitle>Application workbench</CardTitle>
+              <CardDescription>
+                Object list + detail + agent rail — compose shadcn, don&apos;t
+                twin shells.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="px-3 pb-3">
+              <div className="overflow-hidden rounded-2xl edge">
+                <Workbench />
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="overflow-hidden">
+            <CardHeader>
+              <CardTitle>Composer shell</CardTitle>
+              <CardDescription>
+                Bound AI next to the object — provenance and activity stay
+                readable.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="px-3 pb-3">
+              <div className="overflow-hidden rounded-2xl edge">
+                <ComposerShell />
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+      ) : null}
     </div>
   )
 }
